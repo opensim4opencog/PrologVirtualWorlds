@@ -1,0 +1,517 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<META content="Microsoft FrontPage 4.0" name=GENERATOR></HEAD>
+<BODY>
+<P><B><FONT face=Arial size=3>Messaging System For Prolog Modules</FONT></B></P>
+<P><FONT face=Arial size=3>The bot at this present time runs on separate 
+computers<SPAN class=329361720-21022000>&nbsp; clustered over 
+tcp/ip&nbsp;</SPAN>.. its database on win2k adv server<SPAN 
+class=329361720-21022000>&nbsp;,&nbsp;</SPAN> It<SPAN 
+class=329361720-21022000>&nbsp;'s&nbsp;</SPAN> main parser runs on Unix, and its 
+definitive clause grammar sometimes on another machine. In order to implement 
+the most scalable solution,&nbsp; I have all processes meeting in an IPC party 
+line. This allows the code written in C,SQL7,DCG,VB,PROLOG,TCL,sh to interact as 
+if part of the same program any Language that can open a socket can join the 
+party line and do its job for the total API.<BR><BR>The bot first utilizes an 
+Eggdrop Party-Line system. This acts as a firewall to the actually processes 
+from the turbulence of&nbsp; dying sockets and switching remote hosts and is the 
+place where a all Messaging API happens.&nbsp; Each of the programs/threads 
+joined a "topic" and can share and advantage from each others code and data 
+space. Program modules run may run on their own physical machine most of the 
+time.</FONT></P>
+<P><FONT face=Arial size=3>Some example modules...</FONT></P>
+<HR>
+
+<P><FONT face=Arial size=3><B>swiProlog</B> - runs from ns1.vast1.com as 
+UID="nobody" .. It telnets into vast1.com:65530 and logs on with its nick 
+"swiProlog" and its password.. its level is Administrator/Owner as it performs 
+the I/O requests of the other processes over the Eggdrop on EFNet. From its 
+account it may use the built in TCL command set.&nbsp; It is written in prolog 
+and runs from SWI-Prolog&nbsp; kernel.&nbsp; This process is always connected 
+and presently serves for demonstrative </FONT><FONT face=Arial 
+size=3>purposes.</FONT><FONT face=Arial size=3>&nbsp; <A 
+href="http://www.swi.psy.uva.nl/projects/SWI-Prolog">SWI-Prolog</A> </FONT><FONT 
+face=Arial size=3></FONT><FONT face=Arial size=3>i</FONT><FONT face=Arial 
+size=3>s a rich and modifiable language</FONT></P>
+<UL>
+  <LI>&nbsp;It contains the Text-Token Engine and Token-Text code (based on <A 
+  href="http://www.cogsci.princeton.edu/~wn">WordNet</A>) 
+  <LI>&nbsp;Maintains 24 Megabyte Workspace&nbsp; 
+  <LI>&nbsp;Can create new Token objects from new Text. 
+  <LI>&nbsp;To query the OS for user information and runtime statistics 
+  <LI>Maintain Online user Profiles </LI></UL>
+<HR>
+
+<P><FONT face=Arial size=3><B>urlfetch -</B> runs from ns1.vast1.com also and 
+has UID="nobody" .. It telnets into vast1.com:65530 and logs on with its nick 
+"urlfetcher" and its password.. its runs as a guest as it performs URL lookups. 
+to return to other processes (Also written in SWI-Prolog).</FONT></P>
+<UL>
+  <LI>&nbsp;It fetches URLs and performs data transfers related to HTTP </LI></UL>
+<HR>
+
+<P><FONT face=Arial size=3><B>pesterer -</B> Works way the others do (all 
+processes telnet in) and this is also written in SWI-Prolog</FONT></P>
+<UL>
+  <LI><FONT face=Arial size=2>it pesters Purl the IRC Bot into storage and 
+  retrieval of facts</FONT> </LI></UL>
+<P><FONT face=Arial size=2>&nbsp;&nbsp;&nbsp; (I am going to obtain more info 
+from the authors of "purl" shortly)</FONT></P>
+<HR>
+
+<P><FONT face=Arial size=3><B>context</B> - runs from dizzy.vast1.com and exists 
+in the same scenario as it logs into the Eggdrop itself.. but use SICStus Prolog 
+command interpreter..</FONT></P>
+<UL>
+  <LI>It contains a Unweighted Graph analyzer 
+  <LI>Princeton's Semantic Network Database (Unweighted WordNet) 
+  <LI>Context Based Token suggestions for swiProlog to used to clear ambiguities 
+  </LI></UL>
+<table border="0" cellPadding="2" cellSpacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td bgColor="#e0e0e0"><font face="Arial"><strong>How to win&nbsp;</strong><span class="329361720-21022000">&nbsp;<strong>a</strong>&nbsp;</span><strong>
+        yearly Chatterbox contest:</strong></font></td>
+    </tr>
+    <tr>
+      <td bgColor="#ffffff">
+        <p>&nbsp;</p>
+        <p><font face="Arial">First lets look at some&nbsp;<span class="329361720-21022000">&nbsp;things&nbsp;&nbsp;we
+        don't want to do</span>:</font></p>
+        <p><font face="Arial">i_have_my_agenda_and_your_going_to_follow_it
+        (Parry)</font></p>
+        <p><font face="Arial">i_will_look_up_data_in_human_query_form_and_impress_the_he<span class="329361720-21022000">ck&nbsp;</span>_out_of_you&nbsp;
+        (Purl, Shakespeare)</font></p>
+        <p><font face="Arial">i_am_going_to_use_free_association (MegaHAL)</font></p>
+        <p><font face="Arial">i_am_using_keywords_to_find_your_agenda_and_match_it
+        (Eliza, MegaHAL)<span class="329361720-21022000">&nbsp;</span></font></p>
+        <p><font face="Arial"><span class="329361720-21022000">Those seem to be
+        easy enough modules to write (maybe we will can incorporate some of them
+        later)</span></font></p>
+        <p><font face="Arial"><span class="329361720-21022000">&nbsp;</span>Now
+        the one&nbsp;<span class="329361720-21022000">&nbsp;I use (also easy to
+        write)</span>:</font></p>
+        <p><font face="Arial">I am in an adventure game and you are trying to
+        query me on my whereabouts and my goals.&nbsp; I exist as a mutli-headed
+        life living in several bodies at once each in there own adventure<span class="329361720-21022000">&nbsp;
+        game&nbsp;</span>,<span class="329361720-21022000">&nbsp; my bodies are</span>
+        sharing the same unified database.&nbsp; When you talk to me you are
+        restating a story I&nbsp;<span class="329361720-21022000">&nbsp;hopefully&nbsp;</span>already
+        know<span class="329361720-21022000">&nbsp; and presently acting out&nbsp;</span>..<span class="329361720-21022000">&nbsp;
+        or you will state&nbsp;</span> book marked section of my map<span class="329361720-21022000">&nbsp;s&nbsp;</span>
+        ..&nbsp;<span class="329361720-21022000">&nbsp;I use you to help me
+        re-live these themes and goals</span>.&nbsp;&nbsp;<span class="329361720-21022000">&nbsp;You
+        are directing my adventure character.. when you are not doing so&nbsp;I
+        am trying to navigate it myself.&nbsp; Sometimes I have to map for
+        something new.&nbsp;I have a map called</span> Oz<span class="329361720-21022000">&nbsp;
+        that&nbsp;</span> is where new things get built into my database.<span class="329361720-21022000">&nbsp;
+        I test them out and try to live them&nbsp;. Sometimes&nbsp;</span> you
+        are telling me something I already know but have never heard it that
+        way.. through our conversations I will decide where and when you are
+        talking about on a paragraph level.&nbsp;<span class="329361720-21022000">&nbsp;
+        If you are doing so and I&nbsp;am in probably in OZ&nbsp;instead of
+        Kansas.. I will hook into both a cross piece that does not allow tight
+        data bindings.&nbsp;</span> If you leave out something like a name or a
+        place that is ok because i will instantiate loosely those places with
+        datum i&nbsp; am already aware of.&nbsp; Some simple stories/games I
+        know are<span class="329361720-21022000">&nbsp;:&nbsp;</span></font></p>
+        <p><font face="Arial"><span class="329361720-21022000">&nbsp;Hello
+        world, &nbsp;</span>Greetings, What is your name? What is my name?&nbsp;<br>
+        Look up hardcoded information for you (which I have no comprehension of)<br>
+        Storage of new facts from you, Retrieval of Facts, Eating at a
+        Restaurant<br>
+        Playing Eliza, Playing Tic-Tac-Toe,<span class="329361720-21022000">&nbsp;
+        Confusing you for me.&nbsp;</span></font></p>
+        <p><font face="Arial">Games&nbsp;<span class="329361720-21022000">&nbsp;only&nbsp;</span>you
+        know and are going to unavoidably teach me are</font></p>
+        <p><font face="Arial">Being a human , How we can talk about unknown data<br>
+        How to respond to a confused person<span class="329361720-21022000">&nbsp;
+        (that's&nbsp;me)&nbsp;</span><br>
+        </font></p>
+        <p><font face="Arial"><u>I</u> am going to teach you how to program for
+        my database and write&nbsp;<span class="329361720-21022000">&nbsp;the&nbsp;</span>
+        simple&nbsp;<span class="329361720-21022000">&nbsp;above&nbsp;&nbsp;functions&nbsp;.</span></font><span class="329361720-21022000"><br>
+        </span><font face="Arial">First of all these games must have a language
+        they can be programmed in:<br>
+        I must be able to write this language&nbsp;<span class="329361720-21022000">&nbsp;(&nbsp;&nbsp;as
+        good as you can )&nbsp;</span>and compile it and even talk about it
+        semi-humanlike form.<span class="329361720-21022000">&nbsp;&nbsp;<br>
+        Also as a note.. when i talk in this language i actually forget its me
+        running it 1/2 the time and have developed an internal dialog that
+        whispers it thru my head as it executes.&nbsp; I see this as a separate
+        entity.&nbsp; And when talking about&nbsp;it, evidently i am talking by
+        myself This may help me better understand the causality between the
+        pragmatics and semantics of my own code.</span></font></p>
+        <p><font face="Arial">If you are not familiar with the syntax of
+        Definitive Clause Grammar it reads like this...</font></p>
+        <font face="Arial">
+        <hr>
+        </font>
+        <p><font face="Arial"><b>this --&gt; something, something_else.</b></font></p>
+        <p><font face="Arial">this WILL BE represented while something AND
+        something else is represented. (conjunctive)</font></p>
+        <font face="Arial">
+        <hr>
+        </font>
+        <p><font face="Arial"><b>this --&gt; something ; something_else.</b></font></p>
+        <p><font face="Arial">this will be represented while something OR
+        something else is represented.&nbsp; (disjunctive)</font></p>
+        <font face="Arial">
+        <hr>
+        </font>
+        <p><font face="Arial"><b>this --&gt; something .<br>
+        this --&gt; something_else.</b></font></p>
+        <p><font face="Arial">this is equivalent to the above OR.</font></p>
+        <font face="Arial">
+        <hr>
+        </font>
+        <p><font face="Arial"><b>this --&gt; something, {clause}.</b></font></p>
+        <p><font face="Arial">this will be represented while something is
+        represented and clause is true.&nbsp;</font></p>
+        <font face="Arial">
+        <hr>
+        </font>
+        <p><font face="Arial"><b>this(A) --&gt; something(A), {clause(A)}.</b></font></p>
+        <p><font face="Arial">this with A will be represented while something
+        with A is represented and clause is true considering&nbsp;<span class="329361720-21022000">&nbsp;clause
+        &nbsp;</span>A.&nbsp;</font></p>
+        <font face="Arial">
+        <hr>
+        </font>
+        <p><font face="Arial"><b>this --&gt; [that].</b></font></p>
+        <p><font face="Arial">this will be represented while 'that' is in the
+        statemen<span class="329361720-21022000">&nbsp;t (syntax)&nbsp;</span></font></p>
+        <font face="Arial">
+        <hr>
+        </font>
+        <p><font face="Arial"><b>this --&gt; something, [that].</b></font></p>
+        <p><font face="Arial">this will be represented while something is
+        represented and 'that' follows in a statement.&nbsp;</font></p>
+        <font face="Arial">
+        <hr>
+        </font>
+        <p><font face="Arial"><b>this --&gt; [that] {clause}.</b></font></p>
+        <p><font face="Arial">this will be represented while 'that' is in the
+        statement and clause is true.</font></p>
+        <font face="Arial">
+        <hr>
+        </font>
+        <p><font face="Arial">Of course there are many more variations of the
+        above and I will create a link here to learn Definitive Clause Grammar
+        syntax if you do not already know it.</font></p>
+        <p><font face="Arial">To explain its usefulness lets take a trip back to
+        Aristotle<span class="329361720-21022000">&nbsp; meaning triangles&nbsp;</span>
+        to when we had <u>syntax</u>, <u>semantics</u> and <u>pragmatics</u>.</font></p>
+        <p><font face="Arial"><b>semantics --&gt; [syntax], {pragmatics}.</b></font></p>
+        <ul>
+          <li><font face="Arial">The syntax is the visible appearance of the
+            representation.</font>
+          <li><font face="Arial">The pragmatics indicates the primitive
+            operations that can be performed on the representation, essential
+            for escaping the circularity of the symbolic fallacy.</font>
+          <li><font face="Arial">The relationship between the syntactic view and
+            its pragmatic reality is mediated by its semantics, representing
+            important patterns of use.</font></li>
+        </ul>
+        <p><font face="Arial">Example:<br>
+        <strong>walking_person --&gt; [Person,is,walking],</strong><span class="329361720-21022000">&nbsp;<br>
+        <strong>&nbsp;&nbsp; </strong>&nbsp;</span><strong> {true_that(Person,is_</strong><span class="329361720-21022000">&nbsp;<strong>a(</strong>&nbsp;</span><strong>person</strong><span class="329361720-21022000">&nbsp;<strong>)</strong>&nbsp;</span><strong>)</strong><span class="329361720-21022000">&nbsp;<strong>,true_that(Person,be_do_cast(time_event(now),root_action(walk))</strong>&nbsp;</span><strong>}.</strong></font></p>
+        <p><font face="Arial">These don't always follow the 3 types in this
+        symmetry such we may have&nbsp;<span class="329361720-21022000">&nbsp;an
+        &nbsp;</span>all semantic<span class="329361720-21022000">&nbsp; clause.&nbsp;</span><br>
+        <b>eating_lunch --&gt; it_is_lunch_time, consuming_food.</b></font></p>
+        <p><font face="Arial">we could say the semantic <b>it_is_lunch_time </b>is
+        based on the following pragma...<br>
+        <b>it_is_lunch_time --&gt; [ ], { getsystime(Time),
+        Time&lt;1300,Time&gt;1100 }.</b></font></p>
+        <p><font face="Arial">The <b>[ ] </b>meant there is nothing particularly
+        useful syntactically but was required&nbsp; for <strong>it_is_lunch_time&nbsp;</strong><span class="329361720-21022000">&nbsp;<br>
+        this is a semantic to pragmatic rule</span><br>
+        Semantic-Pragmatics that are not ordinal should be built via the <b>[ ]</b>
+        form so they can happen in any order or at any time be tested.</font></p>
+        <p><font face="Arial"><span class="329361720-21022000">The reason we do
+        things like this is that most information about our world comes in
+        inconcise and only 'describes' something real.&nbsp; Rules that we make
+        often try to treat semantics like syntactics when they need to be kept
+        separate</span></font></p>
+        <p><font face="Arial"><span class="329361720-21022000">We have these
+        primitive lookup predicates</span></font></p>
+        <p><font face="Arial"><span class="329361720-21022000"><b>primitive_lookups
+        --&gt; semantic_to_syntax( _Sem, _Syn).&nbsp;&nbsp; /* sem2syn/2 */<br>
+        primitive_lookups --&gt; semantic_to_pragma( _Sem, _Prag). /* sem2prag/2
+        */<br>
+        primitive_lookups --&gt; syntax_to_pragma( _Syn, _Prag).<br>
+        primitive_lookups --&gt; syntax_to_semantic( _Syn, _Sem).<br>
+        primitive_lookups --&gt; pragma_to_semantic( _Prag, _Sem).<br>
+        primitive_lookups --&gt; pragma_to_syntax( _Prag, _Syn).<br>
+        </b></span></font></p>
+        <hr>
+        <p><span class="329361720-21022000"><font face="Arial">Syntax is&nbsp;
+        will always match one of these forms (always a flattened list</font><font color="#008000" face="Arial">)</font></span></p>
+        <p><b>[atomic,list,of,enitities]&nbsp; /* simple list */</b></p>
+        <p><b>[one_atomic]&nbsp; /* simple atom */</b></p>
+        <p><b>[ ]&nbsp;&nbsp;&nbsp;&nbsp; /* nil */</b></p>
+        <p><b>[a,Variable,inside,a,list]&nbsp;&nbsp;&nbsp;&nbsp; /* equivalent
+        to [a,_,inside,a,list] where variable can be a list of any length */</b></p>
+        <p><b>[_]&nbsp; /* match anything */</b></p>
+        <p><b>[funtion(foo),and,call(predicate)]&nbsp;&nbsp;</b></p>
+        <p>As long as we denote with braces we can be optimistic it is
+        syntactically parsable</p>
+        <hr>
+        <p>Pragma is actual Code that can be executed, often times it can be i/o
+        code.. but sometimes it can be a wrapper to a functional superset of our
+        learned functions. I am using a semi-ISO prolog standard for. I will
+        assume you know a bit of prolog or can fill yourself in at <a href="http://www.swi.psy.uva.nl/projects/SWI-Prolog/Manual/">http://www.swi.psy.uva.nl/projects/SWI-Prolog/Manual/</a></p>
+        <p><font face="Arial"><span class="329361720-21022000"><b>post('hello
+        there').<br>
+        assert(New_Fact).<br>
+        add_to_grammar_with_local_scope((&nbsp; this --&gt; [this_is_this] )).</b></span></font></p>
+        <hr>
+        <p><font face="Arial"><span class="329361720-21022000">semantics are
+        always at the head of a clause and can exist anywhere else in the body</span></font></p>
+        <p><font face="Arial"><span class="329361720-21022000"><b>semantic_concept1
+        --&gt; semantic_concept2 ; semantic_concept3 </b>(or)</span></font></p>
+        <p>this statement only uses the semantic concept 2 and 3 for their
+        syntactical components when sateliting the syntactic construct.</p>
+        <p><span class="329361720-21022000"><font face="Arial"><b>semantic_concept1
+        --&gt; semantic_concept2 , [syntactic,construct],</b></font></span> <span class="329361720-21022000"><font face="Arial"><b>semantic_concept3.</b></font></span></p>
+        <p><font face="Arial"><span class="329361720-21022000">but also implies<b>
+        semantic_concept1 --&gt; semantic_concept2 , semantic_concept3 </b>(and)</span></font></p>
+        <hr>
+        <p><font face="Arial"><span class="329361720-21022000">It seems
+        important at this point to cover a little theory. So you can see
+        what/why we are creating...&nbsp; You are familiar with the problems of
+        parsing and all the nuances of what must be done to parse a natural
+        language.&nbsp; It is a mind blowing difficult task to some, but not to
+        you or I, we see it as just one of our&nbsp; challenges . We envision
+        that once that is done, the sky is the limit.&nbsp; Well there is the
+        entire rainbow to the problem... We want a &quot;Natural Language to
+        Logical Form Language(LFL)&quot; function.. Yes very important.. But
+        what would we do with all that LFL code? ok:</span></font></p>
+        <p><font face="Arial"><span class="329361720-21022000"><b>&nbsp;&quot;john
+        will love mary&quot; ==&gt; do(time(future),loves(actor(john),actor(mary)).</b></span></font></p>
+        <p><font face="Arial"><span class="329361720-21022000">Which is more
+        cryptic to the semantics? We can match <b>do(time(future),loves(actor(john),actor(mary))</b>
+        to<b> do(time(past),loves(actor(john),actor(mary)). </b>and gather a
+        change occurred in <b>time(X) </b>and know that it represented a
+        difference into time elements and can compare the transitions to other
+        time/state changes. I believe it might be tempting to create this kind
+        of LFL in an adhoc manner.. As per each transitive verb.&nbsp; And then
+        tie them together via ontology.&nbsp; And them define a language for
+        navigating our dynamic ontology.&nbsp; Maybe a nice thought out semantic
+        network&nbsp; with a fixed number of link types? Yes this is useful, I
+        agree.&nbsp; I will assure you that our system is capable of doing this
+        task and more. Getting even more out of a 'well built&nbsp; network' ..
+        The difference you will see in our approach is that we are going to
+        generate any 'terminal objects' that have semantic meaning.</span></font></p>
+        <p><font face="Arial"><span class="329361720-21022000">Lets spend some
+        time defining the 'perfect' logical form language which is capable of
+        accessing our entire representational scheme.</span></font></p>
+        <p><b>logical_form_language --&gt; script ; plan ; goal.</b></p>
+        <p>A Script, Plan or Goal makes up the top level of our interpreter.&nbsp;</p>
+        <p>A script is an actual entry into the knowledge system (KS)</p>
+        <p>its internal semantics look like this...</p>
+        <p><b>script --&gt; scriptlet ; ( scriptlet, script ). /* prefer one
+        unit over a list */</b></p>
+        <p>meaning it is a list of tiny scriptlets...</p>
+        <p><b>scriptlet --&gt; factual_clause ; action_clause ; unknown_clause.
+        /* only 2 true scriptlet types */</b></p>
+        <p>factual clauses are semantically declarative in query mode but&nbsp;
+        pragmatic instantiations in execution mode. All factual clauses have to
+        have an execution mode meaning they must be capable of manipulation of
+        variables inside them.&nbsp; They are 'collectors' for unbound variables
+        and 'test'ers to already bound variables.&nbsp; In other languages
+        variables are limited to the pragmatic domain but since we have designed
+        ours having 'collect' or 'test' modes in each declaration, they can work
+        their way into semantics later.&nbsp;</p>
+        <p><b>factual_clause --&gt; [ fact(Datum) ], { nonvar(Datum),
+        if_possible(Datum) }.</b></p>
+        <p><b>/*<br>
+        factual_clause </b>is a label for what it does (semantics)</p>
+        <p><b>fact(Datum) </b>is what is put into the internal representation <b>[</b>syntactics<b>]</b></p>
+        <p><b>(nonvar(Datum)</b> Datum should never be left unbound. <b>{</b>pragmatics<b>}</b></p>
+        <p><b>if_possible(Datum) </b>either tests that Datum is structurally
+        sound or returns the known facts <b>{</b>pragmatics<b>}</b><br>
+        <b>*/</b></p>
+        <p>Action clauses have no pragmatic requirements as they are actually
+        fixatives or glue for the factual clauses. But each require a syntactic
+        declaration or a subset of other scripts.&nbsp; <b>action_clause </b>itself
+        is a <b>scriptlet</b> as they are often the most complex class of rules
+        often existing cyclically. Here is some of its ontology:</p>
+        <p><b>action_clause --&gt; phys_conceptual_primitive ;&nbsp;
+        mental_conceptual_primitive ; new_primitive.</b></p>
+        <p><b>phys_conceptual_primitive --&gt; ptrans ; atrans ; propel ; move ;
+        grasp ; ingest ; expel ; speak ; attend .</b></p>
+        <p><b>mental_conceptual_primitive --&gt; mtrans ; mbuild ; forget .</b></p>
+        <p>These reserved words like 'ptrans', 'mtrans', 'move' are taken
+        straight from <a href="http://gwis.circ.gwu.edu/~tip/schank.html">'conceptual
+        dependency theory</a>'<br>
+        they have prototype declaration process</p>
+        <p><b>propel --&gt; propel(_Actor,_Obj,_Loc,_Force).<br>
+        move --&gt; move(_Actor,_Bpart).<br>
+        grasp --&gt; grasp(_Actor,_Bpart,_Obj).<br>
+        injest --&gt; injest(_Actor,_Obj).<br>
+        expel --&gt; expel(_Actor,_Obj,_Loc).</b></p>
+        <p>they also have a manifestation clauses</p>
+        <p><b>propel(Actor,Obj,Loc,Force) --&gt; [propel(Actor,Obj,Loc,Force)],<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {p(actor,Actor),p(pobj,Obj),p(loc,Loc),p(force,Force),neq(Obj,Loc)}.<br>
+        <br>
+        move(Actor,Bpart) --&gt; [move(Actor,Bpart)],<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; {p(actor,Actor),p(bpart,Bpart),if(has_part(Actor,Bpart))}.<br>
+        <br>
+        grasp(Actor,Bpart,Obj) --&gt; [grasp(Actor,Bpart,Obj)],<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; {p(actor,Actor),if(has_part(Actor,Bpart)),p(grasper,Bpart),p(pobj,Obj),neq(Bpart,Obj)}.<br>
+        &nbsp;&nbsp;</b></p>
+        <p>Notice the arity of the declarations matching up the the
+        manifestation clauses.<br>
+        Also note the the syntactical definition is identical to the semantic
+        head purposely.<br>
+        This is the 'glue'.. the pragmatics such as&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; <b>{
+        p(actor,Actor),p(pobj,Obj),p(loc,Loc),p(force,Force),neq(Obj,Loc) }.</b></p>
+        <p>&nbsp;&nbsp;&nbsp; means 'Actor' is instanciatable only with things
+        that are somewhere label to be 'actor's as each <b>p(casting,Object)</b>
+        is stated.&nbsp; the <b>neq(Object1,Object2)</b> means in any actual
+        case the two objects are not the same instance..&nbsp;</p>
+        <p><b>*/</b></p>
+        <p><b>transitional_clause --&gt; transition_semantics( _Object, _State1,
+        _State2).</b></p>
+        <p><b>&nbsp;factual_clause --&gt; be_do.</b></p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p><b><br>
+        </b><br>
+        <b>meaning_triangle --&gt; semantic_unit ; syntactic_unit ;
+        pragmatic_unit</b></p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p><font face="Arial"><span class="329361720-21022000">In gaming terms
+        we have&nbsp;</span></font></p>
+        <p><font face="Arial">1) Agreement of Initialization<br>
+        2) Private Instantiation<br>
+        3) Decide on a winning (or no win) situation&nbsp;<br>
+        4) The wager of what we will gain or not gain<br>
+        5) who will go first<br>
+        6) What does a turn consist of&nbsp;<span class="329361720-21022000">&nbsp;&nbsp;</span><br>
+        </p>
+        </font>
+        <p><font face="Arial">And can be represented as..</font></p>
+        <p><font face="Arial"><strong>game_foo --&gt;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; game_foo_begins,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; game_foo_plays,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; game_foo_ends.</strong><span class="329361720-21022000">&nbsp;</span></font></p>
+        <p><strong><font face="Arial"><span class="329361720-21022000">game_foo_begins
+        --&gt;&nbsp;</span></font></strong><font face="Arial"><span class="329361720-21022000"><br>
+        <strong>&nbsp;&nbsp;&nbsp; load_foo_rules,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;find_foo_entry_point,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;find_foo_exit_point,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;make_wager_evaluate_gain,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;decide_who_goes_first,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;initialize_players.<br>
+        </strong><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></font></p>
+        <p><font face="Arial"><strong>game_foo_plays --&gt;&nbsp; /* one turn */<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; game_foo_play_once</strong><span class="329361720-21022000">&nbsp;<strong>,
+        game_over.</strong>&nbsp;</span></font></p>
+        <p><font face="Arial"><strong>game_foo_plays --&gt;&nbsp; /* series of
+        turns */<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; game_foo_play_once,</strong><span class="329361720-21022000">&nbsp;<strong>
+        game_not_over,</strong>&nbsp;</span><br>
+        <strong>&nbsp;&nbsp;&nbsp;&nbsp; game_foo_plays.</strong></font></p>
+        <p><font face="Arial">( two clauses with the same head means disjunctive
+        'or' )<span class="329361720-21022000">&nbsp;<br>
+        &nbsp;</span><br>
+        <strong>game_foo_play_once --&gt;</strong><span class="329361720-21022000">&nbsp;&nbsp;</span><br>
+        </font><strong><font face="Arial">&nbsp;&nbsp;&nbsp;&nbsp;
+        game_foo_turn(X,User),<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; game_foo_turn(X+1,invert(User)).<span class="329361720-21022000">&nbsp;</span></font></strong></p>
+        <p><font color="#0000ff" face="Arial"><span class="329361720-21022000">&lt;more&gt;</span></font></p>
+        <p><font face="Arial">In this paper I will lay out the problems I am
+        faced with and some proposed solutions.&nbsp; The first and main goal is
+        to create a system that can hold and moderate the 'semantics of
+        interaction' between two&nbsp;<span class="329361720-21022000">&nbsp;functions
+        then&nbsp;eve&nbsp;n&nbsp;</span> entities or data sources.&nbsp; To do
+        this we must identify and continue creating a language that is capable
+        of representing a model. Also we must define an interaction as well.</font></p>
+        <p><font face="Arial"><strong>an_interaction(UserA,UserB,Data) --&gt;
+        mtrans(actor(UserA),info(Data),actor(UserB)) , nil.<br>
+        </strong>or<br>
+        <strong>an_interaction --&gt; mtrans(actor(A),info(B),actor(C)) ,
+        more_interaction.<br>
+        </strong>or<br>
+        <strong>an_interaction --&gt; tell(actor(A),info(B),actor(C)) ,
+        more_interaction.<br>
+        <br>
+        </strong></font></p>
+        <p><font color="#0000ff" face="Arial"><span class="329361720-21022000"><strong>&lt;more
+        to come... chapter 1 unfinished&gt;</strong></span></font></p>
+        <p>&nbsp;</p>
+        <p><font face="Arial"><span class="329361720-21022000">Chapter 2: Hello
+        World</span></font></p>
+        <p><font face="Arial">Source File contains this one line:</font><b><br>
+        <font face="Arial">program --&gt; [hello,world].</font></b></p>
+        <p><font face="Arial">To execute it we use:<span class="329361720-21022000">&nbsp;<br>
+        &nbsp;</span><strong>semantic_to_syntax(program,X),post(X)</strong></font></p>
+        <p><font face="Arial">It responds with:<br>
+        <b>[hello,world]</b></font></p>
+        <p><font face="Arial">or if we used the shorthand <b>sem2syn(program,X),post(X)</b></font></p>
+        <p><font face="Arial">It still responds with:<br>
+        <b>[hello,world]</b></font></p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p><font face="Arial"><span class="329361720-21022000">Background on
+        Douglas</span></font></p>
+        <p><font face="Arial">I am a PROLOG programmer that is using Conceptual
+        Dependancy Theory<span class="329361720-21022000">&nbsp;.&nbsp;<br>
+        </span>You can look at the Bots source at http://prolog.magick.nu<br>
+        Everything you see there was written by me personaly unless otherwise
+        noted.<br>
+        And for a deeper look at the Whole bot http://prolog.vast1.com/library/
+        look at the the files called spg.pl dspg.pl thats the underlying
+        framework. eggdrop.pl is how I actually get to IRC (/whois Prolog)<span class="329361720-21022000">&nbsp;</span></font><span class="329361720-21022000"><br>
+        <font face="Arial">You may see this Bot on IRC in the tutorial channel
+        #AI or #AIBOTS&nbsp;</font></span><br>
+        <font face="Arial">The bot at this present time runs on 3 separate
+        computers<span class="329361720-21022000">&nbsp; clustering&nbsp;a
+        crossed&nbsp;tcp&nbsp;</span>.. its database on win2k adv server<span class="329361720-21022000">&nbsp;,&nbsp;</span>
+        It<span class="329361720-21022000">&nbsp;'s&nbsp;</span> main parser
+        runs on Linux, and its definitive clause grammar on another Linux box.
+        In order to implement the most scalable solution, that wont restrict
+        myself or others, i have all processes meeting in an IPC party line.
+        This allows the code i've written in C,SQL7,DCG,VB,PROLOG,TCL,sh to
+        interact .. any Languuage that can open a socket can join the party line
+        and do its job for the total API.<br>
+        <br>
+        I have worked on this bot for many months already. I have set up its
+        system to make it easy to check in your own code.<br>
+        <br>
+        The parts that we need work on right now are:<br>
+        <br>
+        Priority 1<br>
+        -LogicalFormLangage to Text converter<br>
+        -Traveling Salesman Problem Optimized in C (prolog currently)<br>
+        -Redistribution of Tokenization (allowing the bot to only ever see
+        tokens (integers) through its internal representation<br>
+        <br>
+        Priority 2<br>
+        -SQL Caching System (intercepts often requested items)<br>
+        -COM (win32/64) creation / destruction Interface<br>
+        <br>
+        There has been some interest in using a MOO sitting in left field
+        creating objects as needed to try to create its internal view of world
+        model structure. This is only for&nbsp;<span class="329361720-21022000">&nbsp;the
+        &nbsp;</span>representation and debugging internal data.<br>
+        It may query objects and set properties and allow the separate MOO
+        machine to handle the overhead of that.<br>
+        This would be similar to how SQL is used (but wastefully)<span class="329361720-21022000">&nbsp;
+        &nbsp;</span>in the current implementation.</font></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</BODY></HTML>
