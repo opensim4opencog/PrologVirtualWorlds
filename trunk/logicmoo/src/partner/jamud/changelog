@@ -1,0 +1,16 @@
+20020106:
+	fixed bug #500090.
+
+20011216:
+	EXACTMATCH and IGNORECASE added to INTERPRETERMANAGER settings
+	
+20011121:
+	fixed bug #484374, with the trust checks in TrustedCommand
+	
+20011120:
+	fixed Entrance$Down.clone-- thanks Laminamia, whomever you are :-)
+	turned on pretty-printing XML on suggestion (thanks Loren & John)
+	fixed validatePassword to equate a null pasword with a zero-length one (again, thanks John & Loren)
+	
+alpha 5.0:
+	Initial deploy to CVS. Total rewrite.

@@ -1,0 +1,107 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- OKBC.ConstraintChecker | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class OKBC.ConstraintChecker
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class OKBC.ConstraintChecker
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----<A HREF="OKBC.Node.html">OKBC.Node</A>
+           |
+           +----OKBC.ConstraintChecker
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>ConstraintChecker</STRONG>
+     extends OKBC.<A HREF="OKBC.Node.html">Node</A>
+{
+          // Constructors 1
+     public <A HREF="#ConstraintChecker()">ConstraintChecker</A>();
+
+          // Methods 2
+     public static void <A HREF="#enforce_domain_constraint(OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.SlotType, OKBC.InferenceLevel, OKBC.ValueSelector, OKBC.TruthValue)">enforce_domain_constraint</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, <A CLASS=nound HREF="OKBC.ValueSelector.html">ValueSelector</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#enforce_slot_constraints(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.InferenceLevel, OKBC.SlotType, OKBC.ValueSelector, OKBC.TruthValue)">enforce_slot_constraints</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.ValueSelector.html">ValueSelector</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+
+}
+</PRE>
+<P>
+<P>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="ConstraintChecker"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="ConstraintChecker()">ConstraintChecker</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public ConstraintChecker() </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+Default constructor
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="enforce_domain_constraint"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="enforce_domain_constraint(OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.SlotType, OKBC.InferenceLevel, OKBC.ValueSelector, OKBC.TruthValue)">enforce_domain_constraint</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void enforce_domain_constraint(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                                <A HREF="OKBC.Node.html">Node</A> slot, 
+                                                <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                                <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                                <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> inference_level, 
+                                                <A HREF="OKBC.ValueSelector.html">ValueSelector</A> value_selector, 
+                                                <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="enforce_slot_constraints"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="enforce_slot_constraints(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.InferenceLevel, OKBC.SlotType, OKBC.ValueSelector, OKBC.TruthValue)">enforce_slot_constraints</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> enforce_slot_constraints(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                               <A HREF="OKBC.Node.html">Node</A> slot, 
+                                               <A HREF="OKBC.Node.html">Node</A> current_values, 
+                                               <A HREF="OKBC.Node.html">Node</A> future_values, 
+                                               <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                               <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> inference_level, 
+                                               <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                               <A HREF="OKBC.ValueSelector.html">ValueSelector</A> value_selector, 
+                                               <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

@@ -1,0 +1,677 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- Jot.JotMenu | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class Jot.JotMenu
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-Jot.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class Jot.JotMenu
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----<A HREF="java.awt.MenuComponent.html">java.awt.MenuComponent</A>
+           |
+           +----<A HREF="java.awt.MenuBar.html">java.awt.MenuBar</A>
+                   |
+                   +----Jot.JotMenu
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>JotMenu</STRONG>
+     extends java.awt.<A HREF="java.awt.MenuBar.html">MenuBar</A>
+{
+          // Fields 42
+     public <A CLASS=nound HREF="java.awt.MenuItem.html">MenuItem</A> <A HREF="#miAddOtherOwnSlot">miAddOtherOwnSlot</A>;
+     public <A CLASS=nound HREF="java.awt.MenuItem.html">MenuItem</A> <A HREF="#miAskQuery">miAskQuery</A>;
+     public <A CLASS=nound HREF="java.awt.MenuItem.html">MenuItem</A> <A HREF="#miCreateAxiom">miCreateAxiom</A>;
+     public <A CLASS=nound HREF="java.awt.MenuItem.html">MenuItem</A> <A HREF="#miCreateClass">miCreateClass</A>;
+     public <A CLASS=nound HREF="java.awt.MenuItem.html">MenuItem</A> <A HREF="#miCreateFacet">miCreateFacet</A>;
+     public <A CLASS=nound HREF="java.awt.MenuItem.html">MenuItem</A> <A HREF="#miCreateIndividual">miCreateIndividual</A>;
+     public <A CLASS=nound HREF="java.awt.MenuItem.html">MenuItem</A> <A HREF="#miCreateSlot">miCreateSlot</A>;
+     public <A CLASS=nound HREF="java.awt.MenuItem.html">MenuItem</A> <A HREF="#miCreateSubclass">miCreateSubclass</A>;
+     public <A CLASS=nound HREF="java.awt.MenuItem.html">MenuItem</A> <A HREF="#miFind">miFind</A>;
+     public <A CLASS=nound HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> <A HREF="#miGrid1A">miGrid1A</A>;
+     public <A CLASS=nound HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> <A HREF="#miGrid1D">miGrid1D</A>;
+     public <A CLASS=nound HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> <A HREF="#miGrid1T">miGrid1T</A>;
+     public <A CLASS=nound HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> <A HREF="#miGrid2">miGrid2</A>;
+     public <A CLASS=nound HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> <A HREF="#miGrid3">miGrid3</A>;
+     public <A CLASS=nound HREF="java.awt.MenuItem.html">MenuItem</A> <A HREF="#miResetTree">miResetTree</A>;
+     public <A CLASS=nound HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> <A HREF="#miTree1">miTree1</A>;
+     public <A CLASS=nound HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> <A HREF="#miTree2">miTree2</A>;
+     public <A CLASS=nound HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> <A HREF="#miTree3">miTree3</A>;
+     public <A CLASS=nound HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> <A HREF="#miTree4">miTree4</A>;
+     public <A CLASS=nound HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> <A HREF="#miTree5">miTree5</A>;
+     public <A CLASS=nound HREF="java.awt.MenuItem.html">MenuItem</A> <A HREF="#miTree6">miTree6</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sCloseConnection">sCloseConnection</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sCloseKb">sCloseKb</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sExit">sExit</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sInstances">sInstances</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sLoadKb">sLoadKb</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sMoreOptions">sMoreOptions</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sNewKb">sNewKb</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sOpenConnection">sOpenConnection</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sOpenLoadedKb">sOpenLoadedKb</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sOwnSlots">sOwnSlots</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sPreferences">sPreferences</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sResetTree">sResetTree</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sSaveKb">sSaveKb</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sSaveKbAs">sSaveKbAs</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sSubclasses">sSubclasses</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sSuperclasses">sSuperclasses</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sTemplateSlots">sTemplateSlots</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sTest">sTest</A>;
+     public <A CLASS=nound HREF="java.util.Vector.html">Vector</A> <A HREF="#vDefaultSlotInfos">vDefaultSlotInfos</A>;
+     public <A CLASS=nound HREF="java.util.Vector.html">Vector</A> <A HREF="#vSlotInfos">vSlotInfos</A>;
+     public <A CLASS=nound HREF="java.util.Vector.html">Vector</A> <A HREF="#vSlotItems">vSlotItems</A>;
+
+          // Constructors 1
+     public <A HREF="#JotMenu(Jot.JotUI)">JotMenu</A>(<A CLASS=nound HREF="Jot.JotUI.html">JotUI</A>);
+
+          // Methods 15
+     public void <A HREF="#addSlot(OKBC.Node, boolean)">addSlot</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, boolean);
+     public boolean <A HREF="#bSlotExists(OKBC.Node)">bSlotExists</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public <A CLASS=nound HREF="java.awt.Color.html">Color</A> <A HREF="#getRelationshipColor(OKBC.Node)">getRelationshipColor</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public <A CLASS=nound HREF="Jot.SlotInfo.html">SlotInfo</A> <A HREF="#getRelationshipSlotInfo(OKBC.Node)">getRelationshipSlotInfo</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#getRelationshipString(OKBC.Node, boolean)">getRelationshipString</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, boolean);
+     public <A CLASS=nound HREF="Jot.SlotInfo.html">SlotInfo</A> <A HREF="#getSlotInfo(OKBC.Node)">getSlotInfo</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#prepareForRename(OKBC.Node)">prepareForRename</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#renameFailed(OKBC.Node)">renameFailed</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#setClassSelected(boolean)">setClassSelected</A>(boolean);
+     public void <A HREF="#updateAfterCreate()">updateAfterCreate</A>();
+     public void <A HREF="#updateAfterCreateOriginal()">updateAfterCreateOriginal</A>();
+     public void <A HREF="#updateAfterDelete(OKBC.Node)">updateAfterDelete</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#updateAfterNewKb()">updateAfterNewKb</A>();
+     public void <A HREF="#updateAfterRename(OKBC.Node)">updateAfterRename</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#updateSlots()">updateSlots</A>();
+}
+</PRE>
+<P>
+<P>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Fields</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miGrid1D"><FONT COLOR="#FF00FF">&middot;</FONT> miGrid1D</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> miGrid1D
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miGrid1T"><FONT COLOR="#FF00FF">&middot;</FONT> miGrid1T</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> miGrid1T
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miGrid1A"><FONT COLOR="#FF00FF">&middot;</FONT> miGrid1A</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> miGrid1A
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miGrid2"><FONT COLOR="#FF00FF">&middot;</FONT> miGrid2</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> miGrid2
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miGrid3"><FONT COLOR="#FF00FF">&middot;</FONT> miGrid3</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> miGrid3
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miTree1"><FONT COLOR="#FF00FF">&middot;</FONT> miTree1</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> miTree1
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miTree2"><FONT COLOR="#FF00FF">&middot;</FONT> miTree2</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> miTree2
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miTree3"><FONT COLOR="#FF00FF">&middot;</FONT> miTree3</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> miTree3
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miTree4"><FONT COLOR="#FF00FF">&middot;</FONT> miTree4</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> miTree4
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miTree5"><FONT COLOR="#FF00FF">&middot;</FONT> miTree5</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.CheckboxMenuItem.html">CheckboxMenuItem</A> miTree5
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miResetTree"><FONT COLOR="#FF00FF">&middot;</FONT> miResetTree</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.MenuItem.html">MenuItem</A> miResetTree
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miAddOtherOwnSlot"><FONT COLOR="#FF00FF">&middot;</FONT> miAddOtherOwnSlot</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.MenuItem.html">MenuItem</A> miAddOtherOwnSlot
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miTree6"><FONT COLOR="#FF00FF">&middot;</FONT> miTree6</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.MenuItem.html">MenuItem</A> miTree6
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miCreateSubclass"><FONT COLOR="#FF00FF">&middot;</FONT> miCreateSubclass</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.MenuItem.html">MenuItem</A> miCreateSubclass
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miCreateClass"><FONT COLOR="#FF00FF">&middot;</FONT> miCreateClass</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.MenuItem.html">MenuItem</A> miCreateClass
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miCreateIndividual"><FONT COLOR="#FF00FF">&middot;</FONT> miCreateIndividual</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.MenuItem.html">MenuItem</A> miCreateIndividual
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miCreateFacet"><FONT COLOR="#FF00FF">&middot;</FONT> miCreateFacet</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.MenuItem.html">MenuItem</A> miCreateFacet
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miCreateSlot"><FONT COLOR="#FF00FF">&middot;</FONT> miCreateSlot</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.MenuItem.html">MenuItem</A> miCreateSlot
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miCreateAxiom"><FONT COLOR="#FF00FF">&middot;</FONT> miCreateAxiom</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.MenuItem.html">MenuItem</A> miCreateAxiom
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miFind"><FONT COLOR="#FF00FF">&middot;</FONT> miFind</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.MenuItem.html">MenuItem</A> miFind
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="miAskQuery"><FONT COLOR="#FF00FF">&middot;</FONT> miAskQuery</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.MenuItem.html">MenuItem</A> miAskQuery
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="vSlotItems"><FONT COLOR="#FF00FF">&middot;</FONT> vSlotItems</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.util.Vector.html">Vector</A> vSlotItems
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="vSlotInfos"><FONT COLOR="#FF00FF">&middot;</FONT> vSlotInfos</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.util.Vector.html">Vector</A> vSlotInfos
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="vDefaultSlotInfos"><FONT COLOR="#FF00FF">&middot;</FONT> vDefaultSlotInfos</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.util.Vector.html">Vector</A> vDefaultSlotInfos
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sTest"><FONT COLOR="#0000FF">&middot;</FONT> sTest</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sTest
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sOpenConnection"><FONT COLOR="#0000FF">&middot;</FONT> sOpenConnection</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sOpenConnection
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sCloseConnection"><FONT COLOR="#0000FF">&middot;</FONT> sCloseConnection</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sCloseConnection
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sNewKb"><FONT COLOR="#0000FF">&middot;</FONT> sNewKb</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sNewKb
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sLoadKb"><FONT COLOR="#0000FF">&middot;</FONT> sLoadKb</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sLoadKb
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sOpenLoadedKb"><FONT COLOR="#0000FF">&middot;</FONT> sOpenLoadedKb</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sOpenLoadedKb
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sCloseKb"><FONT COLOR="#0000FF">&middot;</FONT> sCloseKb</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sCloseKb
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sSaveKb"><FONT COLOR="#0000FF">&middot;</FONT> sSaveKb</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sSaveKb
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sSaveKbAs"><FONT COLOR="#0000FF">&middot;</FONT> sSaveKbAs</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sSaveKbAs
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sExit"><FONT COLOR="#0000FF">&middot;</FONT> sExit</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sExit
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sSubclasses"><FONT COLOR="#0000FF">&middot;</FONT> sSubclasses</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sSubclasses
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sSuperclasses"><FONT COLOR="#0000FF">&middot;</FONT> sSuperclasses</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sSuperclasses
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sInstances"><FONT COLOR="#0000FF">&middot;</FONT> sInstances</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sInstances
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sOwnSlots"><FONT COLOR="#0000FF">&middot;</FONT> sOwnSlots</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sOwnSlots
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sTemplateSlots"><FONT COLOR="#0000FF">&middot;</FONT> sTemplateSlots</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sTemplateSlots
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sResetTree"><FONT COLOR="#0000FF">&middot;</FONT> sResetTree</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sResetTree
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sMoreOptions"><FONT COLOR="#0000FF">&middot;</FONT> sMoreOptions</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sMoreOptions
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sPreferences"><FONT COLOR="#0000FF">&middot;</FONT> sPreferences</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sPreferences
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<P>
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="JotMenu"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="JotMenu(Jot.JotUI)">JotMenu</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public JotMenu(<A HREF="Jot.JotUI.html">JotUI</A> _ui) </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+First argument will be set as the action listener for all menu items.
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="bSlotExists"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="bSlotExists(OKBC.Node)">bSlotExists</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean bSlotExists(<A HREF="OKBC.Node.html">Node</A> nSlot) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="addSlot"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="addSlot(OKBC.Node, boolean)">addSlot</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void addSlot(<A HREF="OKBC.Node.html">Node</A> nSlot, 
+                       boolean bSelect) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="updateSlots"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="updateSlots()">updateSlots</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void updateSlots() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="getRelationshipString"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="getRelationshipString(OKBC.Node, boolean)">getRelationshipString</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.lang.String.html">String</A> getRelationshipString(<A HREF="OKBC.Node.html">Node</A> _rel, 
+                                       boolean bArticle) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="getRelationshipColor"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="getRelationshipColor(OKBC.Node)">getRelationshipColor</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.Color.html">Color</A> getRelationshipColor(<A HREF="OKBC.Node.html">Node</A> relationship) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="getRelationshipSlotInfo"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="getRelationshipSlotInfo(OKBC.Node)">getRelationshipSlotInfo</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="Jot.SlotInfo.html">SlotInfo</A> getRelationshipSlotInfo(<A HREF="OKBC.Node.html">Node</A> relationship) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="getSlotInfo"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="getSlotInfo(OKBC.Node)">getSlotInfo</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="Jot.SlotInfo.html">SlotInfo</A> getSlotInfo(<A HREF="OKBC.Node.html">Node</A> slot) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="setClassSelected"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="setClassSelected(boolean)">setClassSelected</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void setClassSelected(boolean bClassSelected) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="updateAfterNewKb"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="updateAfterNewKb()">updateAfterNewKb</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void updateAfterNewKb() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="updateAfterCreate"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="updateAfterCreate()">updateAfterCreate</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void updateAfterCreate() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="updateAfterCreateOriginal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="updateAfterCreateOriginal()">updateAfterCreateOriginal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void updateAfterCreateOriginal() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="updateAfterDelete"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="updateAfterDelete(OKBC.Node)">updateAfterDelete</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void updateAfterDelete(<A HREF="OKBC.Node.html">Node</A> n) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="prepareForRename"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="prepareForRename(OKBC.Node)">prepareForRename</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void prepareForRename(<A HREF="OKBC.Node.html">Node</A> nOld) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="renameFailed"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="renameFailed(OKBC.Node)">renameFailed</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void renameFailed(<A HREF="OKBC.Node.html">Node</A> nOld) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="updateAfterRename"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="updateAfterRename(OKBC.Node)">updateAfterRename</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void updateAfterRename(<A HREF="OKBC.Node.html">Node</A> nNew) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-Jot.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

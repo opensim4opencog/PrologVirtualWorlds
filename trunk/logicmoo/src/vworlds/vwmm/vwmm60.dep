@@ -1,0 +1,1339 @@
+# Microsoft Developer Studio Generated Dependency File, included by vwmm60.mak
+
+..\vwcommon\cathelp.cpp : \
+	"..\vwcommon\cathelp.h"\
+	
+
+.\dlldatax.c : \
+	".\vwmm_dlldata.c"\
+	
+
+..\vwcommon\mmhelp.cpp : \
+	"..\property\cellprop\darray.h"\
+	"..\property\cellprop\edgecyc.h"\
+	"..\property\cellprop\geom2d.h"\
+	"..\property\cellprop\mmdebug.h"\
+	"..\property\cellprop\mmutils.h"\
+	"..\property\pickdata\pickdato.h"\
+	"..\property\sound\sound.h"\
+	"..\property\vector\vectorob.h"\
+	"..\property\vwadata\vwadatao.h"\
+	"..\property\vwframe\vwframeo.h"\
+	"..\property\vwgeom\vwgeomob.h"\
+	"..\property\vwgeomsp\vwgeoms.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\dirserv.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\mmhelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\spritemn.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwadmin.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwclient.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwhtml.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwodb.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwsysex.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwsystem\vwsystem.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+.\StdAfx.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwimpl.cpp"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+!ENDIF 
+
+..\vwcommon\syshelp.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\plistobj.h"\
+	"..\vwobject\pmapobj.h"\
+	".\stdafx.h"\
+	
+
+.\vwmm.cpp : \
+	"..\module\mm\vwmmexo.h"\
+	"..\property\cellprop\darray.h"\
+	"..\property\cellprop\edgecyc.h"\
+	"..\property\cellprop\geom2d.h"\
+	"..\property\cellprop\mmdebug.h"\
+	"..\property\cellprop\mmutils.h"\
+	"..\property\pickdata\pickdato.h"\
+	"..\property\sound\sound.h"\
+	"..\property\vector\vectorob.h"\
+	"..\property\vwadata\vwadatao.h"\
+	"..\property\vwframe\vwframeo.h"\
+	"..\property\vwgeom\vwgeomob.h"\
+	"..\property\vwgeomar\charobj.h"\
+	"..\property\vwgeomar\jointobj.h"\
+	"..\property\vwgeomar\puppetob.h"\
+	"..\property\vwgeomar\vwgeoma.h"\
+	"..\property\vwgeomsp\vwgeoms.h"\
+	"..\property\vwidata\vwidatao.h"\
+	"..\spritemn\spritemo.h"\
+	"..\tools\3dstod3d\3dsftk\inc\3dsftk.h"\
+	"..\tools\3dstod3d\conv3ds.h"\
+	"..\uitools\vwnvtool\vwnavt2d.h"\
+	"..\uitools\vwnvtool\vwnavt3d.h"\
+	"..\uitools\vwpktool\vwpktl.h"\
+	"..\vwcommon\3dstod3d.h"\
+	"..\vwcommon\3dstod3d_i.c"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\avprof_i.c"\
+	"..\vwcommon\cathelp.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\cellprop_i.c"\
+	"..\vwcommon\convgeer.h"\
+	"..\vwcommon\convgeom.h"\
+	"..\vwcommon\convgeom_i.c"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\d2d_i.c"\
+	"..\vwcommon\dirserv.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\inetfile_i.c"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\isound_i.c"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\menuitem_i.c"\
+	"..\vwcommon\mmhelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\ocxproxy_i.c"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\Pickdata_i.c"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\spritemn.h"\
+	"..\vwcommon\spritemn_i.c"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vbsguids.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vector_i.c"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwadata_i.c"\
+	"..\vwcommon\vwadmin.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwclient.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwframe_i.c"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgcache_i.c"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeom_i.c"\
+	"..\vwcommon\vwgeomar.h"\
+	"..\vwcommon\vwgeomar_i.c"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwgeomsp_i.c"\
+	"..\vwcommon\vwhtml.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwidata_i.c"\
+	"..\vwcommon\vwmenu.h"\
+	"..\vwcommon\vwmmex.h"\
+	"..\vwcommon\vwmmex_i.c"\
+	"..\vwcommon\vwnvtool.h"\
+	"..\vwcommon\vwnvtool_i.c"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwobject_i.c"\
+	"..\vwcommon\vwodb.h"\
+	"..\vwcommon\vwpktool.h"\
+	"..\vwcommon\vwpktool_i.c"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwprop_i.c"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwrender_i.c"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwsysex.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwtrans_i.c"\
+	"..\vwcommon\vwuiobjs.h"\
+	"..\vwgcache\vwgcacho.h"\
+	"..\vwrender\vwrend2d.h"\
+	"..\vwrender\vwrend3d.h"\
+	"..\vwrender\vwrendrt.h"\
+	"..\vwsystem\vwsystem.h"\
+	"..\vwsystem\vwsystem_i.c"\
+	".\dlldatax.h"\
+	".\stdafx.h"\
+	".\vwmm.h"\
+	".\vwmm_i.c"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+.\vwmm.rc : \
+	".\Conv3DS.rgs"\
+	".\version.h"\
+	".\vwglogo.BMP"\
+	".\vwglogo2.BMP"\
+	".\vwglogo3.BMP"\
+	".\vwmm.rc2"\
+	".\vwmm.tlb"\
+	".\vwmmex.rgs"\
+	
+
+..\vwcommon\vwuiobjs_p.c : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwuiobjs.h"\
+	
+
+..\vwcommon\vwmenu.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwmenu.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	
+
+..\uitools\vwpktool\vwpktl.cpp : \
+	"..\uitools\vwpktool\vwpktl.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwmenu.h"\
+	"..\vwcommon\vwnvtool.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwpktool.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwuiobjs.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+..\uitools\vwnvtool\vwnavt2d.cpp : \
+	"..\uitools\vwnvtool\vwnavt2d.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwnvtool.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwpktool.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwuiobjs.h"\
+	".\stdafx.h"\
+	
+
+!ENDIF 
+
+..\uitools\vwnvtool\vwnavt3d.cpp : \
+	"..\uitools\vwnvtool\vwnavt3d.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwanim_i.c"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwnvtool.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwpktool.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwuiobjs.h"\
+	"..\vwcommon\vwuiobjs_i.c"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+..\uitools\vwnvtool\vwnt2d3d.cpp : \
+	"..\uitools\vwnvtool\VWNT2D3D.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwnvtool.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwpktool.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwuiobjs.h"\
+	".\stdafx.h"\
+	
+
+!ENDIF 
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\property\cellprop\edgecyc.cpp : \
+	"..\property\cellprop\darray.h"\
+	"..\property\cellprop\edgecyc.h"\
+	"..\property\cellprop\geom2d.h"\
+	"..\property\cellprop\mmdebug.h"\
+	"..\property\cellprop\mmutils.h"\
+	"..\property\vwidata\vwidatao.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\mmhelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwmmex.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	".\stdafx.h"\
+	
+
+..\vwcommon\vecmath.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\property\vector\vectorob.cpp : \
+	"..\property\vector\vectorob.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\property\vwgeom\vwgeomob.cpp : \
+	"..\property\vwgeom\vwgeomob.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	".\stdafx.h"\
+	
+
+..\property\vwgeomsp\d3dmath.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+..\property\vwgeomsp\vwgeoms.cpp : \
+	"..\property\vwgeomsp\d3dmacs.h"\
+	"..\property\vwgeomsp\d3dmath.h"\
+	"..\property\vwgeomsp\vwgeoms.h"\
+	"..\spritemn\spritemo.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\spritemn.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\property\vwidata\vwidatao.cpp : \
+	"..\property\vwidata\vwidatao.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwtrans.h"\
+	".\stdafx.h"\
+	
+
+..\property\vwgeomar\charobj.cpp : \
+	"..\property\vwgeomar\charobj.h"\
+	"..\property\vwgeomar\jointobj.h"\
+	"..\property\vwgeomar\vwgeoma.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomar.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwcommon\vwtrans.h"\
+	".\stdafx.h"\
+	
+
+..\property\vwgeomar\jointobj.cpp : \
+	"..\property\vwgeomar\jointobj.h"\
+	"..\property\vwgeomar\vwgeoma.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomar.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwcommon\vwtrans.h"\
+	".\stdafx.h"\
+	
+
+..\property\vwgeomar\PuppetOb.cpp : \
+	"..\property\vwgeomar\charobj.h"\
+	"..\property\vwgeomar\jointobj.h"\
+	"..\property\vwgeomar\puppetob.h"\
+	"..\property\vwgeomar\vwgeoma.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomar.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwcommon\vwtrans.h"\
+	".\stdafx.h"\
+	
+
+..\property\vwgeomar\vwgeoma.cpp : \
+	"..\property\vwgeomar\charobj.h"\
+	"..\property\vwgeomar\jointobj.h"\
+	"..\property\vwgeomar\puppetob.h"\
+	"..\property\vwgeomar\vwgeoma.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomar.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwcommon\vwtrans.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\property\vwframe\BBox.cpp : \
+	"..\property\vwframe\bbox.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\property\vwframe\vwframeo.cpp : \
+	"..\property\vwframe\bbox.h"\
+	"..\property\vwframe\vwframeo.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\mmhelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\property\vwadata\vwadatao.cpp : \
+	"..\property\vwadata\vwadatao.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+..\property\PickData\PickData.cpp : \
+	"..\property\pickdata\pickdato.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwtrans.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\property\Sound\Sound.cpp : \
+	"..\property\sound\sound.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+..\vwgcache\readwdb.cpp : \
+	"..\vwcommon\3dstod3d.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\convgeom.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwgcache\readwdb.h"\
+	"..\vwgcache\vwgcacho.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\vwgcache\vwgcacho.cpp : \
+	"..\vwcommon\3dstod3d.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\convgeom.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwgcache\readwdb.h"\
+	"..\vwgcache\vwgcacho.h"\
+	".\stdafx.h"\
+	
+
+..\vwrender\vwrend2d.cpp : \
+	"..\d2d\d2dutils\include\d2dutils.h"\
+	"..\d2d\d2dutils\include\darray.h"\
+	"..\d2d\d2dutils\include\dset.h"\
+	"..\d2d\d2dutils\include\errmgr.h"\
+	"..\d2d\d2dutils\include\mmutils.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwrender\vwrend2d.h"\
+	".\stdafx.h"\
+	
+
+..\vwrender\vwrend3d.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwutils.h"\
+	"..\vwrender\vwrend3d.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\vwrender\vwrendrt.cpp : \
+	"..\d2d\d2dutils\include\d2dutils.h"\
+	"..\d2d\d2dutils\include\darray.h"\
+	"..\d2d\d2dutils\include\dset.h"\
+	"..\d2d\d2dutils\include\errmgr.h"\
+	"..\d2d\d2dutils\include\mmutils.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\graphtls.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwsevent.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwrender\vwrend3d.h"\
+	"..\vwrender\vwrendrt.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\spritemn\spritemo.cpp : \
+	"..\spritemn\spritemo.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\spritemn.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\tools\3dstod3d\conv3ds.cpp : \
+	"..\tools\3dstod3d\3dsftk\inc\3dsftk.h"\
+	"..\tools\3dstod3d\conv3ds.h"\
+	"..\vwcommon\3dstod3d.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\convgeer.h"\
+	"..\vwcommon\convgeom.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\d2d_i.c"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\inetfile_i.c"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwsystem\vwsystem_i.c"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\module\mm\mmartfct.cpp : \
+	"..\module\mm\vwmmexo.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\mmhelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwmmex.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+..\module\mm\mmavatar.cpp : \
+	"..\module\mm\vwmmexo.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\mmhelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\profhelp.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\spritemn.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwmmex.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+..\module\mm\mmhost.cpp : \
+	"..\module\mm\vwmmexo.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\mmhelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwmmex.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+..\module\mm\mmlight.cpp : \
+	"..\module\mm\vwmmexo.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\mmhelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwmmex.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+..\module\mm\mmportal.cpp : \
+	"..\module\mm\vwmmexo.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\mmhelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwmmex.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+..\module\mm\mmroom.cpp : \
+	"..\module\mm\vwmmexo.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\mmhelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwmmex.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+..\module\mm\mmthing.cpp : \
+	"..\module\mm\vwmmexo.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\mmhelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwidata.h"\
+	"..\vwcommon\vwmmex.h"\
+	"..\vwcommon\vwnvtool.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwpktool.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwrnedit.h"\
+	"..\vwcommon\vwsevent.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwuiobjs.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+..\Vwcommon\Profhelp.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\profhelp.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwmm - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwmm - Win32 Release MinSize"
+
+!ENDIF 
+
+..\module\mm\vwmmexo.cpp : \
+	"..\module\mm\vwmmexo.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cellprop.h"\
+	"..\vwcommon\isound.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\mmhelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\Pickdata.h"\
+	"..\vwcommon\point23.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vecmath.h"\
+	"..\vwcommon\vector.h"\
+	"..\vwcommon\vwadata.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwframe.h"\
+	"..\vwcommon\vwgcache.h"\
+	"..\vwcommon\vwgeom.h"\
+	"..\vwcommon\vwgeomsp.h"\
+	"..\vwcommon\vwmmex.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrender.h"\
+	"..\vwcommon\vwtrans.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	

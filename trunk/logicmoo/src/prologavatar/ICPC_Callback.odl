@@ -1,0 +1,42 @@
+[
+	uuid(29707d60-3889-11d4-b999-444553540000),
+	helpstring("IConnectionPointContainer Callback - Eduardo A. Morcillo"),
+	version(1.0)
+]
+library ICPCCB {
+
+	importlib("stdole2.tlb");
+	importlib("tlib.tlb");
+
+	typedef enum CONNECT_E {
+		CONNECT_E_NOCONNECTION = 0x80040200,
+		CONNECT_E_ADVISELIMIT,
+		CONNECT_E_CANNOTCONNECT,
+		CONNECT_E_OVERRIDDEN,
+		CONNECT_E_LAST,
+	} CONNECT_E;
+
+	[
+		odl,
+		uuid(29707d61-3889-11d4-b999-444553540000),
+		helpstring("Callback interface")
+	]
+	interface ICPCCallback : IUnknown {
+
+		HRESULT SavePointers(
+			[in] IConnectionPoint* DefaultDCP,
+			[in] LONG FindPtr,
+			[in] LONG EnumPtr);
+
+		HRESULT GetPointers(
+			[in, out] LONG *FindPtr,
+			[in, out] LONG *EnumPtr);
+
+		HRESULT FindConnectionPoint(
+			[in] UUID *IID,
+			[in, out] IConnectionPoint **CP,
+			[out, retval] LONG *result);
+
+	}
+
+}

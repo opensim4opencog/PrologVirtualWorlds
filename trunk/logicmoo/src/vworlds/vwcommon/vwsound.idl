@@ -1,0 +1,197 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// VWSound.idl : IDL source for VWSound.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (VWSound.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IVWSound : Primary sound interface. Allows initialization of the sound device and
+// creation of sound buffers from .wav files. The object implementing this interface also
+// creates the 3D listener and allows attributes of the listener to be set.
+//
+// IVWSoundBuffer : Interface to access the sound buffers. A sound buffer represents a buffer
+// containing sound data. Buffer objects are used to start, stop, and pause sound playback,
+// as well as to set attributes such as frequency and format.
+//
+// IVWSound3DBuffer : 3D specific sound buffer interface allowing the setting of 3D sound
+// specific attributes.
+//
+// Many concepts are introduced in this idl pertaining to DirectSound, upon which all this 
+// functionality is based. See the DirectSound section of the DirectX help for more
+// information on these concepts.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+// Codes 0x0-0x01ff are reserved for the OLE group of
+// interfaces.  We start our codes at 0x700.
+
+cpp_quote("#define VWSOUND_E_NOTINITIALIZED			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0701)")
+cpp_quote("#define VWSOUND_E_ERRORMAPPINGFILE		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0702)")
+cpp_quote("#define VWSOUND_E_INVALIDSOUNDFORMAT		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0703)")
+
+interface ISoundBuffer;
+interface ISound3DBuffer;
+
+	[
+		object,
+		uuid(96732825-482A-11D0-89AB-00A0C9054129),
+		dual,
+		helpstring("IVWSound Interface"),
+		pointer_default(unique)
+	]
+	interface IVWSound : IDispatch
+	{
+		import "oaidl.idl";
+		import "vwclient.idl";
+		import "vector.idl";
+
+		[restricted, helpstring("Initialize sound object. Must be invoked before all other methods.")]
+		HRESULT Initialize(IVWClient *pClient);
+
+		[restricted, helpstring("Interally used - do not invoke.")] 
+		HRESULT Terminate();
+
+		const long VWS_EXCLUSIVE	= 1;
+		const long VWS_NORMAL		= 2;
+		const long VWS_PRIORITY		= 3;
+
+		[restricted, helpstring("Determines the level of control this app has over system sound.")]
+		HRESULT SetCooperativeLevel( [in] HWND hWnd, int nLevel );
+
+		[helpstring("Load a sound buffer from a .wav file.")]
+		HRESULT Create(	[in] BSTR bstrFile, [out, retval] ISoundBuffer **ppBuffer );
+
+		[helpstring("Load a 3D sound buffer from a .wav file.")]
+		HRESULT Create3D( [in] BSTR bstrFile, [out, retval] ISound3DBuffer **pp3DBuffer );
+
+		[helpstring("Reload a sound buffer")]
+		HRESULT Reload( [in] BSTR bstrFile, [in] int hBuffer );
+
+		[helpstring("Play a sound from a specific buffer.")]
+		HRESULT Play( [in] ISoundBuffer *pBuffer, [in] VARIANT_BOOL bLoop );
+
+		[helpstring("Stop playing a sound from a specific buffer.")]
+		HRESULT Stop( [in] ISoundBuffer *pBuffer );
+
+		[helpstring("Set listener position.")]
+		HRESULT SetPosition([in] float fPosX, [in] float fPosY, [in] float fPosZ);
+
+		[helpstring("Set the listener orientation.")]
+		HRESULT SetOrientation( [in] float fDirX, [in] float fDirY, [in] float fDirZ, [in] float fUpX, [in] float fUpY, [in] float fUpZ);
+
+		[helpstring("Set the listener distance factor.")]
+		HRESULT SetDistanceFactor( [in] float flFactor );
+
+		[helpstring("Set the roll-off factor.")]
+		HRESULT SetRolloffFactor( [in] float flFactor );
+	};
+
+	[
+		object,
+		uuid(96732827-482A-11D0-89AB-00A0C9054129),
+		dual,
+		helpstring("ISoundBuffer Interface"),
+		pointer_default(unique)
+	]
+	interface ISoundBuffer : IDispatch
+	{
+		// NOTE: nDSHandle is really the underlying DirectSound buffer interface pointer
+		[hidden, helpstring("Initialize buffer. Must be invoked before all other methods.")]
+		HRESULT Initialize( [in] IVWSound *psound, [in] BSTR bstrFile, [in] int nDSHandle );
+
+		[helpstring("Set volume.")]
+		HRESULT SetVolume([in] int nVolume);
+
+		[helpstring("Set Pan.")]
+		HRESULT SetPan([in] int nPan);
+
+		[helpstring("Set Frequency.")]
+		HRESULT SetFrequency([in] int nFrequency);
+
+
+		[hidden, helpstring("Play the buffer.")]
+		HRESULT Play( [in] VARIANT_BOOL bLoop );
+
+		[hidden, helpstring("Stop playing the buffer.")]
+		HRESULT Stop();
+
+		[helpstring("Buffer looping, playing, lost?")]
+		HRESULT GetStatus( [out, retval] int *pnStatus );
+	};
+
+	[
+		object,
+		uuid(9673282B-482A-11D0-89AB-00A0C9054129),
+		dual,
+		helpstring("ISound3DBuffer Interface"),
+		pointer_default(unique)
+	]
+	interface ISound3DBuffer : ISoundBuffer 
+	{
+		[helpstring("Set cone angles.")]
+		HRESULT SetConeAngles([in] int nInsideCone, [in] int nOutsideCone );
+
+		[helpstring("Set cone orientation.")]
+		HRESULT SetConeOrientation( [in] IVector *pvector );
+
+		[helpstring("Set cone outside volume.")]
+		HRESULT SetConeOutsideVolume( [in] int nVolume );
+
+		[helpstring("Set max distance.")]
+		HRESULT SetMaxDistance( [in] float flDistance );
+
+		[helpstring("Set min distance.")]
+		HRESULT SetMinDistance( [in] float flDistance );
+
+		[helpstring("Set position.")]
+		HRESULT SetPosition( [in] IVector *pvector );
+
+	};
+
+#ifdef SOUNDLIB
+
+[
+	uuid(96732823-482A-11D0-89AB-00A0C9054129),
+	version(1.0),
+	helpstring("VWSound 1.0 Type Library")
+]
+library VWSOUNDLib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(96732829-482A-11D0-89AB-00A0C9054129),
+		helpstring("VWSound Class")
+	]
+	coclass VWSound
+	{
+		[default] interface IVWSound;
+	};
+
+	[
+		uuid(9673282D-482A-11D0-89AB-00A0C9054129),
+		helpstring("SoundBuffer Class")
+	]
+	coclass SoundBuffer
+	{
+		[default] interface ISoundBuffer;
+	};
+
+	[
+		uuid(9673282F-482A-11D0-89AB-00A0C9054129),
+		helpstring("Sound3DBuffer Class")
+	]
+	coclass Sound3DBuffer
+	{
+		[default] interface ISound3DBuffer;
+	};
+
+};
+
+#endif

@@ -1,0 +1,39 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// OCXProxy.idl : IDL source for OCXProxy.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (OCXProxy.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IOCXProxy : Controls on the client page can create an object which supports this interface
+// and put their own interface into that object. They can can then add the object as a 
+// property in-world thus allowing in-world methods to access them directly.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+	import "oaidl.idl";
+	import "vwprop.idl";
+
+	[
+		object,
+		uuid(09362218-2570-11D1-83BF-00C04FB6FA46),
+		dual,
+		helpstring("IOCXProxy Interface"),
+		pointer_default(unique)
+	]
+	interface IOCXProxy : IObjectProperty
+	{
+const DISPID DISPID_OCXPROXY_OCX = 101;
+
+		[propget, id(DISPID_OCXPROXY_OCX), helpstring("The interface of the control.")] 
+		HRESULT OCX([out, retval] LPDISPATCH *pVal);
+		[propput, id(DISPID_OCXPROXY_OCX), helpstring("The interface of the control.")] 
+		HRESULT OCX([in] LPDISPATCH newVal);
+	};
+

@@ -1,0 +1,24 @@
+HKCR
+{
+	VWSTUDIO.Rotate2DTool.1 = s 'Rotate2DTool Class'
+	{
+		CLSID = s '{FFF1E320-30B4-31d0-13A9-13A019044129}'
+	}
+	VWSTUDIO.Rotate2DTool = s 'Rotate2DTool Class'
+	{
+		CurVer = s 'VWSTUDIO.Rotate2DTool.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {FFF1E320-30B4-31d0-13A9-13A019044129} = s 'Rotate2DTool Class'
+		{
+			ProgID = s 'VWSTUDIO.Rotate2DTool.1'
+			VersionIndependentProgID = s 'VWSTUDIO.Rotate2DTool'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

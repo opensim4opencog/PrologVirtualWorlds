@@ -1,0 +1,323 @@
+# Microsoft Developer Studio Generated Dependency File, included by uictrl60.mak
+
+.\AvListCt.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\reghelp.h"\
+	"..\..\vwcommon\vwadmin.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwclient.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\vwview\viewctl.h"\
+	".\AvListCt.h"\
+	".\StdAfx.h"\
+	".\uictrl.h"\
+	
+
+.\cutil.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\ocxproxy.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\syshelp.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwmenu.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	".\cutils.h"\
+	
+
+.\ddutil.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\cellprop.h"\
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\d2d_i.c"\
+	"..\..\vwcommon\graphtls.h"\
+	"..\..\vwcommon\inetfile.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\spritemn.h"\
+	"..\..\vwcommon\spritemn_i.c"\
+	"..\..\vwcommon\vector.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwframe.h"\
+	"..\..\vwcommon\vwgcache.h"\
+	"..\..\vwcommon\vwgeom.h"\
+	"..\..\vwcommon\vwgeomsp.h"\
+	"..\..\vwcommon\vwgeomsp_i.c"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwrender.h"\
+	"..\..\vwcommon\vwtrans.h"\
+	".\cutils.h"\
+	".\ddutil.h"\
+	".\StdAfx.h"\
+	
+
+..\..\vwcommon\reghelp.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\reghelp.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	
+
+..\..\vwcommon\scripts.cpp : \
+	"..\..\vwcommon\compmgr.h"\
+	"..\..\vwcommon\helpers.h"\
+	"..\..\vwcommon\scripts.h"\
+	"..\..\vwcommon\vbsguids.h"\
+	
+
+.\socxctl.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\inetfile.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\scripts.h"\
+	"..\..\vwcommon\vwadmin.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwclient.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\vwview\viewctl.h"\
+	".\cutils.h"\
+	".\socxctl.h"\
+	".\StdAfx.h"\
+	".\uictrl.h"\
+	
+
+.\soundCtl.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\cellprop.h"\
+	"..\..\vwcommon\inetfile.h"\
+	"..\..\vwcommon\isound.h"\
+	"..\..\vwcommon\isound_i.c"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\ocxproxy.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\vector.h"\
+	"..\..\vwcommon\vwadmin.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwclient.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwevents.h"\
+	"..\..\vwcommon\vwframe.h"\
+	"..\..\vwcommon\vwgcache.h"\
+	"..\..\vwcommon\vwgeom.h"\
+	"..\..\vwcommon\vwgeom_i.c"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwrender.h"\
+	"..\..\vwcommon\VWRender_i.c"\
+	"..\..\vwcommon\vwsysex.h"\
+	"..\..\vwcommon\vwtrans.h"\
+	"..\vwview\viewctl.h"\
+	".\soundCtl.h"\
+	".\StdAfx.h"\
+	".\uictrl.h"\
+	
+
+.\StdAfx.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwimpl.cpp"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	".\StdAfx.h"\
+	
+
+..\..\vwcommon\syshelp.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\ocxproxy.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\syshelp.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwsystem\stdafx.h"\
+	
+
+.\uictrl.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\inetfile.h"\
+	"..\..\vwcommon\inetfile_i.c"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\menuitem_i.c"\
+	"..\..\vwcommon\vbsguids.h"\
+	"..\..\vwcommon\vector.h"\
+	"..\..\vwcommon\vector_i.c"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	".\StdAfx.h"\
+	".\uictrl.h"\
+	
+
+.\uictrl.rc : \
+	".\AvListCt.bmp"\
+	".\cliocCtl.bmp"\
+	".\default.bmp"\
+	".\HistCtl.bmp"\
+	".\ignore.bmp"\
+	".\RoomCtl.bmp"\
+	".\SelfCtl.bmp"\
+	".\socxctl.bmp"\
+	".\treeicon.bmp"\
+	".\uictrl.ico"\
+	".\uictrl.rc2"\
+	".\UserCtl.bmp"\
+	".\version.h"\
+	".\VWSfVwCt.bmp"\
+	".\WHelpCt.bmp"\
+	
+
+..\vwview\viewctl.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\dirserv.h"\
+	"..\..\vwcommon\inetfile.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\ocxproxy.h"\
+	"..\..\vwcommon\ocxproxy_i.c"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\syshelp.h"\
+	"..\..\vwcommon\vwadmin.h"\
+	"..\..\vwcommon\vwanim.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwclient.h"\
+	"..\..\vwcommon\vwclient_i.c"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwhtml.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwobject_i.c"\
+	"..\..\vwcommon\vwodb.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwprop_i.c"\
+	"..\..\vwcommon\vwserver.h"\
+	"..\..\vwcommon\vwsysex.h"\
+	"..\..\vwsystem\vwsystem.h"\
+	"..\..\vwsystem\vwsystem_i.c"\
+	"..\vwview\stdafx.h"\
+	"..\vwview\viewctl.h"\
+	"..\vwview\ViewPpg.h"\
+	"..\vwview\VWView.h"\
+	
+
+..\..\vwcommon\vwmenu.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwmenu.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	
+
+.\vwsfvwct.cpp : \
+	"..\..\d2d\d2dutils\include\D2DUtils.h"\
+	"..\..\d2d\d2dutils\include\DArray.h"\
+	"..\..\d2d\d2dutils\include\DSet.h"\
+	"..\..\d2d\d2dutils\include\ErrMgr.h"\
+	"..\..\d2d\d2dutils\include\MMUtils.h"\
+	"..\..\d2d\mmimage\include\Blt.h"\
+	"..\..\d2d\mmimage\include\BMPImage.h"\
+	"..\..\d2d\mmimage\include\DDHelper.h"\
+	"..\..\d2d\mmimage\include\GIFImage.h"\
+	"..\..\d2d\mmimage\include\imgcache.h"\
+	"..\..\d2d\mmimage\include\JPGImage.h"\
+	"..\..\d2d\mmimage\include\MFIB.h"\
+	"..\..\d2d\mmimage\include\MFImage.h"\
+	"..\..\d2d\mmimage\include\mmimage.h"\
+	"..\..\d2d\mmimage\include\PalMap.h"\
+	"..\..\d2d\mmimage\include\PalMgr.h"\
+	"..\..\d2d\mmimage\include\PixInfo.h"\
+	"..\..\d2d\mmimage\include\PPMImage.h"\
+	"..\..\d2d\mmimage\include\RLESurf.h"\
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\cellprop.h"\
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\inetfile.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\spritemn.h"\
+	"..\..\vwcommon\vector.h"\
+	"..\..\vwcommon\vwadata.h"\
+	"..\..\vwcommon\vwadmin.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwclient.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwevents.h"\
+	"..\..\vwcommon\vwframe.h"\
+	"..\..\vwcommon\vwgcache.h"\
+	"..\..\vwcommon\vwgeom.h"\
+	"..\..\vwcommon\vwgeomsp.h"\
+	"..\..\vwcommon\vwmenu.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwrender.h"\
+	"..\..\vwcommon\vwtrans.h"\
+	"..\vwview\viewctl.h"\
+	".\StdAfx.h"\
+	".\uictrl.h"\
+	".\VWSfVwCt.h"\
+	
+
+.\whelpct.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\ocxproxy.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\syshelp.h"\
+	"..\..\vwcommon\vwadmin.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwclient.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwmenu.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\vwview\viewctl.h"\
+	".\cutils.h"\
+	".\StdAfx.h"\
+	".\uictrl.h"\
+	".\whelpct.h"\
+	
+
+..\..\D2d\D2dutils\Src\Errmgr.cpp : \
+	"..\..\d2d\d2dutils\include\D2DUtils.h"\
+	"..\..\d2d\d2dutils\include\DArray.h"\
+	"..\..\d2d\d2dutils\include\DSet.h"\
+	"..\..\d2d\d2dutils\include\ErrMgr.h"\
+	"..\..\d2d\d2dutils\include\MMUtils.h"\
+	
+
+..\..\D2d\D2dutils\Src\Mmutils.cpp : \
+	"..\..\d2d\d2dutils\include\D2DUtils.h"\
+	"..\..\d2d\d2dutils\include\DArray.h"\
+	"..\..\d2d\d2dutils\include\DSet.h"\
+	"..\..\d2d\d2dutils\include\ErrMgr.h"\
+	"..\..\d2d\d2dutils\include\MMUtils.h"\
+	

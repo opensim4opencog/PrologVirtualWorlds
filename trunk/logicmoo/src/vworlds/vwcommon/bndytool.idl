@@ -1,0 +1,132 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// bndytool.idl - tools for use in the boundary editor
+
+// This file will be processed by the MIDL tool to
+// produce the type library (geomtool.tlb) and marshalling code.
+
+const short zmZoomIn = 0;
+const short zmZoomOut = 1;
+
+
+	import "oaidl.idl";
+	import "vwuiobjs.idl";
+
+	[
+		object,
+		uuid(76BD302A-515C-11d1-B33A-00C04FB6A5C8),
+		dual,
+		helpstring("IVWScale2DTool Interface"),
+		pointer_default(unique)
+	]
+	interface IVWScale2DTool : IVWUITool
+	{
+	};
+
+	[
+		object,
+		uuid(3153FD3E-E37F-131F-82A9-02A0C9345629),
+		dual,
+		helpstring("IVWTranslate2DTool Interface"),
+		pointer_default(unique)
+	]
+	interface IVWTranslate2DTool : IVWUITool
+	{
+	};
+
+	[
+		object,
+		uuid(3153FDAE-E27F-111F-82A9-02A0C9054529),
+		dual,
+		helpstring("IVWRotate2DTool Interface"),
+		pointer_default(unique)
+	]
+	interface IVWRotate2DTool : IVWUITool
+	{
+	};
+
+	[
+		object,
+		uuid(056BA0D1-C31A-11D0-AFB6-00C04FB68E58),
+		dual,
+		helpstring("IPolyTool Interface"),
+		pointer_default(unique)
+	]
+	interface IPolyTool : IVWUITool
+	{
+		[propget, id(200), helpstring("property ShowRubberBand")] HRESULT ShowRubberBand([out, retval] VARIANT_BOOL *pVal);
+		[propput, id(200), helpstring("property ShowRubberBand")] HRESULT ShowRubberBand([in] VARIANT_BOOL newVal);
+	};
+
+	[
+		object,
+		uuid(E0B64D5D-764A-11D1-B345-00C04FB6A5C8),
+		dual,
+		helpstring("IVWZoomTool Interface"),
+		pointer_default(unique)
+	]
+	interface IVWZoomTool : IVWUITool
+	{
+		[propget, id(110), helpstring("property Mode")] HRESULT Mode([out, retval] short *pVal);
+		[propput, id(110), helpstring("property Mode")] HRESULT Mode([in] short newVal);
+	};
+
+#ifdef BOUNDARYTOOLS1LIB
+[
+	uuid(1E55CD88-B21F-11d1-84F8-00C04FB6A5C8),
+	version(1.0),
+	helpstring("BoundaryTools1 1.0 Type Library")
+]
+library BOUNDARYTOOLS1Lib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(3159FDB2-EF7F-11CF-89A9-00A0C9054129),
+		helpstring("VWTranslate2DTool Class")
+	]
+	coclass VWTranslate2DTool
+	{
+		[default] interface IVWTranslate2DTool;
+	};
+	[
+		uuid(FFF1E320-30B4-31d0-13A9-13A019044129),
+		helpstring("ControlManager Class")
+	]
+	coclass VWRotate2DTool
+	{
+		[default] interface IVWRotate2DTool;
+	};
+	[
+		uuid(056BA0D2-C31A-11D0-AFB6-00C04FB68E58),
+		helpstring("PolyTool Class")
+	]
+	coclass PolyTool
+	{
+		[default] interface IPolyTool;
+	};
+	[
+		uuid(76BD302B-515C-11d1-B33A-00C04FB6A5C8),
+		helpstring("Scale2D Class")
+	]
+	coclass VWScale2DTool
+	{
+		[default] interface IVWScale2DTool;
+	};
+
+	[
+		uuid(E0B64D5E-764A-11D1-B345-00C04FB6A5C8),
+		helpstring("VWZoomTool Class")
+	]
+	coclass VWZoomTool
+	{
+		[default] interface IVWZoomTool;
+	};
+};
+
+
+
+#endif

@@ -1,0 +1,19 @@
+;; /home/siegel/temp4/EconomyContext-non-implications.kif
+
+
+(documentation 
+  (=> 
+    (and 
+      (instance ?COUNTRY IndependentCountry) 
+      (instance ?EXPORTS Money) 
+      (instance ?CONSUMPTION Money) 
+      (instance ?IMPORTS Money) 
+      (totalBudgetExpenditures 
+        (GovernmentFn ?COUNTRY) ?TIME ?EXPENDITURES) 
+      (investmentAmountDuring ?COUNTRY Product ?TIME ?INVESTMENTS) 
+      (exportAmountDuring ?COUNTRY Product ?TIME ?EXPORTS) 
+      (consumptionAmountDuring ?COUNTRY Product ?TIME ?CONSUMPTION) 
+      (importAmountDuring ?COUNTRY Product ?TIME ?IMPORTS)) 
+    (grossDomesticProduct ?COUNTRY ?TIME 
+      (SubtractionFn 
+        (AdditionFn ?CONSUMPTION ?EXPENDITURES ?EXPORTS ?INVESTMENT) ?IMPORTS))) "This rule is meant to capture the definition of Gross Domestic Product given in Version 1.0 of the Year 2 Crisis Management Challenge Problem spec - 'A measure of national economic size. It is comprised of four components - Private Consumption (C), Government Spending (G), Commercial Investment (I), and the national Trade Balance [exports (X) - imports (M)]. Therefore, the equation - GDPequalC+I+G+(X-M).'")

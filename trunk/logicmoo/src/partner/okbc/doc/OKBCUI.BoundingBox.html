@@ -1,0 +1,375 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- OKBCUI.BoundingBox | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class OKBCUI.BoundingBox
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBCUI.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class OKBCUI.BoundingBox
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----OKBCUI.BoundingBox
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>BoundingBox</STRONG>
+     extends java.lang.<A HREF="java.lang.Object.html">Object</A>
+{
+          // Methods 25
+     public void <A HREF="#centerAPort(int, int)">centerAPort</A>(int, int);
+     public void <A HREF="#centerAStarbord(int, int)">centerAStarbord</A>(int, int);
+     public void <A HREF="#centerAbove(int, int)">centerAbove</A>(int, int);
+     public void <A HREF="#centerBelow(int, int)">centerBelow</A>(int, int);
+     public void <A HREF="#copyFrom(OKBCUI.BoundingBox)">copyFrom</A>(<A CLASS=nound HREF="OKBCUI.BoundingBox.html">BoundingBox</A>);
+     public void <A HREF="#copyInto(OKBCUI.BoundingBox)">copyInto</A>(<A CLASS=nound HREF="OKBCUI.BoundingBox.html">BoundingBox</A>);
+     public void <A HREF="#deselectSelf(java.awt.Graphics, int, int)">deselectSelf</A>(<A CLASS=nound HREF="java.awt.Graphics.html">Graphics</A>, int, int);
+     public void <A HREF="#enlargeFrom(OKBCUI.BoundingBox)">enlargeFrom</A>(<A CLASS=nound HREF="OKBCUI.BoundingBox.html">BoundingBox</A>);
+     public void <A HREF="#enlargeInto(OKBCUI.BoundingBox)">enlargeInto</A>(<A CLASS=nound HREF="OKBCUI.BoundingBox.html">BoundingBox</A>);
+     public void <A HREF="#growBy(int, int)">growBy</A>(int, int);
+     public int <A HREF="#height()">height</A>();
+     public void <A HREF="#moveBy(int)">moveBy</A>(int);
+     public void <A HREF="#moveBy(int, int)">moveBy</A>(int, int);
+     public void <A HREF="#moveTo(int, int)">moveTo</A>(int, int);
+     public void <A HREF="#moveTo(int, int, int, int)">moveTo</A>(int, int, int, int);
+     public void <A HREF="#moveTo(int, int, int, int, int, int)">moveTo</A>(int, int, int, int, int, int);
+     public void <A HREF="#positionBelow(OKBCUI.BoundingBox, int, int)">positionBelow</A>(<A CLASS=nound HREF="OKBCUI.BoundingBox.html">BoundingBox</A>, int, int);
+     public void <A HREF="#recomputeBoundingBox()">recomputeBoundingBox</A>();
+     public void <A HREF="#restrictTo(OKBCUI.BoundingBox)">restrictTo</A>(<A CLASS=nound HREF="OKBCUI.BoundingBox.html">BoundingBox</A>);
+     public int <A HREF="#restrictToX(int)">restrictToX</A>(int);
+     public int <A HREF="#restrictToY(int)">restrictToY</A>(int);
+     public void <A HREF="#selectSelf(java.awt.Graphics, int, int)">selectSelf</A>(<A CLASS=nound HREF="java.awt.Graphics.html">Graphics</A>, int, int);
+     public <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#toString()">toString</A>();
+     public void <A HREF="#unAnchorSelf()">unAnchorSelf</A>();
+     public int <A HREF="#width()">width</A>();
+}
+</PRE>
+<P>
+<P>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Cross Reference</B></FONT></TD> </TR> </TABLE>
+<BR><DL>
+<DT><B>Returned By: </B>
+<DD>GraphNode.<A HREF="OKBCUI.GraphNode.html#getOverallBoundingBox()">getOverallBoundingBox()</A>, GrapherPanel.<A HREF="OKBCUI.GrapherPanel.html#getPlotArea()">getPlotArea()</A><P>
+</DL><BR>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="moveTo"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="moveTo(int, int)">moveTo</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void moveTo(int x, 
+                      int y) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="copyInto"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="copyInto(OKBCUI.BoundingBox)">copyInto</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void copyInto(<A HREF="OKBCUI.BoundingBox.html">BoundingBox</A> bb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="copyFrom"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="copyFrom(OKBCUI.BoundingBox)">copyFrom</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void copyFrom(<A HREF="OKBCUI.BoundingBox.html">BoundingBox</A> bb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="enlargeInto"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="enlargeInto(OKBCUI.BoundingBox)">enlargeInto</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void enlargeInto(<A HREF="OKBCUI.BoundingBox.html">BoundingBox</A> bb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="enlargeFrom"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="enlargeFrom(OKBCUI.BoundingBox)">enlargeFrom</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void enlargeFrom(<A HREF="OKBCUI.BoundingBox.html">BoundingBox</A> bb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="restrictTo"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="restrictTo(OKBCUI.BoundingBox)">restrictTo</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void restrictTo(<A HREF="OKBCUI.BoundingBox.html">BoundingBox</A> maximalBB) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="restrictToX"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="restrictToX(int)">restrictToX</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public int restrictToX(int x) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="restrictToY"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="restrictToY(int)">restrictToY</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public int restrictToY(int y) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="moveTo"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="moveTo(int, int, int, int)">moveTo</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void moveTo(int l, 
+                      int t, 
+                      int r, 
+                      int b) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="moveTo"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="moveTo(int, int, int, int, int, int)">moveTo</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void moveTo(int l, 
+                      int t, 
+                      int r, 
+                      int b, 
+                      int xOffset, 
+                      int yOffset) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="positionBelow"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="positionBelow(OKBCUI.BoundingBox, int, int)">positionBelow</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void positionBelow(<A HREF="OKBCUI.BoundingBox.html">BoundingBox</A> bb, 
+                             int xOffset, 
+                             int yOffset) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="centerBelow"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="centerBelow(int, int)">centerBelow</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void centerBelow(int x, 
+                           int y) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="centerAbove"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="centerAbove(int, int)">centerAbove</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void centerAbove(int x, 
+                           int y) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="centerAStarbord"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="centerAStarbord(int, int)">centerAStarbord</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void centerAStarbord(int x, 
+                               int y) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="centerAPort"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="centerAPort(int, int)">centerAPort</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void centerAPort(int x, 
+                           int y) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="moveBy"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="moveBy(int, int)">moveBy</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void moveBy(int dx, 
+                      int dy) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="growBy"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="growBy(int, int)">growBy</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void growBy(int dx, 
+                      int dy) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="moveBy"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="moveBy(int)">moveBy</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void moveBy(int dx) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="width"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="width()">width</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public int width() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="height"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="height()">height</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public int height() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="toString"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="toString()">toString</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.lang.String.html">String</A> toString() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="java.lang.Object.html#toString()">toString</A> in class <A HREF="java.lang.Object.html">Object</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="recomputeBoundingBox"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="recomputeBoundingBox()">recomputeBoundingBox</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void recomputeBoundingBox() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="unAnchorSelf"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="unAnchorSelf()">unAnchorSelf</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void unAnchorSelf() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="selectSelf"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="selectSelf(java.awt.Graphics, int, int)">selectSelf</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void selectSelf(<A HREF="java.awt.Graphics.html">Graphics</A> g, 
+                          int xoffset, 
+                          int yoffset) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="deselectSelf"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="deselectSelf(java.awt.Graphics, int, int)">deselectSelf</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void deselectSelf(<A HREF="java.awt.Graphics.html">Graphics</A> g, 
+                            int xoffset, 
+                            int yoffset) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBCUI.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

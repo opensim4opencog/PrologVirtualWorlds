@@ -1,0 +1,320 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- OKBC.AbstractEvaluator | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class OKBC.AbstractEvaluator
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class OKBC.AbstractEvaluator
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----OKBC.AbstractEvaluator
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>AbstractEvaluator</STRONG>
+     extends java.lang.<A HREF="java.lang.Object.html">Object</A>
+{
+          // Fields 5
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_current_kb">_current_kb</A>;
+     public static boolean <A HREF="#allow_interpreted_global_assignmenst_p">allow_interpreted_global_assignmenst_p</A>;
+     public <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A> <A HREF="#evaluators">evaluators</A>;
+     public boolean <A HREF="#initialized_p">initialized_p</A>;
+     public static boolean <A HREF="#trace_p">trace_p</A>;
+
+          // Constructors 1
+     public <A HREF="#AbstractEvaluator()">AbstractEvaluator</A>();
+
+          // Methods 14
+     public static void <A HREF="#check_length(OKBC.Node, int)">check_length</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, int);
+     public static void <A HREF="#check_length_exceeds(OKBC.Node, int)">check_length_exceeds</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, int);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#getenv(OKBC.AbstractSymbol, OKBC.EvalContext)">getenv</A>(<A CLASS=nound HREF="OKBC.AbstractSymbol.html">AbstractSymbol</A>, <A CLASS=nound HREF="OKBC.EvalContext.html">EvalContext</A>);
+
+     public void <A HREF="#basic_initialize_evaluators(java.util.Hashtable)">basic_initialize_evaluators</A>(<A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A>);
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#err_on_missing_procedure(OKBC.Node, OKBC.Node, OKBC.EvalContext)">err_on_missing_procedure</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.EvalContext.html">EvalContext</A>);
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#eval(OKBC.Node, OKBC.EvalContext, int, OKBC.Kb)">eval</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.EvalContext.html">EvalContext</A>, int, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public <A CLASS=nound HREF="java.lang.Object.html">Object</A> <A HREF="#eval_maybe_to_values(OKBC.Node, OKBC.EvalContext, int, OKBC.Kb)">eval_maybe_to_values</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.EvalContext.html">EvalContext</A>, int, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public <A CLASS=nound HREF="OKBC.AbstractEvaluator.html">AbstractEvaluator</A> <A HREF="#get_evaluator(java.lang.Object)">get_evaluator</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public void <A HREF="#initialize_evaluators()">initialize_evaluators</A>();
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#positional_eval(OKBC.Node, OKBC.EvalContext, int, OKBC.Kb)">positional_eval</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.EvalContext.html">EvalContext</A>, int, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public <A CLASS=nound HREF="java.lang.Object.html">Object</A> <A HREF="#positional_eval_maybe_to_values(OKBC.Node, OKBC.EvalContext, int, OKBC.Kb)">positional_eval_maybe_to_values</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.EvalContext.html">EvalContext</A>, int, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public void <A HREF="#set_missing_procedure_handler(OKBC.AbstractEvaluator)">set_missing_procedure_handler</A>(<A CLASS=nound HREF="OKBC.AbstractEvaluator.html">AbstractEvaluator</A>);
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#trivial_eval_expression(OKBC.Node, OKBC.EvalContext, int, OKBC.Kb)">trivial_eval_expression</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.EvalContext.html">EvalContext</A>, int, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public <A CLASS=nound HREF="java.lang.Object.html">Object</A> <A HREF="#trivial_eval_expression_maybe_to_values(OKBC.Node, OKBC.EvalContext, int, OKBC.Kb)">trivial_eval_expression_maybe_to_values</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.EvalContext.html">EvalContext</A>, int, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+}
+</PRE>
+<P>
+<P>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Cross Reference</B></FONT></TD> </TR> </TABLE>
+<BR><DL>
+<DT><B>Extended By: </B>
+<DD><A HREF="OKBC.Evaluator.html">Evaluator</A><P>
+<DT><B>Returned By: </B>
+<DD>AbstractEvaluator.<A HREF="OKBC.AbstractEvaluator.html#get_evaluator(java.lang.Object)">get_evaluator()</A><P>
+</DL><BR>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Fields</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="trace_p"><FONT COLOR="#0000FF">&middot;</FONT> trace_p</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static boolean trace_p
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_current_kb"><FONT COLOR="#0000FF">&middot;</FONT> _current_kb</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _current_kb
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="initialized_p"><FONT COLOR="#FF00FF">&middot;</FONT> initialized_p</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean initialized_p
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="evaluators"><FONT COLOR="#FF00FF">&middot;</FONT> evaluators</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.util.Hashtable.html">Hashtable</A> evaluators
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="allow_interpreted_global_assignmenst_p"><FONT COLOR="#0000FF">&middot;</FONT> allow_interpreted_global_assignmenst_p</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static boolean allow_interpreted_global_assignmenst_p
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<P>
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="AbstractEvaluator"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="AbstractEvaluator()">AbstractEvaluator</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public AbstractEvaluator() </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+Default constructor
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="set_missing_procedure_handler"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="set_missing_procedure_handler(OKBC.AbstractEvaluator)">set_missing_procedure_handler</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void set_missing_procedure_handler(<A HREF="OKBC.AbstractEvaluator.html">AbstractEvaluator</A> ev) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="getenv"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="getenv(OKBC.AbstractSymbol, OKBC.EvalContext)">getenv</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> getenv(<A HREF="OKBC.AbstractSymbol.html">AbstractSymbol</A> key, 
+                             <A HREF="OKBC.EvalContext.html">EvalContext</A> environment) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="check_length"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="check_length(OKBC.Node, int)">check_length</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void check_length(<A HREF="OKBC.Node.html">Node</A> expression, 
+                                   int l) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="check_length_exceeds"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="check_length_exceeds(OKBC.Node, int)">check_length_exceeds</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void check_length_exceeds(<A HREF="OKBC.Node.html">Node</A> expression, 
+                                           int l) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="err_on_missing_procedure"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="err_on_missing_procedure(OKBC.Node, OKBC.Node, OKBC.EvalContext)">err_on_missing_procedure</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> err_on_missing_procedure(<A HREF="OKBC.Node.html">Node</A> name, 
+                                        <A HREF="OKBC.Node.html">Node</A> expression, 
+                                        <A HREF="OKBC.EvalContext.html">EvalContext</A> environment) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_evaluator"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_evaluator(java.lang.Object)">get_evaluator</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.AbstractEvaluator.html">AbstractEvaluator</A> get_evaluator(<A HREF="java.lang.Object.html">Object</A> key) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="trivial_eval_expression"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="trivial_eval_expression(OKBC.Node, OKBC.EvalContext, int, OKBC.Kb)">trivial_eval_expression</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> trivial_eval_expression(<A HREF="OKBC.Node.html">Node</A> expression, 
+                                       <A HREF="OKBC.EvalContext.html">EvalContext</A> environment, 
+                                       int depth, 
+                                       <A HREF="OKBC.Kb.html">Kb</A> ckb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="trivial_eval_expression_maybe_to_values"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="trivial_eval_expression_maybe_to_values(OKBC.Node, OKBC.EvalContext, int, OKBC.Kb)">trivial_eval_expression_maybe_to_values</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.lang.Object.html">Object</A> trivial_eval_expression_maybe_to_values(<A HREF="OKBC.Node.html">Node</A> expression, 
+                                                         <A HREF="OKBC.EvalContext.html">EvalContext</A> environment, 
+                                                         int depth, 
+                                                         <A HREF="OKBC.Kb.html">Kb</A> ckb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="eval"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="eval(OKBC.Node, OKBC.EvalContext, int, OKBC.Kb)">eval</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> eval(<A HREF="OKBC.Node.html">Node</A> args, 
+                    <A HREF="OKBC.EvalContext.html">EvalContext</A> environment, 
+                    int depth, 
+                    <A HREF="OKBC.Kb.html">Kb</A> ckb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="eval_maybe_to_values"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="eval_maybe_to_values(OKBC.Node, OKBC.EvalContext, int, OKBC.Kb)">eval_maybe_to_values</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.lang.Object.html">Object</A> eval_maybe_to_values(<A HREF="OKBC.Node.html">Node</A> args, 
+                                      <A HREF="OKBC.EvalContext.html">EvalContext</A> environment, 
+                                      int depth, 
+                                      <A HREF="OKBC.Kb.html">Kb</A> ckb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="positional_eval"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="positional_eval(OKBC.Node, OKBC.EvalContext, int, OKBC.Kb)">positional_eval</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> positional_eval(<A HREF="OKBC.Node.html">Node</A> args, 
+                               <A HREF="OKBC.EvalContext.html">EvalContext</A> environment, 
+                               int depth, 
+                               <A HREF="OKBC.Kb.html">Kb</A> ckb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="positional_eval_maybe_to_values"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="positional_eval_maybe_to_values(OKBC.Node, OKBC.EvalContext, int, OKBC.Kb)">positional_eval_maybe_to_values</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.lang.Object.html">Object</A> positional_eval_maybe_to_values(<A HREF="OKBC.Node.html">Node</A> args, 
+                                                 <A HREF="OKBC.EvalContext.html">EvalContext</A> environment, 
+                                                 int depth, 
+                                                 <A HREF="OKBC.Kb.html">Kb</A> ckb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="initialize_evaluators"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="initialize_evaluators()">initialize_evaluators</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void initialize_evaluators() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="basic_initialize_evaluators"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="basic_initialize_evaluators(java.util.Hashtable)">basic_initialize_evaluators</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void basic_initialize_evaluators(<A HREF="java.util.Hashtable.html">Hashtable</A> ht) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

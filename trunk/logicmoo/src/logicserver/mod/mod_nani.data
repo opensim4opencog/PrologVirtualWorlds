@@ -1,0 +1,302 @@
+		
+
+:- style_check(-singleton).
+:- style_check(-discontiguous).
+:- style_check(-atom).
+:- style_check(-string).
+
+% ==================================================
+% Rooms
+% ==================================================
+
+:-dynamic(room/1).
+
+room(kitchen).
+room(office).
+room(hall).
+room('living room').
+room('dining room').
+room(cellar).
+room('bed room').
+room(closet).
+room('back yard').
+
+
+% ==================================================
+% Doors
+% ==================================================
+
+:-dynamic(door/2).
+
+door(office, hall).
+door(kitchen, office).
+door(hall, 'dining room').
+door('living room', hall).
+door(kitchen, cellar).
+door('dining room', kitchen).
+door(hall,'bed room').
+door('bed room', closet).
+door(kitchen, 'back yard').
+
+connect(Thing,Noun2) :- door(Thing,Noun2); door(Noun2,Thing).
+
+% ==================================================
+% Where Things are Located
+% ==================================================
+
+:-dynamic(location/2).
+
+location(desk, office).
+location(apple(color([red])), kitchen).
+location(apple(color([green])), kitchen).
+location(flashlight, desk).
+location('washing machine', cellar).
+location(nani, 'washing machine').
+location(broccoli, kitchen).
+location(crackers, kitchen).
+location(computer, office).
+location(envelope, desk).
+location(stamp, envelope).
+location(key, envelope).
+location(bed, 'bed room').
+location('stand table', 'bed room').
+location(pajamas, 'stand table').
+location(shirt, closet).
+location(pillow, bed).
+location(blanket, bed).                                                              
+location(table, kitchen).
+location(coat, closet).
+location(pants, closet).
+location(light_switch, 'bed room').
+location(ball, 'back yard').
+location(sofa, 'living room').
+location(easy_chair, 'living room').
+location(coffee_table, 'living room').
+location(coffee_cup, kitchen).
+location(coffee, coffee_cup).
+location(book(color([green])), coffee_table).
+location(book(color([pink])), coffee_table).
+location(bookcase, 'living room').
+location(dresser, 'bed room').
+location(top_drawer, dresser).
+location(middle_drawer, dresser).
+location(bottom_drawer, dresser). 
+location(houseplant, planter).
+location(planter, gueridon). 
+location(gueridon, 'living room').
+location(garden_plant, 'back yard').
+
+location(me, kitchen).
+
+
+location(kawfee, kif).
+location(lewellyn, sfgoth).
+location(meaculpa, sfgoth).
+location(arakys, ji).
+location(kumoe, ji).
+location(a10, ji).
+location(fanglet, sfgoth).
+location(failure, irl).
+location(lithiuum, ji).
+location(rahul, kif).
+location(me, fangletsass).
+location(elexa, irl).
+location(rhap, ji).
+location(revenant, pigface).
+location(crazzz, ji).
+location(aeplus, kif).
+location(fleeky, sfgoth).
+location(polardark, ai).
+location(fneh, pigface).
+location(vertigo, irl).
+location(danger, pigface).
+location(zeus5, irl).
+location(torainium, ai).
+location(spcdman, ai).
+location(heffster, botfarm).
+location(orbotz, ai).
+location(shawnhi, irl).
+location(cod, irl).
+location(meanap, pigface).
+location(bark, pigface).
+location(yrlnry, kif).
+location(jeffer, ji).
+location(lilrouter, ji).
+location(desk, office).
+location(apple, kitchen).
+location(flashlight, desk).
+location('washing machine', cellar).
+location(nani, 'washing machine').
+location(broccoli, kitchen).
+location(crackers, kitchen).
+location(computer, office).
+location(envelope, desk).
+location(stamp, envelope).
+location(key, envelope).
+location(aflightcarrier, fangletsass).
+location(thesearstower, dangersass).
+location(myass, dangersass).
+location(astiffy, dangersass).
+location(fnehzz, myass).
+location(food, fneh).
+location(jimmyhoffa, fangletsass).
+location(corn, fangletsass).
+location(beer, meaculpa).
+location(sfgoth, fangletsass).
+location('500bowlingballs', fangletsass).
+location(dover, fangletsass).
+location(fangfett, fangletsass).
+location(fangless, fangletsass).
+location(kmart, fangletsass).
+location(walmart, fangletsass).
+location(theempirestatebuilding, fangletsass).
+location(thestatueofliberty, fangletsass).
+location(thespaceneedle, fangletsass).
+location(thepudgetsound, fangletsass).
+location('1000pigs', fangletsass).
+location('1000000dildos', fangletsass).
+location('1000lbsofwetcement', fangletsass).
+location(canada, 'washing machine').
+location(thaifood, meaculpa).
+location(guts, lewellyn).
+location(brains, lewellyn).
+location(penis, lewellyn).
+location(asia, fangletsass).
+location(india, fangletsass).
+location(rimjob, fangletsass).
+location(shit, fangletsass).
+location(thepacificocean, fangletsass).
+location(antartica, fangletsass).
+location(thewashingtonmemorial, fangletsass).
+location(mexico, fangletsass).
+location(africa, fangletsass).
+location(disneyworld, fangletsass).
+location(amilliongallonsoflemonjuice, fangletsass).
+location(acopcarwithcopinside, fangletsass).
+location(thearmy, fangletsass).
+location(thenavy, fangletsass).
+location(theairforce, fangletsass).
+location(themarines, fangletsass).
+location(thepresident, fangletsass).
+location(thequeenofengland, fangletsass).
+location(thequeenmother, fangletsass).
+location('900hotpokers', fangletsass).
+location(everyhookerintexas, fangletsass).
+location(ablackhole, fangletsass).
+location(thesun, fangletsass).
+
+
+:-dynamic(location_s/2).
+
+location(candle,kitchen).
+
+locaton_s(object(RealObj,D1,D2,Weight),Place):-
+	location(RealObj,Place),object(RealObj,D1,D2),
+	member(weight(Weight),D2),!.
+locaton_s(object(RealObj,D1,D2,0),Place):-
+	location(RealObj,Place),object(RealObj,D1,D2).	
+
+
+
+
+
+
+
+% ==================================================
+% Object Descriptions
+% ==================================================
+
+:-dynamic(object/4).
+
+object(candle, [color(blue),size(small)],[shape(triangular),material(wax),texture(sticky)]).
+object(apple, [color(red),size(small)],[shape(round),is_a(fruit),texture(smooth)]).
+object(apple, [color([green,pastel]),size(small)],[shape(round),is_a(fruit),texture(smooth)]).
+object(table, [color([blue,white]),size(large)],[shape(oval),material(wood),texture([bumpy,irregular]),weight(50)]).
+object(pillow, [color(white),size(medium)],[shape(rectangular),material([cotton,flannel]),texture([fluffy,soft])]).
+object(blanket, [color([green,dark]),size([large,bulky])],[shape(rectangular),material(rayon),texture([plush,soft])]).                                                              
+object('stand table', [color([black,shiney]),size(medium)],[shape([cubular,rectangular]),material(wood),texture(smooth),weight(25)]).
+object(pajams, [color([blue,pastel]),size([medium,fits])],[shape(unique),material([cotton,rayon ]),texture(soft)]).
+object(shirt, [color(black),size([medium,fits])],[shape(like(torso)),material(cotton),texture([soft,threadbare])]).
+object(flashlight, [color(yellow),size([medium,small])],[shape(cylindrical),material(plastic),texture(ribbed)]).
+object(key, [color(silver),size([small,tiny])],[shape(unique),material(metal)],[texture([ridged,bumpy])]).
+object(envelope, [color(white),size(small)],[shape(rectangular),material(paper),texture(smooth)]).
+object(desk, [color([brown,shiney]),size(large)],[shape([cubular,rectangular]),texture([smooth,ridged]),weight(175)]).
+object('washing machine', [color(white),size(large)],[shape([cubular,square]),material(metal),texture(smooth),weight(125)]).
+object(broccoli, [color(green),size(small)],[shape(like(tree)),is_a(vegetable),texture([porous,bumpy])]).                                                                    
+object(crackers, [color(tan),is_a(bread)],[shape([circular,flat]),size(small),texture([dry,coarse])]).
+object(computer, [color(grey),material(plastic)],[shape([cubular,rectangular]),size(medium),texture(smooth)]).
+object(stamp, [color('Polychromatic'),size(tiny,thin)],[shape(square),material(paper),texture([smooth,sticky])]).
+object(coat, [color(black),size([medium,fits])],[shape(like(torso)),material([wool,cotton,rayon ]),texture(coarse)]).
+object(pants, [color(black),size([medium,fits])],[shape(like(ass)),material([denim]),texture(coarse)]).
+object(nani, [color(brown),color(white),size(medium)],[shape(like(teddy_bear)),material(plush),texture([fuzzy,soft])]).
+object(light_switch, [color(cream),size(small)],[shape(rectangular),material(plastic),texture(smooth)]).
+object(ball, [color(red),size(medium)],[shape(spherical),material(rubber),texture(bumpy)]).
+object(coffee, [color(black,brown),size(small)],[shape(fluid),material(liquid),texture(wet)]).
+object(coffee_cup, [color(black,brown),size(small)],[shape(fluid),material(liquid),texture(wet)]).
+object(sofa, [color([blue,dark]),size([large,wide,long])],[shape(polyhedral),material([poplin,wood]),texture(ribbed),weight(125)]).
+object(easy_chair, [color(blue),size([large,narrow])],[shape(polyhedral),material([poplin,wood]),texture(ribbed),weight(75)]).
+object(coffee_table, [color([brown,shiney]),size(medium)],[shape(circular),material(wood),texture(smooth),weight(35)]).
+object(book, [color(green),color(white),color(black),size(small)],[shape(cubular,rectangular),material(paper),texture(smooth)]).
+object(book, [color(pink),color(white),color(black),size(small)],[shape(cubular,rectangular),material(paper),texture(smooth)]).
+object(bookcase, [color([brown,dark,shiney]),size(large)],[shape([square,concave_polyhedron]),material(wood),texture(smooth),weight(60)]).
+object(dresser, [color([brown,shiney]),size(large)],[shape([rectangular,polyhedral]),material(wood),texture(smooth),weight(45)]).
+object(top_drawer, [color([brown,shiney]),size(medium)],[shape([rectangular,concave_polyhedron]),material(wood),texture(smooth)]). 
+object(middle_drawer, [color([brown,shiney]),size(medium)],[shape([rectangular,concave_polyhedron]),material(wood),texture(smooth)]).
+object(bottom_drawer, [color([brown,shiney]),size(medium)],[shape([rectangular,concave_polyhedron]),material(wood),texture(smooth)]).
+object(planter, [color([pastel,blue]),size(medium)],[shape([cylindrical,trapezohedron]),material(clay),texture(abrasive),weight(15)]).
+object(houseplant, [color(green),size(medium)],[shape(anthurium_crystallinum),material(plant_tissue),texture(smooth)]).
+object(gueridon, [color([brown,shiney]),size(medium)],[shape(circular),material(wood),texture(smooth),weight(25)]).		 
+
+
+
+object(teddy_bear, [color(natural)],[shape(unique)]).
+object(torso, [color(like(skin))],[shape(unique)]).
+object(skin, [color(unique)],[shape(unique)]).
+
+%object(, [color(),size()],[shape(),material(),texture()]),weight()]).
+
+:-dynamic(property/2).
+:-dynamic(subpart/2).  
+
+
+property(Obj,Words):-
+	((Obj =..[Type,Spec] ; (Obj=Type,Spec=[]))),!,
+	get_property(Type,Spec,Pro),
+	transform_property(Pro,Property),
+	Property=..Words.
+
+
+transform_property(Pro,Property):-
+	  Pro=..[Type,like(Other)],
+	  Property=..[Type,_],!,
+	  property(Other,Property).
+transform_property(Property,Property).
+
+	  
+	
+
+	
+
+get_property(Type,Specification,Property):-
+	member(Property,Specification).
+get_property(Type,Specification,Property):-
+	object(Type,D1,D2),
+	append(D1,D2,DD),
+	member(Property,DD),
+	not(functor_member(Property,Specification)).
+
+functor_member(Property,[]):-!,fail.
+functor_member(Property,Specification):-
+	functor(Property,S,_),!,
+	member(Super,Specification),
+	functor(Super,S,_).
+
+	
+
+
+	
+	
+	
+
+
+

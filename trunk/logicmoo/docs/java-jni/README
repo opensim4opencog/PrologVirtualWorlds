@@ -1,0 +1,160 @@
+Writing JNI using GCC on win32:
+===========================================================================
+
+Last Change: Thu Apr 22 00:48:47 CDT 1999
+
+TOC:
+  - CHANGES SINCE 1999-04-08 RELEASE
+  - CHANGES SINCE 1999-01-21 RELEASE
+  - REQUIREMENTS
+  - CHANGES TO JDK HEADERS NEEDED FOR GCC
+  - EXAMPLES
+  - MINGW NOTES
+  - CYGWIN NOTES
+  - THANKS
+  - LINKS
+
+===========================================================================
+
+I've provided two simple Java JNI examples, one in C and other in C++ 
+(this also tests global constructors and destructors). The third example,
+courtesy of Douglas E. Wegscheid, is a JNI invoker.
+
+Changes since 1999-04-08 release:
+=================================
+
+* Add f77 example.
+
+Changes since 1999-01-21 release:
+=================================
+
+* Update README for egcs-1.1.2.
+* Add Java JNI invoker example from Douglas E. Wegscheid. 
+* Rename Makefiles to Makefile.cyg and Makefile.nocyg to build for Cygwin
+  and Mingw using -mno-cygwin.
+* Add reference to -mno-cygwin-howto.
+
+Requirements:
+=============
+
+  - JDK <URL:http://www.javasoft.com/> of course. 
+  
+  - cygwin B20.1 or newer <URL:http://sourceware.cygnus.com/cygwin/>: 
+    You of course only need this if you need to use Cygwin. For Mingw,
+    ie., native win32, you already have the required runtime. See my 
+    gnu-win32 page below for a short discussion of what is cygwin/mingw/etc.
+
+  - GNU EGCS-1.1.2 development tools 
+    <URL:http://www.xraylith.wisc.edu/~khan/software/gnu-win32/>
+
+Changes to JDK headers needed for GCC:
+======================================
+
+GCC doesn't have a __int64 built-in, and this patch basically uses
+"long long" instead. 
+
+1. Edit the file <jdk_root>/include/win32/jni_md.h, Where <jdk_root> 
+   is the installation root (eg., c:/jdk1.1.7A).
+
+2. Replace the segment:
+
+    typedef long jint;
+    typedef __int64 jlong;
+ 
+   with:
+
+    typedef long jint;
+    #ifdef __GNUC__
+    typedef long long jlong;
+    #else
+    typedef __int64 jlong;
+    #endif
+    typedef signed char jbyte;
+
+and that's it. Or, you can use patch on the jdk-1.1.patch file included
+which automates this.
+
+Examples:
+=========
+  
+  * c/HelloWorld: Thanks to Andrew Mickish 
+    <URL:http://www.andrew.cmu.edu/~am2q/>
+
+  * c++/HelloWorld: A C++ version.
+
+  * f77/HelloWorld: A F77 version.
+
+  * jni_invoke: JNI invoker. Thanks to Douglas E. Wegscheid. 
+
+For Cygwin, just cd to the "c", "c++", "f77" and "jni_invoke" directories, 
+and type `make -f Makefile.cyg' to build the DLLs. Make sure that you edit 
+the Makefile.cyg files to fix JDK_ROOT.
+
+For Mingw, but using Cygwin GCC in -mno-cygwin mode, use `make -f
+Makefile.nocyg' to build the DLLs. Note that you *must* have downloaded
+the mingw-extra package needed with -mno-cygwin flag. See my mno-cygwin
+howto at http://www.xraylith.wisc.edu/~khan/software/gnu-win32/ for
+more information. Make sure that you edit the Makefile.nocyg files to
+fix JDK_ROOT and also MINGW_EXTRA variables.
+
+For Mingw using Mingw32 GCC, use makeit.bat files in these directories.
+
+Mingw32 notes:
+==============
+
+Since Java as distributed by Sun requires MSVC 4.2, it probably depends on
+some of the MSVC's features, either of the runtime or of the compiler; for
+this reason alone, mingw will probably be the most stable platform for
+developing JNI's when using GCC.
+
+If you're using Cygwin GCC in -mno-cygwin mode to build Mingw32 executables 
+and/or DLLs, please see my -mno-cygwin-howto at any of the following sites:
+
+  http://www.xraylith.wisc.edu/~khan/software/gnu-win32/
+  http://www.delorie.com/howto/
+
+Cygwin notes:
+==============
+
+Since Java as distributed by Sun requires MSVC 4.2, it probably depends on
+some of the MSVC's features, either of the runtime or of the compiler; for
+this reason alone, cygwin will probably *NOT* be the most stable platform 
+for developing JNI's when using GCC.
+
+Oh, the joys of cut and paste ;-)
+
+The good news is that Cygwin B20.1 supports Java JNI's quite well, and I've 
+run a large 3D PDE solver that MSVC can't even compile (uses C++ expression
+templates and so on).
+
+Creating Java JNI with Cygwin tools is just as easy as creating these with
+MSVC or some other commercial native tools, except for one small, but
+important, difference: since Java is not a "Cygwin native" application,
+we need to initialize the Cygwin DLL differently and for that we supply
+an alternative entry point when building the DLL. The new entry point,
+__cygwin_noncygwin_dll_entry@12, was introduced in B20.1 as an interim 
+measure; starting from B21, we should not need to do this anymore.
+
+THANKS:
+=======
+
+Many thanks to Andrew Mickish <michish@cmu.edu>, Glenn Fullmer
+<Glen_Fullmer-EGF002@email.mot.com> and Douglas E. Wegscheid 
+<wegscd@whirlpool.com> for all their help. 
+
+LINKS:
+======
+
+Latest version of these examples can be found at the following site:
+
+ http://www.xraylith.wisc.edu/~khan/software/gnu-win32/
+
+Follow the links provided there to the home sites for these various projects.
+
+---------------------------------- x -------------------------------------
+
+Mumit Khan <khan@xraylith.wisc.edu>
+<URL:http://www.xraylith.wisc.edu/~khan/>
+
+Last Change: Thu Apr 22 00:48:47 CDT 1999
+

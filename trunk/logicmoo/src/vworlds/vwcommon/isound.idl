@@ -1,0 +1,103 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// ISound : Interface used to specify a sound to be played (via a filename) and to specify 
+// all the attributes (2D + 3D) of that sound.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+import "oaidl.idl";
+import "vwprop.idl";
+	
+	[
+		object,
+		uuid(FF0BD16D-AE3E-11D1-83F0-00C04FB6FA46),
+		dual,
+		helpstring("ISound Interface"),
+		pointer_default(unique)
+	]
+	interface ISound : IObjectProperty
+	{
+
+const DISPID DISPID_SOUND_URL = 101;
+const DISPID DISPID_SOUND_ISLOOPING = 102;
+const DISPID DISPID_SOUND_IS3D = 103;
+const DISPID DISPID_SOUND_SET2DDATA = 104;
+const DISPID DISPID_SOUND_SET3DDATA = 105;
+
+
+
+		[propget, id(DISPID_SOUND_URL), helpstring("The URL of the file describing the sound to be played.")] 
+		HRESULT SoundURL([out, retval] BSTR *pbstrURL);
+
+		[propput, id(DISPID_SOUND_URL), helpstring("The URL of the file describing the sound to be played.")] 
+		HRESULT SoundURL([in] BSTR bstrURL);
+
+		[propget, id(DISPID_SOUND_ISLOOPING), helpstring("Repeatedly loop playing the sound?")] 
+		HRESULT IsLooping([out, retval] VARIANT_BOOL *pbIsLooping);
+
+		[propput, id(DISPID_SOUND_ISLOOPING), helpstring("Repeatedly loop playing the sound?")] 
+		HRESULT IsLooping([in] VARIANT_BOOL bIsLooping);
+
+		[propget, id(DISPID_SOUND_IS3D), helpstring("3D (directional+distance) sound?")] 
+		HRESULT Is3D([out, retval] VARIANT_BOOL *pbIs3D);
+
+		[propput, id(DISPID_SOUND_IS3D), helpstring("3D (directional+distance) sound?")] 
+		HRESULT Is3D([in] VARIANT_BOOL bIs3D);
+	
+		[id(DISPID_SOUND_SET2DDATA),helpstring("The sound's 2D data.")]
+		HRESULT Set2DData([in] long lVolume, 
+						  [in] long lFrequency, 
+						  [in] long lPan);
+				 
+		[helpstring("The sound's 2D data.")]
+		HRESULT Get2DData([out] VARIANT * pvarlVolume, 
+						  [out] VARIANT * pvarlFrequency, 
+						  [out] VARIANT * pvarlPan);
+
+		[restricted, helpstring("The sound's 2D data.")]
+		HRESULT Get2DDataExt([out] long* plVolume, 
+						  [out] long* plFrequency, 
+						  [out] long* plPan);
+
+		[id(DISPID_SOUND_SET3DDATA),helpstring("The sound's 3D data (see help).")]
+		HRESULT Set3DData([in] long dwInsideConeAngle,
+						  [in] long dwOutsideConeAngle,
+						  [in] long lConeOutsideVolume,
+						  [in] float flMinDistance,
+						  [in] float flMaxDistance);
+
+		[helpstring("The sound's 3D data (see help).")]
+		HRESULT Get3DData([out] VARIANT * pvardwInsideConeAngle,
+						  [out] VARIANT * pvardwOutsideConeAngle,
+						  [out] VARIANT * pvarlConeOutsideVolume,
+						  [out] VARIANT * pvarflMinDistance,
+						  [out] VARIANT * pvarflMaxDistance);
+
+		[restricted, helpstring("The sound's 3D data (see help).")]
+		HRESULT Get3DDataExt([out] long* pdwInsideConeAngle,
+						  [out] long* pdwOutsideConeAngle,
+						  [out] long* plConeOutsideVolume,
+						  [out] float* pflMinDistance,
+						  [out] float* pflMaxDistance);
+
+	};
+
+	typedef 
+	[
+		uuid(0D8F714B-B30D-11d1-83F0-00C04FB6FA46),
+		helpstring("")
+	]
+	enum SoundHint
+	{
+		[helpstring("")] soundURL = 0,	
+		[helpstring("")] soundIsLooping = 1,	
+		[helpstring("")] soundIs3D = 2,	
+		[helpstring("")] soundIsPlaying = 3,
+		[helpstring("")] sound2DData = 4,	
+		[helpstring("")] sound3DData = 5,	
+	} SoundHint;

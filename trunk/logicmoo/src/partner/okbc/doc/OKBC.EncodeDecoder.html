@@ -1,0 +1,307 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- OKBC.EncodeDecoder | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class OKBC.EncodeDecoder
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class OKBC.EncodeDecoder
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----OKBC.EncodeDecoder
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>EncodeDecoder</STRONG>
+     extends java.lang.<A HREF="java.lang.Object.html">Object</A>
+{
+          // Constructors 1
+     public <A HREF="#EncodeDecoder()">EncodeDecoder</A>();
+
+          // Methods 16
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#decode(byte[], OKBC.Kb, boolean, OKBC.Connection)">decode</A>(byte[], <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, boolean, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#decode(byte[], OKBC.Kb, boolean, OKBC.Connection, OKBC.AbstractPackage)">decode</A>(byte[], <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, boolean, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>, <A CLASS=nound HREF="OKBC.AbstractPackage.html">AbstractPackage</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#decode(java.io.InputStream, OKBC.Kb, boolean, OKBC.Connection)">decode</A>(<A CLASS=nound HREF="java.io.InputStream.html">InputStream</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, boolean, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#decode(java.io.InputStream, OKBC.Kb, boolean, OKBC.Connection, OKBC.AbstractPackage)">decode</A>(<A CLASS=nound HREF="java.io.InputStream.html">InputStream</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, boolean, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>, <A CLASS=nound HREF="OKBC.AbstractPackage.html">AbstractPackage</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#decode(java.io.InputStream, OKBC.Kb, boolean, OKBC.Connection, OKBC.AbstractPackage, OKBC.Node[])">decode</A>(<A CLASS=nound HREF="java.io.InputStream.html">InputStream</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, boolean, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>, <A CLASS=nound HREF="OKBC.AbstractPackage.html">AbstractPackage</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>[]);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#decode_using_table(byte[], OKBC.Kb, boolean, OKBC.Connection)">decode_using_table</A>(byte[], <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, boolean, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#decode_using_table(byte[], OKBC.Kb, boolean, OKBC.Connection, OKBC.AbstractPackage)">decode_using_table</A>(byte[], <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, boolean, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>, <A CLASS=nound HREF="OKBC.AbstractPackage.html">AbstractPackage</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#decode_using_table(java.io.InputStream, OKBC.Kb, boolean, OKBC.Connection)">decode_using_table</A>(<A CLASS=nound HREF="java.io.InputStream.html">InputStream</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, boolean, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#decode_using_table(java.io.InputStream, OKBC.Kb, boolean, OKBC.Connection, OKBC.AbstractPackage)">decode_using_table</A>(<A CLASS=nound HREF="java.io.InputStream.html">InputStream</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, boolean, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>, <A CLASS=nound HREF="OKBC.AbstractPackage.html">AbstractPackage</A>);
+     public static byte[] <A HREF="#encode(OKBC.Node, boolean, OKBC.AbstractPackage)">encode</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, boolean, <A CLASS=nound HREF="OKBC.AbstractPackage.html">AbstractPackage</A>);
+     public static void <A HREF="#encode(java.io.OutputStream, OKBC.Node, boolean, OKBC.AbstractPackage)">encode</A>(<A CLASS=nound HREF="java.io.OutputStream.html">OutputStream</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, boolean, <A CLASS=nound HREF="OKBC.AbstractPackage.html">AbstractPackage</A>);
+     public static void <A HREF="#encode(java.io.OutputStream, OKBC.Node, boolean, OKBC.AbstractPackage, java.util.Hashtable)">encode</A>(<A CLASS=nound HREF="java.io.OutputStream.html">OutputStream</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, boolean, <A CLASS=nound HREF="OKBC.AbstractPackage.html">AbstractPackage</A>, <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A>);
+     public static byte[] <A HREF="#encode_node_uniquifying(OKBC.Node, boolean, OKBC.AbstractPackage)">encode_node_uniquifying</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, boolean, <A CLASS=nound HREF="OKBC.AbstractPackage.html">AbstractPackage</A>);
+     public static void <A HREF="#encode_node_uniquifying(java.io.OutputStream, OKBC.Node, boolean, OKBC.AbstractPackage)">encode_node_uniquifying</A>(<A CLASS=nound HREF="java.io.OutputStream.html">OutputStream</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, boolean, <A CLASS=nound HREF="OKBC.AbstractPackage.html">AbstractPackage</A>);
+     public static void <A HREF="#main(java.lang.String[])">main</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>[]);
+     public static int <A HREF="#preallocate_unique_ids(OKBC.Node, java.util.Hashtable)">preallocate_unique_ids</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A>);
+
+}
+</PRE>
+<P>
+<P>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="EncodeDecoder"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="EncodeDecoder()">EncodeDecoder</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public EncodeDecoder() </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+Default constructor
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="decode"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="decode(byte[], OKBC.Kb, boolean, OKBC.Connection)">decode</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> decode(byte[] bytes, 
+                             <A HREF="OKBC.Kb.html">Kb</A> kb_type, 
+                             boolean client_p, 
+                             <A HREF="OKBC.Connection.html">Connection</A> connection) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="decode"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="decode(java.io.InputStream, OKBC.Kb, boolean, OKBC.Connection)">decode</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> decode(<A HREF="java.io.InputStream.html">InputStream</A> s, 
+                             <A HREF="OKBC.Kb.html">Kb</A> kb_type, 
+                             boolean client_p, 
+                             <A HREF="OKBC.Connection.html">Connection</A> connection) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="decode"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="decode(byte[], OKBC.Kb, boolean, OKBC.Connection, OKBC.AbstractPackage)">decode</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> decode(byte[] bytes, 
+                             <A HREF="OKBC.Kb.html">Kb</A> kb_type, 
+                             boolean client_p, 
+                             <A HREF="OKBC.Connection.html">Connection</A> connection, 
+                             <A HREF="OKBC.AbstractPackage.html">AbstractPackage</A> pack) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="decode"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="decode(java.io.InputStream, OKBC.Kb, boolean, OKBC.Connection, OKBC.AbstractPackage)">decode</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> decode(<A HREF="java.io.InputStream.html">InputStream</A> s, 
+                             <A HREF="OKBC.Kb.html">Kb</A> kb_type, 
+                             boolean client_p, 
+                             <A HREF="OKBC.Connection.html">Connection</A> connection, 
+                             <A HREF="OKBC.AbstractPackage.html">AbstractPackage</A> pack) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="decode"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="decode(java.io.InputStream, OKBC.Kb, boolean, OKBC.Connection, OKBC.AbstractPackage, OKBC.Node[])">decode</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> decode(<A HREF="java.io.InputStream.html">InputStream</A> s, 
+                             <A HREF="OKBC.Kb.html">Kb</A> kb_type, 
+                             boolean client_p, 
+                             <A HREF="OKBC.Connection.html">Connection</A> connection, 
+                             <A HREF="OKBC.AbstractPackage.html">AbstractPackage</A> pack, 
+                             <A HREF="OKBC.Node.html">Node</A>[] table) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="decode_using_table"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="decode_using_table(byte[], OKBC.Kb, boolean, OKBC.Connection)">decode_using_table</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> decode_using_table(byte[] bytes, 
+                                         <A HREF="OKBC.Kb.html">Kb</A> kb_type, 
+                                         boolean client_p, 
+                                         <A HREF="OKBC.Connection.html">Connection</A> connection) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="decode_using_table"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="decode_using_table(java.io.InputStream, OKBC.Kb, boolean, OKBC.Connection)">decode_using_table</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> decode_using_table(<A HREF="java.io.InputStream.html">InputStream</A> s, 
+                                         <A HREF="OKBC.Kb.html">Kb</A> kb_type, 
+                                         boolean client_p, 
+                                         <A HREF="OKBC.Connection.html">Connection</A> connection) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="decode_using_table"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="decode_using_table(byte[], OKBC.Kb, boolean, OKBC.Connection, OKBC.AbstractPackage)">decode_using_table</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> decode_using_table(byte[] bytes, 
+                                         <A HREF="OKBC.Kb.html">Kb</A> kb_type, 
+                                         boolean client_p, 
+                                         <A HREF="OKBC.Connection.html">Connection</A> connection, 
+                                         <A HREF="OKBC.AbstractPackage.html">AbstractPackage</A> pack) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="decode_using_table"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="decode_using_table(java.io.InputStream, OKBC.Kb, boolean, OKBC.Connection, OKBC.AbstractPackage)">decode_using_table</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> decode_using_table(<A HREF="java.io.InputStream.html">InputStream</A> s, 
+                                         <A HREF="OKBC.Kb.html">Kb</A> kb_type, 
+                                         boolean client_p, 
+                                         <A HREF="OKBC.Connection.html">Connection</A> connection, 
+                                         <A HREF="OKBC.AbstractPackage.html">AbstractPackage</A> pack) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="encode"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="encode(OKBC.Node, boolean, OKBC.AbstractPackage)">encode</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static byte[] encode(<A HREF="OKBC.Node.html">Node</A> n, 
+                               boolean client_p, 
+                               <A HREF="OKBC.AbstractPackage.html">AbstractPackage</A> pack) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="encode"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="encode(java.io.OutputStream, OKBC.Node, boolean, OKBC.AbstractPackage)">encode</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void encode(<A HREF="java.io.OutputStream.html">OutputStream</A> s, 
+                             <A HREF="OKBC.Node.html">Node</A> n, 
+                             boolean client_p, 
+                             <A HREF="OKBC.AbstractPackage.html">AbstractPackage</A> pack) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="encode"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="encode(java.io.OutputStream, OKBC.Node, boolean, OKBC.AbstractPackage, java.util.Hashtable)">encode</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void encode(<A HREF="java.io.OutputStream.html">OutputStream</A> s, 
+                             <A HREF="OKBC.Node.html">Node</A> n, 
+                             boolean client_p, 
+                             <A HREF="OKBC.AbstractPackage.html">AbstractPackage</A> pack, 
+                             <A HREF="java.util.Hashtable.html">Hashtable</A> ht) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="encode_node_uniquifying"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="encode_node_uniquifying(OKBC.Node, boolean, OKBC.AbstractPackage)">encode_node_uniquifying</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static byte[] encode_node_uniquifying(<A HREF="OKBC.Node.html">Node</A> n, 
+                                                boolean client_p, 
+                                                <A HREF="OKBC.AbstractPackage.html">AbstractPackage</A> pack) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="encode_node_uniquifying"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="encode_node_uniquifying(java.io.OutputStream, OKBC.Node, boolean, OKBC.AbstractPackage)">encode_node_uniquifying</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void encode_node_uniquifying(<A HREF="java.io.OutputStream.html">OutputStream</A> s, 
+                                              <A HREF="OKBC.Node.html">Node</A> node, 
+                                              boolean client_p, 
+                                              <A HREF="OKBC.AbstractPackage.html">AbstractPackage</A> pack) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="preallocate_unique_ids"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="preallocate_unique_ids(OKBC.Node, java.util.Hashtable)">preallocate_unique_ids</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static int preallocate_unique_ids(<A HREF="OKBC.Node.html">Node</A> n, 
+                                            <A HREF="java.util.Hashtable.html">Hashtable</A> ht) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="main"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="main(java.lang.String[])">main</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void main(<A HREF="java.lang.String.html">String</A>[] argv) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

@@ -1,0 +1,222 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- OKBC.Server | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class OKBC.Server
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class OKBC.Server
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----<A HREF="OKBC.Node.html">OKBC.Node</A>
+           |
+           +----<A HREF="OKBC.SessionInfo.html">OKBC.SessionInfo</A>
+                   |
+                   +----<A HREF="OKBC.Connection.html">OKBC.Connection</A>
+                           |
+                           +----<A HREF="OKBC.NetworkGeneral.html">OKBC.NetworkGeneral</A>
+                                   |
+                                   +----OKBC.Server
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>Server</STRONG>
+     extends OKBC.<A HREF="OKBC.NetworkGeneral.html">NetworkGeneral</A>
+     implements OKBC.<A HREF="OKBC.Notifyee.html">Notifyee</A>
+{
+          // Fields 4
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_concrete_kb_class_from_abstract_kb_class_name">_concrete_kb_class_from_abstract_kb_class_name</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_current_kb">_current_kb</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_get_kb_type">_get_kb_type</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_meta_kb">_meta_kb</A>;
+
+          // Constructors 1
+     public <A HREF="#Server(int)">Server</A>(int);
+
+          // Methods 8
+     public static void <A HREF="#continue_running_okbc_server(java.lang.String[])">continue_running_okbc_server</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>[]);
+     public static void <A HREF="#document_server_options()">document_server_options</A>();
+     public static void <A HREF="#main(java.lang.String[])">main</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>[]);
+
+     public void <A HREF="#handle_connection(java.net.ServerSocket, java.io.BufferedReader, java.io.PrintWriter, boolean, boolean)">handle_connection</A>(<A CLASS=nound HREF="java.net.ServerSocket.html">ServerSocket</A>, <A CLASS=nound HREF="java.io.BufferedReader.html">BufferedReader</A>, <A CLASS=nound HREF="java.io.PrintWriter.html">PrintWriter</A>, boolean, boolean);
+     public void <A HREF="#loop_executing_okbc_requests(OKBC.PushableBufferedReader, java.io.PrintWriter, boolean, boolean)">loop_executing_okbc_requests</A>(<A CLASS=nound HREF="OKBC.PushableBufferedReader.html">PushableBufferedReader</A>, <A CLASS=nound HREF="java.io.PrintWriter.html">PrintWriter</A>, boolean, boolean) throws <A CLASS=nound HREF="OKBC.DisconnectException.html">DisconnectException</A>;
+     public void <A HREF="#notice_side_effect()">notice_side_effect</A>();
+     public void <A HREF="#start_server()">start_server</A>();
+     public void <A HREF="#start_server(boolean, boolean)">start_server</A>(boolean, boolean);
+}
+</PRE>
+<P>
+<P>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Fields</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_current_kb"><FONT COLOR="#0000FF">&middot;</FONT> _current_kb</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _current_kb
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_get_kb_type"><FONT COLOR="#0000FF">&middot;</FONT> _get_kb_type</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _get_kb_type
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_meta_kb"><FONT COLOR="#0000FF">&middot;</FONT> _meta_kb</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _meta_kb
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_concrete_kb_class_from_abstract_kb_class_name"><FONT COLOR="#0000FF">&middot;</FONT> _concrete_kb_class_from_abstract_kb_class_name</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _concrete_kb_class_from_abstract_kb_class_name
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<P>
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Server"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Server(int)">Server</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Server(int the_port) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="start_server"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="start_server()">start_server</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void start_server() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="start_server"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="start_server(boolean, boolean)">start_server</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void start_server(boolean catch_errors_p, 
+                            boolean backtrace_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="handle_connection"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="handle_connection(java.net.ServerSocket, java.io.BufferedReader, java.io.PrintWriter, boolean, boolean)">handle_connection</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void handle_connection(<A HREF="java.net.ServerSocket.html">ServerSocket</A> server_socket, 
+                                 <A HREF="java.io.BufferedReader.html">BufferedReader</A> r_s, 
+                                 <A HREF="java.io.PrintWriter.html">PrintWriter</A> write_stream, 
+                                 boolean catch_errors_p, 
+                                 boolean backtrace_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="loop_executing_okbc_requests"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="loop_executing_okbc_requests(OKBC.PushableBufferedReader, java.io.PrintWriter, boolean, boolean)">loop_executing_okbc_requests</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void loop_executing_okbc_requests(<A HREF="OKBC.PushableBufferedReader.html">PushableBufferedReader</A> read_stream, 
+                                            <A HREF="java.io.PrintWriter.html">PrintWriter</A> write_stream, 
+                                            boolean catch_errors_p, 
+                                            boolean backtrace_p)  throws <A HREF="OKBC.DisconnectException.html">DisconnectException</A></PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="notice_side_effect"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="notice_side_effect()">notice_side_effect</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void notice_side_effect() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Implements:</B>
+<DD><A HREF="OKBC.Notifyee.html#notice_side_effect()">notice_side_effect</A> in interface <A HREF="OKBC.Notifyee.html">Notifyee</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="continue_running_okbc_server"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="continue_running_okbc_server(java.lang.String[])">continue_running_okbc_server</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void continue_running_okbc_server(<A HREF="java.lang.String.html">String</A>[] argv) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="document_server_options"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="document_server_options()">document_server_options</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void document_server_options() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="main"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="main(java.lang.String[])">main</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void main(<A HREF="java.lang.String.html">String</A>[] argv) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>
