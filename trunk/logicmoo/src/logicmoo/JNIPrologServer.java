@@ -514,6 +514,9 @@ public class JNIPrologServer extends Thread {
     }
 
 
+    
+
+
     /* Serializes Instance Members into Prolog List */
     public synchronized static String membersValuesToVector(Object instance, Member[] pMembs) {
         StringBuffer interfaceList= new StringBuffer();
@@ -531,24 +534,29 @@ public class JNIPrologServer extends Thread {
         return toScriptingName(pMemb.getName());
     }
 
+
     /* Serializes Methods into Prolog List */
     public synchronized static String methodValueToVector(Object instance, Method pMemb) {
-        try {
-            if ( pMemb.getName().toLowerCase().startsWith( "get") )
-                return toPrologString(pMemb.invoke(instance,null));
-        } catch ( Exception e ) {
-        }
-        return methodToVector(pMemb);
+        String lcname=  pMemb.getName().toLowerCase();
+        if ( pMemb.getParameterTypes().length==0 )
+
+            try {
+                if ( lcname.startsWith("get") || pMemb.getReturnType().getName().endsWith("String") )
+                    return methodToVector(pMemb) + "=" + toPrologString(pMemb.invoke(instance,null));
+            } catch ( Exception e ) {
+                return methodToVector(pMemb) + "=" + makeError(e);
+            }
+            return methodToVector(pMemb) + "=uncalled";
 
     }
 
 
     public synchronized static String fieldValueToVector(Object instance, Field sField) {
         try {
-            return toPrologString(sField.get(instance));
+            return fieldToVector(sField) + "=" + toPrologString(sField.get(instance));
         } catch ( Exception e ) {
+            return fieldToVector(sField) + "=" + makeError(e);
         }
-        return fieldToVector(sField);
     }
 
 
