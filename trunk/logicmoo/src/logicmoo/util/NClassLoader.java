@@ -24,14 +24,14 @@ public class NClassLoader extends ClassLoader {
      * @param root <code>String</code> containing root directory.    
      */    
     public void setRoot(String root) {
-	System.out.println("ROOTa = '"+root+"'");
+	// System.out.println("ROOTa = '"+root+"'");
         root = root.replace(NFS, FS);
-	System.out.println("ROOTb = '"+root+"'");
+	// System.out.println("ROOTb = '"+root+"'");
         if (!root.endsWith(""+FS)) {
             root+=FS;
-	    System.out.println("ROOTc = '"+root+"'");
+	    // System.out.println("ROOTc = '"+root+"'");
         }
-	System.out.println("ROOTd = '"+root+"'");
+	// System.out.println("ROOTd = '"+root+"'");
         baseRoot = root;
     }
     /**Sets the file extension of the classes you are loading, the default extension
@@ -101,7 +101,7 @@ public class NClassLoader extends ClassLoader {
      * @throws <code>ClassNotFoundException</code>
      */
     public Class loadClass(String base, String name) throws ClassNotFoundException {
-        System.out.println("BASE = '"+base+"' NAME = '"+name+"'");
+        // System.out.println("BASE = '"+base+"' NAME = '"+name+"'");
         return findClass(base + name);
     }
     /**Loads a class by name with or without resolving it first.
@@ -111,16 +111,16 @@ public class NClassLoader extends ClassLoader {
      * @throws <code>ClassNotFoundException</code>
      */
     public Class loadClass(String name, boolean resolve) throws ClassNotFoundException {
-        System.out.println("RESOLVE = '"+resolve+"' NAME = '"+name+"'");
+        // System.out.println("RESOLVE = '"+resolve+"' NAME = '"+name+"'");
         Class c = findClass(name);
         if (resolve) {
             resolveClass(c);
         }
-        System.out.println("GOT = '"+c+"'");
+        // System.out.println("GOT = '"+c+"'");
         return c;
     }
     public Class findClass(String name) throws ClassNotFoundException {
-      System.out.println("finding class:  " + name);
+      // System.out.println("finding class:  " + name);
         //ClassLoader lod = new ClassLoader();
         //lod.
     /*  if (
@@ -145,11 +145,11 @@ public class NClassLoader extends ClassLoader {
         String path = name.replace('.', FS);
         boolean err = false;
         try {
-            System.out.println("FULLNAME = '"+fullname+"'");
-          //  System.out.println("PATH = '"+baseRoot+"' '"+path+"' '"+extension+"'");
+            // System.out.println("FULLNAME = '"+fullname+"'");
+          //  // System.out.println("PATH = '"+baseRoot+"' '"+path+"' '"+extension+"'");
             path = baseRoot + path + extension;
             NFileHolder nfh = (NFileHolder)Servlets.get(fullname);
-            System.out.println("nfh === " + nfh);
+            // System.out.println("nfh === " + nfh);
             file = new File(path);
             if (nfh != null) {
                 long oldtime = nfh.date();
@@ -169,7 +169,7 @@ public class NClassLoader extends ClassLoader {
         if (c == null) {
             FileInputStream fi = null;
             try {
-                System.out.println("PATH = '"+path+"'");
+                // System.out.println("PATH = '"+path+"'");
                 fi = new FileInputStream(path);
                 byte[] classBytes = new byte[fi.available()];
                 fi.read(classBytes);
@@ -177,7 +177,7 @@ public class NClassLoader extends ClassLoader {
                 c = defineClass(name, classBytes, 0, classBytes.length);
                 resolveClass(c);
             } catch (Error e) {
-                System.out.println("111");
+                // System.out.println("111");
                 e.printStackTrace();
                 err = true;
             } catch (IOException ioe) {
@@ -190,31 +190,31 @@ public class NClassLoader extends ClassLoader {
                 }
                 fi = null;
             } catch (IOException ioe) {
-                System.out.println("222");
+                // System.out.println("222");
                 ioe.printStackTrace();
             }
             if (err) {
-		System.out.println("err="+err+" returning system class '"+name+"'");
+		// System.out.println("err="+err+" returning system class '"+name+"'");
                 try {
                     return Class.forName(name);
                 } catch (Exception ie) {
-                    System.out.println("333");
+                    // System.out.println("333");
                     ie.printStackTrace();
                     throw new ClassNotFoundException(name);
                 }
             }
-            System.out.println("111"+c);
+            // System.out.println("111"+c);
            NFileHolder nfh = new NFileHolder(file,c);
-            System.out.println("222"+fullname);
-            System.out.println("Storing CLASS '"+fullname+"'>'"+nfh+"'");
+            // System.out.println("222"+fullname);
+            // System.out.println("Storing CLASS '"+fullname+"'>'"+nfh+"'");
            Servlets.put(fullname,nfh);
-            System.out.println("333"+nfh);
+            // System.out.println("333"+nfh);
         }
         return c;
     }
 /*
     protected URL findResource(String name) {
-        System.out.println(getClass().getName() + " finding resource:  " + name);
+        // System.out.println(getClass().getName() + " finding resource:  " + name);
         File searchResource = new File(baseRoot + name);
         URL result = null;
         if ( searchResource.exists() ) {
@@ -226,7 +226,7 @@ public class NClassLoader extends ClassLoader {
         return result;
     }
     protected Enumeration findResources(final String name) throws IOException {
-        System.out.println(getClass().getName() + " finding resources:  " + name);
+        // System.out.println(getClass().getName() + " finding resources:  " + name);
         return new Enumeration() {
             URL resource = findResource(name);
             public boolean hasMoreElements() {

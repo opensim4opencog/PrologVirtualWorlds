@@ -1,6 +1,8 @@
 package logicmoo.net;
 
 import logicmoo.*;
+import logicmoo.obj.*;
+
 
 // Java
 import java.lang.*;
@@ -24,7 +26,7 @@ public class CycWebServer  extends Thread {
 	webserver.run();
     }
 
-    public synchronized boolean receiveEvent(Object event) {
+    public synchronized boolean receiveEvent(LogicMooEvent event) {
 	return true;
     }
 

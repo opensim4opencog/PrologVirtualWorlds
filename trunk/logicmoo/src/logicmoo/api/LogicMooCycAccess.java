@@ -25,6 +25,8 @@ import bsh.util.*;
 
 // OpenCyc
 import org.opencyc.api.*;
+import org.opencyc.constraintsolver.*;
+import org.opencyc.inferencesupport.*;
 import org.opencyc.creation.*;
 import org.opencyc.cycobject.*;
 import org.opencyc.kif.*;
@@ -39,7 +41,7 @@ import ViolinStrings.*;
 *
 * Collaborates with the <tt>Jamud</tt> class which manages the api connections.
 *
-* @version $Id: LogicMooCycAccess.java,v 1.1 2002-06-09 19:42:34 dmiles Exp $
+* @version $Id: LogicMooCycAccess.java,v 1.2 2002-07-02 04:24:06 dmiles Exp $
 * @author Douglas R. Miles
 *
 * <p>Copyright 2001 Cycorp, Inc., license is open source GNU LGPL.
@@ -335,10 +337,11 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 	    }
 
 	    if ( post instanceof CycConstant )
-		return converseString("(generate-phrase " + ((CycConstant)post).stringApiValue() +  ")");
+		return getGeneratedPhrase((CycFort)post);
 
 	    if ( post instanceof CycNart )
-		return converseString("(generate-phrase '" + ((CycNart)post).cyclify() +  ")");
+		return getGeneratedPhrase((CycFort)post);
+		//return converseString("(generate-phrase '" + ((CycNart)post).cyclify() +  ")");
 
 	    if ( post instanceof CycVariable )
 		return(((CycVariable)post).stringApiValue());
@@ -354,7 +357,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 
 		if ( ((CycList)post).first() instanceof CycList ) return attemptParaphrase(((CycList)post).iterator());
 
-		return converseString("(generate-phrase '" + ((CycList)post).cyclify() +  ")");
+		return getParaphrase((CycList)post); // converseString("(generate-phrase '" + ((CycList)post).cyclify() +  ")");
 	    }
 
 	} catch ( Exception e ) {
@@ -480,8 +483,85 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
     }
 
 
+    /**
+     * Preforms query in mt with parameters
+     *   then unasserts the insanciated gafs derived from the query 
+     *	 
+     *  NOTE:  Only if they exist in the same microtheory as the query is in.
+     *   see queryMatch for how these insanciated gafs are produced
+     *
+     */
 
 
+    public ArrayList deleteMatchGaf(CycList query,CycFort mt,int maxBackchains,int maxAnswers, int maxSeconds) {
+	    ArrayList al = queryMatch(query,mt,maxBackchains,maxAnswers,maxSeconds);
+	    Iterator its = al.iterator();
+	    while(its.hasNext()) {
+		try {
+		    deleteGaf((CycList)its.next(),mt);
+		} catch (Exception e){
+		}
+	    }
+	    return al;
+    }
+
+    /**
+     * Preforms query in mt with parameters
+     *   returns the insanciated gafs derived from the query 
+     *	
+     *   a query of (#$isa ?X #$Dog) in #$BiologyMt
+     *     will return a ArrayList with a single CycList formula containing:
+     *     (#$isa (#$GenericInstanceFn #$Dog) #$Dog)
+     *
+     */
+
+    public ArrayList queryMatch(CycList query,CycFort mt,int maxBackchains,int maxAnswers, int maxSeconds) {
+
+	ArrayList match = new CycList();
+	try {
+	    CycList results = queryWithMaximums(query,mt,maxBackchains,maxAnswers,maxSeconds);
+	    Iterator its = results.iterator();
+	    while( its.hasNext() ) {
+		try {
+		    CycList bindingset = (CycList)its.next();
+		    CycList result = replaceVarsWithBindingSet(query,bindingset).getFormula();
+		    System.out.println(result);
+		    match.add(result);
+		} catch( Exception e ) {
+		    e.printStackTrace();
+		}
+	    }
+	} catch( Exception ee ) {
+	    ee.printStackTrace();
+	}
+	return match;
+    }
+
+    public CycList queryWithMaximums(CycList query,CycFort mt,int maxBackchains,int maxAnswers, int maxSeconds) 
+    throws IOException, CycApiException {
+	StringBuffer queryBuffer = new StringBuffer();
+	queryBuffer.append("(clet ((*cache-inference-results* nil) ");
+	queryBuffer.append("       (*compute-inference-results* nil) ");
+	queryBuffer.append("       (*unique-inference-result-bindings* t) ");
+	queryBuffer.append("       (*generate-readable-fi-results* nil)) ");
+	queryBuffer.append("  (without-wff-semantics ");
+	queryBuffer.append("    (cyc-query '" + query.cyclify() + " ");
+	queryBuffer.append("                  " + mt.stringApiValue() + " ");
+	queryBuffer.append("                  '(:backchain "+maxBackchains+" :number "+maxAnswers+" :time "+ maxSeconds +"))))");
+	return converseList(queryBuffer.toString());
+    }
+
+    public QueryLiteral replaceVarsWithBindingSet(CycList query, ArrayList bindingset) {
+	QueryLiteral querylit = new QueryLiteral(query);
+	Iterator bindings = bindingset.iterator();
+	while( bindings.hasNext() ) {
+	    CycList binding =  (CycList)bindings.next();
+	    CycVariable variable = (CycVariable)binding.first();
+	    Object value = binding.rest();
+	    querylit.substituteVariable(variable,value);
+	}
+	return querylit;
+    }
 
 
 
@@ -1346,62 +1426,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 	return (IMooClient)plugins.get(user);
     }
 
-
-    public boolean emoteAll(IMooClient sender, Object message) {
-	Iterator all = plugins.keySet().iterator();
-	boolean ret = true;
-	while ( all.hasNext() ) {
-	    IMooClient targ = (IMooClient)plugins.get(all.next()); 
-	    if ( targ!=null ) if ( !targ.equals(sender) ) if ( !emoteDirect(targ,message) ) ret = false;
-	}
-	return ret;
-    }
-
-
-    public boolean emoteDirect(IMooClient targ, Object message) {
-	return targ.receiveEvent(message);
-    }
-		   /*
-    public boolean emoteDirect(IMooClient targ, Object message) {
-	if ( targ==null ) return true;
-	Object[] args = { message};
-       // Class[] style = {args[0].getClass()};
-	try {
-	    Class[] style = {Class.forName("java.lang.Object").getClass()};
-
-	    Boolean result = (Boolean)targ.getClass().getMethod("receiveEvent",style).invoke(targ,args);
-	    return result.booleanValue();
-	} catch ( Exception e ) {
-	    e.printStackTrace();
-	}
-	return true;
-    }
-		*/
-    public boolean emoteTo(Object target, Object message) {
-	IMooClient targ = (IMooClient)plugins.get(target); 
-	if ( targ!=null ) return emoteDirect(targ,  message);
-	Iterator all = plugins.keySet().iterator();
-	boolean ret = true;
-	while ( all.hasNext() ) {
-	    targ = (IMooClient)plugins.get(all.next()); 
-	    if ( targ.equals(target) ) if ( !emoteDirect(targ,message) ) ret = false;
-	}
-	return ret;
-    }
-
-
-    public boolean emoteAll(String mt,String query, Object message) {
-	Iterator all = queryArrayListSEL(mt,query).iterator();
-	boolean ret = true;
-	while ( all.hasNext() ) {
-	    IMooClient targ = (IMooClient)plugins.get(all.next()); 
-	    if ( !emoteDirect(targ,message) ) ret = false;
-	}
-	return ret;
-    }
-
-
 }
 
-//</pre>
+
 

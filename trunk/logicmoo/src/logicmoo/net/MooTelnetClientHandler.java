@@ -27,7 +27,6 @@ public class MooTelnetClientHandler extends MooCommandLine {
     
     public MooTelnetClientHandler(Socket sock)  {   
 	try {
-	    cyc = new LogicMooCycAccess();
 	    out = new PrintWriter(sock.getOutputStream(), true);
 	    in =   new BufferedReader(new InputStreamReader(sock.getInputStream()));
 	} catch ( Exception e ) {

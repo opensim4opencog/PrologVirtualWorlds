@@ -42,7 +42,7 @@ import ViolinStrings.*;
 *
 * Collaborates with the <tt>Jamud</tt> class which manages the api connections.
 *
-* @version $Id: LogicMoo.java,v 1.9 2002-06-09 19:23:51 dmiles Exp $
+* @version $Id: LogicMoo.java,v 1.10 2002-07-02 04:24:06 dmiles Exp $
 * @author Douglas R. Miles
 *
 * <p>Copyright 2001 Cycorp, Inc., license is open source GNU LGPL.
@@ -64,7 +64,7 @@ import ViolinStrings.*;
 * BASE CONTENT, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-public class LogicMoo {
+public class LogicMoo extends Thread {
 
     //private  static Jamud logicmooInstance;
     //private  static Area logicmooArea;
@@ -77,6 +77,22 @@ public class LogicMoo {
 
     private static org.opencyc.webserver.WebServer cycWebserverThread=null;
     private static logicmoo.net.LogicMooTelnetServer cycMooserverThread = null;
+
+    public static void main(String[] args){
+	try {
+	    LogicMoo cm = new LogicMoo();
+	    while (cm.running && !cm.interrupted()) {
+		Thread.sleep(10000);
+	    }
+	} catch ( Exception e ) {
+	    e.printStackTrace();
+	}
+
+
+        
+//        MooCommandLine.runClientAt(new PrintWriter(System.out,true),new BufferedReader(new InputStreamReader(System.in)));
+    }
+
 
     /**
      * Constructs a new CycAssertionsFactory object.
@@ -143,17 +159,6 @@ public class LogicMoo {
      *
      **********************************************************/
 
-    public static void main(String[] args){
-	try {
-	    LogicMoo cm = new LogicMoo();  
-	} catch ( Exception e ) {
-	    e.printStackTrace();
-	}
-
-	MooCommandLine.runClientAt(new PrintWriter(System.out,true),new BufferedReader(new InputStreamReader(System.in)));
-    }
-
-
     private synchronized static void primaryStart() {
 	if ( running ) return;
 	else running = true;
@@ -176,10 +181,10 @@ public class LogicMoo {
 	//runPluginsDir();
     }
 
-    static MooCycRobot npc1 = null;
+    static LogicMooAgency npc1 = null;
 
     private synchronized static void startNPCs() {
-	npc1 = new MooCycRobot(cyc.makeCycConstant("SampleEliza"));
+	npc1 = new LogicMooAgency(cyc);
 	npc1.start();
     }
 
@@ -279,7 +284,7 @@ public class LogicMoo {
 	if ( logicMooMt!=null ) return;
 	try {
 	    logicMooMt =  cyc.makeCycConstantSafe("#$LogicMooMt");
-	    jamudMt =  cyc.makeCycConstantSafe("#$JamudMt");
+	    jamudMt =  cyc.makeCycConstantSafe("#$JamudMt"/*TODO*/);
 	    cyc.assertIsaSafe(logicMooMt,     cyc.microtheory,     cyc.baseKB);
 	    cyc.assertIsaSafe(jamudMt,     cyc.microtheory,     cyc.baseKB);
 	    cyc.assertIsaSafe(jamudMt, cyc.reifiedMicrotheory,     cyc.baseKB);
@@ -363,7 +368,7 @@ public class LogicMoo {
 		System.out.println(line);
 		sb.append(line + "\n");
 	    }
-	    System.out.println("pl");
+	    System.out.println("pl ->" + raw);
 	    pSock.close();
 	} catch ( Exception e ){
 	    e.printStackTrace();

@@ -2,6 +2,7 @@ package logicmoo.net;
 
 import logicmoo.*;
 import logicmoo.agent.*;
+import logicmoo.obj.*;
 
 
 
@@ -23,30 +24,30 @@ public class LogicMooTelnetServer extends Thread {
     public LogicMooTelnetServer() throws IOException {
 	serverSocket = new ServerSocket(serverPort);
     }
-    
+
     public LogicMooTelnetServer(int port) throws IOException {
 	serverSocket = new ServerSocket(port);
     }
 
     public void run() {
 	try {
-	    while ( listening ) {
-		Socket thisClient = serverSocket.accept();
-		System.out.println(thisClient.getInetAddress().toString()+ " connected");
-		MooTelnetClientHandler clientThread = new MooTelnetClientHandler(thisClient);
-		System.out.println(thisClient.getInetAddress().toString()+ " connected to " +clientThread );
-		clients.add(clientThread);
-		clientThread.start();
+	    while ( listening && !interrupted() ) {
+		try {
+		    Socket thisClient = serverSocket.accept();
+		    System.out.println("Telnet client "+thisClient.getInetAddress().toString()+ " connected");
+		    MooTelnetClientHandler clientThread = new MooTelnetClientHandler(thisClient);
+		    clients.add(clientThread);
+		    clientThread.start();
+		} catch ( Exception e ) {
+		}
 	    }
 	    serverSocket.close();
-	} catch ( Exception e ) {
+	} catch ( Exception ee ) {
 	}
     }
 
-    public synchronized boolean receiveEvent(Object event) {
+    public synchronized boolean receiveEvent(LogicMooEvent event) {
 	return true;
     }
-
-
 }
 
