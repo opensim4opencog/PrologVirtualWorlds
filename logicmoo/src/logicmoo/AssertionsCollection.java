@@ -21,12 +21,37 @@ import org.opencyc.xml.*;
  * The associated formula, microtheory, truth-value, direction, and remaining attributes are
  * is fetched later.
  *
- * @version $Id: AssertionsCollection.java,v 1.4 2002-04-07 04:42:35 dmiles Exp $
+ * @version $Id: AssertionsCollection.java,v 1.5 2002-04-08 03:03:23 dmiles Exp $
  * @author Douglas R. Miles
  *
  */
 
 public class AssertionsCollection {
+
+	/**
+	 * Constructs a new AssertionsCollection.
+	 *
+	 * @param ca the CycAccess for this AssertionsCollection
+	 */
+	
+	public void AssertionsCollection(CycAccess ca) {
+		cycAccess = ca;
+		resetAssertions();
+	}
+	
+	/**
+	 * Constructs a new AssertionsCollection.
+	 *
+	 * uses a default new CycAccess()
+	 */
+	
+	public void AssertionsCollection() {
+		try {
+			cycAccess = new CycAccess();
+		} catch (Exception e) {
+		}
+		resetAssertions();
+	}
 
 	private ArrayList cycAssertionsMtDefs;
 	private ArrayList cycAssertionsDefintional;
@@ -40,12 +65,8 @@ public class AssertionsCollection {
 	/**
 	 * Cyc api support.
 	 */
-	CycAccess cycAccess;
+	private CycAccess cycAccess;
 
-	public void AssertionsCollection(CycAccess ca) {
-		cycAccess = ca;
-		resetAssertions();
-	}
 
 	public void resetAssertions() {
 		cycAssertionsMtDefs = new ArrayList();
@@ -168,74 +189,120 @@ public class AssertionsCollection {
 			return;
 		}
 
-		ConstraintRule cycRule = new ConstraintRule(formula);
+		ConstraintRule cycLiteral = new ConstraintRule(formula);
 
 		// Variables Or predicate argument is not a constant cause this formula to be asserted last 
-		if ( cycRule.getVariables().size()>0 || ( !(formula.first() instanceof CycConstant)) ) {
+		if ( !cycLiteral.isGround() || ( !(formula.first() instanceof CycConstant)) ) {
 			cycAssertionsOfRest.add(formula);
 			return;
 		}
 
 		// Can assume only Gafs beyond here
-		CycConstant cycPredicate = cycRule.getPredicate();
+		CycConstant cycPredicate = cycLiteral.getPredicate();
 
-		if (cycPredicate.equals(cycAccess.genlMt)) {
+		if ( cycPredicate.equals(cycAccess.genlMt) ) {
 			cycAssertionsMtDefs.add(formula);
 			return;
 		}
-		
-		if (cycPredicate.equals(cycAccess.isa)) {
 
-				if ( cycRule.getArity()!=3 )
-					throw new CycApiException("'isa' is not arity 3? - " + formula.toString());
-				Object cycCollection = formula.third();
-
-				if ( !(cycCollection instanceof CycConstant) ) {
-					cycAssertionsOfRest.add(formula);
-					return;
-				}
-
-				switch ( ((CycConstant)cycCollection).getId().intValue() ) {
-					
-					case 666:    
-						// (isa ?C Microtheory)
-						cycAssertionsMtDefs.add(0,formula);
-					case 667:    
-						// (isa ?C Collection)
-						cycAssertionsDefintional.add(0,formula);
-					case 668:    
-						// (isa ?C Thing)
-						cycAssertionsDefintional.add(0,formula);
-					default:    
-						// (isa ?C ?Other)
-						cycAssertionsDefintional.add(formula);
-				}
-
+		if ( cycPredicate.equals(cycAccess.isa) ) {
+			if ( cycLiteral.getArity()!=3 )
+				throw new CycApiException("'isa' is not arity 3? - " + formula.toString());
+			addFormulaIsa(formula);
+			return;
 		}
+
+		if ( cycPredicate.equals(cycAccess.genls) ) {
+			if ( cycLiteral.getArity()!=3 )
+				throw new CycApiException("'genls' is not arity 3? - " + formula.toString());
+			addFormulaGenls(formula);
+			return;
+		}
+
+		// Since Gaf add it to first part of cycAssertionsOfRest
+		cycAssertionsOfRest.add(0,formula);
 	}
 
 	/**
-	 * Adds the AssertionCollection to defaultMt
+	 * Adds the genls based formula (CycList) to this AssertionCollection.
 	 *
+	 * @param formula (CycList) to be added to this AssertionsCollection
 	 */
-	public void commitAssertions()  throws Exception  {
-		commitAssertions(defaultMt);
+	public void addFormulaGenls(CycList formula) throws Exception {
+		Object cycCollection = formula.third();
+
+		if ( !(cycCollection instanceof CycConstant) ) {
+			cycAssertionsOfRest.add(formula);
+			return;
+		}
+
+		// Is this already a Known Collection?
+		if ( cycAccess.isa((CycFort) cycCollection,(CycFort) cycAccess.collection) ) {
+			cycAssertionsDefintional.add(0,formula);
+			return;
+		}
+
+		// This is not a known about collection yet
+		cycAssertionsDefintional.add(formula);
+	}
+
+	/**
+	 * Adds the isa based formula (CycList) to this AssertionCollection.
+	 *
+	 * @param (CycList) of the formula for this AssertionsCollection
+	 */
+
+	public void addFormulaIsa(CycList formula) throws Exception {
+
+		Object cycCollection = formula.third();
+
+		if ( !(cycCollection instanceof CycConstant) ) {
+			cycAssertionsOfRest.add(formula);
+			return;
+		}
+
+		// Is this a Mt Defintion?
+		if ( cycCollection.equals(cycAccess.getConstantByName("Microtheory")) ) {
+			cycAssertionsMtDefs.add(0,formula);
+			return;
+		}
+
+		// Is this a CollectionType Defintion?
+		if ( cycCollection.equals(cycAccess.getConstantByName("CollectionType")) ) {
+			cycAssertionsDefintional.add(0,formula);
+			return;
+		}
+
+		// Is this a Collection Defintion?
+		if ( cycCollection.equals(cycAccess.getConstantByName("Collection")) ) {
+			cycAssertionsDefintional.add(0,formula);
+			return;
+		}
+
+		// Is this already a Known Collection?
+		if ( cycAccess.isa((CycFort) cycCollection,(CycFort) cycAccess.collection) ) {
+			cycAssertionsDefintional.add(0,formula);
+			return;
+		}
+
+		// This is not a known about collection yet
+		cycAssertionsDefintional.add(formula);
 
 	}
 
 	/**
 	 * Adds the AssertionCollection to Mt
-	 *
-	 * @param mt for formulas for this AssertionsCollection
-	 *
-	 * [08:09] <eca-home> All microtheory definitions 
-	 * [08:09] <eca-home>  isa and other definitional assertions) second.
-	 * [08:10] <eca-home> All predicate definitions (isa, arity, argIsa, and other definitional assertions) third.
-	 * [08:11] <eca-home> All collection definitions, in descending order of type, fourth.
-	 * [08:11] <eca-home> e.g. ThirdOrderCollections, then SecondOrderCollections (CollectionTypes), then Collections which genls Individual.
-	 * [08:11] <eca-home> All other constant definitions fifth
-	 * [08:11] <eca-home> Then all other assertions -- the non-definitional ones.
-	 * (and (isa ?GAF CycLClosedAtomicSentence) (operatorFormulas ?PRED ?GAF) (isa ?PRED OpenCycDefinitionalPredicate))
+	*
+	* @param mt for formulas for this AssertionsCollection
+	*
+	* [08:09] <eca-home> All microtheory definitions 
+	* [08:09] <eca-home>  isa and other definitional assertions) second.
+	* [08:10] <eca-home> All predicate definitions (isa, arity, argIsa, and other definitional assertions) third.
+	* [08:11] <eca-home> All collection definitions, in descending order of type, fourth.
+	* [08:11] <eca-home> e.g. ThirdOrderCollections, then SecondOrderCollections (CollectionTypes), then Collections which genls Individual.
+	* [08:11] <eca-home> All other constant definitions fifth
+	* [08:11] <eca-home> Then all other assertions -- the non-definitional ones.
+	* (and (isa ?GAF CycLClosedAtomicSentence) (operatorFormulas ?PRED ?GAF) (isa ?PRED OpenCycDefinitionalPredicate))
 	 */
 
 	public void commitAssertions(String mt)  throws Exception  {
@@ -249,6 +316,17 @@ public class AssertionsCollection {
 		commitAssertions(cycAssertionsOfRest,mtFort);
 	}
 
+
+	/**
+	 * Adds the AssertionCollection to defaultMt
+	 *
+	 */
+	public void commitAssertions()  throws Exception  {
+		commitAssertions(defaultMt);
+
+	}
+
+
 	/**
 	 * Ensures the Mt is a valid Microtheory
 	 *
@@ -258,9 +336,10 @@ public class AssertionsCollection {
 		return cycAccess.getConstantByName(mt);
 	}
 	/**
-	 * Adds the AssertionCollection to Mt
+	 * Adds the cycListCollection to Mt
 	 *
-	 * @param mt for formulas for this AssertionsCollection
+	* @param cycListCollection of formulas for this AssertionsCollection
+	* @param mt for formulas for this AssertionsCollection
 	 */
 	public void commitAssertions(ArrayList cycListCollection,CycFort mt ) throws Exception  {
 		Iterator forms = cycListCollection.iterator();
@@ -275,6 +354,57 @@ public class AssertionsCollection {
 	}
 
 
+	public void writeAssertions(Writer pw,String mt)  throws Exception  {
+		CycFort mtFort = ensureMt(mt);
+		writeAssertions( pw,cycAssertionsMtDefs,mtFort);
+		writeAssertions( pw,cycAssertionsDefintional,mtFort);
+		writeAssertions( pw,cycAssertionsPredicateDefs,mtFort);
+		writeAssertions( pw,cycAssertionsCollectionDefs,mtFort);
+		writeAssertions( pw,cycAssertionsSpecialCollectionDefs,mtFort);
+		writeAssertions( pw,cycAssertionsSecondaryConstantDefs,mtFort);
+		writeAssertions( pw,cycAssertionsOfRest,mtFort);
+	}
+
+	/**
+	 * Displays the cycListCollection to Mt
+	 *
+	 * @param mt for formulas for this AssertionsCollection
+	 */
+	public void writeAssertions(Writer pw,ArrayList cycListCollection,CycFort mt ) throws Exception  {
+		Iterator forms = cycListCollection.iterator();
+		while ( forms.hasNext() ) {
+			pw.write( (((CycList)  forms.next()).toString()) + "\n" );
+		}
+	}
+
+	/**
+	 * Tests the File loading
+	 *
+	 * @param mt for formulas for this AssertionsCollection
+	 */
+
+	public void testFileLoad() {
+		testFileLoad(new PrintWriter(System.out));
+	}
+
+
+	public void testFileLoad(Writer pw) {
+		try {
+			File f = new File("/testkifload.kif");
+			loadFile(f);
+			setDefaultMt("testMt");
+			writeAssertions( pw,defaultMt);
+		} catch ( Exception e ) {
+			try {
+				pw.write(e + "\n");
+			} catch (Exception ee) {
+			}
+			PrintWriter ppw = new PrintWriter(pw);
+			e.printStackTrace( ppw );
+		}
+
+	}
+
 }
 
 
@@ -283,4 +413,6 @@ public class AssertionsCollection {
 
 
 
-	
+
+
+
