@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>FogEnd</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>FogEnd</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Room Exemplar</td>
+	</tr>
+</table>
+<p>Sets or returns the ending&nbsp;position of a fog effect for the specified <A href="Room.htm">Room</A> object. <b>FogEnd</b> is a 
+read/write <STRONG>Short</STRONG>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><I>object</I>.<STRONG>FogEnd</STRONG> = 
+  <EM>shortValue</EM></TD></TR></TABLE></P>
+<P>To return the property:
+<table class="backlight" style="HEIGHT: 26px; WIDTH: 543px" 
+ >
+	<tr>
+    	<td><i>object</i>.<STRONG>FogEnd</STRONG></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<p>The&nbsp;<STRONG>FogEnd</STRONG>  property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Object</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses a 
+      <STRONG>Room</STRONG>        object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name--><EM>shortValue</EM></td>
+		<td><!--Type-->Short</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->An 
+      expression that evaluates to a <STRONG>Short</STRONG>.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->You 
+set the location and size of&nbsp;the fog effect in the 3-D view&nbsp;of a&nbsp;room by using the 
+<A href="FogStart.htm">FogStart</A> and <b>FogEnd</b> properties.&nbsp; The 
+end value is relative to the <b>FogStart</b>       
+       position and&nbsp;together they represent 
+the extent of the fog effect.</P>
+<P>Settings for various sizes of fog effects are shown in the following table. 
+</P>     
+         
+<table class="backlight">
+<thead>
+<tr>
+<td>Size of fog area</td>
+<td>FogStart value</td>
+<td>FogEnd value</td></tr>
+</thead>
+
+<tr class="line"><td colspan=100></td></tr>
+  <TR>
+    <TD>Small</TD>
+    <TD>
+      <P align=center>1</P></TD>
+    <TD>
+      <P align=center>5</P></TD></TR>
+  <TR>
+    <TD>Medium</TD>
+    <TD>
+      <P align=center>1</P></TD>
+    <TD>
+      <P align=center>15</P></TD></TR>
+<tr>
+<td>Large</td>
+<td>
+      <P align=center>-1000</P></td>
+<td>
+      <P align=center>1000</P></td>
+</tr>
+
+</table>
+<P>Fog effects can vary in size with starting and ending 
+values from -1000 through 1000.<!--Example section-->
+<!--Example section--></P>
+<H3>Example</H3>
+<p>This example sets the ending location of a fog area to 90.</p>
+
+<pre class="example">
+User.Container.<STRONG>FogEnd</STRONG> = 90
+
+</pre>
+<P>
+<A href=""></A>
+<br></SPAN></P> 
+
+</body>
+</html>

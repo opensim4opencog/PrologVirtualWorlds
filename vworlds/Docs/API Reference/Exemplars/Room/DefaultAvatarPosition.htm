@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>DefaultAvatarPosition</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>DefaultAvatarPosition</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Room Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Sets or returns the default entry point of a <a href="Room.htm">Room</a>. <b>DefaultAvatarPosition</b> is a read/write <a href="../../Vector/Vector.htm">Vector</a>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<p>To set this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>DefaultAvatarPosition</b> = <i>vectorValue</i></td>
+	</tr>
+</table>
+<p>To retrieve this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>DefaultAvatarPosition</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>DefaultAvatarPosition</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Room</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Room</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">vectorValue</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>A <b>Vector</b> that specifies the default entry point of a <b>Room</b>. The default value is (0, 0, 0).</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>DefaultAvatarPosition</b> property stores the default entry point of a <b>Room</b>. When an <b>Avatar</b> enters the default room of a <b>World</b> for the first time, the <a href="../Thing/Position.htm">Position</a> property of that avatar is set to the <b>DefaultAvatarPosition</b> value. After the first log in, each time the avatar logs out, the avatar's <b>Position</b> property is set to the last position recorded before logging out of that room. The updated <b>Position</b> property establishes the entry point for that avatar each subsequent time the avatar logs in.
+
+<p>If an avatar or object moves from one room to another using a <a href="../Portal/Portal.htm">Portal</a>, the destination room uses the <a href="../Portal/EntryPoint.htm">EntryPoint</a> property of the portal to determine the <b>Position</b> property of the avatar or object.
+
+<p>If an avatar teleports to a room (moves from one room to another without using a portal), Microsoft Virtual Worlds first looks for the default portal of a room to establish the avatar's position. If a default portal has not been set, Virtual Worlds then looks for any portal in that room, and sets the property to the first portal listed in that room. If there is no portal in that room, the avatar's position is set to the <b>DefaultAvatarPosition</b> property of that room.
+
+<H3>Example</H3>
+<p>This example displays the <b>DefaultAvatarPosition</b> property in the Command Window, changes the value, and then displays the new value. Since the value is a <b>Vector</b>, the <a href="../../Base%20Class/ToAscii.htm">ToAscii</a> method is used to display the result. "User.Container" is a reference to the room the user is currently visiting.<br><br>
+
+<pre class="example">Trace &quot;Old Position: &quot; &amp; User.Container.<b>DefaultAvatarPosition</b>.ToAscii
+User.Container.<b>DefaultAvatarPosition</b> = World.CreateVector(4, 0, 7)
+Trace &quot;New Position: &quot; &amp; User.Container.<b>DefaultAvatarPosition</b>.ToAscii
+<!--Example text-->&nbsp;
+
+</pre>
+
+
+</body>
+</html>

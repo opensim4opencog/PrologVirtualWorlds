@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>RotationAxis</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>RotationAxis</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Vector</b> that specifies the axis of rotation of the object. 
+<b>RotationAxis</b> is a read/write <b>Vector</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>RotationAxis</b>&nbsp;=&nbsp;<i>VectorValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>RotationAxis</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">VectorValue</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>The axis of the rotation of the object. The default value is <b>Null</b>.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>The <b>RotationAxis</b> property species a direction vector with the origin set at the center of the object. 
+
+<P>This property has no effect if the object is an avatar.</p>
+
+
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get this property:</p>
+
+<pre>   Set TheVec = MyThing.RotationAxis</pre>
+
+<p>To set this property:</p>
+
+<pre>   MyThing.RotationAxis = TheVec</pre>&nbsp;
+ 
+
+</body>
+</html>

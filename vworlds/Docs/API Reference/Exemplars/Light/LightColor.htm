@@ -1,0 +1,107 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>LightColor</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>LightColor</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property</td>
+	</tr>
+</table>
+<P>
+
+<P>Sets or returns the color that an instance of the <A href="Light.htm">Light</A> exemplar projects. This property is a read-write <a href="../../Vector/Vector.htm">Vector</a> data type.
+
+<!--Summary of topic-->
+      
+          
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+
+<table class="backlight">
+	<tr>
+    	<td><em>Object</em>.<b>LightColor</b> <em>= 
+ 
+  vectorValue</em></td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<p>The <b>LightColor</b> property syntax has the following parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">Object</td>
+		<td>Light</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An instance of the <b>Light</b> exemplar.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">vectorValue</td>
+		<td>Vector</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>Any valid expression that evaluates to a <b>Vector</b> data type. The default value is (1, 1, 1).</td>
+	</TR>
+
+
+</TABLE>
+
+ <!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>The <b>LightColor</b>  property provides full control over the hue and intensity of a <b>Light</b> object. The three elements of&nbsp;the <b>Vector </b>data type, x, y, and z, correspond, respectively, to the red, green, and blue values of light.
+These three values combine to create the color&nbsp;of the light&nbsp;the object emits.
+
+<P>The default value of an instance of the <b>Light</b> exemplar is (1, 1, 1), which is the equivelent of 100 percent brightness of each of the components of the <b>Vector</b> data type. 
+
+<p>You can use negative values for the components of the <b>LightColor</b> property to produce "dark light." On surfaces that share light effects from multiple sources, negative values combine mathematically with the values of other <b>Light </b>objects, reducing the rendered&nbsp;effect of&nbsp;the other light. This technique creates interesting details and complex lighting effects that can make a scene appear more dramatic.
+
+<p>To view the value of the <b>LightColor</b> property in the Command Window, use the <b>ToAscii</b> method of <b>Vector</b>.
+
+<p><b>Note:</b>&nbsp;&nbsp;&nbsp;To change the value of the <b>LightColor</b> property, use the <a href="../../World/CreateVector.htm">CreateVector</a> method of the <a href="../../World/World.htm">World</a> object. Although you can retrieve each vector value through the <a href="../../Vector/X.htm">X</a>, <a href="../../Vector/Y.htm">Y</a>, and <a href="../../Vector/Z.htm">Z</a> properties of <b>Vector</b>, changes to these values are implemented only when an entire vector value is assigned.
+
+<H3>Example</H3>
+
+<p>This example creates an instance of the <b>Light</b> exemplar and then adjusts the value of the <b>LightColor </b>property. The parameter "myName" is the name of the new instance. The parameters "myRed", "myGreen", and "myBlue", are the color values.
+<br><br>
+<PRE class=example>Sub CreateMyLight(myName, myRed, myGreen, myBlue)
+Dim NewLight
+Set NewLight = World.CreateInstance(myName, "Light", User.Container)</PRE>
+<p class=comments>'Change the color value to the values supplied.
+<PRE class=example>NewLight.<b>LightColor</b> = World.CreateVector(myRed, myGreen, myBlue)<pre/>
+<p class=comments>Display the change in the Command Window.
+<PRE class=example>Trace NewLight.<b>LightColor</b>.ToAscii
+
+End Sub
+</PRE>
+
+
+</body>
+</html>

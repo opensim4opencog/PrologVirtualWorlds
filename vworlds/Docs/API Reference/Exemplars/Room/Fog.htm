@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Fog</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Fog</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Room Exemplar</td>
+	</tr>
+</table>
+<p>Sets or returns <b>True</b> if fog is enabled for the specified <A href="Room.htm">Room</A> object. <b>Fog</b> is a 
+read/write <STRONG>Boolean</STRONG>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set a property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><I>object</I>.<STRONG>Fog</STRONG> = 
+  <EM>BooleanValue</EM></TD></TR></TABLE></P>
+<P>To return a property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>Fog</STRONG></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<p>The&nbsp;<STRONG>Fog</STRONG>  property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Object</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses a 
+      <STRONG>Room</STRONG>        object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name--><EM>BooleanValue</EM></td>
+		<td><!--Type-->Boolean</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->An 
+      expression that evaluates to <STRONG>True</STRONG> or 
+      <STRONG>False</STRONG>.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->You 
+enable fog in 
+a room by setting the <STRONG>Fog</STRONG> property to 
+<STRONG>True</STRONG>. To establish the extent 
+to which the fog effect applies to the 3-D view, use the <A href="FogStart.htm">FogStart</A> and <A href="FogEnd.htm">FogEnd</A>  properties. You can also vary the color that the fog displays by varying the value of the <A href="FogColor.htm">FogColor</A> property.
+<H4>Creating Realistic Fog</H4>
+<P>There are multiple factors that are involved in creating a scene with 
+realistic-looking fog. The factors are the viewing angle or camera position, the 
+near clipping plane, the far clipping pane, and the polygonal complexity of the 
+model. The following diagram shows&nbsp;a typical viewing area of fog.</P>
+<IMG alt="" border=0 src="../../Images/fog.jpg">
+
+<H5>Camera Position Affects Fog Visibility</H5>
+<P>An area of fog is set relative to the camera 
+position.&nbsp;The fog effect can be only applied across an entire polygon, 
+according to its distance from the camera in the 3-D view. The fog effect does not fad realistically over an are. </P>
+<H5>Near and Far Clipping Planes</H5>
+<P>Near and far clipping&nbsp;planes encapsulate the area of fog display in your world.&nbsp;The near 
+plane is set with the <STRONG>FogStart</STRONG> property and can be set to any positive 
+or negative number. If you set the <STRONG>FogStart</STRONG> property with a negative number in the 
+current view,&nbsp;objects up close will already have a faded effect. The fog 
+will fade towards the color that you set using the <STRONG>FogColor</STRONG>    
+              
+   property. </P>
+<blockquote><pre>
+myRoom.<b>FogStart</b> = -10
+</pre></blockquote>
+<p>  For&nbsp;a fog effect to appear heavier around farther objects than nearer ones, 
+the <STRONG>FogEnd</STRONG> property must be set to a number greater than the 
+<STRONG>FogStart</STRONG> property. If you set both 
+properties to the          
+                
+     same number, the fog will not be visible.
+<h5>Polygonal Complexity Affects Realism</h5>
+<P>               
+              
+               
+              
+    The fog effect can be only applied across 
+an entire polygon and does not realistically fade over a few polygons. To increase the realism of 
+fog effects, user a ground plane that is subdivided into many polygons.</P>
+<H3>Example</H3>
+<p>This example creates a bank of fog in a virtual world.</p>
+<pre class="example">
+Sub MakeFog()
+Dim myRoom
+
+Set myRoom = User.Container
+</pre>
+<p class="comments">
+'Establish the characteristics of the fog bank.
+<pre class="example">
+myRoom.FogStart = 20
+myRoom.FogEnd = 150
+myRoom.FogColor = &amp;HDDDDDDD
+</pre>
+<p class="comments">
+'Start the fog.
+<pre class="example">
+myRoom.<STRONG>Fog</STRONG> = True
+</pre>
+</body>
+</html>

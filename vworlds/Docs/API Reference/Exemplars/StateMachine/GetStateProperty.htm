@@ -1,0 +1,107 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>GetStateProperty</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetStateProperty</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the StateMachine Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Gets a state-specific property of a state machine. <b>GetStateProperty</b> is 
+a member of the <b>StateMachine</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetStateProperty</b>&nbsp;(<i>bstrStateMachineName</i>, <i>bstrState</i>, 
+		<i>bstrPropertyName</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetStateProperty</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>StateMachine</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>StateMachine</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrStateMachineName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The specific state machine name.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrState</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The state of the state machine.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrPropertyName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of a property of the state machine.</td>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Variant</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method returns the value of a property associated with a
+particular state machine, state, and property name. The type of
+the value that is returned will be the same as the type used in
+either of the <b>StateMachine</b> methods <a href="PutStateProperty.htm">PutStateProperty</a>
+(used for <i>Default</i>) or <a href="PutStateMachineStateProperty.htm">PutStateMachineStateProperty</a>
+(used for other internal state machines). This method
+will run on either the client or the server.</p>
+
+<p>This method's principal use is to get any state machine
+state-specific property. <i>TimeOut</i> is an example of such a
+property; its purpose is to control the length of time a state
+will be active.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>Value = MyStateMachine.GetStateProperty(&quot;Default&quot;, &quot;Waiting&quot;, &quot;TimeOut&quot;)</pre>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,228 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>SetAnimationIndex</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetAnimationIndex</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Changes the starting or ending position for an animation while it 
+is running. This method essentially provides a random-access, fast-forward/rewind 
+feature.&nbsp;<STRONG>SetAnimationIndex</STRONG> is a member of the <A href="Thing.htm">Thing</A> 
+exemplar exemplar.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>SetAnimationIndex 
+      </STRONG><EM>bstrPropertyName, varIndex </EM>[<EM>, 
+  varOptions</EM>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The&nbsp;<STRONG>SetAnimationIndex</STRONG>  method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Thing</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses 
+      a&nbsp;<STRONG>Thing</STRONG>       object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>bstrPropertyName</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>A&nbsp;<STRONG>String</STRONG> value 
+      that&nbsp;represents one of the valid property names corresponding to 
+      the&nbsp;values provided for the <A href="StartAnimation.htm">StartAnimation</A> method.<FONT size=2></FONT></TD></TR>
+  <TR>
+    <TD class=boldItal><EM>varIndex</EM></TD>
+    <TD> Float</TD>
+    <TD>Required</TD>
+    <TD>A&nbsp;<STRONG>Float</STRONG> that specifies the 
+      keyframe where the animation executes. 
+      <P>If the keyframe is set before the start or after the end of 
+      the&nbsp;animation path, the keyframe will be snapped to the front or the 
+      end of the animation, respectively.</P>
+      <P>If the animation is executing and set to run once, it will be stopped 
+      if the keyframe is set to the end of the animation.</P></TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->[<EM>varOptions</EM>]</td>
+		<td><!--Type-->Variant</td>
+		<td><!--Required or Optional-->Optional</td>
+		<td><!--Description-->
+      <P>A bitflag with component values that determine the overall behavior of 
+      the animation. The bitflag values are added together to compose the 
+      resulting flag.&nbsp;</P>
+      <P>Default value 
+      for this flag A_LINEAR + A_ONCE.</P></td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>
+<H4>Valid Values for the <I>bstrPropertyName</I> Parameter</H4></H3>
+<P>You can use the following property names as values for the 
+<I>bstrPropertyName</I> parameter.</P>
+<TABLE class=backlight>
+  <THEAD>
+  <TR>
+    <TD>Property </TD>
+    <TD>Description </TD></TR></THEAD>
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR>
+  <TR>
+    <TD><STRONG>Direction</STRONG></TD>
+    <TD>Set the index of an ongoing "Direction" 
+    animation.</TD></TR>
+  <TR>
+    <TD><STRONG>LightAttenuation</STRONG></TD>
+    <TD>Set the index of an ongoing "LightAttenuation" 
+      animation.</TD></TR>
+  <TR>
+    <TD><STRONG>LightColor</STRONG></TD>
+    <TD>Set the index of an ongoing "LightColor" 
+      
+animation.</TD></TR>
+  <TR>
+    <TD><STRONG>Position</STRONG></TD>
+    <TD>Set the index of an ongoing "Position" 
+    animation.</TD></TR>
+  <TR>
+    <TD><STRONG>Scale</STRONG></TD>
+    <TD>Set the index of an ongoing "Scale" 
+  animation.</TD></TR>
+  <TR>
+    <TD><STRONG>Up</STRONG></TD>
+    <TD>Set the index of an ongoing "Up" animation.</TD></TR>
+  <TR>
+    <TD><STRONG>File</STRONG></TD>
+    <TD>Set the index of an ongoing "File" 
+animation.</TD></TR></TABLE>
+<H4>Enumerated Types for the <EM>varOptions</EM>Parameter</H4>
+<P>
+<TABLE class=backlight><!--table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Option</TD>
+    <TD>Value</TD>
+    <TD>Animation type</TD>
+    <TD>Description</TD></TR></THEAD><!--table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--table: contents-->
+  <TR>
+    <TD class=boldItal>A_ONCE</TD>
+    <TD>
+      <P align=center>1</P></TD>
+    <TD width=5>Scale<BR>Orientation</TD>
+    <TD>Animation runs once and then stops.</TD></TR>
+  <TR>
+    <TD class=boldItal>A_LOOP</TD>
+    <TD>
+      <P align=center>2</P></TD>
+    <TD width=5>Scale<BR>Orientation </TD>
+    <TD>Animation runs continually until manually stopped.</TD></TR>
+  <TR>
+    <TD class=boldItal>A_LINEAR</TD>
+    <TD>
+      <P align=center>4</P></TD>
+    <TD width=5>Direct3D<BR>Interpolators</TD>
+    <TD>Animation follows a path along a line.</TD></TR>
+  <TR>
+    <TD class=boldItal>A_SPLINE</TD>
+    <TD>
+      <P align=center>8</P></TD>
+    <TD width=5>Direct3D<BR>Interpolators</TD>
+    <TD>Animation follows a mathematically calculated curved path.</TD></TR>
+  <TR>
+    <TD class=boldItal>A_NEAREST</TD>
+    <TD>
+      <P align=center>16</P></TD>
+    <TD width=5>Direct3D<BR>Interpolators</TD>
+    <TD>The property value is set to the keyframe that is the closest 
+      approximation of the current time. This causes the object&nbsp;to animate 
+      in discrete steps instead of fluidly interpolating.</TD></TR>
+  <TR>
+    <TD class=boldItal>A_LOCAL</TD>
+    <TD>
+      <P align=center>32</P></TD>
+    <TD width=5>Direct3D<BR>Interpolators</TD>
+    <TD>Animation runs only on the client and is not remoted to other 
+      computers.</TD></TR>
+  <TR>
+    <TD class=boldItal>A_RELATIVE</TD>
+    <TD>
+      <P align=center>64</P></TD>
+    <TD width=5>Direct3D<BR>Interpolators</TD>
+    <TD>The animation path values are calculated for the position of the 
+      object at the time that you invoke the <STRONG>StartAnimation</STRONG> 
+      method.</TD></TR></TABLE></P>
+<P> Some of the flag components cannot be used in combination. For example, the 
+<EM>Nearest</EM>, <EM>Linear</EM>, and <EM>Spline</EM> flags are mutually 
+exclusive.<FONT size=2></P></FONT>
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->This method positions an animation at any&nbsp;keyframe&nbsp;while the 
+animation is running. To affect the starting position of an animation&nbsp;before it&nbsp;runs, use 
+the&nbsp;<EM>varIndex</EM> parameter of the <A 
+href="StartAnimation.htm">StartAnimation</A> method.&nbsp; 
+<P><STRONG>Note:</STRONG>&nbsp;&nbsp;&nbsp;Objects with animations imbedded in 
+their geometry can set their index even if the animation is not running.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example changes the index position, direction, and file.</p>
+<pre class="example">
+Sub ReIndex()
+Dim myTigerHawk
+
+Set myTigerHawk = User.Container.FindWithin("TigerHawk")
+
+myTigerHawk.SetAnimationIndex "Position", 12000, 71
+myTigerHawk.SetAnimationIndex "Direction", 32000, 71
+myTigerHawk.SetAnimationIndex "File", 15, 31
+
+End Sub
+</pre>
+
+
+</body>
+</html>

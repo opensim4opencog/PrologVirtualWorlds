@@ -1,0 +1,83 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Take</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Take</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Causes an object to be taken. <b>Take</b> is a member of the <b>Thing</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Take</b>&nbsp;<i>pthing</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Take</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pthing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object to take.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method takes <i>TakeObject</i>, which must be in the same container as the <b>Thing</b> attempting to take it, and adds it to the contents of the calling <b>Thing</b>. For <b>Take</b> to succeed, both the <a href="CanChangeContainer.htm">CanChangeContainer</a> property and the <a href="IsTakeable.htm">IsTakeable</a> property of <i>TakeObject</i> must be <b>True</b>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>AThing.<b>Take</b> myObject</pre>
+&nbsp;
+
+
+</body>
+</html>

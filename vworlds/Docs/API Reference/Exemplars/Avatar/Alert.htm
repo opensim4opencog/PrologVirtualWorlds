@@ -1,0 +1,256 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Alert</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> Alert</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Avatar Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Displays a text message to the specified user in a 
+modeless dialog box. <STRONG>Alert</STRONG> is a member of the <A href="Avatar.htm">Avatar</A> exemplar.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>Alert</STRONG>&nbsp;<EM>bstrTitle, bstrText </EM>[<EM>,&nbsp;varNotifyObject</EM>] 
+      [<EM>,&nbsp;varNotifyMethod</EM>] [<EM>,&nbsp;varNotifyParam</EM>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Alert</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->Avatar</td>
+		<td><!--Type-->Required</td>
+		<td>An object reference to an <b>Avatar</b> object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>bstrTitle</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>  The text that you want&nbsp;displayed as the title of the dialog 
+      box.</TD></TR>
+  <TR>
+    <TD class=boldItal>bstrText</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The message you want&nbsp;displayed in the text 
+    box.</TD></TR>
+  <TR>
+    <TD class=boldItal>[varNotifyObject]</TD>
+    <TD>Variant</TD>
+    <TD>Optional</TD>
+    <TD>The object&nbsp;selected for notification after the dialog box is closed. 
+      Default value is <STRONG>Null</STRONG>.</TD></TR>
+  <TR>
+    <TD class=boldItal>[varNotifyMethod]</TD>
+    <TD>Variant</TD>
+    <TD>Optional</TD>
+    <TD>A&nbsp;method of the object specified by the 
+      <EM>varNotifyObject</EM> parameter. Default value is an empty string.</TD></TR>
+	<TR>
+		<td class="boldItal">[varNotifyParam]</td>
+		<td><!--Parameter name--</td>>
+		<td><!--Type-->Variant</td>
+    <TD>Optional</TD>
+		<td><!--Description-->A 
+      parameter of the object specified by the <EM>varNotifyObject</EM> 
+      parameter. Default 
+      value is <STRONG>Null</STRONG>.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<P>This method does not return a value.&nbsp;
+
+<!--Remarks section--></P>
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>The default behavior of the <STRONG>Alert</STRONG> method 
+presents the&nbsp;avatar with a text message in a modeless dialog box. The 
+dialog box includes a predefined <STRONG>OK</STRONG> button.&nbsp;You can use the 
+<EM>bstrTitle</EM> parameter to add text to the title bar. The 
+main difference between the <B>Alert</B> method and the&nbsp;<A 
+href="Confirm.htm">Confirm</A>&nbsp;method is that the 
+<STRONG>Alert</STRONG> method provides only an <STRONG>OK</STRONG> button, 
+whereas the <STRONG>Confirm</STRONG> method provides&nbsp;a <B>Cancel</B> button. All other functionality is the 
+same. The <A href="Prompt.htm">Prompt</A> method adds a text box to the dialog 
+box that provides further interaction with the 
+ user. </P>
+<P> 
+  When&nbsp;the user clicks the <B>OK</B> 
+button, the <B>Alert</B> method sets the user's 
+<A href="QueryOK.htm"><STRONG>QueryOK</STRONG></A> property to 
+<STRONG>True</STRONG>; otherwise the <B>QueryOK</B> property is set to <B>False</B>. </P>
+<P>If the optional parameters are included, clicking the 
+<B>OK</B> button or closing the dialog box triggers the following sequence 
+of actions. The <STRONG>Alert</STRONG>   
+       method: 
+<OL>
+  <LI>Sends a notification message to&nbsp;the object 
+  specified by the <EM>varNotifyObject</EM> parameter. 
+  <LI>Calls the <EM>varNotifyMethod</EM> method&nbsp;for the 
+  object specified by the <EM>varNotifyObject</EM> parameter. 
+  <LI>Copies the value in the <EM>varNotifyParam</EM> 
+  parameter to the <B>QueryParam</B> property of 
+  the user's avatar. </LI></OL>
+<P>If you don't provide a value for the <EM>varNotifyObject</EM> parameter,&nbsp;a notification message 
+is not sent when the user closes the dialog box. If you include a parameter for 
+the <EM>varNotifyMethod</EM> parameter, it must be a server-side 
+method&nbsp;with exactly one parameter that can be invoked by the object named 
+in the <EM>varNotifyObject</EM> 
+parameter.&nbsp;
+
+<!--Example section--></P>
+<H3>Examples</H3> 
+<p>The first example opens a modeless dialog box that displays the text "Warning!" in the title bar with a message to the avatar. The first parameter in the&nbsp;following statement is the title of the dialog box, and the second parameter is the text displayed inside the dialog box. </p>
+
+<pre class="example">
+myAvatar.<b>Alert "Warning!", "You are about to exit this room."</b></pre>
+<p>
+Example 2
+<p>The following procedure can be called by&nbsp;a program 
+running in the background that monitors new avatars or avatars visiting the 
+world through a portal.
+<P>The NotifyWizard procedure first checks to see if a new avatar is a wizard. If not, the procedure sends a <A href="Prompt.htm">Prompt</A> message to the new avatar 
+asking if the user playing the avatar wants that avatar to be a wizard. If the avatar clicks the <b>Cancel</b> button, an <b>Alert</b>  message is sent to a designated wizard. 
+If the avatar clicks&nbsp;the <STRONG>OK</STRONG> button, the avatar's <A href="QueryOK.htm">QueryOK</A> 
+property is set to <STRONG>True</STRONG>. This example assumes that Gracie is a wizard in the world and that the user is the avatar that wants authoring permission.
+
+
+<pre class="example">
+<!--Example text-->
+Sub NotifyWizard()
+Dim myWizard
+Dim myNewAvatar
+Dim myMsg
+
+Set myNewAvatar = User
+Set myWizard = User.Container.FindWithin("Gracie") 
+
+myMsg = "Do you want to be a wizard? 
+&nbsp;&nbsp;&nbsp;&nbsp;I will send a message to the resident wizard...
+&nbsp;&nbsp;&nbsp;&nbsp;Click OK if you want to be a wizard,
+&nbsp;&nbsp;&nbsp;&nbsp;otherwise, click Cancel." 
+</pre>
+
+<p class="comments">'Check if the avatar is a wizard.<br>
+'If not, send a message to the avatar.
+<pre class="example">If Not myNewAvatar.IsWizard Then
+&nbsp;&nbsp;&nbsp;&nbsp;myAvatar.Prompt "Message to Wizard", myMsg, _
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User.Name &amp; " wants to be a wizard", myWizard
+End If</pre>
+
+<p class="comments">'Check the status of the <b>QueryOK</b> property and send the <br>'appropriate message to the wizard.
+<pre class="example">
+If myNewAvatar.QueryOK &lt;&gt; False Then
+&nbsp;&nbsp;&nbsp;&nbsp;myWizard.<b>Alert "Warning no Authoring", _
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User.Name &amp; " decided not to be a wizard."</b> 
+Else
+&nbsp;&nbsp;&nbsp;&nbsp;myWizard.<b>Alert "Need New Author Permission", _
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User.Name &amp; " wants to be a wizard."</b>
+End If
+End Sub
+</pre>
+<p>Example 3
+<P> 
+This example shows how you can use the <b>Alert</b> method with all of its optional parameters. First, the example creates a property map with the <A href="../../World/CreatePropertyMap.htm">CreatePropertyMap</A> method and initializes it with <EM>key-value pairs</EM>, in this case, the avatar names and phone numbers. The <b>Alert</b> 
+method transfers the existing property map to a new property map and copies it to the calling avatar's <b>QueryParam</b> property.</P>
+<P>A key/value pair in the case of a 
+property map is a property name paired with its value. The key is a string that 
+represents the name of a property in the property map. The value is the contents 
+of that property. A property map uses the string&nbsp;that makes up the key, 
+instead of an index number, to access the value of each property. </P>
+<P>To run this example: There are several objects and methods that you must create before running the code. You can create the ones suggested here or use those of your own choosing.
+<ul><li type="disc">PhoneKiosk: An object in your world that has one method, the TransferMethod. This is the object that the <b>Alert</b> method will notify when the dialog box is closed. 
+ 
+<li>TransferMethod: A server-side method with one implicit argument that passes the PhoneMap object pointer to the <EM>varNotifyMethod</EM> parameter. This method is invoked by the PhoneKiosk object when the dialog box is closed.</li></ul>
+
+<p>The fifth parameter, 
+"myPhoneMap", is copied to the calling avatar's <b>QueryParam</b> property.
+
+<p class="comments">'Create 
+a simple property map with the avatar names as <br>
+'the keys and the phone numbers as the values of the <br>
+'properties.
+<pre class="example">
+Sub SendAlert()
+Dim myPhoneMap
+Dim myAvatarEve
+</pre>
+<p class="comments">'Set a reference to the avatar.
+<pre class="example">
+Set myAvatarEve = User.Container.FindWithin("Eve")
+</pre>
+<p class="comments">'Create a property map.
+<pre class="example">
+Set myPhoneMap = CreatePropertyMap
+</pre>
+<p class="comments">'Add properties to the property map.
+<pre class="example">
+PhoneMap.Property("Erik") = "555-1234"
+PhoneMap.Property("Samantha") = "555-2468"
+</pre>
+<p class="comments">'Display an <b>Alert</b> dialog box to Eve. <br>
+'When Eve closes the dialog box, the "myPhoneMap" property map <br>
+'is transferred to the <b>QueryParam</b> property of Eve's avatar. 
+<pre class="example">
+myAvatarEve.<b>Alert "Phone Numbers", "Transfer?", PhoneKiosk, _
+&nbsp;&nbsp;&nbsp;&nbsp;"TransferMethod", myPhoneMap</b>
+
+End Sub
+</pre>
+<p>
+Example 4
+<p>This example iterates through the properties that were passed to the <b>QueryParam</b> property of the specified avatar by Example 3.</p>
+<pre class="example">
+Sub IterateQueryParams()
+Dim myQueryParams
+Dim myQP
+Dim myAvatarEve
+
+Set myAvatarEve = User.Container.FindWithin("Eve")
+Set myQueryParams = myAvatarEve.QueryParam
+
+For Each myQP In myQueryParams
+&nbsp;&nbsp;&nbsp;&nbsp;Print myQueryParams.Property(myQP)
+Next
+End Sub</pre>
+  
+
+</body>
+</html>

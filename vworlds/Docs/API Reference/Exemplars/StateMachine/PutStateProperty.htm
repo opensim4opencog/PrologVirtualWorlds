@@ -1,0 +1,116 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>PutStateProperty</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>PutStateProperty</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the StateMachine Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets the value for a state-specific property of the default
+internal state machine. <b>PutStateProperty</b> is a member of the <b>StateMachine</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>PutStateProperty</b>&nbsp;<i>bstrState, bstrPropertyName, 
+		var</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>PutStateProperty</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>StateMachine</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>StateMachine</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrState</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The state machine state.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrPropertyName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the state machine property.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">var</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The value of the property.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Although this method can be used to set the value of any
+property for a particular state machine and state, its primary
+purpose is to set the length of time a state will be active. Such
+a property is often named <i>TimeOut</i>. </p>
+
+<p>This method will run on either the client or the server.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>In the example that follows, the first line will cause the <b>StateMachine</b>
+object, <i>MyStMach</i>, to display a message when the <i>Waiting</i>
+state of the default internal state machine is entered. Note that this statement uses a nested string in connection with the <b>Say</b> method. The
+second line (shown in <b>bold</b>) sets a property
+(named <i>TimeOut</i>) of the the <i>Waiting</i> state to
+10000 milliseconds, or 10 seconds. The third line tells Virtual
+Worlds that if the <i>Waiting</i> state times out, it should
+set the state to <i>Finish</i> and display a message.</p>
+
+<pre>MyStMach.PutInlineStateMethod METHOD_CLIENT, &quot;Waiting&quot;, &quot;OnEnterState&quot;,
+   &quot;this.Say &quot;&quot;Entered State1&quot;&quot; &quot;
+<b>MyStMach.PutStateProperty &quot;Waiting&quot;, &quot;TimeOut&quot;, 10000</b>
+MyStMach.PutInlineStateMethod METHOD_CLIENT, &quot;Waiting&quot;, &quot;OnTimeOut&quot;,
+   &quot;this.SetState &quot;&quot;Finish&quot;&quot; : this.Say &quot;&quot;Timed out!&quot;&quot; &quot;</pre>
+
+&nbsp;
+
+
+</body>
+</html>

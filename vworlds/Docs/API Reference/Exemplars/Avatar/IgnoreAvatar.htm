@@ -1,0 +1,143 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>IgnoreAvatar</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> IgnoreAvatar</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Avatar Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Adds the name of the specified <b>Thing</b> object to the <b>Ignoring</b> property list 
+in the specified avatar's profile. <b>IgnoreAvatar</b> is a member of the <a href="Avatar.htm">Avatar</a> exemplar.&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>IgnoreAvatar</STRONG> 
+      <EM>ThingValue</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>IgnoreAvatar</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Avatar</td>
+		<td>Required</td>
+		<td>An object reference to an <b>Avatar</b> object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>ThingValue</TD>
+    <TD>Thing</TD>
+    <TD>Required</TD>
+    <TD>An expression that evaluates to a <b>Thing</b> object, such 
+      as an artifact or avatar.</TD></TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method works hand in hand with a default key, named "Ignoring", in the 
+<A href="../../AvatarProfile/AvatarProfile.htm">AvatarProfile</A>  object. If you use the <b>IgnoreAvatar</b> method to ignore 
+another avatar or other object, the ignored object's name is added to the <b>Ignoring</b> property 
+list in your profile. 
+<P>If you ignore an object, you do not receive messages from that object. A message is displayed 
+in the chat-history window and in the Command Window that you are ignoring the object. An ignored object 
+does not have access to the <b>Approach</b> menu item (or any other menu item, for that matter) 
+on the ignoring avatar. This means that the ignored object cannot approach the ignoring avatar 
+(your avatar). The object that is ignored appears in the Microsoft Virtual World environment as a 
+little monster locked inside a stoppered bottle. The original image of the object or avatar does 
+not appear in the world until you use the <A href="UnIgnoreAvatar.htm">UnIgnoreAvatar</A> method 
+to stop ignoring the object.
+<P><b>Note:</b>&nbsp;&nbsp;You cannot ignore your own avatar, and another avatar cannot add 
+avatars and objects to the <b>Ignoring</b> property list in your profile.&nbsp;&nbsp;
+<H3>Example</H3>
+<p>This example shows you how to ignore an object and an avatar, and then how to print a list of 
+ignored items in the Command Window.
+<p>
+   To run this example: You must have another avatar and object present in your 
+world. You can substitute an avatar and object of your choice for Gracie's avatar or the "Red 
+Baron's Plane".
+<p>
+<b>Note:</b>&nbsp;&nbsp;&nbsp;In most cases, the <b>Ignoring</b> property is <b>Property(0)</b>. 
+However, you can check this by running the program in the example for the 
+<A href="../../AvatarProfile/KeyValue.htm">KeyValue</A> method.
+
+<pre class="example">
+<!--Example text-->
+&nbsp;
+Sub IgnoreStuff()
+Dim myIgnoredAvatar
+Dim myIgnoredObject
+Dim myIgnorePropertyList
+Dim myCount
+Dim i
+
+Set myIgnoredAvatar = User.Container.FindWithin("Gracie")
+Set myIgnoredObject = User.Container.FindWithin("Red Baron's Plane")
+Set myIgnorePropertyList = _
+&nbsp;&nbsp;&nbsp;&nbsp;User.Profile.KeyValue(User.Profile.Keys.Property(0))
+</pre>
+<p class="comments">'Add the avatar and object to the <b>Ignoring</b> property list in your profile.
+<pre class="example">
+User.<b>IgnoreAvatar myIgnoredAvatar</b>
+User.<b>IgnoreAvatar myIgnoredObject</b>
+myCount = myIgnorePropertyList.Count - 1
+</pre>
+<p class="comments">'Print the ignored items to the Command 
+Window.
+<pre class="example">
+For i = 0 To myCount
+&nbsp;&nbsp;&nbsp;&nbsp;Print myIgnorePropertyList.Property(i)
+Next 
+</pre>
+<p class="comments">'Remove the ignored name from the property list.
+<pre class="example">
+User.UnIgnore myIgnoredAvatar
+</pre>
+<p class="comments">'Print the ignored items to the Command Window again to <br>
+'verify that the avatar is not ignored.
+<pre class="example">
+For i = 0 To myCount 
+&nbsp;&nbsp;&nbsp;&nbsp;Print myIgnorePropertyList.Property(i)
+Next
+
+End Sub </pre>
+ 
+
+</body>
+</html>

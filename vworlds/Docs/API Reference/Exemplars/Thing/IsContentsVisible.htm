@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>IsContentsVisible</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsContentsVisible</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Boolean</b> flag that indicates whether an object's contents can be
+seen graphically in the world. <b>IsContentsVisible</b> is a read/write <b>Boolean</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsContentsVisible</b>&nbsp;=&nbsp;<i>booleanValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>IsContentsVisible</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">booleanValue</td>
+		<td>Boolean</td>
+		<td>Required</td>
+		<td>Indicates whether the contents of the object can be seen. The default is <b>False</b>.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>To ensure that the objects inside the container are visible, set this property to <b>True</b>; to ensure that the
+objects are not visible, set it to <b>False</b>.</p>
+
+<p>To assure that all of the objects in a container (including the geometry) ar available to every user in the room (and will thereby be displayed in each client renderer), you must first set the container's <a href="IsOpen.htm">IsOpen</a> property to <b>True</b>. For more information, see the <a href="IsOpen.htm">IsOpen</a> topic.
+
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get the value:</p>
+
+<blockquote><pre>Result = PeerAvatar.IsContentsVisible</pre></blockquote>
+
+<p>To set the value:</p>
+
+<blockquote><pre>PeerAvatar.Isopen = True
+PeerAvatar.IsContentsVisible = True</pre></blockquote>&nbsp;
+ 
+
+</body>
+</html>

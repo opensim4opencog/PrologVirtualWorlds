@@ -1,0 +1,102 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>SetStateMachineIfState</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetStateMachineIfState</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the StateMachine Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Set the state of a specified state machine to a new state, but only if it is in a given
+state. <b>SetStateMachineIfState</b> is a member of the <b>StateMachine</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetStateMachineIfState</b>&nbsp;<i>bstrStateMachineName, 
+		bstrOldState, bstrNewState</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetStateMachineIfState</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>StateMachine</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>StateMachine</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrStateMachineName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The state machine name.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrOldState</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The current state.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrNewState</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The state to be changed to.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method sets the state of the specified state machine (<i>bstrStateMachineName</i>) to a new
+state (<i>bstrNewState</i>), but only if it is in the given state (<i>CurrentState</i>);
+it should be run from the server. The related <a href="SetIfState.htm">SetIfState</a>
+method of <b>StateMachine</b> can be used to perform the same action on the
+default internal state machine, <i>Default</i>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyStateMachine.SetStateMachineIfState &quot;StateMachine1&quot;, &quot;Waiting&quot;, &quot;TurnLeft&quot;</pre>
+&nbsp;
+
+
+
+</body>
+</html>

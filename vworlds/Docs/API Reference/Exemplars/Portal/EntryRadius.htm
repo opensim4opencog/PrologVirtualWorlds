@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>EntryRadius</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>EntryRadius</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Portal Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Float</b> specifying the radius of a 
+semi-circle around an <A href="EntryPoint.htm">EntryPoint</A> 
+into which new arrivals to a <A href="../Room/Room.htm">Room</A> are 
+placed. <b>EntryRadius</b> is a read/write <b>Float</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<p>To set this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>EntryRadius</b> = <i>floatValue</i></td>
+	</tr>
+</table>
+<p>To return this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>EntryRadius</b></td>
+	</tr>
+</table>
+<!--Parameters table-->
+<p>The <b>EntryRadius</b>  property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">Object</td>
+		<td>Portal</td>
+		<td>Required</td>
+		<td>An object reference that evaluates to a <b>Portal</b>.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">floatValue</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Float</b>.</td>
+	</TR>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>New arrivals to a <b>Room</b> are placed at random positions in a 
+semi-circular area around the <b>EntryPoint</b>, within a radius of 
+<b>EntryRadius</b> meters. This prevents new arrivals from stacking up 
+at the same point. The default value for <b>EntryRadius</b> is 3.0.&nbsp;
+
+
+
+</body>
+</html>

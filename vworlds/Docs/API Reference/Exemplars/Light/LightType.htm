@@ -1,0 +1,148 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<Link rel="Stylesheet" href="../../APIRef.css">
+<head>
+	<title>LightType</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>LightType</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Light Exemplar</td>
+	</tr>
+</table>
+<P>
+<P>Sets or returns the type of a <a href="Light.htm">Light</a> object. <b>LightType</b> is a read/write <b>Long</b>.
+
+<!--Summary of topic-->
+      
+          
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td>
+      <P><i>object</i>.<B>LightType</B> = <i>longValue</i></td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>LightType</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Light</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An instance of the <B>Light</b> exemplar. </td><!--Description-->
+	</TR>
+	
+	<TR>
+		<td class="boldItal">longValue</td>
+		<td>Long</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>See the following table for a list of valid values. The default value is 2.</td><!--Description-->
+	</TR>
+</TABLE>
+<p><b>LightType</b> values
+
+<TABLE class="backlight" STYLE="WIDTH:75%">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Value</td>
+			<td>Type</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=50></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">0</td>
+		<td>Ambient</td><!--Parameter name-->
+		<td>A light source that illuminates everything in a scene, regardless of
+the orientation, position, and surface characteristics of the objects in the scene.
+Because this type of light illuminates a scene with equal strength everywhere, the
+position and orientation of the light is inconsequential. Ambient lights are only affected by color and intensity.
+</td><!--Type-->
+	
+	</TR>
+	
+	<TR>
+		<td class="boldItal">1</td>
+		<td>Point</td><!--Parameter name-->
+		<td>A light source that radiates equally in all directions from its origin. Point light sources require the system to calculate a new lighting vector for every facet or normal they illuminate, and so are computationally more expensive than a parallel point light source. They produce a more faithful lighting effect than parallel point light sources, however. </td><!--Type-->
+		
+	</TR>
+	<TR>
+		<td class="boldItal">2</td>
+		<td>Spot</td><!--Parameter name-->
+		<td>A light source that emits a cone of light. Only objects within the
+cone are illuminated. The cone produces light of two degrees of intensity; the central,
+brightly lit section (the umbra) acts as a point source, and an outer, dimly lit section
+(the penumbra) merges with the surrounding deep shadow. You can specify the angles of each of these two sections by modifying the other properties (LightUmbra and LightPenumbra), which determine the shape of the cone it produces. 
+
+</td><!--Type-->
+		<td></td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">3</td>
+		<td>Directional</td><!--Parameter name-->
+		<td>This light appears to illuminate all objects with equal intensity, as if it were at an infinite distance from the objects. Directional light has orientation but no position, and it is
+ commonly used to simulate distant light sources, such as the sun.  It is the best choice of light to use for maximum rendering speed. </td><!--Type-->
+		<td></td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">4</td>
+		<td>Parallel point</td><!--Parameter name-->
+		<td>A light source that illuminates objects with parallel light, but the orientation of the light is taken from the position of the light source. For example, two meshes on either side of a parallel point source are lit on the side that faces the position of the source. The parallel point light  source offers similar rendering-speed performance to the directional light.</td><!--Type-->
+		<td></td><!--Description-->
+	</TR>
+</TABLE>
+ <!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>The <b>LightType</b> values can be categorized into two distinct types: ambient light and direct light. Ambient light can be thought of as the general lighting level of an entire scene, as opposed to a light source affecting each vertex in a world from a specific position. Ambient light illuminates all objects on all sides of each object, regardless of the position of the light. Direct lights, including point, spot, directional, and parallel lights, project light from a specific location. Since direct lights are based on their position, each vertex of an object is rendered depending on where the light is located.
+
+<!--Insert Remarks here-->
+
+<H3>Example</H3>
+<p>This example creates an instance of the <b>Light</b> exemplar and then changes the <b>LightType</b> property.<br><br>
+<pre class="example">Dim myLightInstance
+Set myLightInstance = World.CreateInstance("myLight1", "Light", User.Container)
+myLightInstance.LightType = 4
+
+</pre>&nbsp;
+
+
+</body>
+</html>

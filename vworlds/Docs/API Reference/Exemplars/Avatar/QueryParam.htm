@@ -1,0 +1,148 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>QueryParam</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>QueryParam</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Avatar Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Returns the object that was passed by the <A href="Alert.htm"><b>Alert</b></A>, <A 
+href="Confirm.htm"><b>Confirm</b></A>, or <A 
+href="Prompt.htm"><b>Prompt</b></A> method. <b>QueryParam</b> is a read-only 
+<b>Object</b>.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>QueryParam</STRONG></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<!--Parameters table-->
+<p>The <b>QueryParam</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Avatar</td>
+		<td>Required</td>
+		<td>An&nbsp;object reference to an <b>Avatar</b> 
+object.</td>
+	</TR>
+
+</TABLE>
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->The 
+<STRONG>QueryParam</STRONG> property is associated with the 
+<EM>varNotifyParam</EM> parameter of the <STRONG>Alert</STRONG>, 
+<STRONG>Confirm</STRONG>, and <STRONG>Prompt</STRONG> methods. These methods display a dialog box that requests 
+various levels of information from the user depending on which method was 
+used.&nbsp;The <EM>varNotifyParam</EM> parameter is optional, but when 
+specified, sends the object to the <STRONG>QueryParam</STRONG> property of the 
+specified avatar when the dialog box is closed.
+<H3>Examples</H3>
+<P>The first example shows how you can use the 
+<STRONG>Alert</STRONG>          method with all of its optional 
+parameters. The procedure creates a property map with the <A 
+href="../../World/CreatePropertyMap.htm">CreatePropertyMap</A> method 
+and initializes it with&nbsp;the 
+avatar names and phone numbers.</P>
+
+<P>To run this example: There are several objects and methods that you must 
+create before running the code. You can create the ones suggested here or use 
+those of your own choosing. 
+<UL>
+  <LI type=disc>PhoneKiosk: An object in your world that has one method, the 
+  TransferMethod. This is the object that the <B>Alert</B> method will notify 
+  when the dialog box is closed. 
+  <LI>TransferMethod: A server-side method with one implicit argument that 
+  passes the PhoneMap object pointer to the <EM>varNotifyMethod</EM> parameter. 
+  This method is invoked by the PhoneKiosk object when the dialog box is 
+  closed.</LI></UL>
+<P>The fifth parameter, "myPhoneMap", is copied to the calling avatar's 
+<B>QueryParam</B> property. 
+
+<p class="comments">'Create 
+a simple property map with the avatar names as <br>
+'the keys and the phone numbers as the values of the <br>
+'properties.
+<pre class="example">
+Sub SendAlert()
+Dim myPhoneMap
+Dim myAvatarEve
+</pre>
+<p class="comments">'Set a reference to the avatar.
+<pre class="example">
+Set myAvatarEve = User.Container.FindWithin("Eve")
+</pre>
+<p class="comments">'Create a property map.
+<pre class="example">
+Set myPhoneMap = CreatePropertyMap
+</pre>
+<p class="comments">'Add properties to the property map.
+<pre class="example">
+PhoneMap.Property("Erik") = "555-1234"
+PhoneMap.Property("Samantha") = "555-2468"
+</pre>
+<p class="comments">'Display an <b>Alert</b> dialog box to Eve. <br>
+'When Eve closes the dialog box, the "myPhoneMap" property map <br>
+'is transferred to the <b>QueryParam</b> property of Eve's avatar. 
+<pre class="example">
+myAvatarEve.Alert "Phone Numbers", "Transfer?", PhoneKiosk, _
+&nbsp;&nbsp;&nbsp;&nbsp;"TransferMethod", myPhoneMap
+
+End Sub</pre>
+<P>
+<P>Example 2</P>
+<P>This example iterates through the properties that were passed to the 
+<B>QueryParam</B> property of the specified avatar by the SendAlert program 
+shown in the first example.</P>
+<PRE class="example">
+Sub IterateQueryParams()
+Dim myQueryParams
+Dim myQP
+Dim myAvatarEve
+
+Set myAvatarEve = User.Container.FindWithin("Eve")
+Set myQueryParams = myAvatarEve.<b>QueryParam</b>
+
+For Each myQP In myQueryParams
+&nbsp;&nbsp;&nbsp;&nbsp;Print myQueryParams.Property(myQP)
+Next
+End Sub
+<!--Example text-->&nbsp; </PRE><PRE></PRE> 
+<PRE></PRE>
+  
+
+</body>
+</html>

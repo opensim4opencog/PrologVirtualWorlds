@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>RotationRate</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>RotationRate</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Float</b> that specifies the rate of rotation of the object. 
+<b>RotationRate</b> is a read/write <b>Float</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>RotationRate</b> = <i>floatValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>RotationRate</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">floatValue</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>A <b>Float</b> value that determines the rotation speed of an object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This property represents the number of radians that the object should be rotated each time the
+scene is rendered. (There are 2 * Pi radians in 360 degrees.)  If the scene is being rendered at 
+twenty frames per second and you want the object to make one revolution per second, you should set
+<b>RotationRate</b> to (2 * Pi / 20), or approximately 0.3. </p>
+<p>A positive value for <b>RotationRate</b> causes the object to revolve clockwise (assuming
+the object is rotating about its vertical axis and is viewed from above).  A negative value causes
+the object to revolve in the opposite direction.</p>
+
+<p>This property has no effect if the object is an avatar.</p>
+
+<p>The default value for this property is 0.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get this property:</p>
+
+<pre>   RotRate = MyThing.RotationRate</pre>
+
+<p>To set this property:</p>
+
+<pre>   MyThing.RotationRate = 0.2</pre>&nbsp;
+
+
+</body>
+</html>

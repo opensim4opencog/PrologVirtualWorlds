@@ -1,0 +1,84 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Drop</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Drop</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Causes an object to be dropped from the contents of the <b>Thing</b>
+object. <b>Drop</b> is a member of the <b>Thing</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Drop</b>&nbsp;<i>pthing</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Drop</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pthing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object to drop.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Drop</b> method enables its caller to transfer an object in the caller's
+inventory to the room (or other container) the caller is in.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>TheThing.Drop ObjectToDrop</pre>
+&nbsp;
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>LightAttenuation</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>LightAttenuation</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Light Exemplar</td>
+	</tr>
+</table>
+<P>
+<P>
+<!--Summary of topic-->
+<p>Sets or returns the behavior over distance of light emitted from specific types of <a href="Light.htm">Light</a> objects. <b>LightAttenuation</b> is a read/write <a href="../../Vector/Vector.htm">Vector</a>.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>LightAttenuation</b> = <i>vectorValue</i></td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>LightAttenuation</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Light</td>
+		<td>Required</td>
+		<td>An instance of the <B>Light</b> exemplar.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">vectorValue</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>Any valid expression that evaluates to a <b>Vector</b> of <b>float</b> values. The default value is (1.0, 0.0, 0.0). </td>
+	</TR>
+</tbody>
+</TABLE>
+
+ <!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>The <b>LightAttenuation</b> property defines the behavior of light over distance. The value of the <b>LightColor</b> property is combined with the attenuation to produce the color intensity for each vertex within the attenuated area.
+
+<p>The three values of the <b>LightAttenuation</b> vector correspond to three types of attenuation: constant, linear, and quadratic. All three values are normalized at 1.0, but each value has a different effect on the behavior of light over distance. These members contain floating point values typically ranging from 0.0 to 1.0, controlling a light's constant, linear, and quadratic attenuation. Many applications set the <b>LightAttenuation</b>.y member to 1.0 and the others to 0.0 (as in (0.0, 1.0, 0.0)), resulting in light intensity that attenuates evenly over distance-from maximum intensity at the source, to zero intensity at the light's maximum range. You can combine attenuation values to get more complex attenuation effects. Or, you might set them to values outside of the normal range to create even stranger attenuation effects; negative attenuation values make a light that gets brighter over distance. 
+
+<p><img src="../../Images/attngraf.gif" width=529 height=298 alt="" border="0">
+
+<p>Directional, parallel, and ambient lights are not affected by the <b>LightAttenuation</b> property.
+
+<!--Insert Remarks here-->
+
+<H3>Example</H3>
+<p>This example sets the value of the <b>LightAttenuation</b> property to have a Linear behavior.<br><br>
+<pre class="example">myLightInstance.<b>LightAttenuation</b> = World.CreateVector(0.0, 1.0, 0.0)</pre>
+ 
+
+</body>
+</html>

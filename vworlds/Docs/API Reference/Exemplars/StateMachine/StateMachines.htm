@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>StateMachines</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>StateMachines</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the StateMachine Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>PropertyList</b> containing the names of
+internal state machines (including <i>Default</i>) associated
+with a state machine. <b>StateMachines</b> is a read/write <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>StateMachines</b> = <i>PropertyListValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>StateMachines</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>StateMachine</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>StateMachine</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">PropertyListValue</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>A property list of the names of the internal state machines.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>StateMachines</b> <b>PropertyList</b> contains the
+names (each of which is a <b>String</b>) of the default
+state machine (<i>Default</i>) and any other state machines
+that are part of the invoking state machine. The first name on
+this list will always be <i>Default</i>. Additional names are
+added automatically when other internal state machines are added
+(using the <a href="AddStateMachine.htm">AddStateMachine</a> 
+method of <b>StateMachine</b>).
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get the <b>StateMachines</b> property:</p>
+
+<pre>   Set Properties = MyStateMachine.StateMachines</pre>
+
+<p>To set the <b>StateMachines</b> property:</p>
+
+<pre>   MyStateMachine.StateMachines = Properties</pre>
+
+<p><b>Note:</b> The variable <i>Properties</i> in the
+second example must have already been created as a 
+<a href="../../PropertyList/PropertyList.htm">PropertyList</a> (by the
+<a href="../../World/CreatePropertyList.htm">CreatePropertyList</a>
+method of <b>World</b>) and initialized to the
+proper values.&nbsp;
+
+</body>
+</html>

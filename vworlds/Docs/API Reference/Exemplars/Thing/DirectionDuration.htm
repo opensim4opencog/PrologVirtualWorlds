@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>DirectionDuration</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>DirectionDuration</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Long</b> that contains the time over which a change in the <b>Direction</b>
+property should be interpolated. <b>DirectionDuration</b> is a read/write <b>Long</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>DirectionDuration</b> = <i>LongValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>DirectionDuration</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">LongValue</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The time, in milliseconds, for interpolating a change in direction.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>If you set <b>DirectionDuration</b> on an object to 5000, and then set the
+same object's <a href="Direction.htm">Direction</a> property to a new value, the
+object's <b>Direction</b> property appears to change smoothly from its
+previous value to its new value over a period of 5 seconds.
+
+
+<p>When this interpolation is complete, the method
+<a href="../../Events/OnDirectionDone.htm">OnDirectionDone</a> is invoked on the object.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get this property:</p>
+
+<pre>   TheDuration = MyThing.DirectionDuration</pre>
+
+<p>To set this property:</p>
+
+<pre>   MyThing.DirectionDuration = 5000</pre>&nbsp;
+
+
+</body>
+</html>

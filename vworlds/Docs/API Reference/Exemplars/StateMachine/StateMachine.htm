@@ -1,0 +1,60 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>StateMachine</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>StateMachine</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P class=body>The <b>StateMachine</b> exemplar enables an author
+to create simple objects with behaviors that can be defined by
+states. A state machine's response to a method invoked on it
+depends on the current state of the state machine. Actions,
+including transitions between states, occur when certain events
+take place.&nbsp;
+
+<!--How-to section -->
+<H3>Using the Object</H3>
+<p>The behavior of a state machine is defined by adding methods,
+properties, states, and internal state machines to the object.
+Multiple simultaneous, independent, internal state machines allow
+more complex objects that react to a number of actions and
+transitions (for example, toggling between empty and full, or hot
+and cold). A list of all internal state machines for a given <b>StateMachine</b>
+object is kept in its <b>StateMachines</b> property.</p>
+
+<p>States are changed by calling <b>SetState</b> (for
+the default primary state machine <i>Default</i>) or <b>SetStateMachineState</b> 
+(for another internal state machine). When a state is
+entered, the state machine looks for a state machine-specific
+property with the name <i>TimeOut</i>. If this property has
+been set by <b>PutStateProperty</b> (for <i>Default</i>),
+or <b>PutStateMachineStateProperty</b> (for another
+internal state machine), it represents the number of milliseconds
+to wait before calling <i>OnTimeOut</i>, the code for which is
+supplied by the user in a call to <b>PutInlineStateMethod</b>.</p>
+
+<p><b>Example:</b> Every state machine that is created
+has an internal state machine named <i>Default</i>, which might
+start in the <i>Waiting</i> state. The pre-defined method 
+<a href="../../Events/OnLButtonUp.htm">OnLButtonUp</a>
+could then be added to this state so that a transition to a
+different state would occur when the user clicked the left mouse
+button over the object.&nbsp;
+
+
+</body>
+</html>

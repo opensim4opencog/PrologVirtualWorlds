@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>IsAccessory</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> IsAccessory</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Artifact Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>Set this property to <STRONG>True</STRONG>     if you want the <A 
+href="Artifact.htm">Artifact</A>&nbsp;to be an avatar 
+graphic.&nbsp;<STRONG>IsAccessory</STRONG> is a read/write 
+<STRONG>Boolean</STRONG>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>IsAccessory</STRONG> = 
+      <EM>BooleanValue</EM></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The&nbsp;<STRONG>IsAccessory</STRONG>  property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Artifact</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses an 
+      <STRONG>Artifact</STRONG>        object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->BooleanValue</td>
+		<td><!--Type-->Boolean</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description--><STRONG>True</STRONG> if 
+      the artifact is an avatar graphic.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>An&nbsp;avatar graphic (or accessory) is an artifact with a two-dimensional representation in&nbsp;a 
+virtual world. While you are wearing it, it is displayed on your avatar, both in 
+your self-view pane and in the graphical windows of others in the room.</P>
+<P>An&nbsp;avatar graphic can act like clothing, jewelry, a mask, a wig, a badge or 
+button, a pet, or anything else that might appear attached to an avatar. You can 
+place an&nbsp;avatar graphic anywhere on your avatar.</P>
+<P>To make an <STRONG>Artifact</STRONG> an avatar graphic, set its 
+<STRONG>IsAccessory</STRONG> property to <STRONG>True</STRONG>. You should also 
+make sure that its <A 
+href="AccessoryGraphic.htm"><STRONG>AccessoryGraphic</STRONG></A> property is set to point to a 
+small graphics file containing a&nbsp;2-D image.</P>
+<P>If&nbsp;an artifact&nbsp;has its <STRONG>IsAccessory</STRONG> property set 
+to <STRONG>True</STRONG>,&nbsp;Microsoft Virtual Worlds automatically adds the 
+<STRONG>Artifact</STRONG> to the right-click menu 
+of your avatar.<!--Example section-->
+
+<!--Example section--></P>
+<H3>Example</H3>
+<p>
+  This example creates an artifact and adds 
+an&nbsp;avatar graphic to the artifact. You must either create a RainyDayHat.gif and modify the URL to match its location or substitute an image of your choice.</p>
+
+<pre class="example">Public Sub CreateHat()
+Dim myRainyDayHat
+</pre>
+
+<p class = "comments">'Create an artifact.
+<pre class = "example">Set myRainyDayHat = _
+&nbsp;&nbsp;&nbsp;&nbsp;CreateInstance("Rainy Day Hat", "Artifact", User.Container)
+</pre>
+<p class = "comments">'Make the artifact an accessory.
+<pre class = "example">
+myRainyDayHat.<b>IsAccessory</b> = True
+</pre>
+<p class = "comments">'Get the image.
+<pre class = "example">
+myRainyDayHat.AccessoryGraphic = _
+&nbsp;&nbsp;&nbsp;&nbsp;"http://Webs/Images/RainyDayHat.gif"
+</pre>
+<p class = "comments">
+'Take the artifact.
+<pre class = "example">
+User.Take myRainyDayHat
+</pre>
+<p class = "comments">
+'Wear the artifact.
+<pre class = "example">
+User.Wear myRainyDayHat
+
+End Sub</pre>
+ 
+
+</body>
+</html>

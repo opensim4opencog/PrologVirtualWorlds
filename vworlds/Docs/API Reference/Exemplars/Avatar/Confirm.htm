@@ -1,0 +1,213 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Confirm</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Confirm</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Avatar Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P> Displays a text message to the specified user in 
+a dialog box that includes both the <STRONG>OK</STRONG> and 
+<STRONG>Cancel</STRONG> 
+buttons. <STRONG>Confirm</STRONG> is a member of the <A href="Avatar.htm">Avatar</A> exemplar.&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object.</EM><b>Confirm</b>&nbsp;<EM>bstrTitle, bstrText </EM>[<EM>,&nbsp;varNotifyObject</EM>]<EM> 
+      </EM>[<EM>,&nbsp;varNotifyMethod</EM>] [<em>,&nbsp;varNotifyParam</em>])</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Confirm</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->Avatar</td>
+		<td><!--Type-->Required</td>
+		<td>An object reference to an <b>Avatar</b> object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>bstrTitle</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>  The text that you want&nbsp;displayed&nbsp;in the 
+      dialog box above the <STRONG>OK</STRONG> and <STRONG>Cancel</STRONG>             
+      buttons.</TD></TR>
+  <TR>
+    <TD class=boldItal>bstrText</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The message you want&nbsp;displayed&nbsp;above 
+      the the <STRONG>OK</STRONG> and <STRONG>Cancel</STRONG>       
+    buttons.</TD></TR>
+  <TR>
+    <TD class=boldItal>[varNotifyObject]</TD>
+    <TD>Variant</TD>
+    <TD>Optional</TD>
+    <TD>The object&nbsp;selected for notification after the dialog box is closed. 
+      Default value is <STRONG>Null</STRONG>.</TD></TR>
+  <TR>
+    <TD class=boldItal>[varNotifyMethod]</TD>
+    <TD>Variant</TD>
+    <TD>Optional</TD>
+    <TD>A&nbsp;method of the object specified by the 
+      <EM>varNotifyObject</EM> parameter. Default value is an empty string.</TD></TR>
+	<TR>
+		<td class="boldItal">[varNotifyParam]</td>
+		<td><!--Parameter name--</td>>
+		<td><!--Type-->Variant</td>
+    <TD>Optional</TD>
+		<td><!--Description-->A 
+      parameter of the object specified by the <EM>varNotifyObject</EM> 
+      parameter. Default 
+      value is <STRONG>Null</STRONG>.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<P>This method does not return a value.&nbsp;
+
+<!--Remarks section--></P>
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>The default behavior of the <STRONG>Confirm</STRONG>    
+ method presents the&nbsp;avatar with a text message in a dialog box. 
+The dialog box includes predefined <STRONG>OK</STRONG> and <STRONG>Cancel</STRONG> buttons.&nbsp;You can add text to the title 
+bar&nbsp;by using the 
+<EM>bstrTitle</EM>         
+  parameter. The main difference between the <b>Confirm</b> method 
+and the <A href="Alert.htm">Alert</A> method is that the 
+<STRONG>Confirm</STRONG> method provides&nbsp;a <b>Cancel</b> button, whereas the <STRONG>Alert</STRONG> 
+method provides only an <STRONG>OK</STRONG> button. All other functionality is 
+the same. The <A href="Prompt.htm">Prompt</A> method adds a text box to the dialog box that provides further interaction with the user. </P>
+<P> 
+  If&nbsp;the user clicks the <B>OK</B> 
+button, the <B>Confirm</B> method sets the user's 
+<A href="QueryOK.htm"><b>QueryOK</b></A> property to 
+<b>True</b>.&nbsp;If the&nbsp;user clicks the 
+<STRONG>Cancel</STRONG> button&nbsp;or closes the dialog box, the <B>QueryOK</B> property is set to <B>False</B>. </P>
+<P>If the optional parameters are included, clicking the <B>OK</B> button or closing the dialog box triggers the following sequence 
+of actions. The <b>Confirm</b>  method: 
+<OL>
+  <LI>Sends a notification message to&nbsp;the object 
+  specified by the <EM>varNotifyObject</EM> parameter. 
+  <LI>Calls the <EM>varNotifyMethod</EM> method&nbsp;for the 
+  object specified by the <EM>varNotifyObject</EM> parameter. 
+  <LI>Copies the value in the <EM>varNotifyParam</EM> 
+  parameter to the <B>QueryParam</B> property of 
+  the user's avatar. </LI></OL>
+<P>If you don't provide a value for the <EM>varNotifyObject</EM> parameter,&nbsp;a notification message 
+is not sent when the user closes the dialog box. If you include a parameter for 
+the <EM>varNotifyMethod</EM> parameter, it must be a server-side 
+method&nbsp;with exactly one parameter that can be invoked by the object named 
+in the <EM>varNotifyObject</EM> 
+parameter.&nbsp;
+
+<!--Example section--></P>
+<H3>Examples</H3>
+<p> The first example opens a dialog box that displays the text "Please confirm" in the title bar with a message to the avatar that appears above the <b>OK</b> button. The first parameter in the&nbsp;following statement is the title, and the second parameter is the text displayed inside the dialog box. </p>
+
+<pre class="example">
+myAvatar.<b>Confirm "Please confirm", "Do you want to exit this room?"</b></pre>
+
+<p>Example 2
+<P>This example shows how you can use the <b>Confirm</b> method with all of its optional parameters. First, the example creates a property map with the <A href="../../World/CreatePropertyMap.htm">CreatePropertyMap</A> method and initializes it with <EM>key-value pairs</EM>, in this case, the avatar names and phone numbers. The <b>Confirm</b> 
+method transfers the existing property map to a new property map and copies it to the calling avatar's <b>QueryParam</b> property.</P>
+<P>A key/value pair in the case of a 
+property map is a property name paired with its value. The key is a string that 
+represents the name of a property in the property map. The value is the contents 
+of that property. A property map uses the string&nbsp;that makes up the key, 
+instead of an index number, to access the value of each property.</P>
+<P>To run this example: There are several objects and methods that you must create before running the code. You can create the ones suggested here or use those of your own choosing.
+<ul><li type="disc">PhoneKiosk: An object in your world that has one method, the TransferMethod. This is the object that the <b>Confirm</b> method will notify when the dialog box is closed. 
+ 
+<li>TransferMethod: A server-side method with one implicit argument that passes the PhoneMap object pointer to the <EM>varNotifyMethod</EM> parameter. This method is invoked by the PhoneKiosk object when the dialog box is closed.</li></ul>
+
+<p>The fifth parameter, 
+"myPhoneMap", is copied to the calling avatar's <b>QueryParam</b> property.
+
+<p class="comments">'Create 
+a simple property map with the avatar names as <br>
+'the keys and the phone numbers as the values of the <br>
+'properties.
+<pre class="example">
+Sub SendConfirm()
+Dim myPhoneMap
+Dim myAvatarEve
+</pre>
+<p class="comments">'Set a reference to the avatar.
+<pre class="example">
+Set myAvatarEve = User.Container.FindWithin("Eve")
+</pre>
+<p class="comments">'Create a property map.
+<pre class="example">
+Set myPhoneMap = CreatePropertyMap
+</pre>
+<p class="comments">'Add properties to the property map.
+<pre class="example">
+PhoneMap.Property("Erik") = "555-1234"
+PhoneMap.Property("Samantha") = "555-2468"
+</pre>
+<p class="comments">'Display a <b>Confirm</b> dialog box to Eve. <br>
+'When Eve closes the dialog box, the "myPhoneMap" property map <br>
+'is transferred to the <b>QueryParam</b> property of Eve's avatar. 
+<pre class="example">
+myAvatarEve.<b>Confirm "Phone Numbers", "Transfer?", PhoneKiosk, _
+&nbsp;&nbsp;&nbsp;&nbsp;"TransferMethod", myPhoneMap</b>
+
+End Sub
+</pre>
+<p>
+Example 3
+<p>This example iterates through the properties that were passed to the <b>QueryParam</b> property of the specified avatar by Example 2.</p>
+<pre class="example">
+Sub IterateQueryParams()
+Dim myQueryParams
+Dim myQP
+Dim myAvatarEve
+
+Set myAvatarEve = User.Container.FindWithin("Eve")
+Set myQueryParams = myAvatarEve.QueryParam
+
+For Each myQP In myQueryParams
+&nbsp;&nbsp;&nbsp;&nbsp;Print myQueryParams.Property(myQP)
+Next
+End Sub</pre>
+ 
+
+</body>
+</html>

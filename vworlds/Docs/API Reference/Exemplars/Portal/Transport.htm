@@ -1,0 +1,95 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Transport</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Transport</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Portal Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Moves a <b>Thing</b> object through a source 
+<b>Portal</b> to a destination <b>Portal</b>. <b>Transport</b> 
+is a member of the <b>Portal</b> exemplar. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Transport</b>&nbsp;<i>pthing</i>&nbsp;[,&nbsp;<i>iIndex</i>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Transport</b>  method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Portal</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Portal</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pthing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object to send through the portal.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[iIndex]</td>
+		<td>Integer</td>
+		<td>Optional</td>
+		<td>The index of the destination to send the SentObject.</td>
+	</TR>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The Thing represented by <i>SentObject</i> is moved to the portal numbered 
+by <i>iIndex</i> in the portal's <a href="Destinations.htm">Destinations</a> property list. 
+<i>iIndex</i> is optional; if omitted, <i>SentObject</i> will be sent to 
+the first portal in the list.</P>
+<P>If you find that the object you are trying to transport is not actually being 
+transported, it may be that <b>Destinations</b> is failing during 
+server processing. In such circumstances, it is useful to check the server trace 
+window. For more information on server trace messages, see the <b>Virtual Worlds Server Application</b> topic.&nbsp;
+
+<!--Example section--></P>
+<H3>Example</H3>
+<p><pre>MyPortal.Transport ThingObject</pre>
+&nbsp;
+
+
+</body>
+</html>

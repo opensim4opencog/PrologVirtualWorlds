@@ -1,0 +1,120 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Wear</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Wear</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Avatar Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Displays the specified accessory on the image of an 
+avatar. In a virtual world, an accessory graphic appears as an object that can 
+be worn or held by an avatar. You use the <A href="../Artifact/IsAccessory.htm">IsAccessory</A> property of the <A href="../Artifact/Artifact.htm">Artifact</A> object to create an 
+accessory.&nbsp;<STRONG>Wear</STRONG> is a member of the <A href="Avatar.htm">Avatar</A> 
+exemplar.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>Wear</STRONG>&nbsp;<EM>pThing</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>Wear</STRONG> method syntax has these parts: 
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->Avatar</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An 
+      object reference that accesses an&nbsp;<STRONG>Avatar</STRONG> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pThing</td>
+		<td><!--Parameter name--</td>>
+		<td><!--Type-->Thing</td>
+		<td><!--Description-->Required</td>		<td><!--Description--> 
+      An expression that&nbsp;evaluates to a&nbsp;<STRONG>Thing</STRONG> object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section --></P>
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->An 
+avatar can "wear" an accessory&nbsp;only if the following three 
+conditions apply:&nbsp; 
+<P><ul>
+  <li>The object referenced by the <EM>pthing</EM> 
+  parameter&nbsp;exists in the avatar's inventory. 
+  <li>   The object referenced by the <EM>pthing</EM> 
+  parameter's <strong><A  href="../Artifact/IsAccessory.htm">IsAccessory</A></strong> property 
+  is set to <STRONG>True</STRONG>.
+  <li>The object referenced by the <EM>pthing</EM> 
+  parameter is not currently being worn.</li>
+</ul>
+<P>The major differences between an artifact and 
+an accessory&nbsp;are that the object intended to be the accessory must have the 
+<STRONG>IsAccessory</STRONG> property set to <STRONG>True</STRONG>    and the 
+<A href="../Artifact/AccessoryGraphic.htm">AccessoryGraphic</A> 
+property&nbsp;must be set to the image file for the accessory.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>
+This example shows you how to create an artifact and add 
+an accessory graphic to the artifact. You must either create 
+a StrawHat.gif and modify the URL to match its location, or substitute an image of your choice.</p>
+
+<pre class="example">Sub CreateHat()
+Dim StrawHat
+Dim ImageForHat</pre>
+
+<p class = "comments">'Create an artifact.
+<pre class = "example">Set StrawHat = CreateInstance("Straw Hat", "Artifact", User.Container)
+StrawHat.IsAccessory = True
+</pre>
+<p class = "comments">
+'Get the image.
+<pre class = "example">StrawHat.AccessoryGraphic = _
+&nbsp;&nbsp;&nbsp;&nbsp;"http://Webs/Scripts/Images/StrawHat.gif"</pre>
+<p class = "comments">'Wear the artifact.
+<pre class = "example">User.<b>Wear StrawHat</b>
+
+End Sub</pre>
+</body>
+</html>

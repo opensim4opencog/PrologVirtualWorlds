@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>ApproachDistance</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ApproachDistance</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Float</b> that specifies the approximate 
+distance between an approaching object and its destination object at the end of an approach. 
+<b>ApproachDistance</b> is a read/write <b>Float</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>ApproachDistance</b> = <i>floatValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>ApproachDistance</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">floatValue</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Float</b>.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>A destination object's <b>ApproachDistance</b> property defines a 
+circle centered on the object, and with a radius equal to this property's 
+value. An approaching object ends up at some point in a <i>second</i> circle 
+whose center lies on the circle determined by <b>ApproachDistance</b>. </p>
+
+<p><img src="../../Images/ApproachDistance.GIF" width=205 height=228 alt="" border="0">
+<p>The default value for this property is 4.0 units.</p>
+
+<p>The <a href="Approach.htm">Approach</a> method of <b>Thing</b> uses three 
+properties to determine the final position of an object when it approaches a 
+destination object: <b>ApproachDistance</b>,
+<a href="ApproachToFront.htm">ApproachToFront</a>, and
+<a href="ApproachRadius.htm">ApproachRadius</a>.  For a complete discussion 
+of all three properties, see <a href="Approach.htm">Approach</a>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get this property:</p>
+
+<pre>   Dist = AThing.ApproachDistance</pre>
+
+<p>To set this property:</p>
+
+<pre>   AThing.ApproachDistance = 3.0</pre>&nbsp;
+ 
+
+</body>
+</html>

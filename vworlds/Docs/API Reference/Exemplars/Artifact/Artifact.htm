@@ -1,0 +1,84 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Artifact</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Artifact</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Exemplar</P></td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P class=body>    
+   An artifact can be any object in 
+a <A href="../Room/Room.htm">Room</A>, such as a 
+table, chair, picture, tree, house, and so on. Artifacts can be classified into two types:&nbsp;A&nbsp;regular 
+artifact, such as a chair,&nbsp;or an artifact that&nbsp;can be worn as an accessory. 
+<H3> Creating Artifacts</H3>
+<p>         
+            
+        If you want to         
+            
+        create an artifact that is a chair,&nbsp;you use 
+the <A href="../../world/createinstance.htm">CreateInstance</A> method as shown in the following code.
+<blockquote><PRE>Set myChair = World.<b>CreateInstance("Chair", "Artifact", _
+&nbsp;&nbsp;User.Container)</b></PRE></blockquote>
+
+<P>After you have created the chair, you must specify the graphic you want 
+to display for that  artifact.
+<p><b>Note:</b>&nbsp;&nbsp;&nbsp;The following URL for "myGraphic" may wrap, depending on the settings for your browser, but it is one continuous line of code.</p>   
+<blockquote><PRE>Dim myGraphic
+
+myGraphic = _
+"file://C:\Program Files\Microsoft Virtual Worlds\Local 
+Content\SDK\Library\Models\Furniture\Chair1.x"
+
+myChair.GeometryName = myGraphic
+myChair.Position = 1, 0, 0
+</PRE>  
+</blockquote><PRE></PRE> 
+<p>Virtual Worlds stores the models for the graphics in the 
+Microsoft Virtual Worlds\Local Content\SDK\Library\Models folder. However, you 
+can use any graphic as long as you specify the complete URL.
+
+<H4>Creating Accessories from Artifacts</H4>
+<P>      
+ The second type of      
+ artifact available in Virtual      
+ Worlds is an accessory, which is an artifact that can be worn and has its 
+<A href="IsAccessory.htm">IsAccessory</A> property set to <b>True</b>. You can create articles of clothing, such as a hat, for 
+your avatar by making your artifact an accessory. The following code statement assumes that you have created an artifact named "StrawHat".
+<blockquote>
+<p class="comments">'After this statement executes, "StrawHat" will be an accessory.
+<pre class="example">StrawHat.<b>IsAccessory</b> = True</pre></blockquote>
+<P>After&nbsp;you have created an accessory item, you can use the <A href="../Avatar/Wear.htm">Wear</A> and <A href="../Avatar/UnWear.htm">UnWear</A> 
+methods of the 
+avatar to add or remove accessories from your avatar, as shown in the following 
+statement.
+<blockquote>
+<p class="comments"> 'This statement adds the accessory to an avatar.
+<pre class="example">User.<STRONG>Wear StrawHat</STRONG></pre></blockquote>
+<blockquote>
+<p class="comments"> 'This statement removes the accessory from an avatar.
+<pre class="example">User.<STRONG>UnWear StrawHat</STRONG></pre></blockquote>
+<p>To display a specific image for your accessory, you can 
+use the <A href="AccessoryGraphic.htm">AccessoryGraphic</A> property as shown in the following 
+statement. 
+<blockquote>
+<p class="comments">  'Display the specified image as the accessory.
+<pre class="example">StrawHat.<b>AccessoryGraphic</b> = _
+    "http://Webs/Scripts/Images/StrawHat.gif"</pre></blockquote>
+ 
+
+</BODY>
+</html>

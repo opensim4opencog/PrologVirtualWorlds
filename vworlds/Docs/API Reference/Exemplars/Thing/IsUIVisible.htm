@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>IsUIVisible</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsUIVisible</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Boolean</b> flag that is used by the sample clients to indicate whether to display the object in a room
+or inventory contents list. <b>IsUIVisible</b> is a read/write <b>Boolean</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsUIVisible</b>&nbsp;=&nbsp;<i>booleanValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>IsUIVisible</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a Thing object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">booleanValue</td>
+		<td>Boolean</td>
+		<td>Required</td>
+		<td>True is the object can be displayed.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+
+<H3>Example</H3>
+<p>To get this property:</p>
+
+<pre>   ShowFlag = MyThing.IsUIVisible</pre>
+
+<p>To set this property:</p>
+
+<pre>   MyThing.IsUIVisible = True</pre>&nbsp;
+ 
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>SetState</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetState</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the StateMachine Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Set the state of the default state machine (<i>Default</i>) to a particular state.
+<b>SetState</b> is a member of the <b>StateMachine</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetState</b>&nbsp;<i>bstrState</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetState</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>StateMachine</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>StateMachine</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrState</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the state.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method sets the default state machine (<i>Default</i>) to a different state (<i>bstrState</i>);
+it can be run from either the server or the client. It can be used to set the initial
+state of a state machine, and is often used to set a new state in a user-written inline
+event handler such as <i>OnTimeOut</i> or <i>OnEnterState</i>. </p>
+
+<p>To set the state of an internal state machine other than <i>Default</i>, use the
+<a href="SetStateMachineState.htm">SetStateMachineState</a> method of <b>StateMachine</b>.
+</p>
+
+<p>To find an internal state machine's current state, use the <a href="../../World/Trace.htm">Trace</a> 
+method of <b>World</b> and pass it the name of the state machine object and the internal state machine 
+for which you want to find the state.&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyStateMachine.SetState &quot;TurnLeft&quot;</pre>
+
+
+
+</body>
+</html>

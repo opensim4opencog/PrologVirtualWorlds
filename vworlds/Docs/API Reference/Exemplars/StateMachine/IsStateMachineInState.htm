@@ -1,0 +1,99 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>IsStateMachineInState</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsStateMachineInState</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the StateMachine Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Find whether the specified state machine is in the specified
+state. <b>IsStateMachineInState</b> is a member of the <b>StateMachine</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsStateMachineInState</b>&nbsp;(<i>bstrStateMachineName</i>, 
+		<i>bstrState</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>IsStateMachineInState</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>StateMachine</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>StateMachine</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrStateMachineName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the state machine.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrState</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The state of the state machine.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Boolean</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method executes on either the client or the server.</p>
+
+<p>To find a state machine's current state, use the 
+<a href="../../World/Trace.htm">Trace</a> method of <b>World</b>,
+and pass it the name of the state machine object and the internal
+state machine for which you want to find the state. </p>
+
+<p>A related method of <b>StateMachine</b>, <a href="IsInState.htm">IsInState</a>, 
+is intended for use on the <i>Default</i> state machine.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>inState = MyStateMachine.IsStateMachineInState(&quot;State1&quot;, &quot;Waiting&quot;)</pre>
+
+
+
+</body>
+</html>

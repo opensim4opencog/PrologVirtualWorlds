@@ -1,0 +1,89 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Report</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Report</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Causes a string to be reported. <b>Report</b> is a member of 
+the <b>Thing</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Report</b>&nbsp;<i>bstrReport</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Report</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrReport</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The text to report.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method reports the string to every object in the calling
+object's container with an <b>OnTell</b> event. Reports
+are typically used to provide low-priority user interface
+feedback. Note that <b>Report</b> runs only on the client; only
+the user of the client on which it is called will ever see
+reported text when this method runs.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyThing.Report &quot;Error!&quot;</pre>
+&nbsp;
+
+
+</body>
+</html>

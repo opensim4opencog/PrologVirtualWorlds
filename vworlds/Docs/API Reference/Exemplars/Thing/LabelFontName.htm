@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>LabelFontName</title>
+</head>
+
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>LabelFontName</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Sets or returns the font for the <A href="Label.htm">Label</a> of a <A href="Thing.htm">Thing</A> 
+object. <b>LabelFontName</b> is a read/write <b>String</b>.      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><em>object</em>.<b>LabelFontName</b> = <em>stringValue</em></td></TD>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>LabelFontName</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td><!--Description-->An 
+      instance of the <b>Thing</b> exemplar.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">stringValue</td>
+		<td>String</td>
+		<td>Required</td>
+		<td><!--Description-->Any valid font expressed as a string.</td>
+	</TR>
+
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+The default setting of the <b>LabelFontName</b> property is Arial.
+<p>The <b>LabelFontName</b> property 
+derives a list of valid fonts from the list of fonts installed in your Windows folder. To add a font to this list, follow the instructions in the Windows 98 Help system under the heading, "To add a new font to your computer."
+<P>If an invalid font is assigned to the <b>LabelFontName </b>property, the font displayed in the 3-D view is undefined, but the name in the <b>LabelFontName</b> property is listed as the last string assigned to it. For example, if you wanted to change the font to Courier and you misspelled it "Dourier," the font displayed in the 3-D view would default an undefined font. However, if you used the 
+<b>Trace </b>or <b>Print </b>method to display the current <b>LabelFontName </b>property setting, it would return "Dourier" in the Command Window.
+<H3>Example</H3>
+<p>This example gives an object a <b>Label</b> and then changes the font. In this example, "strName" equals "Bob", "strLabel" equals "Bob's Label", and "strFont" equals "Helvetica".
+<br><br>
+<pre class="example">
+Sub MyLabelFont(strName, strLabel, strFont)
+Dim MyLamp
+Dim OldFont</pre>
+<p class=comments>'Acquire a reference to the object named "Bob".
+<pre class="example">Set MyLamp = User.Container.FindWithin(strName)</pre>
+
+<p class=comments>'Provide a label for the object that says, "Bob's Label".
+<pre class="example">MyLamp.Label = strLabel</pre>
+
+<p class=comments>'Print the name of the previous font to the Command Window.
+<pre class="example">Set OldFont = MyLamp.<b>LabelFontName</b>
+Print "The previous font was: " &amp; OldFont</pre>
+
+<p class=comments>'Change the font.
+<pre class="example">MyLamp.<b>LabelFontName</b> = strFont</pre>
+
+<p class=comments>'Print the new font in the Command Window.
+<pre class="example">Print "The new font is: " &amp; MyLamp.<b>LabelFontName</b>
+
+End Sub
+</pre>
+
+
+</body>
+</html>

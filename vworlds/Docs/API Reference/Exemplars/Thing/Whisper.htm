@@ -1,0 +1,95 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Whisper</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Whisper</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sends a whisper message to an object or list of objects. 
+<b>Whisper</b> is a member of the <b>Thing</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Whisper</b>&nbsp;<i>strText</i>&nbsp;[,&nbsp;<i>userOrList</i>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Whisper</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">strText</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The text to whisper.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[userOrList]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The target or targets to whisper to.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>You can set an individual target by assigning a <b>Thing</b>
+to <i>TheTarget</i>; to set more than one target, use a <b>PropertyList</b>.</p>
+
+<p>Other objects in the room will be notified that the current
+object is whispering, but will not hear what is said.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>Set MyThing = World.CreateInstance(&quot;MyThing&quot;, &quot;Thing&quot;, User.Container)
+MyThing.<b>Whisper "TheText", User</b></pre>
+&nbsp;
+
+
+</body>
+</html>

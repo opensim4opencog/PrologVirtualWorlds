@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>IsSolid</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsSolid</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Boolean</b> flag indicating whether the object has an impassable
+boundary. <b>IsSolid</b> is a read/write <b>Boolean</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Property</b>&nbsp;=&nbsp;<i>booleanValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>IsSolid</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">booleanValue</td>
+		<td>Boolean</td>
+		<td>Required</td>
+		<td>True is the object has a boundary.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Setting this property to <strong>True</strong> triggers the 
+<a href="../../Events/OnIsSolidChanged.htm">OnIsSolidChanged</a> 
+event handler, thereby creating a simple, hexagonal, impassable 
+<a href="../../Boundary/Boundary.htm">Boundary</a>
+around the <b>Thing</b> based on the size of its geometry. Setting this property
+to <b>False</b> triggers the same event; in this case, it removes the boundary
+that was previously created.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get this property:</p>
+
+<pre>   ImpassableFlag = MyThing.IsSolid</pre>
+
+<p>To set this property:</p>
+
+<pre>   MyThing.IsSolid = True</pre>&nbsp;
+
+
+</body>
+</html>

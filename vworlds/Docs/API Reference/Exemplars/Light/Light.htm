@@ -1,0 +1,51 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Light</title>
+</head>
+
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> Light</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Exemplar</P></td>
+	</tr>
+</table><!--Topic Definition-->
+<P class=body><!--How-to section -->
+<H3> The Light Exemplar</H3>
+
+<p><b>Light</b> objects are a powerful feature of Microsoft Virtual Worlds. They mimic the behavior of natural light, providing a much more realistic and visually appealing 3-dimensional space. The effects of <b>Light</b> objects are rendered on other objects that have their <A href="../Thing/RenderQuality.htm">RenderQuality</A> property set to 3 or above. All&nbsp;<STRONG>Light</STRONG> objects&nbsp;are instances of the&nbsp; <b>Light</b> exemplar which inherits from the <A href="../Thing/Thing.htm">Thing</A> exemplar. <!--See also section-->
+
+<H3>Combining Lights</H3>
+<P>The technical accuracy of <b>Light</b> objects in Virtual Worlds can make it very easy to "overlight" areas of a world when using multiple instances of the <b>Light</b> exemplar. The effects of numerous lights that share the same rendered 
+space are cumulative, so combined colors of light can produce unexpected results. The following example illustrates the potential confusion of combining too many lights in a space.
+
+<P>Light A is set to 100 percent Red (1,0,0).
+
+<P>Light B is set to 100 percent Green (0,1,0).
+
+<P>Light C is set to 100 percent Blue (0,0,1).
+
+<P>All three lights separately illuminate objects within their scope at their full normalized value. That is, an object within the scope of Light A reflects 100 percent red, an object within the scope of Light B reflects 100 percent blue, and so on. If an object were illuminated by all three lights at once, it would reflect 100 percent red, 100 percent green, and 100 percent blue. The combination of each of these colors in equal value produces white light. 
+
+<H3>Distance and Fall-Off Rates</H3>
+<P>In addition, <b>Light</b> objects take into account distance and fall-off rates using the mathematical principles of physics as they relate to the behavior of natural light. Continuing with the illustration above, if the illuminated object is a sphere, the area of the sphere that directly faces the three lights would be rendered white, but as the light "falls off" the curvature of the sphere, the color percentages change depending on the position and distance of the light objects in relation to the illuminated object.
+<H3>Hiding Lights</H3>
+<P><b>Light</b> objects themselves do not have to be visible to have their effects rendered on other objects. During designtime, it is useful to be able to see them in the 3-D view, but when the design is complete, the objects may be "hidden" by changing their <A href="../Thing/IsVisible.htm">IsVisible</A> property to <b>False</b>. This makes it possible to make other objects appear to glow, when they are actually being illuminated by a fully controllable external light source.
+<br><br>
+<P>As in the real world, <b>Light</b> objects behave differently when rendered on different textures. 
+
+
+<P><b>Tip</b>:&nbsp;&nbsp;&nbsp;A good 
+way to test the brightness of a light is to set its <b>LightType</b> property to&nbsp;0 
+(ambient). This setting eliminates attenuation, which specifies how light 
+changes over distance.&nbsp;</P>
+
+
+</BODY>
+</html>

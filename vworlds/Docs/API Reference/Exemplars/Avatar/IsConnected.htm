@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>IsConnected</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsConnected</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Avatar Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>
+Returns the state of a connection to a virtual 
+world. Returns <STRONG>True</STRONG> if the&nbsp;specified avatar is connected. 
+<b>IsConnected</b> is a read-only <b>Boolean</b>.&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--syntax statement --><EM>object</EM>.<b>IsConnected</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>IsConnected</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Object</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description--> 
+       An&nbsp;object reference to an <b>Avatar</b> object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->If 
+the invoking <B>Avatar</B> object is currently connected to the world, this 
+property is <B>True</B>. If the invoking <B>Avatar</B> object is not currently 
+connnected, this property does not exist for that <b>Avatar</b> object. 
+Before querying this property for other avatars in your world, check first to see 
+whether the property exists by using the <A 
+href="../../Thing/IsValidProperty.htm"><B>IsValidProperty</B></A> method of the 
+<B>Thing</B>&nbsp;object.
+
+<!--Example section-->
+<H3>Examples</H3>
+<p>
+The first example checks for the existence of the <b>IsConnected</b> property for 
+the specified avatar. If the property exists, then the avatar is connected to the 
+world; if not, the property does not exist.</p>
+<PRE class="example">
+Sub IsUserConnected()
+Dim myAvatar
+
+Set myAvatar = User.Container.FindWithin("Eve")
+
+If myAvatar.IsValidProperty("IsConnected") Then
+   Print myAvatar.<b>IsConnected</b>
+Else
+   Print myAvatar.Name &amp; " is not connected."
+End If 
+</PRE>
+<p>Example 2
+<p>You can also use the following statement to return the connected state of an avatar.</p>
+<pre class="example">
+Print User.<b>IsConnected</b>
+<!--Example text-->&nbsp;
+</pre>
+ 
+
+</body>
+</html>

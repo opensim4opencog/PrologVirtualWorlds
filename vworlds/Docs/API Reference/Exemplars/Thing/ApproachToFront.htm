@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>ApproachToFront</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ApproachToFront</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Boolean</b> flag indicating whether an object should be approached from
+its front. <b>ApproachToFront</b> is a read/write <b>Boolean</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>ApproachToFront</b> = BooleanValue</td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>ApproachToFront</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">BooleanValue</td>
+		<td>Boolean</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Boolean</b>. The default value for this property is <b>True</b>.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This property is used by the <a href="Approach.htm">Approach</a> method of 
+<b>Thing</b>. Its value determines whether an approaching object stops directly 
+in front of the destination object, or at some other point.</p>
+
+<p>If the destination object's <b>ApproachToFront</b> property is <b>True</b>,
+the approaching object stops at a randomly chosen point in front of the destination.  
+More precisely, the approaching object stops at a point inside a circle whose center 
+is directly in front of the destination object.</p>
+
+<p>If the destination object's <b>ApproachToFront</b> property is <b>False</b>, the
+approaching object stops at an randomly chosen point near the destination object.  See the
+<a href="Approach.htm">Approach</a> topic for more information.</p>
+
+<p><img src="../../Images/approach.gif" width=388 height=228 alt="" border="0">
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get this property:</p>
+
+<pre>   ToFront = TheObject.ApproachToFront</pre>
+
+<p>To set this property:</p>
+
+<pre>   TheObject.ApproachToFront = False</pre>&nbsp;
+
+
+</body>
+</html>

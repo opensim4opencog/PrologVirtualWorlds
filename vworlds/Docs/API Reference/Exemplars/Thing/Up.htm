@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Up</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Up</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p> Specifies the direction that represents the object's 
+subjective "up." From the current orientation in the 
+world, "up" represents a positive y-coordinate value. 
+<b>Up</b> is a read/write <A 
+href="../../Vector/Vector.htm">Vector</A>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Up</b>&nbsp;=&nbsp;<i>VectorValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<p>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><I>object</I>.<B>Up</B></TD></TR></TABLE>
+<P>The <b>Up</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">VectorValue</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>The vector that represents the "up" direction (0, 1 0).</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Up</b> property consists of 
+a vector that describes the orientation of the top of the object. The vector 
+originates at the center of the object and points through the top of the object. 
+The default vector for the <B>Up</B> property is (0, 1, 0), which orients an 
+object in an upright position in the world. The vector for the 
+<STRONG>Up</STRONG> property is projected onto a plane perpendicular to the 
+vector for the <A href="Direction.htm">Direction</A>&nbsp;property, effectively 
+limiting the vector for the <STRONG>Up</STRONG>        property to
+two degrees: up or down.</P>
+
+<p>The&nbsp;<STRONG>Direction</STRONG> and <b>Up</b> properties together
+determine the rotation of the object. </p>
+
+<p>The <A href="../../Vector/Vector.htm">Vector</A>&nbsp;topic has detailed 
+information about the way vectors work in Microsoft Virtual Worlds. 
+<P><STRONG>Important:</STRONG>&nbsp;&nbsp;&nbsp;Do not set the 
+<STRONG>Up</STRONG> vector to 0, 0, 0.&nbsp;This causes D3D problems. Also, 
+never set the <STRONG>Direction</STRONG> and <STRONG>Up</STRONG> vectors to the 
+same values.
+<H3>Example</H3>
+<P><FONT class=body>This example demonstrates&nbsp;the use of the <b>Up</b> 
+    property.</FONT></P>
+<pre class="example">Dim myVector</pre>
+<P class="comments">
+'Create a  vector to establish coordinates for <EM>x, y,</EM> and <EM>z</EM>.<br>
+'Retrieve the y-coordinate.
+<pre class="example">
+Set myVector = CreateVector(10, 5, 3)
+Trace myVector.y
+</pre>
+<p class="comments">'Establish the y-coordinates independently of a vector object.
+<pre class="example">
+Dim myChair
+
+Set myChair = User.Container.FindWithin("Chair")
+
+myChair.Direction.y = 2
+myChair.Position.y = 4
+myChair.RotationAxis.y = 1
+myChair.<STRONG>Up</STRONG>.y = 0.15
+</pre>
+<p class="comments">'This next code block retrieves the 
+values for the <br>'x-coordinate independently of a vector object.
+<pre class="example">
+Dim myChairY
+
+Trace myChair.Scale.y
+Trace myChair.<STRONG>Up</STRONG>.y
+myChairY = myChair.Position.y
+</pre>
+
+
+</body>
+</html>

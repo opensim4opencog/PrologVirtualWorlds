@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>BackgroundColor</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>BackgroundColor</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Room Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Variant</b> specifying the RGB value for the background color of a <a href="Room.htm">Room</a> object.
+<b>BackgroundColor</b> is a read/write <b>Long</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+
+<p>To set this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>BackgroundColor = longValue</b></td>
+	</tr>
+</table>
+<p>To return this property:</p>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>BackgroundColor</b></td>
+	</tr>
+</table>
+<!--Parameters table-->
+<p>The <b>BackgroundColor</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Room</td>
+		<td>Required</td>
+		<td>An object reference that evaluates to a <b>Room</b>.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">longValue</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a valid color value (See remarks).</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Changing the background color of a room does not change the colors of objects
+in the room, including walls.  This property represents the color you would see in the
+graphical view window at a point beyond the room's walls.  Possible values for each primary
+color component range from 0 to 255 decimal, or &amp;H00 to &amp;HFF hexadecimal.
+RGB values are calculated by concatenating the three component values (expressed in hexadecimal),
+then treating the entire string as a hexadecimal number. For instance, &amp;HFF0000 is primary red,
+&amp;H00FF00 is primary green, and &amp;H0000FF is primary blue. (Since pure white is an equal
+mixture of all three primary colors, it is represented by &amp;HFFFFFF, and pure black is represented
+by &amp;H000000.)</p>
+
+<p>You should not use the Visual Basic Script <tt>RGB</tt> function to calculate RGB
+values by itself, because Visual Basic Script's scheme is the opposite of the one used in
+Virtual Worlds. For example, &amp;HFF0000 is primary red in Virtual Worlds, but primary
+blue in Visual Basic Script. Note, however, that hexadecimal numbers can be represented
+directly in Visual Basic Script by prepending '&amp;H' as in the examples below.
+&nbsp;
+
+<!--Example section-->
+
+
+</body>
+</html>
