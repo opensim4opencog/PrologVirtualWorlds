@@ -59,7 +59,7 @@ moduleEnsureLoaded(X):-
 callIfPlatformWin32(G):-prolog_flag(windows,true),!,ignore(G).
 callIfPlatformWin32(G):-!.
 
-callIfPlatformUnix(G):-not(prolog_flag(windows,true)),!,ignore(G).
+callIfPlatformUnix(G):- \+ (prolog_flag(windows,true)),!,ignore(G).
 callIfPlatformUnix(G):-!.
 
 /*
@@ -180,12 +180,105 @@ createJamud:-
 	 
 
 loadJamudReferences:-
-	 jamud_object(JAMUD),
+               jamud_object(JAMUD),
 	 java_invoke_method(JAMUD,getJamudInstance(Instance)),
 	 java_invoke_method(JAMUD,getJamudMudObjectRoot(MudRoot)),!,
 	 assert(jamud_instance(Instance)),
 	 assert(jamud_root(MudRoot)),
-	 writeFmt('Jamud started\n').
+	 showInstanceValue(MudRoot).
+	 
+showInstanceValue(Object):-
+   getJavatypeValueFn(Object,Name,ActualName,Value),
+   format('\n ~q \n',[equal('JavaMemberFn'('JavaObjectFn'(Object),Name),Value)]),
+   fail.
+showInstanceValue(Object):-
+   inferJavatypeMemberFnTuples(Term),
+   format('\n~q\n',[Term]),
+   fail.
+
+showInstanceValue(Object):-!.
+
+:-dynamic(classToPLStructure/2).
+
+java_classToPLStructure(Object,Term):-
+	 nonvar(Object),classToPLStructure(Object,Term),!.
+
+java_classToPLStructure(Object,Term):-
+      jamud_object(JAMUD),
+      java_invoke_method(JAMUD,classToPLStructure(Object,Term)),!,
+      assert(classToPLStructure(Object,Term)).
+
+getInstanceValue(Object,ActualName,Value):-
+      getInstanceValue(Object,Name,ActualName,Value),!.
+getInstanceValue(Object,Name,Value):-
+      getInstanceValue(Object,Name,ActualName,Value),!.
+
+getInstanceValue(Object,Name,ActualName,Value):-
+      getInstanceValue(Object,Name,ActualName,Value,Type).
+
+:-dynamic(java_object_known/1).
+
+inferJavatypeMemberFnTuples(equal('JavaMemberFn'('JavaObjectFn'(Object),Name),Result)):-
+      java_object(Object),java_object_known(Object),
+      getJavatypeValueFn(Object,Name,ActualName,Result).
+
+getJavatypeValueFn(Object,ActualName,Value):-
+      getJavatypeValueFn(Object,Name,ActualName,Value),!.
+getJavatypeValueFn(Object,Name,Value):-
+      getJavatypeValueFn(Object,Name,ActualName,Value),!.
+getJavatypeValueFn(Object,Name,ActualName,'JavaValueFn'(Type,Value)):-
+      getInstanceValue(Object,Name,ActualName,Value,Type).
+
+
+getInstanceValue(Object,Name,ActualName,Value,Type):-
+      java_classToPLStructure(Object,Term),
+      get_call_term_from_class(Object,Term,Name,Value,Type,ActualName,CallTerm),
+      catch(CallTerm,E,format('\nAttempting "~q" resulted in ~q\n',[CallTerm,E])).
+
+get_call_term_from_class(Object,Term,Name,Value,Type,Name,java_get_value(Object,MethodCall)):-
+      catch(arg(1,Term,Arg1),_,fail),
+      arg(1,Arg1,FieldsList),
+      member(Field,FieldsList),
+      functor(Field,ActualName,1),
+      arg(1,Field,Type),
+      MethodCall=..[Name,Value].
+
+get_call_term_from_class(Object,Term,Name,Value,Type,ActualName,java_invoke_method(Object,MethodCall)):-
+      catch(arg(2,Term,Arg1),_,fail),
+      arg(1,Arg1,MethodsList),
+      member(Method,MethodsList),
+      functor(Method,ActualName,MA),
+      arg(MA,Method,Type),
+      match_method(MethodsList,Method,ActualName,MA,Name,Value,MethodCall).
+
+match_method(MethodsList,Method,ActualName,MA,Name,Value,MethodCall):-
+      var(Name),
+      % Make sure we don't walk blindly into some side-effect method when the Name is a variable
+      member(Lead,['load','save','set','add','wait','equals','toString',
+	 'unload','create','destroy','kill','stop','terminate','final','write','print','append',
+	 ('['),('_'),('(') ]),atom_concat(Lead,_,ActualName),!,fail.
+      
+% Not that zero length happens but just incase fail. 
+match_method(MethodsList,Method,ActualName,0,Name,Value,MethodCall):-!,fail.
+
+% Explore Simple No parameter methods
+match_method(MethodsList,Method,ActualName,1,Name,Value,MethodCall):-!,
+           % Look for an identical match
+      ((Name == ActualName) ;
+           % Or no match, guess what was wanted by prepending 'get' or 'to'
+      ((atom_concat('get',Name,ActualName);atom_concat('to',Name,ActualName)),
+   	   % If we did a prepend, confirm that the Name was not already in list 
+	 \+ (member(Term,MethodsList),functor(Term,Name,_)))),!,
+      MethodCall=..[ActualName,Value].
+
+% Explore Explicitly called 
+match_method(MethodsList,Method,ActualName,MA,Name,Value,MethodCall):-
+      nonvar(Name),functor(Name,ActualName,TA),
+      Name =.. [ActualName|Rest],!,
+      ((TA is MA -1 , Left= Rest);append(Left,[_],Rest)),!,
+      append(Left,[Value],NewRest),!,MethodCall =.. [F|NewRest].
+
+
 
 startLogicMoo:-
 	 startJava,
