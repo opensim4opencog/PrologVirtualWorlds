@@ -92,7 +92,7 @@ public class JavaRt extends Thread {
 		}
 
 		Array.set(stringClassArrayOfOne,0,stringClass);
-		debug=0;
+		debug=5;
 		allObjects = new HashMap();
 		allObjects.put("oJavaRt",new JavaRt());                
 		allObjects.put("oSystem",System.class);                
@@ -212,16 +212,15 @@ public class JavaRt extends Thread {
 	}
 
 	public synchronized static Object[] argsToObjectVector(Object[] args) {
-		int len = Integer.parseInt((String) args[0]);
-		if ( debug >1 )	System.err.println("argsToObjectVector Len=" + (len));
+		
+	    int len = args.length;
 
-		Object toReturnObjects[]=new Object[len];
+	    Object toReturnObjects[]=new Object[len];
 		int source = 0;
-		for ( int target = 0 ; target < len ; target++ ) {
-			source ++;
-			toReturnObjects[target ]=argToObject( (Object) args[ source ]);
+		for ( int i = 0 ; i < len ; i++ ) {
+			toReturnObjects[i ]=argToObject( (Object) args[ i ]);
 			if ( debug >1 )
-				System.err.println("Arg" + target + "=\"" + args[source] + "\" -> " + toReturnObjects[target].toString());
+				System.err.println("Arg" + i + "=\"" + args[i] + "\" -> " + toReturnObjects[i].toString());
 		}
 		return toReturnObjects;
 	}                     
@@ -271,7 +270,7 @@ public class JavaRt extends Thread {
 
 	public synchronized static String objectToProlog(Object obj ) {
 		if ( obj==null ) return "void";
-		if ( obj.getClass().isPrimitive() )		return obj.toString();
+		if ( obj.getClass().isPrimitive() )    return obj.toString();
 		try {
 			if ( obj.getClass().getDeclaredMethod("toString",null)!=null ) return obj.toString();
 		} catch ( NoSuchMethodException e ) {
@@ -442,7 +441,7 @@ public class JavaRt extends Thread {
 
 	/* Return public synchronized instance name (HashCode)*/
 	public synchronized static String nameForInstance(Object innerInstance) {
-		return "'$java_instance'(o" +innerInstance.hashCode() + "," + toScriptingName(innerInstance.getClass().getName()) +"('" + innerInstance.toString() + "'))";
+		return "'$java_instance'(" +innerInstance.hashCode() + "," + toScriptingName(innerInstance.getClass().getName()) +"('" + innerInstance.toString() + "'))";
 	}
 
 
