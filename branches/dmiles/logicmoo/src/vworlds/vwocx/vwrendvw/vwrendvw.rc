@@ -1,0 +1,507 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "vwrendvw.rc2"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""vwrendvw.rc2""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""VWRendVw.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_VWRENDERVIEW        BITMAP  DISCARDABLE     "VWRnVwCt.bmp"
+IDB_GEOMBAR             BITMAP  DISCARDABLE     "geombar.bmp"
+ZOOMOUTX                BITMAP  DISCARDABLE     "zoomoutx.bmp"
+GRAVITYTOGGLEU          BITMAP  DISCARDABLE     "GravTogu.bmp"
+NAVIGATED               BITMAP  DISCARDABLE     "navigatd.bmp"
+REDOU                   BITMAP  DISCARDABLE     "redou.bmp"
+REDOX                   BITMAP  DISCARDABLE     "redox.bmp"
+ROTATEU                 BITMAP  DISCARDABLE     "rotateu.bmp"
+SCALEU                  BITMAP  DISCARDABLE     "scaleu.bmp"
+SELECTU                 BITMAP  DISCARDABLE     "selectu.bmp"
+TRANSD                  BITMAP  DISCARDABLE     "transd.bmp"
+UNDOD                   BITMAP  DISCARDABLE     "undod.bmp"
+UNDOX                   BITMAP  DISCARDABLE     "undox.bmp"
+ZOOMINU                 BITMAP  DISCARDABLE     "zoominu.bmp"
+ZOOMINX                 BITMAP  DISCARDABLE     "zoominx.bmp"
+ZOOMOUTU                BITMAP  DISCARDABLE     "zoomoutu.bmp"
+COLLISIONTOGGLED        BITMAP  DISCARDABLE     "CollTogd.bmp"
+SELECTDIALOGD           BITMAP  DISCARDABLE     "slctdlgd.bmp"
+COLLISIONTOGGLEU        BITMAP  DISCARDABLE     "CollTogu.bmp"
+GRAVITYTOGGLED          BITMAP  DISCARDABLE     "GravTogd.bmp"
+NAVIGATEU               BITMAP  DISCARDABLE     "navigatu.bmp"
+REDOD                   BITMAP  DISCARDABLE     "redod.bmp"
+ROTATED                 BITMAP  DISCARDABLE     "rotated.bmp"
+SCALED                  BITMAP  DISCARDABLE     "scaled.bmp"
+SELECTD                 BITMAP  DISCARDABLE     "selectd.bmp"
+SELECTDIALOGU           BITMAP  DISCARDABLE     "slctdlgu.bmp"
+TRANSU                  BITMAP  DISCARDABLE     "transu.bmp"
+UNDOU                   BITMAP  DISCARDABLE     "undou.bmp"
+ZOOMIND                 BITMAP  DISCARDABLE     "zoomind.bmp"
+ZOOMOUTD                BITMAP  DISCARDABLE     "zoomoutd.bmp"
+HELPU                   BITMAP  DISCARDABLE     "helpu.bmp"
+HELPD                   BITMAP  DISCARDABLE     "helpd.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PROPPAGE_VWRENDERVIEW DIALOG DISCARDABLE  0, 0, 537, 76
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Navigate Tool",ID_TOOLS_NAVIGATE,"Button",
+                    BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_TABSTOP,
+                    4,27,16,16
+    CONTROL         "Selection Tool",ID_TOOLS_SELECT,"Button",
+                    BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_TABSTOP,
+                    20,27,16,16
+    CONTROL         "Geometry Translation Tool",ID_TOOLS_TRANSLATE,"Button",
+                    BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_TABSTOP,
+                    42,27,16,16
+    CONTROL         "Geometry Rotation Tool",ID_TOOLS_ROTATE,"Button",
+                    BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_TABSTOP,
+                    58,27,16,16
+    CONTROL         "Geometry Scaling Tool",ID_TOOLS_SCALE,"Button",
+                    BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_TABSTOP,
+                    74,27,16,16
+    CONTROL         "Ignore Effects of Gravity",ID_TOOLS_GRAVITYTOGGLE,
+                    "Button",BS_AUTOCHECKBOX | BS_ICON | BS_PUSHLIKE | 
+                    WS_TABSTOP,96,27,16,16
+    CONTROL         "Ignore Boundary Collisions",ID_TOOLS_COLLISIONTOGGLE,
+                    "Button",BS_AUTOCHECKBOX | BS_ICON | BS_PUSHLIKE | 
+                    WS_TABSTOP,112,27,16,16
+    CONTROL         "Slider1",IDC_SLIDER_ZOOMLEVEL,"msctls_trackbar32",
+                    TBS_NOTICKS | NOT WS_VISIBLE | WS_TABSTOP,184,28,121,12
+    LTEXT           "Zoom Level:",IDC_STATIC_ZOOMLEVEL,136,30,44,10,NOT 
+                    WS_VISIBLE
+END
+
+IDD_DIALOGBAR DIALOGEX 0, 0, 680, 48
+STYLE WS_CHILD | WS_BORDER
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "UNDO",ID_EDIT_UNDO,"Button",BS_OWNERDRAW | WS_TABSTOP,4,
+                    4,16,16,WS_EX_TRANSPARENT
+    CONTROL         "REDO",ID_EDIT_REDO,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    20,4,16,16
+    CONTROL         "SELECTDIALOG",ID_TOOLS_SELECTCONTENTS,"Button",
+                    BS_OWNERDRAW | WS_TABSTOP,42,4,16,16
+    CONTROL         "HELP",ID_TOOLS_HELP,"Button",BS_OWNERDRAW | WS_TABSTOP,
+                    58,4,16,16
+    COMBOBOX        IDC_DB_SELECTED,95,4,99,56,CBS_DROPDOWNLIST | 
+                    CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_DB_X,214,4,35,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DB_Y,270,4,35,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DB_Z,326,4,35,13,ES_AUTOHSCROLL
+    CONTROL         "NAVIGATE",ID_TOOLS_NAVIGATE,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_TABSTOP,4,27,16,16
+    CONTROL         "SELECT",ID_TOOLS_SELECT,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_TABSTOP,20,27,16,16
+    CONTROL         "TRANS",ID_TOOLS_TRANSLATE,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_TABSTOP,42,27,16,16
+    CONTROL         "ROTATE",ID_TOOLS_ROTATE,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_TABSTOP,58,27,16,16
+    CONTROL         "SCALE",ID_TOOLS_SCALE,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_TABSTOP,74,27,16,16
+    CONTROL         "ZOOMIN",ID_TOOLS_ZOOMIN,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_TABSTOP,111,27,16,16
+    CONTROL         "ZOOMOUT",ID_TOOLS_ZOOMOUT,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE | WS_TABSTOP,95,27,16,16
+    CHECKBOX        "GRAVITYTOGGLE",ID_TOOLS_GRAVITYTOGGLE,132,27,16,16,
+                    BS_PUSHLIKE
+    CHECKBOX        "COLLISIONTOGGLE",ID_TOOLS_COLLISIONTOGGLE,148,27,16,16,
+                    BS_PUSHLIKE
+    LTEXT           "X:",IDC_STATIC,203,6,10,9
+    LTEXT           "Y:",IDC_STATIC,259,6,9,9
+    LTEXT           "Z:",IDC_STATIC,314,6,9,9
+    GROUPBOX        "",IDC_STATIC,0,19,679,28
+END
+
+IDD_OPTIONSDIALOG DIALOG DISCARDABLE  0, 0, 174, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,114,11,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,114,28,50,14
+    GROUPBOX        "Rendering",IDC_STATIC,7,7,99,39,WS_GROUP
+    CONTROL         "&Solid with textures",IDC_RB_TEXTURED,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,18,18,78,10
+    CONTROL         "&Wireframe",IDC_RB_WIREFRAME,"Button",
+                    BS_AUTORADIOBUTTON,18,31,78,10
+END
+
+IDD_SELECTOR DIALOG DISCARDABLE  0, 0, 239, 130
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Which objects should be selected?"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,182,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,182,24,50,14
+    CONTROL         "List1",IDC_LIST,"SysListView32",LVS_LIST | 
+                    LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,7,7,165,114
+END
+
+IDD_DIALOGBAR_BAK DIALOGEX 0, 0, 680, 48
+STYLE WS_CHILD | WS_BORDER
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "UNDO",ID_EDIT_UNDO,4,4,16,16,0,WS_EX_TRANSPARENT
+    PUSHBUTTON      "REDO",ID_EDIT_REDO,20,4,16,16
+    COMBOBOX        IDC_DB_SELECTED,95,4,99,56,CBS_DROPDOWNLIST | 
+                    CBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_DB_X,214,4,35,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DB_Y,270,4,35,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DB_Z,326,4,35,13,ES_AUTOHSCROLL
+    CONTROL         "Selection Tool",ID_TOOLS_SELECT,"Button",
+                    BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_TABSTOP,
+                    20,27,16,16
+    CONTROL         "Geometry Translation Tool",ID_TOOLS_TRANSLATE,"Button",
+                    BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_TABSTOP,
+                    42,27,16,16
+    CONTROL         "Geometry Rotation Tool",ID_TOOLS_ROTATE,"Button",
+                    BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_TABSTOP,
+                    58,27,16,16
+    CONTROL         "Geometry Scaling Tool",ID_TOOLS_SCALE,"Button",
+                    BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_TABSTOP,
+                    74,27,16,16
+    CONTROL         "Ignore Effects of Gravity",ID_TOOLS_GRAVITYTOGGLE,
+                    "Button",BS_AUTOCHECKBOX | BS_ICON | BS_PUSHLIKE | 
+                    WS_TABSTOP,96,27,16,16
+    CONTROL         "Ignore Boundary Collisions",ID_TOOLS_COLLISIONTOGGLE,
+                    "Button",BS_AUTOCHECKBOX | BS_ICON | BS_PUSHLIKE | 
+                    WS_TABSTOP,112,27,16,16
+    LTEXT           "X:",IDC_STATIC,203,6,10,9
+    LTEXT           "Y:",IDC_STATIC,259,6,9,9
+    LTEXT           "Z:",IDC_STATIC,314,6,9,9
+    GROUPBOX        "",IDC_STATIC,0,19,679,28
+    PUSHBUTTON      "SELECTDIALOG",ID_TOOLS_SELECTCONTENTS,42,4,16,16
+    PUSHBUTTON      "HELP",ID_TOOLS_HELP,58,4,16,16
+    CONTROL         "Navigation Tool",ID_TOOLS_NAVIGATE,"Button",
+                    BS_AUTORADIOBUTTON | BS_ICON | BS_PUSHLIKE | WS_TABSTOP,
+                    4,27,16,16
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PROPPAGE_VWRENDERVIEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 530
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 69
+    END
+
+    IDD_SELECTOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 232
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 123
+    END
+
+    IDD_DIALOGBAR_BAK, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 676
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 45
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_GEOM_POPMENUS MENU DISCARDABLE 
+BEGIN
+    MENUITEM SEPARATOR
+    POPUP "&Geometry Editor..."
+    BEGIN
+        POPUP "&Tools..."
+        BEGIN
+            MENUITEM "&Move",                       ID_TOOLS_TRANSLATE
+            , CHECKED
+            MENUITEM "R&otate",                     ID_TOOLS_ROTATE, CHECKED
+            MENUITEM "&Scale",                      ID_TOOLS_SCALE, CHECKED
+            MENUITEM SEPARATOR
+            MENUITEM "&Move Camera",                ID_TOOLS_NAVIGATE
+            , CHECKED
+            MENUITEM SEPARATOR
+            MENUITEM "Zoom &In",                    ID_TOOLS_ZOOMIN
+            MENUITEM "&Zoom Out",                   ID_TOOLS_ZOOMOUT
+        END
+        POPUP "&View..."
+        BEGIN
+            MENUITEM "&Perspective (default)",      ID_VIEW_PERSPECTIVE
+            , CHECKED
+            MENUITEM "&Top",                        ID_VIEW_TOP, CHECKED
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Render &Quality...",          ID_TOOLS_OPTIONS
+    END
+END
+
+IDR_BOUNDARY_POPMENUS MENU DISCARDABLE 
+BEGIN
+    MENUITEM SEPARATOR
+    POPUP "&Boundary Editor..."
+    BEGIN
+        POPUP "&Tools..."
+        BEGIN
+            MENUITEM "&Move",                       ID_TOOLS_TRANSLATE
+            MENUITEM "&Rotate",                     ID_TOOLS_ROTATE
+            MENUITEM "&Scale",                      ID_TOOLS_SCALE
+            MENUITEM "&Create Boundary",            ID_TOOLS_CREATEPOLYGONBOUNDARY
+
+            MENUITEM SEPARATOR
+            MENUITEM "&Move Camera",                ID_TOOLS_NAVIGATE
+            MENUITEM SEPARATOR
+            MENUITEM "Zoom &In",                    ID_TOOLS_ZOOMIN
+            MENUITEM "Zoom &Out",                   ID_TOOLS_ZOOMOUT
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Render &Quality...",          ID_TOOLS_OPTIONS
+        MENUITEM SEPARATOR
+        MENUITEM "&Generate Boundary Script",   ID_TOOLS_DUMPBOUNDARYSCRIPT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_ACCELERATOR ACCELERATORS DISCARDABLE 
+BEGIN
+    "1",            ID_TOOLS_NAVIGATE,      VIRTKEY, NOINVERT
+    "2",            ID_TOOLS_TRANSLATE,     VIRTKEY, NOINVERT
+    "3",            ID_TOOLS_ROTATE,        VIRTKEY, NOINVERT
+    "4",            ID_TOOLS_SCALE,         VIRTKEY, NOINVERT
+    VK_DELETE,      ID_TOOLS_DELETE,        VIRTKEY, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_DIALOGBAR DLGINIT
+BEGIN
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0031, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0032, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0033, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0034, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0035, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0036, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0037, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0038, 
+    0
+END
+
+IDD_DIALOGBAR_BAK DLGINIT
+BEGIN
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0031, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0032, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0033, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0034, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0035, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0036, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0037, 
+    IDC_DB_SELECTED, 0x403, 2, 0
+0x0038, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ROTATE              ICON    DISCARDABLE     "rotate.ico"
+IDI_UNDOGREY            ICON    DISCARDABLE     "undogr.ico"
+IDI_UNDO                ICON    DISCARDABLE     "undo.ico"
+IDI_TRANS               ICON    DISCARDABLE     "move.ico"
+IDI_SELECT              ICON    DISCARDABLE     "select.ico"
+IDI_SCALE               ICON    DISCARDABLE     "scale.ico"
+IDI_REDOGREY            ICON    DISCARDABLE     "redogr.ico"
+IDI_REDO                ICON    DISCARDABLE     "redo.ico"
+IDI_NAVIGATE            ICON    DISCARDABLE     "nav.ico"
+IDI_HELP                ICON    DISCARDABLE     "help.ico"
+IDI_COLLISIONTOGGLEUP   ICON    DISCARDABLE     "bpass.ico"
+IDI_GRAVITYTOGGLEUP     ICON    DISCARDABLE     "gravoff.ico"
+IDI_COLLISIONTOGGLEDOWN ICON    DISCARDABLE     "bxpass.ico"
+IDI_GRAVITYTOGGLEDOWN   ICON    DISCARDABLE     "gravon.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_NAVIGATE            CURSOR  DISCARDABLE     "navigate.cur"
+IDC_LINK                CURSOR  DISCARDABLE     "Link.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VWRENDERVIEW        "V-Worlds RenderView Control"
+    IDS_VWRENDERVIEW_PPG    "V-Worlds RenderView Property Page"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VWRENDERVIEW_PPG_CAPTION "General"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_TOOLS_SELECT         "Select Geometry"
+    ID_TOOLS_NAVIGATE       "Move Around The World (Navigate)"
+    ID_TOOLS_TRANSLATE      "Move"
+    ID_TOOLS_ROTATE         "Rotate"
+    IDS_TOOLS_SCALE         "Scale"
+    IDS_TOOLMENU            "&Tools..."
+    IDS_UNDO_MENU_LABEL     "&Undo: "
+    IDS_REDO_MENU_LABEL     "Re&do: "
+    IDS_VIEWMENU            "&View..."
+    ID_TOOLS_GRAVITYTOGGLE  "Ignore Effects of Gravity"
+    ID_TOOLS_COLLISIONTOGGLE "Ignore Boundary Collisions"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_SLIDER_ZOOMLEVEL    "Change the View's Zoom Level"
+    IDC_DB_SELECTED         "Selected Things"
+    IDC_DB_X                "X Coordinate of Position of Selected Thing"
+    IDC_DB_Y                "Y Coordinate of Position of Selected Thing"
+    IDC_DB_Z                "Z Coordinate of Position of Selected Thing"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_UNDO            "Undo"
+    ID_EDIT_REDO            "Redo"
+    IDS_MENU_PERSPECTIVE    "&Perspective (default)"
+    IDS_MENU_TOP            "&Top"
+    IDS_MENU_FRONT          "&Front"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MENU_RIGHT          "&Right"
+    IDS_GEOM_MENU_EDITOR    "&Geometry Editor..."
+    IDS_SELECT              "Select"
+    IDS_FIRSTPERSON         "*FIRSTPERSON*"
+    IDS_WINGMAN             "*WINGMAN*"
+    IDS_FACING              "*FACING*"
+    IDS_BOUNDARY_MENU_EDITOR "&Boundary Editor..."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_TOOLS_HELP           "Help with the Geometry Editor"
+    ID_TOOLS_SELECTCONTENTS "Select Objects in Room by Name"
+    ID_TOOLS_ZOOMIN         "Zoom In"
+    ID_TOOLS_ZOOMOUT        "Zoom Out"
+    IDS_ZOOMNORMAL          "Zoom &Normal"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_POPUP_NAVIGATE       "Navigate"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "VWRendVw.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

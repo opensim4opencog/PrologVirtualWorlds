@@ -1,0 +1,24 @@
+HKCR
+{
+	VWSYSTEM.Authenticate.1 = s 'V-Worlds Authenticate Class'
+	{
+		CLSID = s '{955A131A-731F-11D1-9082-00C04FD91EFE}'
+	}
+	VWSYSTEM.Authenticate = s 'V-Worlds Authenticate Class'
+	{
+		CurVer = s 'VWSYSTEM.Authenticate.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {955A131A-731F-11D1-9082-00C04FD91EFE} = s 'V-WOrlds Authenticate Class'
+		{
+			ProgID = s 'VWSYSTEM.Authenticate.1'
+			VersionIndependentProgID = s 'VWSYSTEM.Authenticate'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

@@ -1,0 +1,74 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// VWAdmin.idl : IDL source for VWAdmin.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (VWAdmin.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IVWAdmin : Not yet implemented. Was to be used to as an interface to return when a client
+// connected to allow that client to remotely administer the server.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+	import "vwobject.idl";
+
+// Codes 0x0-0x01ff are reserved for the OLE group of
+// interfaces.  We start our codes at 0x300.
+
+//cpp_quote("#define VWADMIN_E_ALREADYCONNECTED			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0301)")
+
+	coclass VWAdmin;
+	interface IVWAdmin;
+
+	[
+		object,
+		uuid(02043F40-02B3-11d2-80F5-00C04FAD7D6D),
+		dual,
+		helpstring("IVWAdmin Interface"),
+		pointer_default(unique)
+	]
+	interface IVWAdmin : IDispatch
+	{
+		import "oaidl.idl";
+
+		[restricted, helpstring("Internal, do not call.")] 
+		HRESULT Terminate();
+
+#if 0
+		[helpstring("Creates a new world (mustn't have an existing one!)")]
+		HRESULT CreateWorld([in] BSTR bstrWorldName, [out, retval] IWorld** ppworld);
+
+		[helpstring("Opens an existing world.")]
+		HRESULT OpenWorld([in] BSTR bstrWorldName, [out, retval] IWorld** ppworld);
+
+		[helpstring("Deletes an existing world.")]
+		HRESULT DeleteWorld([in] BSTR bstrWorldName);
+#endif
+	};
+
+#ifdef VWADMINLIB
+[
+	uuid(02043F41-02B3-11d2-80F5-00C04FAD7D6D),
+	version(1.0),
+	helpstring("VWAdmin 1.0 Type Library")
+]
+library VWAdminLib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(02043F43-02B3-11d2-80F5-00C04FAD7D6D),
+		helpstring("VWAdmin Object")
+	]
+	coclass VWAdmin
+	{
+		[default] interface IVWAdmin;
+	};
+};
+#endif

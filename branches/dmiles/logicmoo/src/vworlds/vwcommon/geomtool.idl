@@ -1,0 +1,98 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// geomtool.idl : IDL source for geomtool.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (geomtool.tlb) and marshalling code.
+
+	import "oaidl.idl";
+	import "ocidl.idl";
+
+	import "vwuiobjs.idl";
+	import "vwrender.idl";
+
+	[
+		object,
+		uuid(9B813D82-A148-11D0-89AB-00A0C9054129),
+		dual,
+		helpstring("IVWScale3DTool Interface"),
+		pointer_default(unique)
+	]
+	interface IVWScale3DTool : IVWUITool
+	{
+	};
+
+	[
+		object,
+		uuid(0A1D4362-A12B-11D0-89AB-00A0C9054129),
+		dual,
+		helpstring("IRotate3DTool Interface"),
+		pointer_default(unique)
+	]
+	interface IRotate3DTool : IVWUITool
+	{
+		HRESULT ComputeEulerAngles([in] IVWFrame* pVWFrame, [in] IVector* vecAngles);
+	};
+
+	[
+		object,
+		uuid(86CD4C7F-9A10-11D0-89AB-00A0C9054129),
+		dual,
+		helpstring("IVWTranslate3DTool Interface"),
+		pointer_default(unique)
+	]
+	interface IVWTranslate3DTool : IVWUITool
+	{
+	};
+
+#ifdef GEOMTOOLLIB
+[
+	uuid(86CD4C71-9A10-11D0-89AB-00A0C9054129),
+	version(1.0),
+	helpstring("geomtool 1.0 Type Library")
+]
+library GEOMTOOLLib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(86CD4C80-9A10-11D0-89AB-00A0C9054129),
+		helpstring("VWTranslate3DTool Class")
+	]
+	coclass VWTranslate3DTool
+	{
+		[default] interface IVWTranslate3DTool;
+	};
+
+	[
+		uuid(0A1D4363-A12B-11D0-89AB-00A0C9054129),
+		helpstring("Rotate3DTool Class")
+	]
+	coclass Rotate3DTool
+	{
+		[default] interface IRotate3DTool;
+	};
+
+	[
+		uuid(9B813D83-A148-11D0-89AB-00A0C9054129),
+		helpstring("VWScale3DTool Class")
+	]
+	coclass VWScale3DTool
+	{
+		[default] interface IVWScale3DTool;
+	};
+
+	[
+		uuid(C461BF77-DDDA-11D0-8899-00C04FC32EF3),
+		helpstring("VWExecuteGeomUndo Class")
+	]
+	coclass VWExecuteGeomUndo
+	{
+		[default] interface IVWExecuteUndo;
+	};
+};
+#endif

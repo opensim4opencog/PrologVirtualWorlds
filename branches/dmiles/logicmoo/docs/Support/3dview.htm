@@ -1,0 +1,440 @@
+<html>
+
+<head>
+<meta http-equiv="Expires" content="0">
+<title>V-Worlds Renderer Pane</title>
+</head>
+
+<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" height=100% width=100%>
+
+
+
+<script language="VBScript">
+
+
+'----------------- Authoring status variables -----------------------------
+dim boundaryEditorOpen
+dim objectExplorerOpen
+dim authorTabOpen
+dim Initialized
+
+dim iReadyCount
+iReadyCount = 0
+Initialized = False
+
+sub ChildReady(theWin)
+	iReadyCount = iReadyCount + 1
+	if iReadyCount >= 2 then
+		iReadyCount = 2
+		parent.ChildReady(window)
+	end if
+end sub
+
+sub window_OnLoad
+	ChildReady(window)
+end sub
+
+
+sub Initialize()
+
+	'on error resume next
+	' Initialize
+
+	if (Initialized = True) Then
+		Toolbar.Initialize
+		Exit Sub
+	End If
+
+	renderer.style.display="none"
+	renderer.style.display=""
+
+	dim vwclient
+	set vwclient = top.theclient.vwclient
+	top.AddToEventList window
+	dim bExplicitlyRequestedHW
+	bExplicitlyRequestedHW = False
+
+	vwclient.world.global.EnableAutoDownload = CBool(top.bAutoDownloadAvatars)
+
+	Vwsound.vwclient = vwclient
+
+	set VWSound.RenderRoot = renderer
+	vwsound.enable = top.bPlaySoundFX
+
+	' Set necessary renderer options before renderer is fully initialized (via client set)
+	if CInt(top.iUseHWAcceleration) = 0 then
+		renderer.renderroot.UseHWAcceleration = false
+	elseif CInt(top.iUseHWAcceleration) = 1 then
+		bExplicitlyRequestedHW = True
+	end if
+	if top.bForceBackBuffering = True then
+		renderer.renderroot.ForceBackBuffer = True
+	end if
+	if CInt(top.iDrawFastWhenMoving) = 0 then
+		renderer.renderroot.fastmodeenabled = false
+	end if
+	if CInt(top.iColorModel) > -1 then
+		renderer.renderroot.colormodel = CInt(top.iColorModel)
+	end if
+
+	' NOTE: Its VERY IMPORTANT this happens here so we don't create the device multiple
+	' times as we set the renderer options.
+	renderer.vwclient = vwclient
+
+	' We may not have gotten HW acceleration even though we requested it.
+	if renderer.renderroot.UseHWAcceleration = false then
+		if bExplicitlyRequestedHW = True then
+			vwclient.world.user.Alert "Hardware Acceleration", "No hardware acceleration found, reverting to software."
+		end if
+		top.iUseHWAcceleration = 0
+	else
+		top.iUseHWAcceleration = 1
+	end if
+
+	top.SetRenderControl renderer
+
+	set top.RenderPage = window
+
+	objectExplorerOpen = 0
+	boundaryEditorOpen = 0
+	authorTabOpen = 0
+
+	UpdateUserCamera
+
+	Toolbar.Initialize
+	Tabbar.Initialize
+
+	UpdateToolbars
+
+	Initialized = True
+
+end sub
+
+sub UpdateToolbars
+
+	Dim paths
+
+	'On Error Resume Next
+
+	tabbar.UpdateButtonStates
+
+	If top.theclient.vwclient.world.user.isauthor and top.theclient.vwclient.world.IsSDKInstalled Then
+		'Authoring mode, do some work to decide what to show.
+		if renderer.EditMode = 0 Then
+			toolbardiv.style.top = 0
+			toolbardiv.style.height = 0
+
+			renderer.style.top = 0
+			renderer.style.height = document.body.offsetheight - 24
+
+			tabbardiv.style.top = renderer.style.height
+			tabbardiv.style.height = 24
+			window.status = ""
+		Elseif renderer.EditMode = 1 Then
+			toolbardiv.style.top = 0
+			toolbardiv.style.height = 65
+
+			renderer.style.top = 65
+			renderer.style.height = document.body.offsetheight - 24 - 65
+
+			tabbardiv.style.top = renderer.style.pixelheight + 65
+			tabbardiv.style.height = 24
+
+			paths = split(document.frames("toolbar").location, "/")
+
+			if (StrComp(paths(UBound(paths)), "toolbar.htm", 1)) Then
+				paths(UBound(paths)) = "toolbar.htm"
+				document.frames("toolbar").location = join(paths, "/")
+			End If
+
+		Elseif renderer.EditMode = 2 Then
+			toolbardiv.style.top = 0
+			toolbardiv.style.height = 65
+
+			renderer.style.top = 65
+			renderer.style.height = document.body.offsetheight - 24 - 65
+
+			tabbardiv.style.top = renderer.style.pixelheight + 65
+			tabbardiv.style.height = 24
+
+			paths = split(document.frames("toolbar").location, "/")
+
+			if (StrComp(paths(UBound(paths)), "btoolbar.htm", 1)) Then
+				paths(UBound(paths)) = "btoolbar.htm"
+				document.frames("toolbar").location = join(paths, "/")
+			End If
+
+		End If
+
+	Else
+		toolbardiv.style.top = 0
+		toolbardiv.style.height = 0
+
+		renderer.style.top = 0
+		renderer.style.height = parent.document.body.offsetheight - 21
+
+		tabbardiv.style.top = renderer.style.height
+		tabbardiv.style.height = 0
+	End If
+
+	'toolbar.UpdateButtonStates
+	'tabbar.UpdateButtonStates
+
+	renderer.style.display="none"
+	renderer.style.display=""
+	Err.Clear
+
+End Sub
+
+sub Window_OnResize
+	if Initialized = True then
+		UpdateToolbars
+	end if
+End Sub
+
+sub Terminate()
+	'on error resume next
+'	top.htmlpopup.CloseAll
+	if ( IsObject(VWSound ) and not(IsNull(VWSound))) then
+		set Vwsound.vwclient = nothing
+		set VWSound.RenderRoot = nothing
+	end if
+end sub
+
+sub window_OnUnload()
+	top.RemoveFromEventList window
+	top.SetRenderControl Nothing
+	Terminate
+end sub
+
+
+sub UpdateUserCamera
+	'on error resume next
+	dim cameraMode
+	dim world
+	dim user
+
+	set world = top.theclient.vwclient.world
+	set user = world.user
+
+	cameraMode = user.profile.keyValue("CameraPreference")
+	if cameraMode = "*FIRSTPERSON*" then
+		' do nothing - this is the default
+	elseif cameraMode = "*WINGMAN*" then
+		world.FireUIEvent user, "SetCamera", array(0.5, 1.0, -3.0)
+	elseif cameraMode = "*FACING*" then
+		world.FireUIEvent user, "SetCameraOr", array(0.0, 0.0, 3.0, 0.0, 0.0, -1.0)
+	else
+		dim camObj
+		set camObj = user.container.findwithin(cameraMode, True)
+		if camObj is nothing then
+			' reset the profile
+			' TO DO: print some kind of message here...
+			user.profile.keyValue("CameraPreference") = "*FIRSTPERSON*"
+		else
+			' stick it onto the object
+			world.FireUIEvent camObj, "SetCamera", array(0.0, 0.0, 0.0)
+		end if
+	end if
+end sub
+
+
+Sub UpdateFromPrefs
+
+	top.theclient.vwclient.world.global.EnableAutoDownload = CBool(top.bAutoDownloadAvatars)
+
+	' Have to be careful here. Each property set on the renderer can cause a
+	' device rebuild if the renderer is fully initialized.
+	if CInt(top.iUseHWAcceleration) = 0 and renderer.renderroot.UseHWAcceleration = true then
+		renderer.renderroot.UseHWAcceleration = false
+	elseif CInt(top.iUseHWAcceleration) = 1 and renderer.renderroot.UseHWAcceleration = false then
+		renderer.renderroot.UseHWAcceleration = true
+		if renderer.renderroot.UseHWAcceleration = false then
+			top.theclient.vwclient.world.user.Alert "Hardware Acceleration", "No hardware acceleration found, reverting to software."
+		end if
+	end if
+	if top.bForceBackBuffering = True and renderer.renderroot.ForceBackBuffer = False then
+		renderer.renderroot.ForceBackBuffer = True
+	elseif top.bForceBackBuffering = False and renderer.renderroot.ForceBackBuffer = True then
+		renderer.renderroot.ForceBackBuffer = False
+	end if
+	if CInt(top.iDrawFastWhenMoving) = 1 and renderer.editmode <> 2 then
+		' Boundary edit mode always switches off fast mode.
+		renderer.renderroot.fastmodeenabled = true
+	else
+		renderer.renderroot.fastmodeenabled = false
+	end if
+	if CInt(top.iColorModel) > -1 then
+		if not(renderer.renderroot.vwrender3d is Nothing) then
+			if renderer.renderroot.vwrender3d.colormodel <> CInt(top.iColorModel) then
+				renderer.renderroot.colormodel = CInt(top.iColorModel)
+			end if
+		else
+			renderer.renderroot.colormodel = CInt(top.iColorModel)
+		end if
+	end if
+
+	' We may not have gotten HW acceleration even though we requested it.
+	if renderer.renderroot.UseHWAcceleration = false then
+		top.iUseHWAcceleration = 0
+	else
+		top.iUseHWAcceleration = 1
+	end if
+
+	vwsound.enable = top.bPlaySoundFX
+
+end sub
+
+'----------------- Authoring status functions -----------------------------
+'EditModeHelper() is called from this page by author-tool specific subroutine.
+'Do not call EditModeHelper() from outside this webpage.  To add another
+'interested author-tool, add a SetXXXStatus subroutine and variable,
+'initialize it in window_OnLoad(), and have the new sub call EditModeHelper().
+sub EditModeHelper
+
+	if authorTabOpen > 0 OR objectExplorerOpen > 0 OR boundaryEditorOpen > 0 then
+		renderer.ShowSelection = TRUE
+	else
+		renderer.ShowSelection = FALSE
+	end if
+
+
+end sub
+
+'sub SetBoundaryEditorStatus(stat)
+'
+'	boundaryEditorOpen = stat
+'	EditModeHelper
+'
+'	UpdateToolbars
+'
+'end sub
+
+sub SetAuthoringStatus(stat)
+
+	Dim world
+
+	set world = top.theclient.vwclient.world
+	authorTabOpen = stat
+	EditModeHelper
+
+	world.global.editingmode = CLng(stat)
+
+	'if (stat <> 0) Then
+	'	toolbar.Initialize
+	'End If
+
+
+	UpdateToolbars
+
+end sub
+
+
+sub SetObjectExplorerStatus(stat)
+
+	objectExplorerOpen	 = stat
+	EditModeHelper
+
+	UpdateToolbars
+
+end sub
+
+sub renderer_AlphaKeyPressed(theChar)
+	if theChar = 10 then
+		top.SetFocusToTextEntry
+	else
+		top.SendKeyToTextEntry theChar
+	end if
+end sub
+
+sub HandleUIEvent(byval who, what, byval args)
+
+	Dim world, user
+
+	Err.Clear
+
+	set world = top.theclient.vwclient.world
+	set user = world.user
+
+	If what = "OnFinishSceneComposite" then
+		UpdateUserCamera
+	Elseif what = "OnEditingModeChanged" then
+		If (CLng(authorTabOpen) <> CLng(args)) Then
+			If (CLng(args) = 0) Then
+				tabbar.DoEditNormal
+			Elseif (CLng(args) = 1) Then
+				tabbar.DoEditGeometry
+			Elseif (CLng(args) = 2) Then
+				tabbar.DoEditBoundary
+			End If
+		End If
+	ElseIf (StrComp(what, "OnIsAuthorChanged", 1) = 0) then
+		If (who.id = user.id) Then
+			if (Not user.IsAuthor) Then
+				tabbar.DoEditNormal
+			End If
+			UpdateToolbars
+		End If
+	Elseif what = "OnEnterRoom" OR what = "OnLeaveRoom" Then
+		If (IsObject(args) AND Not (args Is Nothing) ) Then
+			If (args.id = top.theclient.vwclient.world.user.id) Then
+				UpdateToolbars
+			End If
+		End If
+	Elseif  what = "OnEnterWorld" Or what = "OnLeaveWorld" Then
+		If (IsObject(who) AND Not (who Is Nothing) ) Then
+			If (who.id = top.theclient.vwclient.world.user.id) Then
+				UpdateToolbars
+			End If
+		End If
+'	Else
+'		toolbar.HandleUIEvent who, what, args
+	end if
+end sub
+
+sub Renderer_ToolEvent(eventNum, what, arg1, arg2, arg3)
+
+'	On Error Resume Next
+
+'	if (toolbar.bIsInitialized) Then
+		toolbar.ToolEvent eventNum, what, arg1, arg2, arg3
+'	End If
+
+'	Err.Clear
+end sub
+
+
+'--------------------------------------------------------------------
+
+</script>
+
+
+<div id="toolbardiv" style="position:absolute;top:0;left:0;width:document.width;height:1" noresize=true>
+<IFRAME SRC="toolbar/toolbar.htm" HSPACE=0 BORDER=0 FRAMESPACING=0 VSPACE=0 MARGINHEIGHT=0 MARGINWIDTH=0 name="toolbar" ID="toolbar" scrolling="no" height=100% width=100% frameborder="yes" noresize=true>
+</IFRAME>
+</div>
+
+<p>
+
+
+<object id="renderer" style="position:absolute;top:0;left:0;width:100%;height:100%"
+	classid="clsid:44FAC783-0CA4-11D0-89A9-00A0C9054129"
+	border="0">
+</object>
+
+<p>
+
+<div id="tabbardiv" style="position:absolute;left:0;top:document.height;width:document.width;height:1;" noresize=true>
+<IFRAME SRC="toolbar/tabbar.htm" HSPACE=0 BORDER=0 FRAMESPACING=0 VSPACE=0 MARGINHEIGHT=0 MARGINWIDTH=0 name="tabbar" ID="tabbar" scrolling="no" height=100% width=100% frameborder=no noresize=true>
+</IFRAME>
+</div>
+
+
+<OBJECT tabindex=-1 ID="Vwsound" WIDTH=0 HEIGHT=0
+ CLASSID="CLSID:05769B8C-A180-11D1-83E9-00C04FB6FA46">
+</OBJECT>
+
+</p>
+
+</body>
+</html>

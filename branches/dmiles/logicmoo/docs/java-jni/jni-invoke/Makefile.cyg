@@ -1,0 +1,62 @@
+#
+# Sample makefile to create Java JNI with Cygwin b20.1 tools. This *will not*
+# work with Cygwin versions earlier than b20.1.
+# 
+# The only difference from creating a regular DLL is to supply a different
+# entry point, __cygwin_noncygwin_dll_entry@12, since Java is an MSVC app.
+#
+# See Makefile.nocyg if you want to use -mno-cygwin and build a Mingw JNI.
+#
+
+CC = gcc 
+CXX = c++
+
+DEBUG = -g -Wall -O2
+CXXFLAGS = $(DEBUG) 
+CFLAGS = $(DEBUG) 
+CPPFLAGS = -I. -I$(JDK_ROOT)/include -I$(JDK_ROOT)/include/win32
+
+LDFLAGS =
+LDLIBS = 
+
+JDK_ROOT = c:/jdk1.1.7A
+
+AS = as
+DLLTOOL = dlltool
+
+SRCS = invoke.c javai.def
+OBJS = invoke.o
+
+#
+# Various targets to build.
+#
+PROGRAMS = invoke.exe
+LIBRARIES = libjavai.a
+
+all: $(PROGRAMS)
+
+invoke.exe: invoke.o libjavai.a
+	$(CXX) -o $@ invoke.o $(LDFLAGS) -L. -ljavai $(LDLIBS)
+
+libjavai.a: javai.def
+	$(DLLTOOL) --as=$(AS) -k --def javai.def --dllname javai.dll \
+		--output-lib $@
+
+#
+# dependencies.
+#
+
+#
+# default rules for building DLL objects. Note that client programs (ie.,
+# the ones that *use* the DLL) have to be compiled without the DLL_CFLAGS
+# flags.
+#
+.cc.o:
+	$(CXX) -c $(CPPFLAGS) $(CXXFLAGS) -o $@ $<
+.c.o:
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
+
+clean:
+	-rm -f $(OBJS) $(LIBRARIES) $(PROGRAMS) core
+
+

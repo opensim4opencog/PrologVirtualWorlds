@@ -1,0 +1,104 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// DirServ.idl :
+//
+// This file will be processed by the MIDL tool to
+// produce the type library (DirServ.tlb) and marshalling code.
+
+/////////////////////////////////////////////////////////////////////////////////////
+// This file includes the definition of the following interfaces:
+// 
+//	IDServ:	An interface you interface with SiteServer Personalization and Membership
+//			Directory Services
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+//the server.
+	[
+		object,
+		uuid(40A94350-9AE4-11D0-8587-00A0C90F2911),
+		dual,
+		helpstring("IDServ Interface"),
+		pointer_default(unique)
+	]
+	interface IDServ : IDispatch
+	{
+
+		[helpstring("Call this to initialize this module with an LDAP path.")] 
+		HRESULT ConnectEx2(HWND hNotificationWindow, BSTR bstrLDAP);
+
+		[helpstring("method ConnectEx")] 
+		HRESULT ConnectEx(BSTR bstrLocation,BSTR bstrAdmin, BSTR bstrPasswd, HWND hNotificationWindow);
+
+		[helpstring("Call this just before final release.")] 
+		HRESULT Disconnect();
+
+		[helpstring("Get DS connection status message")] 
+		HRESULT GetStatus([out] BSTR *bstrMsg, [out] VARIANT_BOOL *pbIsDSConnected);
+
+		[helpstring("Add a World to the directory service")] 
+		HRESULT AddWorld([in] BSTR bstrWorldGUID, [in] BSTR bstrWorldURL, [in] BSTR bstrWorldNoUsers, [in] BSTR bstrInfoURL);
+		
+		[helpstring("Remove a World from the directory service listing")] 
+		HRESULT RemoveWorld([in] BSTR bstrWorldGUID);
+
+// the following attributes have been added but were never fully implemented:
+		[helpstring("Not Implemented - Used to add a user to the directory service, indexed by alias. state=0 for notInWorld.")] 
+		HRESULT AddUser(BSTR EmailName, BSTR InWorldAlias, BSTR ComputerName, BSTR Comment, 
+				BSTR bstrCurrentWorld);		
+		
+		[helpstring("Not Implemented - Remove's a user by alias.")] 
+		HRESULT RemoveUser([in] BSTR InWorldAlias);
+		
+		[helpstring("Not Implemented - Looks up user in DS and toggles flag.")] 
+		HRESULT LogUserOn([in] BSTR InWorldAlias);
+				
+		[helpstring("Not Implemented - Looks up user in DS and toggles flag.")] 
+		HRESULT LogUserOff([in] BSTR InWorldAlias);
+
+		[helpstring("Not Implemented - Gets a user's attribs. State=-1 if failed, 0 if outworld, 1 if in.")] 		
+		HRESULT FindUser([in]BSTR inworldalias,[out]BSTR *emailname,[out] BSTR *computername,
+			[out]BSTR *comment,[out]BSTR *bstrCurrentWorld);
+
+		[helpstring("Not Implemented - Internal TestQueue method")] 
+		HRESULT TestQueue(void);
+
+		[helpstring("Not Implemented -  EnumerateUsers")] 
+		HRESULT EnumerateUsers(HWND hNotificationWindow);
+		
+		[helpstring("Not Implemented - GetNextUser")] 
+		HRESULT GetNextUser([out]BSTR *inworldalias,[out]BSTR *emailname,
+			[out] BSTR *computername,[out]BSTR *comment,[out]BSTR *bstrCurrentWorld);
+
+		[helpstring("Not Implemented - IsEnumerating")] 
+		HRESULT IsEnumerating([out]VARIANT_BOOL *bIsEnum);
+	};
+
+#ifdef DIRSERVLIB
+[
+	uuid(40A94341-9AE4-11D0-8587-00A0C90F2911),
+	version(1.0),
+	helpstring("DirServ 1.0 Type Library")
+]
+library DIRSERVLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(40A94351-9AE4-11D0-8587-00A0C90F2911),
+		helpstring("DServ Class")
+	]
+	coclass DServ
+	{
+		[default] interface IDServ;
+	};
+	
+};
+#endif

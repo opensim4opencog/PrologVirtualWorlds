@@ -1,0 +1,23 @@
+HKCR
+{
+	VWSYSTEM.Authentication.1 = s 'Authentication Class'
+	{
+		CLSID = s '{955A131C-731F-11D1-9082-00C04FD91EFE}'
+	}
+	VWSYSTEM.Authentication = s 'Authentication Class'
+	{
+		CLSID = s '{955A131C-731F-11D1-9082-00C04FD91EFE}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {955A131C-731F-11D1-9082-00C04FD91EFE} = s 'Authentication Class'
+		{
+			ProgID = s 'VWSYSTEM.Authentication.1'
+			VersionIndependentProgID = s 'VWSYSTEM.Authentication'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

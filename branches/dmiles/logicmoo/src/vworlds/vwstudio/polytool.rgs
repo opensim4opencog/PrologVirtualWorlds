@@ -1,0 +1,24 @@
+HKCR
+{
+	VWSTUDIO.PolyTool.1 = s 'PolyTool Class'
+	{
+		CLSID = s '{056BA0D2-C31A-11D0-AFB6-00C04FB68E58}'
+	}
+	VWSTUDIO.PolyTool = s 'PolyTool Class'
+	{
+		CurVer = s 'VWSTUDIO.PolyTool.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {056BA0D2-C31A-11D0-AFB6-00C04FB68E58} = s 'PolyTool Class'
+		{
+			ProgID = s 'VWSTUDIO.PolyTool.1'
+			VersionIndependentProgID = s 'VWSTUDIO.PolyTool'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

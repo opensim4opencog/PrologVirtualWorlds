@@ -1,0 +1,55 @@
+:Base HelpRu.hlp
+:Title Справка к Editeur
+1 Что такое Editeur ?=WhatIsEditeur
+1 Процедуры редактора Editeur
+2 Открытие и сохранение
+3 Создание текста=CreatingText
+3 Открытие существующих текстовых файлов=OpeningFiles
+3 Нахождение файлов=FindingInFiles
+3 Сохранение текста=SavingTexts
+3 Закрытие текста=ClosingTexts
+3 Выход из программы Editeur=Exiting
+2 Изменение текста
+3 Изменение текста=HIDD_EDITEUR
+3 Перемещение текста=MovingInText
+3 Выбор текста=SelectingText
+3 Отмена выбора текста=UnselectingText
+3 Обработка изменений=HandlingUpdates
+3 Повторение последнего изменения=RepeatingLastUpdate
+3 Протаскивание и опускание=OleDragAndDrop
+3 Вырезка, копирование, прибавление, вставка, очистка, выбор всего=CutCopyAppendPasteClearSelectAll
+3 Копировать в, Вставить из=CopyToPasteFrom
+3 Сдвиг, Обратный сдвиг=IndentUnindent
+3 Заглавные, прописные, инвертирование, первая буква заглавная=Case
+3 Вставка даты и времени=DateTime
+2 Поиск и замена
+3 Поиск цепочки=Searching
+3 Замена цепочки другой цепочкой=Replacing
+3 Специальные перемещения=SpecialMoves
+2 Печатание и посылка по электронной почте
+3 Печатание текстов=Printing
+3 Предварительный просмотр печатания текста=PrintPreviewing
+3 Изменение раскладки страницы=ChangingPageLayout
+3 Изменение опций печати=ChangingPrintingOptions
+3 Посылка через электронную почту=Sending
+2 Опции и инструменты
+3 Опции=Options
+3 Изменение шрифтов=ChangingFonts
+3 Установка новых синтаксисов=SettingUpNewSyntaxes
+3 Проверка правописания=SpellChecking
+3 Преобразование ширины табуляций=ConvertingTabulationsWidth
+3 Сортировка=Sorting
+3 Отработка программы=Running
+3 Описание внешних инструментов=SettingUpTools
+1 Меню программы Editeur
+2 Меню Файл (File)=FileMenu
+2 Меню Редактирование (Edit)=EditMenu
+2 Меню Поиск (Search)=SearchMenu
+2 Меню Макросы (Macro)=MacroMenu
+2 Меню Инструменты (Tools)=ToolsMenu
+2 Меню Окно (Window)=WindowMenu
+2 Меню Справка (Help)=HelpMenu
+1 Регистрация
+2 Информация о легальности=LegalInformation
+2 Регистрация=Registering
+2 Флорма для заказа=OrderForm

@@ -1,0 +1,24 @@
+HKCR
+{
+	VWSTUDIO.VWScale3DTool.1 = s 'VWScale3DTool Class'
+	{
+		CLSID = s '{9B813D83-A148-11D0-89AB-00A0C9054129}'
+	}
+	VWSTUDIO.VWScale3DTool = s 'VWScale3DTool Class'
+	{
+		CurVer = s 'VWSTUDIO.VWScale3DTool.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {9B813D83-A148-11D0-89AB-00A0C9054129} = s 'VWScale3DTool Class'
+		{
+			ProgID = s 'VWSTUDIO.VWScale3DTool.1'
+			VersionIndependentProgID = s 'VWSTUDIO.VWScale3DTool'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

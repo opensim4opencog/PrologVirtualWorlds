@@ -1,0 +1,293 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- OKBC.KbLoader | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class OKBC.KbLoader
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class OKBC.KbLoader
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----OKBC.KbLoader
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>KbLoader</STRONG>
+     extends java.lang.<A HREF="java.lang.Object.html">Object</A>
+{
+          // Fields 5
+     public static final int <A HREF="#BLIP">BLIP</A>;
+     public static final int <A HREF="#SILENT">SILENT</A>;
+     public static final int <A HREF="#VERBOSE">VERBOSE</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_load">_load</A>;
+     public int <A HREF="#verbosity">verbosity</A>;
+
+          // Constructors 1
+     public <A HREF="#KbLoader()">KbLoader</A>();
+
+          // Methods 11
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#assert_form_given_kb(OKBC.Node, java.util.Hashtable, java.util.Hashtable, OKBC.Kb, OKBC.TruthValue, OKBC.Node, OKBC.Walker)">assert_form_given_kb</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A>, <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Walker.html">Walker</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#assert_frame_definition(OKBC.Node, java.util.Hashtable, java.util.Hashtable, OKBC.Kb, OKBC.TruthValue, OKBC.Node, OKBC.Walker)">assert_frame_definition</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A>, <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Walker.html">Walker</A>);
+     public <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A> <A HREF="#load_okbc_kb(java.io.File, OKBC.Kb)">load_okbc_kb</A>(<A CLASS=nound HREF="java.io.File.html">File</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A> <A HREF="#load_okbc_kb(java.io.File, OKBC.Kb, OKBC.Node)">load_okbc_kb</A>(<A CLASS=nound HREF="java.io.File.html">File</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A> <A HREF="#load_okbc_kb(java.io.File, OKBC.Kb, OKBC.Node, java.util.Hashtable)">load_okbc_kb</A>(<A CLASS=nound HREF="java.io.File.html">File</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A>);
+     public <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A> <A HREF="#load_okbc_kb(java.io.File, OKBC.Kb, OKBC.Node, java.util.Hashtable, OKBC.TruthValue)">load_okbc_kb</A>(<A CLASS=nound HREF="java.io.File.html">File</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A> <A HREF="#load_okbc_kb_internal(java.io.File, OKBC.Kb, OKBC.TruthValue, java.util.Hashtable, OKBC.Node, OKBC.Walker)">load_okbc_kb_internal</A>(<A CLASS=nound HREF="java.io.File.html">File</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>, <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Walker.html">Walker</A>);
+     protected void <A HREF="#maybe_okbc_load_warn(OKBC.OKBCString)">maybe_okbc_load_warn</A>(<A CLASS=nound HREF="OKBC.OKBCString.html">OKBCString</A>);
+     protected void <A HREF="#maybe_okbc_load_warn(java.lang.String)">maybe_okbc_load_warn</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#walk_form_for_interning_given_kb(OKBC.Node, java.util.Hashtable, OKBC.Kb, OKBC.TruthValue, OKBC.Node, OKBC.Walker)">walk_form_for_interning_given_kb</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Walker.html">Walker</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#walk_form_for_load(OKBC.Node, java.util.Hashtable, OKBC.Kb, OKBC.Walker)">walk_form_for_load</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.util.Hashtable.html">Hashtable</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.Walker.html">Walker</A>);
+}
+</PRE>
+<P>
+<P>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Cross Reference</B></FONT></TD> </TR> </TABLE>
+<BR><DL>
+<DT><B>Extended By: </B>
+<DD><A HREF="demos.KbLoaderTest.html">KbLoaderTest</A><P>
+</DL><BR>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Fields</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_load"><FONT COLOR="#0000FF">&middot;</FONT> _load</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _load
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="SILENT"><FONT COLOR="#0000FF">&middot;</FONT> SILENT</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final int SILENT
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="BLIP"><FONT COLOR="#0000FF">&middot;</FONT> BLIP</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final int BLIP
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="VERBOSE"><FONT COLOR="#0000FF">&middot;</FONT> VERBOSE</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final int VERBOSE
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="verbosity"><FONT COLOR="#FF00FF">&middot;</FONT> verbosity</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public int verbosity
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<P>
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="KbLoader"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="KbLoader()">KbLoader</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public KbLoader() </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+Default constructor
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="load_okbc_kb"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="load_okbc_kb(java.io.File, OKBC.Kb)">load_okbc_kb</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.util.Hashtable.html">Hashtable</A> load_okbc_kb(<A HREF="java.io.File.html">File</A> path, 
+                                 <A HREF="OKBC.Kb.html">Kb</A> kb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="load_okbc_kb"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="load_okbc_kb(java.io.File, OKBC.Kb, OKBC.Node)">load_okbc_kb</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.util.Hashtable.html">Hashtable</A> load_okbc_kb(<A HREF="java.io.File.html">File</A> path, 
+                                 <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                 <A HREF="OKBC.Node.html">Node</A> action) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="load_okbc_kb"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="load_okbc_kb(java.io.File, OKBC.Kb, OKBC.Node, java.util.Hashtable)">load_okbc_kb</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.util.Hashtable.html">Hashtable</A> load_okbc_kb(<A HREF="java.io.File.html">File</A> path, 
+                                 <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                 <A HREF="OKBC.Node.html">Node</A> action, 
+                                 <A HREF="java.util.Hashtable.html">Hashtable</A> frame_handle_mapping_table) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="load_okbc_kb"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="load_okbc_kb(java.io.File, OKBC.Kb, OKBC.Node, java.util.Hashtable, OKBC.TruthValue)">load_okbc_kb</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.util.Hashtable.html">Hashtable</A> load_okbc_kb(<A HREF="java.io.File.html">File</A> path, 
+                                 <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                 <A HREF="OKBC.Node.html">Node</A> action, 
+                                 <A HREF="java.util.Hashtable.html">Hashtable</A> frame_handle_mapping_table, 
+                                 <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="maybe_okbc_load_warn"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="maybe_okbc_load_warn(java.lang.String)">maybe_okbc_load_warn</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void maybe_okbc_load_warn(<A HREF="java.lang.String.html">String</A> string) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="maybe_okbc_load_warn"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="maybe_okbc_load_warn(OKBC.OKBCString)">maybe_okbc_load_warn</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void maybe_okbc_load_warn(<A HREF="OKBC.OKBCString.html">OKBCString</A> string) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="walk_form_for_interning_given_kb"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="walk_form_for_interning_given_kb(OKBC.Node, java.util.Hashtable, OKBC.Kb, OKBC.TruthValue, OKBC.Node, OKBC.Walker)">walk_form_for_interning_given_kb</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> walk_form_for_interning_given_kb(<A HREF="OKBC.Node.html">Node</A> form, 
+                                                   <A HREF="java.util.Hashtable.html">Hashtable</A> frame_handle_mapping_table, 
+                                                   <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                                   <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p, 
+                                                   <A HREF="OKBC.Node.html">Node</A> action, 
+                                                   <A HREF="OKBC.Walker.html">Walker</A> walker) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="assert_form_given_kb"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="assert_form_given_kb(OKBC.Node, java.util.Hashtable, java.util.Hashtable, OKBC.Kb, OKBC.TruthValue, OKBC.Node, OKBC.Walker)">assert_form_given_kb</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> assert_form_given_kb(<A HREF="OKBC.Node.html">Node</A> form, 
+                                       <A HREF="java.util.Hashtable.html">Hashtable</A> frame_handle_mapping_table, 
+                                       <A HREF="java.util.Hashtable.html">Hashtable</A> handle_to_name_mapping_table, 
+                                       <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                       <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p, 
+                                       <A HREF="OKBC.Node.html">Node</A> action, 
+                                       <A HREF="OKBC.Walker.html">Walker</A> walker) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="walk_form_for_load"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="walk_form_for_load(OKBC.Node, java.util.Hashtable, OKBC.Kb, OKBC.Walker)">walk_form_for_load</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> walk_form_for_load(<A HREF="OKBC.Node.html">Node</A> form, 
+                                     <A HREF="java.util.Hashtable.html">Hashtable</A> frame_handle_mapping_table, 
+                                     <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                     <A HREF="OKBC.Walker.html">Walker</A> walker) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="assert_frame_definition"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="assert_frame_definition(OKBC.Node, java.util.Hashtable, java.util.Hashtable, OKBC.Kb, OKBC.TruthValue, OKBC.Node, OKBC.Walker)">assert_frame_definition</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> assert_frame_definition(<A HREF="OKBC.Node.html">Node</A> form, 
+                                          <A HREF="java.util.Hashtable.html">Hashtable</A> frame_handle_mapping_table, 
+                                          <A HREF="java.util.Hashtable.html">Hashtable</A> handle_to_name_mapping_table, 
+                                          <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                          <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p, 
+                                          <A HREF="OKBC.Node.html">Node</A> action, 
+                                          <A HREF="OKBC.Walker.html">Walker</A> walker) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="load_okbc_kb_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="load_okbc_kb_internal(java.io.File, OKBC.Kb, OKBC.TruthValue, java.util.Hashtable, OKBC.Node, OKBC.Walker)">load_okbc_kb_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="java.util.Hashtable.html">Hashtable</A> load_okbc_kb_internal(<A HREF="java.io.File.html">File</A> path, 
+                                             <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                             <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p, 
+                                             <A HREF="java.util.Hashtable.html">Hashtable</A> frame_handle_mapping_table, 
+                                             <A HREF="OKBC.Node.html">Node</A> action, 
+                                             <A HREF="OKBC.Walker.html">Walker</A> walker) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

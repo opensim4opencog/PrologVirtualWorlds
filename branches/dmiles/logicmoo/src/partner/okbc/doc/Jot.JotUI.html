@@ -1,0 +1,763 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- Jot.JotUI | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class Jot.JotUI
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-Jot.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class Jot.JotUI
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----<A HREF="java.awt.Component.html">java.awt.Component</A>
+           |
+           +----<A HREF="java.awt.Container.html">java.awt.Container</A>
+                   |
+                   +----<A HREF="java.awt.Panel.html">java.awt.Panel</A>
+                           |
+                           +----<A HREF="com.shafir.jct.JctPanel.html">com.shafir.jct.JctPanel</A>
+                                   |
+                                   +----Jot.JotUI
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>JotUI</STRONG>
+     extends com.shafir.jct.<A HREF="com.shafir.jct.JctPanel.html">JctPanel</A>
+     implements com.shafir.jct.<A HREF="com.shafir.jct.JctDragDropListener.html">JctDragDropListener</A>, 
+                java.awt.event.<A HREF="java.awt.event.ActionListener.html">ActionListener</A>, 
+                java.awt.event.<A HREF="java.awt.event.ItemListener.html">ItemListener</A>
+{
+          // Fields 27
+     public <A CLASS=nound HREF="Jot.Jot.html">Jot</A> <A HREF="#browser">browser</A>;
+     public static final <A CLASS=nound HREF="java.awt.Color.html">Color</A> <A HREF="#colorDefaultInstance">colorDefaultInstance</A>;
+     public static final <A CLASS=nound HREF="java.awt.Color.html">Color</A> <A HREF="#colorDefaultSubclass">colorDefaultSubclass</A>;
+     public <A CLASS=nound HREF="java.awt.Dimension.html">Dimension</A> <A HREF="#dimLastAsk">dimLastAsk</A>;
+     public <A CLASS=nound HREF="java.awt.Dimension.html">Dimension</A> <A HREF="#dimLastAxiom">dimLastAxiom</A>;
+     public <A CLASS=nound HREF="java.awt.Dimension.html">Dimension</A> <A HREF="#dimLastCreate">dimLastCreate</A>;
+     public <A CLASS=nound HREF="java.awt.Dimension.html">Dimension</A> <A HREF="#dimLastEnterSlot">dimLastEnterSlot</A>;
+     public <A CLASS=nound HREF="com.shafir.jct.JctFrame.html">JctFrame</A> <A HREF="#frame">frame</A>;
+     public <A CLASS=nound HREF="Jot.ConnectInfo.html">ConnectInfo</A> <A HREF="#info">info</A>;
+     public <A CLASS=nound HREF="Jot.JotGrid.html">JotGrid</A> <A HREF="#ivGrid">ivGrid</A>;
+     public <A CLASS=nound HREF="Jot.JotGridListener.html">JotGridListener</A> <A HREF="#ivGridListener">ivGridListener</A>;
+     public <A CLASS=nound HREF="Jot.JotMenu.html">JotMenu</A> <A HREF="#ivMenu">ivMenu</A>;
+     public <A CLASS=nound HREF="com.shafir.jct.JctLabel.html">JctLabel</A> <A HREF="#ivStatus">ivStatus</A>;
+     public <A CLASS=nound HREF="OKBC.Kb.html">Kb</A> <A HREF="#kb">kb</A>;
+     public <A CLASS=nound HREF="OKBC.Kb.html">Kb</A> <A HREF="#meta_kb">meta_kb</A>;
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#nModified">nModified</A>;
+     public int <A HREF="#numValuesForAsk">numValuesForAsk</A>;
+     public <A CLASS=nound HREF="Jot.Preferences.html">Preferences</A> <A HREF="#prefs">prefs</A>;
+     public <A CLASS=nound HREF="Jot.Preferences.html">Preferences</A> <A HREF="#prefsPermanent">prefsPermanent</A>;
+     public <A CLASS=nound HREF="Jot.KbProperties.html">KbProperties</A> <A HREF="#properties">properties</A>;
+     public <A CLASS=nound HREF="java.awt.Point.html">Point</A> <A HREF="#ptLastAsk">ptLastAsk</A>;
+     public <A CLASS=nound HREF="java.awt.Point.html">Point</A> <A HREF="#ptLastAxiom">ptLastAxiom</A>;
+     public <A CLASS=nound HREF="java.awt.Point.html">Point</A> <A HREF="#ptLastCreate">ptLastCreate</A>;
+     public <A CLASS=nound HREF="java.awt.Point.html">Point</A> <A HREF="#ptLastEnterSlot">ptLastEnterSlot</A>;
+     public <A CLASS=nound HREF="Jot.RecentQueries.html">RecentQueries</A> <A HREF="#queries">queries</A>;
+     public static final <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#sSend">sSend</A>;
+     public <A CLASS=nound HREF="Jot.JotTreeNode.html">JotTreeNode</A> <A HREF="#tnDummy">tnDummy</A>;
+
+          // Constructors 1
+     public <A HREF="#JotUI()">JotUI</A>();
+
+          // Methods 30
+     public void <A HREF="#actionPerformed(java.awt.event.ActionEvent)">actionPerformed</A>(<A CLASS=nound HREF="java.awt.event.ActionEvent.html">ActionEvent</A>);
+     public void <A HREF="#addNewRelationship(OKBC.Node)">addNewRelationship</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#askDialogDone(java.lang.String, java.lang.String, OKBC.InferenceLevel, int, OKBC.Node, java.awt.Point, java.awt.Dimension)">askDialogDone</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, int, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.awt.Point.html">Point</A>, <A CLASS=nound HREF="java.awt.Dimension.html">Dimension</A>);
+     public void <A HREF="#chooseKbDialogDone(OKBC.Node, OKBC.Node)">chooseKbDialogDone</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#chooseKbTypeDialogDone(OKBC.Node)">chooseKbTypeDialogDone</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#chooseSlotsDialogDone()">chooseSlotsDialogDone</A>();
+     public void <A HREF="#createDone(java.awt.Point, java.awt.Dimension)">createDone</A>(<A CLASS=nound HREF="java.awt.Point.html">Point</A>, <A CLASS=nound HREF="java.awt.Dimension.html">Dimension</A>);
+     public void <A HREF="#editAxiomDialogDone(OKBC.Node, java.lang.String, java.awt.Point, java.awt.Dimension)">editAxiomDialogDone</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="java.awt.Point.html">Point</A>, <A CLASS=nound HREF="java.awt.Dimension.html">Dimension</A>);
+     public void <A HREF="#enterSlotDialogDone(OKBC.Node, java.awt.Point, java.awt.Dimension)">enterSlotDialogDone</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.awt.Point.html">Point</A>, <A CLASS=nound HREF="java.awt.Dimension.html">Dimension</A>);
+     public <A CLASS=nound HREF="java.awt.Dimension.html">Dimension</A> <A HREF="#getMinimumSize()">getMinimumSize</A>();
+     public <A CLASS=nound HREF="com.shafir.jct.Jct3DPanel.html">Jct3DPanel</A> <A HREF="#getPanel3d()">getPanel3d</A>();
+     public <A CLASS=nound HREF="java.awt.Dimension.html">Dimension</A> <A HREF="#getPreferredSize()">getPreferredSize</A>();
+     public void <A HREF="#initJotUI(Jot.Jot, OKBC.Kb, Jot.ConnectInfo)">initJotUI</A>(<A CLASS=nound HREF="Jot.Jot.html">Jot</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="Jot.ConnectInfo.html">ConnectInfo</A>);
+     public void <A HREF="#inspect(Jot.EvalInfo)">inspect</A>(<A CLASS=nound HREF="Jot.EvalInfo.html">EvalInfo</A>);
+     public boolean <A HREF="#isNotChild(com.shafir.jct.JctNode, com.shafir.jct.JctNode)">isNotChild</A>(<A CLASS=nound HREF="com.shafir.jct.JctNode.html">JctNode</A>, <A CLASS=nound HREF="com.shafir.jct.JctNode.html">JctNode</A>);
+     public void <A HREF="#itemStateChanged(java.awt.event.ItemEvent)">itemStateChanged</A>(<A CLASS=nound HREF="java.awt.event.ItemEvent.html">ItemEvent</A>);
+     public void <A HREF="#jctDragDrop(com.shafir.jct.JctDragDropEvent)">jctDragDrop</A>(<A CLASS=nound HREF="com.shafir.jct.JctDragDropEvent.html">JctDragDropEvent</A>);
+     public void <A HREF="#loadKbDialogDone(OKBC.Node, OKBC.Node)">loadKbDialogDone</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#mouseDragged(java.awt.event.MouseEvent)">mouseDragged</A>(<A CLASS=nound HREF="java.awt.event.MouseEvent.html">MouseEvent</A>);
+     public void <A HREF="#newKbNameDialogDone(java.lang.String, OKBC.Node)">newKbNameDialogDone</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#oobnEditorDone(OKBC.Node)">oobnEditorDone</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#openLoadedKbDialogDone(OKBC.Node, OKBC.Node)">openLoadedKbDialogDone</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#preferencesDialogDone(Jot.Preferences, boolean)">preferencesDialogDone</A>(<A CLASS=nound HREF="Jot.Preferences.html">Preferences</A>, boolean);
+     public void <A HREF="#removeRelationship(OKBC.Node)">removeRelationship</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#saveKb()">saveKb</A>();
+     public void <A HREF="#saveKbAsDialogDone(java.lang.String)">saveKbAsDialogDone</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>);
+     public void <A HREF="#saveKbConfirmDialogDone(int)">saveKbConfirmDialogDone</A>(int);
+     public void <A HREF="#setAllWaiting(boolean)">setAllWaiting</A>(boolean);
+     public void <A HREF="#slotSelected(Jot.SlotMenuItem)">slotSelected</A>(<A CLASS=nound HREF="Jot.SlotMenuItem.html">SlotMenuItem</A>);
+     public void <A HREF="#updateColor(OKBC.Node, java.awt.Color)">updateColor</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.awt.Color.html">Color</A>);
+}
+</PRE>
+<P>
+<P>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Cross Reference</B></FONT></TD> </TR> </TABLE>
+<BR><DL>
+<DT><B>Returned By: </B>
+<DD>GrapherPanel.<A HREF="OKBCUI.GrapherPanel.html#getJotUI()">getJotUI()</A><P>
+</DL><BR>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Fields</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="colorDefaultSubclass"><FONT COLOR="#0000FF">&middot;</FONT> colorDefaultSubclass</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.awt.Color.html">Color</A> colorDefaultSubclass
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="colorDefaultInstance"><FONT COLOR="#0000FF">&middot;</FONT> colorDefaultInstance</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.awt.Color.html">Color</A> colorDefaultInstance
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="sSend"><FONT COLOR="#0000FF">&middot;</FONT> sSend</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="java.lang.String.html">String</A> sSend
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="info"><FONT COLOR="#FF00FF">&middot;</FONT> info</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="Jot.ConnectInfo.html">ConnectInfo</A> info
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="browser"><FONT COLOR="#FF00FF">&middot;</FONT> browser</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="Jot.Jot.html">Jot</A> browser
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="frame"><FONT COLOR="#FF00FF">&middot;</FONT> frame</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="com.shafir.jct.JctFrame.html">JctFrame</A> frame
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="kb"><FONT COLOR="#FF00FF">&middot;</FONT> kb</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Kb.html">Kb</A> kb
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="meta_kb"><FONT COLOR="#FF00FF">&middot;</FONT> meta_kb</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Kb.html">Kb</A> meta_kb
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="ivMenu"><FONT COLOR="#FF00FF">&middot;</FONT> ivMenu</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="Jot.JotMenu.html">JotMenu</A> ivMenu
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="ivGrid"><FONT COLOR="#FF00FF">&middot;</FONT> ivGrid</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="Jot.JotGrid.html">JotGrid</A> ivGrid
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="ivGridListener"><FONT COLOR="#FF00FF">&middot;</FONT> ivGridListener</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="Jot.JotGridListener.html">JotGridListener</A> ivGridListener
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="ivStatus"><FONT COLOR="#FF00FF">&middot;</FONT> ivStatus</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="com.shafir.jct.JctLabel.html">JctLabel</A> ivStatus
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="properties"><FONT COLOR="#FF00FF">&middot;</FONT> properties</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="Jot.KbProperties.html">KbProperties</A> properties
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="queries"><FONT COLOR="#FF00FF">&middot;</FONT> queries</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="Jot.RecentQueries.html">RecentQueries</A> queries
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="ptLastCreate"><FONT COLOR="#FF00FF">&middot;</FONT> ptLastCreate</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.Point.html">Point</A> ptLastCreate
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="ptLastAxiom"><FONT COLOR="#FF00FF">&middot;</FONT> ptLastAxiom</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.Point.html">Point</A> ptLastAxiom
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="ptLastEnterSlot"><FONT COLOR="#FF00FF">&middot;</FONT> ptLastEnterSlot</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.Point.html">Point</A> ptLastEnterSlot
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="ptLastAsk"><FONT COLOR="#FF00FF">&middot;</FONT> ptLastAsk</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.Point.html">Point</A> ptLastAsk
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="dimLastCreate"><FONT COLOR="#FF00FF">&middot;</FONT> dimLastCreate</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.Dimension.html">Dimension</A> dimLastCreate
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="dimLastAxiom"><FONT COLOR="#FF00FF">&middot;</FONT> dimLastAxiom</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.Dimension.html">Dimension</A> dimLastAxiom
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="dimLastEnterSlot"><FONT COLOR="#FF00FF">&middot;</FONT> dimLastEnterSlot</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.Dimension.html">Dimension</A> dimLastEnterSlot
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="dimLastAsk"><FONT COLOR="#FF00FF">&middot;</FONT> dimLastAsk</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.Dimension.html">Dimension</A> dimLastAsk
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="nModified"><FONT COLOR="#FF00FF">&middot;</FONT> nModified</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> nModified
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="prefs"><FONT COLOR="#FF00FF">&middot;</FONT> prefs</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="Jot.Preferences.html">Preferences</A> prefs
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="prefsPermanent"><FONT COLOR="#FF00FF">&middot;</FONT> prefsPermanent</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="Jot.Preferences.html">Preferences</A> prefsPermanent
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="tnDummy"><FONT COLOR="#FF00FF">&middot;</FONT> tnDummy</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="Jot.JotTreeNode.html">JotTreeNode</A> tnDummy
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="numValuesForAsk"><FONT COLOR="#FF00FF">&middot;</FONT> numValuesForAsk</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public int numValuesForAsk
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<P>
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="JotUI"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="JotUI()">JotUI</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public JotUI() </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="initJotUI"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="initJotUI(Jot.Jot, OKBC.Kb, Jot.ConnectInfo)">initJotUI</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void initJotUI(<A HREF="Jot.Jot.html">Jot</A> _browser, 
+                         <A HREF="OKBC.Kb.html">Kb</A> _kb, 
+                         <A HREF="Jot.ConnectInfo.html">ConnectInfo</A> _info) </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+A valid visible component needs to be displayed for
+        images not to blow up on AWT 32. The URL is the path where the "Data" directory
+        resides.
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="setAllWaiting"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="setAllWaiting(boolean)">setAllWaiting</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void setAllWaiting(boolean b) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="jctDragDrop"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="jctDragDrop(com.shafir.jct.JctDragDropEvent)">jctDragDrop</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void jctDragDrop(<A HREF="com.shafir.jct.JctDragDropEvent.html">JctDragDropEvent</A> evt) </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+Implements JctDragDropListener. This is where we receive drag and drop
+    event from the TreeView.
+<P>
+<DT><B>Implements:</B>
+<DD><A HREF="com.shafir.jct.JctDragDropListener.html#jctDragDrop(com.shafir.jct.JctDragDropEvent)">jctDragDrop</A> in interface <A HREF="com.shafir.jct.JctDragDropListener.html">JctDragDropListener</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="isNotChild"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="isNotChild(com.shafir.jct.JctNode, com.shafir.jct.JctNode)">isNotChild</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean isNotChild(<A HREF="com.shafir.jct.JctNode.html">JctNode</A> parent, 
+                             <A HREF="com.shafir.jct.JctNode.html">JctNode</A> possibleChild) </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+Checks to make sure that the possibleChild is not a child of
+    the parent.
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="actionPerformed"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="actionPerformed(java.awt.event.ActionEvent)">actionPerformed</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void actionPerformed(<A HREF="java.awt.event.ActionEvent.html">ActionEvent</A> evt) </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+Implements Action Listener.
+<P>
+<DT><B>Implements:</B>
+<DD><A HREF="java.awt.event.ActionListener.html#actionPerformed(java.awt.event.ActionEvent)">actionPerformed</A> in interface <A HREF="java.awt.event.ActionListener.html">ActionListener</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="editAxiomDialogDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="editAxiomDialogDone(OKBC.Node, java.lang.String, java.awt.Point, java.awt.Dimension)">editAxiomDialogDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void editAxiomDialogDone(<A HREF="OKBC.Node.html">Node</A> nFrame, 
+                                   <A HREF="java.lang.String.html">String</A> sAxiom, 
+                                   <A HREF="java.awt.Point.html">Point</A> p, 
+                                   <A HREF="java.awt.Dimension.html">Dimension</A> d) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="createDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="createDone(java.awt.Point, java.awt.Dimension)">createDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void createDone(<A HREF="java.awt.Point.html">Point</A> p, 
+                          <A HREF="java.awt.Dimension.html">Dimension</A> d) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="saveKb"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="saveKb()">saveKb</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void saveKb() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="saveKbConfirmDialogDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="saveKbConfirmDialogDone(int)">saveKbConfirmDialogDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void saveKbConfirmDialogDone(int whatNext) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="enterSlotDialogDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="enterSlotDialogDone(OKBC.Node, java.awt.Point, java.awt.Dimension)">enterSlotDialogDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void enterSlotDialogDone(<A HREF="OKBC.Node.html">Node</A> nSlot, 
+                                   <A HREF="java.awt.Point.html">Point</A> p, 
+                                   <A HREF="java.awt.Dimension.html">Dimension</A> d) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="chooseKbTypeDialogDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="chooseKbTypeDialogDone(OKBC.Node)">chooseKbTypeDialogDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void chooseKbTypeDialogDone(<A HREF="OKBC.Node.html">Node</A> nType) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="newKbNameDialogDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="newKbNameDialogDone(java.lang.String, OKBC.Node)">newKbNameDialogDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void newKbNameDialogDone(<A HREF="java.lang.String.html">String</A> sName, 
+                                   <A HREF="OKBC.Node.html">Node</A> nType) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="openLoadedKbDialogDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="openLoadedKbDialogDone(OKBC.Node, OKBC.Node)">openLoadedKbDialogDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void openLoadedKbDialogDone(<A HREF="OKBC.Node.html">Node</A> nKbType, 
+                                      <A HREF="OKBC.Node.html">Node</A> nKb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="chooseKbDialogDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="chooseKbDialogDone(OKBC.Node, OKBC.Node)">chooseKbDialogDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void chooseKbDialogDone(<A HREF="OKBC.Node.html">Node</A> nKbType, 
+                                  <A HREF="OKBC.Node.html">Node</A> nKbLocator) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="loadKbDialogDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="loadKbDialogDone(OKBC.Node, OKBC.Node)">loadKbDialogDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void loadKbDialogDone(<A HREF="OKBC.Node.html">Node</A> nKbType, 
+                                <A HREF="OKBC.Node.html">Node</A> nKbLocator) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="saveKbAsDialogDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="saveKbAsDialogDone(java.lang.String)">saveKbAsDialogDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void saveKbAsDialogDone(<A HREF="java.lang.String.html">String</A> sName) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="itemStateChanged"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="itemStateChanged(java.awt.event.ItemEvent)">itemStateChanged</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void itemStateChanged(<A HREF="java.awt.event.ItemEvent.html">ItemEvent</A> evt) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Implements:</B>
+<DD><A HREF="java.awt.event.ItemListener.html#itemStateChanged(java.awt.event.ItemEvent)">itemStateChanged</A> in interface <A HREF="java.awt.event.ItemListener.html">ItemListener</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="slotSelected"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="slotSelected(Jot.SlotMenuItem)">slotSelected</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void slotSelected(<A HREF="Jot.SlotMenuItem.html">SlotMenuItem</A> smi) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="inspect"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="inspect(Jot.EvalInfo)">inspect</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void inspect(<A HREF="Jot.EvalInfo.html">EvalInfo</A> eInfo) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="addNewRelationship"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="addNewRelationship(OKBC.Node)">addNewRelationship</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void addNewRelationship(<A HREF="OKBC.Node.html">Node</A> relationship) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="removeRelationship"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="removeRelationship(OKBC.Node)">removeRelationship</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void removeRelationship(<A HREF="OKBC.Node.html">Node</A> relationship) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="updateColor"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="updateColor(OKBC.Node, java.awt.Color)">updateColor</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void updateColor(<A HREF="OKBC.Node.html">Node</A> relationship, 
+                           <A HREF="java.awt.Color.html">Color</A> color) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="oobnEditorDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="oobnEditorDone(OKBC.Node)">oobnEditorDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void oobnEditorDone(<A HREF="OKBC.Node.html">Node</A> nChanges) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="chooseSlotsDialogDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="chooseSlotsDialogDone()">chooseSlotsDialogDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void chooseSlotsDialogDone() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="preferencesDialogDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="preferencesDialogDone(Jot.Preferences, boolean)">preferencesDialogDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void preferencesDialogDone(<A HREF="Jot.Preferences.html">Preferences</A> prefNew, 
+                                     boolean bSave) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="askDialogDone"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="askDialogDone(java.lang.String, java.lang.String, OKBC.InferenceLevel, int, OKBC.Node, java.awt.Point, java.awt.Dimension)">askDialogDone</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void askDialogDone(<A HREF="java.lang.String.html">String</A> sQuery, 
+                             <A HREF="java.lang.String.html">String</A> sReplyPattern, 
+                             <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> il, 
+                             int num, 
+                             <A HREF="OKBC.Node.html">Node</A> nLocalOnly, 
+                             <A HREF="java.awt.Point.html">Point</A> pt, 
+                             <A HREF="java.awt.Dimension.html">Dimension</A> d) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="mouseDragged"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="mouseDragged(java.awt.event.MouseEvent)">mouseDragged</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void mouseDragged(<A HREF="java.awt.event.MouseEvent.html">MouseEvent</A> e) </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+Implements mouse motion listener. This initiates a JCT dragDrop Operation
+    when the user drags on the tree.
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="getPreferredSize"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="getPreferredSize()">getPreferredSize</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.Dimension.html">Dimension</A> getPreferredSize() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="java.awt.Container.html#getPreferredSize()">getPreferredSize</A> in class <A HREF="java.awt.Container.html">Container</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="getMinimumSize"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="getMinimumSize()">getMinimumSize</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.Dimension.html">Dimension</A> getMinimumSize() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="java.awt.Container.html#getMinimumSize()">getMinimumSize</A> in class <A HREF="java.awt.Container.html">Container</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="getPanel3d"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="getPanel3d()">getPanel3d</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="com.shafir.jct.Jct3DPanel.html">Jct3DPanel</A> getPanel3d() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-Jot.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

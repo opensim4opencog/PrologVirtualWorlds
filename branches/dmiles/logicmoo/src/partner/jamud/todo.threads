@@ -1,0 +1,2 @@
+
+I need to rework the way that Connections handle IO... I think that the current threaded way (one thread per connection, in addition to the one thread per Player) is ridiculous, and won't scale well. What I need to do instead is implement a change in the plugin such that a Connection registers itself with the Server... the server then has an additional thread which cycles through all the Connections and does IO (without blocking on any of them). 

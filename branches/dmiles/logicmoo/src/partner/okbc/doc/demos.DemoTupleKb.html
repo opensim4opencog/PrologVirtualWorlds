@@ -1,0 +1,187 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- demos.DemoTupleKb | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class demos.DemoTupleKb
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-demos.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class demos.DemoTupleKb
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----<A HREF="OKBC.Node.html">OKBC.Node</A>
+           |
+           +----<A HREF="OKBC.Kb.html">OKBC.Kb</A>
+                   |
+                   +----<A HREF="OKBC.StandardDefaultsKb.html">OKBC.StandardDefaultsKb</A>
+                           |
+                           +----<A HREF="OKBC.CachingKb.html">OKBC.CachingKb</A>
+                                   |
+                                   +----<A HREF="OKBC.AbstractFactStoreKb.html">OKBC.AbstractFactStoreKb</A>
+                                           |
+                                           +----<A HREF="OKBC.TupleKb.html">OKBC.TupleKb</A>
+                                                   |
+                                                   +----demos.DemoTupleKb
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>DemoTupleKb</STRONG>
+     extends OKBC.<A HREF="OKBC.TupleKb.html">TupleKb</A>
+{
+          // Constructors 1
+     public <A HREF="#DemoTupleKb()">DemoTupleKb</A>();
+
+          // Methods 7
+     public static void <A HREF="#ensure_registered()">ensure_registered</A>();
+     public static <A CLASS=nound HREF="OKBC.Kb.html">Kb</A> <A HREF="#get_kb_type_internal()">get_kb_type_internal</A>();
+     public static void <A HREF="#main(java.lang.String[])">main</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>[]);
+
+     public void <A HREF="#cache_hit_hook(OKBC.Node, OKBC.Node, OKBC.TrieResult)">cache_hit_hook</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TrieResult.html">TrieResult</A>);
+     public <A CLASS=nound HREF="OKBC.Values2.html">Values2</A> <A HREF="#cache_miss_hook(OKBC.Node, OKBC.Node)">cache_miss_hook</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     protected <A CLASS=nound HREF="OKBC.Values2.html">Values2</A> <A HREF="#copy_frame_forward_2(OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue, OKBC.Node, OKBC.HashtableNode, OKBC.TruthValue)">copy_frame_forward_2</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.HashtableNode.html">HashtableNode</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Values3.html">Values3</A> <A HREF="#get_slot_values_internal(OKBC.Node, OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.Node, OKBC.ValueSelector, OKBC.TruthValue)">get_slot_values_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.ValueSelector.html">ValueSelector</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+}
+</PRE>
+<P>
+<P>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="DemoTupleKb"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="DemoTupleKb()">DemoTupleKb</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public DemoTupleKb() </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="ensure_registered"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="ensure_registered()">ensure_registered</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void ensure_registered() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.TupleKb.html#ensure_registered()">ensure_registered</A> in class <A HREF="OKBC.TupleKb.html">TupleKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_kb_type_internal"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="get_kb_type_internal()">get_kb_type_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Kb.html">Kb</A> get_kb_type_internal() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.TupleKb.html#get_kb_type_internal()">get_kb_type_internal</A> in class <A HREF="OKBC.TupleKb.html">TupleKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="cache_miss_hook"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="cache_miss_hook(OKBC.Node, OKBC.Node)">cache_miss_hook</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Values2.html">Values2</A> cache_miss_hook(<A HREF="OKBC.Node.html">Node</A> function, 
+                                  <A HREF="OKBC.Node.html">Node</A> key) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.TupleKb.html#cache_miss_hook(OKBC.Node, OKBC.Node)">cache_miss_hook</A> in class <A HREF="OKBC.TupleKb.html">TupleKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="cache_hit_hook"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="cache_hit_hook(OKBC.Node, OKBC.Node, OKBC.TrieResult)">cache_hit_hook</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void cache_hit_hook(<A HREF="OKBC.Node.html">Node</A> function, 
+                              <A HREF="OKBC.Node.html">Node</A> key, 
+                              <A HREF="OKBC.TrieResult.html">TrieResult</A> trie_result) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.TupleKb.html#cache_hit_hook(OKBC.Node, OKBC.Node, OKBC.TrieResult)">cache_hit_hook</A> in class <A HREF="OKBC.TupleKb.html">TupleKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="copy_frame_forward_2"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="copy_frame_forward_2(OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue, OKBC.Node, OKBC.HashtableNode, OKBC.TruthValue)">copy_frame_forward_2</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Values2.html">Values2</A> copy_frame_forward_2(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                          <A HREF="OKBC.Node.html">Node</A> new_name, 
+                                          <A HREF="OKBC.Kb.html">Kb</A> from_kb, 
+                                          <A HREF="OKBC.TruthValue.html">TruthValue</A> error_p, 
+                                          <A HREF="OKBC.Node.html">Node</A> missing_frame_action, 
+                                          <A HREF="OKBC.HashtableNode.html">HashtableNode</A> frame_handle_mapping_table, 
+                                          <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#copy_frame_forward_2(OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue, OKBC.Node, OKBC.HashtableNode, OKBC.TruthValue)">copy_frame_forward_2</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_slot_values_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_slot_values_internal(OKBC.Node, OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.Node, OKBC.ValueSelector, OKBC.TruthValue)">get_slot_values_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Values3.html">Values3</A> get_slot_values_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                              <A HREF="OKBC.Node.html">Node</A> slot, 
+                                              <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> inference_level, 
+                                              <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                              <A HREF="OKBC.Node.html">Node</A> number_of_values, 
+                                              <A HREF="OKBC.ValueSelector.html">ValueSelector</A> value_selector, 
+                                              <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.StandardDefaultsKb.html#get_slot_values_internal(OKBC.Node, OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.Node, OKBC.ValueSelector, OKBC.TruthValue)">get_slot_values_internal</A> in class <A HREF="OKBC.StandardDefaultsKb.html">StandardDefaultsKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="main"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="main(java.lang.String[])">main</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void main(<A HREF="java.lang.String.html">String</A>[] argv) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.TupleKb.html#main(java.lang.String[])">main</A> in class <A HREF="OKBC.TupleKb.html">TupleKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-demos.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

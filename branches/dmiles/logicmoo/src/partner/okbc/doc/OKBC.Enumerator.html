@@ -1,0 +1,240 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- OKBC.Enumerator | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class OKBC.Enumerator
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class OKBC.Enumerator
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----<A HREF="OKBC.Node.html">OKBC.Node</A>
+           |
+           +----OKBC.Enumerator
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>Enumerator</STRONG>
+     extends OKBC.<A HREF="OKBC.Node.html">Node</A>
+{
+          // Constructors 1
+     public <A HREF="#Enumerator()">Enumerator</A>();
+
+          // Methods 13
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#internThing(OKBC.Node, OKBC.Connection)">internThing</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>);
+
+     protected void <A HREF="#encode(java.io.PrintWriter, boolean)">encode</A>(<A CLASS=nound HREF="java.io.PrintWriter.html">PrintWriter</A>, boolean);
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#fetch()">fetch</A>();
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#fetch(OKBC.Node)">fetch</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#fetch_list_of_at_most(OKBC.Node)">fetch_list_of_at_most</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#free()">free</A>();
+     public <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A> <A HREF="#has_more()">has_more</A>();
+     public boolean <A HREF="#has_more_p()">has_more_p</A>();
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#next()">next</A>();
+     public void <A HREF="#prefetch()">prefetch</A>();
+     public void <A HREF="#prefetch(OKBC.Node)">prefetch</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public void <A HREF="#prefetch(OKBC.Node, OKBC.Node)">prefetch</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#toString()">toString</A>();
+}
+</PRE>
+<P>
+<P>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Cross Reference</B></FONT></TD> </TR> </TABLE>
+<BR><DL>
+<DT><B>Extended By: </B>
+<DD><A HREF="OKBC.ExhaustiveEnumerator.html">ExhaustiveEnumerator</A>, <A HREF="OKBC.NetworkEnumerator.html">NetworkEnumerator</A><P>
+<DT><B>Returned By: </B>
+<DD>Many
+<P>
+</DL><BR>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Enumerator"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Enumerator()">Enumerator</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Enumerator() </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+Default constructor
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="encode"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="encode(java.io.PrintWriter, boolean)">encode</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void encode(<A HREF="java.io.PrintWriter.html">PrintWriter</A> s, 
+                         boolean client_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#encode(java.io.PrintWriter, boolean)">encode</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="internThing"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="internThing(OKBC.Node, OKBC.Connection)">internThing</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> internThing(<A HREF="OKBC.Node.html">Node</A> the_id, 
+                                  <A HREF="OKBC.Connection.html">Connection</A> connection) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="free"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="free()">free</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void free() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="has_more"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="has_more()">has_more</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.TruthValue.html">TruthValue</A> has_more() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="has_more_p"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="has_more_p()">has_more_p</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean has_more_p() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="prefetch"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="prefetch()">prefetch</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void prefetch() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="prefetch"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="prefetch(OKBC.Node)">prefetch</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void prefetch(<A HREF="OKBC.Node.html">Node</A> number_of_values) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="prefetch"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="prefetch(OKBC.Node, OKBC.Node)">prefetch</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void prefetch(<A HREF="OKBC.Node.html">Node</A> number_of_values, 
+                        <A HREF="OKBC.Node.html">Node</A> increment) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="fetch"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="fetch()">fetch</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> fetch() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="fetch"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="fetch(OKBC.Node)">fetch</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> fetch(<A HREF="OKBC.Node.html">Node</A> number_of_values) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="next"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="next()">next</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> next() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="fetch_list_of_at_most"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="fetch_list_of_at_most(OKBC.Node)">fetch_list_of_at_most</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> fetch_list_of_at_most(<A HREF="OKBC.Node.html">Node</A> number_of_values) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="toString"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="toString()">toString</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.lang.String.html">String</A> toString() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="java.lang.Object.html#toString()">toString</A> in class <A HREF="java.lang.Object.html">Object</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>
