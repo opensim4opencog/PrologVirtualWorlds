@@ -1,0 +1,84 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateLight</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateLight</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Creates and adds a light to a frame. <b>CreateLight</b> is a member of 
+the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CreateLight</b>&nbsp;[<i>bstrName</i>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>CreateLight</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object. <td>
+	</TR>
+	<TR>
+		<td class="boldItal">[bstrName]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The name of the light.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The light that is created and added is a white <b>Point</b> light. After you have created the light, you can adjust its properties using the <a href="SetLightColor.htm">SetLightColor</a> and <a href="SetLightType.htm">SetLightType</a> methods.
+<p>For more information on the types of <b>Lights</b> available, see the <a href="GetLightType.htm">GetLightType</a> topic.
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.CreateLight &quot;Spotlight1&quot;</pre>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,715 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "vwsystem.rc2"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""vwsystem.rc2""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""vwsystem.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_DSERV               REGISTRY DISCARDABLE    "DServ.rgs"
+IDR_AVATARPROFILE       REGISTRY DISCARDABLE    "AvProf.rgs"
+IDR_DLTHREAD            REGISTRY DISCARDABLE    "dlthread.rgs"
+IDR_VWSYSEX             REGISTRY DISCARDABLE    "vwsysex.rgs"
+IDR_THINGEXEMPLAR       REGISTRY DISCARDABLE    "vwthing.rgs"
+IDR_AVATAREXEMPLAR      REGISTRY DISCARDABLE    "avatar.rgs"
+IDR_PORTALEXEMPLAR      REGISTRY DISCARDABLE    "portal.rgs"
+IDR_ROOMEXEMPLAR        REGISTRY DISCARDABLE    "room.rgs"
+IDR_ARTIFACTEXEMPLAR    REGISTRY DISCARDABLE    "artifact.rgs"
+IDR_AUTHENTICATION      REGISTRY DISCARDABLE    "authshun.rgs"
+IDR_AUTHENTICATE        REGISTRY DISCARDABLE    "authcate.rgs"
+IDR_IWPORTALEXEMPLAR    REGISTRY DISCARDABLE    "IWportal.rgs"
+IDR_STATEMACHINEEXEMPLAR REGISTRY DISCARDABLE    "statemch.rgs"
+IDR_VWCLIENTOCX         REGISTRY DISCARDABLE    "vwcliocx.rgs"
+IDR_HOSTEXEMPLAR        REGISTRY DISCARDABLE    "host.rgs"
+IDR_WEBPAGEEXEMPLAR     REGISTRY DISCARDABLE    "WebPage.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_LOGON DIALOG DISCARDABLE  0, 0, 287, 101
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Enter Network Password"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_USER,51,28,162,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PASSWORD,51,49,162,14,ES_PASSWORD | ES_AUTOHSCROLL
+    EDITTEXT        IDC_DOMAIN,51,70,162,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,230,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,230,24,50,14
+    LTEXT           "Enter your network password for Microsoft Networking",
+                    IDC_STATIC,7,7,194,11
+    LTEXT           "&User name:",IDC_STATIC,7,30,37,8
+    LTEXT           "&Password:",IDC_STATIC,7,51,34,8
+    LTEXT           "&Domain:",IDC_STATIC,7,72,27,8
+END
+
+IDD_PASSWORD DIALOG DISCARDABLE  320, 240, 186, 63
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Microsoft Virtual Worlds"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EDIT_PASS,49,21,112,14,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,129,42,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,63,42,50,14
+    LTEXT           "This avatar requires a password in this world.",
+                    IDC_STATIC,7,8,172,12
+    LTEXT           "Password:",IDC_STATIC,7,25,34,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_LOGON, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 280
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 94
+    END
+
+    IDD_PASSWORD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 56
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ISCONNECTED_PROP    "IsConnected"
+    IDS_INVOKEMETHODFAILED_METHOD "OnInvokeMethodFailed"
+    IDS_ACTIVATE_EVENT      "Activate"
+    IDS_DEACTIVATE_EVENT    "Deactivate"
+    IDS_PROJNAME            "VWSystem"
+    IDS_VWODB_DESC          "Object Repository Class"
+    IDS_SYSTEMACTIVATE_EVENT "SystemActivate"
+    IDS_SYSTEMDEACTIVATE_EVENT "SystemDeactivate"
+    IDS_ISFERTILE_PROP      "IsFertile"
+    IDS_ISOPEN_PROP         "IsOpen"
+    IDS_ISNOTICEABLE_PROP   "IsNoticeable"
+    IDS_ISEXEMPLAR_PROP     "IsExemplar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VWCLIENT_DESC       "VWClient Class"
+    IDS_WORLD_DESC          "World Class"
+    IDS_VWADMIN_DESC        "Admin Class"
+    IDS_PROPLIST_DESC       "Property List Class"
+    IDS_PROPMAP_DESC        "Property Map Class"
+    IDS_UNKNOWN_TYPE        "Unknown"
+    IDS_PROPLIST_TYPE       "Property List"
+    IDS_PROPMAP_TYPE        "Property Map"
+    IDS_THING_DESC          "Thing Class"
+    IDS_THING_TYPE          "Instance"
+    IDS_NAME_PROP           "Name"
+    IDS_THINGDEF_DESC       "ThingDefault Class"
+    IDS_CONTAINER_PROP      "Container"
+    IDS_OWNER_PROP          "Owner"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VWSERVER_DESC       "Server Class"
+    IDS_COMMODULE_DESC      "COM Module Class"
+    IDS_SCRIPTMODULE_DESC   "Script Module Class"
+    IDS_VWCOMM_DESC         "Comm Class"
+    IDS_AUTHENTICATION_PROP "Authentication"
+    IDS_SELF_EVENT          "On"
+    IDS_PEER_EVENT          "OnPeer"
+    IDS_PARENT_EVENT        "OnContainer"
+    IDS_CHILD_EVENT         "OnContent"
+    IDS_CONTENTS_PROP       "Contents"
+    IDS_ENTER_EVENT         "Enter"
+    IDS_LEAVE_EVENT         "Leave"
+    IDS_VWSTATMGR_DESC      "Statistics Manager Class"
+    IDS_METHOD_DESC         "Method Class"
+    IDS_METHOD_TYPE         "Method"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DESCRIPTION_PROP    "Description"
+    IDS_DESCRIPTION_DEFAULT "<unknown>"
+    IDS_WORLD_TYPE          "World"
+    IDS_MARSHBUF_DESC       "Marshall Buffer Class"
+    IDS_UNMARSHBUF_DESC     "UnMarshall Buffer Class"
+    IDS_CONNECTION_PROP     "Connection"
+    IDS_CONNECT_EVENT       "Connect"
+    IDS_DISCONNECT_EVENT    "Disconnect"
+    IDS_PROPCHANGE_ON       "On"
+    IDS_PROPERTYSECURITY_DESC "Property Security Class"
+    IDS_COMMODULE_TYPE      "COM Module"
+    IDS_SCRIPTMODULE_TYPE   "Script Module"
+    IDS_PROPCHANGE_CHANGED  "Changed"
+    IDS_CREATE_EVENT        "Create"
+    IDS_DESTROY_EVENT       "Destroy"
+    IDS_SYSCONNECT_EVENT    "SystemConnect"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SYSDISCONNECT_EVENT "SystemDisconnect"
+    IDS_CURRENTID_PROP      "CurrentID"
+    IDS_ROOM_TYPE           "Room"
+    IDS_AVATAR_TYPE         "Avatar"
+    IDS_MOVETO_METHOD       "MoveInto"
+    IDS_AVATARS_PROP        "Avatars"
+    IDS_EXEMPLARS_PROP      "Exemplars"
+    IDS_MODULES_PROP        "Modules"
+    IDS_WIELDED_PROP        "Wielded"
+    IDS_SYSTEMCREATE_EVENT  "SystemCreate"
+    IDS_SYSTEMDESTROY_EVENT "SystemDestroy"
+    IDS_MENUITEM_DESC       "Menu Item Class"
+    IDS_MENUITEM_TYPE       "Menu Item"
+    IDS_MENU_DESC           "Menu Class"
+    IDS_MENU_TYPE           "Menu"
+    IDS_PROPCHANGE_ACCESS   "Access"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ISCLONEABLE_PROP    "IsCloneable"
+    IDS_GUIDS_PROP          "GUIDs"
+    IDS_GUID_PROP           "GUID"
+    IDS_OCXPROXY_TYPE       "OCXProxy"
+    IDS_OCXPROXY_DESC       "OCXProxy Class"
+    IDS_PROFILE_TYPE        "Avatar Profile"
+    IDS_AVATARPROFILE_DESC  "Avatar Profile Class"
+    IDS_PROFILEDATA_TYPE    "Avatar Profile Data"
+    IDS_AVATARPROFILEDATA_DESC "Avatar Profile Data Class"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_INVOKEEXCEPTION     "Exception caught during IDispatch::Invoke"
+    IDS_FILEEXCEPTION       "Exception during file I/O (MFC)"
+    IDS_FILEREADERROR       "File read error"
+    IDS_INVALIDMODULE       "Invalid module"
+    IDS_COLLECTIONERROR     "Generic collection error"
+    IDS_WRONGPROPERTYTYPE   "Incorrect VARIANT type for property"
+    IDS_UNKNOWNTYPE         "Invalid Object Property type"
+    IDS_INVALIDPROPERTYLIST "Invalid property list"
+    IDS_PROPERTYEXISTS      "Property already exists"
+    IDS_INVALIDPROPERTYMAP  "Invalid property map"
+    IDS_PROPERTYNOTEXIST    "Property doesn't exist"
+    IDS_METHODEXISTS        "Method already exists"
+    IDS_METHODNOTEXIST      "Method doesn't exist"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_INVALIDMETHOD       "Invalid method"
+    IDS_INVALIDMETHODMAP    "Invalid method map"
+    IDS_CONNECTIONERROR     "Error assigning connection to avatar"
+    IDS_INVALIDCREATUREMAP  "Invalid avatar map"
+    IDS_EXEMPLAREXISTS      "Exemplar already exists"
+    IDS_INVALIDOBJECT       "Invalid object"
+    IDS_EXEMPLARNOTEXIST    "Exemplar doesn't exist"
+    IDS_INVALIDEXEMPLARMAP  "Invalid exemplar map"
+    IDS_CREATUREEXISTS      "Avatar already exists"
+    IDS_INVALIDTOOLMAP      "Invalid tool map"
+    IDS_INVALIDMODULEMAP    "Invalid module map"
+    IDS_STUBOBJECT          "Object is a stub: data not marshalled over yet"
+    IDS_UNKNOWNPROPERTYTYPE "Unsupported VARIANT type for property"
+    IDS_UNKNOWNMESSAGETYPE  "Unknown message type from server"
+    IDS_MODULEEXISTS        "Module already exists"
+    IDS_MODULENOTEXIST      "Module doesn't exist"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TOOLEXISTS          "Tool already exists"
+    IDS_TOOLNOTEXIST        "Tool doesn't exist"
+    IDS_INVALIDMODULETYPE   "Invalid module type"
+    IDS_UNKNOWNPROGID       "Unknown PROGID"
+    IDS_INVALIDCONNECTION   "Invalid connection"
+    IDS_INTERFACENOTSUPPORTED "Requested OLE interface is not supported"
+    IDS_INVALIDTRACELEVEL   "Invalid trace level"
+    IDS_COLLECTIONLEVEL     "Collections within collections are not supported"
+    IDS_PERMISSION_DENIED   "Security violation: Permission denied"
+    IDS_SYNTAX_ERROR        "Syntax error in permissions string"
+    IDS_UNKNOWNTRACECOMPONENT "Unknown trace component"
+    IDS_ALREADYCONNECTED    "User is already connected to this V-Worlds server"
+    IDS_OBJECTNOTFOUND      "Object not found"
+    IDS_UNKNOWNCLSIDINDEX   "Unknown CLSID index"
+    IDS_INVALIDLISTINDEX    "Invalid list index"
+    IDS_EMPTYPROPERTYLIST   "Property list is already empty"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TYPE_MISMATCH       "Security violation: Type mismatch between old and new property"
+    IDS_INVALIDDEFAULTSCRIPT "Failed to load default ActiveScript file"
+    IDS_INVALIDWORLD        "Invalid world object"
+    IDS_INVALIDBITSTATE     "Invalid security bit state"
+    IDS_EVENTABORTED        "Event firing was aborted"
+    IDS_EXEMPLARNOTFERTILE  "Cannot instance an infertile exemplar"
+    IDS_INVALIDPROPERTYNAME "Invalid property name"
+    IDS_INVALIDEXEMPLARTYPE "Invalid exemplar type"
+    IDS_INVALIDINSTANCENAME "Invalid instance name"
+    IDS_INVALIDSCRIPTENGINE "Invalid ActiveScript engine"
+    IDS_UNKNOWNSCRIPTERROR  "Unknown ActiveScript error - probably an error parsing the script file"
+    IDS_INVALIDCONTAINER    "Invalid container for object"
+    IDS_AVATARNOTEXIST      "Avatar doesn't exist"
+    IDS_INVALIDSECURITY     "Invalid property security information"
+    IDS_ONLYRECONNECTFROMCLIENT 
+                            "Can only reconnect to new server from client-side"
+    IDS_OBJECTNOTEXEMPLAR   "Cannot create an exemplar based on an object instance (must be an exemplar)"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CLIENTALREADYCONNECTED 
+                            "Client is already connected to a V-Worlds server"
+    IDS_WINDOWCREATIONFAILURE "Error creating dummy window"
+    IDS_POSTMESSAGEFAILURE  "Error posting message to queue"
+    IDS_INVALIDREPLYFROMSERVER "Invalid reply from server"
+    IDS_INVALIDDATABASENAME "Invalid database name"
+    IDS_CONNECTFAILED       "Failed to connect to V-Worlds server.  Check server path or world name"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SERVER_OFFLINEWORLD "The world is marked offline."
+    IDS_SERVER_ALREADY_REGISTERED 
+                            "The GUID or filename of this world is already taken."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_INETFILEMANAGER_DESC "Internet File Manager Class"
+    IDS_ADDDEFAULTKEYS_METHOD "AddDefaultKeys"
+    IDS_VWANIMATOR_DESC     "Animator Class"
+    IDS_VWANIMATION_DESC    "Animation Class"
+    IDS_VWHTML_DESC         "HTML Class"
+    IDS_VWHTMLHELPER_DESC   "HTML Helper Class"
+    IDS_MODULE_TYPE         "Module"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ANNOUNCE_METHOD     "Announce"
+    IDS_SYSTEMENTER_EVENT   "SystemEnter"
+    IDS_SYSTEMLEAVE_EVENT   "SystemLeave"
+    IDS_PASSWORD_PROP       "Password"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ALREADYOPEN         "Object repository is already open"
+    IDS_DBCREATEERROR       "Error creating object repository - HKLM\\Microsoft\\V-Worlds\\Path\\WorldPath registry key probably points to an invalid directory"
+    IDS_DBNOTEXIST          "Failed to create object repository - file does not exist"
+    IDS_DBREADERROR         "Error reading from object repository"
+    IDS_DBOPENERROR         "Error opening object repository"
+    IDS_INVALIDDBSIGNATURE  "Failed to open object repository - version mismatch between server and physical file"
+    IDS_OBJECTNOTEXIST      "Specified object does not exist in object repository"
+    IDS_INVALIDDBRECORD     "Invalid object repository record"
+    IDS_NOTPERSISTMODE      "Cannot commit changes to object repository (not in persistent mode)"
+    IDS_BACKUPFAILED        "Backup of object repository failed"
+    IDS_LOGRECORDTOOLARGE   "Tried to write too large a log record"
+    IDS_NOTOPEN             "Object repository has not been opened"
+    IDS_INVALIDDBNAME       "Invalid filename for object repository"
+    IDS_DBALREADYEXIST      "Failed to create object repository - file already exists"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_DLCOULDNTCONNECT    "Failed connecting to server"
+    IDS_DLCOULDNTACCEPT     "Failed accepting incoming connection"
+    IDS_DLNOTINITIALIZED    "Communications layer not initialized"
+    IDS_DLINVALIDCONFIGURATION "Invalid configuration of communications layer"
+    IDS_DLUNKNOWNERROR      "Unknown communications layer error"
+    IDS_DLINVALIDPARAMETER  "Invalid parameter passed to communications layer"
+    IDS_DLINTERNALTIMEOUT   "Internal timeout during synchronous write"
+    IDS_DLERRORDURINGSYNCHWRITE "Error during synchronous write"
+    IDS_DLNOMESSAGES        "No messages waiting to be read by communications layer"
+    IDS_CONNECTIONNOTFOUND  "Incoming message has unknown connection"
+    IDS_INVALIDSOCKET       "Invalid socket"
+    IDS_IMPROPERSTATE       "Communications layer is in improper state"
+    IDS_WINSOCKERROR        "Windows Sockets error occurred"
+    IDS_COULDNTINITIALIZE   "Failed to initialize communications layer"
+    IDS_ALREADYINWRITESYNCH "Failed to send synchronous message to server - already in synchronous send"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_FILENOTFOUND        "Failed to retrieve file from HTTP server or local content path"
+    IDS_INVALIDROOTURL      "No root URL was set.  Failed to retrieve file from local content path"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NOTINITIALIZED      "DirectSound has not been initialized"
+    IDS_ERRORMAPPINGFILE    "Error during file mapping of WAV audio file"
+    IDS_INVALIDSOUNDFORMAT  "Invalid format of WAV audio file"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_INSTANCENOTCLONEABLE "Object instance is not cloneable"
+    IDS_EXEMPLARNOTCLONEABLE 
+                            "Exemplars are not cloneable.  Use CreateExemplar instead."
+    IDS_INVALIDURLFORMAT    "Invalid URL format for server"
+    IDS_ONLYSERVERSIDE      "This method can only be invoked on the server"
+    IDS_INVALIDPARENT       "Object property or method has already been added to a collection"
+    IDS_INVALIDWORLDREGISTRY "Invalid registration of installed V-Worlds"
+    IDS_PROCESSMSGEXCEPTION "Exception caught during message processing"
+    IDS_INVALIDBSTRSIZE     "Invalid BSTR length"
+    IDS_ALREADYDESTROYED    "Object instance has already been destroyed"
+    IDS_INVALIDEXEMPLAR     "Invalid exemplar.  Cannot create avatars with CreateInstance"
+    IDS_INVALIDPASSWORD     "Invalid password.  Failed to connect avatar"
+    IDS_CANTDESTROYUSER     "Cannot destroy user"
+    IDS_CANTDESTROYCONTAINER "Cannot destroy user's container"
+    IDS_CANTDESTROYROOM     "Cannot destroy rooms"
+    IDS_INVALIDCONTENTPATH  "HKLM\\Microsoft\\V-Worlds\\Paths\\ContentPath registry key does not exist"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_START_ATOM          "Global"
+    IDS_STRING5001          "{00000000-0000-0000-0000-000000000000}"
+    IDS_STRING5002          "Artifact"
+    IDS_STRING5003          "Avatar"
+    IDS_STRING5004          "Room"
+    IDS_STRING5005          "Portal"
+    IDS_STRING5006          "IWPortal"
+    IDS_STRING5007          "WebPage"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VWPORTAL_INVALIDINDEX 
+                            "Index in Transport is not valid - please check that the portal has at least one valid destination portal in its Destinations list."
+    IDS_VWPORTAL_E_INVALIDDESTINATION 
+                            "You are trying to transport to an invalid destination.  Please check that the portal's Destinations list only contains valid portals in this world."
+    IDS_VWPORTAL_UNKNOWN    "Portal: An unknown error has occured."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VWAVATAR_NODEFAULTROOMORPORTAL 
+                            "Need to specify default room and/or portal"
+    IDS_VWAVATAR_NOPROFILE  "Unable to retrieve profile for avatar."
+    IDS_VWAVATAR_WHISPERNOTALLOWED "Whispering is not allowed in this room."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_INVALIDAVATARGRAPHICSPATH 
+                            "HKLM\\Microsoft\\V-Worlds\\Paths\\AvatarGraphics registry key does not exist"
+    IDS_INVALIDAVATARPATH   "HKLM\\Microsoft\\V-Worlds\\Paths\\AvatarPath registry key does not exist"
+    IDS_INVALIDPROFILE      "Failed to read avatar profile from disk"
+    IDS_INVALIDHELPPATH     "HKLM\\Microsoft\\V-Worlds\\Paths\\HelpPath registry key does not exist"
+    IDS_INVALIDWORLDPATH    "HKLM\\Microsoft\\V-Worlds\\Paths\\WorldPath registry key does not exist"
+    IDS_CANTDESTROYAVATAR   "Cannot destroy avatars"
+    IDS_INVALIDDSURL        "Invalid URL for directory server"
+    IDS_NOTCLIENTMODULE     "Cannot assign server-side module to client-side method"
+    IDS_NOTSERVERMODULE     "Cannot assign client-side module to server-side method"
+    IDS_NOTSAFEFORSCRIPTING "Component is not safe for scripting"
+    IDS_INVALIDPROFILEVERSION 
+                            "Failed to read avatar profile - version mismatch between client and physical file"
+    IDS_INVALIDCLIENTVERSION 
+                            "Failed to process network message - version mismatch between client and server"
+    IDS_SCRIPTNOTFOUND      "Failed to download script from HTTP server or local content path"
+    IDS_COMPONENTNOTFOUND   "Failed to create instance of COM component.  Component not registered on system"
+    IDS_INVALIDONACCESSMETHOD 
+                            "Failed to add method.  On<Property>Access methods must be marked as both METHOD_CLIENT and METHOD_SERVER"
+    IDS_EXTERNALCALLONLY    "Method is only callable from external script"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VWTHING_MOVEINTOPOLICYDENIED 
+                            "You do not have permission to complete this operation. (A MoveInto security check failed.)"
+    IDS_VWTHING_E_ACCEPTLEAVEDENIED 
+                            "You do not have permission to complete this operation.  (AcceptLeave failed in MoveInto.) "
+    IDS_VWTHING_ALLOWLEAVEDENIED 
+                            "You do not have permission to complete this operation.  (AllowLeave failed in MoveInto.) "
+    IDS_VWTHING_ACCEPTENTERDENIED 
+                            "You do not have permission to complete this operation.  (AcceptEnter failed in MoveInto.) "
+    IDS_VWTHING_ALLOWENTERDENIED 
+                            "You do not have permission to complete this operation.  (AllowEnter failed in MoveInto.) "
+    IDS_VWTHING_TAKENOTINCONTAINER "Specified object is not in your container"
+    IDS_VWTHING_DROPNOTINCONTENTS "Specified object is not in your contents"
+    IDS_VWTHING_TAKEPERMISSIONDENIED 
+                            "You do not have permission to complete the Take operation.  (The object's IsTakeable property is set to false.)"
+    IDW_VWTHING_UNKNOWN     "Thing: An unknown error has occured."
+    IDS_VWTHING_NOSECURITYONSERVER 
+                            "Server-side method should not check security."
+    IDS_VWTHING_NOSECURITYFORUNKNOWNUSER 
+                            "Caller must be user to check security."
+    IDS_VWTHING_NOTCLIENTPROPERTY "Item is not a client property."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VWCORE_FILEUPLOADERROR "Unable to upload the requested file."
+    IDS_VWCORE_NOTAWIZARD   "Cannot convert because avatar is not a wizard."
+    IDS_VWCORE_NOTANAVATAR  "Cannot complete command because target is not a V-Worlds Avatar."
+    IDS_VWCORE_NOTAHOST     "Cannot complete command because target is not a V-Worlds Host."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VWHOST_NOTAHOST     "You do not have permission to complete this operation.  (You must be a host to log off someone.)"
+    IDS_VWHOST_CANTLOGOFFWIZARD "A wizard cannot be logged off."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VWIWPORTAL_E_NODESTINATION 
+                            "The interworld portal you are trying to go through does not have any destinations set.  (To add a destination, add a string of form servername/worldname to the Destinations property list of the interworld portal.)"
+    IDS_VWIWPORTAL_E_INVALIDDESTINATION 
+                            "You are trying to transport to an invalid destination world.  Please check that this interworld portal's Destinations list contains valid strings of servername/worldname pairs."
+    IDS_VWIWPORTAL_E_RECONNECTFAILED 
+                            "Reconnect failed.  Please check that the portal's Destinations list contains a valid server/worldname."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_EXCEEDEDOBJECTQUOTA "Your object quota has been exceeded. Try destroying other objects you have created"
+    IDS_CANTDESTROYEXEMPLAR "Cannot destroy exemplars"
+    IDS_INVALIDMETHODNAME   "Invalid method name"
+    IDS_INVALIDWORLDNAME    "Invalid world name"
+    IDS_INVALIDAVATARNAME   "Invalid avatar name"
+    IDS_INVALIDNAME         "Invalid name"
+    IDS_NORECONNECTTOSAMEWORLD 
+                            "Invalid servername/worldname. Reconnect failed because you are trying to connect to the same world you are currently logged in to."
+    IDS_INVALIDMETHODPERMISSIONS 
+                            "Invalid permissions for this method.  If PS_EXECUTE is set, PS_READ must also be set"
+    IDS_INVALIDDIRECTORYSERVICEPAGE 
+                            "Directory Service Page URL does not exist in registry"
+    IDS_PARSESCRIPTERROR    "Error parsing text in script module"
+    IDS_MODULESHUTDOWN      "Failed to invoke method.  The associated module has been deleted or failed to be initialized"
+    IDS_CANTCREATEAVATAR    "Failed to create instance - cannot create instances of avatars with CreateInstance method. "
+    IDS_RUNTIMESCRIPTERROR  "Error during invocation of method in script module"
+    IDS_COPYINGNOTSUPPORTED "Copying orphaned PropertyList objects is not supported."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING5008          "Host"
+    IDS_STRING5009          "Thing"
+    IDS_STRING5010          "StateMachine"
+    IDS_STRING5011          "System"
+    IDS_STRING5012          "Method"
+    IDS_STRING5013          "Name"
+    IDS_STRING5014          "Owner"
+    IDS_STRING5015          "Contents"
+    IDS_STRING5016          "Container"
+    IDS_STRING5017          "IsComplete"
+    IDS_STRING5018          "IsExemplar"
+    IDS_STRING5019          "IsAuthor"
+    IDS_STRING5020          "IsCloneable"
+    IDS_STRING5021          "IsFertile"
+    IDS_STRING5022          "IsTakeable"
+    IDS_STRING5023          "IsUIVisible"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING5024          "IsWizard"
+    IDS_STRING5025          "IsOpen"
+    IDS_STRING5026          "IsNoticeable"
+    IDS_STRING5027          "Menu"
+    IDS_STRING5028          "Menu Item"
+    IDS_STRING5029          "Avatars"
+    IDS_STRING5030          "Modules"
+    IDS_STRING5031          "ModuleNameList"
+    IDS_STRING5032          "CurrentID"
+    IDS_STRING5033          "CanChangeContainer"
+    IDS_STRING5034          "DefaultPortal"
+    IDS_STRING5035          "DefaultRoom"
+    IDS_STRING5036          "DefaultObjectQuota"
+    IDS_STRING5037          "DefaultAvatarExemplar"
+    IDS_STRING5038          "Description"
+    IDS_STRING5039          "EnableRoamingProfiles"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING5040          "EnableSecurity"
+    IDS_STRING5041          "Exemplars"
+    IDS_STRING5042          "GUID"
+    IDS_STRING5043          "GUIDs"
+    IDS_STRING5044          "Profile"
+    IDS_STRING5045          "Property List"
+    IDS_STRING5046          "Property Map"
+    IDS_STRING5047          "CreatePropertyList"
+    IDS_STRING5048          "WorldDescription"
+    IDS_STRING5049          "WorldName"
+    IDS_STRING5050          "ServerName"
+    IDS_STRING5051          "Profile"
+    IDS_STRING5052          "COM Module"
+    IDS_STRING5053          "NumberOfAvatars"
+    IDS_STRING5054          "NumberOfObjects"
+    IDS_STRING5055          "AcceptEnter"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING5056          "AcceptLeave"
+    IDS_STRING5057          "AllowEnter"
+    IDS_STRING5058          "AllowLeave"
+    IDS_STRING5059          "AcceptTransport"
+    IDS_STRING5060          "AllowTransport"
+    IDS_STRING5061          "ContainerMenu"
+    IDS_STRING5062          "ContentMenu"
+    IDS_STRING5063          "SelfMenu"
+    IDS_STRING5064          "IsWielded"
+    IDS_STRING5065          "IsWieldable"
+    IDS_STRING5066          "LookAt"
+    IDS_STRING5067          "Take"
+    IDS_STRING5068          "Drop"
+    IDS_STRING5069          "Find"
+    IDS_STRING5070          "MoveInto"
+    IDS_STRING5071          "OnAction"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING5072          "OnContentEnter"
+    IDS_STRING5073          "OnContentLeave"
+    IDS_STRING5074          "OnContentSystemConnect"
+    IDS_STRING5075          "OnContentSystemDisconnect"
+    IDS_STRING5076          "OnContentSystemEnter"
+    IDS_STRING5077          "OnContentSystemLeave"
+    IDS_STRING5078          "OnContentSystemTell"
+    IDS_STRING5079          "OnInvokeMethodFailed"
+    IDS_STRING5080          "OnRootURLChanged"
+    IDS_STRING5081          "OnSystemConnect"
+    IDS_STRING5082          "OnSystemDisconnect"
+    IDS_STRING5083          "OnSystemCreate"
+    IDS_STRING5084          "OnSystemDestroy"
+    IDS_STRING5085          "OnSystemEnter"
+    IDS_STRING5086          "OnSystemLeave"
+    IDS_STRING5087          "OnSystemPreCreate"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING5088          "OnSystemPostCreate"
+    IDS_STRING5089          "OnSystemPreDestroy"
+    IDS_STRING5090          "OnSystemPostDestroy"
+    IDS_STRING5091          "PeerMenu"
+    IDS_STRING5092          "Portals"
+    IDS_STRING5093          "Rooms"
+    IDS_STRING5094          "Say"
+    IDS_STRING5095          "Shout"
+    IDS_STRING5096          "Emote"
+    IDS_STRING5097          "Show"
+    IDS_STRING5098          "Transport"
+    IDS_STRING5099          "TransportMenu"
+    IDS_STRING5100          "WieldItem"
+    IDS_STRING5101          "UnWieldItem"
+    IDS_STRING5102          "Wield"
+    IDS_STRING5103          "UnWield"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING5104          "Whisper"
+    IDS_STRING5105          "WhisperTo"
+    IDS_STRING5106          "CreateMenu"
+    IDS_STRING5107          "CreateMenuItem"
+    IDS_STRING5108          "CreatePropertyMap"
+    IDS_STRING5109          "CreateMenuSeparator"
+    IDS_STRING5110          "CreateOCXProxy"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_INVALIDKEYMAP       "Invalid avatar profile key map"
+    IDS_INVALIDBANNEDOBJECTLIST "Invalid avatar profile banned object list"
+    IDS_KEYNOTEXIST         "Avatar profile key does not exist"
+    IDS_KEYEXISTS           "Avatar profile key already exists"
+    IDS_BANNEDOBJECT        "User is banned from adding avatar profile keys"
+    IDS_AVPROF_PERMISSIONDENIED 
+                            "Failed to read avatar profile key - permission denied"
+    IDS_INVALIDOWNER        "Invalid owner for avatar profile key - must be user or caller"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ANIMATIONNOTEXIST   "Animation doesn't exist"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "vwsystem.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

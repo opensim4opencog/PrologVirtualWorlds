@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>EnableAutoDownload</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>EnableAutoDownload</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Boolean</b> flag that specifies whether new avatar sprite files will be
+downloaded automatically to all clients when an avatar enters a <a href="../Exemplars/Room/Room.htm">Room</a>. <b>EnableAutoDownload</b> is a read-only <b>Boolean</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<p>To set this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>EnableAutoDownload</b> = BooleanValue</td>
+	</tr>
+</table>
+<p>To return this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>EnableAutoDownload</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>EnableAutoDownload</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that evaluates to a <b>World</b> object.</td>
+	</TR>
+<TR>
+		<td class="boldItal">BooleanValue</td>
+		<td>Boolean</td>
+		<td>Required</td>
+		<td>A flag that indicates whether the avatar sprite files of an avatar entering a room are downloaded automatically to all clients in that room. The default value is <b>True</b>.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>This property is local; each client sets the value for itself only.
+
+<P>A <b>True</b> value for this property indicates that the client will download sprite files that are not on the
+local computer. A <b>False</b> value indicates that the client will not download unknown
+sprites, but will download the default avatar to display in their place.</p>
+
+<p>This property can be set from script, but only by the user. 
+&nbsp;
+
+
+
+</body>
+</html>

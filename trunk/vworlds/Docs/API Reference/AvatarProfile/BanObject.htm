@@ -1,0 +1,132 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>BanObject</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>BanObject</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of AvatarProfile</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Prevents the specified object from adding items 
+to&nbsp;an <A 
+href="AvatarProfile.htm">AvatarProfile</A> list. 
+<STRONG>BanObject</STRONG> is a member of the <STRONG>AvatarProfile</STRONG> object.
+
+<!--Syntax table--></P>
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>BanObject</STRONG>&nbsp;<EM>pthing</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>BanObject</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+<TR>
+<TD class=boldItal>object</TD>
+<TD>AvatarProfile</TD>
+<TD><!--Type-->Required</TD>
+<TD><!--Description-->  An object reference&nbsp;to an 
+<STRONG>AvatarProfile</STRONG> object.</TD></TR>
+<TR>
+<TD class=boldItal>pthing</TD>
+<TD><!--Parameter name--</td>>
+		<td><!--Type-->Thing</TD>
+<TD><!--Description-->Required</TD>
+<TD> An object reference&nbsp;to a 
+      <STRONG>Thing</STRONG> object, such as an avatar.</TD></TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->The 
+<STRONG>BanObject</STRONG>           
+     method 
+prevents an object, such as another avatar or program, from adding <A href="Keys.htm">Keys</A> 
+to&nbsp;the profile of your avatar.&nbsp; If you have already banned several 
+objects from adding keys to your profile list, this method appends new banned 
+objects to the current list.
+<P>Anyone can add a key to the profile of an avatar; you don't have to be a wizard in the 
+world to add a key. In addition, any object can create and add a key to a profile. For example, 
+if you ran a chess tournament in your world, the chess program could add a 
+key that contained the final score of the game to the profile of each player. 
+To prevent the chess program from adding a score to your own profile, use the 
+<b>BanObject</b> method as shown in the following statements.
+
+<blockquote><pre>
+Dim myAvatarProfile
+Dim myChessGame
+
+<font color="#009900">     'Get the profile for your avatar.</font>
+Set myAvatarProfile = User.Profile
+
+<font color="#009900">'Get the object that you want to ban. 
+'This assumes that the name of the object is "Chess."
+</font>
+Set myChessGame = User.Container.FindWithin("Chess")
+
+<font color="#009900">'Ban the game object from adding keys.</font>
+myAvatarProfile.<b>BanObject myChessGame</b> 
+</pre></blockquote>
+<p>    In some cases, you may find that a 
+user is adding keys to your profile and you'd prefer not to have those extra 
+keys attached to your profile. You can&nbsp;ban other users from adding keys to your profile as 
+shown in the Example section.
+<H3>Example</H3>
+<p>This example prevents another avatar object (Gracie) from adding keys to Eve's profile.</p>
+
+<pre class="example">
+Sub BanGracie
+Dim myAvatarProfile
+Dim myObjectToBan
+</pre><p class="comments">
+'Get a reference to the avatar you want to prevent from having keys added to its profile.
+<pre class="example">
+Set myAvatarProfile = User.Profile
+</pre><p class="comments">
+'Get the avatar you want to ban.
+<pre class="example">
+Set myObjectToBan = User.Container.FindWithin("Gracie")
+</pre><p class="comments">
+'Ban the object from adding keys.
+<pre class="example">
+myAvatarProfile.<STRONG>BanObject</STRONG > myObjectToBan 
+End Sub
+</pre>
+
+
+</body>
+</html>

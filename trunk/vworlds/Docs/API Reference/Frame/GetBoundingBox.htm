@@ -1,0 +1,128 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetBoundingBox</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetBoundingBox</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Gets the bounding box of a frame and its children. <b>GetBoundingBox</b> 
+is a member of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetBoundingBox</b> <i>fMinX</i>, <i>fMinY</i>, <i>fMinZ</i>, <i>fMaxX</i>, <i>fMaxY</i>, <i>fMaxZ</i></td>
+	</tr>
+</table>
+
+
+
+<p>The <b>AutoGenerateFromBox</b> method syntax has these parts:
+
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fMinX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>Variable that is populated by the <b>GetBoundingBox</b> method that corresponds to the closer x-coordinate of a bounding box.</td>
+	</TR>
+<TR>
+		<td class="boldItal">fMinY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>Variable that is populated by the <b>GetBoundingBox</b> method that corresponds to the closer y-coordinate of a bounding box.</td>
+	</TR>
+<TR>
+		<td class="boldItal">fMinZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>Variable that is populated by the <b>GetBoundingBox</b> method that corresponds to the closer z-coordinate of a bounding box.</td>
+	</TR>
+<TR>
+		<td class="boldItal">fMaxX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>Variable that is populated by the <b>GetBoundingBox</b> method that corresponds to the farther x-coordinate of a bounding box.</td>
+	</TR>
+<TR>
+		<td class="boldItal">fMaxY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>Variable that is populated by the <b>GetBoundingBox</b> method that corresponds to the farther y-coordinate of a bounding box.</td>
+	</TR>
+<TR>
+		<td class="boldItal">fMaxZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>Variable that is populated by the <b>GetBoundingBox</b> method that corresponds to the farther z-coordinate of a bounding box.</td>
+	</TR>
+	
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>                                                                                                                              
+          
+
+<P>A bounding box is the smallest possible bounding volume cube that all of the polygons of an object will fit within. For example, imagine a glass cube that surrounds an entire building. The cube cannot touch the building itself, but it must be as close as possible to all sides of the building. This cube illustrates the bounding box of the building. 
+
+<p>In the case of a <b>Frame</b> object, a frame can also have child objects that are associated with it. The parent frame establishes the origin of the bounding box. So, the bounding box of a <b>Frame</b> object includes the total area that the parent and any children occupy. Continuing with the illustration above, if the building were a <b>Frame</b> object, the bounding box of the building would also include objects that are not part of the building itself, but are associated with it (like a parking lot or sidewalk). The cube encloses the entire area including the child objects of that building.
+ 
+<P>The six parameters can be thought of as two sets of <A href="../Vector/Vector.htm"> Vector</a> coordinates that establish the size of the bounding box in relation to a center point. The  parameters are populated by the <b>GetBoundingBox</b>method, and are expressed in local coordinates (relative to the object). The coordinates (<i>fMinX, fMinY, fMinZ</i>) and (<i>fMaxX, fMaxY, fMaxZ</i>)
+are vertices at opposite corners of the bounding box. The first of these points is the one closer to the origin; the second is a point that is farther away from the origin.</p>
+
+<p><img src="bbox.gif" width="307" height="273">
+<p>Note that all parameters of this method are <i>output</i> parameters. After a call to this method, each of the six parameters will be overwritten with a new value.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.GetBoundingBox fMinX, fMinY, fMinZ, fMaxX, fMaxY, fMaxZ</pre>
+&nbsp;
+
+
+</body>
+</html>

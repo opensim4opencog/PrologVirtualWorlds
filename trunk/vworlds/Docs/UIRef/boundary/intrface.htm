@@ -1,0 +1,160 @@
+<html>
+
+<head>
+<title>Boundary Editor Interface </title>
+<link REL="STYLESHEET" HREF="../../vwgdoc.css" TYPE="text/css" TITLE="VWG">
+</head>
+<!-- Updated 3/16/99 by DI -->
+
+<body>
+
+<h1>Boundary Editor Interface</h1>
+
+<p>Boundaries are objects that are composed of a set of walls that enclose an area (sometimes with an object inside the area). Boundaries are two-dimensional only, lying on the X and Z plane. Boundaries around objects move when the object is moved. 
+<p>
+Boundaries can make objects appear to be solid, by preventing the avatar from passing through the object. Boundaries can also act as tripwires, triggering events when the avatar passes through the boundary. In the Virtual Worlds environment, boundaries are invisible. Each object in the room can have a boundary. Boundaries can also be automatically generated around objects. 
+<p>
+With the <b>Boundary Editor</b>, you can place boundaries around objects, shape the
+boundaries, and establish the nature of the boundaries. To see the <b>Boundary Editor</b> tab and the <b>Tools</b> tab in the Virtual Worlds window, you must have <A href="../../users/others.htm" >author</A> or wizard status, to have permission to build within the world.  </p>
+ <p>
+ Boundaries are automatically generated around new objects in the world. If an object is invisible (objects whose&nbsp; <b>IsVisible</b> property</A> is set to <strong>False</strong>), it may not have a boundary. 
+<p>
+You cannot add a boundary to a spinning object. If an object is
+spinning, use the <b>Motion</b> property page to stop it first, add any boundaries to it, and then you can set it spinning again. Boundaries do not spin with their objects.</p>
+
+<p><IMG alt="toolbar.bmp (115234 bytes)" height=65 src ="toolbar.jpg" width=590 ></p>
+
+<p>             
+  The toolbar appears beneath the Virtual Worlds <b>Menu Bar</b>. This toolbar contains specific shortcuts for the <b>Boundary Editor</b>; the <b>Geometry Editor</b> uses a different toolbar. </p>
+
+<h3>Selected Object</h3>
+<p>
+Pick the object in the current world that you want to associate with a boundary (or edit the boundary already associated with that object). You can enter the first letter of the object to scroll the list faster.
+<p>
+
+<h3>Lock Selection</h3>
+
+<p>
+Freezes the current object or the current object's boundary so that you are only editing that selection. This is effective when a boundary is surrounded by many close or overlapping boundaries. If an object or area has multiple boundaries associated with it, you can use the <b>Boundary Browser</b> to select the specific boundary to edit. 
+
+<h3>Center View on Selection</h3>
+<p>
+Moves the view of the world so that the selected object is in the middle. 
+</p>
+
+<h3>Delete Selection</h3>
+<p>
+Removes a boundary or a vertex point in a boundary. You must select a boundary, and you cannot use the <b>Navigation</b> tool at the same time. To delete the entire boundary,
+click to select it, and then click this button. To delete a vertex point, click the unwanted
+vertex point until it appears with a small square around it, and then click this button. </p>
+
+<h3>Boundary Browser</h3>
+
+<p>Click for the <A href="bbrowser.htm">Boundary Browser</a>, a tool that lists all the possible boundaries associated with an object or area (for selecting or deleting).
+
+<h3>Pan View</h3>
+<p>
+Changes your mouse pointer to the <b>Navigation</b> tool. When you are using this tool, you
+can move around the room, but you cannot select or change objects in it. You can use this
+tool to move quickly through the room and to see an overview of the boundaries.</p>
+
+<h3>Move Boundary or Vertex</h3>
+<p>
+Changes your mouse pointer to the <b>Move</b> tool. This is the tool you can use to change
+boundaries: you can select a boundary, a boundary vertex, or an object by clicking in the
+main view. You can also move or stretch boundaries by dragging them with the mouse, to
+create custom shapes for your boundaries. </p>
+
+<p>When you select a boundary object with this tool, four input boxes appear on the right
+side of the menu bars. The boxes marked <b>X</b> and <b>Y</b> indicate the size and position of the
+chosen boundary. The boxes marked <b>F</b> and <b>C</b> indicate the position of the boundary floor and
+ceiling, respectively.</p>
+
+<h3>Rotate Boundary Tool</h3>
+<p>
+Changes your mouse pointer to the <b>Rotate Boundary</b> tool. You can use this tool to select
+a particular boundary and then rotate it as you like, by clicking and dragging. </p>
+
+<p>When you select a boundary object with this tool, three input boxes appear on the right
+side of the menu bars. The <b>Degrees</b> box shows the total number of degrees you have
+rotated the boundary in each drag of the mouse. When you drop the boundary, <b>Degrees</b> are reset to
+0.0. The boxes marked <b>F</b> and <b>C</b> indicate the position of the boundary floor and ceiling,
+respectively.</p>
+
+<h3>Scale Boundary Tool</h3>
+<p>
+Changes your mouse pointer to the <b>Scale Boundary</b> tool. With this tool, you can select a
+boundary (by clicking it), then drag it to resize it and rotate it, keeping the boundary's
+original shape intact. This can be useful if you create a boundary and then want to shrink
+it, so that it fits closely around the object, or expand it to stand away from the object.</p>
+<p>
+When you select a boundary with this tool, four input boxes appear on the right
+side of the menu bars. The boxes marked <b>X</b> and <b>Y</b> indicate the size and position of the
+chosen boundary. The boxes marked <b>F</b> and <b>C</b> indicate the position of the boundary floor and
+ceiling, respectively.</p>
+
+<h3>Zoom In Tool</h3>
+<p>
+Changes your mouse pointer to the <b>Zoom In</b> tool. When you are using this tool, you can
+click on the main view to produce a larger image of the current room. You can enlarge the
+graphics to see small objects. </p>
+
+<h3>Zoom Out Tool</h3>
+<p>
+Changes your mouse pointer to the <b>Zoom Out</b> tool. When you are using this tool, you can
+click on the main view to produce a smaller image of the current room. This is useful when
+you wish to see an overview of the room, the objects, and their boundaries. </p>
+
+<h3>Zoom Level</h3>
+<p>
+Shows the proportion between the actual size of the world graphics and the current
+view. You can type a number to scroll the list faster, or choose from a list of preset possible
+views that appears when you click the down-arrow. </p>
+
+<h3>Draw Boundary and Insert Vertex Tool</h3>
+<p>
+Changes your mouse pointer to the <b>Create Boundary</b> tool, which uses two shapes: a pencil
+and a cross. When you move over an area that can include a boundary, the pencil appears.
+You can use it to "sketch" a boundary by clicking to create a corner, then
+moving the pointer to another corner and clicking, around the perimeter of the new
+boundary. New boundaries are attached to the selected object. If there is no selected
+object, new boundaries are attached to the room.</p>
+
+<p>When you pass the pointer over a boundary, the cross appears. You can create a new
+vertex by moving the tool to the location and clicking. If you wish to move and stretch
+the new vertex, however, you must switch to the <b>Translate Boundary</b> tool.</p>
+
+<p>When you select a boundary object with this tool, four input boxes appear on the right
+side of the menu bars. The boxes marked <b>X</b> and <b>Y</b> indicate the size and position of the
+chosen boundary. The boxes marked <b>F</b> and <b>C</b> indicate the position of the boundary floor and
+ceiling, respectively.</p>
+
+<h3>Add Automatic Boundary to Selected Object</h3>
+
+<p>Creates a boundary that has a standard shape and size around the current object. This selection is not available if the current object is a boundary.</p>
+
+<h3>Toggle Boundary Passable </h3>
+
+<p>Makes the selected boundary passable or impassable, depending on its current status.
+When the button is up, the boundary is impassable, which makes the object appear solid.
+When the button is clicked into the down position, the boundary is passable, and avatars can pass through the object. </p>
+
+<h3>X Axis Lock</h3>
+<p>
+Click to lock the selected boundary to movement only on the X axis, or "up" and "down" on the <b>Boundary Editor</b>'s plan view of the world. 
+</p>
+
+<h3>Z Axis Lock</h3>
+Click to lock the selected boundary to movement only on the Z axis, or "left" and "right" on the <b>Boundary Editor</b>'s plan view of the world. 
+</p>
+
+<p>
+See also:
+<p>
+<a href="../../users/others.htm">What are Owners, Wizards, Authors, and Hosts?</a>  <br>                                
+<a href="bbrowser.htm">Boundary Browser Dialog Box</a><br>
+<a href="../geomed/intrface.htm">Geometry Editor Interface</a><br>
+ <p>
+ 
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>WelcomeURL</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>WelcomeURL</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>String</b> that holds the URL of the web page that greets a user who enters a
+world for the first time. <b>WelcomeURL</b> is a read/write <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<p>To set this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>WelcomeURL</b> = StringValue</td>
+	</tr>
+</table>
+<p>To return this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>WelcomeURL</b></td>
+	</tr>
+</table>
+<!--Parameters table-->
+<p>The <b>WelcomeURL</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">StringValue</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>String</b>, which is the URL of a Web page.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <a href="ShowWelcomeMessage.htm">ShowWelcomeMessage</a> method of 
+<b>World</b> refers to the <b>WelcomeURL</b> property.</p>
+
+<p>The default value for this property is <tt>&quot;client\welcome.htm&quot;</tt>, but its
+value can be set individually for different worlds. If the value is set to an empty
+string, no welcome message will be shown.
+&nbsp;
+
+
+</body>
+</html>

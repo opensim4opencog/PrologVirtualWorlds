@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateVector</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateVector</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Creates a <A href="../Vector/Vector.htm"><strong>Vector</strong></A> object from the <em>x, y,</em> and <em>z</em> parameter 
+values. <STRONG>CreateVector</STRONG> is a member of the <A href="World.htm">World</A> 
+object.&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>CreateVector</STRONG>(<EM>x, y, 
+z</EM>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>CreateVector</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->World</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description--> 
+       An object reference&nbsp;to a&nbsp;<STRONG>World</STRONG>  object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">x</td>
+		<td><!--Parameter name-->Float</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->Represents 
+      the x value of the vector's x-coordinate.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">y</td>
+		<td><!--Parameter name-->Float</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->Represents 
+      the&nbsp;y value of the vector's y-coordinate.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">z</td>
+		<td><!--Parameter name-->Float</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->Represents 
+      the&nbsp;z value of the vector's z-coordinate.</td>
+	</TR>
+			
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>This method returns a new vector based on the coordinate 
+values of the <EM>x, y, </EM>and <EM>z</EM>          
+       parameters.
+<H3>Remarks</H3>
+<p>        
+           
+   A vector in Microsoft Virtual Worlds is a set of 3 floats. You 
+can adjust how your object appears in a Virtual Worlds space by using the 
+following&nbsp;objects with the x, y, and z coordinates.</p>
+
+<P>
+<TABLE border=0 cellPadding=1 cellSpacing=1 width="75%">
+  
+  
+  <TR>
+    <TD>
+      <P><font class=body><A href="../Exemplars/Thing/Direction.htm">Direction</a></P></FONT></TD>
+    <TD><A href="../Exemplars/Thing/Position.htm">Position</a></TD></TR>
+  <TR>
+    <TD><A href="../Exemplars/Portal/EntryOrientation.htm">EntryOrientation</a></TD>
+    <TD><A href="../Exemplars/Thing/RotationAxis.htm">RotationAxis</a></TD>
+    </TR>
+  <TR>
+    <TD><A href="../Exemplars/Portal/EntryPoint.htm">EntryPoint</a></TD>
+    <TD><A href="../Exemplars/Thing/Scale.htm">Scale</a></TD></TR>
+  <TR>
+    <TD><A href="../Exemplars/Light/LightAttenuation.htm">LightAttenuation</a></TD>
+    <TD><A href="../Exemplars/Thing/Up.htm">Up</a></TD></TR>
+  <TR>
+    <TD><A href="../Exemplars/Light/LightColor.htm">LightColor</a></TD>
+    <TD></FONT></TD>
+    </TR></TABLE></P>
+<P></P>After you create a vector, you must assign it to an 
+object.&nbsp;&nbsp;
+
+
+<!-- Example -->
+<H3><FONT face=Verdana>Example</FONT></H3><FONT class=example>
+<!--Example text-->
+<p>  This 
+example creates a new vector and assigns it to an existing object in Virtual Worlds.</p>
+<pre class="example">
+Dim myVector
+
+<font color="#009900">'Create a new vector.</font>
+Set myVector = <strong>CreateVector(5, 0, 10)</strong>
+
+<font color="#009900">'Assign the vector to an existing object.</font>
+Set myHouse.Position = myVector
+</pre></FONT>
+
+
+</body>
+</html>

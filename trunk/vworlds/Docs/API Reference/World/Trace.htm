@@ -1,0 +1,96 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Trace</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Trace</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Displays a string of numerals or text to the Command Window. 
+<b>Trace</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Trace</b>&nbsp;<i>bstr</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Trace</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstr</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The expression to be displayed.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Even though the <i>bstr</i> parameter is of type <b>String</b>, the <b>Trace</b>
+method will evaluate numeric and other expressions in its operation. It can evaluate
+numeric expressions using any of the arithmetic or logical operators of VBScript, as well
+the mathematical functions. <b>Trace</b> can display strings concatenated by '+'
+or '&amp;'. To lessen ambiguity when you use addition expessions, however, use '&amp;' for
+this purpose.</p>
+
+<p><b>Trace</b> displays <b>True</b> and <b>False</b> for
+logical expressions, which is different from the behavior of <b>Print</b>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>World.Trace &quot;3 + 5 = &quot; &amp; 3 + 5     'Displays 3 + 5 = 8
+World.Trace 1 OR 2	           'Displays 3
+World.Trace Hex(255)	           'Displays FF
+World.Trace 3 &gt; 2	           'Displays True 
+World.Trace &quot;My name is &quot; &amp; User.Name	'Displays My name is &lt;your name&gt;</pre>
+&nbsp;
+
+
+</body>
+</html>

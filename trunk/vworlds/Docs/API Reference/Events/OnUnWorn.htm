@@ -1,0 +1,92 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnUnWorn</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnUnWorn</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called in response to the <strong>UnWorn</strong>
+event, which occurs when the  <a href="../Exemplars/Avatar/Wear.htm">UnWear</a> method of an <a href="../Exemplars/Avatar/Avatar.htm">Avatar</a> is invoked.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>OnUnWorn()</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+
+
+<p>The <b>Connect</b> event supports these additional handlers:
+<TABLE class="backlight" STYLE="WIDTH:75%">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Event Handler</td>
+			<td>Description</td>
+
+		</TR>
+	</thead>
+<tr class="line" ><td colspan=100></td></tr>
+	<TR>
+		<td class="boldItal">OnPeerUnWorn</td>
+		<td>The handler for other objects on the <a href="../Thing/Contents.htm">Contents</a> list of the <b>Avatar</b> that is unwearing the object.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContainerUnWorn</td>
+		<td>The handler for the <b>Contents</b> of the object being unworn. For example, if object "A" contains objects named "A1" and "A2", this handler is fired on "A1" and "A2".</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContentUnWorn</td>
+		<td>The handler for the avatar that is unwearing the object. Since the object that is being unworn must already be in the container's <a href="../Thing/Contents.htm">Contents</a> list, this handler is for the container (the <b>Avatar</b>) of the object that is being worn.</td>
+		<td></td>
+		<td></td>
+	</TR>
+</TABLE>
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>This method responds to an internal <strong>UnWorn</strong> event that occurs in Virtual Worlds when the <b>UnWear</b>  method  of an <b>Avatar</b> is invoked. For more information on wearing objects, see the <a href="../Exemplars/Avatar/UnWear.htm">UnWear</a> topic.
+
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;To ensure that the internal procedures that are tied to each event handler are invoked, you must call <b>InvokeSuperMethod</b> within the overridden subroutine. For more information on using this method, see the <a href="../Thing/InvokeSuperMethod.htm">InvokeSuperMethod</a> topic.
+<!--Example section-->
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">
+Sub OnUnWorn()
+&nbsp;&nbsp;&nbsp;&nbsp;Trace &quot;The UnWear method has been invoked.&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod
+End Sub
+
+</pre>
+
+</body>
+</html>

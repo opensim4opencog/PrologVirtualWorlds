@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Method</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Method</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of MenuItem</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>String</b> that holds the name of the method
+that a menu item represents. <b>Method</b> is a read-only <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>expression</i>.<b>Method</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Method</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">expression</td>
+		<td>MenuItem</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>String</b>.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This property represents the name of the method to be called
+when a menu item is selected. For example, if the menu belongs to
+a <a href="../Exemplars/Portal/Portal.htm">Portal</a> object 
+named <i>SomePortal</i>, and the value
+of this property on the menu item is &quot;DoSomething&quot;,
+then the method <tt>SomePortal.DoSomething</tt> will be called
+when that menu item is clicked.</p>
+
+<p><i>Important Note:</i> This property holds the name of a
+method (of type <b>String</b>), not the method itself.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get the method name for a menu item:</p>
+
+<pre>   Result = MyMenuItem.Method</pre>
+<p>To set the method name for a menu item:</p>
+<pre>   MyMenuItem.Method = &quot;Wave&quot; </pre>&nbsp;
+
+
+</body>
+</html>

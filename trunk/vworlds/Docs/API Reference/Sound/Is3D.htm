@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Is3D</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Is3D</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Sound Object</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>  Returns <STRONG>True</STRONG>&nbsp;when the specified <A 
+href="Sound.htm">Sound</A> object is set to 
+three-dimensional stereo when you first create the <STRONG>Sound</STRONG>     
+    
+  object. <STRONG>Is3D</STRONG> is a read-only 
+<STRONG>Boolean</STRONG>.      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>   
+<table class="backlight">
+	<tr>
+    	<td><!--syntax statement --><EM>object</EM>.<STRONG>Is3D</STRONG></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<P>The <b>Is3D</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name-->object</td>
+		<td><!--Type-->Sound</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description--> 
+       An&nbsp;object reference to a <STRONG>Sound</STRONG> object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section--></P>
+<H3>Remarks</H3>
+<P>You can set your sound file to play in two- or 
+three-dimensional stereo with the <A href="../World/CreateSound.htm">CreateSound</A> 
+method.<!--Insert Remarks here-->&nbsp;If 
+you set the <EM>bIs3D</EM> parameter to <STRONG>True</STRONG>, the 
+<STRONG>Sound</STRONG> object is set to 3-D. 
+<H4>Defining 2-D and 3-D Sound Objects</H4>
+<P>A&nbsp;2-D sound&nbsp;is an ambient sound in a virtual world, such as the sound of 
+crickets or birds. This type of sound is heard throughout the world. You can 
+adjust the pan and volume of the sound, but these adjustments will remain at the 
+same level throughout the world.
+<P>A 3-D sound has position and orientation.&nbsp;It uses a sound projection 
+cone that has 3-D qualities as well as a spatial orientation. With&nbsp;a 3-D 
+sound, as you&nbsp;move throughout the world, the sound changes. An example of 
+this type of sound is the sound of 
+a crowd in a room. As you approach the 
+object that the sound is attached to, the volume 
+increases.
+<P>After&nbsp;you have&nbsp;set the sound to either 2-D or 
+3-D, use the following methods to adjust various sound parameters. Use the <A 
+href="Set2DData.htm">Set2DData</A> method to set the 2-D parameters, 
+such as volume, frequency, and pan information. To set the&nbsp;3-D parameters for the 
+sound cone, such as the inside and 
+outside sound cone 
+angles, the outside volume, and the minimum and maximum distance, use the <A 
+href="Set3DData.htm">Set3DData</A>&nbsp;method.
+<H3>Examples</H3>
+<p>The first example creates a&nbsp; <b>Sound</b> object, associates it with an object in the world, and&nbsp;sets the sound&nbsp;to 2-D.</p>
+
+<pre class="example">
+Sub MakeThunder()
+Dim myCloud
+Dim myWavFile
+Dim myThunderClap
+</pre><P class=comments>'You can use the default "cloud" object in Virtual Worlds. <PRE class=example>Set myCloud = User.Container.FindWithin("cloud")
+</PRE><P class=comments>'Get the sound file. <PRE class=example>myWavFile = "file://C:/Sound Files/Thunder.wav"
+</PRE>
+<P class=comments>'Create a 2-D <B>Sound</B> object. <PRE class=example>
+Set myThunderClap = CreateSound(myWavFile, False, True)
+</PRE>
+<P class=comments>'Associate the sound with an object.
+<PRE class="example">
+myCloud.Sound = myThunderClap
+</PRE> 
+<p class="comments">'Set&nbsp;the 2-D data. <PRE class=example > 
+myThunderClap.Set2DData -1000, 50, 500
+End Sub</PRE>
+<p>Example 2
+<p>To set the sound to 3-D and adjust the 3-D effects, use the following code.</p>
+<pre class="example">
+Set myThunderClap = CreateSound(myWavFile, True,  True)
+<PRE>myThunderClap.<STRONG>Set3DData 20, 40, -1000, 5, 25</STRONG></PRE> 
+</pre>
+</body>
+</html>

@@ -1,0 +1,128 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetMeshFaceVertexColor</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetMeshFaceVertexColor</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Gets the color of a vertex for a particular mesh and face. 
+<b>GetMeshFaceVertexColor</b> is a member of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetMeshFaceVertexColor</b>&nbsp;<i>nMeshIndex, 
+		nFaceIndex, index, fRed, fGreen, fBlue</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetMeshFaceVertexColor</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nMeshIndex</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The index of the mesh to use.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nFaceIndex</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The index of the face to use.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">index</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The index of the vertex to use.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fRed</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The fractional amount of red.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fGreen</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The fractional amount of green.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fBlue</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The fractional amount of blue.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The fourth, fifth, and sixth parameters of <b>GetMeshFaceVertexColor</b> are <i>output</i>
+parameters. After this method is executed, these parameters will be overwritten with new
+values. After a call to <b>GetMeshFaceVertexColor</b>, the fourth, fifth, and
+sixth parameters will be set to the red, green, and blue color values for the specified
+mesh and face. </p>
+
+<p>Each color value is a decimal fraction between 0.0 and 1.0.</p>
+
+<p>When you set a color value with <a href="SetMeshFaceVertexColor.htm">SetMeshFaceVertexColor</a>
+and retrieve it with <b>GetMeshFaceVertexColor</b>, there may be some loss of accuracy.
+For example, a value of <tt>0.5</tt> may be translated to a number like <tt>0.498999</tt>
+by the color algorithms.</p>
+
+<p>Vertex colors can be seen only when the render quality is Gouraud or Phong.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.GetMeshFaceVertexColor 23, 17, 5, Red, Green, Blue</pre>
+&nbsp;
+
+
+</body>
+</html>

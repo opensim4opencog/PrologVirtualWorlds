@@ -1,0 +1,89 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnInvokeMethodFailed</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnInvokeMethodFailed</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method called in response to the <b>InvokeMethodFailed</b> event,
+which occurs when <b>InvokeMethod</b> fails.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>OnInvokeMethodFailed(<i>bstrMethodName</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+<p>The <b>OnTell</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+	<TR>
+		<td class="boldItal">bstrMethodName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the method that has failed to fire.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>The most common reason for an invocation failure is that the method does not exist.</p>
+
+<p>This method is not normally called by the user; it responds to an internal event that
+occurs in Virtual Worlds when an <strong>InvokeMethod</strong> call fails. If you find
+it necessary to override this event-handling method, <strong>InvokeSuperMethod</strong>
+should also be called to maintain the existing functionality of the overridden method. 
+<!--Example section-->
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">Sub OnInvokeMethodFailed(strMethodName)
+&nbsp;&nbsp;&nbsp;&nbsp;World.Trace CStr(strMethodName) &amp; &quot; method failed.&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod(strMethodName)
+End Sub
+</pre>
+<!--Example text-->
+&nbsp;
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<title>New Menu Item Dialog Box (Inline Method Editor)</title>
+<link rel="STYLESHEET" href="../../vwgdoc.css" type="text/css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>New Menu Item Dialog Box (Inline Method Editor)</h1>
+
+<p>Use this dialog box to create a new menu item and attach it to
+a particular object. The menu is the shortcut menu for an object that you see if you right-click on that
+object in the virtual world. You can set menu items to appear to certain levels of visibility in Virtual Worlds. 
+<p> 
+
+<p><img src="newmenu.gif" width="400" height="207"></p>
+
+<p>This dialog box appears when you click the <strong>Add Menu
+Item</strong> button on the <a href="inlinmth.htm"><strong>Inline
+Method Editor</strong> dialog box</a>. The menu item you add
+invokes the method you are editing.
+<p>
+
+<h2>Options</h2>
+
+<h3>Add item to the object's Menu</h3>
+<P>
+Adds the menu item you specified to the shortcut menu of an object. This menu item appears when 
+anyone right-clicks on the object. 
+<p>
+The object is selected in the <b>Object</b> text field of the <b>Inline Method Editor</b> dialog box. 
+<p>
+
+<h3>Add item to the object's PeerMenu</h3>
+<p>
+Adds a menu item to the shortcut menu of all the object's peers. A peer is defined as another object that has
+the ability to right-click on other objects (at the moment, that means objects that are avatars). 
+<p>
+<h4>PeerMenu Example</h4>
+<p>
+You set a PeerMenu item on an artifact and name the menu item Pull Lever. All other peers (avatars) in the room can 
+right-click on the artifact and see the Pull Lever menu item. 
+<p>
+Note: This only works if PeerMenu is defined on the right-clicking object (avatar). 
+<p>
+
+<h3>Add item to the object's ContainerMenu</h3>
+<p>
+Adds a menu item to the objects contained within that object. Each object inside the container object gets the 
+menu item added to their shortcut menus.
+<p>
+<h4>ContainerMenu Example</h4>
+<p>
+Adding ContainerMenu to a room causes that menu item to be displayed when you right-click on any objects on any
+objects in that room. 
+
+<h3>Add item to the object's ContentMenu</h3>
+<p>
+Adds a menu item to the object's container. 
+<p>
+<h4>ContentMenu Example</h4>
+<p>
+Adding ContentMenu to an artifact held in the inventory of an avatar adds the menu item to that avatar's
+shortcut menu.
+<p>
+Note: Rooms do not have shortcut menus, so the object must be contained by something else to see any effects. 
+<P>
+
+<h3>Add item to the object's SelfMenu</h3>
+<p>
+Adds a menu item to yourself (avatars only, since avatars are the only objects that can right-click
+on themselves). This menu item is visible only to you, other avatars will not see it if they right-click on your 
+avatar. 
+<p>
+
+<h4>See Also: </h4>
+<p>
+<a href="../../API%20Reference/Thing/Container.htm"><strong>Container</strong></a>
+(Property of Thing (Core object type))<br>
+<a href="../../API%20Reference/Thing/Contents.htm"><strong>Contents</strong></a>
+(Property of Thing (Core object type))<br>
+<a href="inlinmth.htm">Inline Method Editor</a><br>
+
+
+</body>
+</html>

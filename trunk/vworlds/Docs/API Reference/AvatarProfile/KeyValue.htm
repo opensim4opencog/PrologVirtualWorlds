@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>KeyValue</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> KeyValue</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of AvatarProfile</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>
+Sets or returns&nbsp;the value of a key in the profile 
+of the specified avatar.&nbsp;<STRONG>KeyValue</STRONG> is a 
+read/write <STRONG>String</STRONG>.
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><!--syntax statement --><EM>object</EM>.<STRONG>KeyValue</STRONG>(<EM>bstrKey</EM>) = 
+<EM>stringValue</EM></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<P>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><!--syntax statement --><EM>object</EM>.<STRONG>KeyValue</STRONG>(<EM>bstrKey)</EM></TD></TR></TABLE></P>
+<P>The&nbsp;<STRONG>KeyValue</STRONG> 
+property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->AvatarProfile</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description--> 
+      An object reference to an <A 
+      href="AvatarProfile.htm">AvatarProfile</A> object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>bstrKey</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The name of&nbsp;a key in the avatar's profile list.</TD></TR>
+	<TR>
+		<td class="boldItal">stringValue</td>
+		<td><!--Parameter name-->String</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An 
+      expression that evaluates to a 
+<STRONG>String</STRONG>.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section--></P>
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>You must use the <STRONG>KeyValue</STRONG> property to&nbsp;access the value 
+of a property in an avatar's profile list. Although 
+the&nbsp;<STRONG>AvatarProfile</STRONG> object uses a property map to store the 
+<EM>key/value pairs</EM>, you cannot use the 
+<STRONG>Property</STRONG> property to access the 
+value of a key.</P>
+<P>A key/value pair in the case of a property map is a 
+property name paired with its value.&nbsp;A key is a string that represents the 
+name of&nbsp;a property in the property map. The paired value is the               
+               
+     contents of that property. A property map uses the 
+string&nbsp;that makes up the key instead of an index number to access the value of each property.</P>
+<P>Key/value pairs are distinguished by the type of value 
+in the pair. Types of keys include numeric<EM> </EM>keys (whose corresponding 
+value is a number), string keys (whose corresponding value is a string), and 
+<STRONG>PropertyList</STRONG> keys (whose corresponding value is a 
+<STRONG>PropertyList</STRONG> 
+object).&nbsp;<!--Example section--></P>
+<P>You can also use this property to alter the value of an 
+existing key. For example, there is a key in most avatar profiles named "Home 
+page"; it contains the URL for the avatar's user's home page on the World Wide 
+Web.&nbsp;A user can update the URL after creating&nbsp;the avatar by setting 
+the <b>KeyValue</b> property to the text of the new URL as shown in the following statement.
+<blockquote><pre>Set User.Profile.<STRONG>KeyValue("Home page")</STRONG> = _
+&nbsp;&nbsp;&nbsp;&nbsp;"http://myWeb/myHomePage"  </pre></blockquote>
+<P>There are considerable security limitations on who can use this property: 
+Only the owner of a key can change its value.&nbsp;A key's owner is the 
+object that created it. Key owners can include not only avatars but also objects like vending machines. Even an avatar's owner cannot change the value 
+of a key in that avatar's profile unless he or she is also the key's owner. 
+For example, during a Microsoft Virtual Worlds chess tournament, the judge (which could be 
+an avatar or even a bot) might place a key named "ChessRanking" 
+in your profile. Only the judge could change your chess ranking with this key.</P>
+<P>However, in the case of obsolete or nuisance keys, the avatar's owner can always 
+delete the key with the <A href="RemoveKey.htm"><STRONG>RemoveKey</STRONG></A> method or 
+make it private with the <A 
+href="KeyAccess.htm"><STRONG>KeyAccess</STRONG></A>&nbsp;method.</P>
+<H3>Examples</H3>
+<p>
+The first example iterates through the profile of an avatar and then returns the value of the avatar's image file to the Command Window. </p>
+<pre class="example">
+Sub ListKeys()
+Dim myKey
+Dim myKeyList
+</pre><p class="comments">
+'Get the <STRONG>Keys</STRONG> collection.
+<pre class="example">
+Set myKeyList = User.Profile.Keys
+</pre>
+<p class="comments">'Trace each key to the Command Window.
+<pre class="example">
+For Each myKey In myKeyList
+&nbsp;&nbsp;&nbsp;&nbsp;If User.Profile.IsValid(myKey) Then
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trace myKey
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print Typename(User.Profile.KeyValue(myKey))
+&nbsp;&nbsp;&nbsp;&nbsp;End If
+Next
+End Sub
+</pre>
+<p>Example 2
+<p>Trace a single key.</p>
+<pre class="example">Trace User.Profile.<b>KeyValue("SpriteGeometry")</b>
+</pre>
+
+
+</body>
+</html>

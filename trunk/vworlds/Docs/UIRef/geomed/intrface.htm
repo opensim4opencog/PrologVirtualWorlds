@@ -1,0 +1,174 @@
+<html>
+
+<head>
+<title>Geometry Editor Interface</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 3.0">
+<link REL="STYLESHEET" HREF="../../vwgdoc.css" TYPE="text/css" TITLE="VWG">
+</head>
+<!-- Updated 10/30/98 by MH -->
+
+<body>
+
+<h1>Geometry Editor Interface</h1>
+
+<p>The term &quot;geometry&quot; refers to aspects of the graphics that represent a
+virtual object. You can use the Geometry Editor to change some properties of objects as
+well as their position and orientation within the room.</p>
+
+<p>You can reach the Geometry Editor from the Microsoft Virtual Worlds Client by clicking
+the Geometry Editor tab at the bottom of the world view pane. If you do not have <a
+href="../../users/others.htm">author status</a> within the world, however, the Geometry
+Editor tab will not appear.</p>
+
+<p><img src="toolbar.jpg" width="354" height="39" alt="toolbar.jpg (19441 bytes)"></p>
+
+<h2>Geometry Editor 3D View</h2>
+
+<p>Shows the current room and its objects, but not boundaries. You can use the navigation
+tool to move around the room. This is the workspace for the Geometry Editor, and the place
+where you can watch the changes that you make.</p>
+
+<h2>Geometry Editor Menu Bar</h2>
+
+<p>This appears beneath the normal blue Virtual Worlds Menu Bar. It contains icons for
+tools and actions you can use within the Boundary Editor. Click an icon to select a tool
+or action.</p>
+
+<h3>Selected Object</h3>
+
+<p>Shows the name of the object you are changing. You can type a name into the box, or
+choose from a list of possible objects that appears when you click the down-arrow. If you
+begin to type a name, Virtual Worlds tries to fill in the appropriate object name using
+the letters you type. If you try to type a name that does not appear in the list, Virtual
+Worlds supplies the closest match it can find; you cannot type in a new name.</p>
+
+<p>Normally, when you select an object, a boundary box will be drawn around it, but
+invisible objects (objects whose&nbsp; <a href="../../API%20Reference/Exemplars/Thing/IsVisible.htm"><strong>IsVisible</strong></a>
+property is set to <strong>False</strong>) do not have boundary boxes drawn
+automatically.</p>
+
+<h3>Selection Lock</h3>
+
+<p>Makes it impossible to use the mouse to select geometry. Locking the geometry keeps you
+from selecting an object's geometry and changing it accidentally. This prevents accidents
+by keeping you from moving any object other than the intended one, so that you are only
+working with a single object at a time.</p>
+
+<h3>Center View on Selected Object</h3>
+
+<p>Moves the main view so that the current object is in the center. This makes it easier
+to concentrate on one object at a time if you have several objects to edit. It can also
+help you determine exactly which object corresponds to a name in the list.</p>
+
+<h3>Delete Selected Objects</h3>
+
+<p>Removes the current object or objects. An object must be selected, and you must not be
+using the Navigate the Camera tool. After you click this button, a dialog will appear to
+verify that you intend to delete the selected object.</p>
+
+<h3>X, Y, and Z Text Boxes</h3>
+
+<p>During Translate mode, these text boxes specify the position of the selected object in
+the coordinates of the world. During Rotate mode, these text boxes specify the rotation
+around each axis. During Scale mode, these text boxes specify the scale of the selected
+object on each axis.</p>
+
+<h3>Navigate the Camera Tool</h3>
+
+<p>Changes your mouse pointer to the navigation tool. When you are using this tool, you
+can move your camera viewpoint around the room, but you cannot select or change objects in
+it. You can use this tool to move quickly through the room and to see an overview of the
+objects and their positions.</p>
+
+<h3>Translate Object Tool</h3>
+
+<p>Changes your mouse pointer to the Translate Object tool, and puts the Geometry Editor
+into Translate mode. This is the tool you can use to change the position of objects: you
+can select an object by clicking it in the main view, and then you can move the object by
+dragging.</p>
+
+<p>If gravity is off, you can use the shortcut of right-clicking an object in Translate
+mode to move it up or down.</p>
+
+<h3>Rotate Object Tool</h3>
+
+<p>Changes your mouse pointer to the Rotate Object tool, and puts the Geometry Editor into
+Rotate mode. Using this tool, you can select a particular object (by clicking it) and then
+rotate it as you like, by dragging it in the direction you want. The object will stay in
+the same place while it rotates.</p>
+
+<h3>Scale Object Tool</h3>
+
+<p>Changes your mouse pointer to the Scale Object tool, and puts the Geometry Editor into
+Scale mode. With this tool, you can select an object (by clicking it), then drag it to
+resize it and rotate it, keeping the object's basic shape intact. This can be useful if
+you create an object that is out of scale with your room.</p>
+
+<h3>Zoom In Tool</h3>
+
+<p>Changes your mouse pointer to the Zoom In tool. When you are using this tool, you can
+click on the main view to produce a larger image of the current room. You can enlarge the
+graphics to make working on small objects easier. Be careful not to confuse this tool with
+the Zoom Out tool, which looks very similar.</p>
+
+<h3>Zoom Out Tool</h3>
+
+<p>Changes your mouse pointer to the Zoom Out tool. When you are using this tool, you can
+click on the main view to produce a smaller image of the current room. This is useful when
+you wish to see an overview of the room, the objects, and their boundaries. Be careful not
+to confuse this tool with the Zoom In tool, which looks very similar.</p>
+
+<h3>Zoom Level</h3>
+
+<p>Shows the proportion between the actual size of the world graphics and the current
+view. You can type a proportion into the box, or choose from a list of possible views that
+appears when you click the down-arrow. If you begin to type a proportion, Virtual Worlds
+tries to fill in the appropriate view using the numerals you type. If you try to type a
+proportion that does not appear in the list, Virtual Worlds supplies the closest match it
+can find; you cannot type in a new proportion.</p>
+
+<h3>Perspective View</h3>
+
+<p>Switches the main view to show the room and objects as an avatar in the world would see
+them. This is essential, so that you can monitor the way your changes register inside the
+virtual world. Toggles with Top View, so that clicking either will switch between the two
+viewpoints.</p>
+
+<h3>Top View</h3>
+
+<p>Switches the main view to show the room and objects from above. This can be very useful
+in positioning objects well within the virtual world. Toggles with Avatar View, so that
+clicking either will switch between the two viewpoints.</p>
+
+<h3>Toggle Gravity </h3>
+
+<p>Turns gravity on or off in the world. The appearance of the button shows whether
+gravity is on or off. <font SIZE="2">If gravity is on, then after an object is moved, it
+falls until it hits something solid (usually a floor). Further, when gravity is on,
+avatars cannot fly (CTRL+UP), and can walk down stairs and fall from ledges. If gravity is
+off, however, objects and avatars do not fall (or walk down stairs), and avatars can fly.</font></p>
+
+<h3>Camera Follows Object</h3>
+
+<p>Specifies whether the camera moves to follow an object that the translate tool has
+moved off-screen.</p>
+
+<h3>X, Y, and Z Buttons</h3>
+
+<p>The X, Y, and Z buttons are axis locks. If you depress one or more of these buttons,
+you will be prevented from transforming the object on the axes that you lock. For example,
+if you are looking at an object and choose not to move it left or right, then depress the
+X button and the object will not be able to move left or right. </p>
+
+<p>You can also constrain axes with the X,Y,and Z keys on the keyboard, in a way that is
+logically opposite of the X, Y, and Z buttons on the toolbar. If you press the X key, you
+can then <em>only</em> move the object on the X axis. In this way, pressing the X key is
+equivalent to locking both the Y and Z axes with the Y and Z buttons on the toolbar.</p>
+
+<p>The axis locks (X, Y, and Z toolbar buttons) and axis constraints (X, Y, and Z keys)
+use the view coordinate system, which is the coordinate system of the camera. The X, Y,
+and Z text boxes work in the coordinate system of the virtual world itself. This means
+that when you lock an axis, you may still see changes in the text box for that axis.</p>
+</body>
+</html>

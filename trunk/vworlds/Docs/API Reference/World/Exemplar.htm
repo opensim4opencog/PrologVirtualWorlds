@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Exemplar (World)</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Exemplar</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>Returns a reference to the exemplar specified in the parameter. <b>Exemplar</b> is a read-only <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Exemplar</b>(<i>stringExemplar</i>)</td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Exemplar</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">stringExemplar</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The type of exemplar, expressed as a <b>String</b>.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>The <b>Exemplar</b> property of the <b>World</b> object returns an object reference to the exemplar specified in the <i>stringExemplar</i> parameter. This is particularly useful when you want to add or remove a property to or from an exemplar from which all instances of that exemplar inherit from. For example, if you create a custom exemplar named &quot;MyArtifactExemplar&quot;, and you want all subsequent instances of that exemplar to have a &quot;middleName&quot; property, you can acquire a reference to that exemplar using the <b>Exemplar</b> property, and then add the &quot;middleName&quot; property to the exemplar itself. The &quot;middleName&quot; property is then inherited by all instances of that exemplar.
+
+<p>If an existing instance of an exemplar has not changed the default value of a property, changing the property at the exemplar level will change the property on the existing instance as well. However, if the property value on the instance has been changed from the default value, Microsoft Virtual Worlds defaults to the changed value on the instance. In this case, changes to the exemplar have no affect on the customized instance. Likewise, if a property is removed from an exemplar, the property is removed only from those instances that have not changed the default value.
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;When changes are made to an exemplar object, these changes should be done in a module (as opposed to in the Command Window). Storing your changes in a module assures that the changes are kept when a world file is saved using the <a href="SaveToScript.htm">SaveToScript</a> method.
+
+
+
+<!--Example section-->
+<H3>Example</H3>
+<P>This example creates a custom exemplar named "myArtifactEx", obtains a reference to that exemplar, and adds a property to that exemplar. The example also creates an instance of that custom exemplar and verifies that the new property has been added.
+<br><br>
+<p class = comments>'Create a custom exemplar.
+<pre class=example>Sub CreateMyExemplar()
+Dim myEx
+
+Set myEx = World.CreateExemplar("myArtifactEx", "Artifact")
+
+End Sub
+
+
+Sub ChangeMyExemplar()
+
+Dim myArtEx
+Dim myInstance</pre>
+<p class=comments>'Obtain a reference to the exemplar using 
+<br>the <b>Exemplar</b> property.
+<pre class=example>Set myArtEx = World.<b>Exemplar("myArtifactEx")</b></pre>
+<p class=comments>'Add a new property.
+<pre class=example>myArtEx.AddProperty "Age", 28, PSBIT_FRIENDLY</pre>
+<p class=comments>'Create an instance of the custom exemplar.
+<pre class=example>Set myInstance = World.CreateInstance("myArt1", "myArtifactEx", User.Container)</pre>
+<p class=comments>'Verify that the property was inherited.
+<pre class=example>Trace myInstance.Age
+
+End Sub
+</pre>&nbsp;
+ 
+
+</body>
+</html>

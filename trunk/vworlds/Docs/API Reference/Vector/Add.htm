@@ -1,0 +1,119 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Add (Vector)</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Add</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Vector</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>Adds a <a href="Vector.htm">Vector</a> value to the value of the calling vector, and assigns the result to a vector passed as the second parameter. <b>Add</b> is a member of the <b>Vector</b> data type.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Add</b> <i>pv</i>, <i>pvres</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Add</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Vector</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pv</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>The <b>Vector</b> value to be added.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvres</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>A <b>Vector</b> variable that is assigned the result of the <b>Add</b> method.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Add</b> method provides a means of adding vector values. The first parameter (<i>pv</i>) is the value to be added to the value of the calling object. The second parameter (<i>pvres</i>) is a vector variable that is assigned the total of the addition. The <b>Vector</b> that invokes this method is not changed. 
+
+<p>The <i>pvres</i> parameter must be instantiated as a <b>Vector</b> object before it is sent as a parameter.
+<!--Example section-->
+<H3>Examples</H3>
+<p>The first example adds two vectors and assigns the sum to a third vector variable. 
+<br><br>
+
+<pre class="example">Dim myVector1
+Dim myVector2
+Dim myVecResult</pre>
+<p class=comments>'Create the vectors.
+<pre class="example">Set myVector1 = World.CreateVector(1, 1, 1)
+Set myVector2 = World.CreateVector(2, 2, 2)
+Set myVecResult = World.CreateVector(0, 0, 0)</pre>
+<p class=comments>'Call the <b>Add</b> method and add the values.
+<pre class="example">myVector1.<b>Add myVector2, myVecResult</b></pre>
+<p class=comments>'Display the result in the Command Window.
+<pre class="example">Trace myVecResult.ToAscii
+</pre>
+<p>Example 2
+<p>The second example adds a value to the invoking object by assigning the result of the addition to that object.<br><br>
+<pre class="example">Dim myVector1
+Dim myVector2</pre>
+<p class=comments>'Create the vectors.
+<pre class="example">Set myVector1 = World.CreateVector(1, 1, 1)
+Set myVector2 = World.CreateVector(2, 2, 2)</pre>
+<p class=comments>'Call the <b>Add</b> method and add the values, 
+<br>'assigning the result to the calling vector.
+<pre class="example">myVector1.<b>Add myVector2, myVector1</b></pre>
+<p class=comments>'Display the result in the Command Window.
+<pre class="example">Trace myVecResult.ToAscii
+
+</pre>
+<p class=comments>
+<div class=comments></div>
+
+
+</body>
+</html>

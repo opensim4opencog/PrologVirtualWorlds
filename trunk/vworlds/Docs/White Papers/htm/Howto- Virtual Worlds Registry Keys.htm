@@ -1,0 +1,251 @@
+<html>
+
+<head>
+<meta name=Generator content="Microsoft Office HTML Filter 2.0">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Originator content="Microsoft Word 9">
+<title>How To: Virtual Worlds Registry Keys</title>
+<style>
+<!--
+ 
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:Arial;}
+h1
+	{
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	border:none;
+	padding:0in;
+	font-size:14.0pt;
+	font-family:Arial;}
+h2
+	{
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{
+	margin:0in;
+	margin-bottom:.0001pt;
+	page-break-after:avoid;
+	font-size:10.0pt;
+	font-family:Verdana;
+	layout-grid-mode:line;
+	font-weight:normal;
+	font-style:italic;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+</head>
+
+<body lang=EN-US>
+
+<div class=Section1>
+
+<div style='border:none;border-bottom:solid windowtext .5pt;padding:0in 0in 1.0pt 0in'>
+
+<h1><span style='layout-grid-mode:line'>How To: Virtual Worlds Registry Keys</span></h1>
+
+</div>
+
+<h3>by Peter Wong, Microsoft Research</h3>
+
+<p class=MsoNormal><i>version 01.00.00.0001,
+10/25/99</i></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
+background:#E8EDF4'>
+
+<p class=MsoNormal style='border:none;
+padding:0in;'>This document illustrates
+the various keys that Microsoft Virtual Worlds adds to the Microsoft Windows
+registry database and their respective uses.</p>
+
+</div>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>There are 3 main categories of registry keys
+that Virtual Worlds uses (actually four but you don't need to worry about the
+fourth - CLSIDs of library contents).  A
+typical user will only need to deal with the first two:</p>
+
+<p class=MsoNormal style='text-autospace:none'>&nbsp;</p>
+
+<p class=MsoNormal style='text-autospace:none'>a) Install paths to locations of files</p>
+
+<p class=MsoNormal style='text-autospace:none'>b) Friendly name to checkpoint file mapping</p>
+
+<p class=MsoNormal style='text-autospace:none'>c) Server and World properties</p>
+
+<p class=MsoNormal style='text-autospace:none'>&nbsp;</p>
+
+<p class=MsoNormal style='text-autospace:none'>a) This is a static set of keys that is
+created at install time and lets the system know the main install path, and
+locations for various content.  Most
+should be self-explanatory.  You would
+only need to change these if you want to move locations of any of these
+files.  Useful if you're changing
+installation drives or if you want to test with new content without erasing
+installed content (by temporarily pointing the path to a new location).  These paths are the default paths that the
+system will search for content on.  The
+RootURL allows additional content paths to be post-pended to the
+LocalContentPath setting.</p>
+
+<p class=MsoNormal style='text-autospace:none'>&nbsp;</p>
+
+<p class=MsoNormal style='text-autospace:none'>Note that AvatarPath and WorldPath define
+where checkpoint files are located, and not where avatar graphics and world
+content are located.  Checkpoint files
+are created locally for worlds running on a local server and avatars that are
+created on a local client.</p>
+
+<p class=MsoNormal style='text-autospace:none'>&nbsp;</p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\V-Worlds]</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;InstallPath&quot;=&quot;C:\\Program
+Files\\Microsoft Virtual Worlds&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>&nbsp;</p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\V-Worlds\Paths]</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;AvatarPath&quot;=&quot;C:\\Program
+Files\\Microsoft Virtual Worlds\\Avatars\\&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;AvatarGraphicsPath&quot;=&quot;C:\\Program
+Files\\Microsoft Virtual Worlds\\Local Content\\Avatar Graphics\\&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;ContentPath&quot;=&quot;C:\\Program
+Files\\Microsoft Virtual Worlds\\Local Content\\&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;WorldWizPath&quot;=&quot;C:\\Program
+Files\\Microsoft Virtual Worlds\\Local Content\\SDK\\Wizards\\World\\&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;HelpPath&quot;=&quot;C:\\Program
+Files\\Microsoft Virtual Worlds\\docs\\&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;WorldPath&quot;=&quot;C:\\Program
+Files\\Microsoft Virtual Worlds\\Worlds\\&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;DirectoryServiceURL&quot;=&quot;LDAP://vworldsint/o=Microsoft/ou=dynamic&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;DirectoryServicePage&quot;=&quot;file:\\\\C:\\Program
+Files\\Microsoft Virtual Worlds\\Local
+Content\\Client\\html\\dservice.htm&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>&nbsp;</p>
+
+<p class=MsoNormal style='text-autospace:none'>b) These are created at runtime as each
+world and avatar is created locally. 
+Each world and avatar stores properties/profiles in a checkpoint file
+(per world/avatar).  In the case of each
+avatar, the registry maps a name to a checkpoint.  In the case of each world, the registry maps a GUID to a
+checkpoint.  A user would only
+realistically touch these registry entries if they wanted to move an
+administrative avatar (world creator) from one machine to another to allow
+wizard privelages from another client. 
+Manipulating worlds is best done from the Virtual Worlds Server
+application.</p>
+
+<p class=MsoNormal style='text-autospace:none'>&nbsp;</p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>[HKEY_CURRENT_USER\Software\Microsoft\V-Worlds\Avatars\aaa]</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>@=&quot;C:\\Program Files\\Microsoft Virtual
+Worlds\\Avatars\\aaa.vwc&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>[HKEY_CURRENT_USER\Software\Microsoft\V-Worlds\Worlds\{212256E2-8014-11D3-9A9F-00C04F5C2468}]</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;Path&quot;=&quot;test1pt1server&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;FriendlyName&quot;=&quot;Friendly name
+here.&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;NotInDirectory&quot;=&quot;TRUE&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;InfoURL&quot;=&quot;TRUE&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'>&nbsp;</p>
+
+<p class=MsoNormal style='text-autospace:none'>c) A few out of world properties that the
+system or server uses:</p>
+
+<p class=MsoNormal style='text-autospace:none'>            isSDK
+lets the system know if the SDK files are installed</p>
+
+<p class=MsoNormal style='text-autospace:none'>            MaxUsers
+is the maximum number of users allowed on a server...0 means no limit</p>
+
+<p class=MsoNormal style='text-autospace:none'>            Local
+Group is the name of an NT local group for authentcation purposes (on a large
+intranet, where everyone is authenticated against a common domain, you can set
+a local group on the server machine to limit access to the VWorld server to
+only members of that group)</p>
+
+<p class=MsoNormal style='text-autospace:none'>            Authentication
+(0=off/1=on) - NTLM authentication</p>
+
+<p class=MsoNormal style='text-autospace:none'>&nbsp;</p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\V-Worlds]</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;isSDK&quot;=&quot;1&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;MaxUsers&quot;=dword:00000000</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;LocalGroup&quot;=&quot;&quot;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span
+style='font-family:"Courier New"'>&quot;Authentication&quot;=&quot;1&quot;</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>

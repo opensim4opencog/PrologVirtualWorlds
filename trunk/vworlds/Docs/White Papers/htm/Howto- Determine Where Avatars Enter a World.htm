@@ -1,0 +1,146 @@
+<html>
+
+<head>
+<meta name=Generator content="Microsoft Office HTML Filter 2.0">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Originator content="Microsoft Word 9">
+<title>How To: Determine Where Avatars Enter a World</title>
+<style>
+<!--
+ 
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:Arial;}
+h1
+	{
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	border:none;
+	padding:0in;
+	font-size:14.0pt;
+	font-family:Arial;}
+h2
+	{
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{
+	margin:0in;
+	margin-bottom:.0001pt;
+	page-break-after:avoid;
+	font-size:10.0pt;
+	font-family:Verdana;
+	layout-grid-mode:line;
+	font-weight:normal;
+	font-style:italic;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+</head>
+
+<body lang=EN-US>
+
+<div class=Section1>
+
+<div style='border:none;border-bottom:solid windowtext .5pt;padding:0in 0in 1.0pt 0in'>
+
+<h1><span style='layout-grid-mode:line'>How To: Determine Where Avatars Enter a
+World</span></h1>
+
+</div>
+
+<h3>by Reena Kawal, Microsoft Research</h3>
+
+<p class=MsoNormal><i>version 01.00.00.0001,
+09/24/99</i></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
+background:#E8EDF4'>
+
+<p class=MsoNormal style='border:none;
+padding:0in;'>This document addresses
+the proper use of object properties that determine where avatars enter a world
+or room on first login and when they move through portals.</p>
+
+</div>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>First,
+you must specify either a default room or a default portal in the world.  Otherwise, there won't be a place for an
+avatar to enter.  Specifiying a default
+room is simplest, but specifying a default portal allows you to define not only
+an initial position, but an initial orientation and a radius in which avatars
+will be scattered (so they don't appear to come in on top of each other.)</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>(1)</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>          World.DefaultRoom = EntryRoom</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>or</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>(2)</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>          World.DefaultPortal = EntryPortal</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>To
+place an avatar entering the DefaultRoom as in (1):</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>Set
+the room's DefaultAvatarPosition property. 
+This property is a vector and is set to (0, 0, 0) by default.</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>          EntryRoom.DefaultAvatarPosition =
+World.CreateVector(-2.1, 0.0, 3.5)</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>To
+place an avatar entering through a DefaultPortal as in (2), you set the entry
+point, or position, the entry orientation (the direction the avatar will be
+facing), and the entry radius:</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>          EntryPortal.EntryPoint =
+World.CreateVector(-2.1, 0.0, 3.5)</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>          EntryPortal.EntryOrientation =
+World.CreateVector(0.0, 0.0, 1.0)</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>          EntryPortal.EntryRadius = 1</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>Note:
+you can also use the vector &quot;Set&quot; method to set these properties:</span></p>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>          EntryPortal.EntryPoint.Set -2.1, 0.0,
+3.5</span></p>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Frame</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Frame</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Object</P></td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P class=body>A frame is a section of the screen or visible 
+user interface that you can use&nbsp;as a container&nbsp;to hold other objects. 
+In HTML, you can use a frameset to organize 
+multiple frames and nested framesets. A <STRONG>Frame</STRONG> object is an individual 
+frame within a frameset. You can use the <A href="../Exemplars/Thing/GetFrame.htm">GetFrame</A> method to retrieve an 
+existing frame, the <A href="../World/CreateFrame.htm">CreateFrame</A> method to create a new frame, and <A href="Copy.htm">Copy</A> method to copy an existing frame to another 
+frame.&nbsp;Each thing in a room has a frame organized under the room's 
+name.&nbsp;
+
+<!--How-to section -->
+<H3>Using the Object</H3>
+<p>A <b>Frame</b>    contains:
+<ul>
+  <li>  A list of <i>visuals</i> (visual objects) and a list
+    of lights. A visual can be a <i>mesh</i>, a visual object that is made up of a set of
+    polygonal faces. A sprite is an example of a mesh. Another kind of visual is a <i>decal</i>,
+    a texture that can be rendered directly. The name in text above an avatar's head is an
+    example of a decal. A third kind of visual is a <i>progressive mesh</i> , a mesh that is
+    stored as a base mesh (a coarse version) and a set of records that are used to
+    increasingly refine the mesh. You can reference a visual&nbsp;by its index in the visual list, or
+    by name. Use the <A href="GetVisualCount.htm">GetVisualCount</A> 
+  method to determine the
+    number of visuals in a frame. To determine the index of a named visual, use the 
+	<A href="GetVisualIndexByName.htm">GetVisualIndexByName</A>&nbsp;method.</li>
+</ul>
+
+<ul>
+  <li> A transformation, made up of the frame's position, orientation,
+    and scale. You can set and retrieve these attributes by using the transformation
+    methods <A href="GetPosition.htm">GetPosition</A>, <A href="SetPosition.htm">SetPosition</A>, 
+	<A href="GetOrientation.htm">GetOrientation</A>, <A href="SetOrientation.htm">SetOrientation</A>, 
+	<A href="GetScale.htm">GetScale</A>, and <A href="SetScale.htm">SetScale</A>. 
+	In addition, the methods <A href="SetVelocity.htm">SetVelocity</A>, 
+	<A href="GetVelocity.htm">GetVelocity</A>, <A href="SetRotationRate.htm">SetRotationRate</A>,
+    and <A href="GetRotationRate.htm">GetRotationRate</A> modify the frame's 
+  transformation each time the scene is rendered (approximately 15 times per 
+  second). For thing's in a room, these
+    values are set from the objects <a href="../Exemplars/Thing/Position.htm">Position</a>, <a href="../Exemplars/Thing/Direction.htm">Direction</a>, <a href="../Exemplars/Thing/Up.htm">Up</a>, and <a href="../Exemplars/Thing/Scale.htm">Scale</a> properties.</li>
+</ul>
+
+<ul>
+  <li>  A record of the frame hierarchy. At the top level in
+    this hierarchy is the <i>scene</i> or <i>root</i> <i>frame</i>. Beneath this top
+    level there may be <i>child frames</i> , which, in turn, may be parents to other
+    child frames. The <A href="AddChild.htm">AddChild</A>, <A href="DeleteChild.htm">DeleteChild</A>, 
+	<A href="IsChildOf.htm">IsChildOf</A>, <A href="GetParent.htm">GetParent</A>, 
+	<A href="GetChildren.htm">GetChildren</A>, and <A href="GetScene.htm">GetScene</A> methods 
+	all relate to this hierarchy. Each frame in the hierarchy has its own local transformation, 
+	which is combined with those of the frames above it in the hierarchy to produce the 
+	world-coordinate transformation.</li>
+</ul>
+
+<p> To create an empty mesh, use the <A href="CreateMesh.htm">CreateMesh</A>
+  method. You can name the mesh after you create it by using the 
+<A href="SetMeshName.htm">SetMeshName</A> method. Each frame 
+can have one or more meshes associated with it.&nbsp;</p>
+
+
+</BODY>
+</html>

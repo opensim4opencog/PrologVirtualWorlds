@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsExemplar</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsExemplar</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Thing</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Returns a flag indicating whether the calling object is an <a href="Exemplar.htm">Exemplar</a> based on a <a href="Thing.htm">Thing</a>. <b>IsExemplar</b> is a read-only <b>Boolean</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsExemplar</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>IsExemplar</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that evaluates to an instance of the <b>Thing</b> object.</td>
+	</TR>
+	
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>IsExemplar</b> property is useful for verifying whether the calling object is a reference to an exemplar, as opposed to an instance of that exemplar. The <a href="../World/CreateInstance.htm">CreateInstance</a> method of the <a href="../World/World.htm">World</a> object, for example, requires a <b>String</b> reference to an exemplar (the <b>Name</b> of the exemplar) as a parameter. If that parameter is based on a built-in exemplar, such as an <a href="../Exemplars/Artifact/Artifact.htm">Artifact</a>, it is usually not necessary to verify that the reference is an exemplar. However, when custom exemplars are created, you can use the <b>IsExemplar</b> property as a safety measure to ensure that the custom exemplar has already been instantiated before invoking a method that requires a reference to an exemplar. 
+
+<p>For more information on creating a custom exemplar, see the <a href="../World/CreateExemplar.htm">CreateExemplar</a> topic.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>The following example uses the <b>IsExemplar</b> property to verify whether the provided object reference is an exemplar. If the <b>IsExemplar</b> property returns <b>True</b>, the subroutine prints a confirmation to the Command Window and creates new instances of that exemplar, based on the number supplied in the "myNumber" parameter. If the <b>IsExemplar</b> property returns <b>False</b>, a message appears in the Command Window stating that "myExemplar" is not a reference to an exemplar. The subroutine also includes several extra formatting elements for the new instances that make the results easier to view in the 3-D pane.
+<br><br>
+<div class=comments></div>
+<pre class="example">
+Sub myObjectGenerator(myExemplar, myNumber)
+Dim myCounter</pre>
+<p class=comments>'Verify that &quot;myExemplar&quot; is a reference to an exemplar.
+<pre class="example">If myExemplar.<b>IsExemplar</b> = True Then
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myExemplar.Name &amp; " is an exemplar."</pre>
+<p class=comments>'Create new instances of the valid exemplar, based on the number specified.
+<pre class="example">&nbsp;&nbsp;&nbsp;&nbsp;If myNumber > 0 Then
+&nbsp;&nbsp;&nbsp;&nbsp;For myCounter = 1 to myNumber
+	Dim newInstance
+	Set newInstance = World.CreateInstance(myExemplar.Name &amp; myCounter, myExemplar, User.Container)</pre>
+<p class=comments>'[Optional] Format the new objects with a label, new position, and better render quality.
+<pre class="example">	newInstance.Label = myExemplar.Name &amp; myCounter
+	newInstance.Position = World.CreateVector(myCounter * 1.5, 1, 0)
+	newInstance.RenderQuality = 2
+&nbsp;&nbsp;&nbsp;&nbsp;Next
+&nbsp;&nbsp;&nbsp;&nbsp;End If</pre>
+<p class=comments>'If <b>IsExemplar</b> returns False, print a notification in the Command Window.
+<pre class="example">Else
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myExemplar.Name &amp; " is not an exemplar."
+
+End If
+
+End Sub
+</pre>
+
+
+
+</span> 
+
+</body>
+</html>

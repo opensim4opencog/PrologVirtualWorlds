@@ -1,0 +1,112 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>RotateAboutAxis</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>RotateAboutAxis</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Vector</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>Rotates a <a href="Vector.htm">Vector</a> around a given axis. <b>RotateAboutAxis</b> is a member of the <b>Vector</b> data type.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>RotateAboutAxis</b> <i>fTheta</i>, <i>fAxisX</i>, <i>fAxisY</i>, <i>fAxisZ</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>RotateAboutAxis</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Vector</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fTheta</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The radian angle value represented as a <b>Float</b> by which the <b>Vector</b> is rotated.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fAxisX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The x coordinate of the vector that acts as an axis around which the calling <b>Vector</b> is rotated.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fAxisY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The y coordinate of the vector that acts as an axis around which the calling <b>Vector</b> is rotated.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fAxisZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The z coordinate of the vector that acts as an axis around which the calling <b>Vector</b> is rotated.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+
+<P>The <b>RotateAboutAxis</b> method rotates the calling object around a supplied vector that acts as an axis. The axis is determined by the <i>fAxisX</i>, <i>fAxisY</i>, and <i>fAxisZ</i> parameters. The vector is rotated by multiplying the angle supplied in the first parameter (<i>fTheta</i>) by the supplied user-defined axis. The <i>fTheta</i> parameter is a radian value represented as a <b>Float</b>.
+
+
+<!--Example section-->
+<H3>Example</H3>
+
+<p>This example rotates a vector by the given angle around the axis provided in the parameters.
+<br><br>
+
+<pre class="example">Dim myVector1</pre>
+<p class=comments>'Create the vector.
+<pre class="example">Set myVector1 = World.CreateVector(1, 1, 1)</pre>
+<p class=comments>'Rotate the vector.
+<pre class="example">myVector1.<b>RotateAboutAxis 1.2, 3, 2, 4</b></pre>
+<p class=comments>'Display the new value in the Command Window.
+<pre class="example">Trace myVector1.ToAscii</pre>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Setting and Retrieving a Property</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>Setting and Retrieving a Property</h1>
+
+<p><!-- 10/23/98 --></p>
+
+<p>Although you can use the <a href="../../uiref/objexpl/intrface.htm"><b>Object Explorer</b></a>
+to view or retrieve the values of properties on
+most objects in a world, the Virtual Worlds security model
+prevents users from changing object properties. If you are the owner of an object
+(or a wizard in the world), you can set a property by using the <b>Object Explorer</b>.
+You can also set or retrieve a property's
+value by using <i>object.property</i> notation in the
+<a href="../../uiref/cmdwin/cwinintf.htm"><b>Command Window</b></a>. </p>
+
+<h2>To set the value of a property - Object Explorer:</h2>
+
+<ol>
+    <li>In the <strong>Object Explorer</strong>, select the
+        object whose property you want to change.</li>
+    <li>In the <strong>Properties</strong> pane, select the
+        property, and then right-click it.  <strong>Note</strong>: for
+        security reasons, some properties cannot be edited. These
+        properties do not have an <strong>Edit Value</strong>
+        option, and have special icons signifying that they
+        cannot be edited.</li>
+    <li>From the menu that appears, click <strong>Edit Value</strong>.</li>
+    <li>If the property is a numerical or string type, enter a
+        new value for the property. If the property is <strong>Boolean</strong>,
+        select <strong>True</strong> or <strong>False</strong>
+        from the selection box. If the property is none of these 
+        types, an edit window of the appropriate type
+        is displayed.</li>
+</ol>
+
+<h2>To set the value of a property - Command Window:</h2>
+
+<ul>
+    <li>Type an assignment statement with this form into the <strong>Command
+        Window</strong>: <em><br>
+        ObjectName.PropertyName</em> = <em>NewValue</em></li>
+</ul>
+
+	<p>For example, the following assignment statement changes the
+	<b>Description</b>
+	property of an object named <em>NewObj</em>.</p>
+
+<blockquote>
+    <pre>NewObj.Description = &quot;This amulet makes you invisible&quot;</pre>
+</blockquote>
+
+<p>You can also set the value of an added property using the same
+<i>object.property</i> notation. In the following example, the
+first line uses the <b>AddProperty</b>
+method of <b>Thing</b
+(core object type) to add a <em>Color</em> property to <em>NewObj</em>.
+In the second line, the newly added property is set to the <strong>String</strong>
+value, &quot;Green&quot;. </p>
+
+<blockquote>
+    <pre>NewObj.AddProperty &quot;Color&quot;
+NewObj.Color = &quot;Green&quot;</pre>
+</blockquote>
+
+<h2>To retrieve the value of an object's property - Command Window</h2>
+
+<ul>
+    <li>For numeric, <strong>Boolean</strong>, or <strong>String</strong>
+        properties, type an assignment statement of this form
+        into the <strong>Command Window</strong>:<br>
+        <em>Value</em> = <em>ObjectName.PropertyName</em></li>
+</ul>
+
+<p>For example, this statement retrieves the value that is
+currently stored in the <i>Color</i> property on <i>NewObj</i>:</p>
+
+<blockquote>
+    <pre>CurrentColor = NewObj.Color</pre>
+</blockquote>
+
+<ul>
+    <li>If the property is Virtual Worlds core object
+        (such as <b>Vector</b>, <b>PropertyList</b>,
+        and others), include <strong>Set</strong> in
+        the assigment statement, using an
+        assignment statement of this form:<br>
+        <em>Set Value</em> = <em>ObjectName.PropertyName</em></li>
+</ul>
+
+<p>For example, the following statement retrieves the value of
+the <b>Position</b> property (of type <strong>Vector</strong>)
+on <em>NewObj</em>:</p>
+
+<blockquote>
+    <pre>Set ObjLocation = NewObj.Position</pre>
+</blockquote>
+
+</body>
+</html>

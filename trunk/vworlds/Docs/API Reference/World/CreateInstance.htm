@@ -1,0 +1,124 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateInstance</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateInstance</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Creates an instance of a particular object in a specified container. 
+<b>CreateInstance</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CreateInstance</b>(<i>bstrName</i>, 
+		<i>varExemplar</i>&nbsp;[,&nbsp;<i>varContainer</i>])</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>CreateInstance</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the instance.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">varExemplar</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The exemplar for the instance to be created.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[varContainer]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The container in which the instance will be created.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Thing</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <i>Exemplar</i> parameter can be either a reference to an exemplar 
+(type <b>Thing</b>), or the name of the exemplar (type <b>String</b>).</p>
+
+<p>If the <i>Container</i> parameter is omitted, the object will usually be created in
+the <a href="../Thing/Contents.htm">Contents</a> of the 
+<a href="User.htm">User</a> who created the object, unless the object
+created is a <a href="../Exemplars/Room/Room.htm">Room</a>, in which case, the 
+<a href="World.htm">World</a> will be its container.</p>
+
+<p>Objects of type <a href="../Exemplars/Avatar/Avatar.htm">Avatar</a> cannot be
+created with this method. You will receive an error if you try to do so.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>The first example invokes the <b>CreateInstance</b> method and supplies the <b>String</b> name of an exemplar for the <i>varExemplar</i> parameter.>.<br><br>
+
+<pre class=example>Set NewThing = World.CreateInstance(&quot;Toy&quot;, &quot;Artifact&quot;, User.Container)</pre>
+<p>Example 2.
+<p>This example obtains a reference to an existing object named "myObject", and supplies the object reference as the <i>varExemplar</i> parameter.<br><br>
+
+<pre class=example>Dim myInstance
+Dim myInstanceExemplar
+
+Set myObject1 = User.Container.Findwithin("myObject")
+Set myInstanceExemplar = myObject1.Exemplar
+
+Set NewThing = World.CreateInstance(&quot;Toy&quot;, myInstanceExemplar, User.Container)
+</pre>
+
+<p>Example 3.
+<p>The third example uses the <b>CreateInstance</b> method to add the instance to the contents of the <b>User</b>.<br><br>
+<pre class=example>Set NewThing = World.CreateInstance(&quot;Toy&quot;, &quot;Artifact&quot;)</pre>
+&nbsp;
+
+
+</body>
+</html>

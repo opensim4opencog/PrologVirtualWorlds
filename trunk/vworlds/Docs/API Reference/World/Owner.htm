@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Owner (World)</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Owner</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <a href="../Thing/Thing.htm">Thing</a> that represents the owner of the <a href="World.htm">World</a>. 
+<b>Owner</b> is a read-only <b>Thing</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Owner</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Owner</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Every object in the <b>World</b>, including the world itself, has an <b>Owner</b>.
+The <b>Owner</b> is the <a href="../Exemplars/Avatar/Avatar.htm">Avatar</a>
+who created the object. Once an object is created, its ownership never changes.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To find the name of the <b>Owner</b> of the world:</p>
+
+<pre><tt>   Set myOwnerReference = World.<b>Owner</b>
+   Trace myOwnerReference.Name</tt></pre>&nbsp;
+ 
+
+</body>
+</html>

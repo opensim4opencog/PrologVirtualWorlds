@@ -1,0 +1,213 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// vwcomm.idl : IDL source for vwcomm.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (vwcomm.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IVWComm : Primary interface for communications layer. Used on both client and server. Allows
+// initiation of server to accept connections and disconnect those connections. Allows clients
+// to connect to specific servers.
+//
+// IVWCommSite : Interface to be implemented by objects requiring to receive notification
+// when messages arrive through VWComm.
+//
+// IVWCommConnection : Interface for the actual connections created via IVWComm. Allows data
+// to be sent on the connection and the connection to be disconnected.
+//
+// IVWCommMessage : Data received on a connection is packaged into a message and placed in 
+// a queue. The IVWCommSite is then notified and IVWComm can be used to get the most recent
+// message added to the queue. This interface primarily allows the data to be extracted from
+// the message.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+	import "vwbuffer.idl";
+	import "authntic.idl";
+
+// Codes 0x0-0x01ff are reserved for the OLE group of
+// interfaces.  We start our codes at 0x500.
+
+cpp_quote("#define VWCOMM_E_COULDNTCONNECT			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0501)")
+cpp_quote("#define VWCOMM_E_COULDNTACCEPT			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0502)")
+cpp_quote("#define VWCOMM_E_NOTINITIALIZED			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0503)")
+cpp_quote("#define VWCOMM_E_INVALIDCONFIGURATION	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0504)")
+cpp_quote("#define VWCOMM_E_UNKNOWNERROR			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0505)")
+cpp_quote("#define VWCOMM_E_INVALIDPARAMETER		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0506)")
+cpp_quote("#define VWCOMM_E_INTERNALTIMEOUT			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0507)")
+cpp_quote("#define VWCOMM_E_ERRORDURINGSYNCHWRITE	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0508)")
+cpp_quote("#define VWCOMM_E_NOMESSAGES				MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0509)")
+cpp_quote("#define VWCOMM_E_CONNECTIONNOTFOUND		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x050A)")
+cpp_quote("#define VWCOMM_E_INVALIDSOCKET			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x050B)")
+cpp_quote("#define VWCOMM_E_IMPROPERSTATE			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x050C)")
+cpp_quote("#define VWCOMM_E_WINSOCKERROR			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x050D)")
+cpp_quote("#define VWCOMM_E_COULDNTINITIALIZE		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x050E)")
+cpp_quote("#define VWCOMM_E_ALREADYINWRITESYNCH		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x050F)")
+
+	interface IVWCommConnection;
+	interface IVWCommMessage;
+	interface IVWCommSite;
+
+	[
+		object,
+		uuid(c1918680-dbe4-11cf-a516-00aa00b595db),
+		helpstring("IVWComm Interface"),
+		local,
+		pointer_default(unique)
+	]
+	interface IVWComm : IUnknown
+	{
+		import "oaidl.idl";
+
+		[helpstring("Initialize VWComm with IVWCommSite.")]
+		HRESULT Initialize([in] IVWCommSite *pICommSite);
+
+		[helpstring("Internally used - do not invoke.")]
+		HRESULT Terminate();
+
+		[helpstring("Client: Connect to a named server via a specific port.")] 
+		HRESULT Connect([in] LPSTR psz, [in] int iPort, [in] VARIANT_BOOL bTunnel, [out] IVWCommConnection **ppICommConnection);
+		
+		[helpstring("Server: Disconnect all connections.")] 
+		HRESULT DisconnectAll();
+
+		[helpstring("Server: Accept connections via a specific port.")] 
+		HRESULT Accept([in] int iPort);
+
+		[helpstring("Get the most recent message from VWComm's queue.")] 
+		HRESULT GetMessage([out] IVWCommMessage **pICommMessage);
+
+		[propget, helpstring("Server name.")] 
+		HRESULT HostName([out, retval] BSTR* pbstrVal);
+
+		[helpstring("Client: Send a KeepAlive message.")]
+		HRESULT KeepAlive();
+
+		[helpstring("Server: Useful statistics regarding performance.")]
+		HRESULT GetUsageStatistics(	[out] int *pcPacketsSent,
+									[out] int *pcPacketsReceived,
+									[out] int *pcBytesSent,
+									[out] int *pcBytesReceived,
+									[out] int *pcPacketsReceivedPerSecond,
+									[out] int *pcBytesReceivedPerSecond,
+									[out] int *pcPacketsSentPerSecond,
+									[out] int *pcBytesSentPerSecond,
+									[out] int *pcMeanPacketsInWriteQueue,
+									[out] int *pcMeanMessagesInReadQueue,
+									[out] int *pcMeanTimeInWriteQueue,
+									[out] int *pcMeanTimeInReadQueue );
+
+	};
+
+	[
+		object,
+		uuid(c1918682-dbe4-11cf-a516-00aa00b595db),
+		helpstring("IVWCommSite Interface"),
+		local,
+		pointer_default(unique)
+	]
+	interface IVWCommSite : IUnknown
+	{
+		// called during synchronous sends (in calling thread)
+		[helpstring("A message has been received and can be collected via IVWComm::GetMessage()")] 
+		HRESULT OnMessageAvailable(IVWComm *);
+
+		// called from secondary thread
+		[helpstring("A message has been received and can be collected via IVWComm::GetMessage()")] 
+		HRESULT OnMessageAvailable_T2(IVWComm *);
+	}
+
+	[
+		object,
+		uuid(c1918686-dbe4-11cf-a516-00aa00b595db),
+		helpstring("IVWCommConnection interface"),
+		local,
+		pointer_default(unique)
+	]
+	interface IVWCommConnection : IUnknown
+	{	
+		[helpstring("Send a message asynchronously on this connection.")] 
+		HRESULT SendAsync([in] IMarshallBuffer *pcb);
+		[restricted, helpstring("Send a message asynchronously to specified connections.")]
+		HRESULT SendAsyncExt([in] IMarshallBuffer *pcb, [in] int cConnections, [in, size_is(cConnections)] IVWCommConnection *rgpconn[]);
+		[helpstring("Client: Send a message synchronously on this connection.")] 
+		HRESULT SendSync([in] IMarshallBuffer *pcb, [out] IUnMarshallBuffer **ppcbReply);
+		[helpstring("Disconnect this connection.")] 
+		HRESULT Disconnect();
+
+		[propget, helpstring("Address of socket for this connection.")]
+		HRESULT SocketAddress([out, retval] BSTR* pbstrVal);
+
+		[propput, restricted, helpstring("Authentication interface (see authntic.idl).")]
+		HRESULT Authentication([in] IAuthentication *pauth);
+		[propget, restricted, helpstring("Authentication interface (see authntic.idl).")]
+		HRESULT Authentication([out, retval] IAuthentication **ppauth);
+
+		[propget, helpstring("Is authenticated? (see authntic.idl).")]
+		HRESULT IsAuthenticated([out, retval] VARIANT_BOOL *pbAuthenticated);
+
+		[propput, restricted, helpstring("User defined data (can be anything).")]
+		HRESULT UserData([in] void *pvData);
+		[propget, restricted, helpstring("User defined data (can be anything).")]
+		HRESULT UserData([out, retval] void **ppvData);
+	}
+
+	typedef 
+	[
+		uuid(c191868A-dbe4-11cf-a516-00aa00b595db),
+		helpstring("")
+	]
+	enum MsgStatusConstant
+	{
+		[helpstring("")] mscOk = 0,	
+		[helpstring("")] mscReadError = 1,	
+		[helpstring("")] mscWriteError = 2,	
+		[helpstring("")] mscAcceptError = 3,	
+		[helpstring("")] mscConnect = 4,
+		[helpstring("")] mscDisconnect = 5,
+		[helpstring("")] mscDirtyDisconnect = 6,
+		[helpstring("")] mscOutOfMemory = 7,
+		[helpstring("")] mscEvilUser = 8,
+	} MsgStatusConstant;
+
+	[
+		object,
+		uuid(c1918688-dbe4-11cf-a516-00aa00b595db),
+		helpstring("IVWCommMessage interface"),
+		local,
+		pointer_default(unique)
+	]
+	interface IVWCommMessage : IUnknown
+	{
+		// Status codes
+		// REVIEW: use an enum once these settle down
+		//
+		// 0 = Ok - regular incoming message
+		// 1 = Read error
+		// 2 = Write error
+		// 3 = Accept error
+		// 4 = New connection
+		// 5 = Clean disconnect
+		// 6 = Dirty disconnect
+		// 7 = Out of memory error
+		// 8 = Evil user
+		//
+		[helpstring("Message status (see codes).")]
+		HRESULT GetStatus([out] int *pnStatus);
+
+		[helpstring("Connection this message is associated with.")] 
+		HRESULT GetConnection([out] IVWCommConnection **ppIVWCommConnection);
+		[helpstring("The actual data of the message.")] 
+		HRESULT GetData([out] IUnMarshallBuffer **ppbuffer);
+		[helpstring("Is message synchronous?")] 
+		HRESULT GetSynchronous([out] VARIANT_BOOL *pbSync);
+		[helpstring("Reply to this message via same connection (used in synchronous case).")] 
+		HRESULT Reply([in] IMarshallBuffer *pbuffer);
+	}
+

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Arguments</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Arguments</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of MenuItem</td>
+	</tr>
+</table><!--Topic Definition-->
+<p>   Sets and returns a list of&nbsp;parameters that are 
+passed to&nbsp;a method invoked by a <A href="MenuItem.htm">MenuItem</A>&nbsp;object. <b>Arguments</b> is a read/write <b>Variant</b>. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td>
+<p> <EM>object</EM>.<STRONG>Arguments</STRONG> = 
+  <EM>Value</EM></p></td>
+	</tr>
+</table><!--Parameters table--></P>
+<p>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD>
+      <P><EM>object</EM>.<STRONG>Arguments</STRONG></P></TD></TR></TABLE>
+<P>The <b>Arguments</b> property syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>MenuItem</TD>
+    <TD>Required</TD>
+    <TD>An&nbsp;object reference to a <STRONG>MenuItem</STRONG>.</TD></TR>
+
+	<TR>
+		<td class="boldItal">Value</td>
+		<td>Variant (Array or other)</td>
+		<td>Required</td>
+		<td>If a single parameter is required, <EM>Value</EM> 
+      contains that parameter.&nbsp; If multiple parameters are required, 
+      <EM>Value</EM>         will 
+      be an array that contains those parameters.</td>
+	</TR>
+
+</TABLE><!--Remarks section-->
+<H3>Remarks</H3>
+<P>When you create a menu item that calls a method, the 
+<STRONG>Arguments</STRONG> property contains the arguments 
+for that method. You use an array to store the parameters for the method.&nbsp; 
+Note that when you get the <STRONG>Arguments</STRONG> property from the menu 
+item, it is returned as a <a href="../PropertyList/PropertyList.htm">PropertyList</a> 
+object, not an array. 
+<P>           
+   The number of argument elements in the array
+must be the same as the number of parameters in the method.
+You must pass the arguments&nbsp;to the method as an array. You can use the
+Visual Basic Script <b>Array</b> function to create an initialized array, as in 
+the second example below. &nbsp; <!--Example section-->
+<H3>Example</H3>
+<p>You can substitute the Method object for the MenuItem object in any of the following statements.</p>
+<p>To set the arguments: </p>
+<pre>myMenuItem.<b>Arguments</b> = Array(10, 20, 30)
+myMenuItem.<b>Arguments</b> = Array(bstrAvatarName, 5)</pre>
+<p>To return the arguments: </p>
+
+<pre>myParams = myMenuItem.<b>Arguments</b> </pre>
+&nbsp;
+
+
+</body>
+</html>

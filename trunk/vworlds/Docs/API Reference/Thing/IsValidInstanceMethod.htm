@@ -1,0 +1,117 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsValidInstanceMethod</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsValidInstanceMethod</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Thing</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Determines whether the specified method exists on the object instance. 
+<b>IsValidInstanceMethod</b> is a member of the <a href="Thing.htm">Thing</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsValidInstanceMethod</b>(<i>bstrName</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>IsValidInstanceMethod</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the method on the instance.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Boolean</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method checks to see whether the specified method exists on the object instance,
+rather than on the exemplar of the instance. For example, if this method is called on an object
+named <i>MyObject</i>, for a method named <i>List</i>,
+it returns <b>True</b> if the method is present on <i>MyObject</i>. It does not check for
+the presence of this method on the <i>MyObject</i>'s exemplar.</p>
+
+<p>The <b>IsValidInstanceMethod</b> method is especially useful when verifying whether a method on an instance of an exemplar has been over-ridden. This method can be used in tandem with the <b>IsValidMethod</b> method of the <b>Thing</b> object to first verify that the method exists, and if it does, check whether the method has been over-ridden on the instance of the exemplar. If the method has not been over-ridden, the <b>IsValidInstanceMethod</b> method returns <b>False</b>. If the method has been over-ridden, the <b>IsValidInstanceMethod</b> method returns true.   
+
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+
+<P>This example verifies when a method is over-ridden on an instance of an exemplar by invoking the <b>IsValidInstanceMethod</b> method. The example first creates a custom exemplar named "myArtifactEx", adding a new method (&quot;Take&quot;) to that exemplar. The default return value of the <b>IsValidInstanceMethod</b> is displayed when a method is in its default state. Then, the method is over-ridden, and the change is reflected in the new return value for the <b>IsValidInstanceMethod</b> method.
+<br><br>
+<p class = comments>'Create a custom exemplar.
+<pre class=example>Sub CreateMyExemplar()
+Dim myEx
+Dim myInstance
+
+Set myEx = World.CreateExemplar(&quot;myArtifactEx&quot;, &quot;Artifact&quot;)
+myEx.AddMethod &quot;Take&quot;, myTake, PSBIT_FRIENDLY</pre>
+<p class=comments>'Create an instance of the custom exemplar.
+<pre class=example>Set myInstance = World.CreateInstance(&quot;myArt1&quot;, &quot;myArtifactEx&quot;, User.Container)</pre>
+<p class=comments>'Display the defaults for both the IsValidMethod and <b>IsValidInstanceMethod</b> methods.
+<pre class=example>If myInstance.IsValidMethod(&quot;Take&quot;) = True Then
+&nbsp;&nbsp;&nbsp;&nbsp;Trace &quot;Method exists on the Exemplar.&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;Trace &quot;Return value of IsValidInstanceMethod is: &quot; &amp;_ <br>&nbsp;&nbsp;&nbsp;&nbsp;myInstance.<b>IsValidInstanceMethod(&quot;Take&quot;)</b>
+Else
+&nbsp;&nbsp;&nbsp;&nbsp;Trace &quot;Method does not exist on either the exemplar or the instance.&quot;
+End If</pre>
+
+<p class=comments>'Change the value of the method.
+<pre class=example>Dim NewMethod
+Set NewMethod = CreateMethod(METHOD_CLIENT, NewModule, &quot;Take2&quot;)
+myInstance.Method(&quot;Take&quot;) = NewMethod
+Trace &quot;Method is changed.&quot;</pre>
+<p class=comments>'Display the new value for the <b>IsValidInstanceMethod</b>
+<pre class=example>Trace &quot;The IsValidInstanceMethod value is now: " &amp; myInstance.<b>IsValidInstanceMethod("Take")</b>
+
+End Sub
+
+</body>
+</html>

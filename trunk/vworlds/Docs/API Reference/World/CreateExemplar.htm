@@ -1,0 +1,114 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateExemplar</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateExemplar</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Creates a new exemplar that inherits from an existing exemplar. 
+<b>CreateExemplar</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CreateExemplar</b>(<i>bstrType</i>, <i>varExemplar</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>CreateExemplar</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrType</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name for the new exemplar type.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">varExemplar</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The exemplar to be used as the parent for the new exemplar.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a reference to an instance of the <b>Thing</b> exemplar, unless the <b>Thing</b> core object is specified by the varExemplar parameter (see Remarks).
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The new exemplar that is created inherits all the properties and methods of its
+parent exemplar. After the new exemplar is created, additional properties and methods can
+be added by using the <a href="../Thing/AddMethod.htm">AddMethod</a> and 
+<a href="../Thing/AddProperty.htm">AddProperty</a> methods of the <b>Thing</b> object.</p>
+
+<p>The <i>varExemplar</i> parameter can be either a reference to an exemplar (as may be
+gotten by the <a href="Exemplar.htm">Exemplar</a> property of <b>World</b>), 
+or a <b>String</b> containing the name of an exemplar.  The string you use
+for the <i>varExemplar</i> parameter must be distinct from all other
+exemplar names. No two exemplars can have the same name.</p>
+
+<p>You can create a root exemplar (one with no parent exemplar) by setting the
+<i>varExemplar</i> parameter of <b>CreateExemplar</b> to <b>Nothing</b>.  In this 
+circumstance, the exemplar that is created inherits from the <a href="../Thing/Thing.htm">Thing</a> core object,
+rather than the <b>Thing</b> exemplar, the usual case. (The <b>Thing</b> exemplar inherits from the <b>Thing</b> core object, but the <b>Thing</b> exemplar has been extended to support additional multimedia features.) Because a root exemplar does not
+inherit from the <b>Thing</b> exemplar, it has no multimedia properties (such as <b>GeometryName</b> and
+<b>Sound</b>). The most important reason for creating a root exemplar is to implement an
+inheritance tree of exemplars, where none of the exemplars needs the multimedia support that
+<b>Thing</b> normally provides. For example, you can create a 2-dimensional world that does not exhibit multimedia behavior, but behaves more like a dynamic World Wide Web page. In this case, the existing <b>Thing</b> exemplar includes many features that are not necessary to a basic 2-D client interface.</p>
+
+<p><b>Note:</b> Once you have created an exemplar, there is no way to remove it from the world.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>The two examples that follow show how the second parameter can be either an object
+reference or a <b>String</b>. Both examples do the same thing.</p>
+
+<pre>Set NewExemplar = World.CreateExemplar(&quot;SubArtifact1&quot;, World.Exemplar(&quot;Artifact&quot;))
+Set NewExemplar = World.CreateExemplar(&quot;SubArtifact2&quot;, &quot;Artifact&quot;)</pre>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+HKCR
+{
+	VWSYSTEM.Avatar.1 = s 'Avatar Class'
+	{
+		CLSID = s '{99AD361F-AAB5-11D0-BAE3-00C04FC2CAB1}'
+	}
+	VWSYSTEM.Avatar = s 'Avatar Class'
+	{
+		CurVer = s 'VWSYSTEM.Avatar.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {99AD361F-AAB5-11D0-BAE3-00C04FC2CAB1} = s 'Avatar Class'
+		{
+			ProgID = s 'VWSYSTEM.Avatar.1'
+			VersionIndependentProgID = s 'VWSYSTEM.Avatar'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

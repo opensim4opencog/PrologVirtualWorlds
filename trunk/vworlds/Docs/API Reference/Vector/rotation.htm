@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Rotation</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Rotation</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Vector</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Returns the rotation angle of a <a href="Vector.htm">Vector</a> about the y-axis in radians, relative to the vector (1, 0, 0). <b>Rotation</b> is a read-only <b>Float</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Rotation</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Rotation</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Vector</b>.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name--></td>
+		<td><!--Type--></td>
+		<td><!--Required or Optional--></td>
+		<td><!--Description--></td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+The <b>Rotation</b> property contains the angle of rotation of a <b>Vector</b> relative to the starting position of (1, 0, 0). The <b>Rotation</b> value is stored as a radian value, where 2 pi radians is approximately 360 degrees. The rotation value is commonly used to establish placement and orientation of a vector within a scene. To change the <b>Rotation</b> value, use the <a href="Rotate.htm">Rotate</a> method of the <b>Vector</b> data type.
+
+<p>A simple example to understand the rotation value is to draw a circle on a cartesian plane as if you were viewing the plane from directly above the y-axis. On the x-z plane, draw a circle with a radius of 10 units, with the center point aligning with the axis intersection point (this radius will give you whole number coordinates at 45-degree intervals.) Map out the vectors that intersect the circle at 45-degree angles from either the x- or the y-axis. Using the <a href="../World/CreateVector.htm">CreateVector</a> method of the <a href="../World/World.htm">World</a> object, iterate through the list of vectors, acquire the rotation value for each vector, and convert the result from radians to degrees using the formula: degrees = radianValue * 57.297. Although the <b>Vector</b> methods related to rotation all use radians, for many people degrees are easier to visualize.
+<!--Example section-->
+<H3>Example</H3>
+<p>This example creates a subroutine that converts the value of the <b>Rotation</b> property to degrees, and then displays the result in the Command Window. In this example, the parameter "myVector" is a <b>Vector</b> object.
+<br><br>
+<pre class=example>
+Sub myRotationConversion(myVector)
+
+Dim myRadian
+Dim myDegreeValue</pre>
+<p class=comments>'Acquire the <b>Rotation</b> value in radians.
+<pre class=example>myRadian = myVector.<b>Rotation</b></pre>
+<p class=comments>'Convert the value and round it to the nearest whole degree.
+<pre class=example>myDegreeValue = Round(myRadian * 57.297)</pre>
+<p class=comments>'Trace a brief description and the conversion to the Command Window.
+<pre class=example>Trace myVector.ToAscii &amp; " has a Rotation value of: " &amp; myRadian &amp; "."
+Trace "The converted value is " &amp; myDegreeValue &amp; " Degrees."
+
+End Sub
+
+</pre>
+
+
+</span> 
+
+</body>
+</html>

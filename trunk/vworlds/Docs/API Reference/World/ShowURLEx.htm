@@ -1,0 +1,145 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>ShowURLEx</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ShowURLEx</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Displays&nbsp;the content of&nbsp;the specified URL in a modeless pop-up window. 
+<b>ShowURLEx</b> is a member of the <a href="World.htm">World</a> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>ShowURLEx</b>&nbsp;<EM>bstrWinName, bstrTitle, 
+      bstrURL,&nbsp;dispArg </EM>[<EM>, x</EM>] [<EM>, y</EM>] [<EM>, cx</EM>] 
+      [<EM>,</EM> <EM>cy</EM>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>ShowURLEx</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrWinName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the window.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrTitle</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td><!--Description-->The 
+      title of the window.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrURL</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The URL of the page to display.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">dispArg</td>
+		<td>Object</td>
+		<td>Required</td>
+		<td>A DHTML object, such as that defined in an 
+      &lt;Object&gt; tag. Or, this can also be a Virtual Worlds object, such as World.User.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[x]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The x-coordinate of the upper left corner of the window in pixels. The default value is 0.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[y]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The y-coordinate of the upper left corner of the window in pixels. The default value is 0.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[cx]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The width of the window in pixels. The default value is 0.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[cy]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The height of the window in pixels. The default value is 0.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method&nbsp;displays the page content at a URL in a modeless pop-up window, with the&nbsp;specified name
+and title. If the optional <i>x</i>, <i>y</i>, <i>cx</i>, or <i>cy</i>
+parameters are included, they specify the position of the upper left corner of the window,
+and the window's width and height. The default value for each of these parameters is 0.</P>
+
+<p>The <i>dispArg</i> parameter can be a 
+DHTML object (such as an object defined in an &lt;OBJECT&gt; tag on the page), 
+or it may be a Virtual Worlds object (such as World.User). Or, it can be any
+Automation object that matches the type of this parameter; the Helper object on the
+popped-up web page gives you access to that variable. If you do not need to pass a value
+for <i>dispArg</i>, use <b>Nothing</b>.</p>
+
+<p>If <b>ShowURLEx</b> is called more than once for the same window, it refreshes the window, but
+ignores any changes in the window's position and size.</p>
+
+<p>The "Ex" in this method's name stands for "Extended." 
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>World.<b>ShowURLEx "Window1", "Edit", "http://research.microsoft.com/vwg", Nothing, 20, 100, 550, 400</b> </pre>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>HeightLower</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>HeightLower</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Sets or returns the vertical position of the lower edge of a
+<A href="Boundary.htm">Boundary</A> in relation to the object to which the the boundary is assigned. <b>HeightLower</b> is a read/write <b>Float</b>.
+   
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>HeightLower</b> = <i>floatValue</i> </td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>HeightLower</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <B>Boundary</b>.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">floatValue</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>Any valid expression that evaluates to a <b>Float</b> value.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>When a <b>Boundary</b> is assigned to an object, the <b>HeightLower</b> property is set to the lower edge of that object, as opposed to the x-z plane. The value of this property is relative to the center point of the object to which the boundary is assigned.
+<p>The <b>HeightLower</b> property applies to all <b>Boundary</b> points as a whole. Individual points of a <b>Boundary</b> do not have separate <b>HeightLower</b> properties.
+<p><img src="../Images/Boundary5.GIF" width=308 height=161 alt="" border="0">
+<p><b>Important:</b>&nbsp;&nbsp; After a <b>Boundary</b> is applied to an object, you must use the following syntax to set the value of the <b>HeightLower</b> property:
+<p>
+<blockquote>
+<pre class="example">
+<i>object</i>.BoundaryList.Property(<i>indexNumber</i>).<b>HeightLower</b> = <i>floatValue</i></pre></blockquote>
+
+<p>In the previous statement, the term <i>object</i> refers to the object that the <b>Boundary</b> is applied to, <i>indexNumber</i> corresponds to the index number of the <b>Boundary</b>, and <i>floatValue</i>" refers to any valid expression that evaluates to a <b>Float</b>.
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;The value of the <b>HeightLower</b> property must be less than the value of the <b>HeightUpper</b> property.
+<!--Example section-->
+
+<H3>Examples</H3>
+
+<p>The first example creates a <b>Boundary</b> around an existing object and changes the <b>HeightLower</b> property. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a four-sided outer boundary.
+<pre class="example">Set myOuterEdge = World.CreateBoundary(Array(1,1, 1,-1, -1,-1, -1,1))</pre>
+
+<p class=comments>'Change the <b>HeightLower</b> property.
+<pre class="example">myOuterEdge.<b>HeightLower</b> = -1.37</pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge
+
+End Sub</pre>
+<p>Example 2
+<p>This example changes the <b>HeightLower</b> property after the boundary has been assigned to an object. "myObject" is the name of an existing object. To use this example in the Command Window, substitute the name of an existing object for "myObject".
+<br><br>
+<pre class="example">Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to the third boundary.
+<div class=comments>'in an existing object's boundary list.</div>
+<pre class="example">Set myOuterEdge = myObject.BoundaryList.Property(2)</pre>
+
+<p class=comments>'Change the <b>HeightLower</b> property.
+<pre class="example">myOuterEdge.<b>HeightLower</b> = -1.32</pre>
+<p>Example 3
+
+<p>This example changes the <b>HeightLower</b> property and then confirms the change in the Command Window. To use this example, substitute the name of an existing object for "myObject".
+<br><br>
+<pre class="example">myObject.BoundaryList.Property(2).<b>HeightLower</b> = -1.62
+Trace myObject.BoundaryList.Property(2).<b>HeightLower</b></pre>
+<!--See also section-->
+
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>DeleteChild</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>DeleteChild</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Deletes a child frame from a parent frame. <b>DeleteChild</b> is a member 
+of the <A href="Frame.htm"><b>Frame</b></A> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>DeleteChild</b>&nbsp;<i>pChildFrame</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>DeleteChild</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pChildFrame</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>The child frame to delete.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->To 
+delete a child frame, you must first get a reference to the child frame's parent, 
+as shown in the following statements.
+<blockquote><pre>
+Dim myParentFrame
+Set myParentFrame = User.Container.GetFrame
+</pre></blockquote>
+<p> If you don't know which container the parent frame is in, you can use the <A href="GetParent.htm">GetParent</A> method to retrieve a reference to the parent frame, as shown in the following statement.
+<blockquote><pre>
+Dim myChildFrame
+Set myParentFrame = myChildFrame.GetFrame
+</pre></blockquote>
+<p>You can now delete the frame.
+<blockquote><pre>
+Dim myChildFrame
+myParentFrame.<b>DeleteChild myChildFrame</b>
+</pre></blockquote>
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example deletes an existing frame within the user's container.</p>
+<pre class="example">Dim 
+Set myFrame = User.Container.GetFrame
+
+myFrame.<b>DeleteChild myDecalFrame</b>
+</pre>
+
+</body>
+</html>

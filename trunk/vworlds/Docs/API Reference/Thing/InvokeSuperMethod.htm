@@ -1,0 +1,108 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>InvokeSuperMethod</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>InvokeSuperMethod</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Thing</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Invokes a parent exemplar method from within a child exemplar method or instance method
+of the same name. <b>InvokeSuperMethod</b> is a member of the <a href="Thing.htm">Thing</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>InvokeSuperMethod</b>(<i>var</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>InvokeSuperMethod</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">var</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The argument list for the invoked method. If there is more than one argument, the arguments should be passed in the form of an array.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Variant</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><b>InvokeSuperMethod</b> gives you the ability to create a child exemplar or instance
+method that extends an existing exemplar method, by allowing you to provide additional
+customizing behavior in the child or instance method. You can change the parent
+method's behavior either before or after you invoke it with <b>InvokeSuperMethod</b>.</p>
+
+<p>To use <b>InvokeSuperMethod</b>, you do not need to specify the name of the method to
+be invoked; rather, <b>InvokeSuperMethod</b> will attempt to invoke a method of the same
+name on the instance's exemplar. (If <b>InvokeSuperMethod</b> is invoked within
+an exemplar method, this will cause a method on the exemplar's exemplar to be executed.)</p>
+
+<p>The parameter list must be put into a <b>Variant</b> that contains either a single
+value or an <b>Array</b> of values.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This <i>MoveInto</i> subroutine example extends the behavior of the 
+<a href="../Exemplars/Thing/MoveInto.htm">MoveInto</a> method of the <b>Thing</b>
+exemplar.  The call to <b>InvokeSuperMethod</b> is shown in boldface. </p>
+
+<pre>Sub MoveInto(Where)
+   Dim Result
+   this.Say &quot;About to call exemplar method&quot;<b>
+   Result = this.InvokeSuperMethod(Where)
+   </b>this.Say &quot;Back from exemplar method&quot;
+End Sub</pre>
+
+<p><b>Note:</b> if you are extending a method that requires two or more parameters, the parameters
+must be formed into an array in the call to <b>InvokeSuperMethod</b>, as in the following example:
+<pre>   Result = this.InvokeSuperMethod(Array(Where, What))</pre></p>
+
+
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<title>Moving a World</title>
+<link rel="STYLESHEET" href="../vwgdoc.css" type="text/css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>Moving a World</h1>
+
+<p>A Virtual World consists of a meta-database and graphic, sound, and other content.  The database,
+or <a href="savewrld.htm">checkpoint</a> file, contains information about all the objects in
+the world. Content may be located on each
+Virtual Worlds client, or it may be accessed remotely by URL
+(Uniform Resource Locator) from a shared directory on another computer on an intranet, or from a
+Web server.  The world's database, or checkpoint file,
+and its content do not need to reside on the same computer.</p>
+
+<p>If necessary, you can move a Virtual World from one server to another. The most common
+reason to do this is when you create content on one computer (often local) and
+publish the world and its content to another.  This operation requires you to move the world's
+checkpoint, and any content that may be on that computer. The first part of this
+topic provides information about what to do when you move a world's data to
+another server;  the second part provides details on how to move (or <i>publish</i>)
+world content from one computer to a Web server using the Microsoft Web Publishing Wizard. </p>
+
+<p>The most important point to keep in mind when you move a world to a new server is that the 
+directory structure must be left intact.  If it is not, clients logging on to the new server are
+not able to locate the content they need.</p>
+
+<h2>To move the world's data to a new server:</h2>
+
+<h3>When the world's data and its content are located on different computers</h3>
+<ol>
+	<li>Copy the checkpoint file to its new destination.
+	<li>On the destination computer, click the Virtual Worlds Server application's
+	<b>File</b> menu option, and then click <b>Open...</b> to open the checkpoint file on the new server.  
+</ol>
+
+<h3>When the world's data and its content are located on the same computer, and both are to be moved</h3>
+<ol>
+	<li>Copy the checkpoint file to the new server.
+	<li>Click the Virtual Worlds Server application's <b>File</b> menu option,
+	and then click <b>Open...</b> to open the checkpoint file on the new server.  
+	<li>Change the <a href="../API%20Reference/World/RootURL.htm">RootURL</a> to include the new
+	content path.  Note that to change <b>World</b>
+	properties, you must log on to the world using the same avatar that you used to create the world.
+</ol>
+
+
+<p>As an alternative to moving the world's checkpoint file, you can export the
+world as a script file, copy the script file to the new server, and then import the file
+using the <a href="../uiref/adminui/import.htm"><b>Import Script Wizard</b></a>
+in the Virtual Worlds Server application.  If you also intend to move the world's content, however, you must include the new path to this
+content in the <b>RootURL</b> property, as detailed in the previous paragraph.</p>
+
+
+<h2>To publish content to a Web server:</h2>
+
+<p>Before you can publish world content to a Web server, you need to contact the server
+administrator to get an account on it.  The server administrator will 
+set up a directory for your use, assign you a user name and password on the server, and set
+appropriate write permissions for you on that server.</p>
+
+<p>Once you have been given an account on the server, you can then transfer files to the server.
+Although there are several ways that this can be done, this focus of this topic is on
+transferring files using FTP (File Transfer Protocol).  If you are familiar with FTP, you may
+use any FTP client and skip the rest of this section.</p>
+
+<p>To start the <b>Web Publishing Wizard</b>, first click the <b>Start</b> menu, and then click
+<b>Programs</b>, then click <b>Internet Explorer</b>, and then
+click <b>Web Publishing Wizard</b>. If you do not find
+the icon for the <b>Web Publishing Wizard</b>, it may not be installed. You can download
+the Web Publishing Wizard from this site: <a href="http://www.microsoft.com/ie/">
+http://www.microsoft.com/ie/</a></p>
+
+<ol>		
+    <li>When the <b>Publish Your Files on the Web</b> Wizard page appears,
+	    read the introductory information contained in this page, and
+		then click <b>Next</b>.</li>
+    <li>On the <b>Select a File or Folder</b> Wizard page, 
+        enter the file or folder name of the files you want to
+        publish to the Web server. As an alternative, you can
+        click the <b>Browse Folder...</b> button to locate the directory
+        you want to publish to the server. The <b>Browse Files...</b>
+        button displays the files within that directory. When you
+        have located the directory you want to publish, click
+        <b>Next</b>.</li>
+    <li>On the <b>Name the Web Server</b> Wizard page, enter a name to
+        describe your Web server. You can type any name you want,
+        but it is helpful to use a name that you can easily
+        remember. After you have entered a name for the Web
+        server, click <b>Advanced</b>.
+        </li>
+    <li>On the <b>Select Your Service Provider</b> Wizard page,
+        choose FTP from the options available in the select option box,
+        and then click <b>Next</b>.</li>
+    <li>On the <b>Specify the URL and Directory</b> Wizard page,
+        enter the URL (Uniform Resource Locator) or Internet
+        address of the Web server hosting your web pages. The
+        URL or Internet address may look something like this:
+		<tt>http://www.microsoft.com/myname</tt>.
+        The other text input box on this page should contain the
+        local directory (on your computer) that you are
+        publishing to the Web server. Click <b>Next</b>.</li>
+    <li>On the <b>Specify the FTP Server and Subfolder</b> Wizard page,
+        enter the name of your FTP server if it is different from
+        your Web server. If you plan to publish files to a
+        subdirectory in your account area, enter the name of this
+        subdirectory in the <b>Subfolder</b> input box. Click <b>Next</b>.</li>
+    <li>On the <b>Publish Your Files</b> Wizard page,
+        click <b>Finish</b>. The first time you use the
+        Web Publishing Wizard, you see the <b>Enter Network Password</b>
+        dialog box. Enter the user name given to you by the Web
+        server administrator, and then the password. Note that these
+        can be different from the user name and
+        password you normally use to log on to your network. Click <b>OK</b>.<br>  The
+		<b>Publishing Files</b> dialog box that displays lists the individual
+		files being uploaded. When all of the files have been uploaded, another
+		dialog box informs you of this. Click <b>OK</b>.</li>
+</ol>
+<h4>See Also</h4>
+<a href="savechk.htm">Saving a World as a Checkpoint File</a><br>
+<a href="savescpt.htm">Exporting a World as a Script File</a>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsValidExemplar</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsValidExemplar</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Returns a flag indicating whether the parameter provided is a reference to an <a href="Exemplar.htm">Exemplar</a>. <b>IsValidExemplar</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsValidExemplar</b>(<i>bstrType</i>)</td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>IsValidExemplar</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that evaluates to a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrType</td>
+		<td>String<!--Type--></td>
+		<td>Required<!--Required or Optional--></td>
+		<td>A string value that is the name of an <b>Exemplar</b>. The name of an exemplar is contained in the <b>Name</b> property of exemplars based on the <b>Thing</b> object.<!--Description--></td>
+	</TR>
+</tbody>
+</TABLE>
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Boolean</b> indicating whether the value corresponds to the <b>Name</b> property of an existing exemplar.
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>IsValidExemplar</b> method is useful for verifying whether the <b>String</b> provided in the <i>bstrType</i> parameter is the name of an exemplar. The <a href="../World/CreateInstance.htm">CreateInstance</a> method of the <a href="../World/World.htm">World</a> object, for example, requires a string reference to an exemplar (the name of the exemplar) as a parameter. If that parameter is based on a built-in exemplar, such as an <a href="../Exemplars/Artifact/Artifact.htm">Artifact</a>, it is usually not necessary to verify that the reference is an exemplar. However, when a custom exemplar is created, you can use the <b>IsValidExemplar</b> method as a safety measure to ensure that the custom exemplar has already been instantiated before invoking a method that requires a reference to an exemplar. 
+
+<p>For more information on creating a custom exemplar, see the <a href="../World/CreateExemplar.htm">CreateExemplar</a> topic.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>The following example uses the <b>IsValidExemplar</b> method to verify whether a new exemplar has been created. The example first creates a new exemplar named "myLightExemplar" based on the existing <b>Light</b> exemplar, verifies that it was successfully created by using the <b>IsValidExemplar</b> method, and if it was, creates an instance of that exemplar.
+<br><br>
+<div class=comments></div>
+<pre class=example>Dim myNewExemplar
+Set myNewExemplar = World.CreateExemplar("myLightExemplar", "Light")</pre>
+<p class=comments>'Verify that the new exemplar has been created in the Command Window.
+<pre class=example>Trace World.<b>IsValidExemplar("myLightExemplar")</b></pre>
+<p class=comments>'If the new exemplar has been created, create an instance of it.
+<pre class=example>If World.<b>IsValidExemplar("myLightExemplar")</b> = True Then
+World.CreateInstance("myLightInstance", "myLightExemplar", User.Container)
+End If
+</pre>
+
+
+
+</span> 
+
+</body>
+</html>

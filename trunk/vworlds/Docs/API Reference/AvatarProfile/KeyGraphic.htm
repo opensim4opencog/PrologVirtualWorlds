@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>KeyGraphic</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>KeyGraphic</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of AvatarProfile</td>
+	</tr>
+</table>
+<p>Sets or returns the URL for the specified key in the <A 
+href="AvatarProfile.htm">AvatarProfile</A><STRONG> </STRONG>object. 
+<STRONG>KeyGraphic </STRONG>is a read/write 
+<STRONG>String.&nbsp;</STRONG>&nbsp;&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>KeyGraphic</STRONG>(<EM>bstrKey</EM>) 
+      = <EM>stringValue</EM></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The&nbsp;<STRONG>KeyGraphic</STRONG> 
+property syntax has these parts: 
+<TABLE class=backlight><!--Parameters table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Parts</TD>
+    <TD>Type</TD>
+    <TD>Use</TD>
+    <TD>Description</TD></TR></THEAD><!--Parameters table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD><!--Parameter name-->Thing</TD>
+    <TD><!--Type-->Required</TD>
+    <TD><!--Description-->An object reference that accesses 
+      a&nbsp;<STRONG>Thing</STRONG> object.</TD></TR>
+  <TR>
+    <TD class=boldItal>bstrKey</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>An expression that evaluates to the name of a key in the profile list 
+      of an avatar.</TD></TR>
+  <TR>
+    <TD class=boldItal>stringValue</TD>
+    <TD><!--Parameter name-->String</TD>
+    <TD><!--Type-->Required</TD>
+    <TD><!--Description-->An expression that evaluates to a&nbsp;valid 
+  URL.</TD></TR></TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->Along 
+with creating your own <A href="Keys.htm">Keys</A> for&nbsp;the profile of your 
+avatar, you can also include an image, either&nbsp;by creating the key with the 
+<A href="AddKey.htm">AddKey</A> method or&nbsp;by using the <B>KeyGraphic</B> 
+method to add an image later. 
+<P>The image that you assign to the&nbsp;<STRONG>KeyGraphic</STRONG> property is 
+not used in the Microsoft Virtual Worlds environment. However, it can&nbsp;be 
+used in&nbsp;an environment that is customized for the display of 
+it.&nbsp;&nbsp;
+
+<!--Example section--></P>
+<H3>Example</H3>
+<p>
+This example checks each 
+key in an avatar's profile for an existing image. If no image is attached to the key, it attaches a default image.</p>
+<pre class="example">
+Sub AttachDefaultGraphic()
+Dim myKey
+Dim myKeyList
+Dim myKeyCount
+
+Set myKeyList = User.Profile.Keys
+myKeyCount = myKeyList.Count - 1
+
+For myKey = 0 To myKeyCount
+</pre>
+<p class="comments">
+'Check each key for an image.
+<pre class="example">
+&nbsp;&nbsp;If _
+&nbsp;&nbsp;&nbsp;&nbsp;User.Profile.<b>KeyGraphic(Keylist.Property(myKey)) = ""</b> Then</pre>
+<div class="comments">         
+&nbsp;&nbsp;&nbsp;&nbsp;'Assign the default image if none exists.</div>
+<pre class="example">
+&nbsp;&nbsp;&nbsp;&nbsp;User.Profile.<b>KeyGraphic(Keylist.Property(myKey)) = _
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"file://C:/Images/Default.bmp"</b>
+&nbsp;&nbsp;Trace KeyList.Property(myKey) &amp; " KeyGraphic has been set to Default.bmp"
+&nbsp;&nbsp;End If
+Next
+End Sub
+</pre>
+
+</body>
+</html>

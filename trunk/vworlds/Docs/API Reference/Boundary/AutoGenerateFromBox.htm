@@ -1,0 +1,156 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>AutoGenerateFromBox</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AutoGenerateFromBox</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Boundary</td>
+	</tr>
+</table>
+
+
+<P>
+Creates a <a href="Boundary.htm">Boundary</a> that fits around a given area. <b>AutoGenerateFromBox</b> is a member of the <b>Boundary</b> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>AutoGenerateFromBox</b> <i>fMinX</i>, <i>fMinY</i>, <i>fMinZ</i>, <i>fMaxX</i>, <i>fMaxY</i>, <i>fMaxZ</i> [, <i>nSides</i>]</td>
+	</tr>
+</table>
+
+
+
+<p>The <b>AutoGenerateFromBox</b> method syntax has these parts:
+
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td>An object with a <b>Boundary</b> data type.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fMinX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The Lower x-coordinate of a bounding box.</td>
+	</TR>
+<TR>
+		<td class="boldItal">fMinY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The Lower y-coordinate of a bounding box.</td>
+	</TR>
+<TR>
+		<td class="boldItal">fMinZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The Lower z-coordinate of a bounding box.</td>
+	</TR>
+<TR>
+		<td class="boldItal">fMaxX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The Upper x-coordinate of a bounding box.</td>
+	</TR>
+<TR>
+		<td class="boldItal">fMaxY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The Upper y-coordinate of a bounding box.</td>
+	</TR>
+<TR>
+		<td class="boldItal">fMaxZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The Upper z-coordinate of a bounding box.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[nSides]</td>
+		<td>Integer</td>
+		<td>Optional</td>
+		<td>The number of sides in the <b>Boundary</b>.</td>
+	</TR>
+	
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>                                                                                                                              
+          
+
+<P>The <b>AutoGenerateFromBox</b> method creates a <i>bounding box</i> around a given three-dimensional area, and optionally creates a <b>Boundary</b> that references that object. A bounding box is the smallest possible area that all of the polygons of an object will fit within. Unlike the <a href="AutoGenerate.htm">AutoGenerate</a> method,the <B>AutoGenerateFromBox </B>method does not reference the bounding box of an <I>existing</I> object to calculate the position of the vertices. Rather, the <B>AutoGenerateFromBox </B>method creates a bounding box that is not associated with any object.
+
+<p>If you create a <B>Boundary</B> using the <b>AutoGenerateFromBox</b> method, the starting point is placed at a point on the x-axis relative to the size of the object, and at 0.0 on the y-axis. The remaining vertices are rendered and indexed sequentially, moving from point to point in a clockwise direction until the boundary forms a closed polygon.
+ 
+<P>The first six parameters can be thought of as two sets of <A href="../Vector/Vector.htm"> Vector</a> coordinates that establish the size of the bounding box in relation to a center point. Bounding boxes are three-dimensional objects, so the <i>z</i> parameters-fMinZ and fMaxZ-are required to create the box. However, the vertices generated are still referencing the bounding box only from the perspective of a 2-D boundary coordinate system. The vertical fMinY and fMaxY  coordinates are used by the <b>Boundary</b> object to assign values to the <A href="HeightUpper.htm">HeightUpper</a> and <A href="HeightLower.htm">HeightLower</a> properties. 
+
+<p> If you include the optional parameter "nSides", this method creates a boundary with an evenly spaced, specified number of sides. The size of the boundary is calculated by the size of the bounding box detailed in the required parameters.
+
+<p>Although the <b>AutoGenerateFromBox</b> method creates a bounding box and optional boundary without a reference to an existing object, the instance is not placed in a World until it is added to the <a href="../Exemplars/Thing/BoundaryList.htm">BoundaryList </a> of an existing object.                                             
+
+
+<p><b>Note:</b>&nbsp;&nbsp;&nbsp;The first three parameters-fMinX, fMinY, and fMinZ-must mark a position that is less than the second three parameters.
+
+<H3>Example</H3>
+
+<p>This example creates a <b>Boundary</b> around an existing object using the <b>AutoGenerateFromBox</b> method. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create an instance of a boundary without a specified size.
+<pre class="example">Set myOuterEdge = World.CreateBoundary</pre>
+
+<p class=comments>'Generate an eight-sided boundary.
+<pre class="example">myOuterEdge.<b>AutoGenerateFromBox 2, 2, 2, 4, 4, 4, 8</b></pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge
+
+End Sub</pre>
+
+</body>
+</html>

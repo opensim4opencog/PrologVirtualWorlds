@@ -1,0 +1,164 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateMenuItem</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateMenuItem</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table><!--Topic Definition-->
+<P>Creates a shortcut menu item. <b>CreateMenuItem</b> is a member of the <a href="World.htm">World</a> object. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CreateMenuItem</b>(<i>bstrMenuText</i>, 
+		<i>lFlags</i>, <i>pOwner</i>, <i>bstrUpdateMethod</i>, <i>bstrMethod</i>&nbsp;[,&nbsp;<i>var</i>])</td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>CreateMenuItem</b> method syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrMenuText</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The text of the menu item.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">lFlags</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The menu item display option.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pOwner</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object whose method is invoked by the menu item.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrUpdateMethod</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The onupdate method for the menu item.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrMethod</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The method associated with the menu item.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[var]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The list of arguments for the menu item method.</td>
+	</TR>
+
+</TABLE><!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a <b>MenuItem</b>. <!--Remarks section-->
+<H3>Remarks</H3>
+<P>Each menu item of a <A href="../Thing/Thing.htm">Thing</A> object's
+shortcut menu causes a certain action to be performed when it is clicked. <b>CreateMenuItem</b> enables you to specify the text that 
+appears for a menu item, how that text is displayed, the object whose method the 
+menu item invokes, the method (and an option list of arguments) that is invoked 
+when the menu item is clicked, and an <EM>onupdate method </EM>for the menu item.
+
+<P>A menu item's <EM>onupdate method</EM> is called each time a menu is composited 
+(right before it is displayed to the user) and can be used to alter&nbsp;the menu&nbsp;item's display 
+flags before the menu is displayed.&nbsp; By making use of the update method, 
+you can customize menu item text or other display characteristics based on 
+dynamic information such as which user is calling up the menu.
+<P>The menu item is displayed in accordance with the value of the <i>lFlags</i>     parameter. If you 
+want to specify more than one of these display options, simply add the flags 
+together.&nbsp; For convenience, each flag constant is exposed as a read-only 
+property of the <STRONG>World</STRONG> object.&nbsp;
+<P>These flag constants&nbsp;are:</P>
+
+<P>
+<TABLE class="backlight">
+  
+  <TR>
+    <TD><B>Flag</B></TD>
+    <TD><B>Value</B></TD>
+    <TD><B>Description</B></TD></TR>
+<tr class="line" ><td colspan=100></td></tr>
+  <TR>
+    <TD><B>MI_DEFAULT</B></A></TD>
+    <TD>0</TD>
+    <TD>Menu item is displayed in default format. </TD></TR>
+  <TR>
+    <TD><B>MI_GRAYED</B></A></TD>
+    <TD>1</TD>
+    <TD>Menu item is grayed.</TD></TR>
+  <TR>
+    <TD><B>MI_DISABLED</B></A></TD>
+    <TD>2</TD>
+    <TD>Menu item is disabled.</TD></TR>
+  <TR>
+    <TD>
+      <P><B>MI_INVISIBLE</B></A></P></TD>
+    <TD>4</TD>
+    <TD>Menu item is not displayed.</TD></TR>
+  <TR>
+    <TD><B>MI_CHECKED</B></A></TD>
+    <TD>8</TD>
+    <TD>Menu item is checked. This option is applicable  only to popup menus for <b>Thing</b> objects.</TD></TR>
+  <TR>
+    <TD><B>MI_POPUP</B></A></TD>
+    <TD>16</TD>
+    <TD>Menu item&nbsp;displays a submenu.</TD></TR>
+  <TR>
+    <TD><B>MI_SEPARATOR</B></A></TD>
+    <TD>2048</TD>
+    <TD>Insert separator between menu items.</TD></TR></TABLE></P>
+
+<p>The <i>Arguments</i> parameter is used to hold either a single argument or a list of
+arguments for the menu item method. If there are two or more arguments, use an expression similar
+to <tt>Array( arg1, arg2, arg3 )</tt> for the <i>Arguments</i> parameter. This argument list is passed to 
+the menu item method each time the menu item is clicked. &nbsp; <!--Example section-->
+<H3>Example</H3>
+<p>In the example that follows, a menu item is being created on the user's avatar. The text to be
+displayed for the menu item is "Friends", and the menu item is displayed with 
+a check mark (first and second parameters). The menu item's owner is 
+<A href="User.htm">User</A>, but the menu item does not have an update method 
+(third and fourth parameters) or the optional argument list (which would appear 
+as the sixth parameter if it were used). The method that is invoked by clicking the 
+menu item is named <i>ShowFriends</i> (fifth parameter).  This method must have been 
+previously added to the user's avatar.</p>
+
+<p>After the menu item has been created, it must be added to the menu of the appropriate
+object, by using the <b>Add</b> method of then <STRONG>Menu</STRONG>   
+<A href="../PropertyList/PropertyList.htm">PropertyList</A>.</p>
+
+<pre>Set MyMenuItem = World.CreateMenuItem("Friends", World.MI_CHECKED, User, "", "ShowFriends")</pre>
+&nbsp;
+
+
+</body>
+</html>

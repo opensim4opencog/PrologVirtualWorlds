@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Module (Method Object)</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Module (Method Object)</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Method Object</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets or returns the module that is associated with the calling object. <b>Module</b> is a member of the <A href="Method.htm">Method</A> 
+data type.   
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>Module</STRONG> = 
+      <EM>ModuleValue</EM></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The&nbsp;<STRONG>Module</STRONG>  property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Method</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses 
+      a&nbsp;<STRONG>Method</STRONG>        object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name--><EM>ModuleValue</EM></td>
+		<td><!--Type-->Module</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->An 
+      object reference that accesses a&nbsp;<STRONG>Module</STRONG> 
+  object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->You 
+can use the <STRONG>Module </STRONG>property to track new 
+or existing modules when scripting your world.&nbsp;&nbsp;
+
+<!--Example section-->
+<H3>Examples</H3>
+<h4>Example 1</h4>
+<p>Use the following example to access the module property for the entry point method.</p>
+<pre>
+Sub GetModuleType()
+Dim thisMethod
+Dim thisModType
+
+'This statement first locates the entry point object, finds the 
+'AcceptEnter method.
+
+Set thisMethod = _
+    World.User.Container.FindWithin("entry point").Method("AcceptEnter")
+
+'Now access the Module property.
+Set thisModType = thisMethod.<b>Module</b>
+
+'Print the module's type to the Command Window. Valid types are COMM, Inline, 'and so on.
+Trace thisModType.Type
+End Sub
+ </pre>
+<p>
+<h4>Example 2</h4>
+Use the following example to set the entry point module for a method and trace it's name (Artifact) to the Command Window.</p>
+<pre>
+Sub SetModule()
+Dim thisMethod
+Dim thisMod 
+
+'Set the variable, "thisMod", to an existing COMModule.
+Set thisMod = World.<b>Module ("Artifact")</b>
+
+'Locate the entry point object and find the AcceptEnter method.
+Set thisMethod = _
+    World.User.Container.FindWithin("entry point").Method("AcceptEnter")
+
+'Set the module for the AcceptEnter method to the Artifact module.
+thisMethod.<b>Module</b> = thisMod
+
+'Print the name of the module to the Command Window.
+Trace thisMod.ModuleName
+End Sub
+ </pre>
+
+</body>
+</html>

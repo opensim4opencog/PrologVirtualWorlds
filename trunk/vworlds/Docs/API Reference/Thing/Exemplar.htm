@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Exemplar</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Exemplar</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Thing</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>Obtains the <a href="Thing.htm">Thing</a> from which the current object is derived. 
+<b>Exemplar</b> is a read-only <b>Thing</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Exemplar</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Exemplar</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Thing</b>.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>Each object in a world that is in the <a href="../Exemplars/Thing/Thing.htm">Thing</a>
+exemplar's inheritance chain has an <b>Exemplar</b> property.  This property contains a
+reference to the exemplar used to create the object.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get the <b>Exemplar</b> of a <b>Thing</b>: </p>
+
+<pre>  Set Result = AThing.Exemplar </pre>
+
+<p>You can determine the exemplar for an object (named <i>UnkObject</i> in the following
+example) in the following way:</p>
+
+<blockquote>
+  <pre>Set UnkObjRef = User.Container.FindWithin(&quot;UnkObject&quot;)
+Set Exemp = UnkObjRef.Exemplar
+Print Exemp.Type</pre>
+</blockquote>
+
+<p>If <i>UnkObject</i> is an instance of the 
+<a href="../Exemplars/Artifact/Artifact.htm">Artifact</a> exemplar, the
+third line of the preceding example will display <tt>Artifact</tt>.&nbsp;
+
+
+</body>
+</html>

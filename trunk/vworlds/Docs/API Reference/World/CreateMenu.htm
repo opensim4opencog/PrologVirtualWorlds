@@ -1,0 +1,129 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateMenu</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateMenu</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Creates a shortcut menu for an object. <b>CreateMenu</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CreateMenu</b>()</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>CreateMenu</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <a href="../Exemplars/Thing/Menu.htm">Menu</a>, which is a specific type of <b>PropertyList</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Every <a href="../Thing/Thing.htm">Thing</a> object has a 
+<b>Menu</b> property, which contains a list of
+menu items. Each of these menu items can perform an action when clicked.</p>
+
+<p>To extend the exemplar menu of a <b>Thing</b> object, use the following steps:
+
+<ol>
+  	<li>Create the new menu, using <b>CreateMenu</b>. </li>
+  	<li>Get the exemplar for the object to which the new menu will belong, using the <a href="Exemplar.htm">Exemplar</a> property of <b>World</b>. </li>
+	<li>Copy the exemplar menu items to the new menu, using the <a href="../PropertyList/CopyTo.htm">CopyTo</a> method of <b>PropertyList.</b></li>
+	<li>Add your new menu items. </li>
+	<li>Assign the newly created menu to the object's <b>Menu</b> property. </li>
+</ol>
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>The example that follows shows each of the steps in the foregoing list.  If you want to add custom
+menu items, you can do this after the menu has been added to the object (after the fourth line of code).
+See the <a href="CreateMenuItem.htm">CreateMenuItem</a> method of <b>World</b>.</p>
+
+<pre>
+Sub CreateVaseMenu()
+Dim myVase
+Dim myVaseMenu
+Dim myArtifact
+Dim myArtifactMenu
+Dim myMenuItem
+Dim myCount
+Dim myMenuItem, myMenuItem2
+
+Set myVase = CreateInstance(&quot;Vase&quot;, &quot;Artifact&quot;, User.Container)
+Set myVaseMenu = World.<b>CreateMenu</b>
+</pre>
+<p class="comments">
+'Get a reference to the artifact exemplar.
+<pre class="example">
+Set myArtifact = Exemplar("Artifact")
+</pre>
+<p class="comments">
+'Copy the standard artifact menu.
+<pre class="example">
+myArtifact.Menu.CopyTo myVaseMenu
+<p class="comments">'Add items to the menu.
+<pre class="example">Set myMenuItem = World.CreateMenuItem("MyItemText", MI_CHECKED, User, "", "MyMethod")
+Set MyMenuItem2 = World.CreateMenuItem("MyItemText2", MI_DEFAULT, User, "", "MyMethod2")
+myVaseMenu.Add myMenuItem
+myVaseMenu.Add myMenuItem2
+
+myVase.Menu = myVaseMenu
+myCount = myVase.Menu.Count - 1
+
+For myMenuItem = 0 To myCount
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myVase.Menu.Property(myMenuItem)
+Next
+
+End Sub
+</pre>
+&nbsp;
+
+
+</body>
+</html>

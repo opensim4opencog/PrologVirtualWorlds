@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Container</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Container</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Thing</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>The <a href="Thing.htm">Thing</a> that contains the calling object. 
+<b>Container</b> is a read-only <b>Thing</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Container</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Container</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Container</b> of a <b>Room</b> is the <b>World</b>
+in which it exists; an avatar's <b>Container</b> is the <b>Room</b> in
+which the avatar currently exists; an avatar is the <b>Container</b> for any
+objects in the avatar's inventory. Most objects in a <b>World</b> exist within
+some sort of containing object. </p>
+
+<p>The <b>Container</b> property is set by the system each time an object changes to a new container. For example, when the <a href="../Exemplars/Thing/MoveInto.htm">MoveInto</a> method of the <a href="../Exemplars/Thing/Thing.htm">Thing</a> Exemplar is used to change the container of an object, the <b>Container</b> property is automatically updated. Likewise, when an object moves from one world or room to another, the <b>Container</b> property is automatically updated.
+<p>The objects within a <b>Container</b> make up its <a href="Contents.htm">Contents</a>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example displays, in the Command Window, the contents of the container that the user is currently within.<br><br>
+<pre class=example>Dim myContentObject
+
+For Each myContentObject in User.<b>Container</b>.Contents
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myContentObject.Name
+Next
+ 
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SetMeshFaceVertex</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetMeshFaceVertex</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets the vertex coordinates for a particular vertex in a given face of a 
+given mesh. <b>SetMeshFaceVertex</b> is a member of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetMeshFaceVertex</b>&nbsp;<i>nMeshIndex, nFaceIndex, 
+		index, fX, fY, fZ</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetMeshFaceVertex</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nMeshIndex</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The index of the mesh to use.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nFaceIndex</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The index of the face to use.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">index</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The index of the vertex to use.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The x-coordinate of the position.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The y-coordinate of the position.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The z-coordinate of the position.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The vertex, face, and mesh must already exist when this method is used.  To create a vertex,
+face, or mesh, use <a href="AddMeshFaceVertex.htm">AddMeshFaceVertex</a>, 
+<a href="CreateMeshFace.htm">CreateMeshFace</a>, or 
+<a href="CreateMesh.htm">CreateMesh</a>, respectively.</p>
+
+<p><i>nMeshIndex</i> is generally set to the index of a particular mesh, but can be set to
+two additional values. A value of <tt>-1</tt> indicates that this method should be applied
+to all meshes in the frame, and a value of <tt>-2</tt> indicates that this method should
+be applied to all meshes in all frames in the hierarchy.</p>
+
+<p>The position parameters <i>fX</i>, <i>fY</i>, and <i>fZ</i> are expressed
+in local coordinates.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.SetMeshFaceVertex 4, 12, 1, 3.5, 1.0, 0.0</pre>
+&nbsp;
+
+
+</body>
+</html>

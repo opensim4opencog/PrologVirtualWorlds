@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Adding a Method from a Script Module</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>Adding a Method from a Script Module</h1>
+
+<p><!-- 10/23/98 --></p>
+
+<p>If you intend to add your own methods to an object, it is
+helpful to know at least some of the properties and methods of the objects provided by 
+Virtual Worlds. Much of the Virtual Worlds Applications Programming Interface
+is accessible through Microsoft Visual Basic Script<font size="2">©</font>. A basic
+familiarity with programming and this scripting language is
+essential for creating your own custom methods. </p>
+
+<p>You can create a method from a module in either of two ways:</p>
+
+<ul>
+    <li>using the <a href="../../uiref/cmdwin/cwinintf.htm"><b>Command Window</b></a></li>
+    <li>using tools built into the <a href="../../uiref/objexpl/intrface.htm"><b>Object Explorer</b></a></li>
+</ul>
+
+<h2>To add a method to an object using the Command Window:</h2>
+
+<h3>1. Write the subroutine or function.</h3>
+
+<p>This example uses a subroutine named <i>ListAvatars</i>, which is contained
+in a file named <tt>Listavat.VBS</tt>. The purpose of the subroutine, as well as the
+method it will become, is to display the names of all avatars who are currently in a room, as well as 
+those who have been there in the past. <i>ListAvatars</i> uses the
+<a href="../../API%20Reference/Exemplars/Room/Room.htm">Room</a> exemplar's
+<a href="../../API%20Reference/Exemplars/Room/Avatars.htm">Avatars (Room)</a> property, 
+a <a href="../../API%20Reference/PropertyList/PropertyList.htm">PropertyList</a> that contains this
+information, to create a displayed list of avatars.  </p>
+
+<p>In the expression, <tt>User.Container.Avatars</tt>, 
+<tt>User</tt>
+refers to the object on which the method resides,
+<tt>User.Container</tt> is the room containing the object, and <tt>User.Container.Avatars</tt> is the list of
+avatars.</p>
+
+<blockquote>
+    <pre>' File Listavat.VBS
+
+Sub ListAvatars
+   Dim Avat
+   For Each Avat In User.Container.Avatars
+      Print Avat.Name
+   Next
+End Sub</pre>
+</blockquote>
+
+<h3>2. Create a script module.</h3>
+
+<p>Use the <a href="../../API%20Reference/World/CreateScriptModule.htm">CreateScriptModule</a>
+method of <b>World</b> to make a module from the file
+containing your subroutine.  <b>CreateScriptModule</b> returns a reference to the newly created
+<a href="../../API%20Reference/Module/Module.htm">Module</a> object.</p>
+
+<blockquote>
+    <pre>Set NewModule = CreateScriptModule( &quot;ListModule&quot;, &quot;Listavat.VBS&quot;, MODULE_CLIENT )</pre>
+</blockquote>
+
+<p>The first argument of this method gives a name to the module. The
+second argument supplies the path to the script file; if the file is in the directory
+<tt>C:\Program Files\Microsoft Virtual Worlds\Local
+Content</tt>, you only need to fill in the filename. If the file is not in this directory,
+or one of its subdirectories, you must include the full path to the
+script file. The third argument, <b>MODULE_CLIENT</b>,
+is a <b>World</b> property indicating that all methods in this module
+are meant to run on the client. (If the module contained only server-side methods, use
+<b>MODULE_SERVER</b>.  If the methods in the module are
+mixed, use both terms: <b>MODULE_CLIENT</b> + <b>MODULE_SERVER</b>.)</p>
+
+
+
+<h3>3. Create a method from the module.</h3>
+
+<p>Use the <a href="../../API%20Reference/World/CreateMethod.htm">CreateMethod</a> method
+of <b>World</b> to make a method from your module.  <b>CreateMethod</b> returns a reference to the
+newly created <a href="../../API%20Reference/Method/Method.htm">Method</a> object.</p>
+
+<blockquote>
+    <pre>Set NewMethod = CreateMethod( METHOD_CLIENT, NewModule, &quot;ListAvatars&quot; )</pre>
+</blockquote>
+
+<p>The first argument of <b>CreateMethod</b>, <b>METHOD_CLIENT</b>,
+is a <b>World</b> property indicating that the method to be created is meant to
+run on the client.   (If the method were meant to run on
+the server, use <b>METHOD_SERVER</b>, another
+<b>World</b> property. If the method were meant to run
+on both the client and server, use both terms: <b>METHOD_CLIENT </b>+
+<b>METHOD_SERVER</b>.) The second argument is the module
+object created in the previous step. The third argument is the
+name of the subroutine in the script file.</p>
+
+<h3>4. Add the method to the object.</h3>
+
+<p>Use the <b>Thing</b> (core object type) method <a href="../../API%20Reference/Thing/AddMethod.htm">AddMethod</a>
+to add the method to an object. In the following example, the object is named <i>MyObject</i>.</p>
+
+<blockquote>
+    <pre>MyObject.AddMethod &quot;List&quot;, NewMethod</pre>
+</blockquote>
+
+<p>Here, the first argument is the name of the new method, and the second
+is a reference to the method object created in the previous step. These do not have
+to be the same; the new name (first argument) is the name by which the method is known and called.</p>
+
+<p>To invoke the new method, type <tt>MyObject.List</tt>
+into the <b>Command Window</b>. </p>
+
+<h2>To create a method from a module using the Object Explorer:</h2>
+
+<h3>1. Write the subroutine or function.</h3>
+
+<p>This step is identical to step 1 of the previous procedure.</p>
+
+<h3>2. Load a script module.</h3>
+
+<ol>
+    <li>Open the <b>Object Explorer</b>.</li>
+    <li>In the <b>Objects</b> pane, right-click <b>Modules</b>.</li>
+    <li>From the menu that appears, click <b>New
+        Module...</b>.</li>
+    <li>When the <b>New Module</b> editor opens -</li>
+</ol>
+
+<blockquote>
+    <ul>
+        <li>Enter a name for the module in the <b>Module
+            Name</b> text box.</li>
+        <li>Enter the name of the file containing the subroutine
+            or function you wrote in step 1.</li>
+        <li>Choose <b>Client</b>, <b>Server</b>,
+            or <b>Client and Server</b> in the <b>Execute
+            on</b> selection box. Here, you are telling the <b>New
+            Module</b> editor whether its potential methods
+            are exclusively client-side, or server-side, or some
+            of each. Remember your selection, since you will be
+            making it again in the next step.</li>
+        <li>Click <b>OK</b>.</li>
+    </ul>
+</blockquote>
+
+<h3>3. Add the method to your object.</h3>
+
+<ol>
+    <li>In the <b>Objects</b> pane of the <b>Object
+        Explorer</b>, select the object to which the method
+        is to be added.</li>
+    <li>Right-click anywhere in the <b>Methods</b>
+        pane.</li>
+    <li>From the menu that appears, click <b>New</b>.</li>
+    <li>When the <b>New Method</b> editor opens - </li>
+</ol>
+
+<blockquote>
+    <ul>
+        <li>Enter a name for the method in the <b>Method
+            Name</b> text box.</li>
+        <li>Select the module you created in step 2 in the <b>Module</b>
+            selection box.</li>
+        <li>Enter the name of the subroutine in the <b>Subroutine</b>
+            text box.</li>
+        <li>In the <b>Execute on</b> selection box,
+            choose the same selection you did in step 2.</li>
+        <li>Click <b>OK</b>.</li>
+    </ul>
+</blockquote>
+
+<p>To invoke this newly added method, type <tt>User.Container.List</tt>
+into the <b>Command Window</b>. </p>
+
+</body>
+</html>

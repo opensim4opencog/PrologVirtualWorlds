@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>DefaultPortal</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>DefaultPortal</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>The default <a href="../Exemplars/Portal/Portal.htm">Portal</a> of 
+a <b>World</b>. <b>DefaultPortal</b> is a read/write <b>Portal</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<p>To set this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>DefaultPortal</b>&nbsp;=&nbsp;<i>PortalValue</i></td>
+	</tr>
+</table>
+<p>To return this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>DefaultPortal</b></i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>DefaultPortal</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">PortalValue</td>
+		<td>Portal</td>
+		<td>Required</td>
+		<td>The default portal.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This value specifies which portal users enter through when coming into the world. If
+there is a default portal, new users are sent through it; otherwise, they are sent to the 
+default room, specified by the <a href="DefaultRoom.htm">DefaultRoom</a> property.</p>
+
+<p>When Virtual Worlds starts, this property is not initialized.
+&nbsp;
+
+<!--Example section-->
+
+
+</body>
+</html>

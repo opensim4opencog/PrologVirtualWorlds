@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>HeightUpper</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>HeightUpper</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Sets or returns the vertical position of the upper edge of a
+<A href="Boundary.htm">Boundary</A> in relation to the object to which the the boundary is assigned. <b>HeightUpper</b> is a read/write <b>Float</b>.
+   
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>HeightUpper</b> = <i>floatValue</i> </td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>HeightUpper</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <B>Boundary</b>.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">floatValue</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>Any valid expression that evaluates to a <b>Float</b> value.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+
+<p>The <b>HeightUpper</b> property establishes the y-axis location of the top of a <b>Boundary</b>. If the <A href="IsPassable.htm">IsPassable</A> property of a <b>Boundary</b> is set to <b>False</b> (default), the <b>Boundary</b> behaves as a solid object, allowing other objects to be placed on the top surface. <b>Avatars</b>, for example, can step onto a <b>Boundary</b>, however avatars are limited to stepping onto have a <b>HeightUpper</b> value of one unit or less.
+
+<p>When a <b>Boundary</b> is assigned to an object, the <b>HeightUpper</b> property is set to the upper edge of that object, as opposed to the x-z plane. The value of this property is relative to the center point of the object to which the boundary is assigned.
+
+<p>The <b>HeightUpper</b> property applies to all <b>Boundary</b> points as a whole. Individual points of a <b>Boundary</b> do not have separate <b>HeightUpper</b> properties.
+
+<p><img src="../Images/Boundary5.GIF" width=308 height=161 alt="" border="0">
+
+<p><b>Important:</b>&nbsp;&nbsp; After a <b>Boundary</b> is applied to an object, you must use the following syntax to set the value of the <b>HeightUpper</b> property:
+<p>
+<blockquote><pre class="example">
+<i>object</i>.BoundaryList.Property(<i>indexNumber</i>).<b>HeightUpper</b> = <i>floatValue</i></pre></blockquote>
+
+<p>In the previous statement, <i>object</i> refers to the object that the <b>Boundary</b> is applied to, <i>indexNumber</i> corresponds to the index number of the <b>Boundary</b>, and <i>floatValue</i> refers to any valid expression that evaluates to a <b>Float</b>.
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;The value of the <b>HeightUpper</b> property must be greater than the value of the <b>HeightLower</b> property.
+<!--Example section-->
+<H3>Examples</H3>
+
+<p>The first example creates a <b>Boundary</b> around an existing object and changes the <b>HeightUpper</b> property. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a four-sided outer boundary.
+<pre class="example">Set myOuterEdge = World.CreateBoundary(Array(1,1, 1,-1, -1,-1, -1,1))</pre>
+
+<p class=comments>'Change <b>HeightUpper</b>  property.
+<pre class="example">myOuterEdge.<b>HeightUpper</b> = 4.32</pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge
+
+End Sub</pre>
+<p>Example 2
+<p>This example changes the <b>HeightUpper</b> property after the boundary has been assigned to an object. "myObject" is the name of an existing object. To use this example, substitute the name of an existing object for "myObject".
+<br><br>
+<pre class="example">Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to the third boundary
+<div class=comments>'in an existing object's boundary list.</div>
+<pre class="example">Set myOuterEdge = myObject.BoundaryList.Property(2)</pre>
+
+<p class=comments>'Change the <b>HeightUpper</b> property.
+<pre class="example">myOuterEdge.<b>HeightUpper</b> = 7.65</pre>
+
+<p>Example 3
+
+<p>This example changes the <b>HeightUpper</b> property and then confirms the change in the Command Window. To use this example, substitute the name of an existing object for "myObject".
+<br><br>
+<pre class="example">myObject.BoundaryList.Property(2).<b>HeightUpper</b> = 7.543
+Trace myObject.BoundaryList.Property(2).<b>HeightUpper</b></pre>
+
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Add</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> Add</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of PropertyList</td>
+	</tr>
+</table>
+<P>Adds 
+a new item to the specified <A href="../PropertyList/PropertyList.htm">PropertyList</A> collection. 
+<STRONG>Add</STRONG> is a member of the 
+<STRONG>PropertyList</STRONG> object.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b><STRONG>Add</STRONG></b>&nbsp;<i><EM>var</EM>  </i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The&nbsp;<STRONG>Add</STRONG>  method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->PropertyList</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses a 
+      <STRONG>PropertyList</STRONG>       collection.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->var</td>
+		<td><!--Type-->Variant</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->A 
+      reference to the&nbsp;variant that you want to add to the property list. 
+      It can be of any variant type, <STRONG>String</STRONG>, <STRONG>Integer</STRONG>, and so on.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>You&nbsp;can populate your property list with any variant type with the 
+<EM>var</EM> parameter. However, a property list can also contain object 
+references, which are variables that contain the address of the object to which 
+they refer. For example, if you have a tree object in Microsoft Virtual Worlds 
+named "Oak Tree", you can add a reference to that object in your property list, 
+as shown in the following code sample. 
+<P>
+<BLOCKQUOTE><PRE>Dim myTreeCollection
+Dim myOakTree
+
+Set myOakTree = User.Container.FindWithin("Oak Tree")
+Set myTreeCollection = CreatePropertyList
+
+myTreeCollection.<STRONG>Add myOakTree</STRONG> 
+Trace myTreeCollection.Property(0).Name</PRE></BLOCKQUOTE>
+<H3>Examples</H3>
+<p>This example adds properties to a property 
+list in various ways.</p>
+
+<PRE class="example">
+Sub PrintCeramicCollection()
+Dim myCeramicCollection 
+Dim myCount
+Dim myCeramicIndex
+
+Set myCeramicCollection = CreatePropertyList
+
+myCeramicCollection.<STRONG>Add "Vase"</STRONG>
+myCeramicCollection.<STRONG>Add "Salad</STRONG> <STRONG>Bowl</STRONG>"
+myCeramicCollection.<STRONG>Add "Teapot"</STRONG>
+</PRE>
+<p class="comments">
+'Subtract 1 from the <b>Count</b> property because the collection starts at 0 and the <b>Count</b> property starts at 1.
+<pre class="example">
+myCeramicIndex = 
+myCeramicCollection.Count - 1
+</pre>
+<p class="comments">'Iterate through the collection and print the names of the properties.
+<pre class="example">
+For myCount = 0 To myTotalCeramics
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myCeramicCollection.Property(myCount)
+Next
+
+End Sub
+</pre>
+<p class="comments">'With this property list, you add an initial property when you create the list and then add more properties later.
+<pre class="example">
+Dim myTeaList
+</pre>
+<p class="comments">'Earl Grey becomes the first property in the collection (Item 0).
+<pre class="example">
+Set myTeaList = CreatePropertyList("Earl Grey")
+
+myTeaList.<STRONG>Add "English Breakfast"</STRONG>
+myTeaList.<STRONG>Add "Orange Spice"</STRONG>
+<!--Example text--></pre>
+
+
+</body>
+</html>

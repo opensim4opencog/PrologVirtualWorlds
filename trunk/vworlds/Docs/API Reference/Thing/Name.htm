@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Name</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Name</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Thing</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>String</b> that contains the name of the <a href="Thing.htm">Thing</a>. 
+<b>Name</b> is a read/write <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Name</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Name</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>A reference to an instance of the <b>Thing</b> object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>An object is given a name by its creator when it is created.  (See the
+<a href="../World/CreateInstance.htm">CreateInstance</a>
+method of <b>World</b>.)  Except for an avatar's name,
+which cannot be changed by anyone, an object's name can be changed by its owner, a wizard, or
+the world owner.</p>
+
+<p>The name of an object can be used to obtain a reference to
+that object.  The object reference can then be used to invoke methods and query
+properties on the object.  The third code sample in the next section shows how you can
+get a reference to an object whose name you know.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get the <b>Name</b> property: </p>
+
+<pre>   Result = AThing.Name </pre>
+
+<p>To set the <b>Name</b> property: </p>
+
+<pre>   AThing.Name = &quot;Droid&quot; </pre>
+
+<p>If there is an object named <i>Tree</i>, and you are in the same room as <i>Tree</i>,
+you can use its <b>Name</b> property to obtain a reference to it in this way:</p>
+
+<pre>   Set TreeRef = User.Container.FindWithin(&quot;Tree&quot;)</pre>&nbsp;
+ 
+
+</body>
+</html>

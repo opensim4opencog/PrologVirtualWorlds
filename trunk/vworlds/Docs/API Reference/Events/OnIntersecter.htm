@@ -1,0 +1,145 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnIntersecter</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnIntersecter</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called on an object when it
+collides with another object's boundary.
+<!--Syntax table-->
+
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>OnIntersecter(<i>pIntersectee, fX, fY, fZ,
+iBoundaryIndex, iEdgeIndex, bTransition</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnIntersecter</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">pIntersectee</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object whose boundary has been collided with.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The x-coordinate of the position of the intersection.</td>
+	</TR>
+		<TR>
+		<td class="boldItal">fY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The y-coordinate of the position of the intersection.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The Z-coordinate of the position of the intersection.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">iBoundaryIndex</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The index of the boundary with the cell that is
+        intersected.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">iEdgeIndex</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The index of the edge within the boundary.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bTransition</td>
+		<td>Boolean</td>
+		<td>Required</td>
+		<td>A flag describing the type of cell intersection.</td>
+	</TR>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>The x, y, and z coordinates are relative to the frame
+containing the object (typically the room's frame).</p>
+
+<p>A <i>Transition</i> value of 1 indicates the object attempted to
+cross a boundary from the outside; a value of 0 indicates that
+a boundary was exited.  See the <a href="../Boundary/Boundary.htm">Boundary</a>
+core object for more information.</p>
+
+<p>If the <a href="../Boundary/IsInverse.htm">IsInverse</a> property
+on the boundary is <b>True</b>, the boundary marks a hole.  A <b>False</b> value for
+this property denotes an ordinary boundary.</p>
+
+<p>This method is not normally called by the user; it responds to
+an internal event that occurs in Virtual Worlds on collision by
+an avatar with the boundary around a <strong>Thing</strong>. If you
+find it necessary to override this event-handling method, <a href="../Thing/InvokeSuperMethod.htm">InvokeSuperMethod</a>
+should also be called to maintain the existing functionality of
+the overridden method. 
+<!--Example section-->
+<H3>Example</H3>
+<p>This example displays the name of the object that the calling object has collided with. It also displays the system time of the collision.<br><br>
+
+
+<pre class="example">Sub OnIntersecter (Object2, x, y, z, BoundaryIndex, EdgeIndex, Transition)
+&nbsp;&nbsp;&nbsp;&nbsp;World.Trace "The object has intersected with: " &amp; Object2.Name &amp; " At " &amp; Time
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod (Array(Object2, x, y, z, BoundaryIndex, EdgeIndex, Transition))
+End Sub</pre>
+<!--Example text-->
+&nbsp;
+
+
+</body>
+</html>

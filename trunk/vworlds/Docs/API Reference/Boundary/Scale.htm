@@ -1,0 +1,137 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Scale</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Scale</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>
+Sizes a <a href="Boundary.htm">Boundary</a> around the center point of an object. <b>Scale</b> is a member of the <b>Boundary</b> object.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Scale</b> <i>fX</i>, <i>fY</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Scale</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <B>Boundary</b>.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Float</b>. Corresponds to the x-axis of the boundary coordinate system.</td>
+</TR>
+	<TR>
+<td class="boldItal">fY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Float</b>. Corresponds to the y-axis of the boundary coordinate system.</td>
+	</TR>
+	
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<p>The <b>Scale</b> method changes the size of an entire <b>Boundary</b> on the x-y plane of the boundary coordinate system. The values supplied in the parameters are percentages that are expressed as floats, where a value of 1.0 equals 100 percent (the current size of the boundary). For more information on the boundary coordinate system, see the <a href="Boundary.htm">Boundary</a> topic.
+
+<p>The location of each point on a boundary is incremented or decremented by the values supplied, based on the center point of the boundary. You cannot scale the points individually using the <b>Scale</b> method. To move an individual point on a boundary, use the <a href="TranslateVertexSafe.htm">TranslateVertexSafe</a> method.
+
+<p><b>Tip:</b>&nbsp;&nbsp; Although both parameters are required, there may be instances where you want to change only one parameter. In these cases, multiplying the parameter that you want to remain unchanged by a value of 1.0 (100 percent) will leave the value unchanged.
+
+<!--Example section-->
+<H3>Examples</H3>
+
+
+<p>This example creates a <b>Boundary</b> around an existing object and invokes the <b>Scale</b> method to change the size of the boundary. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a four-sided outer boundary.
+<pre class="example">Set myOuterEdge = World.CreateBoundary(Array(1,1, 1,-1, -1,-1, -1,1))</pre>
+
+<p class=comments>'Scale the boundary.
+<pre class="example">myOuterEdge.<b>Scale 2.0, 3.0</b></pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge
+
+End Sub</pre>
+<p>Example 2
+<p>This example invokes the <b>Scale</b> method after the boundary has been assigned to an object. "myObject" is the name of an existing object. To use this example, substitute the name of an existing object for "myObject".
+<br><br>
+<pre class="example">Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to the third boundary
+<div class=comments>'in an existing object's boundary list.</div>
+<pre class="example">Set myOuterEdge = myObject.BoundaryList.Property(2)</pre>
+
+<p class=comments>'Scale the x-axis of the boundary, leaving the y-axis unchanged.
+<pre class="example">myOuterEdge.<b>Scale 2.34, 1.0</b></pre>
+
+<p>Example 3
+
+<p>This example resizes the third boundary without assigning the boundary to a variable. To use this example, substitute the name of an existing object for "myObject".
+<br><br>
+<pre class="example">myObject.BoundaryList.Property(2).<b>Scale 1.5, 2.0</b></pre>
+
+
+</body>
+</html>

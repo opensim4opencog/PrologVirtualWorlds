@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Deleting a World</title>
+<link rel="STYLESHEET" type="text/css" href="../vwgdoc.css"
+title="VWG">
+</head>
+
+<h1>Deleting a World</h1>
+
+<p>If you no longer intend to support a particular world, you can
+delete it using the Virtual Worlds Server application. This
+operation deletes the checkpoint file (extension .VWC) for the world and removes
+its registry key from the Windows registry.   Because deleting a
+world removes only the world's checkpoint file, and not its backup
+checkpoint file (extension .BAK.VWC), it may still be possible to restore
+a world after you have deleted it.</p>
+
+<p>Another reason for deleting a world is to
+re-create a world from scratch, using the same name for the
+world. In such a case you must delete the world before
+you start re-creating it, because world names
+must be unique. If you are attempting to create a world, and its
+name is already in use, the Virtual Worlds Server
+application opens an error dialog box that asks you to choose
+a different name. </p>
+
+<p>A world that was deleted can be restored, if you
+have not deleted its backup checkpoint file. The <a
+href="openchk.htm">Opening a World Checkpoint File</a> topic
+explains the steps to open both a checkpoint file and a backup
+checkpoint file.</p>
+
+<h2>To delete a world:</h2>
+
+<ol>
+    <li>In the Virtual Worlds Server application, click the title
+        bar of the world you wish to delete. You do not need to
+        open the world before you delete it.</li>
+    <li>Click the <strong>File</strong> menu, and then click <b>Delete
+        </b>.</li>
+</ol>
+
+<h4>See Also </h4>
+
+<p><a href="savewrld.htm">How Worlds Are Saved</a><br>
+</p>
+
+<h4>Tasks </h4>
+
+<p><a href="wrldoff.htm">Taking a World Offline</a><br>
+<a href="openchk.htm">Opening a World Checkpoint File</a><br>
+<a href="openscpt.htm">Importing a World Script File</a><br>
+<a href="savechk.htm">Saving a World as a Checkpoint File</a><br>
+<a href="savescpt.htm">Exporting a World as a Script File</a></p>
+</body>
+</html>

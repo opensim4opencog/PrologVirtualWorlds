@@ -1,0 +1,144 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnPropertyChanged</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>On<i>Property</i>Changed</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>This topic does not document an actual event handler.  It is intended to be
+representative of an entire class of event handlers.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>On<i>Property</i>Changed(<i>Hint, HintData</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnPropertyChanged</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">Hint</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The type of change that was made (See Remarks.)</td>
+	</TR>
+	<TR>
+		<td class="boldItal">HintData</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>A property-dependent value used by Virtual Worlds  (See Remarks.)</td>
+	</TR>
+		
+</TABLE>
+
+<!--Return Value section -->
+
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>Many of the properties on objects provided with Virtual Worlds have event handlers that are invoked
+when the properties change.  For example, there is an <b>OnIsSolidChanged</b></a>
+event handler that is automatically invoked when a <b>Thing</b>'s
+<b>IsSolid</b> property is changed. These methods are
+not normally called by the user; they respond to internal events that occur in
+Virtual Worlds when the properties they are tied to change or
+are removed.  You may want to write such a method if you plan to add a property to a <b>Thing</b> object,
+and want certain actions to be taken if that property changes. 
+If you decide to override a built-in <b>On<i>Property</i>Changed</b> method, <strong>InvokeSuperMethod</strong> should also be called
+to maintain the existing functionality of the overridden method.</p>
+
+<p>Whether you write you own <b>On<i>Property</i>Changed</b> method, or override one that is built-in,
+there are two important points to keep in mind.  First, the name of the method must be
+<i>On&lt;Name of Property&gt;Changed</i>.  In the example already mentioned for the <b>IsSolid</b>
+property, the handler is <b>OnIsSolidChanged</b>.  Second, all of these handlers take two parameters.
+They are discussed in the following paragraphs. 
+ </p>
+
+<p>The <i>Hint</i> parameter contains a code that describes the type of change to the property.
+If a <b>Thing</b> property is added, changed, or removed,
+the value of this parameter indicates which type of operation took place. </p>
+<table class="backlight">
+	<tr>
+		<td><b><i>Operation</i></b></td>
+		<td><b><i>Hint Value</i></b></td>
+		<td><b><i>HintData Value</i></b></td>
+	</tr>
+<tr class="line" ><td colspan=100></td></tr>
+	<tr>
+		<td>Add a property</td>
+		<td>100</td>
+		<td>New property value</td>
+	</tr>
+	<tr>
+		<td>Change an existing property</td>
+		<td>101</td>
+		<td>New property value</td>
+	</tr>
+	<tr>
+		<td>Remove a property</td>
+		<td>102</td>
+		<td>Nothing</td>
+	</tr>
+</table>
+<p>The <i>HintData</i> parameter is dependent on the property
+and is used to provide additional data to help decode the <b>On<i>Property</i>Changed</b> method. If a new property is added or an existing property is changed, the value of the HintData parameter is the new value of that property. For example, if you add a property called "middlename" to an object and supplied a value for that property, the <i>hintData</i> parameter would contain the value supplied for that property. Likewise, if you later changed the "middlename" property value to a different value, the <i>hintdata</i> parameter would reflect the new value. If the property is removed, the <i>hintData</i> parameter is empty.
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;The values documented in this topic apply to <b>Thing</b> objects only.
+<!--Example section-->
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">Sub On<i>Property</i>Changed(Hint, HintData)
+
+<p class=comments>'(Calls the parent's On<i>Property</i>Changed method)
+<pre class="example">This.InvokeSuperMethod(Array(Hint, HintData))
+
+End Sub</pre>
+<!--Example text-->
+&nbsp;
+
+
+</body>
+</html>

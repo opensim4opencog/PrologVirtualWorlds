@@ -1,0 +1,135 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CopyTo</title>
+	
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CopyTo</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of PropertyList</td>
+	</tr>
+</table>
+<P>Copies the specified collection to the destination 
+collection. <STRONG>CopyTo</STRONG> is a member of the <A 
+href="../PropertyList/PropertyList.htm">PropertyList</A>&nbsp;and <A 
+href="../PropertyMap/PropertyMap.htm">PropertyMap</A>     
+ collections.
+
+<H3> Syntax</H3>
+
+<TABLE class="backlight"><TR><TD><EM>object</EM>.<b>CopyTo</b>&nbsp;<EM>ppropertylist</EM></TD></TR></TABLE>
+
+<table style="HEIGHT: 20px; WIDTH: 215px"><tr class="line"><td colspan=20 valign="center" style="HEIGHT: 5px; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px"> <div align="center">-or-</div></td></tr></table>
+
+<table class="backlight"><TR><td><EM>object</EM>.<b>CopyTo</b>&nbsp;<EM>ppropertymap</EM> 
+</td></TR>
+</table>
+
+<!--Parameters table-->
+<p>The <b>CopyTo</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>
+      <P>PropertyList PropertyMap</P></TD>
+    <TD>Required</TD>
+    <TD>     An object reference&nbsp;to a <B>PropertyList</B> or 
+      <B>PropertyMap</B> collection.</TD></TR>
+
+	<TR>
+		<td class="boldItal"><EM>ppropertylist</EM></td>
+		<td>PropertyList<BR></td><!--Parameter name-->
+    <TD rowspan="3" valign="bottom"  >
+      <br>Required</TD>
+		<td rowspan="3" valign="center">
+      <br>The name of the&nbsp;destination 
+      collection&nbsp;of type <B>PropertyList</B> or <B>PropertyMap</B>.
+      <P></P></td><!--Type--><!--Description--></TR>
+  <TR class=line 
+  style="cellspacing-BOTTOM: 0px; cellspacing-LEFT: 0px; cellspacing-RIGHT: 0px; cellspacingG-TOP: 0px" 
+  >
+    <TD colSpan=2>
+      <DIV align=center>-or-</DIV></TD></TR>
+  <TR>
+    <TD class=boldItal><EM>ppropertymap</EM> </TD>
+    <TD>
+      <P>PropertyMap</P></TD><!--Parameter name--><!--Type--><!--Description--></TR></TABLE><!--Return Value section -->
+<H3>Return Value</H3>
+<P>This method does not return a value. 
+<H3>Remarks</H3>
+<P>When you add a property to an object, you are adding a 
+copy of that property. The <B>CopyTo</B>          
+       method recreates each property of the 
+source collection in the destination collection. If the destination property list or property map 
+already contains properties, the <B>CopyTo</B> method appends the copied 
+properties to the end of the destination property list or property map. A 
+destination property list or property map must already exist before you call 
+this method. The <B>CopyTo</B>  method does not automatically 
+create a new list or a new map. 
+<H3>Example</H3>
+<P>This example copies a collection of ceramic items from "myCeramicCollection"
+to a new collection named "myPots".</P>
+
+<PRE class=example>Sub PrintCeramicCollection()
+Dim myCeramicCollection 
+Dim myCount
+Dim myTotalCeramics
+Dim myHighfire1
+Dim myHighfire2
+Dim myHighfire3
+</PRE>    
+<p class="comments">'Declare the new collection name for the copy of the collection.
+<pre class="example">
+Dim myPots
+
+Set myCeramicCollection = CreatePropertyList
+Set myPots = CreatePropertyList
+
+myHighfire1 = "Vase"
+myHighfire2 = "Salad Bowl"
+myHighfire3 = "Teapot"
+
+myCeramicCollection.Add myHighfire1
+myCeramicCollection.Add myHighfire2
+myCeramicCollection.Add myHighfire3
+
+myTotalCeramics = myCeramicCollection.Count - 1
+</pre>
+<P class="comments">'Use the following statement to create a copy of the ceramic 
+collection. <PRE class="example">myCeramicCollection.<B>CopyTo myPots</B></PRE>
+<p class="comments">
+'Iterate through the collection and print the names of the properties.          
+<pre class="example">For myCount = 0 myTotalCeramics
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myPots.Property(myCount)
+Next End
+Sub
+</pre>
+
+
+</body>
+</html>

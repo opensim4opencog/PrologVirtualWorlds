@@ -1,0 +1,151 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateSound</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateSound</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+Creates a new <A href="../Sound/Sound.htm">Sound</A> object. <b>CreateSound</b>&nbsp;is a member 
+of the <A href="../World/World.htm">World</A> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>CreateSound</STRONG>(<EM>SoundURL, bIs3D, 
+      bIsLooping</EM>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>CreateSound</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name-->object</td>
+		<td><!--Type-->Sound</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->An 
+      object reference that accesses a <STRONG>Sound</STRONG> object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>SoundURL</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>A valid URL that references a sound file.</TD></TR>
+  <TR>
+    <TD class=boldItal>bIs3D</TD>
+    <TD>Boolean</TD>
+    <TD>Required</TD>
+    <TD>Set this parameter to <STRONG>True</STRONG> when 
+      the sound file contains 3D properties and <STRONG>False</STRONG> when it 
+      contains 2D properties.</TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->bIsLooping</td>
+		<td><!--Type-->Boolean</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->Set 
+      this parameter to <STRONG>True</STRONG> when you want the sound file to 
+      continually play and <STRONG>False</STRONG> when you want to play the file 
+      once.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>This method returns a <STRONG>Sound</STRONG> object.
+<H3>Remarks</H3>
+<P>You can play&nbsp;a <STRONG>Sound</STRONG> object by 
+associating it with a <A href="../Exemplars/Thing/Thing.htm">Thing</A> object. This object can be a speaker, 
+tree, or another avatar. any artifact, avatar, state machine, or 
+other object that is of type <b>Thing</b> can play a sound through the use of its <A 
+href="../Exemplars/Thing/Sound.htm">Sound</A> property. 
+<P>You do this by setting the&nbsp;<STRONG>Sound</STRONG> 
+property&nbsp;of the <STRONG>Thing</STRONG> object to your new 
+<STRONG>Sound</STRONG> object as shown in the following statements.&nbsp;
+<blockquote><pre>
+Dim myTree
+Dim myBirdSound
+
+myBirdSound = "bird.wav"
+Set myTree = User.Container.FindWithin("Oak Tree")
+
+myTree.Sound = myBirdSound
+</pre></blockquote>
+<p>You can stop the sound by setting the <A href="../Sound/IsLooping.htm">IsLooping</A> property 
+of the <STRONG>Sound</STRONG> object to <STRONG>False</STRONG>.
+<blockquote><pre>
+Dim mySong
+
+mySong = myTree.Sound
+mySong.IsLooping = False
+</pre></blockquote>
+<P>When&nbsp;you set the <EM>bIsLooping</EM> and 
+<EM>bIs3D</EM> parameters&nbsp;for the&nbsp;<STRONG>CreateSound</STRONG>, you 
+determine the state of the <STRONG>IsLooping</STRONG> and <STRONG>bIs3D</STRONG> 
+properties for the <STRONG>Sound</STRONG> object, such as the "mySong" 
+<STRONG>Sound</STRONG> object in the previous statements. 
+<P><STRONG>Note:</STRONG>&nbsp;&nbsp;&nbsp;Rooms can contain default 
+<STRONG>Sound</STRONG> objects. The object that you create plays at the same 
+time as the default sound. You can turn off a sound by setting the sound file to 
+an empty string. 
+<BLOCKQUOTE><PRE>User.Container.<STRONG>Sound</STRONG> = ""</PRE></BLOCKQUOTE>            
+     
+<H3>Example</H3>
+<p>This example creates a <b>Sound</b> object and associates it with an object in the world.
+<p>To run this example: You must have a sound file named bird.wav and a tree&nbsp;named Oak Tree with which to associate it in your world. Or, you may substitute a file and object of your choice.
+<pre class="example">
+<!--Example text-->
+Sub AddBirdSong()
+Dim myTree
+Dim mySong
+Dim mySound
+
+mySound = "file://C:/Program Files/Microsoft Virtual
+Worlds/Local Content/SDK/Library/Sounds/bird.wav"
+</pre>
+<p class="comments">
+'Create a 3D, continually looping sound object.
+<pre class="example">
+Set mySong = <b>CreateSound(mySound, True, True)</b>
+Set myTree = User.Container.FindWithin("Oak Tree")
+
+myTree.Sound = mySong
+
+End Sub
+</pre>
+  
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SetLightType</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetLightType</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets a light's type. <b>SetLightType</b> is a member of the <b>Frame</b> 
+data type.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetLightType</b>&nbsp;<i>nIndex, iType</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetLightType</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nIndex</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The index of the light.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">iType</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The type of the light.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <i>Type</i> parameter can be one of the following values:</p>
+
+<table class="backlight">
+    <tr>
+      <td><i><b>Value</b></i></td>
+      <td><i><b>Type</b></i></td>
+    </tr>
+<tr class="line" ><td colspan=100%></td></tr>
+    <tr>
+      <td>0</td>
+      <td>Ambient</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Point</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Spot</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Directional </td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Parallel point </td>
+    </tr>
+  </table>
+
+<p><b>Ambient:</b> A light source that illuminates everything in a scene, regardless of
+the orientation, position, and surface characteristics of the objects in the scene.
+Because this type of light illuminates a scene with equal strength everywhere, the
+position and orientation of the frame to which it is attached are inconsequential.
+Multiple ambient light sources are combined within a scene.</p>
+
+<p><b>Point:</b> A light source that radiates equally in all directions from its origin.</p>
+
+<p><b>Spotlight:</b> A light source that emits a cone of light. Only objects within the
+cone are illuminated. The cone produces light of two degrees of intensity; the central,
+brightly lit section (the umbra) acts as a point source, and an outer, dimly lit section
+(the penumbra) merges with the surrounding deep shadow.</p>
+
+<p><b>Directional:</b> A light source that is attached to a frame, but appears to
+illuminate all objects with equal intensity, as if it were at an infinite distance from
+the objects. Directional light has orientation but no position; it is commonly used to
+simulate distant light sources, such as the sun.</p>
+
+<p><b>Parallel point:</b> A light source that illuminates objects with parallel light. The
+orientation of the light is taken from the position of the parallel point light source.
+For example, two meshes on either side of a parallel point light source are lit on the
+side that faces the position of the source.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.SetLightType 8, 2</pre>
+&nbsp;
+
+
+</body>
+</html>

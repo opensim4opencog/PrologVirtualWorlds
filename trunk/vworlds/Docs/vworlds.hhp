@@ -1,0 +1,17 @@
+[OPTIONS]
+Auto TOC=9
+Compatibility=1.1 or later
+Compiled file=vworlds2.chm
+Contents file=vworlds.hhc
+Default topic=api graphics.htm
+Display compile progress=No
+Index file=Index.hhk
+Language=0x409 English (United States)
+
+
+[FILES]
+api graphics.htm
+sdkintro.htm
+
+[INFOTYPES]
+

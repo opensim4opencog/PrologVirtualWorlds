@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnUpdateMethod</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnUpdateMethod</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of MenuItem</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Sets or retrieves the name of an update method to be invoked by a <a href="MenuItem.htm">MenuItem</a> before teh menu item is displayed in a right-click menu for a <a href="../Thing/Thing.htm">Thing</a>. <b>OnUpdateMethod</b> is a read/write <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>OnUpdateMethod</b> = <i>strValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>OnUpdateMethod</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>MenuItem</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>MenuItem</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">strValue</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the method to be invoked.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>OnUpdateMethod</b> property stores the name of a method that is invoked on a menu item every time a menu is composited.  Each time the menu is composited, Microsoft Virtual Worlds checks the <b>OnUpdateMethod</b> property to see if there is a specified method for this property, and if there is, it invokes that method. The method specified is the name of a method associated with the <a href="../Thing/Thing.htm">Thing</a> object that the menu is attached to.
+
+<p>When a menu item is created using the <a href="../World/CreateMenuItem.htm">CreateMenuItem</a> method of the <a href="../World/World.htm">World</a> object, the name of this method is specified in the <i>bstrUpdateMethod</i> parameter. 
+The <b>OnUpdateMethod</b> property stores the name of that method. Having access to the value of this property means that you can change the specified method dynamically by changing the property value, instead of having to re-create the menu item each time a change takes place.
+
+
+
+</body>
+</html>

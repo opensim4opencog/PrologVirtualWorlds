@@ -1,0 +1,79 @@
+<html>
+
+<head>
+<title>Motion Property Page</title>
+<link REL="STYLESHEET" HREF="../../vwgdoc.css" TYPE="text/css" TITLE="VWG">
+</head>
+
+<body>
+
+<h1>Motion Property Page</h1>
+
+<p>Objects can be set in motion, causing them to spin. You can set the speed of the spin,
+and the axis to spin around. You can also cause the object to spin around axes other than
+the three coordinate axes. By making objects rotate, you can produce many effects, such as
+a globe revolving on its axis, bubbles rotating in water, or display items spinning in a
+gallery. You can also add special effects by having objects that appear and disappear
+through other objects. </p>
+
+<p><img src="motion.jpg" width="491" height="300" alt="motion.bmp (442854 bytes)"></p>
+
+<h2>Property Page Options</h2>
+
+<h3>Object spins</h3>
+
+<p>Choose whether or not you want this object to spin. </p>
+
+<h3>Spin Speed</h3>
+
+<p>Enter the speed at which you want this object to spin. A positive number causes the
+object to turn clockwise (assuming the object is rotating about its vertical axis, and is
+viewed from above). A negative number causes the object to rotate in the opposite
+direction. The number you enter here represents the number of radians the object rotates
+in each rendered frame. (Note: there are 2 * Pi radians in one complete revolution.) If
+you want the object to rotate once per second, and the clients are capable of rendering
+twenty frames per second, then the object should spin one-twentieth of a revolution per
+frame. This works out to 2 * Pi / 20, or approximately 0.3 radians per frame. If you
+choose a very high spin speed, the computer may not be able to redraw the object quickly
+enough. </p>
+
+<h3>Spin on</h3>
+
+<p>Choose the axis that you want the object to rotate around (this is optional). You can
+choose the x, y, or z axis to spin around. Using the example of a character shaped like a
+man, this is how each spin would work: 
+
+<ul>
+  <li>the x-axis spins the man in a cartwheel, with his front always facing you. </li>
+  <li>the y-axis spins the man by pivoting his feet so that he turns like a top, clockwise,
+    with his head always up. </li>
+  <li>the z-axis spins the man head over feet, his arms always sticking out at his sides in
+    the same place. </li>
+</ul>
+
+<h3>Custom</h3>
+
+<p>If you want the object to spin around a particular vector, click this radio button and
+type in the x-, y-, and z-coordinates of the vector around which you want the object to
+rotate.</p>
+
+<h3>Advanced</h3>
+
+<p>Click this to go directly to the <b>Object Explorer</b> with this object. </p>
+
+<h4>See Also: </h4>
+<a href="../objexpl/intrface.htm">
+
+<p>Object Explorer Interface</a><br>
+
+<a href="approach.htm">Approach Property Page</a><br>
+<a href="descrip.htm">General Property Page</a><br>
+<a href="geometry.htm">Geometry Property Page</a><br>
+<a href="texture.htm">Texture Property Page</a><br>
+<a href="portal.htm">Portal Property Page</a><br>
+<a href="iwportal.htm">Interworld Portal Property Page</a><br>
+<a href="webpage.htm">Web Page Property Page</a> </p>
+
+
+</body>
+</html>

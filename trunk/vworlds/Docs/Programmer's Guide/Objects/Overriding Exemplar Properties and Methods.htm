@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Overriding Exemplar Properties and Methods</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>Overriding Exemplar Properties and Methods</h1>
+
+<p><!-- 10/23/98 --></p>
+
+<p>Exemplars are generic objects that are used as templates to create specific object instances.
+When an instance is created, the exemplar passes on all of its properties and methods
+to the instance.  At first, all of the properties and methods on the instance are those
+inherited from the exemplar; the instance has no properties and methods of its own.
+</p>
+
+<p>Once you change the value of an instance property, however, you actually cause a new
+property to be created automatically on the instance.  The instance property is said to
+<i>override</i> the exemplar property of the same name.   Both properties exist, but have
+different values.  
+</p>
+
+<p>Similary, you can override an instance method that has been inherited from the exemplar.  Normally, you would do this when you want to
+provide your own version of a method provided with a Virtual Worlds exemplar.  There are two important points to remember when you override
+an exemplar method with your own version: the overriding instance method must have the same name as the
+ method it overrides, and both methods must have the same number and types of arguments.</p>
+
+<h2>To override an exemplar property:</h2>
+
+<ul>
+    <li>Change the value of the property on the instance. </li>
+</ul>
+
+<h2>To override an exemplar method:</h2>
+
+<ol>
+    <li>Create a method with the same name and the same number
+        and types of parameters as the exemplar method you wish
+        to override. Steps 1, 2, and 3 of <A href="../Methods/Creating%20a%20Method%20from%20a%20Module.htm">Adding a Method from a Script Module</a> detail this process. 
+    <li>Copy the new method to the object by using the object's
+        <A href="../../API%20Reference/Thing/Method.htm">Method</a> property. For example, suppose you intend to override the
+        <b>Report</b> method
+		(all <b>Thing</b>-based
+        objects inherit this method) on your <em>MyObj</em>
+        instance. The following code shows how this can be
+        done. <em>NewMethodRef</em> is a reference to the method
+        created in the first step. </li>
+</ol>
+
+<blockquote>
+    <pre>   MyObj.Method("Report") = NewMethodRef</pre><PRE>&nbsp;</PRE>
+</blockquote>
+</body>
+</html>

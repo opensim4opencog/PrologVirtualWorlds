@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Virtual Worlds Methods</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>Virtual Worlds Methods</h1>
+
+<p><!-- 10/23/98 --></p>
+
+<p>There are three types of methods in Virtual Worlds:</p>
+
+<ul>
+    <li>Script Methods 
+    <li>Inline Methods 
+  <LI>System Methods</LI>
+</ul>
+
+<h2>Script Methods</h2>
+
+<p>A script method is a subroutine or function written in Microsoft
+Visual Basic Scripting Edition<font size="2">© or 
+Microsoft JScript<FONT size=2>©</FONT></font>. Before you start to write the code
+for your method, consider whether the method should return a value. If the
+method does not need to return a value, write a
+subroutine to implement your method. If the method does need to
+return a value, write a function. </p>
+
+<p>Once you have decided whether to implement your method as a
+subroutine or as a function, you can carry out the following 
+four-step process in order to add the method to an object: </p>
+
+<ol>
+    <li>Create a text file that contains one or more script 
+  subroutines or functions. Each of these subroutines and functions could 
+  potentially become a method on an object. 
+    <li>Create a script module from this file. 
+    <li>Create a method from the script module. 
+    <li>Add the method to the appropriate object.</li>
+</ol>
+
+<p>These steps are examined in detail in the topic <a href="Creating%20a%20Method%20from%20a%20Module.htm">Adding a Method from a Script Module</a>.</p>
+<P>   Note that once a module is created from a text file containing 
+script code, the actual code in the module is not updated unless you explicitly 
+reload the module.&nbsp; Simply changing code in the text file will not cause 
+the module to be reloaded.</P>
+
+<h2>Inline Methods</h2>
+
+<p>   An inline method is a type of method that
+is not associated with an external module. In contrast, script methods <em>are</em>
+associated with external modules. The inline method type is ideal for
+writing methods that can be completed within short code fragments. Unlike script methods, inline
+methods can be edited in the <A href="../../uiref/objexpl/inlinmth.htm"><b>Inline Method Editor</b></A>
+(one of the editors in the <A href="../../uiref/objexpl/intrface.htm"><b>Object Explorer</b></A>).
+Also, if a change is made to an inline method, the server and
+other clients will automatically be updated.  This is not true of script methods.</p>
+
+<p>All inline methods are associated with a single internal
+inline script module.</p>
+
+<p>The topic <a href="Writing%20an%20Inline%20Method.htm">Writing an Inline Method</a> contains more
+information.</p>
+
+<h2>System Methods</h2>
+
+<p>All of the Virtual Worlds core objects and exemplars 
+have native methods that are implemented in C++.&nbsp; These methods cannot 
+explicitly be changed by the user, but many of them can be <EM>overridden</EM>                
+       by re-implementing
+the methods as script or inline methods. </p>
+
+</body>
+</html>

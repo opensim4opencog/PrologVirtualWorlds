@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>RootURL</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>RootURL</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>String </b>that holds the path for the default location of the world's
+content. <b>RootURL</b> is a read/write <b>String</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><I>object</I>.<B>Property</B> = 
+<I>stringValue</I></TD></TR></TABLE></P>
+<P>To return the property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Property</b></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<p>The <b>RootURL</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">stringValue</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The path of the default location of the content of the world.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>RootURL</b> property 
+consists of a collection of directory paths, separated by semicolons. The 
+directories to which the paths refer should contain world content.</P>
+<P>With the <b>RootURL</b> property, 
+you can extend the default search locations to include other remote or local 
+URLs, but only the world Owner and Wizards can set the <STRONG>RootURL</STRONG>  
+            
+          property.</P>
+<H4> 
+       Other&nbsp;Directories Used for Searches</H4>
+<P>        
+          Microsoft Virtual Worlds
+will automatically search the following directories by default (the string <i>Worldname</i> is
+replaced by the name of the relevant world in actual usage):</P>
+
+<p><tt>\Program Files\Microsoft Virtual Worlds\Local Content<br>
+\Program Files\Microsoft Virtual Worlds\Avatar Graphics<br>
+\Program Files\Microsoft Virtual Worlds\Worlds\<i>Worldname</i><br>
+\Program Files\Microsoft Virtual Worlds\<i>Worldname</i>\Avatar Graphics&nbsp; </tt>&nbsp;
+
+<!--Example section--></p>
+<P>These other directories do not appear by default in the 
+<STRONG>RootURL</STRONG> property, but are a part of Virtual Worlds searching 
+mechanism. The <STRONG>RootURL</STRONG> property provides&nbsp;you with a way to 
+add to this default search by including directories on a local or remote site 
+that are not included in the searching mechanism by default.</P>
+<H3>Example</H3>
+<p>To get the <b>RootURL</b> value:</p>
+
+<pre><tt>   Result = World.<b>RootURL</b></tt></pre>
+
+<p>To set the <b>RootURL</b> value:</p>
+
+<pre><tt>   World.<b>RootURL</b> = "http://vworlds.microsoft.com/myworld/content/"</tt></pre>&nbsp;
+ 
+
+</body>
+</html>

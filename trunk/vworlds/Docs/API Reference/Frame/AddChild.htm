@@ -1,0 +1,114 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>AddChild</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AddChild</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Adds a child frame to&nbsp;the&nbsp;specified frame. <b>AddChild</b> is a member of the <A href="Frame.htm">Frame</A> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>AddChild</b>&nbsp;<i>pChildFrame</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>AddChild</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b>  object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pChildFrame</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>The frame to be added as a child to the&nbsp;specified frame.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>         
+   Frames can exist on multiple levels in Microsoft Virtual Worlds, just as they can 
+on a Web page.&nbsp;To get a reference to a frame within&nbsp;a virtual world&nbsp;use the <A href="../Exemplars/Thing/GetFrame.htm">GetFrame</A> 
+method. The following statements retrieve the frame for the user's container.
+<blockquote><pre>
+Dim myFrame
+Set myFrame = User.Container.GetFrame
+</pre></blockquote>
+<P>  To add a child frame to the "myFrame" object, you must first create&nbsp;a 
+child frame using the <A href="../world/CreateFrame.htm">CreateFrame</A> method.
+<blockquote><pre>
+Dim myNewFrame
+Set myNewFrame = CreateFrame
+</pre></blockquote>
+<P>At this point, the new frame does not have a reference point in the world. You use the <b>AddChild</b> method to add the new frame to an existing one. The object specified is the frame that will be the parent object of the new frame.
+<blockquote><pre>
+myFrame.<b>AddChild myNewFrame</b> 
+</pre></blockquote>
+<P>The child displays relative to its parent. &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>
+This example adds a decal to a child frame.</p>
+<pre class="example">
+Sub AddDecalToFrame()
+Dim myDecal
+Dim myFrame
+Dim myDecalFrame
+
+Set myFrame = User.Container.GetFrame
+Set myDecalFrame = CreateFrame
+
+myFrame.<b>AddChild myDecalFrame</b>
+
+Set myDecal = _
+&nbsp;&nbsp;myDecalFrame.CreateDecalFromText "CDs and DVDs for sale!", "myDecalFrame"
+
+End Sub
+</pre>
+</body>
+</html>

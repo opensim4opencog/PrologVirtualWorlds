@@ -1,0 +1,100 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateBoundary</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateBoundary</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Creates an instance of the <a href="../Boundary/Boundary.htm">Boundary</a> object. <b>CreateBoundary</b> is a member of the <a href="World.htm">World</a> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CreateBoundary</b>([<i>varInitialValue</i>])</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>CreateBoundary</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td>[<b><i>varInitialValue</i></b>]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>An array of a minimum of 3 vertices that defines the boundary points (See remarks.)</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This property returns a reference to an instance of the <b>Boundary</b> object.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><p>A <b>Boundary</b> is an object composed of a set of points that encloses another object or area in 3-D space. Instead of the standard 3-D coordinate system, boundary points, called vertices, are placed on a separate 2-D x-y plane. Unlike other objects, boundary vertex coordinates are relative to the object they surround, not the world in which the object is located. The origin of the x- and y-axes (0,0) corresponds to the center point of the object the boundary is assigned to. A <b>Boundary</b> object is usually used to implement collision detection between objects.
+
+<p>The recommended use of the <b>CreateBoundary</b> method involves providing an array of vertices in the <i>varInitialValue</i> parameter. The boundary should be provided with at least 3 x-y coordinates, forming a simple polygon around the object (see Figure 1). The boundary edges are created in the order that the coordinates are listed in, so make sure that the list of coordinates does not lead to a complex polygon. Complex polygons are not supported in Microsoft Virtual Worlds.
+<p><img src="../Images/Polygons2.GIF" width=216 height=144 alt="" border="0">
+<p>Figure 1.
+<p>When a boundary is created, it is not automatically connected to any particular object. To use a boundary, it must be assigned to an object by adding it to the <a href="../Exemplars/Thing/BoundaryList.htm">BoundaryList</a> property of the object using the <a href="../PropertyList/Add.htm">Add</a> method. The <b>BoundaryList</b> property is a <a href="../PropertyList/PropertyList.htm">PropertyList</a> that maintains a list of boundaries added to an object. Boundaries are added sequentially to this list, and if a boundary is removed from the list, the index numbers of any succeeding boundaries are decremented. The following example adds a boundary to the BoundaryList of an existing object using the <b>Add</b> method. The item "myObject" is an existing object, and the argument "myBoundary" is a boundary that has been created but not yet assigned to an object. <br>
+
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;myObject.BoundaryList.Add <i>myBoundary</i></pre>
+
+<p><b>Tip</b>:&nbsp;&nbsp;&nbsp;There are two other suggested techniques for creating instances of the boundary object. The easiest way to add a boundary to a <b>Thing</b> object is to change the value of the <a href="../Exemplars/Thing/IsSolid.htm">IsSolid</a> property on that instance to <b>True</b>. This will automatically create a boundary around an object, and it automatically adds the boundary to the <b>BoundaryList</b> property of that object. A boundary can also be created using the <a href="../Boundary/AutoGenerate.htm">AutoGenerate</a> method of the <b>Boundary</b> object, however, using the <b>AutoGenerate</b> method requires the user to manually add the boundary to the <b>BoundaryList</b> property of an object. Both of these techniques provide, simple, functional, and completely customizeable boundaries. 
+<!--Example section-->
+<H3>Example</H3>
+<p>This example creates a boundary using the <b>CreateBoundary</b> method (including the array of vertices), and then adds the new instance to the <b>BoundaryList</b> property of a <b>Thing</b> object ("myObject").<br><br>
+&nbsp;
+
+<pre class="example">Dim myBoundary
+
+Set myBoundary = World.<b>CreateBoundary(Array(1,1, 1,-1, -1,-1, -1,1))</b></pre>
+<p class=comments>'[Optional] Customize properties of the instance.
+<pre class="example">myBoundary.HeightUpper = 3.2
+myBoundary.HeightLower = 1</pre>
+<p class=comments>'Add the boundary to the BoundaryList property of an existing object.
+<pre class="example">myObject.BoundaryList.Add myBoundary
+
+</pre>
+ 
+
+</body>
+</html>

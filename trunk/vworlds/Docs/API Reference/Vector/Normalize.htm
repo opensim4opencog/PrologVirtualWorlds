@@ -1,0 +1,97 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Normalize</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Normalize</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Vector</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>Modifies a copy of the values of the calling <a href="Vector.htm">Vector</a> to create a unit-length vector with the same direction as the source. The result is assigned to the supplied parameter. <b>Normalize</b> is a member of the <b>Vector</b> data type.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Normalize</b>&nbsp;<i>pvres</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Normalize</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Vector</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvres</td>
+		<td>Vector</td>
+		<td>Required<!--Required or Optional--></td>
+		<td>The <b>Vector</b> that is assigned the normalized value.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Normalize</b> method creates a vector by modifying a copy of the values of the calling vector and assigning the result to the supplied parameter (<i>pvres</i>). The new vector is a unit-length vector with the same direction as the source.
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;The <i>pvres</i> parameter must be initialized as a vector object prior to being passed as a parameter. The initial values are then overwritten by the <b>Normalize</b> method.
+<!--Example section-->
+<H3>Example</H3>
+<p>This example creates two vectors, and then normalizes a copy of the values of the invoking vector and assigns the result to the second vector.
+<br><br>
+
+<pre class="example">Dim myVector1
+Dim myVectorResult
+</pre>
+<p class=comments>'Create the vectors.
+<pre class="example">Set myVector1 = World.CreateVector(1, 1, 1)
+Set myVectorResult = World.CreateVector(0, 0, 0)
+</pre>
+<p class=comments>'Call the <b>Normalize</b> method and normalize the invoking object,
+<br>'assigning the result to the second parameter.
+<pre class="example">myVector1.<b>Normalize myVectorResult</b></pre>
+<p class=comments>'Display the result in the Command Window.
+<pre class="example">Trace myVectorResult.Length
+</pre>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Property</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> Property</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of PropertyMap</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+Sets or returns the value of the specified property in a 
+<A 
+href="PropertyMap.htm">PropertyMap</A> collection. The specified property is 
+indicated the <EM>bstrName</EM>      
+parameter.&nbsp;The collection&nbsp;is zero-based. <STRONG>Property</STRONG>      
+    is a read/write <STRONG>Variant</STRONG>.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><EM>object</EM>.<B>Property</B>(<EM>bstrName</EM>) = 
+      <EM>variantValue</EM></TD></TR></TABLE></P>
+<P>To return the property:
+<table class="backlight">  <TR>
+    <TD><EM>object</EM>.<b>Property</b>(<EM>bstrName</EM>)</TD><!--syntax statement --></TR></table>
+
+
+<!--Parameters table--></P>
+<p>The <b>Property</b> property syntax has these parts:
+<TABLE class=backlight><!--Parameters table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Parameters </TD>
+    <TD>Type </TD>
+    <TD>Use </TD>
+    <TD>Description </TD></TR></THEAD><!--Parameters table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object </TD>
+    <TD>
+      <P> PropertyMap</P></TD><!--Parameter name-->
+    <TD>Required</TD><!--Type-->
+    <TD>   An object&nbsp;variable that accesses a <B>PropertyMap</B>&nbsp;collection. </TD><!--Description--></TR>
+  <TR>
+    <TD class=boldItal>bstrName </TD>
+    <TD>String </TD>
+    <TD>Required </TD>
+    <TD>The variant name of the property within a 
+      <B>PropertyMap</B>&nbsp;collection. </TD></TR>
+  <TR>
+    <TD class=boldItal>variantValue </TD>
+    <TD>Variant </TD><!--Parameter name-->
+    <TD>Required </TD><!--Type-->
+    <TD>A variant that can represent any of the variant 
+      types, except an array. 
+</TD><!--Description--></TR></TABLE></p>
+<H3>Remarks</H3>
+<P>A property map is a collection of items organized by the 
+keys in a list of keys and value pairs.&nbsp;If you want to add a 
+property to an existing <b>PropertyMap</b>    collection, use the <b>Property</b>      property, as shown in the following code.
+<blockquote><PRE>
+Dim myCDs
+Set myCDs = CreatePropertyMap
+
+myCDs.<STRONG>Property("Jazz")</STRONG> = "Ella Fitzgerald"
+</PRE></blockquote>
+<P>The previous code added a property named "Jazz" that has a 
+value of "Ella Fitzgerald" to the "myCDs" property map. 
+<P>If you want to modify an individual property for an 
+object, you must refer to it explicitly, otherwise, you will be modifying only 
+your local copy of the property. For example, if you want to modify the value of 
+the&nbsp;"Jazz"               
+             
+               
+  property from&nbsp;"Ella Fitzgerald" to&nbsp;"Louie Armstrong", you must access the value using the 
+following code. 
+<BLOCKQUOTE><PRE>myCDs.<b>Property("Jazz")</b> = "Louie  Armstrong"
+</PRE></BLOCKQUOTE><PRE></PRE>
+<P>In Microsoft Virtual Worlds, you cannot access an 
+item in a collection by using the collection name with the item number in 
+parentheses, you must use the <STRONG>Property</STRONG>    
+      property. For example, suppose you have an 
+existing property list named "VegiGarden" that contains a list of all of the items growing in 
+the garden. Among those items is an item named "Carrots". The following statements show 
+how you can access that item.</P>  
+<BLOCKQUOTE><PRE>
+Dim myCarrots
+
+myCarrots = VegiGarden.<STRONG>Property("Carrots")</STRONG></B></PRE></BLOCKQUOTE>       
+
+<P><STRONG>Note:</STRONG>&nbsp;&nbsp; Although the 
+<STRONG>Variant</STRONG> type normally takes an array, Virtual Worlds does not 
+support arrays as a <STRONG>Variant</STRONG> type for property maps.
+<!--Example section-->
+<H3>Examples</H3>
+<P> The first example&nbsp;illustrates how to access Automated properties versus non-Automated properties. It assumes you have a property map named "Vehicles" and that you want to retrieve the "Truck" property.</P>                             
+
+<P class="comments">          
+'The Automation property is an object and must use the <b>Set</b> keyword.
+
+<pre class="example">
+Set myTruck = Vehicles.<b>Property("Truck")</b>
+</pre>
+<p class="comments">'The non-Automation property is not an object and must be referenced
+'as a property.
+<pre class="example">
+myYear = Vehicles.<b>Property("Year")</b></pre>
+
+<P> Example&nbsp;2                                         <p>To iterate through a property map and trace each key's value to the Command Window, you can use the <b>For...Each</b> statement to access an individual item.</p>
+
+<pre class = "example">Sub ListCDs()
+Dim myCDs
+Dim myItem
+</pre>
+<p class="comments">'Create a new property map.
+<pre class="example">
+Set myCDs = CreatePropertyList
+</pre>
+<p class="comments">'Add properties to the new map.
+<pre class="example">myCDs.Property(Jazz) =  "Ella
+Fitzgerald" myCDs.Property(Saxaphone) =  "Louis
+Armstrong" myCDs.Property(Classical) = "Bach"
+</pre>
+<p class="comments">'Iterate through the list and print the value for each property name to the Command Window.
+<pre class="example">
+For Each myItem In myCDs
+    Trace myCDs.<b>Property(myItem)</b>
+Next
+
+End Sub</pre>
+
+
+</body>
+</html>

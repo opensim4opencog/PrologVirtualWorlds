@@ -1,0 +1,24 @@
+HKCR
+{
+	VWSTUDIO.VWFileAccessTool.1 = s 'VWFileAccessTool Class'
+	{
+		CLSID = s '{F5B9E8D3-74C4-11D1-B344-00C04FB6A5C8}'
+	}
+	VWSTUDIO.VWFileAccessTool = s 'VWFileAccessTool Class'
+	{
+		CurVer = s 'VWSTUDIO.VWFileAccessTool.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {F5B9E8D3-74C4-11D1-B344-00C04FB6A5C8} = s 'VWFileAccessTool Class'
+		{
+			ProgID = s 'VWSTUDIO.VWFileAccessTool.1'
+			VersionIndependentProgID = s 'VWSTUDIO.VWFileAccessTool'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

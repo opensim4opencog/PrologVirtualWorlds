@@ -1,0 +1,102 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>AcceptEnter</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AcceptEnter</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called on a <a href="../Exemplars/Thing/Thing.htm">Thing</a> when it is about to enter a container using <a href="../Exemplars/Thing/MoveInto.htm">MoveInto</a>. <b>AcceptEnter</b> is a member of <b>Thing</b>. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>AcceptEnter(<i>pThing</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>AcceptEnter</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">pThing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The container to which the object will move.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a Boolean.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>This method is not normally called by the user; it responds to
+an internal event that occurs in Virtual Worlds when an object is
+about to change containers using <b>MoveInto</b>.
+If you find it necessary to override this event-handling method, <strong>InvokeSuperMethod</strong>
+should also be called to maintain the existing functionality of
+the overridden method.
+<!--Example section-->
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">Function AcceptEnter(NewContainer)
+&nbsp;&nbsp;&nbsp;&nbsp;Dim MoveOK</pre>
+<div class=comments>&nbsp;&nbsp;&nbsp;&nbsp;'(Calls the parent's AcceptEnter method)</div>
+<pre class="example">&nbsp;&nbsp;&nbsp;&nbsp;MoveOK = This.InvokeSuperMethod(NewContainer)
+&nbsp;&nbsp;&nbsp;&nbsp;AcceptEnter = MoveOK 
+End Function</pre>
+<!--Example text-->
+&nbsp;
+</pre>
+<p class=comments>
+<div class=comments></div>
+<!--See also section-->
+
+
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsValid</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsValid</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of PropertyMap</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+Returns <STRONG>True</STRONG> if 
+the&nbsp;string specified by   
+   the&nbsp; <EM>bstrName</EM> 
+parameter exists as a
+       property in&nbsp;a <A href="PropertyMap.htm">PropertyMap</A>  collection. 
+<b>IsValid</b> is a member of&nbsp;the <STRONG>PropertyMap</STRONG> 
+collection.
+<H3>Syntax</H3>
+<P>
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><EM>object</EM>.<STRONG>IsValid</STRONG>(<EM>bstrName</EM>) </TD><!--syntax statement --></TR>
+</TABLE></P>
+
+
+<!--Parameters table-->
+<p>The <b>IsValid</b> method syntax has these parts:
+<TABLE class=backlight><!--Parameters table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Parameters </TD>
+    <TD>Type </TD>
+    <TD>Use </TD>
+    <TD>Description </TD></TR></THEAD><!--Parameters table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object </TD>
+    <TD>PropertyMap</TD><!--Parameter name-->
+    <TD>Required </TD><!--Type-->
+    <TD>     An&nbsp;object reference&nbsp;to a <B>PropertyMap</B>&nbsp;collection. </TD><!--Description--></TR>
+  <TR>
+  <TR>
+    <TD class=boldItal>bstrName </TD>
+    <TD>String&nbsp; </TD><!--Parameter name-->
+    <TD>Required</TD><!--Type-->
+    <TD>The&nbsp;name of the property in the 
+      <STRONG>PropertyMap</STRONG>       collection. </TD><!--Description--></TR>
+
+</TABLE></p>
+<H3>Return Value</H3>
+<P>This method returns <STRONG>True</STRONG> if the 
+specified property exists in the property map, otherwise, it returns 
+<STRONG>False</STRONG>         
+            
+ .&nbsp;</P>
+<H3>Remarks</H3>
+<P>When you use the&nbsp;<STRONG>IsValid</STRONG> method,&nbsp;it searches&nbsp;the 
+specified property map.&nbsp;A <STRONG>PropertyMap</STRONG> object contains an unordered list of paired 
+keys and values, known as <EM>key/value pairs</EM>.&nbsp;Once you have inserted a 
+key/value pair (element) into&nbsp;a map, you can efficiently retrieve or 
+delete the pair using the key to access it. You 
+can also iterate over            
+    all the elements in the map. </P>
+<P>A key/value pair maps unique keys to values. The key is a string that 
+represents the name of the property in the property map. The value is the 
+contents of the property. A property map uses the string that makes up the key 
+instead of an index number to access the value of each property. </P><B></B><B></B>
+<H3>Example</H3>
+<p>The first example checks&nbsp;whether a property 
+exists in a property map.
+<P>
+<PRE class="example">
+Sub CheckProperty()
+Dim myCDs
+
+Set myCDs = CreatePropertyMap
+
+myCDs.Property("Vocal") = "Ella Fitzgerald"
+myCDs.Property("Saxaphone") = "Louie Armstrong"
+</PRE><p class="comments">
+'The next statement returns <b>True</b>.
+<pre class="example">
+Trace myCDs.<b>IsValid("Vocal")</b>
+
+End Sub
+</pre>
+</body>
+</html>

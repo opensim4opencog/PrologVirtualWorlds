@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Exporting a World as a Script File</title>
+<link rel="STYLESHEET" href="../vwgdoc.css" type="text/css"
+title="VWG">
+</head>
+
+
+<h1>Exporting a World as a Script File</h1>
+
+<p>After you have made changes to your world, you should back up
+your changes. One way to do this is to export the data to a
+script file. (The other way is to save the world's data to a
+checkpoint file). The script file that is produced contains a
+single Microsoft Visual Basic Script<font size="2">©</font>
+subroutine named AutoRun. When this script is loaded in the
+<a href="../uiref/adminui/import.htm"><b>Import Script Wizard</b></a>,
+the subroutine re-creates all of the objects in the world exactly as they were at the
+time the script was exported. Although the script can be edited, it is
+recommended that do not make changes in this file unless you are sure of
+their effects. The script file contains Microsoft Visual Basic
+Script<font size="2">©</font> statements that are sensitive to minor changes, as are
+statements in any other programming language. </p>
+
+<h2>To export a world as a script file:</h2>
+
+<ol>
+    <li class="mvd-P">In the Virtual Worlds Server application,
+        click the title bar of the world you want to export. </li>
+    <li class="mvd-P">Click the <strong>File</strong> menu, and then click
+        <b>Export</b>.</li>
+</ol>
+
+<p>The Virtual Worlds Server application writes a Microsoft
+Visual Basic Script© file containing all of the objects of the
+world and their methods and properties. This file is written to
+the <tt>Worlds</tt> directory.  The default path to this directory is
+<tt>C:\Program Files\Microsoft Virtual Worlds\Worlds\.</tt></p>
+
+<h2>To export a world as a script file, but with a different
+name:</h2>
+
+<ol>
+    <li>In the Virtual Worlds Server application, click the title
+        bar of the world you want to export.</li>
+    <li>Click the <strong>File</strong> menu, and then click <strong>Export As...</strong>. </li>
+    <li>When the <a href="../uiref/adminui/vwsexp.htm"><strong>Export
+        As</strong></a> dialog box appears, type the
+        new filename in the <strong>File name</strong> input box.</li>
+    <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<p>The Virtual Worlds Server application writes out a
+Microsoft Visual Basic Script© file to the Worlds directory,
+using the name you entered. This file contains all of the
+objects and their methods and properties.</p>
+
+<h4>See Also </h4>
+
+<p><a href="savewrld.htm">How Worlds Are Saved</a><br>
+</p>
+
+<h4>Tasks </h4>
+
+<p><a href="openscpt.htm">Importing a World Script File</a><br>
+<a href="openchk.htm">Opening a World Checkpoint File</a><br>
+<a href="savechk.htm">Saving a World as a Checkpoint File</a><br>
+<a href="vwsdelw.htm">Deleting a World</a></p>
+</body>
+</html>

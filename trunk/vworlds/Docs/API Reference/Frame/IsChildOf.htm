@@ -1,0 +1,86 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsChildOf</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsChildOf</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Determines whether or not the invoking object is a child of the specified frame. 
+<b>IsChildOf</b> is a member of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsChildOf</b>(<i>pvwf</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>IsChildOf</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvwf</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>The frame to query.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Boolean</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Returns a <b>Boolean</b> flag that will be <b>True</b> if the
+invoking frame is a child of the frame that is passed to the method, and <b>False</b>
+otherwise.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>IsChild = MyFrame.IsChildOf (TheFrame)</pre>
+&nbsp;
+
+
+</body>
+</html>

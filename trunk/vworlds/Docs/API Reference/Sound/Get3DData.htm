@@ -1,0 +1,138 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Get3DData</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Get3DData</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Sound Object</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Returns the&nbsp;three-dimensional angle and volume information for a 3-D <A href="Sound.htm" >Sound</A> 
+object.&nbsp;<STRONG>Get3DData</STRONG> 
+ is a member of the <STRONG>Sound</STRONG> object.&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>Get3DData</STRONG> 
+      <EM>dwInsideConeAngle, dwOutsideConeAngle, lConeOutsideVolume, 
+      flMinDistance, flMaxDistance</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>Get3DData</STRONG> method syntax has these parts:
+<TABLE class=backlight><!--Parameters table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Part</TD>
+    <TD>Type</TD>
+    <TD>Use</TD>
+    <TD>Description</TD></TR></THEAD><!--Parameters table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal><!--Parameter name-->object</TD>
+    <TD><!--Type-->Sound</TD>
+    <TD><!--Required or Optional-->Required</TD>
+    <TD><!--Description--> An object reference to a 
+      <STRONG>Sound</STRONG> object. </TD></TR>
+  <TR>
+    <TD class=boldItal>dwInsideConeAngle</TD>
+    <TD>Long</TD>
+    <TD>Required</TD>
+    <TD>The inside angle, in degrees, of the sound projection cone.</TD></TR>
+  <TR>
+    <TD class=boldItal>dwOutsideConeAngle</TD>
+    <TD>Long</TD>
+    <TD>Required</TD>
+    <TD>The outside angle, in degrees, of the sound projection cone. </TD></TR>
+  <TR>
+    <TD class=boldItal>lConeOutsideVolume</TD>
+    <TD>Long</TD>
+    <TD>Required</TD>
+    <TD>The outside cone volume in hundredths of a decibel.</TD></TR>
+  <TR>
+    <TD class=boldItal>flMinDistance</TD>
+    <TD>Float</TD>
+    <TD>Required</TD>
+    <TD> The approach distance, in meters, within which the volume&nbsp;does not 
+      increase.</TD></TR>
+  <TR>
+    <TD class=boldItal><!--Parameter name-->flMaxDistance</TD>
+    <TD><!--Type-->Float</TD>
+    <TD><!--Required or Optional-->Required</TD>
+    <TD><!--Description-->   The distance, in meters, beyond which 
+      the sound&nbsp;does not decrease.</TD></TR></TABLE>
+
+<!--Return Value section --></P>
+<H3>Return Value</H3>
+<p>This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>There are three 
+basic ways to represent sound within a virtual world:</P>
+<ul><LI>A sound with an orientation is a sound cone. The 
+  amplitude of the sound at a given distance is the same in all directions. 
+  
+<li>A sound with no orientation is a point source, or sound 
+  source. 
+  
+<li>   A sound projection cone is a sound that has 3D qualities&nbsp;and a spatial orientation.</li></ul>
+<p>In Virtual Worlds, sound cones are made up of an inner 
+cone and an outer cone. Within the inner cone, the volume of the sound is what 
+it would be if there were no cone; in other words, there is no attenuation from 
+the normal volume. Outside the outer cone, the normal volume is attenuated by a 
+specified number of decibels. The angle between the inner and outer cones is a 
+zone of transition between the inside volume and the outside volume.</p>
+<P>The following illustration shows the concept of sound cones.</P>
+<P><IMG alt="" border=0 src="../Images/soundcone.bmp">
+<h4> Effects of the <EM>dwInsideConeAngle</EM> and 
+<EM>dwOutsideConeAngle</EM>   Parameters</h4>
+<P>The <EM>dwInsideConeAngle</EM> and 
+<EM>dwOutsideConeAngle</EM> parameters describe the scope of the 
+<STRONG>Sound</STRONG>   object. The outside cone angle must always be equal 
+to or greater than the inside cone angle. To set the orientation of sound 
+cones, use the <A href="Set3DData.htm">Set3DData</A> method.</P>
+<H4>Effects of the <EM>lConeOutsideVolume</EM> Parameter</H4>
+<P>The <EM>lConeOutsideVolume</EM> 
+parameter is expressed in 
+hundredths of a decibel and is a negative value because it represents 
+attenuation from the default volume of 0. Allowable values are&nbsp;from 0 
+(no attenuation)&nbsp;through -10,000&nbsp;(silence). </P>
+<H4>Effects of the <EM>flMinDistance</EM> and 
+<EM>flMaxDistance</EM>  Parameters</H4>
+<P>As you approach a <STRONG>Sound</STRONG> object in the world, you reach a point where 
+the sound does not increase in volume. This is the distance set by the 
+<EM>flMinDistance</EM> parameter. The <EM>flMaxDistance</EM> is the point at 
+which the sound does not decrease as you walk away from a <STRONG>Sound</STRONG>    
+               
+      object.</P>
+<H3>Example</H3>
+<P>All five of the parameters of <STRONG>Get3DData</STRONG> are output 
+parameters. This means that after this method has been called, each of these 
+parameters will be reset to a new value.</P><PRE>mySound.<b>Get3DData InsideConeAngle, _
+&nbsp;&nbsp;&nbsp;&nbsp;OutsideConeAngle, _
+&nbsp;&nbsp;&nbsp;&nbsp;ConeOutsideVolume, _
+&nbsp;&nbsp;&nbsp;&nbsp;MinDistance, _
+&nbsp;&nbsp;&nbsp;&nbsp;MaxDistance</b>
+</PRE>  
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>ScriptPath</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ScriptPath</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Module Object</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Returns the location of a <a href="Module.htm">Module</a> that has been added to a world. <b>ScriptPath</b> is a read-only <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>ScriptPath</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>ScriptPath</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>ScriptModule</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Module</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name--></td>
+		<td><!--Type--></td>
+		<td><!--Required or Optional--></td>
+		<td><!--Description--></td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>ScriptPath</b> property returns the file location of a module that has been added to a world. The value of the <b>ScriptPath</b> property is set when the module is added to the world, so if the file location changes, the <b>ScriptPath</b> property is not updated.
+
+<p>To obtain a reference to a module that has been added to a world, use the <a href="../Method/Module.htm">Module</a> property of the <a href="../Method/Method.htm">Method</a> object.
+
+<p><b>Tip</b>: &nbsp;&nbsp;The recommended way to move a module that has been added to a world is to delete the module from the world, and then add it back using the new path. This method ensures that the <b>ScriptPath</b> property is updated, and the references to members of the module are pointed at the correct file location.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example displays the file location of a module that has been added to a world. The parameter "myStrModuleName" is the <b>String</b> name of a valid module.
+<br><br>
+<p class=comments>
+<div class=comments></div>
+<pre class="example">Sub myTraceModulePath(myStrModuleName)
+Dim myFlag
+Dim myModuleObject</pre>
+<p class=comments>'Verify that the string passed is a valid module name.
+<pre class="example">myFlag = World.IsValidModule(myStrModuleName)</pre>
+<p class=comments>'If the module is valid, acquire a reference to it and<br>
+'display the <b>ScriptPath</b> in the Command Window.
+<pre class="example">If myFlag = True Then
+&nbsp;&nbsp;&nbsp;&nbsp;Set myModuleObject = World.Module(myStrModuleName)
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myModuleObject.<b>ScriptPath</b>
+Else
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myStrModuleName &amp; " is not a valid module."
+End If
+
+End Sub
+<!--Example text-->&nbsp;
+
+</pre>
+
+
+</span> 
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateDecalFromURL</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateDecalFromURL</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+Adds a decal to a frame from a file at a specified 
+URL.&nbsp;<STRONG>CreateDecalFromURL</STRONG> is a member of the <A href="Frame.htm">Frame</A> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>CreateDecalFromURL 
+      </STRONG><EM>bstrTexture</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<B>CreateDecalFromURL</B> method syntax has these parts: 
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name-->object</td>
+		<td><!--Type-->Frame</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->An 
+      object reference that accesses an object with 
+      a&nbsp;<STRONG>Frame</STRONG> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->bstrTexture</td>
+		<td><!--Type-->String</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->A 
+      valid URL for the decal. The path for the URL 
+      can be relative or explicit.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section --></P>
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Although decals are still&nbsp;functional for backward 
+compatibility in Microsoft Virtual Worlds 1.5, the <A 
+href="../Exemplars/Thing/Label.htm">Label</A> object is the preferred method of 
+creating text that you can display within your world.<!--Insert Remarks here-->
+<P>The 
+file type must be a bitmap that is recognized by Virtual 
+Worlds.&nbsp;This method displays an image file as a decal in a virtual 
+world. You can also use the <A href="CreateDecalFromText.htm">CreateDecalFromText</A> method to create 
+a decal&nbsp;from text.
+
+<!--Example section-->
+<H3>Example</H3>
+<P>This example creates a decal and displays it in a virtual world.</P><PRE class=example>Sub CreateKioskDecal()
+Dim myFrame
+Dim myDecal
+Dim myFI
+
+myFI = _
+&nbsp;&nbsp;"file://C:/Program Files/Microsoft Virtual Worlds/Local Content/SDK/Library/models/other/Kiosk.x"
+</PRE>
+<P class=comments>'Set a reference to the frame where you want to place the 
+decal. <PRE class=example>Set myFrame = User.Container.GetFrame
+myDecal = myFI
+</PRE>
+<P class=comments> 'Create the decal. <PRE class=example>myFrame.<B>CreateDecalFromURL myDecal</B>
+
+End Sub
+</PRE>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Creating an Object Based on a Thing</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>    Creating an Object</h1>
+
+<p><!-- 10/23/98 --></p>
+
+<p>You can populate your world with objects based on the <b>Thing</b>
+exemplar, and on exemplars that inherit from <b>Thing</b>.
+These exemplars, which are called the core exemplars, include <b>Artifact</b>,
+<b>Avatar</b>, <b>Host</b>, <b>Interworld Portal</b>, <b>Room</b>,
+<b>Room Portal</b>, <b>StateMachine</b>, <b>Thing</b>, and
+<b>WebPage</b>.</p>
+
+<p>You can create an object based on the <b>Thing</b>
+exemplar in either of two ways: </p>
+
+<ul>
+    <li>by using the <A href="../../uiref/objexpl/intrface.htm">Object Wizard</a>
+    <li>using script commands in the <A href="../../uiref/cmdwin/cwinintf.htm">Command Window</a></li>
+</ul>
+
+<h2>To create an object using the Object Wizard:</h2>
+
+<ol>
+    <li>In the <b>Object Explorer</b>, 
+  right-click the current room or any object in the room. 
+    <li>From the shortcut menu that displays, click <b>Create
+        New Thing...</b>. 
+    <li>When the <b>Object</b> <b>Wizard</b>
+        displays, select the type of object you wish to create.
+        For more information, see <A
+        href="../../uiref/objwiz/objwiz.htm">Object Wizard</a>. 
+    <li>Click <b>Create</b>.</li>
+</ol>
+
+<h2>To create an object using script commands in the Command
+Window:</h2>
+
+<ol>
+    <li>Determine which exemplar provides the best match for 
+  the kind of instance you want to create. 
+    <li>Use the <A href="../../API%20Reference/world/createinstance.htm">CreateInstance</a>
+	    method of the <A href="../../API%20Reference/world/world.htm">World</a>
+        core object to create the instance. <br>
+        <b>CreateInstance</b> takes three arguments:
+        the name of the object, the exemplar to use in creating
+        the object, and (optionally) the room or container in which
+        the object is to be created. <b>CreateInstance</b>
+        returns a reference to the created object. In both
+        examples, the name of the created object is <em>Toy</em>,
+        and it is an instance of the <a href="../../API%20Reference/Exemplars/Artifact/Artifact.htm"></a>
+        exemplar. In example 1, the object is created in the
+        user's inventory, the default location if no other
+        container is specified for the third argument. In example
+        2, the object is created in the same room as the user -
+        the <A href="../../API%20Reference/Thing/container.htm">Container</a> holding <A href="../../API%20Reference/world/user.htm">User</a>.</li>
+</ol>
+
+<blockquote>
+    <pre>' Example 1
+Set NewThing = World.CreateInstance("Toy", "Artifact")
+' Example 2
+Set NewThing = World.CreateInstance("Toy", "Artifact", User.Container)</pre>
+</blockquote>
+
+<h4>See Also</h4>
+<A href="../../uiref/cmdwin/cwinintf.htm">Command Window Interface</a>
+
+</body>
+</html>

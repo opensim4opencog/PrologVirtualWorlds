@@ -1,0 +1,432 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Virtual Worlds Client Server Overview</title>
+<Link rel="Stylesheet" href="../../API%20Reference/APIRef.css">
+</head>
+
+<body>
+
+<table class="head" bgcolor=#e8edf4 border=1>
+	<tr>
+		<td><h2>Virtual Worlds Client Server Overview</h2></td>
+	</tr>
+</table>
+
+<p><!-- 10/30/98 --></p>
+
+<p>Microsoft Virtual Worlds employs a client/server architecture, and consists of two pieces of
+software: the Virtual Worlds Server and the Virtual Worlds Client.
+The server, which is run on a single computer on the network, keeps track
+of all the objects in all the worlds that are running at any time, and processes
+all the information flowing within each world and to the clients.  
+The client, which is run by each of the users connected to a world, receives information
+from the server, interprets it into the local view of a world (by drawing the graphics
+and so forth),  and acts as a conduit for information between the user and the server.
+The server and the client send messages to each other that synchronize their operation.
+</p>
+<H4>Fundamentals</H4>
+
+<p>When you connect to a world, you are actually connecting the
+Virtual Worlds Client, running on your computer, to the
+Virtual Worlds Server running on the computer that hosts
+the world.</p>
+
+<p>Virtual Worlds objects run on both the client and server. Most
+objects exist only on the server. It is slow,
+however, to work with objects remotely over a slow network
+connection (such as a standard telephone line). To avoid this,
+the server sends copies of certain objects to the client for it
+to use directly. These objects generally
+include the user's avatar and objects near it (the room
+that the avatar is in, for example, and the other objects in the same room).</p>
+
+<p>The client does many things (such as displaying graphics) that
+do not require any communication with the server and that can be done
+entirely from its local copies of objects. When an object
+changes, however, the server and client software must ensure that
+their copies are synchronized. Many changes are
+initiated by the client and then confirmed by the server. For
+example, if a user attempts to move her avatar into a different
+room, the client asks the server to perform the move. The
+server then checks to see whether the move is possible (for example, to
+assure that the destination room is not full). If the move is
+allowed, the server then sends a message to those clients in
+the room she is leaving (including her client), and to clients in
+the room she is moving to, informing them all of the change.</p>
+
+<p>The messages between client and server are called system
+events. System events occur automatically in response to user input, operations
+from running methods, and other cues.  For example, if a property value is changed
+on a copy of an object on a computer running the client, that computer sends a
+message automatically  to inform the server of the change.  The server then automatically
+relays the message to all necessary client computers. </p>
+
+<p>When the server needs to pass changes to clients, it does
+not send all messages to all the clients. It calculates a list of
+bystander clients that need to be informed of a change. In
+general, a client is informed of a change only if it has a copy
+of the object that is being changed. For example, if two clients are
+being used by people whose avatars are in different rooms in a
+world, those clients will not typically be informed of changes made to objects
+outside of their respective rooms.</p>
+
+<p>Method invocations can also result in client/server messages.
+Methods are marked as being <i>client-side</i> or <i>server-side</i>,
+or both. Client-side methods are intended to be run only on
+computers running the client, while server-side methods are intended to be run
+only on the computer running the server. When a computer running the client invokes a
+client-side method, it is run only on that particular client.  When a computer running the
+client invokes a server-side method, it automatically sends a message to the server
+telling it to run the method. Conversely, when the server invokes
+a client-side method, it sends messages to all of the bystander clients telling them
+to run the method. A method that is
+marked as both client-side <em>and</em> server-side is run on
+whichever side it is called. To get a client-side method to run on all bystander
+clients, invoke it on the server. If you need to
+initiate this from a client-side method, first invoke a
+server-side method and then have the server-side method invoke
+the final client-side method. When the server invokes the
+client-side method, all of the bystander
+clients will run it. </p>
+<H4>Client/Server Awareness</H4>
+
+<p>It is important to be aware of the difference between code that is running on the
+client and code running on the server. It is also important to have some
+understanding of which objects are present and which operations can
+be done on each side. In general, the client machine contains only the objects
+that are needed in order to process a particular room within a world. </p>
+
+<p>These objects are:</p>
+
+<ul>
+    <li>The <A href="../../API%20Reference/World/World.htm">World</a> object 
+    <li>The <A href="../../API%20Reference/Exemplars/Room/Room.htm">Room</a> (or other container) the user is in 
+    <li><A href="../../API%20Reference/Exemplars/Avatar/Avatar.htm">Avatar</a> 
+  objects for your avatar and the other avatars in the room 
+    <li><A href="../../API%20Reference/Exemplars/Artifact/Artifact.htm">Artifact</a> and other objects for the other things in 
+  the room 
+    <li>Objects for the items in your avatars <A href="../../API%20Reference/Thing/Contents.htm">Contents</a> list 
+    <li>Objects explicitly requested by client methods 
+    <li>All of the exemplars needed for these objects</li>
+</ul>
+
+<p>When you write client-side methods, it is important to remember
+that these are typically the <i>only</i> objects present on the
+client. You should not, for example, write a client-side method
+that tries to access another avatar's <b>Contents</b> or an
+artifact's <b>Owner</b>. 
+On the server, all objects are present. However, the
+server does not display an object's graphics and has no access to
+user-interface mechanisms. When you write server-side methods,
+remember that all graphics, sound and user-interface
+operations must occur on the client computer.</p>
+
+<p>To work within the framework of client- and server-side code,
+it is sometimes necessary to break up operations into a sequence
+of methods, each executing on the appropriate side, in
+order to accomplish a task. For example, a user-interface
+operation might initiate a server-side method that, in turn,
+initiates a client-side method that triggers a visual
+display. This client-to-server-to-all-clients technique is a
+useful technique whenever you want to initiate an operation on a
+specific client (for example, as a result of a user-interface operation),
+but then have the operation take effect on another of the clients.</p>
+
+<p>While the client has a single implicit user, the server is connected to all
+the users. The server code should never assume any particular
+user - it should get the current <b>Avatar</b> (the avatar
+associated with the user who initiated the current operation) by
+querying the <b>World.User</b>
+property. This property is set by
+the message handling code in the server. When a message is
+received from a particular user, the <b>World.User</b> property
+is set to reference the <b>Avatar</b> object associated with the
+user that sent the message.</p>
+<H4>Client/Server Communication</H4>
+
+<p><!-- 10/30/98 --></p>
+
+<p>When you create certain objects, or make changes to an object
+in the world, these changes are collected into a data packet and
+sent from client to server, or vice versa. The technical term for
+this data communication is <em>marshalling</em>. </p>
+
+<p>The main reason for concern about communication between 
+the client and server occurs in situations where you create very large objects 
+(such as property lists or property maps). In very rare circumstances, the data 
+in these objects may exceed Virtual Worlds' packet size limit (approximately 32 kilobytes), which generates a Virtual Worlds error.
+In actual practice, this is unlikely to occur.</p>
+<P>Here are some general rules to help you understand when client/server 
+communication occurs and when it does not.</P>
+
+<ol type="1" >
+    <li>No client/server communication occurs during local
+        operations. This means that the server is not updated concerning a client-side method that
+        has a locally-created object as a parameter. <br><br>
+    <li>If the value you are working with is a Virtual Worlds
+	    <A href="../../API%20Reference/Thing/Thing.htm">Thing</a>
+        object (or instance of an exemplar inheriting from <strong>Thing</strong>,
+        such as <A href="../../API%20Reference/Exemplars/Artifact/Artifact.htm">Artifact</a>), all of the object's
+        data is transferred when the object is created. (The only
+        other case occurs when an avatar enters a room - data for
+        all the objects in the room is transferred from the
+        server to the client.) The following code sends all data for the newly created object from the
+        server to the client. All of the data for
+        the object exists on the server, and a complete copy
+        of this data is also sent to the client. After the
+        object is created, both the client and server have
+        identical local versions of the object, and each has a
+        pointer to its local version. If changes are made to the
+        copy on one side, only those changes are used to update
+        the other side.<blockquote>
+            <pre>Set NewObject = World.CreateInstance("Rock", "Artifact")</pre>
+        </blockquote>
+    <li>If the value you are working with is an instance of a
+        Virtual Worlds core object type (such as <A href="../../API%20Reference/PropertyList/PropertyList.htm">PropertyList</a>, <A href="../../API%20Reference/PropertyMap/PropertyMap.htm">PropertyMap</a>,
+		<A href="../../API%20Reference/Vector/Vector.htm">Vector</a>,
+        and others), the object is created locally, and its data
+        is not sent to the server. If, however, the object is
+        added to a <strong>Thing</strong> (or to an instance of
+        any exemplar inheriting from <strong>Thing</strong>),
+        then the object's data is sent to the server and from
+        there to any appropriate clients (typically other users
+        in the same room). For example, the following statement causes two
+		things to occur.
+		<p>The vector (an object) is created locally on a client, and when
+		the <A href="../../API%20Reference/Vector/Scale.htm">Scale (Vector)</a> property
+		is reset to its new value, the server is updated with this change.</p>
+		<blockquote>
+            <pre>User.Scale = World.CreateVector(0.5, 0.5, 0.5) </pre>
+        </blockquote>
+    <li>Property lists and property maps are not communicated
+        below the first layer of objects in them. This means
+        that, while it is possible to create a property list that
+        has a property list as one of its elements, none of the
+        information in the inner property list will be used to
+        update the server. For example, you can create two
+        property lists, fill one of them with data, and then add
+        this property list as a property of the empty (first)
+        property list. In that way you have created a property
+        list that has a property list as one of its elements. If
+        you then add the outer property list to a <strong>Thing</strong>,
+        none of the items of the internal property list will be
+        communicated to the server, and then back to the <strong>Thing</strong>.
+        This restriction also applies to property lists
+        containing property maps, and property maps containing
+        either property lists or property maps.</li>
+</ol>
+<H4>Writing Methods for the Client/Server Model</H4>
+  <P>
+   A <EM>server-side</EM> method is a method that runs on the Virtual 
+   Worlds server. Similarly, a <EM>client-side</EM> method runs on a 
+   connected client. Both types of methods can be invoked from either 
+   the server or a client. If you want your Virtual Worlds method to 
+   make changes that all bystanders can see, then you should declare the 
+   method to be a server-side method. If the bystander clients 
+   don't need to be updated with these changes, a client-side method suffices.</P>
+  <P>
+   The advantages of running a client side method are performance (due to 
+   not relying on a server) and the ability to create and work with graphics, 
+   which can only be done on the client. One advantage of a server side method 
+   is the server is only one with all objects. In other words, if you need an 
+   object (like another room) that hasn't been marshalled to the client, you must 
+   use a server method. Another advantage of using a server side method is that 
+   the server can callback on a client method to make it execute on all clients.</P>
+  <P>
+   While a server-side method always runs on the server, and a 
+   client-side method always runs on a client, either type of method can 
+   be invoked from either place. When deciding whether to invoke a 
+   method from the server or a client, remember that unless the method 
+   needs to be run on more than one client, you could slow down the 
+   operation of the world as a result of server-side execution. Because 
+   a method can be invoked anywhere, you must take into consideration 
+   four possible scenarios.</P>
+  <UL>
+   <LI CLASS="mvd-P">
+   <P>
+    Server-side methods invoked&nbsp;from the server<BR>     </P>
+    <LI CLASS="mvd-P">Server-side methods invoked&nbsp;from the client<BR>
+    <LI CLASS="mvd-P">Client-side methods invoked&nbsp;from the server<BR>
+    <LI CLASS="mvd-P">Client-side methods invoke&nbsp;from the 
+  client
+  <P></P></LI>
+   </UL>
+  <P>
+   The ChangeProperties method, shown in the following sample code, 
+   illustrates the execution process for each of these scenarios.</P><BLOCKQUOTE><PRE>Sub ChangeProperties<BR>   this.IsTakeable = True<BR>   this.Count = 3<BR>   this.Name = "Victorian Lamp"<BR>End Sub</PRE></BLOCKQUOTE>
+<H5>Server-Side Method Invoked&nbsp;from the Server</H5>
+  <OL>
+   <LI CLASS="mvd-P">
+   <P>
+    The server executes the ChangeProperties method.<BR>        </P>
+    <LI CLASS="mvd-P">The method alters the properties of the object.<BR>
+    <LI CLASS="mvd-P">For each property change, the server updates the 
+    Virtual Worlds database.<BR>
+    <LI CLASS="mvd-P">Each connected bystander client is 
+  notified of each change.
+  <P></P></LI>
+   </OL>
+  <P>
+   Any process involving a server update to a client will cause an 
+   increase in traffic flow between the server and its bystander 
+   clients. This scenario causes the least amount of traffic.</P>
+<H5>Server-Side Method Invoked on a Client</H5>
+  <OL>
+   <LI CLASS="mvd-P">
+   <P>
+    The client sends a message to the server, requesting that it execute 
+    the ChangeProperties method.<BR>        
+            </P>
+    <LI CLASS="mvd-P">The server executes the ChangeProperties method.<BR>
+    <LI CLASS="mvd-P">The method alters the properties of the object.<BR>
+    <LI CLASS="mvd-P">For each property change, the server updates the 
+    Virtual Worlds database.<BR>
+    <LI CLASS="mvd-P">The server sends a message to each 
+  bystander client, notifying them of each change to the object.
+  <P></P></LI>
+   </OL>
+  <P>
+   This scenario causes a little more traffic because the client must 
+   initiate the process.</P>
+<H5>Client-Side Method Invoked&nbsp;from the Server</H5>
+  <OL>
+   <LI CLASS="mvd-P">
+   <P>
+    The server sends a message to each bystander client requesting it to 
+    execute the ChangeProperties method.<BR>          
+             </P>
+    <LI CLASS="mvd-P">Each bystander client executes the method.<BR>
+    <LI CLASS="mvd-P">On each client, the method alters the properties of 
+    the object.<BR>
+    <LI CLASS="mvd-P">Each client sends three property update requests to 
+    the server, one for each property that changes.<BR>
+    <LI CLASS="mvd-P">Each of these requests causes the server to update 
+    the Virtual Worlds database.<BR>
+    <LI CLASS="mvd-P">Each change to the database causes a 
+  message to be sent to each bystander client, notifying it of the change.
+  <P></P></LI>
+   </OL>
+  <P>
+   This scenario generates the most traffic between the server and its 
+   clients and must be avoided whenever possible.</P>
+<H5>Client-Side Method Invoked on a Client</H5>
+  <OL>
+   <LI CLASS="mvd-P">
+   <P>
+    The client executes the ChangeProperties method.<BR>      </P>
+    <LI CLASS="mvd-P">The method alters the properties of the object.<BR>
+    <LI CLASS="mvd-P">The client notifies the server of each change.<BR>
+    <LI CLASS="mvd-P">For each property change, the server updates the 
+    Virtual Worlds database.<BR>
+    <LI CLASS="mvd-P">The server updates each connected 
+  bystander client.
+  <P></P></LI>
+   </OL>
+  <P>
+   This scenario may generate a little more traffic than the first 
+   scenario because of the necessary updates to the server, but is the 
+   preferred process for invoking a method on a client.</P>
+<H4>Synchronous and Asynchronous Server-Side Methods</H4>
+
+<p><!-- 10/30/98 --></p>
+
+<p>The Virtual Worlds client/server architecture supports both <i>synchronous</i>
+and <i>asynchronous</i> server-side methods. In synchronous operations,
+one computer "waits" for the other one to finish an
+operation (and, possibly, to return data to it). In asynchronous
+operations, a computer tells another to perform an operation but
+does <i>not</i> wait for the operation to complete. For
+performance reasons, it is valuable to operate asynchronously as
+much as possible.</p>
+
+<p>Virtual Worlds supports both synchronous and
+asynchronous client-to-server communications but only
+asynchronous server-to-client communication. In other words,
+when a client-side method invokes a server-side method, Virtual
+Worlds allows this operation to be performed either synchronously
+or asynchronously. When a server-side method invokes a
+client-side method, however, this operation can only be performed
+asynchronously. This is critical because it assures that the server is
+never "tied-up", waiting for a client-side operation.</p>
+
+<p>In most cases, Virtual Worlds controls synchronous and 
+asynchronous server-side operations automatically. World-level methods that 
+return information from the server (for example, logging on to a new Virtual 
+Worlds server) are automatically performed synchronously. Other operations are 
+automatically performed asynchronously. There are cases, however, when it is 
+important to be aware of the difference between synchronous and asynchronous 
+operations. For example, if you write a server-side method that returns a value, 
+the method needs to be identified as a synchronous method so that the client 
+will wait for the value to be returned.&nbsp; You can identify a method as a 
+server-side synchronous method by using the <STRONG>METHOD_SERVER + 
+METHOD_SYNC</STRONG>          
+        
+         
+   
+       
+        
+           
+           
+         flags at
+the time of the method's creation. </p>
+<H5>Example</H5>
+
+<p>In the following example, a function method (that returns a
+list of avatars in the room) is added to the <em>MyObj</em> object
+(assumed to be already present in the world). There are a few points to
+remember:
+<ol>
+<li>The script module that is created in the fourth line using the function in <tt>Show.VBS</tt>
+is meant to be referenced by server-side methods.
+<li>The <i>ShowAvatars</i> method that 
+  is created in the fifth line references the module that was created in the 
+  fourth line, and is meant to run synchronously on the server.</li>                           
+</ol>
+
+<blockquote>
+    <pre>Dim MyObjRef
+Set MyObjRef = User.Container.FindWithin("MyObj")
+Dim ShowAvatarsMod, ShowAvatarsMethod
+Set ShowAvatarsMod = World.CreateScriptModule("ShowAvatarsModule", "SHOW.VBS", MODULE_SERVER)
+Set ShowAvatarsMethod = World.CreateMethod( METHOD_SERVER + METHOD_SYNC, ShowAvatarsMod, "ShowAvatars" )
+MyObjRef.AddMethod "ShowAvatars", ShowAvatarsMethod</pre>
+</blockquote>
+
+<p>Here is a listing of <tt>Show.VBS</tt>, mentioned in the fourth line of
+the preceding code:</p>
+
+<blockquote>
+    <pre>' file Show.VBS
+Function ShowAvatars
+  Set ShowAvatars = This.Container.Avatars
+End Function</pre>
+</blockquote>
+
+<p>Finally, the method would be invoked in the following way in the <strong>Command
+Window</strong>. An object variable (<em>AvatarsList</em>)
+is provided to receive the value returned by this function
+method.</p>
+
+<blockquote>
+    <pre>Dim AvatarsList
+Set AvatarsList = MyObjRef.ShowAvatars</pre>
+</blockquote>
+
+<p>To see the contents of this list, iterate through the list:</p>
+
+<blockquote>
+    <pre>For Each Item In AvatarsList
+  Print "Avatar name: " &amp; Item
+Next</pre>
+</blockquote>
+
+<p>
+              
+       </p>
+</body>
+</html>

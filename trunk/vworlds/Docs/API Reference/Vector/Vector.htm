@@ -1,0 +1,113 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Vector</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> Vector</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>  Data Type</P></td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p><font class=body>Represents&nbsp;the direction of a line in a 
+three-dimensional space. This is a data type specific to Microsoft Virtual 
+Worlds.
+
+<!--How-to section -->
+<H3>  Description of&nbsp;a Vector Object</H3>
+<p>A <STRONG>Vector</STRONG>&nbsp;object usually represents a three-dimensional geometric vector, a directed line segment that extends from the point of origin to its endpoint. The properties of the <b>Vector</b>&nbsp;object in Virtual Worlds contain the values 
+for the x, y, and z 
+coordinates as <STRONG>Float</STRONG>         
+                     values.</p>
+
+<p>              In Virtual Worlds, you can also
+use a vector to represent&nbsp;the&nbsp;attenuation of a&nbsp;Light object, or its color.&nbsp;
+<H3>Creating a Vector</H3><FONT class=body>
+<P>Use the <A 
+href="../World/CreateVector.htm"><B>CreateVector</B></A>     
+    method to 
+create a vector. For example, use the following code to create a vector.</P>
+
+<blockquote>
+<pre class="example">Dim myVector
+</pre>
+<p class="comments">'Create a new vector.
+<pre class="example">
+Set myVector = <b> CreateVector(2.0, 0.0, 0.0)</b></pre>
+</blockquote>
+
+<p>This code creates a vector that begins at the point (0, 0, 0) and ends at the point (2, 0, 0). This vector is two units long and extends in the positive x-axis direction.</p>
+<p>You can use the <A href="Set.htm">Set</A> method to change the&nbsp;values of a vector&nbsp;after the vector has been created. The following code changes the scale of a lamp.</p>
+<p> To run this code: Create an artifact in your world and name it Study Lamp.
+
+<blockquote><pre class="example">
+Dim myLamp</pre>
+<p class="comments">
+'Assign the variable to the study lamp.
+<pre class="example">
+Set myLamp =  User.Container.FindWithin("Study Lamp")
+</pre>
+<p class="comments">'Change the&nbsp;direction of the lamp using the <b>Scale</b> method.
+<pre class="example">
+myLamp.Direction.Set 2, 1, 0
+</pre>
+</blockquote>
+
+<p>The <A href="x.htm">x</A>, <A href="y.htm">y</A>, and <A href="z.htm">z</A> properties provide access to  the individual coordinates of a vector and allow you to adjust a single coordinate on your local computer, as shown in the following code.</p>
+
+<blockquote><pre>
+Dim myLamp
+
+<p class="comments">'Assign the variable to the study lamp.
+<pre class = "example">Set myLamp =  User.Container.FindWithin("Study Lamp")
+</pre>
+<p class="comments">   'Position the lamp.
+<pre class = "example">myLamp.Position.y = 4
+</pre></pre></blockquote>
+<P><STRONG>Important:</STRONG>&nbsp;&nbsp;&nbsp;Setting the value for 
+these&nbsp;properties does not remote, persist, or cause the property-changed handler to be 
+invoked. If you want these changes to persist and remote, etc., use the <A 
+href="Set.htm">Set</A> method to change the vector values.</P>
+<H3>    Properties That Use Vectors</H3><FONT class=body><FONT 
+class=body>
+<P>There are other Virtual Worlds&nbsp;properties that use 
+vectors. They are shown in the following list. 
+<P>
+<TABLE border=0 cellPadding=1 cellSpacing=1 width="75%">
+  <TBODY>
+  <TR>
+    <TD>
+      <P><FONT class=body><A 
+      href="../Exemplars/Thing/Direction.htm">Direction</A></P></FONT></TD>
+    <TD><A href="../Exemplars/Thing/Position.htm">Position</A></TD></TR>
+  <TR>
+    <TD><A 
+    href="../Exemplars/Portal/EntryOrientation.htm">EntryOrientation</A></TD>
+    <TD><A href="../Exemplars/Thing/RotationAxis.htm">RotationAxis</A></TD></TR>
+  <TR>
+    <TD><A href="../Exemplars/Portal/EntryPoint.htm">EntryPoint</A></TD>
+    <TD><A href="../Exemplars/Thing/Scale.htm">Scale</A></TD></TR>
+  <TR>
+    <TD><A 
+    href="../Exemplars/Light/LightAttenuation.htm">LightAttenuation</A></TD>
+    <TD><A href="../Exemplars/Thing/Up.htm">Up</A></TD></TR>
+  <TR>
+    <TD><A href="../Exemplars/Light/LightColor.htm">LightColor</A></TD>
+    <TD></FONT></TD></TR></TBODY></TABLE>
+<P></P>
+
+
+</FONT></font></FONT></FONT> 
+
+</body>
+</html>

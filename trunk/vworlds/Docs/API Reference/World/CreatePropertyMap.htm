@@ -1,0 +1,157 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<Link rel="Stylesheet" href="../APIRef.css">
+<head>
+	<title>CreatePropertyMap</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreatePropertyMap</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+<P>
+<P>
+<P>
+
+<!--Summary of topic-->
+<P>Creates an&nbsp;unordered collection of custom-defined 
+ items. 
+<STRONG>CreatePropertyMap</STRONG> is a member of the <STRONG>World</STRONG> object.      
+          
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>CreatePropertyMap</STRONG>([<EM>varOrphan</EM>])</td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>CreatePropertyMap</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><em>object</em></td>
+		<td>PropertyMap</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An&nbsp;object reference that&nbsp;accesses a <A 
+      href="../PropertyMap/PropertyMap.htm">PropertyMap</A>&nbsp;collection.</td><!--Description-->
+	</TR>
+  <TR>
+    <TD class=boldItal>[varOrphan]</TD>
+    <TD>Variant</TD>
+    <TD>Optional</TD>
+    <TD>A flag that indicates&nbsp;whether the property 
+      list is created within a virtual world or is an orphaned, nested, data 
+      structure. The value is <STRONG>True</STRONG> if the property list is 
+      orphaned. The default is <STRONG>False</STRONG>.</TD></TR>
+
+</TABLE>
+
+ <!--Remarks section-->
+<H3>Return Value</H3>
+<P>This method returns a new <STRONG>PropertyMap</STRONG>      collection.</P>
+<H3>Remarks</H3>
+<P>A property map is an unordered list 
+of keys and values. You access data in a property map by using its key. You can add 
+<STRONG>String</STRONG>, <STRONG>Boolean</STRONG>, <STRONG>Float</STRONG>, 
+<STRONG>Integer</STRONG>, or objects as properties to the 
+property map. However, Microsoft Virtual Worlds does not support arrays. For more&nbsp;details on property maps, refer 
+to the topic <A href="../PropertyMap/PropertyMap.htm">PropertyMap</A>. </P>
+<P>You can create a nested property&nbsp;map in Virtual 
+Worlds. However, such a property&nbsp;map cannot be attached to a world, it must be 
+orphaned.&nbsp;&nbsp;To create a property&nbsp;map that does not reference a 
+world, set the <EM>varOrphan</EM> parameter to 
+<STRONG>True</STRONG>, as shown in the following code sample. The 
+<EM>varOrphan</EM> parameter is set to <STRONG>False</STRONG> by default.</P>
+<blockquote><PRE>Set myPropertyMap = <STRONG>CreatePropertyMap(True)</STRONG></PRE></blockquote>
+<P>Once you have orphaned a property map, you can never 
+attach it to a world. You might want to orphan a&nbsp;property map for use as a generic 
+nested data structure.</P>
+<H3>Example</H3>
+<p>This example creates a 
+<STRONG>PropertyMap</STRONG> collection that is not attached to a world.</p>
+<pre class="example">
+Sub CreateInterworldPassportForUser()
+Dim myInterworldPassports
+Dim myProps
+Dim myID
+Dim myName
+Dim myCountry
+Dim myLastVisit
+Dim myDateOfLastVisit
+Dim myDateOfEntry
+Dim myPointOfEntry
+Dim myIsResident
+</pre>
+<p class="comments">
+'Create interworld passport collection.
+<pre class="example">
+Set myInterworldPassports = <b>CreatePropertyMap(True)</b>
+</pre>
+<p class="comments">'Create properties.
+<pre class="example">
+myInterworldPassports.Property "myPassportID" 
+myInterworldPassports.Property "myName"
+myInterworldPassports.Property "myCountryOfOrigin"
+myInterworldPassports.Property "myLastCountryVisited"
+myInterworldPassports.Property "myDateOfLastVisit"
+myInterworldPassports.Property "myDateOfEntry"
+myInterworldPassports.Property "myPointOfEntry"
+myInterworldPassports.Property "myIsCurrentResident"
+
+Set myProps = User.Contents
+</pre>
+<p class="comments">'Add property values.
+<pre class="example">
+myID = myProps.Find("myPassportID")
+myID = 3000927843
+myName = myProps.Find("myName")
+myName = "Tiki"
+
+myCountry = myProps.Find("myCountryOfOrigin")
+myCountry = "Galatic Center"
+myLastVisit = myProps.Find("myLastCountryVisited")
+myLastVisit = "USA"
+myDateOfLastVisit = myProps.Find("myDateOfLastVisit")
+myDateOfLastVisit = "11/09/1999"
+
+myDateOfEntry = myProp.Find("myDateOfEntry")
+myDateOfEntry = "12/2/1999"
+
+myPointOfEntry = myProp.Find("myPointOfEntry")
+myPointOfEntry = "Interworld Portal 2206"
+myIsCurrentResident = myProp.Find("myIsCurrentResident")
+myIsCurrentResident = True
+
+End Sub</pre>
+
+
+</body>
+</html>

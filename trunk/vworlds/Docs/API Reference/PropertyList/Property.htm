@@ -1,0 +1,161 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Property</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> Property</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of PropertyList</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+Sets or returns the value of the specified property in a 
+<A href="PropertyList.htm">PropertyList</A> collection. The specified 
+property is indicated by the <EM>index</EM>      
+parameter.&nbsp;The collection&nbsp;is zero-based. <STRONG>Property</STRONG>      
+    is a read/write <STRONG>Variant</STRONG>.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><EM>object</EM>.<B>Property</B>(<EM>index</EM>)</TD></TR></TABLE></P>
+<P>To return the property:
+<table class="backlight">  <TR>
+    <TD><EM>object</EM>.<b>Property</b>(<EM>index</EM>) =  
+    <EM>variantValue</EM></TD><!--syntax statement --></TR></table>
+
+
+<!--Parameters table--></P>
+<p>The <b>Property</b> property syntax has these parts:
+<TABLE class=backlight><!--Parameters table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Parameters </TD>
+    <TD>Type </TD>
+    <TD>Use </TD>
+    <TD>Description </TD></TR></THEAD><!--Parameters table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object </TD>
+    <TD>
+      <P> PropertyList</P></TD><!--Parameter name-->
+    <TD>Required</TD><!--Type-->
+    <TD>   An object&nbsp;variable that accesses a 
+      <B>PropertyList</B>&nbsp;collection. </TD><!--Description--></TR>
+  <TR>
+    <TD class=boldItal>index </TD>
+    <TD>Long </TD><!--Parameter name-->
+    <TD>Required </TD><!--Type-->
+    <TD>The index number of the property within a 
+      <B>PropertyList</B>&nbsp;collection. </TD><!--Description--></TR>
+  <TR>
+    <TD class=boldItal>variantValue </TD>
+    <TD>Variant&nbsp; </TD><!--Parameter name-->
+    <TD>Required </TD><!--Type-->
+    <TD>A variant that can represent any of the variant 
+      types, except an array.&nbsp;&nbsp; 
+</TD><!--Description--></TR></TABLE></p>
+<H3>Remarks</H3>
+<P>A property list is a collection of items organized by an 
+index number.&nbsp;If you want to add a property to an existing property list, you use 
+the <A href="Add.htm">Add</A>      method, as shown in the following code.
+<blockquote><PRE>
+Dim myCDs
+Set myCDs = CreatePropertyList
+
+myCDs.<STRONG>Add Jazz</STRONG>  
+</PRE></blockquote>
+<P>The previous code added a property named "Jazz" to the 
+"myCDs" property map. 
+<P>           If&nbsp;you want to access an individual property from a property list, you must use 
+the <b>Property</b>&nbsp;property to gain access to an individual 
+item. The items in a property list are indexed from 0&nbsp;through <EM>n</EM> - 1. </P>
+<P><B>Note:</B>&nbsp;&nbsp; The <A href="Count.htm">Count</A> property of the 
+<B>PropertyList</B>&nbsp;and <B>PropertyMap</B> collections starts its count 
+at&nbsp;1 instead of 0, thus&nbsp;resulting in a correct count without 
+subtracting&nbsp;1 from the count. The following code returns the correct number 
+of items. 
+<BLOCKQUOTE><PRE>Trace myCDs.Count</PRE></BLOCKQUOTE>
+<P>For example, suppose you have an existing property list named "VegiGarden" 
+that contains a list of all of the items growing in the garden. Among those 
+items is an item named "Carrots" with an index of 3. The following statements 
+show how you can access that item using its index number.</P>  
+<BLOCKQUOTE><PRE>
+Dim myCarrots
+
+myCarrots = VegiGarden.<STRONG>Property(3)</STRONG></B></PRE></BLOCKQUOTE>
+<P>However, you cannot use the index number with the collection name as you can in Microsoft Visual Basic. Thus, the 
+following code does not work in Virtual Worlds.
+<BLOCKQUOTE>
+<PRE>Dim myCarrots
+
+<FONT color="#009900">'This code does not work.</FONT>
+myCarrots = VegiGarden(3)
+</PRE></BLOCKQUOTE>
+<P> 
+<P>There is another way to access individual items. You can use the <A href="Find.htm">Find</A> 
+method of the <STRONG>PropertyList</STRONG> 
+   collection to 
+access items by the value of the property in the property list.
+<P><STRONG>Note:</STRONG> &nbsp;&nbsp;&nbsp;Because 
+the properties of a property list&nbsp;can be of any type, you can use the Visual Basic 
+<STRONG>Set</STRONG> keyword to&nbsp;reference properties that are 
+Automation objects (formerly OLE Automation objects). Do not use the 
+<STRONG>Set</STRONG> statement&nbsp;if the property type is of 
+<STRONG>Integer</STRONG>, <STRONG>Float</STRONG>, <STRONG>String</STRONG>, 
+<STRONG>Variant</STRONG>, <STRONG>Boolean</STRONG>, or other non-Automation 
+types.
+<P><STRONG>Note:</STRONG>&nbsp;&nbsp; Although the 
+<STRONG>Variant</STRONG> type normally takes an array, Virtual Worlds does not 
+support arrays as a <STRONG>Variant</STRONG> type for property lists.
+<!--Example section-->
+<H3>Example</H3>
+<P> This example creates several variants, adds them to the property list, iterates through a property list, and traces the value of each property to the Command Window in Virtual Worlds.</P>
+
+<pre class="example">
+Sub ListCDs()
+Dim myCDs, Vocal_Jazz, Saxaphone, Classical  
+Dim i
+</pre>
+<p class="comments">'Create a new property list.
+<pre class="example">
+Set myCDs = CreatePropertyList
+</pre>
+<p class="comments">'Add values to the variant properties.
+<pre class="example">
+Vocal_Jazz = "Ella Fitzgerald"
+Saxaphone = "Louis Armstrong"
+Classical = "Bach"
+</pre>
+<p class="comments">'Add properties to the new list.
+<pre class="example">
+myCDs.Add Vocal_Jazz
+myCDs.Add Saxaphone
+myCDs.Add Classical
+</pre>
+<p class="comments">'Iterate through the list and print each property name to the Command Window.
+<pre class="example">
+For i = 0 To  myCDs.Count - 1
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myCDs.<b>Property(i)</b>
+Next
+
+End Sub</pre><PRE class=example>&nbsp;</PRE>
+
+
+</body>
+</html>

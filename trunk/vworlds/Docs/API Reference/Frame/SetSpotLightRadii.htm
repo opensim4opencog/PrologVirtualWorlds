@@ -1,0 +1,107 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SetSpotLightRadii</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetSpotLightRadii</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets spotlight parameters. <b>SetSpotLightRadii</b> is a member of the 
+<b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetSpotLightRadii</b>&nbsp;<i>nIndex, fUmbra, 
+		fPenumbra</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetSpotLightRadii</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nIndex</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The index of the light.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fUmbra</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The angle of the umbra cone in radians.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fPenumbra</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The angle of the penumbra cone in radians.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>A spotlight emits a cone of light, illuminating only those objects that lie within the
+cone. The cone produces light of two degrees of intensity; a central brightly-lit section
+(the <i>fUmbra</i>) acts as a point source, and an outer dimly lit section (the <i>fPenumbra</i>)
+that merges with the surrounding deep shadow.</p>
+
+<p>The <i>fPenumbra</i> cone angle must be greater than or equal to the <i>fUmbra</i>
+cone angle. If the <i>fPenumbra</i> cone angle is less than the <i>fUmbra</i> cone
+angle, the <i>fUmbra</i> cone angle will be reset to be equal to the <i>fPenumbra</i>
+cone angle. Furthermore, if the <i>fUmbra</i> cone angle is greater than the <i>fPenumbra</i>
+cone angle, the <i>fPenumbra</i> cone angle will be reset to be equal to the <i>fUmbra</i>
+cone angle. Both angle measures are in radians.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.SetSpotLightRadii 99, .5, .4</pre>
+&nbsp;
+
+
+</body>
+</html>

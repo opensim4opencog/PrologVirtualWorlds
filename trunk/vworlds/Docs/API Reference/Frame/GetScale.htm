@@ -1,0 +1,110 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetScale</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetScale</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Gets the scale of the frame. <b>GetScale</b> is a member of the 
+<b>Frame</b> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetScale</b>&nbsp;<i>pvwfRef, pfScaleX, 
+		pfScaleY, pfScaleZ</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetScale</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvwfRef</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>The frame for which you want to retrieve the scale.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pfScaleX</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The x-component of the scale factor.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pfScaleY</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The y-component of the scale factor.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pfScaleZ</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The z-component of the scale factor.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Set the <b>Frame</b> parameter to <b>Nothing</b> if you want the output values in coordinates
+relative to the world's origin.  Set the <b>Frame</b> parameter to the parent of the calling frame
+to produce output values relative to the parent frame's origin.</P>
+
+<p>The second, third, and fourth parameters of <b>GetScale</b> are <i>output</i> 
+parameters. After this method executes, these parameters will be overwritten 
+with new values. Specifically, after this method has been called, the second, 
+third, and fourth parameters will be set to the components of the scale for the 
+invoking frame (on the x, y, and z parameters). &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.GetScale ParentFrame, xScale, yScale, zScale</pre>
+&nbsp;
+
+
+</body>
+</html>

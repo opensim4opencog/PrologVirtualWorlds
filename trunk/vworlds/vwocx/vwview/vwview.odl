@@ -1,0 +1,82 @@
+// VWView.odl : type library source for OLE Control project.
+
+// This file defines the base CVWView ole control and its Event and Dispatch Interfaces
+// 
+// The CVWViewCtrl serves as the parent class for many of the other vworlds controls.
+// Its functionality allows you to set the VWClient and encompasses the event sinks
+// for IVWObjectSite and IVWClientSite.
+// 
+// This control is used as the parent class of controls in the \vwocx\uictrl subdirectory:
+//		CHistoryCtrl, CAvatarListCtrl, CVWCliocxCtrl, CRoomCtrl, CSelfCtrl, CScriptCtrl,
+//		CVWSoundCtrl, CUsersCtrl
+// It is also used by the CVWUIView control defined in the \vwcommon directory, and that
+// control in turn is the parent class for the  CVWRenderviewCtrl and some of the 
+// object explorer controls like: CPropEdCtrl, CThingTreeCtrl
+
+
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (VWView.tlb) that will become a resource in
+// VWView.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(812E6300-0C8C-11D0-8A96-00A0C9082583), version(1.0),
+  helpstring("VWView OLE Control module"), control ]
+library VWVIEWLib
+{
+	importlib(STDOLE_TLB);
+	importlib(STDTYPE_TLB);
+
+	//  Primary dispatch interface for CVWViewCtrl
+
+	[ uuid(812E6301-0C8C-11D0-8A96-00A0C9082583),
+	  helpstring("Dispatch interface for VWView Control"), hidden ]
+	dispinterface _DVWView
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CVWViewCtrl)
+			[id(DISPID_READYSTATE), readonly] long ReadyState;
+			[id(1)] IDispatch* VWClient;
+			//}}AFX_ODL_PROP
+
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CVWViewCtrl)
+			//}}AFX_ODL_METHOD
+
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+	};
+
+	//  Event dispatch interface for CVWViewCtrl
+
+	[ uuid(812E6302-0C8C-11D0-8A96-00A0C9082583),
+	  helpstring("Event interface for VWView Control") ]
+	dispinterface _DVWViewEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+			// NOTE - ClassWizard will maintain event information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_EVENT(CVWViewCtrl)
+			//}}AFX_ODL_EVENT
+	};
+
+	//  Class information for CVWViewCtrl
+
+	[ uuid(812E6303-0C8C-11D0-8A96-00A0C9082583),
+	  helpstring("VWView Control"), control ]
+	coclass VWView
+	{
+		[default] dispinterface _DVWView;
+		[default, source] dispinterface _DVWViewEvents;
+	};
+
+
+	//{{AFX_APPEND_ODL}}
+};

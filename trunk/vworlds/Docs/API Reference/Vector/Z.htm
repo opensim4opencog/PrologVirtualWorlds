@@ -1,0 +1,152 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Z (Vector)</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Z (Vector)</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Vector</td>
+	</tr>
+</table>
+<!--Summary of topic-->
+<p>Sets or returns the z-coordinate value for a <A 
+href="Vector.htm"><STRONG>Vector</STRONG></A> data 
+type.&nbsp;<STRONG>Z (Vector)</STRONG> is a read/write 
+<STRONG>Float</STRONG>.&nbsp;      
+          
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>z = 
+      </STRONG><EM>VectorValue</EM></td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table--></P>
+<P>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><EM>object</EM>.<STRONG>z</STRONG></TD><!--syntax statement --></TR></TABLE></P>
+<P>The&nbsp;<STRONG>z</STRONG> property syntax has these parts: 
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Vector</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td> An object reference to a 
+      <STRONG>Vector</STRONG>  object.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">VectorValue</td>
+		<td>Float</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An expression that evaluates to a z-coordinate 
+      that is a <STRONG>Float</STRONG>       
+      .</td><!--Description-->
+	</TR>
+
+</TABLE>
+
+ <!--Remarks section--></P>
+<H3>Remarks</H3>
+
+<!--Insert Remarks here-->
+<P>The <STRONG>z</STRONG> property 
+returns the&nbsp;z-coordinates for the following properties that use vectors: </P>
+<P>
+<TABLE border=0 cellPadding=1 cellSpacing=1 width="75%">
+  
+  <TR>
+    <TD>
+      <P><FONT class=body><A 
+      href="../Exemplars/Thing/Direction.htm">Direction</A></P></FONT></TD>
+    <TD><A href="../Exemplars/Thing/Position.htm">Position</A></TD></TR>
+  <TR>
+    <TD><A 
+    href="../Exemplars/Portal/EntryOrientation.htm">EntryOrientation</A></TD>
+    <TD><A href="../Exemplars/Thing/RotationAxis.htm">RotationAxis</A></TD></TR>
+  <TR>
+    <TD><A href="../Exemplars/Portal/EntryPoint.htm">EntryPoint</A></TD>
+    <TD><A href="../Exemplars/Thing/Scale.htm">Scale</A></TD></TR>
+  <TR>
+    <TD><A 
+    href="../Exemplars/Light/LightAttenuation.htm">LightAttenuation</A></TD>
+    <TD><A href="../Exemplars/Thing/Up.htm">Up</A></TD></TR>
+  <TR>
+    <TD><A href="../Exemplars/Light/LightColor.htm">LightColor</A></TD>
+    <TD></FONT></TD></TR></TABLE></P>
+<P>The vector coordinates become the end point of a line which originates at the 
+center of the object.</P>
+<P><STRONG>Important:</STRONG>&nbsp;&nbsp;&nbsp;Setting the value for the <STRONG>z</STRONG> property of a vector directly 
+does not remote, persist, or cause the property-changed handler to be invoked on 
+the vector. If you want these changes 
+to persist and remote, etc., use the <A href="Set.htm">Set</a> method 
+to change the vector values.</P>
+<H3>Example</H3>
+<!--Example text--><P><FONT class=body>
+This example demonstrates&nbsp;the use of the <STRONG>z</STRONG> property with various data types.</FONT></P>
+<pre class="example">Dim myVector</pre>
+<p class="comments">
+'Create a  vector to establish coordinates for <EM>x, y,</EM> and <EM>z</EM>.<br>
+'Retrieve the z-coordinate.
+<pre class="example">
+Set myVector = CreateVector(10, 5, 3)
+Trace myVector.<b>z</b>
+</pre>
+<p class="comments">'Establish the z-coordinates independently of a vector object.
+<pre class="example">
+Dim myChair
+
+Set myChair = World.CreateInstance("Chair", "Artifact", User.Container)
+</pre>
+<p class="comments">'The following changes will appear on your local computer.
+<pre class="example">
+myChair.Direction.<STRONG>z</STRONG> = 2
+myChair.Position.<STRONG>z</STRONG> = 4
+myChair.RotationAxis.<STRONG>z</STRONG> = 1
+myChair.Up.<STRONG>z</STRONG> = 0
+</pre>
+<p class="comments">'This next code block retrieves the 
+values for the <br>'z-coordinate independently of a vector object.
+<pre class="example">
+Dim myChairZ
+
+Trace myChair.Scale.<STRONG>z</STRONG>
+Trace myChair.Up.<STRONG>z</STRONG>
+myChairZ = myChair.Position.<STRONG>z</STRONG>
+</pre>
+
+
+</body>
+</html>

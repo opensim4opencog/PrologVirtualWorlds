@@ -1,0 +1,164 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<Link rel="Stylesheet" href="../APIRef.css">
+<head>
+	<title>RemoveAt</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>RemoveAt</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of PropertyList</td>
+	</tr>
+</table>
+<P>Removes a collection item from a specific position within 
+a property list. <STRONG>RemoveAt</STRONG>        
+  is a member of <A href="PropertyList.htm">PropertyList</A> collection.</P>
+
+
+<!--Summary of topic-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>RemoveAt</STRONG>&nbsp;<EM>index</EM></td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>RemoveAt</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>PropertyList</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An expression that returns a 
+      <STRONG>PropertyList</STRONG> collection.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">index</td>
+		<td>Long</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>The index number of the item in the 
+      <STRONG>PropertyList</STRONG> collection.</td><!--Description-->
+	</TR>
+
+</TABLE>
+<H3>Return Value</H3>
+<P>This method does not return a value.
+ <!--Remarks section-->
+<H3>Remarks</H3>
+<P>The execution of this method affects the index number 
+of the collection and the <A href="Count.htm">Count</A> property. All properties at higher indexes 
+are shifted down one position. For example, if a property list initially has 
+properties at indexes 0, 1, 2, and 3, and the property        
+             
+             
+              
+ at index 2 is removed, then the property at index 3 will be shifted 
+down to index 2.
+<P>The <strong>Count</strong> property 
+is adjusted to match the total count of properties in the property 
+list.&nbsp;Therefore, you may want to avoid using the <strong>Count</strong>
+ property as an iteration counter. If you include an 
+increment or decrement method (such as the <A href="Add.htm">Add</A> method) inside a loop, the 
+<STRONG>Count</STRONG> property will be changed within your 
+loop and an iteration counter depending on the value may not be accurate.&nbsp;
+<P><STRONG>Note:</STRONG>&nbsp;&nbsp;&nbsp;Attempting to remove an item that 
+does not exist in the collection results in a scripting error.</P>    
+                    
+ 
+<P>
+<!--Insert Remarks here-->
+
+<H3>Example</H3>This example 
+illustrates how executing the <strong>RemoveAt</strong> method changes the index and count 
+of the remaining items in the collection.
+</P>
+<PRE class="example">
+Sub CheckCollection()
+Dim myOakTree, myFirTree, mySpruceTree, myMapleTree, myBirchTree
+Dim myTrees
+Dim myCount, myIndex, i
+</PRE>
+<p class="comments">'Establish the link to the object in the virtual world.
+<pre class="example">
+Set myOakTree = CreateInstance("OakTree", "Artifact", User.Container)
+Set myFirTree = CreateInstance("FirTree", "Artifact",  User.Container)
+Set mySpruceTree = CreateInstance("SpruceTree", "Artifact", User.Container)
+Set myMapleTree = CreateInstance("MapleTree", "Artifact", User.Container)
+Set myBirchTree = CreateInstance("BirchTree", "Artifact",  User.Container)
+</pre>
+<p class="comments">'Create the collection.
+<pre class="example">
+Set myTrees = CreatePropertyList
+</pre>
+<p class="comments">'Establish the link for the object to the collection.
+<pre class="example">
+myTrees.Add myOakTree
+myTrees.Add myFirTree
+myTrees.Add mySpruceTree
+myTrees.Add myMapleTree
+myTrees.Add myBirchTree
+</pre>
+<p class="comments">'Get the count of items in the collection.
+<pre class="example">
+myCount = myTrees.Count
+</pre>
+<p class="comments">'Display the original collection list.<br>
+'The variable "i" represents the index number of each item
+	 in the collection.
+<pre class="example">
+For i = 0 To myCount - 1
+&nbsp;&nbsp;&nbsp; Trace i &amp; " " &amp; myTrees.Property(i).Name
+Next
+</pre>
+<p class="comments">'Display the original count of items in the collection.
+<pre class="example">
+Trace myTrees.Count</pre>
+<p class="comments">'Remove the fir tree from the collection.
+<pre class="example">
+myTrees.<strong>RemoveAt 1</strong>
+</pre>
+<p class="comments">'Get the new count of items in the collection.
+<pre class="example">
+myCount = myTrees.Count
+</pre>
+<p class="comments">'Display the collection again.
+<pre class="example">
+For i = 0 To myCount - 1
+&nbsp;&nbsp;&nbsp; Trace i &amp; " " &amp; myTrees.Property(i).Name
+Next
+</pre>
+<p class="comments">'Display the new count of items in the collection.
+<pre class="example">
+Trace myTrees.Count
+
+End Sub</pre>
+
+
+</body>
+</html>

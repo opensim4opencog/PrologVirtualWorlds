@@ -1,0 +1,113 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>ToAscii</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ToAscii</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+ Returns&nbsp;the name of an object as an&nbsp;ASCII string. 
+<STRONG>ToAscii</STRONG> is a member of all objects 
+in Microsoft Virtual Worlds.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>ToAscii</STRONG></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The <STRONG>ToAscii</STRONG> method syntax has these parts: 
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name-->object</td>
+		<td><!--Type-->Thing</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description--> 
+      An object reference that&nbsp;can access any object in Virtual 
+  Worlds.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section --></P>
+<H3>Return Value</H3>
+<p>This method returns a string that corresponds to the 
+name of the specified object.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>When working with <A href="../PropertyList/PropertyList.htm">PropertyList</A> and <A href="../PropertyMap/PropertyMap.htm">PropertyMap</A> objects, 
+you can use the <STRONG>ToAscii</STRONG>           
+ method to return the number of objects in the collection as a string. 
+<blockquote><PRE>Dim myTeaList
+Dim myTeaCount
+
+Set myTeaList = CreatePropertyList
+
+myTeaList.Add "Earl Grey"
+myTeaList.Add "Orange Spice"
+myTeaList.Add "English Breakfast"
+myTeaCount = myTeaList.<b>ToAscii</b>
+
+Print "myTeaList has " &amp; myTeaCount &amp; "."
+</PRE></blockquote>
+<p>The variable "myTeaCount" now contains the value "3 
+properties" and prints "myTeaList has 3 properties." to the Command Window.
+<P>        
+             If you just want the number of items in the collection 
+and you don't care if the value is a <STRONG>Long</STRONG>, you can use the <A href="../PropertyList/Count.htm">Count</A> property instead of the 
+<STRONG>ToAscii</STRONG> method.
+<!--Example section-->
+<H3>Example</H3>
+<p>This example takes a vector (the direction of a portal), and uses the <b>ToAscii</b> method to return the direction as a string.
+<p>To run this example: You must have a portal existing in your world. Substitute the name of the portal in your world for the one in the example.</p>
+<pre class="example">
+Sub DirectionToString()
+Dim myPortal
+Dim myDirection
+
+Set myPortal = User.Container.FindWithin("Portal to Home")
+
+myDirection = myPortal.Direction.<b>ToAscii</b>
+
+Print myDirection
+
+End Sub
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Scale (Vector)</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Scale (Vector)</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Vector</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>The <b>Scale</b> method multiplies the value of a <a href="Vector.htm">Vector</a> by the <b>Float</b> value of the <i>scale</i> parameter. <b>Scale</b> is a member of the <b>Vector</b> data type.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Scale</b> <i>scale</i>, <i>pvres</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Scale</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Vector</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">scale</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>A <b>Float</b> value that the invoking object is multiplied by.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvres</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>A <b>Vector</b> variable that is assigned the product of the <b>Scale</b> method.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Scale</b> method provides a way to a vector by a given amount. This method multiplies the value of the first parameter (<b>scale</b>) by the value of the calling vector, and then assigns the product to the second parameter (<b>pvres</b>). The <b>Vector</b> that invokes this method is not changed. 
+
+<p>The <i>pvres</i> parameter must be instantiated as a <b>Vector</b> object before it is sent as a parameter.
+
+<p><b>Tip</b>:&nbsp;&nbsp;&nbsp;Remember that the value of the <i>scale</i> parameter is <i>multiplied</i> by the value of the calling parameter. So, if the value of the calling parameter is (0, 0, 0), the product of the multiplication will always be (0, 0, 0).
+
+
+<!--Example section-->
+<H3>Examples</H3>
+<p>The first example creates two vectors, and then scales the value of the invoking vector and assigns the result to the second parameter. 
+<br><br>
+
+<pre class="example">Dim myVector1
+Dim myVectorResult
+</pre>
+<p class=comments>'Create the vectors.
+<pre class="example">Set myVector1 = World.CreateVector(1, 1, 1)
+Set myVectorResult = World.CreateVector(0, 0, 0)
+</pre>
+<p class=comments>'Call the <b>Scale</b> method and scale a vector.
+<pre class="example">myVector1.<b>Scale 4.1, myVectorResult</b></pre>
+<p class=comments>'Display the result in the Command Window.
+<pre class="example">Trace myVectorResult.Length
+</pre>
+<p>Example 2
+<p>The second example adjusts the size of the invoking object by assigning the result of the <b>Scale</b> method to that object.<br><br>
+<pre class="example">Dim myVector1</pre>
+<p class=comments>'Create the vector.
+<pre class="example">Set myVector1 = World.CreateVector(2, 2, 2)
+</pre>
+<p class=comments>'Call the <b>Scale</b> method and multiply the values, 
+<br>'assigning the result to the calling vector.
+<pre class="example">myVector1.<b>Scale 3.6, myVector1</b></pre>
+<p class=comments>'Display the result in the Command Window.
+<pre class="example">Trace myVecResult.Length</pre>
+
+<p class=comments>
+<div class=comments></div>
+
+
+</body>
+</html>

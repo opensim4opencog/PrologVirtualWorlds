@@ -1,0 +1,152 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnTell</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnTell</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called in response to the <b>Tell</b>
+event, which occurs when a <strong>Thing</strong> object has said
+something to another <strong>Thing</strong> object, using either
+of the communication methods <strong>Say</strong>
+or <strong>Emote</strong>.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Function </b><b>OnTell(<i>Speaker, Hearers, Text, Mode</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Function</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnTell</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+		<TR>
+		<td class="boldItal">Speaker</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>A reference to the <b>Thing</b> that is speaking.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">Hearers</td>
+		<td>PropertyList</td>
+		<td>Required</td>
+		<td>The list of <b>Things</b> being spoken to.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">Text</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The text to be said or emoted.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">Mode</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The mode of communication (See Remarks.)</td>
+	</TR>
+</TABLE>
+<p>The <b>Tell</b> event supports these additional handlers:
+<TABLE class="backlight" STYLE="WIDTH:75%">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Event Handler</td>
+			<td>Description</td>
+
+		</TR>
+	</thead>
+<tr class="line" ><td colspan=100></td></tr>
+	<TR>
+		<td class="boldItal">OnPeerTell</td>
+		<td>The handler for other objects in the same <a href="../Thing/Container.htm">Container</a>.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContainerTell</td>
+		<td>The handler for the <a href="../Thing/Contents.htm">Contents</a> of the object.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContentTell</td>
+		<td>The handler for the object's container.</td>
+		<td></td>
+		<td></td>
+	</TR>
+</TABLE>
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+<p>Returns the (possibly modified) text that has been
+communicated, with a <b>String</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>This method is not normally called by the user; it responds to
+an internal event that occurs in Virtual Worlds whenever someone
+whispers, says, or emotes a message.
+
+<p>The <em>Mode</em> parameter can have two values: 0 to <strong>Say</strong>
+something, and 1 to <strong>Emote</strong> something. For either
+of these modes, OnPeerTell is sent only to other objects within the same container as the invoking object. </p>
+
+<p>There is a suite of <em>On*Tell</em> methods, which includes <strong>OnTell</strong>,
+<em>OnContainerTell</em>, <em>OnContentTell</em>, and <em>OnPeerTell</em>.
+<strong>OnTell</strong>, <em>OnContentTell</em>, and <em>OnContainerTell</em>
+can all return a modified version of the string being &quot;told.&quot; <em>OnPeerTell</em> cannot. For more information on event handlers, see the <a href="Event%20Handlers.htm">Event Handlers</a> overview.
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;To ensure that the internal procedures that are tied to each event handler are invoked, you must call <b>InvokeSuperMethod</b> within the overridden subroutine. For more information on using this method, see the <a href="../Thing/InvokeSuperMethod.htm">InvokeSuperMethod</a> topic.
+<!--Example section-->
+<H3>Example</H3>
+
+<pre class="example">
+Function OnTell(Speaker, Hearers, Text, Mode)
+&nbsp;&nbsp;&nbsp;&nbsp;Trace Speaker.Name &amp; &quot; said &quot; CStr(Text)
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod(Array(Speaker, Hearers, Text, Mode))
+
+End Function
+</pre>
+
+</body>
+</html>

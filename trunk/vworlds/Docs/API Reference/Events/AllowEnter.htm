@@ -1,0 +1,99 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>AllowEnter</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AllowEnter</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called on a container when an
+object is about to enter a container with <b>MoveInto</b>.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>AllowEnter(<i>pThing</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>AllowEnter</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">pThing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object seeking permission to enter the container.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a Boolean.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>Returns a <strong>Boolean</strong> flag indicating whether to allow entry of an object
+into the calling object's contents. <strong>True</strong> will be returned if the object
+is allowed to enter, and <strong>False</strong> otherwise.
+<p>This method is not normally called by the user; it responds to an internal event that
+occurs in Virtual Worlds when <em>NewThing</em> attempts to move into the contents of a
+new container with <strong>MoveInto</strong>.
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;To ensure that the internal procedures that are tied to each event handler are invoked, you must call <b>InvokeSuperMethod</b> within the overridden subroutine. For more information on using this method, see the <a href="../Thing/InvokeSuperMethod.htm">InvokeSuperMethod</a> topic.
+<!--Example section-->
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">Function AllowEnter(NewThing)
+&nbsp;&nbsp;&nbsp;&nbsp;Dim MoveOK
+&nbsp;&nbsp;&nbsp;&nbsp;MoveOK = This.InvokeSuperMethod(NewThing)
+&nbsp;&nbsp;&nbsp;&nbsp;AllowEnter = MoveOK 
+End Function</pre>
+<!--Example text-->
+&nbsp;
+
+
+
+</body>
+</html>

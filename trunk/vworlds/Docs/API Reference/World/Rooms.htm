@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Rooms</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Rooms</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>A <a href="../PropertyList/PropertyList.htm">PropertyList</a> containing a list of rooms that have been added to a <a href="World.htm">World</a>. <b>Rooms</b> is a read-only <b>PropertyList</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>World</i>.<b>Rooms</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Rooms</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">World</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An instance of the <b>World</b> object.</td>
+	</TR>
+	
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Rooms</b> property is a zero-based property list that contains the list of rooms that have been added to a world. The <b>Rooms</b> property is automatically updated when a room is added. Rooms are added to the list in the order that they are created. 
+
+<p>Note:&nbsp;&nbsp;&nbsp;This property list can contain a stub, which can lead to an error. For more information on preventing errors related to stubs, see the <a href="../Thing/IsStub.htm">IsStub</a> topic.
+<!--Example section-->
+<H3>Example</H3>
+This example uses the <b>Rooms</b> property to display the value of the <b>Name</b> property of the first room in the list.<br><br>
+<pre class=example>Trace World.Rooms.Property(0).Name
+
+</pre>
+
+</body>
+</html>

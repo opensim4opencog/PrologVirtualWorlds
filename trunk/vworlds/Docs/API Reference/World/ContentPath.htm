@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>ContentPath</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ContentPath</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>String</b> that holds the path of the directory
+that contains local content. <b>ContentPath</b> is a read-only <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>ContentPath</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>ContentPath</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This property is read-only; it cannot be set by anyone. </p>
+
+<p>Local content includes geometry files, texture map files,
+scripts, and other basic building blocks of the world. </p>
+
+
+
+<p>This property is initialized with the value in the ContentPath
+entry of the Windows Registry (the subkey is: 
+<b>\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\V-Worlds\Paths</b>).
+&nbsp;
+
+<p>The default path to this directory is:</p>
+
+<pre>C:\Program Files\Microsoft Virtual Worlds\Local Content\.</pre>
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get the <b>ContentPath</b> value:</p>
+
+<pre><tt>   Result = World.ContentPath</tt></pre>
+&nbsp;
+ 
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>PropertyMap</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> PropertyMap</h2></td>
+		<td class="space"></td>
+		<td class="collectionpic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Collection</P></td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>A <STRONG>PropertyMap</STRONG> object contains an unordered list of 
+paired keys and values, known as 
+<EM>key/value pairs</EM>.&nbsp;Once you have inserted a 
+key/value pair (element) into&nbsp;a map, you can efficiently retrieve or delete 
+the pair using the key to access it. You can also iterate over all the elements 
+in the map. </P>
+<P>A key/value pair maps unique keys to values. The key is a string that 
+represents the name of the property in the property map. The value is the 
+contents of the property. A property map uses the string that makes up the key 
+instead of an index number to access the value of each property. </P>  
+  
+<H3>Using the Object</H3>
+<p> You can create an unordered list of 
+pairs with the <STRONG>PropertyMap</STRONG>      
+                 object&nbsp;by using the <A 
+href="../World/CreatePropertyMap.htm"><STRONG>CreatePropertyMap</STRONG></A> method.
+<BLOCKQUOTE><PRE>Dim mySpanishNumbers
+Set mySpanishNumbers = World.<STRONG>CreatePropertyMap</STRONG></PRE></BLOCKQUOTE>
+<P>   After you create a&nbsp;property map, you can add key/value pairs to it 
+using the <A href="../PropertyList/Property.htm"><STRONG>Property</STRONG></A> 
+property. In the following 
+example, the key/value pairs are English-Spanish word pairs for the first three 
+numbers. For example, the key "three" is paired with the value "tres".</P>
+<BLOCKQUOTE><PRE>mySpanishNumbers.<STRONG>Property("one")</STRONG> = "uno"
+mySpanishNumbers.<STRONG>Property("two")</STRONG> = "dos"
+mySpanishNumbers.<STRONG>Property("three")</STRONG> = "tres"</PRE></BLOCKQUOTE>
+<P>    To see the number of items in a property map, you can&nbsp;use the 
+<A href="../PropertyList/Count.htm"><STRONG>Count</STRONG></A> property.
+<blockquote><PRE>Total = mySpanishNumbers.<STRONG>Count</STRONG> </PRE></blockquote>
+<P>You can use the following code to iterate&nbsp;through 
+the values of 
+all key/value pairs stored in the property map.
+<blockquote><PRE>Dim myKey
+For Each myKey In mySpanishNumbers
+&nbsp;&nbsp;&nbsp;&nbsp;Print myKey
+Next
+</PRE></blockquote>
+<P>You can remove items from a property map using the <A href="../PropertyList/Remove.htm">Remove</A> or 
+<A href="../PropertyList/RemoveAll.htm">RemoveAll</A>&nbsp;methods.&nbsp; </P>
+<blockquote><pre>
+mySpanishNumbers.<b>RemoveAll</b>
+</pre></blockquote>
+</body>
+</html>

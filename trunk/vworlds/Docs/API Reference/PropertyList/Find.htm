@@ -1,0 +1,157 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Find</title>
+	
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> Find</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of PropertyList</td>
+	</tr>
+</table><!--Summary of topic-->
+<P>Returns the index number of an item in a property list. 
+<STRONG>Find</STRONG>           is a member 
+of the <A href="PropertyList.htm">PropertyList</A> collection.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>Find</STRONG>(<EM>var</EM>)</td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>Find</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>PropertyList</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>  An object reference&nbsp;to a 
+      <STRONG>PropertyList</STRONG> collection.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">var</td>
+		<td>Variant</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>
+      <P>      The&nbsp;item that you want to find in&nbsp;the 
+      <STRONG>PropertyList</STRONG> collection.</P>
+      <P><STRONG>Note:</STRONG>   The value for the <EM>var</EM> parameter must 
+      exactly match the value for the item in the collection. For example, if 
+      you created an item as an integer, you must search for it as an 
+      integer, not as a string.</P></td><!--Description-->
+	</TR>
+
+</TABLE>
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>Returns the index number of the item in the specified 
+<STRONG>PropertyList</STRONG> collection as a 
+<STRONG>Long</STRONG>.
+<H3>Remarks</H3>
+
+<P>The <STRONG>Find</STRONG>  method is a tool to help 
+you locate a specific item in a property list. Instead of iterating through&nbsp;an 
+entire list and searching each item, the <STRONG>Find</STRONG> method searches the list for 
+you and returns&nbsp;the index number for the specified item. If the item is not found, the 
+<STRONG>Find</STRONG>   
+method returns a value of -1.</P>
+<H4>Using the Find Method with Vectors</H4>
+
+<P>If&nbsp;you use the <A href="Add.htm"><STRONG>Add</STRONG></A> method to 
+add an object, such as a <A href="../Vector/Vector.htm"><STRONG>Vector</STRONG></A>, to a property list, 
+the <STRONG>Add</STRONG> method stores a reference pointer to 
+the object, not the data contained in the object. To find the object in the 
+<STRONG>PropertyList</STRONG> collection, you must pass the reference 
+pointer as a parameter to the <STRONG>Find</STRONG> method, not the data to 
+which the reference points, as shown in the following example.
+</P>
+<P><blockquote><pre>
+Dim myVector
+Dim myVectors
+Dim myIndex
+
+Set myVector = CreateVector(2.0, 0.0, 0.0)
+Set myVectors = CreatePropertyList
+
+myVectors.Add myVector
+
+myIndex = myVectors.<strong>Find(myVector)</strong></pre></blockquote>
+<P></P>
+<H4>Adding Items to a Collection</H4>
+<P>If you plan to&nbsp;attach your property list to an object, you may want to 
+include all of the items in the list before you attach it to an object. 
+Microsoft Virtual Worlds clones collections when they are attached to objects, 
+instead of copying them. This means that two identical lists exist with 
+different memory addresses. In this case, a call to the <STRONG>Find</STRONG> 
+method results in a -1.</P>
+<h3>Example</h3>This example creates a property list that 
+includes a reference pointer to a Virtual Worlds object, finds&nbsp;the item, 
+and&nbsp;determines the index of a reference pointer to an object. 
+<P></P>
+<PRE class="example">
+Sub FindInCollection()
+Dim mySpruceTree
+Dim myTrees
+Dim myCount, i
+</PRE>
+<p class="comments">'Establish the link to the object in the virtual world.
+<pre class="example">
+Set mySpruceTree = CreateInstance("SpruceTree", "Artifact", User.Container)
+</pre>
+<p class="comments">'Create the collection.
+<pre class="example">
+Set myTrees = CreatePropertyList
+</pre>
+<p class="comments">'Create items in the collection and establish the link for the mySpruceTree object to the collection.
+<pre class="example">
+myTrees.Add "Oak Tree"
+myTrees.Add "Fir Tree"
+myTrees.Add mySpruceTree
+myTrees.Add "Maple Tree"
+myTrees.Add "Birch Tree"
+</pre>
+<p class="comments">'Find the index number of the spruce tree in the collection.
+<pre class="example">
+myFind = myTrees.<STRONG>Find(mySpruceTree)</STRONG>
+</pre>
+<p class="comments">'The value of "myFind" is 2, which is the index number of mySpruceTree.
+<pre class="example">
+Trace myFind
+
+End Sub
+</pre>
+ 
+
+</body>
+</html>

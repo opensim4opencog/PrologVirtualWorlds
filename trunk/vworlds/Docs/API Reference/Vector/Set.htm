@@ -1,0 +1,142 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Set</title>
+	
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Set</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Vector</td>
+	</tr>
+</table>
+<P>Sets the 
+<em>x</em>, <em>y</em>, and <em>z</em>     values for a&nbsp;previously created <A href="Vector.htm"><strong>Vector</strong></A> 
+object.&nbsp;<STRONG>Set</STRONG> is a member of the <STRONG>Vector</STRONG> object.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>Set</STRONG> <EM>x, y, z</EM></td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>Set</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+  <TR>
+		<td class="boldItal">object</td>
+		<td>Vector</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>    An object reference to a 
+      <STRONG>Vector</STRONG>  object.</td><!--Description--></TR>
+	<TR>
+		<td class="boldItal">x</td>
+		<td>Float</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>Represents&nbsp;the value of the vector's     
+      x-coordinate.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">y</td>
+		<td>Float</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>Represents&nbsp;the value of the 
+      vector's&nbsp;y-coordinate.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">z</td>
+		<td>Float</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>Represents&nbsp;the value of the 
+      vector's&nbsp;z-coordinate.</td><!--Description-->
+	</TR>
+
+</TABLE>
+<!--Return Value section -->
+<H3>Return Value</H3>            
+<P style="MARGIN-RIGHT: 0px">This method does not return a 
+value.
+
+ <!--Remarks section--></P>
+<H3>Remarks</H3>
+<P>Use&nbsp;the <STRONG>Set</STRONG> 
+method to change all of the values of a vector for an object. The changes you 
+make to the vector's values using the <STRONG>Set</STRONG> 
+                
+        method do persist, remote, and invoke 
+the property-changed handler.
+<P>You must first create a vector with the <A 
+href="../World/CreateVector.htm"><B>CreateVector</B></A> method before you can 
+use the <STRONG>Set</STRONG> method to change those values.&nbsp;You can use 
+integers to set the values for the <EM>x</EM>, <EM>y</EM>, and <EM>z</EM> 
+parameters for the <STRONG>Set</STRONG> method, but when the values are 
+stored they will be converted to floating numbers.
+<P>You cannot use the&nbsp;<STRONG>Set</STRONG> method to change the position of a user. For 
+example,&nbsp;the code: <FONT face=Courier>User.Position.<STRONG>Set 
+3,0,4</STRONG> </FONT>      will not 
+change the position of the user's avatar.
+<P>
+<b>Note:</b>&nbsp;&nbsp; This method 
+is not the same as the <STRONG>Set</STRONG> keyword in Microsoft Visual Basic 
+where you assign a reference to an object. 
+<p>
+<H3>Example</H3>
+<p>This example uses the <STRONG>Set</STRONG> method to 
+change the direction of objects in Microsoft Virtual Worlds.</p>
+
+<p>To run the example: Create three airplane artifacts in 
+your world and name them Plane1, Plane2, and Plane3.</p>
+
+<PRE class="example">Sub OrientPlanes()
+Dim myPlanes(3)
+Dim i
+Dim myVector
+</PRE>
+<p class="comments">'Create a new vector.
+<pre class="example">
+Set myVector = CreateVector(0, 0, 0)
+</pre>
+<p class="comments">'Change the values of the vector using the <b>Set</b> method.
+<pre class="example">
+myVector.<b>Set 3, 4, 2</b>
+</pre>
+<p class="comments">'Iterate through a series of objects to change their direction at one time.
+<pre class="example">
+For i = 1 To 3
+&nbsp;&nbsp;&nbsp;&nbsp;Set myPlanes(i) = User.Container.FindWithin("Plane" &amp; i)
+&nbsp;&nbsp;&nbsp;&nbsp;myPlanes(i).Direction = myVector
+Next
+End Sub
+</pre>
+
+
+</body>
+</html>

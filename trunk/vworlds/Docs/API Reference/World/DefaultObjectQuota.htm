@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>DefaultObjectQuota</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>DefaultObjectQuota</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>
+Sets or returns the default 
+number of items that an avatar can create 
+in a world. <b>DefaultObjectQuota</b> property is a read/write 
+<b>Long</b>.&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--syntax statement --><EM>object</EM>.<STRONG>DefaultObjectQuota</STRONG> 
+      = <EM>longValue</EM></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>DefaultObjectQuota</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>World</TD>
+    <TD>Required</TD>
+    <TD>A reference to the&nbsp;<STRONG>World</STRONG> object.</TD></TR>
+
+	<TR>
+		<td class="boldItal">longValue</td>
+		<td><!--Parameter name-->Long</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->The 
+      default&nbsp;upper limit of objects an avatar can create in a 
+  world.</td>
+	</TR>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This property determines the default for the  
+<A href="../Exemplars/Avatar/ObjectQuota.htm">ObjectQuota</A> value given to all new avatars. 
+The&nbsp;standard <STRONG>DefaultObjectQuota</STRONG> value is 
+10. Changing this value affects only avatars that you create after 
+you change the quota.</P>
+<P>A value of -1 for this property indicates that an avatar 
+can create an infinite number of objects.</P>
+<P><!--Insert Remarks here-->
+<H3>Example</H3>
+<p>
+This example changes the default quota.
+<pre class="example">
+<!--Example text-->&nbsp;
+Sub CheckDefaultQuota()
+Dim myDefaultQuota
+
+Set myDefaultQuota = World.<b>DefaultObjectQuota</b>
+
+If myDefaultQuota = 10 Then myDefaultQuota = 20
+
+End Sub</pre>
+ 
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Print</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Print</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Displays a string of text or numerals to the Command Window. 
+<b>Print</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Print</b>&nbsp;<i>varAnything</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Print</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">varAnything</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The text or numeric expression to display.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Print</b> method can be used to display text (character strings) or numeric
+expressions. In addition, an object reference can be supplied as the <i>varAnything</i> parameter, resulting in the display of the contents of the <a href="../Base%20Class/ToAscii.htm">ToAscii</a> property of that object.</p>
+
+<p><b>Print</b> can evaluate numeric expressions using any of the arithmetic or
+logical operators of VBScript, as well the mathematical functions. </p>
+
+<p><b>Print</b> can display strings concatenated by '+' or '&amp;'. To lessen
+ambiguity with addition expessions, however, it is recommended that you use '&amp;' for
+this purpose.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>World.Print &quot;3 + 5 = &quot; &amp; 3 + 5 	   'Displays 3 + 5 = 8
+World.Print 1 OR 2		   'Displays 3
+World.Print Hex(255)		   'Displays FF
+World.Print 3 &gt; 2		   'Displays -1  (indicates True - 0 is used for False
+World.Print &quot;My name is &quot; &amp; User.Name	  'Displays My name is &lt;your name&gt;</pre>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>MenuItem</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>MenuItem</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Object</P></td>
+	</tr>
+</table><!--Topic Definition-->
+<P class=body>The <b>MenuItem</b> object holds a single menu item in an object's shortcut menu.&nbsp; <!--How-to section -->
+<H3>Using the Object</H3>
+<p>Every object that is visible in Microsoft Virtual Worlds&nbsp;can 
+have an attached shortcut menu, which is made up of one or more <b>MenuItem</b>
+objects. An object's menu (see the <A href="../Exemplars/Thing/Menu.htm">Menu</A>
+property of <b>Thing</b>) is a 
+<A href="../PropertyList/PropertyList.htm">PropertyList</A> 
+  in which each element contains a menu item object. The
+object's menu can be modified to provide additional behaviors for
+that object.</p>
+
+<p>To create a menu item, use the <A href="../World/CreateMenuItem.htm">CreateMenuItem</A> method 
+of the <b>World</b> object.&nbsp;
+<blockquote><pre>
+Dim myMenuItem
+
+Set myMenuItem = _
+&nbsp;&nbsp;World.CreateMenuItem("Friends", _
+&nbsp;&nbsp;MI_CHECKED, User, "", "ShowFriends")
+</pre></blockquote>
+<p>You can check text on menu items by using the <A href="MenuText.htm">MenuText</A> property as shown in the following procedure:</p>
+
+<pre class="example">
+Sub CheckMenuItem()
+Dim myPriceTag
+Dim myContents
+Dim myContentsCount
+Dim myCount
+
+Set myRoomItems = User.Container.Contents
+myRoomItemsCount = User.Container.Contents.Count - 1
+myMenuItemsCount = myRoomItems.Property(myRoomItem).Menu.Count-1
+
+For myRoomItem = 0 To myRoomItemsCount
+&nbsp;&nbsp;For myMenuItem = 0 to myMenuItemsCount
+&nbsp;&nbsp;&nbsp;&nbsp;If myRoomItems.Property(myRoomItem).Menu.Property(myMenuItem).<b>MenuText</b> _
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = "More about " Then
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print myRoomItems.Property(myRoomItem)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trace "Menu okay."
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myIsMenu = True
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exit For
+&nbsp;&nbsp;&nbsp;&nbsp;End If
+&nbsp;&nbsp;Next
+&nbsp;&nbsp;If Not myIsMenu Then
+&nbsp;&nbsp;&nbsp;&nbsp;Print myRoomItems.Property(myRoomItem)
+&nbsp;&nbsp;&nbsp;&nbsp;Trace "Needs menu"
+&nbsp;&nbsp;End If
+Next
+
+End Sub
+</pre>
+</BODY>
+</html>

@@ -1,0 +1,152 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<Link rel="Stylesheet" href="../APIRef.css">
+<head>
+	<title>CreatePropertyList</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreatePropertyList</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+<P>
+<P>
+<P>
+
+<!--Summary of topic-->
+<P>Creates a <A 
+href="../PropertyList/PropertyList.htm">PropertyList</A> collection. 
+<STRONG>CreatePropertyList</STRONG> is a member of the <A href="World.htm">World</A> 
+object.      
+          
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>CreatePropertyList</STRONG>([<EM>varInitialValue</EM>] [<EM>, varOrphan</EM>])</td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>CreatePropertyList</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><em>object</em></td>
+		<td>World</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>  An object reference to a <STRONG>World</STRONG> object.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">[varInitialValue]</td>
+		<td> Variant</td><!--Parameter name-->
+		<td>Optional</td><!--Type-->
+		<td>      The name of the first property      in the property list, 
+      Property(0).</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">[varOrphan]</td>
+		<td>Boolean Variant</td><!--Parameter name-->
+		<td>Optional</td><!--Type-->
+		<td>A flag that indicates&nbsp;whether the property 
+      list is created within a virtual world or is an orphaned data structure. The value is <STRONG>True</STRONG>   
+           if the property list is orphaned. The 
+      default is <STRONG>False</STRONG>.</td><!--Description-->
+	</TR>
+
+</TABLE>
+
+ <!--Remarks section-->
+<H3>Return Value</H3>
+<p>This method returns a <STRONG>PropertyList</STRONG>     object.
+<H3>Remarks</H3>
+<P>The <STRONG>PropertyList</STRONG> 
+        
+    collection&nbsp;provides developers with a way to&nbsp;add 
+new properties to an object. When you create a new property list, you 
+are 
+creating an empty collection that you can fill with properties. 
+You can reference an item in the collection by an index number. The 
+index for this collection starts at 0. 
+</P>
+<P>The <EM>varInitialValue</EM> 
+parameter of the <STRONG>PropertyList</STRONG>&nbsp;collection is variant. However, <b>PropertyLists</b> do not support 
+arrays.</P>
+<P>You can create a nested property list, however, such a property list cannot be attached to a world; it must be 
+orphaned. To create a property list that doesn't reference a world, 
+set the <em>varOrphan</em> parameter to 
+<STRONG>True</STRONG>, as in the following code sample. The 
+<EM>varOrphan</EM> parameter is set to <STRONG>False</STRONG> by default.</P>
+<blockquote><PRE>Set myPropertyList = <STRONG>CreatePropertyList("PropertyOne", True)</STRONG></PRE></blockquote>
+
+<P>Once you have orphaned a property list, you can never attach it to a <b>Thing</b>. You might want to orphan a list for use as a generic nested data structure.</P>
+<H3>Examples</H3>
+
+
+<P>This example illustrates how to create different types of <STRONG>PropertyList</STRONG> collections. 
+
+<p class="comments">'This example creates a maximum occupancy property that contains an integer value.
+<PRE class="example">
+Sub SpaProperties()
+
+Dim myPropertyList
+Dim MaximumOccupancy
+Dim myIndex
+Dim myCount
+</PRE>
+
+<p class="comments">
+'Create a new <strong>PropertyList</strong> collection.
+<pre class="example">
+Set myPropertyList = <strong>CreatePropertyList</strong>
+</pre>
+<p class="comments">
+'Add a new property to the <strong>PropertyList</strong> collection.
+<pre class="example">myPropertyList.Add "MaximumOccupancy"
+</pre>
+<p class="comments">
+'Find the new property in the list of contents.
+<pre class="example">
+myIndex = myPropertyList.Find("MaximumOccupancy")
+</pre>
+<p class="comments">
+'Get the index number of the "MaximumOccupancy" variable.
+<pre class="example">
+Trace myIndex
+</pre>
+<p class="comments">
+'Verify that the value has been set.
+<pre class="example">
+Trace myPropertyList.Property(myIndex)
+End Sub
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetLightColor</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetLightColor</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Get a light's color (expressed as a mixture of red, green, and blue). 
+<b>GetLightColor</b> is a member of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetLightColor</b>&nbsp;<i>nIndex, fRed, 
+		fGreen, fBlue</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetLightColor</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nIndex</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The index of the light.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fRed</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>A variant that is populated by the <b>GetLightColor</b> method, which evaluates to the fractional amount of red.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fGreen</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>A variant that is populated by the <b>GetLightColor</b> method, which evaluates to the fractional amount of green.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fBlue</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>A variant that is populated by the <b>GetLightColor</b> method, which evaluates to the fractional amount of blue.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Each of the three colors is a number between 0.0 and 1.0, representing the decimal
+fractional amount of red, green, and blue, respectively.</p>
+
+<p>The second, third, and fourth parameters of <b>GetLightColor</b> are <i>output</i>
+parameters. After this method executes, these parameters will be overwritten with new
+values.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.GetLightColor 17, Red, Green, Blue</pre>
+&nbsp;
+
+
+</body>
+</html>

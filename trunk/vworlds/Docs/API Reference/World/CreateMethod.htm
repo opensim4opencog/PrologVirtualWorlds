@@ -1,0 +1,160 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateMethod</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateMethod</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table><!--Topic Definition-->
+<P>Creates a new method. <b>CreateMethod</b> is a member of the <A 
+href="World.htm">World</A> object. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CreateMethod</b>(<EM>lFlags</EM>, 
+		<i>varModule</i>, <i>bstrName</i>)</td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>CreateMethod</b> method syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a&nbsp;<B>World 
+      </B> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">lFlags</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>A flag value that determines how and where the 
+      <STRONG>Method</STRONG>    will execute.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">varModule</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The script module that will be used to create the method.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the&nbsp;procedure or function within the module.</td>
+	</TR>
+
+</TABLE><!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a reference to the new method that 
+has been created. <!--Remarks section-->
+<H3>Remarks</H3>
+<P>Possible values for the <EM>lFlags</EM> parameter include the constants as shown 
+in the following table.&nbsp; For convenience, these flag constants are exposed 
+as read-only properties of the <STRONG>World</STRONG> 
+      object.</P>
+<P>
+<TABLE class="backlight">
+  <THEAD>
+  <TR>
+    <TD>Constant</TH>
+    <TD>Value</TH>
+    <TD>Description</TD></TR></THEAD>
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR>
+  <TR>
+  <TR >
+    <TD><B>METHOD_CLIENT</B></TD>
+    <TD align=middle>1</TD>
+    <TD>Set this flag to run the method on&nbsp;a client.</TD></TR>
+  <TR >
+    <TD><B>METHOD_SERVER</B></TD>
+    <TD align=middle>2</TD>
+    <TD>Set this flag to run the method on the server.</TD></TR>
+  <TR vAlign=top>
+    <TD><B>METHOD_SYNC</B>
+    <TD align=middle>16</TD>
+    <TD>Set this flag to run the method synchronously on the server. By default, methods run 
+      asynchronously.</TD></TR></TABLE>
+
+<P>Use the <STRONG>METHOD_CLIENT</STRONG>    constant for 
+methods that run exclusively on&nbsp;a client. If the method is invoked from&nbsp;a client, it will 
+be&nbsp;run only on that client. However, if the method is invoked from the server, 
+it will be run remotely on all bystander clients.</P>
+<P>Use the <STRONG>METHOD_SERVER </STRONG> constant for those methods intended 
+to run only on the server. If the method is invoked from the server, it will 
+be&nbsp;run only on the server. If the method is invoked from a client, it will be 
+run remotely on the server.</P>
+<P>Methods that are&nbsp;invoked on the server are 
+normally&nbsp;run asynchronously: the code that invokes the 
+method will return without waiting for the method to complete on 
+the server.&nbsp; Should you want to explicitly wait for a server side method 
+to complete before the invocation returns (for example, to wait for return data from that method), you can use the 
+<STRONG>METHOD_SYNC</STRONG> constant.&nbsp; Note that 
+<STRONG>METHOD_SYNC</STRONG> only has functional meaning 
+when set on a server side method.&nbsp; Also note that 
+<STRONG>METHOD_SYNC</STRONG> should be used with caution:&nbsp;the client will 
+not do anything else until the server finishes executing the method in 
+question.&nbsp; If the server is very busy, the client could potentially be blocked for a significant amount of time.</P>
+<P>A method whose <STRONG>Flags</STRONG> property has both the 
+<STRONG>METHOD_CLIENT</STRONG> and <STRONG>METHOD_SERVER</STRONG> constants set runs wherever it is 
+invoked: If it is invoked on a client, it runs there, and if it is invoked on 
+the server, it runs there.&nbsp; <!--Example section-->   For 
+methods that are designed to run on both&nbsp;a client and the server, you can 
+combine the flags by&nbsp;adding them together&nbsp;in this way:</P><PRE>World.METHOD_CLIENT + World.METHOD_SERVER</PRE>The 
+
+flags used in creating a method must logically
+match the flags that were used in the initial call to the 
+<A href="CreateScriptModule.htm">CreateScriptModule</A>&nbsp;method that 
+created the corresponding module. In 
+other words, if you want a methods created from a certain module to be server-side methods (created with the
+<STRONG>METHOD_SERVER</STRONG> flag), the module that contains them must have been created with the <b>MODULE_SERVER</b>
+flag.
+
+<p>The <EM>varModule</EM> parameter can be either a reference to a 
+<A href="../Module/Module.htm">Module</A>
+object or the name of a <b>Module</b> object.
+<P>The <EM>bstrName</EM> parameter can 
+be either the name of a procedure or function within the module.&nbsp;&nbsp; <!--Example section-->
+<H3>Example</H3>
+<p>This example illustrates the creation of a server-side, synchronous method which is then added to an object.
+It is assumed in this example that the gestures.vbs file exists in an accessible location and
+contains a subroutine called "Wave".  It is also assumed that the object "myArtifact" has been
+previously created in the current room by the user executing this code.</p>
+
+<pre class="example">
+Dim ModReference, theObject, NewMethod
+
+Set ModReference = World.CreateScriptModule("Gestures", "gestures.vbs", World.MODULE_SERVER)
+Set theObject = User.Container.Findwithin("myArtifact")
+
+Set NewMethod = World.<STRONG>CreateMethod(World.METHOD_SERVER + World.METHOD_SYNC, ModReference, "Wave")</STRONG>
+
+theObject.AddMethod "wave", NewMethod        
+</pre>
+&nbsp;
+
+
+</body>
+</html>

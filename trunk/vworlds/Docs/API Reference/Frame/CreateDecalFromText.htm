@@ -1,0 +1,113 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateDecalFromText</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateDecalFromText</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Creates a new decal from the specified parameters and 
+places it in the current <A href="Frame.htm">Frame</A> 
+object. <STRONG>CreateDecalFromText</STRONG> is a member of the 
+<STRONG>Frame</STRONG> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>CreateDecalFromText 
+      </STRONG><EM>bstrText </EM>[<EM>, bstrName</EM>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>CreateDecalFromText</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name-->object</td>
+		<td><!--Type-->Frame</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description--> 
+         An object reference to 
+      a <STRONG>Frame</STRONG>  object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>bstrText</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The text for the decal.</TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->[bstrName]</td>
+		<td><!--Type-->String</td>
+		<td><!--Required or Optional-->Optional</td>
+		<td><!--Description-->The 
+      name of the decal.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>There are two ways to create graphical 
+text in Microsoft Virtual Worlds: By creating a decal, or 
+by using&nbsp;a <A href="../Exemplars/Thing/Label.htm">Label</A>     
+     
+      object.
+<P> Virtual Worlds takes the text in the <EM>bstrText</EM> parameter and converts it into a bitmap 
+that&nbsp;appears in your world.&nbsp;You can change the position and size of 
+the decal by using the <A href="SetDecalOrigin.htm">SetDecalOrigin</A> and <A href="SetDecalSize.htm">SetDecalSize</A> methods.
+<H3>Example</H3>
+<p>This example creates a decal and displays it in a virtual world.</p>
+<pre class="example">
+Sub CreateKioskDecal()
+Dim myFrame
+</pre>
+<p class="comments">'Set a reference to the frame where you want to place the decal.
+<pre class="example">
+Set myFrame = User.Container.GetFrame
+</pre>
+<p class="comments"> 'Create the decal.
+<pre class="example">
+myFrame.<b>CreateDecalFromText "This is the new Kiosk", "Kiosk"</b>
+
+End Sub</pre>
+<!--Example text-->&nbsp;&nbsp;&nbsp;&nbsp; 
+<PRE></PRE>
+<p class=comments></p>
+ 
+
+</body>
+</html>

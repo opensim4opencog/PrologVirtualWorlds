@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsInverse</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsInverse</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Flag that indicates whether a <A href="Boundary.htm">Boundary</A> surrounds an area or defines a void inside an area. <b>IsInverse</b> is a read/write <b>Boolean</b>.
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsInverse</b> = <i>BooleanValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>IsInverse</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td><!--Description-->An object reference that accesses a <b>Boundary</b>.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">BooleanValue</td>
+		<td>Boolean</td>
+		<td>Required</td>
+		<td>Any valid expression that evaluates to a <b>Boolean</b>. Default is <b>False</b> (not inverse).</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>A common application of the <b>IsInverse</b> property is to define a boundary within 
+another boundary, isolating the area between the two from the rest of the 
+world. Changes in the area between the inner and outer boundaries do not affect the area within the inner, inverse boundary.
+ 
+<p>For example, you can define a virtual body of water in a world by giving it an outer boundary. Within that boundary, you can then place an island (a second boundary). By setting the <b>IsInverse</b> property of the inner, island boundary to <b>True</b>, the island would not be affected by the properties of the water, which are defined by the surrounding boundary. In this case, when an avatar enters the water (the area between the inner and outer boundaries), it is affected by the properties of that area (the area is wet). When the avatar leaves the water by moving to the island (crossing the inner boundary) or leaving the entire body (crossing the outer boundary), the area it enters is dry.
+<br>
+<br>
+<br>
+<br>
+<blockquote><img src="InverseBoundary.jpg" width=385 height=107 alt="" border="0"></blockquote>
+<br>
+<br>
+<!--Example section-->
+<H3>Examples</H3>
+
+<p>The first example creates a <b>Boundary</b> around an existing object and changes the <b>IsInverse</b> property. The argument "myOcean" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myOcean)
+
+Dim myLake
+Dim myOuterRim
+Dim myInnerRim</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myLake = User.Container.FindWithin(myOcean)</pre>
+
+<p class=comments>'Create four-sided outer and inner boundaries.
+<pre class="example">Set myOuterRim = World.CreateBoundary(Array(10,10, 10,-10, -10,-10, -10,10))</pre>
+<pre class="example">Set myInnerRim = World.CreateBoundary(Array(3,3, 3,-3, -3,-3, -3,3))</pre>
+
+<p class=comments>'Change the inner boundary to inverse.
+<pre class="example">myInnerRim.<b>IsInverse</b> = True</pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myLake.BoundaryList.Add myOuterRim
+
+End Sub</pre>
+<p>Example 2
+<p>This example changes the <b>IsInverse</b> property after the boundary has been assigned to an object. "myObject" is the name of an existing object. To use this example in the Command Window, substitute the name of an existing object for "myObject".
+<br><br>
+<pre class="example">Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to the third boundary.
+<div class=comments>'in an existing object's boundary list.</div>
+<pre class="example">Set myOuterEdge = myObject.BoundaryList.Property(2)</pre>
+
+<p class=comments>'Change the <b>IsInverse</b> property.
+<pre class="example">myOuterEdge.<b>IsInverse</b> = True</pre>
+
+<p>Example 3
+
+<p>This example changes the <b>IsInverse</b> property and then confirms the change in the Command Window. To use this example, substitute the name of an existing object for "myObject".
+<br><br>
+<pre class="example">myObject.BoundaryList.Property(2).<b>IsInverse</b> = True
+Trace myObject.BoundaryList.Property(2).<b>IsInverse</b></pre>
+   
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CheckPolicy</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CheckPolicy</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Determines whether a user is allowed access to an object. 
+<b>CheckPolicy</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CheckPolicy</b>(<i>pthing</i>, <i>lFlags</i>&nbsp;[,&nbsp;<i>var</i>])</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>CheckPolicy</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pthing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object for which access permissions are to be checked.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">lFlags</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The type of access to check for.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[var]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>Reserved for future use.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Boolean</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method provides a convenient shortcut for checking the security role of a user (or method caller) with
+respect to the object passed in as <i>pthing</i>. Knowing this security information is very useful when constructing
+a custom security policy via an <b>OnAccess</b> method.</p>
+
+<p>Possible values for <i>lFlags</i> include the following:</p>
+
+<table class="backlight">
+  <tr>
+    <td><b>Flag</b></td>
+    <td><b>Value</b></td>
+    <td><b>Description</b></td>
+  </tr>
+<tr class="line" ><td colspan=100%></td></tr>
+  <tr>
+    <td><b>CP_WIZARD</b></td>
+    <td><b>1</b></td>
+    <td><b>CheckPolicy</b> returns <b>True</b> if the user is a Wizard.</td>
+  </tr>
+  <tr>
+    <td><b>CP_OWNER</b></td>
+    <td><b>2</b></td>
+    <td><b>CheckPolicy</b> returns <b>True</b> if the user is the owner of the object.</td>
+  </tr>
+  <tr>
+    <td><b>CP_WORLDOWNER</b></td>
+    <td><b>4</b></td>
+    <td><b>CheckPolicy</b> returns <b>True</b> if the user is the owner of the world.</td>
+  </tr>
+  <tr>
+    <td><b>CP_CALLER</b></td>
+    <td><b>8</b></td>
+    <td><b>CheckPolicy</b> returns <b>True</b> if the owner of the <i>caller</i>
+    (the object attempting to modify the object) is the owner of the object.</td>
+  </tr>
+</table>
+
+<p>It is possible to combine these flags by adding them together.
+&nbsp;
+
+<!--Example section-->
+<H3>Examples</H3>
+This example will return True if the user is both the owner of the <i>FidoTheDog</i> object and the owner of the world.
+<p><pre class=example>AccessOK = World.<b>CheckPolicy (FidoTheDog, World.CP_OWNER + World.CP_WORLDOWNER)</b></pre>
+<p>Example 2
+<p>This example creates an <i>OnXXXAccess</i> method for a property (<i>Coins</i>) that has been added to an existing object. This method returns <b>True</b> if either the object's owner or the world's owner attempts to write to the <i>Coins</i> property.
+In either case, the change to <i>Coins</i> will be permitted. If a user who is neither the object's owner nor the world's owner attempts to modify <i>Coins</i>, <i>OnCoinsAccess</i> returns <b>False</b>, and the change to <i>Coins</i> will not be permitted. </p>
+<p>
+<pre class=example>Function OnCoinsAccess(Perms)</pre>
+<p class=comments>' Permit access only to object's owner and world owner
+<pre class=example>If <b>CheckPolicy(This, CP_OWNER + CP_WORLDOWNER)</b> = True Then
+&nbsp;&nbsp;&nbsp;&nbsp;OnCoinsAccess = True
+Else
+&nbsp;&nbsp;&nbsp;&nbsp;OnCoinsAccess = False
+End If
+
+End Function</pre>
+
+</body>
+</html>

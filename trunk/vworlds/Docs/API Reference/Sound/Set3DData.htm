@@ -1,0 +1,168 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Set3DData</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Set3DData</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Sound Object</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets the&nbsp;three-dimensional angle and volume information for a 3-D <A href="Sound.htm">Sound</A> 
+object. <STRONG>Set3DData</STRONG> is a member of the <STRONG>Sound</STRONG>  
+object.
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>Set3DData</STRONG> 
+      <EM>dwInsideConeAngle, dwOutsideConeAngle, lConeOutsideVolume, 
+      flMinDistance, flMaxDistance</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>Set3DData</STRONG> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name-->object</td>
+		<td><!--Type-->Sound</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description--> 
+      An object reference to a <STRONG>Sound</STRONG> object. 
+              </td>
+	</TR>
+  <TR>
+    <TD class=boldItal>dwInsideConeAngle</TD>
+    <TD>Long</TD>
+    <TD>Required</TD>
+    <TD>The inside angle, in degrees, of the sound 
+      projection cone.</TD></TR>
+  <TR>
+    <TD class=boldItal>dwOutsideConeAngle</TD>
+    <TD>Long</TD>
+    <TD>Required</TD>
+    <TD>        
+    The outside angle, in degrees, of the sound 
+      projection cone.        
+    </TD></TR>
+  <TR>
+    <TD class=boldItal>lConeOutsideVolume</TD>
+    <TD>Long</TD>
+    <TD>Required</TD>
+    <TD>   The outside cone volume 
+      in hundredths of a decibel.</TD></TR>
+  <TR>
+    <TD class=boldItal>flMinDistance</TD>
+    <TD>Float</TD>
+    <TD>Required</TD>
+    <TD>The approach distance, in meters, within which 
+      the volume will not increase.</TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->flMaxDistance</td>
+		<td><!--Type-->Float</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->The 
+      distance, in meters, beyond which the sound will not get any quieter.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section --></P>
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>       
+           You can set your sound file to play in two- or 
+three-dimensional stereo with the <A 
+href="../World/CreateSound.htm">CreateSound</A> 
+method.<!--Insert Remarks here-->&nbsp;If you set the <EM>bIs3D</EM> parameter 
+to <STRONG>True</STRONG>, the <STRONG>Sound</STRONG> object is set to       
+           3-D.</P>
+<P>                
+               
+                
+                 
+         
+    You can manipulate 3-D sounds by using the 
+parameters for the <STRONG>Set3DData</STRONG> method to change the dimensions of 
+the sound projection cones. These changes affect the <EM>attenuation</EM> of the sound, which means&nbsp;that the 
+volume is lowered by the specified amount of hundredths of a decibel.</P>
+<P>         A 3-D sound has&nbsp;position as well as&nbsp;spatial orientation. 
+In Microsoft Virtual Worlds, sound cones are made up of an inner cone and an 
+outer cone. Within the inner cone, the volume of the sound is what it would be 
+if there were no cone; in other words, there is no attenuation from the normal 
+volume. Outside the outer cone, the normal volume is attenuated by a specified 
+outside cone volume. The angle between the inner and outer cones is a zone of 
+transition between the inside volume and the outside volume.</P>
+<P>The following illustration shows the concept of sound cones.</P>
+<P><IMG alt="" border=0 src="../Images/soundcone.bmp">&nbsp;</P>
+<H4>Effects of the <EM>dwInsideConeAngle</EM> and 
+<EM>dwOutsideConeAngle</EM>  Parameters</H4>
+<P>The <EM>dwInsideConeAngle</EM> and 
+<EM>dwOutsideConeAngle</EM> parameters describe the scope of the <STRONG>Sound</STRONG> object. The 
+outside cone angle must always be equal to or greater than the inside cone 
+angle. To get the orientation of sound cones, use the <A 
+href="Get3DData.htm"><STRONG>Get3DData</STRONG></A>&nbsp;method.</P>
+<H4>Effects of the <EM>lConeOutsideVolume</EM> Parameter</H4>
+<P>The <EM>lConeOutsideVolume</EM>    parameter is expressed in 
+hundredths of a decibel and is a negative value because it represents&nbsp;decible 
+attenuation from the default volume of 0. Allowable values are&nbsp;from 0 (no 
+attenuation)&nbsp;through -10,000&nbsp;(silence). </P>
+<P>To create an omnidirectional 3-D sound source, set the 
+<EM>lConeOutsideVolume</EM> parameter to 0 (no attenuation) and both the 
+<I>dwInsideConeAngle</I> and <I>dwOutsideConeAngle</I> parameters to 360 degrees. The sound will 
+have no apparent orientation. These are the default values when you create a sound, 
+so unless you explicitly specify other values, all 3-D sounds start out as 
+omnidirectional.</P>
+<P>Changes to these parameters may be delayed by as much as one second.</P>
+<H4>Effects of the <EM>flMinDistance</EM> and 
+<EM>flMaxDistance</EM>  Parameters</H4>
+<P>As you approach a <STRONG>Sound</STRONG> object in the world, you reach a 
+point where the sound does not increase in volume. This is the distance set by 
+the <EM>flMinDistance</EM> parameter. The <EM>flMaxDistance</EM> is the point at 
+which the sound does not decrease as you walk away from a <STRONG>Sound</STRONG> 
+object.&nbsp;
+
+<!--Example section--> 
+</P>
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">
+mySound.<STRONG>Set3DData 20, 40, -1000, 5, 25</STRONG>
+
+</pre>  
+
+</body>
+</html>

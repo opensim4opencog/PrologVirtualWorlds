@@ -1,0 +1,96 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateMeshFace</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateMeshFace</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Adds a face or faces to a mesh. <b>CreateMeshFace</b> is a member of 
+the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CreateMeshFace</b>&nbsp;<i>nMeshIndex, varArgs</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>CreateMeshFace</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nMeshIndex</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The index for the mesh to use. The index is zero-based.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">varArgs</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The array of faces to add.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><i>VarArray</i> can be an array of at least three elements, each of which is a vertex
+represented by a <a href="../Vector/Vector.htm">Vector</a>. It can also be an array of
+at least nine elements, each of which is a vertex coordinate represented by a <b>Float</b>.</p>
+
+<p><i>nMeshIndex</i> is set to the index of a particular mesh. For example, if you create a new frame and mesh, the mesh will have an index of 0, since it is the first mesh listed for that frame.
+
+<!--Example section-->
+<H3>Example</H3>
+This example creates an instance of the <b>Frame</b> object, associates a new mesh with that frame, and defines a face for that mesh. In this example, the <i>varArgs</i> parameter is an array of nine <b>Floats</b>. However, you could also substitute an array of three <b>Vectors</b> for this parameter. <br><br>
+
+<pre class=example>Dim myFrame
+Set myFrame = World.CreateFrame
+myFrame.CreateMesh
+myFrame.<b>CreateMeshFace 0, Array(0, 0, 0, 1, 1, 1, 2, 2, 2)</b>
+</pre>
+</body>
+</html>

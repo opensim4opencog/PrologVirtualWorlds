@@ -1,0 +1,288 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "vwstudio.rc2"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""vwstudio.rc2""\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""vwstudio.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_CONTROLMGR          REGISTRY MOVEABLE PURE  "ctrlmgr.rgs"
+IDR_CopyTool            REGISTRY MOVEABLE PURE  "CopyTool.rgs"
+IDR_CutTool             REGISTRY MOVEABLE PURE  "CutTool.rgs"
+IDR_DELVERT             REGISTRY DISCARDABLE    "DelVert.rgs"
+IDR_INSVERT             REGISTRY DISCARDABLE    "InsVert.rgs"
+IDR_POLYTOOL            REGISTRY DISCARDABLE    "PolyTool.rgs"
+IDR_ROTATE2DTOOL        REGISTRY DISCARDABLE    "Rotat2D.rgs"
+IDR_Scale2DTOOL         REGISTRY DISCARDABLE    "scale2d.rgs"
+IDR_VWErrorTool         REGISTRY MOVEABLE PURE  "vwerrtl.rgs"
+IDR_VWSelectTool        REGISTRY MOVEABLE PURE  "select.rgs"
+IDR_VWTranslate2DTool   REGISTRY MOVEABLE PURE  "Trans2d.rgs"
+IDR_VWUNDOITEM          REGISTRY DISCARDABLE    "UndoItem.rgs"
+IDR_VWUndoStacks        REGISTRY MOVEABLE PURE  "undostak.rgs"
+IDR_ROTATE3DTOOL        REGISTRY DISCARDABLE    "rottool.rgs"
+IDR_VWEXECUTEGEOMUNDO   REGISTRY DISCARDABLE    "GeomUndo.rgs"
+IDR_VWSCALE3DTOOL       REGISTRY DISCARDABLE    "ScaleTl.rgs"
+IDR_VWTRANSLATE3DTOOL   REGISTRY DISCARDABLE    "VWTrans.rgs"
+IDR_ROOMWIZHELPER       REGISTRY DISCARDABLE    "RWHelper.rgs"
+IDR_WORLDWIZHELPER      REGISTRY DISCARDABLE    "WWHelper.rgs"
+IDR_VWFILEACCESSTOOL    REGISTRY DISCARDABLE    "FileAcTl.rgs"
+IDR_VWZOOMTOOL          REGISTRY DISCARDABLE    "ZoomTool.rgs"
+IDR_VWSTUEX             REGISTRY DISCARDABLE    "vwstuex.rgs"
+IDR_VWBOUNDARYNAVIGATETOOL REGISTRY DISCARDABLE    "NavBound.rgs"
+IDR_VWDeluxeSelectTool  REGISTRY DISCARDABLE    "delxslct.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_NAV                 CURSOR  DISCARDABLE     "navigate.cur"
+IDC_INSVERT             CURSOR  DISCARDABLE     "vxinsert.cur"
+IDC_ROTATE2D            CURSOR  DISCARDABLE     "rotate.cur"
+IDC_SCALE2D             CURSOR  DISCARDABLE     "scale.cur"
+IDC_SELECT              CURSOR  DISCARDABLE     "select.cur"
+IDC_TRANS2D             CURSOR  DISCARDABLE     "translat.cur"
+IDC_DELVERT             CURSOR  DISCARDABLE     "delvert.cur"
+IDC_CREATEPEC           CURSOR  DISCARDABLE     "draw.cur"
+IDC_ZOOMOUT             CURSOR  DISCARDABLE     "zoomin.cur"
+IDC_ZOOMIN              CURSOR  DISCARDABLE     "zoomout.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_EC_EDITOR_DLG DIALOG DISCARDABLE  0, 0, 185, 102
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Edit Edge Cycle"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,146,7,32,14
+    PUSHBUTTON      "Cancel",IDCANCEL,146,24,32,14
+    EDITTEXT        IDC_FLOOR_EDIT,65,48,38,12,ES_AUTOHSCROLL
+    LTEXT           "Floor Height",IDC_STATIC,7,50,41,8
+    EDITTEXT        IDC_CEIL_EDIT,65,28,38,12,ES_AUTOHSCROLL
+    LTEXT           "Ceiling Height",IDC_STATIC,7,30,45,8
+    LTEXT           "Passable",IDC_STATIC,7,70,31,8
+    COMBOBOX        IDC_PASSABLE_COMBO,65,67,48,38,CBS_DROPDOWN | WS_TABSTOP
+    CONTROL         "Spin1",IDC_CEIL_SPIN,"msctls_updown32",UDS_ARROWKEYS,
+                    103,27,9,12
+    CONTROL         "Spin1",IDC_FLOOR_SPIN,"msctls_updown32",UDS_ARROWKEYS,
+                    103,47,9,12
+    EDITTEXT        IDC_THING_EDIT,65,7,59,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Attach to thing",IDC_STATIC,7,9,51,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_EC_EDITOR_DLG DLGINIT
+BEGIN
+    IDC_PASSABLE_COMBO, 0x403, 4, 0
+0x6559, 0x0073, 
+    IDC_PASSABLE_COMBO, 0x403, 3, 0
+0x6f4e, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_EC_EDITOR_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 178
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 95
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON    DISCARDABLE     "icon1.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_UNDO_TRANSLATE      "Translate geometry"
+    IDS_UNDO_SCALE          "Scale geometry"
+    IDS_UNDO_ROTATE         "Rotate geometry"
+    IDS_ERROR_TOO_HIGH      "Max Height is 1000.0"
+    IDS_ERROR_TOO_LOW       "Min Height is -1000.0"
+    IDS_ERROR_CEILING_BELOW_FLOOR "The ceiling cannot be below the floor!"
+    IDS_ERROR_FLOOR_ABOVE_CEILING "The floor cannout be above the ceiling!"
+    IDS_ENTERNAME           "You must enter a menu name"
+    IDS_TEXTLIMITREACHED    "The text box is full."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_INVALID_OBJECT_PROPERTY 
+                            "Invalid Object Property passed to Property List Editor."
+    IDS_ERROR_INVALID_COLLECTION_NESTING 
+                            "Cannot embed a property map or list inside another property collection."
+    IDS_ERROR_CANNOT_REMOVE_EXEMPLAR_PROPERTY 
+                            "Cannot remove exemplar property: "
+    IDS_ERROR_NOT_INITIALIZED 
+                            "Control Initialized incorrectly, cannot perform operation."
+    IDS_ERROR_PROP_NOT_EXIST "The Property does not exist."
+    IDS_ERROR_STUB_OBJECT   "The object has not been downloaded."
+    IDS_ERROR_METHOD_NOT_EXIST "The method does not exist."
+    IDS_FILE_ERROR          "File Error!"
+    IDS_ERROR_INVALID_MODULE "Invalid Module"
+    IDS_NOTHINGSELECTED     "A thing must be selected to add an boundary to it's cell."
+    IDS_NOCYCLESELECTED     "An boundary must be selected in order to delete one."
+    IDS_UNDO_CREATEBOUNDARY "Create Boundary"
+    IDS_UNDO_INSERTVERTEX   "Insert Vertex"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_INTERNAL      "Internal Error!"
+    IDS_ERROR_PROP_MAP_INVALID 
+                            "The property map has become invalid.  Are we still connected?"
+    IDS_ERROR               "Error"
+    IDS_ERROR_INVALID_PROPNAME 
+                            "Cannot rename a property to be the same as another property"
+    IDS_ERROR_CANNOT_EDIT_EXEMPLAR_NAME 
+                            "Cannot change the name of a property on an exemplar object in this editor"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_EXEMPLAR_NOT_EXIST "The Exemplar does not exist"
+    IDS_ERROR_PROPERTY_NOT_FOUND 
+                            "The property was not found in the exemplar chain"
+    IDS_ERROR_EMPTY_NAME    "Cannot change a name to be empty"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TOOLMANAGER_DESC    "ToolManager Class"
+    IDS_CUTTOOL_DESC        "CutTool Class"
+    IDS_COPYTOOL_DESC       "CopyTool Class"
+    IDS_VWTRANSLATE2DTOOL_DESC "VWTranslate2DTool Class"
+    IDS_VWSELECTTOOL_DESC   "VWSelectTool Class"
+    IDS_VWUNDOSTACKS_DESC   "VWUndoStacks Class"
+    IDS_VWERRORTOOL_DESC    "VWError Tool Class"
+    IDS_ECPOPUP_DESC        "BoundaryPopup Class"
+    IDS_VWMENUPOPUP_DESC    "MenuItemPopup Class"
+    IDS_VWPOPUPMGR_DESC     "PopupManager Class"
+    IDS_THINGPICK_DESC      "ThingPick Class"
+    IDS_VPOPUP_DESC         "VerbPopup Class"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_UNDO_DELETEVERTEX   "Delete Vertex"
+    IDS_ERROR_PERMISSION_DENIED 
+                            "You do not have permission to perform that operation."
+    IDS_NOTHINGNOEDITVERB   "A verb must be attached to a thing in order to be edited."
+    IDS_UNDO_TRANSLATE2D    "Translate boundary"
+    IDS_UNDO_SCALE2D        "Scale boundary"
+    IDS_UNDO_ROTATE2D       "Rotate boundary"
+    IDS_ERRORSUBINFO        "Error: Either you didn't start a line with a '$' or you didn't end the  header section with $END_SUB_INFO"
+    IDS_PROPPUT             "Module Property"
+    IDS_ORDER_INFO          "Informational"
+    IDS_ORDER_PRIMARY       "Primary"
+    IDS_ORDER_GENERIC       "Generic"
+    IDS_ORDER_EDIT          "Editing"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TYPE_INLINE_METHOD  "Inline Method"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_TYPE_THING          "Thing"
+    IDS_TYPE_VECTOR         "Vector"
+    IDS_TYPE_GEOMETRY       "Geometry"
+    IDS_TYPE_OBJECT_PROPERTY "Object Property"
+    IDS_TYPE_OBJECT         "Object"
+    IDS_TYPE_UNKNOWN        "Unknown"
+    IDS_TYPE_METHOD         "Method"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "vwstudio.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

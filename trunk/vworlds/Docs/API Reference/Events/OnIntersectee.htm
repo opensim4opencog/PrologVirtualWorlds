@@ -1,0 +1,149 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnIntersectee</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnIntersectee</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called when another object collides with the calling object's boundary.
+<!--Syntax table-->
+
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>OnIntersectee(<i>pIntersector, fX, fY, fZ,
+iEdgeCycleIndex, iEdgeIndex, bTransition</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnIntersectee</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">pIntersector</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object that has collided with the calling object's boundary.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The x-coordinate of the position of the intersection.</td>
+	</TR>
+		<TR>
+		<td class="boldItal">fY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The y-coordinate of the position of the intersection.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The z-coordinate of the position of the intersection.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">iEdgeCycleIndex</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The index of the boundary with the <b>BoundaryList</b> that is
+        intersected.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">iEdgeIndex</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The index of the edge within the boundary.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bTransition</td>
+		<td>Boolean</td>
+		<td>Required</td>
+		<td>A flag describing the type of cell intersection.</td>
+	</TR>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>The x, y, and z coordinates are relative to the frame
+containing the cell.</p>
+
+<p>A <i>Transition</i> value of 1 indicates the object attempted to
+cross a boundary from the outside; a value of 0 indicates that
+a boundary was exited.  See the <b>Boundary</b>
+core object for more information.</p>
+
+<p>This method is not normally called by the user; it responds to
+an internal event that occurs in Virtual Worlds on collision by
+an object with the cell around a <strong>Thing</strong>. If you
+find it necessary to override this event-handling method, <strong>InvokeSuperMethod</strong>
+should also be called to maintain the existing functionality of
+the overridden method. </p>
+
+<p>When the <b>Thing</b> that has been intersected is a <b>Room Portal</b> or a <b>Interworld Portal</b>,
+the portal calls a method that displays a dialog box, taking the URL (Uniform Resource Locator)
+for the dialog box from the portal's <b>PortalDialogURL</b>
+property.  For this reason, if you plan to override <b>OnIntersectee</b> with your own version,
+you should include a call to <b>InvokeSuperMethod</b> in your overriding version, to ensure
+that this dialog box is displayed.
+<!--Example section-->
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">Sub OnIntersectee(Object2, x, y, z, BoundaryIndex, EdgeIndex, Transition)
+&nbsp;&nbsp;&nbsp;&nbsp;World.Trace "The intersecting object was: " &amp; Object2.Name
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod(Array(Object2, x, y, z, BoundaryIndex, EdgeIndex, Transition))
+End Sub</pre>
+<!--Example text-->
+&nbsp;
+</pre>
+
+
+
+</body>
+</html>

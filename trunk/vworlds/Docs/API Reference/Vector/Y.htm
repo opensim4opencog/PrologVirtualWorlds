@@ -1,0 +1,157 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Y (Vector)</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Y (Vector)</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Vector</td>
+	</tr>
+</table>
+<P>Sets or returns the y-coordinate value for a <A 
+href="Vector.htm"><STRONG>Vector</STRONG></A> data 
+type. <STRONG>Y (Vector)</STRONG>  
+   is a read/write 
+<STRONG>Float</STRONG>.
+<P>
+<P>
+
+<!--Summary of topic-->
+      
+          
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>y</STRONG> = 
+      <EM>VectorValue</EM></td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table--></P>
+<P>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><EM>object</EM>.<STRONG>y</STRONG></TD><!--syntax statement --></TR></TABLE>      </P>
+<P>The&nbsp;<STRONG>y</STRONG> 
+property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Vector</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td> An object reference to a 
+      <STRONG>Vector</STRONG>  object.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">VectorValue</td>
+		<td>Float</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An expression that evaluates to a y-coordinate 
+      that is a <STRONG>Float</STRONG>      
+      .</td><!--Description-->
+	</TR>
+
+</TABLE>
+
+ <!--Remarks section--></P>
+<H3>Remarks</H3>
+<P>The <STRONG>y</STRONG> property 
+returns the&nbsp;y-coordinates for the following properties that use vectors: </P>
+<P>
+<TABLE border=0 cellPadding=1 cellSpacing=1 width="75%">
+  
+  <TR>
+    <TD>
+      <P><FONT class=body><A 
+      href="../Exemplars/Thing/Direction.htm">Direction</A></P></FONT></TD>
+    <TD><A href="../Exemplars/Thing/Position.htm">Position</A></TD></TR>
+  <TR>
+    <TD><A 
+    href="../Exemplars/Portal/EntryOrientation.htm">EntryOrientation</A></TD>
+    <TD><A href="../Exemplars/Thing/RotationAxis.htm">RotationAxis</A></TD></TR>
+  <TR>
+    <TD><A href="../Exemplars/Portal/EntryPoint.htm">EntryPoint</A></TD>
+    <TD><A href="../Exemplars/Thing/Scale.htm">Scale</A></TD></TR>
+  <TR>
+    <TD><A 
+    href="../Exemplars/Light/LightAttenuation.htm">LightAttenuation</A></TD>
+    <TD><A href="../Exemplars/Thing/Up.htm">Up</A></TD></TR>
+  <TR>
+    <TD><A href="../Exemplars/Light/LightColor.htm">LightColor</A></TD>
+    <TD></FONT></TD></TR></TABLE></P>
+<P>
+<P>The vector coordinates become the end point of a line which originates at the 
+center of the object.</P>
+<P><STRONG>Important:</STRONG>&nbsp;&nbsp;&nbsp;Setting the value for 
+the&nbsp;<STRONG>y</STRONG> property does not remote, 
+persist, or cause the property-changed handler to be invoked. If you want these 
+changes to persist and remote, etc., use the <A href="Set.htm">Set</A>        method 
+to change the vector values.</P>
+<H3>Example</H3>
+<P><FONT class=body>This example demonstrates&nbsp;the use of the <b>y</b> 
+property with various data types.</FONT></P>
+<pre class="example">Dim myVector</pre>
+<P class="comments">
+'Create a  vector to establish coordinates for <EM>x, y,</EM> and <EM>z</EM>.<br>
+'Retrieve the y-coordinate.
+<pre class="example">
+Set myVector = CreateVector(10, 5, 3)
+Trace myVector.<STRONG>y</STRONG>
+</pre>
+<p class="comments">'Establish the y-coordinates independently of a vector object.
+<pre class="example">
+Dim myChair
+
+Set myChair = World.CreateInstance("Chair", "Artifact", User.Container)
+</pre>
+<p class="comments">'The following changes will appear on your local computer.
+<pre class="example">
+myChair.Direction.<STRONG>y</STRONG> = 2
+myChair.Position.<STRONG>y</STRONG> = 4
+myChair.RotationAxis.<STRONG>y</STRONG> = 1
+myChair.Up.<STRONG>y</STRONG> = 0
+</pre>
+<p class="comments">'This next code block retrieves the 
+values for the <br>'y-coordinate independently of a vector object.
+<pre class="example">
+Dim myChairY
+
+Trace myChair.Scale.<STRONG>y</STRONG>
+Trace myChair.Up.<STRONG>y</STRONG>
+myChairY = myChair.Position.<STRONG>y</STRONG>
+</pre>
+ 
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateFrame</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateFrame</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Creates a Virtual Worlds 3D frame object. <b>CreateFrame</b> is a member of the <a href="World.htm">World</a> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CreateFrame</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>CreateFrame</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a <b>Frame</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>To create and work with frames in Microsoft Virtual Worlds, you need to 
+understand the background information on frames in Virtual Worlds. In HTML, 
+frames are used in a two-dimensional pane to divide a page on the screen. 
+In Virtual Worlds, frames are used to define aspects of the world.
+<p>
+<H3>Defining Frame Relationships</H3><p>
+The term <i>frame</i> is derived from an object's physical frame of reference. 
+You can place objects in a <i>scene</i> by stating their spatial relationship to 
+a relevant reference frame; they are not simply placed in world space.</p>
+
+<p>A frame is used to position objects in a scene, and visuals (such as meshes) 
+take their positions and orientation from frames. A scene is defined by a frame 
+that has no parent frame; that is, a frame at the top of the hierarchy of frames. 
+This frame is also sometimes called a <i>scene frame</i> or <i>master frame</i>. 
+The scene defines the frame of reference for all of the other objects. In Virtual 
+Worlds, frames are represented by the <b>VWFrame</b> object. The 
+relationship between Virtual Worlds objects and their frames is described in the 
+documentation for the <A href="../Exemplars/Thing/GetFrame.htm">GetFrame</a> and 
+<A href="../Exemplars/Thing/GetGeometryFrame.htm">GetGeometryFrame</a> methods of the 
+<A href="../Exemplars/Thing/Thing.htm">Thing</a> exemplar.</p>
+<p>
+The frames in a scene are arranged in a tree structure. Frames can have a parent 
+frame and child frames. Child frames have positions and orientations relative to 
+their parent frames. If the parent frame moves, the child frames also move. You can 
+also remove frames from one parent frame and add them to another at any time by using 
+the <A href="../Frame/AddChild.htm">AddChild</a> method of the <b>VWFrame</b> 
+object. To remove a child frame entirely, use the 
+<A href="../Frame/DeleteChild.htm">DeleteChild</a> method. To retrieve a frame's parent and 
+children frames, use the <A href="../Frame/GetChildren.htm">GetChildren</a> and 
+<A href="../Frame/GetParent.htm">GetParent</a> methods. The 
+<A href="../Exemplars/Thing/MoveInto.htm">MoveInto</a> method of the <b>Thing</b> exemplar will also indirectly affect the frame 
+hierarchy. &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><PRE>Set newFrame = World.CreateFrame</PRE>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>User</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>User</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>Returns a reference to the <b>Thing</b> that represents the currently connected avatar. 
+<b>User</b> is a read-only <b>Thing</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>User</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>User</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>A common usage of the <b>User</b> property is to find an object that is in
+the same room as the <b>User</b>. For example, to obtain a reference to the
+object <i>Rock5</i> (assumed to be in the <a href="../Exemplars/Room/Room.htm">Room</a>
+with the <b>User</b>), type the following into the Command Window:</p>
+
+<blockquote>
+  <pre>Set RockRef = World.<b>User</b>.Container.FindWithin(&quot;Rock5&quot;)</pre>
+</blockquote>
+
+<p>After this VBScript executes, <i>RockRef</i> refers to the object that is returned.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>The following example displays the name of your avatar in the Command Window.</p>
+
+<pre class=example>Set Result = World.User
+Trace Result.Name</pre>&nbsp;
+ 
+
+</body>
+</html>

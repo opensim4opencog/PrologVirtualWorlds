@@ -1,0 +1,105 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetFrameByName</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetFrameByName</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Returns&nbsp;the <A href="Frame.htm"><b>Frame</b></A> object specified by the <EM>bstrName</EM>   
+         
+ parameter.&nbsp; <b>GetFrameByName</b> is a member of the <b>Frame</b> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetFrameByName</b>(<i>bstrName</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetFrameByName</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the frame to retrieve.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns the <B>Frame</B> corresponding to the 
+name used in the <EM>bstrName</EM> parameter. Microsoft Virtual Worlds searches 
+the hierarchy&nbsp;starting from the current frame.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->In 
+HTML, you can use a frameset to organize multiple frames and nested framesets. A 
+<STRONG>Frame</STRONG> object is an individual frame within a frameset. If you 
+know the name of the frame, you can use the <STRONG>GetFrameByName</STRONG> 
+           method to return&nbsp;the 
+<STRONG>Frame</STRONG> 
+object.&nbsp;
+<P>A container in Virtual Worlds is an object, such as a 
+room, that can hold other objects, such as a frame. If you only know&nbsp;in which container&nbsp;a frame resides, 
+you can use the <A href="../Exemplars/Thing/GetFrame.htm">GetFrame</A> method to return a 
+reference to the specified frame. To return the name of a frame for later use 
+with the <STRONG>GetFrameByName </STRONG>method, use the following code.
+<blockquote><pre>myFrame.GetName</blockquote></pre>
+<!--Example section-->
+<H3>Example</H3>
+<p>This example returns the specified frame by using the value of the <i> bstrName</i> parameter to find the correct frame.</p>
+<pre class="example">
+Sub GetDecalsFrame()
+Dim myFrame
+Dim myDecalFrame
+
+Set myFrame = User.Container.GetFrame
+Set myDecalFrame = myFrame.<b>GetFrameByName("Decals")</b>
+
+End Sub
+</pre>
+
+</body>
+</html>

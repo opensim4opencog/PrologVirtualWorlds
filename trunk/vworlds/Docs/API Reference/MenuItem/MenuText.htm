@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>MenuText</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>MenuText</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of MenuItem</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>Returns the text specified by the <EM>bstrMenuText</EM> 
+parameter for the <A href="../World/CreateMenuItem.htm">CreateMenuItem</A> method. This text is displayed on the shortcut
+menu that appears when you right-click an object in the
+world. <b>MenuText</b> is a read/write <b>String</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>MenuText</STRONG> = 
+      <EM>stringValue</EM></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<p>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><EM>object</EM>.<STRONG>MenuText</STRONG></TD></TR></TABLE>
+<P>The <b>MenuText</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>MenuItem</td>
+		<td>Required</td>
+		<td>An&nbsp;object reference that&nbsp;accesses&nbsp;a 
+      <STRONG>MenuItem</STRONG> object.</td>
+	</TR>
+<tr><td><EM><STRONG>stringValue</STRONG></EM></td>
+<td>String</td>
+    <TD>Required</TD>
+<td>An expression that evaluates to a 
+      <STRONG>String</STRONG> that represents the text&nbsp;for a menu 
+  item.</td></tr>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>You can use accelerator keys (shortcut key 
+combinations) on shortcut menus in Microsoft Virtual Worlds by preceding the 
+first character of the menu item with an ampersand. The following script enables 
+users to use a key combination&nbsp;to invoke the method associated with the <i>Laugh</i>
+menu item.</P>
+
+<pre>   MyMenuItem.<b>MenuText</b> = "&amp;Laugh" </pre>
+
+<p>      This menu item&nbsp;appears in the object's
+menu with the first character underlined, "<u>L</u>augh". You can invoke
+the menu item in either of two ways:</p>
+
+<ul>
+    <li>  Clicking&nbsp;the menu item 
+    <li>Pressing <strong>SHIFT+L</strong></li>
+</ul>
+
+<p>You can use the <STRONG>MenuText</STRONG> property to 
+ensure that all menus&nbsp;for each&nbsp;artifact in your world contain the same 
+information. For example, if you create a shop where people can create objects 
+and "sell" them, you can use a loop to check that all menus have a "price tag" 
+menu item associated with each shortcut menu. 
+<H3>Example</H3>
+<p>This example checks each item in a room for specific text on a menu.</p>
+
+<pre class="example">
+Sub CheckMenuItem()
+Dim myPriceTag
+Dim myContents
+Dim myContentsCount
+Dim myCount
+
+Set myRoomItems = User.Container.Contents
+myRoomItemsCount = User.Container.Contents.Count - 1
+myMenuItemsCount = myRoomItems.Property(myRoomItem).Menu.Count-1
+
+For myRoomItem = 0 To myRoomItemsCount
+&nbsp;&nbsp;For myMenuItem = 0 To myMenuItemsCount
+&nbsp;&nbsp;&nbsp;&nbsp;If myRoomItems.Property(myRoomItem).Menu.Property(myMenuItem).<b>MenuText</b> _
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = "More about " Then
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print myRoomItems.Property(myRoomItem)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trace "Menu OK"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myIsMenu = True
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exit For
+&nbsp;&nbsp;&nbsp;&nbsp;End If
+&nbsp;&nbsp;Next
+&nbsp;&nbsp;If Not myIsMenu Then
+&nbsp;&nbsp;&nbsp;&nbsp;Print myRoomItems.Property(myRoomItem)
+&nbsp;&nbsp;&nbsp;&nbsp;Trace "Needs menu"
+&nbsp;&nbsp;End If
+Next
+
+End Sub
+
+</pre>
+</body>
+</html>

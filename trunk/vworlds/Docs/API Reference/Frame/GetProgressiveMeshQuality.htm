@@ -1,0 +1,119 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetProgressiveMeshQuality</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetProgressiveMeshQuality</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Gets the quality of rendering for a mesh in the current frame. 
+<b>GetProgressiveMeshQuality</b> is a member of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetProgressiveMeshQuality</b>(<i>nMeshIndex</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetProgressiveMeshQuality</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nMeshIndex</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The index of the mesh to use.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns an <b>Integer</b>. The return values are defined in the following table.
+<table class="backlight">
+    <tr>
+            <td><b>Value</b></td>
+            <td><b>Meaning</b></td>
+            <td><b>Comment</b></td>
+    </tr>
+<tr class="line" ><td colspan=100%></td></tr>
+    <tr>
+            <td>0</td>
+            <td>Wireframe</td>
+            <td>No shading</td>
+    </tr>
+    <tr>
+            <td>1</td>
+            <td>Solid shading</td>
+            <td>Not affected by lights</td>
+    </tr>
+    <tr>
+            <td>2</td>
+            <td>Solid shading</td>
+            <td>Affected by lights; each triangle will be a solid
+            color </td>
+    </tr>
+    <tr>
+            <td>3</td>
+            <td>Gouraud shading</td>
+            <td>Affected by lights; smoothly shaded</td>
+    </tr>
+    <tr>
+            <td>4</td>
+            <td>Phong shading</td>
+            <td>Like Gouraud shading, but better quality</td>
+    </tr>
+</table>
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><i>nMeshIndex</i> is set to the index of a particular mesh that has been added to a <b>Frame</b>. 
+
+
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MeshQuality = MyFrame.<b>GetProgressiveMeshQuality 8</b></pre>
+&nbsp;
+
+
+</body>
+</html>

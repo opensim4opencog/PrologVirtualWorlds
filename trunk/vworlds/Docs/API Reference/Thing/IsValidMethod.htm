@@ -1,0 +1,88 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsValidMethod</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsValidMethod</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Thing</td>
+	</tr>
+</table><!--Topic Definition-->
+<P>Determines whether the specified&nbsp;user-added method exists on either the object or on an
+exemplar in its inheritance tree. <b>IsValidMethod</b> is a member of the <a href="Thing.htm">Thing</a> object. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsValidMethod</b>(<i>bstrName</i>)</td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>IsValidMethod</b> method syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the user-added method.</td>
+	</TR>
+
+</TABLE><!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a <b>Boolean</b>. <!--Remarks section-->
+<H3>Remarks</H3>
+<P><b>IsValidMethod</b> first looks for the specified method on the calling object. If
+the method can not be found there, <b>IsValidMethod</b> then looks for it on the object's
+exemplar. If necessary, <b>IsValidMethod</b> will search for the specified method all the way to the
+base exemplar for the object.  For example, if you use <b>IsValidMethod</b> to determine whether
+a particular method exists on a <b>StateMachine</b> instance, it may be necessary for
+<b>IsValidMethod</b> to search the instance, the 
+<A href="../Exemplars/StateMachine/StateMachine.htm">StateMachine</A> exemplar, 
+the <A href="../Exemplars/Artifact/Artifact.htm">Artifact</A>
+exemplar, and finally the <A href="../Exemplars/Thing/Thing.htm">Thing</A> exemplar.&nbsp;
+If the method is found on any intermediate exemplar, <b>IsValidMethod</b> abandons the
+search and returns <b>True</b>.</P>
+
+<p>To prevent calling a method that does not exist, and the errors that result,
+first use <b>IsValidMethod</b> to 
+determine that the method exists, and then call it only if it does.
+<P>Please note that <STRONG>IsValidMethod</STRONG>&nbsp;will not detect most of the 
+methods built in to the Virtual Worlds system (e.g. checking 
+IsValidMethod("IsValidMethod") will return <STRONG>False</STRONG>).&nbsp; For 
+this reason, it is most effectively 
+used to check for the existence of methods added by users 
+or world designers. 
+<H3>Example</H3>
+<p><pre>Result = MyObject.IsValidMethod( "DoSomething" )
+If Result = True Then
+   MyObject.DoSomething		'Call method only if it exists
+Else
+   Trace "DoSomething method does not exist."
+End If</pre>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetVelocity</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetVelocity</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Gets the velocity of the calling frame relative to a reference frame. 
+<b>GetVelocity</b> is a member of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetVelocity</b>&nbsp;<i>pvwfRef, pvX, pvY, 
+		pvZ</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetVelocity</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvwfRef</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>The reference frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvX</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The x-component of the velocity of the frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvY</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The y-component of the velocity of the frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvZ</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The z-component of the velocity of the frame.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The second, third, and fourth parameters of <b>GetVelocity</b> are <i>output</i>
+parameters. After this method executes, these parameters will be overwritten with new
+values. </p>
+
+<p>Each of the three output parameters represents a particular component of distance per
+render cycle, which is typically 15 frames per second.  This means that a value of .01
+for <i>xVelocity</i> moves the object .01 * 15 ( = .15) units per second in the x-axis direction.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.GetVelocity RefFrame, xVel, yVel, zVel</pre>
+&nbsp;
+
+
+</body>
+</html>

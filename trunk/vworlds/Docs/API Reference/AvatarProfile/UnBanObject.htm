@@ -1,0 +1,106 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>UnbanObject</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>UnbanObject</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of AvatarProfile</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Removes the restriction previously created with the 
+<A href="BanObject.htm">BanObject</A> method, and allows the specified 
+<STRONG>Thing</STRONG> object to add keys to an avatar's profile. 
+<STRONG>UnbanObject</STRONG>        is a member of 
+the <A 
+href="AvatarProfile.htm">AvatarProfile</A> object.
+
+<!--Syntax table--></P>
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>UnbanObject</STRONG>&nbsp;<EM>pthing</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>UnBanObject</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+<TR>
+<TD class=boldItal>object</TD>
+<TD><!--Parameter name-->AvatarProfile</TD>
+<TD><!--Type-->Required</TD>
+<TD><!--Description--> An object reference to an 
+<STRONG>AvatarProfile</STRONG> object.</TD></TR>
+<TR>
+<TD class=boldItal>pthing</TD>
+<TD><!--Parameter name--</td>>
+		<td><!--Type-->Thing</TD>
+<TD><!--Description-->Required</TD>
+<TD> An object reference&nbsp;to a 
+      <STRONG>Thing</STRONG> object, such as an avatar.</TD></TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->The 
+<STRONG>UnbanObject</STRONG>           
+      
+ method restores the ability of an object to add <A href="Keys.htm">Keys</A> to the profile of your avatar. This object can be a reference to a user or to another 
+object, such as a game.
+<H3>Example</H3>
+<p>This example prevents another user (Gracie) from adding keys to&nbsp;your profile.</p>
+
+<pre class="example">
+Sub BanGracie
+Dim myAvatarProfile
+Dim myUserToUnban
+</pre><p class="comments">
+'Get the avatar you want to protect.
+<pre class="example">
+Set myAvatarProfile = User.Profile
+</pre><p class="comments">
+'Get the avatar you want to unban.
+<pre class="example">
+Set myUserToUnban = User.Container.FindWithin("Gracie")
+</pre><p class="comments">
+'Remove the ban.
+<pre class="example">
+myAvatarProfile.<b>UnbanObject</b > myUserToUnban 
+End Sub
+</pre>
+
+
+</body>
+</html>

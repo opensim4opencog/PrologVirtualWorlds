@@ -1,0 +1,82 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// 3dsToD3D.idl : IDL source for 3dsToD3D.dll
+//midl geomint.idl /I ..\..\worlds96\vwcommon /out ..\..\common
+
+// This file will be processed by the MIDL tool to
+// produce the type library (3dsToD3D.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IConvert3DSGeometry : Used to load 3D scenes from .3DS type files and convert them into 
+// D3DRM scene hierarchies.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+	import "oaidl.idl";
+	import "ocidl.idl";
+
+	import "convgeom.idl";
+
+	[
+		object,
+		uuid(8639C43D-C5F0-11D0-811D-00C04FB6A5C8),
+		dual,
+		helpstring("IConvert3DSGeometry Interface"),
+		pointer_default(unique)
+	]
+	interface IConvert3DSGeometry : IConvertGeometry
+	{
+		[id(11), helpstring("Initialize the converter with D3D, D2D and the INetFile manager.")] 
+		HRESULT Init([in] LPDIRECT3DRM piD3DRMParam, [in] LPDIRECT2DRM piD2DRMParam, [in] IInternetFileManager* piInternetFileManagerParam);
+		[id(12), helpstring("Read in the geometry scene from the specified file.")] 
+		HRESULT ReadScene([in] BSTR bstr, [in] ITextureCallback *pCGTCallback , [out, retval] VARIANT* pvarFrame); 
+//		HRESULT ReadScene([in] BSTR bstr, [out, retval] VARIANT* pvarFrame); 
+		[id(13), helpstring("The name of this converter (3DS to D3D Geometry Converter).")] 
+		HRESULT Name([out, retval] BSTR* bstr);
+		[id(14), helpstring("The file extension related to this converter (3DS).")] 
+		HRESULT Extensions([out, retval] BSTR* bstr);
+
+		[propget, id(15), helpstring("The scale factor to be applied when reading the scene.")] 
+		HRESULT ScaleFactor([out, retval] double *pVal);
+		[propput, id(15), helpstring("The scale factor to be applied when reading the scene.")]
+		HRESULT ScaleFactor([in] double newVal);
+		[propget, id(16), helpstring("Not implemented.")] 
+		HRESULT ConvertAnimation([out, retval] VARIANT_BOOL *pVal);
+		[propput, id(16), helpstring("Not implemented.")] 
+		HRESULT ConvertAnimation([in] VARIANT_BOOL newVal);
+
+		[propget, id(17), helpstring("Load textures found in the scene file?")] 
+		HRESULT LoadTextures([out, retval] VARIANT_BOOL *pVal);
+		[propput, id(17), helpstring("Load textures found in the scene file?")] 
+		HRESULT LoadTextures([in] VARIANT_BOOL newVal);
+		[propget, id(18), helpstring("if TRUE D3D texture objects will be assigned the file name used to load them.")] 
+		HRESULT KeepCachedTextureNames([out, retval] VARIANT_BOOL *pVal);
+		[propput, id(18), helpstring("if TRUE D3D texture objects will be assigned the file name used to load them.")] 
+		HRESULT KeepCachedTextureNames([in] VARIANT_BOOL newVal);
+	};
+
+#ifdef MY3DSTOD3DLIB
+[
+	uuid(8639C42F-C5F0-11D0-811D-00C04FB6A5C8),
+	version(1.0),
+	helpstring("3dsToD3D 1.0 Type Library")
+]
+library MY3DSTOD3DLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(8639C43E-C5F0-11D0-811D-00C04FB6A5C8),
+		helpstring("Convert3DSGeometry Class")
+	]
+	coclass Convert3DSGeometry
+	{
+		[default] interface IConvert3DSGeometry;
+	};
+};
+#endif

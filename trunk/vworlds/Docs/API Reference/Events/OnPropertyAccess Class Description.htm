@@ -1,0 +1,84 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnPropertyAccess</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>On<i>Property</i>Access</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table><!--Topic Definition-->
+<p>This topic does not document an actual event handler. It 
+is intended to be representative of an entire class of event handlers. <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>On<i>Property</i>Access(<i>varPermissions</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>On<i>Property</i>Access</b> method syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">varPermissions</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The permissions bits indicating the type of access 
+      requested. Currently, On<EM>Property</EM>Access methods are only 
+      called when write access is requested, so this parameter will always be PS_WRITE (2).</td>
+	</TR>
+	
+</TABLE><!--Return Value section -->
+<h3>Return Value</h3>
+<p>Returns <b>True</b> if access to the property is permitted, and <b>False</b> if access is not 
+permitted. <!--Remarks section-->
+<H3>Remarks</H3>
+<p>Using Virtual Worlds security you can limit write access permission to the owner of an object, or to the exemplar used to create the object, or to all users. If you want to grant specialized write access to a particular property, you can provide an additional layer of security by writing an OnAccess method for that property. These methods are also known as <b>On<i>Property</i>Access</b> methods, where <i>Property</i> represents the name of the property associated with the method. 
+
+<p>When a user tries to change a property's value on a particular object, Virtual Worlds always checks to see whether there is a related <b>On<i>Property</i>Access</b> method on the object allowing the change to occur. If the method exists, it is automatically invoked. The value returned by the method determines whether the property's value is changed.
+
+<p>For more information on security, see the <a href="../../Programmer's%20Guide/Security/security%20overview.htm">Virtual Worlds Security Overview</a> topic.
+
+<H3>Example</H3>
+<p>Here is a sample implementation of an On<i>Property</i>Access method. This method returns True if either the object's owner or the world's owner attempts to write to the Coins property. In either case, the change to Coins will be permitted. If a user who is neither the object's owner nor the world's owner attempts to modify Coins, OnCoinsAccess returns False, and the change to Coins will not be permitted. 
+  <br><br>
+<pre class = example>Function OnCoinsAccess(Permissions)</pre>
+<p class=comments>&nbsp;&nbsp;'Permit access only to object's owner and world owner
+<pre class = example>&nbsp;&nbsp;If CheckPolicy( This, CP_OWNER + CP_WORLDOWNER ) = True Then
+&nbsp;&nbsp;&nbsp;&nbsp;OnCoinsAccess = True
+&nbsp;&nbsp;Else
+&nbsp;&nbsp;&nbsp;&nbsp;OnCoinsAccess = False
+&nbsp;&nbsp;End If
+
+End Function</pre>
+
+
+
+
+</body>
+</html>

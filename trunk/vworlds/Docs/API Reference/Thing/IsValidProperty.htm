@@ -1,0 +1,87 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsValidProperty</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsValidProperty</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Thing</td>
+	</tr>
+</table><!--Topic Definition-->
+<P>Determines whether the specified user-added property exists on either the object or on an
+exemplar in its inheritance tree. <b>IsValidProperty</b> is a member of the <a href="Thing.htm">Thing</a> object. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsValidProperty</b>(<i>bstrName</i>)</td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>IsValidProperty</b> method syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the user-added property.</td>
+	</TR>
+
+</TABLE><!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a <b>Boolean</b> that indicates whether the specified property 
+exists on the invoking object. <!--Remarks section-->
+<H3>Remarks</H3>
+<P><b>IsValidProperty</b> first looks for the specified property on the calling instance of the object. If
+the property is not found there, <b>IsValidProperty</b> then looks for it on the object's
+exemplar. If necessary, <b>IsValidProperty</b> will search for the specified property all the way to the
+base exemplar for the object.  For example, if you use <b>IsValidProperty</b> to determine whether
+a particular property exists on a <b>StateMachine</b> instance, it may be necessary for
+<b>IsValidProperty</b> to search the instance, the 
+<A href="../Exemplars/StateMachine/StateMachine.htm">StateMachine</a> exemplar, 
+the <A href="../Exemplars/Artifact/Artifact.htm">Artifact</a>
+exemplar, and finally the <A href="../Exemplars/Thing/Thing.htm">Thing</a> exemplar.&nbsp;
+If the property is found on any intermediate exemplar, <b>IsValidProperty</b> abandons the
+search and returns <b>True</b>.</P>
+
+<p>To prevent accessing a property that does not exist, first use <b>IsValidProperty</b> to determine that the 
+property exists, and then access it only if it does exist.
+<P>Please note that <STRONG>IsValidProperty</STRONG>&nbsp;will not detect most 
+of the properties built in to the Virtual Worlds system (e.g. checking 
+IsValidProperty("IsStub") will return <STRONG>False</STRONG>).&nbsp; For this 
+reason, it is most effectively used to check for the existence of properties 
+added by users or world designers.<!--Example section-->
+<H3>Example</H3>
+<p><pre>Result = AThing.IsValidProperty( "Age" )
+If Result = True Then
+   Value = AThing.Age		'Access property only if it exists
+Else
+   Trace "Age property does not exist."
+End If</pre>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Format</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Format</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Formats a string that will be used to report an action. 
+<b>Format</b> is a member of the <a href="World.htm">World</a> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Format</b>(<i>bstrIn</i>, <i>pObjects</i>, 
+		<i>pPOV</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Format</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrIn</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The text to be formatted.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pObjects</td>
+		<td>PropertyList</td>
+		<td>Required</td>
+		<td>The list containing the objects in the event: the subject, 
+		the object itself, and any indirect objects.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pPOV</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object from which the event is perceived.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a <STRONG>String</STRONG> that contains the formatted text.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>The <EM>bstrIn</EM> parameter describes an action 
+involving the objects in the <EM>pObjects</EM> parameter,
+and should be reported from the point of view of the <i>pPOV</i> parameter. </p>
+<P>The first object in
+the <i>pObjects</i> parameter is the subject of the event, the second is the direct object of the
+event, and the rest are indirect objects. For example, consider this sentence:&nbsp; <i>Gracie gave&nbsp;Eve a flower</i>.&nbsp;Gracie is the subject - the person performing the
+action. The&nbsp;flower is the direct object - the object on which the verb directly acts . The&nbsp;Eve is
+the indirect object - the recipient of the action. This sentence can take different
+forms, each dependent on the point of view of a different participant. From the perspective
+of the&nbsp;flower (the direct object), the sentence could be rewritten as: <i>The&nbsp;flower was
+given to&nbsp;Eve by Gracie.</i>  From Eve's perspective, the sentence might appear as:&nbsp; <i>Eve was given a&nbsp;flower by Gracie.</i> 
+</P>
+
+<p>The <i>bstrIn</i> parameter is 
+divided into multiple substrings using a vertical bar as a separator. Which 
+substring is used depends on the <EM>pPOV</EM> parameter. If
+the <i>pPOV</i> parameter is the same as the first object (the subject) in the <i>pObjects</i>   &nbsp;parameter,
+the first string is used. If the <i>pPOV</i> parameter is the same as 
+the second object (the direct object) in the <i>pObjects</i>
+parameter, the second string is used, and so forth. If the object in the <i>pPOV</i> parameter does not 
+appear in the <EM>pObjects</EM>
+    parameter, or there are fewer than that number of substrings, the last
+substring is used. </p>
+
+<p>Within the substring, macro substitutions can be specified using braces ("{&amp;
+}"). There are two types of substitutions: text and indexed. In text
+substitutions, the name of an object and subproperty or method are enclosed in the braces.
+For example, "{subject.name}". In indexed substitutions, the same object and
+subproperty or method specify a number that is used to select from a list of
+vertical-bar-separated strings. For example, "{subject.gender|his|her|its}". </p>
+
+<p>Object references within brackets have the form "<tt>mainObject.subPart.subPart&amp;</tt>".
+The subParts can be the names of properties, or of methods that take no parameters. The
+mainObject can be one of the following: 
+
+<ul>
+  <li><b>&lt;number&gt; - </b>The &lt;number&gt;th object in <i>pObjects</i>
+  <li><b>Subject </b>- The first object in <i>pObjects</i>
+  <li><b>Object </b>- The second object in <i>pObjects</i>
+  <li><b>IndirectObject -</b>The third object in <i>pObjects</i>
+  <li><b>User </b>- The current user 
+  <li><b>Room - </b>The room the user 
+  is in 
+  <li><b>World </b>- The World object 
+  <li><b>POV </b>- The POV object 
+  <li><b>This </b>- The current object</li>
+</ul>
+
+<p>Other remarks: 
+
+<ul>
+  <li>Since the <i>pObjects</i> 
+  parameter contains a property list that is 
+  zero-based, its first object is considered to be at index 0, its second at 
+  index 1, and so on. 
+  <li>Objects in the <i>pObjects</i> 
+  parameter can be any <b>Variant</b> type, including <b>String</b>,
+    <b>Thing</b>, and so 
+  forth. 
+  <li>If the final result of an object specification is of type <b>IDispatch</b>, ".name" is automatically appended 
+  to it. (This allows "{subject}" in place of "{subject.name}".) 
+  <li>String substitution is not performed recursively. 
+  <li>The objects in the <EM>pObjects</EM> parameter and 
+  the <i>pPOV</i> parameter can be <b>Nothing</b> 
+  (NULL in C++) 
+  <li>The character "{" can be included in strings using 
+  "\{". 
+  <li>The character "|" can be included in strings. </li>
+</ul>&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>In the example that follows, the first of three strings is selected, since <b>User</b>
+(the third parameter in the call to <b>Format</b>) is the first item (the
+Subject) in <i>List</i>. Assuming the <b>User</b> 
+name is Gracie, the resulting string will be, "Gracie gave Eve a flower." 
+Different strings would result from using the flower&nbsp;or Eve as the third parameter in the call to <b>Format</b>.</p>
+
+<pre class="example">Dim List, Str
+Set List = World.CreatePropertyList
+List.Add User
+</pre><p class="comments">'The flower is assumed to have been already created.
+<pre class="example">
+List.Add Flower</pre>
+<p class="comments">'The avatar, Eve, is assumed to have been already created.
+<pre class="example">List.Add Eve  
+Str = _
+&nbsp;&nbsp;World.<b>Format("{Subject.Name} gave {IndirectObject.Name} a {Object.Name}. | 
+&nbsp;&nbsp;The {Object.Name} was given to the {IndirectObject.Name} by {Subject.Name}. |
+&nbsp;&nbsp;{IndirectObject.Name} was given a {Object.Name} by {Subject.Name}.", List, User)</b></pre>
+&nbsp;
+
+
+</body>
+</html>

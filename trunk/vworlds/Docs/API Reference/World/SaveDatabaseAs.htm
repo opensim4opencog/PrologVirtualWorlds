@@ -1,0 +1,86 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SaveDatabase</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SaveDatabaseAs</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Saves checkpoint files. <b>SaveDatabaseAs</b> is a member of the <a href="World.htm">World</a> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>SaveDatabaseAs 
+      </STRONG><EM>bstrNewName</EM>&nbsp;</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SaveDatabaseAs</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>World</TD>
+    <TD>Required</TD>
+    <TD>  An object reference&nbsp;to a <B>World</B> object.</TD></TR>
+	<TR>
+		<td class="boldItal">bstrNewName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The new name of the database.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>To invoke this method, you must be the owner of the 
+world, or a wizard. The checkpoint file&nbsp;(.vwc) is saved to your \Microsoft 
+Virtual Worlds\Worlds directory.
+<P><STRONG>Note:</STRONG>&nbsp;&nbsp;&nbsp;Do not enter an extension for the 
+filename. The extension .vwc is automatically appended to your filename.
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>World.<STRONG>SaveDatabaseAs "Art Gallery"</STRONG></pre>
+&nbsp;
+
+
+</body>
+</html>

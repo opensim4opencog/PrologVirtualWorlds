@@ -1,0 +1,138 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SetMeshFaceUV</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetMeshFaceUV</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets the texture parameters U and V for a vertex of a 
+mesh.&nbsp;<STRONG>SetMeshFaceUV</STRONG> is a member of the 
+<A href="Frame.htm">Frame</a> 
+object. &nbsp;
+
+<!--Syntax table--></P>
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>SetMeshFaceUV</STRONG>&nbsp;<EM>nMeshIndex, 
+      nFaceIndex, index, fU, fV</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetMeshFaceUV</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Frame</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses 
+      a&nbsp;<STRONG>Frame</STRONG>       object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>nMeshIndex</TD>
+    <TD>Long</TD>
+    <TD>Required</TD>
+    <TD>The index number for the mesh that you want to use 
+      for the frame.</TD></TR>
+  <TR>
+    <TD class=boldItal>nFaceIndex</TD>
+    <TD>Integer</TD>
+    <TD>Required</TD>
+    <TD>The&nbsp;index number for the face that you want 
+      to use for the frame.</TD></TR>
+  <TR>
+    <TD class=boldItal>index</TD>
+    <TD>Integer</TD>
+    <TD>Required</TD>
+    <TD>The&nbsp;index number for the vertex that you want to use for the 
+      frame.</TD></TR>
+  <TR>
+    <TD class=boldItal>fU</TD>
+    <TD>Float</TD>
+    <TD>Required</TD>
+    <TD>The U value at the vertex</TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->fV</td>
+		<td><!--Type-->Float</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->The&nbsp;V 
+      value at the vertex</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>The values for the <EM>fU</EM> and 
+<EM>fV</EM>      &nbsp;parameters are used to establish&nbsp;mapping between pixels (in a 
+texture map) and points or vertices (on a surface). These parameters are 
+floating point values in the normalized range (0.0 to 1.0). For example, consider 
+a 256 X 256 texture map that has been wrapped around an object. A vertex at the 
+point (128, 32) on the 256 X 256 texture map would be paired with a U value of 
+0.5 and a V value of 0.125.</P>
+<P>The <EM>MeshIndex</EM> parameter is generally set to the index of a particular mesh, but can 
+be set to two additional values. A value of <TT>-1</TT> indicates that this 
+method should be applied to all meshes in the frame, and a value of <TT>-2</TT> indicates that this method should be applied to all 
+meshes in all frames in the hierarchy.
+
+<!--Example section--> 
+               
+</P>
+<H3>Example</H3>
+<p>
+This example sets the mesh face for the specified object.</p>
+
+<pre class="example">
+Sub PolishAFrame()
+Dim myFrameToPolish</pre>
+<p class="comments">
+'Get the frame.
+<pre class="example">
+Set myFrameToPolish = User.Container.GetFrame</pre>
+<p class="comments">
+'Set the mesh.
+<pre class="example">
+<b>myFrameToPolish.SetMeshFaceUV 4, 12, 1, 0.5, 0.125</b>
+End Sub
+
+</pre>
+
+</body>
+</html>

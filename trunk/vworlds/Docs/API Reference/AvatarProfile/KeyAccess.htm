@@ -1,0 +1,160 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>KeyAccess</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>KeyAccess</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of AvatarProfile</td>
+	</tr>
+</table>
+<P>
+  Sets or returns the access permission for&nbsp;a key in an&nbsp;<A href="AvatarProfile.htm">AvatarProfile</A> object. 
+<STRONG>KeyAccess</STRONG> is a read/write 
+<STRONG>Short</STRONG>.
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>KeyAccess(<EM>bstrKey</EM>)</STRONG> = 
+      <EM>shortValue</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>KeyAccess</STRONG> property syntax has 
+these parts: 
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->Thing</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An 
+      object reference that accesses a&nbsp;<STRONG>Thing</STRONG> 
+           object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>bstrKey</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The name of the key that you want to access.</TD></TR>
+	<TR>
+		<td class="boldItal">shortValue</td>
+		<td><!--Parameter name--> 
+        Short</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An 
+      expression that evaluates to either 0, 1, or 2.</td>
+	</TR>
+</TABLE></P>
+<h4>  Valid Values&nbsp;for KeyAccess Permissions</h4>
+<TABLE class="backlight">
+<TR >
+<TD class=boldItal><P align=center>Value</P></TD>
+<TD class=boldItal><P>Description</P></TD>
+</TR>
+
+<TR>
+<TD><P align=center>0</P></TD>
+<TD>Public: Everyone can read the key. </TD>
+</TR>
+
+<TR>
+<TD><P align=center>1</P></TD>
+<TD>Friends: Only those avatars designated as friends can read&nbsp;the key.</TD>
+</TR>
+
+<TR>
+<TD><P align=center>2</P></TD>
+<TD>Private: Only the key owner can read the key.</TD>
+</TR>
+</TABLE>
+<DIV></DIV>
+
+
+<!--This next tag ends the Flag table.--></TD></TR></TABLE></TD></TR></TABLE>
+<H3>Remarks</H3>
+<P>A user's <STRONG>AvatarProfile</STRONG> object contains an unordered list of 
+paired keys and values, known as <EM>key/value pairs</EM>.&nbsp;Once you have 
+inserted a key/value pair (element) into&nbsp;a map, you can efficiently 
+retrieve or delete the pair using the key to access it. You can also iterate over all the elements in the map.&nbsp;The key 
+is a string that represents the name of&nbsp;a property in the property map. The 
+value is the contents of&nbsp;that property. A property map uses the 
+string&nbsp;that makes up the key instead of an index number to access the value 
+of each property.</P><!--Insert Remarks here-->
+
+<H3>Examples</H3>
+<P>                 This first example is the preliminary procedure that creates the profile key whose access permission is checked 
+in Example 2. This example checks each avatar in a room for a profile key named "PassportID". 
+If the key is not found, the program adds the key to the avatar. Instead of using traditional numeric IDs for the passport, this 
+program generates a unique ID for each avatar in the room by concatenating the name of the world, the user, and the date and time.</P>
+<PRE class="example">
+Sub NewProfileKey()
+Dim myKeyOwner
+Dim allAvatars
+Dim myPassID
+
+Set myKeyOwner = User
+Set allAvatars = User.Container.Avatars
+</PRE>
+<p class="comments">
+'Check each avatar in the room.
+<pre class="example">
+For Each myUser In allAvatars
+</pre>
+<p class="comments">
+&nbsp;&nbsp;&nbsp;&nbsp;'If a passport doesn't exist, create a new passport key.
+<pre class="example">
+&nbsp;&nbsp;&nbsp;&nbsp;If Not myUser.Profile.IsValid("PassportID") Then
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; myPassID = WorldName &amp; myUser.Name &amp; now
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; myUser.Profile.AddKey "PassportID", myPassID, _
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;"http://c:/Passport Info/Passbook.gif", 0, myKeyOwner
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Trace "New PassportID added to " &amp; myUser.Name &amp; _
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  myUser.Profile.KeyValue("PassportID")
+&nbsp;&nbsp;&nbsp; Else
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Trace myUser.Name &amp; "'s passport is validated!"
+&nbsp;&nbsp;&nbsp; End If
+Next
+End Sub
+</pre>
+<p>
+Example 2
+<p>Use the following statement to set the access permission if you are the owner of the key.</p>
+<pre class = "example">
+User.Profile.<STRONG>KeyAccess("PassportID")</STRONG> = 1
+</pre>
+<p>Example 3
+<p>      The following statements check the status of the access permissions and trace a comment to the Command Window if the key is not public.</p><PRE class=example>
+Dim myAccess
+
+myAccess = User.Profile.<b>KeyAccess("PassportID")</b>
+
+If myAccess &lt;&gt; 0 Then Trace _</PRE><PRE class=example>&nbsp;&nbsp;"This key is not public. Only a friend or the Owner has access to this key."
+</PRE>  
+
+</body>
+</html>

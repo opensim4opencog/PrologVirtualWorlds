@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Module (World)</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Module</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>An object reference (or pointer) to the named 
+<A href="../Module/Module.htm">Module</a>. <b>Module</b> is a read-only <b>String</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Module</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Module</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Returns an object reference to the module for which the 
+user is searching.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>In the following example, the Module named "<i>myModule</i>" is presumed to
+have been created previously, probably by a call to the 
+<A href="CreateScriptModule.htm">CreateScriptModule</a> method of <b>World</b>. </p>
+
+<pre>Set Result = World.Module("myModule")</pre>&nbsp;
+ 
+
+</body>
+</html>

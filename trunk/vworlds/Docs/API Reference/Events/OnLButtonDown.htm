@@ -1,0 +1,103 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnLButtonDown</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnLButtonDown</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Method that is called when the left mouse button has been pressed. This method returns a <b>Boolean</b>, but use of the return value is optional.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+		<td><b>Sub OnLButtonDown(<i>hWnd, x, y</i>)</b><br>
+<i>statements</i>
+<br><b>End Sub</b></td>
+    
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnLButtonDown</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	
+		<TR>
+		<td class="boldItal">hWnd</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The window in which the mouse event occurred.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">x</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The x-coordinate of the mouse pointer.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">y</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The y-coordinate of the mouse pointer.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This event-handling method returns a <b>Boolean</b>. 
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>Returns a Boolean flag that indicates whether the left mouse button has been pressed. If it has been, the value is <strong>True</strong>; if not, it is <strong>False</strong>. The <a href="OnRButtonDown.htm">OnRButtonDown</a>, <a href="OnRButtonUp.htm">OnRButtonUp</a>, and <a href="OnLButtonUp.htm">OnLButtonUp</a> methods are also available methods that can be overridden using the same technique.
+
+<p>The most common use of this method is to override it in a function or subroutine to fire additional methods when the left mouse button is pressed. For example, to detect when an object has been clicked, you can add an overidden version of this method to that object. Each time that object is left-clicked, this method is invoked. Use of the return value is optional.
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;To ensure that the internal procedures that are tied to this method are invoked, you must call <b>InvokeSuperMethod</b> within the overridden subroutine. For more information on using this method, see the <a href="../Thing/InvokeSuperMethod.htm">InvokeSuperMethod</a> topic.
+<!--Example section-->
+<H3>Example</H3>
+<p>This example overrides the <b>OnLButtonDown</b> method and displays the mouse-pointer location when the method was fired. To use this example, add this subroutine to an object.<br><br>
+
+
+<pre class="example">Sub OnLButtonDown(Window, x, y)
+&nbsp;&nbsp;&nbsp;&nbsp;World.Trace "Clicked at: " &amp; CStr(x) &amp; ", " &amp; CStr(y)
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod(Window, x, y)
+End Sub
+<!--Example text-->
+&nbsp;
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<HTML>
+ <HEAD>
+ <!Author:Di; Born on 8/26/99 in HTML>
+  <TITLE>Top Ten Programming Tips in Virtual Worlds (White Paper)</TITLE>
+ <LINK REL="STYLESHEET" HREF="../../vwgdoc.css" TYPE="text/css" TITLE="VWG"></HEAD>
+ <BODY>
+</HEAD>
+
+  <H1>Top Ten Programming Tips in Microsoft Virtual Worlds</H1>
+  <P>
+ By Doug Leary, Web Developer, Virtual Worlds
+ <p>
+ <h2>Abstract and Summary</h2>
+ This paper describes 10 programming tips for programmers using Microsoft Virtual Worlds. 
+<p>
+
+ <h2>Top Ten Programming Tips</h2>
+ <p>
+ <h3>1. Insert diagnostic messages freely.</h3>
+ 
+  On web pages use <b>msgbox</b> statements. In code modules, use <b>"world.trace"</b> statements (msgbox statements do not work). Client-side code sends trace messages to the Command Window; server-side code sends them to the server window for that world. 
+ <p>
+ <h3>2. Use the Command Window and the Object Explorer.</h3>
+ The Command Window and Object Explorer are invaluable development and debugging tools. 
+ We recommend including a way of accessing them in your client; you can always remove or disable them later in the final version. Try opening the Command Window as soon as you connect to the world, so you can see unexpected error messages. If you modify a code module and you are connected as a wizard, you can use the Object Explorer to reload that module and continue testing without having to restart your client. 
+  
+<p>
+<h3>3. Check that your world works properly for non-wizard ranked avatars.</h3>
+Privilege differences between wizards and non-wizards can cause unwanted behavior. After you have debugged your newest and coolest version, reconnect as a non-wizard and confirm that it still works as expected. 
+<p>
+
+<h3>4. Use STOP statements when code runs away with no response.</h3>
+The most difficult things to debug in Virtual Worlds are probably world-building code and client startup, because errors that occur during these steps are not always visible. In some cases your client or build can stop responding. Sometimes the only way to see what the code is doing is to insert a <b>STOP</b> statement and step through your code with a debugger such as Microsoft Visual Interdev.
+<p>
+While a world build is running, watch the main window and the world window on the server. These are the places where you will see syntax errors that prevent modules from compiling. 
+<P>
+<h3>5. Make use of the automatic remoting mechanism.</h3>
+
+Unless a property is defined as non-remoted, Virtual Worlds broadcasts all property changes to all clients, triggering OnPropertyChanged methods. To cause an action on all clients, placing code in an OnPropertyChanged method can be more efficient than writing a separate client-side method.
+<p>
+<h3>6. Learn the differences between client-side versus server-side methods.</h3>
+
+Become an expert on the differences between client-side methods and server-side methods, and the ramifications of using each. Especially read the Help topics, "What is the Client/Server Programming Model?" and "What are Server-Side Methods?" For example, when a client executes a client method, the method runs only on that one client. To run a method on all clients, you can create a server method that executes the client method, or you can create a client OnPropertyChanged method and trigger it by changing the property. 
+<p>
+<h3>7. Be aware of timing issues inherent in asynchronous methods and multiple threading.</h3>
+
+Things might not happen in the order you expect. For instance, suppose you have two consecutive lines of code that change PropertyA and PropertyB. You can be sure that PropertyA will be changed before PropertyB and that the new value of PropertyA will be sent to a given client before the new value of PropertyB. But suppose you have a client-side OnPropertyAChanged method that uses PropertyB in some way. OnPropertyAChanged starts running as soon as the new value of PropertyA arrives, and may behave inconsistently depending on how soon the new value of PropertyB gets there. 
+<p>
+ Inserting <b>msgbox</b> statements to see what's going on can hide problems like this (or create new problems) by making one thread wait for you to click OK while the other thread runs. 
+<p>
+<h3>8. Keep server-side methods short and sweet. </h3>
+
+The less script the server has to execute, the better. Generally you want the server to do little else than its job of passing property changes and other traffic back and forth between clients. 
+<p>
+<h3>9. Check and confirm the use of CreateMethod.</h3>
+
+If a method does not seem to execute and you get no errors and no trace messages from the method, check your <b>CreateMethod</b> call for simple cut-and-paste errors. Be sure you have a <b>CreateMethod</b> in the first place, that it refers to the right object or exemplar name, method name, subroutine or function name, the right module name, and that you have correctly specified it as a client or server method. Also make sure the privilege flags are correct.
+<p>
+<h3>10. Synchronize all the software involved. </h3>
+
+If you see weird behavior, especially different behavior on different client machines, make sure they are all running the same version of your world and the same version of Virtual Worlds. This includes making sure everybody has all the newest graphics files, HTML files, and code files. See if one client is connected as a wizard and the others are not. Also make sure everyone is using new avatars, especially if you have changed avatar properties, methods, or anything to do with the user profile. Before you suspect a general problem with Virtual Worlds, try bouncing your server and re-building the world.
+<p>
+
+ </BODY>
+</HTML>

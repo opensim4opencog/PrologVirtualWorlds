@@ -1,0 +1,160 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Remove</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Remove</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of PropertyList</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>    Removes a collection item from 
+a property. <STRONG>Remove</STRONG> is a member of the <A 
+href="PropertyList.htm">PropertyList</A> collection.&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<TABLE class=backlight>
+<TR>
+<TD><EM>object</EM>.<STRONG>Remove</STRONG>&nbsp;<EM>var</EM></TD>
+</TR>
+</TABLE>
+<p>The <b>Remove</b> method syntax has 
+these parts:
+<!--Return Value section -->
+<TABLE class=backlight><!--Parameters table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Part</TD>
+    <TD>Type</TD>
+    <TD>Use</TD>
+    <TD>Description</TD></TR></THEAD><!--Parameters table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>PropertyList</TD><!--Parameter name-->
+    <TD>Required</TD><!--Type-->
+    <TD>An&nbsp;object reference to a <STRONG>PropertyList</STRONG> collection.</TD><!--Description--></TR>
+  <TR>
+    <TD class=boldItal>var</TD>
+    <TD>Variant</TD><!--Parameter name-->
+    <TD>Required</TD><!--Type-->
+    <TD>
+      <P>The name of the item in the collection that you want to remove from the 
+      <STRONG>PropertyList</STRONG> collection. This item may or may not have a 
+      reference to an object.</P></TD><!--Description--></TR></TABLE>
+<H3></H3>
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The execution of this method is similar to the <A 
+href="RemoveAt.htm">RemoveAt</A> method in that both methods remove an 
+item in a collection from a specified point.&nbsp;Both methods affect the index 
+ number and the <A href="Count.htm">Count</A> property&nbsp;of the 
+<STRONG>PropertyList</STRONG> collection.
+<P><STRONG>Remove</STRONG>&nbsp;-&nbsp;Specifies the collection item to remove by the item's name.<br><STRONG>RemoveAt</STRONG>&nbsp;-&nbsp;Specifies the collection item 
+to remove by the item's index number. 
+<P>With both methods, you can remove 
+an item from the middle of a list.&nbsp; 
+<H4>Reshuffling the Collection After a Remove Action</H4>
+<P>The process that takes place within the <STRONG>Remove</STRONG> method is the same as in the 
+<STRONG>RemoveAt</STRONG> method:&nbsp;The <STRONG>Count</STRONG> property and indexes are adjusted to fill in 
+the vacant point in the collection. For example, if a property list initially 
+has properties at indexes 0, 1, 2, and 3, and the property at index 2 is 
+removed, then the property at index 3 will be shifted down to index 2. 
+<P>The <STRONG>Count</STRONG>         
+             
+                
+property is adjusted to match the total count of properties in the property list. 
+Therefore, you may want to avoid using the <STRONG>Count</STRONG> property as an 
+iteration counter. If you include an increment or decrement method (such as the 
+<A href="Add.htm">Add</A> method) inside a loop, the <STRONG>Count</STRONG> property will be changed within your loop and an iteration counter depending 
+on the value may not be accurate. <PRE></PRE>    
+              
+ 
+<P></P>
+<H3>Examples</H3>
+<p>
+ 
+ This example removes a property from a property list.</p>
+<!--Example text--><PRE>Sub OceanViewInnFeatures()
+Dim myHotTub
+Dim myStonehenge
+Dim myBridge
+Dim myOceanViewInnFeatures
+Dim i
+Dim myCount
+</PRE>
+<p class="comments">
+'Establish the link to the object in the virtual world.
+<pre class="example">
+Set myHotTub = CreateInstance("Spa", "Artifact", User.Container)
+Set myStonehenge = _
+&nbsp;&nbsp;CreateInstance("Stonehenge", "Artifact",  User.Container)
+Set myBridge = _
+&nbsp;&nbsp;CreateInstance("Bridge", "Artifact",  User.Container)
+</pre>
+<p class="comments">
+'Create the collection.
+<pre class="example">
+Set myOceanViewInnFeatures = CreatePropertyList
+</pre>
+<p class="comments">
+'Establish the link for the object to the collection.
+<pre class="example">
+myOceanViewInnFeatures.Add myHotTub
+myOceanViewInnFeatures.Add myStonehenge
+myOceanViewInnFeatures.Add myBridge
+</pre>
+<p class="comments">
+'Get the count of items in the 
+collection.</FONT>
+<pre class="example">
+myCount = myOceanViewInnFeatures.Count
+</pre>
+<p class="comments">
+'Display the original collection list.
+<br>'The variable "i" represents the index number of each 
+item in the collection.</FONT>
+<pre class="example">
+For i = 0 To myCount - 1
+&nbsp;&nbsp;&nbsp; Trace i &amp; " " &amp; myOceanViewInnFeatures.Property(i)
+Next
+</pre>
+<p class="comments">'Remove the bridge from the collection.
+<pre class="example">
+myOceanViewInnFeatures.<STRONG>Remove myBridge</STRONG>
+</pre>
+<p class="comments">'Get the new count of items in the collection.
+<pre class="example">
+myCount = myOceanViewInnFeatures.Count
+</pre>
+<p class="comments">'Display the collection again.
+<pre class="example">For i = 0 To myCount - 1
+&nbsp;&nbsp;&nbsp; Trace i &amp; " " &amp; myOceanViewInnFeatures.Property(i).Name
+Next
+</pre>
+<p class="comments">'Display the new count of items in the collection.
+<pre class="example">
+Trace myOceanViewInnFeatures.Count
+End Sub</pre><PRE class=example>&nbsp;</PRE>
+ 
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsAvatar</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsAvatar</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Determines whether or not an object is an 
+<a href="../Exemplars/Avatar/Avatar.htm">Avatar</a>. 
+<b>IsAvatar</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsAvatar</b>(<i>pthing</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>IsAvatar</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pthing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The <b>Thing</b> object reference to inspect.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Boolean</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Use <b>IsAvatar</b> to differentiate between users (who have avatar profiles
+and connections) and other objects.</p>
+
+<p><b>IsAvatar</b> will return <b>True</b> for instances of
+subexemplars of <b>Avatar</b> (for example, 
+<a href="../Exemplars/Host/Host.htm">Host</a>).
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>In the following example, an object named <i>Runner</i> in the same room as the user
+(in <b>User.Container</b>) is being inspected to determine whether or not it is
+an <b>Avatar</b>. A <b>True</b> value for the <i>IsAnAvatar</i>
+variable means that <i>Runner</i> is an <b>Avatar</b>, while a <b>False</b>
+value means that it is not.</p>
+
+<pre>Dim ObjectRef
+Set ObjectRef = User.Container.FindWithin(&quot;Runner&quot;)
+IsAnAvatar = World.IsAvatar( ObjectRef )</pre>
+&nbsp;
+
+
+</body>
+</html>

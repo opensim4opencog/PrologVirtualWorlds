@@ -1,0 +1,58 @@
+<html>
+
+<head>
+<title>New Module Dialog Box</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 3.0">
+<link REL="STYLESHEET" HREF="../../vwgdoc.css" TYPE="text/css" TITLE="VWG">
+</head>
+
+<body>
+
+<h1>New Module Dialog Box</h1>
+
+<p>Use this dialog box to create a new <a href="../../API%20Reference/Module/Module.htm"><strong>Module</strong></a>
+object.</a> A module is a Virtual Worlds data structure used to contain program code that
+can be invoked by objects within the world. Modules can be either <i>script modules</i>
+(plain text files containing subs and functions) or <i>COM modules</i> (binary files
+containing interfaces and methods).</p>
+
+<p><img src="newmodu.jpg" width="298" height="169" alt="newmodu.bmp (151478 bytes)"></p>
+
+<p>You can make this dialog box appear by right-clicking on Modules in the Objects window
+of the Object Explorer, and then choosing New Module. </p>
+
+<h2>Options</h2>
+
+<h3>Module Name</h3>
+
+<p>Enter the name of the module you are creating into this text box. Try to use a
+descriptive and informative name for your module, such as <em>RotateRoutines</em> or <em>SizeManipulationCode</em>
+rather than something generic like <em>FredsModule</em> or <em>Module17</em>. </p>
+
+<h3>Module URL</h3>
+
+<p>Enter the URL for your module file into this text box. The URL can point to either a
+file on the Internet or one on your local computer. Any URL can be used. The most useful
+protocols are probably <strong>FILE://</strong>, <strong>HTTP://</strong>, and <strong>FTP://</strong>.</p>
+
+<p>Since you <em>must</em> type an URL into this box, you should access a file locally by
+entering <strong>FILE://</strong> protocol and appending the pathname of the file to it.</p>
+
+<h3>Execute on</h3>
+
+<p>Specifies whether your method should run on the client, on the server, or both. 
+
+<ul>
+  <li>If you select <strong>Client</strong>, and the module's code is invoked from a client,
+    it runs only on that client, but if it is invoked from the server, it runs remotely on all
+    bystander clients. </li>
+  <li>If you select <strong>Server</strong>, and the module's code is invoked from a client,
+    it runs remotely on the server, but if it is invoked from the server, it runs only on the
+    same server. </li>
+  <li>If you select <strong>Client and Server</strong>, and the module's code is invoked from
+    a client, it is invoked both on that client and on the server, but if it is invoked from
+    the server, it runs remotely both on all bystander clients as well as the server.</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,101 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnLoadGeometry</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnLoadGeometry</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called in response to the <strong>LoadGeometry</strong>
+event, which occurs whenever the geometry for an object is loaded on a client.
+<!--Syntax table-->
+
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>OnLoadGeometry(<i>pNewFrame</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnLoadGeometry</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">pNewFrame</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>Child frame containing geometry for the object.</td>
+	</TR>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>This method is not normally called by the user; it responds to an internal event that
+occurs in Virtual Worlds when the geometry of an object has changed, including when it is
+deleted. If you find it necessary to override this event-handling method, <strong>InvokeSuperMethod</strong> should also be called
+to maintain the existing functionality of the overridden method.
+
+<p>The geometry for an object will be loaded when that object enters a room the user is
+in, when the object is made visible (from being invisible),
+or when the geometry for that object is changed. 
+
+<p>The geometry frame for the object (not the transform frame) is passed to <strong>OnLoadGeometry</strong>
+as a parameter.
+<!--Example section-->
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">Sub OnLoadGeometry(newFrame)
+&nbsp;&nbsp;&nbsp;&nbsp;World.Trace newFrame.Name &amp; &quot; has been loaded.&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod(newFrame)
+End Sub</pre>
+<!--Example text-->
+&nbsp;
+
+
+</body>
+</html>

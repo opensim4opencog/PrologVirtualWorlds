@@ -1,0 +1,108 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>FindWithin</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>FindWithin</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Thing</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Searches by name within the invoking object's contents for a specified object. 
+<b>FindWithin</b> is a member of the <a href="Thing.htm">Thing</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>FindWithin</b>(<i>bstrName</i>&nbsp;[,&nbsp;<i>varQuiet</i>])</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>FindWithin</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the requested object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[varQuiet]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>Equal to 0.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Thing</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The invoking object should be the container that is to be searched to find the
+requested object. </p>
+
+<p>If <b>FindWithin</b> is successful, it displays <tt>OK</tt> in the <b>Command Window</b>. 
+If the requested object cannot be found, it displays <tt>Failed to find 
+"&lt;ObjectName&gt;" within "&lt;Container&gt;"</tt>.</p>
+
+<p>When <b>FindWithin</b> is called from the server, it is able to find anything
+for which it is searching, in the container. When <b>FindWithin</b> is called
+from a client, however, it may not find every object in the same container, because
+clients have only a subset of the objects in a world. Specifically, only those objects in
+the same room as your avatar exist on your client. Such objects as another avatar's
+contents or the contents of closed containers are not sent to the client, and cannot be
+found by <b>FindWithin</b> if it is called from the client. </p>
+
+<p>If the object is not being marshalled (for example, if you call this method on the client 
+to find an object that isn't being regularly marshalled to your client), you will get only a 
+momentary, one-time copy of the object. The original object, from which the copy was made, may 
+undergo further changes after you have gotten the copy.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>Set Result = AThing.FindWithin (&quot;SomeObject&quot;)</pre>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Copy</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Copy</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Duplicate the specified <A 
+href="Frame.htm"><B>Frame</B></A>   object. <b>Copy</b> is a 
+member of the <STRONG>Frame</STRONG> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Copy</b>&nbsp;<i>pObjProp</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Copy</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b>  object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pObjProp</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>The destination for the copy of the frame.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <i>pObjProp</i> parameter should be set to <b>Nothing</b> when you use this method. &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre class="example">
+Dim myFrame
+Dim myCopyFrame
+Set myFrame = User.Container.GetFrame
+myFrame.<b>Copy myCopyFrame</b>
+</pre>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Keys</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Keys</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of AvatarProfile</td>
+	</tr>
+</table>
+<P>
+<P>
+<P>
+
+<!--Summary of topic-->
+<P>Returns&nbsp;a&nbsp;<A 
+href="../PropertyList/PropertyList.htm">PropertyList</A> collection 
+from the profile of an avatar. <STRONG>Keys</STRONG> is a 
+read-only&nbsp;<A href="AvatarProfile.htm">AvatarProfile</A> property.     
+          
+
+<!--Syntax table--></P>
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object.</EM><STRONG>Keys</STRONG></td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>Keys</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>AvatarProfile</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An expression that returns 
+      an&nbsp;<STRONG>AvatarProfile</STRONG>  object.</td><!--Description-->
+	</TR>
+</TABLE>
+
+ <!--Remarks section-->
+<H3>Remarks</H3>
+<P>
+Keys are a property list that contains settings for your 
+avatar. The keys are stored in your avatar's profile. In Microsoft Virtual 
+Worlds, you can&nbsp;update the default keys in the profile list for your 
+avatar, or you can create your own keys by using the <A 
+href="AddKey.htm">AddKey</A>
+          
+            
+                
+    method. These keys contain information about you and your 
+avatar. For example, the <EM>GestureText</EM>
+      
+        
+                       
+          
+         key 
+contains either the default text for the gesture or the last phrase 
+you used with the <A href="../Exemplars/Thing/Emote.htm">Emote</A>        
+method. The following table lists the keys that are available for your&nbsp;avatar's&nbsp;profile in Virtual Worlds.
+<P><table class="backlight">
+<tr><td><b>Key</b></td>
+<td><b>Index</b></td>
+<td><b>Type</b></td>
+<td><b>Description</b></td></tr> 
+
+<tr class="line" ><td colspan=100></td></tr>
+
+<tr>
+<td><i>Ignoring</i></td>
+<td><div align="center">0</div></td>
+<td>PropertyList</td>
+<td><STRONG>True</STRONG>      if the user ignores someone.</td>
+</tr>
+
+<tr>
+<td><i>GestureText</i></td>
+<td><div align="center">1</div></td>
+<td>PropertyMap</td>
+<td>Text of a gesture that displays in the chat-history window. The text is either a default value or set with the <b>Emote</b> method.</td>
+</tr>
+
+<tr>
+<td><i>CameraPreference</i></td>
+<td><div align="center">2</div></td>
+<td>String</td>
+<td>          The selected camera angle.</td>
+</tr>
+
+<tr>
+<td><i>AvatarCameraPosition</i></td>
+<td><div align="center">3</div></td>
+<td>Vector</td>
+<td>The camera position for your avatar.</td>
+</tr>
+
+<tr>
+<td><i>Chat?</i></td>
+<td><div align="center">4</div></td>
+<td>Boolean</td>
+<td><b>True</b>  if the user 
+      turned chat&nbsp;on.</td>
+</tr>
+
+<tr>
+<td><i>LastWorld</i></td>
+<td><div align="center">5</div></td>
+<td>String</td>
+<td>The last world that your avatar entered.</td></tr>
+
+<tr>
+<td><i>Where from</i></td>
+<td><div align="center">6</div></td>
+<td>String</td>
+<td>The location of the user.</td>
+</tr>
+
+<tr>
+<td><i>Home page</i></td>
+<td><div align="center">7</div></td>
+<td>String</td>
+<td>The&nbsp;URL&nbsp;of the user's home page.</td>
+</tr>
+
+<tr>
+<td><i>RecentWorlds</i></td>
+<td><div align="center">8</div></td>
+<td>PropertyList</td>
+<td>The most recent worlds your avatar entered.</td>
+</tr>
+
+<tr>
+<td><i>SpriteGeometry</i></td>
+<td><div align="center">9</div></td>
+<td>String</td>
+<td>The file name of the graphic for your avatar. See 
+      the <A href="../Exemplars/Thing/GeometryName.htm">GeometryName</A> property for more 
+information.</td>
+</tr>
+
+<tr>
+<td><i>Gender</i></td>
+<td><div align="center">10</div></td>
+<td>String</td>
+<td>The gender of the user.</td>
+</tr>
+
+<tr>
+<td><i>Real name</i></td>
+<td><div align="center">11</div></td>
+<td>String</td>
+<td>The name of the user.</td>
+</tr>
+
+<tr>
+<td><i>Friends</i></td>
+<td><div align="center">12</div></td>
+<td>PropertyList</td>
+<td>Avatars that you've added to the friends list within a Virtual World's session.</td>
+  </tr>
+
+<tr>
+<td><i>E-Mail alias</i></td>
+<td><div align="center">13</div></td>
+<td>String</td>
+<td>The e-mail address of the user.</td>
+</tr>
+
+<tr>
+<td><i>Age</i></td>
+<td><div align="center">14</div></td>
+<td>String</td>
+<td>The age of the user.</td>
+</tr>
+
+<tr>
+<td><i>NamedGestures</i></td>
+<td><div align="center">15</div></td>
+<td>PropertyMap</td>
+<td> A list of the named gestures in Virtual Worlds. For more 
+      information, see the <A href="../Exemplars/Thing/GetNamedGestures.htm">GetNamedGestures</A> method.</td>
+</tr>
+
+<tr>
+<td><i>Quote</i></td>
+<td><div align="center">16</div></td>
+<td>String</td>
+<td>A quote from the user.</td>
+</tr>
+
+<tr>
+<td><EM>PreferredName</EM></td>
+<td><div align="center">17</div></td>
+<td>String</td>
+<td>The name that the user prefers.</td>
+</tr>
+  <TR>
+
+<td><i>GUID</i></td>
+<td><div align="center">18</div></td>
+<td>String</td>
+<td>The globally unique identifier for the object.</td>
+</TR>
+</table>
+
+<H3>Example</H3>
+<p> This example prints the value of a 
+single key and iterates through the entire list of keys in the profile of an 
+avatar. <PRE class=example><!--Example text--> 
+Sub ListKeys()
+Dim myKey
+Dim myKeyList
+Dim myKeyCount
+</PRE>
+<p class="comments">'Get the <b>Keys</b> collection.
+<pre class="example">
+Set myKeyList = User.Profile.<b>Keys</b>
+myKeyCount = myKeyList.Count - 1
+</pre>
+<p class="comments">'Trace each key to the Command Window.
+<pre class="example">
+For myKey = 0 To myKeyCount
+&nbsp;&nbsp;&nbsp;&nbsp;Print myKeyList.Property(myKey)
+&nbsp;&nbsp;&nbsp;&nbsp;Trace&nbsp;Typename(User.Profile.KeyValue(myKeyList.Property(myKey)))
+Next
+</pre>
+<p class="comments">'Now trace a single key.
+<pre class="example">
+Trace User.Profile.KeyValue("SpriteGeometry")
+
+End Sub
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>How Worlds Are Saved</title>
+<link rel="STYLESHEET" href="../vwgdoc.css" type="text/css"
+title="VWG">
+</head>
+
+
+<h1>How Worlds Are Saved</h1>
+
+<p>The Virtual Worlds Server application provides you with the
+capability of saving the current state of a world at any time.
+After you have taken the world offline, you can then restore it to its saved state.
+You can use this capability to "undo" changes made after you saved the world.</p> 
+
+<p>The world data can be saved in either of two different file formats: </p>
+
+<ul>
+    <li>as a checkpoint file </li>
+    <li>as a Microsoft Visual Basic Script<font size="2">©</font>
+        file. </li>
+</ul>
+
+<p>The Virtual Worlds Server application's <a
+href="../uiref/adminui/vwsfile.htm"><b>File</b></a> menu
+distinguishes between these two file formats in its terminology: the <a
+href="savechk.htm"><strong>Save</strong></a> option saves
+the world to a checkpoint file, while the <a href="savescpt.htm">
+<strong>Export</strong></a> option saves the world to a Microsoft Visual
+Basic Script<font size="2">©</font> file. </p>
+
+<h2>Saving to a Virtual Worlds Checkpoint File</h2>
+
+<p>The Virtual Worlds checkpoint file is a database of all objects in the world,
+together with their methods and properties, organized in a form that the Virtual
+Worlds Server application can read. When you click
+either the <strong>Save</strong> or <strong>Save As...</strong> menu
+options on the <strong>File</strong> menu,
+the server creates a checkpoint file. You can restore the world
+by clicking the <strong>Open...</strong> menu option on the <strong>File</strong>
+menu. One very important point is that the Virtual Worlds Server
+application cannot open a checkpoint file that was created by a
+different version of Virtual Worlds. To ensure compatibility, always export your world
+as a script file before you upgrade to a new version of Virtual Worlds.  After you have
+upgraded to the new version, you can import the script file you saved.</p>
+
+<p><b>Tip</b>:&nbsp;&nbsp;&nbsp;Saving a world to a checkpoint file has the added benefit of reducing the overall file size of a world. Periodically saving a world to a checkpoint file can help to reduce the loading time of a world.
+
+<h2>Exporting to a Microsoft Visual Basic Script<font size="3">©</font>
+File</h2>
+
+<p>When you click either the <strong>Export</strong> or <strong>Export As...</strong>
+menu options on the <strong>File</strong> menu,
+the server creates a Microsoft Visual Basic Script<font size="2">©</font>
+file. This is a text file consisting of a single subroutine named
+AutoRun. (Note: The AutoRun subroutine is executed in the
+<a href="../uiref/adminui/import.htm"><b>Import Script Wizard</b></a> when you
+<strong>Import...</strong> a
+world script file.) Rather than storing all the data for the
+world as a checkpoint file does, the script file subroutine
+contains Visual Basic Script statements that generate new copies of all of the
+world's objects. </p>
+
+<p>Unlike a checkpoint file, a script file can be opened with an
+ordinary text editor. The script file contains statements in Microsoft
+Visual Basic Script<font size="2">©</font> that are sensitive to small changes, like
+statements in any other programming language.  Unless you are fairly certain of the
+outcome of changes you make to this file,  it is recommended that you leave the script
+file untouched.  </p>
+
+<p>The most important reasons for exporting a world to a script
+file are:</p>
+
+<ul>
+    <li>to provide compatibility between different versions of the
+        Virtual Worlds software. Unlike a checkpoint file, a
+        script file can be exported by one version of the server
+        application and imported by another.</li>
+    <li>to provide greater power, flexibility, and precision to
+        those who write scripts than is available with the user
+        interface tools. In certain special cases (such as
+		<a href="../API%20Reference/Exemplars/StateMachine/StateMachine.htm"><b>StateMachine</b></a>
+        objects), there is no other way to access these objects.
+        </li>
+</ul>
+
+<h4>Tasks </h4>
+
+<p><a href="openchk.htm">Opening a World Checkpoint File</a><br>
+<a href="openscpt.htm">Importing a World Script File</a><br>
+<a href="savechk.htm">Saving a World as a Checkpoint File</a><br>
+<a href="savescpt.htm">Exporting a World as a Script File</a><br>
+<a href="vwsdelw.htm">Deleting a World</a></p>
+</body>
+</html>

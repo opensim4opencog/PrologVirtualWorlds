@@ -1,0 +1,24 @@
+HKCR
+{
+	VWSYSTEM.Thing.1 = s 'Thing Class'
+	{
+		CLSID = s '{99AD3619-AAB5-11D0-BAE3-00C04FC2CAB1}'
+	}
+	VWSYSTEM.Thing = s 'Thing Class'
+	{
+		CurVer = s 'VWSYSTEM.Thing.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {99AD3619-AAB5-11D0-BAE3-00C04FC2CAB1} = s 'Thing Class'
+		{
+			ProgID = s 'VWSYSTEM.Thing.1'
+			VersionIndependentProgID = s 'VWSYSTEM.Thing'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Method (Thing)</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Method (Thing)</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Thing</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Variant</b> (of type Object) that contains a method for 
+a <b>Thing</b>. <b>Method</b> is a read/write <a href="../Method/Method.htm">Method</a> object reference.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<p>To set this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Method</b> = <i>stringValue</i></td>
+	</tr>
+</table>
+<p>To retrieve this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Method</b></td>
+	</tr>
+</table>
+<!--Parameters table-->
+<p>The <b>Method</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">stringValue</td>
+		<td>Method</td>
+		<td>Required</td>
+		<td>A <b>String</b> reference that evaluates to a <b>Method</b> object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Method</b> property enables a scripter to obtain a method on a <b>Thing</b>
+object, or to reset an existing method so that it will execute different code. To reset a
+method for a <b>Thing</b>, that method must already exist on the <b>Thing</b>,
+and the new method must already have been created from a module. To create a method, use 
+<a href="../World/CreateMethod.htm">CreateMethod</a> method of <b>World</b>;
+to create a script module, use the <a href="../World/CreateScriptModule.htm">CreateScriptModule</a>
+method of <b>World</b>. </p>
+
+<p>When you add a property or method to an object, you are adding a copy of that property
+or method. If you want to modify the property or method on the object, you must be careful
+to refer to it explicitly; otherwise, you will be modifying your local copy of the
+property.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+
+<p>In the following example, there is a <b>Thing</b> object named <i>Baby</i>
+with a method <i>Greet</i> on it. The VBScript creates a script module from a file named
+<i>test.vbs</i> (line 2), and then creates a method from this module (line 3). The
+method refers to a subroutine named NewGreet within the file <i>test.vbs</i>. Finally,
+the <i>Greet</i> method of <i>Baby</i> is reset to refer to the new code (line 4).</p>
+
+<blockquote>
+  <pre>Dim NewMod, NewMeth
+Set NewModule = CreateScriptModule(&quot;New Module&quot;, &quot;test.vbs&quot;, MODULE_CLIENT)
+Set NewMethod = CreateMethod(METHOD_CLIENT, NewModule, &quot;NewGreet&quot;)
+Baby.Method(&quot;Greet&quot;) = NewMethod</pre>
+</blockquote>&nbsp;
+
+
+</body>
+</html>

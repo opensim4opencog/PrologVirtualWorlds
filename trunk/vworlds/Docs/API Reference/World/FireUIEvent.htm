@@ -1,0 +1,158 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>FireUIEvent</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>FireUIEvent</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>Invokes a specified event on the Virtual Worlds <b>Client</b> ActiveX&trade; object. <b>FireUIEvent</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>FireUIEvent</b>&nbsp;<i>pthing</i>, <i>bstrEventName</i> [,<i>varArg</i>] </td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>FireUIEvent</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pthing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>A reference to an instance of the <b>Thing</b> object that calls the event.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrEventName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the event to be fired.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">varArg</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>Any valid arguments required by the event to be invoked. If more than one argument is required, they may be passed as an array or a <a href="../PropertyList/PropertyList.htm">PropertyList</a>.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>In addition to the system events that are described in the <a href="../Events/Event%20Handlers.htm">Event Handlers</a> section, Microsoft Virtual Worlds also includes events that are associated with the Virtual Worlds <b>Client</b> ActiveX&trade; object. Through an instance of this object, system events that are fired in response to actions that take place within the User Interface can be handled. Having access to these events provides a way to either extend the existing interface, or to create a completely separate interface. 
+
+<p>The Virtual Worlds <b>Client</b> object is included with the Virtual Worlds installation package. To access this object, create an instance of it by placing an &lt;OBJECT&gt; tag with the correct CLASSID in an .htm or .vbs file. 
+
+<p>The basic object tag is:<br><br>
+<pre class = example>&lt;object ID=<i>name</i> CLASSID="clsid:D4898803-20EF-11D0-8A96-00A0C9082583"&gt;&lt;/OBJECT&gt;</pre><br><br>
+
+<p>The <i>name</i> item is the user-assigned name by which other elements on that page will reference the instance of the <b>Client</b> object.
+
+<h3>Working With User Interface Events</h3>
+<p>The Virtual Worlds <b>Client</b> object provides an event handling structure that allows Web Page elements to receive Virtual Worlds UI Events. This structure conforms to the conventions of the Document Object Model (DOM). The structure follows this pattern:<br><br>
+
+<pre class=example>Sub theClient_OnUIEvent(Who, What, Args)
+
+Select Case What
+&nbsp;&nbsp;&nbsp;&nbsp;Case <i>eventname</i></pre>
+<div class=comments>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Perform actions as a result of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'the specified event being fired.</div>
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;Case <i>eventname2</i></pre>
+<div class=comments>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Perform an action as a result of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'the specified event being fired.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'....</div>
+<pre class=example>End Case
+
+End Sub</pre>
+
+<p>In the previous example, "theClient" refers to the name of the Virtual Worlds <b>Client</b> object that is determined by the ID tag of the <b>Client</b> object. the items &quot;<i>eventname</i>&quot; and &quot;<i>eventname2</i>&quot; correspond to any valid UI Event in the form of a <b>String</b>.
+
+
+<P>The primary usefulness of the <b>FireUIEvent</b> method is to support an object-oriented, modular client structure. Each object within a web page can use the <b>Client</b> object to communicate between objects contained in that web page. <b>FireUIEvent</b> triggers the event specified by first passing a message to the <b>Client</b> object. Then the <b>Client</b> object broadcasts this message to each object on that page, and each receiving object "decides" whether to handle the event.
+
+<p>For example, consider a client interface that has a chat text area, a chat-history window, and a Web browser. In this interface, the chat object uses <b>FireUIEvent</b> to send a message to the <b>Client</b> object to fire a specific event on all objects within the web page, which would include both the chat-history object and the Web browser object. In turn, each object receives this message and "chooses" whether or not to handle that event. In this example, the chat-history object would logically respond to this message by firing an event internally (perhaps displaying, in the chat-history window, the text that was entered in the chat text object), whereas the Web browser object might simply ignore the event. 
+
+<p>Using this message relay structure allows any object on a web page to be extracted from that page without leaving a broken connection between the removed object and the remaining objects.
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;You should invoke the <b>FireUIEvent</b> method only on client-side events. When an event is triggered (and subsequent properties are changed), Microsoft Virtual Worlds remotes any changes to other clients internally. Firing the <b>FireUIEvent</b> method on a server-side method generally results in an error. 
+
+<!--Example section-->
+<H3>Examples</H3>
+<p>The first example invokes the <b>FireUIEvent</b> method to signal an event is to be fired on the <b>Client</b> object. The parameter <i>myThingChild</i> is a reference to the thing object that is firing the event. The parameter <i>myWorld</i> is the name of the parent object.<br><br>
+&nbsp;
+
+<pre class="example">Sub MyEventInvoker(myThingChild, myWorld, myBoolFlag)
+
+If myBoolFlag = True Then</pre>
+<p class=comments>'Note: the names of the arguments in the array<br>
+'are the arguments required by the specified event.
+
+<pre class="example">&nbsp;&nbsp;&nbsp;&nbsp;myWorld.<b>FireUIEvent myThingChild, myMainEvent, Array("myNewName", True)</b>
+Else
+&nbsp;&nbsp;&nbsp;&nbsp;myWorld.<b>FireUIEvent myThingChild, mySecondaryEvent</b>
+End If
+
+End Sub
+
+</pre>
+Example 2
+<p>This example demonstrates creating a <b>PropertyList</b> and passing it as the <i>varArg</i> parameter of the <b>FireUIEvent</b> method.<br><br>
+
+<pre class="example">Dim myPropList</pre>
+<p class=comments>'Create a PropertyList and add members to the list.
+<pre class="example">Set myPropList = World.CreatePropertyList
+&nbsp;&nbsp;&nbsp;&nbsp;myPropList.Add True		
+&nbsp;&nbsp;&nbsp;&nbsp;myPropList.Add "..\..\worlds\myWorld\html\mainWorld.htm"
+&nbsp;&nbsp;&nbsp;&nbsp;myPropList.Add World
+</pre>
+<p class=comments>'Invoke the <b>FireUIEvent</b> method and<br>
+'pass the PropertyList as the <i>varArg</i> parameter.
+<pre class="example">myWorld.<b>FireUIEvent User, "myBigEvent", myPropList</b>
+</pre>
+
+</body>
+</html>

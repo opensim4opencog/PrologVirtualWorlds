@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Vertex</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Vertex</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Returns a vector containing the x and y boundary coordinates of a boundary point contained in a <a href="../Exemplars/Thing/BoundaryList.htm">BoundaryList</a>. <b>Vertex</b> is a read-only <a href="../Vector/Vector.htm">Vector</a>.
+   
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Vertex</b>(<i>index</i>)</td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Vertex</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Boundary</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">index</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>The <b>BoundaryList</b> index number of the vertex of a boundary. BoundaryLists are zero-based.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+
+<p>The <b>Vertex</b> property returns the x- and y-axis <b>Boundary</b> coordinates of a specified point on a <b>Boundary</b>. The z-coordinate does not apply to a boundary vertex. For more information on the boundary coordinate system, see the <a href="Boundary.htm">Boundary</a> topic.
+
+<p>To retrieve a specific vertex of a boundary assigned to an object, you must include both the property index of the boundary and the vertex index within that boundary. For example, to display the vertex coordinates of the first boundary point in the first boundary in a <b>BoundaryList</b>, the following syntax is required:
+<BLOCKQUOTE>Trace myObject.BoundaryList.Property(0).<b>Vertex(0).ToAscii</b></blockquote>
+<p>In the previous example, "myObject" refers to an existing object.
+
+<p><b>Note:</b>&nbsp;&nbsp; The <b>Vertex</b> property returns values in <b>Vector</b> form, where the x and y <b>Vector</b> coordinates are the valid values. <b>Boundary</b> vertices are placed using the x and y planes of the two-dimensional boundary coordinate system. The z coordinate of the returned <b>Vector</b> does not apply to boundaries.
+<!--Example section-->
+<H3>Example</H3>
+
+<p>This example creates a boundary around an existing object and prints the coordinates of each <b>Vertex</b> in the boundary. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge
+Dim i
+</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a boundary without a specified size.
+<pre class="example">Set myOuterEdge = World.CreateBoundary</pre>
+
+<p class=comments>'Generate an eight-sided boundary.
+<pre class="example">myOuterEdge.AutoGenerate myFireHydrant, 8</pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge</pre>
+
+<p class=comments>'Iterate through and print each coordinate in the Command Window.
+<pre class="example">For i = 0 To 7
+&nbsp;&nbsp;&nbsp;&nbsp;Print myObject.BoundaryList.Property(0).<b>Vertex(i)</b>
+Next
+
+End Sub</pre>
+<!--See also section-->
+
+
+
+</body>
+</html>

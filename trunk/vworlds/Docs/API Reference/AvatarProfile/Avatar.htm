@@ -1,0 +1,113 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Avatar</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Avatar</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of AvatarProfile</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+     Returns&nbsp;an <A href="../Exemplars/Avatar/Avatar.htm">Avatar</A>&nbsp;object&nbsp;for the 
+specified&nbsp;<A href="AvatarProfile.htm">AvatarProfile</A> object. 
+<STRONG>Avatar</STRONG> is a read-only <STRONG>Thing</STRONG> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>Avatar</STRONG></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Avatar</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->Thing</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description--> 
+       An object reference&nbsp;to a&nbsp;<STRONG>Thing</STRONG> 
+           object.</td>
+	</TR>
+</TABLE>
+<H3>Remarks</H3>
+<P>            
+                                 
+  Instead of returning only the name of the 
+avatar&nbsp;whose profile you are accessing, Microsoft Virtual Worlds returns 
+the entire <STRONG>Avatar</STRONG> object. Because of this, 
+you can access any of the properties of methods that exist for the 
+<STRONG>Avatar</STRONG>            
+                                 
+          
+         
+              
+       object, such as <A href="../Exemplars/Avatar/Alert.htm">Alert</A>, <A href="../Exemplars/Avatar/IgnoreAvatar.htm">IgnoreAvatar</A>, or <A href="../Exemplars/Avatar/Wear.htm">Wear</A>.
+
+<H3>Examples</H3>
+<p> In this example, you use the <STRONG>Avatar</STRONG> 
+property together with the <A href="KeyOwner.htm">KeyOwner</A>                 property to check&nbsp;whether the owner of the avatar owns all of the profile keys. If not, this example prints the names of the other key owners.</p>
+<pre class="example">
+Sub GetOtherOwnerList()
+Dim myKey
+Dim myKeyCount
+Dim myKeyOwner
+Dim myProfileAvatarOwner
+Dim myKeyList
+</pre>
+<p class="comments">'Get the list of keys.
+<pre class="example">
+Set myKeyList = User.Profile.Keys
+
+myKeyCount = myKeyList.Count - 1
+myProfileAvatarOwner = User.Profile.<b>Avatar</b>.Name
+
+For myKey = 0 To myKeyCount
+&nbsp;&nbsp;myKeyOwner = _
+&nbsp;&nbsp;&nbsp;&nbsp;User.Profile.KeyOwner(myKeyList.Property(myKey)).Name
+</pre>    
+<p class="comments">&nbsp;&nbsp;'Check if the owner of the key<br>&nbsp;&nbsp;'is the same as the owner of the avatar.
+<pre class="example">
+&nbsp;&nbsp;If Not myProfileAvatarOwner = myKeyOwner Then</pre>
+<p class="comments">&nbsp;&nbsp;&nbsp;&nbsp;'If the key owner is not the owner of the avatar,&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;'display the key and key owner values<br>&nbsp;&nbsp;&nbsp;&nbsp;'to the Command Window.
+<pre class="example">
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myKeyList.Property(myKey)
+&nbsp;&nbsp;&nbsp;&nbsp;Print myProfileAvatarOwner
+&nbsp;&nbsp;End If
+Next
+End Sub
+</pre>
+  
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Code</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Code</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Method Object</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>String</b> that contains the code for an 
+inline method. <b>Code</b> is a read-only <b>String</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<b>Code</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Code</b>  property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Method</td>
+		<td>Required</td>
+		<td>An object reference to a 
+    <STRONG>Method</STRONG>.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>If you want to use quotation marks within a string, you must include one 
+extra quotation mark for each one within the string. Thus, the quotation-marked 
+phrase is surrounded by another pair of quotation marks, and the whole statement 
+is enclosed by a pair of quotation marks for a total of six (minimum) in the 
+statement. Within the code, the desired quotation marks will be doubled. See the 
+Examples section that follows for an example of a string embedded within another 
+string. </P>
+
+<P>If you need to put several script statements in the code string, separate 
+each statement from the next with a colon ( <b>:</b> ). You can also 
+use a carriage return to separate the lines by concatenating two quoted 
+statements with <b>CHR(13)</b> between them (see examples).&nbsp;
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;The <b>Code</b> method works only with inline methods, not with external modules.
+<!--Example section--></P>
+<H3>Examples</H3>
+
+<p>To get the code for an inline method:</p>
+
+<pre>   Result = MyMethod.Code </pre>
+
+<p>To separate statements with a colon:</p>
+
+<pre>   MyMethod.Code = "Print ""Hello!"" : Print ""Hello again!"" "</pre>
+
+<p>To separate statements with a carriage return:</p>
+
+<pre>   MyMethod.Code = "Print ""Hello!"" " + CHR(13) + "Print ""Hello again!"" "</pre>
+
+</body>
+</html>

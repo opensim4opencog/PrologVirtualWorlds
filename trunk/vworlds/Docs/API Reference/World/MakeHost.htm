@@ -1,0 +1,85 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>MakeHost</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>MakeHost</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Changes an avatar's exemplar from <a href="../Exemplars/Avatar/Avatar.htm">Avatar</a> to 
+<a href="../Exemplars/Host/Host.htm">Host</a>. <b>MakeHost</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>MakeHost</b>&nbsp;<i>pTarget</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>MakeHost</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pTarget</td>
+		<td>Avatar</td>
+		<td>Required</td>
+		<td>The avatar whose exemplar will be changed.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>A host is an avatar that can log off other avatars.&nbsp;
+<P>Only a Wizard can call this method.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>World.MakeHost MCEmcee</pre>
+&nbsp;
+
+
+</body>
+</html>

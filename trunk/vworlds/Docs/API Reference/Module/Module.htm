@@ -1,0 +1,60 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Module</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Module</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Object</P></td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<P class=body>The <STRONG>Module</STRONG> object exists to provide Microsoft Virtual 
+Worlds scripters with a single, convenient receptacle for one or more script 
+subroutines or functions.&nbsp;&nbsp;
+
+<!--How-to section -->
+<H3>Using the Module Object</H3>
+<p>The <STRONG>Module</STRONG>  object encapsulates two 
+pieces of information:
+<UL>
+  <LI>A&nbsp;flag that indicates whether the module contains methods that will 
+  run on the client or on the server. 
+  <LI>The name of the module. </LI></UL>
+<P>To create a module, use the <A 
+href="../world/CreateScriptModule.htm"><STRONG>CreateScriptModule</STRONG></A> method.</P>
+<blockquote><PRE>Set myScript = World.<B>CreateScriptModule("myScript", _
+&nbsp;&nbsp;"myScript.vbs", MODULE_CLIENT + MODULE_SERVER)</B></PRE></blockquote>
+<P>The <A href="Flags(Module).htm">Flags</A> method returns the flags that were 
+used when the module was created.</P>
+<BLOCKQUOTE><PRE>myModuleFlags = World.Module("myScript").<B>Flags</B></PRE></BLOCKQUOTE>
+<P>You can use the <A href="ModuleName.htm">ModuleName</a> method to return the name of a 
+module.</P>
+<blockquote><PRE>myModule = World.Module("myScript").<STRONG>ModuleName</STRONG></PRE></blockquote>
+
+<H3>The Install method</H3>
+<p>If the code that the module refers to contains a subroutine called <b>Install</b>, that subroutine is automatically run on the server when the module is loaded.
+
+<p>The syntax for the <b>Install</b> method is:<br><br>
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;<b>Sub Install</b>(<i>module</i>)</pre>
+<div class=comments>&nbsp;&nbsp;&nbsp;&nbsp;'Insert your code here</div>
+<pre class=example><b>&nbsp;&nbsp;&nbsp;&nbsp;End Sub</b></pre>
+
+<p>The required <i>module</i> parameter is a reference to the recently created or reloaded module.
+
+<p>One common use of the <b>Install</b> method is to create a custom exemplar from a script module. Within the <b>Install</b> subroutine, a custom exemplar can be created, methods and properties added, and existing properties customized to apply to subsequent instances of that exemplar. For more information on creating a custom exemplar, see the <a href="../../Programmer's%20Guide/Objects/Creating%20Custom%20Exemplars.htm">Creating Custom Exemplars</a> topic in the Programmer's Guide.
+
+<p><b>Note:</b>&nbsp;&nbsp;&nbsp;Creating instances of a custom exemplar within the <b>Install</b> subroutine can produce unexpected results.
+
+<p>
+</BODY>
+</html>
