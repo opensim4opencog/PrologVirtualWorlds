@@ -1,8 +1,10 @@
-import file.io.FileWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
 
 public class w
 {
-  public static void main (String[] args) 
+  public static void main (String[] args) throws IOException
   {
     // f is the "letter"; below, we put it in an "envelope"
     FileWriter f = new FileWriter("foo.txt");
