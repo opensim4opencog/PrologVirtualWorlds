@@ -1,0 +1,379 @@
+;; /home/siegel/temp/EconomyMt-non-implications.kif
+
+
+(arg4Format importExpenditureFractionDuring SingleEntry)
+
+(arg4Format budgetExpenditureFractionOfGDP SingleEntry)
+
+(arg4Format exportRevenueFractionDuring SingleEntry)
+
+(arg4Format importOriginFractionDuring SingleEntry)
+
+(arg4Format industryFractionOfGDP SingleEntry)
+
+(arg4Format exportDestinationFractionDuring SingleEntry)
+
+(arg5Format purchaseFromFractionDuring SingleEntry)
+
+(arg5Format saleToFractionDuring SingleEntry)
+
+(arg6Isa importFromThroughAmountDuring ScalarInterval)
+
+(comment investmentAmountDuring "(#$investmentAmountDuring PT PRODUCT-TYPE THING AMOUNT) means that the amount of #$Money AMOUNT was spent on instances of the #$ProductType PRODUCT-TYPE by #$PartiallyTangible PT during the the temporal extent of the #$TemporalThing THING, where PT acquired those instances in order to use them as inputs to production. PT will commonly be an #$Agent that is involved in producing goods, such as a #$Business or #$ManufacturingOrganization.")
+
+(comment importCapacityDuring "(#$importCapacityDuring REGION PRODUCT-TYPE THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the greatest possible amount of instances of the #$ProductType PRODUCT-TYPE that could be imported by the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  In the case of automobile imports, for example, AMOUNT might be an #$Integer indicating the number of cars that could be imported.  In the case of oil imports, AMOUNT might be a #$Volume (a number of barrels) indicating the total quantity of oil that could be imported, or it might be an instance of #$Money indicating the monetary value of all the oil that could be imported.  Alternatively, AMOUNT might be a #$Rate, characterizing what would be the average rate of import of instances of PRODUCT-TYPE to REGION during the temporal extent of THING if REGION were importing PRODUCT-TYPE at the limit of its capacity.  Oil imports, for example, might be expressed in terms of so many million barrels per day or in terms of so many dollars per day (again, indicating the monetary value of the oil).")
+
+(comment exportToQuotaDuring "(#$exportToQuotaDuring REGION1 PRODUCT-TYPE REGION2 THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the export quota of instances of the #$ProductType PRODUCT-TYPE for the #$GeographicalRegion REGION1 to the #$GeographicalRegion REGION2 during the temporal extent of the #$TemporalThing THING.  (Of course, the existence of export quotas is the exception rather than the rule.)  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  In the case of oil exports, for example, AMOUNT might be a #$Volume (a number of barrels) indicating the total quantity of oil REGION1 is allowed to export to REGION2.  Alternatively, AMOUNT might be a #$Rate, characterizing the average rate of export, under the quota, of instances of PRODUCT-TYPE by REGION1 to REGION2 during the temporal extent of THING.  Oil exports, for example, might be expressed in terms of so many million barrels per day.")
+
+(comment productionAmountDuring "(#$productionAmountDuring PT PRODUCT-TYPE THING AMOUNT) means that the #$NonNegativeScalarInterval AMOUNT is a measure of the amount of instances of the #$ProductType PRODUCT-TYPE produced by the instance of #$PartiallyTangible PT during the temporal extent of the #$TemporalThing THING.  PT might, for example, be a #$Country or a #$Business.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  If AMOUNT is a #$Rate, AMOUNT indicates the average rate of production of instances of PRODUCT-TYPE by PT during the temporal extent of THING.
+See also #$productionAmount, which can be used when the time period is unknown.")
+
+(comment importCapacity "(#$importCapacity REGION PRODUCT-TYPE RATE) means that the #$Rate RATE is the greatest possible rate at which instances of the #$ProductType PRODUCT-TYPE could be imported by the #$GeographicalRegion REGION.  Note that RATE may be expressed as a #$MonetaryFlowRate, but also as rate of volume, mass or number depending on the type of product.")
+
+(comment inflationRateDuring "(#$inflationRateDuring GE THING NR) means that NR is the inflation rate of the #$GeopoliticalEntity GE's economy during the temporal extent of the #$TemporalThing THING.  (THING will often be a calendar time period.)  That is, NR is the quotient of the difference between the price level in GE's economy at the end of the temporal extent of THING and the price level at the start of the temporal extent of THING (as dividend) and the price level at the start of the temporal extent of THING (as divisor).  For example, to express the fact that Oman's inflation rate for 1997 was 1.1%, we can say (#$inflationRateDuring #$Oman (#$YearFn 1997) .011).")
+
+(comment unemploymentRateDuring "(#$unemploymentRateDuring REGION THING NR) means that NR is the average unemployment rate of the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING, where the unemployment rate of a region at a point in time is the quotient of the number of unemployed persons in the region and the region's labor force (that is, the sum of the number of employed and unemployed persons in the region).  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  For example, to express the fact that the United States' unemployment rate in 1996 was 5.4%, we can say (#$unemploymentRateDuring #$UnitedStatesOfAmerica (#$YearFn 1996) .054).")
+
+(comment realGDPGrowthRateDuring "(#$realGDPGrowthRateDuring GE THING NR) means that NR is the growth rate of the #$GeopoliticalEntity GE's real (adjusted for inflation) gross domestic product during the temporal extent of the #$TemporalThing THING.  (THING will often be a calendar time period.)  That is, NR is the quotient of the difference between GE's gross domestic product for the temporal extent of THING and GE's gross domestic product for the time interval immediately preceding, and of the same duration as, THING (as dividend) and GE's gross domestic product for the time interval immediately preceding, and of the same duration as, THING (as divisor).  For example, to express the fact that Oman's real gross domestic product growth rate for 1997 was 5.9%, we can say (#$realGDPGrowthRateDuring #$Oman (#$YearFn 1997) .059).  See also #$grossDomesticProduct.")
+
+(comment productionCapacityDuring "(#$productionCapacityDuring PT PRODUCT-TYPE THING AMOUNT) means that the #$NonNegativeScalarInterval AMOUNT is a measure of the greatest possible amount of instances of the #$ProductType PRODUCT-TYPE that could be produced by the instance of #$PartiallyTangible PT during the temporal extent of the #$TemporalThing THING.  PT might, for example, be a #$Country or a #$Business.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  If AMOUNT is a #$Rate, AMOUNT indicates what would be the average rate of production of instances of PRODUCT-TYPE by PT during the temporal extent of THING if PT were producing PRODUCT-TYPE at the limit of its capacity.")
+
+(comment consumptionRate "(#$consumptionRate PT PRODUCT-TYPE RATE) means that the instance of #$PartiallyTangible PT consumes instances of the #$ProductType PRODUCT-TYPE at the #$Rate RATE.  PT might, for example, be a #$Country or a #$Business.")
+
+(comment demandRate "(#$demandRate PT PRODUCT-TYPE RATE) means that the #$Rate RATE is a measure of the demand for instances of the #$ProductType PRODUCT-TYPE by the instance of #$PartiallyTangible PT.  In a general economic context, PT will often be an instance of (#$GroupFn #$IntelligentAgent).")
+
+(comment demandAmountDuring "(#$demandAmountDuring PT PRODUCT-TYPE THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the demand for instances of the #$ProductType PRODUCT-TYPE by the instance of #$PartiallyTangible PT during the temporal extent of the #$TemporalThing THING.  In a general economic context, PT will often be an instance of (#$GroupFn #$IntelligentAgent).  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  If AMOUNT is a #$Rate, AMOUNT indicates the average rate of demand for instances of PRODUCT-TYPE by PT during the temporal extent of THING.")
+
+(comment productionAmount "(#$productionAmount PT PRODUCT-TYPE AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the amount of instances of the #$ProductType PRODUCT-TYPE produced by the instance of #$PartiallyTangible PT.  PT might, for example, be a #$Country or a #$Business. If AMOUNT is a #$Rate, AMOUNT indicates the average rate of production of instances of PRODUCT-TYPE by PT. This predicate should be used when the time period of production is unknown. If the time period is known, use #$productionAmountDuring.")
+
+(comment importFromAmountDuring "(#$importFromAmountDuring REGION1 PRODUCT-TYPE REGION2 THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the amount of instances of the #$ProductType PRODUCT-TYPE imported by the #$GeographicalRegion REGION1 from the #$GeographicalRegion REGION2 during the temporal extent of the #$TemporalThing THING.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  In the case of automobile imports, for example, AMOUNT might be an #$Integer indicating the number of cars imported.  In the case of oil imports, AMOUNT might be a #$Volume (a number of barrels) indicating the total quantity of oil imported (by REGION1 from REGION2), or it might be an instance of #$Money indicating the monetary value of all the oil imported.  Alternatively, AMOUNT might be a #$Rate, characterizing the average rate of import of instances of PRODUCT-TYPE by REGION1 from REGION2 during the temporal extent of THING.  Oil imports, for example, might be expressed in terms of so many million barrels per day or in terms of so many dollars per day (again, indicating the monetary value of the oil).")
+
+(comment consumptionCapacity "(#$consumptionCapacity PT PRODUCT-TYPE RATE) means that the #$Rate RATE is the greatest possible rate at which instances of the #$ProductType PRODUCT-TYPE could be consumed by the instance of #$PartiallyTangible PT.  PT might, for example, be a #$Country or a #$Business.")
+
+(comment tradeBalanceDuring "(#$tradeBalanceDuring REGION PRODUCT-TYPE THING MONEY) means that the instance of #$Money MONEY is a measure of the difference between the value of the instances of the #$ProductType PRODUCT-TYPE exported by the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING and the value of the instances of PRODUCT-TYPE imported by REGION during the temporal extent of THING.  (THING will often be a calendar time period.)  Thus if the value of REGION's exports of PRODUCT-TYPE is greater than the value of its imports of PRODUCT-TYPE during the temporal extent of THING, REGION will have a positive trade balance.  If the value of its imports of PRODUCT-TYPE exceeds that of its exports, it will have a negative trade balance.  This latter case can be expressed using a #$UnitOfMoney function with a negative number as its argument.  A region's overall trade balance for all goods and services (over a given time period) can be expressed with this predicate using the constant #$Product as the second argument.")
+
+(comment importExpenditureFractionDuring "(#$importExpenditureFractionDuring REGION PRODUCT-TYPE THING NR) means that NR is the quotient of the monetary value of imports of the #$ProductType PRODUCT-TYPE by the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING (as dividend) and the monetary value of REGION's imports of all goods and services during the temporal extent of THING (as divisor).  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  For example, to express the fact that Oman's oil imports accounted for 80 percent of the total value of its imports in 1997, we can say (#$importExpenditureFractionDuring #$Oman #$PetroleumProduct (#$YearFn 1997) (#$Percent 80)).  See also #$importAmountDuring.")
+
+(comment exchangeRateDuring-Market "(#$exchangeRateDuring-Market UM1 UM2 THING NR) means that NR is the average market exchange rate of the #$UnitOfMoney UM1 for the #$UnitOfMoney UM2 during the temporal extent of the #$TemporalThing THING.  (THING will often be a calendar time period.)  That is, NR UM1's can be traded for 1 UM2, and conversely, in a market that is not controlled by the #$GeopoliticalEntity whose currency UM1 is.  For example, the fact that during October of 1995 the market exchange rate between Liberian and United States dollars was 50 Liberian dollars for 1 US dollar can be expressed as (#$exchangeRateDuring-Market #$Dollar-Liberia #$Dollar-UnitedStates (#$MonthFn #$October (#$YearFn 1995)) 50).  See also #$exchangeRateDuring-Official and #$exchangeRateDuring.")
+
+(comment importOriginFractionDuring "(#$importOriginFractionDuring REGION1 REGION2 THING NR) means that NR is the quotient of the monetary value of the imports by the #$GeographicalRegion REGION1 from the #$GeographicalRegion REGION2 during the temporal extent of the #$TemporalThing THING (as dividend) and the monetary value of REGION1's imports of all goods and services during the temporal extent of THING (as divisor).  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  For example, to express the fact that imports to the United States accounted for 5 percent of the total value of Oman's imports in 1995, we can say (#$importOriginFractionDuring #$Oman #$UnitedStatesOfAmerica (#$YearFn 1995) (#$Percent 5)).  See also #$importAmountDuring.")
+
+(comment budgetExpenditureFractionOfGDP "(#$budgetExpenditureFractionOfGDP GE COL THING NR) means that NR is the quotient of the amount of money spent by the #$GeopoliticalEntity GE on instances of the specialization of #$SpatialThing-Localized COL during the temporal extent of the #$TemporalThing THING (as dividend) and the monetary value of GE's total domestic production of goods and services (its gross domestic product) during the temporal extent of THING (as divisor).  A country would be a typical instance of GE.  COL might be any type of thing on or for which budget expenditures are made; for example, goods, services, institutions (such as government agencies or military organizations), or debt service.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  For example, to express the fact that Oman's 1996 expenditure on the military was 13.7% of its gross domestic product for that year, we can say (#$budgetExpenditureFractionOfGDP #$Oman #$GovernmentMilitaryOrganization (#$YearFn 1996) (#$Percent 13.7)).  See also #$budgetExpenditures and #$grossDomesticProduct.")
+
+(comment exportThroughAmountDuring "(#$exportThroughAmountDuring REGION PRODUCT-TYPE PT THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the amount of instances of the #$ProductType PRODUCT-TYPE exported by the #$GeographicalRegion REGION through the instance of #$PartiallyTangible PT (on their way to their destination) during the temporal extent of the #$TemporalThing THING.  PT might, in the case of oil exports, for instance, be a #$GeographicalRegion or a #$Pipeline.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  In the case of automobile exports, for example, AMOUNT might be an #$Integer indicating the number of cars exported.  In the case of oil exports, AMOUNT might be a #$Volume (a number of barrels) indicating the total quantity of oil exported (by REGION through PT), or it might be an instance of #$Money indicating the monetary value of all the oil exported.  Alternatively, AMOUNT might be a #$Rate, characterizing the average rate of export of instances of PRODUCT-TYPE by REGION through PT during the temporal extent of THING.  Oil exports, for example, might be expressed in terms of so many million barrels per day or in terms of so many dollars per day (again, indicating the monetary value of the oil).")
+
+(comment productionQuotaDuring "(#$productionQuotaDuring PT PRODUCT-TYPE THING AMOUNT) means that the #$NonNegativeScalarInterval AMOUNT is a measure of the production quota of instances of the #$ProductType PRODUCT-TYPE for the instance of #$PartiallyTangible PT during the temporal extent of the #$TemporalThing THING.  (Of course, the existence of production quotas is the exception rather than the rule.)  PT will most commonly be a #$Country.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  For example, to express the fact that Algeria's 1997 crude oil production quota was 750,000 barrels per day, we can say (#$productionQuotaDuring #$Algeria #$Petroleum-CrudeOil (#$YearFn 1997) (#$BarrelsPerDay 750000)).")
+
+(comment consumptionQuotaDuring "(#$consumptionQuotaDuring PT PRODUCT-TYPE THING AMOUNT) means that the #$NonNegativeScalarInterval AMOUNT is a measure of the consumption quota (or ration) of instances of the #$ProductType PRODUCT-TYPE for the instance of #$PartiallyTangible PT during the temporal extent of the #$TemporalThing THING.  (Of course, the  existence of consumption quotas is the exception rather than the rule.)  PT might, for example, be a #$Country, a #$Business, or a household (#$CohabitationUnit).  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.")
+
+(comment distributionCapacity "(#$distributionCapacity PT PRODUCT-TYPE RATE) means that the #$Rate RATE is the greatest possible rate at which instances of the #$ProductType PRODUCT-TYPE could be distributed to the instance of #$PartiallyTangible PT.  In a general economic context, PT will often be an instance of (#$GroupFn #$IntelligentAgent).")
+
+(comment exportCapacity "(#$exportCapacity REGION PRODUCT-TYPE RATE) means that the #$Rate RATE is the greatest possible rate at which instances of the #$ProductType PRODUCT-TYPE could be exported by the #$GeographicalRegion REGION.  Note that RATE may be expressed as a #$MonetaryFlowRate, but also as rate of volume, mass or number depending on the type of product.")
+
+(comment laborForceFractionDuring "(#$laborForceFractionDuring REGION COL THING NR) means that NR is the quotient of the labor force of the economic sector or occupation COL in the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING (as dividend) and the total labor force of REGION during the temporal extent of THING (as divisor), where the labor force (of an economic sector or occupation) in a region at a point in time is the sum of the number of persons employed and unemployed (in the sector or occupation) in the region.  COL can range from a broad economic sector, such as agriculture, manufacturing, or services to a more specific segment of the economy such as the automobile industry; in either of these cases, COL will be a specialization of the collection #$Industry.  Alternatively, COL can be an instance of the collection #$OccupationType.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  For example, to express the fact that agriculture accounted for 37 percent of Oman's labor force in 1993, we can say (#$laborForceFractionDuring #$Oman #$AgriculturalEconomicSector (#$YearFn 1993) (#$Percent 37)).  See also #$laborForceDuring and #$laborForceOfIndustryOrOccupationDuring.")
+
+(comment budgetExpenditures "(#$budgetExpenditures ORG COL THING MONEY) means that MONEY is a measure of the amount of money spent by the #$Organization ORG on instances of the specialization of #$SpatialThing-Localized COL during the temporal extent of the #$TemporalThing THING.  ORG might, for example, be a #$Business, a #$LegalGovernmentOrganization, or a #$Country.  COL might be any type of thing on or for which budget expenditures are made; for example, goods, services, institutions (such as government agencies or military organizations), or debt service.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.")
+
+(comment currentAccountBalanceDuring "(#$currentAccountBalanceDuring COUNTRY THING MONEY) means that the instance of #$Money MONEY is a measure of the difference between, on the one hand, the sum of the value of all goods and services exported by the #$Country COUNTRY during the temporal extent of the #$TemporalThing THING and the transfer payments received by COUNTRY from foreigners during the temporal extent of THING, and, on the other, the sum of the value of all goods and services imported by COUNTRY during the temporal extent of THING and the transfer payments by COUNTRY to foreigners during the temporal extent of THING.  (THING will often be a calendar time period.)  Thus if the value of COUNTRY's exports and received transfer payments is greater than the value of its imports and outgoing transfer payments during the temporal extent of THING, COUNTRY will have a positive current account balance.  If the value of its imports and outgoing transfer payments exceeds that of its exports and incoming transfer payments, it will have a negative current account balance.  This latter case can be expressed using a #$UnitOfMoney function with a negative number as its argument.")
+
+(comment productionRate "(#$productionRate PT PRODUCT-TYPE RATE) means that the instance of #$PartiallyTangible PT produces instances of the #$ProductType PRODUCT-TYPE at the #$Rate RATE.  PT might, for example, be a #$Country or a #$Business; and RATE might be a number per unit of time, or a volume per unit of time, or a #$MonetaryFlowRate.")
+
+(comment consumptionAmountDuring "(#$consumptionAmountDuring PT PRODUCT-TYPE THING AMOUNT) means that the #$NonNegativeScalarInterval AMOUNT is a measure of the amount of instances of the #$ProductType PRODUCT-TYPE consumed by the instance of #$PartiallyTangible PT during the temporal extent of the #$TemporalThing THING.  PT might, for example, be a #$Country, a #$Business, or a household (#$CohabitationUnit).  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  If AMOUNT is a #$Rate, AMOUNT indicates the average rate of consumption of instances of PRODUCT-TYPE by PT during the temporal extent of THING.")
+
+(comment exportRevenueFractionDuring "(#$exportRevenueFractionDuring REGION PRODUCT-TYPE THING NR) means that NR is the quotient of the monetary value of exports of the #$ProductType PRODUCT-TYPE by the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING (as dividend) and the monetary value of REGION's exports of all goods and services during the temporal extent of THING (as divisor).  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  For example, to express the fact that Oman's oil exports accounted for 80 percent of the total value of its exports in 1997, we can say (#$exportRevenueFractionDuring #$Oman #$PetroleumProduct (#$YearFn 1997) (#$Percent 80)).  See also #$exportAmountDuring.")
+
+(comment importThroughAmountDuring "(#$importThroughAmountDuring REGION PRODUCT-TYPE PT THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the amount of instances of the #$ProductType PRODUCT-TYPE imported by the #$GeographicalRegion REGION through the instance of #$PartiallyTangible PT (on their way from their origin) during the temporal extent of the #$TemporalThing THING.  PT might, in the case of oil imports, for instance, be a #$GeographicalRegion or a #$Pipeline.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  In the case of automobile imports, for example, AMOUNT might be an #$Integer indicating the number of cars imported.  In the case of oil imports, AMOUNT might be a #$Volume (a number of barrels) indicating the total quantity of oil imported (by REGION through PT), or it might be an instance of #$Money indicating the monetary value of all the oil imported.  Alternatively, AMOUNT might be a #$Rate, characterizing the average rate of import of instances of PRODUCT-TYPE by REGION through PT during the temporal extent of THING.  Oil imports, for example, might be expressed in terms of so many million barrels per day or in terms of so many dollars per day (again, indicating the monetary value of the oil).")
+
+(comment exchangeRateDuring "(#$exchangeRateDuring UM1 UM2 THING NR) means that in some market or markets NR is the average exchange rate of the #$UnitOfMoney UM1 for the #$UnitOfMoney UM2 during the temporal extent of the #$TemporalThing THING.  (THING will often be a calendar time period.)  That is, NR UM1's can be traded for 1 UM2, and conversely.  Thus two assertions of the form (#$exchangeRateDuring UM1 UM2 THING NR1) and (#$exchangeRateDuring UM1 UM2 THING NR2), where NR1 differs from NR2, can both be True if different exchange rates prevail in different markets.  In particular, the official and the (financial) market exchange rates of a currency may not be the same.  For example the official exchange rate of the Liberian currency during October of 1995 was 1 Liberian dollar for 1 United States dollar, but the market exchange rate for the same period was 50 Liberian dollars for 1 United States dollar.  So it is the case both that (#$exchangeRateDuring #$Dollar-Liberia #$Dollar-UnitedStates (#$MonthFn #$October (#$YearFn 1995)) 1.0) and (#$exchangeRateDuring #$Dollar-Liberia #$Dollar-UnitedStates (#$MonthFn #$October (#$YearFn 1995)) 50).  (It is desirable to use the more specific predicates #$exchangeRateDuring-Official and #$exchangeRateDuring-Market, when the information to be represented is precise enough to select for one of these predicates.  However, vaguer information is still meaningful, and can be represented with this predicate.)")
+
+(comment importFromQuotaDuring "(#$importFromQuotaDuring REGION1 PRODUCT-TYPE REGION2 THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the import quota of instances of the #$ProductType PRODUCT-TYPE for the #$GeographicalRegion REGION1 from the #$GeographicalRegion REGION2 during the temporal extent of the #$TemporalThing THING.  (Of course, the existence of import quotas is the exception rather than the rule.)  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  In the case of automobile imports, for example, AMOUNT might be an #$Integer indicating the number of cars that may be imported.  In the case of oil imports, AMOUNT might be a #$Volume (a number of barrels) indicating the total quantity of oil REGION1 is allowed to import from REGION2.  Alternatively, AMOUNT might be a #$Rate, characterizing the average rate of import, under the quota, of instances of PRODUCT-TYPE by REGION1 from REGION2 during the temporal extent of THING.  Oil imports, for example, might be expressed in terms of so many million barrels per day.")
+
+(comment consumptionCapacityDuring "(#$consumptionCapacityDuring PT PRODUCT-TYPE THING AMOUNT) means that the #$NonNegativeScalarInterval AMOUNT is a measure of the greatest possible amount of instances of the #$ProductType PRODUCT-TYPE that could be consumed by the instance of #$PartiallyTangible PT during the temporal extent of the #$TemporalThing THING.  PT might, for example, be a #$Country, a #$Business, or a household (#$CohabitationUnit).  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  If AMOUNT is a #$Rate, AMOUNT indicates what would be the average rate of consumption of instances of PRODUCT-TYPE by PT during the temporal extent of THING if PT were consuming PRODUCT-TYPE at the limit of its capacity.")
+
+(comment importQuotaDuring "(#$importQuotaDuring REGION PRODUCT-TYPE THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the import quota of instances of the #$ProductType PRODUCT-TYPE for the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING.  (Of course, the existence of import quotas is the exception rather than the rule.)  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  In the case of automobile imports, for example, AMOUNT might be an #$Integer indicating the number of cars that may be imported.  In the case of oil imports, AMOUNT might be a #$Volume (a number of barrels) indicating the total quantity of oil REGION is allowed to import.  Alternatively, AMOUNT might be a #$Rate, characterizing the average rate of import, under the quota, of instances of PRODUCT-TYPE by REGION during the temporal extent of THING.  Oil imports, for example, might be expressed in terms of so many million barrels per day.")
+
+(comment purchaseFromFractionDuring "(#$purchaseFromFractionDuring PT1 PRODUCT-TYPE PT2 THING NR) means that NR is the quotient of the monetary value of purchases of the #$ProductType PRODUCT-TYPE by the instance of #$PartiallyTangible PT1 from the instance of #$PartiallyTangible PT2 during the temporal extent of the #$TemporalThing THING (as dividend) and the monetary value of all purchases of PRODUCT-TYPE by PT1 during the temporal extent of THING (as divisor).  PT1 might, for example, be a #$Country or a #$Business; and likewise for PT2.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  For example, to express the fact that Norway has a 25 percent share of the European natural gas market in 1998, we can say (#$purchaseFromFractionDuring #$ContinentOfEurope #$NaturalGas #$Norway (#$YearFn 1998) (#$Percent 25)).")
+
+(comment distributionRate "(#$distributionRate PT PRODUCT-TYPE RATE) means that instances of the #$ProductType PRODUCT-TYPE are distributed to the instance of #$PartiallyTangible PT at the #$Rate RATE.  In a general economic context, PT will often be an instance of (#$GroupFn #$IntelligentAgent).")
+
+(comment importFromThroughAmountDuring "(#$importFromThroughAmountDuring REGION1 PRODUCT-TYPE REGION2 PT THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the amount of instances of the #$ProductType PRODUCT-TYPE imported by the #$GeographicalRegion REGION1 from the #$GeographicalRegion REGION2 through the instance of #$PartiallyTangible PT (on their way from REGION2) during the temporal extent of the #$TemporalThing THING.  PT might, in the case of oil imports, for instance, be a #$GeographicalRegion or a #$Pipeline.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  In the case of automobile imports, for example, AMOUNT might be an #$Integer indicating the number of cars imported.  In the case of oil imports, AMOUNT might be a #$Volume (a number of barrels) indicating the total quantity of oil imported (by REGION1 from REGION2 through PT), or it might be an instance of #$Money indicating the monetary value of all the oil imported.  Alternatively, AMOUNT might be a #$Rate, characterizing the average rate of import of instances of PRODUCT-TYPE by REGION1 from REGION2 through PT during the temporal extent of THING.  Oil imports, for example, might be expressed in terms of so many million barrels per day or in terms of so many dollars per day (again, indicating the monetary value of the oil).")
+
+(comment productionValueOfIndustryDuring "(#$productionValueOfIndustryDuring REGION COL THING MONEY) means that the instance of #$Money MONEY is a measure of the value of all the goods and services produced by the specialization of the #$Industry-Localized COL in the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING.  Note that COL can range from a broad economic sector, such as agriculture, manufacturing, or services to a more specific segment of the economy such as the automobile industry.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.")
+
+(comment industryFractionOfGDP "(#$industryFractionOfGDP GE COL THING NR) means that NR is the quotient of the monetary value of the goods and services produced by the specialization of #$Industry COL within the #$GeopoliticalEntity GE during the temporal extent of the #$TemporalThing THING (as dividend) and the monetary value of GE's total domestic production of goods and services (its gross domestic product) during the temporal extent of THING (as divisor).  A country would be a typical instance of GE.  COL can range from a broad economic sector, such as agriculture, manufacturing, or services to a more specific segment of the economy such as the automobile industry.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  For example, to express the fact that services accounted for 41 percent of Saudi Arabia's gross domestic product for 1994, we can say (#$industryFractionOfGDP #$SaudiArabia #$ServiceEconomicSector (#$YearFn 1994) (#$Percent 41)).  See also #$grossDomesticProduct and #$productionValueOfIndustryDuring.")
+
+(comment laborForceDuring "(#$laborForceDuring REGION THING NR) means that NR is average labor force of the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING, where the labor force of a region at point in time is the sum of the number of employed and unemployed persons in the region.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.")
+
+(comment exportCapacityDuring "(#$exportCapacityDuring REGION PRODUCT-TYPE THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the greatest possible amount of instances of the #$ProductType PRODUCT-TYPE that could be exported by the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  In the case of automobile exports, for example, AMOUNT might be an #$Integer indicating the number of cars that could be exported.  In the case of oil exports, AMOUNT might be a #$Volume (a number of barrels) indicating the total quantity of oil that could be exported, or it might be an instance of #$Money indicating the monetary value of all the oil that could be exported.  Alternatively, AMOUNT might be a #$Rate, characterizing what would be the average rate of export of instances of PRODUCT-TYPE from REGION during the temporal extent of THING if REGION were exporting PRODUCT-TYPE at the limit of its capacity.  Oil exports, for example, might be expressed in terms of so many million barrels per day or in terms of so many dollars per day (again, indicating the monetary value of the oil).")
+
+(comment exportQuotaDuring "(#$exportQuotaDuring REGION PRODUCT-TYPE THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the export quota of instances of the #$ProductType PRODUCT-TYPE for the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING.  (Of course, the existence of export quotas is the exception rather than the rule.)  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  In the case of oil exports, for example, AMOUNT might be a #$Volume (a number of barrels) indicating the total quantity of oil REGION is allowed to export.  Alternatively, AMOUNT might be a #$Rate, characterizing the average rate of export, under the quota, of instances of PRODUCT-TYPE by REGION during the temporal extent of THING.  Oil exports, for example, might be expressed in terms of so many million barrels per day.")
+
+(comment laborForceOfIndustryOrOccupationDuring "(#$laborForceOfIndustryOrOccupationDuring REGION COL THING NR) means that NR is the average labor force of the economic sector or occupation COL in the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING, where the labor force of an economic sector or occupation in a region at a point in time is the sum of the number of persons employed and unemployed in the sector or occupation in the region.  COL can range from a broad economic sector, such as agriculture, manufacturing, or services to a more specific segment of the economy such as the automobile industry; in either of these cases, COL will be a specialization of the collection #$Industry.  Alternatively, COL can be an instance of the collection #$OccupationType.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  See also #$laborForceDuring.")
+
+(comment importAmountDuring "(#$importAmountDuring REGION PRODUCT-TYPE THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the amount of instances of the #$ProductType PRODUCT-TYPE imported by the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  In the case of automobile imports, for example, AMOUNT might be an #$Integer indicating the number of cars imported.  In the case of oil imports, AMOUNT might be a #$Volume (a number of barrels) indicating the total quantity of oil imported, or it might be an instance of #$Money indicating the monetary value of all the oil imported.  Alternatively, AMOUNT might be a #$Rate, characterizing the average rate of import of instances of PRODUCT-TYPE by REGION during the temporal extent of THING.  Oil imports, for example, might be expressed in terms of so many million barrels per day or in terms of so many dollars per day (again, indicating the monetary value of the oil).  The total value of a region's imports of all goods and services (over a given time period) can be expressed with this predicate using the constant #$Product as the second argument.")
+
+(comment internationalMonetaryReservesDuring "(#$internationalMonetaryReservesDuring GE THING MONEY) means that the instance of #$Money MONEY is a measure of the monetary value of the foreign currency reserves of the #$GeopoliticalEntity GE during the temporal extent of the #$TemporalThing THING.  (To the extent that there is fluctuation in the amount of GE's foreign currency reserves during the temporal extent of THING, NR should be taken to be an average.)  A country would be a typical instance of GE.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.")
+
+(comment exportDestinationFractionDuring "(#$exportDestinationFractionDuring REGION1 REGION2 THING NR) means that NR is the quotient of the monetary value of the exports by the #$GeographicalRegion REGION1 to the #$GeographicalRegion REGION2 during the temporal extent of the #$TemporalThing THING (as dividend) and the monetary value of REGION1's exports of all goods and services during the temporal extent of THING (as divisor).  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  For example, to express the fact that exports to the United States accounted for 6 percent of the total value of Oman's exports in 1995, we can say (#$exportDestinationFractionDuring #$Oman #$UnitedStatesOfAmerica (#$YearFn 1995) (#$Percent 6)).  See also #$exportAmountDuring.")
+
+(comment realGNPGrowthRateDuring "(#$realGNPGrowthRateDuring GE THING NR) means that NR is the growth rate of the #$GeopoliticalEntity GE's real (adjusted for inflation) gross national product during the temporal extent of the #$TemporalThing THING.  (THING will often be a calendar time period.)  That is, NR is the quotient of the difference between GE's gross national product for the temporal extent of THING and GE's gross national product for the time interval immediately preceding, and of the same duration as, THING (as dividend) and GE's gross national product for the time interval immediately preceding, and of the same duration as, THING (as divisor).  For example, to express the fact that Oman's real gross national product growth rate for 1997 was 5.9%, we can say (#$realGNPGrowthRateDuring #$Oman (#$YearFn 1997) .059).  See also #$grossNationalProduct.")
+
+(comment saleToFractionDuring "(#$saleToFractionDuring PT1 PRODUCT-TYPE PT2 THING NR) means that NR is the quotient of the monetary value of sales of the #$ProductType PRODUCT-TYPE by the instance of #$PartiallyTangible PT1 to the instance of #$PartiallyTangible PT2 during the temporal extent of the #$TemporalThing THING (as dividend) and the monetary value of all sales of PRODUCT-TYPE by PT1 during the temporal extent of THING (as divisor).  PT1 might, for example, be a #$Country or a #$Business; and likewise for PT2.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  For example, to express the fact that in January of 1997 Japan accounted for 35 percent of Iran's sales of crude oil, we can say (#$saleToFractionDuring #$Iran #$Petroleum-CrudeOil #$Japan (#$MonthFn January (#$YearFn 1997)) (#$Percent 35)).")
+
+(comment exportAmountDuring "(#$exportAmountDuring REGION PRODUCT-TYPE THING AMOUNT) means that the #$ScalarInterval AMOUNT is a measure of the amount of instances of the #$ProductType PRODUCT-TYPE exported by the #$GeographicalRegion REGION during the temporal extent of the #$TemporalThing THING.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.  In the case of automobile exports, for example, AMOUNT might be an #$Integer indicating the number of cars exported.  In the case of oil exports, AMOUNT might be a #$Volume (a number of barrels) indicating the total quantity of oil exported, or it might be an instance of #$Money indicating the monetary value of all the oil exported.  Alternatively, AMOUNT might be a #$Rate, characterizing the average rate of export of instances of PRODUCT-TYPE by REGION during the temporal extent of THING.  Oil exports, for example, might be expressed in terms of so many million barrels per day or in terms of so many dollars per day (again, indicating the monetary value of the oil).  The total value of a region's exports of all goods and services (over a given time period) can be expressed with this predicate using the constant #$Product as the second argument.")
+
+(comment exchangeRateDuring-Official "(#$exchangeRateDuring-Official UM1 UM2 THING NR) means that the #$GeopoliticalEntity GE whose currency UM1 is has set NR as the official exchange rate of the #$UnitOfMoney UM1 for the #$UnitOfMoney UM2 during the temporal extent of the #$TemporalThing THING.  (THING will often be a calendar time period.)  The official exchange rate will not necessarily be the same as the (financial) market exchange rate, but in at least some markets regulated by GE, NR UM1's can be traded for 1 UM2, and conversely.  (Official exchange rates are typically more stable than market exchange rates; but to the extent that there is fluctuation in the official exchange rate during the temporal extent of THING, NR should be taken to be the average official exchange rate during the temporal extent of THING.)  For example, the fact that during October of 1995 the official exchange rate between Liberian and UnitedStates dollars was 1 Liberian dollar for 1 US dollar can be expressed as (#$exchangeRateDuring-Official  #$Dollar-Liberia #$Dollar-UnitedStates (#$MonthFn #$October (#$YearFn 1995)) 1.0).  See also #$exchangeRateDuring-Market and #$exchangeRateDuring.")
+
+(comment totalBudgetExpenditures "(#$totalBudgetExpenditures ORG THING MONEY) means that MONEY is a measure of the amount of money spent by the #$Organization ORG during the temporal extent of the #$TemporalThing THING.  ORG might, for example, be a #$Business, a #$LegalGovernmentOrganization, or a #$Country.  THING will often be a calendar time period; but it may also be, for instance, a particular #$Event.")
+
+(comment 
+  (implies 
+    (and 
+      (isa ?COUNTRY IndependentCountry) 
+      (isa ?EXPORTS Money) 
+      (isa ?CONSUMPTION Money) 
+      (isa ?IMPORTS Money) 
+      (totalBudgetExpenditures 
+        (GovernmentFn ?COUNTRY) ?TIME ?EXPENDITURES) 
+      (investmentAmountDuring ?COUNTRY Product ?TIME ?INVESTMENTS) 
+      (exportAmountDuring ?COUNTRY Product ?TIME ?EXPORTS) 
+      (consumptionAmountDuring ?COUNTRY Product ?TIME ?CONSUMPTION) 
+      (importAmountDuring ?COUNTRY Product ?TIME ?IMPORTS)) 
+    (grossDomesticProduct ?COUNTRY ?TIME 
+      (DifferenceFn 
+        (PlusFn ?CONSUMPTION ?EXPENDITURES ?EXPORTS ?INVESTMENT) ?IMPORTS))) "This rule is meant to capture the definition of Gross Domestic Product given in Version 1.0 of the Year 2 Crisis Management Challenge Problem spec - 'A measure of national economic size. It is comprised of four components - Private Consumption (C), Government Spending (G), Commercial Investment (I), and the national Trade Balance [exports (X) - imports (M)]. Therefore, the equation - GDP=C+I+G+(X-M).'")
+	
+
+;; /home/siegel/temp/EconomyMt-implications.kif
+
+
+(implies 
+  (isa ?ORG InternationalOrganizationOfCountries) 
+  (productionCapacityDuring ?ORG ?PRODUCT-TYPE ?TIME 
+    (PlusAll 
+      (TheSetOf ?COUNTRY 
+        (internationalOrg-MemberCountry ?ORG ?COUNTRY)) 
+      (FunctionToArg 2 
+        (Kappa 
+          (?C ?A) 
+          (productionCapacityDuring ?C ?PRODUCT-TYPE ?TIME ?A))))))
+
+(implies 
+  (and 
+    (grossDomesticProduct ?GE 
+      (YearFn ?X) ?GDP) 
+    (realGDPGrowthRateDuring ?GE 
+      (YearFn ?X) ?GROWTH-RATE)) 
+  (grossDomesticProduct ?GE 
+    (YearFn 
+      (DifferenceFn ?X 1)) 
+    (QuotientFn ?GDP 
+      (PlusFn ?GROWTH-RATE 1))))
+
+(implies 
+  (and 
+    (grossDomesticProduct ?REGION ?TIME ?GDP) 
+    (industryFractionOfGDP ?REGION ?IND-TYPE ?TIME ?FRACTION)) 
+  (productionValueOfIndustryDuring ?REGION ?IND-TYPE ?TIME 
+    (TimesFn ?GDP ?FRACTION)))
+
+(implies 
+  (and 
+    (isa ?AREA GeographicalAgent) 
+    (damages ?EVT ?FACILITIES) 
+    (industryFacilities 
+      (IndustryOfRegionFn ?INDUSTRY ?AREA) ?FACILITIES)) 
+  (maleficiary ?EVT ?AREA))
+
+(implies 
+  (and 
+    (damages ?EVT ?FACILITIES) 
+    (industryFacilities 
+      (IndustryOfRegionFn ?INDUSTRY ?AREA) ?FACILITIES)) 
+  (damages ?EVT 
+    (IndustryOfRegionFn ?INDUSTRY ?AREA)))
+
+(implies 
+  (and 
+    (exportAmountDuring ?REGION Product ?TIME ?EXP-VALUE) 
+    (isa ?EXP-VALUE Money) 
+    (isa ?PART-EXP-VALUE Money) 
+    (exportAmountDuring ?REGION ?PRODUCT-TYPE ?TIME ?PART-EXP-VALUE)) 
+  (exportRevenueFractionDuring ?REGION ?PRODUCT-TYPE ?TIME 
+    (QuantityConversionFn Percent 
+      (QuotientFn ?PART-EXP-VALUE ?EXP-VALUE))))
+
+(implies 
+  (and 
+    (laborForceDuring ?REGION ?TIME ?TOTAL) 
+    (laborForceOfIndustryOrOccupationDuring ?REGION ?COL ?TIME ?IND-NR)) 
+  (laborForceFractionDuring ?REGION ?COL ?TIME 
+    (QuotientFn ?IND-NR ?TOTAL)))
+
+(implies 
+  (and 
+    (grossDomesticProduct ?GE ?TIME ?GDP) 
+    (productionValueOfIndustryDuring ?GE ?IND-TYPE ?TIME ?MONEY)) 
+  (industryFractionOfGDP ?GE ?IND-TYPE ?TIME 
+    (QuantityConversionFn Percent 
+      (QuotientFn ?MONEY ?GDP))))
+
+(implies 
+  (exportThroughAmountDuring ?EXPORTER ?PRODUCT-TYPE ?THRU ?TIME 
+    ((PerFn (Giga CubicFoot) YearsDuration) 0)) 
+  (importFromThroughAmountDuring ?ANY-IMPORTER NaturalGas ?EXPORTER ?THRU ?TIME 
+    ((PerFn (Giga CubicFoot) YearsDuration) 0)))
+
+(implies 
+  (and 
+    (isa ?EXP-VALUE Money) 
+    (exportAmountDuring ?REGION Product ?TIME ?EXP-VALUE) 
+    (exportRevenueFractionDuring ?REGION ?PRODUCT-TYPE ?TIME ?FRACTION)) 
+  (exportAmountDuring ?REGION ?PRODUCT-TYPE ?TIME 
+    (TimesFn ?EXP-VALUE ?FRACTION)))
+
+(implies 
+  (and 
+    (isa ?TIME TimeInterval) 
+    (holdsIn ?TIME 
+      (nationalBudgetExpenditures ?REG ?AMT))) 
+  (totalBudgetExpenditures ?REG ?TIME ?AMT))
+
+(implies 
+  (and 
+    (distributionCapacity ?MOB ?PROD-TYPE ?CAPACITY) 
+    (distributionRate ?MOB ?PROD-TYPE ?RATE)) 
+  (greaterThanOrEqualTo ?CAPACITY ?RATE))
+
+(implies 
+  (and 
+    (isa ?COUNTRY IndependentCountry) 
+    (investmentAmountDuring ?COUNTRY Product ?TIME ?INVESTMENTS) 
+    (exportAmountDuring ?COUNTRY Product ?TIME ?EXPORTS) 
+    (isa ?EXPORTS Money) 
+    (consumptionAmountDuring ?COUNTRY Product ?TIME ?CONSUMPTION) 
+    (isa ?CONSUMPTION Money) 
+    (isa ?IMPORTS Money) 
+    (importAmountDuring ?COUNTRY Product ?TIME ?IMPORTS) 
+    (totalBudgetExpenditures 
+      (GovernmentFn ?COUNTRY) ?TIME ?EXPENDITURES)) 
+  (grossDomesticProduct ?COUNTRY ?TIME 
+    (DifferenceFn 
+      (PlusFn ?CONSUMPTION ?EXPENDITURES ?EXPORTS ?INVESTMENT) ?IMPORTS)))
+
+(implies 
+  (and 
+    (laborForceDuring ?REGION ?TIME ?TOTAL) 
+    (laborForceFractionDuring ?REGION ?COL ?TIME ?FRACTION)) 
+  (laborForceOfIndustryOrOccupationDuring ?REGION ?COL ?TIME 
+    (TimesFn ?TOTAL ?FRACTION)))
+
+(implies 
+  (and 
+    (importFromAmountDuring ?REGION2 Product ?REGION1 ?TIME ?PART-EXP-VALUE) 
+    (isa ?PART-EXP-VALUE Money) 
+    (isa ?EXP-VALUE Money) 
+    (exportAmountDuring ?REGION1 Product ?TIME ?EXP-VALUE)) 
+  (exportDestinationFractionDuring ?REGION1 ?REGION2 ?TIME 
+    (QuantityConversionFn Percent 
+      (QuotientFn ?PART-EXP-VALUE ?EXP-VALUE))))
+
+(implies 
+  (and 
+    (importAmountDuring ?REGION Product ?TIME ?IMP-VALUE) 
+    (isa ?IMP-VALUE Money) 
+    (isa ?PART-IMP-VALUE Money) 
+    (importAmountDuring ?REGION ?PRODUCT-TYPE ?TIME ?PART-IMP-VALUE)) 
+  (importExpenditureFractionDuring ?REGION ?PRODUCT-TYPE ?TIME 
+    (QuantityConversionFn Percent 
+      (QuotientFn ?PART-IMP-VALUE ?IMP-VALUE))))
+
+(implies 
+  (and 
+    (isa ?EXP-VALUE Money) 
+    (exportAmountDuring ?REGION1 Product ?TIME ?EXP-VALUE) 
+    (exportDestinationFractionDuring ?REGION1 ?REGION2 ?TIME ?FRACTION)) 
+  (importFromAmountDuring ?REGION2 Product ?REGION1 ?TIME 
+    (TimesFn ?EXP-VALUE ?FRACTION)))
+
+(implies 
+  (and 
+    (importFromAmountDuring ?REGION1 Product ?REGION2 ?TIME ?PART-IMP-VALUE) 
+    (isa ?PART-IMP-VALUE Money) 
+    (isa ?IMP-VALUE Money) 
+    (importAmountDuring ?REGION1 Product ?TIME ?IMP-VALUE)) 
+  (importOriginFractionDuring ?REGION1 ?REGION2 ?TIME 
+    (QuantityConversionFn Percent 
+      (QuotientFn ?PART-IMP-VALUE ?IMP-VALUE))))
+
+(implies 
+  (and 
+    (isa ?IMP-VALUE Money) 
+    (importAmountDuring ?REGION Product ?TIME ?IMP-VALUE) 
+    (importExpenditureFractionDuring ?REGION ?PRODUCT-TYPE ?TIME ?FRACTION)) 
+  (importAmountDuring ?REGION ?PRODUCT-TYPE ?TIME 
+    (TimesFn ?IMP-VALUE ?FRACTION)))
+
+(implies 
+  (isa ?ORG InternationalOrganizationOfCountries) 
+  (supplyFromThroughAmountDuring PlanetEarth ?PRODUCT-TYPE ?ORG ?PT ?TIME 
+    (PlusAll 
+      (TheSetOf ?COUNTRY 
+        (internationalOrg-MemberCountry ?ORG ?COUNTRY)) 
+      (FunctionToArg 2 
+        (Kappa 
+          (?C ?A) 
+          (supplyFromThroughAmountDuring PlanetEarth ?PRODUCT-TYPE ?C ?PT ?TIME ?A))))))
+
+(implies 
+  (and 
+    (isa ?IMP-VALUE Money) 
+    (importAmountDuring ?REGION1 Product ?TIME ?IMP-VALUE) 
+    (importOriginFractionDuring ?REGION1 ?REGION2 ?TIME ?FRACTION)) 
+  (importFromAmountDuring ?REGION1 Product ?REGION2 ?TIME 
+    (TimesFn ?IMP-VALUE ?FRACTION)))
+
+(implies 
+  (exportThroughAmountDuring ?EXPORTER ?PRODUCT-TYPE ?THRU ?TIME ?AMOUNT) 
+  (importFromThroughAmountDuring ?ANY-IMPORTER NaturalGas ?EXPORTER ?THRU ?TIME 
+    (IntervalMaxFn ?AMOUNT)))
+
+(implies 
+  (isa ?ORG InternationalOrganizationOfCountries) 
+  (productionAmountDuring ?ORG ?PRODUCT-TYPE ?TIME 
+    (PlusAll 
+      (TheSetOf ?COUNTRY 
+        (internationalOrg-MemberCountry ?ORG ?COUNTRY)) 
+      (FunctionToArg 2 
+        (Kappa 
+          (?C ?A) 
+          (productionAmountDuring ?C ?PRODUCT-TYPE ?TIME ?A))))))
+
+(implies 
+  (and 
+    (grossDomesticProduct ?GE ?TIME ?GDP) 
+    (budgetExpenditures ?GE ?ITEM ?TIME ?MONEY)) 
+  (budgetExpenditureFractionOfGDP ?GE ?ITEM ?TIME 
+    (QuantityConversionFn Percent 
+      (QuotientFn ?MONEY ?GDP))))
+
+(implies 
+  (and 
+    (genls ?ENERGYPRODUCT EnergyStuff) 
+    (exports ?VICTIMNATION ?ENERGYPRODUCT) 
+    (maleficiary ?ATTACK ?VICTIMNATION) 
+    (isa ?ATTACK MilitaryAttack) 
+    (performedBy ?ATTACK ?ATTACKER) 
+    (isa ?ATTACKER Country) 
+    (exportAmountDuring ?VICTIMNATION ?ENERGYPRODUCT 
+      (YearFn 1997) ?EXPORTAMOUNT) 
+    (greaterThan 
+      (QuotientFn ?EXPORTAMOUNT ?WORLDWIDE) 
+      (Percent 5)) 
+    (productionAmountDuring PlanetEarth ?ENERGYPRODUCT 
+      (YearFn 1997) ?WORLDWIDE)) 
+  (holdsIn 
+    (STIF ?ATTACK) 
+    (economicStability 
+      (EconomicSystemFn PlanetEarth) Low)))
+

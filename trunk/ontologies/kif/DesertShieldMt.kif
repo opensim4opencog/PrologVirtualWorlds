@@ -1,0 +1,1036 @@
+
+ (#$inReactionTo #$PassingUNSC-Resolution661 #$IraqInvadingKuwait)
+
+ (#$subEvents #$OPECMeetingInGeneva #$UAEAcceptsProductionQuota)
+
+ (#$adversarialResponseTo #$BushDoublesNumberOfTroopsInSaudiArabia #$IraqInvadingKuwait)
+
+ (#$performedBy #$IraqAgreesToMeetWithKuwait #$Iraq)
+
+ (#$opponentsInConflict #$UnitedArabEmirates #$Iraq #$PreludeToPersianGulfWar)
+
+ (#$subEvents #$PreludeToPersianGulfWar #$UAEAsksForUSSupport)
+
+ (#$holdsIn 
+  (#$TimeIntervalInclusiveFn 
+   (#$DayFn 2 
+    (#$MonthFn #$August 
+     (#$YearFn 1990))) 
+   (#$DayFn 27 
+    (#$MonthFn #$February 
+     (#$YearFn 1991)))) 
+  (#$beliefs #$UnitedStatesOfAmerica 
+   (#$goals #$Iraq 
+    (#$exists 
+     (?ATTACK) 
+     (#$exists 
+      (?WEAPON) 
+      (#$and 
+       (#$isa ?ATTACK #$MilitaryAttack) 
+       (#$isa ?WEAPON #$WeaponOfMassDestruction) 
+       (#$performedBy ?ATTACK #$Iraq) 
+       (#$intendedMaleficiary ?ATTACK 
+        (#$ArmyFn #$UnitedStatesOfAmerica)) 
+       (#$deviceUsed ?ATTACK ?WEAPON)))))))
+
+ (#$toLocation #$USForcesArriveInSA #$SaudiArabia)
+
+ (#$topicOfInfoTransfer #$UNDeclaresAnnexationVoid #$IraqAnnexesKuwait)
+
+ (#$implies 
+  (#$and 
+   (#$temporallySubsumes #$BlockadeOfIraq ?EXPORT) 
+   (#$isa ?EXPORT #$ImportExportEvent) 
+   (#$fromLocation ?EXPORT #$Iraq) 
+   (#$relationInstanceExists #$transportees ?EXPORT #$PetroleumProduct)) 
+  (#$causes-SitProp #$BlockadeOfIraq 
+   (#$failureForAgents ?EXPORT #$Iraq)))
+
+ (#$socialParticipants #$IraqAndUSNegotiate #$UnitedStatesOfAmerica)
+
+ (#$recipientOfInfo-Intended #$UAEAsksForUSSupport #$UnitedStatesOfAmerica)
+
+ (#$performedBy #$IraqThreatensIsrael #$Iraq)
+
+ (#$opponentsInConflict #$Iraq #$Kuwait #$TerritorialDispute-RumailaOilField)
+
+ (#$hasLeaders #$DesertShieldCoalition #$UnitedStatesOfAmerica)
+
+ (#$senderOfInfo #$IraqObjectsToOverProductionOfOil #$Iraq)
+
+ (#$inReactionTo #$CongressAuthorizesMilitaryAction #$IraqAndUSNegotiate)
+
+ (#$implies 
+  (#$toLocation #$IraqMassesTroopsOnSaudiBorder ?LOCATION) 
+  (#$near 
+   (#$BorderBetweenFn #$Kuwait #$SaudiArabia) ?LOCATION))
+
+ (#$adversarialResponseTo #$UNImposesSanctionsOnIraq #$IraqInvadingKuwait)
+
+
+ (#$fromLocation #$EmirFleesKuwait #$Kuwait)
+
+ (#$socialParticipants #$EgyptMeetsWithIraq #$Iraq)
+
+ (#$subEvents #$PersianGulfWar #$IraqDeclaresKuwaitIts19thProvince)
+
+ (#$purposeInEvent #$UN-SecurityCouncil #$PassingUNSC-Resolution678 
+  (#$exists 
+   (?WITHDRAWAL) 
+   (#$and 
+    (#$isa ?WITHDRAWAL #$MilitaryWithdrawal) 
+    (#$performedBy ?WITHDRAWAL 
+     (#$ArmyFn #$Iraq)) 
+    (#$toLocation ?WITHDRAWAL #$Iraq) 
+    (#$fromLocation ?WITHDRAWAL #$Kuwait))))
+
+ (#$dateOfEvent #$IraqiTroopMovements 
+  (#$DayFn 19 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$dateOfEvent #$UNOrdersIraqiWithdrawal 
+  (#$DayFn 2 
+   (#$MonthFn #$August 
+    (#$YearFn 1990))))
+
+
+ (#$performedBy #$UKAnnouncesTroopDeployments #$UnitedKingdomOfGreatBritainAndNorthernIreland)
+
+ (#$subEvents #$PersianGulfWar #$PassingUNSC-Resolution661)
+
+
+
+ (#$opponentsInConflict #$Iraq #$UnitedArabEmirates #$PreludeToPersianGulfWar)
+
+ (#$subEvents #$PreludeToPersianGulfWar #$UAEMobilizesTroops)
+
+ (#$holdsIn 
+  (#$TimeIntervalInclusiveFn 
+   (#$DayFn 2 
+    (#$MonthFn #$August 
+     (#$YearFn 1990))) 
+   (#$DayFn 27 
+    (#$MonthFn #$February 
+     (#$YearFn 1991)))) 
+  (#$beliefs #$UnitedStatesOfAmerica 
+   (#$goals #$Iraq 
+    (#$exists 
+     (?ATTACK) 
+     (#$exists 
+      (?WEAPON) 
+      (#$and 
+       (#$isa ?ATTACK #$MilitaryAttack) 
+       (#$isa ?WEAPON #$WeaponOfMassDestruction) 
+       (#$performedBy ?ATTACK #$Iraq) 
+       (#$intendedMaleficiary ?ATTACK #$Israel) 
+       (#$deviceUsed ?ATTACK ?WEAPON)))))))
+
+ (#$infoTransferred #$UAEAsksForUSSupport 
+  (#$exists 
+   (?MISSION) 
+   (#$and 
+    (#$isa ?MISSION #$MilitaryAircraftMission) 
+    (#$assistsInActionByDoing #$UnitedStatesOfAmerica #$UAEMobilizesTroops ?MISSION))))
+
+
+ (#$subEvents #$PersianGulfWar #$UNDeclaresAnnexationVoid)
+
+ (#$adversarialResponseTo #$FranceAnnouncesTroopDeployments #$IraqInvadingKuwait)
+
+ (#$holdsIn 
+  (#$TimeIntervalInclusiveFn 
+   (#$YearFn 1988) 
+   (#$YearFn 1989)) 
+  (#$statusWithAgent-Gradient #$Iraq #$UnitedStatesOfAmerica #$StateOfDiplomaticTension #$Positive))
+
+ (#$maleficiary #$BlockadeOfIraq #$Iraq)
+
+ (#$socialParticipants #$IraqAndUSNegotiate #$Iraq)
+
+
+ (#$territoryDisputed #$TerritorialDispute-RumailaOilField #$RumailaOilFieldIraq)
+
+ (#$performedBy #$IraqObjectsToOverProductionOfOil #$Iraq)
+
+ (#$startingDate #$OperationDesertStorm 
+  (#$DayFn 17 
+   (#$MonthFn #$January 
+    (#$YearFn 1991))))
+
+ (#$directingAgent #$IraqMassesTroopsOnSaudiBorder #$Iraq)
+
+ (#$maleficiary #$UNImposesSanctionsOnIraq #$Iraq)
+
+ (#$socialParticipants #$EgyptMeetsWithIraq #$Egypt)
+
+ (#$dateOfEvent #$IraqDeclaresKuwaitIts19thProvince 
+  (#$DayFn 28 
+   (#$MonthFn #$August 
+    (#$YearFn 1990))))
+
+
+ (#$recipientOfInfo #$UNOrdersIraqiWithdrawal #$Iraq)
+
+
+ (#$subEvents #$PersianGulfWar #$FranceAnnouncesTroopDeployments)
+
+ (#$topicOfInfoTransfer #$USDemandsInfoAboutTroopMovements #$IraqiTroopMovements)
+
+ (#$subEvents #$PersianGulfWar #$SaudiArabiaRequestsUSTroops)
+
+ (#$opponentsInConflict #$Kuwait #$Iraq #$PreludeToPersianGulfWar)
+
+ (#$infoTransferred #$HusseinMakesPromiseToUS 
+  (#$exists 
+   (?NEGOTIATING) 
+   (#$and 
+    (#$socialParticipants ?NEGOTIATING #$Iraq) 
+    (#$socialParticipants ?NEGOTIATING #$Kuwait) 
+    (#$isa ?NEGOTIATING #$Negotiating) 
+    (#$holdsIn 
+     (#$TimeIntervalInclusiveFn #$HusseinMakesPromiseToUS ?NEGOTIATING) 
+     (#$not 
+      (#$exists 
+       (?ATTACK) 
+       (#$and 
+        (#$isa ?ATTACK #$MilitaryAttack) 
+        (#$maleficiary ?ATTACK #$Kuwait) 
+        (#$deliberateActors ?ATTACK #$Iraq))))))))
+
+ (#$subEvents #$PreludeToPersianGulfWar #$USDemandsInfoAboutTroopMovements)
+
+ (#$recipientOfInfo #$UAEAsksForUSSupport #$UnitedStatesOfAmerica)
+
+ (#$purposeInEvent #$Iraq #$IraqInvadingKuwait 
+  (#$forall 
+   (?OIL-FIELD) 
+   (#$implies 
+    (#$and 
+     (#$isa ?OIL-FIELD #$OilField) 
+     (#$objectFoundInLocation ?OIL-FIELD #$Kuwait)) 
+    (#$territoriesControlled #$Iraq ?OIL-FIELD))))
+
+ (#$relationInstanceExistsCount #$outputsCreated #$PassingUNSC-Resolution678 #$Agreement 1)
+
+ (#$dateOfEvent #$UNDeclaresAnnexationVoid 
+  (#$DayFn 9 
+   (#$MonthFn #$August 
+    (#$YearFn 1990))))
+
+ (#$startingDate #$BlockadeOfIraq 
+  (#$DayFn 12 
+   (#$MonthFn #$August 
+    (#$YearFn 1990))))
+
+
+ (#$infoTransferred #$IraqiMinisterAnnouncesTalks 
+  (#$exists 
+   (?NEGOTIATING) 
+   (#$and 
+    (#$socialParticipants ?NEGOTIATING #$Iraq) 
+    (#$socialParticipants ?NEGOTIATING #$Kuwait) 
+    (#$isa ?NEGOTIATING #$Negotiating) 
+    (#$eventOccursAt ?NEGOTIATING #$CityOfBaghdadIraq))))
+
+ (#$startsAfterStartingOf #$TerritorialDispute-RumailaOilField 
+  (#$MonthFn #$August 
+   (#$YearFn 1988)))
+
+ (#$dateOfEvent #$IraqObjectsToOverProductionOfOil 
+  (#$DayFn 30 
+   (#$MonthFn #$May 
+    (#$YearFn 1990))))
+
+ (#$subEvents #$PersianGulfWar #$CongressAuthorizesMilitaryAction)
+
+ (#$inReactionTo #$UAEAcceptsProductionQuota #$IraqiTroopMovements)
+
+ (#$subEvents #$PersianGulfWar #$IraqMassesTroopsOnSaudiBorder)
+
+ (#$performedBy #$UNImposesSanctionsOnIraq #$UN-SecurityCouncil)
+
+ (#$dateOfEvent #$EgyptMeetsWithIraq 
+  (#$DayFn 22 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$senderOfInfo #$IraqDeclaresKuwaitIts19thProvince #$Iraq)
+
+ (#$senderOfInfo #$UNOrdersIraqiWithdrawal #$UnitedNationsOrganization)
+
+ (#$reasonForAction #$OperationDesertStorm #$beliefs #$DesertShieldCoalition 
+  (#$failureForAgents #$IraqAndUSNegotiate #$UnitedStatesOfAmerica))
+
+ (#$recipientOfInfo #$USDemandsInfoAboutTroopMovements #$Iraq)
+
+ (#$dateOfEvent #$SaudiArabiaRequestsUSTroops 
+  (#$DayFn 7 
+   (#$MonthFn #$August 
+    (#$YearFn 1990))))
+
+ (#$adversarialResponseTo #$BlockadeOfIraq #$IraqOccupiesKuwait)
+
+ (#$subEvents #$PersianGulfWar #$BushDoublesNumberOfTroopsInSaudiArabia)
+
+ (#$increasesCausally #$IraqInvadingKuwait 
+  (#$exists 
+   (?RETALIATION) 
+   (#$and 
+    (#$isa ?RETALIATION #$AttackOnTangible) 
+    (#$maleficiary ?RETALIATION #$Iraq))) #$likelihood)
+
+ (#$opponentsInConflict #$Iraq #$Kuwait #$PreludeToPersianGulfWar)
+
+ (#$subEvents #$PreludeToPersianGulfWar #$KuwaitiTroopMovements)
+
+ (#$senderOfInfo #$UAEAsksForUSSupport #$UnitedArabEmirates)
+
+ (#$subEvents #$PersianGulfWar #$PassingUNSC-Resolution678)
+
+ (#$deliberateActors #$IraqOccupiesKuwait #$Iraq)
+
+ (#$eventOccursAt #$BlockadeOfIraq #$PersianGulf)
+
+ (#$recipientOfInfo #$UNDeclaresAnnexationVoid #$Iraq)
+
+
+ (#$dateOfEvent #$IraqiMinisterAnnouncesTalks 
+  (#$DayFn 31 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$adversarialResponseTo #$UAEMobilizesTroops #$IraqiTroopMovements)
+
+
+
+ (#$startsAfterStartingOf #$IraqOccupiesKuwait #$IraqInvadingKuwait)
+
+ (#$inReactionTo #$KuwaitAcceptsProductionQuota #$IraqiTroopMovements)
+
+ (#$startsAfterStartingOf #$IraqMassesTroopsOnSaudiBorder #$IraqInvadingKuwait)
+
+ (#$dateOfEvent #$EmirFleesKuwait 
+  (#$DayFn 2 
+   (#$MonthFn #$August 
+    (#$YearFn 1990))))
+
+
+ (#$performedBy #$IraqDeclaresKuwaitIts19thProvince #$Iraq)
+
+ (#$performedBy #$UNOrdersIraqiWithdrawal #$UnitedNationsOrganization)
+
+ (#$inReactionTo #$IraqRejectsUNResolutions #$UNDeclaresAnnexationVoid)
+
+ (#$directingAgent #$KuwaitiTroopMovements #$Kuwait)
+
+ (#$infoTransferred #$KuwaitAcceptsProductionQuota 
+  (#$exists 
+   (?QUOTA-AMOUNT) 
+   (#$exists 
+    (?PRODUCTION-AMOUNT) 
+    (#$exists 
+     (?TIME) 
+     (#$and 
+      (#$temporallySubsumes 
+       (#$YearFn 1990) ?TIME) 
+      (#$greaterThanOrEqualTo ?QUOTA-AMOUNT ?PRODUCTION-AMOUNT) 
+      (#$productionAmountDuring #$Kuwait #$Petroleum-CrudeOil ?TIME ?PRODUCTION-AMOUNT) 
+      (#$productionQuotaDuring #$Kuwait #$Petroleum-CrudeOil ?TIME ?QUOTA-AMOUNT))))))
+
+ (#$dateOfEvent #$FranceAnnouncesTroopDeployments 
+  (#$DayFn 15 
+   (#$MonthFn #$September 
+    (#$YearFn 1990))))
+
+ (#$senderOfInfo #$USDemandsInfoAboutTroopMovements #$UnitedStatesOfAmerica)
+
+ (#$recipientOfInfo #$SaudiArabiaRequestsUSTroops #$UnitedStatesOfAmerica)
+
+ (#$successfulForAgents #$IraqInvadingKuwait #$Iraq)
+
+ (#$capableOfDoing #$UnitedNationsOrganization #$PreludeToPersianGulfWar #$mediators)
+
+ (#$directingAgent #$UAEMobilizesTroops #$UnitedArabEmirates)
+
+ (#$dateOfEvent #$HusseinMakesPromiseToUS 
+  (#$DayFn 25 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$subEvents #$PreludeToPersianGulfWar #$IraqiTroopMovements)
+
+ (#$performedBy #$UAEAsksForUSSupport #$UnitedArabEmirates)
+
+ (#$dateOfEvent #$PassingUNSC-Resolution678 
+  (#$DayFn 29 
+   (#$MonthFn #$November 
+    (#$YearFn 1990))))
+
+ (#$senderOfInfo #$UNDeclaresAnnexationVoid #$UN-SecurityCouncil)
+
+ (#$objectActedOn #$IraqOccupiesKuwait #$Kuwait)
+
+ (#$dateOfEvent #$CongressAuthorizesMilitaryAction 
+  (#$DayFn 12 
+   (#$MonthFn #$January 
+    (#$YearFn 1991))))
+
+ (#$startingDate #$IraqMassesTroopsOnSaudiBorder 
+  (#$DayFn 2 
+   (#$MonthFn #$August 
+    (#$YearFn 1990))))
+
+
+
+
+ (#$inReactionTo #$IraqRejectsUNResolutions #$PassingUNSC-Resolution661)
+
+ (#$dateOfEvent #$KuwaitiTroopMovements 
+  (#$DayFn 19 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$performedBy #$KuwaitAcceptsProductionQuota #$Kuwait)
+
+ (#$senderOfInfo #$FranceAnnouncesTroopDeployments #$France)
+
+ (#$performedBy #$USDemandsInfoAboutTroopMovements #$UnitedStatesOfAmerica)
+
+ (#$senderOfInfo #$SaudiArabiaRequestsUSTroops #$SaudiArabia)
+
+ (#$dateOfEvent #$BushDoublesNumberOfTroopsInSaudiArabia 
+  (#$DayFn 8 
+   (#$MonthFn #$November 
+    (#$YearFn 1990))))
+
+ (#$opponentsInConflict #$Israel #$Iraq #$PreludeToPersianGulfWar)
+
+ (#$dateOfEvent #$UAEMobilizesTroops 
+  (#$DayFn 22 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$performedBy #$IraqAnnexesKuwait #$Iraq)
+
+ (#$purposeInEvent #$Iraq #$IraqInvadingKuwait 
+  (#$increases-Generic #$IraqInvadingKuwait #$Iraq 
+   (#$Kappa 
+    (?AGT ?AMT) 
+    (#$powerInRegion-Geopolitical ?AGT #$MiddleEast-Region ?AMT))))
+
+ (#$recipientOfInfo #$HusseinMakesPromiseToUS #$UnitedStatesOfAmerica)
+
+ (#$subEvents #$PreludeToPersianGulfWar #$IraqAccusesKuwaitOfOilTheft)
+
+ (#$dateOfEvent #$UAEAsksForUSSupport 
+  (#$DayFn 22 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$maleficiary #$PassingUNSC-Resolution678 #$Iraq)
+
+ (#$lastSubEvents #$PreludeToPersianGulfWar #$IraqiMinisterAnnouncesTalks)
+
+ (#$performedBy #$UNDeclaresAnnexationVoid #$UN-SecurityCouncil)
+
+ (#$infoTransferred #$IraqRejectsUNResolutions 
+  (#$forall 
+   (?RESOLUTION) 
+   (#$forall 
+    (?RES-AGREEMENT) 
+    (#$implies 
+     (#$and 
+      (#$isa ?RESOLUTION #$PassingAResolution) 
+      (#$performedBy ?RESOLUTION #$UN-SecurityCouncil) 
+      (#$maleficiary ?RESOLUTION #$Iraq) 
+      (#$temporallySubsumes 
+       (#$TimeIntervalInclusiveFn #$IraqInvadingKuwait #$PassingUNSC-Resolution678) ?RESOLUTION) 
+      (#$outputsCreated ?RESOLUTION ?RES-AGREEMENT)) 
+     (#$not 
+      (#$agreeingAgents ?RES-AGREEMENT #$Iraq))))))
+
+ (#$performedBy #$IraqOccupiesKuwait 
+  (#$ArmyFn #$Iraq))
+
+
+ (#$inReactionTo #$IraqAndUSNegotiate #$IraqRejectsUNResolutions)
+
+ (#$goalCategoryForAgent #$Iraq 
+  (#$changesQuantityInDirection 
+   (#$TimeIntervalInclusiveFn 
+    (#$YearFn 1990) 
+    (#$YearFn 1991)) #$OPEC #$oilPriceCharged #$None) #$StrategicNationalInterest)
+
+ (#$deliberateActors #$UNDeclaresAnnexationVoid #$UnitedNationsOrganization)
+
+
+ (#$adversarialResponseTo #$BlockadeOfIraq #$IraqInvadingKuwait)
+
+ (#$dateOfEvent #$KuwaitAcceptsProductionQuota 
+  (#$DayFn 25 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$performedBy #$FranceAnnouncesTroopDeployments #$France)
+
+ (#$dateOfEvent #$USDemandsInfoAboutTroopMovements 
+  (#$DayFn 20 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$performedBy #$SaudiArabiaRequestsUSTroops #$SaudiArabia)
+
+
+ (#$opponentsInConflict #$Iraq #$Israel #$PreludeToPersianGulfWar)
+
+
+ (#$subEvents #$PersianGulfWar #$IraqAnnexesKuwait)
+
+ (#$subEvents #$PreludeToPersianGulfWar #$IraqObjectsToOverProductionOfOil)
+
+
+ (#$performedBy #$PassingUNSC-Resolution678 #$UN-SecurityCouncil)
+
+ (#$firstSubEvents #$PreludeToPersianGulfWar #$IraqThreatensIsrael)
+
+ (#$objectActedOn #$BlockadeOfIraq 
+  (#$ShippingSystemFn #$PersianGulf))
+
+
+ (#$subEvents #$PersianGulfWar #$IraqRejectsUNResolutions)
+
+ (#$adversarialResponseTo #$UKAnnouncesTroopDeployments #$IraqInvadingKuwait)
+
+
+
+
+ (#$goals #$Iraq 
+  (#$changesQuantityInDirection 
+   (#$TimeIntervalInclusiveFn 
+    (#$YearFn 1990) 
+    (#$YearFn 1991)) #$OPEC #$oilPriceCharged #$None))
+
+ (#$inReactionTo #$UNDeclaresAnnexationVoid #$IraqAnnexesKuwait)
+
+ (#$holdsSometimeDuring 
+  (#$TimeIntervalInclusiveFn 
+   (#$MonthFn #$August 
+    (#$YearFn 1988)) 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))) 
+  (#$knows #$UnitedStatesOfAmerica 
+   (#$exists 
+    (?CW) 
+    (#$and 
+     (#$isa ?CW #$ChemicalWeapon) 
+     (#$owns #$Iraq ?CW)))))
+
+ (#$subEvents #$OPECMeetingInGeneva #$KuwaitAcceptsProductionQuota)
+
+
+
+
+
+ (#$dateOfEvent #$IraqAnnexesKuwait 
+  (#$DayFn 8 
+   (#$MonthFn #$August 
+    (#$YearFn 1990))))
+
+ (#$subEvents #$PersianGulfWar #$UNImposesSanctionsOnIraq)
+
+ (#$subEvents #$PreludeToPersianGulfWar #$IraqThreatensIsrael)
+
+ (#$goals #$UnitedStatesOfAmerica 
+  (#$not 
+   (#$exists 
+    (?BLOCK) 
+    (#$and 
+     (#$isa ?BLOCK #$BlockingTraffic) 
+     (#$relationInstanceExists #$objectActedOn ?BLOCK 
+      (#$ShippingLaneOfRegionFn #$PersianGulf))))))
+
+
+ (#$adversarialResponseTo #$KuwaitiTroopMovements #$IraqiTroopMovements)
+
+ (#$subEvents #$PreludeToPersianGulfWar #$IraqiMinisterAnnouncesTalks)
+
+ (#$failureForAgents #$IraqAndKuwaitNegotiate #$Kuwait)
+
+ (#$inReactionTo #$IraqRejectsUNResolutions #$PassingUNSC-Resolution678)
+
+ (#$infoTransferred #$IraqObjectsToOverProductionOfOil 
+  (#$exists 
+   (?ACTION) 
+   (#$and 
+    (#$maleficiary ?ACTION #$Iraq) 
+    (#$deliberateActors ?ACTION #$UnitedArabEmirates))))
+
+ (#$holdsIn #$IraqOccupiesKuwait 
+  (#$possesses #$Iraq 
+   (#$IndustryOfRegionFn #$OilIndustry #$Kuwait)))
+
+ (#$inReactionTo #$SaudiArabiaRequestsUSTroops #$IraqInvadingKuwait)
+
+ (#$goalCategoryForAgent #$Iraq 
+  (#$changesQuantityInDirection 
+   (#$TimeIntervalInclusiveFn 
+    (#$YearFn 1990) 
+    (#$YearFn 1991)) #$OPEC #$oilPriceCharged #$None) #$NationalEconomyGoal)
+
+ (#$infoTransferred #$IraqAccusesKuwaitOfOilTheft 
+  (#$exists 
+   (?ATTACK) 
+   (#$and 
+    (#$isa ?ATTACK #$MilitaryAttack) 
+    (#$directingAgent ?ATTACK #$Iraq) 
+    (#$intendedMaleficiary ?ATTACK #$Kuwait))))
+
+
+ (#$adversarialResponseTo #$USForcesArriveInSA #$IraqInvadingKuwait)
+
+
+ (#$performedBy #$BlockadeOfIraq #$UnitedStatesOfAmerica)
+
+
+ (#$causes-EventEvent #$PreludeToPersianGulfWar #$PersianGulfWar)
+
+ (#$goalCategoryForAgent #$UnitedStatesOfAmerica 
+  (#$not 
+   (#$exists 
+    (?BLOCK) 
+    (#$and 
+     (#$isa ?BLOCK #$BlockingTraffic) 
+     (#$relationInstanceExists #$objectActedOn ?BLOCK 
+      (#$ShippingLaneOfRegionFn #$PersianGulf))))) #$StrategicNationalInterest)
+
+ (#$preconditionFor-Events #$PassingUNSC-Resolution678 #$IraqRejectsUNResolutions)
+
+ (#$contiguousAfter 
+  (#$STIF #$UNOrdersIraqiWithdrawal) #$UNOrdersIraqiWithdrawal)
+
+ (#$subEvents #$PreludeToPersianGulfWar #$IraqAndKuwaitNegotiate)
+
+ (#$holdsIn 
+  (#$TimeIntervalInclusiveFn 
+   (#$DayFn 2 
+    (#$MonthFn #$August 
+     (#$YearFn 1990))) 
+   (#$DayFn 27 
+    (#$MonthFn #$February 
+     (#$YearFn 1991)))) 
+  (#$beliefs #$UnitedStatesOfAmerica 
+   (#$goals #$Iraq 
+    (#$exists 
+     (?ATTACK) 
+     (#$exists 
+      (?WEAPON) 
+      (#$exists 
+       (?TARGET) 
+       (#$and 
+        (#$isa ?ATTACK #$MilitaryAttack) 
+        (#$isa ?WEAPON #$WeaponOfMassDestruction) 
+        (#$performedBy ?ATTACK #$Iraq) 
+        (#$near 
+         (#$BorderFn #$Iraq) ?TARGET) 
+        (#$eventOccursNear ?ATTACK 
+         (#$BorderFn #$Iraq)) 
+        (#$deviceUsed ?ATTACK ?WEAPON) 
+        (#$intendedMaleficiary ?ATTACK ?TARGET))))))))
+
+ (#$decreasesCausally #$HusseinMakesPromiseToUS #$PreludeToPersianGulfWar #$conflictLevel)
+
+ (#$failureForAgents #$IraqAndKuwaitNegotiate #$Iraq)
+
+ (#$dateOfEvent #$IraqRejectsUNResolutions 
+  (#$DayFn 29 
+   (#$MonthFn #$November 
+    (#$YearFn 1990))))
+
+ (#$postEvents #$SaudiArabiaRequestsUSTroops #$USForcesArriveInSA)
+
+ (#$startsAfterEndingOf #$USForcesArriveInSA #$SaudiArabiaRequestsUSTroops)
+
+ (#$causes-EventEvent #$TerritorialDispute-RumailaOilField #$PreludeToPersianGulfWar)
+
+ (#$infoTransferred #$IraqObjectsToOverProductionOfOil 
+  (#$exists 
+   (?ACTION) 
+   (#$and 
+    (#$maleficiary ?ACTION #$Iraq) 
+    (#$deliberateActors ?ACTION #$Kuwait))))
+
+ (#$subEvents #$PersianGulfWar #$IraqOccupiesKuwait)
+
+ (#$inReactionTo #$UAEAsksForUSSupport #$IraqiTroopMovements)
+
+ (#$firstSubEvents #$PersianGulfWar #$IraqInvadingKuwait)
+
+ (#$implies 
+  (#$holdsIn 
+   (#$STIB #$BushDoublesNumberOfTroopsInSaudiArabia) 
+   (#$entityCardinality 
+    (#$TheSetOf ?TROOP 
+     (#$exists 
+      (?MMO) 
+      (#$and 
+       (#$isa ?MMO #$ModernMilitaryOrganization) 
+       (#$isa ?TROOP #$MilitaryPerson) 
+       (#$inRegion ?MMO #$SaudiArabia) 
+       (#$officialArmedForces 
+        (#$GovernmentFn #$UnitedStatesOfAmerica) ?MMO) 
+       (#$hasMembers ?MMO ?TROOP)))) ?NUM)) 
+  (#$increasesByAmount #$BushDoublesNumberOfTroopsInSaudiArabia 
+   (#$TheSetOf ?TROOP 
+    (#$exists 
+     (?MMO) 
+     (#$and 
+      (#$isa ?MMO #$ModernMilitaryOrganization) 
+      (#$isa ?TROOP #$MilitaryPerson) 
+      (#$inRegion ?MMO #$SaudiArabia) 
+      (#$officialArmedForces 
+       (#$GovernmentFn #$UnitedStatesOfAmerica) ?MMO) 
+      (#$hasMembers ?MMO ?TROOP)))) #$entityCardinality ?NUM))
+
+ (#$deliberateActors #$USForcesArriveInSA #$UnitedStatesOfAmerica)
+
+ (#$increasesImmediatelyCausally #$IraqInvadingKuwait 
+  (#$powerInRegion-Geopolitical #$Iraq #$MiddleEast-Region #$MediumToVeryHigh) #$likelihood)
+
+
+ (#$opponentsInConflict #$SaudiArabia #$Iraq #$PreludeToPersianGulfWar)
+
+ (#$deliberateActors #$IraqMassesTroopsOnSaudiBorder #$Iraq)
+
+ (#$subEvents #$PreludeToPersianGulfWar #$HusseinMakesPromiseToUS)
+
+ (#$preconditionFor-Events #$IraqInvadingKuwait #$IraqOccupiesKuwait)
+
+ (#$decreasesCausally #$IraqAgreesToMeetWithKuwait #$PreludeToPersianGulfWar #$conflictLevel)
+
+ (#$inReactionTo #$USForcesArriveInSA #$SaudiArabiaRequestsUSTroops)
+
+ (#$socialParticipants #$IraqAndKuwaitNegotiate #$Kuwait)
+
+ (#$recipientOfInfo #$IraqRejectsUNResolutions #$UN-SecurityCouncil)
+
+ (#$postEvents #$PassingUNSC-Resolution678 #$IraqRejectsUNResolutions)
+
+ (#$subEvents #$PersianGulfWar #$IraqAndUSNegotiate)
+
+ (#$increases-Generic #$IraqAnnexesKuwait #$PersianGulfWar #$conflictLevel)
+
+ (#$startsAfterEndingOf #$IraqRejectsUNResolutions #$PassingUNSC-Resolution678)
+
+ (#$infoTransferred #$IraqThreatensIsrael 
+  (#$exists 
+   (?ATTACK) 
+   (#$and 
+    (#$isa ?ATTACK #$MilitaryAttack) 
+    (#$directingAgent ?ATTACK #$Iraq) 
+    (#$maleficiary ?ATTACK #$Israel))))
+
+ (#$positiveVestedInterest #$Kuwait #$RumailaOilFieldIraq)
+
+ (#$infoTransferred #$IraqObjectsToOverProductionOfOil 
+  (#$exists 
+   (?QUANTITY1) 
+   (#$exists 
+    (?QUANTITY) 
+    (#$and 
+     (#$productionAmountDuring #$UnitedArabEmirates #$Petroleum-CrudeOil 
+      (#$QuarterFn 1 
+       (#$YearFn 1990)) ?QUANTITY) 
+     (#$productionQuotaDuring #$UnitedArabEmirates #$Petroleum-CrudeOil 
+      (#$QuarterFn 1 
+       (#$YearFn 1990)) ?QUANTITY1) 
+     (#$greaterThan ?QUANTITY ?QUANTITY1)))))
+
+ (#$temporallySubsumes 
+  (#$TimeIntervalInclusiveFn 
+   (#$DayFn 2 
+    (#$MonthFn #$August 
+     (#$YearFn 1990))) 
+   (#$DayFn 27 
+    (#$MonthFn #$February 
+     (#$YearFn 1991)))) #$IraqOccupiesKuwait)
+
+ (#$inReactionTo #$PassingUNSC-Resolution678 #$IraqInvadingKuwait)
+
+ (#$increasesCausally #$BushDoublesNumberOfTroopsInSaudiArabia 
+  (#$TheSetOf ?TROOP 
+   (#$exists 
+    (?MMO) 
+    (#$and 
+     (#$isa ?TROOP #$MilitaryPerson) 
+     (#$isa ?MMO #$ModernMilitaryOrganization) 
+     (#$inRegion ?MMO #$SaudiArabia) 
+     (#$officialArmedForces 
+      (#$GovernmentFn #$UnitedStatesOfAmerica) ?MMO) 
+     (#$hasMembers ?MMO ?TROOP)))) #$entityCardinality)
+
+ (#$dateOfEvent #$IraqAccusesKuwaitOfOilTheft 
+  (#$DayFn 17 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$inReactionTo #$EmirFleesKuwait #$IraqInvadingKuwait)
+
+ (#$deliberateActors #$BushDoublesNumberOfTroopsInSaudiArabia #$UnitedStatesOfAmerica)
+
+ (#$objectActedOn #$IraqInvadingKuwait #$Kuwait)
+
+ (#$subEvents #$PersianGulfWar #$UKAnnouncesTroopDeployments)
+
+ (#$infoTransferred #$UAEAcceptsProductionQuota 
+  (#$exists 
+   (?QUOTA-AMOUNT) 
+   (#$exists 
+    (?PRODUCTION-AMOUNT) 
+    (#$exists 
+     (?TIME) 
+     (#$and 
+      (#$temporallySubsumes 
+       (#$YearFn 1990) ?TIME) 
+      (#$greaterThanOrEqualTo ?QUOTA-AMOUNT ?PRODUCTION-AMOUNT) 
+      (#$productionAmountDuring #$UnitedArabEmirates #$Petroleum-CrudeOil ?TIME ?PRODUCTION-AMOUNT) 
+      (#$productionQuotaDuring #$UnitedArabEmirates #$Petroleum-CrudeOil ?TIME ?QUOTA-AMOUNT))))))
+
+ (#$contiguousAfter #$BushDoublesNumberOfTroopsInSaudiArabia 
+  (#$STIB #$BushDoublesNumberOfTroopsInSaudiArabia))
+
+ (#$opponentsInConflict #$Iraq #$SaudiArabia #$PreludeToPersianGulfWar)
+
+ (#$performedBy #$IraqMassesTroopsOnSaudiBorder 
+  (#$ArmyFn #$Iraq))
+
+ (#$subEvents #$PreludeToPersianGulfWar #$IraqAgreesToMeetWithKuwait)
+
+ (#$decreasesCausally #$OPECMeetingInGeneva #$PreludeToPersianGulfWar #$conflictLevel)
+
+ (#$socialParticipants #$IraqAndKuwaitNegotiate #$Iraq)
+
+ (#$senderOfInfo #$IraqRejectsUNResolutions #$Iraq)
+
+ (#$startsAfterStartingOf #$DesertShieldCoalition #$PersianGulfWar)
+
+ (#$dateOfEvent #$IraqAndUSNegotiate 
+  (#$DayFn 9 
+   (#$MonthFn #$January 
+    (#$YearFn 1991))))
+
+ (#$recipientOfInfo-Intended #$SaudiArabiaRequestsUSTroops #$UnitedStatesOfAmerica)
+
+ (#$dateOfEvent #$IraqThreatensIsrael 
+  (#$MonthFn #$April 
+   (#$YearFn 1990)))
+
+ (#$objectOfPossessionTransfer #$IraqAnnexesKuwait #$Kuwait)
+
+ (#$positiveVestedInterest #$Iraq #$RumailaOilFieldIraq)
+
+ (#$infoTransferred #$IraqObjectsToOverProductionOfOil 
+  (#$exists 
+   (?QUANTITY1) 
+   (#$exists 
+    (?QUANTITY) 
+    (#$and 
+     (#$productionAmountDuring #$Kuwait #$Petroleum-CrudeOil 
+      (#$QuarterFn 1 
+       (#$YearFn 1990)) ?QUANTITY) 
+     (#$productionQuotaDuring #$Kuwait #$Petroleum-CrudeOil 
+      (#$QuarterFn 1 
+       (#$YearFn 1990)) ?QUANTITY1) 
+     (#$greaterThan ?QUANTITY ?QUANTITY1)))))
+
+ (#$recipientOfInfo #$IraqAccusesKuwaitOfOilTheft #$Kuwait)
+
+ (#$directingAgent #$EgyptMeetsWithIraq #$Egypt)
+
+ (#$startingDate #$IraqInvadingKuwait 
+  (#$DayFn 2 
+   (#$MonthFn #$August 
+    (#$YearFn 1990))))
+
+ (#$infoTransferred #$IraqDeclaresKuwaitIts19thProvince 
+  (#$nameOfAgent #$CityOfKuwaitKuwait &quot;al-Kadhima&quot;))
+
+ (#$startingDate #$UNImposesSanctionsOnIraq 
+  (#$DayFn 6 
+   (#$MonthFn #$August 
+    (#$YearFn 1990))))
+
+ (#$increasesCausally #$IraqiTroopMovements 
+  (#$TheSetOf ?MMO 
+   (#$exists 
+    (?LOCATION) 
+    (#$and 
+     (#$isa ?MMO #$ModernMilitaryOrganization) 
+     (#$officialArmedForces 
+      (#$GovernmentFn #$Iraq) ?MMO) 
+     (#$near 
+      (#$BorderBetweenFn #$Kuwait #$Iraq) ?LOCATION) 
+     (#$objectFoundInLocation ?MMO ?LOCATION)))) #$entityCardinality)
+
+ (#$implies 
+  (#$internationalOrg-MemberCountry #$OPEC ?COUNTRY) 
+  (#$socialParticipants #$OPECMeetingInGeneva ?COUNTRY))
+
+ (#$adversarialResponseTo #$BlockadeOfIraq #$IraqAnnexesKuwait)
+
+ (#$performedBy #$UAEAcceptsProductionQuota #$UnitedArabEmirates)
+
+ (#$infoTransferred #$IraqAgreesToMeetWithKuwait 
+  (#$exists 
+   (?MEETING) 
+   (#$and 
+    (#$socialParticipants ?MEETING #$Iraq) 
+    (#$socialParticipants ?MEETING #$Kuwait) 
+    (#$isa ?MEETING #$MeetingTakingPlace))))
+
+ (#$opponentsInConflict #$UnitedStatesOfAmerica #$Iraq #$PreludeToPersianGulfWar)
+
+ (#$contiguousAfter 
+  (#$STIF #$IraqAnnexesKuwait) #$IraqAnnexesKuwait)
+
+ (#$increases-Generic #$IraqAccusesKuwaitOfOilTheft #$PreludeToPersianGulfWar #$conflictLevel)
+
+ (#$subEvents #$PreludeToPersianGulfWar #$OPECMeetingInGeneva)
+
+ (#$relationInstanceExists #$subOrganizations 
+  (#$ArmyFn #$Iraq) #$ArmoredUnit-MilitarySpecialty)
+
+ (#$subEvents #$PersianGulfWar #$USForcesArriveInSA)
+
+ (#$temporallySubsumes 
+  (#$TimeIntervalInclusiveFn 
+   (#$MonthFn #$April 
+    (#$YearFn 1990)) 
+   (#$DayFn 31 
+    (#$MonthFn #$July 
+     (#$YearFn 1990)))) #$PreludeToPersianGulfWar)
+
+ (#$endingDate #$IraqAndKuwaitNegotiate 
+  (#$DayFn 31 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$performedBy #$IraqRejectsUNResolutions #$Iraq)
+
+ (#$failureForAgents #$IraqAndUSNegotiate #$UnitedStatesOfAmerica)
+
+ (#$preconditionFor-Events #$IraqOccupiesKuwait #$IraqDeclaresKuwaitIts19thProvince)
+
+ (#$recipientOfInfo #$IraqThreatensIsrael #$Israel)
+
+ (#$toPossessor #$IraqAnnexesKuwait #$Iraq)
+
+ (#$capableOfDoing #$UnitedNationsOrganization #$TerritorialDispute-RumailaOilField #$mediators)
+
+ (#$recipientOfInfo #$IraqObjectsToOverProductionOfOil #$Kuwait)
+
+ (#$senderOfInfo #$IraqAccusesKuwaitOfOilTheft #$Iraq)
+
+ (#$subEvents #$PersianGulfWar #$EmirFleesKuwait)
+
+ (#$inReactionTo #$EgyptMeetsWithIraq #$IraqiTroopMovements)
+
+ (#$maleficiary #$IraqInvadingKuwait #$Kuwait)
+
+ (#$infoTransferred #$IraqDeclaresKuwaitIts19thProvince 
+  (#$geographicalSubRegions #$Iraq #$Kuwait))
+
+ (#$implies 
+  (#$toLocation #$IraqiTroopMovements ?LOCATION) 
+  (#$near 
+   (#$BorderBetweenFn #$Kuwait #$Iraq) ?LOCATION))
+
+ (#$subEvents #$PersianGulfWar #$UNOrdersIraqiWithdrawal)
+
+ (#$eventOccursAt #$OPECMeetingInGeneva #$CityOfGenevaSwitzerland)
+
+ (#$dateOfEvent #$UKAnnouncesTroopDeployments 
+  (#$DayFn 15 
+   (#$MonthFn #$September 
+    (#$YearFn 1990))))
+
+ (#$authorizesAgentToDo #$PassingUNSC-Resolution678 #$DesertShieldCoalition #$MilitaryAttack)
+
+ (#$dateOfEvent #$UAEAcceptsProductionQuota 
+  (#$DayFn 25 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$dateOfEvent #$IraqAgreesToMeetWithKuwait 
+  (#$DayFn 25 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$opponentsInConflict #$Iraq #$UnitedStatesOfAmerica #$PreludeToPersianGulfWar)
+
+ (#$subEvents #$PreludeToPersianGulfWar #$EgyptMeetsWithIraq)
+
+ (#$senderOfInfo #$UKAnnouncesTroopDeployments #$UnitedKingdomOfGreatBritainAndNorthernIreland)
+
+ (#$temporallySubsumes #$OPECMeetingInGeneva 
+  (#$DayFn 25 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))))
+
+ (#$inReactionTo #$UNOrdersIraqiWithdrawal #$IraqInvadingKuwait)
+
+ (#$directingAgent #$IraqiTroopMovements #$Iraq)
+
+ (#$increasesCausally #$IraqInvadingKuwait 
+  (#$exists 
+   (?RETALIATION) 
+   (#$and 
+    (#$isa ?RETALIATION #$AttackOnTangible) 
+    (#$maleficiary ?RETALIATION 
+     (#$ArmyFn #$Iraq)))) #$likelihood)
+
+ (#$not 
+  (#$and 
+   (#$geographicalSubRegions #$Kuwait ?LOCATION) 
+   (#$toLocation #$EmirFleesKuwait ?LOCATION)))
+
+ (#$performedBy #$IraqAccusesKuwaitOfOilTheft #$Iraq)
+
+ (#$increasesCausally #$IraqThreatensIsrael #$Iraq 
+  (#$Kappa 
+   (?AGENT ?LEVEL) 
+   (#$statusWithAgent-Gradient ?AGENT #$UnitedStatesOfAmerica #$StateOfDiplomaticTension ?LEVEL)))
+
+ (#$recipientOfInfo #$IraqObjectsToOverProductionOfOil #$UnitedArabEmirates)
+
+ (#$opponentsInConflict #$Kuwait #$Iraq #$TerritorialDispute-RumailaOilField)
+
+ (#$senderOfInfo #$IraqThreatensIsrael #$Iraq)
+
+ (#$inReactionTo #$USDemandsInfoAboutTroopMovements #$IraqiTroopMovements)
+
+ (#$recipientOfInfo-Intended #$HusseinMakesPromiseToUS #$UnitedStatesOfAmerica)
+
+ (#$failureForAgents #$IraqAndUSNegotiate #$Iraq)
+
+ (#$holdsIn 
+  (#$DayFn 31 
+   (#$MonthFn #$July 
+    (#$YearFn 1990))) 
+  (#$trueFormula 
+   (#$thereExistAtLeast 100000 ?SOLDIER 
+    (#$and 
+     (#$isa ?SOLDIER #$MilitaryPerson) 
+     (#$hasMembers 
+      (#$ArmyFn #$Iraq) ?SOLDIER) 
+     (#$near 
+      (#$BorderBetweenFn #$Kuwait #$Iraq) ?SOLDIER)))))
+
+ (#$subEvents #$PersianGulfWar #$BlockadeOfIraq)
+
+
+
+ (#$endingDate #$USForcesArriveInSA 
+  (#$DayFn 9 
+   (#$MonthFn #$August 
+    (#$YearFn 1990))))

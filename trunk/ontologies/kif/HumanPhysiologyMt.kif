@@ -1,0 +1,136 @@
+
+
+ (implies 
+  (and 
+   (genls Person ?ORG_TYPE) 
+   (relationAllExistsCount anatomicalParts ?ORG_TYPE ?PART 1)) 
+  (isa ?PART UniqueAnatomicalPartType))
+
+ (implies 
+  (and 
+   (isa ?TYPE PhysiologicalConditionType) 
+   (isa ?BLO BiologicalLivingObject) 
+   (objectTakenCareOf ?CARE ?BLO) 
+   (isa ?CARE ?TREATMENTOF) 
+   (termOfUnit ?TREATMENTOF 
+    (TreatmentFn ?TYPE))) 
+  (isa 
+   (SKF-636489 ?BLO ?CARE ?TREATMENTOF ?TYPE) ?TYPE))
+
+ (uniquePartTypes Person Torso)
+
+ (implies 
+  (and 
+   (isa ?BLO BiologicalLivingObject) 
+   (objectTakenCareOf ?CARE ?BLO) 
+   (isa ?CARE ?TREATMENTOF) 
+   (isa ?TYPE PhysiologicalConditionType) 
+   (termOfUnit ?TREATMENTOF 
+    (TreatmentFn ?TYPE))) 
+  (startsAfterStartingOf ?CARE 
+   (SKF-636489 ?BLO ?CARE ?TREATMENTOF ?TYPE)))
+
+ (implies 
+  (isa ?U MakingAnOralSound) 
+  (anatomicalResourceRequired ?U Mouth 1))
+
+ (comment Exercising "The collection of events in which humans move their bodies for the purpose of general physical conditioning and/or strengthening muscles. comment by Nichols on June 25, 1996") 
+
+ (isa Rickettsialpox PhysiologicalConditionType)
+
+ (relationAllExists anatomicalParts Person Finger)
+
+ (implies 
+  (isa ?U Person) 
+  (anatomicallyCapableOf ?U ArmMovement doneBy))
+
+ (isa SKF-17558030 FixedAritySkolemFunction)
+
+ (relationAllInstance temperatureOfObject Person 
+  (DegreeFahrenheit 90 110))
+
+ (isa Leg SymmetricAnatomicalPartType)
+
+ (relationAllExists subEvents PuttingOnAClothingItem ArmMovement)
+
+ (isa Foot-AnimalBodyPart SymmetricAnatomicalPartType)
+
+ (implies 
+  (and 
+   (isa ?Y PartiallyTangible) 
+   (objectActedOn ?X ?Y) 
+   (isa ?X Swallowing)) 
+  (volumeOfObject ?Y 
+   (CubicCentimeter 0 60)))
+
+ (relationAllExistsMax anatomicalParts Organism-Whole Stomach 1)
+
+ (relationAllExists subEvents TakingOffAClothingItem ArmMovement)
+
+ (implies 
+  (and 
+   (isa ?BLO BiologicalLivingObject) 
+   (objectTakenCareOf ?CARE ?BLO) 
+   (isa ?CARE ?TREATMENTOF) 
+   (isa ?TYPE PhysiologicalConditionType) 
+   (termOfUnit ?TREATMENTOF 
+    (TreatmentFn ?TYPE))) 
+  (bodilyDoer 
+   (SKF-636489 ?BLO ?CARE ?TREATMENTOF ?TYPE) ?BLO))
+
+ (interArgFormat1-2 performedBy SecretionEvent SingleEntry)
+
+ (isa Lung SymmetricAnatomicalPartType)
+
+ (implies 
+  (and 
+   (isa ?X AnimalWalkingProcess) 
+   (performedBy ?X ?Y) 
+   (isa ?Y Person)) 
+  (holdsIn ?X 
+   (postureOfAnimal ?Y UprightPosture)))
+
+ (resultIsa SKF-17558030 Mob)
+
+ (arity SKF-17558030 1)
+
+ (isa Rickettsiosis PhysiologicalConditionType)
+
+ (resultIsa SKF-17558030 SheetOfSomeStuff)
+
+ (genls Ear PartiallyTangible)
+
+ (resultIsa SKF-17558030 
+  (CollectionUnionFn 
+   (TheSet 
+    (SolidTangibleThing SemiSolidTangibleThing))))
+
+ (implies 
+  (isa ?U Person) 
+  (anatomicallyCapableOf ?U Speaking performedBy))
+
+ (interArgFormat1-2 performedBy ExperiencingHunger SingleEntry)
+
+ (resultIsa SKF-17558030 AnimalBodyPart)
+
+ (implies 
+  (and 
+   (genls Person ?ORG_TYPE) 
+   (relationAllExistsCount anatomicalParts ?ORG_TYPE ?PART 2)) 
+  (isa ?PART SymmetricAnatomicalPartType))
+
+ (isa Arm SymmetricAnatomicalPartType)
+
+ (isa Stomach UniqueAnatomicalPartType)
+
+ (implies 
+  (isa ?BRAIN Brain) 
+  (behaviorCapable ?BRAIN AtLeastPartiallyMentalEvent actorPartsInvolved))
+
+ (implies 
+  (isa ?U Person) 
+  (anatomicallyCapableOf ?U Perceiving doneBy))
+
+ (implies 
+  (isa ?U ArmMovement) 
+  (anatomicalResourceRequired ?U Arm 1))

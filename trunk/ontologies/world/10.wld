@@ -1,0 +1,946 @@
+#1000
+Main Engineering~
+   You find yourself in the middle of main engineering. The room is longer 
+than it is wide, and it has fairly low ceilings. Computer terminals cover 
+all the walls, and a large table built into the floor sits in the middle of 
+the room. At the far end of the room you see the warp core, a large pulsating 
+vertical tube.    
+~
+10 d 0
+D0
+A corridor is North.
+~
+~
+0 -1 1002
+S
+#1001
+Geordi's Quarters~
+   You're in the middle of Geordi's quarters. The room is sparsely decorated, 
+due to the fact that Geordi is blind. A small personal computer sits on a 
+desk against the western wall, in between two windows that look out into 
+space. A neatly made bed has been placed against the northern wall.
+~
+10 d 0
+D1
+A corridor is East.
+~
+~
+0 -1 1002
+S
+#1002
+A Corridor~
+   You find yourself in the middle of a well lit corridor on the Enterprise. 
+It isn't very wide, and the light beige walls have been  rounded, making the 
+corridor an oval shape. 
+~
+10 d 0
+D0
+The corridor continues North.
+~
+~
+0 -1 1005
+D1
+Data's Quarters are East.
+~
+~
+0 -1 1003
+D2
+Main Engineering is South.
+~
+~
+0 -1 1000
+D3
+Geordi's Quarters are West.
+~
+~
+0 -1 1001
+S
+#1003
+Data's Quarters~
+   You're in the middle of Data's quarters. Some easils and paintings have 
+been left scattered around the southern part of the room, while a huge 
+computer screen showing a cross section of the Enterprise covers the entire 
+northern wall. In front of the screen is a large desk, which is covered in 
+computer controls. You can't see a bed in this room, but you figure it's 
+because Data doesn't sleep. 
+~
+10 d 0
+D3
+A corridor is West.
+~
+~
+0 -1 1002
+S
+#1004
+The Brig~
+   You're in the dimly lit Brig. This is where all the criminals and 
+prisoners are kept while on board the Enterprise. Three fairly large cells 
+can been seen in the southern part of the room, and they're all empty. A 
+computer control panel is situated in the northwestern corner of the room, 
+which is where the force fields for the cells are controlled. 
+~
+10 d 0
+D1
+A corridor is East.
+~
+~
+0 -1 1005
+S
+#1005
+A Corridor~
+   You find yourself in the middle of a well lit corridor on the Enterprise. 
+It isn't very wide, and the light beige walls have been rounded, making the 
+corridor an oval shape.  
+   You notice a tiny computer panel embedded into the wall.   
+~
+10 d 0
+D0
+The corridor continues North.
+~
+~
+0 -1 1008
+D1
+The Transporter Room is East.
+~
+~
+0 -1 1006
+D2
+The corridor continues South.
+~
+~
+0 -1 1002
+D3
+The Brig is West.
+~
+~
+0 -1 1004
+E
+control panel computer screen sign~
+The panel says:
+ 
+    ***************************************************
+    *                                                 *
+    *            NCC-1701-D - "ENTERPRISE"            *
+    *                                                 *
+    *              *****                              *
+    *      **********************                     *
+    *      ***********************  _________         *
+    *              *****        ***(___  ____(        *
+    *                            ***** \ \*           *
+    *                             **********          *
+    *                                                 *
+    *          You are currently on deck 1            *
+    *                                                 *
+    ***************************************************
+~
+S                              
+#1006
+Transporter Room~
+   You're in the Enterprise transporter room. A computer terminal is sitting 
+near the southern wall, where the transporter chief can control the 
+transporters. Eight round transport pads have been arranged in a circle, 
+on a raised platform against the northern wall.
+~
+10 d 0
+D0
+A transporter beam is North.
+~
+~
+0 -1 1042
+D3
+A corridor is West.
+~
+~
+0 -1 1005
+S
+#1007
+School~
+   You step through the doors and find yourself in a large school room.
+Various tables and chairs are set up all around the room, and many
+paintings and drawings have been attached to the walls. Several computer
+consoles with a children's interface on them can be seen on the tables.
+~
+10 d 0
+D1
+A corridor is East.
+~
+~
+0 -1 1008 
+S
+#1008
+A Corridor~
+   You find yourself in the middle of a well lit corridor on the Enterprise. 
+It isn't very wide, and the light beige walls have been rounded, making the 
+corridor an oval shape. 
+   You see the holodeck's control panel beside the holodeck door, and 
+it has some information on it.  
+~
+10 d 0
+D0
+The turbolift is North.
+~
+~
+0 -1 1010
+D1
+Holodeck 2 is East.
+~
+~
+0 -1 1009
+D2
+The corridor continues South.
+~
+~
+0 -1 1005
+D3
+The School is West.
+~
+~
+0 -1 1007
+E
+holodeck computer control panel sign~
+It looks like this:
+   
+    ***************************************************
+    *                                                 *
+    *            NCC-1701-D - "ENTERPRISE"            *
+    *                    HOLODECK 2                   *
+    *                                                 *
+    *              STATUS : Inactive                  *
+    *     CURRENT PROGRAM : N/A                       *
+    *            SAFETIES : N/A                       *
+    *                                                 *
+    *    NOTE: Starfleet is not responsible for       *
+    *          any injuries incurred while on this    *
+    *          holodeck!                              *
+    *                                                 *
+    * WARNING: While the safeties are disabled, you   *
+    *          CAN be injured, or even killed.        *
+    *                                                 *
+    ***************************************************
+~
+S
+#1009
+Holodeck 2~
+   You're now on Holodeck 2. The room is just a large cube, with jet black 
+walls and a yellow grid painted on the floors, the walls, and the ceiling. 
+This is where different programs can be loaded and experienced, which seem 
+totally real. Right now, this holodeck is not functioning.
+~
+10 d 0
+D3
+A corridor is West.
+~
+~
+0 -1 1008
+S
+#1010
+Turbolift~
+   You're in the turbolift. The turbolift walls have been rounded off, 
+making it in the shape of a tube. Several vertical rows of lights make this 
+place very well lit. From here, you can access the other decks on the 
+Enterprise.
+
+~
+10 d 0
+D2
+A corridor leads South.
+~
+~
+0 -1 1008
+D4
+The turbolift goes Up.
+~
+~
+0 -1 1011  
+S
+#1011
+Turbolift~
+   You're in the turbolift. The turbolift walls have been rounded off, 
+making it in the shape of a tube. Several vertical rows of lights make this 
+place very well lit. From here, you can accessthe other decks on the 
+Enterprise.
+~
+10 d 0
+D0
+A corridor leads North.
+~
+~
+0 -1 1013
+D4
+The turbolift goes Up.
+~
+~
+0 -1 1032
+D5
+The turbolift goes Down.
+~
+~
+0 -1 1010
+S
+#1012
+Cargo Bay 1~
+   You're in the main cargo bay of the Enterprise. It's quite a large room,
+ with a very high ceiling and a lot of floor space. You can see several 
+hundred plastic crates and barrels with the Starfleet insignia on them
+stacked right up to the ceiling. 
+~
+10 d 0
+D1
+A corridor is East.
+~
+~
+0 -1 1013   
+S
+#1013
+A Corridor~
+   You find yourself in the middle of a well lit corridor on the Enterprise. 
+It isn't very wide, and the light beige walls have been rounded, making the 
+corridor an oval shape.  
+   You notice a tiny computer panel embedded into the wall.   
+~
+10 d 0
+D0
+The corridor continues North.
+~
+~
+0 -1 1016
+D1
+Riker's Quarters are East.
+~
+~
+0 -1 1014
+D2
+The Turbolift is South.
+~
+~
+0 -1 1011
+D3
+The Cargo Bay is West.
+~
+~
+0 -1 1012
+E
+control panel computer screen sign~
+The panel says:
+ 
+    ***************************************************
+    *                                                 *
+    *            NCC-1701-D - "ENTERPRISE"            *
+    *                                                 *
+    *              *****                              *
+    *      **********************                     *
+    *      ***********************  _________         *
+    *              *****        ***(___  ____(        *
+    *                            ***** \ \*           *
+    *                             **********          *
+    *                                                 *
+    *          You are currently on deck 2            *
+    *                                                 *
+    ***************************************************
+~
+S                            
+#1014
+Riker's Quarters~
+   You've arrived in Riker's quarters. The room is very neat and tidy, 
+with a couch and several chairs aranged around a coffee table by the
+eastern wall. A small partition at the northern part of the room seperates 
+his sleeping area with the rest of the room.
+~
+10 d 0
+D3
+A corridor is West.
+~
+~
+0 -1 1013
+S
+#1015
+Sick Bay~
+   You're in the middle of the Enterprise's Sick Bay. About a dozen beds are 
+arranged along the walls of the room, while several carts covered with 
+medical supplies are scattered around the room. A large glass window in the 
+northern part of the room separates the doctor's office with the rest of the 
+room.
+~
+10 d 0
+D1
+A corridor is East.
+~
+~
+0 -1 1016
+S
+#1016
+A Corridor~
+   You find yourself in the middle of a well lit corridor on the Enterprise. 
+It isn't very wide, and the light beige walls have been rounded, making the 
+corridor an oval shape. 
+   You see the holodeck's control panel beside the holodeck door, and 
+it has some information on it.  
+~
+10 d 0
+D0
+The corridor continues North.
+~
+~
+0 -1 1019
+D1
+Holodeck 4 is East.
+~
+~
+0 -1 1017
+D2
+The corridor continues South.
+~
+~
+0 -1 1013
+D3
+Sick Bay is West.
+~
+~
+0 -1 1015
+E
+holodeck computer control panel sign~
+It looks like this:
+   
+    ***************************************************
+    *                                                 *
+    *            NCC-1701-D - "ENTERPRISE"            *
+    *                    HOLODECK 4                   *
+    *                                                 *
+    *              STATUS : Active                    *
+    *     CURRENT PROGRAM : Sherlock Holmes (19th     *
+    *                       century London)           *
+    *            SAFETIES : Disabled                  *
+    *                                                 *
+    *    NOTE: Starfleet is not responsible for       *
+    *          any injuries incurred while on this    *
+    *          holodeck!                              *
+    *                                                 *
+    * WARNING: While the safeties are disabled, you   *
+    *          CAN be injured, or even killed.        *
+    *                                                 *
+    *             ---ENTER WHEN READY---              *
+    *                                                 *
+    ***************************************************
+~
+S
+#1017
+Holodeck 4 Entrance - A Narrow Alley~
+   You emerge into a dark narrow alley. Tall dark brick buildings block your 
+way north and south. You can see that the windows on the buildings are fairly 
+high, and some have been boarded up. The smell from the rotting food and 
+garbage mixing with the foul water on the ground is unbearable. You can hear 
+the sounds of a bustling marketpace to the east. The archway leading out of 
+the holodeck is west.
+~
+10 d 0
+D3
+A corridor is West.
+~
+~
+0 -1 1016
+S
+#1018
+Crusher's Quarters~
+   You're in Doctor Crusher's quarters. Several different paintings are 
+attached to the walls, and you also notice a few sculptures. A neatly made 
+bed is located by the northern wall, in between two large windows looking 
+out into space.
+~
+10 d 0
+D1
+A corridor is East.
+~
+~
+0 -1 1019
+S
+#1019
+A Corridor~
+   You find yourself in the middle of a well lit corridor on the Enterprise. 
+It isn't very wide, and the light beige walls have been rounded, making the 
+corridor an oval shape.    
+~
+10 d 0
+D0
+Ten Forward is North.
+~
+~
+0 -1 1021
+D1
+Security is East.
+~
+~
+0 -1 1020
+D2
+The corridor continues South.
+~
+~
+0 -1 1016
+D3
+Crusher's Quarters are West.
+~
+~
+0 -1 1018
+S
+#1020
+Enterprise Security~
+   You're standing in the dimly lit Enterprise Security. Weapons lockers 
+cover all of the walls, except along the northern wall, where a large glass 
+window protects dozens of different phasors, blaster rifles, and other high 
+tech weapons. Three long tables surrounded by chairs stretch across the room.
+~
+10 d 0
+D3
+A corridor is West.
+~
+~
+0 -1 1019
+S
+#1021
+Ten Forward~
+   You're now in Ten Forward, the entertainment room of the Enterprise. 
+The entire northern wall is covered with windows looking out into space,
+while two large wooden doors with the Starfleet insignia stamped on them
+face south. Many round metal tables are scattered around the room, 
+surrounded by metal chairs. A long bar spans almost the entire length of 
+the southern part of the room, and about two dozen bar stools are sitting
+in front of it. It's very noisy in here, due to all the talking and
+laughing.
+~
+10 d 0
+D2
+A corridor is South.
+~
+~
+0 -1 1019
+S
+#1022
+Shuttle Bay~
+   You're in the main shuttle bay of the Enterprise. It's quite a large 
+room, with a very high ceiling and a lot of floor space. You can see three 
+different shuttle crafts sitting here, waiting to be flown. 
+   A large grey door leads into space.
+~
+10 d 0
+D0
+A corridor is North.
+~
+~
+0 -1 1024
+D2
+~
+door grey doors~
+1 -1 1039
+S
+#1023
+Troi's Quarters~
+  You're in Counselor Deanna Troi's quarters. Several different paintings 
+have been hung from the walls, and a small couch and a recliner are 
+positioned around a coffee table. A neatly made bed is partially hidden 
+behind a curtain at the northern part of the room.
+~
+10 d 0
+D1
+A corridor is East.
+~
+~
+0 -1 1024
+S
+#1024
+A Corridor~
+   You find yourself in the middle of a well lit corridor on the Enterprise. 
+It isn't very wide, and the light beige walls have been rounded, making the 
+corridor an oval shape. 
+   You notice a tiny computer panel embedded into the wall.   
+~
+10 d 0
+D0
+The corridor continues North.
+~
+~
+0 -1 1027
+D1
+Worf's Quarters are East.
+~
+~
+0 -1 1025
+D2
+The shuttle bay is South.
+~
+~
+0 -1 1022
+D3
+Troi's Quarters are West.
+~
+~
+0 -1 1023
+E
+control panel computer screen sign~
+The panel says:
+ 
+    ***************************************************
+    *                                                 *
+    *            NCC-1701-D - "ENTERPRISE"            *
+    *                                                 *
+    *              *****                              *
+    *      **********************                     *
+    *      ***********************  _________         *
+    *              *****        ***(___  ____(        *
+    *                            ***** \ \*           *
+    *                             **********          *
+    *                                                 *
+    *          You are currently on deck 3            *
+    *                                                 *
+    ***************************************************
+~
+S                          
+#1025
+Worf's Quarters~
+   You're in Worf's quarters. A small table is sitting in the southeastern 
+corner, and on it is a small potted plant. An impressive selection of 
+Klingon weapons have been mounted on the northern wall, and a partition 
+splits this room with Worf's bedroom to the east.
+~
+10 d 0
+D3
+A corridor is West.
+~
+~
+0 -1 1024
+S
+#1026
+Enterprise Gym~
+   You emerge into the Enterprise gym. The room is quite large, with a soft 
+grey floor. A set of lockers against the southern wall contain all of the 
+necessary equipment needed for using the gym. A thick stack of mats have been 
+piled high in one corner, which can be used for different activities. Captain 
+Picard likes to come here to practice his fencing.
+~
+10 d 0
+D1
+A corridor is East.
+~
+~
+0 -1 1027
+S
+#1027
+A Corridor~
+   You find yourself in the middle of a well lit corridor on the Enterprise. 
+It isn't very wide, and the light beige walls have been rounded, making the 
+corridor an oval shape. 
+~
+10 d 0
+D0
+The corridor continues North.
+~
+~
+0 -1 1030
+D1
+Picard's Quarters are East.
+~
+~
+0 -1 1028
+D2
+The corridor continues South.
+~
+~
+0 -1 1024
+D3
+The Enterprise Gym is West.
+~
+~
+0 -1 1026
+S
+#1028
+Picard's Quarters~
+   You find yourself standing by the door of Captain Picard's quarters. He 
+isn't very fond of visitors, but you decide to stay and have a look around. 
+You can see several different ancient artifacts on tables and small pedestals, 
+and a large wooden wardrobe is facing south. A comfortable looking recliner 
+with a matching footrest sits beside the door, along with a bright reading 
+lamp and end table. Two large windows offer a great view of space. A small 
+partition at the northern part of the room contains Picard's sleeping area.
+~
+10 d 0
+D3
+A corridor is West.
+~
+~
+0 -1 1027
+S
+#1029
+Science Lab~
+   You're in the Enterprise science lab. A strange looking machine sits in 
+the middle of the room, up on a slightly raised platform. It looks as though 
+something (or someone) could be placed inside, hooked up to the multitude of 
+wires and cables, and have scientific tests performed on it (or them). A 
+complex looking computer console is facing this machine. Around the rest of 
+the room are counterops with with the odd computer terminal.
+~
+10 d 0
+D1
+A corridor is East.
+~
+~
+0 -1 1030
+S
+#1030
+A Corridor~
+   You find yourself in the middle of a well lit corridor on the Enterprise. 
+It isn't very wide, and the light beige walls have been rounded, making the 
+corridor an oval shape. 
+~
+10 d 0
+D0
+The Turbolift is North.
+~
+~
+0 -1 1032
+D1
+Empty Quarters are East.
+~
+~
+0 -1 1031
+D2
+The corridor continues South.
+~
+~
+0 -1 1027
+D3
+Empty Quarters are West.
+~
+~
+0 -1 1029
+S
+#1031
+Cargo Bay 2~
+   You're in the cargo bay 2 of the Enterprise. It's quite a large room, with 
+a very high ceiling and a lot of floor space. You can see several hundred 
+plastic crates and barrels with the Starfleet insignia on them stacked right 
+up to the ceiling. 
+~
+10 d 0
+D3
+A corridor is West.
+~
+~
+0 -1 1030
+S
+#1032
+Turbolift~
+   You're in the turbolift. The turbolift walls have been rounded off,
+making it in the shape of a tube. Several vertical rows of lights make this 
+place very well lit. From here, you can access the other decks on the 
+Enterprise.
+~
+10 d 0
+D2
+A corridor leads South.
+~
+~
+0 -1 1030
+D4
+The turbolift goes Up.
+~
+~
+0 -1 1033
+D5
+The turbolift goes Down.
+~
+~
+0 -1 1011
+S
+#1033
+Turbolift~
+   You're in the turbolift. The turbolift walls have been rounded off, 
+making it in the shape of a tube. Several vertical rows of lights make this 
+place very well lit. From here, you can access the other decks on the 
+Enterprise.
+~
+10 d 0
+D4
+The turbolift goes Up.
+~
+~
+0 -1 1034
+D5
+The turbolift goes Down.
+~
+~
+0 -1 1032
+S
+#1034
+Turbolift~
+   You're in the turbolift. The turbolift walls have been rounded off, 
+making it in the shape of a tube. Several vertical rows of lights make this
+place very well lit. From here, you can access the other decks on the 
+Enterprise.
+~
+10 d 0
+D4
+The Main Bridge is Up.
+~
+~
+0 -1 1036
+D5
+The turbolift goes Down.
+~
+~
+0 -1 1033
+S
+#1035
+Picard's Ready Room~
+   You're standing in Captain Picard's ready room. A long couch has been 
+placed beside the door, while a large U shaped desk is located by the 
+northern wall. A small computer screen is sitting on the desk, as well as 
+several other papers and documents. A single high window beside the desk 
+looks into space, and a fish tank is located in the northwestern corner of 
+the room. This is where the Captain makes all of his important decisions.
+~
+10 d 0
+D1
+The Main Bridge - Lower Half is East.
+~
+~
+0 -1 1038
+S
+#1036
+Main Bridge - Upper Half~
+   You find yourself on the upper half of the main bridge of the USS 
+Enterprise. Directly in front of you is a thick railing that contains many 
+different computer panels used for the tactical systems of the ship. The
+entire southern wall is covered with computer consoles, where the ship's 
+main systems are controlled. Two small curved ramps on either side of the 
+room lead north to the lower part of the bridge, and a large circular 
+skylight shows the space outside the ship.
+~
+10 d 0
+D0
+The Main Bridge - Lower Half is North.
+~
+~
+0 -1 1038
+D1
+The Conference Room is East.
+~
+~
+0 -1 1037
+D5
+The Turbolift is Down.
+~
+~
+0 -1 1034
+S
+#1037
+Conference Room~
+   You're in the conference room of the Enterprise. A large glass rectangular 
+table sits in the middle of the room, surrounded by about a dozen comfortable 
+looking office chairs. The entire eastern wall is covered with windows, 
+looking out into space. This is where the senior officers of the Enterprise 
+meet and discuss important issues.
+~
+10 d 0
+D3
+The Main Bridge - Upper Half is West.
+~
+~
+0 -1 1036
+S
+#1038
+Main Bridge - Lower Half~
+   You find yourself on the lower half of the main bridge of the USS 
+Enterprise. An enormous view screen covers almost the entire northern wall, 
+and is currently displaying a view of the stars rushing by. Three large 
+chairs in the northern part of the room, in front of the railing, face the 
+screen. This is where the Captain, Commander Riker, and Counselor Troi sit. 
+Two computer consoles with built in chairs rest about ten feet in front of 
+the chairs, also facing the view screen. This is where the ship's pilot and
+information officer sit.
+~
+10 d 0
+D2
+The Main Bridge - Upper Half is South.
+~
+~
+0 -1 1036
+D3
+The Captain's Ready Room is West.
+~
+~
+0 -1 1035
+S
+#1039
+Outer Space by the Enterprise~
+   You're floating in outer space right beside the USS Enterprise. You can 
+see stars in every direction, which provide the only light here. You feel 
+very cold.
+   A large grey door leads into the Enterprise's Shuttle Bay.
+~
+10 0 9
+D0
+The Shuttle Bay is North.
+~
+door doors grey~
+1 -1 1022
+D4
+Outer Space is Up.
+~
+~
+0 -1 1040
+S
+#1040
+Outer Space~
+   You're floating in outer space right above the USS Enterprise. You can 
+see stars in every direction, which provide the only light here. You feel 
+very cold.
+~
+10 0 9
+D4
+Outer Space is Up.
+~
+~
+0 -1 1041
+D5
+Outer Space is Down.
+~
+~
+0 -1 1039
+S
+#1041
+Outer Space~
+   You're floating in outer space right above the USS Enterprise. You can 
+see stars in every direction, which provide the only light here. You feel 
+very cold.
+~
+10 0 9
+* D4
+* The Galaxy is Up.
+* ~
+* ~
+* 0 -1 9303
+D5
+Outer Space is Down.
+~
+~
+0 -1 1040
+S
+#1042
+Transporter Beam~
+   You find yourself in a transporter beam. All you can see is blue 
+flashing light. It feels as though your body is racing around at high 
+speeds. As you try to look down at your body, you realize that there's 
+nothing there!
+~
+10 0 9
+D0
+~
+~
+0 -1 4075
+D2
+The Transporter Room is South.
+~
+~
+0 -1 1006
+S
+
+$
+

@@ -1,0 +1,2049 @@
+;; /home/siegel/temp/HumanActivitiesMt-non-implications.kif
+
+(isa judicialAgents AntiSymmetricBinaryPredicate)
+
+(isa sellingAgent AntiSymmetricBinaryPredicate)
+
+(isa buyingAgent AntiSymmetricBinaryPredicate)
+
+(isa employees AsymmetricBinaryPredicate)
+
+(isa judicialAgents AsymmetricBinaryPredicate)
+
+(isa employees AntiSymmetricBinaryPredicate)
+
+(isa sellingAgent AsymmetricBinaryPredicate)
+
+(isa buyingAgent AsymmetricBinaryPredicate)
+
+(isa mediators IrreflexiveBinaryPredicate)
+
+(isa mediators AntiSymmetricBinaryPredicate)
+
+(isa hasWorkers AsymmetricBinaryPredicate)
+
+(isa sellingAgent AntiTransitiveBinaryPredicate)
+
+(isa mediators AsymmetricBinaryPredicate)
+
+(isa judicialAgents IrreflexiveBinaryPredicate)
+
+(isa hasWorkers IrreflexiveBinaryPredicate)
+
+(isa buyingAgent AntiTransitiveBinaryPredicate)
+
+(isa sellingAgent IrreflexiveBinaryPredicate)
+
+(isa buyingAgent IrreflexiveBinaryPredicate)
+
+(isa employees IrreflexiveBinaryPredicate)
+
+(arg2Format clients SetTheFormat)
+
+(arg2Format hasWorkers SetTheFormat)
+
+(arg2Format employees SetTheFormat)
+
+(comment FoundingAnOrganization "The collection of all events in which some instance of
+#$Organization is formally established.")
+
+(comment RudeAction "The collection of behaviors that go against the social conventions of politeness.  This will be a different set of behaviors in different circumstances (contexts).  In an office, e.g., it might be rude to make a loud noise, but at a football game it might be rude to not do so.")
+
+(comment Dexterity "#$Dexterity is the #$ScriptPerformanceAttributeType for describing actions in which the performer's hands move accurately, quickly, and with economy of motion.")
+
+(comment Persecution "Persecution tries to capture all these instances where physical or psychological violence is committed against person or persons by perpetrators of a different set of beliefs or background. The main issue is that the point of contention is not an action of some sort, but rather a state of mind.")
+
+(comment Mullah "Mullah derives from the old Arabian word MAWLA, which denotes either the slave or the master (cf. http://www.usc.edu/dept/MSA/reference/glossary/term.MAWLA.html). In the extended sense, it means a Muslim teacher of religion, who has interpretive authority over the Qur'an, Hadith and the other bodies of Islam's religious knowledge. Notice that due to the intertwined relationship of religion, politics and social policy in Islam, the religious rulings of a Mullah can have massive socio-political consequences.")
+
+(comment SmokingFood "A kind of cooking in which the food is exposed to smoke.  This adds nitrates to the food to prevent rotting.")
+
+(comment Bomb-VehicleDelivered "A collection of devices typically employed by terrorist organizations.  Each instance is an explosive device that is brought into proximity to its target by covert means involving a passenger vehicle.  The vehicle may be parked in the vicinity of the target and evacuated by its driver prior to detonation, or it may be driven into the target by a suicide bomber or bombers who are killed when the device explodes.  Do not confuse this collection with #$CarBomb, which refers to bombs wired into the ignition systems of vehicles unbeknownst to their occupants.")
+
+(comment Agility "#$Agility is the #$ScriptPerformanceAttributeType for describing actions in which the performer's whole body moves precisely and in a well-coordinated fashion.")
+
+(comment optionAvailableToAgent "This instance of #$TernaryPredicate is used to specify the
+salient characteristics of a particular kind of option available to an
+agent in a specific context.  Specifically, (#$optionAvailableToAgent
+AGENT (#$TheSetOf ?VAR PROP1(?VAR)...PROPN(?VAR)) ROLE) means that
+playing the role ROLE in an event which satisfies the conditions PROP1
+through PROPN is an option available to AGENT in the context in which
+the assertion is made.  Ordinarily GAFs which use this predicate will
+be asserted in fairly constrained contexts in which a limited number
+of contingent options exist.  The second argument must be an instance
+of #$Set-Mathematical, not an instance of #$Collection.  This is
+because there is no a priori reason that a set of propositions
+describing the 'situational type' of an option should happen to
+characterize a natural kind, such as a specialization of #$Event or
+#$Situation.  The fact that arg3 is an instance of #$ActorSlot
+presupposes that the set identified in the arg2 position is a subset
+of the collection #$Event.")
+
+(comment PreparingFoodOrDrink "A collection of events. Each element of #$PreparingFoodOrDrink is an event in which a single instance of #$FoodAndDrink is created from something. Preparation may begin `from scratch', with raw ingredients, or may use semi-prepared or `convenience' products (such as cake mixes, margarita mixes, or frozen foods). Typical #$subEvents in elements of #$PreparingFoodOrDrink include activities commonly performed by cooks and/or bartenders, including instances of #$ChoppingSomething, #$CookingFood, #$BakingFood, #$MixingAlcoholicDrinks, etc. Each #$PreparingFoodOrDrink event ends when the item prepared is ready to eat. This collection is NOT to include activities that a diner does with food at table (such as peeling, unwrapping, cutting into bitesized pieces), nor activities that a farmer does before food reaches market or kitchen (e.g., planting, harvesting).")
+
+(comment PassingAResolution "The collection of all events in which a governing body with nominally legislative powers passes an agreement resolving to take some kind of action. The body may be a formally empowered legislature, or an informal committee or group of agents, representing one or several interests.  Most legislative resolutions characterize themselves as such with formal language.")
+
+(comment potentialDutyOfAgent "(#$potentialDutyOfAgent AGENT ACTTYPE ROLE) means that AGENT may potentially be called upon to play ROLE in an event which satisfies the description given in the set expression that is ACTTYPE in the context of the assertion. Ordinarily GAFs which use this predicate will be asserted in fairly constrained contexts in which a limited number of contingent options exist. The second argument must be an instance of #$Set-Mathematical, not an instance of #$Collection, because there is no a priori reason that a set of propositions describing the 'situational type' of an option should happen to characterize a natural kind, such as a specialization of #$Event or #$Situation. The fact that arg3 is an instance of #$ActorSlot presupposes that the set identified in the arg2 position is a subset of #$Event.")
+
+(comment ShowingSupportForSomeone "The collection of events in which one #$Agent shows
+            support for another #$Agent (the #$beneficiary).  ")
+
+(comment ServingFoodOrDrink "A collection of events.  Each element of #$ServingFoodOrDrink is an event in which an item of food or drink is served.  It starts when the server picks up the food or drink from a preparation or pickup area and ends when it is deposited at the location where the people being served may eat or drink it.  Such events are typically part of the job of any restaurant server who waits on tables, and they may be performed also by a host or servant at a dinner party or banquet, or by a family member at a home meal.  Note: this collection does not include placing a `serving' of food from a common dish onto a diner's plate.")
+
+(comment SaltingFood "Soaking food in salt to prevent it from rotting.")
+
+(comment PublicProtesting "The public objection, by an individual or group, to some action or state of affairs.")
+
+(comment pointOfContact-Types "(#$pointOfContact-Types AGENT_TYPE CONTLOC_TYPE BLDG_TYPE) means thatinstances of AGENT_TYPE ordinarily have some instance of the #$Collection BLDG_TYPE as their #$ContactLocationType CONTLOC_TYPE.")
+
+(comment Alertness "#$Alertness is an #$AnimalPhysiologicalAttribute which specifies how sleepy or alert an animal is.  Levels of #$Alertness include #$Asleep, #$Sleepy, and #$Awake.")
+
+(comment EdibleFruit "The collection of individual edible fruits, often eaten whole by people or used in cooking. Note that this is the common-sense notion of fruit, so Tomatoes, Olives, Legumes are NOT EdibleFruit.  See also #$Fruit.")
+
+(comment clients "The predicate #$clients represents a relationship between two #$Agents.  (#$clients AGENT1 AGENT2) means that AGENT1 provides goods and/or services to AGENT2.  AGENT2 may or may not pay AGENT1 for the goods/services received.  The predicate #$clients can indicate either a one-time relationship or a more long-term relationship.  See also #$suppliers and #$customers.")
+
+(conceptuallyRelated Revolution-Political PoliticalInstability)
+
+(conceptuallyRelated Buying Money)
+
+(conceptuallyRelated Weapon WagingWar)
+
+(conceptuallyRelated Buying TransferringOwnership)
+
+(conceptuallyRelated MilitaryExercise MilitaryTrainingCourse)
+
+(conceptuallyRelated Pants Shirt)
+
+(conceptuallyRelated EducationalOrganization Teaching)
+
+(conceptuallyRelated CommercialActivity Business)
+
+(conceptuallyRelated WeaponOfMassDestruction ViolentAction)
+
+(conceptuallyRelated AudioCommunicating Sound)
+
+(conceptuallyRelated MakingFacialExpression NonVerbalCommunicating)
+
+(disjointWith PortableObject Place)
+
+(disjointWith PhysicalDevice ComputerProgram)
+
+(disjointWith IntelligentAgent EdibleStuff)
+
+(disjointWith Food Drink)
+
+(disjointWith FoodIngredientOnly FoodAndDrink)
+
+(frequencyOfActionType EatingEvent Person performedBy 
+  (TimesPerDay 1 6))
+
+(frequencyOfActionType CookingFood HumanAdult performedBy 
+  (TimesPerWeek 0 21))
+
+(frequencyOfActionType HavingAMeal Person performedBy 
+  (TimesPerDay 1 4))
+
+(genlPreds employees hasWorkers)
+
+(genlPreds hasWorkers hasAgents)
+
+(genlPreds mediators deliberateActors)
+
+(genlPreds hasWorkers worksWith)
+
+(holdsIn 
+  (IntervalStartedByFn 
+    (YearFn 1700)) 
+  (forall 
+    (?NATION) 
+    (implies 
+      (isa ?NATION Country) 
+      (groupMembers InternationalCommunity ?NATION))))
+
+(interArgIsa1-2 transporter 
+  (TransportViaFn AirTransportationDevice) AirTransportationDevice)
+
+(interArgIsa1-2 informationOrigin Reading TextualMaterial)
+
+(interArgIsa1-2 pathway-Complete 
+  (TransportViaFn Bicycle) SolidSurfacePathThroughAir)
+
+(interArgIsa1-2 deliberateActors EvacuatingAPlace IntelligentAgent)
+
+(interArgIsa1-2 performedBy PassingAResolution Organization)
+
+(interArgIsa1-2 objectActedOn PreservingFood FoodAndDrink)
+
+(interArgIsa1-2 outputsCreated PassingAResolution Agreement)
+
+(minimizeExtent userRightsRelation)
+
+(minimizeExtent wearsClothing)
+
+(minimizeExtent skillRequired)
+
+(minimizeExtent worksWith)
+
+(negationInverse hasWorkers hasWorkers)
+
+(negationInverse sellingAgent sellingAgent)
+
+(negationInverse buyingAgent buyingAgent)
+
+(negationInverse employees employees)
+
+(negationInverse mediators mediators)
+
+(negationInverse judicialAgents judicialAgents)
+
+(negationPreds recipientOfService providerOfService)
+
+(negationPreds owns rents)
+
+(not 
+  (and 
+    (isa ?DARS DiagnosingAndRepairingSomething) 
+    (objectTakenCareOf ?DARS ?LIQ) 
+    (isa ?LIQ LiquidTangibleThing)))
+
+(not 
+  (and 
+    (isa ?WASH Washing) 
+    (objectActedOn ?WASH ?PART) 
+    (holdsIn ?WASH 
+      (wornOn ?CLOTH ?PART)) 
+    (isa ?CLOTH ClothingItem)))
+
+(not 
+  (and 
+    (isa ?THING Place) 
+    (objectMoving ?ANYEVENT ?THING)))
+
+(not 
+  (and 
+    (isa ?X AnimalWalkingProcess) 
+    (performedBy ?X ?U) 
+    (isa ?U HumanInfant)))
+
+(not 
+  (and 
+    (isa ?SUB LocomotionProcess) 
+    (isa ?P Person) 
+    (doneBy ?SUB ?P) 
+    (doneBy ?SUB ?TRANS) 
+    (isa ?TRANS NonPersonAnimal) 
+    (subEvents ?EV ?SUB) 
+    (transportees ?EV ?P) 
+    (transporter ?EV ?TRANS)))
+
+(not 
+  (and 
+    (isa ?BUY MonetaryExchangeOfUserRights) 
+    (subEvents ?BUY ?T1) 
+    (isa ?T1 Paying) 
+    (subEvents ?BUY ?T2) 
+    (reciprocalTransfers ?T1 ?T2) 
+    (isa ?T2 Paying)))
+
+(not 
+  (and 
+    (isa ?U Shirt) 
+    (wearsClothing ?X ?U) 
+    (in-ImmersedFully ?X ?Y) 
+    (isa ?Y 
+      (LiquidFn Water))))
+
+(relationAllExists deviceUsed CookingFood HeatingDevice)
+
+(relationAllExists objectFoundInLocation Bomb-VehicleDelivered TransportationDevice-Vehicle)
+
+(relationAllExists perpetrator Persecution SocialBeing)
+
+(relationAllExists objectActedOn PuttingOnAClothingItem ClothingItem)
+
+(relationAllExists victim Persecution SocialBeing)
+
+(relationAllExists near OffshoreOilPlatform OilWell)
+
+(relationAllExists outputs EmployeeHiring WorkAgreement)
+
+(relationAllExists objectActedOn TakingOffAClothingItem ClothingItem)
+
+(relationAllExists objectActedOn Washing SolidTangibleThing)
+
+(relationAllExists physicalParts LandVehiclePathSystem PathForWheeledVehicles)
+
+(relationAllExists itemWorn WearingSomething SomethingToWear)
+
+(relationAllExists wearer WearingSomething Animal)
+
+(relationAllExistsCount transporter 
+  (TransportViaFn Bicycle) Bicycle 1)
+
+(relationAllInstance outputsCreated FoundingAnOrganization Organization)
+
+(relationExistsAll postEvents Requesting-CommunicationAct Approval-CommunicationAct)
+
+(relationExistsAll temporallySubsumes Night GoingToSleep)
+
+(relationExistsAll outputs MakingAnAgreement Agreement)
+
+(relationExistsAll hasMembers MilitaryOrganization MilitaryPerson)
+
+(relationExistsAll physicalParts LandVehiclePathSystem PathForWheeledVehicles)
+
+(requiredArg1Pred WearingSomething wearer)
+
+(requiredArg1Pred WearingSomething itemWorn)
+
+(salientAssertions WritingImplement 
+  (implies 
+    (isa ?U WritingImplement) 
+    (primaryFunction ?U WritingByHand deviceUsed)))
+
+(salientAssertions GraspingImplement 
+  (implies 
+    (isa ?IMP GraspingImplement) 
+    (primaryFunction ?IMP GraspingSomethingWithATool deviceUsed)))
+
+(salientAssertions TransportationDevice 
+  (implies 
+    (isa ?U TransportationDevice) 
+    (primaryFunction ?U 
+      (TransportViaFn TransportationDevice) transporter)))
+
+(salientAssertions LightingDevice 
+  (implies 
+    (isa ?U LightingDevice) 
+    (primaryFunction ?U 
+      (WaveEmissionFn VisibleLight) deviceUsed)))
+
+(salientAssertions FoodIngredientOnly 
+  (disjointWith FoodIngredientOnly FoodAndDrink))
+
+(salientAssertions Device-UserControlled 
+  (implies 
+    (and 
+      (isa ?DEV Device-UserControlled) 
+      (isa ?CON ControllingSomething) 
+      (subEvents ?ACT ?CON) 
+      (objectControlled ?CON ?DEV) 
+      (deviceUsed ?ACT ?DEV) 
+      (doneBy ?ACT ?USER) 
+      (actorCapacity ?DEV ?ACT IntendedFunction)) 
+    (doneBy ?CON ?USER)))
+
+(salientAssertions SomethingToWear 
+  (implies 
+    (isa ?SW SomethingToWear) 
+    (primaryFunction ?SW WearingSomething itemWorn)))
+
+(salientAssertions performedBy 
+  (implies 
+    (performedBy ?Y ?X) 
+    (intends ?X 
+      (doneBy ?Y ?X))))
+
+(salientAssertions HumanResidence 
+  (implies 
+    (pointOfContactInfo ?P HumanResidence stateOfAddress ?STATE) 
+    (residesInRegion ?P ?STATE)))
+
+(salientAssertions PortableObject 
+  (implies 
+    (isa ?X PortableObject) 
+    (massOfObject ?X 
+      (IntervalMaxFn 
+        (Pound-UnitOfMass 100)))))
+
+(salientAssertions FoodOrDrinkPreparationDevice 
+  (implies 
+    (isa ?U FoodOrDrinkPreparationDevice) 
+    (primaryFunction ?U PreparingFoodOrDrink deviceUsed)))
+
+(salientAssertions HumanResidence 
+  (implies 
+    (pointOfContactInfo ?P HumanResidence cityOfAddress ?CITY) 
+    (residesInRegion ?P ?CITY)))
+
+(salientAssertions NonVerbalCommunicating 
+  (implies 
+    (and 
+      (isa ?IBT-GEN IBTGeneration) 
+      (isa ?NVC NonVerbalCommunicating) 
+      (subEvents ?NVC ?IBT-GEN)) 
+    (isa ?IBT-GEN BodyMovementEvent)))
+
+(salientAssertions Connector 
+  (implies 
+    (isa ?U Connector) 
+    (primaryFunction ?U ConnectingTogether deviceUsed)))
+
+(siblingDisjointExceptions Conveyance SelfPoweredDevice)
+
+(siblingDisjointExceptions TransportationDevice WindPoweredDevice)
+
+(skillRequired SportsEvent SportsEvent Competence Positive)
+
+(skillRequired SportsEvent SportsEvent Competence MediumToVeryHigh)
+
+
+;; /home/siegel/temp/HumanActivitiesMt-implications.kif
+
+
+(implies 
+  (isa ?P OilPump) 
+  (primaryFunction ?P 
+    (TransportFn Petroleum-CrudeOil) providerOfMotiveForce))
+
+(implies 
+  (and 
+    (isa ?PER Person) 
+    (holdsIn ?TI 
+      (on-Physical ?PER ?SEAT)) 
+    (isa ?SEAT SeatingDevice)) 
+  (holdsIn ?TI 
+    (postureOfAnimal ?PER SittingPosture)))
+
+(implies 
+  (and 
+    (agreementPeriod ?SC ?TIME) 
+    (governedByAgreement ?EVNT ?SC)) 
+  (temporallySubsumes ?TIME ?EVNT))
+
+(implies 
+  (businessPartners ?AG1 ?AG2) 
+  (positiveVestedInterest ?AG1 ?AG2))
+
+(implies 
+  (and 
+    (isa ?CAMPAIGN PurposefulAction) 
+    (assistingAgent ?CAMPAIGN ?ASST) 
+    (directingAgent ?CAMPAIGN ?DIRAGT) 
+    (different ?ASST ?DIRAGT)) 
+  (affiliatedWith ?ASST ?DIRAGT))
+
+(implies 
+  (feelsTowardsObject ?X ?Y Love Positive) 
+  (loves ?X ?Y))
+
+(implies 
+  (isa ?X PortableObject) 
+  (massOfObject ?X 
+    (IntervalMaxFn 
+      (Pound-UnitOfMass 100))))
+
+(implies 
+  (and 
+    (isa ?U CookingFood) 
+    (deviceUsed ?U ?X)) 
+  (isa ?X FoodOrDrinkPreparationDevice))
+
+(implies 
+  (isa ?U Shoe) 
+  (intendedBehaviorCapable ?U AnimalWalkingProcess deviceUsed))
+
+(implies 
+  (and 
+    (isa ?MS EmittingSound) 
+    (doneBy ?MS ?ANIM) 
+    (transferOutSubEvent ?AS ?MS) 
+    (isa ?AS AnimalSound)) 
+  (isa ?ANIM Animal))
+
+(implies 
+  (and 
+    (cohabitants ?X ?Z) 
+    (residesInDwelling ?X ?Y)) 
+  (residesInDwelling ?Z ?Y))
+
+(implies 
+  (and 
+    (isa ?EXCH MonetaryExchangeOfUserRights) 
+    (buyer ?EXCH ?BUYER) 
+    (subEvents ?EXCH ?TRANS) 
+    (objectPaidFor ?EXCH ?OBJ) 
+    (objectOfPossessionTransfer ?TRANS ?OBJ)) 
+  (toPossessor ?TRANS ?BUYER))
+
+(implies 
+  (and 
+    (isa ?SYS LandVehiclePathSystem) 
+    (primaryFunction ?SYS 
+      (TransportViaFn Train-TransportationDevice) eventOccursAt)) 
+  (relationInstanceExists physicalParts ?SYS Railway))
+
+(implies 
+  (and 
+    (isa ?L IndividualAgent) 
+    (owns ?L ?P) 
+    (isa ?P DomesticPet)) 
+  (loves ?L ?P))
+
+(implies 
+  (isa ?U HarvestingAPlant) 
+  (duration ?U AFewSecondsDuration))
+
+(implies 
+  (hasOwnershipIn ?AGT ?THING) 
+  (goalCategoryForAgent ?AGT 
+    (not 
+      (exists 
+        (?EXPROP) 
+        (and 
+          (isa ?EXPROP ExpropriatingSomething) 
+          (objectOfPossessionTransfer ?EXPROP ?THING)))) EconomicGoal))
+
+(implies 
+  (isa ?U Sleeping) 
+  (duration ?U 
+    (HoursDuration 1 12)))
+
+(implies 
+  (and 
+    (isa ?AGENT Person) 
+    (isa ?BASE NavalShipBase) 
+    (pointOfContact ?AGENT Workplace ?BASE)) 
+  (or 
+    (isa ?AGENT MarinePersonnel) 
+    (isa ?AGENT NavyPersonnel)))
+
+(implies 
+  (and 
+    (isa ?Y Food) 
+    (inputsDestroyed ?X ?Y) 
+    (isa ?X EatingEvent)) 
+  (massOfObject ?Y 
+    (Kilogram 0.001 1.5)))
+
+(implies 
+  (and 
+    (isa ?REP SimpleRepairing) 
+    (subEvents ?DARS ?REP) 
+    (objectActedOn ?DARS ?OBJ) 
+    (isa ?DARS DiagnosingAndRepairingSomething)) 
+  (objectActedOn ?REP ?OBJ))
+
+(implies 
+  (and 
+    (isa ?REGION GeographicalRegion) 
+    (genlPreds ?ACT-PRED deliberateActors) 
+    (performsInsAtLocation ?AGT ?ACT-TYPE ?REGION) 
+    (actsInCapacity ?AGT ?ACT-PRED ?ACT-TYPE JobCapacity)) 
+  (operatesInRegion ?AGT ?REGION))
+
+(implies 
+  (and 
+    (isa ?CLEAN Cleaning) 
+    (objectOfStateChange ?CLEAN ?OBJ) 
+    (holdsIn 
+      (STIB ?CLEAN) 
+      (dirtinessOfObject ?OBJ ?DIRT1)) 
+    (holdsIn 
+      (STIF ?CLEAN) 
+      (dirtinessOfObject ?OBJ ?DIRT2))) 
+  (followingValue ?DIRT2 ?DIRT1))
+
+(implies 
+  (holdsIn ?I616 
+    (feelsTowardsObject ?A6132292851036 ?E6132292851036 ?ATTR ?GEN)) 
+  (holdsIn ?I616 
+    (attitudeTowardsObject ?A6132292851036 ?E6132292851036 ?ATTR ?GEN)))
+
+(implies 
+  (and 
+    (isa ?FIRE CombustionProcess) 
+    (inputsDestroyed ?FIRE ?STRUC) 
+    (isa ?STRUC HumanOccupationConstruct)) 
+  (isa ?FIRE DisasterEvent))
+
+(implies 
+  (and 
+    (failureForAgents ?E ?A) 
+    (majorUndertakingsOf ?E ?A) 
+    (hasMembers ?A ?M)) 
+  (holdsIn 
+    (STIF ?E) 
+    (feelsTowardsEvent ?M ?E Disappointment Positive)))
+
+(implies 
+  (and 
+    (isa ?X SportsEvent) 
+    (spectators ?X ?X-2517-3191-408) 
+    (isa ?X-2517-3191-408 Person)) 
+  (holdsIn ?X 
+    (feelsEmotion ?X-2517-3191-408 Excitement MediumToVeryHigh)))
+
+(implies 
+  (isa ?X ClothingItem) 
+  (hasAttributes ?X Flexible))
+
+(implies 
+  (and 
+    (isa ?MEM SomethingToWear) 
+    (wearsClothing ?AGENT ?OBJ) 
+    (groupMembers ?OBJ ?MEM)) 
+  (wearsClothing ?AGENT ?MEM))
+
+(implies 
+  (isa ?U GraspingSomethingWithATool) 
+  (requiresForRole ?U GraspingImplement deviceUsed))
+
+(implies 
+  (and 
+    (isa ?TP TransferringPossession) 
+    (toPossessor ?TP ?REC)) 
+  (beneficiary ?TP ?REC))
+
+(implies 
+  (and 
+    (isa ?R Resting-Relaxing) 
+    (doneBy ?R ?X)) 
+  (holdsIn ?R 
+    (feelsEmotion ?X Relaxed-Emotion Positive)))
+
+(implies 
+  (and 
+    (isa ?SYS LandVehiclePathSystem) 
+    (primaryFunction ?SYS 
+      (TransportViaFn RoadVehicle) eventOccursAt)) 
+  (relationInstanceExists physicalParts ?SYS Street-Generic))
+
+(implies 
+  (loves ?X ?Y) 
+  (feelsTowardsObject ?X ?Y Love Positive))
+
+(implies 
+  (and 
+    (isa ?PERF EntertainmentPerformance) 
+    (spectators ?PERF ?PERS)) 
+  (holdsIn ?PERF 
+    (feelsTowardsEvent ?PERS ?PERF Enjoyment Positive)))
+
+(implies 
+  (and 
+    (hasMembers ?ORG101 ?MEM100) 
+    (representsAgentInEvent ?ORG101 ?BIG ?EV103)) 
+  (representsAgentInEvent ?MEM100 ?BIG ?EV103))
+
+(implies 
+  (and 
+    (isa ?BIRTH BirthEvent) 
+    (bodilyDoer ?BIRTH ?MOTHER) 
+    (isa ?MOTHER Person)) 
+  (duration ?BIRTH 
+    (HoursDuration 0.5 50)))
+
+(implies 
+  (and 
+    (isa ?BIRTH BirthEvent) 
+    (isa ?BIRTH MedicalTreatmentEvent) 
+    (birthParent ?BIRTH ?MOM)) 
+  (isa ?MOM FemalePerson))
+
+(implies 
+  (and 
+    (contraryFeelings ?EMOT ?NEG) 
+    (feelsTowardsObject ?PERS ?OBJ ?EMOT Positive)) 
+  (feelsTowardsObject ?PERS ?OBJ ?NEG None))
+
+(implies 
+  (and 
+    (isa ?X Microwaving) 
+    (outputs ?X ?FOO) 
+    (isa ?FOO FoodAndDrink)) 
+  (holdsIn 
+    (STIF ?X) 
+    (hasPreparationAttributes ?FOO Microwaved)))
+
+(implies 
+  (and 
+    (isa ?X EatingEvent) 
+    (recipientOfService ?X ?Y) 
+    (isa ?Y Person)) 
+  (holdsIn 
+    (STIB ?X) 
+    (hungerLevelOf Hungry ?Y)))
+
+(implies 
+  (and 
+    (isa ?U HavingAMeal) 
+    (performedBy ?U ?X)) 
+  (postureOfAnimal ?X SittingPosture))
+
+(implies 
+  (isa ?U FoodOrDrinkPreparationDevice) 
+  (primaryFunction ?U PreparingFoodOrDrink deviceUsed))
+
+(implies 
+  (and 
+    (isa ?AG Person) 
+    (performedBy ?ACT ?AG) 
+    (objectActedOn ?ACT ?OBJ) 
+    (isa ?OBJ Person) 
+    (actionExpressesFeeling ?ACT ?EMOTION)) 
+  (holdsIn ?ACT 
+    (feelsTowardsObject ?AG ?OBJ ?EMOTION Positive)))
+
+(implies 
+  (isa ?U PuttingOnAClothingItem) 
+  (anatomicalPartTypeAffected ?U AnimalBodyPart))
+
+(implies 
+  (and 
+    (isa ?M MilitaryOrganization) 
+    (hasMembers ?M ?AGENT)) 
+  (isa ?AGENT MilitaryPerson))
+
+(implies 
+  (and 
+    (isa ?LEAVE LeavingAPlace) 
+    (performedBy ?LEAVE ?PERF) 
+    (fromLocation ?LEAVE ?PLACE) 
+    (toLocation ?LEAVE ?DEST)) 
+  (purposeInEvent ?PERF ?LEAVE 
+    (holdsIn 
+      (STIF ?LEAVE) 
+      (not 
+        (spatiallyIntersects ?DEST ?PLACE)))))
+
+(implies 
+  (and 
+    (fromPossessor ?X ?A) 
+    (objectOfPossessionTransfer ?X ?O) 
+    (rightsGranted ?X ?R)) 
+  (holdsIn 
+    (STIB ?X) 
+    (userRightsRelation ?A ?O FullUseRights)))
+
+(implies 
+  (isa ?IMP GraspingImplement) 
+  (primaryFunction ?IMP GraspingSomethingWithATool deviceUsed))
+
+(implies 
+  (and 
+    (genls ?FEELING ?GENLSFEEL) 
+    (feelsTowardsObject ?A ?O ?FEELING ?VAL)) 
+  (feelsTowardsObject ?A ?O ?GENLSFEEL ?VAL))
+
+(implies 
+  (skillLevel ?P ?ST performedBy Competence MediumToVeryHigh) 
+  (skillCapableOf ?P ?ST performedBy))
+
+(implies 
+  (and 
+    (isa ?HAND HandlingAnObject) 
+    (eventOccursAt ?HAND ?LOC) 
+    (performedBy ?HAND ?PER)) 
+  (holdsIn ?HAND 
+    (objectFoundInLocation ?PER ?LOC)))
+
+(implies 
+  (and 
+    (contraryFeelings ?EMOT ?NEG) 
+    (feelsTowardsEvent ?PERS ?EVENT ?EMOT Positive)) 
+  (feelsTowardsEvent ?PERS ?EVENT ?NEG None))
+
+(implies 
+  (and 
+    (isa ?HCE HospitalCareEvent) 
+    (providerOfService ?HCE ?HOS) 
+    (isa ?HOS Hospital)) 
+  (eventOccursAt ?HCE ?HOS))
+
+(implies 
+  (and 
+    (isa ?X-5495-5069 Frying) 
+    (objectActedOn ?X-5495-5069 ?X)) 
+  (holdsIn 
+    (STIF ?X-5495-5069) 
+    (hasPreparationAttributes ?X Fried)))
+
+(implies 
+  (and 
+    (isa ?BODY1 LandBody) 
+    (geographicalSubRegions ?BODY1 ?FROM) 
+    (isa ?BODY2 LandBody) 
+    (fromLocation ?TRANS ?FROM) 
+    (geographicalSubRegions ?BODY2 ?TO) 
+    (toLocation ?TRANS ?TO) 
+    (trajectory-Complete ?TRANS ?TRAJ) 
+    (transportees ?TRANS ?PERSON) 
+    (isa ?PERSON Person)) 
+  (or 
+    (equals ?BODY1 ?BODY2) 
+    (isa ?TRAJ TrajectoryThroughAir) 
+    (isa ?TRAJ WaterSurfaceTrajectory)))
+
+(implies 
+  (and 
+    (isa ?U TransportationDevice-Vehicle) 
+    (isa ?U WaterTransportationDevice)) 
+  (intendedBehaviorCapable ?U 
+    (TransportViaFn WaterTransportationDevice) vehicle))
+
+(implies 
+  (wearsClothing ?X ?Y) 
+  (owns ?X ?Y))
+
+(implies 
+  (referredServiceProvider ?E ?A) 
+  (providerOfService ?E ?A))
+
+(implies 
+  (isa ?ANIMAL Animal) 
+  (orientation ?ANIMAL RightSideUp))
+
+(implies 
+  (and 
+    (isa ?X Reading) 
+    (informationOrigin ?X ?Y)) 
+  (isa ?Y TextualMaterial))
+
+(implies 
+  (and 
+    (isa ?GENLSFEEL FeelingAttributeType) 
+    (genls ?FEELING ?GENLSFEEL) 
+    (holdsIn ?T 
+      (attitudeTowardsObject ?A ?O ?FEELING ?VAL))) 
+  (holdsIn ?T 
+    (attitudeTowardsObject ?A ?O ?GENLSFEEL ?VAL)))
+
+(implies 
+  (and 
+    (isa ?AGT Country) 
+    (performedBy ?FOUNDING ?AGT) 
+    (isa ?FOUNDING FoundingAnOrganization) 
+    (outputsCreated ?FOUNDING ?ORG) 
+    (hasMembers ?ORG ?MEMBER) 
+    (isa ?ORG Coalition-International)) 
+  (allies ?AGT ?MEMBER))
+
+(implies 
+  (and 
+    (majorUndertakingsOf ?COMP ?AGT) 
+    (subEvents ?COMP ?ACT) 
+    (performanceLevel ?AGT ?ACT performedBy Competence LowToVeryLow)) 
+  (holdsIn 
+    (STIF ?ACT) 
+    (feelsTowardsEvent ?AGT ?ACT Disappointment MediumToVeryHigh)))
+
+(implies 
+  (citizens ?CO ?PER) 
+  (residesInRegion ?PER ?CO))
+
+(implies 
+  (and 
+    (isa ?BOAT WaterTransportationDevice) 
+    (transporter ?EVENT ?BOAT) 
+    (eventOccursAt ?EVENT ?LOC) 
+    (isa ?LOC 
+      (LiquidFn Water))) 
+  (or 
+    (isa ?BOAT Submarine) 
+    (holdsIn ?EVENT 
+      (in-Floating ?BOAT ?LOC))))
+
+(implies 
+  (and 
+    (isa ?TRANS 
+      (TransportViaFn AirTransportationDevice)) 
+    (passengers ?TRANS ?AGENT) 
+    (vehicle ?TRANS ?AIRPLANE)) 
+  (holdsIn ?TRANS 
+    (in-ContClosed ?AGENT ?AIRPLANE)))
+
+(implies 
+  (and 
+    (isa ?X Surgery) 
+    (objectTakenCareOf ?X ?Y)) 
+  (isa ?Y Animal))
+
+(implies 
+  (and 
+    (isa ?U ServingFoodOrDrink) 
+    (objectActedOn ?U ?V) 
+    (isa ?V EdibleStuff)) 
+  (commitsForFutureUses ?U ?V))
+
+(implies 
+  (holdsIn ?I100 
+    (feelsTowardsEvent ?A613229285106 ?E613229285106 ?ATTR ?GEN)) 
+  (holdsIn ?I100 
+    (attitudeTowardsEvent ?A613229285106 ?E613229285106 ?ATTR ?GEN)))
+
+(implies 
+  (and 
+    (isa ?STEAMING SteamingFood) 
+    (objectActedOn ?STEAMING ?FOOD) 
+    (isa ?FOOD Food) 
+    (stuffUsed ?STEAMING ?WATER) 
+    (isa ?WATER 
+      (GaseousFn Water))) 
+  (holdsIn ?STEAMING 
+    (in-ImmersedFully ?FOOD ?WATER)))
+
+(implies 
+  (owns ?X ?Y) 
+  (userRightsRelation ?X ?Y FullUseRights))
+
+(implies 
+  (isa ?U FoodUtensil) 
+  (or 
+    (primaryFunction ?U CookingFood deviceUsed) 
+    (primaryFunction ?U EatingEvent deviceUsed) 
+    (primaryFunction ?U PreparingFoodOrDrink deviceUsed)))
+
+(implies 
+  (isa ?U WritingImplement) 
+  (primaryFunction ?U WritingByHand deviceUsed))
+
+(implies 
+  (and 
+    (isa ?ATT AttackOnTangible) 
+    (performedBy ?ATT ?DOER) 
+    (objectActedOn ?ATT ?OBJ)) 
+  (purposeInEvent ?DOER ?ATT 
+    (damages ?ATT ?OBJ)))
+
+(implies 
+  (and 
+    (isa ?BUY MonetaryExchangeOfUserRights) 
+    (subEvents ?BUY ?T1) 
+    (subEvents ?BUY ?T2) 
+    (reciprocalTransfers ?T1 ?T2)) 
+  (or 
+    (isa ?T1 Paying) 
+    (isa ?T2 Paying)))
+
+(implies 
+  (and 
+    (isa ?LOOK LookingForSomething) 
+    (successfulForAgents ?LOOK ?PERF) 
+    (holdsIn ?LOOK 
+      (goals ?PERF 
+        (perceives ?PERF ?OBJ))) 
+    (isa ?OBJ PartiallyTangible)) 
+  (holdsIn 
+    (STIF ?LOOK) 
+    (perceives ?PERF ?OBJ)))
+
+(implies 
+  (hasPositionIn ?EMP ?ORG ?POS) 
+  (isa ?EMP ?POS))
+
+(implies 
+  (and 
+    (isa ?NEG Negotiating) 
+    (successfulForAgents ?NEG ?PERF)) 
+  (isa ?NEG MakingAnAgreement))
+
+(implies 
+  (and 
+    (isa ?EVENT Action) 
+    (officiator ?EVENT ?AGENT)) 
+  (performedBy ?EVENT ?AGENT))
+
+(implies 
+  (and 
+    (isa ?LEAVE LeavingAPlace) 
+    (fromLocation ?LEAVE ?PLACE) 
+    (performedBy ?LEAVE ?PERF) 
+    (toLocation ?LEAVE ?DEST)) 
+  (holdsIn 
+    (STIF ?LEAVE) 
+    (holdsIn 
+      (STIF ?LEAVE) 
+      (not 
+        (spatiallyIntersects ?DEST ?PLACE)))))
+
+(implies 
+  (and 
+    (isa ?TRANS 
+      (TransportViaFn WaterTransportationDevice)) 
+    (trajectory-Complete ?TRANS ?TRAJ) 
+    (isa ?TRAJ TrajectoryThroughWater) 
+    (transporter ?TRANS ?SUBMAR)) 
+  (holdsIn ?TRANS 
+    (in-ImmersedFully ?SUBMAR ?TRAJ)))
+
+(implies 
+  (and 
+    (isa ?U CookingFood) 
+    (objectActedOn ?U ?V) 
+    (isa ?V Food)) 
+  (commitsForFutureUses ?U ?V))
+
+(implies 
+  (and 
+    (isa ?ATT AttackOnTangible) 
+    (successfulForAgents ?ATT ?DOER) 
+    (objectActedOn ?ATT ?OBJ)) 
+  (damages ?ATT ?OBJ))
+
+(implies 
+  (isa ?BABY HumanInfant) 
+  (age ?BABY 
+    (GenValueFn age Person Low)))
+
+(implies 
+  (and 
+    (isa ?MOVING Movement-TranslationEvent) 
+    (toLocation ?MOVING ?PORTAL) 
+    (isa ?PORTAL Portal)) 
+  (unchangedActors ?MOVING ?PORTAL))
+
+(implies 
+  (pointOfContactInfo ?P HumanResidence cityOfAddress ?CITY) 
+  (residesInRegion ?P ?CITY))
+
+(implies 
+  (and 
+    (isa ?PILOT Person) 
+    (driverActor ?FLYING ?PILOT) 
+    (isa ?FLYING 
+      (TransportViaFn Airplane))) 
+  (isa ?PILOT AirplanePilot))
+
+(implies 
+  (and 
+    (isa ?ORG Organization) 
+    (employees ?ORG ?EMP) 
+    (rents ?ORG ?SPACE) 
+    (isa ?SPACE ConstructionArtifact) 
+    (pointOfContact ?EMP Workplace ?SPACE)) 
+  (physicalQuarters ?ORG ?SPACE))
+
+(implies 
+  (and 
+    (isa ?A976 Person) 
+    (failureForAgents ?E976 ?A976)) 
+  (holdsIn 
+    (STIF ?E976) 
+    (feelsTowardsEvent ?A976 ?E976 Sadness Positive)))
+
+(implies 
+  (and 
+    (isa ?X-5497-5073 CookingFood) 
+    (objectActedOn ?X-5497-5073 ?X)) 
+  (holdsIn 
+    (STIF ?X-5497-5073) 
+    (hasPreparationAttributes ?X Cooked)))
+
+(implies 
+  (and 
+    (isa ?GIVING GiftGiving) 
+    (objectOfPossessionTransfer ?GIVING ?GIFT) 
+    (isa ?GIFT PartiallyTangible)) 
+  (objectActedOn ?GIVING ?GIFT))
+
+(implies 
+  (and 
+    (isa ?V TransportationDevice) 
+    (transporter ?TRANS ?V) 
+    (pathway-Complete ?TRANS ?PATH) 
+    (isa ?PATH PathThroughAir)) 
+  (isa ?V AirTransportationDevice))
+
+(implies 
+  (and 
+    (vehicle ?TRANS ?DEV) 
+    (pathway-Complete ?TRANS ?RR) 
+    (isa ?RR Railway)) 
+  (isa ?DEV Train-TransportationDevice))
+
+(implies 
+  (and 
+    (isa ?AGT IndividualAgent) 
+    (performedBy ?ACT1 ?AGT) 
+    (eventOccursAt ?ACT1 ?LOC1) 
+    (performedBy ?ACT2 ?AGT) 
+    (eventOccursAt ?ACT2 ?LOC2)) 
+  (or 
+    (equals ?ACT1 ?ACT2) 
+    (temporallyDisjoint ?ACT1 ?ACT2) 
+    (equals ?LOC1 ?LOC2)))
+
+(implies 
+  (and 
+    (isa ?X-2138-2531 Person) 
+    (performedBy ?X ?X-2138-2531) 
+    (isa ?X Reading)) 
+  (age ?X-2138-2531 
+    (IntervalMinFn 
+      (YearsDuration 4))))
+
+(implies 
+  (residesInRegion ?PERS ?REG) 
+  (objectFoundInLocation ?PERS ?REG))
+
+(implies 
+  (and 
+    (isa ?OB TemporalThing) 
+    (feelsTowardsObject ?AG ?OB ?EMO ?LEVEL)) 
+  (causes-ThingProp ?OB 
+    (feelsEmotion ?AG ?EMO ?LEVEL)))
+
+(implies 
+  (and 
+    (isa ?DRY DryingSomething) 
+    (objectActedOn ?DRY ?OBJ)) 
+  (objectOfStateChange ?DRY ?OBJ))
+
+(implies 
+  (and 
+    (isa ?X GrillingFood) 
+    (objectActedOn ?X ?X-1888-2073) 
+    (isa ?X-1888-2073 Food)) 
+  (holdsIn 
+    (STIF ?X) 
+    (hasPreparationAttributes ?X-1888-2073 Grilled)))
+
+(implies 
+  (and 
+    (isa ?EX Exercising) 
+    (performedBy ?EX ?PRF)) 
+  (objectTakenCareOf ?EX ?PRF))
+
+(implies 
+  (and 
+    (isa ?U TakingOffAClothingItem) 
+    (objectActedOn ?U ?V) 
+    (isa ?V SomethingToWear)) 
+  (objectRemoved ?U ?V))
+
+(implies 
+  (and 
+    (isa ?WEARING WearingSomething) 
+    (wearer ?WEARING ?PERS) 
+    (itemWorn ?WEARING ?CLOTHING) 
+    (wornOn ?CLOTHING ?PART)) 
+  (anatomicalParts ?PERS ?PART))
+
+(implies 
+  (isa ?X Motorcycle) 
+  (intendedBehaviorCapable ?X 
+    (TransportViaFn Motorcycle) vehicle))
+
+(implies 
+  (hasOwnershipIn ?AGT ?THING) 
+  (goalCategoryForAgent ?AGT 
+    (not 
+      (exists 
+        (?EXPROP) 
+        (and 
+          (isa ?EXPROP ExpropriatingSomething) 
+          (performedBy ?EXPROP ?AGT2) 
+          (objectOfPossessionTransfer ?EXPROP ?THING) 
+          (different ?AGT1 ?AGT2)))) EconomicGoal))
+
+(implies 
+  (and 
+    (isa ?NVC NonVerbalCommunicating) 
+    (subEvents ?NVC ?MOVING) 
+    (isa ?MOVING BodyMovementEvent) 
+    (ibtGenerated ?MOVING ?MOVEMENT)) 
+  (communicationToken ?NVC ?MOVEMENT))
+
+(implies 
+  (and 
+    (isa ?WASH Washing) 
+    (objectActedOn ?WASH ?PART)) 
+  (holdsIn ?WASH 
+    (forall 
+      (?CLOTH) 
+      (not 
+        (and 
+          (isa ?CLOTH ClothingItem) 
+          (wornOn ?CLOTH ?PART))))))
+
+(implies 
+  (and 
+    (isa ?X AnimalWalkingProcess) 
+    (performedBy ?X ?Y) 
+    (isa ?Y Person)) 
+  (holdsIn ?X 
+    (postureOfAnimal ?Y UprightPosture)))
+
+(implies 
+  (isa ?U SportsEvent) 
+  (duration ?U 
+    (MinutesDuration 5 240)))
+
+(implies 
+  (and 
+    (isa ?PILOT Person) 
+    (driverActor ?FLYING ?PILOT) 
+    (isa ?FLYING 
+      (TransportViaFn Airplane))) 
+  (age ?PILOT 
+    (YearsDuration 16 90)))
+
+(implies 
+  (and 
+    (eventOccursAt ?A ?C) 
+    (performedBy ?A ?G012) 
+    (different ?A ?B) 
+    (eventOccursAt ?B ?D) 
+    (performedBy ?B ?G012) 
+    (different ?C ?D)) 
+  (or 
+    (subEvents ?A ?B) 
+    (temporallyDisjoint ?A ?B) 
+    (subEvents ?B ?A) 
+    (spatiallyIntersects ?C ?D)))
+
+(implies 
+  (and 
+    (isa ?X SteamingFood) 
+    (objectActedOn ?X ?X-2799-3747) 
+    (isa ?X-2799-3747 Food)) 
+  (holdsIn 
+    (STIF ?X) 
+    (hasPreparationAttributes ?X-2799-3747 Steamed)))
+
+(implies 
+  (and 
+    (isa ?BUY 
+      (BuyingFn FurniturePiece)) 
+    (buyer ?BUY ?PER)) 
+  (isa ?PER HumanAdult))
+
+(implies 
+  (and 
+    (isa ?V TransportationDevice) 
+    (transporter ?TRANS ?V) 
+    (trajectory-Complete ?TRANS ?TRAJ) 
+    (isa ?TRAJ WaterSurfaceTrajectory)) 
+  (isa ?V WaterTransportationDevice))
+
+(implies 
+  (isa ?U MakingFacialExpression) 
+  (anatomicalResourceRequired ?U FaceOfAnimal 1))
+
+(implies 
+  (isa ?U AnimalWalkingProcess) 
+  (duration ?U 
+    (MinutesDuration 0.5 600)))
+
+(implies 
+  (and 
+    (contraryFeelings ?EMOT ?NEG) 
+    (feelsEmotion ?PERS ?EMOT Positive)) 
+  (feelsEmotion ?PERS ?NEG None))
+
+(implies 
+  (isa ?SW SomethingToWear) 
+  (primaryFunction ?SW WearingSomething itemWorn))
+
+(implies 
+  (isa ?U TransportationDevice) 
+  (primaryFunction ?U 
+    (TransportViaFn TransportationDevice) transporter))
+
+(implies 
+  (and 
+    (isa ?AGR WorkAgreement) 
+    (holdsIn ?AGR 
+      (employees ?X ?Y)) 
+    (outputs ?EH ?AGR) 
+    (isa ?EH EmployeeHiring)) 
+  (holdsIn ?AGR 
+    (employingAgent ?AGR ?X)))
+
+(implies 
+  (and 
+    (isa ?TAKE TakingCareOfSomething) 
+    (objectActedOn ?TAKE ?THING)) 
+  (objectTakenCareOf ?TAKE ?THING))
+
+(implies 
+  (and 
+    (isa ?X SportsEvent) 
+    (spectators ?X ?X-2515-3187-400) 
+    (isa ?X-2515-3187-400 Person)) 
+  (holdsIn ?X 
+    (feelsEmotion ?X-2515-3187-400 Excitement Positive)))
+
+(implies 
+  (and 
+    (isa ?X PhysicallyAttackingAnAgent) 
+    (objectActedOn ?X ?Y) 
+    (isa ?Y Person)) 
+  (holdsIn ?X 
+    (feelsEmotion ?Y Fear Positive)))
+
+(implies 
+  (isa ?U LightingDevice) 
+  (primaryFunction ?U 
+    (WaveEmissionFn VisibleLight) deviceUsed))
+
+(implies 
+  (and 
+    (genls ?SPEC ?TYPE) 
+    (skillCapableOf ?X ?TYPE performedBy)) 
+  (skillCapableOf ?X ?SPEC performedBy))
+
+(implies 
+  (isa ?X 
+    (TransportViaFn Bicycle)) 
+  (anatomicalResourceRequired ?X Leg 2))
+
+(implies 
+  (and 
+    (genls ?X ?Y) 
+    (capableOf ?AGNT 
+      (TreatmentFn ?Y) performedBy)) 
+  (capableOf ?AGNT 
+    (TreatmentFn ?X) performedBy))
+
+(implies 
+  (and 
+    (isa ?EXCH MonetaryExchangeOfUserRights) 
+    (seller ?EXCH ?SELLER) 
+    (subEvents ?EXCH ?TRANS) 
+    (objectPaidFor ?EXCH ?OBJ) 
+    (objectOfPossessionTransfer ?TRANS ?OBJ)) 
+  (fromPossessor ?TRANS ?SELLER))
+
+(implies 
+  (and 
+    (isa ?A Person) 
+    (failureForAgents ?E ?A) 
+    (majorUndertakingsOf ?E ?A)) 
+  (holdsIn 
+    (STIF ?E) 
+    (feelsTowardsEvent ?A ?E Disappointment Positive)))
+
+(implies 
+  (and 
+    (isa ?BIRTH BirthEvent) 
+    (birthChild ?BIRTH ?ANIMAL) 
+    (biologicalMother ?ANIMAL ?MOTHER)) 
+  (birthParent ?BIRTH ?MOTHER))
+
+(implies 
+  (and 
+    (genls ?SPEC-ACT-TYPE ?GENL-ACT-TYPE) 
+    (providesMotiveFor ?THING ?AGENT ?SPEC-ACT-TYPE ?ROLE)) 
+  (providesMotiveFor ?THING ?AGENT ?GENL-ACT-TYPE ?ROLE))
+
+(implies 
+  (and 
+    (isa ?REP SimpleRepairing) 
+    (objectOfStateChange ?REP ?OBJ)) 
+  (objectTakenCareOf ?REP ?OBJ))
+
+(implies 
+  (and 
+    (hasWorkers ?X ?A2) 
+    (hasWorkers ?X ?A1) 
+    (pointOfContactInfo ?A1 ?CLT postalCodeOfAddress ?Z1) 
+    (pointOfContactInfo ?A1 ?CLT faxNumberText ?F1) 
+    (pointOfContactInfo ?A2 ?CLT postalCodeOfAddress ?Z1)) 
+  (pointOfContactInfo ?A2 ?CLT faxNumberText ?F1))
+
+(implies 
+  (skillCapableOf ?P ?ST performedBy) 
+  (skillLevel ?P ?ST performedBy Competence MediumToVeryHigh))
+
+(implies 
+  (memberOfThisPoliticalParty Taliban ?PERSON) 
+  (feelsTowardsObject ?PERSON Iran Hate High))
+
+(implies 
+  (and 
+    (isa ?LOCO LocomotionEvent) 
+    (performedBy ?LOCO ?PERF) 
+    (isa ?PERF Person)) 
+  (distanceTranslated ?LOCO 
+    (IntervalMaxFn 
+      (Mile 0.5))))
+
+(implies 
+  (and 
+    (isa ?ORG Organization) 
+    (subOrganizations ?ORG ?AGT) 
+    (performedByPart ?EVT ?ORG) 
+    (performedBy ?EVT ?AGT)) 
+  (representsAgentInEvent ?AGT ?ORG ?EVT))
+
+(implies 
+  (and 
+    (isa ?OFF LawEnforcementOfficer) 
+    (employees ?ORG ?OFF) 
+    (isa ?ORG LegalGovernmentOrganization)) 
+  (hasPositionIn ?OFF ?ORG LawEnforcementOfficer))
+
+(implies 
+  (and 
+    (distanceTranslated ?TRANS 
+      (IntervalMinFn 
+        (Mile 1))) 
+    (objectMoving ?TRANS ?PERSON) 
+    (isa ?PERSON Person) 
+    (trajectory-Complete ?TRANS ?TRAJ) 
+    (isa ?TRAJ WaterSurfaceTrajectory)) 
+  (isa ?TRANS 
+    (TransportViaFn Watercraft)))
+
+(implies 
+  (and 
+    (wearer ?WEARING ?WEARER) 
+    (itemWorn ?WEARING ?WORN)) 
+  (objectsInContact ?WEARING ?WEARER ?WORN))
+
+(implies 
+  (and 
+    (isa ?U HarvestingAPlant) 
+    (transportees ?U ?V) 
+    (isa ?V PlantBLO)) 
+  (commitsForFutureUses ?U ?V))
+
+(implies 
+  (isa ?U Connector) 
+  (primaryFunction ?U ConnectingTogether deviceUsed))
+
+(implies 
+  (and 
+    (isa ?Y Person) 
+    (employees ?X ?Y)) 
+  (hasWorkers ?X ?Y))
+
+(implies 
+  (and 
+    (isa ?EVT SportsEvent) 
+    (spectators ?EVT ?PER) 
+    (isa ?PER Person)) 
+  (holdsIn ?EVT 
+    (postureOfAnimal ?PER SittingPosture)))
+
+(implies 
+  (and 
+    (isa ?U HarvestingAPlant) 
+    (objectActedOn ?U ?V) 
+    (isa ?V BotanicalOrgan)) 
+  (transportees ?U ?V))
+
+(implies 
+  (and 
+    (isa ?ASLOT ActorSlot) 
+    (genls ?ACTIONTYPE Situation) 
+    (isa ?CURRENTACTION ?ACTIONTYPE) 
+    (isa ?PREACTION ?ACTIONTYPE) 
+    (different ?PREACTION ?CURRENTACTION) 
+    (trueFormula 
+      (?ASLOT ?PREACTION ?AGENT))) 
+  (capableOfDoing ?CURRENTACTION ?AGENT ?ASLOT))
+
+(implies 
+  (and 
+    (isa ?REP SimpleRepairing) 
+    (objectTakenCareOf ?REP ?OBJ)) 
+  (objectOfStateChange ?REP ?OBJ))
+
+(implies 
+  (and 
+    (isa ?ADULT HumanAdult) 
+    (wearsClothing ?ADULT ?ITEM)) 
+  (owns ?ADULT ?ITEM))
+
+(implies 
+  (and 
+    (isa ?RVT 
+      (TransportViaFn RoadVehicle)) 
+    (pathway-Complete ?RVT ?PATH)) 
+  (unchangedActors ?RVT ?PATH))
+
+(implies 
+  (performedBy ?Y ?X) 
+  (intends ?X 
+    (doneBy ?Y ?X)))
+
+(implies 
+  (and 
+    (isa ?TRANS 
+      (TransportViaFn WaterTransportationDevice)) 
+    (trajectory-Complete ?TRANS ?TRAJ) 
+    (isa ?TRAJ WaterSurfaceTrajectory) 
+    (transporter ?TRANS ?BOAT) 
+    (spatiallyIntersects ?BODY ?TRAJ) 
+    (isa ?BODY BodyOfWater)) 
+  (holdsIn ?TRANS 
+    (in-ImmersedPartly ?BOAT ?BODY)))
+
+(implies 
+  (and 
+    (isa ?F Foot-AnimalBodyPart) 
+    (wornOn ?S ?F) 
+    (isa ?S Shoe)) 
+  (coversWithConformity ?F ?S Medium))
+
+(implies 
+  (pointOfContactInfo ?P HumanResidence stateOfAddress ?STATE) 
+  (residesInRegion ?P ?STATE))
+
+(implies 
+  (and 
+    (isa ?EV ?SCRIPT) 
+    (performanceLevel ?PERS ?EV ?ROLE ?SKILL LowToVeryLow) 
+    (skillLevel ?PERS ?SCRIPT ?ROLE ?SKILL VeryHigh)) 
+  (holdsIn 
+    (STIF ?EV) 
+    (feelsTowardsEvent ?PERS ?EV Embarrassment Positive)))
+
+(implies 
+  (intendedBehaviorCapable ?X ?Y ?R) 
+  (behaviorCapable ?X ?Y ?R))
+
+(implies 
+  (and 
+    (isa ?DEV Device-UserControlled) 
+    (deviceUsed ?ACT ?DEV) 
+    (actorCapacity ?DEV ?ACT IntendedFunction) 
+    (objectControlled ?CON ?DEV) 
+    (subEvents ?ACT ?CON) 
+    (isa ?CON ControllingSomething) 
+    (doneBy ?ACT ?USER)) 
+  (doneBy ?CON ?USER))
+
+(implies 
+  (majorUndertakingsOf ?E ?A) 
+  (or 
+    (successfulForAgents ?E ?A) 
+    (holdsIn 
+      (STIF ?E) 
+      (feelsTowardsEvent ?A ?E Frustration Positive))))
+
+(implies 
+  (and 
+    (isa ?WAKE WakingUpFromSleep) 
+    (bodilyDoer ?WAKE ?ANIMAL) 
+    (isa ?ANIMAL Animal)) 
+  (holdsIn 
+    (STIF ?WAKE) 
+    (alertnessLevel ?ANIMAL Awake)))
+
+(implies 
+  (isa ?U 
+    (TransportViaFn WaterTransportationDevice)) 
+  (requiresForRole ?U WaterTransportationDevice transporter))
+
+(implies 
+  (purposeInEvent ?AG ?E ?P) 
+  (intends ?AG ?P))
+
+(implies 
+  (isa ?U CleaningDevice) 
+  (primaryFunction ?U Cleaning deviceUsed))
+
+(implies 
+  (isa ?U TakingOffAClothingItem) 
+  (anatomicalPartTypeAffected ?U AnimalBodyPart))
+
+(implies 
+  (and 
+    (isa ?X BakingFood) 
+    (outputs ?X ?FOO) 
+    (isa ?FOO Food)) 
+  (holdsIn 
+    (STIF ?X) 
+    (hasPreparationAttributes ?FOO Baked)))
+
+(implies 
+  (isa ?U Airplane) 
+  (primaryFunction ?U 
+    (TransportViaFn Airplane) vehicle))
+
+(implies 
+  (and 
+    (isa ?PROTEST PublicProtesting) 
+    (inReactionTo ?PROTEST ?ACTION) 
+    (topicOfInfoTransfer ?PROTEST ?ACTION) 
+    (performedBy ?ACTION ?AGT)) 
+  (actionExpressesFeelingToward ?PROTEST Disapproval ?AGT))
+
+(implies 
+  (holdsIn ?TIME 
+    (givesSupportToAgent ?AGT-1 ?AGT-2 ?SUPPORT)) 
+  (holdsIn ?TIME 
+    (positiveVestedInterest ?AGT-1 ?AGT-2)))
+
+(implies 
+  (and 
+    (isa ?LOC HumanShelterConstruction) 
+    (eventOccursAt ?PERF ?LOC) 
+    (spectators ?PERF ?PERS)) 
+  (holdsIn ?PERF 
+    (objectFoundInLocation ?PERS ?LOC)))
+
+(implies 
+  (and 
+    (isa ?AGR WorkAgreement) 
+    (outputs ?EH ?AGR) 
+    (objectActedOn ?EH ?X) 
+    (isa ?EH EmployeeHiring)) 
+  (holdsIn ?AGR 
+    (employedAgent ?AGR ?X)))
+
+(implies 
+  (and 
+    (isa ?X Hat) 
+    (wornOn ?X ?BODY)) 
+  (isa ?BODY Head-AnimalBodyPart))
+
+(implies 
+  (and 
+    (isa ?U HarvestingAPlant) 
+    (objectActedOn ?U ?V) 
+    (isa ?V Seed)) 
+  (transportees ?U ?V))
+
+(implies 
+  (and 
+    (isa ?V TransportationDevice) 
+    (transporter ?TRANS ?V) 
+    (isa ?TRANS TransportationEvent) 
+    (pathway-Complete ?TRANS ?PATH) 
+    (isa ?PATH WaterSurfacePath)) 
+  (isa ?V WaterTransportationDevice))
+
+(implies 
+  (children ?X ?Y) 
+  (feelsTowardsObject ?X ?Y Love Positive))
+
+(implies 
+  (and 
+    (isa ?TRANS 
+      (TransportViaFn WaterTransportationDevice)) 
+    (pathway-Complete ?TRANS ?PATH) 
+    (isa ?PATH WaterSurfacePath) 
+    (transporter ?TRANS ?BOAT)) 
+  (holdsIn ?TRANS 
+    (in-ImmersedPartly ?BOAT ?PATH)))
+
+(implies 
+  (isa ?U WritingByHand) 
+  (requiresForRole ?U WritingImplement deviceUsed))
+
+(implies 
+  (and 
+    (isa ?X-5339-4735 WearingSomething) 
+    (itemWorn ?X-5339-4735 ?X-5338-4733) 
+    (isa ?X-5338-4733 SomethingToWear) 
+    (wearer ?X-5339-4735 ?X) 
+    (isa ?X Person)) 
+  (holdsIn ?X-5339-4735 
+    (supportedBy ?X-5338-4733 ?X)))
+
+(implies 
+  (isa ?U ServingFoodOrDrink) 
+  (duration ?U AFewMinutesDuration))
+
+(implies 
+  (and 
+    (isa ?A Person) 
+    (failureForAgents ?E ?A) 
+    (majorUndertakingsOf ?E ?A)) 
+  (holdsIn 
+    (STIF ?E) 
+    (feelsTowardsEvent ?A ?E Sadness Positive)))
+
+(implies 
+  (and 
+    (isa ?AGENT Person) 
+    (isa ?BASE AirBase) 
+    (pointOfContact ?AGENT Workplace ?BASE)) 
+  (isa ?AGENT AirForcePersonnel))
+
+(implies 
+  (allies ?AGT ?ALLY) 
+  (goalCategoryForAgent ?AGT 
+    (not 
+      (relationExistsInstance maleficiary HarmingSomething ?ALLY)) AidingAllies))
+
+(implies 
+  (and 
+    (isa ?PT Movement-TranslationEvent) 
+    (postEvents ?PT ?ACT) 
+    (eventOccursAt ?ACT ?LOC) 
+    (objectActedOn ?PT ?OBJ) 
+    (deviceUsed ?ACT ?OBJ)) 
+  (toLocation ?PT ?LOC))
+
+(implies 
+  (isa ?DEV Automobile) 
+  (primaryFunction ?DEV 
+    (TransportViaFn Automobile) vehicle))
+
+(implies 
+  (and 
+    (isa ?WBH WritingByHand) 
+    (objectActedOn ?WBH ?P)) 
+  (isa ?P Paper))
+
+(implies 
+  (isa ?U SteamingFood) 
+  (requiresForRole ?U Boiling subEvents))
+
+(implies 
+  (isa ?U WaterTransportationDevice) 
+  (intendedBehaviorCapable ?U 
+    (TransportViaFn WaterTransportationDevice) transporter))
+
+(implies 
+  (and 
+    (isa ?X Shirt) 
+    (wornOn ?X ?BODY)) 
+  (isa ?BODY Torso))
+
+(implies 
+  (isa ?U InformationRecordingDevice) 
+  (intendedBehaviorCapable ?U InformationRecordingProcess deviceUsed))
+
+(implies 
+  (and 
+    (isa ?ORG CommercialOrganization) 
+    (hasPositionIn ?PERS ?ORG CorporateOfficer)) 
+  (isa ?PERS Executive))
+
+(implies 
+  (and 
+    (subAgreements ?AGREEMENT ?SUB) 
+    (agreeingAgents ?AGREEMENT ?AGENT)) 
+  (agreeingAgents ?SUB ?AGENT))
+
+(implies 
+  (and 
+    (holdsIn ?TI 
+      (considersAsEnemy ?AGT-1 ?AGT-2)) 
+    (holdsIn ?TI 
+      (considersAsEnemy ?AGT-2 ?AGT-1))) 
+  (holdsIn ?TI 
+    (opponents ?AGT-1 ?AGT-2)))
+
+(implies 
+  (and 
+    (isa ?RR Resting-Relaxing) 
+    (doneBy ?RR ?AG)) 
+  (holdsIn ?RR 
+    (feelsTowardsEvent ?AG ?RR Calm Positive)))
+
+(implies 
+  (and 
+    (isa ?CENSURE Censuring-CommunicationAct) 
+    (inReactionTo ?CENSURE ?ACTION) 
+    (performedBy ?ACTION ?AGT)) 
+  (actionExpressesFeelingToward ?CENSURE Disapproval ?AGT))
+
+(implies 
+  (and 
+    (isa ?ACT MakingSomething) 
+    (performedBy ?ACT ?PERS) 
+    (isa ?PERS Person) 
+    (products ?ACT ?PROD) 
+    (isa ?PROD ArtObject)) 
+  (causes-ThingProp ?ACT 
+    (feelsEmotion ?PERS Relaxed-Emotion Positive)))
+
+(implies 
+  (and 
+    (isa ?OBJ SomethingToWear) 
+    (groupMembers ?OBJ ?MEM) 
+    (isa ?MEM SomethingToWear) 
+    (wearsClothing ?AGENT ?MEM)) 
+  (wearsClothing ?AGENT ?OBJ))
+
+(implies 
+  (and 
+    (failureForAgents ?E ?A) 
+    (majorUndertakingsOf ?E ?A)) 
+  (holdsIn 
+    (STIF ?E) 
+    (feelsTowardsEvent ?A ?E Frustration Positive)))
+
+(implies 
+  (and 
+    (pathway-Complete ?TRANS ?PATH) 
+    (fromLocation ?TRANS ?BODY1) 
+    (isa ?BODY1 LandBody) 
+    (toLocation ?TRANS ?BODY2) 
+    (different ?BODY1 ?BODY2) 
+    (isa ?BODY2 LandBody)) 
+  (or 
+    (isa ?PATH PathThroughAir) 
+    (isa ?PATH PathThroughWater) 
+    (isa ?PATH WaterSurfacePath)))
+
+(implies 
+  (and 
+    (isa ?U HarvestingAPlant) 
+    (transporter ?U ?V) 
+    (isa ?V Person)) 
+  (performedBy ?U ?V))
+
+(implies 
+  (and 
+    (isa ?BUY Buying) 
+    (subEvents ?BUY ?T1) 
+    (subEvents ?BUY ?T2) 
+    (reciprocalTransfers ?T1 ?T2)) 
+  (isa ?T1 TransferringOwnership))
+
+(implies 
+  (and 
+    (isa ?ORG Organization) 
+    (hasMembers ?ORG ?AGT) 
+    (performedByPart ?EVT ?ORG) 
+    (performedBy ?EVT ?AGT)) 
+  (representsAgentInEvent ?AGT ?ORG ?EVT))
+
+(implies 
+  (and 
+    (isa ?VEHICLE WaterTransportationDevice) 
+    (objectFoundInLocation ?VEHICLE ?WATER) 
+    (isa ?WATER BodyOfWater)) 
+  (in-Floating ?VEHICLE ?WATER))
+
+(implies 
+  (isa ?U Reading) 
+  (duration ?U 
+    (MinutesDuration 0.02 600)))
+
+(implies 
+  (and 
+    (isa ?FIRE CombustionProcess) 
+    (objectActedOn ?FIRE ?SHIP) 
+    (isa ?SHIP Ship)) 
+  (isa ?FIRE DisasterEvent))
+
+(implies 
+  (and 
+    (wornOn ?CLOTH ?PART) 
+    (anatomicalParts ?WHOLE ?PART)) 
+  (externalParts ?WHOLE ?PART))
+
+(implies 
+  (and 
+    (isa ?ACT PurposefulAction) 
+    (directingAgent ?ACT ?DIRAGT) 
+    (assistingAgent ?ACT ?ASSTAGT) 
+    (different ?DIRAGT ?ASSTAGT)) 
+  (affiliatedWith ?ASSTAGT ?DIRAGT))
+
+(implies 
+  (and 
+    (isa ?AGT-1 Agent) 
+    (different ?AGT-1 ?AGT-2) 
+    (isa ?AGT-2 Agent) 
+    (holdsIn ?TIME 
+      (goals ?AGT-1 
+        (exists 
+          (?EVENT) 
+          (and 
+            (isa ?EVENT 
+              (DestructionFn Agent)) 
+            (inputsDestroyed ?EVENT ?AGT-2)))))) 
+  (holdsIn ?TIME 
+    (opponents ?AGT-1 ?AGT-2)))
+
+(implies 
+  (isa ?U MedicalTreatmentEvent) 
+  (duration ?U 
+    (MinutesDuration 1 300)))
+
+(implies 
+  (and 
+    (deviceUsed ?X ?U) 
+    (isa ?U GraspingImplement)) 
+  (isa ?X GraspingSomethingWithATool))
+
+(implies 
+  (and 
+    (isa ?COM CommunicationAct-Single) 
+    (senderOfInfo ?COM ?SENDER)) 
+  (performedBy ?COM ?SENDER))
+
+(implies 
+  (and 
+    (isa ?DARS DiagnosingAndRepairingSomething) 
+    (objectOfStateChange ?DARS ?OBJ)) 
+  (objectTakenCareOf ?DARS ?OBJ))
+
+(implies 
+  (and 
+    (objectControlled ?EVENT ?OBJ) 
+    (performedBy ?EVENT ?AGENT)) 
+  (holdsIn ?EVENT 
+    (controls ?AGENT ?OBJ)))
+
+(implies 
+  (isa ?SYS LandVehiclePathSystem) 
+  (primaryFunction ?SYS 
+    (TransportViaFn LandTransportationDevice) eventOccursAt))
+
+(implies 
+  (and 
+    (owns ?Y ?X) 
+    (physicalDecompositions ?X ?Z)) 
+  (owns ?Y ?Z))
+
+(implies 
+  (and 
+    (isa ?GUR GainingUserRights) 
+    (objectOfPossessionTransfer ?GUR ?OBJ) 
+    (rightsGranted ?GUR ?URA) 
+    (toPossessor ?GUR ?AG)) 
+  (holdsIn 
+    (STIB ?GUR) 
+    (not 
+      (userRightsRelation ?AG ?OBJ ?URA))))
+
+(implies 
+  (isa ?U 
+    (TransportViaFn Bicycle)) 
+  (requiresForRole ?U Bicycle deviceUsed))
+
+(implies 
+  (and 
+    (isa ?ACT MakingSomething) 
+    (performedBy ?ACT ?PERS) 
+    (isa ?PERS Person) 
+    (products ?ACT ?PROD) 
+    (isa ?PROD ArtObject)) 
+  (holdsIn ?ACT 
+    (feelsTowardsEvent ?PERS ?ACT Relaxed-Emotion Positive)))
+
+(implies 
+  (and 
+    (failureForAgents ?E ?A) 
+    (majorUndertakingsOf ?E ?A) 
+    (holdsIn ?E 
+      (hasMembers ?A ?M))) 
+  (holdsIn 
+    (STIF ?E) 
+    (feelsTowardsEvent ?M ?E Sadness Positive)))
+
+(implies 
+  (and 
+    (isa ?U GraspingSomethingWithATool) 
+    (deviceUsed ?U ?V) 
+    (isa ?V FoodUtensil)) 
+  (unchangedActors ?U ?V))
+
+(implies 
+  (and 
+    (isa ?MAKE PreparingFoodOrDrink) 
+    (commitsForFutureUses ?MAKE ?FOODSTUFF)) 
+  (objectOfStateChange ?MAKE ?FOODSTUFF))
+
+(implies 
+  (and 
+    (isa ?RIDE 
+      (TransportViaFn Bicycle)) 
+    (performedBy ?RIDE ?PERSON) 
+    (transporter ?RIDE ?BIKE)) 
+  (holdsIn ?RIDE 
+    (on-Physical ?PERSON ?BIKE)))
+
+(implies 
+  (feelsTowardsEvent ?AG ?EV ?EMO ?LEVEL) 
+  (causes-SitProp ?EV 
+    (feelsEmotion ?AG ?EMO ?LEVEL)))
+
+(implies 
+  (and 
+    (isa ?PROTEST PublicProtesting) 
+    (inReactionTo ?PROTEST ?ACTION) 
+    (topicOfInfoTransfer ?PROTEST ?ACTION)) 
+  (actionExpressesFeelingToward ?PROTEST Disapproval ?ACTION))
+
+(implies 
+  (and 
+    (isa ?INS PhysicalDevice) 
+    (instrument-Generic ?EVENT ?INS) 
+    (isa ?EVENT ?TYPE) 
+    (primaryFunction ?INS ?TYPE deviceUsed)) 
+  (deviceUsed ?EVENT ?INS))
+
+(implies 
+  (and 
+    (isa ?GENLSFEEL FeelingAttributeType) 
+    (genls ?FEELING ?GENLSFEEL) 
+    (holdsIn ?T 
+      (attitudeTowardsEvent ?A ?E ?FEELING ?VAL))) 
+  (holdsIn ?T 
+    (attitudeTowardsEvent ?A ?E ?GENLSFEEL ?VAL)))
+
+(implies 
+  (isa ?AT 
+    (TransportViaFn Airplane)) 
+  (duration ?AT 
+    (HoursDuration 0.5 12)))
+
+(implies 
+  (and 
+    (isa ?U ServingFoodOrDrink) 
+    (objectActedOn ?U ?V) 
+    (isa ?V EdibleStuff)) 
+  (transportees ?U ?V))
+
+(implies 
+  (and 
+    (isa ?IBT-GEN IBTGeneration) 
+    (subEvents ?NVC ?IBT-GEN) 
+    (isa ?NVC NonVerbalCommunicating)) 
+  (isa ?IBT-GEN BodyMovementEvent))
+
+(implies 
+  (and 
+    (isa ?X Cleaning) 
+    (deviceUsed ?X ?Y)) 
+  (isa ?Y CleaningDevice))
+
+(implies 
+  (clients ?X ?Y) 
+  (positiveVestedInterest ?X ?Y))
+
+(implies 
+  (isa ?U AirTransportationDevice) 
+  (primaryFunction ?U 
+    (TransportViaFn AirTransportationDevice) transporter))
+
+(implies 
+  (and 
+    (isa ?DARS DiagnosingAndRepairingSomething) 
+    (objectTakenCareOf ?DARS ?OBJ)) 
+  (objectOfStateChange ?DARS ?OBJ))
+
+(implies 
+  (and 
+    (isa ?ARREST ArrestingSomeone) 
+    (performedBy ?ARREST ?PERF)) 
+  (isa ?PERF LawEnforcementOfficer))
+
+(implies 
+  (and 
+    (isa ?C Hat) 
+    (isa ?H Head-AnimalBodyPart) 
+    (wearsClothing ?A ?C) 
+    (anatomicalParts ?A ?H)) 
+  (wornOn ?C ?H))
+
+(implies 
+  (pointOfContact ?A HumanResidence ?HR) 
+  (residesInDwelling ?A ?HR))
+
+(implies 
+  (and 
+    (isa ?ACT Communicating) 
+    (performedBy ?ACT ?AGENT1) 
+    (infoTransferred ?ACT ?INFO) 
+    (intends ?AGENT1 
+      (recipientOfInfo ?ACT ?AGENT2))) 
+  (holdsIn 
+    (TimeIntervalInclusiveFn 
+      (STIB ?ACT) 
+      (STIF ?ACT)) 
+    (intends ?AGENT1 
+      (beliefs ?AGENT2 ?INFO))))
+
