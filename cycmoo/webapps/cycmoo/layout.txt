@@ -1,0 +1,52 @@
+
+
+
+/org/opencyc/
+         api/  
+         chat/  
+                IrcChat.java  ( the name of the Bot class )       
+         constraintsolver/  
+         conversation/  
+         cycagent/  
+         cycobject/  
+         inferencesupport/  
+         jini/  
+         jxta/
+         jsp/
+              JspUtils.java (Java Web Server Page friendy wrapper for CycAsserionsFactory to return CycBulkAsserions)
+              examples/  (examples that can be refined to become more specific to a target application)
+                        createcollection.jsp
+                        editcollection.jsp              
+                        createpredicate.jsp
+                        createfunction.jsp
+                        createmicrotheory.jsp
+                        uploadkif.jsp           
+                        uploadprotege.jsp               
+                        uploadcycl.jsp          
+         kif/   (added to place the KIF loading import utilities)
+              CycListKifParser.java  ( the changed version of the CycList parser for specific differences between KIF and CycL )
+              KifFileParser.java (uses CycListKifParser returns CycBulkAssertions via CycAsserionsFactory )
+              KifMapping.java (Data object that is used to hold IEEE-KIF transformation rules into CycL + Static methods for invoking)
+         creation/  
+              CycBulkAsserions.java ( Data Object that holds a collection of CycLists that are destined to be placed into one specific Microtheory
+                                          Confirms that each assertion passes TMS and can throw exceptions based on problems)
+              CycAsserionsFactory.java (static methods that create CycBulkAsserions based on creation of new Collection/Predicate/Functions/Microtheory/CollectionType etc)
+         queryprocessor/  
+         templateparser/  
+         uml/  
+         util/  
+         webserver/  
+         xml/     
+         
+        
+	   
+          
+	   
+	   testAssertions(boolean )
+	   
+	   Method:
+	     Creates a temporary Mt  TemporaryBulkAsserions{HashCode}Mt
+	     genlMts this to the Targeted setMicrotheory(String or CycFort)
+	     Loops through the assertions trying assert with Wff checks and  it can throw an Exception
+	     If an exception is thrown, it kills the TemporaryBulkAsserions{HashCode}Mt
+	   If assertions succeed 	   

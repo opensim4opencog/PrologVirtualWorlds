@@ -1,0 +1,33 @@
+<%@ page language="java" import=" jamud.*, logicmoo.*, org.opencyc.constraintsolver.*,org.opencyc.cycobject.*, org.opencyc.creation.*, org.opencyc.kif.*, org.opencyc.jsp.*, org.opencyc.util.*,org.opencyc.api.*,org.opencyc.inferencesupport.*,org.opencyc.webserver.*, java.util.*,com.oreilly.servlet.*,com.oreilly.servlet.multipart.*,java.io.*" %>
+<jsp:useBean id="theLogicMoo" scope="application" class="logicmoo.LogicMoo"/>
+
+<%
+CycAccess cycAccess = theLogicMoo.getCycAccess();
+%>
+
+
+
+<%!static String writeOption(String title, String name,  String defaultVal, ServletRequest p_Request ){
+      String theValue = p_Request.getParameter(name);
+      if (theValue==null) {
+          theValue = defaultVal;
+	  }
+     if  (title=="hidden") {return ("<INPUT type=hidden name=" + name + " value=\"" + theValue + "\" />");}
+		else{
+			return ("<td><font size=-1>" + title + "</font><br><INPUT size=10 name=" + name + " value=\"" + theValue + "\" /></td>");
+		}
+     
+	}
+%>
+
+<%!
+static String selectedValue(String name, String theValue, ServletRequest p_Request ){
+	  StringBuffer outputer= new StringBuffer("<option value=\"" + theValue + "\" ");
+	  String BV = p_Request.getParameter(name);
+	  try {if (BV.equalsIgnoreCase(theValue))  { outputer.append(" SELECTED ") ;}} catch(Exception e) {}
+      return (outputer.append(" >").toString());
+
+	}
+%>   
+
+
