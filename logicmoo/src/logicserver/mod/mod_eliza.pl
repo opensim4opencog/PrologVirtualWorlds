@@ -31,11 +31,11 @@
 % ===================================================================
 % Invokation  (knot,kbot2).
 % ===================================================================
-kbot2:-my_sigmaThreadCreate(kill,'Consultation Mode Test (KIFBOT!) OPN Server',consultation_thread(swiProlog,65530),Id,[]).
-kbot:-my_sigmaThreadCreate(kill,'Consultation Mode Test (KIFBOT!) Efnet Server',consultation_thread(swipl,65532),Id,[]).
+kbot2:-my_mooProcessCreate(kill,'Consultation Mode Test (KIFBOT!) OPN Server',consultation_thread(swiProlog,65530),Id,[]).
+kbot:-my_mooProcessCreate(kill,'Consultation Mode Test (KIFBOT!) Efnet Server',consultation_thread(swipl,65532),Id,[]).
 
-my_sigmaThreadCreate(K,N,G,Id,A):-catch(sigmaThreadCreate(K,N,G,Id,A),_,fail),!.
-my_sigmaThreadCreate(K,N,G,Id,A):-G,!.
+my_mooProcessCreate(K,N,G,Id,A):-catch(mooProcessCreate(K,N,G,Id,A),_,fail),!.
+my_mooProcessCreate(K,N,G,Id,A):-G,!.
 
 
 % ===================================================================
@@ -138,8 +138,8 @@ from(Channel,Who,say(Atom)):-
 		not(member(shell,List)),
 		not(member(help,List)),
 		not(member(rm,List)),
-		(unsetSigmaOption(client=_)),
-		(setSigmaOption(client=consultation)), 
+		(unsetMooOption(client=_)),
+		(setMooOption(client=consultation)), 
 		catch(once((Term,write_chat_vars(Vars))),E,(format(user_error,'~q\n',[E]),fail)).	
 
 from(Channel,Who,say(String)):- 
@@ -224,10 +224,10 @@ to_codes(C,C).
 kif_response(Channel,Who,String):- 
 	once(getSurfaceFromChars(String,STERM,Vars)),
 	not( STERM=[comment,_]),
-	once((getSigmaTermFromSurface(STERM,NEWFORM))),
-	(unsetSigmaOption(client=_)),
+	once((getMooTermFromSurface(STERM,NEWFORM))),
+	(unsetMooOption(client=_)),
 	default_user(User),
-	(setSigmaOption(client=consultation)),
+	(setMooOption(client=consultation)),
 	once(catch(invokeOperation_irc(Channel,Who,NEWFORM,User,Vars),E,say(E))),!.
 	 
 invokeOperation_irc(Channel,Who,X,User,Vars):-
@@ -323,7 +323,7 @@ english_to_kif(ENG):-ado_tuple(L,P,A,B),
 	E=ENG.
 	
 ado_tuple(Logic,P,A,B):-
-	sigmaCache(Surface,CLF,Flags,Vars,KB,Ctx,TN,Author,TMResult),
+	mooCache(Surface,CLF,Flags,Vars,KB,Ctx,TN,Author,TMResult),
 	Surface=..[P,A,B],
 	ground((P,A,B)).
 
@@ -343,7 +343,7 @@ download(URL,File):-say([downloading,URL,File]),!,sformat(Shell,'wget -O ~w  ~w 
 
 use(URL):- file_base_name(URL,File),!,((download(URL,File),load_file(File))).
 
-in_thread(X):-sigmaThreadCreate(kill,chat(X),X,Id,[]).
+in_thread(X):-mooProcessCreate(kill,chat(X),X,Id,[]).
 
 load_file(File):-file_name_extension(Base, rpm,File),!, sformat(Shell,'rpm --force -i ~w  ',[File]),string_to_atom(Shell,Cmd),shell(Cmd),!,say([done,installing,File]).
 load_file(File):-file_name_extension(Base, 'P',File),!,ensure_loaded(File),say([done,compiling,File]).
@@ -359,10 +359,10 @@ perl(CMD):-sformat(Shell,'perl -c "~w"  ',[CMD]),string_to_atom(Shell,Cmd),shell
 load_file(File):-file_name_extension(Base, E,File),!,say([E,'Extension is not yet regisitered']).
 
 
-bot(ps):-!,sigmaThreadCreate_data(Perms,Name,Goal,Id,Options),
+bot(ps):-!,mooThreadCreate_data(Perms,Name,Goal,Id,Options),
 	current_thread(Id,Status),
 	sayq((Id:Name:Goal:(Status):(Perms):Options)),fail.
-bot(kill(Id)):-nonvar(Id),sigmaThreadCreate_data(kill,Name,Goal,Id,Options),
+bot(kill(Id)):-nonvar(Id),mooThreadCreate_data(kill,Name,Goal,Id,Options),
 	thread_signal(Id,thread_exit(killed)).
 
 		
@@ -388,14 +388,14 @@ pp(H):-findall(Y,predicate_property(H,Y),L),L=[_|_],sayq(L),!.
 pp(H):-say(nv(['i don''t know about',H])),!.
 
 
-%surf(Num):-number(Num),sigmaCache(PredR,_,F,Vars,_,_,Num,_,_),say(F,Vars),fail.
+%surf(Num):-number(Num),mooCache(PredR,_,F,Vars,_,_,Num,_,_),say(F,Vars),fail.
 %surf(Num):-say([assertion,Num,not,found]).
 
 			
-kbsize:-predicate_property(sigmaCache(_,_,_,_,_,_,_,_,_),number_of_clauses(X)),say(X).
+kbsize:-predicate_property(mooCache(_,_,_,_,_,_,_,_,_),number_of_clauses(X)),say(X).
 
 /*
-doc(Const):-sigmaCache(PredR,_,documentation(Const,F),Vars,_,_,Num,_,_),!,my_toMarkUp(kif,F,Vars,O),sayn(O),!.
+doc(Const):-mooCache(PredR,_,documentation(Const,F),Vars,_,_,Num,_,_),!,my_toMarkUp(kif,F,Vars,O),sayn(O),!.
 doc(Const):-sayn('Not Found').
   */
 
@@ -465,7 +465,7 @@ remember_what_is(WhatIs):-
 what_is_query([i,save]):-bumem,fail.
 
 
-bumem:-tell('mod/backup'),listing(isa_mem_c),listing(mem_c),told.
+bumem:-tell('mod/mod_eliza.data'),listing(isa_mem_c),listing(mem_c),told.
 	
 what_is_query([i,learned]):-
 	retract(isa_mem_c(Mem)),!,
@@ -1651,8 +1651,6 @@ e_rules([[dit,10],[
 		[how,?]]]]):-precond.
 
 
-
-:-['mod/backup'].
 
 %chattingWith(Channel,User).
 %:-kbot.

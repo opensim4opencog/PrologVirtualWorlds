@@ -11,7 +11,7 @@
 :-multifile(do_irc_nd/1).
 
 
-:-ensure_loaded('mod/nani.data').
+:-ensure_loaded('mod/mod_nani.data').
 
 % ==================================================
 % Mud Dictionary

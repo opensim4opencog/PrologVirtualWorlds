@@ -153,10 +153,17 @@ prologAtInitalization(V):-at_initialization(V),!,logOnFailureIgnore(V).
 
 :-setMooOptionDefaults.
 
+sigma_ua(X):-moo_ua(X).
+
 
 :-callIfPlatformUnix(prologAtInitalization(cs)).	 	
 
-%:-callIfPlatformUnix((prologAtInitalization(['mod/nani.sig']),prologAtInitalization(['mod/eliza.sig']),prologAtInitalization(kbot),prologAtInitalization(kbot2))).	 	
+:-callIfPlatformUnix((prologAtInitalization(['mod/mod_nani.pl']),prologAtInitalization(['mod/mod_eliza.pl']),
+	 prologAtInitalization(kbot),prologAtInitalization(kbot2))).
+
+
+
+
 
 
 
