@@ -1,13 +1,13 @@
 % ===================================================================
 % File 'moo_markup.pl'
 % Maintainers: Douglas Miles
-% Contact: dmiles@users.sourceforge.net ;  
+% Contact: dmiles@users.sourceforge.net ;
 % Version: 'moo_markup.pl' 1.0.0
-% Revised At:  $Date: 2002-03-07 06:07:50 $
+% Revised At:  $Date: 2002-03-08 14:39:51 $
 
 % ===================================================================
-% Major functions:  
-% This file meets the needs of an external agent working for the needs of eigther an automated or human user 
+% Major functions:
+% This file meets the needs of an external agent working for the needs of eigther an automated or human user
 % Interface with Java with XML to display explaination trees and variable bindings
 % ===================================================================
 
@@ -51,10 +51,10 @@ toMarkUp(chat,Var,VS,Chars):-!,catch(toMarkUp(kif,Var,VS,Chars),_,true),!.
 toMarkUp(java,Var,VS,Chars):-!,catch(toMarkUp(html,Var,VS,Chars),_,true),!.
 
 toMarkUp(L,T,V,Chars):-!,
-	ignore(catch(/*notrace*/((
-	copy_term((T,V),(CT,CV)),
-	numbervars((CT,CV),'$VAR',0,_),%trace,
-	toMarkUp_lang(L,CT,CV,Chars))),_,true)),!.
+        ignore(catch(/*notrace*/((
+        copy_term((T,V),(CT,CV)),
+        numbervars((CT,CV),'$VAR',0,_),%trace,
+        toMarkUp_lang(L,CT,CV,Chars))),_,true)),!.
 
 % VARIABLES
 toMarkUp_lang(L,C,Vars,Out):-isSlot(C),!,toMarkUp_slotValue(L,C,Vars,Out).
@@ -63,14 +63,14 @@ toMarkUp_lang(html,'$spacer',Vars,'\n<hr>\n').
 toMarkUp_lang(_,'$spacer',Vars,'\n;; ------------------------------------------------------------------------------\n\n').
 
 tml(Form):-toMarkUp_lang(html,formula(Form),Vars,Out),write(Out),nl.
-	
+
 toMarkUp_lang(L,formula(C),Vars,Out):-!,
-	getMarkupFormula(L,C,Vars,Out).
-	
+        getMarkupFormula(L,C,Vars,Out).
+
 % ===================================================
 % Pretty Print Formula
 % ===================================================
-%getMarkupFormula(L,C,Vars,Out):-	writeq( C=Vars),nl,fail.
+%getMarkupFormula(L,C,Vars,Out):-       writeq( C=Vars),nl,fail.
 
 
 getMarkupFormula(L,C,Vars,Out):-isSlot(C),!,toMarkUp_lang(L,C,Vars,Out).
@@ -78,100 +78,100 @@ getMarkupFormula(L,C,Vars,Out):-not(compound(C)),!,toMarkUp_lang(L,C,Vars,Out).
 
 % QUOTED STRING FORMAT
 getMarkupFormula(L,Atom,_VS,Chars):-((isCharCodelist(Atom);string(Atom))),!,
-	catch(sformat(Chars,'"~s"',[Atom]),_,sformat(Chars,'"~w"',[Atom])).
+        catch(sformat(Chars,'"~s"',[Atom]),_,sformat(Chars,'"~w"',[Atom])).
 
 getMarkupFormula(L,string(C),Vars,C):-!.
 
 getMarkupFormula(L,hidden(F,Args),Vars,''):-!.
 
 getMarkupFormula(html,colourize(Color,Thing),Vars,Chars):-!,
-	getMarkupFormula(html,Thing,Vars,Chars1),!,
-	sformat(Chars,'<font color="~w">~w</font>\n',[Color,Chars1]).
+        getMarkupFormula(html,Thing,Vars,Chars1),!,
+        sformat(Chars,'<font color="~w">~w</font>\n',[Color,Chars1]).
 
 getMarkupFormula(L,colourize(Color,Thing),Vars,Chars):-!,
-	getMarkupFormula(L,Thing,Vars,Chars),!.
+        getMarkupFormula(L,Thing,Vars,Chars),!.
 
 /*
 getMarkupFormula(L,','(A,B),Vars,Chars):-!,
-	prolog_to_krlog(','(A,B),KR),
-	getMarkupFormula(L,KR,Vars,Chars),!.
+        prolog_to_krlog(','(A,B),KR),
+        getMarkupFormula(L,KR,Vars,Chars),!.
 */
-	
+
 
 getMarkupFormula(L,write_dollar('$v',[A|Args]),Vars,Chars):-!,
-		Flag=..[getPrologVars,A|Args],!,
-		getMarkupFormula(L,Flag,Vars,Chars).
+                Flag=..[getPrologVars,A|Args],!,
+                getMarkupFormula(L,Flag,Vars,Chars).
 
 getMarkupFormula(L,table_(Goal,Lits),Vars,Chars):-!,
-		getMarkupFormula(L,table_p(Lits,Goal),Vars,Chars).
-		
+                getMarkupFormula(L,table_p(Lits,Goal),Vars,Chars).
+
 
 getMarkupFormula(L,write_dollar(F,[A|Args]),Vars,Chars):-!,
-	getMarkupFormula(L,A,Vars,Chars1),
-	getMarkupFormula(L,hidden(F,Args),Vars,Chars2),!,
-	sformat(Chars,'~w~w',[Chars1,Chars2]).
+        getMarkupFormula(L,A,Vars,Chars1),
+        getMarkupFormula(L,hidden(F,Args),Vars,Chars2),!,
+        sformat(Chars,'~w~w',[Chars1,Chars2]).
 
 getMarkupFormula(L,'$existential'(VarName,Name,Literal),Vars,O):-!,
-	getMarkupFormula(L,'existential'(VarName),Vars,O).
+        getMarkupFormula(L,'existential'(VarName),Vars,O).
 
 getMarkupFormula(L,'$eval'(Function),Vars,O):-!,
-	getMarkupFormula(L,' eval'(Function),Vars,O).
+        getMarkupFormula(L,' eval'(Function),Vars,O).
 
 
 getMarkupFormula(L,functional(VarName,Domains,Literal),Vars,O):-
-	toMarkUp_lang(L,Literal,Vars,O),!.
+        toMarkUp_lang(L,Literal,Vars,O),!.
 
 close_list_var(M,[]):-isSlot(M),!.
 close_list_var([[M]|Ms],[M|Ls]):-!,
-	close_list_var(Ms,Ls).
+        close_list_var(Ms,Ls).
 close_list_var([M|Ms],[M|Ls]):-!,
-	close_list_var(Ms,Ls).
-	
+        close_list_var(Ms,Ls).
+
 getMarkupFormula(L,Term,Vars,Chars):-
-	Term=..[F,A|Args],
-	atom_concat('$',_,F), !,
-	getMarkupFormula(L,write_dollar(F,[A|Args]),Vars,Chars).
- 
+        Term=..[F,A|Args],
+        atom_concat('$',_,F), !,
+        getMarkupFormula(L,write_dollar(F,[A|Args]),Vars,Chars).
+
 
 getMarkupFormula(L,unused(C,P),Vars,O):-!,
-	getMarkupFormula(L,notused(C,writeq(P)),Vars,O).
+        getMarkupFormula(L,notused(C,writeq(P)),Vars,O).
 
 getMarkupFormula(L,ff([]),Vars,'[]'):-!.
 
 getMarkupFormula(L,ff([Flag|Flags]),Vars,Chars):-!,
-	getMarkupFormula(L,flag(Flag),Vars,Chars1),
-	getMarkupFormula(L,ff(Flags),Vars,Chars2),
-	sformat(Chars,'~w, ~w',[Chars1, Chars2]).
+        getMarkupFormula(L,flag(Flag),Vars,Chars1),
+        getMarkupFormula(L,ff(Flags),Vars,Chars2),
+        sformat(Chars,'~w, ~w',[Chars1, Chars2]).
 
 getMarkupFormula(L,domargs([]),Vars,''):-!.
 
 getMarkupFormula(L,domargs([(P:N)]),Vars,Chars):-!,
-	getMarkupFormula(L,P,Vars,Chars1),
-	sformat(Chars,'~w:~w',[Chars1,N]).
+        getMarkupFormula(L,P,Vars,Chars1),
+        sformat(Chars,'~w:~w',[Chars1,N]).
 
 getMarkupFormula(L,domargs([(P:N)|Flags]),Vars,Chars):-!,
-	getMarkupFormula(L,P,Vars,Chars1),
-	getMarkupFormula(L,domargs(Flags),Vars,Chars2),
-	sformat(Chars,'~s:~w,~w',[Chars1,N,Chars2]).
+        getMarkupFormula(L,P,Vars,Chars1),
+        getMarkupFormula(L,domargs(Flags),Vars,Chars2),
+        sformat(Chars,'~s:~w,~w',[Chars1,N,Chars2]).
 
 getMarkupFormula(L,flag(Flag),Vars,Chars):-
-	Flag=..[domainV,Var,DomArgs],!,
-	getMarkupFormula(L,Var,Vars,VarChars),
-	getMarkupFormula(L,domargs(DomArgs),Vars,ArgChars),
-	sformat(Chars,'~w(~w,[~w])',[domainV,VarChars,ArgChars]).
-	
+        Flag=..[domainV,Var,DomArgs],!,
+        getMarkupFormula(L,Var,Vars,VarChars),
+        getMarkupFormula(L,domargs(DomArgs),Vars,ArgChars),
+        sformat(Chars,'~w(~w,[~w])',[domainV,VarChars,ArgChars]).
+
 getMarkupFormula(L,flag(Flag),Vars,Chars):-
-	Flag=..[Name,Var,Args],!,
-	getMarkupFormula(L,Var,Vars,VarChars),
-	sformat(Chars,'~w(~w, ~q)',[Name,VarChars,Args]).
+        Flag=..[Name,Var,Args],!,
+        getMarkupFormula(L,Var,Vars,VarChars),
+        sformat(Chars,'~w(~w, ~q)',[Name,VarChars,Args]).
 getMarkupFormula(L,flag(Flag),Vars,Chars):-!,
-	getMarkupFormula(L,writeq(Flag),Vars,Chars).
-	
+        getMarkupFormula(L,writeq(Flag),Vars,Chars).
 
-	
-	
 
-	
+
+
+
+
 
 getMarkupFormula(L,writeq(Atom),_VS,Chars):-!,sformat(Chars,'~q',[Atom]).
 
@@ -181,14 +181,14 @@ getMarkupFormula(L,[],Vars,''):-!.
 %getMarkupFormula(L,[A | B],Vars,Chars):-catch(TRY=..[A | B],_,fail),getMarkupFormula(L,TRY,Vars,Chars),!.
 %getMarkupFormula(L,[A | B],Vars,Chars):-catch(TRY=..[A | B],_,fail),getMarkupFormula(L,TRY,Vars,Chars),!.
 getMarkupFormula(L,[Su|Bj],Vars,Chars):-
-	toMarkUp_list(L,[Su|Bj],Vars,Chars1),
-	sformat(Chars,'(~w)',[Chars1]).
+        toMarkUp_list(L,[Su|Bj],Vars,Chars1),
+        sformat(Chars,'(~w)',[Chars1]).
 
 /*
-getMarkupFormula(L,Term,Vars,O):- 
-	Term=..[holds,F|Args],isNonVar(F),not_a_function(F),!,
-	NTerm=..[F|Args],
-	getMarkupFormula(L,NTerm,Vars,O).
+getMarkupFormula(L,Term,Vars,O):-
+        Term=..[holds,F|Args],isNonVar(F),not_a_function(F),!,
+        NTerm=..[F|Args],
+        getMarkupFormula(L,NTerm,Vars,O).
 */
 getMarkupFormula(L,'$VAR'(_)* X ,Vars,Out):-!,getMarkupFormula(L, X ,Vars,Out).
 getMarkupFormula(L, X * '$VAR'(_) ,Vars,Out):-!,getMarkupFormula(L, X ,Vars,Out).
@@ -199,33 +199,33 @@ getMarkupFormula(L, X * deduced ,Vars,Out):-!,getMarkupFormula(L, X ,Vars,Out).
 
 
 getMarkupFormula(L,domainV(Var,ReqsL),Vars,Chars):-
-	getMarkupFormula(L,' domainV'(Var,writeq(ReqsL)),Vars,Chars).	
+        getMarkupFormula(L,' domainV'(Var,writeq(ReqsL)),Vars,Chars).
 getMarkupFormula(L,domainC(Var,ReqsL),Vars,Chars):-
-	getMarkupFormula(L,' domainC'(Var,writeq(ReqsL)),Vars,Chars).	
+        getMarkupFormula(L,' domainC'(Var,writeq(ReqsL)),Vars,Chars).
 getMarkupFormula(L,domainA(Var,ReqsL),Vars,Chars):-
-	getMarkupFormula(L,' domainA'(Var,writeq(ReqsL)),Vars,Chars).	
+        getMarkupFormula(L,' domainA'(Var,writeq(ReqsL)),Vars,Chars).
 getMarkupFormula(L,existsC(Var,ReqsL),Vars,Chars):-
-	getMarkupFormula(L,' existsC'(Var,writeq(ReqsL)),Vars,Chars).	
+        getMarkupFormula(L,' existsC'(Var,writeq(ReqsL)),Vars,Chars).
 getMarkupFormula(L,existsA(Var,ReqsL),Vars,Chars):-
-	getMarkupFormula(L,' existsA'(Var,writeq(ReqsL)),Vars,Chars).	
+        getMarkupFormula(L,' existsA'(Var,writeq(ReqsL)),Vars,Chars).
 
 getMarkupFormula(L,(A * B),Vars,Chars):-!,
-	getMarkupFormula(L,B,Vars,Chars2),
-	getMarkupFormula(L,A,Vars,Chars1),
-	sformat(Chars,'~w\n~w',[Chars2, Chars1]).
+        getMarkupFormula(L,B,Vars,Chars2),
+        getMarkupFormula(L,A,Vars,Chars1),
+        sformat(Chars,'~w\n~w',[Chars2, Chars1]).
 
 getMarkupFormula(L,formula(C),Vars,Out):-!,
-	getMarkupFormula(L,C,Vars,Out).
+        getMarkupFormula(L,C,Vars,Out).
 
 
 getMarkupFormula(html,undefined_constants(UnDefinedList),_,O):-
-	getMarkupFormula(kif,nv(UnDefinedList),_,I),
-	sformat(O,'\n<font color=red>Warning Undefined constants: <font color=black size=+1>~w</font></font>',[I]).
+        getMarkupFormula(kif,nv(UnDefinedList),_,I),
+        sformat(O,'\n<font color=red>Warning Undefined constants: <font color=black size=+1>~w</font></font>',[I]).
 
 getMarkupFormula(kif,undefined_constants(UnDefinedList),_,O):-
-	getMarkupFormula(kif,(UnDefinedList),_,I),
-	sformat(O,'\Warning Undefined constants ~w',[I]).
-	
+        getMarkupFormula(kif,(UnDefinedList),_,I),
+        sformat(O,'\Warning Undefined constants ~w',[I]).
+
 
 
 getMarkupFormula(L,C,Vars,Out):-is_list(C),!,make_args_out(L,C,Vars,Out1),sformat(Out,'(~w)',[Out1]).
@@ -233,15 +233,15 @@ getMarkupFormula(L,C,Vars,Out):-is_list(C),!,make_args_out(L,C,Vars,Out1),sforma
 
 /*
 getMarkupFormula(L,and(A,B),VS,Chars):-
-	collect_op(and(A,B),O),!,
-	getMarkupFormula(L,O,VS,Chars).
+        collect_op(and(A,B),O),!,
+        getMarkupFormula(L,O,VS,Chars).
 
 collect_op(and(A,B),and(A,B)):-not(A=and(_,_)),not(B=and(_,_)).
 collect_op(and(A,B
 */
 
 % ==================================================
-% Unest And/Or 
+% Unest And/Or
 % ==================================================
 
 getMarkupFormula(L,and(and(and(and(and(F,E),D),C),B),A),VS,Chars):-!, getMarkupFormula(L,and(F,E,D,C,B,A),VS,Chars).
@@ -264,30 +264,30 @@ getMarkupFormula(L,or(A,or(B,C)),VS,Chars):-!, getMarkupFormula(L,'or'(A,B,C),VS
 % ==================================================
 
 getMarkupFormula(html,incode(X),Vars,HAtom):-!,
-	getMarkupFormula(L,bullet(X),Vars,Atom),
-	sformat(HAtom,'<table border=0><tr><td><pre>~w</pre></td><td><pre>Implemented in code.</pre></td></tr></table>',[Atom]).
+        getMarkupFormula(L,bullet(X),Vars,Atom),
+        sformat(HAtom,'<table border=0><tr><td><pre>~w</pre></td><td><pre>Implemented in code.</pre></td></tr></table>',[Atom]).
 
 getMarkupFormula(kif,incode(X),Vars,HAtom):-!,
-	getMarkupFormula(L,bullet(X),Vars,Atom),
-	sformat(HAtom,'~w\nImplemented in code.\n',[Atom]).
+        getMarkupFormula(L,bullet(X),Vars,Atom),
+        sformat(HAtom,'~w\nImplemented in code.\n',[Atom]).
 
 
 getMarkupFormula(html,incode(X,M),Vars,HAtom):-!,
-	getMarkupFormula(L,bullet(X),Vars,Atom),
-	sformat(HAtom,'<table border=0><tr><td><pre>~w</pre></td><td><pre>Implemented in code.\n~w</pre></td></tr></table>',[Atom,M]).
+        getMarkupFormula(L,bullet(X),Vars,Atom),
+        sformat(HAtom,'<table border=0><tr><td><pre>~w</pre></td><td><pre>Implemented in code.\n~w</pre></td></tr></table>',[Atom,M]).
 
 getMarkupFormula(kif,incode(X,M),Vars,HAtom):-!,
-	getMarkupFormula(L,bullet(X),Vars,Atom),
-	sformat(HAtom,'~w\nImplemented in code.\n (~w)\n',[Atom,M]).
+        getMarkupFormula(L,bullet(X),Vars,Atom),
+        sformat(HAtom,'~w\nImplemented in code.\n (~w)\n',[Atom,M]).
 
 % ==================================================
 % Finds the clausification then displays the explaination
 % ==================================================
 
 getMarkupFormula(L,cfind(entails(Pre,Post)),Vars,Out):-
-	mooCache(PredR,Post,Pre,T,true,KB,Ctx,Explaination),
-	getMarkupFormula(L,Explaination,Vars,Out),!.
-		
+        mooCache(PredR,Post,Pre,T,true,KB,Ctx,Explaination),
+        getMarkupFormula(L,Explaination,Vars,Out),!.
+
 % ==================================================
 % Show explaination of cross reference optimization
 % ==================================================
@@ -295,12 +295,12 @@ getMarkupFormula(L,g_h(_),Vars,''):-!.
 getMarkupFormula(L,tid(_),Vars,''):-!.
 
 getMarkupFormula(L,crossref(X,Y),Vars,Atom):-!,
-	crossref_to_explaination(crossref(X,Y),P),
-	getMarkupFormula(L,P,Vars,Atom).
+        crossref_to_explaination(crossref(X,Y),P),
+        getMarkupFormula(L,P,Vars,Atom).
 
 getMarkupFormula(L,crossref(X),Vars,Atom):-!,
-	crossref_to_explaination(crossref(X),P),
-	getMarkupFormula(L,P,Vars,Atom).
+        crossref_to_explaination(crossref(X),P),
+        getMarkupFormula(L,P,Vars,Atom).
 
 
 % ==================================================
@@ -308,56 +308,54 @@ getMarkupFormula(L,crossref(X),Vars,Atom):-!,
 % ==================================================
 
 getMarkupFormula(L,sfind(X),Vars,Out):- nonvar(X),
-	mooCache(PredR, surface, X,V,KB, Ctx, TN, Auth, State),!,
-	var_merge(Vars,V,TVars),!,
-	getMarkupFormula(L,surf(KB,TN),TVars,Out).
+        mooCache(PredR, surface, X,V,KB, Ctx, TN, Auth, State),!,
+        var_merge(Vars,V,TVars),!,
+        getMarkupFormula(L,surf(KB,TN),TVars,Out).
 
 % ==================================================
 % Find a surface form, Display its explaination, show instanced version
 % ==================================================
 
 getMarkupFormula(L,sfindi(X),Vars,Out):- nonvar(X),
-	mooCache(PredR, surface, X,V,KB, Ctx, TN, Auth, State),!,
-	var_merge(Vars,V,TVars),!,
-	getMarkupFormula(L,surf(KB,TN) * bullet_a(X),TVars,Out).
+        mooCache(PredR, surface, X,V,KB, Ctx, TN, Auth, State),!,
+        var_merge(Vars,V,TVars),!,
+        getMarkupFormula(L,surf(KB,TN) * bullet_a(X),TVars,Out).
 
 getMarkupFormula(L,sfindi(X),Vars,Out):- nonvar(X),
-	getMarkupFormula(L,bullet_a(X),Vars,Out).
+        getMarkupFormula(L,bullet_a(X),Vars,Out).
 
-       
+
 % ==================================================
 % VIA
 % ==================================================
 
 getMarkupFormula(L,via(Form,V),Vars,Out):-
-	(var_merge(Vars,V,TVars)),
-	getMarkupFormula(L,via(Form),TVars,Out),!.
+        (var_merge(Vars,V,TVars)),
+        getMarkupFormula(L,via(Form),TVars,Out),!.
 
 
-:-dynamic(show_entails).
-
-getMarkupFormula(L,via(entails(Pre,(Post))),Vars,Out):-not(show_entails),!,
-	getMarkupFormula(L,(  via('=>'(Pre,Post)) ),Vars,Out).
+getMarkupFormula(L,via(entails(Pre,(Post))),Vars,Out):-not(isMooOption(show_entails,true)),!,
+        getMarkupFormula(L,(  via('=>'(Pre,Post)) ),Vars,Out).
 
 
 getMarkupFormula(L,'-'(Form),Vars,Out):-
-	getMarkupFormula(L,not(Form),Vars,Out).
+        getMarkupFormula(L,not(Form),Vars,Out).
 
 getMarkupFormula(L,'+'(Form),Vars,Out):-
-	getMarkupFormula(L,(Form),Vars,Out).
+        getMarkupFormula(L,(Form),Vars,Out).
 
 getMarkupFormula(L,via(Form),Vars,Out):-
-	getMarkupFormula(L,bullet_a(Form),Vars,Out).
+        getMarkupFormula(L,bullet_a(Form),Vars,Out).
 
 
 getMarkupFormula(L,(entails(CList,UConsq,false)),Vars,Out):-!,
-	getMarkupFormula(L,entails(CList,not(UConsq)),Vars,Out).
+        getMarkupFormula(L,entails(CList,not(UConsq)),Vars,Out).
 
 getMarkupFormula(L,(entails(CList,UConsq,true)),Vars,Out):-!,
-	getMarkupFormula(L,entails(CList,(UConsq)),Vars,Out).
+        getMarkupFormula(L,entails(CList,(UConsq)),Vars,Out).
 
 getMarkupFormula(L,(entails(true,(Post))),Vars,Out):-!,
-	getMarkupFormula(L,(Post),Vars,Out).
+        getMarkupFormula(L,(Post),Vars,Out).
 
 % ==================================================
 % nv(_) Print list as non-vecorted
@@ -370,48 +368,48 @@ getMarkupFormula(L,nv(Subj),Vars,Chars):-!,toMarkUp_list(L,Subj,Vars,Chars).
 % ==========================
 
 getMarkupFormula(L,surf(KB,TN),Vars,Atom):-
-	mooCache(PredR,surface, OForm, OVars,KB,Ctx,TN,_, _),!,
-	getMarkupFormula(L,OForm,OVars,Orig),
-	flag(explaination_linenumber,LN,LN+1),
-	getMarkupFormula(L,bullet(KB,Ctx,TN,LN,Orig),Vars,Atom).
+        mooCache(PredR,surface, OForm, OVars,KB,Ctx,TN,_, _),!,
+        getMarkupFormula(L,OForm,OVars,Orig),
+        flag(explaination_linenumber,LN,LN+1),
+        getMarkupFormula(L,bullet(KB,Ctx,TN,LN,Orig),Vars,Atom).
 getMarkupFormula(L,surf(KB,TN),Vars,Atom):-!,
-	getMarkupFormula(L,bullet('assertion lookup failure'(KB,TN)),Vars,Atom).
+        getMarkupFormula(L,bullet('assertion lookup failure'(KB,TN)),Vars,Atom).
 
 % ==========================
 % Bullet writing
 % ==========================
 
 getMarkupFormula(L,bullet_a(X),Vars,S):-
-	flag(indent,_,0),
-	getMarkupFormula(L,X,Vars,SStatement),
-	flag(explaination_linenumber,LN,LN),
-	LNB is LN-1,
-	sformat(S,'~wa. ~w\n',[LNB,SStatement]).
+        flag(indent,_,0),
+        getMarkupFormula(L,X,Vars,SStatement),
+        flag(explaination_linenumber,LN,LN),
+        LNB is LN-1,
+        sformat(S,'~wa. ~w\n',[LNB,SStatement]).
 
 getMarkupFormula(L,bullet(X),Vars,Atom):-!,
-	flag(explaination_linenumber,LN,LN+1),
-	getMarkupFormula(L,X,Vars,Orig),
-	getMarkupFormula(L,bullet('Kernel','GlobalContext',9100000,LN,Orig),Vars,Atom).
-	
+        flag(explaination_linenumber,LN,LN+1),
+        getMarkupFormula(L,X,Vars,Orig),
+        getMarkupFormula(L,bullet('Kernel','GlobalContext',9100000,LN,Orig),Vars,Atom).
+
 getMarkupFormula(html,bullet(KB,Ctx,TN,LN,Orig),Vars,Atom):-!,%trace,
-	flag(indent,_,0),
-	(catch((TN < 100000),_,fail) -> 
-		sformat(Atom,'~w <A href="skb.jsp?req=SA&skb=~w&id=~w" title="~w ~w ~w" ><img border=0 src="bullet.gif"/></A> ~w',[LN,KB,TN,TN,KB,Ctx,Orig]);
-		sformat(Atom,'~w <img border=0 src="bullet.gif" title="Not added to browser ~w (~w)"> ~w',[LN,KB,Ctx,Orig])),!.
+        flag(indent,_,0),
+        (catch((TN < 100000),_,fail) ->
+                sformat(Atom,'~w <A href="skb.jsp?req=SA&skb=~w&id=~w" title="~w ~w ~w" ><img border=0 src="bullet.gif"/></A> ~w',[LN,KB,TN,TN,KB,Ctx,Orig]);
+                sformat(Atom,'~w <img border=0 src="bullet.gif" title="Not added to browser ~w (~w)"> ~w',[LN,KB,Ctx,Orig])),!.
 
 getMarkupFormula(kif,bullet(KB,Ctx,TN,LN,Orig),Vars,Atom):-!,
-	flag(indent,_,0),
-%	getMarkupFormula(kif,asserted(Ctx,Orig),Vars,F),
-	getMarkupFormula(kif,Orig,Vars,F),
-	sformat(Atom,'~w. ~w',[LN,F]).
+        flag(indent,_,0),
+%       getMarkupFormula(kif,asserted(Ctx,Orig),Vars,F),
+        getMarkupFormula(kif,Orig,Vars,F),
+        sformat(Atom,'~w. ~w',[LN,F]).
 
 % ==========================
 % Slolem  rewriting
 % ==========================
 
 getMarkupFormula(L,(X),Vars,Out):- nonvar(X),X=..['E',Sk|ArgS],!,
-	Y=..[Sk|ArgS],!,
-	getMarkupFormula(L,Y,Vars,Out).
+        Y=..[Sk|ArgS],!,
+        getMarkupFormula(L,Y,Vars,Out).
 
 % =====================
 % remove_nonvars
@@ -428,17 +426,17 @@ remove_nonvars([V|L],[V|LL]):-remove_nonvars(L,LL).
 % Forall
 % =====================
 
-getMarkupFormula(L,forall(V,F),Vars,Chars):-not(is_list(V)),!, 
-	group_forall(forall(V,F),Next),!,
-	cleanQuantifierConversionForWrite_forall(Next,O),
-	getMarkupFormula(L,O,Vars,Chars).
+getMarkupFormula(L,forall(V,F),Vars,Chars):-not(is_list(V)),!,
+        group_forall(forall(V,F),Next),!,
+        cleanQuantifierConversionForWrite_forall(Next,O),
+        getMarkupFormula(L,O,Vars,Chars).
 
 cleanQuantifierConversionForWrite_forall(forall(VL,F),O):-
-	remove_nonvars(VL,NL),
-	((NL=[],!,O=F);(!,O=forall(NL,F))).
+        remove_nonvars(VL,NL),
+        ((NL=[],!,O=F);(!,O=forall(NL,F))).
 
 getMarkupFormula(L,forall(V,F),Vars,Chars):- not(is_list(V)),!,
-	getMarkupFormula(L,forall([V],F),Vars,Chars).
+        getMarkupFormula(L,forall([V],F),Vars,Chars).
 
 group_forall(forall(V1,forall(V2,forall(V3,forall(V4,forall(V5,F))))),forall([V1,V2,V3,V4,V5],F)):-!.
 group_forall(forall(V1,forall(V2,forall(V3,forall(V4,F)))),forall([V1,V2,V3,V4],F)):-!.
@@ -452,17 +450,17 @@ group_forall(forall(V1,F),forall([V1],F)):-!.
 
 
 
-getMarkupFormula(L,exists(V,F),Vars,Chars):-not(is_list(V)),!, 
-	group_exists(exists(V,F),Next),!,
-	cleanQuantifierConversionForWrite_exists(Next,O),
-	getMarkupFormula(L,O,Vars,Chars).
+getMarkupFormula(L,exists(V,F),Vars,Chars):-not(is_list(V)),!,
+        group_exists(exists(V,F),Next),!,
+        cleanQuantifierConversionForWrite_exists(Next,O),
+        getMarkupFormula(L,O,Vars,Chars).
 
 cleanQuantifierConversionForWrite_exists(exists(VL,F),O):-
-	remove_nonvars(VL,NL),
-	((NL=[],!,O=F);(!,O=exists(NL,F))).
+        remove_nonvars(VL,NL),
+        ((NL=[],!,O=F);(!,O=exists(NL,F))).
 
 getMarkupFormula(L,exists(V,F),Vars,Chars):- not(is_list(V)),!,
-	getMarkupFormula(L,exists([V],F),Vars,Chars).
+        getMarkupFormula(L,exists([V],F),Vars,Chars).
 
 group_exists(exists(V1,exists(V2,exists(V3,exists(V4,exists(V5,F))))),exists([V1,V2,V3,V4,V5],F)):-!.
 group_exists(exists(V1,exists(V2,exists(V3,exists(V4,F)))),exists([V1,V2,V3,V4],F)):-!.
@@ -473,17 +471,17 @@ group_exists(exists(V1,F),exists([V1],F)):-!.
 % Exists
 % =====================
 
-getMarkupFormula(L,exists(V,F),Vars,Chars):-not(is_list(V)),!, 
-	group_exists(exists(V,F),Next),!,
-	cleanQuantifierConversionForWrite_exists(Next,O),
-	getMarkupFormula(L,O,Vars,Chars).
+getMarkupFormula(L,exists(V,F),Vars,Chars):-not(is_list(V)),!,
+        group_exists(exists(V,F),Next),!,
+        cleanQuantifierConversionForWrite_exists(Next,O),
+        getMarkupFormula(L,O,Vars,Chars).
 
 cleanQuantifierConversionForWrite_exists(exists(VL,F),O):-
-	remove_nonvars(VL,NL),
-	((NL=[],!,O=F);(!,O=exists(NL,F))).
+        remove_nonvars(VL,NL),
+        ((NL=[],!,O=F);(!,O=exists(NL,F))).
 
 getMarkupFormula(L,exists(V,F),Vars,Chars):- not(is_list(V)),!,
-	getMarkupFormula(L,exists([V],F),Vars,Chars).
+        getMarkupFormula(L,exists([V],F),Vars,Chars).
 
 group_exists(exists(V1,exists(V2,exists(V3,exists(V4,exists(V5,F))))),exists([V1,V2,V3,V4,V5],F)):-!.
 group_exists(exists(V1,exists(V2,exists(V3,exists(V4,F)))),exists([V1,V2,V3,V4],F)):-!.
@@ -494,46 +492,46 @@ group_exists(exists(V1,F),exists([V1],F)):-!.
 % =====================
 % Findall
 % =====================
-	/*
-getMarkupFormula(L,findall(V,F),Vars,Chars):-not(is_list(V)),!, 
-	group_findall(findall(V,F),Next),!,
-	cleanQuantifierConversionForWrite_findall(Next,O),
-	getMarkupFormula(L,O,Vars,Chars).
+        /*
+getMarkupFormula(L,findall(V,F),Vars,Chars):-not(is_list(V)),!,
+        group_findall(findall(V,F),Next),!,
+        cleanQuantifierConversionForWrite_findall(Next,O),
+        getMarkupFormula(L,O,Vars,Chars).
 
 cleanQuantifierConversionForWrite_findall(findall(VL,F),O):-
-	remove_nonvars(VL,NL),
-	((NL=[],!,O=F);(!,O=findall(NL,F))).
+        remove_nonvars(VL,NL),
+        ((NL=[],!,O=F);(!,O=findall(NL,F))).
 
 getMarkupFormula(L,findall(V,F),Vars,Chars):- not(is_list(V)),!,
-	getMarkupFormula(L,findall([V],F),Vars,Chars).
+        getMarkupFormula(L,findall([V],F),Vars,Chars).
 
 group_findall(findall(V1,findall(V2,findall(V3,findall(V4,findall(V5,F))))),findall([V1,V2,V3,V4,V5],F)):-!.
 group_findall(findall(V1,findall(V2,findall(V3,findall(V4,F)))),findall([V1,V2,V3,V4],F)):-!.
 group_findall(findall(V1,findall(V2,findall(V3,F))),findall([V1,V2,V3],F)):-!.
 group_findall(findall(V1,findall(V2,F)),findall([V1,V2],F)):-!.
 group_findall(findall(V1,F),findall([V1],F)):-!.
-				 */
+                                 */
 % =====================
 % Indentation
 % =====================
-	
+
 getMarkupFormula(L,C,Vars,Out):-
-		C=..[Pred|ARGS],!,
-		flag(indent,X,X+1),
-		indent_it_x(X,PreOut),!,
-		toMarkUp_lang(L,Pred,Vars,PredOut),!,
-		make_args_out(L,ARGS,Vars,ArgsOut),!,
-		sformat(Out,'~w(~w ~w)',[PreOut,PredOut,ArgsOut]), !,   
-		flag(indent,NX,NX-1).
+                C=..[Pred|ARGS],!,
+                flag(indent,X,X+1),
+                indent_it_x(X,PreOut),!,
+                toMarkUp_lang(L,Pred,Vars,PredOut),!,
+                make_args_out(L,ARGS,Vars,ArgsOut),!,
+                sformat(Out,'~w(~w ~w)',[PreOut,PredOut,ArgsOut]), !,
+                flag(indent,NX,NX-1).
 
 make_args_out(L,[],Vars,''):-!.
 make_args_out(L,[C],Vars,ArgsOut):-
-		getMarkupFormula(L,C,Vars,ArgsOut).
+                getMarkupFormula(L,C,Vars,ArgsOut).
 make_args_out(L,[C|GS],Vars,ArgsOut):-
-		getMarkupFormula(L,C,Vars,Out1),
-		make_args_out(L,GS,Vars,Out2),!,
-		sformat(ArgsOut,'~w ~w',[Out1,Out2]).
-		
+                getMarkupFormula(L,C,Vars,Out1),
+                make_args_out(L,GS,Vars,Out2),!,
+                sformat(ArgsOut,'~w ~w',[Out1,Out2]).
+
 indent_it_x(0,''):-!.
 indent_it_x(1,'\n         '):-!.
 indent_it_x(X,Out):-XX is X -1,!, indent_it_x(XX,OutP),!,sformat(Out,'~w   ',[OutP]),!.
@@ -572,9 +570,9 @@ toMarkUp_lang(_,'deduced',Vars,' ').
 
 % QUOTED STRING FORMAT
 toMarkUp_lang(kif,Atom,_VS,Chars):-isCharCodelist(Atom),!,
-	catch(sformat(Chars,'"~s"',[Atom]),_,sformat(Chars,'"~w"',[Atom])).
+        catch(sformat(Chars,'"~s"',[Atom]),_,sformat(Chars,'"~w"',[Atom])).
 toMarkUp_lang(kif,Atom,_VS,Chars):-string(Atom),!,
-	catch(sformat(Chars,'"~s"',[Atom]),_,sformat(Chars,'"~w"',[Atom])).
+        catch(sformat(Chars,'"~s"',[Atom]),_,sformat(Chars,'"~w"',[Atom])).
 
 
 %LISTS
@@ -596,9 +594,9 @@ toMarkUp_lang(kif,maillink(Title,Address,Subject),Vars,Address):-!.
 toMarkUp_lang(kif,weblink(Title,URL),Vars,Title):-!.
 toMarkUp_lang(kif,helplink(Title,URL),Vars,Title):-!.
 toMarkUp_lang(L,explaination(PB),Vars,Atom):-
-	flag(explaination_linenumber,_,1),
-	getMarkupFormula(L,PB,Vars,AtomS),!,
-	sformat(Atom,'\nExplaination:\n~w\n',[AtomS]).
+        flag(explaination_linenumber,_,1),
+        getMarkupFormula(L,PB,Vars,AtomS),!,
+        sformat(Atom,'\nExplaination:\n~w\n',[AtomS]).
 
 toMarkUp_lang(LANG,krlog(COMP),Vars,Atom):-!,prolog_to_krlog(COMP,KR),toMarkUp_lang(LANG,KR,Vars,Atom).
 
@@ -607,11 +605,11 @@ toMarkUp_lang(LANG,html(COMP),Vars,Atom):-!,toMarkUp_lang(html,COMP,Vars,Atom).
 
 toMarkUp_lang(html,select(Name,OptionList),Vars,Out):-toMarkUp_lang(html,options(OptionList),Vars,Options),sformat(Out,'<select sort name="~w" id="~w" size="1">~w</select>',[Name,Name,Options]).
 toMarkUp_lang(html,checkbox(Name,on),Vars,Out):-
-		sformat(Out,'<input type=checkbox name="~w" id="~w" checked>',[Name,Name]),!.
+                sformat(Out,'<input type=checkbox name="~w" id="~w" checked>',[Name,Name]),!.
 toMarkUp_lang(html,checkbox(Name,_),Vars,Out):-
-		sformat(Out,'<input type=checkbox name="~w" id="~w">',[Name,Name]),!.
+                sformat(Out,'<input type=checkbox name="~w" id="~w">',[Name,Name]),!.
 toMarkUp_lang(html,options([]),Vars,'').
-	    
+
 toMarkUp_lang(L,getPrologVars(Form),Vars,Chars):-markUpVARLIST(L,Form,Vars,SChars),sformat(Chars,'~w',[SChars]),!.
 
 toMarkUp_lang(L,getPrologVars(Form),Vars,Chars):-!,sformat(Chars,'; var_post_err (~q). ',[Form]).
@@ -624,28 +622,28 @@ toMarkUp_lang(kif,qresult(Res),Vars,''):-!. %,sformat(Chars,'res="~w"\n',[Res]).
 % Back into Standard Terms
 
 format_o(Format,Stuff):-
-	toMarkUp_lang(html,Stuff,_,Out),writeFmt(Format,[Out]).
-	
+        toMarkUp_lang(html,Stuff,_,Out),writeFmt(Format,[Out]).
+
 
 toMarkUp_lang(html,options([Option|List]),Vars,Out):-
                toMarkUp_lang(html,option(Option),Vars,Out2),
                toMarkUp_lang(html,options(List),Vars,Out3),
                atom_concat(Out2,Out3,Out).
-	       
+
 toMarkUp_lang(html,option(Option),Vars,Out):-sformat(Out,'<option value="~w">~w</option>',[Option,Option]).
 
 % Numbers
 toMarkUp_lang(_,Atom,_VS,Chars):-number(Atom),!,sformat(Chars,'~w',[Atom]).
 
 toMarkUp_lang(L,Value,Vars,Chars):-
-	mooCache(PredR, skolem, Value = x(Name,Expression),SKVARS,KB, Ctx, TN, Auth, State),!, 
-	    toMarkUp_lang(kif,Name,Vars,NameQ),  prependQuestionMark(NameQ,NameQM),
-	    subst(x(Sk,Expression),Sk,NameQM,x(NSk,NExpression)),!,
+        mooCache(PredR, skolem, Value = x(Name,Expression),SKVARS,KB, Ctx, TN, Auth, State),!,
+            toMarkUp_lang(kif,Name,Vars,NameQ),  prependQuestionMark(NameQ,NameQM),
+            subst(x(Sk,Expression),Sk,NameQM,x(NSk,NExpression)),!,
             toMarkUp_lang(L,exists([NSk],NExpression),SKVARS,Chars).
 
 % all other Formulas get intercepted here
 toMarkUp_lang(L,Term,Vars,Chars):-compound(Term),!,
-	getMarkupFormula(L,Term,Vars,Chars),!.
+        getMarkupFormula(L,Term,Vars,Chars),!.
 
 % PRETTYNESS
 toMarkUp_lang(_,';',Vars,'or ').
@@ -655,54 +653,54 @@ toMarkUp_lang(_,'neg',Vars,'neg ').
 %toMarkUp_lang(_,entails,Vars,'modus-tollens ').
 
 
-		
+
 % Not compound - TEXT
 toMarkUp_lang(html,Atom,Vars,Chars):-
-	atom_codes(Atom,[115,107|_]),!,
-		atom_lookup_kb_ctx(html,Atom,KB,Ctx,Result,ID,Color,Page),!,
-		(Result=ml(This) -> toMarkUp_lang(html,This,Vars,SResult) ; SResult=Result),
-		(KB=none -> 
-			sformat(Chars,'<font color=~w>~w</font>',[Color,SResult]);
-			sformat(Chars,'<A HREF="~w.jsp?logicforms=logicforms&submit=All%20Forms&data=~w&kb=~w">~w</A>',[Page,ID,KB,SResult])
-		).
+        atom_codes(Atom,[115,107|_]),!,
+                atom_lookup_kb_ctx(html,Atom,KB,Ctx,Result,ID,Color,Page),!,
+                (Result=ml(This) -> toMarkUp_lang(html,This,Vars,SResult) ; SResult=Result),
+                (KB=none ->
+                        sformat(Chars,'<font color=~w>~w</font>',[Color,SResult]);
+                        sformat(Chars,'<A HREF="~w.jsp?logicforms=logicforms&submit=All%20Forms&data=~w&kb=~w">~w</A>',[Page,ID,KB,SResult])
+                ).
 
 toMarkUp_lang(html,Atom,Vars,Chars):-
-		atom_lookup_kb_ctx(html,Atom,KB,Ctx,Result,ID,Color,Page),!,
-		(Result=ml(This) -> toMarkUp_lang(html,This,Vars,SResult) ; SResult=Result),
-		(KB=none -> 
-			sformat(Chars,'<font color=~w>~w</font>',[Color,SResult]);
-			sformat(Chars,'<A HREF="~w.jsp?req=SC&term=~w&skb=~w">~w</A>',[Page,ID,KB,SResult])
-		).
+                atom_lookup_kb_ctx(html,Atom,KB,Ctx,Result,ID,Color,Page),!,
+                (Result=ml(This) -> toMarkUp_lang(html,This,Vars,SResult) ; SResult=Result),
+                (KB=none ->
+                        sformat(Chars,'<font color=~w>~w</font>',[Color,SResult]);
+                        sformat(Chars,'<A HREF="~w.jsp?req=SC&term=~w&skb=~w">~w</A>',[Page,ID,KB,SResult])
+                ).
 
 toMarkUp_lang(kif,Atom,Vars,Chars):-
-		atom_lookup_kb_ctx(kif,Atom,KB,Ctx,Result,ID,Color,Page),!,
-		(Result=ml(This) -> toMarkUp_lang(html,This,Vars,SResult) ; SResult=Result),
-			sformat(Chars,'~w',[SResult]).
+                atom_lookup_kb_ctx(kif,Atom,KB,Ctx,Result,ID,Color,Page),!,
+                (Result=ml(This) -> toMarkUp_lang(html,This,Vars,SResult) ; SResult=Result),
+                        sformat(Chars,'~w',[SResult]).
 
 % Lookup Proc
 atom_lookup_kb_ctx(kif,Atom,none,none,Atom,Atom,black,skb):-!.
 
 atom_lookup_kb_ctx(_,Atom,KB,'GlobalContext',Atom,Atom,purple,skolems):-
-	hlPredicateAttribute(Atom,'SkolemFunction'),!,isMooOption(opt_kb=KB),!. 
+        hlPredicateAttribute(Atom,'SkolemFunction'),!,isMooOption(opt_kb=KB),!.
 
 atom_lookup_kb_ctx(Lang,Atom,KB,Ctx,Atom,B,C,skb):-
-	atom_lookup_kb_ctx(Lang,Atom,KB,Ctx,Atom,B,C).
+        atom_lookup_kb_ctx(Lang,Atom,KB,Ctx,Atom,B,C).
 
 atom_lookup_kb_ctx(kif,Atom,none,none,Atom,Atom,black):-!.
 atom_lookup_kb_ctx(L,Atom,none,none,Atom,Atom,black):-once(atom_codes(Atom,Codes)),
-	once((memberchk(34,Codes);memberchk(63,Codes);memberchk(32,Codes);memberchk(37,Codes))),!. % String
+        once((memberchk(34,Codes);memberchk(63,Codes);memberchk(32,Codes);memberchk(37,Codes))),!. % String
 atom_lookup_kb_ctx(_,Atom,KB,'GlobalContext',Atom,Atom,blue):-!,isMooOption(opt_kb=KB),!. % Leftover must be PrologMOO (TODO)
 atom_lookup_kb_ctx(_,Atom,'PrologMOO','GlobalContext',Atom,Atom,blue):-!.
 
 codes_to_links(Codes,PrettyAtom):-
-	getUnquotedCodes(Codes,UCodes),
-	getKIFTokens(UCodes,WordList),
-	concat_atom(WordList,'-',PrettyAtom),!.
+        getUnquotedCodes(Codes,UCodes),
+        getKIFTokens(UCodes,WordList),
+        concat_atom(WordList,'-',PrettyAtom),!.
 
 getUnquotedCodes([34|Codes],UCodes):-
-	(reverse(Codes,RCodes)),
-	(ltrim(RCodes,[34|RUCodes])),
-	reverse(RUCodes,UCodes).
+        (reverse(Codes,RCodes)),
+        (ltrim(RCodes,[34|RUCodes])),
+        reverse(RUCodes,UCodes).
 
 getUnquotedCodes(UCodes,UCodes):-!.
 
@@ -711,7 +709,7 @@ getUnquotedCodes(UCodes,UCodes):-!.
 
 % ================================================
 %      toMarkUp_list
-% ================================================ 
+% ================================================
 
 toMarkUp_list(L,Var,VS,Chars):-isSlot(Var),!,toMarkUp_slotValue(L,Var,VS,Chars).
 toMarkUp_list(_,[],VS,''):-!.
@@ -721,12 +719,12 @@ toMarkUp_list(LANG,[H|T],VS,Chars):-!,
         toMarkUp_lang(LANG,H,VS,Chars1),
         toMarkUp_list(LANG,T,VS,Chars2),
         sformat(Chars,'~w ~w',[Chars1,Chars2]).
-         
+
 markUpVARLIST(L,[],Vars,''):-!.
 markUpVARLIST(L,'$VAR'(_),Vars,''):-!.
 
 markUpVARLIST(L,[VV|Varnames],Vars,Chars):-
-                  VV=..[_,Name,Value],!, 
+                  VV=..[_,Name,Value],!,
                   toMarkupVarEquals(L,Name,Value,Vars,Chars1),
                   markUpVARLIST(L,Varnames,Vars,Chars2),
                   sformat(Chars,'~w\n~w',[Chars1,Chars2]).
@@ -739,39 +737,39 @@ toMarkupVarEquals(_,Name,Value,Vars,Chars):-
 
 % Real Prolog Var
 toMarkUp_slotValue(L,Slot,VarList,Chars):- isVarProlog(Slot),!,
-	toMarkUp_makeNamePrologVar(L,VarList,Slot,Name),
-	atom_concat('?',Name,Chars),!.
-% Slot 'Typed' 
+        toMarkUp_makeNamePrologVar(L,VarList,Slot,Name),
+        atom_concat('?',Name,Chars),!.
+% Slot 'Typed'
 toMarkUp_slotValue(L,Slot,VarList,Chars):-isQualifiedAs(Slot,BaseType,Value,Subtype), !,
-	toMarkUp_makeName(L,VarList,Slot,Subtype,Value,Name),
-	close_freeVars(VarList,NVarList),
-	append(NVarList,[Name=Value],NV),
-	toMarkUp_lang(L,Value,NV,VChars),
-	sformat(Chars,'<div title="~w">~w</div>',[Subtype,VChars]).
-	
+        toMarkUp_makeName(L,VarList,Slot,Subtype,Value,Name),
+        close_freeVars(VarList,NVarList),
+        append(NVarList,[Name=Value],NV),
+        toMarkUp_lang(L,Value,NV,VChars),
+        sformat(Chars,'<div title="~w">~w</div>',[Subtype,VChars]).
+
 toMarkUp_makeNamePrologVar(L,VarList,Value,Name):-member(Name=Var,VarList),Var==Value,!.
 toMarkUp_makeNamePrologVar(L,VarList,Value,Name):-getVarAtom(Value,NUame),atom_concat('?',NUame,Name).
-	
+
 getVarAtom(Value,Name):-var(Value),!,term_to_atom(Value,Vname),atom_codes(AVAR,[95,_|CODES]),atom_codes(Name,CODES),!.
 getVarAtom('$VAR'(VNUM),Name):-concat_atom([VNUM],Name),!.
 
 
 
 toMarkUp_makeName(L,VarList,Slot,BaseType,Value,Name):-
-	member(Name=Var,VarList),Var==Slot,!.
+        member(Name=Var,VarList),Var==Slot,!.
 toMarkUp_makeName(L,VarList,Slot,BaseType,Value,Name):-
-	member(Name=Var,VarList),Var==Value,!.
+        member(Name=Var,VarList),Var==Value,!.
 toMarkUp_makeName(L,VarList,Slot,BaseType,Value,Name):-atom_concat('?',BaseType,Name).
-	
-	
-	
+
+
+
 close_freeVars(V,V):-proper_list(V),!.
 close_freeVars(V,[]):-isSlot(V),!. %Closing List if there are no free getPrologVars
-close_freeVars([X|XX],[X|More]):- close_freeVars(XX,More). 
-         
-	
-	      
-  	
+close_freeVars([X|XX],[X|More]):- close_freeVars(XX,More).
+
+
+
+
 
 toMarkup_varProlog(kif,Var,_VS,NameQ):- _VS=[VV|_],nonvar(VV),VV=..[_,Name,VarRef],number(Name),Var==VarRef,!,sformat(NameQ,'?~d',[Name]).
 toMarkup_varProlog(kif,Var,_VS,NameQ):- _VS=[VV|_],nonvar(VV),VV=..[_,Name,VarRef],Var==VarRef,!,sformat(NameQ,'?~w',[Name]).

@@ -1,7 +1,7 @@
 
 
 %:-use_module(library(quintus)).
-%:- use_module(library(fd)). 
+%:- use_module(library(fd)).
  %use_module(library(cprolog)),consult('moo_eclipse.pl').
 %:-use_module(library(cprolog)).
 :-use_module(library(iso)).
@@ -14,34 +14,34 @@
 
 
 %:-op(600,xfy,':').
- 
+
 
 arithmetic_function(_).
 
 flag(Name,Out,In):-
-	flag_db(Name,Out),
-	set_the_flag(Name,In).
+        flag_db(Name,Out),
+        set_the_flag(Name,In).
 
 :-dynamic(in_flag_db/2).
 
-index(_).	
+index(_).
 
-	
-	
+
+
 
 flag_db(Name,Out):-in_flag_db(Name,Out),!.
 flag_db(Name,0).
 
 set_the_flag(Name,In):-
-	retractall(in_flag_db(Name,_)),
-	set_the_flag_1(Name,In).
-	
+        retractall(in_flag_db(Name,_)),
+        set_the_flag_1(Name,In).
+
 set_the_flag_1(Name,V):-var(V).
 
 set_the_flag_1(Name,X + Y):-Z is X + Y,!,
-	     set_the_flag_1(Name,Z).
+             set_the_flag_1(Name,Z).
 set_the_flag_1(Name,X - Y):-Z is X - Y,!,
-	     set_the_flag_1(Name,Z).
+             set_the_flag_1(Name,Z).
 set_the_flag_1(Name,V):-asserta(in_flag_db(Name,V)).
 
 style_check(_).
@@ -56,13 +56,10 @@ include_header:-!.
 :-['moo_header.pl'].
 
 
-writeModeSet(Mode):-
-	(unsetMooOption(client=_)),
-	(setMooOption(client=Mode)),!.
+setMooOption(client,Mode):-
+        (unsetMooOption(client=_)),
+        (setMooOption(client=Mode)),!.
 
-
-:-absolute_file_name(.,Local),assert('LOGIC_ENGINE_RT'(Local)),assert(library_directory(Local)).
-:-absolute_file_name('../..',X),assert('ROOT_RT'(X)).
 
 :-dynamic(ado_cnnstr/1).
 
@@ -71,7 +68,7 @@ writeModeSet(Mode):-
 
 :- dynamic mooCache/1.
 :- dynamic mooCache/6.
-	
+
 :-['moo_temporal.pl'].
 :-['moo_reader.pl'].
 :-['moo_notes.pl'].
@@ -128,44 +125,44 @@ numbervars(X,_,Y,Z):-numbervars(X,Y,Z).
 :-setMooOptionDefaults.
 %:-set_prolog_flag(unknown,fail).
 
- 
+
 string([_|_]).
 
 writeFmt(Format,Args):-!,current_output(Stream),writeFmt(Stream,Format,Args).
 
- 
+
 
 
 writeFmt(Loc,[],Args):-!.
 writeFmt(user_error,F,Args):-!,
-	writeFmt(user_output,F,Args).
+        writeFmt(user_output,F,Args).
 writeFmt(Loc,Atom,Args):-atom(Atom),atom_codes(Atom,String),!,
-	writeFmt(Loc,String,Args).
+        writeFmt(Loc,String,Args).
 writeFmt(Loc,[126,110|Rest],Args):-!,nl(Loc),
-	writeFmt(Loc,Rest,Args),!.
+        writeFmt(Loc,Rest,Args),!.
 writeFmt(Loc,[126,N|Rest],[A|Rgs]):-!,
-	wformat(Loc,N,A),!,
-	writeFmt(Loc,Rest,Rgs),!.
+        wformat(Loc,N,A),!,
+        writeFmt(Loc,Rest,Rgs),!.
 writeFmt(Loc,[N|Rest],Rgs):-!,
-	put_code(Loc,N),
-	writeFmt(Loc,Rest,Rgs),!.
-writeFmt(Loc,Rest,Rgs):-!,throw('fomat_error'(writeFmt(Loc,Rest,Rgs))).	
+        put_code(Loc,N),
+        writeFmt(Loc,Rest,Rgs),!.
+writeFmt(Loc,Rest,Rgs):-!,throw('fomat_error'(writeFmt(Loc,Rest,Rgs))).
 
 
 fmtString(Format,Args):-!,current_output(Stream),fmtString(Stream,Format,Args).
 
 fmtString([],[],Args):-!.
 fmtString(Loc,Atom,Args):-atom(Atom),atom_codes(Atom,String),!,
-	fmtString(Loc,String,Args).
+        fmtString(Loc,String,Args).
 fmtString([10|Loc],[126,110|Rest],Args):-!,nl(Loc),
-	fmtString(Loc,Rest,Args),!.
+        fmtString(Loc,Rest,Args),!.
 fmtString(OLOc,[126,N|Rest],[A|Rgs]):-!,
-	swformat(LocN,N,A),!,
-	fmtString(Loc,Rest,Rgs),!,
-	append(LocN,Loc,OLOc).
+        swformat(LocN,N,A),!,
+        fmtString(Loc,Rest,Rgs),!,
+        append(LocN,Loc,OLOc).
 fmtString([N|Loc],[N|Rest],Rgs):-!,
-	fmtString(Loc,Rest,Rgs),!.
-fmtString(Loc,Rest,Rgs):-!,throw('fomat_error'(fmtString(Loc,Rest,Rgs))).	
+        fmtString(Loc,Rest,Rgs),!.
+fmtString(Loc,Rest,Rgs):-!,throw('fomat_error'(fmtString(Loc,Rest,Rgs))).
 
 wformat(Loc,_,C):-string(C),!,atom_codes(A,C),write(Loc,A).
 wformat(Loc,119,A):-!,write(Loc,A). % ~w
@@ -220,20 +217,20 @@ string_clean(X,X).
 ttta:-term_to_atom('T'(A),X),nl,writeq(X),nl.
 
 term_to_atom(T,A):-break,
-	open(term_to_atom,write,W,[type(binary)]),
-	writeq(W,T),
-	close(W,[force(true)]),!,
-	open(term_to_atom,read,R),
-	get_all_codes(R,Codes),
-	atom_codes(A,Codes),
-	close(R,[force(true)]).!.
-	
+        open(term_to_atom,write,W,[type(binary)]),
+        writeq(W,T),
+        close(W,[force(true)]),!,
+        open(term_to_atom,read,R),
+        get_all_codes(R,Codes),
+        atom_codes(A,Codes),
+        close(R,[force(true)]).!.
+
 get_all_codes(R,[]):-at_end_of_stream(R),!.
 get_all_codes(R,[C|Odes]):-
-	get_code(R,C),
-	get_all_codes(R,Odes),!.
-	
-	
+        get_code(R,C),
+        get_all_codes(R,Odes),!.
+
+
 %atom_to_term(Atom,Term,Vars):-parse_atom(Atom,Term,Vars).
 
 is_whitespace_code(32).
@@ -243,14 +240,14 @@ is_whitespace_code(X):-X<32.
 
 
 unnumbervars(X,Y):-
-	getPrologVars(X,List,_,_),
-	recopy_each_var(X,List,Y).
+        getPrologVars(X,List,_,_),
+        recopy_each_var(X,List,Y).
 
 recopy_each_var(X,[],X).
 recopy_each_var(X,[V|List],Y):-
-	subst(X,V,NewVar,O),
-	recopy_each_var(O,List,Y),!.
-	
-	
+        subst(X,V,NewVar,O),
+        recopy_each_var(O,List,Y),!.
+
+
 
 

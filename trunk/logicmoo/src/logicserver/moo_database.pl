@@ -1,13 +1,5 @@
-%:-include('moo_header.pl').
 
 :-include('moo_header.pl').
-
-:-dynamic(adoobj/2).
-
-:- style_check(-singleton).
-:- style_check(-discontiguous).
-:- style_check(-atom).
-:- style_check(-string).
 
 % =======================================================================================
 % ACTIVATE CONTEXT DAG
@@ -18,19 +10,7 @@
 
 
 
-:-dynamic(have_arity/4).
 
-% these hold prototypes of calls
-:-dynamic(positive_fact_cache/4).
-:-dynamic(positive_rule_cache/4).
-:-dynamic(negative_fact_cache/4).
-:-dynamic(negative_rule_cache/4).
-
-:-index(positive_fact_cache(1,1,1,1)).
-:-index(positive_rule_cache(1,1,1,1)).
-:-index(negative_fact_cache(1,1,1,1)).
-:-index(negative_rule_cache(1,1,1,1)).
-       
 negative_fact_cache(KB,Ctx,+X):-not(positive_fact_cache(KB,Ctx,_,X)).
 negative_fact_cache(KB,Ctx,-X):-not(positive_fact_cache(KB,Ctx,_,X)).
 
@@ -42,73 +22,73 @@ ambiguous_fact_cache(KB,Ctx,-X):- (positive_fact_cache(KB,Ctx,?,X)).
 
 ambiguous_rule_cache(KB,Ctx,+X):- (positive_rule_cache(KB,Ctx,?,X)).
 ambiguous_rule_cache(KB,Ctx,-X):- (positive_rule_cache(KB,Ctx,?,X)).
- 
+
 
 holds_wrapper(KB,Ctx,R,X,Y):-nonvar(R),!,
-	P=..[R,X,Y],
-	all_predicate_cache(KB,Ctx,+P).
+        P=..[R,X,Y],
+        all_predicate_cache(KB,Ctx,+P).
 
 holds_wrapper(KB,Ctx,R,X,Y,Z):-nonvar(R),!,
-	P=..[R,X,Y,Z],
-	all_predicate_cache(KB,Ctx,+P).
+        P=..[R,X,Y,Z],
+        all_predicate_cache(KB,Ctx,+P).
 
 holds_wrapper(KB,Ctx,R,X,Y,Z,Q):-nonvar(R),!,
-	P=..[R,X,Y,Z,Q],
-	all_predicate_cache(KB,Ctx,+P).
+        P=..[R,X,Y,Z,Q],
+        all_predicate_cache(KB,Ctx,+P).
 
 holds_wrapper(KB,Ctx,R,X,Y):-
-	all_predicate_cache(KB,Ctx,+P),
-	P=..[R,X,Y].
+        all_predicate_cache(KB,Ctx,+P),
+        P=..[R,X,Y].
 
 holds_wrapper(KB,Ctx,R,X,Y,Z):-
-	all_predicate_cache(KB,Ctx,+P),
-	P=..[R,X,Y,Z].
+        all_predicate_cache(KB,Ctx,+P),
+        P=..[R,X,Y,Z].
 
 holds_wrapper(KB,Ctx,R,X,Y,Z,Q):-
-	all_predicate_cache(KB,Ctx,+P),
-	P=..[R,X,Y,Z,Q].
+        all_predicate_cache(KB,Ctx,+P),
+        P=..[R,X,Y,Z,Q].
 
 not_holds_wrapper(KB,Ctx,R,X,Y):-nonvar(R),!,
-	P=..[R,X,Y],
-	all_predicate_cache(KB,Ctx,-P).
+        P=..[R,X,Y],
+        all_predicate_cache(KB,Ctx,-P).
 
 not_holds_wrapper(KB,Ctx,R,X,Y,Z):-nonvar(R),!,
-	P=..[R,X,Y,Z],
-	all_predicate_cache(KB,Ctx,-P).
+        P=..[R,X,Y,Z],
+        all_predicate_cache(KB,Ctx,-P).
 
 not_holds_wrapper(KB,Ctx,R,X,Y,Z,Q):-nonvar(R),!,
-	P=..[R,X,Y,Z,Q],
-	all_predicate_cache(KB,Ctx,-P).
+        P=..[R,X,Y,Z,Q],
+        all_predicate_cache(KB,Ctx,-P).
 
 not_holds_wrapper(KB,Ctx,R,X,Y):-
-	all_predicate_cache(KB,Ctx,-P),
-	P=..[R,X,Y].
+        all_predicate_cache(KB,Ctx,-P),
+        P=..[R,X,Y].
 
 not_holds_wrapper(KB,Ctx,R,X,Y,Z):-
-	all_predicate_cache(KB,Ctx,-P),
-	P=..[R,X,Y,Z].
+        all_predicate_cache(KB,Ctx,-P),
+        P=..[R,X,Y,Z].
 
 not_holds_wrapper(KB,Ctx,R,X,Y,Z,Q):-
-	all_predicate_cache(KB,Ctx,-P),
-	P=..[R,X,Y,Z,Q].       
+        all_predicate_cache(KB,Ctx,-P),
+        P=..[R,X,Y,Z,Q].
 
 positive_rule_fact(KB,Ctx,X):-
-	positive_fact_cache(KB,Ctx,X),
-	positive_rule_cache(KB,Ctx,X).
+        positive_fact_cache(KB,Ctx,X),
+        positive_rule_cache(KB,Ctx,X).
 
 positive_rule_only(KB,Ctx,X):-
-	positive_rule_cache(KB,Ctx,X),
-	not(positive_fact_cache(KB,Ctx,X)).
+        positive_rule_cache(KB,Ctx,X),
+        not(positive_fact_cache(KB,Ctx,X)).
 
 positive_fact_only(KB,Ctx,X):-
-	positive_fact_cache(KB,Ctx,X),
-	not(positive_rule_cache(KB,Ctx,X)).
+        positive_fact_cache(KB,Ctx,X),
+        not(positive_rule_cache(KB,Ctx,X)).
 
 
 all_predicate_cache(KB,Ctx,X):-
-	positive_fact_cache(KB,Ctx,X).
+        positive_fact_cache(KB,Ctx,X).
 all_predicate_cache(KB,Ctx,X):-
-	positive_rule_cache(KB,Ctx,X).
+        positive_rule_cache(KB,Ctx,X).
 
 positive_fact_cache(KB,Ctx,+X):-positive_fact_cache(KB,Ctx,+,X).
 positive_fact_cache(KB,Ctx,-X):-positive_fact_cache(KB,Ctx,-,X).
@@ -127,89 +107,87 @@ all_predicate_fast_cache(KB,Ctx,X):-positive_rule_cache(KB,Ctx,X).
 
 all_predicate_slow_cache(KB,Ctx,X):-positive_fact_cache(KB,Ctx,X).
 all_predicate_slow_cache(KB,Ctx,X):-positive_rule_only(KB,Ctx,X).
-	
-	
-:-dynamic(make_positive_cache/2).
 
-	
+
+
 
 remake_positive_cache(KB,Ctx):-
-	unmake_positive_cache(KB,Ctx),
-	make_positive_cache(KB,Ctx),!.
+        unmake_positive_cache(KB,Ctx),
+        make_positive_cache(KB,Ctx),!.
 
 unmake_positive_cache(KB,Ctx):-
-	retractall((make_positive_cache(KB,Ctx):-!)).
+        retractall((make_positive_cache(KB,Ctx):-!)).
 
 make_positive_cache(KB,Ctx):-
-	retractall(positive_fact_cache(_,_,_,_)),
-	retractall(positive_rule_cache(_,_,_,_)),
-	retractall(negative_fact_cache(_,_,_,_)),
-	retractall(negative_rule_cache(_,_,_,_)),
-	fail.
+        retractall(positive_fact_cache(_,_,_,_)),
+        retractall(positive_rule_cache(_,_,_,_)),
+        retractall(negative_fact_cache(_,_,_,_)),
+        retractall(negative_rule_cache(_,_,_,_)),
+        fail.
 
 make_positive_cache(KB,Ctx):-
-	mooCache(R,Cons, Ante, _, L, KB, Ctx, Explaination),
-	add_positive_rule_cache(KB,Ctx,L,R),
-	fail.
-	
-make_positive_cache(KB,Ctx):-
-	mooCache(R,Fact, _, L, KB, Ctx, Explaination),
-	add_positive_fact_cache(KB,Ctx,L,R),
-	fail.
+        mooCache(R,Cons, Ante, _, L, KB, Ctx, Explaination),
+        add_positive_rule_cache(KB,Ctx,L,R),
+        fail.
 
 make_positive_cache(KB,Ctx):-
-	asserta((make_positive_cache(KB,Ctx):-!)),!.
+        mooCache(R,Fact, _, L, KB, Ctx, Explaination),
+        add_positive_fact_cache(KB,Ctx,L,R),
+        fail.
 
-	
+make_positive_cache(KB,Ctx):-
+        asserta((make_positive_cache(KB,Ctx):-!)),!.
+
+
 add_positive_fact_cache(KB,Ctx,L,R):-
-	get_arity_fast(KB,Ctx,R,A),!,
-	functor(P,R,A),
-	not(positive_fact_cache(KB,Ctx,?,P)),
-		((L=true  ->
-			((
-			retract(positive_fact_cache(KB,Ctx,-,P)) ->
-				asserta(positive_fact_cache(KB,Ctx,?,P)) ;
-				assert_if_new(positive_fact_cache(KB,Ctx,+,P))
-			));
-			((
-			retract(positive_fact_cache(KB,Ctx,+,P)) -> 
-				asserta(positive_fact_cache(KB,Ctx,?,P)) ;
-				assert_if_new(positive_fact_cache(KB,Ctx,-,P))
-			))      	
-		)),!.
+        get_arity_fast(KB,Ctx,R,A),!,
+        functor(P,R,A),
+        not(positive_fact_cache(KB,Ctx,?,P)),
+                ((L=true  ->
+                        ((
+                        retract(positive_fact_cache(KB,Ctx,-,P)) ->
+                                asserta(positive_fact_cache(KB,Ctx,?,P)) ;
+                                assert_if_new(positive_fact_cache(KB,Ctx,+,P))
+                        ));
+                        ((
+                        retract(positive_fact_cache(KB,Ctx,+,P)) ->
+                                asserta(positive_fact_cache(KB,Ctx,?,P)) ;
+                                assert_if_new(positive_fact_cache(KB,Ctx,-,P))
+                        ))
+                )),!.
 
 add_positive_rule_cache(KB,Ctx,L,R):-
-	get_arity_fast(KB,Ctx,R,A),!,
-	functor(P,R,A),
-	not(positive_rule_cache(KB,Ctx,?,P)),
-		((L=true  ->
-			((
-			retract(positive_rule_cache(KB,Ctx,-,P)) ->
-				asserta(positive_rule_cache(KB,Ctx,?,P)) ;
-				assert_if_new(positive_rule_cache(KB,Ctx,+,P))
-			));
-			((
-			retract(positive_rule_cache(KB,Ctx,+,P)) -> 
-				asserta(positive_rule_cache(KB,Ctx,?,P)) ;
-				assert_if_new(positive_rule_cache(KB,Ctx,-,P))
-			))      	
-		)),!.
-	
-	
+        get_arity_fast(KB,Ctx,R,A),!,
+        functor(P,R,A),
+        not(positive_rule_cache(KB,Ctx,?,P)),
+                ((L=true  ->
+                        ((
+                        retract(positive_rule_cache(KB,Ctx,-,P)) ->
+                                asserta(positive_rule_cache(KB,Ctx,?,P)) ;
+                                assert_if_new(positive_rule_cache(KB,Ctx,+,P))
+                        ));
+                        ((
+                        retract(positive_rule_cache(KB,Ctx,+,P)) ->
+                                asserta(positive_rule_cache(KB,Ctx,?,P)) ;
+                                assert_if_new(positive_rule_cache(KB,Ctx,-,P))
+                        ))
+                )),!.
+
+
 get_arity_fast(KB,Ctx,R,A):-have_arity(R,KB,Ctx,A),!.
 get_arity_fast(KB,Ctx,R,A):-
-	mooCache(R,Cons, _, _, KB, Ctx, Explaination),
-	functor(Cons,R,A),
-	asserta(have_arity(R,KB,Ctx,A)),!.
+        mooCache(R,Cons, _, _, KB, Ctx, Explaination),
+        functor(Cons,R,A),
+        asserta(have_arity(R,KB,Ctx,A)),!.
 get_arity_fast(KB,Ctx,R,A):-
-	mooCache(R,Cons, _, _, _, KB, Ctx, Explaination),
-	functor(Cons,R,A),
-	asserta(have_arity(R,KB,Ctx,A)),!.
+        mooCache(R,Cons, _, _, _, KB, Ctx, Explaination),
+        functor(Cons,R,A),
+        asserta(have_arity(R,KB,Ctx,A)),!.
 get_arity_fast(KB,Ctx,R,A):-
-	mooCache(valence, _, valence(R,A), Vars, KBName, Context, Tracking, User, Status),
-	asserta(have_arity(R,KB,Ctx,A)),!.
+        mooCache(valence, _, valence(R,A), Vars, KBName, Context, Tracking, User, Status),
+        asserta(have_arity(R,KB,Ctx,A)),!.
 get_arity_fast(KB,Ctx,R,2).
-	
+
 
 % ensureMooKB
 % make_dead
@@ -220,59 +198,53 @@ get_arity_fast(KB,Ctx,R,2).
 
 %:-include('moo_header.pl').
 
-activate_context(KnowledgeBase:Context):-		
-		ensureMooKB(KnowledgeBase,Context).
+activate_context(KnowledgeBase:Context):-
+                ensureMooKB(KnowledgeBase,Context).
 
 getDefaultImageFilepath(X):-
-	'LOGIC_ENGINE_RT'(Local),concat_atom([Local,'/','moo_image.data'],X).
-	
-
-
-:-dynamic('in-active-memory'/2).
-
-:-dynamic('should_be_loaded'/2).
+        'LOGIC_ENGINE_RT'(Local),concat_atom([Local,'/','moo_image.data'],X).
 
 
 save_ado_cache:-saveMooCache.
 
-	
+
 saveMooCache:-
-		save_can_to_file(KB,Handle),close(Handle),
-		retractall(save_can_to_file(KB,Handle)),
-		getDefaultImageFilepath(IF),
-		[IF],!.
-		
+                save_can_to_file(KB,Handle),close(Handle),
+                retractall(save_can_to_file(KB,Handle)),
+                getDefaultImageFilepath(IF),
+                [IF],!.
+
 saveMooCache:-
-	ensure_all_compiled, 
-	get_time(T),convert_time(T,String),
-	remove_all_but_logOnFailure_chars(String,FileName),
-	%  concat_atom(['cp -f moo_image.P "',FileName,'.persist.P" '],ShellCmd),
-	%ignore(shell(ShellCmd)),
-	%sendNote(debug,contentManager,'Saving ADO Cache Was Succesfull',ShellCmd),
-	getDefaultImageFilepath(IF),
-	tell(IF),
-	op(0,xfy,'=>'),
-	%op(0,xfx,#),
-	%op(0,xfx,'#'),
-	%op(0,xfx,'@'),
-	op(0,fy,not),    % negation
-	op(0,xfy,and),   % conjunction
-	op(0,xfy,or),   % disjunction
-	%op(0,xfy,:),
-	op(0,xfx, 'equal' ),
-	op(0,xfx,'<='),
-	op(0,xfx,'if'),
-	op(0,xfy,'=>'),
-	op(0,fy,known),  % Found in Model
-	op(0,fy,consistent),  % Not In Model
-	op(0,fy,after),  % Next time
-	op(0,fy,then),  % Next time
-	op(0,xfy,=>),  % implication
-	op(0,xfy,<=>), % equivalence
-	op(0,fy,always),  % Necessity, Always
-	op(0,fy,possible),  % Possibly, Eventually
-	op(0,fy,necessary),  % Necessity
-	writeFmt('
+        ensure_all_compiled,
+        get_time(T),convert_time(T,String),
+        remove_all_but_logOnFailure_chars(String,FileName),
+        %  concat_atom(['cp -f moo_image.P "',FileName,'.persist.P" '],ShellCmd),
+        %ignore(shell(ShellCmd)),
+        %sendNote(debug,contentManager,'Saving ADO Cache Was Succesfull',ShellCmd),
+        getDefaultImageFilepath(IF),
+        tell(IF),
+        op(0,xfy,'=>'),
+        %op(0,xfx,#),
+        %op(0,xfx,'#'),
+        %op(0,xfx,'@'),
+        op(0,fy,not),    % negation
+        op(0,xfy,and),   % conjunction
+        op(0,xfy,or),   % disjunction
+        %op(0,xfy,:),
+        op(0,xfx, 'equal' ),
+        op(0,xfx,'<='),
+        op(0,xfx,'if'),
+        op(0,xfy,'=>'),
+        op(0,fy,known),  % Found in Model
+        op(0,fy,consistent),  % Not In Model
+        op(0,fy,after),  % Next time
+        op(0,fy,then),  % Next time
+        op(0,xfy,=>),  % implication
+        op(0,xfy,<=>), % equivalence
+        op(0,fy,always),  % Necessity, Always
+        op(0,fy,possible),  % Possibly, Eventually
+        op(0,fy,necessary),  % Necessity
+        writeFmt('
 :- style_check(-singleton).
 :- style_check(-discontiguous).
 :- style_check(-atom).
@@ -294,98 +266,98 @@ saveMooCache:-
 :-dynamic(mooCache/9).
 
 ',[]),
-	listing(mooCache),
-	told,
+        listing(mooCache),
+        told,
 /*
-	retractall(mooCache(_)),
-	retractall(mooCache(_,_)),
-	retractall(mooCache(_,_,_)),
-	retractall(mooCache(_,_,_,_)),
-	retractall(mooCache(Literal,asserted,KB,Ctx,surf(KB,TN,CLID,Vars))),  %Facts /5
-	retractall(mooCache(Literal,deduced,KB,Ctx,surf(KB,TN,CLID,Vars))),  %Facts /5
-	retractall(mooCache(Literal,AnteLiteral,asserted,KB,Ctx,surf(KB,TN,CLID,Vars))),	 %Rules /6
-	retractall(mooCache(Literal,AnteLiteral,deduced,KB,Ctx,surf(KB,TN,CLID,Vars))),	 %Rules /6
-	retractall(mooCache(Surface,CLF,Flags,Vars,KB,Ctx,TN,Maintainer,TMResult)),  %Surface /9
+        retractall(mooCache(_)),
+        retractall(mooCache(_,_)),
+        retractall(mooCache(_,_,_)),
+        retractall(mooCache(_,_,_,_)),
+        retractall(mooCache(Literal,asserted,KB,Ctx,surf(KB,TN,CLID,Vars))),  %Facts /5
+        retractall(mooCache(Literal,deduced,KB,Ctx,surf(KB,TN,CLID,Vars))),  %Facts /5
+        retractall(mooCache(Literal,AnteLiteral,asserted,KB,Ctx,surf(KB,TN,CLID,Vars))),         %Rules /6
+        retractall(mooCache(Literal,AnteLiteral,deduced,KB,Ctx,surf(KB,TN,CLID,Vars))),  %Rules /6
+        retractall(mooCache(Surface,CLF,Flags,Vars,KB,Ctx,TN,Maintainer,TMResult)),  %Surface /9
 */
-	[IF],!,
-	op(1000,xfy,'=>'),
-	%op(500,xfx,'#'),
-	%op(500,xfx,'@'),
-	op(400,fy,not),    % negation
-	op(500,xfy,and),   % conjunction
-	op(600,xfy,or),   % disjunction
-	%op(500,xfy,':'),
-	op(0,xfx, 'equal' ),
-	op(900,xfx,'<='),
-	op(900,xfx,'if'),
-	op(1000,xfy,'=>'),
-	op(400,fy,known),  % Found in Model
-	op(400,fy,consistent),  % Not In Model
-	op(400,fy,after),  % Next time
-	op(400,fy,then),  % Next time
-	op(650,xfy,=>),  % implication
-	op(700,xfy,<=>), % equivalence
-	op(400,fy,always),  % Necessity, Always
-	op(400,fy,possible),  % Possibly, Eventually
-	op(400,fy,necessary).  % Necessity
+        [IF],!,
+        op(1000,xfy,'=>'),
+        %op(500,xfx,'#'),
+        %op(500,xfx,'@'),
+        op(400,fy,not),    % negation
+        op(500,xfy,and),   % conjunction
+        op(600,xfy,or),   % disjunction
+        %op(500,xfy,':'),
+        op(0,xfx, 'equal' ),
+        op(900,xfx,'<='),
+        op(900,xfx,'if'),
+        op(1000,xfy,'=>'),
+        op(400,fy,known),  % Found in Model
+        op(400,fy,consistent),  % Not In Model
+        op(400,fy,after),  % Next time
+        op(400,fy,then),  % Next time
+        op(650,xfy,=>),  % implication
+        op(700,xfy,<=>), % equivalence
+        op(400,fy,always),  % Necessity, Always
+        op(400,fy,possible),  % Possibly, Eventually
+        op(400,fy,necessary).  % Necessity
 
 save_each_kb([]).
 save_each_kb([H|T]):-
-	save_the_kb(H),!,
-	save_each_kb(T),!.
-	
+        save_the_kb(H),!,
+        save_each_kb(T),!.
+
 save_the_kb(H):-!.
 save_the_kb(H):-
         concat_atom(['moo_kbimage_',H,'.pl'],FileName),
-	safe_file_open(FileName,'w',OUTPUT),
-%	writeFmt(OUTPUT,':-include(\'moo_header.P\').\n',[]),
-	writeFmt(OUTPUT,':-index(mooCache(1 ,0,1, 0,0,0, 0,0, 1)).\n',[]),
-	writeFmt(OUTPUT,'% ~w for ~w.\n',[FileName,H]),
-	get_time(Time),convert_time(Time,String),
-	writeFmt(OUTPUT,'% Created at ~w.\n',[String]),
-	ignore(write_the_kb_now(OUTPUT,H)),
-	writeFmt(OUTPUT,':-catch([moo_eval],_,true).\n',[]),
-	close(OUTPUT).
-	      
-	
+        safe_file_open(FileName,'w',OUTPUT),
+%       writeFmt(OUTPUT,':-include(\'moo_header.P\').\n',[]),
+        writeFmt(OUTPUT,':-index(mooCache(1 ,0,1, 0,0,0, 0,0, 1)).\n',[]),
+        writeFmt(OUTPUT,'% ~w for ~w.\n',[FileName,H]),
+        get_time(Time),convert_time(Time,String),
+        writeFmt(OUTPUT,'% Created at ~w.\n',[String]),
+        ignore(write_the_kb_now(OUTPUT,H)),
+        writeFmt(OUTPUT,':-catch([moo_eval],_,true).\n',[]),
+        close(OUTPUT).
+
+
 write_the_kb_now(OUTPUT,KnowledgeBase):-
-	mooCache(PredR,wfs,WFS,Prolog,KnowledgeBase,Context,AssertionID,Creator,on),
-	writeFmt(OUTPUT,'~q.\n',[Prolog]),
-	fail.
+        mooCache(PredR,wfs,WFS,Prolog,KnowledgeBase,Context,AssertionID,Creator,on),
+        writeFmt(OUTPUT,'~q.\n',[Prolog]),
+        fail.
 write_the_kb_now(OUTPUT,KnowledgeBase):-
-	get_time(Time),convert_time(Time,String),
-	writeFmt(OUTPUT,'% Finished at ~w.\n',[String]).
-	
-	
+        get_time(Time),convert_time(Time,String),
+        writeFmt(OUTPUT,'% Finished at ~w.\n',[String]).
+
+
 remove_all_but_logOnFailure_chars(String,FileName):-
-	atom_codes(String,Codes),
-	subtract(Codes,[32,58],CCodes),
-	atom_codes(FileName,CCodes).
+        atom_codes(String,Codes),
+        subtract(Codes,[32,58],CCodes),
+        atom_codes(FileName,CCodes).
 
 :-dynamic(is_up_to_date/2).
 
 ensureMooKB(KnowledgeBase,Context):-
-	is_up_to_date(KnowledgeBase,Context),!.
+        is_up_to_date(KnowledgeBase,Context),!.
 
 ensureMooKB(KnowledgeBase,Context):-
-	asserta(is_up_to_date(KnowledgeBase,Context)),!.
+        asserta(is_up_to_date(KnowledgeBase,Context)),!.
 
-%	concat_atom(['moo_kbimage_',KnowledgeBase,'.pl'],FileName),
+%       concat_atom(['moo_kbimage_',KnowledgeBase,'.pl'],FileName),
  %       ensure_loaded(FileName).
-         
+
 show_active_memory:-!.
 show_active_memory:-listing('in-active-memory').
 
 
 
-	
+
 
 save_each_clause_in_buffer(KnowledgeBase,Context,(PRO,LOG)):-!,
-		save_each_clause_in_buffer(KnowledgeBase,Context,PRO),
-		save_each_clause_in_buffer(KnowledgeBase,Context,LOG).
+                save_each_clause_in_buffer(KnowledgeBase,Context,PRO),
+                save_each_clause_in_buffer(KnowledgeBase,Context,LOG).
 
 save_each_clause_in_buffer(KnowledgeBase,Context,PROLOG):-
-		not(not((numbervars(((KnowledgeBase,Context,PROLOG)),'$VAR',0,_),assert_if_new(storage_buffer(KnowledgeBase,Context,PROLOG))))).
+                not(not((numbervars(((KnowledgeBase,Context,PROLOG)),'$VAR',0,_),assert_if_new(storage_buffer(KnowledgeBase,Context,PROLOG))))).
 
 assert_if_new(X):-X,!.
 assert_if_new(X):-!,assert(X).
@@ -394,26 +366,26 @@ assert_if_new(X):-!,assert(X).
 %  RESETING WORKING MEMORY
 % ===================================================================
 
-clear_moo_memory:- 
+clear_moo_memory:-
                   sendNote(extreme_debug,constentManger,'Rebuilding working memory',' '),
-		  clear_tq_db,!.                     
+                  clear_tq_db,!.
 
 clear_tq_db:-
-	mooCache(PredR,Form,USurface,UVars,KB,Ctx,TN,Maintainer,Result),
-	TN>20000,retractall(mooCache(PredR,_,_,_,_,_,TN,_,_)),fail.
+        mooCache(PredR,Form,USurface,UVars,KB,Ctx,TN,Maintainer,Result),
+        TN>20000,retractall(mooCache(PredR,_,_,_,_,_,TN,_,_)),fail.
 clear_tq_db:-
-	mooCache(PredR,Form,_,_,KB,Ctx,surf(_,TN)),
-	TN>20000,retractall(mooCache(PredR,Form,_,_,KB,Ctx,surf(_,TN))),fail.
+        mooCache(PredR,Form,_,_,KB,Ctx,surf(_,TN)),
+        TN>20000,retractall(mooCache(PredR,Form,_,_,KB,Ctx,surf(_,TN))),fail.
 clear_tq_db:-
-	mooCache(PredR,Form,_,_,_,KB,Ctx,(surf(_,TN)*_)),
-	TN>20000,retractall(mooCache(PredR,Form,_,_,_,KB,Ctx,(surf(_,TN)*_))),fail.
+        mooCache(PredR,Form,_,_,_,KB,Ctx,(surf(_,TN)*_)),
+        TN>20000,retractall(mooCache(PredR,Form,_,_,_,KB,Ctx,(surf(_,TN)*_))),fail.
 
 clear_tq_db:-!.
 
-	
+
 /*
 clear_tq_db:-
-			clear_tq_db(['K','L','M','N','O','P','Q','R','S']),
+                        clear_tq_db(['K','L','M','N','O','P','Q','R','S']),
                   retractall(mooCache(PredR,_,_,_,_,_,_)),
                   retractall('in-active-memory'(_,_)),
                   clear_tq_db('instance',12),
@@ -450,7 +422,7 @@ establish_startup_state:-
 :-dynamic('in-active-memory'/2).
 
 
-set_default_kb(X):-retractall(getDefaultKB(_)),assert(getDefaultKB(X)).
+set_default_kb(X):-retractall(getMooOption(opt_kb,_)),assert(getMooOption(opt_kb,X)).
 set_default_assertion_context(X):-retractall(get_default_assertion_context(_)),assert(get_default_assertion_context(X)).
 set_default_request_context(X):-retractall(get_default_request_context(_)),assert(get_default_request_context(X)).
 
@@ -461,7 +433,7 @@ get_default_assertion_context('GlobalContext').
 get_axioms_path(Path):-get_storage_file("moo_builtins.kif",Path).
 
 
-%		actx_invoke_object(IPRset,'MoveNext',[],_).
+%               actx_invoke_object(IPRset,'MoveNext',[],_).
 
 
 %=================================================================
@@ -508,11 +480,11 @@ Examples:
 
         % Also acceptable if the location is known:
         kb('PrologMOO')
-  
+
         Future forms may include:
 
-        kb('PrologMOO', ftp('jordan', 'anonymous', 'rs@cris.com', '/kbs/PrologMOO.can')) 
-        kb('PrologMOO', https('jordan', 8080, 'mysession', '/kbs/PrologMOO.can')) 
+        kb('PrologMOO', ftp('jordan', 'anonymous', 'rs@cris.com', '/kbs/PrologMOO.can'))
+        kb('PrologMOO', https('jordan', 8080, 'mysession', '/kbs/PrologMOO.can'))
 
 
 kb_source is one of:
@@ -546,7 +518,7 @@ wrap_le(Goal):-
 define_kb(Var):-var(Var),!,
       verify_status(X),!,
       member((Var=_),X).
-                                        
+
 define_kb(kb(Name,Location)):-
          wrap_le(kb_startup_start(kb(Name,Location)=void)).
 
@@ -620,7 +592,7 @@ startup_status(KBS_List):-
 % ===================================================================================================
 
 % ===================================================================================================
-%  verify_status(KBS_List)  Succeeds if every KB_Status in KBS_List unifies with the current status for the WFS whose name equal the kb_name in that KB_Status. 
+%  verify_status(KBS_List)  Succeeds if every KB_Status in KBS_List unifies with the current status for the WFS whose name equal the kb_name in that KB_Status.
 % ===================================================================================================
 verify_status(KBS_List):-var(KBS_List),!,   write('<LE></LE>'),whole_status_set(KBS_List).
 
@@ -675,7 +647,7 @@ establish_status_0(kb(Name,Location)=RequestStatus):- !,
 establish_status_1(kb(Name,Location)=S):-nonvar(S),S=unknown,!,
                   delete_kb_proc(kb(Name,Location)).
 
-establish_status_1(kb(Name,Location)=RequestStatus):- 
+establish_status_1(kb(Name,Location)=RequestStatus):-
                   verify_status_proc([kb(Name,Location)=CurrentStatus]),!,
                   sendNote(debug,contentManager,'kb status establish',[establish,RequestStatus,from,CurrentStatus,kb(Name,Location)]),
                   ignore(make_status(kb(Name,Location),CurrentStatus,RequestStatus)),!.
@@ -685,7 +657,7 @@ establish_status_1(kb(Name,Location)=RequestStatus):-
 % ===================================================================================================
 
 elevate_status(KBS_List):-!,
-                  write('<LE>'),   
+                  write('<LE>'),
                   ignore(elevate_status_0(KBS_List)),!,
                  write('</LE>'),!.
 
@@ -696,12 +668,12 @@ elevate_status_0([First|REST]):-!,
 elevate_status_0(kb(Name,Location)=RequestStatus):- !,
             elevate_status_1(kb(Name,Location)=RequestStatus),!.
 
-elevate_status_1(kb(Name,Location)=RequestStatus):- 
+elevate_status_1(kb(Name,Location)=RequestStatus):-
                   verify_status_proc([kb(Name,Location)=CurrentStatus]),!,
                   sendNote(debug,contentManager,'kb status elevate',[elevate,RequestStatus,from,CurrentStatus,kb(Name,Location)]),
                   elev_status(kb(Name,Location),CurrentStatus,RequestStatus),!.
 
-/*                            
+/*
 
 establish_status([kb('PrologMOO',_) = current]).
 
@@ -786,26 +758,26 @@ Loaded  Memory    File *                 State
 
 % kb_startup_status(kb('PrologMOO', '/cygdrive/c/Moo/SUO/PrologMOO.can')=available)
 
-make_status(kb(Name,Location),_,unknown):-!, 
+make_status(kb(Name,Location),_,unknown):-!,
                            sendNote(debug,contentManager,Name,[making,unknown,from,Location,'(=> deletion)']),
                            delete_kb_proc(kb(Name,Location)),!.
 
-make_status(kb(Name,Location),_,available):-!, 
+make_status(kb(Name,Location),_,available):-!,
                            sendNote(debug,contentManager,Name,[making,available,from,Location,'(compiled but not loaded)']),
                            source_to_p_file(Name),!.
 
-make_status(kb(Name,Location),_,current):-!, 
+make_status(kb(Name,Location),_,current):-!,
                            sendNote(debug,contentManager,Name,[making,current,from,Location]),
                            load_kb_file(Name),!.
-                  
-elev_status(kb(Name,Location),_,available):-!, 
+
+elev_status(kb(Name,Location),_,available):-!,
                            sendNote(debug,contentManager,Name,[elevating,to,available,from,Location]),
                            source_to_p_file(Name),!.
-elev_status(kb(Name,Location),_,current):-!, 
+elev_status(kb(Name,Location),_,current):-!,
                            sendNote(debug,contentManager,Name,[elevating,to,current,from,Location]),
                            load_kb_file(Name),!.
 
-elev_status(kb(Name,Location),_,_):-!, 
+elev_status(kb(Name,Location),_,_):-!,
                            sendNote(debug,contentManager,Name,[elevating,has,no,effect]).
 
 /*
@@ -841,7 +813,7 @@ kb_startup_status_0(KBDesignator=Status):-nonvar(Status),nonvar(KBDesignator),!,
 
 
 % ===================================================================================================
-%  verify_startup_status(KBS_List)  Succeeds if every KB_Status in KBS_List unifies with the current status for the WFS whose name equal the kb_name in that KB_Status. 
+%  verify_startup_status(KBS_List)  Succeeds if every KB_Status in KBS_List unifies with the current status for the WFS whose name equal the kb_name in that KB_Status.
 % ===================================================================================================
 
 verify_startup_status(Var):-var(Var),!,whole_startup_status_set(KBS_List).
@@ -863,7 +835,7 @@ verify_startup_status(KBS_List):-write('<LE></LE>'),nonvar(KBS_List),
 
 
 % ===================================================================================================
-%  server_startup_status(KBS_List)  Succeeds if every KB_Status in KBS_List unifies with the current status for the WFS whose name equal the kb_name in that KB_Status. 
+%  server_startup_status(KBS_List)  Succeeds if every KB_Status in KBS_List unifies with the current status for the WFS whose name equal the kb_name in that KB_Status.
 %  The Moo LE that executes this call should record the specified KB status list as the status that the LE should attempt to establish upon startup. The specified KBS_List must be fully ground and the status indicators should be permissible as target status codes. A KB_Designator with an unknown kb_name is only acceptable if its status indicator is "unknown." [ Is there any point in that special case? ]
 %  The information recorded to implement this call must be stored in a manner that is persistent in the face of forall known shutdown and restart mechanisms, whether controlled or uncontrolled (Prolog crash, system crash, power failure) and whether abortive (e.g. SIGTERM or SIGKILL) or cooperative (shutdown request).
 %  The means by which Moo LE achieves this persistence is unspecified (fully at its discretion).
@@ -876,13 +848,13 @@ server_startup_status([kb(KB, Path) = KB_STATUS]):-
             write('<LE></LE>'),whole_startup_status_set(KBS_List),
             member((kb(KB, Path) = KB_STATUS),KBS_List).
 
-whole_startup_status_set(KBS_List):-findall(KB,kb_make_status_start(KB),KBS_List).         
+whole_startup_status_set(KBS_List):-findall(KB,kb_make_status_start(KB),KBS_List).
 
 server_startup_status(LIST):-
       findall((kb(X,Y)=Status),member((kb(X,Y)=Status),LIST),Look),
       Look=LIST,!,
       write_response_begin,
-         server_startup_status_0(LIST),         
+         server_startup_status_0(LIST),
          save_kb_statuses,
       write_response_end.
 
@@ -891,10 +863,10 @@ server_startup_status(_):-!,
       ignore(ua_out(disp_error,'syntax error'('writeFmt for server_startup_status/1 is server_startup_status([kb(''PrologMOOAddition'', ''/cygdrive/c/Moo/SUO/PrologMOOAddition.can'')=current,kb(''PrologMOO'', ''/cygdrive/c/Moo/SUO/PrologMOO.can'')=unknown]).'),_)),
       write_response_end.
 
-      
-server_startup_status_0([]):-!.         
-server_startup_status_0([Head|Tail]):-!,         
-         kb_startup_status_0(Head),        
+
+server_startup_status_0([]):-!.
+server_startup_status_0([Head|Tail]):-!,
+         kb_startup_status_0(Head),
          server_startup_status_0(Tail).
 
 establish_each([]):-!.
@@ -902,80 +874,79 @@ establish_each([KBDesignator=Status|REST]):-!,once(make_status(KBDesignator,_,St
               establish_each(REST).
 
 
-:-include('moo_header.pl').
 
 invokeKbLoading(KB):-isKbLoading(KB,Status),!.
 invokeKbLoading(KB):-
-	mooProcessCreate(loadKBfromSource(KB,GlobalContext),loadKBfromSource(KB,GlobalContext),ID,[detatched(false)]),
-	assert(isMooProcess(ID,loadKBfromSource(KB,GlobalContext))).
+        mooProcessCreate(loadKBfromSource(KB,GlobalContext),loadKBfromSource(KB,GlobalContext),ID,[detatched(false)]),
+        assert(isMooProcess(ID,loadKBfromSource(KB,GlobalContext))).
 
 loadKBfromSource(KB,Ctx):-
-		getFilenameOfKBSource(KB,Filename),!,
-		once(invokeKifFileChecking(KB,Filename,Ctx,User)).
+                getFilenameOfKBSource(KB,Filename),!,
+                once(invokeKifFileChecking(KB,Filename,Ctx,User)).
 
 getFilenameOfKBSource(KB,Filename):-
-		fmtString(FileChars,'../moo-rt/work/~w.can',[KB]),!,
-		string_to_atom(FileChars,Filename),!.
+                fmtString(FileChars,'../moo-rt/work/~w.can',[KB]),!,
+                string_to_atom(FileChars,Filename),!.
 
-		
+
 
 % ===========================================================
 % Test Knowledge Base File (Currently only Test until browser integration)
 % ===========================================================
 loadKnowledgebaseSourcefile(Name,Filename):-  make,
-		catch(atom_codes(Name,Codes),_,Codes=[]),
-		length(Codes,L),L<3,
-		file_base_name(Filename,BaseName),
-		file_name_extension(KB,Extension,BaseName),
-		writeFmt('<B color=red>No name was given, so a Knowledge Base called <font color=green>~w</font> is being created.<p>',[KB]),
-		load_kif_to_kb_ctx(KB,Filename,'GlobalContext','MooWeb').
+                catch(atom_codes(Name,Codes),_,Codes=[]),
+                length(Codes,L),L<3,
+                file_base_name(Filename,BaseName),
+                file_name_extension(KB,Extension,BaseName),
+                writeFmt('<B color=red>No name was given, so a Knowledge Base called <font color=green>~w</font> is being created.<p>',[KB]),
+                load_kif_to_kb_ctx(KB,Filename,'GlobalContext','MooWeb').
 
 loadKnowledgebaseSourcefile(KB,Filename):-!,
-		(unsetMooOption(opt_surface_check=_)),
-		(setMooOption(opt_surface_check=trusted)),
-		idGen(TN1),
-		idGen(TN2),
-		idGen(TN3),
-		retractall(mooCache(PredR,_,_,KB,_,_,_,_)),
-		assertaClean(mooCache(PredR,surface,'instance'(KB,'KnowledgeBase'),'$VAR'(0),'MooKernel','GlobalContext',TN1,'WebUser',gaf)),
-		assertaClean(mooCache(PredR,surface,'instance'('GlobalContext','Context'),'$VAR'(0),KB,'GlobalContext',TN2,'WebUser',gaf)),
-		assertaClean(mooCache(PredR,surface,'sourcefile-of'(KB,Filename),'$VAR'(0),'MooKernel','GlobalContext',TN3,'WebUser',gaf)),
-		invokeKifFileChecking(KB,Filename,'GlobalContext','MooWeb').
+                (unsetMooOption(opt_surface_check=_)),
+                (setMooOption(opt_surface_check=trusted)),
+                idGen(TN1),
+                idGen(TN2),
+                idGen(TN3),
+                retractall(mooCache(PredR,_,_,KB,_,_,_,_)),
+                assertaClean(mooCache(PredR,surface,'instance'(KB,'KnowledgeBase'),'$VAR'(0),'MooKernel','GlobalContext',TN1,'WebUser',gaf)),
+                assertaClean(mooCache(PredR,surface,'instance'('GlobalContext','Context'),'$VAR'(0),KB,'GlobalContext',TN2,'WebUser',gaf)),
+                assertaClean(mooCache(PredR,surface,'sourcefile-of'(KB,Filename),'$VAR'(0),'MooKernel','GlobalContext',TN3,'WebUser',gaf)),
+                invokeKifFileChecking(KB,Filename,'GlobalContext','MooWeb').
 
 
 
 invokeKifFileChecking(KB,Filename,Ctx,User):-!, make,tell(user_error),
-	ignore(User='MooWeb'),
-	 get_default_assertion_context(DCtx), ignore((Ctx=DCtx)),
-         getDefaultKB(DKB), !,  ignore((KB=DKB)),
-	 retractall(mooCache(PredR,_,_,_,KB,Ctx,_,_,_)),!,	
-	 saveMooCache,
-	 writeFmt(user_error,'Reading In ~w to ~w with a default context of ~w \n',[Filename,KB,Ctx]),
-	 flag('Axioms Compiled',_,0),
+        ignore(User='MooWeb'),
+         get_default_assertion_context(DCtx), ignore((Ctx=DCtx)),
+         ensureMooOption(opt_kb,_,KB),
+         retractall(mooCache(PredR,_,_,_,KB,Ctx,_,_,_)),!,
+         saveMooCache,
+         writeFmt(user_error,'Reading In ~w to ~w with a default context of ~w \n',[Filename,KB,Ctx]),
+         flag('Axioms Compiled',_,0),
          safe_file_open(Filename,'r',INPUT),!,
          writeFmt(user_error,'~q\n',[safe_file_open(Filename,'r',INPUT)]),
-	 repeat, 
-		  compile_each_line(INPUT),
-	at_end_of_stream(INPUT),
-	close(INPUT),
-	flag('Axioms Compiled',AX,AX),
+         repeat,
+                  compile_each_line(INPUT),
+        at_end_of_stream(INPUT),
+        close(INPUT),
+        flag('Axioms Compiled',AX,AX),
          writeFmt('\n% Compiled ~w axioms.\n',[AX]),
-	 %(test_syntax_save_kb_ctx(KB,Ctx,Filename)),
+         %(test_syntax_save_kb_ctx(KB,Ctx,Filename)),
          ignore(retract(findings(CPU,RESULT))) ,
          ignore(findall(T,retract(title(T)),Title)).
-	 
+
 compile_each_line(Stream):-
-		sleep(1),
-		once(readKIF_priv(Stream,RRAW)),
-		once(getCleanCharsWhitespaceProper(RRAW,Trimed)),
-		once(ltrim(Trimed,L_trimmed)),
-			catch(writeFmt(user_error,'"~s" \n',[L_trimmed]),_,true).
+                sleep(1),
+                once(readKIF_priv(Stream,RRAW)),
+                once(getCleanCharsWhitespaceProper(RRAW,Trimed)),
+                once(ltrim(Trimed,L_trimmed)),
+                        catch(writeFmt(user_error,'"~s" \n',[L_trimmed]),_,true).
 
 /*
-		        source_from_stream(INPUT,Trimed,SOURCEFORM,Vars),nonvar(Trimed),
-			catch(writeFmt(user_error,'~s \n',[Trimed]),_,true),
-			rememberAxioms(KB,Ctx,SOURCEFORM,Vars,User),!.
-			
+                        source_from_stream(INPUT,Trimed,SOURCEFORM,Vars),nonvar(Trimed),
+                        catch(writeFmt(user_error,'~s \n',[Trimed]),_,true),
+                        rememberAxioms(KB,Ctx,SOURCEFORM,Vars,User),!.
+
 */
 
 
@@ -986,14 +957,14 @@ compile_each_line(Stream):-
 %tkb:-loadKBfromSource('PrologMOO','GlobalContext').
 /*
 skipKIFChar(Stream):-stream_property(Stream,position('$stream_position'(CharIndex, LineNo, LinePos)),
-	NewI is CharIndex+1,
+        NewI is CharIndex+1,
 */
 /*
-(pnf (documentation instance "An object is an &%instance a &%Class if 
+(pnf (documentation instance "An object is an &%instance a &%Class if
 
-it is a member of that &%Class.  An individual may be an instance of many 
+it is a member of that &%Class.  An individual may be an instance of many
 
-classes, some of which may be subclasses of others.  Thus, there is no 
+classes, some of which may be subclasses of others.  Thus, there is no
 
 assumption in the meaning of &%instance about specificity or uniqueness.")
  GlobalContext T-4)
@@ -1003,28 +974,28 @@ assumption in the meaning of &%instance about specificity or uniqueness.")
 */
 
 
-	 
-		      
+
+
 rememberAxioms(KB,Ctx,file_comment(_),Vars,User):-!.
 rememberAxioms(KB,Ctx,surf,Vars,User):-!.
 rememberAxioms(KB,Ctx,SOURCEFORM,Vars,User):-!,
-		global_increment('Axioms Compiled'),
-		flag('Axioms Compiled',AssertionID,AssertionID),
-		idGen(INTID),
-		assert(mooCache(PredR,surface,SOURCEFORM,Vars,KB,Ctx,AssertionID,User,uncanonicalized)).
-		
+                global_increment('Axioms Compiled'),
+                flag('Axioms Compiled',AssertionID,AssertionID),
+                idGen(INTID),
+                assert(mooCache(PredR,surface,SOURCEFORM,Vars,KB,Ctx,AssertionID,User,uncanonicalized)).
+
 test_syntax_save_kb_ctx(KnowledgeBase,Context,Filename):-
          safe_file_open(Filename,'w',OUTPUT),
-	 test_syntax_write_kb_ctx(KnowledgeBase,Context,OUTPUT),
-	 close(OUTPUT).
-	 
+         test_syntax_write_kb_ctx(KnowledgeBase,Context,OUTPUT),
+         close(OUTPUT).
+
 test_syntax_save_kb_ctx:-test_syntax_save_kb_ctx('PrologMOO','GlobalContext','C:/mool/SUO/MFixed.txt').
 
-	
+
 test_syntax_write_kb_ctx(KnowledgeBase,Context,OUTPUT):-
-		mooCache(PredR,surface,Source,Vars,KnowledgeBase,Context,AssertionID,Creator,Status),
-		once(catch((toMarkUp(kif,Source,Vars,OutChars),writeFmt(OUTPUT,'~w\n',[OutChars])),_,true)),
-		fail.
+                mooCache(PredR,surface,Source,Vars,KnowledgeBase,Context,AssertionID,Creator,Status),
+                once(catch((toMarkUp(kif,Source,Vars,OutChars),writeFmt(OUTPUT,'~w\n',[OutChars])),_,true)),
+                fail.
 
 test_syntax_write_kb_ctx(KnowledgeBase,Context,OUTPUT):-!,saveMooCache.
 
