@@ -16,24 +16,52 @@
 
 <p><b>Use
 a KIF/CycL like language&nbsp; to represent shared activities among autonomic
-agents. &nbsp;Java and Prolog libraries integrate with a first
+agents. &nbsp;Java libraries integrate with a first
 person MOO system <a href="http://www.jamud.com">JaMUD</a> to provide debugging and agent programming facilities.&nbsp;</b></p>
 <pre>Symbiotic Refection between an Object-Oriented and a Logic Programming Language</pre>
-<p>Java Libraries
+<p>Some purposes of LogicMOO:<br>
+<br>
+1) Is to create a SHRDLU type environment for Modal Logic testing.&nbsp;<br>
+&nbsp;&nbsp;&nbsp; A way to put our knowledge engineering to a real virtual
+world test!<br>
+<br>
+2) Provide a interface for humans to involve themselves in the lives of
+logically created agent creatures.<br>
+<br>
+3) To represent episodic models of memory, diagrams for belief engines.<br>
+<br>
+4) Provide an adaptable interface for a fire hose of data to be stored. And
+later wrapped into a single pragma for inference.<br>
+<br>
+After OpenCyc has been released we are very excited to use it.&nbsp; We had
+created a generalized API between Jamud and an &quot;LogicServer&quot; usually
+that entails first pragmatically pushing the Java system data into the LogicServer
+(in Prolog).&nbsp; Then notifying updates via a wrapper around java objects.
+Using OpenCyc however opens up more possibilities:&nbsp; Not just pushing data
+from Java to Cyc but &quot;querying&quot; for instances of Java member
+data.&nbsp;</p>
+<p>For those prolog hackers out there that want to write Prolog Agents like used
+in OOA projects. We are interested in using the HornClause libraries in Cyc.
+Maybe can get the best of both worlds and still make it feel like prolog.&nbsp;
+Perhaps a Prolog to CycL HornClause tool?&nbsp; Currently LogicMOO uses the
+Motel system of propositional Logic.&nbsp; And other systems are being experimented
+with.</p>
+<p>We don't plan on immediately using NL features of Cyc for game control but definitely
+will be fun using .say &quot;Hello CycHumansMt, is Joe a Person?&quot; type
+things since that seems to be the direction the Cyc is going at first. The Jamud
+command parser exports a very tight infocomm Zork like domain of imperative
+commands currently. It will be interesting still, mapping them to Cyc.. We would
+like to be able to eventually ask the 'BejeweledLady' to go and rent a room in
+the Inn but don't pay more then 50$ per night and have the agent run of and do
+the tasks based on a Cyc planning library.&nbsp; We would like to see LogicMOO
+eventually accompany as a Cyc Example Application.<br>
+<br>
+Java Libraries
 are provided that you need to use KIF (<a href="http://logic.stanford.edu/kif/dpans.html">Knowledge
 Interchange Format</a>) and soon enough <a href="http://www.daml.org">DAML</a> (<a href="http://www.darpa.mil">DARPA</a>
 Agent Markup Language) content into an episodic simulation inside a
-virtual world MOO.&nbsp;
-The programming languages used are Prolog and Java.&nbsp; Combining powerful tools:
-JaMUD (Christopher
-O'Brien) and various Edinburgh style of Prologs.
-SWI-Prolog is a stable, free,
-professional distribution of the prolog virtual machine and compiler.)<br>
-I am working on and trying other prologs like B-Prolog, BinProlog and
-CIAO-Prolog.&nbsp;<br>
-<br>
-The goal is to represent episodic models of memory, diagrams for belief
-engines.&nbsp;<br>
+virtual world MOO.&nbsp;&nbsp;</p>
+<p>
 <br>
 <span style="color:forestgreen">A simple&nbsp;example of agent orientated
 programming inside a Moo:</span></p>
@@ -89,7 +117,7 @@ KB?&nbsp; KIF File?&nbsp; Daml Page?&nbsp; Jamud running mud objects?</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">JaMUD
 is saved an loaded from an XML pages.&nbsp; This means at any time we can
-serialize the&nbsp; 'MOOState' context (Microtheory?).</p>
+serialize the&nbsp; 'MOOState' context (Microtheory).</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">This
 is meant to be a solid context comprising of instances and sets.&nbsp; The other
 ontologies about understanding and using these can stored as well as
@@ -101,30 +129,30 @@ and therefore not effecting to the rest of the system.&nbsp; But how would we pe
 information that does not fit into a 4D space?&nbsp;&nbsp;&nbsp; For example
 these two rules:&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
-<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">(=&gt;&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">(implies&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;
 (and&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-(instance ?PERSON Human)&nbsp;</p>
+(isa ?PERSON Human)&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 (acquaintedWith ?OTHER ?PERSON))</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;
 (acquaintances ?PERSON ?OTHER SimpleContactAcquaintance))&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
-<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">(=&gt;&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">(implies</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;
 (spouse ?X ?Y)&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;
 (friends ?X ?Y))</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Each
-rule is kept in an instance of a ContentBearingObject.&nbsp; Physical Regions of
-the MOO may be effected by any 'Set' of instances from the ContentBearingObject
-Class.&nbsp; ContentBearingObjects can be divided into theoreticals that can be believed
-by agents (or Mobs).&nbsp; The MOO reserves no special godlike entity for
+rule is kept in an instance of an Assertion.&nbsp; Physical Regions of
+the MOO may be effected by any 'Set' of instances from the Assertion Class.&nbsp;
+Assertions can be divided into Microtheories that can be believed
+by agents (or Mobs).&nbsp; The MOO reserves no special entity for
 enforcement of rules unless an agent has been assigned specifically to a room to
 do so.&nbsp; Most cases agents in the room are picking from there own private
-array of ContentBearingObjects which is separate from&nbsp; an entity using the
+array of Assertions which is separate from&nbsp; an entity using the
 room's set.&nbsp;&nbsp;&nbsp;</p>
 
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
@@ -187,17 +215,16 @@ Asserted<br>
 ;&nbsp; (located&nbsp; ToolHammer53455345SKFn Player8)</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><b>KIF</b><br>
-I, like others, am comfortable with the good knowledge engineering coming from
+We, like others, are comfortable with the good knowledge engineering coming from
 the standard upper level ontology working group.&nbsp; And between the content
 produced there and Cyc should be able to come up with interchangeable mappings
-without conflicts between 'Entity' vs. 'Thing'.&nbsp; This implementation is
-*not* Cyc and therefore tends to try to lean towards the KIF standards.</p>
+without conflicts between 'Entity' vs. 'Thing'.&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
 
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><b>CycL</b></p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Asserting
 CycL directly like&nbsp; &quot;(isa Fluffy Mammal)&quot; or an entire CycL
-Microtheory from File which becomes a set of very useful 'ContentBearingObjects'</p>
+Microtheory from File which becomes a set of very useful 'Assertions'</p>
 
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
 
@@ -233,41 +260,66 @@ Perhaps leveraging inference.&nbsp;<br>
 </p>
 
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
-<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><font color="#008080"><b>TO-DO
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><font color="#008080"><b>Status/TO-DO
 List</b></font></p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
-<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">MOO
-Based RDF Specification document.<br>
-The port for CIAO-Prolog which better transparently interfaces to JaMUD</p>
-<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Raw
-Prolog Http content Browser/Editor (mostly completed) (Does not use Java)<br>
-Looking for Help in making a Java Servlet API that Wraps all the useful features
-of content editing and source.</p>
-<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">User
-can update/expand the current KIF&lt;-&gt;CycL mappings.&nbsp; (Edited in the
-context of a 'system' ontology)</p>
-<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">User
-can update/expand the current DAML&lt;-&gt;KIF mappings.</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Cyc
+Httpd Strap-on for OO/Jamud editing (almost finished - dmiles).</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;
+This is an Outer frame layer for OpenCyc that adds the extra tool suite with
+these options:</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Create predicate with argument constraints in one web form</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Create function with argument constraints in one web form</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Load KIF File from Http upload into OpenCyc</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+KIF&lt;-&gt;CycL Import Utility (finished - code cleanup - dmiles).</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Make it so users
+can update/expand the current KIF&lt;-&gt;CycL mappings.&nbsp; (Edited&nbsp; '<font SIZE="2">SumoAlignmentMt</font>')</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Load external Jamud XML file into OpenCyc</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Load Protegé into OpenCyc</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Ask a query or make and assertion in KIF/CycL all in one form&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Prolog to CycL HornClause tool</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Proxy
+MudObject that stores and queries in OpenCyc</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;
+Complete
+readability of all Jamud primitive types into logical&nbsp; paradigms (To better export
+to KIF/CycL)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">With
 Christopher, the OLC interfaces to JaMUD</p>
-<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-- Our goal is to increase number of ways to produce stylistic creations from the
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;Our
+mission is to increase number of ways to produce stylistic creations from the
 telnet</p>
-<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Complete
-readability of all Jamud primitive types into prolog paradigms (To better export
-to KIF/CycL)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">MOO
+Based RDF Specification document (Help?).</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">A
-small lightweight installation of CIAO-Prolog</p>
+small lightweight installation and demo</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><font color="#008080"><b>Supported
 configurations</b></font></p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">LINUX
 (currently developed on Redhat 7.x)</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">JDK
-1.4 (Out of Beta? Right?)</p>
-<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">CIAO-Prolog
-1.7.x</p>
-<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+1.4 </p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Jakarta
+Tomcat 4.x</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">OpenCyc
+0.6.0</p>
 <p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
 
 </body>
