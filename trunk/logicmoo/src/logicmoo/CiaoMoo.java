@@ -6,7 +6,6 @@ import java.io.*;
 import java.util.*;
 import java.awt.*;
 
-import jamud.*;
 import CiaoJava.*;
 
 public class CiaoMoo extends LogicMoo {

@@ -2,8 +2,8 @@
  * 
  * Now prolog can call java!!!
  * 
- *  File:    $Id: javart.c,v 1.1 2002-03-17 11:30:39 dmiles Exp $
- *  Date:    $Date: 2002-03-17 11:30:39 $
+ *  File:    $Id: javart.c,v 1.2 2002-03-18 10:46:41 dmiles Exp $
+ *  Date:    $Date: 2002-03-18 10:46:41 $
  *  Author:  Douglas Miles
  *  
  * This library is free software; you can redistribute it and/or
@@ -35,16 +35,26 @@
 
 
 /* Globals */
+
 static JNIEnv *jni_env;
+
 static JavaVM *java_vm;
+
 static JavaVMInitArgs vm_args;
 
+static char* cp;
 
 static JavaVMOption options[4];
+
 static jint result_of_JNI_CreateJavaVM=-1; /* Means not created */
+
 static jclass class_pointer_JavaRt = 0; /*  Uninitialized */
+
 static jclass class_jstring;
+
 static jclass class_jobject;
+
+/*
 static jclass class_jchar;
 static jclass class_jbyte;
 static jclass class_jboolean;
@@ -54,6 +64,7 @@ static jclass class_jint;
 static jclass class_jlong;
 static jclass class_jshort;
 static jclass class_jclass;
+*/
 
 static jmethodID invoke_object_method;
 static long flags;
@@ -64,7 +75,7 @@ static long flags;
 #define JNI_ENV (*jni_env)
 #define JAVA_VM (*java_vm)
 
-#define sj_FindClass(classname) \
+#define javart_FindClass(classname) \
     (JNI_ENV->FindClass(jni_env,(STRING) classname))
 
 #define chars_to_jstring(source) \
@@ -109,8 +120,7 @@ static void init_prolog(int argc, STRING *argv);
 static jobject term_to_jobject(term_t temp_term);
 
 
-foreign_t 
-destroy_vm() 
+foreign_t destroy_vm() 
 	{
 	result_of_JNI_CreateJavaVM=-1;		/* Means not created */
 	class_pointer_JavaRt = 0;	/* Uninitialized */
@@ -122,39 +132,32 @@ destroy_vm()
 	PL_succeed;
 	}
 
-foreign_t 
-java_prep_vm()
+foreign_t java_prep_vm()
 	{
 	/* Allows it to be called more then once */
-	if (class_pointer_JavaRt)
-		PL_succeed;
-
-	/* Allows it to be called more then once */
-	if (!result_of_JNI_CreateJavaVM)
-		PL_succeed;
-
+	if (class_pointer_JavaRt) PL_succeed;
+	
 	{
-		STRING szClasspath = getenv( "CLASSPATH" );
-		STRING cp = malloc( 8192 ); 
+	
+	cp = malloc( 8192 ); 
+	
+	sprintf(cp, "-Djava.class.path=%s", getenv( "CLASSPATH" ) );
 
-		// destroy_vm();
-
-
-		sprintf(cp,"-Djava.class.path=%s",szClasspath);
-
+		
 		options[0].optionString = "-Djava.compiler=NONE";	/* disable JIT */
 		options[1].optionString = cp;	/* user classes */
 		options[2].optionString = "-Djava.library.path=.";	/* set native library path */
-		//options[3].optionString = "";						/* print JNI-related messages */
+		options[3].optionString = "";						/* print JNI-related messages */
 
 		// options[3].optionString = "-verbose:jni";   	/* print JNI-related messages */
 
 
-		// fprintf(stderr, "\nCLASSPATH=%s\n",options[1].optionString);
+	    //  fprintf(stderr, "%% %s\n",options[1].optionString);
 
-		vm_args.version = JNI_VERSION_1_4;
+		vm_args.version = JNI_VERSION_1_2;
+		
 		vm_args.options = options;
-		vm_args.nOptions = 3;
+		vm_args.nOptions = 4;
 		vm_args.ignoreUnrecognized = 1;     
 
 		/*
@@ -169,27 +172,37 @@ java_prep_vm()
 			fprintf(stderr, "Can't create Java VM\n%i\n",result_of_JNI_CreateJavaVM);
 			PL_fail;
 			}
-		return prep_vm_phase2();
-	}
-	}
+
+	class_pointer_JavaRt = javart_FindClass("logicmoo/JavaRt");
 
 
+	class_jstring = javart_FindClass("java/lang/String");
 
-foreign_t  
-prep_vm_phase2() 
-	{
-	if (class_pointer_JavaRt)
-		PL_succeed;
+	 class_jobject = javart_FindClass("java/lang/Object");
+	
 
-	class_pointer_JavaRt = JNI_ENV-> 
-									FindClass(jni_env, "logicmoo/JavaRt");
-
-	if (!class_pointer_JavaRt)
+  
+    if (!class_pointer_JavaRt || !class_jstring || !class_jobject)
 		{
 		fprintf(stderr, "Can't find \"logicmoo.JavaRt\" (Set Your Classpath)\n");
 		PL_fail;
 		}
-	/*
+    
+	invoke_object_method = JNI_ENV->GetStaticMethodID(jni_env, 
+													  class_pointer_JavaRt, 
+													  "invokeObject",
+													  "(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;");
+	if (!invoke_object_method)
+		{
+		fprintf(stderr, "Cant GetStaticMethodID (invokeObject)\n");
+		PL_fail;
+		}
+	PL_succeed;
+	}
+
+	}
+
+		/*
 	Java Type  Native Type  Description  
 	-----------------------------------
 	boolean  jboolean  unsigned 8 bits  
@@ -205,32 +218,17 @@ prep_vm_phase2()
 	*/
 
 	/*	
-	class_jclass = sj_FindClass("java/lang/Class");
+	class_jclass = javart_FindClass("java/lang/Class");
 	
-	class_jboolean = sj_FindClass("java/lang/Boolean");
-	class_jbyte = sj_FindClass("java/lang/Byte");
-	class_jchar = sj_FindClass("java/lang/Char");
-	class_jshort = sj_FindClass("java/lang/Short");
-	class_jint = sj_FindClass("java/lang/Integer");
-	class_jlong = sj_FindClass("java/lang/Long");
-	class_jfloat = sj_FindClass("java/lang/Float");
+	class_jboolean = javart_FindClass("java/lang/Boolean");
+	class_jbyte = javart_FindClass("java/lang/Byte");
+	class_jchar = javart_FindClass("java/lang/Char");
+	class_jshort = javart_FindClass("java/lang/Short");
+	class_jint = javart_FindClass("java/lang/Integer");
+	class_jlong = javart_FindClass("java/lang/Long");
+	class_jfloat = javart_FindClass("java/lang/Float");
 	*/
 
-	class_jstring = sj_FindClass("java/lang/String");
-
-	class_jobject = sj_FindClass("java/lang/Object");
-
-	invoke_object_method = JNI_ENV->GetStaticMethodID(jni_env, 
-													  class_pointer_JavaRt, 
-													  "invokeObject",
-													  "(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;");
-	if (!invoke_object_method)
-		{
-		fprintf(stderr, "Cant GetStaticMethodID (invokeObject)\n");
-		PL_fail;
-		}
-	PL_succeed;
-	}
 
 jstring intToHash(term_t temp_term)
 	{
@@ -383,35 +381,14 @@ static jobject term_to_jobject(term_t temp_term)
 
 	}
 
-
-
-static int 
-call_chars(const char *goal)
-	{
-	fid_t fid = PL_open_foreign_frame();
-	term_t g = PL_new_term_ref();
-	int rval=0;
-
-	if ( PL_chars_to_term(goal, g) )
-		rval = PL_call(g, NULL);
-	else
-		rval = FALSE;
-
-	PL_discard_foreign_frame(fid);
-	return rval;
-	}
-
-
-
-foreign_t
-pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg_list,term_t result_term) 
+foreign_t pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg_list,term_t result_term) 
 	{
 	jstring result_string_object;
 	jobjectArray method_args;
 	foreign_t prolog_result;
 
 	STRING method_result_chars;
-	term_t temp_term = PL_new_term_ref();	   /* variable for the elements */
+	term_t temp_term = PL_new_term_ref();	   /* variable for the elements */	java_prep_vm();
 
 	result_string_object = JNI_ENV->CallStaticObjectMethod(jni_env,
 														   class_pointer_JavaRt,
@@ -449,16 +426,31 @@ pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg_list,term
 
 	}
 
-
-install_t 
-install()
+install_t install()
 	{
 	PL_register_foreign("java_create_vm", 0, java_prep_vm, 0);
 	PL_register_foreign("java_destroy_vm", 0, destroy_vm, 0);
 	PL_register_foreign("java_invoke_object_protected", 4, pl_java_invoke_object, 0);
 	}
 
+/*
 
+			
+static int call_chars(const char *goal)
+	{
+	fid_t fid = PL_open_foreign_frame();
+	term_t g = PL_new_term_ref();
+	int rval=0;
+
+	if ( PL_chars_to_term(goal, g) )
+		rval = PL_call(g, NULL);
+	else
+		rval = FALSE;
+
+	PL_discard_foreign_frame(fid);
+	return rval;
+	}
+			
 static void 
 init_prolog(argc, argv) 
 int argc;
@@ -468,10 +460,10 @@ STRING *argv;
 	int ac = 0;
 
 	av[ac++] = argv[0];
-	/*
-		av[ac++] = "-x";
-		av[ac++] = "mystate";
-	*/
+	
+	  //  av[ac++] = "-x";
+	//	av[ac++] = "mystate";
+	
 	av[ac]   = NULL;
 
 	if (!PL_initialise(ac, av))
@@ -481,7 +473,8 @@ STRING *argv;
 	PL_install_readline(); 
 }
 
-/* Main is used when invoking from commandline */
+
+// Main is used when invoking from commandline
 int 
 main(argc, argv) 
 int argc;
@@ -491,5 +484,6 @@ STRING *argv;
 	PL_toplevel();
 	return 0;
 }
+											  */
 
 
