@@ -1,4 +1,6 @@
 
+% This can be used by SWI as a drop-in for CIAO-Prolog bidirrectional interface for Java
+
 :-module(swijni,[
 	 java_start/0,
 	 java_start/1,
@@ -23,12 +25,14 @@
 
 
 
-:- initialization(load_foreign_library(foreign(javart))).
+%:- initialization(load_foreign_library(foreign(javart))).
+:- initialization(catch(load_foreign_library(javart),_,true)).
 
-java_start:-
-       ('$java_machine_thread'(_) ; 
-       (thread_create(java_start_local,X,[]),
-	 assert('$java_machine_thread'(X)))),!.
+java_start:- '$java_machine_thread'(_),!.
+java_start:- not(predicate_property(thread_create(_,_,_),_)),!,
+	  java_start_local,assert('$java_machine_thread'(main)),!.
+java_start:- thread_create(java_start_local,X,[]),
+	 assert('$java_machine_thread'(X)),!.
 
 % Main thread
 
@@ -74,7 +78,7 @@ java_start_local(ClassPath):-   notrace(( is_list(ClassPath),!,
    java_start_local(AtomPath))).
 
 java_create_object(Class,Object):-
-	notrace(java_invoke_object_at_thread('$$$$',createObject,[Class],Object)).
+	notrace(java_invoke_object_at_thread('javart',createObject,[Class],Object)).
 
 java_destroy_object(Object):-
 	notrace(java_invoke_object_at_thread('java_object'(0),forgetObject,[Object],_True)).
