@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Destinations</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Destinations</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Portal Exemplar</td>
+	</tr>
+</table><!--Topic Definition-->
+<p>A <a href="../../PropertyList/PropertyList.htm">PropertyList</a> of destination 
+ portals or worlds. 
+<b>Destinations</b> is a read/write <b>PropertyList</b>. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<p>To set this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Destinations</b>&nbsp;=&nbsp;<i>PropertyList</i></td>
+	</tr>
+</table>
+<p>To return this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Destinations</b></td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>Destinations</b>  property syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Portal</td>
+		<td>Required</td>
+		<td> An object reference that accesses a <b>Portal</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">PropertyList</td>
+		<td>PropertyList</td>
+		<td>Required</td>
+		<td>A list of destination portals or worlds.</td>
+	</TR>
+
+</TABLE><!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Destinations</b> property list consists of a list either <b>Portal</b> objects (in the case 
+of a Room Portal) or strings (in the case of an InterWorld Portal), each of which is a 
+possible destination for the current portal. It is possible to get and set each item in this <b>PropertyList</b> individually, just as it is possible to modify individual elements of any other <b>PropertyList</b>.</P>
+<P>If the <STRONG>Destinations</STRONG> property is on an InterWorld Portal, it 
+contains a list of strings that are fully qualified world names for other 
+Microsoft Virtual Worlds servers.&nbsp; For example, if the portal transported 
+the user to a world named <EM>FooWorld</EM> on a server named 
+<EM>VirtualServer</EM>, a string in the <STRONG>Destinations</STRONG> list would 
+be "FooWorld\VirtualServer".&nbsp; When the user is transported to the 
+appropriate world, his or her avatar will be placed in the <a href="../../World/DefaultRoom.htm">DefaultRoom</a> of the new world.</P>
+<H3>Example</H3>
+
+<p>Here is a brief code example that shows creation of two
+portals and use of the <b>Destinations</b> property for each. The first room portal goes from <i>Room1</i>
+to <i>Room2</i> and the other goes from <i>Room2</i> back to <i>Room1</i>.
+The example assumes that both rooms have already been created,
+and that the variables <i>Room1Ref</i> and <i>Room2Ref</i>
+are references to these rooms. In the calls to <b>CreateInstance</b>, the actual examplar
+name, <b>Portal</b>, is used.</p>
+
+<pre>   '1) Create a new portal from Room1 to Room2, and place it in Room1 
+   Dim PortalRoom1ToRoom2, PortalRoom2ToRoom1
+   Set PortalRoom1ToRoom2 = World.CreateInstance ("Portal to Room 2", "Portal", Room1Ref)
+  
+   '2) Create a new portal from Room2 back to Room1, and place it in Room2
+   Set PortalRoom2ToRoom1 = World.CreateInstance ("Portal to Room 1", "Portal", Room2Ref)
+  
+   '3) Set the destination portal for PortalRoom1ToRoom2 to be PortalRoom2ToRoom1
+   PortalRoom1ToRoom2.Destinations.Add PortalRoom2ToRoom1
+  
+   '4) Set the destination portal for PortalRoom2ToRoom1 to be PortalRoom1ToRoom2
+   PortalRoom2ToRoom1.Destinations.Add PortalRoom1ToRoom2
+  
+   '5) Set the description for each portal (this step is optional)
+   PortalRoom1ToRoom2.Descriptions.Add "To Room 2"
+   PortalRoom2ToRoom1.Descriptions.Add "To Room 1"
+</pre>
+
+
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>MoveInto</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>MoveInto</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Moves the calling object into a new container. <b>MoveInto</b> 
+is a member of the <b>Thing</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>MoveInto</b>&nbsp;<i>pNewContainer</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>MoveInto</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pNewContainer</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The container that the object is to be moved into.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><b>MoveInto</b> attempts to move the object from its
+current container into <i>NewContainer</i>. For this to happen
+successfully, <a href="../../Events/AllowLeave.htm">AllowLeave</a>
+on the object's old container must return <b>True</b> (the default),
+and <a href="../../Events/AllowEnter.htm">AllowEnter</a>
+on the object's new container must also return <b>True</b> (the default).
+</p>
+
+<p>If the <a href="CanChangeContainer.htm">CanChangeContainer</a>
+property of the object to be moved is <b>False</b>, the
+object can only be moved by the object's <b>Owner</b> (the 
+<a href="../Avatar/Avatar.htm">Avatar</a> who created
+the object), a <b>Wizard</b>,
+or a <a href="../Portal/Portal.htm">Portal</a>. When
+the object's <b>IsTakeable</b> property is <b>True</b>,
+the object can be moved by anyone if there are no other
+restrictions.</p>
+
+<p><b>Avatar</b> objects cannot be moved into objects that are
+not rooms, or rooms that are <b>Null</b>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To determine the owner of an object named <i>Art1</i>,
+execute the following VBScript code:</p>
+
+<pre>Trace User.Container.FindWithin(&quot;Art1&quot;).Owner.Name</pre>
+
+<p>The following code will create two artifacts - named <i>Inner</i> 
+and <i>Box</i> (<i>InnerObj</i> and <i>BoxObj</i> are
+references to these objects). Setting <b>CanChangeContainer</b>
+on an object determines whether or not that object can be moved
+to another container.</p>
+
+<pre class=example>Dim InnerObj, BoxObj
+Set InnerObj = CreateInstance(&quot;Inner&quot;,&quot;Artifact&quot;,User.Container)
+Set BoxObj = CreateInstance(&quot;Box&quot;,&quot;Artifact&quot;,User.Container)</pre>
+<p class=comments>'Move can occur.
+<pre class=example>InnerObj.CanChangeContainer = True
+InnerObj.<b>MoveInto</b> OuterObj </pre>
+&nbsp;
+
+
+
+</body>
+</html>

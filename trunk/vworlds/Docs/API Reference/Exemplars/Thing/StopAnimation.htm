@@ -1,0 +1,214 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>StopAnimation</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>StopAnimation</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Stops&nbsp;an animation that is currently executing for the specified object. 
+<STRONG>StopAnimation</STRONG> is a member of the <A href="Thing.htm">Thing</A> exemplar.&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>StopAnimation</STRONG>&nbsp;<EM>bstrPropertyName</EM>&nbsp;[<i>,&nbsp;varOptions</i>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>StopAnimation</STRONG> method syntax 
+has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>Thing</TD>
+    <TD>Required</TD>
+    <TD>An&nbsp;object reference that accesses a 
+      <B>Thing</B> object.</TD></TR>
+  <TR>
+    <TD class=boldItal>bstrPropertyName</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>A&nbsp;<STRONG>String</STRONG> value 
+      that&nbsp;represents one of the valid property names corresponding to 
+      the&nbsp;animation action you want to perform.<FONT size=2></FONT></TD></TR>
+  <TR>
+    <TD class=boldItal>[<EM>varOptions</EM>] </TD>
+    <TD>Variant</TD>
+    <TD>Optional</TD>
+    <TD> Enumerated types that specify the 
+      type of&nbsp;animation that&nbsp;is running.</TD></TR>
+
+</TABLE>
+
+<!--Return Value section --></P>
+<H4>Valid Values for the <I>bstrPropertyName</I> Parameter</H4>
+<P>You can use the following property names as values for the 
+<I>bstrPropertyName</I> parameter.</P>
+<TABLE class=backlight>
+  <THEAD>
+  <TR>
+    <TD>Property </TD>
+    <TD>Description </TD></TR></THEAD>
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR>
+  <TR>
+    <TD><STRONG>Direction</STRONG></TD>
+    <TD>Interpolate the <STRONG>Direction</STRONG> property of an object over 
+      the path provided in the&nbsp;<EM>varPathMap</EM> parameter of 
+      the <STRONG>StartAnimation</STRONG>   
+        method.</TD></TR>
+  <TR>
+    <TD><STRONG>LightAttenuation</STRONG></TD>
+    <TD>Interpolate the&nbsp;<STRONG>LightAttenuation</STRONG> property of an 
+      object over the path provided in the <EM><EM>varPathMap</EM></EM> parameter of the 
+      <STRONG>StartAnimation</STRONG> 
+      method.</TD></TR>
+  <TR>
+    <TD><STRONG>LightColor</STRONG></TD>
+    <TD>Interpolate the&nbsp;<STRONG>LightColor</STRONG> property of an object 
+      over the path provided in the <EM><EM>varPathMap</EM></EM> parameter of the 
+      <STRONG>StartAnimation</STRONG> 
+method.</TD></TR>
+  <TR>
+    <TD><STRONG>Position</STRONG></TD>
+    <TD>Interpolate the <STRONG>Position</STRONG> property of an object over 
+      the path provided in the <EM><EM>varPathMap</EM></EM> parameter of the 
+      <STRONG>StartAnimation</STRONG> method.</TD></TR>
+  <TR>
+    <TD><STRONG>Scale</STRONG></TD>
+    <TD>Interpolate the&nbsp;<STRONG>Scale</STRONG> property of an object over 
+      the path provided in the <EM><EM>varPathMap</EM></EM> parameter of the 
+      <STRONG>StartAnimation</STRONG> method.</TD></TR>
+  <TR>
+    <TD><STRONG>Up</STRONG></TD>
+    <TD>Interpolate the&nbsp;<STRONG>Up</STRONG> property of an object over 
+      the path provided in the <EM><EM>varPathMap</EM></EM> parameter of the 
+      <STRONG>StartAnimation</STRONG> method.</TD></TR>
+  <TR>
+    <TD><STRONG>Xfile</STRONG></TD>
+    <TD>Run the animation embedded in the geometry file.</TD></TR></TABLE>
+<H4>Enumerated Values for the <EM>varOptions</EM> 
+Parameter</H4>
+<TABLE class=backlight><!--table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Option</TD>
+    <TD>Value</TD>
+    <TD>Animation type</TD>
+    <TD>Description</TD></TR></THEAD><!--table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--table: contents-->
+  <TR>
+    <TD class=boldItal>NoLoop</TD>
+    <TD>
+      <P align=center>1</P></TD>
+    <TD width=5>Scale<BR>Orientation</TD>
+    <TD>Animation runs once and then stops.</TD></TR>
+  <TR>
+    <TD class=boldItal>Loop</TD>
+    <TD>
+      <P align=center>2</P></TD>
+    <TD width=5>Scale<BR>Orientation </TD>
+    <TD>Animation runs continually until manually stopped.</TD></TR>
+  <TR>
+    <TD class=boldItal>Linear</TD>
+    <TD>
+      <P align=center>4</P></TD>
+    <TD width=5>Direct3D<BR>Interpolators</TD>
+    <TD>Animation follows a path along a line.</TD></TR>
+  <TR>
+    <TD class=boldItal>Spline</TD>
+    <TD>
+      <P align=center>8</P></TD>
+    <TD width=5>Direct3D<BR>Interpolators</TD>
+    <TD>Animation follows a mathematically calculated curved path.</TD></TR>
+  <TR>
+    <TD class=boldItal>Nearest</TD>
+    <TD>
+      <P align=center>16</P></TD>
+    <TD width=5>Direct3D<BR>Interpolators</TD>
+    <TD>The property value is set to the keyframe that is the closest 
+      approximation of the current time. This causes the object&nbsp;to animate 
+      in discrete steps instead of fluidly interpolating.</TD></TR>
+  <TR>
+    <TD class=boldItal>Local</TD>
+    <TD>
+      <P align=center>32</P></TD>
+    <TD width=5>Direct3D<BR>Interpolators</TD>
+    <TD>Animation runs only on the client and is not remoted to other 
+      computers.</TD></TR>
+  <TR>
+    <TD class=boldItal>Relative</TD>
+    <TD>
+      <P align=center>64</P></TD>
+    <TD width=5>Direct3D<BR>Interpolators</TD>
+    <TD>The animation path values are calculated for the position of the 
+      object at the time that you invoke the <STRONG>StartAnimation</STRONG> 
+      method.</TD></TR></TABLE>
+<DIV></DIV>
+<H3>Return Value</H3>
+<p>This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>StopAnimation</b> method stops an animation that was previously begun with the <A href="StartAnimation.htm">StartAnimation</A> method. If you use the 
+<EM>varCallBack</EM> parameter of the 
+<STRONG>StartAnimation</STRONG> method, the <STRONG>StopAnimation</STRONG> method does not affect the firing of 
+the method specified by the <EM>varCallBack</EM> parameter.
+</P>
+<H3>Example</H3>
+<p>The following statements assume that you have previously created a <A href="../../PropertyMap/PropertyMap.htm">PropertyMap</A> object named "mapPosition" that contains the vectors for the movement of the baseball. 
+</p>
+
+<pre class="example">
+Dim myBaseball
+
+Set myBaseball = CreateInstance("Baseball", "Artifact", User.Container)
+</pre>
+<p class="comments">
+'The number 2 represents a continually looping animation.
+<pre class="example">
+myBaseball.StartAnimation "Position", myBaseball.mapPosition, , 2
+</pre>
+<p class="comments">
+'The animation loops until stopped with the <b>StopAnimation</b> method.
+<pre class="example">
+myBaseball.<b>StopAnimation</b>
+</pre>
+
+</body>
+</html>

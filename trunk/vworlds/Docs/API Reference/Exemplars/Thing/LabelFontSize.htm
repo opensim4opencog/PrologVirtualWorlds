@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>LabelFontSize</title>
+</head>
+
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>LabelFontSize</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<p>Sets or returns the font size of the <a href="Label.htm">Label</a> of a <A href="Thing.htm">Thing</A> object. <b>LabelFontSize</b> 
+is a read/write <b>Long</b>.      
+         
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><em>object</em>.<b>LabelFontSize</b> = <em>longValue</em></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>LabelFontSize</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An 
+      instance of the <STRONG>Thing</STRONG> exemplar.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">longValue</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td><!--Description-->Any valid expression that evaluates to a <b>Long</b>. The font size is measured in points.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>The default setting of the <b>LabelFontSize</b> property is 24 point. Points are the only available unit of measurement for this property.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example gives an object a <b>Label</b> and then changes the font size. In this example, "strName" equals "Bob", "strLabel" equals "Bob's Label", and "intSize" equals "16".
+<br><br>
+<pre class="example">
+Sub MyLabelSize(strName, strLabel, lntSize)
+Dim MyWorker
+Dim OldSize</pre>
+<p class=comments>'Acquire a reference to the object named "Bob".
+<pre class="example">Set MyWorker = User.Container.FindWithin(strName)</pre>
+
+<p class=comments>'Provide a label for the object that says, "Bob's Label".
+<pre class="example">MyWorker.Label = strLabel</pre>
+
+<p class=comments>'Print the previous font size to the Command Window. 
+<pre class="example">Set OldSize = MyWorker.<b>LabelFontSize</b>
+Print "The previous font size was: " &amp; OldSize</pre>
+
+<p class=comments>'Change the font size to 16.
+<pre class="example">MyWorker.<b>LabelFontSize</b> = OldSize</pre>
+
+<p class=comments>'Print the new font size in the Command Window.
+<pre class="example">Print "The new font size is: " &amp; MyWorker.<b>LabelFontSize</b>
+
+End Sub
+</pre>
+
+
+</body>
+</html>

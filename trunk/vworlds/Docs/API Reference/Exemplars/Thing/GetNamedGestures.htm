@@ -1,0 +1,159 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>GetnamedGestures</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetNamedGestures</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Returns&nbsp;the collection of the available 
+gestures&nbsp;for a <STRONG>Thing</STRONG>    object 
+in Microsoft Virtual Worlds. <STRONG>GetNamedGestures</STRONG> is a 
+member of the <STRONG>Thing</STRONG> exemplar.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<b>GetNamedGestures</b>()</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>GetNamedGestures</STRONG> property syntax has these parts: 
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>
+      <P><!--Parameter name--> 
+      Thing</P></td>
+		<td><!--Type-->Required</td>
+		<td><!--Description--> 
+       An&nbsp;object reference&nbsp;to a&nbsp;<STRONG>Thing</STRONG> object. </td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section --></P>
+<H3>Return Value</H3>
+<p>        Returns 
+a property list of gesture names.
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->You 
+can use the gestures in the property list in combination with the <A href="Emote.htm">Emote</A> method 
+of the <b>Thing</b> object to programmatically articulate 
+emotions for your avatar. By default, Virtual Worlds has&nbsp;13 gestures 
+available for use by your avatar. </P>
+<H4>Gestures Available in Virtual Worlds</H4>     
+          
+     
+<table class="backlight">
+<thead><tr><td>Gesture name</td><td>Description</td></tr></thead>  
+  <TR>
+    <TD>Idle</TD>
+    <TD>The default stationary pose for the avatar.</TD></TR>
+  <TR>
+    <TD>Wave</TD>
+    <TD>Causes the avatar to wave.</TD></TR>
+  <TR>
+    <TD>Smile</TD>
+    <TD>Causes the avatar to smile.</TD></TR>
+  <TR>
+    <TD>Flirt</TD>
+    <TD>Causes the avatar to flirt.</TD></TR>
+  <TR>
+    <TD>Shrug</TD>
+    <TD>Causes the avatar to shrug.</TD></TR>
+  <TR>
+    <TD>Trick 1</TD>
+    <TD>Causes the avatar to perform an act.</TD></TR>
+  <TR>
+    <TD>Trick 2</TD>
+    <TD>Causes the avatar to perform an act.</TD></TR>
+  <TR>
+    <TD>Turn</TD>
+    <TD>Causes the avatar to turn.</TD></TR>
+  <TR>
+    <TD>Laugh</TD>
+    <TD>Causes the avatar to laugh.</TD></TR>
+  <TR>
+    <TD>Blush</TD>
+    <TD>Causes the avatar to blush.</TD></TR>
+  <TR>
+    <TD>Angry</TD>
+    <TD>Causes the avatar to angry.</TD></TR>
+  <TR>
+    <TD>Trick 3</TD>
+    <TD>Causes the avatar to pose for a picture.</TD></TR>
+<tr><td>Sleep</td>
+<td>Causes the avatar to sleep.</td>
+</tr>
+</table>
+<P>You can also use the <A href="DoGesture.htm">DoGesture</A> or the <A 
+href="DoNamedGesture.htm">DoNamedGesture</A> &nbsp;method to 
+articulate a specific gesture. The difference between these two methods is that 
+with the <b>DoGesture</b> method you must provide the 
+integer value for the gesture, whereas with the <A href="DoNamedGesture.htm">DoNamedGesture</A> method, you provide the name of the 
+gesture.
+<P>        
+    If you want to accompany&nbsp;a gesture with text that&nbsp;your avatar 
+speaks, you must use the <b>Emote</b> method. The 
+<b>DoGesture</b> method does not send text to the chat-history window.
+
+
+<H3>Example</H3><!--Example section-->
+<p> This example prints a list of the gestures to the Command Window and then applies the wave and smile gestures to the avatar.
+<pre class="example">
+<!--Example text-->
+Sub MakeAvatarWaveSmile()
+Dim myGestures
+Dim myGesture
+
+Set myGestures = User.<b>GetNamedGestures</b>
+</pre>
+<p class="comments">
+'Iterate through the gestures and display their names and index numbers.
+<pre class="example">
+For myGesture = 0 To 12
+    Trace myGestures.Property(myGesture)
+Next
+</pre>
+<p class="comments">'Execute the wave and smile gestures with text echoed to the chat-history window.
+<pre class="example">
+User.Emote "Wave"
+User.Emote "Smile", "Hi Everyone!"
+End Sub
+</pre>
+ 
+
+</body>
+</html>

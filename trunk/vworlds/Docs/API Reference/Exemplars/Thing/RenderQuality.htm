@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>RenderQuality</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>RenderQuality</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Short</b> that specifies the rendering quality. 
+<b>RenderQuality</b> is a read/write <b>Long</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>RenderQuality</b> = <i>longValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>RenderQuality</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">longValue</td>
+		<td>Short</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a valid <b>Long</b> value. See the table in the Remarks section for valid values.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This property applies to all meshes in the frame of the
+object. It takes a value from 0 to 4, as follows:</p>
+
+<table class="backlight">
+    <tr>
+            <td><b>Value</b></td>
+            <td><b>Meaning</b></td>
+            <td><b>Comment</b></td>
+    </tr>
+<tr class="line" ><td colspan=100%></td></tr>
+    <tr>
+            <td>0</td>
+            <td>Wireframe</td>
+            <td>No shading</td>
+    </tr>
+    <tr>
+            <td>1</td>
+            <td>Solid shading</td>
+            <td>Not affected by lights</td>
+    </tr>
+    <tr>
+            <td>2</td>
+            <td>Solid shading</td>
+            <td>Affected by lights; each triangle will be a solid
+            color </td>
+    </tr>
+    <tr>
+            <td>3</td>
+            <td>Gouraud shading</td>
+            <td>Affected by lights; smoothly shaded</td>
+    </tr>
+    <tr>
+            <td>4</td>
+            <td>Phong shading</td>
+            <td>Like Gouraud shading, but better quality</td>
+    </tr>
+</table>
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get this property:</p>
+
+<pre>   TheQuality = MyThing.RenderQuality</pre>
+
+<p>To set this property:</p>
+
+<pre>   MyThing.RenderQuality = 4</pre>&nbsp;
+ 
+
+</body>
+</html>

@@ -1,0 +1,286 @@
+<html>
+<head>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function LinkUp() 
+{
+var number = document.DropDown.DDlinks.selectedIndex;
+parent.RIGHT.location.href = document.DropDown.DDlinks.options[number].value;
+}
+// -->
+</SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+<!--
+function popitup(url)
+{
+	newwindow=window.open(url,'name','height=150,width=450');
+	//newwindow=window.open(url,'name','');
+	if (window.focus) {newwindow.focus()}
+}
+
+// -->
+</SCRIPT>
+
+
+<script LANGUAGE="JavaScript">
+<!--
+var total=1;
+var db = new Array();
+
+// -- Enter Values Here --
+// Format: dbAdd(parent[true|false] , description, URL [blank for nohref], level , TARGET [blank for "content"], new? [1=yes])
+dbAdd( false , "LogicMoo" , "projects.html" , 0 , "" , 0)
+dbAdd( true , "Projects" , "" ,0 , "" , 0)
+dbAdd( true , " OpenCYC Related" , "" ,1 , "" , 0)  
+     dbAdd( false , "Cyc Javashell" , "/opencyc/index.html#javashell" ,2 , "" , 0)
+     dbAdd( false , "Cyc KIF Tools" , "/opencyc/index.html#kif" ,2 , "" , 0)
+     dbAdd( false , "Cyc+Jamud" , "/jamud/" ,2 , "" , 0)  
+     dbAdd( false , "Cyc MUD" , "/cycmud/" ,2 , "" , 0)  
+dbAdd( true , "Prolog" , "" ,1 , "" , 0)  
+     dbAdd( false , "Prolog Virtual Worlds" , "/prologvirtualworlds/" ,2 , "" , 0)  
+     dbAdd( false , "OpenModality" , "/openmodality/" ,2 , "" , 0)  
+     dbAdd( false , "Active X" , "/SwiActX/" ,2 , "" , 0)  
+dbAdd( true , "Worldforge" , "" ,1 , "" , 0)
+     dbAdd( false , "Logicmoo Server" , "/worldforge/index.html#logicmoo" ,2 , "" , 0)
+     dbAdd( false , "Atlas Object Editor" , "/worldforge/index.html#atlas" ,2 , "" , 0)
+dbAdd( true , "Freecraft AI" , "/freecraft/" ,1 , "" , 0)
+dbAdd( false , "People" , "people.html#people" , 0 , "" , 0)
+dbAdd( false , "Links" , "people.html#links" , 0 , "" , 0)
+dbAdd( false, "Special Access" , "passpage.htm" , 0 , "" , 0)
+// dbAdd( false , "" , "" , 0 , "" , 0)
+
+// -- End modifications --
+
+// Get current cookie setting
+var current=getCurrState()
+function getCurrState() {
+  var label = "currState="
+  var labelLen = label.length
+  var cLen = document.cookie.length
+  var i = 0
+  while (i < cLen) {
+    var j = i + labelLen
+    if (document.cookie.substring(i,j) == label) {
+      var cEnd = document.cookie.indexOf(";",j)
+      if (cEnd == -1) { cEnd = document.cookie.length }
+      return unescape(document.cookie.substring(j,cEnd))
+    }
+    i++
+  }
+  return ""
+}
+
+// Add an entry to the database
+function dbAdd(mother,display,URL,indent,top,newitem) {
+  db[total] = new Object;
+  db[total].mother = mother
+  db[total].display = display
+  db[total].URL = URL
+  db[total].indent = indent
+  db[total].top = top
+  db[total].newitem = newitem
+  total++
+  }
+
+// Record current settings in cookie
+function setCurrState(setting) {
+  var expire = new Date();
+  expire.setTime(expire.getTime() + ( 7*24*60*60*1000 ) ); // expire in 1 week
+  document.cookie = "currState=" + escape(setting) + "; expires=" + expire.toGMTString();
+  }
+
+// toggles an outline mother entry, storing new value in the cookie
+function toggle(n) {
+  if (n != 0) {
+    var newString = ""
+    var expanded = current.substring(n-1,n) // of clicked item
+    newString += current.substring(0,n-1)
+    newString += expanded ^ 1 // Bitwise XOR clicked item
+    newString += current.substring(n,current.length)
+    setCurrState(newString) // write new state back to cookie
+  }
+}
+
+// returns padded spaces (in mulTIPles of 2) for indenting
+function pad(n) {
+  var result = ""
+  for (var i = 1; i <= n; i++) { result += "&nbsp;&nbsp;&nbsp;&nbsp;" }
+  return result
+}
+
+// Expand everything
+function explode() {
+  current = "";
+  initState="";
+  for (var i = 1; i < db.length; i++) { 
+    initState += "1"
+    current += "1"
+    }
+  setCurrState(initState);
+  history.go(0);
+  }
+
+// Collapse everything
+function contract() {
+  current = "";
+  initState="";
+  for (var i = 1; i < db.length; i++) { 
+    initState += "0"
+    current += "0"
+    }
+  setCurrState(initState);
+  history.go(0);
+  }
+
+function tree_close() {
+  window.parent.location = window.parent.RIGHT.location;
+  }
+
+// end -->
+
+
+</script>
+
+        <TITLE>Contents</TITLE>
+</HEAD>
+
+<BODY LINK="#e7e4d6" VLINK="#e7e4d6" bgcolor="#004d6b" text="#FFB294">
+<a href="about.html" target="RIGHT"><img src="logicmoo.gif"  alt="Logicmoo" border="0"></a>
+
+<table width=100% cellspacing=0 cellpadding=3 border=0>
+<tr>
+<td align=left  bgcolor="#004d6b" width=100%><font color="#fffffe" face="arial"><b>Contents</b></font></td>
+<td align=right bgcolor="#004d6b"><a href="javascript:contract();"><IMG SRC="minimize.gif" WIDTH=16 HEIGHT=14 BORDER=0></a><a href="javascript:explode();"><IMG SRC="maximize.gif" WIDTH=16 HEIGHT=14 BORDER=0 ></a><a href="javascript:tree_clos
+
+
+
+
+e();"><IMG SRC="x.gif" WIDTH=16 HEIGHT=14 BORDER=0></a></td>
+</tr>
+</table>
+<!-- <IMG SRC="images/dot.gif" WIDTH=16 HEIGHT=16 BORDER=0> = New!<br> -->
+<table border=0 width=500>
+<tr><td>
+<font size="-1">
+
+<script LANGUAGE="JavaScript">
+<!--
+// Set the initial state if no current state or length changed
+if (current == "" || current.length != (db.length-1)) {
+  current = ""
+  initState = ""
+  for (i = 1; i < db.length; i++) { 
+    initState += "0"
+    current += "0"
+    }
+  setCurrState(initState)
+  }
+var prevIndentDisplayed = 0
+var showMyDaughter = 0
+// end -->
+ 
+<!--
+var Outline=""
+// cycle through each entry in the outline array
+for (var i = 1; i < db.length; i++) {
+  var currIndent = db[i].indent           // get the indent level
+  var expanded = current.substring(i-1,i) // current state
+  var top = db[i].top
+  if (top == "") { top="RIGHT" }
+  // display entry only if it meets one of three criteria
+  if ((currIndent == 0 || currIndent <= prevIndentDisplayed || (showMyDaughter == 1 && (currIndent - prevIndentDisplayed == 1)))) {
+  Outline += pad(currIndent)
+
+  // Insert the appropriate GIF and HREF
+  newitem = "";
+//  if (db[i].newitem) { newitem="_new"; }
+//  if (!(db[i].mother)) {
+//    Outline += "<IMG SRC=\"images/blank.gif\" WIDTH=16 HEIGHT=16 BORDER=0><IMG SRC=\"images/document" + newitem + ".gif\" WIDTH=16 HEIGHT=16 BORDER=0>"
+//    } 
+//  else { 
+//      if (current.substring(i-1,i) == 1) {
+//        Outline += "<A HREF=\"javascript:history.go(0)\" onMouseOver=\"window.parent.status=\'Click to collapse\';return true;\" onClick=\"toggle(" + i + ")\">"
+//        Outline += "<IMG SRC=\"images/minus.gif\" WIDTH=16 HEIGHT=16 BORDER=0><IMG SRC=\"images/open" + newitem + ".gif\" WIDTH=16 HEIGHT=16 BORDER=0>"
+//        Outline += "</A>"
+//        }
+//      else {
+//	    Outline += "<A HREF=\"javascript:history.go(0)\" onMouseOver=\"window.parent.status=\'Click to expand\';return true;\" onClick=\"toggle(" + i + ")\">"
+//        Outline += "<IMG SRC=\"images/plus.gif\" WIDTH=16 HEIGHT=16 BORDER=0><IMG SRC=\"images/closed" + newitem + ".gif\" WIDTH=16 HEIGHT=16 BORDER=0>"
+//        Outline += "</A>"
+//        }
+//      }
+    Outline += "&nbsp;";
+     
+    if (db[i].URL == "" || db[i].URL == null) {
+     <!--  Outline += " " + db[i].display -->     // no link, just a listed item  
+	    Outline += "<A HREF=\"javascript:history.go(0)\" onMouseOver=\"window.parent.status=\'Click to expand\';return true;\" onClick=\"toggle(" + i + ")\">"
+	    Outline +="<font color=\"e7e4d6\"> <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana'>"
+        Outline += " " + db[i].display      // no link, just a listed item  
+       <!--  Outline += "<IMG SRC=\"images/plus.gif\" WIDTH=16 HEIGHT=16 BORDER=0><IMG SRC=\"images/closed" + newitem + ".gif\" WIDTH=16 HEIGHT=16 BORDER=0>" -->
+        Outline += "</span></font></A>"
+      }
+    else {
+      Outline += " <A HREF=\"" + db[i].URL + "\" TARGET=\"" + top + "\"><font color=\"e7e4d6\"> <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana'>" + db[i].display + "</span></font></A>"
+      }
+	// Bold if at level 0
+    if (currIndent == 0) { 
+      Outline = "<B>" + Outline + "</B>"
+      }
+    Outline += "<BR>"
+    prevIndentDisplayed = currIndent
+    showMyDaughter = expanded
+    // if (i == 1) { Outline = ""}
+    if (db.length > 25) {
+      document.write(Outline)
+      Outline = ""
+      }
+    }
+  }
+document.write(Outline)
+// end -->
+</script>
+
+
+</font>
+</td></tr>
+</table>
+<span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana'>
+<hr noshade>
+ <BR> 
+
+<form name="DropDown">
+ <p> 
+  <select name="DDlinks" onChange="LinkUp(this.form)" style="font-size: 8pt" size="1">
+   <option selected>Choose a Location
+   <option value="http://www.google.com">Google
+   <option value="GPL.htm">Governmental Project List
+
+  </select>
+ </p>
+</form>
+<br>
+
+</span>
+
+<p><a href="http://12.211.44.132/douglasm/index.html" target="RIGHT">
+<span style='mso-bidi-font-size: 12.0pt; font-family: Verdana'>
+<font color="#e7e4d6" face="Verdana" size="3">Douglas Miles</font>
+</span>
+</a></p>
+<span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana'>
+<hr noshade>
+
+<font color="FFB294">
+This site remains under construction.
+</font>
+<BR>
+<IMG SRC="digging.gif" width="38" height="38" ALT="">
+<BR>
+<a href="http://www.darpa.mil" target="RIGHT"><img alt="Defense Advanced Research Projects Agency (DARPA) Logo" border="0" src="darpa_logo.gif" width="89" height="45"></a><a href="http://www.darpa.mil"><br>
+</a>
+</span>
+</BODY>
+</HTML>

@@ -1,0 +1,170 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>IsInUserProfileList</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsInUserProfileList</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Avatar Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Returns <STRONG>True</STRONG> if&nbsp;an 
+object&nbsp;exists as a key value for an <A 
+href="../Avatar/Avatar.htm">Avatar</A> object's&nbsp;profile list. 
+<STRONG>IsInUserProfileList</STRONG> is a member of the <b>Avatar</b> exemplar.
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>IsInUserProfileList</STRONG>(<EM>pthing, 
+      bstrKey</EM>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The <STRONG>IsInUserProfileList</STRONG> method syntax 
+has these parts: 
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->Avatar</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An 
+      object reference to an <STRONG>Avatar</STRONG> 
+  object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>pthing</TD>
+    <TD>Thing</TD>
+    <TD>Required</TD>
+<td><!--Description-->An 
+      object reference to a <STRONG>Thing</STRONG> 
+  object.</td></TR>
+	<TR>
+		<td class="boldItal">bstrKey</td>
+		<td><!--Parameter name--</td>>
+		<td><!--Type-->String</td>
+		<td><!--Description-->Required</td><td><!--Description-->A 
+      string that represents a valid key in the key list of the profile&nbsp;for the 
+ 
+  avatar.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section --> </P>
+<H3>Return Value</H3>
+<p>This method returns a <STRONG>Boolean</STRONG> value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>The <STRONG>IsInUserProfileList</STRONG> method provides 
+a quick way for developers to check if an object exists in&nbsp;the profile 
+list of an avatar. If you know the name of the object and the key that should 
+hold it, you can use this method instead of using an 
+<STRONG>If...Then...Else</STRONG> &nbsp;statement to find the     
+             
+              
+               key. </P>
+<P> 
+           
+             
+                 
+       The <A 
+href="../../AvatarProfile/AvatarProfile.htm">AvatarProfile</A> object for an 
+avatar stores data in key lists, which are composed of <EM>key/value pairs</EM>. A key/value pair is a property name 
+paired with its value. The key is a string that represents the name of&nbsp;a 
+property in the property map. The value is the contents of&nbsp;that property. A 
+property map uses the string&nbsp;that makes up the key instead of an index 
+number to access the value of each 
+           
+             
+                 
+       property.&nbsp;</P>
+<P>Key/value pairs are distinguished by the type of value in 
+the pair. Types of keys include numeric<EM> </EM>keys 
+(whose corresponding value is a number), string keys (whose corresponding value 
+is a string), and <STRONG>PropertyList</STRONG> keys (whose 
+corresponding value is a <STRONG>PropertyList</STRONG> 
+object). </P>
+<H3>Example</H3>
+<p>
+This example creates a passport object, adds a "PassportID" key to the user's profile with reference to the passport object, and then removes the key.
+</p>
+
+<pre class="example">
+Sub AddPassportKey()
+Dim myNewPassport
+Dim myPass
+Dim myKeys
+Dim myCount
+Dim myDoesExist
+
+Set myKeys = User.Profile.Keys
+Set myCount = myKeys.Count - 1
+</pre>
+<p class="comments">
+'Create the passport object.
+<pre class="example">
+Set myNewPassport = _
+&nbsp;&nbsp;CreateInstance("Passport", "Artifact", User.Container)
+</pre>
+<p class="comments">
+'Get a reference to the new object.
+<pre class="example">
+Set myPass = User.Container.FindWithin("Passport")
+</pre>
+<p class="comments">
+'Add a new key to the user's profile.
+<pre class="example">
+User.AddToUserProfileList myPass, "PassportID"
+</pre>
+<p class="comments">
+'Verify that the new key exists in the user's profile.
+<pre class="example">
+For i = 0 To myCount
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myKeys.Property(i)
+Next
+</pre>
+<p class="comments">
+'Another way to verify that the new key exists is<br>'to use the <b>IsInUserProfileList</b> method.
+<pre class="example">
+myDoesExist = User.<b>IsInUserProfileList(myPass, "PassportID")</b>
+Trace myDoesExist
+</pre>
+<p class="comments">
+'To remove the new key.
+<pre class="example">
+User.RemoveFromUserProfileList myPass, "PassportID"
+
+End Sub
+</pre>
+</body>
+</html>

@@ -1,0 +1,97 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<Link rel="Stylesheet" href="../../APIRef.css">
+<head>
+	<title>LightEnabled</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> LightEnabled</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Light Exemplar</td>
+	</tr>
+</table>
+<P>
+<P>
+<P>
+<!--Summary of topic--> 
+<br>
+ A flag that indicates whether the effects of a <b><a href="Light.htm">Light</a></b> object are visible. <b>LightEnabled</b> is a 
+read/write <b>Boolean</b>.
+          
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td>     
+      <p><EM>object</EM>.<b>LightEnabled</b> = <EM>BooleanValue</EM></p></td><!--syntax statement -->
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>LightEnabled</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Light</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An instance of the <b>Light</b> Exemplar.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">BooleanValue</td>
+		<td>Boolean</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>
+      <P><em><b>True</b></em>: The lighting effects of the light object are visible in the 
+      3-D view. The default setting is <b>True</b>.
+      <P><em><b>False</b></em>: The lighting effects are not visible. </td><!--Description-->
+	</TR>
+</TABLE>
+<!--Remarks section-->
+<H3>Remarks</H3>
+<!--Insert Remarks here-->
+<P>The <b>LightEnabled </b> property is particularly useful when trying to isolate specific lighting effects on surfaces that are illuminated by multiple lights. The cumulative characteristics of light are reflected by the behavior of <b>Light</b> objects in Microsoft Virtual Worlds. If an object shares multiple light sources, the effects of each light are mathematically combined with other lights that share the same space. This combination of light can create unexpected colors and peculiar lighting effects.
+
+<p>To narrow down which light is causing an unexpected effect, the <b>LightEnabled</b> property of each <b>Light</b> object provides a way to systematically shut down lights until the source of the effect is identified.  
+<H3>Example</H3>
+<p>This example creates a <b>Light</b> object, changes the <b>LightEnabled</b> property to <b>False</b>, and then verifies that the effect is disabled by displaying the status in the Command Window.
+<p class=comments>'Create a <b>Light</b> object.
+<pre class=example>Dim myLight
+Set myLight = World.CreateInstance("Light1", "Light", User.Container)
+</pre>
+<p class=comments>'Disable the light effect using the <b>LightEnabled</b> property.
+<pre class=example>myLight.<STRONG>LightEnabled </STRONG>= False</pre>
+
+<p class=comments>'Trace the current status of the light to the Command Window.
+<pre class=example>Trace Light1.<b>LightEnabled</b> 
+
+
+</pre>&nbsp;
+ 
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>EntryOrientation</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>EntryOrientation</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Portal Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Vector</b> specifying the orientation of an object when it transports through a portal. 
+<b>EntryOrientation</b> is a read/write <b>Vector</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>EntryOrientation</b>&nbsp;=&nbsp;<i>VectorValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>EntryOrientation</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Portal</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Portal</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">VectorValue</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>The orientation vector of a new arrival in a room.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>When an object arrives in a room, its position and orientation are set by two 
+<B>Room</B> properties: <a href="EntryPoint.htm">EntryPoint</a> and 
+<B>EntryOrientation</B>. <B>EntryPoint</B> represents the object's location in 
+the room, and <B>EntryOrientation</B> represents the direction 
+it is facing. This property's default value is the vector (0, 0, 1).&nbsp;
+
+<p>The <a href="../Thing/Direction.htm">Direction</a> property is set to the <b>EntryOrientation</b> value when the object enters the destination room.
+<!--Example section-->
+<H3>Example</H3>
+<p>To get the <b>EntryOrientation</b>:</p>
+
+<pre>   Set EntryDir = MyPortal.EntryOrientation </pre>
+
+<p>To set the <b>EntryOrientation</b>:</p>
+
+<pre>   MyPortal.EntryOrientation = World.CreateVector(2,2,2)
+
+</pre>
+
+
+</body>
+</html>

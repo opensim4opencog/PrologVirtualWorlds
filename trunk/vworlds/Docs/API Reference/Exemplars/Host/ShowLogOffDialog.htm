@@ -1,0 +1,84 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>ShowLogOffDialog</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ShowLogOffDialog</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Host Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Brings up a logoff dialog box that asks the host why the 
+user is being logged off. <b>ShowLogOffDialog</b> is a member of 
+the <a href="Host.htm">Host</a> exemplar. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>ShowLogOffDialog</b>&nbsp;<i>pTarget</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>ShowLogOffDialog</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Host</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Host</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pTarget</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The avatar to log off.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <i>Target</i> user cannot be a wizard; if a wizard is set as the 
+<i>Target</i>, the method will fail.&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><PRE>HostNancy.ShowLogOffDialog RudeGwen</PRE>&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>GetAnimationStartTime</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetAnimationStartTime</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>Returns the global time (in milliseconds) at which the 
+animation specified by the <EM>bstrPropertyName</EM> parameter was started for the current <A href="Thing.htm">Thing</A> object. <b>GetAnimationStartTime</b> is a member of the <b>Thing</b> exemplar. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetAnimationStartTime</b>(<EM>bstrPropertyName</EM>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The&nbsp;<STRONG>GetAnimationStartTime</STRONG>  method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Thing</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses a 
+      <STRONG>Thing</STRONG>       object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name--><EM>bstrPropertyName</EM></td>
+		<td><!--Type-->String</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->A&nbsp;<STRONG>String</STRONG> 
+      value that&nbsp;represents one of the valid property names corresponding 
+      to the&nbsp;animation action you want to perform.<FONT size=2></FONT> 
+           </td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>
+<H4>Valid Values for the <I>bstrPropertyName</I> Parameter</H4></H3>
+<P>You can use the following property names as values for 
+the <EM>bstrPropertyName</EM> parameter: 
+<STRONG>Direction</STRONG>, <STRONG>LightAttenuation</STRONG>, 
+<STRONG>LightColor</STRONG>, <STRONG>Position</STRONG>, <STRONG>Scale</STRONG>, 
+<STRONG>Up</STRONG>, And <STRONG>File</STRONG>            
+.</P>
+<H3>Return Value</H3>
+<p>
+This 
+method returns a time value in&nbsp;milliseconds as a 
+<STRONG>Long</STRONG>. This value is the time that the 
+specified animation started running, or zero if the specified property is not 
+animating on the object.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>You can use this method in conjunction with the 
+<a href="../../World/GetAnimationSystemTime.htm">GetAnimationSystemTime</a> 
+property to determine the current keyframe of the animation that is currently 
+running.
+<P>The <STRONG>GetAnimationStartTime</STRONG> method returns 0 for the 
+following two conditions: 
+<UL>
+  <LI>If the current animation is running only on the current client.
+  <LI>If the specified animation does not exist or was stopped.</LI></UL>
+<H3>Example</H3>
+<p>This example determines how long an animation has been running and puts the number of milliseconds into the "myPositionClock" variable. </p>
+
+<pre class="example">
+Dim myPositionClock
+
+myPositionClock = myBaseball.AnimationSystemTime - _
+&nbsp;&nbsp;myBaseball.<b>GetAnimationStartTime("Position")</b>
+</pre>
+
+
+</body>
+</html>

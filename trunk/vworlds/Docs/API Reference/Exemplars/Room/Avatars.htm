@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Avatars (Room)</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Avatars (Room)</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Room Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <a href="../../PropertyList/PropertyList.htm">PropertyList</a> of every 
+<a href="../Avatar/Avatar.htm">Avatar</a> who is currently, or has previously been, in the 
+<b>Room</b>, whether connected or not.&nbsp;<b>Avatars</b> is a read-only 
+<b>PropertyList</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Avatars</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Avatars</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Room</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Room</b> object.</td>
+	</TR>
+	
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Avatars</b> property stores a <b>PropertyList</b> of every <b>Avatar</b> that has entered the specified <b>Room</b>, regardless of whether they are logged on or not.
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>    
+Set Visitors = User.Container.Avatars&nbsp;</pre>
+
+
+</body>
+</html>

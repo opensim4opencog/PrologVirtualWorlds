@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>LabelStyle</title>
+</head>
+
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>LabelStyle</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<p>Sets or returns the text style of the <A href="Label.htm">Label</a> of a <A href="Thing.htm">Thing</A> 
+object. <b>LabelStyle</b> is a read/write <b>Long</b>.      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><em>object</em>.<b>LabelStyle</b> = <em>longValue</em></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>LabelStyle</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An instance of the <b>Thing</b> exemplar.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">longValue</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>Any valid expression that evaluates to a <b>Long</b>. You can also use the enumerated types in the following table.</td>
+	</TR>
+</TD></TR>
+</TABLE>
+<H4>Enumerated Types For the <i>longValue</i> Parameter</H4>
+<TABLE class="backlight">
+<thead>
+		<TR>
+			<td>Enumerated type</td>
+			<td align="center">Value</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+
+<TR class=line><TD colSpan=100%></TD></TR>
+
+<TR>
+<TD>Nomal</TD>
+<TD><P align=center>0</TD>
+<TD>The label is not formatted. The default setting.</TD>
+</TR>
+
+<TR><TD>BOLD </TD>
+<TD><P align=center>1</TD>
+<TD>The label is bold.</TD>
+</TR>
+
+<TR>
+<TD>ITALIC</TD>
+<TD><P align=center>2</TD>
+<TD>The label is italic.</TD>
+</TR>
+<TR>
+<TD>UNDERLINE</TD>
+<TD><P align=center>4</TD>
+<TD>The label is underlined.</TD>
+</TR>
+<TR>
+<TD>STRIKETHROUGH</TD>
+<TD><P align=center>8</TD>
+<TD>The label has a horizontal line through the center.</TD>
+</TR>
+</TABLE>
+
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>In addition to using the settings individually, you can also combine settings. For example, the expression BOLD + UNDERLINE would produce a label that was both bold and underlined. You can also combine types and values together to achieve the same results.
+
+
+<!--Example section-->
+<H3>Examples</H3>
+<p>This example gives an object a <b>Label</b> and then changes the style of the <b>Label</b>. In this example, "strMyName" equals "Bob", and "strMyLabel" equals "Bob's Label". 
+<br>
+<br>
+<pre class="example">
+Sub LabelBoldUnderline(strMyName, strMyLabel)
+Dim myVehicle
+Dim myOldLabelStyle</pre>
+<p class=comments>'Acquire a reference to the object named "Bob".
+<pre class="example">Set myVehicle = User.Container.FindWithin(strMyName)</pre>
+
+<p class=comments>'Provide a label for the object that says "Bob's Label".
+<pre class="example">myVehicle.Label = strMyLabel</pre>
+
+<p class=comments>'Change the label style.
+<pre class="example">myVehicle.<b>LabelStyle</b> = BOLD + UNDERLINE
+
+End Sub
+</pre>
+<p>Example 2
+<p>This example shows the command line syntax for changing the style. To use this example in the Command Window, substitute the name of an existing <b>Thing</b> object for the argument "myThingObject".
+<br>
+<br>
+<pre class="example">
+Dim myObject
+Set myObject = User.Container.FindWithin("myThingObject")</pre>
+<p class=comments>'Change the label style to strikethrough.
+<pre class="example">myObject.LabelStyle = STRIKETHROUGH</pre>
+<!--See also section-->
+
+
+
+</body>
+</html>

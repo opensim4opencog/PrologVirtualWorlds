@@ -1,0 +1,452 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>StartAnimation</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>StartAnimation</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>Begins&nbsp;an animation contained in an&nbsp;object's geometry or&nbsp;animates a graphical property of a <A href="Thing.htm">Thing</A> object. When the animation finishes, the method specified by the <EM>varCallBack</EM> parameter executes. 
+<STRONG>StartAnimation</STRONG> is a member of the <b>Thing</b> exemplar.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>StartAnimation</STRONG><EM> 
+      bstrPropertyName </EM>[<EM>, varPathMap</EM>] [<EM>,</EM> 
+      <EM>varCallBack</EM>] [<EM>, varOptions</EM>] [<EM>, varTimeScale</EM>] 
+      [<EM>, varStartRange</EM>] [<EM>, varEndRange</EM>] [<EM>, 
+    varIndex</EM>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>StartAnimation</STRONG> method syntax has these parts: </P>
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>Object</TD>
+    <TD>Required</TD>
+    <TD>An&nbsp;object reference that accesses a 
+      <B>Thing</B> object.</TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->bstrPropertyName</td>
+		<td><!--Type-->String</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->A&nbsp;<STRONG>String</STRONG> 
+      value that&nbsp;represents one of the valid property names corresponding 
+      to the&nbsp;animation action you want to perform.<FONT size=2 
+      ></FONT> 
+           </td>
+	</TR>
+  <TR>
+    <TD class=boldItal>[varPathMap]</TD>
+    <TD>Variant (PropertyMap)</TD>
+    <TD>Optional</TD>
+    <TD>
+      <P>A reference&nbsp;to&nbsp;a <A href="../../PropertyMap/PropertyMap.htm">PropertyMap</A>  
+                 
+      object that contains&nbsp;the interpolation path data. The property map is a list of values 
+      for the object property keyed by frame numbers. </P>
+      <P>If the value for the <EM>bstrPropertyName</EM> parameter is "File" then  
+                 
+                  this parameter 
+      is ignored because the animation data is contained in the file and does 
+      not need to be specified by a property map.<FONT 
+      size=2 ></FONT> </P>             
+  </TD></TR>
+  <TR>
+    <TD class=boldItal>[<EM>varCallBack</EM>] </TD>
+    <TD>Variant (String)</TD>
+    <TD>Optional</TD>
+    <TD>A <STRONG>String</STRONG> that represents the 
+      name of the method that the <STRONG>StartAnimation</STRONG> 
+      method&nbsp;invokes when the animation completes or programmatically 
+      terminates.</TD></TR>
+  <TR>
+    <TD class=boldItal>[<EM>varOptions</EM>] </TD>
+    <TD>Variant (Flags)</TD>
+    <TD>Optional</TD>
+    <TD>
+      <P>A bitflag with component values that determine the 
+      overall behavior of the animation. The bitflag values are added together 
+      to compose the resulting flag.&nbsp;</P>
+      <P>Default value for this flag is <EM>A_LINEAR</EM> + 
+      <EM>A_ONCE</EM>      .</P></TD></TR>
+  <TR>
+    <TD class=boldItal>[varTimeScale] </TD>
+    <TD>
+      <P>Variant (Float)</P></TD>
+    <TD>Optional</TD>
+    <TD>
+      <P>A <STRONG>Float</STRONG> that 
+      describes an overall scale for the animation timeline. Default value is 
+      1.0 (normal time scale). However, 1.0 scales keyframes to one millisecond 
+      each and, depending on your animation model, this may be too fast to be 
+      visible. For&nbsp;more information on animation models and time scales, 
+      refer to the section Valid Values for the <EM>varTimeScale</EM>  
+                 
+                
+                   
+               
+              Parameter.</P>         </TD></TR>
+  <TR>
+    <TD class=boldItal>[<EM>varStartRange</EM>] </TD>
+    <TD>Variant (Float)</TD>
+    <TD>Optional</TD>
+    <TD>
+      <P>A <STRONG>Float</STRONG> that 
+      specifies the keyframe 
+      within the animation path at which to start 
+      playing the animation. If this parameter is omitted, the animation starts from 
+      the beginning of the animation.</P>
+      <P><STRONG>Note:</STRONG>&nbsp;&nbsp;&nbsp;Required for 
+      <STRONG>File</STRONG> animations.</P>
+      <P>If this parameter is applied to an object property animation, the 
+      animation must start with the value in the path map nearest the 
+      prescribed&nbsp;start range time.</P></TD></TR>
+  <TR>
+    <TD class=boldItal>[<EM>varEndRange</EM>] </TD>
+    <TD>Variant (Float)</TD>
+    <TD>Optional</TD>
+    <TD>
+      <P>A <STRONG>Float</STRONG> that 
+      specifies the keyframe within the animation path at 
+      which to stop playing the animation. If this parameter is omitted, the 
+      animation plays to the end of the animation. If specified, you must 
+      also specify a value for the <EM>varStartRange</EM> parameter.</P>
+      <P><STRONG>Note:</STRONG>&nbsp;&nbsp;&nbsp;Required for 
+      <STRONG>File</STRONG> animations.</P>
+      <P>If this parameter is applied to an object property animation, the 
+      animation must&nbsp;end with the value in the path map nearest the 
+      prescribed&nbsp;end range time.</P></TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->[<EM>varIndex</EM>]</td>
+		<td><!--Type-->Variant 
+      (Float)</td>
+		<td><!--Required or Optional-->Optional</td>
+		<td>
+      <P><!--Description-->A 
+      <STRONG>Float</STRONG> that specifies the keyframe 
+      where the animation begins execution. For animations with 
+      the flag A_LOOP enabled, this parameter overrides the 
+      <EM>varStartRange</EM> parameter only the first time that the animation 
+      runs. Each succeeding time, the animation begins at the position set by 
+      the <EM>varStartRange</EM>        
+      parameter. </P>
+      <P>  If the keyframe is set before the start or after the 
+      end of the&nbsp;animation path, the keyframe will&nbsp;default to the front or the 
+      end of the animation, respectively.</P></td>
+	</TR></TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<P>This method does not return a value.</P>
+
+<H4>Valid Values for the <i>bstrPropertyName</i> 
+Parameter</H4>
+<P>You can use the following property names as values for the <i>bstrPropertyName</i> parameter.</P>
+<TABLE class="backlight">
+<thead>
+<tr>
+<td>Property
+</td>
+<td>Description
+</td>
+</tr>
+</thead>
+<tr class="line" ><td colspan=100></td></tr>
+<tr><td><STRONG>Direction</STRONG></td>
+<td>Interpolate the <STRONG>Direction</STRONG> property of a 
+      <STRONG>Thing</STRONG>    object over the path 
+      provided in the&nbsp;<EM>varPathMap</EM> parameter.</td></tr>
+  <TR>
+    <TD><STRONG>LightAttenuation</STRONG></TD>
+    <TD>Interpolate 
+      the&nbsp;<STRONG>LightAttenuation</STRONG> property of type 
+      <A href="../Light/Light.htm">Light</A> exemplar&nbsp;for a <STRONG>Thing</STRONG>    object over the 
+      path provided in the <EM><EM>varPathMap</EM></EM> parameter.</TD></TR>
+  <TR>
+    <TD><STRONG>LightColor</STRONG></TD>
+    <TD>Interpolate the&nbsp;<STRONG>LightColor</STRONG> property of type 
+      <STRONG>Light</STRONG> exemplar&nbsp;for a <STRONG>Thing</STRONG>    object over the 
+      path provided in the <EM><EM>varPathMap</EM></EM> 
+                 
+      parameter.</TD></TR>
+  <TR>
+    <TD><STRONG>Position</STRONG></TD>
+    <TD>Interpolate the <STRONG>Position</STRONG> property of 
+      a&nbsp;<STRONG>Thing</STRONG>  
+        object over the path provided in the <EM><EM>varPathMap</EM></EM>       
+             parameter.</TD></TR>
+  <TR>
+    <TD><STRONG>Scale</STRONG></TD>
+    <TD>Interpolate the&nbsp;<STRONG>Scale</STRONG> property of 
+      a&nbsp;<STRONG>Thing</STRONG> 
+         object over the path provided in the 
+      <EM><EM>varPathMap</EM></EM> 
+      parameter. The default time scale is milliseconds.</TD></TR>
+  <TR>
+    <TD><STRONG>Up</STRONG></TD>
+    <TD>Interpolate the&nbsp;<STRONG>Up</STRONG> property of a <STRONG>Thing</STRONG>  
+        object over the path provided in the <EM><EM>varPathMap</EM></EM> 
+      parameter.</TD></TR>
+<tr><td><STRONG>File</STRONG></td><td>Run the animation embedded in the geometry 
+  file.</td></tr></TABLE>
+<P><STRONG>Note:</STRONG>&nbsp;&nbsp;&nbsp;Due to certain 
+restrictions, you cannot simultaneously animate <STRONG>Scale</STRONG>&nbsp;and 
+<STRONG>Direction</STRONG>, <STRONG>Scale</STRONG>&nbsp;and <STRONG>Up</STRONG>, 
+or <STRONG>Up</STRONG> + <STRONG>Direction</STRONG>     
+            
+.</P>
+
+<H4>Valid Values for the <EM>varPathMap</EM>   Parameter</H4>
+<P>The <EM>varPathMap</EM> parameter 
+must&nbsp;reference a property map that consists of key and value pairs. The 
+string for&nbsp;each key must be a positive integer, such as "0", "2", "4", or 
+"2000". Each key must be unique. The value for each key represents the state of 
+the animation at that point in the timeline and must be a vector.&nbsp;The 
+key/value 
+pairs in the property map create the keyframes of the animation path for 
+the object.</P>
+
+<H4>Valid Values for the <EM>varCallBack</EM> 
+Parameter</H4>
+<P>The callback method can be any method&nbsp;for&nbsp;the <STRONG>Thing</STRONG>   object      
+ being animated.The callback method must&nbsp;accept exactly two parameters:&nbsp;A boolean that indicates whether the 
+animation finished,&nbsp;and a float that indicates 
+the time that the animation finished. You can 
+use&nbsp;a callback method&nbsp;to inform you when an animation 
+finishes.&nbsp; The following code traces a comment and the current data and time 
+to the Command Window after the animation finishes. </P>
+<blockquote><PRE>
+Sub AnimDone(myIsDone, myAnimStopTime)
+&nbsp;&nbsp;&nbsp;&nbsp;Trace "Animation is done " &amp; cstr(Now)
+End Sub
+</PRE></blockquote>
+<p>The "AnimDone" method&nbsp;would be specified as the callback 
+method in a call to the <STRONG>StartAnimation</STRONG>     
+       
+method.
+<blockquote><PRE>
+myCreakyDoor.StartAnimation "Position", _
+&nbsp;&nbsp;&nbsp;&nbsp;myCreakyDoor.myPosPropertyMap, _ &nbsp;&nbsp;&nbsp;&nbsp;"AnimDone",
+9, .001,
+0, 30
+</PRE></blockquote>
+<p>If you want to use the "AnimDone" method to start 
+another animation, you must&nbsp;check that the value of the "myIsDone" 
+parameter of the callback ("AnimDone") method is <STRONG>True</STRONG>,&nbsp;meaning that the animation completed 
+normally. Otherwise, you may inadvertently create non-stoppable animations.
+<P>If you invoke the <A href="StopAnimation.htm">StopAnimation</A> method, the method specified in the <i>varCallBack</i> parameter 
+fires when the animation stops.
+<H4>Enumerated Types for the <EM>varOptions</EM>&nbsp;Parameter</H4>
+<TABLE class="backlight" >
+<!--table: Caption-->
+	<thead>
+		<TR>
+			<td>Option</td>
+    <TD>Value</TD>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--table: contents-->
+  <TR>
+    <TD class=boldItal>A_ONCE</TD>
+    <TD>
+      <P align="center">1</P></TD>
+    <TD>Animation runs once and then stops.</TD></TR>
+  <TR>
+    <TD class=boldItal>A_LOOP</TD>
+    <TD>
+      <P align="center">2</P></TD>
+    <TD>Animation runs continually until manually 
+    stopped.</TD></TR>
+  <TR>
+    <TD class=boldItal>A_LINEAR</TD>
+    <TD >
+      <P align="center">4</P></TD>
+    <TD>Animation follows a path along a line.</TD></TR>
+  <TR>
+    <TD class=boldItal>A-SPLINE</TD>
+    <TD>
+      <P align="center">8</P></TD>
+    <TD>Animation follows a mathmetically calculated 
+      curved path.</TD></TR>
+  <TR>
+    <TD class=boldItal>A_NEAREST</TD>
+    <TD>
+      <P align="center">16</P></TD>
+    <TD>The property value is set to the keyframe that is the closest approximation 
+      of the current time. This causes the object&nbsp;to animate in discrete 
+      steps instead of fluidly interpolating.</TD></TR>
+  <TR>
+    <TD class=boldItal>A_LOCAL</TD>
+    <TD>
+      <P align=center>32</P></TD>
+    <TD>Animation runs only on the client and is not remoted to other 
+      computers.</TD></TR>
+
+  <TR>
+    <TD class=boldItal>A_RELATIVE</TD>
+    <TD>
+      <P align=center>64</P></TD>
+    <TD>
+      <P>The animation path values are calculated for the 
+      position of the object at the time that you invoke the <STRONG>StartAnimation</STRONG> method.</P>
+      <P>This option automatically makes the animation 
+local.</P>               
+         </TD></TR>
+</TABLE>
+<P>Some of the flag components can not be used in combination. For example, the 
+<EM>Nearest</EM>, <EM>Linear</EM>, and <EM>Spline</EM> flags are mutually 
+exclusive.<FONT size=2 ></P></FONT>
+<DIV></DIV>
+<H4>Valid Values for the <EM>varTimeScale</EM> Parameter</H4>
+<P>The <EM>varTimeScale</EM> parameter represents the rate 
+of an animation in frames per milliseconds. You can control the speed of your animation by using the 
+<EM>varTimeScale</EM> parameter. Because Virtual Worlds defaults to a 
+millisecond per frame time scale, you must adjust the <EM>varTimeScale</EM> parameter to a smaller 
+number to run the animation at a 
+slower rate. For example, if you have an animation that is 10 frames long 
+and you animate it using the default for the time scale (1.0), those 10 frames 
+will run in one thousandth of a second each, or a period of one one-hundredth 
+of a second. In order to slow the animation down, you can set the 
+<EM>varTimeScale</EM> paramater to 
+.001 frames per second to produce an animation where each key represents a second, producing 
+a period of 10 seconds. The following diagram represents&nbsp;the keyframes of a position 
+animation.
+<H5>Timeline with vectors and keyframes</H5><IMG 
+alt="Time line with vector values" border=0 src="../../Images/Timeline.jpg">
+<P><STRONG>Tip:&nbsp;&nbsp;&nbsp;</STRONG>File animations usually take a time 
+scale value that is less than 1. Anything greater than that will run too quickly 
+and it may not be visible in the 3-D view.The smaller the number for the value 
+of the time scale, the slower the animation runs.</P>
+<P>  Running&nbsp;at .001 frames per millisecond,&nbsp;an animation based 
+on the timeline in the diagram reaches the&nbsp;tenth keyframe in&nbsp;10 
+seconds. If you change the time scale to .01 frames per millisecond, the animation 
+would reach the&nbsp;tenth keyframe in&nbsp;1 second. </P>
+<P>               
+   The following code animates the&nbsp;position of an object 
+along the path in the property map in a continuous loop.</P>
+<BLOCKQUOTE><PRE>mySkateBoard.<B>StartAnimation "Position", _
+&nbsp;&nbsp;mySkateBoard.myPositionPropertyMap, "AnimDone", A_LOOP, 0.001</B>&nbsp;</PRE></BLOCKQUOTE>
+<H4>Valid Values for the <EM>varStartRange</EM> and 
+<EM>varEndRange</EM> Parameters</H4>
+<P>You can set the starting and ending ranges for an animation to 
+any&nbsp;keyframe numbers within the&nbsp;scope of the animation. If you have an 
+animation that is 25 keyframes, you can start the animation to any keyframe from 
+0 through 23 for the <EM>varStartRange</EM> parameter, and set the 
+<EM>varEndRange</EM> parameter to the twentyfourth keyframe. </P>
+<P><STRONG>Note:&nbsp;&nbsp;&nbsp;</STRONG>It is possible to set the 
+<EM>varEndRange</EM> to a keyframe that exceeds the number of keyframes 
+in the animation. If this happens, the end range&nbsp;defaults to the last keyframe in the 
+animation.</P>
+<H4>Effects of the <i>varIndex</i> Parameter</H4>
+<P>The <EM>varIndex</EM>          parameter&nbsp;provides 
+a&nbsp;way to start an animation at a&nbsp;keyframe other than the position specified by the 
+<EM>varStartRange</EM> parameter.&nbsp;This&nbsp;index is valid 
+ only for 
+the first time that the animation starts (if it loops), after that the 
+animation restarts at the keyframe specified in the <EM>varStartRange</EM> 
+parameter. The <EM>varIndex</EM> parameter affects          
+ the start of an animation at the onset of the animation, unlike the 
+<A href="SetAnimationIndex.htm">SetAnimationIndex</A> 
+method,&nbsp;which affects the positioning of the animation after it 
+has already started.</P>
+<h5>Practical Application of the <EM>varIndex</EM> 
+Parameter</h5><I></I><I></I>
+<p>                              If you&nbsp;create two objects that you want to have 
+share the same path, but start at different points in time on the path, 
+you&nbsp;can run the animation from 30 to 50 keyframes the first time&nbsp;and 
+from 10 to 50 keyframes thereafter. You might run another object&nbsp;from 20 to 
+50 keyframes the first time and 10 to 50 keyframes thereafter. The result is one 
+object 10 keyframes behind the other, moving together in a loop. 
+<H4>   Animating a Thing</H4>
+<P>You can animate any <STRONG>Thing</STRONG>   
+        object. The process for animating 
+an object in a world follows these essential steps:</P>
+<ol type="1">
+	<li>Create an object either in a world or in script. 
+  <LI>Decide which property you want to animate: direction, position, scale, and 
+  so on.
+  <LI>Create a property map that contains each keyframe and position vector for 
+  the animation.
+  <LI>Set a reference to the object.
+  <LI>Use the <STRONG>StartAnimation</STRONG> method to execute your animation 
+  with code similar to the following statement.<blockquote><pre>myHat.<STRONG>StartAnimation "Position", myHat.mapPosition</STRONG></pre></blockquote>      
+          
+  </LI>        
+</ol>
+<p>You can use a property map similar to the following one in your animation of a hat.
+<blockquote><pre>Dim mapPosition
+
+Set mapPosition = CreatePropertyMap
+mapPos.Property("0") = CreateVector(.5, 0,  0)
+mapPos.Property("2") = CreateVector(5, 3, 0)
+mapPos.Property("4") = CreateVector(.5, 0, 0)
+myHat.AddProperty "mapPosition", MapPos
+</pre></blockquote>
+<H4>Processing Geometry Files</H4>
+<P>            
+Certain geometry files (such as files with the extension .x) can include 
+animation information, such as motion capture data or other animation detail for the model. 
+The animation data is streamed from the file as a single 
+long animation. An avatar model can contain animations for several gestures (waving, 
+hugging, nodding, running, or walking) chained together in a long sequence. You 
+can choose to execute the entire animation sequence or any range within it by 
+picking a single animation out of the set and specifying its value in the 
+<EM>varIndex</EM> 
+parameter.&nbsp;&nbsp;
+  </P>
+<H3>Example</H3>
+<p>                                               This example creates a property map and executes the <b>StartAnimation</b> method.</p>
+<pre class="example">
+Dim myPosMap
+
+Set myPosMap = CreatePropertyMap
+myPosMap.Property("0") = CreateVector(.5, 0,  0)
+myPosMap.Property("2") = CreateVector(5, 3, 0)
+myPosMap.Property("4") = CreateVector(.5, 0, 0) 
+
+myBaseball.AddProperty "myPosMap", myPosMap
+
+myBaseball.<STRONG>StartAnimation "Position", myBaseball.myPosMap</STRONG></PRE > 
+</body>
+</html>

@@ -1,0 +1,92 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>SetIfState</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetIfState</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the StateMachine Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Set the state of the default state machine (<i>Default</i>) to a new state, but only
+if it is in a given state. <b>SetIfState</b> is a member of the <b>StateMachine</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetIfState</b>&nbsp;<i>bstrOldState, bstrNewState</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetIfState</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>StateMachine</td>
+		<td>Required</td>
+		<td>An object reference that accesses a StateMachine object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrOldState</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The current state.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrNewState</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The state to be changed to.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method sets the state of the default state machine (<i>Default</i>) to a new
+state (<i>bstrNewState</i>), but only if it is in the given state (<i>CurrentState</i>);
+it can be run from the client or the server. For internal state machines other than <i>Default</i>,
+use the <a href="SetStateMachineIfState.htm">SetStateMachineIfState</a> method of 
+<b>StateMachine</b>.&nbsp;
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyStateMachine.SetIfState &quot;Waiting&quot;, &quot;TurnLeft&quot;</pre>
+&nbsp;
+
+
+</body>
+</html>

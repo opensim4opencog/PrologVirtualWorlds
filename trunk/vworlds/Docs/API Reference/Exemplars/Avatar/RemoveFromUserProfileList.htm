@@ -1,0 +1,154 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>RemoveFromUserProfileList</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>RemoveFromUserProfileList</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Avatar Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Removes&nbsp;the specified property from a key&nbsp;in the profile list 
+of an avatar. <STRONG>RemoveFromUserProfileList</STRONG>   is a member of the <A 
+href="Avatar.htm">Avatar</A> exemplar.&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object.</EM><STRONG>RemoveFromUserProfileList</STRONG>&nbsp;<EM>pthing, 
+      bstrKey</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The&nbsp;<STRONG>RemoveFromUserProfileList</STRONG>  method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Avatar</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses an 
+      <STRONG>Avatar</STRONG>       object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>pthing</TD>
+    <TD>Thing</TD>
+    <TD>Required</TD>
+    <TD>An object reference that accesses a 
+      <STRONG>Thing</STRONG> object.</TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->bstrKey</td>
+		<td><!--Type-->String</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->A 
+      string 
+      that represents a valid key in the key list of the profile of the 
+      avatar.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>
+<P>            
+           The <STRONG>RemoveFromUserProfileList</STRONG> method is used only for 
+removing properties&nbsp;from keys in avatar profiles.&nbsp;For example, if you 
+have a property list that was added to a key in a user's profile, you can use 
+the <STRONG>RemoveFromUserProfileList</STRONG>       
+           
+               method to 
+remove an individual property from that property list. To&nbsp;remove a key/value pair&nbsp;from an avatar's 
+profile, use the <A href="../../AvatarProfile/RemoveKey.htm"><B>RemoveKey</B></A> method of 
+<B>AvatarProfile</B>.&nbsp;
+
+<!--Example section-->        
+    </P><P>The <B>AvatarProfile</B> object for 
+an avatar stores data in key lists, which are composed of <EM>key/value 
+pairs</EM>. A key/value pair is a property name 
+paired with its value.&nbsp;A key is a string that represents the name of&nbsp;a 
+property in the property map. The value is the contents of that property. A 
+property map uses the string&nbsp;that makes up the key instead of an index 
+number to access the value of each     
+             
+              
+               property. </P>
+<P>                
+              
+             
+           Key/value 
+pairs are distinguished by the type of value in the pair. Types of keys include 
+numeric<EM> </EM>keys (whose corresponding 
+value is a number), string keys (whose corresponding value is a string), and 
+property keys lists (whose corresponding value is a property list).</P>
+<H3>Example</H3>
+<p>
+   This example checks the profile list 
+for the specified key. If the key is found, it removes the "PassportID" property from the key.</p> 
+
+<pre class="example">
+Sub RemovePassportIDProperty()
+Dim myKey
+Dim myKeyList
+Dim myKeyCount
+
+Set myKeyList = User.Profile.Keys
+myKeyCount = myKeyList.Count - 1
+
+For myKey = 0 To myKeyCount
+</pre>
+<p class="comments">&nbsp;&nbsp;'Check 
+each key for a passport ID.
+<pre class="example">
+&nbsp;&nbsp;If&nbsp;myKeyList.Property(myKey) = "PassportID" Then 
+</pre>
+<p class="comments">
+ &nbsp;&nbsp;&nbsp;&nbsp;'Remove the property from the key.
+<pre class="example">
+&nbsp;&nbsp;&nbsp;&nbsp;User.<b>RemoveFromUserProfileList Passport, "PassportID"</b>
+&nbsp;&nbsp;End If
+Next
+End Sub
+</pre>
+
+<!--See also section-->
+<H3>See Also</H3>
+<P>
+<A href=""></A></P>
+  
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Direction</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Direction</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p> Specifies the orientation of the object. The orientation 
+is the direction that the object faces.
+<b>Direction</b> is a read/write <A 
+href="../../Vector/Vector.htm">Vector</A>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Direction</b> = <i>VectorValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<p>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><I>object</I>.<B>Direction</B></TD></TR></TABLE>
+<P>The <b>Direction</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">VectorValue</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>The orientation of the object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Direction</b> property 
+consists of a 
+vector that describes the orientation of the front of the object. The vector originates 
+at the center of the object and points through the front of the object. 
+You can set the direction of an object in two ways: You can create a vector 
+and assign it, or you can use the <A href="../../Vector/X.htm">x</A>, <A href="../../Vector/y.htm">y</A>, and <A href="../../Vector/z.htm">z</A> properties of the 
+existing vector.
+<P>To set the direction of an object with a 
+vector, use the following code. </P>
+<blockquote><PRE>Dim myPlane
+<P>Set myPlane = World.CreateVector(0.0, 0.0,  -9.0)&lt; /P  &gt;&lt; /P  &gt;&lt; /P &gt;< /P >     </PRE></blockquote>
+<P>The previous code points the front of the plane counter-clockwise from its original 
+position. To set an individual coordinate, use the following code.</P>
+<blockquote><PRE>myPlane.<b>Direction</b>.x = 9.0</PRE></blockquote>
+<P>          
+               
+      The <b>Direction</b> and 
+<A href="Up.htm">Up</A> properties together determine 
+the rotation of the object. </P>
+
+<p>The <A href="../../Vector/Vector.htm">Vector</A> topic 
+has detailed information about the way vectors work in Microsoft Virtual Worlds.
+<P><STRONG>Important:</STRONG>&nbsp;&nbsp;&nbsp;Do not set the 
+<STRONG>Up</STRONG> vector to 0, 0, 0.&nbsp;This causes D3D problems. Also, 
+never set the <STRONG>Direction</STRONG> and <STRONG>Up</STRONG> vectors to the 
+same values.&nbsp;&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<P><FONT class=body>This example demonstrates&nbsp;the use of the <b>Direction</b> 
+    property.</FONT></P>
+<pre class="example">Dim myVector</pre>
+<P class="comments">
+'Create a  vector to establish coordinates for <EM>x, y,</EM> and <EM>z</EM>.<br>
+'Retrieve the y-coordinate.
+<pre class="example">Set myVector = CreateVector(10, 5, 3)
+Trace myVector.y
+</pre>
+<p class="comments">'Establish the y-coordinates independently of a vector object.
+<pre class="example">
+Dim myChair
+
+Set myChair = User.Container.FindWithin("Chair")
+
+myChair.<STRONG>Direction</STRONG>.y = 2
+myChair.Position.y = 4
+myChair.RotationAxis.y = 1
+myChair.Up.y = 0
+</pre>
+<p class="comments">'This next code block retrieves the 
+values for the <br>'x-coordinate independently of a vector object.
+<pre class="example">
+Dim myChairY
+
+Trace myChair.<STRONG>Direction</STRONG>.y
+Trace myChair.Up.y
+myChairY = myChair.Position.y
+</pre>
+
+</body>
+</html>

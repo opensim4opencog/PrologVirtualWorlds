@@ -1,0 +1,127 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Emote</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Emote</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Displays the specified gesture and text from the list of 
+available gestures in Microsoft Virtual Worlds. <STRONG>Emote</STRONG> is a 
+member of the <A href="../Thing/Thing.htm">Thing</A> exemplar.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>Emote</STRONG>&nbsp;<EM>varGesture</EM> 
+      [, <EM>varText</EM>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Emote</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->Thing</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An&nbsp;object 
+      reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">varGesture</td>
+		<td><!--Parameter name-->Variant</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description--> 
+       A 
+      string that references a valid Virtual Worlds 
+ gesture.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[varText]</td>
+		<td><!--Parameter name-->Variant</td>
+		<td><!--Type-->Optional</td>
+		<td><!--Description--> 
+      A&nbsp;variant 
+      that 
+      specifies the 
+      text that is displayed in the chat-history 
+ window.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>         
+     This method does not return a         
+     value.
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>When you invoke the <b>Emote</b> 
+method, it broadcasts a tell event (see the <A 
+href="../../Events/OnTell.htm"><B>OnTell</B></A> 
+event handler) to all of the 
+objects within speaking range. </P>
+<P>The value of the parameters affects the 
+behavior of the <STRONG>Emote</STRONG>   method in the 
+following ways:
+<ul><li>If the value of the <EM>varGesture</EM>  parameter is a <B>String</B>, the <b>Emote</b> method 
+  executes the named gesture.<li>If you omit the optional 
+<EM>varText</EM> 
+parameter, the <b>Emote</b> method displays 
+the&nbsp;default text for the&nbsp;specified gesture.</li></ul>
+<P> Although the <EM>varText</EM>   parameter is a variant, the 
+chat-history window does not display integers or values for other variant&nbsp;types. If you 
+add an integer or float number as the value for the <EM>varText</EM> parameter, the 
+chat-history window displays "Georgina smile" instead of "Georgina smiles" and 
+ignores the integer or float value.
+
+<!--Example section--></P>
+<H3>Example</H3>
+<P>      This example demonstrates various ways to use&nbsp;the 
+<b>Emote</b> method.
+
+<P>You can call the <B>Emote</B> 
+method with just a string as the only parameter. When this executes, the chat-history window displays the default gesture name. The following statement executes the smile gesture for your avatar. If your avatar's name is Georgina, other users will see the text "Georgina smiles." in the chat-history window.
+
+<PRE>User.<b>Emote "smile"</b></PRE>
+
+<P>You can call the <B>Emote</B> 
+method and supply a string that displays text to the chat-history window. The following executes the smile gesture for your avatar and returns the string "greets everyone!" to the chat-history window. If your avatar's name is Georgina, other users will see the text "Georgina greets everyone!".
+
+<PRE>User.<b>Emote "smile", "greets everyone!"</b></PRE>
+ 
+
+</body>
+</html>

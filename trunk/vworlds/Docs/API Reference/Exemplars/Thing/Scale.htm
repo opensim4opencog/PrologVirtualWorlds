@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Scale</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Scale</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <A href="../../Vector/Vector.htm">Vector</a> that specifies the scaling
+factor for an object in three dimensions. <b>Scale</b> is a read/write <b>Vector</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Scale</b> = <i>VectorValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Scale</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">VectorValue</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>The scaling factor for an object in three dimensions.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>If you set any component of an object's <b>Scale</b> property to 0, the object's 
+<A href="Direction.htm">Direction</a> and <A href="Up.htm">Up</a> properties are then reset to 
+new values. For this reason, it is not recommended that you set any component of 
+this property to 0. &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<P><FONT class=body>This example demonstrates&nbsp;the use of the <b>Scale</b> 
+    property.</FONT></P>
+<pre class="example">Dim myVector</pre>
+<P class="comments">
+'Create a  vector to establish coordinates for <EM>x, y,</EM> and <EM>z</EM>.<br>
+'Retrieve the y-coordinate.
+<pre class="example">
+Set myVector = CreateVector(10, 5, 3)
+Trace myVector.y
+</pre>
+<p class="comments">'Establish the y-coordinates independently of a vector object.
+<pre class="example">
+Dim myChair
+
+Set myChair = User.Container.FindWithin("Chair")
+
+myChair.Direction.y = 2
+myChair.<b>Scale</b>.y = 4
+myChair.RotationAxis.y = 1
+myChair.Up.y = 0.15
+</pre>
+<p class="comments">'This next code block retrieves the 
+values for the <br>'x-coordinate independently of a vector object.
+<pre class="example">
+Dim myChairY
+
+Trace myChair.<b>Scale</b>.y
+Trace myChair.Up.y
+myChairY = myChair.Position.y
+</pre>
+ 
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>ObjectQuota</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ObjectQuota</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Avatar Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>
+Returns the number 
+of items that an avatar can create in 
+a world. <STRONG>ObjectQuota</STRONG> is a read-only 
+<STRONG>Long</STRONG>.&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--syntax statement --><EM>object</EM>.<STRONG>ObjectQuota</STRONG></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>ObjectQuota</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Avatar</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description--> 
+       An&nbsp;object reference to an <B>Avatar</B> object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->Each 
+time an avatar creates an object, the number&nbsp;stored in the avatar's object 
+quota decreases by one. Conversely, when an object is destroyed, the object 
+quota increases by one. If the object quota reaches zero, the avatar can no 
+longer create objects.
+<P>Some avatars can have an infinite object quota, represented by a value of 
+-1.&nbsp;This value neither increases nor decreases, allowing the avatar 
+to create an infinite number of objects.</P>
+<P>The default object quota for all avatars in a world is specified by the <A 
+href="../../world/DefaultObjectQuota.htm"><STRONG>DefaultObjectQuota</STRONG></A><B> 
+</B>property of the <B>World</B> object.&nbsp;
+
+<!--Example section--></P>
+<H3>Example</H3>
+<p>
+By using the following statement, you can determine the number of items your avatar can create.
+<pre class="example">
+<!--Example text-->&nbsp;
+Print User.<b>ObjectQuota</b>
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>LabelPlacement</title>
+</head>
+
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>LabelPlacement</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Sets or returns the position of the <A href="Label.htm">Label</a> for a <A href="Thing.htm">Thing</A> 
+object. <b>LabelPlacement</b> is a read/write <b>Long</b>.      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><em>object</em>.<b>LabelPlacement</b> = <em>longValue</em></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>LabelPlacement</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->Thing</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An 
+      instance of the <b>Thing</b> exemplar.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">longValue</td>
+		<td><!--Parameter name-->Long</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An expression that evaluates to one of the enumerated types in the following table. Combinations of these values are not valid.</td>
+	</TR>
+
+</tbody>
+</TABLE>
+<H4>Enumerated Types For the <i>longValue</i> Parameter</H4>
+<TABLE class="backlight">
+<thead>
+		<TR>
+			<td>Enumerated type</td>
+			<td align="center">Value</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+
+<TR class=line><TD colSpan=100%></TD></TR>
+
+<TR>
+<TD>LABEL_CENTER </TD>
+<TD align="center">0</TD>
+<TD>The label is centered on the face of the object. </TD>
+</TR>
+
+<TR><TD>LABEL_ABOVE </TD>
+<TD align="center">1</TD>
+<TD>The label is centered above the object. The default setting.</TD>
+</TR>
+
+<TR>
+<TD>LABEL_BELOW</TD>
+<TD align="center"><P align=center>2</TD>
+<TD>The label is centered below the object.</TD>
+</TR>
+<TR>
+<TD>LABEL_RIGHT</TD>
+<TD><P align=center>4</TD>
+<TD>The label is centered to the right of the object.</TD>
+</TR>
+<TR>
+<TD>LABEL_LEFT</TD>
+<TD><P align=center>8</TD>
+<TD>The label is centered to the left of the object.</TD>
+</TR>
+</TABLE></DIV>
+
+
+<!--This next tag ends the Flag table.--></TD></TR>
+</TABLE>
+<tr><td style="PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px" 
+   > &nbsp;</td></tr>
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>The <b>LabelPlacement</b> property contains the position of the <b>Label</b> of a <b>Thing</b> object relative to the <i>bounding box</i> of the object. A bounding box is the smallest possible area that all of the polygons of an object will fit within. The <b>Label</b> is always placed beyond the outer edges of an object, regardless of its scale. For more information on the boundary coordinate system and bounding boxes, see the <a href="../../Boundary/Boundary.htm">Boundary</a> topic.
+
+<p>A <b>Label</b> assigned any valid position (enumerated in the previous table) is visible unless it is obstructed by an adjacent object. For example, if you set the <b>LabelPlacement</b> property to LABEL_BELOW, and the base of that object rests on a floor with an opaque geometry, then the <b>Label</b> would not be visible-the floor would obstruct your view.
+
+<p><b>Note</b>:&nbsp;&nbsp; Unlike many enumerated types, expressions that combine settings (for example, "LABEL_ABOVE + LABEL_RIGHT") are not valid. Combinations of <b>LabelPlacement</b> values use a standard error position by default.
+
+
+<!--Example section-->
+<H3>Example</H3>
+<p>The following example gives an object a <b>Label</b> and then changes the position of the <b>Label</b>. In this example, "strMyName" equals "Bob", "strMyLabel" equals "Bob's Label", and "IntMyLabelPosition" equals "LABEL_RIGHT".<br><br>
+
+<pre class="example">
+Sub LabelPosition(strMyName, strMyLabel, lntMyLabelPosition)
+Dim myVehicle
+Dim myOldLabelPosition</pre>
+<p class="comments">'Acquire a reference to the object named "Bob".
+<pre class="example">Set myVehicle = User.Container.FindWithin(strMyName)</pre>
+
+<p class=comments>'Provide a label for the object that says, "Bob's Label".
+<pre class="example">myVehicle.Label = strMyLabel</pre>
+
+<p class=comments>'Print the previous location to the Command Window. 
+<pre class="example">Set myOldLabelPosition = myVehicle.<b>LabelPlacement</b>
+Print "The previous LabelPlacement was: " &amp; myOldLabelPosition</pre>
+
+<p class=comments>'Change the label position to "LABEL_RIGHT".
+<pre class="example">myVehicle.<b>LabelPlacement</b> = strMyLabelPosition</pre>
+
+<p class=comments>'Print the new position in the Command Window.
+<pre class="example">Print "The new position is: " &amp; myVehicle.<b>LabelPlacement</b>
+
+End Sub
+</pre>
+
+
+
+</body>
+</html>

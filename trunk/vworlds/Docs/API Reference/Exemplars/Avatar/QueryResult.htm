@@ -1,0 +1,146 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>QueryResult</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>QueryResult</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Avatar Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Returns the&nbsp;string that was passed&nbsp;by&nbsp;the <A 
+href="Prompt.htm"><STRONG>Prompt</STRONG></A>&nbsp;method. <STRONG>QueryResult</STRONG> is a read-only 
+<STRONG>String</STRONG>.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>QueryResult</STRONG></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<!--Parameters table-->
+<p>The <b>QueryResult</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Object</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An 
+      expression that returns an <STRONG>Avatar</STRONG> 
+object.</td>
+	</TR>
+
+</TABLE>
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+
+The <STRONG>QueryResult</STRONG> property is associated with the 
+<EM>bstrDefault</EM> parameter of the <STRONG>Prompt</STRONG>          
+method. This method displays a dialog box that requests input from the 
+user.&nbsp;The <EM>bstrDefault</EM> parameter&nbsp;stores the information 
+provided by the user in the <STRONG>QueryResult</STRONG>    
+  property&nbsp;when the dialog box is closed.
+<H3>Examples</H3>
+
+<P>Example 1
+<p>This example shows how the <b>Prompt</b> method can be used with all of 
+its optional parameters. The example creates a property 
+map with the <A href="../../World/CreatePropertyMap.htm">CreatePropertyMap</A> 
+method and initializes it with <i>key-value pairs</i>, in this case,  
+avatar names and phone numbers.</p>
+<P><b>Note:</b>&nbsp;&nbsp; A key/value pair in the case of a 
+property map is a property name paired with its value. A key is a string that 
+represents the name of a property in the property map. The value is the contents 
+of that property. A property map uses the string&nbsp;that makes up the key 
+instead of an index number to access the value of each property. </P>
+<P>To run this example: There are several objects and methods that you must create before running the code. You can create the ones suggested here or use those of your own choosing.
+<ul><li type="disc">PhoneKiosk: An object in your world that has one method, the TransferMethod. This is the object that the <b>Prompt</b> method will notify when the dialog box is closed. 
+ 
+<li>TransferMethod: A server-side method with one implicit argument that passes the PhoneMap object pointer to the <EM>varNotifyMethod</EM> parameter. This method is invoked by the PhoneKiosk object when the dialog box is closed.</li></ul>
+
+<p>The fifth parameter, 
+&quot;myPhoneMap&quot;, is copied to the calling avatar's <b>QueryParam</b> property.
+
+<p class="comments">'Create 
+a simple property map with the avatar names as <br>
+'the keys and the phone numbers as the values of the <br>
+'properties.
+<pre class="example">
+Sub SendPrompt()
+Dim myPhoneMap
+Dim myAvatarEve
+</pre>
+<p class="comments">'Set a reference to the avatar.
+<pre class="example">
+Set myAvatarEve = User.Container.FindWithin("Eve")
+</pre>
+<p class="comments">'Create a property map.
+<pre class="example">
+Set myPhoneMap = CreatePropertyMap
+</pre>
+<p class="comments">'Add properties to the property map.
+<pre class="example">
+PhoneMap.Property("Erik") = "555-1234"
+PhoneMap.Property("Samantha") = "555-2468"
+</pre>
+<p class="comments">'Display a <b>Prompt</b> dialog box to Eve. <br>
+'When Eve closes the dialog box, the &quot;myPhoneMap&quot; property map <br>
+'is transferred to the <b>QueryParam</b> property of Eve's avatar. <br><br>
+'The text typed into the text box is transferred to<br> 
+'the <b>QueryResult</b> property of Eve's avatar.
+<pre class="example">
+myAvatarEve.Prompt "Phone Numbers", "Your phone number?", "555-", _
+&nbsp;&nbsp;&nbsp;&nbsp;PhoneKiosk, "TransferMethod", myPhoneMap
+
+End Sub
+</pre>
+<p>
+
+<p>
+Example 2
+
+<p>
+This example creates and prints the text from the text box that was sent to the <b>QueryResult</b> property.</p>
+<pre class="example">
+Sub GetUserText()
+Dim myAvatarEve
+
+Set myAvatarEve = User.Container.FindWithin("Eve")
+
+Print myAvatarEve.<b>QueryResult</b> 
+
+End Sub</pre>
+  
+
+</body>
+</html>

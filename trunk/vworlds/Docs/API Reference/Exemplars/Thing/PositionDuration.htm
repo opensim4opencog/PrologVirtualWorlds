@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>PositionDuration</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>PositionDuration</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Long</b> that contains the time over which a change in the <b>Position</b>
+property should be interpolated. <b>PositionDuration</b> is a read/write <b>Long</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>PositionDuration</b> = <i>longValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>PositionDuration</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">longValue</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>A <b>Long</b> that corresponds to the time value in milliseconds.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>If you set <b>PositionDuration</b> on an object to 5000, and then set the
+same object's <a href="Position.htm">Position</a> property to a new value, the
+object's <b>Position</b> property appears to change smoothly from its
+previous value to its new value over a period of 5 seconds.
+</p>
+
+<p>When this interpolation is complete, the method 
+<a href="../../Events/OnPositionDone.htm">OnPositionDone</a>
+is invoked on the object.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get this property:</p>
+
+<pre>   TheDuration = MyThing.PositionDuration</pre>
+
+<p>To set this property:</p>
+
+<pre>   MyThing.PositionDuration = 5000</pre>&nbsp;
+ 
+
+</body>
+</html>

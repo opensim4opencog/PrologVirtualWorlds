@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>IsOpen</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsOpen</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Sets or returns&nbsp;a <STRONG>Boolean</STRONG> value of 
+<STRONG>True</STRONG> if the specified <A href="Thing.htm">Thing</A> object (container) is marshalled to the client computers. 
+<STRONG>IsOpen</STRONG>&nbsp;is a read/write <STRONG>Boolean</STRONG>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>IsOpen</STRONG> = 
+<EM>BooleanValue</EM></td>
+	</tr>
+</table></P>
+<P>To&nbsp;return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><I>object</I>.<STRONG>IsOpen</STRONG></TD></TR></TABLE></P>
+<P>The&nbsp;<STRONG>IsOpen</STRONG>  property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Thing</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference to 
+      a&nbsp;<STRONG>Thing</STRONG>        object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->BooleanValue</td>
+		<td><!--Type-->Boolean</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->Set 
+      to <STRONG>True</STRONG> when you want to marshall content of a 
+      <STRONG>Thing</STRONG> object (a 
+      container) to&nbsp;client computers. The default is 
+      <STRONG>False</STRONG>.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section--></P>
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->When 
+set to <STRONG>True</STRONG>, this property marshalls 
+ content 
+for a container from the server to&nbsp;client computers.&nbsp; 
+<P>Use the <A href="IsNoticeable.htm">IsNoticeable</A> method to marshall the content 
+for an individual object.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example creates a character and a hot tub, places the character in the hot tub, and then marshalls the change to the client computers.</p>
+
+<pre class="example">
+Sub MarshallObject()
+Dim Spa
+Dim Hugh
+
+Set Spa = CreateInstance("Spa", "Artifact", User.Container)
+Set Hugh = CreateInstance("Hugh Mann", "State Machine", User.Container)
+
+Spa.GeometryName = "SDK\Library\Models\Other\Hottub.x"
+Hugh.GeometryName = "SDK\Library\Models\Character\Man1.x"
+
+Spa.<b>IsOpen</b> = True
+
+Hugh.MoveInto Spa
+
+End Sub
+</pre>
+
+</body>
+</html>

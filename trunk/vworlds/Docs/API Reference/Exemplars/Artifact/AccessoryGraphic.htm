@@ -1,0 +1,124 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>AccessoryGraphic</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AccessoryGraphic</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Artifact Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+Returns or sets the URL for the image file of the 
+accessory graphic. <STRONG>AccessoryGraphic</STRONG>
+           
+is a read/write <STRONG>String</STRONG>.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><TT><FONT face=Verdana><EM>object</EM></FONT>.</TT></I><STRONG>AccessoryGraphic</STRONG> 
+      = <EM>stringValue</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table--></P>
+<p>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><!--Syntax statement--><TT><FONT 
+      face=Verdana><EM>object</EM></FONT>.</TT></I><B>AccessoryGraphic</B></TD></TR></TABLE>
+<P>The <b>AccessoryGraphic</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>Artifact</TD>
+    <TD>Required</TD>
+    <TD>An object reference to an <STRONG>Artifact</STRONG> object.</TD></TR>
+
+	<TR>
+		<td class="boldItal">stringValue</td>
+		<td><!--Parameter name-->String</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->The 
+      URL of the graphic.</td>
+	</TR>
+
+</TABLE>
+<H3>Remarks</H3>
+<P>In a virtual world, an accessory graphic appears as an 
+object that can be worn or held by an avatar. The 
+<STRONG>AccessoryGraphic</STRONG> property supplies the location of the image as 
+a URL. The URL assigned to this property must point to a graphics file that 
+contains a two-dimensional image. The image-file format can be any one of the 
+following: .bmp, .gif, .jpg, or .ppm.
+
+<P>If you add an&nbsp;accessory graphic to an <STRONG>Artifact</STRONG> 
+  exemplar, the value of the <A href="IsAccessory.htm">IsAccessory</A> property 
+  must be <b>True</b>.
+<P></P>
+
+<H4>Coordinating&nbsp;Palettes for Accessories</H4>
+<P>It is possible to use different palettes for your avatars than the ones that 
+are installed with Microsoft Virtual Worlds. If you do so, we recommend that you 
+use the same palette for your accessories.</P>
+<H3>Example</H3>
+<!--Example text--><P>
+    This example creates an artifact and adds an accessory graphic to the artifact.
+
+To run this example: You must either create a StrawHat.gif and modify the URL to match its location, or substitute an image of your choice.</P>
+
+<pre class="example">Public Sub CreateHat()
+Dim myStrawHat
+Dim myImageForHat</pre>
+
+<p class = "comments">'Create an artifact.
+<pre class = "example">Set myStrawHat = _
+&nbsp;&nbsp;&nbsp;&nbsp;CreateInstance("Straw Hat", "Artifact", User.Container)
+</pre>
+<p class = "comments">'Make sure the artifact is an accessory.
+<pre class = "example">StrawHat.IsAccessory = True
+</pre>
+<p class = "comments">'Get the artifact.
+<pre class = "example">Set StrawHat = _
+&nbsp;&nbsp;&nbsp;&nbsp;User.Container.FindWithin ("Straw Hat")</pre>
+<p class = "comments">
+'Get the image. <PRE class=example>StrawHat.<b>AccessoryGraphic = _
+&nbsp;&nbsp;&nbsp;&nbsp;"http://Webs/Scripts/Images/StrawHat.gif"</b>
+</A>
+<p class = "comments">'Wear the artifact.
+<pre class = "example">User.Wear StrawHat
+
+End Sub</PRE>  
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Position</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Position</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <A href="../../Vector/Vector.htm">Vector</A> that specifies an object's
+position in three-dimensional space. 
+<b>Position</b> is a read/write <b>Vector</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><I>object</I>.<B>Position</B> = 
+<I>VectorValue</I></TD></TR></TABLE></P>
+<P>To return the property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Position</b></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<p>The <b>Position</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">VectorValue</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>The position of the object in three-dimensional space.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The coordinates supplied in the <b>Position</b> property are relative to the center point of the world.
+
+<p>This property is a read-only <b>Vector</b> when the calling object is the avatar of a connected client.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<P>This example creates an instance of the <a href="../Artifact/Artifact.htm">Artifact</a> exemplar, changes the <b>Position</b> property, and then displays the new value in the Command Window.<br><br>
+
+<pre class="example">Dim myChair
+
+Set myChair = World.CreateInstance("myChairObject", "Artifact", User.Container)
+myChair.<b>Position</b> = World.CreateVector(5, 2, 7)
+Trace myChair.<b>Position</b>.ToAscii
+
+</pre>
+ 
+
+</body>
+</html>

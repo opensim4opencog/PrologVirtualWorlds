@@ -1,0 +1,107 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>AddStateMachine</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AddStateMachine</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the StateMachine Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Adds an additional internal state machine to an existing <b>StateMachine</b>
+object. <b>AddStateMachine</b> is a member of the <b>StateMachine</b> exemplar. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>AddStateMachine</b>&nbsp;
+		<i>bstrStateMachineName, bstrInitialValue</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>AddStateMachine</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>AddStateMachine</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>StateMachine</b> object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>bstrStateMachineName</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The name of the new internal state machine.</TD></TR>
+	<TR>
+		<td class="boldItal">bstrInitialValue</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The initial state of the added state machine.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Usually, <b>StateMachine</b> instances are created
+with a single internal state machine (named <i>Default</i>). For certain
+applications, however, it may be desirable
+to have multiple internal state machines, where each internal
+state machine represents a different attribute of the object. In
+such cases, you must use this method after a <b>StateMachine</b>
+object has been created, to add it to another <b>StateMachine</b>.
+</p>
+
+<p><b>AddStateMachine</b> automatically adds the newly
+created internal state machine name to the <a href="StateMachines.htm">StateMachines</a>
+property list.</p>
+
+<p>This method runs on either the client or the server.</p>
+
+<p>To find a state machine's current state, use the <a href="../../World/Trace.htm">Trace</a>
+method of <b>World</b>,
+and pass it the name of the state machine object and the internal
+state machine for which you want to find the state. &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyStateMachine.AddStateMachine &quot;Flyer&quot;, &quot;Waiting&quot;</pre>
+
+
+
+</body>
+</html>

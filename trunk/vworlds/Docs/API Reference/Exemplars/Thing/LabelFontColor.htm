@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>LabelFontColor</title>
+</head>
+
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>LabelFontColor</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>
+Sets or returns the color of the <a href="Label.htm">Label</a> of a <A href="Thing.htm">Thing</a> object. <b>LabelFontColor</b> is a read/write <a href="../../Vector/Vector.htm">Vector</a>.
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--syntax statement --><EM>object</EM>.<STRONG>LabelFontColor </STRONG>= 
+      <EM>vectorValue</EM></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>LabelFontColor</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->Thing</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An 
+      instance of the <STRONG>Thing</STRONG> exemplar.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">vectorValue</td>
+		<td>Vector</td>
+		<td><!--Type-->Required</td>
+		<td>a <b>Vector</b> value that corresponds to red, green, and blue color components. The default setting is white (1, 1, 1).</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<!--Insert Remarks here-->
+<P>The x, y, and z values of the <b>Vector</b> data type correspond, respectively, to the red, green, and blue color values. The normalized range of each vector component for this property is from 0 to 1, where a value of 0 is equal to a color intensity level of 0%, and a value of 1 is equal to a color intensity level of 100%. 
+
+<P>The <b>LabelFontColor </b>property controls the color value of a <b>Label</b> of a <b>Thing</b> object, but it does not affect the color of the shadow behind it. The color of this shadow can be changed by adjusting the <A href="LabelShadowColor.htm">LabelShadowColor</A> property.<br><br>
+<!--Example section-->
+<H3>Example</H3>
+<p>This example changes the <b>Label</b> and <b>LabelFontColor</b> property of a <b>Thing</b> object. In this example, "myThing" is a reference to an instance of the <b>Thing</b> object.<br><br>
+
+
+<p class=comments>'Provide a label for the object.
+<pre class="example">myThing.Label = "Bob's Label"</pre>
+
+<p class=comments>'Change the font color to red.
+<pre class="example">myThing.<b>LabelFontColor</b> = World.CreateVector(1, 0, 0)</pre>
+
+<p class=comments>'Confirm that the color was changed to red.
+<pre class="example">Trace "The new color value is: " &amp; myThing.<b>LabelFontColor</b>.ToAscii
+
+</pre>
+
+
+</body>
+</html>

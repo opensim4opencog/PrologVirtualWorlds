@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>BoundaryList</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>BoundaryList</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>PropertyList</b> that contains every 
+<a href="../../Boundary/Boundary.htm">Boundary</a>
+of an object. <b>BoundaryList</b> is a read/write <a href="../../PropertyList/PropertyList.htm">PropertyList</a>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>BoundaryList</b> = <i>PropertyListValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>BoundaryList</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">PropertyListValue</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>A string value to be added to the <b>BoundaryList</b>. This list is zero-based and contains every <b>Boundary</b> of an object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><p>When a boundary is created, it is not automatically connected to any particular object. To use a boundary, it must be assigned to an object by adding it to the <b>BoundaryList</b> property of the object using the <a href="../../PropertyList/Add.htm">Add</a> method. The <b>BoundaryList</b> property is a <a href="../../PropertyList/PropertyList.htm">PropertyList</a> that maintains a list of boundaries added to an object. Boundaries are added sequentially to this list, and if a boundary is removed from the list, the index numbers of any succeeding boundaries are decremented. The following example adds a boundary to the boundary list of an existing object using the <b>Add</b> method. The item "myObject" is an existing object, and the argument "myBoundary" is a boundary that has been created but not yet assigned to an object. <br><br>
+
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;myObject.BoundaryList.Add <i>myBoundary</i></pre>
+
+<p>You can access any valid <b>Boundary</b> method or property either before or after the assignment to the <b>BoundaryList</b> property of an object. However, to invoke a method for a specific <b>Boundary</b> after it has been assigned, you must acquire a reference to that individual item in the <b>BoundaryList</b>. In the following examples, the variable "myObject" represents an existing object. Both examples below acquire a reference to the third boundary in a boundary list, and then change the position of the boundary using the <a href="../../Boundary/Rotate.htm">Rotate</a> method.
+<br><br>
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;Dim myList</pre>
+<div class=comments>&nbsp;&nbsp;&nbsp;&nbsp;'Acquire a reference to the third boundary in a BoundaryList.</div>
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;Set MyList = myObject.BoundaryList.Property(2)
+&nbsp;&nbsp;&nbsp;&nbsp;MyList.Rotate .2
+</pre>
+<p>Example 2
+<p class=comments>&nbsp;&nbsp;&nbsp;&nbsp;'Acquire a reference to a boundary and invoke the Rotate method.
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;myObject.BoundaryList.Property(2).Rotate .2
+</pre>
+<!--Example section-->
+
+</body>
+</html>

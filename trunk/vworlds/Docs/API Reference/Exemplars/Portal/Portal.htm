@@ -1,0 +1,85 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Room Portal</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Portal</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Exemplar</P></td>
+	</tr>
+</table><!--Topic Definition-->
+<P class=body>A connection between <A href="../Room/Room.htm">Room</A> objects or between worlds.&nbsp; <!--How-to section -->
+<H3>Using the Object</H3>
+<p>A <b>Portal</b> is an object that can transport an <A href="../Avatar/Avatar.htm">Avatar</A> from one room to another or from 
+world to world.&nbsp; There are two types of Portals, regular Portals (sometimes 
+known as Room Portals) and InterWorld Portals.&nbsp; The two types are very 
+similar, in fact, the InterWorld Portal is
+just a special subtype of the Room Portal.&nbsp; The InterWorld version of
+Portal slightly changes the behaviors of some of the properties and methods
+of Portal.&nbsp; These changes, where they exist, are documented in the
+corresponding property or method documentation.</p>
+<p>
+     All Portals are <i>one-way</i> 
+connections between two
+places. To create a door that acts the way a user expects (as a
+two-way connection), an author must create two portals, one in each location.
+In other words, one portal must lead from the first place to
+the second, while the second portal must lead from the second
+place back to the first.</p>
+
+<p>       All Portals&nbsp;have a
+property called <A href="Destinations.htm">Destinations</A> that holds a list of the the 
+possible destinations that they can transport to.&nbsp; In turn, each 
+destination has a corresponding description in the Portal's 
+<A href="Descriptions.htm">Descriptions</A> property.
+
+<p>The <A href="EntryPoint.htm">EntryPoint</A>  property
+of the portal is used to determine the position of the avatar
+in the new room. The programmer can manually set this position. </p>
+<P>To create a room portal, use the <A 
+href="../../World/CreateInstance.htm">CreateInstance</A> method and specify 
+"Portal" for the <I>varExemplar</I> parameter. The following example 
+creates&nbsp;two portals that link a lobby and a conference room, and set 
+various properties for the portals.
+<BLOCKQUOTE><PRE class=example>Dim myLobbyRef, myConfRoomRef
+Dim LobbyPortal_To_ConfRoomPortal, ConfRoomPortal_To_Lobby
+
+Set myLobbyRef = User.Container.FindWithin("Lobby")
+Set myConfRoomRef = User.Container.FindWithin("Conference Room")
+
+<P class=comments>'Create a new portal, and place it in the lobby.
+<PRE class=example>Set LobbyPortal_To_ConfRoomPortal = _
+&nbsp;&nbsp;&nbsp;&nbsp;World.<B>CreateInstance("Portal to Conference room", "Portal", myLobbyRef)</B>
+</PRE>  
+<P class=comments>'Create a new portal in the conference room<BR>'that transports an avatar to the lobby.
+<PRE class=example>Set ConfRoomPortal_To_Lobby = _
+&nbsp;&nbsp;&nbsp;&nbsp;World.<B>CreateInstance("Portal to Lobby", "Portal", myConfRoomRef)</B>
+</PRE>  
+<P class=comments>'Set the destination portal for "LobbyPortal_To_ConfRoomPortal".
+<PRE class=example>LobbyPortal_To_ConfRoomPortal.Destinations.Add ConfRoomPortal_To_Lobby
+</PRE>
+<P class=comments>'Set the destination portal for ConfRoomPortal_To_Lobby.
+<PRE class=example>ConfRoomPortal_To_Lobby.Destinations.Add LobbyPortal_To_ConfRoomPortal
+</PRE>  
+<P class=comments>'Set the description for each portal.
+<PRE class=example>LobbyPortal_To_ConfRoomPortal.Descriptions.Add "To the Conference Room"
+ConfRoomPortal_To_Lobby.Descriptions.Add "To the Lobby"</PRE></PRE></BLOCKQUOTE>
+
+<p>  To create an <b>InterWorld 
+Portal</b>
+you need to know that the exemplar name is actually <b>IWPortal</b>, a shortened form of InterWorld Portal. For 
+example:
+<pre>  Set NewIWPortal = World.CreateInstance( "Portal to NewWorld", "<b>IWPortal</b>", User.Container )<br></pre>
+<P>Note that you&nbsp;still have to set the Destinations and Descriptions 
+properties appropriately to make an InterWorld Portal fully 
+functional.</P>
+
+</BODY>
+</html>

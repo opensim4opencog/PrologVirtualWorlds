@@ -1,0 +1,96 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>LogOff</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>LogOff</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Host Exemplar</td>
+	</tr>
+</table>
+<P>Disconnects the specified user from Microsoft Virtual 
+Worlds.&nbsp;<STRONG>LogOff</STRONG> is a member of the <a href="Host.htm">Host</a> exemplar. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>LogOff</STRONG>&nbsp;<EM>pTarget, 
+      bstrReason</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The&nbsp;<STRONG>LogOff</STRONG>  method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Host</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference to a&nbsp;<STRONG>Host</STRONG> object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>pTarget</TD>
+    <TD>Thing</TD>
+    <TD>Required</TD>
+    <TD>The object that you want to log off, usually a user.</TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->bstrReason</td>
+		<td><!--Type-->String</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->A 
+      reason for logging the user off of the system.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->As 
+a host, you can log a user off of Virtual Worlds.&nbsp;Whether used for system 
+maintenance or just to log off users that do not follow system rules, you can 
+use this method to terminate their connection.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example logs off a user that attempted unauthorized use of system resources.</p>
+<pre class="example">
+Dim userJohn
+Set userJohn = User.Container.FindWithin("John")
+
+myHost.<STRONG>LogOff userJohn, "Unauthorized use of the system."</STRONG></pre>
+
+
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>GetGeometryFrame</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetGeometryFrame</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Retrieves the geometry frame for the object. <b>GetGeometryFrame</b> is 
+a member of the <b>Thing</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetGeometryFrame</b>()&nbsp;</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetGeometryFrame</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a reference to the geometry frame.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>It is important to distinguish between two types of frames in
+Virtual Worlds. The first kind is the root frame of an object,
+referred to as the <i>transform frame</i>; this frame is
+returned by the <a href="GetFrame.htm">GetFrame</a> method
+of the <b>Thing</b> exemplar. The second is a child
+frame containing the geometry that has been built from sprites,
+meshes, textures and other information in the geometry file. This
+arrangement allows you to change the geometry of a transform
+frame without having to disturb the transform hierarchy. This is
+referred to as the <i>geometry frame</i>, and is returned by
+the <b>GetGeometryFrame</b> method.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>     Set TheGeometryFrame = MyThing.GetGeometryFrame</pre>
+&nbsp;
+
+
+
+</body>
+</html>

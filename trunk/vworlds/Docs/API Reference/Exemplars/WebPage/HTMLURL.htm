@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>HTMLURL</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>HTMLURL</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the WebPage Exemplar</td>
+	</tr>
+</table><!--Topic Definition-->
+<p>A <b>String</b> that contains the URL to be
+displayed. <b>HTMLURL</b> is a read/write <b>String</b>. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>HTMLURL</b> = <i>stringValue</i></td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>HTMLURL</b> property syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+<TR>
+		<td class="boldItal">object</td>
+		<td>WebPage</td>
+		<td>Required</td>
+		<td>An object reference to an instance of the <A href="WebPage.htm">WebPage</a> exemplar.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">stringValue</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The URL that will be displayed when the WebPage 
+      object is activated.</td>
+	</TR>
+
+
+</TABLE><!--Remarks section-->
+<H3>Remarks</H3>
+<P>Contains the URL to the content that is displayed when a user activates a <b>WebPage</b> object by clicking on it 
+with the mouse or invoking the <a href="Show.htm">Show</a> method via script.
+<H3>Example</H3>
+<p>To get the value of <b>HTMLURL</b>:</p>
+
+<pre>   Result = MyWindow.HTMLURL </pre>
+
+<p>To set the value of <b>HTMLURL</b>:</p>
+
+<pre>   MyWindow.HTMLURL = "http://www.microsoft.com"</pre>&nbsp;
+ 
+
+</body>
+</html>

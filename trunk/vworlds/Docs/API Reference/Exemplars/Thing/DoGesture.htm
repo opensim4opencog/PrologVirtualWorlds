@@ -1,0 +1,112 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>DoGesture</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>DoGesture</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Returns&nbsp;the&nbsp;specified gesture&nbsp;from the 
+list of&nbsp;available gestures&nbsp;in Microsoft Virtual Worlds. 
+<STRONG>DoGesture</STRONG> is a member of the&nbsp;<STRONG>Thing</STRONG> exemplar.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>DoGesture</STRONG>&nbsp;<EM>iGesture</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>DoGesture</STRONG> property syntax has 
+these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->Thing</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An 
+      object reference that&nbsp;accesses a&nbsp;<STRONG>Thing</STRONG> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">iGesture</td>
+		<td><!--Parameter name-->Integer</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description--> 
+         Represents&nbsp;a valid Virtual Worlds 
+ gesture.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section --></P>
+<H3>Return Value</H3>
+<p>         
+     This method does not return a         
+     value.
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->When 
+you use the <b>DoGesture</b> method, 
+you do not have to use the gesture in combination with the <A href="Emote.htm">Emote</A> method 
+of the <b>Thing</b> object. With the <b>DoGesture</b> method, you programmatically articulate emotions 
+for your avatar by specifying the integer that references the gesture that 
+you want. Virtual Worlds has&nbsp;a default of 13 gestures available for use 
+by your avatar.
+<P><b>Note:</b>&nbsp;&nbsp; When you execute the <B>DoGesture</B> method, there is no 
+accompanying text sent to the chat-history window. You must use the <b>Emote</b> method in order to add text to the chat-history 
+window.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>The following example prints a list of the gestures to the Command Window and then applies the wave and sleep gestures to the avatar.
+<pre class="example">
+<!--Example text-->
+Sub AvatarDoGesture()
+Dim myGesture
+
+Set myGestures = User.GetNamedGestures
+
+<font color="#009900">'Iterate through the gestures and display their names and index numbers.</font>
+For myGesture = 0 To 12
+    Trace User.GetNamedGestures.Property(myGesture) &amp; " - " &amp; myGesture
+Next
+
+<font color="#009900">'Execute the wave and sleep gestures.</font>
+User.<b>DoGesture 1</b>
+User.<b>DoGesture 12</b>
+End Sub
+</pre>
+ 
+
+</body>
+</html>

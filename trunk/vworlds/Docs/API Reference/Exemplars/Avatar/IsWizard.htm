@@ -1,0 +1,147 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>IsWizard</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsWizard</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Avatar Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Returns <b>True</b> if the avatar 
+is a wizard. <STRONG>IsWizard</STRONG>    
+    is <STRONG>Boolean</STRONG>.</P>
+<H3>Syntax</H3>
+This property is read/write for avatars that are wizards:
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object.</EM><STRONG>IsWizard</STRONG> = 
+      <EM>BooleanValue</EM></td>
+	</tr>
+</table>
+<P>This property is read-only for all other avatars:
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><i>object</i>.<b>IsWizard</b></td>
+	</tr>
+</table>
+<!--Parameters table-->
+<p>The <b>IsWizard</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Avatar</td>
+		<td>Required</td>
+		<td>An object reference to an <STRONG>Avatar</STRONG>     object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">BooleanValue</td>
+		<td>Boolean</td>
+		<td>Required</td>
+		<td><STRONG>True </STRONG>the avatar is a wizard. The 
+      default for this property is <B>False</B>. 
+  <!--Syntax table--> </td>
+	</TR>
+
+</TABLE>
+<H3>Remarks</H3>
+<P>     The first avatar to exist in your world is given wizard 
+and world owner status. As&nbsp;such, you can change the world's name 
+and&nbsp;set up its security.&nbsp;The <B>IsWizard</B> property for a world 
+owner's avatar cannot be set to <B>False</B>. 
+<P>                 
+           
+        Any avatar that 
+is created later or visits your world through a portal does not 
+have wizard status unless another wizard in the world sets the wizard 
+permissions for them in the <b>Object Properties</b> dialog box (also 
+known as the <b>Wizard Property Page</b>). Only a wizard can change the 
+value of the <b>IsWizard</b> property 
+for another avatar.
+
+<P>If an avatar is a wizard, the <b>Authoring Tools</b> tab is visible in the right pane of the 
+Microsoft Virtual Worlds environment. An avatar who is a wizard has the ability 
+to modify almost all properties for any object in the world and has the ability 
+to grant wizard, author, or host status to other avatars.
+
+
+<!--Example section-->
+<H3>Example</H3>
+<p> The following procedure&nbsp;can be called by a program running in the background 
+that monitors new avatars or avatars visiting the world through a portal.
+
+<P>The example first checks to see if a new avatar is a wizard. If not, the procedure 
+sends a <A href="Prompt.htm">Prompt</A> message to the new avatar asking whether it 
+wants to be a wizard. If the avatar clicks <b>Cancel</b>, an 
+<A href="Alert.htm">Alert</A> message is sent to a designated wizard. If 
+the avatar clicks <b>OK</b>, the avatar's <A href="QueryOK.htm">QueryOK</A> 
+property is set to <b>True</b> and an <b>Alert</b> message is sent 
+to the designated wizard to review the request. This example assumes that Gracie is a 
+wizard in the world and that the participant is the avatar that wants wizard status.
+
+<pre class="example">
+<!--Example text-->
+Sub NotifyWizard()
+Dim myWizard
+Dim myNewAvatar
+Dim myMsg
+
+Set myNewAvatar = User
+Set myWizard = User.Container.FindWithin("Gracie") 
+
+myMsg = "Do you want to be a wizard? 
+&nbsp;&nbsp;&nbsp;&nbsp;I will send a message to the resident wizard...
+&nbsp;&nbsp;&nbsp;&nbsp;Click OK if you want to be a wizard,
+&nbsp;&nbsp;&nbsp;&nbsp;otherwise, click Cancel." 
+</pre>
+
+<p class="comments">'Check if the <b>IsWizard</b> property is False.<br>
+'If so, send a message to the avatar.
+<pre class="example">
+If myNewAvatar.<b>IsWizard</b> &lt;&gt; True Then
+&nbsp;&nbsp;&nbsp;&nbsp;myAvatar.Prompt "Message to Wizard", myMsg, _
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User.Name &amp; " wants to be a wizard", myWizard
+</pre>
+
+<p class="comments">'Check the status of the <b>QueryOK</b> property and send the <br>'appropriate message to the wizard.
+<pre class="example">
+&nbsp;&nbsp;&nbsp;&nbsp;If myNewAvatar.QueryOK &lt;&gt; False Then
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myWizard.Alert "Warning no Authoring", _
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User.Name &amp; " decided not to be a wizard." 
+&nbsp;&nbsp;&nbsp;&nbsp;Else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myWizard.Alert "Need New Author Permission", _
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User.Name &amp; " wants to be a wizard."
+&nbsp;&nbsp;&nbsp;&nbsp;End If
+End If
+End Sub
+</pre>
+  
+
+</body>
+</html>

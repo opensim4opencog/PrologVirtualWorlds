@@ -1,0 +1,124 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<Link rel="Stylesheet" href="../../APIRef.css">
+<head>
+	<title>LightPenumbra</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>LightPenumbra</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Light Exemplar</td>
+	</tr>
+</table>
+<P>
+<!--Summary of topic-->
+<P>Sets or retrieves the scope of the outer cone of a spotlight, which is a light type of the <A href="light.htm">Light</A> exemplar. <b>LightPenumbra</b> is a read/write <b>Float</b>.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+
+<table class="backlight">
+	<tr>
+    	<td>
+      <P><EM>object</EM>.<B>LightPenumbra</B> = <em>floatValue</em></P></td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>LightPenumbra</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Light</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An instance of the <b>Light</b> Exemplar.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal"><em>floatValue</em></td>
+		<td>Float</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>Any valid expression that evaluates to a <b>float</b> value representing degrees. The default setting is 60 degrees.</td>
+<!--Description-->
+	</TR>
+	
+</TABLE>
+
+ <!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <B>LightPenumbra</B> property sets scope of the outer,&nbsp;gradually darkening area that a spotlight illuminates. A spotlight visually affects objects by concentrating light on a single focal area, referred to in Microsoft Virtual Worlds as the <i>umbra</i>. Outside that region, the light on a surface gets gradually dimmer, or "falls off," until the area outside the scope of the spotlight is completely dark. The gradually dimming area outside the focal region of a spotlight is referred to in Virtual Worlds as the <i>penumbra</i> (see Figure 1). Specifically, the <b>LightPenumbra</b> property sets the outer edge of the fall-off effect. Objects outside the penumbra are completely unaffected by the light source. 
+<br>
+<br>
+<p><img src="../../Images/UmbraPenumbra3.GIF" width=368 height=344 alt="" border="0">
+<p>Figure 1.
+
+<P>The suggested range for the <B>LightPenumbra</B> property is from 0.1 through 180.0 degrees (pi radians), but the setting must be greater than the value of the <A href="LightUmbra.htm">LightUmbra</A> property. Any setting beyond 180 degrees has no increased visible effect on rendered objects. 
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;Both the <b>LightUmbra </b>and <b>LightPenumbra</b> properties have an effect only when the <b>LightType </b> property of&nbsp;the <b>Light</b> object is set to 2 (spotlight). 
+
+
+<H3>Examples</H3>
+<p>The first example creates an instance of the <b>Light</b> exemplar and sets the <b>LightPenumbra</b> property within the suggested usage limits. The parameter <i>myName</i> is the name of the instance, and <i>myNewValue</i> is the new float value for the <b>LightPenumbra</b> property.
+<br><br>
+<pre class=example>Sub myPenumbra (myName, myNewValue)
+Dim NewLight
+</pre>
+<p class=comments>'Create a <b>Light</b> object.
+<pre class=example>Set NewLight = World.CreateInstance(myName, "Light", User.Container)
+</pre>
+<p class=comments>'Verify that the value supplied is valid.
+<pre class=example>If myNewValue &gt; 180.0 Then
+    Trace "Assigned value must be less than 180."
+    Exit Sub
+ElseIf myNewValue is &lt;= 0
+    Trace "Assigned value must be greater than 0."
+    Exit Sub
+ElseIf myNewValue &lt;= NewLight.LightUmbra Then
+    Trace "The penumbra must be greater than the umbra. The current umbra is " &amp; NewLight.LightUmbra "."
+    Exit Sub</pre>
+<div class=comments>'If myNewValue is valid, assign the new value.</div>
+<pre class=example>Else
+    NewLight.<b>LightPenumbra</b> = myNewValue
+End If
+
+End Sub</pre>
+</pre>
+<p>Example 2.
+<p>This example reports the status of the <b>LightPenumbra</b> property in the Command Window.<br><br>
+<p class=comments>'Trace the current status of a light to the Command Window.
+<pre class=example>Dim LightPenumbraStatus
+Dim myLight</pre>
+<p class=comments>'The name of an existing light is "Light1".
+<pre class=example>Set myLight = User.Container.FindWithin("Light1")
+LightPenumbraStatus = myLight.<b>LightPenumbra</b > 
+Trace LightPenumbraStatus
+
+</pre>&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>AllowWhispers</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AllowWhispers</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Room Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Boolean</b> flag indicating whether whispers are allowed in 
+the <b>Room</b>. <b>AllowWhispers</b> is a read/write <b>Boolean</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>AllowWhispers</b> = <i>BooleanValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>AllowWhispers</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+<TR>
+		<td class="boldItal">object</td>
+		<td>Room</td>
+		<td>Required</td>
+		<td>An instance of the <b>Room</b> exemplar.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">BooleanValue</td>
+		<td>Boolean</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Boolean</b>. The default value is <b>True</b>.</td>
+	</TR>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>By setting this property to <b>False</b>, content creators prevent whispering in a room. Avatars will no longer see the "Whisper To..." menu item on other avatars, or the "Whisper..." menu item on themselves.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get this property:</p>
+
+<pre>   IsAllowed = MyRoom.AllowWhispers</pre>
+
+<p>To set this property:</p>
+
+<pre>   MyRoom.AllowWhispers = True&nbsp;
+
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>QueryOK</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>QueryOK</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Avatar Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Returns <STRONG>True</STRONG> if 
+ the user clicked the <b>OK</b> button 
+on a query dialog&nbsp;box. <STRONG>QueryOK</STRONG> is a read-only 
+<STRONG>Boolean</STRONG>.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>QueryOK</STRONG></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<!--Parameters table-->
+<p>The <b>QueryOK</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Avatar</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description--> 
+      An&nbsp;object reference to an <STRONG>Avatar</STRONG> 
+object.</td>
+	</TR>
+
+</TABLE>
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->The 
+<A href="Alert.htm"><STRONG>Alert</STRONG></A>, <A 
+href="Confirm.htm"><STRONG>Confirm</STRONG></A>, and <A 
+href="Prompt.htm"><STRONG>Prompt</STRONG></A> methods each open a dialog box 
+containing an <B>OK</B> button. If the user clicks <B>OK</B> 
+in any of these dialog boxes, the <B>QueryOK</B> property&nbsp;for that avatar 
+is set to <B>True</B>. If the user closes the dialog box or clicks <B>Cancel</B> (for 
+the <B>Confirm</B> and <B>Prompt</B> methods), the value for the <B>QueryOK</B> property is 
+set to <B>False</B>.&nbsp;By default, the value is <STRONG>False</STRONG>.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>
+This example checks the <b>QueryOK</b> property of Eve's avatar. If its value is <b>False</b>, then the program calls the SendAlert 
+ procedure.</p>
+
+<pre class="example">
+Sub VerifySendAlertCall()
+Dim myAvatarEve
+
+Set myAvatarEve = User.Container.FindWithin("Eve")
+
+If myAvatarEve.<b>QueryOK</b> = False Then 
+&nbsp;&nbsp;&nbsp;&nbsp;SendAlert
+End If
+
+
+Sub SendAlert()
+Dim myPhoneMap
+Dim myAvatarEve
+</pre>
+<p class="comments">'Set a reference to the avatar.
+<pre class="example">
+Set myAvatarEve = User.Container.FindWithin("Eve")
+</pre>
+<p class="comments">'Create a property map.
+<pre class="example">
+Set myPhoneMap = CreatePropertyMap
+</pre>
+<p class="comments">'Add properties to the property map.
+<pre class="example">
+PhoneMap.Property("Erik") = "555-1234"
+PhoneMap.Property("Samantha") = "555-2468"
+</pre>
+<p class="comments">'Display an <b>Alert</b> dialog box to Eve. <br>
+'When Eve closes the dialog box, the "myPhoneMap" property map <br>
+'is transferred to the <b>QueryParam</b> property of Eve's avatar. 
+<pre class="example">
+myAvatarEve.Alert "Phone Numbers", "Transfer?", PhoneKiosk, _
+&nbsp;&nbsp;&nbsp;&nbsp;"TransferMethod", myPhoneMap
+
+End Sub
+</pre>
+<!--Example text-->&nbsp; 
+<PRE></PRE>
+  
+
+</body>
+</html>

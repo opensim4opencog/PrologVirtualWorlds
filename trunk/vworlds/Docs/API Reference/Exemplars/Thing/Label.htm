@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Label</title>
+</head>
+
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Label</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Places a label above a <A href="Thing.htm">Thing</A> object. <b>Label</b> 
+is a read/write <b>String</b>.      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><em>object</em>.<b>Label</b> = <em>stringValue</em></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Label</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td><!--Description-->An 
+      instance of the <STRONG>Thing</STRONG> exemplar.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">stringValue</td>
+		<td>String</td>
+		<td>Required</td>
+		<td><!--Description-->Any 
+      valid expression that evaluates to a string.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->The <b>Label</b> property provides a means of placing a name tag on a <b>Thing 
+</b> object. When a label is applied to a <b>Thing</b> object, the following defaults are applied.<br>
+<p>
+<TABLE class="backlight" style="width:50%">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Property</td>
+			<td>Default setting</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+<TR>
+		<td><a href="LabelFontColor.htm">LabelFontColor</a></td>
+		<td><!--Parameter name-->White (1,1,1)</td>
+	</TR>
+<TR>
+		<td><a href="LabelFontName.htm">LabelFontName</a></td>
+		<td><!--Parameter name-->Arial</td>
+	</TR>
+	<TR>
+		<td><a href="LabelFontSize.htm">LabelFontSize</a></td>
+		<td><!--Parameter name-->24pt</td>		
+	</TR>
+	<TR>
+		<td><a href="LabelPlacement.htm">LabelPlacement</a></td>
+		<td><!--Parameter name-->Above (1)</td>
+	</TR>
+<TR>
+		<td><a href="LabelShadowColor.htm">LabelShadowColor</a></td>
+		<td><!--Parameter name-->Black (0,0,0)</td>
+	</TR>
+<TR>
+		<td><a href="LabelStyle.htm">LabelStyle</a></td>
+		<td><!--Parameter name-->None (0)</td>
+	</TR>
+
+</TABLE>
+
+<p>When an object is visible in the 3-D view, the label faces you at all times.
+
+<!--Example section-->
+<H3>Examples</H3>
+<p>This example takes several label elements as arguments to quickly create a label and customize the formatting. In this example, "strName" equals "Bob", "strLabel" equals "Bob's Label", "strFont" equals "Helvetica", "intSize" equals "16", and "vecLabelColor" equals "(1,0,0)", which corresponds to the color red.<br><br>
+<PRE class=example>
+Sub MyLabelFormat(strName, strLabel, strFont, intSize, vecLabelColor)</PRE>
+<p class=comments>'Acquire a reference to the object named "Bob".
+<PRE class=example>Dim MyThing
+Set MyThing = User.Container.FindWithin(strName)</PRE>
+
+<p class=comments>'Set the label to "Bob's Label".
+<PRE class=example>MyThing.<b>Label</b> = strLabel</PRE>
+
+<p class=comments>'Change the font to Helvetica.
+<PRE class=example>MyThing.LabelFontName = strFont</PRE>
+
+<p class=comments>'Change the size of the text to 16.
+<PRE class=example>MyThing.LabelFontSize = intSize</PRE>
+
+<p class=comments>'Change the color of the text to red.
+<PRE class=example>MyThing.LabelColor = vecLabelColor
+
+End Sub
+</PRE>
+
+<p>Example 2
+<p>This example sets the <b>Label</b> caption, retrieves the current setting, and prints the results to the Command Window.
+<br><br>
+<PRE class=example>
+Dim myThing
+Dim myConfirmation</PRE>
+
+<p class=comments>'Acquire a reference to an existing object named "MyThing" and change its label.
+<PRE class=example>Set myThing = User.Container.FindWithin("MyThing")
+myThing.<b>Label</b> = "This is a Label"</PRE>
+
+<p class=comments>'Retrieve the value of the <b>Label</b> property and print the results in the Command Window
+<PRE class=example>Set myConfirmation = myThing.<b>Label</b>
+Print myConfirmation
+</pre>
+
+
+</body>
+</html>

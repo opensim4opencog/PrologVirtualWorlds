@@ -1,0 +1,129 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>SetNamedMeshColor</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetNamedMeshColor</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets a given mesh to a given color. <b>SetNamedMeshColor</b> is 
+a member of the <b>Thing</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetNamedMeshColor</b>&nbsp;<i>bstrMeshName, newColor</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetNamedMeshColor</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrMeshName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the mesh.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">newColor</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The new color for the mesh.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>When you use this method to set the color of a named mesh,
+the change applies to every mesh with that name on the object.</p>
+
+<p>The <i>newColor</i> parameter must be set to a <b>Long</b> value in decimal form.
+To understand the <i>newColor</i> parameter used by <b>SetNamedMeshColor</b>, it is
+useful to know the internal hexadecimal (base 16) format this method uses.
+In this format, a color is represented by three pairs of hexadecimal digits
+in the form &amp;HBBGGRR.   Each pair of digits can hold any of 256 values, from
+&amp;H0 to &amp;HFF (0 to 255).  The left-most pair of digits represents
+the amount of blue in the color, the middle pair represents the amount of green,
+and the right-most pair represents the amount of red.  The entire number can represent
+any of 16,777,215 distinct colors. </p>
+
+<p>The following table lists the internal hexadecimal color representation for three colors,
+and the value that should be used for the <i>newColor</i> parameter.  By adjusting each color level,
+you can get the exact color you want.</p>
+
+<table class="backlight">
+    <tr>
+        <td><b>Color</b></td>
+        <td><b>Hexadecimal Value</b></td>
+        <td><b><i>newColor</i> value</b></td>
+    </tr>
+<tr class="line" ><td colspan=100%></td></tr>
+    <tr>
+        <td><b>Pure Red</b></td>
+        <td>&amp;H0000FF</td>
+        <td>255 </td>
+    </tr>
+	<tr>
+        <td><b>Pure Green</b></td>
+        <td>&amp;H00FF00</td>
+        <td>65280 </td>
+   </tr>
+   <tr>
+        <td><b>Pure Blue</b></td>
+        <td>&amp;HFF0000</td>
+        <td>16711680 </td>
+  </tr>
+</table>
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyThing.SetNamedMeshColor &quot;Leg1&quot;, 65280</pre>
+&nbsp;
+
+
+</body>
+</html>

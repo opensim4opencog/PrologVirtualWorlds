@@ -1,0 +1,100 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>IsInState</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsInState</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the StateMachine Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Determines whether the default state machine is in the
+specified state. <b>IsInState</b> is a member of the <b>StateMachine</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsInState</b>&nbsp;(<i>bstrState</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>IsInState</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>StateMachine</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>StateMachine</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrState</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The state of the state machine.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Boolean</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method is a special case of the 
+<a href="IsStateMachineInState.htm">IsStateMachineInState</a> 
+method of <b>StateMachine</b>. It executes on
+either the client or the server.</p>
+
+<p>To find a state machine's current state, the 
+<a href="../../World/Trace.htm">Trace</a> method of <b>World</b>,
+by passing it the name of the state machine object and the
+internal state machine for which you want to find the state. For
+example, to find out the state of the <i>Default</i> internal
+state machine in the <i>SM</i> state machine object, execute
+this code in the Command Window:</p>
+
+<blockquote>
+    <pre>Trace SM.Default</pre>
+</blockquote>&nbsp;
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>inState = MyStateMachine.IsInState(&quot;Waiting&quot;)</pre>
+
+<p>The foregoing example is equivalent to </p>
+
+<pre>inState = MyStateMachine.IsStateMachineInState(&quot;Default&quot;, &quot;Waiting&quot;)</pre>
+&nbsp;
+
+</body>
+</html>

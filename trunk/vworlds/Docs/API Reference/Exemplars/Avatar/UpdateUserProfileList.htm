@@ -1,0 +1,115 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>UpdateUserProfileList</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>UpdateUserProfileList</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Avatar Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P> Adds a check mark next to the specified menu 
+item&nbsp;if the specified avatar exists in the profile of the user. 
+<STRONG>UpdateUserProfileList</STRONG>          
+  is a member of the <A href="Avatar.htm">Avatar</A> exemplar.
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object.</EM><STRONG>UpdateUserProfileList</STRONG>(<EM>pmi</EM>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>UpdateUserProfileList</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->AvatarProfile</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An 
+      object reference that accesses an <STRONG>AvatarProfile</STRONG> 
+  object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pmi</td>
+		<td><!--Parameter name--</td>>
+		<td><!--Type-->MenuItem</td>
+		<td><!--Description-->Required</td>
+        <td>	A reference to a menu item.	</td>
+</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P> This method is used to manage check marks on shortcut menus in&nbsp;Microsoft Virtual Worlds. For example, if the owner of 
+a menu item is in the user's <A href="../../AvatarProfile/AvatarProfile.htm">AvatarProfile</A> property 
+ list, 
+then the menu item appears on the shortcut menu with a check mark to the 
+left of it. However, if the owner of the menu item is <EM>not</EM> in the user's 
+profile, the <STRONG>UpdateUserProfileList</STRONG>  method generates an error 
+when you attempt to update the 
+profile.</P>
+<P>When you create the menu item by using the <A href="../../World/CreateMenuItem.htm">CreateMenuItem</A> 
+ method, you specify the owner of the menu item. If the value of this 
+parameter exists in the user's profile, the menu item is selected. Otherwise, the menu item is 
+not selected.</P><H3>Example</H3>
+<P>This example uses the <b>UpdateUserProfileList</b>  method to indicate when an 
+avatar is a member of a particular group. 
+In this example, a group named "CoWorkers"&nbsp;is associated with a menu item of 
+the same name. When the user right-clicks an avatar that is a member of the&nbsp;CoWorkers 
+group, a check mark is placed next to the "CoWorkers" menu item 
+on the avatar's shortcut menu.
+
+<pre class="example">
+<!--Example text-->
+Sub CoWorkerSetup
+Dim myNewMenuItem
+
+User.Profile.AddKey "CoWorkers", CreatePropertyList
+
+Set myNewMenuItem = CreateMenuItem("Add to CoWorker list", 0, _
+&nbsp;&nbsp;User, "<b>UpdateUserProfileList</b>", "MenuUserProfileList", "CoWorkers")
+End Sub
+</pre>
+<p>
+If you added more keys later, you would use the following statement to update the avatar's profile.</p>
+<pre class="example">
+User.UpdateUserProfileList myNewMenuItem
+</pre>
+  
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>LabelShadowColor</title>
+</head>
+
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>LabelShadowColor</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<p>
+Sets or returns the shadow color of the <a href="Label.htm">Label</a> of a <A href="Thing.htm">Thing</a> object.<b> LabelShadowColor</b> is a read/write <a href="../../Vector/Vector.htm">Vector</a>.
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--syntax statement --><EM>object</EM>.<STRONG>LabelShadowColor </STRONG>= <EM>vectorValue</EM></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>LabelShadowColor</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->Thing</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->An 
+      instance of the <STRONG>Thing</STRONG> exemplar.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">vectorValue</td>
+		<td><!--Parameter name-->Vector</td>
+		<td><!--Type-->Required</td>
+		<td>A <b>Vector</b> value that corresponds to red, green, and blue color components. The default color setting black (0, 0, 0).  </td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>The x, y, and z values of the <b>Vector</b> data type correspond, respectively, to the red, green, and blue color values. The normalized range of each vector component for this property is from 0 to 1, where a value of 0 is equal to a color intensity level of 0%, and a value of 1 is equal to a color intensity level of 100%. 
+<P>The <B>LabelShadowColor </B>property controls the color value of&nbsp;the shadow behind a <b>Label</b> of a <b>Thing</b> object. It does not affect the color of the actual <b>Label</b>. To change the color of the <b>Label</b>, adjust the <A href="LabelFontColor.htm">LabelFontColor</A> property. 
+
+<P>To remove the shadow from the Label, set the <b>LabelShadowColor</b> property to <b>Nothing</b>.
+
+<!--Example section-->
+<H3>Examples</H3>
+<p>This example changes the <b>Label</b> and <b>LabelShadowColor</b> property of a <b>Thing</b> object. In this example, &quot;myThing&quot; is a reference to an instance of the <b>Thing</b> object.<br><br>
+
+<p class=comments>'Provide a label for the object.
+<pre class="example">myThing.Label = &quot;Bobs Label&quot;</pre>
+
+<p class=comments>'Change the font color to red.
+<pre class="example">myThing.<b>LabelShadowColor</b> = World.CreateVector(1, 0, 0)</pre>
+
+<p class=comments>'Confirm that the color was changed to the new <b>Vector</b> value.
+<pre class="example">Trace &quot;The new color value is: &quot; &amp; myThing.<b>LabelShadowColor</b>.ToAscii
+
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Sound</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Sound</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A property that contains sound data for
+the current <b>Thing</b>. <b>Sound</b> is a read/write <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Sound</b>&nbsp;=&nbsp;<i>stringValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Sound</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">stringValue</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The URL of the sound file.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>To create a <b>Sound</b> object, use the 
+<a href="../../World/CreateSound.htm">CreateSound</a>
+method of <b>World</b>. To begin playing a <b>Sound</b>
+object, set the <b>Sound</b> property on a <b>Thing</b>
+to refer to the <b>Sound</b> object you want to play.
+In this version of Virtual Worlds, there is no other way to play
+a sound. See the Example section of this topic to see how this is
+done.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get the <b>Sound</b> property:</p>
+
+<pre>   Set Result = MyThing.Sound</pre>
+
+<p>To set the <b>Sound</b> property:</p>
+
+<pre>   MyThing.Sound = SoundObject</pre>
+
+<p>Here is an example of how to create a sound, and attach it to
+a <b>Thing</b>. The file path is for illustration purposes only.</p>
+
+<blockquote>
+    <pre>Set BirdSound = World.CreateSound( &quot;File://c:\eagle2.wav&quot;, False, False )   ' Line 1
+Set BotRef = User.Container.FindWithin( &quot;Bot&quot; )			  ' Line 2
+BotRef.Sound = BirdSound					  ' Line 3</pre>
+</blockquote>
+
+<p>In line 1 of this example, <b>CreateSound</b> uses
+the file EAGLE2.WAV to create a <b>Sound</b> object
+named <i>BirdSound</i>. The second parameter indicates that
+this is a 2D sound, rather than a 3D sound. The third parameter
+specifies that the sound should be played once only.</p>
+
+<p>In line 2, a reference (<i>BotRef</i>) to a <b>Thing</b>
+object named <i>Bot</i> is obtained. <i>Bot</i> is assumed to
+be in the same <b>Container</b> (that is, room) as the <b>User</b>.</p>
+
+<p>In line 3, the <b>Sound</b> property on <b>BotRef</b>
+is set to refer to <i>BirdSound</i>, the <b>Sound</b>
+object created in line 1. As soon as this line is executed, the
+sound will begin playing. To stop the sound from playing, set the
+object's <b>Sound</b> property to <b>Nothing</b>.&nbsp;
+ 
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>PutStateMachineInlineStateMethod</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>PutStateMachineInlineStateMethod</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the StateMachine Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Adds an in-line method for a state-specific event on a
+specified state machine. <b>PutStateMachineInlineStateMethod</b> is a member of 
+the <b>StateMachine</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>PutStateMachineInlineStateMethod</b>&nbsp;<i>lFlags, 
+		bstrStateMachineName, bstrState, bstrMethodName, bstrCode&nbsp;[,&nbsp;varParams]</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>PutStateMachineInlineStateMethod</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>StateMachine</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>StateMachine</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">lFlags</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>A flag that specifies whether the inline method will run 
+      on the client or server or both.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrStateMachineName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The state machine name.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrState</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The state machine state.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrMethodName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the inline method.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrCode</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The <b>VBScript</b> code to execute.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[varParams]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The list of one or more parameters.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method adds an inline method (on the client or server) to
+be invoked by a state machine when it is in a particular state. 
+<b>PutStateMachineInlineStateMethod</b>
+runs on either the client or the server.</p>
+
+<p>The <i>lFlags</i> parameter uses the 
+<b>METHOD_CLIENT</b>
+and <b>METHOD_SERVER</b>
+properties of <b>World</b>. 
+
+<p>A state machine will invoke a method associated with a
+particular state when that it is in that state. Two methods that
+a state machine can invoke are <b>OnEnterState</b> and <b>OnTimeOut</b>.
+Use <b>OnEnterState</b> for the <i>MethodName</i>
+parameter to cause a state machine to perform some action when
+the given state is entered. Use <b>OnTimeOut</b> for
+the <i>MethodName</i> parameter to cause a state machine to
+take some action after the specified period of time has elapsed.
+(Neither <b>OnEnterState</b> nor <b>OnTimeOut</b> takes
+parameters. See the <a href="PutStateProperty.htm">PutStateProperty</a>
+and <a href="PutStateMachineStateProperty.htm">PutStateMachineStateProperty</a>
+methods of <b>StateMachine</b> for information about
+setting a <i>TimeOut</i> value.)</p>
+
+<p>The <i>Params</i> parameter is used when the inline method
+takes parameters. Parameters should be listed in a pair of
+quotation marks, and separated by commas if there is more than
+one. The default value of <i>Params</i> is the empty string
+(&quot;&quot;); you can omit <i>Params</i> if there are no
+parameters to pass to the inline method.</p>
+
+<p>Two other useful methods are <b>OnLButtonUp</b>
+and <b>OnPeerEnter</b> (one of several methods in the <b>OnEnter</b> event
+handler suite). Use <b>OnLButtonUp</b> for the <i>MethodName</i>
+parameter to cause a state machine to respond to a click of the
+left mouse button. Use <b>OnPeerEnter</b> for the <i>MethodName</i>
+parameter to cause a state machine to respond to another object
+entering the same room (or other container).
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>Note that if the inline code contains an embedded <b>String</b>,
+the beginning and ending double-quotes must appear twice each, as
+in the following example. Also note that the <b>OnLButtonUp</b>
+event handler requires three arguments to be passed to it. Your
+inline method does not need to use these arguments. These
+arguments are shown in the last parameter.</p>
+
+<pre>MyStateMachine.PutStateMachineInlineStateMethod World.METHOD_CLIENT, &quot;State1&quot;,_
+   &quot;Waiting&quot;, &quot;OnLButtonUp&quot;, &quot;this.Say &quot;&quot;I been clicked!&quot;&quot; &quot;, &quot;win, x, y&quot; </pre>
+
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>AddStateMethod</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AddStateMethod</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the StateMachine Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Adds a state-specific non-inline method to a state machine,
+from a given script module. <b>AddStateMethod</b> is a member of the 
+<b>StateMachine</b> exemplar. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>AddStateMethod</b>&nbsp;<i>lFlags, pmodule, 
+		bstrModuleMethodName, bstrStateMachineName, bstrState, bstrMethodName</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>AddStateMethod</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>AddStateMethod</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>StateMachine</b> object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>lFlags</TD>
+    <TD>Long</TD>
+    <TD>Required</TD>
+    <TD>A flag that indicates whether the method will run on the client or on the server.</TD></TR>
+  <TR>
+    <TD class=boldItal>pmodule</TD>
+    <TD>Module</TD>
+    <TD>Required</TD>
+    <TD>The name of the script module.</TD></TR>
+  <TR>
+    <TD class=boldItal>bstrModuleMethodName</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The name of the method (function or subroutine) within the module.</TD></TR>
+  <TR>
+    <TD class=boldItal>bstrStateMachineName</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The state machine name.</TD></TR>
+  <TR>
+    <TD class=boldItal>bstrState</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The state machine state that is to be associated with the 
+  method.</TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->bstrMethodName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the method (as it is known to the <b>StateMachine</b> 
+      instance).</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The added method can be invoked directly, but will only
+execute if the state machine is in the state associated with the
+method when it is invoked. If the method is intended to run on
+the server, <i>lFlags</i> should be set to 
+<b>METHOD_SERVER</b>;
+if it is meant to run on the client, set <i>lFlags</i> to 
+<b>METHOD_CLIENT</b>. <i>Mod</i>
+is the module that contains the method. </P>
+
+<p>To add inline methods to a state machine, use 
+<a href="PutInlineStateMethod.htm">PutInlineStateMethod</a> or 
+<a href="PutStateMachineInlineStateMethod.htm">PutStateMachineInlineStateMethod</a>,
+other methods of <b>StateMachine</b>. The first of
+these methods is used to add an inline method to the default
+internal state machine, <i>Default</i>. The second method is
+used to add an inline method to another internal state machine.</p>
+
+<p>This method runs on either the client or the server.&nbsp;
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyStateMachine.AddStateMethod METHOD_CLIENT, DisplayModule, "DisplayHelp",_
+	"State1", "Waiting", "Display"
+&nbsp;
+</pre>
+<p class=comments></p>
+
+
+
+</body>
+</html>

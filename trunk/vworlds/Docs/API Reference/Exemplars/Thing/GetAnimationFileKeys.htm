@@ -1,0 +1,91 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>GetAnimationFileKeys</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetAnimationFileKeys</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>Returns a property list of animation keys contained in 
+the file. <b>GetAnimationFileKeys</b> is a member of the <b>Thing</b> exemplar. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<b>GetAnimationFileKeys</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The&nbsp;<STRONG>GetAnimationFileKeys</STRONG>  method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Thing</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>  An object reference&nbsp;to a 
+      <STRONG>Thing</STRONG>       object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3></H3>
+<H3>Return Value</H3>
+<p>
+This method does not return a&nbsp;value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method looks at the current geometry of the object for animation data. If the method fails to find geometry data, it returns 
+an empty property list.
+<P>By checking the <STRONG>Count</STRONG> property of the 
+returned list you can determine&nbsp;whether the file can be animated with the 
+<STRONG>StartAnimation</STRONG>       
+          method.&nbsp;
+<H3>Example</H3>
+<p>This example fills in the key list for the baseball animations from the "Baseball.x" animation file.</p>
+<pre class="example">
+Set myPropertyList = myFileObject.<b>GetAnimationFileKeys</b>
+
+If myPropertyList.Count > 0 Then
+&nbsp;&nbsp;&nbsp;&nbsp;myBaseballFile.StartAnimation "File", , , , .001
+Else
+&nbsp;&nbsp;&nbsp;&nbsp;Print "The file does not contain animation information in it."
+End If
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>ApproachRadius</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ApproachRadius</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Float</b> that specifies the radius of a circle used to position an object that is
+approaching another object. <b>ApproachRadius</b> is a read/write <b>Float</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>ApproachRadius</b> = <i>floatValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>ApproachRadius</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+<TR>
+		<td class="boldItal">floatValue</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Float</b>.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Each of the <a href="ApproachDistance.htm">ApproachDistance</a> and 
+<b>ApproachRadius</b> properties defines a circle that is used to position 
+an approaching object.  <b>ApproachDistance</b> defines a circle centered 
+on the destination object, with a radius equal to the value stored in this property.
+<b>ApproachRadius</b> defines a second circle, centered at some point on the first 
+circle, with a radius equal to the value stored in <b>ApproachRadius</b>.  The final 
+position of an approaching object is a randomly chosen point within this second circle.</p>
+
+<p><img src="../../Images/ApproachDistance.GIF" width=205 height=228 alt="" border="0">
+<p>The default value for this property is 1.0 unit.</p>
+
+<p>The <a href="Approach.htm">Approach</a> method of <b>Thing</b> uses three properties
+to determine the final position of an object when it approaches a destination object: 
+<a href="ApproachDistance.htm">ApproachDistance</a>, 
+<a href="ApproachToFront.htm">ApproachToFront</a>,
+and <b>ApproachRadius</b>.  For a complete discussion of all three properties,
+see <a href="Approach.htm">Approach</a>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get this property:</p>
+
+<pre>   Radius = TheObject.ApproachRadius</pre>
+
+<p>To set this property:</p>
+
+<pre>   TheObject.ApproachRadius = 2.0</pre>&nbsp;
+
+
+</body>
+</html>

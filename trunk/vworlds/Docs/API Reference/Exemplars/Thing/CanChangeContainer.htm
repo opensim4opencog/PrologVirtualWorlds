@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>CanChangeContainer</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CanChangeContainer</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Thing Exemplar</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>Flag that determines whether the object can moved into another <a href="../../Thing/Thing.htm">Thing</a> object using the <a href="MoveInto.htm">MoveInto</a> or <a href="Take.htm">Take</a> method. <b>CanChangeContainer</b> is a read/write <b>Boolean</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CanChangeContainer</b> = <i>booleanValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>CanChangeContainer</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">booleanValue</td>
+		<td>Boolean</td>
+		<td>Required</td>
+		<td>True is the object can be moved.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The values of the <b>CanChangeContainer</b> and 
+<a href="IsTakeable.htm">IsTakeable</a> properties on
+a <b>Thing</b> object can potentially affect two
+different operations on the object: a <a href="MoveInto.htm">MoveInto</a>
+operation, and a <a href="Take.htm">Take</a>
+operation. The following table summarizes the effects of all
+possible values of <b>CanChangeContainer</b> and <b>IsTakeable</b>.</p>
+
+<table class="backlight">
+    <tr>
+        <td><b>CanChangeContainer</b></td>
+        <td><b>IsTakeable</b></td>
+        <td><b>Results</b></td>
+    </tr>
+<tr class="line" ><td colspan=100%></td></tr>
+    <tr>
+        <td><b>True</b></td>
+        <td><b>True</b></td>
+        <td>Take menu item appears on object's shortcut menu.
+        Object can be taken or moved by anyone.</td>
+    </tr>
+    <tr>
+        <td><b>True</b></td>
+        <td><b>False</b></td>
+        <td>Take menu item does not appear, but object can be
+        moved by anyone who invokes <b>MoveInto</b> on
+        the object.</td>
+    </tr>
+    <tr>
+        <td><b>False</b></td>
+        <td><b>True</b></td>
+        <td>Take menu item does not appear. Object can not be
+        taken or moved <i>unless</i> by its owner or a wizard.</td>
+    </tr>
+    <tr>
+        <td><b>False</b></td>
+        <td><b>False</b></td>
+        <td>Take menu item does not appear. Object can not be
+        taken or moved <i>unless</i> by its owner or a wizard.</td>
+    </tr>
+</table>
+
+<p>The <b>General</b> property page for an object sets
+both <b>CanChangeContainer</b> and <b>IsTakeable</b> to
+<b>True</b> if the <b>Can be taken</b>
+checkbox is checked. If this the box is uncheck, <i>only</i> <b>IsTakeable</b>
+is set to <b>False</b>.</p>
+
+<p>The default value of <b>CanChangeContainer</b> is <b>True</b>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get <strong>CanChangeContainer</strong>: </p>
+
+<pre>   Set IsOKToMove = AThing.CanChangeContainer</pre>
+
+<p>To set <strong>CanChangeContainer</strong>: </p>
+
+<pre>   AThing.CanChangeContainer = False</pre>&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Show</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Show</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the WebPage Exemplar</td>
+	</tr>
+</table><!--Topic Definition-->
+<P>Displays a browser window showing the content at a specified URL. 
+<b>Show</b> is a member of the <b>WebPage</b> exemplar. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Show</b>&nbsp;</td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>Show</b> method syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>WebPage</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>WebPage</b> object.</td>
+	</TR>
+
+</TABLE><!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value. <!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method brings up a browser window and displays the content that is
+located at the URL contained in the <A href="HTMLURL.htm">HTMLURL</A> property of the Web 
+Page object. &nbsp; <!--Example section-->
+<H3>Example</H3>
+<P>This example will create a web page object that points to the Microsoft.com 
+web site and then will show the web page there.</P>
+<p><pre>
+set theWebPage = createinstance("Web Page","WebPage")
+theWebPage.HTMLURL = "http://www.microsoft.com"
+theWebPage.Show
+</pre>
+&nbsp;
+</body>
+</html>

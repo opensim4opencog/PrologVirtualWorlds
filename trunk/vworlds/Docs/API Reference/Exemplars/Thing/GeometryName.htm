@@ -1,0 +1,87 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>GeometryName</title>
+</head>
+<body>
+<TABLE class=head>
+  
+  <TR>
+    <TD>
+      <H2>GeometryName</H2></TD>
+    <TD class=space></TD>
+    <TD class=methodpic><!--image is inserted here--></TD>
+    <TD class=greyed>Property of the Thing Exemplar</TD>
+</TR>
+</TABLE>
+<!--Topic Definition-->
+<P>Sets or returns the geometry name of the specified 
+<A href="../Thing/Thing.htm">Thing</A> object. 
+<b>GeometryName</b> is a read/write <b>String</b> property. <!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><!--Syntax statement--><EM>object</EM>.<STRONG>GeometryName</STRONG> 
+      = <EM>stringValue</EM></TD></TR></TABLE>
+	<!--Parameters table--></P>
+<p>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><!--Syntax statement--><EM>object</EM>.<B>GeometryName</B></TD></TR></TABLE>
+<P>The <b>GeometryName</b> property syntax has these parts:
+<TABLE class=backlight><!--Parameters table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Parameters</TD>
+    <TD>Type</TD>
+    <TD>Use</TD>
+    <TD>Description</TD></TR></THEAD><!--Parameters table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>Thing</TD>
+    <TD>Required</TD>
+    <TD>An object reference to a <STRONG>Thing</STRONG> object.</TD></TR>
+  <TR>
+    <TD class=boldItal>stringValue</TD>
+    <TD><!--Parameter name-->String</TD>
+    <TD><!--Type-->Required</TD>
+    <TD><!--Description--> 
+         A&nbsp;<STRONG>String</STRONG> that represents the name of a sprite 
+      file. This can either be a partial path, the filename, or a valid 
+      URL.</TD></TR></TABLE><!--Return Value section -->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->Use 
+this&nbsp;property to set the geometry image for an object from script. Changing this 
+property immediately affects the on-screen appearance of an object in a virtual 
+world.
+<P><b>Note:</b>&nbsp;&nbsp; The 
+geometry of an object disappears when you set the geometry name of an object to 
+an empty string ("").
+<H3>Example</H3>
+<P>This example illustrates how to change the image of your avatar in script. 
+<p><b>Note:</b>&nbsp;&nbsp;&nbsp;The default folder for the sprite images&nbsp;is \Program Files\Microsoft Virtual Worlds\Local Content\Avatar Graphics.
+<PRE class=example><!--Example text-->
+Sub ChangeAvatarLook()
+</PRE>
+<p class="comments">'Print the current image of your avatar to the Command Window.
+<pre class="example">
+Trace User.<b>GeometryName</b>
+
+If User.GeometryName&nbsp;&lt;&gt;&nbsp;"gracie.spr" Then</pre>
+<div class="comments">&nbsp;&nbsp;&nbsp;&nbsp;'Set a new image for your avatar.</div><pre class="example">&nbsp;&nbsp;&nbsp;&nbsp;User.<b>GeometryName</b> = "gracie.spr"
+End If
+
+End Sub
+</pre>
+
+
+</body>
+</html>

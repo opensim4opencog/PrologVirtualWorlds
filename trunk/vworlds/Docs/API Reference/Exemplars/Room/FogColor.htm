@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>FogColor</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>FogColor</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Room Exemplar</td>
+	</tr>
+</table>
+<p>Sets or returns&nbsp;the&nbsp;numeric value of the fog&nbsp;color for the specified <A href="Room.htm">Room</A> object. <STRONG>FogColor</STRONG> is a 
+read/write <STRONG>Long</STRONG>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set a property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><I>object</I>.<STRONG>FogColor</STRONG> = 
+  <EM>longValue</EM></TD></TR></TABLE></P>
+<P>To return a property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>FogColor</STRONG></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<p>The&nbsp;<STRONG>FogColor</STRONG>  property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Object</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses a 
+      <STRONG>Room</STRONG>        object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name--><EM>longValue</EM></td>
+		<td><!--Type-->Long</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->An 
+      expression that evaluates to a valid color value. For possible values, refer to the table in the Remarks section.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>You can use the <STRONG>FogColor</STRONG> property to change the 
+effect&nbsp;fog&nbsp;has on a <b>Room</b> object. The following table shows the full 
+color values for red, green, blue, white, and black. </P>         
+                   
+<table class="backlight" style="HEIGHT: 266px; WIDTH: 637px" 
+ >
+<thead>
+<tr>
+<td>Color</td>
+<td>   Decimal value</td>
+    <TD>RGB value</TD>
+<td>   Hexadecimal value</td>
+</tr>
+</thead>
+  <TR>
+    <TD>Red</TD>
+    <TD>16,711,680 (255 * 256 * 256)</TD>
+    <TD > RGB(0, 0, 255)</TD>
+    <TD>&amp;HFF0000</TD></TR>
+  <TR>
+    <TD>Green</TD>
+    <TD>65,280 (255&nbsp;* 256)</TD>
+    <TD>RGB(0, 255, 0)</TD>
+    <TD> Do not use.</TD></TR>
+  <TR>
+    <TD>Blue</TD>
+    <TD>255</TD>
+    <TD>RGB(255, 0, 0)</TD>
+    <TD>&amp;H0000FF,&nbsp;same as &amp;HFF</TD></TR>
+  <TR>
+    <TD>White</TD>
+    <TD>16,777,215</TD>
+    <TD>RGB(255, 255, 255)</TD>
+    <TD>&amp;HFFFFFF</TD></TR>
+<tr>
+<td>Black</td>
+<td>0</td>
+    <TD>RGB(0, 0, 0)</TD>
+<td>&amp;H000000</td>
+
+</tr>
+</table>
+<H4>Coding with Color Constants</H4>
+<P>Microsoft Visual Basic provides color constants, such as 
+<STRONG>vbRed</STRONG>, <STRONG>vbCyan</STRONG>,&nbsp;and so on. The 3-D view in 
+Microsoft Virtual Worlds is an HTML page,&nbsp;which uses different constants 
+than the constants used by Visual Basic. For example, the constant 
+<STRONG>vbBlue</STRONG>         
+              
+          
+          displays as&nbsp;red in 
+Virtual Worlds.</P>
+<H3>Example</H3>
+<p>This example changes the fog color using hexidecimal and RGB color values.</p>
+<p class="comments">The following statement changes the fog color to&nbsp;light blue.
+<pre class="example">
+User.Container.<STRONG>FogColor</STRONG> = &amp;HDDDDDDD
+</pre>
+<p class="comments">'The following statement sets the fog color to green.
+<pre class="example">
+User.Container.<b>FogColor</b> = RGB(0, 255, 0)
+</pre>
+
+
+</body>
+</html>

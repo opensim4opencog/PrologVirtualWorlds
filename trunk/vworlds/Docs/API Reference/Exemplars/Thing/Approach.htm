@@ -1,0 +1,126 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>Approach</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Approach</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Thing Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Moves the calling object to a point near the destination
+object. <b>Approach</b> is a member of the <b>Thing</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Approach</b> <i>pThing</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Approach</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pThing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>A reference to the <b>Thing</b> object that the calling object moves closer to.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Moves the calling object to a point near the destination
+object. This can be anywhere in a region around
+the destination object, depending on how three approach
+properties are set. These properties are: 
+<a href="ApproachToFront.htm">ApproachToFront</a>,
+<a href="ApproachDistance.htm">ApproachDistance</a>, and
+<a href="ApproachRadius.htm">ApproachRadius</a>.</p>
+
+<p>The following diagram depicts two scenarios for a
+destination object (viewed from above): in the first, the
+destination object's <b>ApproachToFront</b> property is
+<b>True</b>, and in the second, this
+property is <b>False</b>. In each
+scenario, the destination object is at point P; it is facing in
+the direction indicated by the arrow. </p>
+
+<p>If the destination object's <b>ApproachToFront</b>
+property is <b>True</b>, the approaching object stops
+at a randomly selected point in the shaded circle (below, left).
+The center of the shaded circle is directly in front of the
+destination object. The shaded circle has a radius of <b>ApproachRadius</b>
+units. The larger circle is centered at the destination object's
+position, and has a radius of <b>ApproachDistance</b>
+units. </p>
+
+<p>If the destination object's <b>ApproachToFront</b> property is
+<b>False</b>, the approaching object stops at a
+randomly selected point in the shaded circle. The
+center of the shaded circle is a randomly chosen point on the
+larger circle. As in the previous scenario, the shaded circle has
+a radius of <b>ApproachRadius</b> units. The larger
+circle is centered at the destination object's position, and has
+a radius of <b>ApproachDistance</b> units. </p>
+
+<p>If the destination object is an 
+<a href="../Avatar/Avatar.htm">Avatar</a> who is close
+to a boundary (such as a wall of a room), <b>Approach</b>
+makes sure that the approaching object stops at a point within
+that boundary. </p>
+<P>
+<img src="../../Images/approach.gif" border=0 alt="">
+<p>When this method finishes, it invokes the event handler 
+<a href="../../Events/OnApproachDone.htm">OnApproachDone</a>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>Doug.Approach theObject</pre>
+&nbsp;
+
+
+</body>
+</html>

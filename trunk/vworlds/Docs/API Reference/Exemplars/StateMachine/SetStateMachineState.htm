@@ -1,0 +1,96 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../APIRef.css">
+	<title>SetStateMachineState</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetStateMachineState</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the StateMachine Exemplar</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets a specified state machine to a particular state. <b>SetStateMachineState</b> 
+is a member of the <b>StateMachine</b> exemplar.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetStateMachineState</b>&nbsp;<i>bstrStateMachineName, 
+		bstrState</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetStateMachineState</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>StateMachine</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>StateMachine</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrStateMachineName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The state machine name.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrState</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The state machine state.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method sets the state machine (<i>Name</i>) to a state (<i>State</i>); it can
+be run from either the client or the server. To determine a state machine's current state,
+use the <a href="../../World/Trace.htm">Trace</a> method of <b>World</b>,
+and pass it both the name of the state machine object and the internal state machine for
+which you want to determine the state. To set the default internal state machine (<i>Default</i>)
+to a new state, use the <a href="SetState.htm">SetState</a> method of <b>StateMachine</b>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyStateMachine.SetStateMachineState &quot;State&quot;, &quot;TurnLeft&quot;</pre>
+
+
+
+</body>
+</html>
