@@ -18,6 +18,8 @@ public class SwiMoo extends LogicMoo {
 			 assert(jamud_object(JAMUD)),!.
 	
 	*/
+	public SwiMoo() throws Exception  {
+	}
 
 
 	/* Equivalent Bindings for Class Definition into Prolog List */
