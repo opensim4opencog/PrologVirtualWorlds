@@ -22,12 +22,12 @@ import net.n3.nanoxml.*;
 public class LogicMoo extends JavaRt {
 
 
-	public void LogicMoo() {
+	public  LogicMoo() {
 	}
 
-	public Jamud jamudInstance;
-	public MudObjectRoot jamudMudObjectRoot; 
-	public MudObject jamudMudObjectBelowRoot; 
+	public static  Jamud jamudInstance;
+	public static  MudObjectRoot jamudMudObjectRoot; 
+	public static  MudObject jamudMudObjectBelowRoot; 
 
 
 	/*
@@ -44,7 +44,7 @@ public class LogicMoo extends JavaRt {
 	
 	*/              
 
-	public Jamud getJamudInstance() {
+	public static  Jamud getJamudInstance() {
 		return  jamudInstance;
 	}
 
@@ -62,7 +62,7 @@ public class LogicMoo extends JavaRt {
 	
 	*/              
 
-	public MudObjectRoot getJamudMudObjectRoot() {
+	public static  MudObjectRoot getJamudMudObjectRoot() {
 		return  jamudMudObjectRoot;
 	}
 
@@ -73,7 +73,7 @@ public class LogicMoo extends JavaRt {
 					 jamud_object(JAMUD),!,
 					 java_invoke_method(JAMUD,startJamud(X)).
 	*/              
-	public void startJamud() {
+	public static  void startJamud() {
 		if ( jamudInstance==null ) {
 			try {
 				String[] args = { "jamud.xml"} ; 
