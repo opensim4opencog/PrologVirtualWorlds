@@ -2,8 +2,8 @@
  * 
  * Now prolog can call java!!!
  * 
- *  File:    $Id: javart.c,v 1.3 2002-03-18 14:32:04 dmiles Exp $
- *  Date:    $Date: 2002-03-18 14:32:04 $
+ *  File:    $Id: javart.c,v 1.4 2002-04-10 03:19:33 dmiles Exp $
+ *  Date:    $Date: 2002-04-10 03:19:33 $
  *  Author:  Douglas Miles
  *  
  * This library is free software; you can redistribute it and/or
@@ -380,31 +380,29 @@ foreign_t pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg
 														   term_to_jobject(object_term),
 														   term_to_jobject(method_term),
 														   list2MethodArgs(arg_list));
+	
 	if (!result_string_object)
-		{
-		fprintf(stderr, "ERROR:  Out Of Memory Error (CallStaticObjectMethod)\n");
-		PL_fail;
-		}
+			method_result_chars = "null";
+			else 
+			method_result_chars=jstring_to_chars(result_string_object);
+			 9v-0 
+				{
+				fprintf(stderr, "ERROR: Could not get string from result (%d)\n",result_string_object);
+				PL_fail;
+				} 
 
-	if (!(method_result_chars=jstring_to_chars(result_string_object)))
-		{
-		fprintf(stderr, "ERROR: Could not get string from result (%d)\n",result_string_object);
-		PL_fail;
-		}
-
-
-	//printf("method_result_chars=%s\n ",method_result_chars);
+	printf("method_result_chars=%s\n ",method_result_chars);
 
 	if (PL_chars_to_term(method_result_chars,temp_term))
 		{
 		prolog_result =(foreign_t)PL_unify(result_term,temp_term); 
 		} else
 		{
-		prolog_result =(foreign_t)PL_unify_string_chars(result_term,method_result_chars); 
+			prolog_result =(foreign_t)PL_unify_string_chars(result_term,method_result_chars); 
 		}
 
-	JNI_ENV->ReleaseStringUTFChars(jni_env, result_string_object, method_result_chars);
 	//  JNI_ENV->DeleteLocalRef(jni_env,method_args);
+	//	JNI_ENV->ReleaseStringUTFChars(jni_env, result_string_object, method_result_chars);
 
 	return prolog_result;
 
