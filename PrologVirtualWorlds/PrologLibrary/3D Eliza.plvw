@@ -1,0 +1,25 @@
+PrologVirtualWorldsProject 1.0
+
+
+ProjectName="3D Eliza"
+PrologFile=espg.prolog
+PrologFile=data.prolog
+PrologFile=apldriver.prolog
+PrologFile=eliza.prolog
+PrologFile=botsdk.prolog
+PrologFile=event_to_property.prolog
+PrologFile=metabuiltins.prolog
+PrologFile=apldriver.prolog
+PrologFile=vb6support.prolog
+PrologFile=vwevents.prolog
+PrologFile=vwmethods.prolog
+PrologFile=vwevent_to_method.prolog
+PrologFile=event_to_property.prolog
+PrologFile=planning.prolog
+PrologFile=planning_datahooks.prolog
+PrologFile=vwtriggers.prolog
+PrologFile=goal_threads.prolog
+PrologFile=type_template.prolog
+PrologFile=proquery.prolog
+PrologFile=actx_invokes.prolog
+

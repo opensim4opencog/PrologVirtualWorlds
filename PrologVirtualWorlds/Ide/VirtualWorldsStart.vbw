@@ -1,4 +1,4 @@
 Module1 = 110, 110, 778, 605, C
-frmMain = 0, 0, 0, 0, C, 132, 132, 800, 627, C
-frmDocument2 = 0, 0, 0, 0, C, 0, 0, 0, 0, C
-frmDocument = 0, 0, 0, 0, C, 154, 154, 822, 649, C
+fMainMDI = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+fDocument = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+fWebBrowser = 0, 0, 0, 0, C, 0, 0, 0, 0, C
