@@ -2,7 +2,7 @@
 
 source ../../bin/setpaths
 	
-javac JavaRt.java
+javac *.java
 
 plld -I$JAVA_HOME/include/linux/ -I$JAVA_HOME/include/ -L$JAVA_HOME/jre/lib/i386/ -o javart javart.c  -ljava 
 
