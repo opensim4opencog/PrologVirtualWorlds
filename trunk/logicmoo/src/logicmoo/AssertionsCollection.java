@@ -21,7 +21,7 @@ import org.opencyc.xml.*;
  * The associated formula, microtheory, truth-value, direction, and remaining attributes are
  * is fetched later.
  *
- * @version $Id: AssertionsCollection.java,v 1.2 2002-04-06 22:19:26 dmiles Exp $
+ * @version $Id: AssertionsCollection.java,v 1.3 2002-04-06 22:29:29 dmiles Exp $
  * @author Douglas R. Miles
  *
  */
@@ -186,13 +186,20 @@ public class AssertionsCollection {
 	 * Adds the AssertionCollection to Mt
 	 *
 	 * @param mt for formulas for this AssertionsCollection
-	 * [08:09] <eca-home> All microtheory definitions (isa and other definitional assertions) second.
+	 * [08:09] <eca-home>  isa and other definitional assertions) second.
 	 */
-	public void commitAssertionsDefintional(CycFort mt)  throws Exception  {
+	public void commitAssertionsDefintional(CycFort mt  throws Exception  {
 		Iterator forms = cycListCollection.iterator();
 		while ( forms.hasNext() ) {
 			CycList cycList = (CycList)  forms.next();
-			if (cycAccess.isWellFormedFormula(cycList)) 
+			switch case (((CycFort) cycList.first()).getId()) {
+				case cycAccess.isa.getId():
+					continue
+				case cycAccess.genls.getId():
+					continue
+			}
+			
+				if (cycAccess.isWellFormedFormula(cycList)) 
 					cycAccess.assertWithTranscript(cycList,mt);
 			
 					
