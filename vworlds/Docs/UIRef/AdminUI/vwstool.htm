@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<title>Tools Menu (Virtual Worlds Server)</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css" title="VWG">
+</head>
+
+<body>
+
+<h1>Tools Menu (Virtual Worlds Server)</h1>
+
+<p>The <b>Tools</b> menu of the Virtual Worlds Server application contains 
+operations that set properties on the world such as its Directory Service listing and
+server security. 
+</p>
+
+<p><img src="../images/vwstool.jpg" width=306 height=176 alt="" border="0">
+<h2>Tools Menu Options</h2>
+
+<h3>Directory Server Address&#133; </h3>
+
+<p>Opens the <b>Directory Server Address</b> dialog box, where you can set the
+location of your Directory Services server, a server that displays a
+list of all Virtual Worlds that have been published to it.   Users can log on
+to any world listed on the Directory Services server just by clicking the world's name.</p>
+<p>The <b>Directory Server Address</b> must be a fully qualified URL (Uniform
+Resource Locator).</p>
+
+<h3>Clear Performance Averages</h3>
+
+<p>This resets the statistics displayed in the Server Log's bottom status window.
+</p>
+
+<h3>User Authentication&#133;</h3>
+
+<p><b>Note</b>:&nbsp;Only available when using Microsoft NT. Opens the <b>User Authentication</b> 
+dialog box, where you can turn on NTLM Authentication and specify a local group to further restrict
+access to a server within an authenticated domain.
+</p>
+<p>
+For a client connecting to a server who hasn't been authenticated against the domain that the 
+server machine belongs to, a username/password dialog box will be presented on the client machine.  Most
+users within an intranet, will have been authenticated upon logging into their machine.  
+<p>
+Local groups are groups greated on the local domain of the server.  If this option is activated, only
+users who are members of the specified local group can access worlds on the server.
+
+<h3>Set Max User Limit&#133;</h3>
+
+<p><b>Note</b>:&nbsp;Only available when using Microsoft NT. Sets the maximum number of users for 
+the server. The minimum valid number is 1.
+<p>
+
+<h3>Show World in Directory Services </h3>
+
+<p>Displays the world's name in the Directory Services.  Note that even if your world is not
+listed on the Directory Server, people can still log on to the world, as long as they
+know its URL (Uniform Resource Locator).     </p>
+
+<h3>Take World Offline </h3>
+
+<p>Disconnects all avatars from the selected world, and closes it. Use this option when
+you want to make repairs to the world or other authoring changes.  You can also use this option
+if you want to limit access to your world to certain hours of the day, or certain days of the week. </p>
+
+<h3>Web Address... </h3>
+
+<p>Opens the <b>Web Address </b>dialog box, where you can set the URL (Uniform
+Resource Locator) for a web page that contains information about your world. This is used 
+by the Directory Services page.</p>
+
+<h4>See Also:</h4>
+
+<p>
+<a href="../../admin/nods.htm">Adding Directory Services</a><br>
+<a href="../../admin/vwsntlm.htm">User Authetication</a><br>
+<a href="vwssetds.htm">Directory Server Address Dialog Box</a><br>
+<a href="vwswurl.htm">Web Address Dialog Box</a><br></p>
+<a href="../../admin/stadmin.htm">Administrator's Guide Top Topic</a><br>
+</body>
+</html>

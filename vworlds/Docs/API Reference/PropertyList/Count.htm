@@ -1,0 +1,98 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Count</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Count</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of PropertyList</td>
+	</tr>
+</table>
+<P>
+<P>
+<P>
+
+<!--Summary of topic-->Returns&nbsp;the 
+number of items in the specified <A href="../PropertyList/PropertyList.htm">PropertyList</A> or <A 
+href="../PropertyMap/PropertyMap.htm">PropertyMap</A>&nbsp;collection. 
+<STRONG>Count</STRONG> is a 
+read-only <STRONG>Long</STRONG>.     
+          
+
+<!--Syntax table--></P><STRONG></STRONG>
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object.</EM><STRONG>Count</STRONG></td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>Count</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>PropertyList PropertyMap</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An expression that returns a <b>PropertyList</b> or <b>PropertyMap</b> collection object.</td><!--Description-->
+	</TR>
+
+</TABLE>
+
+ <!--Remarks section-->
+<H3>Remarks</H3>
+<P> 
+           Reports 
+ the number of items in a collection.</P>       
+<P></P>
+<P><STRONG>Important:</STRONG> &nbsp;&nbsp;You may want to avoid using the <strong>Count</strong> property as an iteration counter. If you include an increment or decrement 
+method (such as the <A href="Add.htm">Add</A> method) inside a loop, the 
+<STRONG>Count</STRONG> property will be changed within your 
+loop. As a result, an iteration counter may not be accurate, depending on the 
+number of items added or removed within the loop.
+<!--Insert Remarks here-->
+
+<H3>Example</H3>
+<P>This example iterates through a collection using the <b>Count</b> property to determine the number of items in the collection. 
+<P class=comments>'These statements assume you have created the property list, 
+  "myBagOfTricks". <PRE class=example>Dim i
+Dim myCount
+
+myCount = myBagOfTricks.<STRONG>Count</STRONG> - 1 
+
+For i = 0 To myCount
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myBagOfTricks.Property(i)
+Next</PRE>
+</pre>
+
+
+</body>
+</html>

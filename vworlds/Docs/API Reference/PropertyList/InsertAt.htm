@@ -1,0 +1,141 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>InsertAt</title>
+	
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> InsertAt</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of PropertyList</td>
+	</tr>
+</table>
+<P>Adds a new item at a specified position in an existing 
+collection. <STRONG>InsertAt</STRONG>         is a 
+member of the <A href="PropertyList.htm">PropertyList</A>           
+collection.
+<P>
+<P>
+
+<!--Summary of topic-->
+      
+          
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>InsertAt</STRONG>&nbsp;<EM>index, 
+      var</EM></td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>InsertAt</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>PropertyList</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An object reference that accesses a 
+      <STRONG>PropertyList</STRONG> collection.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">index</td>
+		<td>Long</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>The index number of the position where the item 
+      will be added in the <STRONG>PropertyList</STRONG> collection.</td><!--Description-->
+	</TR>
+	<TR>
+		<td class="boldItal">var</td>
+		<td>Variant</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>
+      <P>   The name of the item to add to&nbsp;the 
+      <STRONG>PropertyList </STRONG>collection.</P> </td><!--Description-->
+	</TR>
+
+</TABLE>
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>This method does not return a value.
+<H3>Remarks</H3>
+<P>The number of items in a <STRONG>PropertyList</STRONG> 
+collection is maintained by the <A href="Count.htm"><STRONG>Count</STRONG></A> 
+property. Valid indices are 0 through <STRONG>Count</STRONG>&nbsp;-&nbsp;1. You can add an item to an existing collection at any position&nbsp;from the beginning of the&nbsp;collection 
+(<EM>index</EM> = 0) to 
+one element past the end of the collection (<EM>index</EM> = 
+<STRONG>Count</STRONG>). If a property is inserted anywhere except 
+at the first element past the end, all existing property list elements from the 
+point of insertion to the end are shifted one position higher in the property 
+list. For example, if you have a property list with four elements (indexes 0 =      
+             
+              
+              
+    red, 1 = blue, 2 = green, and 3 = 
+             
+             
+  yellow), and you insert a property at index 2, the properties that 
+were formerly at indexes 2 and 3 will be shifted to indexes  
+             
+             
+              
+          3 and         
+              
+              
+             
+      4 (0 =  red, 1 =                             blue, 2 = purple, 3 =  green,  and 4 =     yellow).</P>
+
+<P> Even though you can insert an item at an index greater than <STRONG>Count</STRONG> (that is, two or more positions beyond the end of the property list), you should not do this. The item itself will be valid and can be accessed, but there will be one or more items in the property list between that one and the last valid item in the list that are inaccessible. A script error results if you attempt to iterate through a property list that contains invalid items. </P>
+
+<P>When you add a property or method to an object, you are 
+actually adding a clone of that property or method. If you want to modify the 
+property or method&nbsp;for the object, you must be careful to refer to it 
+explicitly; otherwise, you will be modifying only your local copy of the 
+property.&nbsp;</P>
+<P><STRONG>Note:</STRONG>&nbsp;&nbsp; You can use the <A href="Add.htm">Add</A> method to add items at the end of a 
+collection.&nbsp;&nbsp;
+<!--Insert Remarks here--></P>
+<p>
+<H3>Example</H3>
+<p>This example adds a new item to an existing collection. This example assumes that collections named "myLibrary" and "myNumberList" exist and contain more than three items.</p>
+<p class="comments">'This statement adds a book title to the "myLibrary" collection.
+<pre class="example">
+myLibrary.<STRONG>InsertAt 3, "A Tale of Two Cities"</STRONG>
+</pre>      
+<p class="comments">'This statement adds an integer item named "2" to the "myNumberList" collection.
+<pre class="example">
+myNumberList.<STRONG>InsertAt 3, 2</strong>
+</pre>
+ 
+
+</body>
+</html>

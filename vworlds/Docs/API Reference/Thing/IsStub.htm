@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsStub</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsStub</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Thing</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Returns <b>True</b> when the 
+specified <A href="Thing.htm">Thing</a> object has not had its properties and methods marshalled. <b>IsStub</b> is a read-only <b>Boolean</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>IsStub</STRONG></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <B>IsStub</B>  property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Thing</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An&nbsp;object reference to a 
+      <STRONG>Thing</STRONG>      object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->You 
+can use the <STRONG>IsStub</STRONG> property to check whether&nbsp;you can 
+access a Thing object's methods and properties. If <STRONG>IsStub</STRONG> is 
+<STRONG>False</STRONG>, you can set or return properties and run methods.&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example checks if an object is a stub, if not, it sets the objects position in a room. If the object is a stub, it sends a message to the Command Window.
+<pre class="example">
+If myChair.IsStub = False Then
+&nbsp;&nbsp;&nbsp;&nbsp;Set myChair.Position 4.789, 1.000, 7.000
+Else
+&nbsp;&nbsp;&nbsp;&nbsp;Trace "Properties and methods are not marshalled yet."
+End If
+</pre>
+
+</body>
+</html>

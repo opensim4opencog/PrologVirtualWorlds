@@ -1,0 +1,620 @@
+<html>
+
+<head>
+<meta name=Generator content="Microsoft Office HTML Filter 2.0">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Originator content="Microsoft Word 9">
+<title>How To: 3D Graphics in Virtual Worlds</title>
+<style>
+<!--
+ 
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:Arial;}
+h1
+	{
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	border:none;
+	padding:0in;
+	font-size:14.0pt;
+	font-family:Arial;}
+h2
+	{
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:12.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{
+	margin:0in;
+	margin-bottom:.0001pt;
+	page-break-after:avoid;
+	font-size:10.0pt;
+	font-family:Verdana;
+	layout-grid-mode:line;
+	font-weight:normal;
+	font-style:italic;}
+h4
+	{
+	margin-top:5.0pt;
+	margin-right:.25in;
+	margin-bottom:5.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:Verdana;
+	layout-grid-mode:line;}
+h5
+	{
+	margin-top:5.0pt;
+	margin-right:.25in;
+	margin-bottom:5.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	border:none;
+	padding:0in;
+	font-size:12.0pt;
+	font-family:Verdana;
+	layout-grid-mode:line;}
+p.MsoCaption, li.MsoCaption, div.MsoCaption
+	{
+	margin-top:5.0pt;
+	margin-right:.25in;
+	margin-bottom:5.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	border:none;
+	padding:0in;
+	font-size:12.0pt;
+	font-family:Verdana;
+	layout-grid-mode:line;
+	font-weight:bold;}
+p.MsoListBullet, li.MsoListBullet, div.MsoListBullet
+	{
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.25in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	font-size:10.0pt;
+	font-family:Arial;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin-top:5.0pt;
+	margin-right:.25in;
+	margin-bottom:5.0pt;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	layout-grid-mode:line;}
+p.MsoBodyText2, li.MsoBodyText2, div.MsoBodyText2
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+p.MsoBodyText3, li.MsoBodyText3, div.MsoBodyText3
+	{margin-top:5.0pt;
+	margin-right:.25in;
+	margin-bottom:5.0pt;
+	margin-left:0in;
+	font-size:10.0pt;
+	font-family:Verdana;
+	layout-grid-mode:line;}
+p.H1, li.H1, div.H1
+	{
+	margin-top:5.0pt;
+	margin-right:0in;
+	margin-bottom:5.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	layout-grid-mode:line;
+	font-weight:bold;}
+p.Blockquote, li.Blockquote, div.Blockquote
+	{
+	margin-top:5.0pt;
+	margin-right:.25in;
+	margin-bottom:5.0pt;
+	margin-left:.25in;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	layout-grid-mode:line;}
+p.H2, li.H2, div.H2
+	{
+	margin-top:5.0pt;
+	margin-right:0in;
+	margin-bottom:5.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:18.0pt;
+	font-family:"Times New Roman";
+	layout-grid-mode:line;
+	font-weight:bold;}
+p.H3, li.H3, div.H3
+	{
+	margin-top:5.0pt;
+	margin-right:0in;
+	margin-bottom:5.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	layout-grid-mode:line;
+	font-weight:bold;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+</head>
+
+<body lang=EN-US>
+
+<div class=Section1>
+
+<div style='border:none;border-bottom:solid windowtext .5pt;padding:0in 0in 1.0pt 0in'>
+
+<h1><span style='layout-grid-mode:line'>How To: 3D Graphics in Virtual Worlds;
+A Primer</span></h1>
+
+</div>
+
+<h3>by Russell Eames, Microsoft Research</h3>
+
+<p class=MsoNormal><i>version 01.00.00.0001,
+09/27/99</i></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<div style='border:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
+background:#E8EDF4'>
+
+<p class=MsoNormal style='border:none;
+padding:0in;'><span style='layout-grid-mode:
+line'>This document addresses fundamental concepts of 3D graphics, particularly
+as they apply to Virtual Worlds and the Microsoft Direct3D API that the
+renderer is based on.</span></p>
+
+</div>
+
+<p class=MsoNormal><span style='font-family:Verdana;layout-grid-mode:line'>&nbsp;</span></p>
+
+<h4>3D Coordinate Systems</h4>
+
+<p class=MsoBodyText><span style='font-size:10.0pt;font-family:Verdana'>There
+are two varieties of Cartesian coordinate systems in 3D graphics: left-handed
+and right-handed. In both coordinate systems, the positive x-axis points to the
+right and the positive y-axis points up. You can remember which direction the
+positive z-axis points by pointing the fingers of either your left or right
+hand in the positive x-direction and curling them into the positive
+y-direction. The direction your thumb points, either toward or away from you,
+is the direction the positive z-axis points for that coordinate system.</span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-size:12.0pt;
+font-family:Verdana;layout-grid-mode:line'><img width=576 height=252
+src="./Howto-%203D%20Graphics%20in%20Virtual%20Worlds_files/image002.jpg"></span></p>
+
+<p class=MsoBodyText3>Virtual Worlds uses the left-handed coordinate system.
+This means the positive z-axis points away from the viewer, as shown in the
+following illustration: </p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'><img width=243 height=102
+src="./Howto-%203D%20Graphics%20in%20Virtual%20Worlds_files/image003.gif"></span></p>
+
+<p class=MsoBodyText3>In a left-handed coordinate system, rotations occur
+clockwise around any axis that is pointed at the viewer. </p>
+
+<h4>3D Transformations</h4>
+
+<p class=MsoBodyText3>In programs that work with 3D graphics, you can use
+geometrical transformations to: </p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:.25in;text-indent:-.25in;'><span style='font-family:Symbol;layout-grid-mode:
+line'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:Verdana;layout-grid-mode:line'>Express
+the location of an object relative to another object. </span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.5in;margin-bottom:
+5.0pt;margin-left:.25in;text-indent:-.25in;'><span style='font-family:Symbol;layout-grid-mode:
+line'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:Verdana;layout-grid-mode:line'>Rotate,
+shear, and size objects. </span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.5in;margin-bottom:
+5.0pt;margin-left:.25in;text-indent:-.25in;'><span style='font-family:Symbol;layout-grid-mode:
+line'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:Verdana;layout-grid-mode:line'>Change
+viewing positions, directions, and perspective. </span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'>The
+following sections describe Frames and Viewports, both of which describe the
+use of 3D transformations.</span></p>
+
+<div style='border:none;border-bottom:solid windowtext .5pt;padding:0in 0in 1.0pt 0in'>
+
+<h1><span style='font-size:12.0pt;font-family:Verdana'>Frames</span></h1>
+
+</div>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'>The
+term <i>frame</i> is derived from an
+object's physical frame of reference. Objects can be placed in a scene by
+stating their spatial relationship to a relevant reference frame; they are not
+simply placed in world space. A frame is used to position objects in a scene,
+and visuals (of which <i>mesh</i>es are an
+example) take their positions and orientation from frames. A <i>scene</i> is defined by a frame that has no
+parent frame; that is, a frame at the top of the hierarchy of frames. This
+frame is also sometimes called a <i>scene
+frame</i> or <i>master frame</i>. The scene
+defines the frame of reference for all of the other objects. In Virtual Worlds
+the Frame Core Object Property represents frames. The relationship between
+Virtual Worlds objects and their <u>Frame</u>s is described in the
+documentation for the <u>GetFrame</u> and <u>GetGeometryFrame</u> methods of
+the <u>Thing</u> exemplar.</span></p>
+
+<h2><span style='font-size:10.0pt;font-family:Verdana'>Hierarchies</span></h2>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'>The
+frames in a scene are arranged in a tree structure. Frames can have a parent
+frame and child frames. Remember, a frame that has no parent frame defines a
+scene and is called a <i>scene frame</i>. </span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'>Child
+frames have positions and orientations relative to their parent frames. If the
+parent frame moves, the child frames also move. </span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'>An
+application can set the position and orientation of a frame relative to any
+other frame in the scene, including the <i>scene
+frame</i> if it needs to set an absolute position. You can also remove frames
+from one parent frame and add them to another at any time by using the <u>AddChild</u>
+method of <u>Frame</u>. To remove a child frame entirely, use the <u>DeleteChild</u>
+method. To retrieve a frame's child and parent frames, use the <u>GetChildren</u>
+and <u>GetParent</u> methods. The <u>MoveInto</u> method of the <u>Thing</u>
+exemplar will also indirectly affect the frame hierarchy.</span></p>
+
+<h2><span style='font-size:10.0pt;font-family:Verdana'>Frame Transformations</span></h2>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'>You
+can think of the position and orientation of a frame relative to its parent
+frame as a linear transformation. This transformation takes vectors defined
+relative to the child frame and changes them to equivalent vectors defined
+relative to the parent. The transformations of all the parent frames above a
+child frame up to the <i>scene frame</i>are concatenated with the transformation of that
+child to produce a world transformation. This world transformation is then
+applied to the visuals on the child frame before rendering. Coordinates
+relative to the child frame are sometimes called <i>model coordinates</i>. After the world transformation is applied,
+coordinates are called <i>world coordinates</i>.
+The transformation of a frame can be modified directly by using the <u>SetPosition,</u>
+<u>SetOrientation</u> and <u>SetScale</u> methods of <u>Frame</u>. The <u>GetPosition,</u>
+<u>GetOrientation</u> and <u>GetScale</u> methods of <u>Frame</u> allow you to
+retrieve the frame’s transformation. The <u>Position</u>, <u>Direction</u>, <u>Up</u>
+and <u>Scale</u> properties of Virtual Worlds objects are directly related to
+the associated transformations of those objects <u>Frame</u>s.</span></p>
+
+<h2><span style='font-size:10.0pt;font-family:Verdana'>Motion</span></h2>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'>Every
+frame has an intrinsic rotation and velocity. Frames that are neither rotating
+nor translating simply have zero values for these attributes. These attributes
+are used before each scene is rendered to move objects in the scene, and they
+can also be used to create simple animations. The <u>SetVelocity</u>, <u>GetVelocity</u>,
+<u>SetRotationRate</u> and <u>GetRotationRate</u> methods of <u>Frame</u> allow
+these attributes to be modified and retrieved. The <u>RotationRate</u> and <u>RotationAxis</u>
+properties of Virtual Worlds objects are directly related to the associated
+rotation of those objects <u>Frame</u>s. </span><span style='font-family:Verdana'>See
+also the <u>Motion Property Page</u> section in the <u>Virtual Worlds User
+Interface Reference</u>.</span></p>
+
+<div style='border:none;border-bottom:solid windowtext .5pt;padding:0in 0in 1.0pt 0in'>
+
+<p class=H1 style='margin-right:.25in;border:none;
+padding:0in;'><span style='font-size:12.0pt;font-family:Verdana'>Viewports</span></p>
+
+</div>
+
+<p class=Blockquote style='margin-left:0in'><span style='font-size:10.0pt;
+font-family:Verdana'>The viewport defines how the 3D scene is rendered into a
+2D window. The viewport defines a rectangular area on a device that objects
+will be rendered into. This section describes the viewport, its components, and
+techniques for their use. There is no way to access the viewport or its related
+properties in Virtual Worlds. However, this section is included to aid in
+giving users a better understanding of the workings of a 3D <i>renderer</i>.</span></p>
+
+<p class=H2 style='margin-right:.25in'><i><span style='font-size:10.0pt;
+font-family:Verdana'>Camera</span></i></p>
+
+<p class=Blockquote style='margin-left:0in'><span style='font-size:10.0pt;
+font-family:Verdana'>The viewport uses a Frame object as a <i>camera</i>. The camera frame defines which scene is rendered and the
+viewing position and direction. The viewport renders only what is visible along
+the positive z-axis of the camera frame, with the up direction being in the
+direction of the positive y-axis. </span></p>
+
+<p class=H2 style='margin-right:.25in'><i><span style='font-size:10.0pt;
+font-family:Verdana'>Viewing Frustum</span></i></p>
+
+<p class=Blockquote style='margin-left:0in'><span style='font-size:10.0pt;
+font-family:Verdana'>The <i>viewing frustrum</i>
+is a 3D volume in a scene positioned relative to the viewport's camera. For
+perspective viewing, the camera is positioned at the tip of an imaginary
+pyramid. Two clipping planes intersect this pyramid, the <i>front clipping plane</i> and the <i>back
+clipping plane</i>. The volume in the pyramid between the front and back
+clipping planes is the viewing frustum. Only objects in the viewing frustum are
+visible.</span></p>
+
+<p class=Blockquote style='margin-left:0in'><span
+style='font-size:10.0pt;font-family:Verdana'><img width=425 height=208
+src="./Howto-%203D%20Graphics%20in%20Virtual%20Worlds_files/image004.gif"></span></p>
+
+<p class=Blockquote style='margin-left:0in'><span style='font-size:10.0pt;
+font-family:Verdana'>The z-axis of the camera runs from the tip of the pyramid
+to the center of the back clipping plane. </span></p>
+
+<p class=Blockquote style='margin-left:0in'><span style='font-size:10.0pt;
+font-family:Verdana'>The dimensions of the viewport on the front clipping plane
+determine the apparent focal length of the camera's lens (You can also think of
+this as a way to set the magnification of objects in the frustum.). </span></p>
+
+<p class=H2 style='margin-right:.25in'><i><span style='font-size:10.0pt;
+font-family:Verdana'>Viewport Transformations</span></i></p>
+
+<p class=Blockquote style='margin-left:0in'><span style='font-size:10.0pt;
+font-family:Verdana'>To render objects with 3D coordinates in a 2D window, the
+object must be transformed into the camera<a
+href="javascript:Glossary(sRelPath%20+%20'gloss/gloss_C.htm#camera')"></a>'s
+frame. A projection matrix is then used to calculate the object’s position in
+the viewing frustum and hence in the 2D window. The projection matrix is a
+combination of a perspective transformation followed by a scaling and
+translation to scale the objects into the window. The viewport transformation
+is used to ensure that the distance by which the object is moved in <i>world coordinates</i> is scaled by the
+object's distance from the camera to account for perspective. </span></p>
+
+<h4>Polygons</h4>
+
+<p class=MsoBodyText3>Three-dimensional objects in Virtual Worlds are made up
+of meshes. A mesh is a set of faces, each of which is described by a simple
+polygon. The fundamental polygon type is the triangle. </p>
+
+<div style='border:none;border-bottom:solid windowtext .5pt;padding:0in 0in 1.0pt 0in'>
+
+<h5>Geometry Requirements</h5>
+
+</div>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'>Triangles
+are the preferred polygon type because they are always convex, and they are
+always planar-two conditions that are required of polygons by the <i>renderer</i>. A polygon is convex if a line
+drawn between any two points of the polygon is also inside the polygon. </span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'><img border=0 width=171 height=93
+src="./Howto-%203D%20Graphics%20in%20Virtual%20Worlds_files/image005.gif"></span></p>
+
+<div style='border:none;border-bottom:solid windowtext .5pt;padding:0in 0in 1.0pt 0in'>
+
+<p class=MsoCaption>Face and Vertex Normals</p>
+
+</div>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'>Each
+face in a mesh has a perpendicular face whose direction is determined by the
+order in which the vertices are defined and by whether the coordinate system is
+right- or left-handed. If the normal vector of a face is oriented toward the
+viewer, that side of the face is its front. In Virtual Worlds, only the front
+side of a face is visible, and a front face is one in which vertices are
+defined in clockwise order. </span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'><img border=0 width=436 height=157
+src="./Howto-%203D%20Graphics%20in%20Virtual%20Worlds_files/image006.gif"></span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'>Virtual
+Worlds calculates face normals automatically when they are needed. The system
+uses face normals and vertex normals for calculating light intensities across
+faces that are responding to lights in the scene. A mesh may be set to respond
+to light in a particular way, or to not respond to light at all. The way a mesh
+is responding to light (or not) is referred to as its <i>render quality</i>. This can be modified and retrieved using the <u>Frame</u>
+methods <u>SetMeshQuality</u> and <u>GetMeshQuality</u>. The <u>RenderQuality</u>
+property of Virtual Worlds objects also affects the associated mesh’s <i>render quality</i> in those objects <u>Frame</u>s.
+</span><span style='font-family:Verdana'>See also the <u>Geometry Property Page</u>
+section in the <u>Virtual Worlds User Interface Reference</u>.</span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:.25in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-family:Verdana;layout-grid-mode:line'><img border=0 width=254 height=155
+src="./Howto-%203D%20Graphics%20in%20Virtual%20Worlds_files/image007.gif"></span></p>
+
+<p class=H2><span style='font-size:14.0pt;font-family:
+Verdana;layout-grid-mode:both'>&nbsp;</span></p>
+
+<p class=H2><span style='font-size:14.0pt;font-family:
+Verdana;layout-grid-mode:both'>Textures</span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span style='font-family:Verdana'>Early computer-generated 3D
+images, although generally advanced for their time, tended to have a shiny
+plastic look. They lacked the types of markings that give 3D objects realistic
+visual complexity such as scuffs, cracks, fingerprints, and smudges. In recent
+years, textures have gained popularity among developers as a tool for enhancing
+the realism of computer-generated 3D images.</span></p>
+
+<p class=MsoBodyText2 style='margin-top:5.0pt;margin-right:0in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-size:10.0pt;font-family:Verdana'>At
+its most basic, a texture is simply a bitmap of pixel colors. In this sense,
+the word texture has a specific definition when used in the context of computer
+graphics. In the normal semantics associated with the word texture, we refer
+both to the patterns of color on an object and its roughness or smoothness.
+Textures don't add &quot;bumpiness&quot; to an object. Rather, the textures, or
+patterns of colors, just give it the appearance of bumpiness. </span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span style='font-family:Verdana'>Because textures are simply
+bitmaps, any bitmap can be applied to a mesh’s faces by using the <u>Frame</u>
+methods <u>SetMeshTextureFromText</u> and <u>SetMeshTextureFromURL</u> For
+instance, applications can create and manipulate objects that appear to have a
+wood grain pattern in them. Grass, dirt, and rocks can be applied to a set of
+meshes that form a hill. The result is a very realistic-looking hillside.
+Texturing can also be used to create effects such as signs along a roadside,
+rock strata in a cliff, or the appearance of marble on a floor. See also the <u>Texture
+Property Page</u> section in the <u>Virtual Worlds User Interface Reference</u>.</span></p>
+
+<div style='border:none;border-bottom:solid windowtext .5pt;padding:0in 0in 1.0pt 0in'>
+
+<p class=H2 style='border:none;
+padding:0in;'><span style='font-size:12.0pt;font-family:Verdana;layout-grid-mode:both'>U &amp; V
+Texture Coordinates</span></p>
+
+</div>
+
+<p class=MsoBodyText2 style='margin-top:5.0pt;margin-right:0in;margin-bottom:
+5.0pt;margin-left:0in'><span style='font-size:10.0pt;font-family:Verdana'>Textures,
+like most bitmaps, are a two dimensional array of color values. The individual
+color values are called texture elements, or texels. Each texel has a unique
+address in the texture. The address can be thought of as a column and row
+number, which are labeled U and V respectively. </span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span style='font-family:Verdana'>Texture coordinates are in
+texture space. That is, they are relative to the location (0,0) in the texture.
+When a texture is applied to a <i>face</i>,
+its texel addresses must be mapped into object coordinates. They must then be
+translated into screen coordinates, or pixel locations.</span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span style='font-family:Verdana'>Virtual Worlds maps texels
+in texture space directly to pixels in <i>screen
+space</i>, skipping the intermediate step for greater efficiency. This mapping
+process is actually an inverse mapping. That is, for each pixel in screen
+space, the corresponding texel position in texture space is calculated. The
+texture color at or around that point is sampled. The sampling process is
+called texture filtering. Each texel in a texture can be specified by its texel
+coordinate. However, in order to map texels onto faces, Virtual Worlds requires
+a uniform address range for all texels in all textures. Therefore, it uses a
+generic addressing scheme in which all texel addresses are in the range of 0.0
+to 1.0 inclusive. Virtual Worlds specifies texture coordinates in terms of U,V
+values, much like 2D Cartesian coordinates are specified in terms of x,y
+coordinates.</span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span style='font-family:Verdana'>A result of this is that
+identical texture addresses can map to different texel coordinates in different
+textures. In the following illustration, the texture address being used is
+(0.0,0.5). However, because the textures are different sizes, the texture
+address maps to different texels. Texture 1, on the left, is 5x5. The texture
+address (0.5,0.0) maps to texel (2,0). Texture 2, on the right, is 7x7. The
+texture address (0.5,0.0) maps to texel (3,0). </span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span style='font-family:Verdana'><img border=0 width=404 height=297
+src="./Howto-%203D%20Graphics%20in%20Virtual%20Worlds_files/image009.jpg"></span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span style='font-family:Verdana'>A simplified version of the
+texel mapping process is shown in the following diagram. </span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span
+style='font-family:Verdana'><img border=0 width=481 height=338
+src="./Howto-%203D%20Graphics%20in%20Virtual%20Worlds_files/image011.jpg"></span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span style='font-family:Verdana'>For this example, we are
+idealizing a pixel, shown at the left of the illustration, into a square of
+color. The addresses of the four corners of the pixel are mapped onto the 3D
+face in object space. The shape of the pixel is often distorted because of the
+shape of the face in 3D space and because of the viewing angle. The corners of
+the surface area on the face that correspond the corners of the pixel are then
+mapped into texture space. The mapping process distorts the pixel's shape
+again, which is common. The final color value of the pixel is computed from the
+texels in the region to which the pixel maps. The final pixel color is
+determined by the texture filtering method.</span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span style='font-family:Verdana'>Virtual Worlds can assign
+texture coordinates directly to vertices by using the <u>Frame</u> method <u>SetMeshFaceUV</u>.
+This capability gives you control over which portion of a texture is mapped
+onto a face. For instance, suppose you create a rectangular face that is
+exactly the same size as the texture in the following illustration. In this
+example, you want your application to map the whole texture onto the whole
+wall. The texture coordinates your application would assign to the vertices of
+the face are (0.0,0.0), (0.0,1.0), (1.0,1.0), and (1.0,0.0).</span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span
+style='font-family:Verdana'><img border=0 width=347 height=310
+src="./Howto-%203D%20Graphics%20in%20Virtual%20Worlds_files/image013.jpg"></span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span style='font-family:Verdana'>Let's say you decide to
+decrease the height of the wall by one-half. You can either distort the texture
+to fit onto the smaller wall, or you can assign texture coordinates that will
+cause Virtual Worlds to use the bottom half of the texture. </span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span style='font-family:Verdana'>If you decide to distort or
+scale the texture to fit the smaller wall, the texture filtering method that
+you use will influence the quality of the image.</span></p>
+
+<p class=MsoNormal style='margin-top:5.0pt;margin-right:0in;margin-bottom:5.0pt;
+margin-left:0in'><span style='font-family:Verdana'>If, instead, you decide to
+assign texture coordinates to make Virtual Worlds use the bottom half of the
+texture for the smaller wall, the texture coordinates your application would
+assign to the vertices of the face in this example are (0.0,0.0), (0.0,0.5),
+(1.0,0.5), and (1.0,0.0). Virtual Worlds will apply the bottom half of the
+texture to the wall.</span></p>
+
+<p class=H3 style='margin-right:.25in'><span style='font-family:Verdana'>Units
+of Measurement</span></p>
+
+<p class=Blockquote style='margin-left:0in'><span style='font-size:10.0pt;
+font-family:Verdana'>In Virtual Worlds there is no particular default unit. The
+developer must decide which units are most appropriate for the application, and
+build this into the program. For most applications measurements in meters, or
+feet, are appropriate, but for some they will not be. For example, if suns and
+moons are in the picture, distances could be measured in miles, or when
+modeling insects, or even atomic particles, the measurements might be very much
+less than a foot or a meter. Virtual Worlds simply works on the basis of
+&quot;units&quot; and has no concept of any real distance. </span></p>
+
+<p class=Blockquote style='margin-left:0in'><span style='font-size:10.0pt;
+font-family:Verdana'>The absence of built in measurements can become a problem
+when importing geometry files from a variety of sources. Not only is the
+measurement not included in the file, the &quot;units&quot; can be arbitrary,
+so need not be any standard measurement. This could make proper scaling of,
+say, two aircraft from different sources, difficult. If one model is in meters,
+and the other in feet, all that is needed is to scale one of the models when it
+is loaded. The <u>SetScale</u> method of <u>Frame</u> can be used in cases
+where the units of measurement of a model are known. Trial and error, or
+inspired guesswork, may be needed if a developer has little information as to
+the units used by the modeler. </span></p>
+
+</div>
+
+</body>
+
+</html>

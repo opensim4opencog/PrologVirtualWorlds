@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Flags(Method Object)</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Flags(Method Object)</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Method Object</td>
+	</tr>
+</table><!--Topic Definition-->
+<p>Returns a <b>Long</b> that 
+indicates how and where a <STRONG>Method</STRONG> will execute. <b> Flags</b> is a read-write <b>Long</b>. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>Flags</STRONG> = 
+      <EM>longValue</EM></td>
+	</tr>
+</table><!--Parameters table-->
+<p>The&nbsp;<STRONG>Flags</STRONG>  property syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Method</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An expression that evaluates to a 
+      <STRONG>Method</STRONG>      object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->longValue</td>
+		<td><!--Type-->Long</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->A flag value that determines how and 
+      where the <STRONG>Method</STRONG> 
+              will 
+execute.</td>
+	</TR>
+</TABLE><!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>Possible values for <STRONG>Flags</STRONG> on a method include the constants as shown 
+in the following table.&nbsp; For convenience, these flag constants are exposed 
+as read-only properties of the <STRONG>World</STRONG> 
+      object.</P>
+<P>
+<TABLE class="backlight">
+  <THEAD>
+  <TR>
+    <TD>Constant</TH>
+    <TD>Value</TH>
+    <TD>Description</TD></TR></THEAD>
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR>
+  <TR>
+  <TR >
+    <TD><B>METHOD_CLIENT</B></TD>
+    <TD align=middle>1</TD>
+    <TD>Set this flag to run the method on&nbsp;a client.</TD></TR>
+  <TR >
+    <TD><B>METHOD_SERVER</B></TD>
+    <TD align=middle>2</TD>
+    <TD>Set this flag to run the method on the server.</TD></TR>
+  <TR vAlign=top>
+    <TD><B>METHOD_SYNC</B>
+    <TD align=middle>16</TD>
+    <TD>Set this flag to run the method synchronously on the server. By default, methods run 
+      asynchronously.</TD></TR></TABLE>
+
+<P> The <STRONG>METHOD_CLIENT</STRONG>      
+constant&nbsp;denotes a method that runs&nbsp;on&nbsp;a client. If the method is invoked from&nbsp;a client, it will 
+be&nbsp;run only on that client. However, if the method is invoked from the server, 
+it will be run remotely on all bystander clients.</P>
+<P>Use the <STRONG>METHOD_SERVER </STRONG> constant for those methods intended 
+to run only on the server. If the method is invoked from the server, it will 
+be&nbsp;run only on the server. If the method is invoked from a client, it will be 
+run remotely on the server.</P>
+<P>Methods that are&nbsp;invoked on the server are 
+normally&nbsp;run asynchronously: the code that invokes the 
+method will return without waiting for the method to complete on 
+the server.&nbsp; Should you want to explicitly wait for a server side method 
+to complete before the invocation returns (for example, to wait for return data from that method), you can use the 
+<STRONG>METHOD_SYNC</STRONG> constant.&nbsp; Note that 
+<STRONG>METHOD_SYNC</STRONG> only has functional meaning 
+when set on a server side method.&nbsp; Also note that 
+<STRONG>METHOD_SYNC</STRONG> should be used with caution:&nbsp;the client will 
+not do anything else until the server finishes executing the method in 
+question.&nbsp; If the server is very busy, the client could potentially be blocked for a significant amount of time.</P>
+<P>A method whose <STRONG>Flags</STRONG> property has both the 
+<STRONG>METHOD_CLIENT</STRONG> and <STRONG>METHOD_SERVER</STRONG> constants set runs wherever it is 
+invoked: If it is invoked on a client, it runs there, and if it is invoked on 
+the server, it runs there.&nbsp; <!--Example section--> For methods that 
+are designed to run on both&nbsp;a client and the server, you can combine the 
+flags by adding them together in this way:</P><PRE>World.METHOD_CLIENT + World.METHOD_SERVER</PRE>
+<H3>Example</H3>
+<p>This example checks the flags of a method to determine whether it's a server-side method.</p>
+
+
+<pre class="example">
+Function IsServerSide(theMethod)
+
+If (theMethod.<b>Flags</b> AND World.METHOD_SERVER) = World.METHOD_SERVER Then
+&nbsp;&nbsp;&nbsp;IsServerSide = True
+Else
+&nbsp;&nbsp;&nbsp;IsServerSide = False
+End If
+
+End Function</pre>
+</body>
+</html>

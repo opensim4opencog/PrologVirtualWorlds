@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SoundURL</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SoundURL</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Sound Object</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>
+Sets or returns the URL for a sound file. 
+<STRONG>SoundURL</STRONG> is a read/write <STRONG>String</STRONG> property.&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><!--syntax statement --><EM>expression</EM>.<STRONG>SoundURL</STRONG> 
+      = <EM>stringValue</EM></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<P>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><!--syntax statement --><EM>expression</EM>.<STRONG>SoundURL</STRONG></TD></TR></TABLE></P>
+<P>The <b>SoundURL</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name-->expression</td>
+		<td><!--Type-->Sound</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->An 
+      expression that evaluates to a <STRONG>Sound</STRONG> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->stringValue</td>
+		<td><!--Type-->String</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->A&nbsp;valid 
+      URL that references a sound file.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section--></P>
+<H3>Remarks</H3>
+<P>When you first create a <STRONG>Sound</STRONG> object, 
+you set the <EM>SoundURL</EM> parameter&nbsp;for the&nbsp;<A 
+href="../World/CreateSound.htm">CreateSound</A>&nbsp;method to a valid 
+URL. This determines the&nbsp;sound file&nbsp;for the <STRONG>SoundURL</STRONG> 
+property&nbsp;of the <STRONG>Sound</STRONG> object. When you associate the 
+<STRONG>Sound</STRONG> object with an object in the world, the value for the 
+<STRONG>SoundURL</STRONG> property is carried over to the 
+object.&nbsp;&nbsp; 
+<P>
+<P>Resetting 
+the <STRONG>SoundURL</STRONG> property of a <A href="Sound.htm">Sound</A> object will stop the 
+sound, then restart it with the new sound.
+<H3>Example</H3>
+<P>This example&nbsp;changes the sound file for a specific object. 
+<P>To run this example: You must have a <STRONG>Sound</STRONG> object existing in 
+your world.&nbsp;To create the objects shown in this example, refer to the 
+<STRONG>CreateSound</STRONG> method. <PRE class=example><!--Example text-->
+Sub ChangeToBirdSong()
+Dim myTree
+Dim mySong
+Dim mySnd
+</PRE>
+
+<P class=comments>'Get the <B>Sound</B> object and the object associated with it. <PRE class=example>Set myTree = User.Container.FindWithin("Oak Tree")
+Set mySong = myTree.Sound
+mySnd = "file://C:/Program Files/Microsoft Virtual
+Worlds/Local Content/SDK/Library/Sounds/bird.wav"
+
+If Not mySong.<B>SoundURL</B> = mySnd Then
+&nbsp;&nbsp;&nbsp;&nbsp;mySong.<B>SoundURL</B> = mySnd
+End If
+
+End Sub</PRE>
+
+
+</body>
+</html>

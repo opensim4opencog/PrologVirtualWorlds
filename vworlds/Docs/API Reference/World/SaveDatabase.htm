@@ -1,0 +1,79 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SaveDatabase</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SaveDatabase</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Saves checkpoint files. <b>SaveDatabase</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SaveDatabase</b>&nbsp;</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SaveDatabase</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>To invoke this method you must be the owner of the world, or a wizard. The <b>SaveDatabase</b> method can only be run on the server.
+<P>Checkpoint files are Microsoft Virtual Worlds internal files that have the .vwc extension. Virtual Worlds uses a series of log files to monitor changes to a world. The <b>SaveDatabase</b> method is periodically invoked internally to combine these changes into a single checkpoint file. This "compression" of log files can improve performance factors such as world loading speed.
+
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>World.SaveDatabase</pre>
+&nbsp;
+
+
+</body>
+</html>

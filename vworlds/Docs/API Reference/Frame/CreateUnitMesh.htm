@@ -1,0 +1,79 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateUnitMesh</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateUnitMesh</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Creates a default (unit) mesh with 1 face. <b>CreateUnitMesh</b> is a member of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CreateUnitMesh</b>&nbsp;</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>CreateUnitMesh</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>A unit mesh is a square of size 1 unit by 1 unit. The <b>CreateUnitMesh</b> method creates a default mesh that is centered on the origin of the frame (0, 0, 0), on the x-y plane. 
+
+<p>Since the mesh size is 1 unit by 1 unit centered on the origin of the <b>Frame</b> object, the vertex coordinates that define the mesh are (0.5, 0.5, 0), (0.5, -0.5, 0), (-0.5, -0.5, 0), and (-0.5, 0.5, 0).
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.<b>CreateUnitMesh</b></pre>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetDecalOrigin</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetDecalOrigin</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+Returns the origin (central point) <!--Syntax table-->of the 
+decal.&nbsp;<STRONG>GetDecalOrigin</STRONG>  
+ is a member of the <A href="Frame.htm">Frame</A> 
+object.<!--Syntax table-->                
+       
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>GetDecalOrigin</STRONG> 
+      <EM>nMeshIndex, lx, ly</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The <STRONG>GetDecalOrigin</STRONG> method syntax has 
+these parts: 
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name--><EM>object</EM></td>
+		<td><!--Type-->Frame</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->An 
+      object reference that accesses an object with 
+      a&nbsp;<STRONG>Frame</STRONG> object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal><EM>nMeshIndex</EM></TD>
+    <TD>Long</TD>
+    <TD>Required</TD>
+    <TD>The index number of the mesh.</TD></TR>
+  <TR>
+    <TD class=boldItal>lx</TD>
+    <TD>Variant</TD>
+    <TD>Required</TD>
+    <TD>The value for the x-coordinate can be 
+      float or integer.</TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->ly</td>
+		<td><!--Type-->Variant</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->The 
+      value for the&nbsp;y-coordinate can be float or 
+  integer.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section --></P>
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P> A <B>Frame</B> contains a list of <I>visuals</I> (visual 
+objects) and a list of lights. A visual can be a <I>mesh</I>, a visual object that is made up of 
+a set of polygonal faces. The text that appears above an avatar is an example of a mesh. 
+Another kind of visual is a <I>decal</I>, a texture that can be rendered 
+directly. The name in text above an avatar's head is an example of a decal. A 
+third kind of visual is a <I>progressive mesh,</I>       
+              a mesh that 
+is stored as a base mesh (a coarse version) and a set of 
+records that are used to increasingly refine the mesh. A visual can be referenced by its index in the visual list.</P>
+<P> The <EM>nMeshIndex</EM>    parameter is generally 
+set to the index of a particular mesh, but you can set it to two additional 
+values. A value of&nbsp;-1 indicates that this method should be applied to all meshes in the 
+frame. A value of -2 indicates that this method should be applied to all meshes in all 
+frames in the hierarchy.</P>
+<P> The default origin of a decal is its center, expressed in the coordinates 
+of the pixel space&nbsp;for the generated image. For example, if a decal is a
+256-by-256 texture, its origin is at (128, 128).</P>
+<P>The <i>lx</i> and <i>ly</i> parameters will  return the x- and y-coordinates for 
+the origin of the specified decal. After this method executes, 
+these parameters will be overwritten with the current values for the x- 
+and y-coordinates.          
+   </P>
+<P>You can&nbsp;set the origin by using the <A href="SetDecalOrigin.htm">SetDecalOrigin</A> method.&nbsp;
+
+<!--Example section--></P>
+<H3>Example</H3>
+<p>   This example changes the size and position of a&nbsp;decal.</p>
+<PRE class="example">
+Sub ChangeDecalSizeAndPosition()
+Dim myFrame
+Dim myMeshIndex
+Dim myHeight
+Dim myWidth
+Dim myScale
+Dim myX
+Dim myY
+</PRE>
+<P class="comments">'Set a reference to the frame where you want to place the 
+decal.
+<PRE class="example">Set myFrame = User.Container.GetFrame
+</PRE>
+<P class="comments">'Create a decal.
+<PRE class="example">
+myFrame.CreateDecalFromText "This is the new Kiosk", "Kiosk"
+</PRE>
+<P class="comments">'Get the values for the variables "myHeight", "myWidth", and "myScale".
+<PRE class="example">myFrame.GetDecalSize 0, myHeight, myWidth, myScale</PRE>
+<P class="comments">'Change the values.
+<PRE class="example">myHeight = myHeight + .5
+myWidth = myWidth - .15</PRE>
+<P class="comments">'Set the decal to the new size.
+<PRE class="example">myFrame.SetDecalSize 0, myHeight, myWidth, myScale</PRE>
+<P class="comments">'Get the origin of the decal.
+<PRE class="example">myFrame.<b>GetDecalOrigin 0, myX, myY</b>
+
+End Sub</PRE>
+</body>
+</html>

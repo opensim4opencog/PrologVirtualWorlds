@@ -1,0 +1,345 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../../API%20Reference/APIRef.css">
+	<title>Virtual Worlds Security Overview</title>
+</head>
+<body><!--Header table -->
+<table class="head" bgcolor=#e8edf4 border=1>
+	<tr>
+		<td><h2>Virtual Worlds Security Overview</h2></td>
+	</tr>
+</table><!--Topic Definition-->
+<p>              
+         Microsoft Virtual Worlds employs a number of
+different measures to attempt to insure that&nbsp;multi-user virtual worlds can be secured against unintentional
+or malicious user actions that would disrupt or otherwise damage them.&nbsp; To this end, Virtual
+Worlds implements the following system security features: </p>
+<UL>
+<li>Unique, password protected avatars for login
+  <LI>NTLM Authentication on supported systems
+  <LI>Avatar security&nbsp;roles (user,&nbsp;host, wizard, world owner)
+  <LI>Authoring restriction and quotas
+  <LI>Object permission system</LI> 
+</UL>
+<H4>Login Security</H4>
+<H5>Unique Avatars</H5>
+<P>In Virtual Worlds, when you create a new avatar, a globally unique identifier 
+(GUID) is created for that avatar.&nbsp; That identifier, along with some other 
+avatar information, is stored in a file named <FONT color=blue>&lt;avatarname&gt;.vwc</FONT> on your local hard 
+drive.&nbsp; When you later connect to a world for the first time with that 
+avatar, the GUID is sent to the world server and stored there.&nbsp; From that 
+point on, any time you wish to log in as that avatar, the server will require 
+that the avatar connecting have the same GUID as the one stored on the 
+server.&nbsp; This system is something of a departure from the traditional 
+password-database approach to login security.&nbsp; The avatar file stored on 
+your local hard drive really is, in a way, your avatar.&nbsp; If you want to log 
+in as that avatar from another machine, you must first move or copy the avatar 
+file to that machine and place it in the appropriate directory.&nbsp; This can 
+be difficult to remember at first, but it does much to assure that no one can 
+log in to a virtual world as you without first having a copy of your avatar 
+file.</P>
+<H5>Avatar Passwords</H5>
+<P>In addition to unique avatar files, avatars can have passwords associated 
+with them.&nbsp; In our client user interface implementation, you are only 
+prompted to associate a password with the world owner avatar during the world 
+creation process, but the Virtual Worlds system supports passwords for every 
+avatar.&nbsp; Each avatar has a secure property (not readable by other avatars 
+except wizards) called <EM>password</EM> that contains a plain text 
+string.&nbsp; If this string is not empty, the client software will prompt the 
+user to enter a password at login time.&nbsp; If the password entered matches 
+the string in the <EM>password</EM> property, the user will be allowed access to 
+that avatar.&nbsp; Note that, in order to be prompted for a password, the GUID 
+of the connecting avatar must match the GUID of that avatar as stored on the 
+server, so you still have to have a copy of the avatar file on the machine that 
+you're connecting from.</P>
+<H5>NTLM Authentication for Server Connections</H5>
+<P>For Virtual Worlds servers running on Microsoft Windows NT or&nbsp;Microsoft 
+Windows 2000&nbsp;Professional, we provide a much stronger level of security: 
+NTLM authentication against the user account list.&nbsp; An administrator can 
+use the user manager (NT administrative tool) to create user accounts (login 
+names and password) and groups of users.&nbsp; Then, by enabling options in the 
+Virtual Worlds server application, the administrator can cause all connections 
+to the Virtual Worlds server to first be validated against the NT user account 
+database.&nbsp; In this way, an administrator can specify fairly strong login 
+security for his or her virtual world.</P>
+<P>If NTLM Authentication is enabled, after the user chooses to connect to the 
+server, the user will be prompted with a separate dialog asking for&nbsp;his or 
+her username, password, and domain name.&nbsp; This information corresponds to a 
+user account in the corresponding NT user database.&nbsp; If the user fails to 
+provide any of the information correctly, the connection to the server will be 
+refused.</P>
+<P>NTLM Authentication does not replace the necessity of having the avatar file 
+locally or knowing the avatar password (if one exists), rather, it is an 
+additional level of security on the actual network connection.&nbsp; This 
+authentication scheme gives the administrator the ability to individually manage 
+and control the users who are allowed to connect to a virtual world.</P>
+<H4>Avatar Security Roles</H4>
+<P>Once connected to a virtual world, an avatar can be assigned one of a number of security roles that govern what 
+the avatar is able to do within the world.&nbsp; The roles are detailed from 
+least privileged to most privileged in the following table:</P>
+<table class="backlight">
+  <tr>
+    <td><b>Role</b></td>
+    <td><b>Mechanism</b></td>
+    <td><b>Description</b></td>
+  </tr>
+<tr class="line" ><td colspan=100></td></tr>
+  <tr>
+    <td><b>User</b></td>
+    <td><STRONG>N/A</STRONG></td>
+    <td>By default, avatars that connect to a world have normal 
+      user permissions.&nbsp; Normal users can explore and interact with the virtual 
+      world and have the ability to create and own objects in the world.&nbsp; 
+      They cannot, in general, change objects that do not belong to them.&nbsp; 
+      Some client software (including the default Virtual Worlds client) will 
+      choose to employ the <A href="../../API%20Reference/Exemplars/Avatar/IsAuthor.htm">IsAuthor</A>         
+                property of the 
+      avatar to determine whether to expose object creation and manipulation tools to the user.</td>
+  </tr>
+  <tr>
+    <td><b>Host</b></td>
+    <td><A href="../../API%20Reference/World/MakeHost.htm">MakeHost</A>, <A href="../../API%20Reference/World/UnMakeHost.htm">UnMakeHost</A></td>
+    <td>         
+           A host has the normal user         
+           permissions with the added ability to forcibly disconnect 
+      other avatars from the server, but no access to objects owned by other avatars.</td>
+  </tr>
+    <tr>
+    <td><b>Wizard</b></td>
+    <td><A href="../../API%20Reference/Exemplars/Avatar/IsWizard.htm">IsWizard</A></td>
+    <td>A wizard is a very powerful user with the ability 
+      to ignore most of the security features of Virtual Worlds.&nbsp; Wizards 
+      can see and change almost anything in the world, including objects that do 
+      not belong to them.&nbsp; Wizard privileges should be very carefully 
+      controlled, as a wizard can very easily damage a virtual world beyond 
+      recovery.&nbsp; World owners and wizards can commute the wizard privileges 
+      by setting the <STRONG>IsWizard</STRONG>         
+                   
+              property of an avatar to True.</td>
+  </tr>
+    <tr>
+    <td><b>World Owner</b></td>
+    <td><STRONG>N/A</STRONG></td>
+    <td>This is the ultimate&nbsp;security&nbsp;level for 
+      a virtual world. There is only one world owner for any given virtual 
+      world, and world owner status is non-transferrable.&nbsp; In general, a world owner has permissions similar to a wizard, 
+      but there are some properties of the world itself that ONLY the world 
+      owner can change.&nbsp; A world owner avatar can never have its wizard privileges revoked.&nbsp;</td>
+  </tr>
+</table>
+  
+<P> Wizards and world owners can effectively ignore system security when 
+it comes to working with objects.&nbsp; Object ownership and property 
+permissions have nothing to do with whether a wizard or world owner can modify or destroy an object in the world.&nbsp; For these reasons, wizard 
+permissions should be very carefully guarded!</P>
+  
+<P>     Although all avatars are, by 
+default, able to create and own objects, a world administrator has a&nbsp;couple 
+of ways to control the creation of objects by users in his or her 
+virtual world.&nbsp; The first approach is one used by the default Virtual 
+Worlds client:&nbsp;the client software checks the value of the 
+<STRONG>IsAuthor</STRONG> 
+property  on the user's avatar.&nbsp; If the value is 
+false, the client software never displays the object creation and management 
+tools.&nbsp; The second approach is to simply architect your client software to 
+disinclude authoring tools for all avatars and distribute it to 
+your users.&nbsp; The third approach is to manipulate 
+the&nbsp;<A href="../../API%20Reference/Exemplars/Avatar/ObjectQuota.htm">ObjectQuota</A>&nbsp;property 
+of certain avatars or 
+the&nbsp;<A href="../../API%20Reference/World/DefaultObjectQuota.htm">DefaultObjectQuota</A> 
+property of the world.&nbsp; If a quota property is set to 0, the avatar will 
+not be able to create objects.</P>
+<H4>Ownership and Permission System</H4>
+<P>              
+            
+              
+            
+      When an avatar creates an object, it becomes the 
+<EM>owner</EM>              
+            
+              
+            
+         
+   of that object.&nbsp; Every <A href="../../API%20Reference/Thing/Thing.htm">Thing</A> in Virtual Worlds
+   has an <A href="../../API%20Reference/Thing/Owner.htm">Owner</A> property that 
+references its owner. By default, the owner of an object has full control over 
+that object and can change the properties and methods or destroy the object 
+entirely.&nbsp; If the owner of an object wants to grant some degree of control 
+of that object to other users in the world, he or she can use  the
+   permission system.</P>
+<P> At the heart of the Virtual Worlds security model is a complex 
+permission system implemented at a very low level.&nbsp; This permission system allows 
+an object owner to control access to properties and methods of an object in 
+a fairly sophisticated way, much like a secure file system.&nbsp; Every property 
+and method in Virtual Worlds has a corresponding 4-byte 
+permission bitflag.&nbsp; This flag is structured&nbsp;in binary as follows:</P>
+<PRE>
+ 0000 0000    0000 0000   0000 0000    0000 0000
+|-RESERVED-| |---ALL---| |-EXEMPLAR-| |--OWNER--|
+</PRE>
+<P>The top byte is reserved for future use and the bottom 
+three bytes each represent a security group for the object.&nbsp; Permissions 
+bitflags are placed in any one of the three slots to comprise a permissions 
+policy for that particular security group.&nbsp; ALL refers to all objects in 
+Virtual Worlds, EXEMPLAR refers to the exemplar of the current object, and OWNER refers to the owner of the current object. </P>
+<P>Within each 8 bit security slot, the permissions are as follows:</P>
+<PRE>
+0 0 0 0  0 0 0 0
+\_____/  | | | |_Read
+   |     | | |__Write
+Reserved | |___Execute 
+         |____Add
+</PRE>
+<P>So, a value of 0000 0001 in the OWNER security slot 
+would give the owner of the object read-only permission to the item that the 
+permissions flag is on, while a value of 0000 0011 in the same slot 
+would confer read and write privileges to the owner. </P>
+<P>In general, the permissions (read, write, execute, add), behave exactly as 
+you might expect they would: a person without read permission to a property 
+wouldn't be able to read it, and a person without write permission wouldn't be 
+able to write to it.&nbsp; Add permissions really apply to collections 
+(<A href="../../API%20Reference/PropertyList/PropertyList.htm">PropertyList</A> and <A href="../../API%20Reference/PropertyMap/PropertyMap.htm">PropertyMap</A>): with read and write, but not add,&nbsp;a user 
+can read or write existing collection items, but not add or remove items from 
+the collection.&nbsp; Execute permissions really apply to methods (without 
+execute permission, a user cannot execute the method code).</P>
+<P>Many of the commonly used permissions flag values are exposed as read-only 
+properties of the <STRONG>World</STRONG> object for ease of use.&nbsp; All of 
+the values below are in the decimal number system, but if you convert them to 
+binary and compare them to the model above, you can see how they make sense.</P>
+<a name="permissions"></a>
+<table class="backlight">
+  <tr>
+    <td><b>Flag</b></td>
+    <td><b>Value</b></td>
+    <td><b>Description</b></td>
+  </tr>
+<tr class="line" ><td colspan=100></td></tr>
+  <tr>
+    <td><b>PS_NONE</b></td>
+    <td><STRONG>0</STRONG></td>
+    <td>         
+                   
+          Represents all permissions bits set to 0 (effectively clears permissions)</td>
+  </tr>
+  <TR>
+    <TD><STRONG>PS_READ</STRONG></TD>
+    <TD><STRONG>1</STRONG></TD>
+    <TD>       Represents the read security 
+      permission (0001 in binary)</TD></TR>
+  <tr>
+    <td><STRONG>PS_WRITE</STRONG>
+
+
+
+
+</td>
+    <td><b>2</b></td>
+    <td>     Represents the write security permission (0010 in binary)</td>
+  </tr>
+  <tr>
+    <td><b>PS_EXECUTE</b></td>
+    <td><b>4</b></td>
+    <td>    Represents the execute security permission (0100 in binary)</td>
+  </tr>
+  <TR>
+    <TD><STRONG>PS_ADD</STRONG></TD>
+    <TD><STRONG>8</STRONG></TD>
+    <TD>Represents the add security permission (1000 in binary)</TD></TR>
+  <TR>
+    <TD><STRONG>PS_OWNER_RW</STRONG></TD>
+    <TD><STRONG>3</STRONG></TD>
+    <TD>Equivalent to PS_READ + PS_WRITE in the OWNER 
+      security slot</TD></TR>
+  <TR>
+    <TD><STRONG>PS_OWNER_RWA</STRONG></TD>
+    <TD><STRONG>11</STRONG></TD>
+    <TD>Equivalent to PS_READ + PS_WRITE + PS_ADD in the OWNER security 
+  slot</TD></TR>
+  <TR>
+    <TD><STRONG>PS_EXEMPLAR_RW</STRONG></TD>
+    <TD><STRONG>768</STRONG></TD>
+    <TD>Equivalent to PS_READ + PS_WRITE shifted into the&nbsp;EXEMPLAR 
+      security slot (shift left&nbsp;8 bits or multiply by 2^8 (256))</TD></TR>
+  <TR>
+    <TD><STRONG>PS_EXEMPLAR_RWA</STRONG></TD>
+    <TD><STRONG>2816</STRONG></TD>
+    <TD>Equivalent to PS_READ + PS_WRITE&nbsp; + PS_ADD shifted into 
+      the&nbsp;EXEMPLAR security slot (shift left&nbsp;8 bits or multiply by 2^8 
+      (256))</TD></TR>
+  <TR>
+    <TD><STRONG>PS_ALL_R</STRONG></TD>
+    <TD><STRONG>65536</STRONG></TD>
+    <TD>Equivalent to PS_READ shifted into the ALL security slot (shift left 
+      16 bits or multiply by 2^16 (65536))</TD></TR>
+  <TR>
+    <TD><STRONG>PS_ALL_RW</STRONG></TD>
+    <TD><STRONG>196608</STRONG></TD>
+    <TD>Equivalent to PS_READ + PS_WRITE shifted into the ALL security slot 
+      (shift left 16 bits or multiply by 2^16 (65536))</TD></TR>
+  <TR>
+    <TD><STRONG>PS_ALL_RWA</STRONG></TD>
+    <TD><STRONG>720896</STRONG></TD>
+    <TD>Equivalent to PS_READ&nbsp;+PS_WRITE + PS_ADD shifted into the ALL 
+      security slot (shift left 16 bits or multiply by 2^16 (65536))</TD></TR>
+  <TR>
+    <TD><STRONG>PS_ALL_E</STRONG></TD>
+    <TD><STRONG>262144</STRONG></TD>
+    <TD>Equivalent to PS_EXECUTE shifted into the ALL security slot (shift 
+      left 16 bits or multiply by 2^16 (65536))</TD></TR>
+  <TR>
+    <TD><STRONG>PS_ALLACCESSPROPERTY</STRONG></TD>
+    <TD><STRONG>197379</STRONG></TD>
+    <TD>Used to allow read and write access to everyone.&nbsp; Equivalent to 
+      PS_READ + PS_WRITE in each of the security slots (ALL, EXEMPLAR, and 
+    OWNER)</TD></TR>
+  <TR>
+    <TD><STRONG>PS_SCRIPTDEFAULTPROPERTY</STRONG></TD>
+    <TD><STRONG>66315</STRONG></TD>
+    <TD>The default permissions value for properties. Equivalent to 
+      PS_READ&nbsp;in ALL, PS_READ + PS_WRITE&nbsp;in EXEMPLAR and PS_READ + 
+      PS_WRITE + PS_ADD&nbsp;in OWNER</TD></TR>
+  <TR>
+    <TD><STRONG>PS_SCRIPTDEFAULTCOLLECTION</STRONG></TD>
+    <TD><STRONG>68363</STRONG></TD>
+    <TD>The default permissions value for collections. Equivalent to 
+      PS_READ&nbsp;in ALL and PS_READ + PS_WRITE + PS_ADD in both the EXEMPLAR 
+      and OWNER slots</TD></TR>
+  <TR>
+    <TD><STRONG>PS_SCRIPTDEFAULTMETHOD</STRONG></TD>
+    <TD><STRONG>67343</STRONG></TD>
+    <TD>The default permissions for methods.&nbsp;Equivalent to 
+      PS_READ&nbsp;in ALL, PS_READ + PS_WRITE + PS_EXECUTE&nbsp;in EXEMPLAR, and 
+      PS_READ + PS_WRITE + PS_EXECUTE + PS_ADD&nbsp;in OWNER</TD></TR>
+</table>
+<P class=example>The only times that the permission bits for a property or 
+method are accessible to the scripting user are during property or method 
+"creation" via <A href="../../API%20Reference/Thing/AddProperty.htm">AddProperty</A> or <A href="../../API%20Reference/Thing/AddMethod.htm">AddMethod</A>  
+.&nbsp; Once a property or method is added to an object, the permission 
+bits cannot be changed unless it is removed and added again.</P>
+<H5 class=example>On<EM>Property</EM>Access Event Handler</H5>
+<P class=example>Another interesting way to control write access to a property 
+on a dynamic basis is through the use of an 
+<A href="../../API%20Reference/Events/OnPropertyAccess%20Class%20Description.htm">On<EM>Property</EM>Access</a> event handler.&nbsp; Before a 
+ change to a property is 
+actually committed, the system checks for a method on the same object as the property 
+named On&lt;propertyname&gt;Access (e.g. OnJunkAccess for a property named Junk) 
+and, if it is present, executes that method before committing the change.&nbsp; The 
+method is called when write access is requested, and therefore receives 
+World.PS_WRITE (2) as its only parameter.&nbsp; The method can perform arbitrary actions, 
+but ultimately must return either True or False.&nbsp; If the return is True, 
+the change is committed.&nbsp; If the return is False, the change is not 
+allowed.&nbsp; This decision applies to everyone, regardless of their security 
+role.&nbsp; It should be noted, however, that a Wizard or World Owner could 
+simply modify or destroy an On<EM>Property</EM>Access handler on any given 
+object, so it's not too difficult to circumvent for such users.</P>
+<P class=example>It is often useful to use the <A href="../../API%20Reference/World/CheckPolicy.htm">CheckPolicy</A> method of the World 
+object within an On<EM>Property</EM>Access method to ascertain the security role 
+of the accessing avatar with respect to the property being 
+accessed.</P>
+
+
+
+</body>
+</html>

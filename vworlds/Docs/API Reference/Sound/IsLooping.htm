@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsLooping</title>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsLooping</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Sound Object</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>When set to <STRONG>True</STRONG>  the <A href="Sound.htm">Sound</A> object is set 
+to&nbsp;continually play. <STRONG>IsLooping</STRONG> 
+is a read/write&nbsp;<STRONG>Boolean</STRONG>.&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><!--syntax statement --><EM>object</EM>.<STRONG>IsLooping</STRONG> 
+      = <EM>BooleanValue</EM></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<p>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><!--syntax statement --><EM>object</EM>.<STRONG>IsLooping</STRONG></TD></TR></TABLE>
+<P>The <b>IsLooping</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name-->object</td>
+		<td><!--Type-->Sound</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description--> 
+      An&nbsp;object reference that accesses a <STRONG>Sound</STRONG> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->BooleanValue</td>
+		<td><!--Type-->Boolean</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->Set 
+      this property to <STRONG>True</STRONG>  to&nbsp;continually&nbsp;play the sound. 
+      Set it to <STRONG>False</STRONG> to&nbsp;play the sound one time.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>When you first create a <STRONG>Sound</STRONG> object, 
+you set the <EM>bIsLooping</EM> parameter&nbsp;for the&nbsp;<A 
+href="../World/CreateSound.htm">CreateSound</A>&nbsp;method to 
+<STRONG>True</STRONG> or <STRONG>False</STRONG>. This determines the state of 
+the <STRONG>IsLooping</STRONG> property for the <STRONG>Sound</STRONG> object and whether the sound plays once or continuously.&nbsp; 
+<P>Resetting 
+the <B>IsLooping</B> 
+property will stop the sound, then restart it in the new mode.&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<P>This example&nbsp;gets a <B>Sound</B> object, determines if the sound is continually 
+playing, and if it is, changes it to play only 
+one time. 
+<P>              
+        To run this example: You must have a 
+<STRONG>Sound</STRONG>              
+                 object set to 
+continually play.&nbsp;To create the objects shown in this example, refer to the 
+<STRONG>CreateSound</STRONG> method. <PRE class=example><!--Example text-->
+Sub AddBirdSong()
+Dim myTree
+Dim mySong
+</PRE>
+<P class=comments>'Get the <b>Sound</b> object and the object associated with it. <PRE class=example>
+Set myTree = User.Container.FindWithin("Oak Tree")
+Set mySong = myTree.Sound
+
+If mySong.<b>IsLooping</b> Then
+&nbsp;&nbsp;&nbsp;&nbsp;mySong.<b>IsLooping</b> = False
+End If
+
+End Sub
+</PRE>
+ 
+
+</body>
+</html>

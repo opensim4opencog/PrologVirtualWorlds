@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<title>Opening a World Checkpoint File</title>
+<link rel="STYLESHEET" href="../vwgdoc.css" type="text/css"
+title="VWG">
+</head>
+
+<h1>Opening a World Checkpoint File</h1>
+
+<p>When you create or save a world, all of the world information
+is saved in a binary file format called a <em>checkpoint file</em>.
+You can also save (or export) the world information as a
+Microsoft Visual Basic Script<font size="2">©</font> file, a
+text file. </p>
+
+<p>When the Virtual Worlds Server application starts, it
+automatically opens any checkpoint files contained in the
+~/Microsoft Virtual Worlds/Worlds directory. However, checkpoint
+files added to this directory after the server starts are not
+automatically detected. Use this menu option if you have added a
+world checkpoint file after the server starts.</p>
+
+<p>You can also use this menu option to restore a world that has
+been deleted, providing that the checkpoint backup file still
+exists. Both a checkpoint file and a backup checkpoint file are
+created when the world is first created, and each is saved
+whenever you save your world. For example, if you have created a
+world named Home, its checkpoint file would be Home.VWC and the
+checkpoint backup file would be Home.BAK.VWC.</p>
+
+<h2>To open a world checkpoint file:</h2>
+
+<ol>
+    <li>On the Virtual Worlds Server application's <b>File </b>menu<b>,
+        </b>click <b>Open...</b>. </li>
+    <li>When the <strong>Open checkpoint file:</strong> dialog
+        box appears, select the checkpoint file for the world you
+        wish to open. All of the checkpoint files and backup
+        checkpoint files are shown in the file explorer pane. </li>
+    <li>Click <strong>Open</strong>.</li>
+</ol>
+
+<p><strong>Note</strong>: Checkpoint files <em>must</em> be
+placed in the ~/Microsoft Virtual Worlds/Worlds directory. If you
+attempt to open checkpoint files from any other directory, an
+error dialog box will be displayed.</p>
+
+<h2>To restore a world that has been deleted:</h2>
+
+<ol>
+    <li>Using Windows Explorer, rename the file Home.BAK.VWC<tt> </tt>to
+        Home.VWC. (The actual file names will probably be
+        different.)</li>
+    <li>On the Server Administration tool's <b>File </b>menu<b>, </b>click
+        <b>Open...</b>. </li>
+    <li>When the <strong>Open checkpoint file:</strong> dialog
+        box appears, select the checkpoint file for the world you
+        wish to open. All of the checkpoint files and backup
+        checkpoint files are shown in the file explorer pane. </li>
+    <li>Click <strong>Open</strong>.</li>
+</ol>
+
+<h4>See Also </h4>
+
+<p><a href="savewrld.htm">How Worlds Are Saved</a><br>
+</p>
+
+<h4>Tasks </h4>
+
+<p><a href="openscpt.htm">Importing a World Script File</a><br>
+<a href="savescpt.htm">Exporting a World as a Script File</a><br>
+<a href="savechk.htm">Saving a World as a Checkpoint File</a><br>
+<a href="vwsdelw.htm">Deleting a World</a></p>
+</body>
+</html>

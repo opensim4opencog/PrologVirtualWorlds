@@ -1,0 +1,131 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnEnter</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnEnter</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called in response to an <em>Enter</em>
+event, which occurs when an object has entered a new container.
+<!--Syntax table-->
+
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>OnEnter(<i>Where, What</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnEnter</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">Where</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>A reference to the container that has been entered.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">What</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>A reference to The object that has entered the container.</td>
+	</TR>
+	
+</TABLE>
+<p>The <b>Enter</b> event supports these additional handlers:
+<TABLE class="backlight" STYLE="WIDTH:75%">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Event Handler</td>
+			<td>Description</td>
+
+		</TR>
+	</thead>
+<tr class="line" ><td colspan=100></td></tr>
+	<TR>
+		<td class="boldItal">OnPeerEnter</td>
+		<td>The handler for other objects in the same <a href="../Thing/Container.htm">Container</a>.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContainerEnter</td>
+		<td>The handler for the object's <a href="../Thing/Contents.htm">Contents</a>.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContentEnter</td>
+		<td>The handler for the <b>Container</b> of the object.</td>
+		<td></td>
+		<td></td>
+	</TR>
+</TABLE>
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>This method is not normally called by the user; it responds to
+an internal event that occurs in Virtual Worlds when an object
+has entered a container.
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;To ensure that the internal procedures that are tied to each event handler are invoked, you must call <b>InvokeSuperMethod</b> within the overridden subroutine. For more information on using this method, see the <a href="../Thing/InvokeSuperMethod.htm">InvokeSuperMethod</a> topic.
+<!--Example section-->
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">Sub OnEnter(Where, What)
+&nbsp;&nbsp;&nbsp;&nbsp;Trace What.Name &amp; &quot; has entered &quot; &amp; Where.Name
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod (Array(Where, What))
+End Sub
+<!--Example text-->
+&nbsp;
+</pre>
+
+
+</body>
+</html>

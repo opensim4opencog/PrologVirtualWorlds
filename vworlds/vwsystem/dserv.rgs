@@ -1,0 +1,24 @@
+HKCR
+{
+	VWSYSTEM.DServ.1 = s 'DServ Class'
+	{
+		CLSID = s '{40A94351-9AE4-11D0-8587-00A0C90F2911}'
+	}
+	VWSYSTEM.DServ = s 'DServ Class'
+	{
+		CurVer = s 'VWSYSTEM.DServ.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {40A94351-9AE4-11D0-8587-00A0C90F2911} = s 'DServ Class'
+		{
+			ProgID = s 'VWSYSTEM.DServ.1'
+			VersionIndependentProgID = s 'VWSYSTEM.DServ'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

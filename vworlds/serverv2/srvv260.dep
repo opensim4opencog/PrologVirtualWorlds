@@ -1,0 +1,331 @@
+# Microsoft Developer Studio Generated Dependency File, included by srvv260.mak
+
+.\ChildFrm.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\ChildFrm.h"\
+	".\MainFrm.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\StdAfx.h"\
+	
+
+.\DlgMaxLimit.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\DlgMaxLimit.h"\
+	".\MainFrm.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\StdAfx.h"\
+	
+
+.\DSURL.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\DSURL.h"\
+	".\MainFrm.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\StdAfx.h"\
+	
+
+.\globdoc.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\globdoc.h"\
+	".\MainFrm.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\StdAfx.h"\
+	
+
+.\globedvw.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\globedvw.h"\
+	".\MainFrm.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\StdAfx.h"\
+	
+
+.\globfrm.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\globedvw.h"\
+	".\globfrm.h"\
+	".\MainFrm.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\servView.h"\
+	".\StdAfx.h"\
+	
+
+.\InfoURL.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\InfoURL.h"\
+	".\MainFrm.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\StdAfx.h"\
+	
+
+.\MainFrm.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\htmlhelp.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\MainFrm.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\StdAfx.h"\
+	
+
+.\OptionsDlg.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\MainFrm.h"\
+	".\OptionsDlg.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\StdAfx.h"\
+	
+
+.\PrgDlg.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\MainFrm.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\StdAfx.h"\
+	
+
+..\vwcommon\reghelp.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\propsecu.h"\
+	".\StdAfx.h"\
+	
+
+.\Servdoc.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\InfoURL.h"\
+	".\MainFrm.h"\
+	".\PrgDlg.h"\
+	".\savedlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\servView.h"\
+	".\StdAfx.h"\
+	
+
+.\ServerV2.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwsystem\vwsystem_i.c"\
+	".\ChildFrm.h"\
+	".\DlgMaxLimit.h"\
+	".\DSURL.h"\
+	".\globdoc.h"\
+	".\globedvw.h"\
+	".\globfrm.h"\
+	".\MainFrm.h"\
+	".\OptionsDlg.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\servView.h"\
+	".\StdAfx.h"\
+	
+
+.\ServerV2.rc : \
+	".\res\bitmap1.bmp"\
+	".\res\icon1.ico"\
+	".\res\server.ico"\
+	".\res\ServerV2.rc2"\
+	".\res\Toolbar.bmp"\
+	".\res\world.ico"\
+	
+
+.\ServSink.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwserver_i.c"\
+	"..\vwcommon\vwtempl.h"\
+	".\MainFrm.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\StdAfx.h"\
+	
+
+.\servView.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\MainFrm.h"\
+	".\PrgDlg.h"\
+	".\Servdoc.h"\
+	".\ServerV2.h"\
+	".\ServSink.h"\
+	".\servView.h"\
+	".\StdAfx.h"\
+	
+
+.\StdAfx.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwimpl.cpp"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\StdAfx.h"\
+	

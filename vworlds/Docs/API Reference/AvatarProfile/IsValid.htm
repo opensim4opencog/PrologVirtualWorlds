@@ -1,0 +1,114 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsValid</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsValid</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of AvatarProfile</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+Returns <STRONG>True</STRONG> if 
+the&nbsp;string specified by the <EM>bstrKey</EM> parameter 
+exists as a
+       key in&nbsp;an <A href="AvatarProfile.htm">AvatarProfile</A>  object. 
+<b>IsValid</b> is a member of&nbsp;the <STRONG>AvatarProfile</STRONG> 
+object.
+<H3>Syntax</H3>
+<P>
+
+  
+<table class="backlight"> 
+  <TR>    <TD><EM>object</EM>.<STRONG>IsValid</STRONG>(<EM>bstrKey</EM>) </TD><!--syntax statement --></TR>
+</table></P>
+
+
+<!--Parameters table-->
+<p>The <b>IsValid</b> method syntax has these parts:
+<TABLE class=backlight><!--Parameters table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Parameters </TD>
+    <TD>Type </TD>
+    <TD>Use </TD>
+    <TD>Description </TD></TR></THEAD><!--Parameters table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object </TD>
+    <TD>AvatarProfile</TD><!--Parameter name-->
+    <TD>Required </TD><!--Type-->
+    <TD>An&nbsp;object reference&nbsp;to an 
+     <b>AvatarProfile</b> object. </TD><!--Description--></TR>
+  <TR>
+    <TD class=boldItal>bstrKey </TD>
+    <TD>String&nbsp; </TD><!--Parameter name-->
+<TD>Required</TD>
+    <TD>The&nbsp;name of the key in an avatar's profile. </TD><!--Description--></TR>
+  <TR></TR>
+
+</TABLE></p>
+<H3>Return Value</H3>
+<P>This method returns <STRONG>True</STRONG> if the key 
+exists in the avatar's profile, otherwise, it returns 
+<STRONG>False</STRONG>.</P>
+<H3>Remarks</H3>
+<P>When you use the&nbsp;<STRONG>IsValid</STRONG>           
+method,&nbsp;it searches&nbsp;the specified avatar profile.&nbsp;You can use the indexes of the <A 
+href="../AvatarProfile/Keys.htm">Keys</A> in the 
+profile list of an avatar to gain access to each 
+item in the list            
+    as shown in the following statements.&nbsp; </P>
+<blockquote><PRE>For myCount = 0 To User.Profile.Keys.Count-1
+&nbsp;&nbsp;&nbsp;&nbsp;Trace User.Profile.Keys.Property(myCount) &amp; " is a valid item " &amp; _
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User.Profile.<b>IsValid(User.Profile.Keys.Property(myCount))</b>
+Next</PRE></blockquote>          
+              
+             
+               
+        
+<P>For security reasons, when using the 
+<STRONG>IsValid</STRONG>       method with the 
+<STRONG>AvatarProfile</STRONG>        
+ object, this method does not distinguish between an absent key and a key that 
+the user does not have permission to access. It will return <B>False</B> in both 
+cases.
+<!--Example section--></P><B></B><B></B>
+<H3>Example</H3>
+<P>       
+ This example returns the value of a single key and iterates through the entire list of keys in the profile of an avatar to check if the keys are valid.</P>
+<pre class="example">
+Sub CheckIfValidKey()
+Dim myKey
+Dim myKeylist
+</pre><p class="comments">
+'Get the Keys collection.
+<pre class="example">
+Set myKeylist = User.Profile.Keys
+</pre><p class="comments">
+'Trace each key and whether it's valid to the Command Window.
+<pre class="example">
+For Each myKey In myKeylist
+    Trace myKey &amp; ":" &amp; User.Profile.<b>IsValid(myKey)</b>
+Next
+</pre><p class="comments">
+'Now trace a single key.
+<pre class="example">
+Trace User.Profile.<b>IsValid(Friends)</b>
+
+End Sub
+</pre>
+</body>
+</html>

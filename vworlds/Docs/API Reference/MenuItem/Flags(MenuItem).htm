@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Flags (MenuItem)</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>  Flags</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of 
+MenuItem</td>
+	</tr>
+</table>
+<p> Sets or returns a flag that determines 
+the&nbsp;display&nbsp;setting for a <A href="MenuItem.htm">MenuItem</A>         
+   object. <STRONG>  Flags</STRONG> is a read-write <STRONG>Long</STRONG>. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>Flags</STRONG> = 
+    <EM>longValue</EM></td>
+	</tr>
+</table><!--Parameters table-->
+<p>The&nbsp;<STRONG>Flags (MenuItem Object)</STRONG>  property syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->MenuItem</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses a 
+      <STRONG>MenuItem</STRONG>        object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->longValue</td>
+		<td><!--Type-->Long</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->A 
+      flag that determines the display setting for a menu 
+item.</td>
+	</TR>
+
+</TABLE><!--Remarks section-->
+<H3>Remarks</H3>
+<P>  When you&nbsp;create a menu item by using the <A 
+href="../world/CreateMenuItem.htm"><B>CreateMenuItem</B></A> method, you set flags that 
+determine the display setting of the menu item that you are creating. 
+<P>The flags used for a <STRONG>MenuItem</STRONG> object are made up of 
+combinations of <STRONG>Long</STRONG>  values based on the constants shown in the 
+table below.&nbsp; For convenience, each flag constant is exposed as a read-only property of 
+the <STRONG>World</STRONG>         
+  object.
+<P>   The&nbsp;flag indicates to the menu display routines in the user interface how the menu item should be processed 
+and displayed. You can combine these flags to customize 
+your menus by adding them together. For example, a flag value of 3 (MI_DISABLED 
++ MI_GRAYED) indicates that the menu item is disabled and displays the 
+item on the menu in light gray. These flags are analogous to the WIN32 
+<I>MIxxx</I> menu flags. 
+<P>
+<P>    The flag names,&nbsp;values, and&nbsp;descriptions are shown in the 
+following table.</P>
+<P>
+<TABLE class="backlight">
+  
+  <TR>
+    <TD><B>Flag</B></TD>
+    <TD><B>Value</B></TD>
+    <TD><B>Description</B></TD></TR>
+<tr class="line" ><td colspan=100></td></tr>
+  <TR>
+    <TD><B>MI_DEFAULT</B></A></TD>
+    <TD>0</TD>
+    <TD>Menu item is displayed in default format. </TD></TR>
+  <TR>
+    <TD><B>MI_GRAYED</B></A></TD>
+    <TD>1</TD>
+    <TD>Menu item is grayed.</TD></TR>
+  <TR>
+    <TD><B>MI_DISABLED</B></A></TD>
+    <TD>2</TD>
+    <TD>Menu item is disabled.</TD></TR>
+  <TR>
+    <TD>
+      <P><B>MI_INVISIBLE</B></A></P></TD>
+    <TD>4</TD>
+    <TD>Menu item is not displayed.</TD></TR>
+  <TR>
+    <TD><B>MI_CHECKED</B></A></TD>
+    <TD>8</TD>
+    <TD>Menu item is checked.</TD></TR>
+  <TR>
+    <TD><B>MI_POPUP</B></A></TD>
+    <TD>16</TD>
+    <TD>Menu item&nbsp;displays a submenu.</TD></TR>
+  <TR>
+    <TD><B>MI_SEPARATOR</B></A></TD>
+    <TD>2048</TD>
+    <TD>Insert separator between menu items.</TD></TR></TABLE></P>
+<P><!--Example section--></P>
+<H3>Example</H3>
+<p>To get the <b>Flags</b> property and 
+check for a specific value:</p><PRE>
+Result = MyMenuItem.<b>Flags</b><BR>
+If (Result AND World.MI_CHECKED) = World.MI_CHECKED Then<BR>   World.Trace "MenuItem is checked!"
+End If
+</PRE>
+<P><FONT face=Verdana>To set the <b>Flags</b> 
+property:</FONT></P>
+
+<pre>MyMenuItem.<b>Flags</b> = World.MI_CHECKED +  World.MI_GRAYED</pre>
+
+</body>
+</html>

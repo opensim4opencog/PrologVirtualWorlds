@@ -1,0 +1,97 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnIsSolidChanged</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnIsSolidChanged</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that creates or destroys a boundary. It is called in response
+to the <strong>IsSolidChanged</strong> event, which occurs whenever the <strong>IsSolid</strong> property for an object is changed. Whether a boundary is created or destroyed depends on how the <strong>IsSolid</strong> property is changed.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>OnIsSolidChanged(<i>Hint, HintData</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnIsSolidChanged</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+		<TR>
+		<td class="boldItal">Hint</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The type of change that occurred.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">HintData</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The new value of the <b>IsSolid</b> property.</td>
+	</TR>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>This method is not normally called by the user; it responds to an internal event that occurs in Virtual Worlds when the <b>IsSolid</b> property of an object has changed.
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;To ensure that the internal procedures that are tied to each event handler are invoked, you must call <b>InvokeSuperMethod</b> within the overridden subroutine. For more information on using this method, see the <a href="../Thing/InvokeSuperMethod.htm">InvokeSuperMethod</a> topic.
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">Sub OnIsSolidChanged (Hint, HintData)
+&nbsp;&nbsp;&nbsp;&nbsp;World.Trace "IsSolid property has changed to: " &amp; CStr(HintData)
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod (Array(Hint, HintData))
+End Sub
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Rotate</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Rotate</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>
+Rotates a <A href="Boundary.htm">Boundary</A> around the center point of an object. 
+<b>Rotate</b> is a member of the <b>Boundary</b> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Rotate</b> <i>fAngle</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table--> 
+<p>The <b>Rotate</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td>An object reference that accesses a 
+      <B>Boundary</B>.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fAngle</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Float</b>. The angle is measured in radians.</td>
+	</TR>
+	
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<p>The <b>Rotate</b> method uses radians to measure the degree of rotation. The maximum useful rotation range is 2 pi radians (about 360 degrees), making the usable float range from 0 through 6.28315.
+<p>This method bases the start point for rotation from the first point in the boundary array. If a boundary is created using the <A href="AutoGenerate.htm">AutoGenerate</A> method, the start point is 0.0 on the y-axis of the boundary coordinate system. If the boundary is custom generated using an array, the start point is the first point listed in the array. Each invocation of the <b>Rotate</b> method calculates the degree of rotation from the latest position of the first <a href="Vertex.htm">Vertex</a>, so if a boundary is rotated once, the new start point is based on the current location of the first vertex. For more information on the boundary coordinate system, see the <A href="Boundary.htm">Boundary</A> topic.
+
+
+<!--Example section--></p>
+<H3>Examples</H3>
+
+<p>The first example creates a <b>Boundary</b> around an existing object and invokes the <b>Rotate</b> method to change the position of the boundary. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a four-sided outer boundary.
+<pre class="example">Set myOuterEdge = World.CreateBoundary(Array(1,1, 1,-1, -1,-1, -1,1))</pre>
+
+<p class=comments>'Rotate the boundary.
+<pre class="example">myOuterEdge.<b>Rotate 1.2</b></pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge
+
+End Sub</pre>
+<p>Example 2
+<p>This example invokes the <b>Rotate</b> method on the third boundary, after that boundary has been assigned to an object. "myObject" is the name of an existing object reference. To use this example, substitute the name of an existing object for "myObject".
+<br><br>
+<pre class="example">Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to the third boundary
+<div class=comments>'in an existing object's boundary list.</div>
+<pre class="example">Set myOuterEdge = myObject.BoundaryList.Property(2)</pre>
+
+<p class=comments>'Rotate the boundary.
+<pre class="example">myOuterEdge.<b>Rotate 2.34</b></pre>
+
+<p>Example 3
+
+<p>This example rotates the third boundary without assigning the boundary to a variable. To use this example, substitute the name of an existing object for "myObject".
+<br><br>
+
+<pre class="example">myObject.BoundaryList.Property(2).<b>Rotate 1.5</b></pre>
+
+<p class=comments>
+<!--See also section-->
+
+<P>
+<A href=""></A>
+<br>
+
+<!--Date-->
+
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetVertexXY</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetVertexXY</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>
+Gets the coordinates of a <a href="Vertex.htm">Vertex</a> of a <a href="Boundary.htm">Boundary</a>. <b>GetVertexXY</b> is a member of the <b>Boundary</b> object.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetVertexXY</b> <i>nEdge, pvarfX, pvarfY</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetVertexXY</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <B>Boundary</b>.</td>
+	</TR>
+<TR>
+		<TD class="boldItal">nEdge
+		</TD>
+		<TD>Integer
+		</TD>
+		<TD>Required
+		</TD>
+		<TD>The index number of a vertex contained in a 
+      <B>BoundaryList</B>.
+		</TD>
+	</TR>
+	<TR>
+		<td class="boldItal">pvarfX</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>Empty variable that is assigned the x-axis Boundary coordinate location of a specific <b>Boundary</b> <b>Vertex</b>. The empty variable is assigned a value of the <b>Float</b> data type.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvarfY</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>Empty variable that is assigned the y-axis Boundary coordinate location of a specific <b>Boundary</b> <b>Vertex</b>. The empty variable is assigned a value of the <b>Float</b> data type.</td>
+	</TR>
+	
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value, but it assigns values to the parameters that are passed.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>GetVertexXY</b> method gets the x and y values of an existing boundary coordinate, or vertex, and assigns the values to the variables passed as parameters. The boundary coordinates are calculated based on the bounding box center point (0,0) of the object to which the boundary is assigned. 
+
+<p>When you create a <b>Boundary</b>, the boundary vertices are rendered in the order that they are listed. If you create a <b>Boundary</b> using the <a href="AutoGenerate.htm">AutoGenerate</a> method, the starting point is set to 0.0 on the boundary y-axis, and a point relative to the bounding box on the boundary x-axis.  The start position x-axis coordinate is calculated internally, taking into account the size of the object that the boundary surrounds, and the center point of the object. A boundary that is created using <b>AutoGenerate</b> renders each vertex moving from point to point in a clockwise direction. If a <b>Boundary</b> is created based on a user-specified array of points, the start point is the first set of coordinates listed in the array. For more information on the coordinate system of boundaries, see the <a href="Boundary.htm">Boundary</a> topic.
+
+<p>The first argument of the <b>GetVertexXY</b> method-<i>nEdge</i>-specifies the index number of the vertex you want to retrieve. The <i>pvarfX</i> and <i>pvarfY</i> arguments specify the location of the vertex on the boundary x-y plane, relative to the bounding box of the object the boundary surrounds.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example creates a <b>Boundary</b> around an existing object by using the <b>AutoGenerate</b> method, and then displays coordinates of each <b>Vertex</b>. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge</pre>
+<div class=comments>'Declare the variables to be used in the method.</div>
+<pre class="example">Dim i
+Dim myVertexX
+Dim myVertexY
+Dim myVertexTotal</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a boundary without a specified size.
+<pre class="example">Set myOuterEdge = World.CreateBoundary</pre>
+
+<p class=comments>'Generate an eight-sided boundary that encloses the existing object.
+<pre class="example">myOuterEdge.AutoGenerate myFireHydrant, 8</pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge</pre>
+
+<p class=comments>'Get the number of vertices, iterate through each vertex,
+<div class=comments>'and print the results to the Command Window.</div>
+<pre class="example">
+myVertexTotal = myFireHydrant.BoundaryList.Property(0).VertexCount
+
+For i = 0 To myVertexTotal - 1
+&nbsp;&nbsp;&nbsp;&nbsp;myFireHydrant.BoundaryList.Property(0).<b>GetVertexXY i, myVertexX, myVertexY</b>
+&nbsp;&nbsp;&nbsp;&nbsp;Print myVertexX
+&nbsp;&nbsp;&nbsp;&nbsp;Print myVertexY
+Next
+
+End Sub</pre>
+
+
+</body>
+</html>

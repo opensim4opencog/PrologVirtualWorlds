@@ -1,0 +1,138 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Translate</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Translate</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>
+Moves a <a href="Boundary.htm">Boundary</a> in a specified direction relative to the current location. <b>Translate</b> is a member of the <b>Boundary</b> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Translate</b> <i>fX</i>, <i>fY</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Translate</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <B>Boundary</b>.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Float</b>. Corresponds to the x-axis of the boundary coordinate system.</td>
+</TR>
+	<TR>
+<td class="boldItal">fY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Float</b>. Corresponds to the y-axis of the boundary coordinate system.</td>
+	</TR>
+	
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<p>The <b>Translate</b> method moves an entire <b>Boundary</b> on the x-y plane of the boundary coordinate system.
+
+<p>The <b>Translate</b> method moves a <b>Boundary</b> relative to its current location. When a boundary is assigned to an object, the boundary is located relative to the center point of the object. So if a boundary is translated (moved) to a different location, it is still relative to the object that it is assigned to. If that object changes location, the boundary changes location as well, maintaining its relative location to the object.
+
+<p>For more information on the boundary coordinate system, see the <a href="Boundary.htm">Boundary</a> topic.
+
+<!--Example section-->
+<H3>Examples</H3>
+
+
+<p>This example creates a <b>Boundary</b> around an existing object and invokes the <b>Translate</b> method to move the entire boundary. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a four-sided outer boundary.
+<pre class="example">Set myOuterEdge = World.CreateBoundary(Array(1,1, 1,-1, -1,-1, -1,1))</pre>
+
+<p class=comments>'Translate the boundary.
+<pre class="example">myOuterEdge.<b>Translate 2.0, 3.0</b></pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge
+
+End Sub</pre>
+<p>Example 2
+<p>This example demonstrates calling the <b>Translate</b> method after the boundary has been assigned to an object. "myObject" is the name of an existing object. To use this example, substitute the name of an existing object for "myObject".
+
+<br><br><pre class="example">Dim myOuterEdge
+</pre>
+
+<p class=comments>'obtain a reference to the third boundary
+<div class=comments>'in an existing object's boundary list.</div>
+<pre class="example">Set myOuterEdge = myObject.BoundaryList.Property(0)</pre>
+
+<p class=comments>'Translate the boundary.
+<pre class="example">myOuterEdge.<b>Translate 2.34, 1.0</b></pre>
+
+<p>Example 3
+
+<p>This example moves the boundary without assigning the boundary to a variable. To use this example, substitute the name of an existing object reference for "myObject".
+<br><br>
+<pre class="example">myObject.BoundaryList.Property(0).<b>Translate 1.5, 2.0</b></pre>
+
+
+</body>
+</html>

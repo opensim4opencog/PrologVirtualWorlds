@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Flags (Module)</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>  Flags</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Module Object</td>
+	</tr>
+</table>
+<p>   A flag   that   indicates whether the code contained in the   script module can be run on&nbsp;a client or on the 
+server.&nbsp;<STRONG>  Flags</STRONG> is a read-write 
+<STRONG>Long</STRONG>. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>Flags =</STRONG><EM><STRONG> 
+      </STRONG>flags</EM></td>
+	</tr>
+</table><!--Parameters table-->
+<p>The&nbsp;<STRONG>Flags </STRONG>  property syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Module</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>  An reference to a 
+      <A href="../Module/Module.htm">Module</A> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->longValue</td>
+		<td><!--Type-->Long</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->A flag value that determines if the 
+      code referred to by the <STRONG>Module</STRONG>&nbsp;can be 
+      run on the client, on the server, or on 
+both.</td>
+	</TR>
+</TABLE><!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>    When you use the <A href="../World/CreateScriptModule.htm">CreateScriptModule</A> method to 
+create a script module, you specify whether the module will run on&nbsp;a 
+client, a server, or both by specifying the value for the <EM>lFlags</EM>     
+                
+         parameter.</P>
+<P>The flags used for a <b>Module</b> 
+object are made up of combinations of constants with 
+<STRONG>Long</STRONG> 
+       values as illustrated in the table below. You 
+can combine these flags by adding them together when a module contains code that should run 
+on both the client and the server.&nbsp; For convenience, these constants are 
+available as&nbsp;read-only properties of the <STRONG>World</STRONG> 
+               
+                       object.&nbsp;&nbsp; 
+</P>
+<P>
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><B>Flag</B></TD>
+    <TD><B>Value</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR class=line>
+    <TD colSpan=100></TD></TR>
+  <TR>
+    <TD><STRONG>MODULE_CLIENT</STRONG></TD>
+    <TD>1</TD>
+    <TD>Used for modules that contain methods designed to run on&nbsp;a 
+    client.</TD></TR>
+  <TR>
+    <TD><STRONG>MODULE_SERVER</STRONG></TD>
+    <TD>2</TD>
+    <TD>Used for modules containing methods that are designed to run on the 
+      server.</TD></TR></TABLE>&nbsp; <!--Example section--></P>
+<H3>Example</H3>
+<p>To get the <b>Flags</b> property and 
+check for a specific value:</p><PRE>
+Result = MyModule.<b>Flags</b>
+If (Result AND World.MODULE_SERVER) = World.MODULE_SERVER Then<BR>   World.Trace "Script from this module can be run on the server!"
+End If
+</PRE>
+<P><FONT face=Verdana>To set the <b>Flags</b> 
+property of a module:</FONT></P>
+
+<pre>MyModule.<b>Flags</b> = World.MODULE_CLIENT +  World.MODULE_SERVER</pre>
+
+
+</body>
+</html>

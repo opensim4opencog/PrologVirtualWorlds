@@ -1,0 +1,172 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>AddMethod</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AddMethod</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Thing</td>
+	</tr>
+</table><!--Topic Definition-->
+<P>Adds a method to the calling object. <b>AddMethod</b> is a member of the <A href="Thing.htm">Thing</A> object. <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>AddMethod</b> <i>bstrName</i>, <i>pmethod</i> [, <i>varPsbits</i>][, <i>varPermissions</i>]</td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>AddMethod</b> method syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An instance of an object that inherits from the <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name that is used to refer to the method you are assigning to the object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pmethod</td>
+		<td>Method</td>
+		<td>Required</td>
+		<td>An object reference to a method already created 
+      with the <A href="../World/CreateMethod.htm">CreateMethod</A> method of the <STRONG>World</STRONG>             object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">varPsbits</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>A flag or set of flags that specify system attributes for the method. (See remarks.)</td>
+	</TR>
+	<TR>
+		<td class="boldItal">varPermissions</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td> A flag or set of flags that represent Read, Write, and Execute permissions for the method. (See
+    remarks.)</td>
+	</TR>
+
+</TABLE><!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value. <!--Remarks section-->
+<H3>Remarks</H3>
+<p>Adding a method to an object allows you to customize the behavior of that object, enabling it to perform actions that you specify in the method.
+
+<p><b>AddMethod</b> is used to add an existing method to an object that does not already have a method with the same name associated with it. If the object (or any of the exemplars the object inherits from) already has a method with the same name as the one you want to add, <b>AddMethod</b> generates an error. For information on <i>replacing</i> a method that exists on the object or one of the exemplars in the object's inheritance chain, see the <A href="Method.htm">Method</A> topic.
+
+The first parameter, <EM>bstrName</EM>, must contain a string that will be the 
+name of the new method.&nbsp; The second parameter,&nbsp; <EM>pmethod</EM> , should refer to an actual 
+<STRONG>Method</STRONG>              
+               
+             
+              
+      object. </p>
+<P>The third parameter of this 
+method,&nbsp;<EM>varPsbits,</EM> employs a combination of flags to define the way the Virtual 
+Worlds system handles the new method.&nbsp; These flags are exposed by name as 
+read-only properties of the <STRONG>World</STRONG> object and are detailed in the 
+following table: </P>
+
+<table class="backlight">
+  <tr>
+    <td><b>Flag</b></td>
+    <td><b>Value</b></td>
+    <td><b>Description</b></td>
+  </tr>
+<tr class="line" ><td colspan=100></td></tr>
+  <tr>
+    <td><b>PSBIT_NONE</b></td>
+    <td><STRONG>0</STRONG></td>
+    <td>No flags are set on the method.&nbsp; This has 
+      the effect of making a method thats data will be accessed directly on 
+      the exemplar, saved in the world's checkpoint file, and sent to all connected clients.</td>
+  </tr>
+  <TR>
+    <TD><STRONG>PSBIT_COPYONGET</STRONG></TD>
+    <TD><STRONG>1</STRONG></TD>
+    <TD>  The method data will be accessed on&nbsp;the instance, rather 
+      than on the exemplar.</TD></TR>
+  <tr>
+    <td><b>PSBIT_NOTLOGGED</b>
+
+
+
+
+</td>
+    <td><b>2</b></td>
+    <td>Changes to the method will not be saved to the world's checkpoint file.</td>
+  </tr>
+  <tr>
+    <td><b>PSBIT_NOTREMOTED</b></td>
+    <td><b>4</b></td>
+    <td>Changes to the method will not be sent to any connected clients.</td>
+  </tr>
+  <TR>
+    <TD><STRONG>PSBIT_HIDDEN</STRONG></TD>
+    <TD><STRONG>256</STRONG></TD>
+    <TD>The method will not be displayed in the <STRONG>Object 
+      Explorer</STRONG>, but can still be accessed via script.</TD></TR>
+  <TR>
+    <TD><STRONG>PSBIT_SCRIPTDEFAULTPROPERTY</STRONG></TD>
+    <TD><STRONG>1</STRONG></TD>
+    <TD>A mnemonic equivalent of <STRONG>PSBIT_COPYONGET</STRONG>, which is 
+      the default value for properties added&nbsp;by 
+      <STRONG>Addmethod</STRONG>.</TD></TR>
+  <tr>
+    <td><STRONG>PSBIT_SCRIPTDEFAULTMETHOD</STRONG></td>
+    <td><STRONG>0</STRONG></td>
+    <td>[default] A mnemonic equivalent of 
+      <STRONG>PSBIT_NONE</STRONG>, which is the default value for methods added 
+      by <STRONG>AddMethod</STRONG>
+                .</td>
+  </tr>
+</table>
+<P>The fourth parameter of this method, <EM>varPermissions</EM>, uses <A href="../../Programmer's%20Guide/Security/security%20overview.htm#permissions">permission 
+flags</A> as detailed in the <A href="../../Programmer's%20Guide/Security/security%20overview.htm">Security Overview</A>  in the Programmer's Guide. The default value for this parameter 
+is <STRONG>PS_SCRIPTDEFAULTMETHOD</STRONG>       
+ .
+<P>The default permissions follow:
+<ul>
+</ul>
+
+<ul>
+  <li>All users have read and execute permissions. 
+  <li>The Exemplar has read, write, and execute permissions. 
+
+  <li>The Owner has read, write, and execute permissions.</li>
+</ul>
+<H3>Example</H3>
+<p>
+<p>After you have written the code for a method, adding it to a <b>Thing</b></A> object is a
+three-step process: create a module, create a method from the module, add the method to the object.
+ In the example code that follows, a method named "<em>List</em>" (first
+parameter) is added to <em>MyObject</em>.&nbsp; The 
+method will not be sent to any other clients and will be executable only by the 
+owner. </p>
+
+<pre>MyObject.<b>  AddMethod "List", NewMethod, world.PSBIT_NOTREMOTED, world.PS_EXECUTE </b></pre>
+
+</body>
+</html>

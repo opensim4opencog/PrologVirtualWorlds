@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>AddTargetParameter</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AddTargetParameter</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of MenuItem</td>
+	</tr>
+</table>
+<p>When&nbsp;this property is <b>True</b>, the target parameter is added as the first 
+parameter for&nbsp;the method that is executed from a menu item. The target
+parameter is the first parameter for the method attached to a menu item.
+<b>AddTargetParameter</b> is a 
+read/write <STRONG>Boolean</STRONG>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><EM>object</EM>.<STRONG>AddTargetParameter </STRONG>= <EM>BooleanValue</EM></TD></TR></TABLE></P>
+<P>To return the property:
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<b>AddTargetParameter</b></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<p>The <B>AddTargetParameter</B>  property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>MenuItem</TD>
+    <TD>Required</TD>
+    <TD>An&nbsp;object reference to a <STRONG>MenuItem</STRONG> object.</TD></TR>
+
+	<TR>
+		<td class="boldItal">BooleanValue</td>
+		<td><!--Type-->Boolean</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>  Determines whether a parameter is added to the 
+      method or      not.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->When 
+set to <STRONG>True</STRONG>, you 
+can use this property to add a reference to the shortcut menu of the current 
+<STRONG>Thing</STRONG> 
+object as the first parameter&nbsp;for the method invoked by the menu item. The 
+method must be written to handle that parameter.&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To set this property:</p>
+<pre class="example">
+User.Menu.Property(7).<b>AddTargetParameter</b> = True
+</pre> 
+<p>To return this property:</p>
+<pre class="example">
+myIsAddParam = User.Menu.Property(7).<b>AddTargetParameter</b></pre>
+</body>
+</html>

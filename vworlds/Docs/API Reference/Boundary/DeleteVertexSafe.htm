@@ -1,0 +1,125 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>DeleteVertexSafe</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>DeleteVertexSafe</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>
+Removes a <a href="Vertex.htm">Vertex</a> from a <a href="Boundary.htm">Boundary</a> in a <a href="../Exemplars/Thing/BoundaryList.htm"><b>BoundaryList</b></a>. <b>DeleteVertexSafe</b> is a member of the <b>Boundary</b> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>DeleteVertexSafe</b>(<i>nIndex</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>DeleteVertexSafe</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <B>Boundary</b>.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nIndex</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Long</b>. Corresponds to the index number of a <b>Vertex</b> on a <b>Boundary</b>.</td>
+</TR>
+	
+	
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Boolean</b> value.
+
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p> The <b>DeleteVertexSafe</b> method removes a <b>Vertex</b> only if the deletion results in the boundary maintaining a simple polygon. A <b>Boundary</b> must be a simple polygon to function properly. If the <b>Vertex</b> is removed, the <b>DeleteVertexSafe</b> method returns <b>True</b>. Otherwise, the method returns <b>False</b>, and the removal is not executed.
+
+<p>If you remove a vertex from the list of coordinates, the index numbers of the succeeding points are decremented. So, if the first of five points is removed (index number 0), the second point (index 1) shifts to the first (index 0), the third (index 2) shifts to the second (index 1), and so on.
+
+<p>If a <b>Vertex</b> is removed from a <b>Boundary</b> using the <b>DeleteVertexSafe</b> method, the x-y boundary coordinates of the remaining points stay the same. The boundary is not automatically resized to make the length of the sides equal. For more information on the boundary coordinate system, see the <a href="Boundary.htm">Boundary</a> topic.
+<!--Example section-->
+<H3>Examples</H3>
+
+
+<p>The first example creates a <b>Boundary</b> around an existing object and invokes the <b>DeleteVertexSafe</b> method to remove a specific <b>Vertex</b>. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a boundary without a specified size.
+<pre class="example">Set myOuterEdge = World.CreateBoundary</pre>
+
+<p class=comments>'Generate an eight-sided boundary that encloses the existing object.
+<pre class="example">myOuterEdge.AutoGenerate myFireHydrant, 8</pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge</pre>
+
+<p class=comments>'Remove the third vertex.
+<pre class="example">myFireHydrant.BoundaryList.Property(0).<b>DeleteVertexSafe(2)</b>
+End Sub</pre>
+
+<p>Example 2
+
+<p>This example prints the return value to the Command Window to verify whether or not a vertex was deleted. To use this example, substitute the name of an existing object for "myObject".
+<pre class="example"><br><br>
+Dim result
+
+result = myObject.BoundaryList.Property(2).<b>DeleteVertexSafe(3)</b>
+Trace result</pre>
+
+
+</body>
+</html>

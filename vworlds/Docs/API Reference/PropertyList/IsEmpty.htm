@@ -1,0 +1,108 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsEmpty</title>
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> IsEmpty</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of PropertyList</td>
+	</tr>
+</table>
+<P>
+<P>
+<P>
+
+<!--Summary of topic-->
+Returns <strong>True</strong> if the specified collection is empty, 
+<STRONG>False</STRONG> if at least one item exists in the 
+collection. <STRONG>IsEmpty</STRONG>         
+  is a read-only <STRONG>Boolean</STRONG>.      
+          
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>IsEmpty</STRONG></td><!--syntax statement -->
+	</tr>
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>IsEmpty</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>PropertyList PropertyMap</td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An expression that returns a 
+      <STRONG>PropertyList</STRONG> or <STRONG>PropertyMap</STRONG>   collection.</td><!--Description-->
+	</TR>
+
+</TABLE> 
+<H3>Remarks</H3>
+<P>You can use the <B>IsEmpty</B>&nbsp;property&nbsp;to test existing <A 
+href="PropertyList.htm">PropertyList</A>
+ or <A href="../PropertyMap/PropertyMap.htm">PropertyMap</A>       
+              
+      collections for their contents. </P>
+<H3><P>Examples</P></H3>
+<p>
+ 
+    These
+ 
+    examples test for an existing collection. If the collection exists, the code continues by adding new items to the collection. If the collection is empty, the code creates a new collection under a different name. The collection in the first example is a property list.
+
+<pre class="example"><!--Example text-->
+Dim Classics
+
+Classics = "Silas Marner"
+
+If myLibrary.<strong>IsEmpty</strong> Then
+&nbsp;&nbsp;&nbsp; Set myBookCollection = CreatePropertyList
+&nbsp;&nbsp;&nbsp;&nbsp;myBookCollection.Add "Classics"
+Else
+&nbsp;&nbsp;&nbsp; myLibrary.Add Classics
+End If
+</pre>
+<p>Example 2
+<p>The second example uses the <b>IsEmpty</b> property with a property map.
+<pre class="example"><!--Example text-->
+If myLibrary.<strong>IsEmpty</strong> Then
+&nbsp;&nbsp;&nbsp; Set myBookCollection = CreatePropertyMap
+&nbsp;&nbsp;&nbsp; myBookCollection.Property("Classics") = "Silas Marner"
+Else
+&nbsp;&nbsp;&nbsp; myLibrary.Property("Classics") = "Silas Marner"
+End If
+</pre>
+
+
+</body>
+</html>

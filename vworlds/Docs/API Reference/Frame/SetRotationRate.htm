@@ -1,0 +1,116 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SetRotationRate</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetRotationRate</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets the rotation rate of the frame relative to the reference frame. 
+<b>SetRotationRate</b> is a member of the <b>Frame</b> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetRotationRate</b>&nbsp;<i>pvwfRef, rvX, 
+		rvY, rvZ, rvTheta</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetRotationRate</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvwfRef</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>The reference frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">rvX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The x-component of the rotation axis vector.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">rvY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The y-component of the rotation axis vector.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">rvZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The z-component of the rotation axis vector.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">rvTheta</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The angular rotation rate. That is, the amount to 
+      rotate in radians per rendered frame.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The invoking frame is set rotating around a direction vector (x, y, z) defined in
+the reference frame, at a rate of <i>rvTheta</i> radians per minute.</P>
+
+<p>The rotation rate, <i>rvTheta</i>, 
+represents the fraction of a complete rotation that should be rendered in each 
+frame. Good values are typically between 0.01 and 0.5; these numbers represent 
+100 frames for a complete rotation and two frames for a complete rotation, 
+respectively. &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.SetRotationRate RefFrame, 2.0, 0.0, 0.0, .45</pre>
+&nbsp;
+
+
+</body>
+</html>

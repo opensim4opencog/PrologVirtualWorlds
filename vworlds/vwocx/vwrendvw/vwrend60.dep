@@ -1,0 +1,356 @@
+# Microsoft Developer Studio Generated Dependency File, included by vwrend60.mak
+
+.\Boundary.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\cmddel.h"\
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\vwadmin.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwclient.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwmenu.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwrnedit.h"\
+	"..\..\vwcommon\vwsgfxut.h"\
+	"..\..\vwcommon\vwuiview.h"\
+	"..\vwview\viewctl.h"\
+	".\geomsel.h"\
+	".\StdAfx.h"\
+	".\ToolDlg.h"\
+	".\vwrnvwct.h"\
+	
+
+..\..\vwcommon\cmddel.cpp : \
+	"..\..\vwcommon\cmddel.h"\
+	
+
+.\CmdHandl.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\cmddel.h"\
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\ocxproxy.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\syshelp.h"\
+	"..\..\vwcommon\vwadmin.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwclient.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwevents.h"\
+	"..\..\vwcommon\vwmenu.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwrnedit.h"\
+	"..\..\vwcommon\vwsgfxut.h"\
+	"..\..\vwcommon\vwuiview.h"\
+	"..\vwview\viewctl.h"\
+	".\geomsel.h"\
+	".\OptionDg.h"\
+	".\selctdlg.h"\
+	".\StdAfx.h"\
+	".\ToolDlg.h"\
+	".\vwrnvwct.h"\
+	
+
+.\edit.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\cathelp.h"\
+	"..\..\vwcommon\cmddel.h"\
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\menuitem_i.c"\
+	"..\..\vwcommon\ocxproxy.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\syshelp.h"\
+	"..\..\vwcommon\vwadmin.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwclient.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwevents.h"\
+	"..\..\vwcommon\vwmenu.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwrnedit.h"\
+	"..\..\vwcommon\vwsevent.h"\
+	"..\..\vwcommon\vwsgfxut.h"\
+	"..\..\vwcommon\vwuiview.h"\
+	"..\..\vwcommon\vwutils.h"\
+	"..\vwview\viewctl.h"\
+	".\geomsel.h"\
+	".\OptionDg.h"\
+	".\rlutil.h"\
+	".\selctdlg.h"\
+	".\StdAfx.h"\
+	".\ToolDlg.h"\
+	".\vwrnvwct.h"\
+	
+
+.\geomsel.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\cmddel.h"\
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwsutils.h"\
+	".\geomsel.h"\
+	".\StdAfx.h"\
+	
+
+.\OptionDg.cpp : \
+	"..\..\vwcommon\d2d.h"\
+	".\OptionDg.h"\
+	".\StdAfx.h"\
+	".\vwrendvw.h"\
+	
+
+.\rlutil.cpp : \
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\propbase.h"\
+	".\rlutil.h"\
+	".\StdAfx.h"\
+	
+
+.\SelctDlg.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\cmddel.h"\
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\uitlimpl.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwsutils.h"\
+	".\selctdlg.h"\
+	".\StdAfx.h"\
+	
+
+.\StdAfx.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwimpl.cpp"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	".\StdAfx.h"\
+	
+
+..\..\vwcommon\syshelp.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\ocxproxy.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\syshelp.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwevents.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	".\StdAfx.h"\
+	
+
+.\ToolDlg.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\cmddel.h"\
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\uitlimpl.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwsutils.h"\
+	".\StdAfx.h"\
+	".\ToolDlg.h"\
+	".\vwrendvw.h"\
+	
+
+..\vwview\viewctl.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\dirserv.h"\
+	"..\..\vwcommon\inetfile.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\ocxproxy.h"\
+	"..\..\vwcommon\ocxproxy_i.c"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\syshelp.h"\
+	"..\..\vwcommon\vwadmin.h"\
+	"..\..\vwcommon\vwanim.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwclient.h"\
+	"..\..\vwcommon\vwclient_i.c"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwhtml.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwobject_i.c"\
+	"..\..\vwcommon\vwodb.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwprop_i.c"\
+	"..\..\vwcommon\vwserver.h"\
+	"..\..\vwcommon\vwsysex.h"\
+	"..\..\vwsystem\vwsystem.h"\
+	"..\..\vwsystem\vwsystem_i.c"\
+	"..\vwview\stdafx.h"\
+	"..\vwview\viewctl.h"\
+	"..\vwview\ViewPpg.h"\
+	"..\vwview\vwview.h"\
+	
+
+..\vwview\viewppg.cpp : \
+	"..\vwview\stdafx.h"\
+	"..\vwview\ViewPpg.h"\
+	"..\vwview\vwview.h"\
+	
+
+..\..\vwcommon\vwmenu.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwmenu.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	
+
+.\VWRendVw.cpp : \
+	"..\..\vwcommon\d2d.h"\
+	".\StdAfx.h"\
+	".\vwrendvw.h"\
+	
+
+.\VWRendVw.rc : \
+	".\bpass.ico"\
+	".\bxpass.ico"\
+	".\CollTogd.bmp"\
+	".\CollTogu.bmp"\
+	".\geombar.bmp"\
+	".\gravoff.ico"\
+	".\gravon.ico"\
+	".\GravTogd.bmp"\
+	".\GravTogu.bmp"\
+	".\help.ico"\
+	".\helpd.bmp"\
+	".\helpu.bmp"\
+	".\Link.cur"\
+	".\move.ico"\
+	".\nav.ico"\
+	".\navigatd.bmp"\
+	".\navigate.cur"\
+	".\navigatu.bmp"\
+	".\redo.ico"\
+	".\redod.bmp"\
+	".\redogr.ico"\
+	".\redou.bmp"\
+	".\redox.bmp"\
+	".\rotate.ico"\
+	".\rotated.bmp"\
+	".\rotateu.bmp"\
+	".\scale.ico"\
+	".\scaled.bmp"\
+	".\scaleu.bmp"\
+	".\select.ico"\
+	".\selectd.bmp"\
+	".\selectu.bmp"\
+	".\slctdlgd.bmp"\
+	".\slctdlgu.bmp"\
+	".\transd.bmp"\
+	".\transu.bmp"\
+	".\undo.ico"\
+	".\undod.bmp"\
+	".\undogr.ico"\
+	".\undou.bmp"\
+	".\undox.bmp"\
+	".\version.h"\
+	".\vwrendvw.rc2"\
+	".\vwrnvwct.bmp"\
+	".\zoomind.bmp"\
+	".\zoominu.bmp"\
+	".\zoominx.bmp"\
+	".\zoomoutd.bmp"\
+	".\zoomoutu.bmp"\
+	".\zoomoutx.bmp"\
+	
+
+.\VWRnVwCt.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\cmddel.h"\
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\graphtls.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\ocxproxy.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\syshelp.h"\
+	"..\..\vwcommon\vwadmin.h"\
+	"..\..\vwcommon\vwanim.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwclient.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwevents.h"\
+	"..\..\vwcommon\vwmenu.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwrnedit.h"\
+	"..\..\vwcommon\vwsevent.h"\
+	"..\..\vwcommon\vwsgfxut.h"\
+	"..\..\vwcommon\vwuiview.h"\
+	"..\..\vwcommon\vwutils.h"\
+	"..\vwview\viewctl.h"\
+	".\geomsel.h"\
+	".\StdAfx.h"\
+	".\ToolDlg.h"\
+	".\vwrendvw.h"\
+	".\vwrnvwct.h"\
+	".\vwrnvwpp.h"\
+	
+
+.\VWRnVwPp.cpp : \
+	"..\..\vwcommon\d2d.h"\
+	".\StdAfx.h"\
+	".\vwrendvw.h"\
+	".\vwrnvwpp.h"\
+	
+
+..\..\vwcommon\vwsgfxut.cpp : \
+	"..\..\vwcommon\d2d.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\vwsgfxut.h"\
+	".\StdAfx.h"\
+	
+
+..\..\vwcommon\vwuiview.cpp : \
+	"..\..\vwcommon\authntic.h"\
+	"..\..\vwcommon\avprof.h"\
+	"..\..\vwcommon\cmddel.h"\
+	"..\..\vwcommon\menuitem.h"\
+	"..\..\vwcommon\ocxproxy.h"\
+	"..\..\vwcommon\propbase.h"\
+	"..\..\vwcommon\syshelp.h"\
+	"..\..\vwcommon\vwadmin.h"\
+	"..\..\vwcommon\vwbuffer.h"\
+	"..\..\vwcommon\vwclient.h"\
+	"..\..\vwcommon\vwcomm.h"\
+	"..\..\vwcommon\vwobject.h"\
+	"..\..\vwcommon\vwprop.h"\
+	"..\..\vwcommon\vwuiview.h"\
+	"..\vwview\viewctl.h"\
+	

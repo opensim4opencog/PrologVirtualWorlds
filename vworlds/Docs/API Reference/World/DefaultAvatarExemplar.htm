@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>DefaultAvatarExemplar</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>DefaultAvatarExemplar</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>Provides a basic template for custom default avatars. The 
+<b>DefaultAvatarExemplar</b> is the starting point for all 
+other avatars in the world. <b>DefaultAvatarExemplar</b> is a read/write 
+<a href="../Exemplars/Avatar/Avatar.htm">Avatar</a>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>DefaultAvatarExemplar</b>&nbsp;=&nbsp;<i>AvatarValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>DefaultAvatarExemplar</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">AvatarValue</td>
+		<td>Avatar</td>
+		<td>Required</td>
+		<td>The default exemplar for the avatar.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>All avatars in a world are based on the <b>DefaultAvatarExemplar</b> 
+for the world. When you log on to a world, the avatar you create for that 
+world is based on the <b>DefaultAvatarExemplar</b>. Virtual Worlds 
+provides a basic <b>DefaultAvatarExemplar</b> that the 
+<b>Owner</b> of a new world can use "as is" or use as a base for 
+a custom <b>DefaultAvatarExemplar</b>.</p>
+
+<p>The <b>Owner</b> of the world can create a custom <b>DefaultAvatarExemplar</b> 
+that derives its standard attributes from the <b>DefaultAvatarExemplar</b>, but 
+has special properties, methods, or characteristics that are unique to the custom 
+avatar. Those special characteristics will be inherited by every avatar that logs 
+on to the world.</p>
+
+<p>It is important to note that only world owners can create a new 
+<b>DefaultAvatarExemplar</b> that is derived from the original one. If you do 
+create a custom <b>DefaultAvatarExemplar</b>, the following restrictions apply:</p>
+<ul>
+	<li class="mvd-P">As the world owner you cannot set your avatar to the <b>DefaultAvatarExemplar</b>. Instead, add the all the properties or methods that you want 
+	for your custom avatar to your <b>DefaultAvatarExemplar</b>.</li><br>
+
+<blockquote><pre>DefaultAvatarExemplar.AddProperty "IsInterworldTraveller", False
+DefaultAvatarExemplar.AddProperty "IsInterworldPassportValid", False
+DefaultAvatarExemplar.AddProperty "InterworldPassport"
+</blockquote></pre>
+
+	<li class="mvd-P">The custom avatar cannot become a 
+	<a href="../Exemplars/Host/Host.htm">Host</a>.
+</ul>
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example creates a custom <b>DefaultAvatarExemplar</b>.</p>
+
+<blockquote><pre>
+Sub CreateCustomDefaultAvatar()
+Dim MyCustomDefaultAvatarExemplar
+Dim CustomDefaultAvatar
+
+'Create a new DefaultAvatarExemplar.
+Set MyCustomDefaultAvatarExemplar = World.CreateExemplar("NewAvatar", _
+	"Avatar")<br>
+
+'Add unique properties.
+MyCustomDefaultAvatarExemplar.AddProperty "IsInterworldTraveller", False
+MyCustomDefaultAvatarExemplar.AddProperty "IsInterworldPassportValid", False
+MyCustomDefaultAvatarExemplar.AddProperty "InterworldPassport"
+
+'Set the custom default avatar that you just created as the 'DefaultAvatarExemplar.
+World.DefaultAvatarExemplar = MyCustomDefaultAvatarExemplar
+
+'Verify that the new avatar is the default.
+Trace World.DefaultAvatarExemplar.Name
+End Sub
+</pre></blockquote>&nbsp;
+
+
+</body>
+</html>

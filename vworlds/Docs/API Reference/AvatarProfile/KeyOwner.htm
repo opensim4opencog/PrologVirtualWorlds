@@ -1,0 +1,119 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>KeyOwner</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>KeyOwner</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of AvatarProfile</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+  Returns the name of the avatar&nbsp;who owns the specified key within&nbsp;the&nbsp;<A href="AvatarProfile.htm">AvatarProfile</A> object. <STRONG>KeyOwner</STRONG> is a read-only <b>AvatarProfile</b> object.
+
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>KeyOwner</STRONG>(<EM>bstrKey</EM>)<STRONG> </STRONG></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>KeyOwner</STRONG> property syntax has 
+these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>AvatarProfile</TD>
+    <TD>Required</TD>
+    <TD>An expression that evaluates to an <STRONG>AvatarProfile</STRONG> 
+      object.</TD></TR>
+
+	<TR>
+		<td class="boldItal">bstrKey</td>
+		<td><!--Parameter name-->String</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description-->The 
+      name of a key in your 
+      Avatar's 
+           profile.</td>
+	</TR>
+
+</TABLE>
+<H3>Remarks</H3>
+<P>This property returns a reference to the owner of the 
+key as an object. The <b>KeyOwner</b> property is set as one of the parameters during the creation of a new key using the <A href="AddKey.htm">AddKey</A> 
+method.</P><!--Insert Remarks here-->
+
+<H3>Example</H3>
+<p>
+In this example, you use the <STRONG>Avatar</STRONG> 
+property together with the <STRONG>KeyOwner</STRONG>
+                 property to check&nbsp;whether the owner of the avatar owns all of the profile keys.&nbsp;If not, this example prints the names of the other key owners.</p>
+
+<pre class="example">
+Sub GetOtherOwnerList()
+Dim myKey
+Dim myKeyCount
+Dim myKeyOwner
+Dim myProfile
+Dim myProfileAvatarOwner
+Dim myKeyList
+
+Set myKeyList = User.Profile.Keys
+Set myProfile = User.Profile
+
+myKeyCount = myKeyList.Count - 1
+myProfileAvatarOwner = User.Profile.Avatar.Name
+
+For myKey = 0 To myKeyCount
+    myKeyOwner = _
+      myProfile.<b>KeyOwner(myKeyList.Property(myKey))</b>.Name
+</pre>    
+<p class="comments">&nbsp;&nbsp;&nbsp;&nbsp;'Check if the owner of the key is the same<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'as the owner of the avatar.
+<pre class="example">
+&nbsp;&nbsp;&nbsp;&nbsp;If myProfileAvatarOwner &lt;&gt; myKeyOwner Then
+</pre>        
+<p class="comments">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'If the key owner is not the avatar owner,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'send the key and key owner values to the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Command Window.
+<pre class="example">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trace myKeyList.Property(myKey)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Print myProfileAvatarOwner
+&nbsp;&nbsp;&nbsp;&nbsp;End If
+Next
+
+End Sub
+</pre>
+  
+
+</body>
+</html>

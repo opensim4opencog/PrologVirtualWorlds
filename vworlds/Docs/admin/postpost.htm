@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Adding Custom Content to a Posted World</title>
+<link rel="STYLESHEET" href="../vwgdoc.css" type="text/css" title="VWG">
+</head>
+
+<body>
+
+<h1>Adding Custom Content to a Posted World</h1>
+
+<p>When you make content changes to a world you have already uploaded, or posted to a Web
+server, there are things you must do to ensure that clients see those changes. Virtual
+Worlds relies on finding content in specific locations.
+This content can be remote content on a Web server or in a shared directory on another
+computer, or it can be local content on each client. Content on the client computers
+must be located in the Local Content directory (or in a subdirectory below it) of
+the Virtual Worlds installation directory. The content author determines where
+Virtual Worlds finds content by using an URL (Universal Resource Locator) to
+locate the content or by setting the <a href="../API%20Reference/World/RootURL.htm">RootURL</a> property of <b>World</b>. </p>
+
+<p>Learn more about:
+
+<ul>
+  <li>Posting Custom Avatar Graphics </li>
+  <li>Making Custom Avatar Graphics Available to Users </li>
+  <li>Posting Other Custom Content </li>
+</ul>
+
+<h2>Posting Custom Avatar Graphics</h2>
+
+<p>After you have created a custom avatar that you would like to make available to users
+in your world, you need to post the avatar graphics to the Web server that is hosting your
+world's content. The topic <a href="webpost.htm">Moving a World</a> provides information
+about moving content from one computer to another.</p>
+
+<h2>Making Custom Avatar Graphics Available to Users</h2>
+
+<p>Once custom avatar graphics have been posted to the Web server, users must download
+these files to their computers in order to use of them. This can be done in either of the
+two ways listed below.
+
+<ul>
+  <li>Users can select the <b>Auto download new avatar graphics</b> option on the <a
+    href="../uiref/cliels/options.htm"><b>Options Dialog Box</b></a>. </li>
+  <li>Users can manually download the files from the server to their client computers. They
+    need to be careful to copy these files to the appropriate directory. (The default
+    directory for avatar graphics is <tt>C:\Program Files\Microsoft Virtual Worlds\Local
+    Content\Avatar Graphics</tt>.) </li>
+</ul>
+
+<h2>Posting Other Custom Content</h2>
+
+<p>When you create custom content other than avatar graphics, view it locally before you
+post it to the Web server that hosts your world's content. You can do this by entering the
+path to the content in the <b>File path</b> text box of the <a
+href="../uiref/proppage/geometry.htm"><b>Geometry Property Page</b></a> (objects with
+simple graphics) or the <a href="../uiref/proppage/texture.htm"><b>Texture Property Page</b></a>
+(objects with more complex graphics). When you are satisfied with your work, you can post
+it to your Web server. Remember that you need to post this file to the same directory on
+the Web server.  Another point to consider is that indirectly referenced content, such as a
+texture map on a 3D model, also needs to be posted.</p>
+
+<p>If you are creating a lot of content, make one or more new directories for this
+content. These directories are displayed in the <b>Models</b> selection box in both the <b>Geometry
+Property Page</b> and the <b>Texture Property Page</b>. To view this content locally,
+select the appropriate model, and then select the graphics file you want to view from the
+file list that appears. When you have completed work on this content, post the directory
+(or directories) to your Web server. As above, use the same directory structure on the Web
+server as on your local computer.</p>
+
+<p>Content can be stored on any Web server. To associate an object in your world with
+content on a Web server, enter the URL for the content in the <b>File path</b> input box
+of either the <b>Geometry Property Page</b> or the <b>Texture Property Page</b> for the
+object. Here is an example: <tt>http://mywebserver/local
+content/sdk/library/models/animal/ant.x</tt>. </p>
+
+<h4>See Also</h4>
+
+<a href="webpost.htm">Moving a World</a><br>
+<a href="savewrld.htm">How Worlds Are Saved</a> 
+
+
+</body>
+</html>

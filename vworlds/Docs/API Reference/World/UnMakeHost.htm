@@ -1,0 +1,86 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>UnMakeHost</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>UnMakeHost</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Changes an avatar's exemplar from <a href="../Exemplars/Host/Host.htm">Host</a> to <a href="../Exemplars/Avatar/Avatar.htm">Avatar</a>. 
+<b>UnMakeHost</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>UnMakeHost</b>&nbsp;<i>pTarget</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>UnMakeHost</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pTarget</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The <b>Avatar</b> whose exemplar will be changed from a <b>Host</b> to an <b>Avatar</b>.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>A host is an avatar that can log off other avatars.&nbsp;
+<P>Only a wizard can call this method. Once it is called, <i>Target</i> 
+ceases to be a <b>Host</b>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>World.UnMakeHost MCEmCee</pre>
+&nbsp;
+
+
+</body>
+</html>

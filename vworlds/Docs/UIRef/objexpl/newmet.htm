@@ -1,0 +1,69 @@
+<html>
+
+<head>
+<title>New Method Dialog Box</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 3.0">
+<link REL="STYLESHEET" HREF="../../vwgdoc.css" TYPE="text/css" TITLE="VWG">
+</head>
+
+<body>
+
+<h1>New Method Dialog Box (Object Explorer)</h1>
+
+<p>Use this dialog box to add a new method to the current object in the Object Explorer. </p>
+
+<p><img src="newmet.jpg" width="260" height="171" alt="newmet.bmp (133434 bytes)"></p>
+
+<p>Add a new method to an object if you would like it to exhibit special behavior that
+Virtual Worlds does not provide. For example, you can program an object to be a <em>bot</em>,
+an object that behaves like a robot avatar under the computer's control, and can give help
+to users or participate in limited conversation. </p>
+
+<h2>Options</h2>
+
+<h3>Object</h3>
+
+<p>This text displays the object to which the new method will be added, which is always
+the object currently selected in the Object Explorer.</p>
+
+<h3>Method Name</h3>
+
+<p>Enter the name of your new method here. Try to use a name suggestive of what the method
+actually does. For example, if you are adding a method that will make your avatar float
+into the air, name your method something like<em> Float</em> or <em>Fly</em>, not <em>JoesMethod</em>
+or <em>Method22</em>.</p>
+
+<h3>Module</h3>
+
+<p>Select the module that contains the code for your method from this drop-down menu. If
+you have added a module to the world, it will be listed in this menu; otherwise this menu
+will have only a single entry, <strong>Inline Module</strong>.</p>
+
+<h3>Subroutine</h3>
+
+<p>If you have added a module to the world, enter the name of the subroutine (or function)
+in that module. If you have not added a module to the world, this option is grayed out.</p>
+
+<h3>Execute on</h3>
+
+<p>Tell Virtual Worlds whether your method should be run on the client, on the server, or
+both, by selecting a value from this drop-down menu. 
+
+<ul>
+  <li>If you select <strong>Client</strong>, and if the method is invoked from a client, it
+    runs only on that client, but if the method is invoked from the server, it runs remotely
+    on all bystander clients. </li>
+  <li>If you select <strong>Server</strong>, and if the method is invoked from a client, it
+    runs remotely on the server, but if the method is invoked from the server, it runs only on
+    the same server. </li>
+  <li>If you select <strong>Client and Server</strong>, and if the method is invoked from a
+    client, it is invoked both on that client and on the server, but if the method is invoked
+    from the server, it runs remotely both on all bystander clients and also on the server.</li>
+</ul>
+
+<h4>See Also: </h4>
+<a href="../../Programmer's%20Guide/Client%20Server/client_server_overview.htm">Virtual Worlds Client Server Overview</a>
+<a href="inlinmth.htm"><strong>Inline Method Editor</strong></a></p>
+</body>
+</html>

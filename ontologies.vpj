@@ -1,0 +1,22 @@
+[GLOBAL]
+workingdir=.
+version=6.0
+packname=(None)
+MACRO=\n
+FILTERNAME=java\nOther Files\n
+FILTERPATTERN=*.java\n*.*\n
+FILTERAPPCOMMAND=\n\n
+FILTERASSOCIATEFILETYPES=0 0 
+[CONFIGURATIONS]
+activeconfig=,Release
+config=,Release
+[COMPILER.Release]
+compile=copts: concur|capture|menu: Compile:&Compilecmd: otheropts: 
+make=copts: concur|capture|menu: Build:&Buildcmd: otheropts: 
+rebuild=copts: concur|capture|menu: Rebuild:&Rebuildcmd: otheropts: 
+debug=copts: |menu: Debug:&Debugcmd: otheropts: 
+execute=copts: |menu: Execute:E&xecutecmd: "ontocyc.exe"otheropts: 
+includedirs=
+reffile=
+[FILES]
+[ASSOCIATION]

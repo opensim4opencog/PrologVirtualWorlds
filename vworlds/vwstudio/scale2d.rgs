@@ -1,0 +1,24 @@
+HKCR
+{
+	VWSTUDIO.VWScale2DTool.1 = s 'VWScale2DTool Class'
+	{
+		CLSID = s '{76BD302B-515C-11d1-B33A-00C04FB6A5C8}'
+	}
+	VWSTUDIO.VWScale2DTool = s 'VWScale2DTool Class'
+	{
+		CurVer = s 'VWSTUDIO.VWScale2DTool.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {76BD302B-515C-11d1-B33A-00C04FB6A5C8} = s 'VWScale2DTool Class'
+		{
+			ProgID = s 'VWSTUDIO.VWScale2DTool.1'
+			VersionIndependentProgID = s 'VWSTUDIO.VWScale2DTool'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Virtual Worlds Object Model Overview</title></title>
+<Link rel="Stylesheet" href="../../API%20Reference/APIRef.css">
+</head>
+
+<body>
+<table class="head" bgcolor=#e8edf4 border=1>
+	<tr>
+		<td><h2>Virtual Worlds Object Model Overview</h2></td>
+	</tr>
+</table>
+<H4>Core Objects</H4>
+
+<p>The objects in Virtual Worlds provide access to 
+a&nbsp;core set of useful system features.&nbsp; Some of them, such as Thing and 
+World, provide much of the basic functionality of the Virtual Worlds platform 
+while others, such as PropertyList, PropertyMap, and Vector, simply provide 
+complex data types that are used throughout the API.&nbsp; Every Virtual Worlds 
+object supports two methods ( <A href="../../API%20Reference/Base%20Class/IsOfType.htm">IsOfType</A>
+and <A href="../../API%20Reference/Base%20Class/ToAscii.htm">ToASCII</A>) and two properties (<A 
+href="../../API%20Reference/Base%20Class/Type.htm">Type</A> and <A 
+href="../../API%20Reference/Base%20Class/World.htm">World</A>    ) that are inherited
+from a common base class.&nbsp; Also, the Thing exemplar (and
+therefore all of the provided exemplars) inherits properties and methods
+from the Thing object.</p>
+<P>Here is a list of the core objects and their purposes.</P>
+
+<table border="2">
+    <tr>
+        <td bgcolor="#c0c0c0"><em><b> Core Object</b></em></td>
+        <td bgcolor="#c0c0c0"><em><b>Description </b></em></td>
+    </tr>
+    <tr>
+        <td><b>AvatarProfile</b></td>
+        <td> Data type for storing certain avatar traits</td>
+    </tr>
+    <tr>
+        <td><b>Boundary&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+        <td> Data type that enables collision-detection
+        between objects</td>
+    </tr>
+    <tr>
+        <td><b>Frame</b></td>
+        <td> Data type for low-level graphical objects</td>
+    </tr>
+    <tr>
+        <td><b>MenuItem</b></td>
+        <td>Data type for Virtual Worlds shortcut menu items</td>
+    </tr>
+    <tr>
+        <td><b>Method</b></td>
+        <td> Data type for creating script and
+        inline methods</td>
+    </tr>
+    <tr>
+        <td><b>Module</b></td>
+        <td>Object that provides abstracted access to script code in
+        a text file</td>
+    </tr>
+    <tr>
+        <td><b>PropertyList</b></td>
+        <td> Data type for array-like collections</td>
+    </tr>
+    <tr>
+        <td><b>PropertyMap</b></td>
+        <td> Data type for dictionary-like collections of
+        key-value pairs </td>
+    </tr>
+    <tr>
+        <td><b>Sound</b></td>
+        <td>Object that&nbsp;provides for rendering of sound in a virtual world</td>
+    </tr>
+    <tr>
+        <td><b>   Thing </b></td>
+        <td>   Object&nbsp;that is the basis for the <b>Thing</b>
+        exemplar</td>
+    </tr>
+    <tr>
+        <td><b>Vector</b></td>
+        <td>Data type for representing 3 float values, often used for 3D
+        points</td>
+    </tr>
+    <tr>
+        <td><b>World</b></td>
+        <td>Object that provides core world functionality</td>
+    </tr>
+</table>
+<BLOCKQUOTE></BLOCKQUOTE>
+<H4>Exemplars</H4>
+
+<p><i>Exemplars</i> are template 
+objects that are used to create the objects that can be seen in a virtual world. 
+An exemplar is like an blueprint, a set of plans that can be used to create real 
+things (often buildings) that each match the blueprint exactly.&nbsp; While each 
+of the things made from the plans are initially identical, they can then be 
+customized&nbsp;without&nbsp;directly effecting the original blueprint (e.g. 
+painting a building a different color or adding on a wing).&nbsp; In 
+object-oriented programming, the individual things are 
+called&nbsp;<EM>instances</EM> and are said to <EM>inherit</EM>        
+                
+              
+ their properties and methods from their exemplar.</p>
+
+<p>You can also use an existing exemplar as the
+basis for a new exemplar.  When a new exemplar is
+created, it inherits all of the characteristics (properties and methods) of its parent
+exemplar, but the programmer can modify aspects of the new
+exemplar to expand upon those of its parent. For example, the <A href="../../API%20Reference/Exemplars/Artifact/Artifact.htm"><b>Artifact</b></A>
+exemplar is used to create the <A href="../../API%20Reference/Exemplars/WebPage/WebPage.htm"><b>WebPage</b></A> exemplar.
+The <A href="../../API%20Reference/Exemplars/WebPage/Show.htm"><b>Show</b></A> method is added to <b>WebPage</b> so that it can display a web page
+in a virtual world. New properties are added to enable
+fine-tuning the display of a web page. Besides the new method and
+properties, however, <b>WebPage</b> still retains all of the
+properties and methods of <b>Artifact</b>.  To learn more about creating your own exemplar, see
+<A href="Creating%20Custom%20Exemplars.htm">Creating Custom Exemplars</A>.</p>
+
+<p>All of the exemplars provided in Virtual Worlds are created from the <A href="../../API%20Reference/Exemplars/Thing/Thing.htm"><b>Thing</b></A> exemplar,
+which inherits from the <A href="../../API%20Reference/Thing/Thing.htm"><b>Thing</b> core object</A>.
+In this help documentation, unless <b>Thing</b> is explicitly 
+referred to as the core data type, the <b>Thing</b> exemplar is
+intended.</p>
+
+<p>The following exemplars are supported in this release of
+Virtual Worlds:</p>
+
+<p><IMG height=360 src="../images/exemplar.gif" width=518></p>
+
+<p>All the exemplars are listed in the <A href="../../API%20Reference/API%20Overview.htm">Virtual Worlds API Reference</A>. </p>
+<H4>Exemplar Instances</H4>
+
+<p><!-- 10/23/98 --></p>
+
+<p>While <EM>Exemplar</EM> is the
+Virtual Worlds term for an object that is used to create a number
+of identical objects, each object created from an exemplar is
+called an <em>instance</em> of that exemplar. Virtual Worlds
+provides a set of core exemplars you can use to populate your
+world with your own specialized objects, by creating instances 
+and then customizing them.</p>
+
+<p>When an instance is created from a particular exemplar, most
+of its properties and all of its methods are inherited from its
+exemplar. Some properties, such as its <b>Name</b>
+property, are modified during instance creation, so they become
+instance properties. If you change the value of an inherited
+property, that property becomes an instance property and is said
+to <em>override</em> the exemplar 
+property. 
+<H4>Inheritance </H4>
+
+<p><!-- 10/23/98 --></p>
+
+<p>In Virtual Worlds, the <b>Thing</b> exemplar is the
+parent exemplar for all of the other core exemplars, such as <b>Artifact</b>.  This means that, in addition
+to their own specialized properties and methods, the other
+exemplars inherit all of the properties and methods on <b>Thing</b>.
+
+<p>For example, the <b>Thing</b> 
+methods &lt; <b>Approach</b>, <b>Say</b>, and 
+<b>Take</b> are inherited by <b>Artifact</b>
+and the other child exemplars. The same is true for such <b>Thing</b>
+properties such as <b>GeometryName</b> and <b>Position</b>
+ - they, too are inherited by all of the child exemplars.</p>
+
+<p>As soon as you create an instance from any Virtual Worlds
+exemplar, the instance immediately has all of the same methods
+and properties as the exemplar from which it was created. The
+advantage is that you do not need to create these methods
+and properties from scratch every time you create an object.</p>
+
+<p>Even though an instance inherits all of its exemplar's
+properties and methods, each property and method is
+shared among the exemplar and all instances created from that exemplar. If you
+change the value of a property on the exemplar, the change is reflected
+on all instances of that exemplar, as well. The situation changes,
+however, when you alter the value of an inherited property on one instance.
+When you do this, a new property of the same name is automatically created and added to
+the instance. (The instance property is said to <em>override</em>
+the exemplar property.) Even though the instance property has a new value, the value
+of the exemplar property remains unchanged. No change occurs to this property
+in other instances, either. For this reason, it is
+possible to have many instances in a world, each with its own copy
+of an inherited property, but with each property having its own
+unique value. </p>
+
+<p>The situation is identical for inherited methods. All
+instances of a particular exemplar share a single copy of an
+inherited method. If you want an instance to have its own version
+of an inherited method, you need to provide a custom version of
+that method that overrides the inherited method.</p>
+<H5>Overridden Properties</H5>
+<P>Any time you change the value of an instance property that was inherited from 
+its exemplar, you are <EM>overriding </EM>the exemplar property. Before you 
+change the property, its value is really retrieved from the exemplar, even 
+though it appears to be a property of the instance. As soon as the property's 
+value changes, however, a new property is created on the instance and is 
+initialized to the new value. At that time there are really two properties with 
+the same name: the overridden exemplar property (which is no longer displayed in 
+the <STRONG>Object Explorer</STRONG>), and the instance property that overrides 
+it (which is displayed in the <STRONG>Object Explorer</STRONG>).&nbsp; While a 
+property on an instance is overridden, all operations involving that property 
+will involve only the instance copy of the property, so if you set the value of 
+the property, it is not propagated back to the exemplar.&nbsp; Similarly, 
+changes to the original exemplar property will not change the value of the 
+instance copy of the property. </P>
+<H5>Overridden Methods</H5>
+<P>There are two situations in which you might choose to override built-in 
+exemplar methods with your own instance versions:</P>
+<UL>
+  <LI>when you want to completely replace the exemplar version with your own 
+  instance version 
+  <LI>when you want to extend the exemplar version while still using it </LI></UL>
+<P>Here is an example. Suppose you have created an instance of the <A 
+href="../../API%20Reference/Exemplars/Artifact/Artifact.htm"><B>Artifact</B></A> 
+exemplar, and that <EM>MyObj</EM> is a reference to this instance. You are very 
+happy with your instance, but you wish it had a different <A 
+href="../../API%20Reference/Exemplars/Thing/Shout.htm"><B>Shout</B></A> method. 
+(<B>Shout</B> is a method your instance inherited from <B>Artifact</B>, which 
+inherited it from <A 
+href="../../API%20Reference/Exemplars/Thing/Thing.htm"><B>Thing</B></A>.) You 
+decide to write an overriding version of <B>Shout</B>, which you add to your 
+instance. Executing the command, <TT>MyObj.Shout "Hey!"</TT>, causes 
+<EM>MyObj</EM> to invoke its overriding <B>Shout</B> method.</P>
+<P>Now, suppose you create another <B>Artifact</B> instance, and that 
+<EM>MyOtherObj</EM> is a reference to that instance. If you execute the command, 
+<TT>MyOtherObj.Shout "Wow"</TT>, <EM>MyOtherObj</EM> invokes 
+the&nbsp;<EM>exemplar </EM>version of <B>Shout</B>, because the overriding 
+version of <B>Shout</B> is unique to <EM>MyObj</EM>.</P>
+<P>The point of this example is that both versions of <B>Shout</B>, the parent 
+version on the exemplar and the overriding version on <EM>MyObj</EM>, exist in 
+the world. Virtual Worlds knows which method version to call based on which 
+object is calling it. An overriding method on an object always gets called in 
+preference to the method that was overridden.</P>
+<P>When overriding an exemplar method, you create a new method with the same 
+name, number and types of arguments as the exemplar method that is overridden. 
+For this reason you need to investigate the method you intend to override before 
+you begin.</P>
+<P>To extend the exemplar version of a method, you need to include a call to the 
+<A 
+href="../../API%20Reference/Thing/InvokeSuperMethod.htm"><STRONG>InvokeSuperMethod</STRONG></A> 
+method of <STRONG>Thing</STRONG> (core object type) in your overriding method. 
+<STRONG>InvokeSuperMethod</STRONG> calls the exemplar method of the same name as 
+the method in which it is embedded.&nbsp; This allows you to write a method that 
+does some custom processing but also relinquishes control to the exemplar method 
+at some point to make sure that the default system function is still 
+performed.</P>
+<P>Overriding methods can be a little dangerous if you are not sure which 
+methods are important to the behavior of Virtual Worlds. You may prevent 
+important code from running, thereby causing unintended problems. The standard 
+Virtual Worlds exemplars are designed to avoid such problems. When you override 
+methods in other exemplars (for example, ones that you or someone else has 
+written) you need to understand what those methods do and determine whether it 
+is acceptable to override them.&nbsp; In general, calling 
+<STRONG>InvokeSuperMethod</STRONG> will allow you to customize methods while 
+retaining their original functionality.</P>
+
+</body>
+</html>

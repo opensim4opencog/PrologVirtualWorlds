@@ -1,0 +1,24 @@
+HKCR
+{
+	VWSTUDIO.DeleteEdgeCycVertex.1 = s 'DeleteEdgeCycVert Class'
+	{
+		CLSID = s '{1752862D-F67C-11D0-AFC9-00C04FB68E58}'
+	}
+	VWSTUDIO.DeleteEdgeCycVertex = s 'DeleteEdgeCycVert Class'
+	{
+		CurVer = s 'VWSTUDIO.DeleteEdgeCycVertex.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {1752862D-F67C-11D0-AFC9-00C04FB68E58} = s 'DeleteEdgeCycVert Class'
+		{
+			ProgID = s 'VWSTUDIO.DeleteEdgeCycVertex.1'
+			VersionIndependentProgID = s 'VWSTUDIO.DeleteEdgeCycVertex'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>MethodName</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>MethodName</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Method Object</td>
+	</tr>
+</table>
+<p>Sets or returns the method name within the specified method's module.&nbsp;<b>MethodName</b> is a 
+read/write <b>String</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>MethodName</STRONG> = 
+      <EM>stringValue</EM></td>
+	</tr>
+</table></P>
+<P>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><I>object</I>.<STRONG>MethodName</STRONG></TD></TR></TABLE></P>
+<P>The&nbsp;<STRONG>MethodName</STRONG>  property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Method</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses 
+      a&nbsp;<STRONG>Method</STRONG>        object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">stringValue</td>
+		<td><!--Type-->String</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An expression that evaluates to the name of the 
+      method that you want to        set.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section--></P>
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->You 
+must set the&nbsp;method name before you attach the method to an object.&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>
+To get the method name:
+</p><pre class="example">
+myDisplayMethodName = myMethod.<b>MethodName</b>
+Trace myDisplayMethodName
+</pre>
+<p>To set the method name: 
+</p><pre class="example">
+myMethod.<b>MethodName</b> = "Display"
+Trace myMethod.<b>MethodName</b>
+</pre> 
+
+</body>
+</html>

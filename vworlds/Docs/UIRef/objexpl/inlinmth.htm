@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Inline Method Editor</title>
+<link rel="STYLESHEET" href="../../vwgdoc.css" type="text/css" title="VWG">
+</head>
+
+<body>
+
+<h1>Inline Method Editor</h1>
+
+<p>In the <b>Inline Method</b> <strong>Editor</strong> dialog box, you can write or edit
+the code for an inline method whose code is confined to a single sub or function.</p>
+
+<p><img src="inlinmth.gif" width="513" height="400"></p>
+
+<h2>Options</h2>
+
+<h3>Object</h3>
+
+<p>This text displays the name of the object whose method you are adding or editing.</p>
+
+<h3>Inline Method</h3>
+
+<p>You can select one of the inline methods available in the world here. This menu lists
+all of the inline methods currently in the world. </p>
+
+<h3>Edit Name</h3>
+
+<p>Click this button to enter a new name for the method you are adding or editing.</p>
+
+<h3>New Method</h3>
+
+<p>Click this button to create a new inline method on the object being edited. (The name
+of this object appears under the <strong>Object</strong> heading of this window.) The new
+method is visible in the <strong>Methods</strong> pane of the <a href="intrface.htm"><strong>Object
+Explorer</strong></a>.</p>
+
+<h3>Load Script</h3>
+
+<p>Click this button to load a script file from your hard disk. This makes it easy to edit
+a script in your favorite text editor, then load the script into Virtual Worlds.</p>
+
+<h3>Save to Script</h3>
+
+<p>Click this button to save the script displayed in the main pane of this dialog to a
+text file. After the script is saved, you can print the script, export it to another
+virtual world, or edit it in another application and load it back into Virtual Worlds with
+the <strong>Load Script</strong> button.</p>
+
+<h3>Delete</h3>
+
+<p>Click this button to completely delete the method you are editing from the virtual
+world, and optionally delete the menu items associated with it. After clicking this
+button, the method name is no longer displayed in the <strong>Methods</strong> pane of the
+<strong>Object Explorer</strong>. </p>
+
+<p><strong>Caution! </strong>After you delete a method from your virtual world, any
+methods or properties that call it will fail with an error.</p>
+
+<h3>Add Menu Item</h3>
+
+<p>Click this button to create a new menu item that calls the method you are editing. (The
+<a href="newmenu.htm"><strong>New Menu Item</strong> dialog box</a> is displayed.)</p>
+
+<h3>Execute on</h3>
+
+<p>A menu appears when you click here; tell Virtual Worlds whether your method should be
+run on the client, on the server, or both by selecting a value from this menu. 
+
+<ul>
+  <li>If you select <strong>Client</strong>, then if the method is invoked from a client, it
+    will be run only on that client, but if the method is invoked from the server, it will be
+    run remotely on all bystander clients. </li>
+  <li>If you select <strong>Server</strong>, then if the method is invoked from a client, it
+    will be run remotely on the server, but if the method is invoked from the server, it will
+    be run only on the same server. </li>
+  <li>If you select <strong>Client and Server</strong>, then if the method is invoked from a
+    client, it will be invoked both on that client and on the server, but if the method is
+    invoked from the server, it will be run remotely both on all bystander clients and also on
+    the server. </li>
+</ul>
+
+<h4>See Also:</h4>
+
+<p><a href="newmet.htm"><strong>New Method</strong> dialog box</a></p>
+</body>
+</html>

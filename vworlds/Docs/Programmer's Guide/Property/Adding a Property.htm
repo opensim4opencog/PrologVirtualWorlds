@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Adding a Property</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>Adding a Property</h1>
+
+<p><!-- 10/23/98 --></p>
+
+<p>In addition to changing the names and values of existing
+properties in an object, you can also add a new property to an
+object by using editors built into the
+<a href="../../uiref/objexpl/intrface.htm"><b>Object Explorer</b></a>,
+or using script in the <a href="../../uiref/cmdwin/cwinintf.htm"><b>Command Window</b></a>.
+If you are more comfortable using Virtual Worlds' user interface than with writing script,
+use the <b>Object Explorer</b> to add a property.  If you are comfortable
+writing script, however, you can use the <b>Command Window</b> to add a property.
+
+<h2>To add a property to an object, using the Object Explorer:</h2>
+<ol type="1">
+	<li>Right-click anywhere in the <b>Properties</b> pane of the
+	<b>Object Explorer</b></a>.
+	<li>From the menu that appears, click <b>New...</b>.
+	<li>In the <b>New Property</b> editor, do the following:
+	<ul type = "a"><li>Enter a name for the property in the <b>Property Name</b> input box.
+	    <li>Select a type for the property in the <b>Property Type</b> selection box.
+		If you select <b>String</b>, <b>Boolean</b>, or one of the four listed numeric types, the property
+		is initialized with a default value, which you can change in the next step.
+		If you select a type other than these, skip the following step.  
+		<li>Enter a new value, if desired, for the property in the <b>Initial Value</b> input box.  
+	</ul>
+	<li>[Optional] The default values of the <b>Property Flags</b> should be satisfactory for most
+	properties (<b>Copy On Get</b> - checked, <b>Not Remoted</b> - unchecked, <b>Not Logged</b> -
+	unchecked). If you uncheck <b>Copy On Get</b>, and make a copy of the object that contains this
+	property, both objects share the same property.  Any change in the property on one object affects
+	the other object's property, as well.  Checking <b>Not Remoted</b> means
+	that changes to the property are not propogated to other clients.  Checking <b>Not Logged</b> means
+	that the property is not saved to the Virtual Worlds database.  
+	<li>Click <b>OK</b>.
+</ol>
+<p>If the property you added is not a <b>String</b>, <b>Boolean</b>, <b>Double</b>,
+<b>Float</b>, <b>Long</b>, or <b>Integer</b>, it is initialized with a default value for that type.
+After you click <b>OK</b>, you can edit the object by clicking the <b>Expand Dialog</b> button that appears
+at the right end of the line containing the property.  Depending on the type of property you chose,
+one of the following editors opens.  For more information on a specific editor, choose one of the
+following links: </p>
+<ul>
+<li><a href="../../uiref/objexpl/vected.htm">Vector Editor</a>
+<li><a href="../../uiref/objexpl/menued.htm">Menu Editor</a>
+<li><a href="../../uiref/objexpl/proplist.htm">Property List Editor</a>
+<li><a href="../../uiref/objexpl/propmap.htm">Property Map Editor</a>
+<li><a href="../../uiref/objexpl/thinpick.htm">Thing Selector</a>
+</ul>
+<h2>To add a property to an object, using the Command Window:</h2>
+
+<ul>
+<li>To add a property to a <b>Thing</b> object, use its <a href="../../API%20Reference/Thing/AddProperty.htm">AddProperty</a> method:
+
+<p><tt>NewObj.AddProperty &quot;Color&quot;</tt></p></li>
+</ul>
+<p>You can, optionally, specify an initial value for the property
+and specify various security options when creating the property.
+Note that it is an error to add a property that is already
+present in an object <i>or any of its exemplars</i>. </p>
+
+<p>Because you sometimes don't know whether a property is already
+present or not, you may have to check for a property's existence,
+and then create it if it does not already exist.</p>
+
+<blockquote>
+    <pre>If NewObj.IsValidProperty (&quot;Color&quot;) = False Then
+   NewObj.AddProperty &quot;Color&quot;, &quot;Yellow&quot;
+Else
+   World.Trace &quot;Property already exists!&quot;
+End If</pre>
+</blockquote>
+
+<p>Here, the <b>IsValidProperty</b> method is used to determine whether the
+<i>Color</i> property exists on the object or on an exemplar in its inheritance chain.</p>
+
+</body>
+</html>

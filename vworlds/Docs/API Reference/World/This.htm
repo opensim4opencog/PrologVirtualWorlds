@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>This</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>This</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table><!--Topic Definition-->
+<p>A <b>Thing</b> that holds a reference to the object associated with the
+method that is currently executing. <b>This</b> is a read-only <b>Thing</b>. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>This</b></td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>This</b> property syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">ThingValue</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object associated with the method that is currently running.</td>
+	</TR>
+
+</TABLE><!--Remarks section-->
+<H3>Remarks</H3>
+<P>When a method on an object is executing, the 
+<STRONG>This</STRONG> property of the <STRONG>World</STRONG>&nbsp;object 
+contains a reference to that object.&nbsp; <STRONG>This</STRONG> is useful both 
+as a shortcut notation and when writing&nbsp;script code that might be executed 
+as a method on a number of different objects.&nbsp; <STRONG>This</STRONG> has a 
+meaningful value only if it is accessed from within the body of
+an executing method. </P>
+
+<p>To determine the object that is calling the method (as 
+opposed to the object on which the method is executing), see the <A href="Caller.htm">Caller</a>&nbsp;property of the 
+<STRONG>World</STRONG> object. &nbsp; <!--Example section-->
+<H3>Example</H3>
+<p>The following piece of code could be added as a method 
+to any object derived from the <STRONG>Thing</STRONG>   exemplar and cause the object to change it's
+geometry to the default sprite file. </p>
+
+<pre> 
+   Sub
+  SetGeometryToDefault World.This.GeometryName =  
+     "default.spr"
+End Sub</pre>&nbsp;
+ 
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Method</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Method</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Object</P></td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>The <STRONG>Method</STRONG> object is an in-world wrapper for a script subroutine or 
+function that is either an inline module or is contained in a script 
+module.</P>
+<H3>Using the Method Object</H3>
+<P>The <STRONG>Method</STRONG> object exists to encapsulate certain pieces of 
+information: </P>
+<UL>
+  <LI>Scripting code for an inline method
+  <LI> A&nbsp;flag that specifies whether the method is to run on the client,&nbsp;the 
+  server, or both, as well as whether the method is to run synchronously or 
+  asynchronously
+  <LI>The name of the method 
+  <LI>The module that contains the script subroutine or function associated 
+  with&nbsp;non-inline methods </LI></UL>
+<P>Use the <A href="../world/CreateMethod.htm"><STRONG>CreateMethod</STRONG></A> method to create&nbsp;a new method. 
+Unless the method you want to create is an inline method, you must add the 
+method to a script file and add the file as a module as described in the following 
+section Attaching Methods to Objects.</P>
+<P>         
+             
+ If you want to create more than one procedure or function in one 
+file, you must add those to Microsoft Virtuals Worlds as a module. To create an inline 
+method, use the <A 
+href="../World/CreateInlineMethod.htm"><STRONG>CreateInlineMethod</STRONG></A> 
+method.</P>
+<H4>Attaching Methods to Objects</H4>
+<P>You can create a method from a script module, and then attach it to objects 
+in Virtual Worlds in order to enable the objects to perform specific 
+actions. After you create a method, you can attach it to an object by using the 
+<A href="../Thing/AddMethod.htm"><STRONG>AddMethod</STRONG></A>&nbsp;method.</P>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Sound</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> Sound</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Object</P>
+      <P>   &nbsp;</P></td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P class=body>      
+              
+             
+            
+                
+        Sound can add dramatic effects to 
+your world.&nbsp;By using sound cones, and two- and three-dimensional sounds effects,&nbsp;sounds in your world&nbsp;can 
+appear to fade and increase in volume (attenuate) when your avatar&nbsp;moves&nbsp;closer to the object&nbsp;that has 
+a sound&nbsp;effect attached to&nbsp;it.
+<H3>How Sound Works in Virtual   Worlds</H3>
+<P>In Microsoft Virtual Worlds, the <STRONG>Sound</STRONG> object is directly 
+derived from Microsoft DirectX technology. The audio-device driver in DirectX 
+implements a DirectSound interface that provides the following functionality: 
+</P>
+<UL>
+  <LI>Acquires and releases control of the audio hardware. 
+  <LI>Describes the capabilities of the audio hardware. 
+  <LI>Performs the specified operation when hardware is available. 
+  <LI> Causes&nbsp;an operation request to report failure when hardware is 
+  unavailable. </LI></UL>
+<P> The device driver does not perform any software emulation; it reports 
+the capabilities of the hardware to DirectSound and passes requests from 
+DirectSound to the hardware. If the hardware cannot perform a requested 
+operation, the device driver reports failure of the request and DirectSound 
+emulates the operation.</P>
+<P>You can use DirectSound in Virtual Worlds as long as the DirectX run-time files are present on 
+the user's system. DirectSound automatically takes advantage of accelerated 
+sound hardware, including hardware mixing and hardware sound-buffer memory. </P>
+<P>There are&nbsp;two basic ways to represent sound within a virtual world:</P>
+<UL>
+  <LI>An ambient sound. This is a two-dimensional sound 
+  effect that sounds the same throughout the world. It does not change when you approach an object.&nbsp;&nbsp; 
+  <LI>A sound projection cone is a sound that has 3-D 
+  qualities as well as a spatial orientation. As you approach or withdraw from&nbsp;an object&nbsp;that has a 3-D sound is attached to it,&nbsp;the 
+  sound changes.</LI></UL>
+<P>  In Virtual Worlds, sound cones are made up of an inner cone and 
+an outer cone. Within the inner cone, the volume of the sound is&nbsp;the same as if 
+there were no cone; in other words, there is no attenuation from the normal 
+volume. Outside the outer cone, the normal volume is attenuated by a specified 
+number of decibels. The angle between the inner and outer cones is a zone of 
+transition between the inside volume and the outside volume.</P>
+<P>The following illustration shows the concept of sound cones.</P>
+<P><IMG alt="" border=0 src="../Images/soundcone.bmp"></P>
+<H4>Using the Object</H4>
+<P>Use the <A 
+href="../World/CreateSound.htm"><STRONG>CreateSound</STRONG></A> method of the <STRONG>World</STRONG> object to create a <STRONG>Sound</STRONG> object.
+<blockquote>
+<pre>Dim mySong
+</pre>
+<P class=comments>'Create a 3-D, continually looping <b>Sound</b> object. 
+<PRE class="example">Set mySong = <B>CreateSound("bird.wav", True, True)</B></PRE></blockquote>
+<p>The default 3-D sound has no sound projection cone and is 
+set to an ambient sound of 360 degrees.
+<P>After you have created a 
+<STRONG>Sound</STRONG> object, you can associate it with the <A 
+href="../Exemplars/Thing/Sound.htm"><STRONG>Sound</STRONG></A> property&nbsp;for a 
+<STRONG>Thing</STRONG>        
+                         object, at which time the sound begins playing.&nbsp;
+<blockquote><pre>
+myBirdSong.Sound = mySong
+</pre></blockquote>          
+               
+      
+<P>The <A href="Set2DData.htm">Set2DData</A> and <A href="Get2DData.htm">Get2DData</A> methods provide 
+access to the settings for a 2-D sound. As settings for a 2-D sound, 
+these methods access only the volume, frequency, and pan settings.&nbsp;However, 
+a 3-D sound accesses sound cones with inside and outside volumes, transitional 
+volume, and the distance sound changes. The settings for a 3-D 
+sound are set and accessed using the <A href="Set3DData.htm">Set3DData</A> and 
+<A href="Get3DData.htm">Get3DData</A> methods.
+<P>You can use the <A href="Is3D.htm">Is3D</A> property to check whether a sound file is two- or 
+three-dimensional.
+<blockquote><pre class="example">
+Sub MakeThunder()
+Dim myCloud
+Dim myWavFile
+Dim myThunderClap
+</pre>
+<p class="comments">
+'You can use the default cloud object in Virtual Worlds.
+<pre class="example">
+Set myCloud = User.Container.FindWithin("cloud")
+</pre>
+<p class="comments">
+'Get the sound file.
+<pre class="example">
+myWavFile = "file://C:/Sound Files/Thunder.wav"
+</pre>
+<p class="comments">
+'Create a <b>Sound</b> object.
+<pre class="example">
+Set myThunderClap = CreateSound(myWavFile, True, True)
+</pre>
+<p class="comments">
+'Associate the sound with an object.
+<pre class="example">
+myCloud.Sound = myThunderClap
+</pre>
+<p class="comments">
+'Test the type of sound in the sound file.
+<pre class="example">
+Trace myThunderClap.Is3D
+ 
+End Sub
+</pre></blockquote>
+ 
+
+</BODY>
+</html>

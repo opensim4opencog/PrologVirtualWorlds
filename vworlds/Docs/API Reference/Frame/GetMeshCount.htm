@@ -1,0 +1,95 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetMeshCount</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetMeshCount</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Returns the number of meshes in the current frame. <b>GetMeshCount</b> 
+is a member of the <A href="Frame.htm"><b>Frame</b></A> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetMeshCount</b>()</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetMeshCount</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a <b>Variant</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->In 
+HTML, you can use a frameset to organize multiple frames and nested framesets. A 
+<STRONG>Frame</STRONG> object is an individual frame within a frameset. A 
+<I>mesh</I> is a visual object that is made up of a set of polygonal faces; it 
+defines a set of vertices and a set of faces. You can use the&nbsp;methods for 
+<I>progressive</I> <I>meshes</I> to set the level of detail rendered for a mesh 
+and to allow progressive downloads from remote sources. A progressive mesh is 
+a mesh that is stored as a base mesh (a coarse version) and a set of records 
+that are used to increasingly refine the mesh.
+<P>Some of the methods you can use to refine&nbsp;the details of a mesh are:</P> 
+<LI type="disc"><A 
+href="SetMeshColor.htm">SetMeshColor</A>
+<LI type="disc"> <A href="SetMeshTextureFromURL.htm">SetMeshTextureFromURL</A>
+<!--Example section-->
+<H3>Example</H3>
+<p>This example assigns the number of meshes to "myCount".</p>
+<pre class="example">
+Dim myFrame
+Dim myCount
+
+Set myFrame = User.Container.GetFrame
+myCount = myFrame.<b>GetMeshCount</b>
+
+</pre>
+</LI>
+
+</body>
+</html>

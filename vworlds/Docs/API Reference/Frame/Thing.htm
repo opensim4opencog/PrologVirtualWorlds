@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Thing</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Thing</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Frame</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>Returns the name of the <b>Thing</b> 
+object that is represented by the frame. <b>Thing</b> is a 
+read/write <STRONG>Thing</STRONG> object. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Thing</b> = <i>ThingValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<p>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><I>object</I>.<B>Thing</B></TD></TR></TABLE>
+<P>The <b>Thing</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">ThingValue</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>  The object reference&nbsp;to the object that is represented by the <b>Frame</b>.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>A frame&nbsp;has a list of <I>visuals</I> (visual objects) and 
+a list of lights. A visual can be a <I>mesh</I>, a visual object that is made up 
+of a set of polygonal faces. A sprite is an example of a mesh. Another kind of 
+visual is a <I>decal</I>, a texture that can be rendered directly. The name in 
+text above an avatar's head is an example of a decal. A third kind of visual is 
+a <I>progressive mesh</I> , a mesh that is stored 
+as a base mesh (a coarse version) and a set of records that are used to 
+increasingly refine the mesh. You can reference a visual&nbsp;by its index in 
+the visual list, or by name.</P>
+<P>Frames can exist on multiple levels in Microsoft Virtual 
+Worlds, just as they can on a Web page. When working with frames of any type, 
+you must first get a reference to a frame.  You can find the object that a frame represents by using&nbsp;the <b>Thing</b>
+ property. To find the frame attached to a given object,&nbsp;use the 
+<A href="../Exemplars/Thing/GetFrame.htm">GetFrame</A>   
+        method.</P>
+<blockquote><pre>
+Dim myContainerFrame
+Dim myFrameObject
+
+Set myContainerFrame = User.Container.GetFrame
+myFrameObject = myContainerFrame.<b>Thing</b>
+</pre></blockquote>
+
+
+<!--Example section-->
+<P><STRONG>Note:</STRONG>&nbsp;&nbsp;&nbsp;Although the <STRONG>Thing</STRONG> 
+property is a read/write property, you&nbsp; must never change the value for 
+system-created frames.</P>
+<H3>Example</H3>
+<p>This example retrieves the Lobby object and returns the name of the first avatar in the list of avatars for the Lobby object.</p>
+<pre class="example">
+Function GetFrameObj(myLobbyAvatarName)
+Dim myFrame
+Dim myObj
+
+Set myFrame = User.Container.GetFrame
+Set myObj = myFrame.<b>Thing<
+
+/b > 
+Print myObj.Avatars.Property(0)
+
+End Sub
+</pre>&nbsp;
+
+
+</body>
+</html>

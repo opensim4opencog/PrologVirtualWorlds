@@ -1,0 +1,117 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>ShowHTML</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ShowHTML</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Creates an HTML pop-up window. <b>ShowHTML</b> is a member of the 
+<a href="World.htm">World</a> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>ShowHTML</b>&nbsp;<EM>bstrTitle</EM>, <EM>bstrHTML </EM>[, <EM>cx</EM>] [, 
+      <EM>cy</EM>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>ShowHTML</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference to a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrTitle</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The title of the window.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrHTML</td>
+		<td>String</td>
+		<td>Required</td>
+		<td> The HTML text to display.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[cx]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The width of the window in pixels. The default value is 0.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[cy]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td><!--Description-->The 
+      height of the window in pixels. The default value is 
+0.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P> This method shows HTML content in a browser window with the given title. The
+upper left corner of the HTML window is at the point (0, 0). If the optional <i>cx</i>
+and <i>cy</i> parameters are included, they specify the window's width and height.
+The default value for <i>cx</i> and <i>cy</i> parameters is 0.</P>
+
+<p><b>ShowHTML</b> displays only one window at a time.  If <b>ShowHTML</b> is called
+while a window created by a prior call to this method is still being displayed, it refreshes
+the window title (if different in the later call) and the window content, but
+ignores any changes in the window's position and size.  To display more than one HTML window,
+use <A href="ShowHTMLEx.htm">ShowHTMLEx</A>.</p>
+
+<p>This method works only on the client. &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>Dim HTMLStr
+HTMLStr = " ... some HTML text ..."
+World.ShowHTML "Edit Artifact", HTMLStr, 50, 80</pre>
+&nbsp;
+
+
+</body>
+</html>

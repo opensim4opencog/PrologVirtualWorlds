@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<title>Creating Custom Exemplars</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>Creating Custom Exemplars</h1>
+
+<p><!-- 10/23/98 --></p>
+
+<p>Although Microsoft Virtual Worlds contains a variety of exemplars to help you create objects
+within a world, you may want to create your own exemplars if you have a kind of object in mind
+that does not match one of the existing exemplars, but will be common in your world.</p>
+
+<p>Custom exemplars are created from standard exemplars, so it is important to choose the
+existing exemplar that is closest to the exemplar you want to make, and then determine how
+the two exemplars will differ.  From this, and from knowing that the new exemplar inherits
+all the methods and properties of the parent exemplar, you can determine which new methods
+and properties you will add to the new exemplar, and whether some methods and properties
+should be removed.</p>
+
+<p>After you have made your plan, the next step is to write the code for any new methods or
+properties, and then write a Microsoft Visual Basic Script<font size="2">©</font> text file
+that creates the new exemplar and adds the desired methods and properties.  Custom exemplars
+can be created only in script.  Also, once you have created an exemplar, there
+is no way to remove it from the world.</p>
+
+<h2>To create a custom exemplar:</h2>
+
+<ol>
+    <li>Create a Microsoft Visual Basic Script<font size="2">©</font>
+        text file that defines your new exemplar. A sample file,
+        <tt>Exemplar.VBS</tt>, is shown below. This file must contain a
+        subroutine named <em>Install</em>, that has a single
+        parameter. In the example code that follows, the
+        parameter for the <em>Install</em> subroutine is named <em>module</em>.
+        If you decide to rename this parameter, make sure that
+        you rename all other references to it, as well. <br>
+        For each method that you add to your exemplar, write either a
+		subroutine or a function. If the
+        method should return a value, use a function;
+        otherwise, use a subroutine. The example code that
+        follows creates a custom exemplar, <em>My Exemplar</em>,
+        which is patterned after the <a href="../../API%20Reference/Exemplars/Artifact/Artifact.htm">Artifact</a>
+        exemplar. Besides the methods and properties inherited
+        from <b>Artifact</b>, the custom exemplar also
+        has two additional properties (<em>StringProperty</em>
+        and <em>NumericProperty</em>), and two additional methods
+        (<em>SampleMethod</em> and <em>AnotherSampleMethod</em>).
+        You should be aware that additional methods and
+        properties can be added to the exemplar after it is created.</li>
+    <li>Copy the file you have created to the directory, <tt>C:\Program
+        Files\Microsoft Virtual Worlds\Local Content</tt>.
+        Virtual Worlds automatically looks for files in this
+        directory and subdirectories below this one when it loads
+        scripts and content files. If you copy the script
+        elsewhere, include the full path to the
+        script in step 6 (second argument to <b>CreateScriptModule</b>).</li>
+    <li>Log on to the world. </li>
+    <li>Click the <a href="../../uiref/views/toolstab.htm"><b>Authoring
+        Tools Tab</b></a> in the client's <b>User Pane</b>.
+    </li>
+    <li>Click <a href="../../uiref/cmdwin/cwinintf.htm"><b>Command
+        Window</b></a>.</li>
+    <li>In the text box of the <b>Command Window</b>, type the
+        line listed below. When this statement executes, <a href="../../API%20Reference/World/CreateScriptModule.htm">CreateScriptModule</a>
+        opens and loads the file you wrote, and executes the <em>Install</em>
+        subroutine in this file. The third parameter in the call
+        to <b>CreateScriptModule</b> indicates that
+        this module references methods that are not exclusively
+        client-side or server-side. </li>
+</ol>
+
+<blockquote>
+    <pre>Set NewMod = CreateScriptModule(&quot;My Exemplar&quot;, &quot;exemplar.vbs&quot;, MODULE_CLIENT+MODULE_SERVER)</pre>
+</blockquote>
+
+<p>Your new exemplar is ready to use. </p>
+
+<pre>' **********************************************
+' * Exemplar.vbs
+' * Script template for creating an exemplar in
+' * Microsoft V-Worlds. It is necessary to use
+' * the safe subroutines in this script template
+' * whenever creating exemplars via script module.
+' *
+' * Copyright 1998 Microsoft Corporation
+' **********************************************
+
+Sub Install(module)
+' * Install
+' * This subroutine is called automatically when
+' * you load a script module. The subroutine is
+' * ALWAYS run on the server, and any errors or
+' * debug output from this subroutine will be reported
+' * in the world log on the server. Place code that creates your exemplar 
+' * in this subroutine.
+Dim ThisExemplar
+Dim ExemplarName
+Dim ExemplarBase
+
+' * CUSTOM: You should place the name of your exemplar
+' * in the ExemplarName variable below. Then place the
+' * name of the exemplar that will be the parent of your exemplar in the
+' * ExemplarBase variable below.
+ExemplarName = &quot;My Exemplar&quot;
+ExemplarBase = &quot;Artifact&quot;
+
+' * This line will safely create the exemplar.
+Set ThisExemplar = SafeCreateExemplar(ExemplarName, ExemplarBase)
+
+' * CUSTOM: Create and add methods to your exemplar following
+' * the template below, using one call to SafeAddMethod for each method, as 
+' * illustrated in the following example lines. 
+' * In the line below &lt;method name&gt; represents the name of the method in the exemplar,
+' * and &lt;subroutine name&gt; represents the subroutine (or function) name within this file.
+' * The subroutine code should be placed below Install but 
+' * above the Safe Library Routines.
+' * SafeAddMethod ThisExemplar, &lt;method name&gt;, SafeCreateMethod(&lt;method flags&gt;, module, &lt;subroutine name&gt;)
+' *
+SafeAddMethod ThisExemplar, &quot;SampleMethod&quot;, SafeCreateMethod(METHOD_CLIENT, module, &quot;SampleMethod&quot;)
+SafeAddMethod ThisExemplar, &quot;AnotherSampleMethod&quot;, SafeCreateMethod(METHOD_SERVER, module, &quot;SampleMethod2&quot;)
+
+' * CUSTOM: Add properties to your exemplar following the
+' * template below, one line per property, as illustrated in
+' * the example.
+' * SafeAddProperty ThisExemplar, &lt;property name&gt;, &lt;initial value&gt;
+SafeAddProperty ThisExemplar, &quot;StringProperty&quot;, &quot;DefaultValue&quot;
+SafeAddProperty ThisExemplar, &quot;NumericProperty&quot;, 12
+
+' * CUSTOM: Place any additional exemplar setup code after
+' * this point.
+
+End Sub
+
+' **********************************************
+' * CUSTOM: Method Subroutines
+' * These routines define the methods for your
+' * exemplar.
+' **********************************************
+Sub SampleMethod
+  Trace &quot;Executing SampleMethod...&quot;
+End Sub
+
+Sub SampleMethod2
+  Trace &quot;Executing SampleMethod2...&quot;
+End Sub
+
+
+' **********************************************
+' * Safe Library Routines
+' * These routines aid in the proper creation of
+' * exemplars. It is not necessary to modify any
+' * script code in these routines.
+' **********************************************
+Function SafeCreateExemplar(exemplarname, exemplartype)
+' * SafeCreateExemplar checks to see whether the exemplar
+' * already exists before trying to re-create it. If it
+' * exists, it uses the current one. This function returns
+' * a pointer to the exemplar that will be used.
+  If IsValidExemplar(exemplarname) Then
+    Set SafeCreateExemplar = Exemplar(exemplarname)
+  Else
+    Set SafeCreateExemplar = CreateExemplar(exemplarname, exemplartype)
+  End If
+End Function
+
+Function SafeCreateMethod(methodflags, module, methodname)
+' * SafeCreateMethod makes sure that the
+' * method flags for Client/Server execution are compatible
+' * with the module flags before it creates the method.
+' * This function returns a pointer to the newly created
+' * method or Nothing if the method was not created.
+  If ((module.Flags And methodflags) = methodflags) Then
+    Set SafeCreateMethod = CreateMethod(methodflags, module, methodname)
+  Else
+    Trace &quot;The method flags for &quot; &amp; methodname &amp; &quot; are incompatible with the module flags for &quot;
+    Trace module.modulename &amp; &quot;. The method will not be created.&quot;
+    Set SafeCreateMethod = Nothing
+  End If	
+End Function
+
+Sub SafeAddMethod(exemplar, methodname, method)
+' * SafeAddMethod checks to see whether a method exists
+' * on an exemplar before adding the method. If the
+' * method exists, it is removed and then added again
+' * to assure that it is current.
+  If Not(method Is Nothing) Then
+    If exemplar.IsValidMethod(methodname) Then
+      exemplar.RemoveMethod(methodname)
+    End If
+    exemplar.AddMethod methodname, method
+  End If
+End Sub
+
+Sub SafeAddProperty(exemplar, propertyname, value)
+' * SafeAddProperty checks to see whether a property exists
+' * on an exemplar before adding the property. If the
+' * property exists, it is removed and then added again
+' * to assure that it is current.
+  If exemplar.IsValidProperty(propertyname) Then
+    exemplar.RemoveProperty(propertyname)
+  End If
+  exemplar.AddProperty propertyname, value
+End Sub
+
+' **********************************************
+' * End exemplar.vbs
+' **********************************************</pre>
+
+
+</body>
+</html>

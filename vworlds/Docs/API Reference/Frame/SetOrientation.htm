@@ -1,0 +1,131 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SetOrientation</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetOrientation</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets the orientation of the frame relative to the reference frame. 
+<b>SetOrientation</b> is a member of the <b>Frame</b> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetOrientation</b>&nbsp;<i>pvwfRef, fDirX, 
+		fDirY, fDirZ, fUpX, fUpY, fUpZ</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetOrientation</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvwfRef</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>The reference frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fDirX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The x-component of the <b>Direction</b> vector of the frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fDirY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The y-component of the <b>Direction</b> vector of the frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fDirZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The z-component of the <b>Direction</b> vector of the frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fUpX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The x-component of the <b>Up</b> vector of the frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fUpY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The y-component of the <b>Up</b> vector of the frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fUpZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The z-component of the <b>Up</b> vector of the frame.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>SetOrientation allows you to set the orientation of the frame according to the
+specified vectors. The frame's orientation is determined by two vectors: the 
+<A href="../Exemplars/Thing/Direction.htm">Direction</a> vector and the 
+<A href="../Exemplars/Thing/Up.htm">Up</a> vector. The <b>Direction</b>
+vector points away from the front surface of the frame, and the <b>Up</b> vector
+points in the direction of the top of the frame; the <b>Up</b> vector should be
+perpendicular to the <b>Direction</b> vector. Both of these are properties of
+the <b>Thing</b> exemplar. </P>
+
+<p>Set the <b>Frame</b> parameter to <b>Nothing</b> if you want the other input values in coordinates
+relative to the world's origin.  Set the <b>Frame</b> parameter to the parent of the calling frame to 
+set the other input values relative to the parent frame's origin. &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.SetOrientation RefFrame, 2.0, 0.0, 0.0, 0.0, 1.0, 0.0</pre>
+&nbsp;
+
+
+</body>
+</html>

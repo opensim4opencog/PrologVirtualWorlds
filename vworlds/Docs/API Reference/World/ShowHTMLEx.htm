@@ -1,0 +1,130 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>ShowHTMLEx</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ShowHTMLEx</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Shows HTML in a pop-up window. <b>ShowHTMLEx</b> is a member of 
+the <a href="World.htm">World</a> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><I>object</I>.<B>ShowHTML</B>&nbsp;<EM>bstrWinName,</EM> 
+      <EM>bstrTitle</EM>, <EM>bstrHTML, dispArg </EM>[<EM>, x</EM>] [<EM>, 
+      y</EM>]<EM> </EM>[, <EM>cx</EM>] [, <EM>cy</EM>]</TD></TR></TABLE><!--Parameters table--></P>
+<P>The <B>ShowHTML</B> method syntax has these parts: 
+<TABLE class=backlight><!--Parameters table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Part</TD>
+    <TD>Type</TD>
+    <TD>Use</TD>
+    <TD>Description</TD></TR></THEAD><!--Parameters table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>World</TD>
+    <TD>Required</TD>
+    <TD>An object reference to a <B>World</B> object.</TD></TR>
+  <TR>
+    <TD class=boldItal>bstrWinName</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The name of the window.</TD></TR>
+  <TR>
+    <TD class=boldItal>bstrTitle</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The title of the window.</TD></TR>
+  <TR>
+    <TD class=boldItal>bstrHTML</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The HTML text to display.</TD></TR>
+  <TR>
+    <TD class=boldItal>dispArg</TD>
+    <TD>Variant</TD>
+    <TD>Required</TD>
+    <TD>A DHTML object, such as that defined in an &lt;Object&gt; tag. Or, 
+      this can also be a Virtual Worlds object, such as World.User.</TD></TR>
+  <TR>
+    <TD class=boldItal>[x]</TD>
+    <TD>Variant</TD>
+    <TD>Optional</TD>
+    <TD>The x-coordinate of the upper left corner of the window. The default 
+      value is 0.</TD></TR>
+  <TR>
+    <TD class=boldItal>[y]</TD>
+    <TD>Variant</TD>
+    <TD>Optional</TD>
+    <TD>] The y-coordinate of the upper left corner of the window. The default 
+      value is 0.</TD></TR>
+  <TR>
+    <TD class=boldItal>[cx]</TD>
+    <TD>Variant</TD>
+    <TD>Optional</TD>
+    <TD>The width of the window in pixels. The default value is 0.</TD></TR>
+  <TR>
+    <TD class=boldItal>[cy]</TD>
+    <TD>Variant</TD>
+    <TD>Optional</TD>
+    <TD><!--Description-->The height of the window in pixels. The default 
+      value is 0.</TD></TR></TABLE></P>
+
+
+<!--Parameters table-->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method displays HTML content in a modeless pop-up window, with the given window
+title and name. If the optional <i>x</i>, <i>y</i>, <i>cx</i>, or <i>cy</i>
+parameters are included, they specify the coordinates and width and height of the window.
+The default value for each of these parameters is 0, which means that the upper left
+corner of the window will be at the point (0, 0), and the window's width and height will
+be 0.</P>
+
+<p>The <i>DispArg</i> parameter can be a DHTML object (such as an object defined in an
+&lt;OBJECT&gt; tag on the page), or it may be a Virtual Worlds object (such as <b>World.User</b>).
+Any Automation object matches the type of this parameter; the Helper object on the
+popped-up web page gives you access to that variable. If you do not need to pass an argument for
+<i>DispArg</i>, use <b>Nothing</b>.</p>
+
+<p>If <b>ShowHTMLEx</b> is called more than once for the same window, it refreshes the window, but
+ignores any changes in the window's position and size.</p>
+
+<p>The "Ex" in this method's name stands for "extended." 
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>Dim HTMLStr
+HTMLStr = " ... some HTML text ..."
+World.ShowHTMLEx "Window1", "Edit", HTMLStr, Nothing, 20, 10, 150, 100</pre>
+&nbsp;
+
+
+</body>
+</html>

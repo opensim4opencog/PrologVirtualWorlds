@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Caller</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Caller</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>The <a href="../Thing/Thing.htm">Thing</a> that has invoked the current method. 
+<b>Caller</b> is a read-only <b>Thing</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Caller</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Caller</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Caller</b> reference is used to determine, within the body of a
+method, which object invoked that method. This can be useful if a particular method
+requires access to the properties (or other methods) of the object that called it.  </p>
+
+<p>If a method is invoked directly from the <b>Command Window</b>, or by a user interface action
+(such as being invoked from a menu item on an object), or by a system message between the server
+and a client, <b>Caller</b> contains the same value as <a href="User.htm">User</a>.  If,
+however, a method is invoked by another method on a different object, <b>Caller</b> contains a reference to
+that other object.</p>
+
+<p>To determine the object on which the method is executing (as opposed to the object that
+is calling the method), see the <a href="This.htm">This</a> property
+of <b>World</b>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>The <b>Caller</b> reference will have a meaningful value only if it appears
+within the body of a subroutine. </p>
+
+<pre>Sub MyRoutine
+  Dim Who
+  Set Who = World.Caller 
+  ' ... Additional code
+End Sub</pre>&nbsp;
+
+
+</body>
+</html>

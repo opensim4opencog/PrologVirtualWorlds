@@ -1,0 +1,134 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Remove</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Remove</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of PropertyMap</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>   Removes a collection item from a 
+property map. <STRONG>Remove</STRONG> is a member of the <A 
+href="../PropertyMap/PropertyMap.htm">PropertyMap</A> collection.&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><EM>object</EM>.<STRONG>Remove</STRONG>&nbsp;<EM>bstrName</EM> 
+  </TD></TR></TABLE>
+<p>The <b>Remove</b> method syntax has 
+these parts:
+<!--Return Value section -->
+<TABLE class=backlight><!--Parameters table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Part</TD>
+    <TD>Type</TD>
+    <TD>Use</TD>
+    <TD>Description</TD></TR></THEAD><!--Parameters table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>PropertyMap</TD><!--Parameter name-->
+    <TD>Required</TD><!--Type-->
+    <TD>An&nbsp;object reference to a 
+      <STRONG>PropertyMap</STRONG> collection.</TD><!--Description--></TR>
+  <TR>
+    <TD class=boldItal>bstrName</TD>
+    <TD>String</TD><!--Parameter name-->
+    <TD>Required</TD><!--Type-->
+    <TD>
+      <P>The name of the item that you want to remove from the 
+      <STRONG>PropertyMap</STRONG> collection.</P></TD></TR></TABLE>
+<H3></H3>
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>  
+<P>With the <STRONG>Remove</STRONG> method, you can remove 
+an item from the middle of a list by specifying the name 
+of the key that you want to remove.&nbsp; 
+<H4>Reshuffling the Collection After a Remove Action</H4>
+<P>The following process&nbsp;takes place within the <STRONG>Remove</STRONG> method:&nbsp;The <STRONG>Count</STRONG>         
+     property&nbsp;is adjusted to fill in the vacant point 
+in the collection. For example, if a property&nbsp;map initially has&nbsp;four properties, and the&nbsp;third property is removed, 
+then the property at&nbsp;the fourth position will be shifted down to the third position. 
+<P>The <STRONG>Count</STRONG>         
+             
+                
+property is adjusted to match the total count of properties in the property map. 
+Therefore, you may want to avoid using the <STRONG>Count</STRONG> property as an 
+iteration counter. If you include an increment or decrement method (such as the 
+<a href="../PropertyList/Add.htm">Add</a> method) inside a loop, the <STRONG>Count</STRONG> property will be changed within your loop and an iteration counter depending 
+on the value may not be accurate. <PRE></PRE>    
+              
+ 
+<P></P>
+<H3>Examples</H3>
+<p>
+ 
+   This example&nbsp;removes a&nbsp;property from a property map.</p>
+<!--Example text--><PRE>Sub OceanViewInnFeatures()
+Dim myHotTub
+Dim myStonehenge
+Dim myBridge
+Dim myOceanViewInnFeatures
+Dim i
+Dim myCount
+</PRE>
+<p class="comments">
+'Establish the link to the object in the virtual world.
+<pre class="example">
+Set myHotTub = CreateInstance("Spa", "Artifact", User.Container)
+Set myStonehenge = _
+&nbsp;&nbsp;CreateInstance("Stonehenge", "Artifact",  User.Container)
+Set myBridge = _
+&nbsp;&nbsp;CreateInstance("Bridge", "Artifact",  User.Container)
+</pre>
+<p class="comments">
+'Create the collection.
+<pre class="example"><PRE class=example>Set myOceanViewInnFeatures = CreatePropertyMap</PRE><P class=comments>&nbsp;<P class=comments>'Establish the link for the object to the collection. <PRE class=example>myOceanViewInnFeatures.Property("myHotTub") = "100 degrees"
+myOceanViewInnFeatures.Property("myStonehenge") = True
+myOceanViewInnFeatures.Property("myBridge") = "Golden Gate"
+
+For Each i In myOceanViewInnFeatures 
+&nbsp;&nbsp;&nbsp; Trace i &amp; " " &amp; myOceanViewInnFeatures.Property(i)
+Next</PRE>
+<p class="comments">'Get the count of items in the collection.
+<pre class="example">myCount = myOceanViewInnFeatures.Count
+</pre>
+<P class="comments">'Remove the bridge from the collection. <PRE class="example">myOceanViewInnFeatures.<STRONG>Remove "myBridge"</STRONG>
+</PRE>
+<P class="comments">'Get the new count of items in the collection.
+<pre class="example">
+myCount = myOceanViewInnFeatures.Count
+</pre>
+<p class="comments">'Display the collection again.
+<pre class="example">For i = 0 To myCount - 1
+&nbsp;&nbsp;&nbsp; Trace i &amp; " " &amp; myOceanViewInnFeatures.Property(i).Name
+Next
+</pre>
+<p class="comments">'Display the new count of items in the collection.
+<pre class="example">
+Trace myOceanViewInnFeatures.Count
+End Sub</pre>
+</body>
+</html>

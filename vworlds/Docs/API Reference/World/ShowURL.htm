@@ -1,0 +1,111 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>ShowURL</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ShowURL</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>     Displays the&nbsp;content of&nbsp;the&nbsp;specified URL. 
+<b>ShowURL</b> is a member of the <a href="World.htm">World</a> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>ShowURL</b>&nbsp;<i>bstrTitle</i>, <i>bstrURL</i> [,<i> cx</i>] [,<i> cy</i>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>ShowURL</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrTitle</td>
+		<td>String</td>
+		<td>Required</td>
+		<td><!--Description-->The 
+      title of the window.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrURL</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The URL to display.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">cx</td>
+		<td>Integer</td>
+		<td>Optional</td>
+		<td>The width of the window in pixels. The default is 0.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">cy</td>
+		<td>Integer</td>
+		<td>Optional</td>
+		<td>The height of the window in pixels. The default is 0.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>     This method displays the content at the&nbsp;specified URL. The
+upper left corner of the HTML window will be at the point (0, 0). If the optional <i>cx</i>
+and <i>cy</i> 
+parameters are included, they specify the width and height of the window.</P>
+<P>The<b>ShowURL</b> method displays only one window at a time. If  the <b>ShowURL</b> method is called
+while a window created by a prior call to this method is still being displayed, it refreshes
+the window title (if different in the later call) and the window content, but
+ignores any changes in the window's position and size.  To display more than one HTML window,
+use <A href="ShowURLEx.htm">ShowURLEx</A>. &nbsp;
+
+<!--Example section--></P>
+<H3>Example</H3>
+<p><pre>World.ShowURL "A Window", "http://research.microsoft.com/vwg", 650, 400 
+</pre>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetCenter</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetCenter</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>
+Gets the coordinates of the center point of a <a href="Boundary.htm">Boundary</a>. <b>GetCenter</b> is a member of the <b>Boundary</b> object.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetCenter</b> <i>varfCenterX, varfCenterY</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetCenter</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Boundary</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">varfCenterX</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>Empty variable that is assigned the boundary coordinate location of the center point of a <b>Boundary</b>. The empty variable is assigned a value of the <b>Float</b> data type.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">varfCenterY</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>Empty variable that is assigned the boundary coordinate location of the center point of a <b>Boundary</b>. The empty variable is assigned a value of the <b>Float</b> data type.</td>
+	</TR>
+	
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value, but it assigns values into the parameters that are passed.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>GetCenter</b> method assigns the center point values of an existing boundary to the variables passed as parameters. The boundary center point coordinates are calculated based on the bounding box center point (0,0) of the object to which the boundary is assigned. For more information on the boundary coordinate system and bounding boxes, see the <A href="Boundary.htm">Boundary</A> topic.
+
+<p>The center point of a boundary is calculated based on the average distance from each vertex to the center. One way to illustrate this is to draw a square on a standard two-dimensional grid, and then draw two diagonal lines, one from each corner to the opposite corner. The center point of the square is where the two diagonal lines meet in the middle of the square. In this case, the center point is an equal distance from all four corners of the square. However, if you stretch one corner of the square along either the x- or y- axis and then redraw the diagonal lines from corner to corner, the center point is now in a new location. The center point is recalculated to be the average distance from all points, including the corner that has been stretched.
+
+<p>When a boundary is created using the <A href="AutoGenerate.htm">AutoGenerate</a> method and then assigned to an object, the center of the boundary aligns with the center point of the bounding box by default. When a boundary is created using a custom array of values, the center point of the boundary will align with the center point of the bounding box only if all vertices are equidistant from each other. If either a vertex or the entire boundary is moved, the center of the boundary is recalculated. Otherwise, the center of the boundary is calculated to be the average distance from each point to the center. The <b>GetCenter</b> method's return values reflect the boundary x- and y-coordinates in relation to the center point of the bounding box.
+
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example creates a <b>Boundary</b> around an existing object using the <b>AutoGenerate</b> method, moves the boundary, and then displays the new position of the boundary center point. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge</pre>
+<div class=comments>'Declare the variables to be used in the method.</div>
+<pre class="example">Dim myBoundaryX
+Dim myBoundaryY</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a boundary without a specified size..
+<pre class="example">Set myOuterEdge = World.CreateBoundary</pre>
+
+<p class=comments>'Generate a four-sided boundary.
+<pre class="example">myOuterEdge.AutoGenerate myFireHydrant, 4</pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge</pre>
+
+<p class=comments>'Call the <b>GetCenter</b> method.
+<pre class="example">myFireHydrant.BoundaryList.Property(0).<b>GetCenter myBoundaryX, myBoundaryY</b></pre>
+<p class=comments>'Print the results to the Command Window.
+<pre class="example">Print myBoundaryX
+Print myBoundaryY</pre>
+
+<p class=comments>'Move the boundary.
+<pre class="example">myFireHydrant.BoundaryList.Property(0).Translate 2, 3</pre>
+
+<p class=comments>'Call the <b>GetCenter</b> method.
+<pre class="example">myFireHydrant.BoundaryList.Property(0).<b>GetCenter myBoundaryX, myBoundaryY</b></pre>
+
+<p class=comments>'Print the results to the Commmand Window.
+<pre class="example">Print myBoundaryX
+Print myBoundaryY
+
+End Sub</pre>
+
+
+<!--See also section-->
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnLeave</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnLeave</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called in response to the <strong>Leave</strong>
+event, which occurs immediately before an object exits its container.
+<!--Syntax table-->
+
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>OnLeave(<i>OldContainer</i>, <i>LeavingObject</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnLeave</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">OldContainer</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>A reference to the container the object is leaving.</td>
+	</TR>
+<TR>
+		<td class="boldItal">LeavingObject</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>A reference to the object that is leaving.</td>
+	</TR>
+</TABLE>
+<p>The <b>Leave</b> event supports these additional handlers:
+<TABLE class="backlight" STYLE="WIDTH:75%">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Event Handler</td>
+			<td>Description</td>
+
+		</TR>
+	</thead>
+<tr class="line" ><td colspan=100></td></tr>
+	<TR>
+		<td class="boldItal">OnPeerLeave</td>
+		<td>The handler for other objects in the same <a href="../Thing/Container.htm">Container</a>.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContainerLeave</td>
+		<td>The handler for the leaving object's <a href="../Thing/Contents.htm">Contents</a>.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContentLeave</td>
+		<td>The handler for the <b>Container</b> of the object.</td>
+		<td></td>
+		<td></td>
+	</TR>
+</TABLE>
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>This method is not normally called by the user; it responds to
+an internal event that occurs in Virtual Worlds immediately
+before an object exits its container.
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;To ensure that the internal procedures that are tied to each event handler are invoked, you must call <b>InvokeSuperMethod</b> within the overridden subroutine. For more information on using this method, see the <a href="../Thing/InvokeSuperMethod.htm">InvokeSuperMethod</a> topic.
+<!--Example section-->
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">Sub OnLeave(OldRoom, LeavingAvatar)
+&nbsp;&nbsp;&nbsp;&nbsp;Trace LeavingObject.Name &amp; " is leaving " &amp; OldContainer.Name
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod(Array(OldRoom, LeavingAvatar))
+End Sub
+</pre>
+<!--Example text-->
+&nbsp;
+
+
+
+
+</body>
+</html>

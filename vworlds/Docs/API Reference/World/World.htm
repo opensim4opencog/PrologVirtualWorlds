@@ -1,0 +1,68 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>World</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>World</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Object</P></td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P class=body>The&nbsp;<STRONG>World</STRONG> object is a reference to the current world 
+of the user in Microsoft Virtual Worlds.&nbsp;It is a container for all of the 
+other objects in the world.
+
+<!--How-to section -->
+<H3>    Scripting&nbsp;in a Virtual Worlds Environment</H3>
+
+<p>Normally, any Virtual Worlds method or property you use 
+must be&nbsp;prefaced by the object to which it belongs. For example, a call to 
+a method must take the form of <EM>object</EM>.<STRONG>MethodName</STRONG>.
+The exception to this rule is the <b>World</b>&nbsp;object. Any 
+method or property that is not&nbsp;prefaced by an object is assumed to belong 
+to the <STRONG>World</STRONG> object. Therefore, you do not need to 
+preface&nbsp;methods
+or properties with the <b>World</b> 
+object when scripting from within a Virtual Worlds environment. The following statements have the same result.</p>
+<blockquote><pre>
+mySound = <STRONG>World</STRONG>.CreateSound("Bird.wav", True, True)
+mySound = CreateSound("Bird.wav", True, True)
+</pre></blockquote>
+<H3>Scripting for Virtual Worlds&nbsp;Using a Browser</H3>
+<P> If you are scripting with Microsoft Internet Explorer or 
+another browser, you must preface the methods or properties for a Virtual 
+Worlds environment with the <STRONG>World</STRONG> object. To 
+access the <STRONG>World</STRONG> object from a browser, you must first 
+reference the <STRONG>VWClient</STRONG> object. The following code statements 
+create references to a client, the world running on the client, and the 
+ user.</P>
+<blockquote><PRE>Set myClient = Top.myClientObject.VWClient
+Set myWorld = myClient.<STRONG>World</STRONG > 
+Set myUser = myWorld.User</PRE></blockquote>
+<H3>Creating Scripts With the World Object</H3>
+<P>The <STRONG>World</STRONG> object is&nbsp;a top level object in the hierarchy 
+of Virtual Worlds. This means that many of the basic methods and properties 
+reside here, such as <A href="CreateExemplar.htm">CreateExemplar</A>, <A href="CreateFrame.htm">CreateFrame</A>, or <A href="SaveDatabase.htm">SaveDatabase</A>. The default 
+templates such as <A href="DefaultAvatarExemplar.htm">DefaultAvatarExemplar</A> or <A href="DefaultSpriteFile.htm">DefaultSpriteFile</A> also reside here. The 
+following statement creates a new 
+exemplar.</P>
+<blockquote><Pre>Set myNewExemplar = <b>World.CreateExemplar("ThunderCloud", _
+&nbsp;&nbsp;"Artifact")</b></Pre></blockquote>
+<P>You can also use the <A href="MakeHost.htm">MakeHost</A> and <A href="UnMakeHost.htm">UnMakeHost</A> methods to 
+add host capabilities to the specified avatar as shown in the following 
+statement.</P>
+<blockquote><PRE>World.<STRONG>MakeHost</STRONG> myAvatar</PRE></blockquote>
+
+</BODY>
+</html>

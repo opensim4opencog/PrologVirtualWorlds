@@ -1,0 +1,116 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>AutoGenerate</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AutoGenerate</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>
+Creates a <a href="Boundary.htm">Boundary</a> that fits around a given object. <b>AutoGenerate</b> is a member of the <b>Boundary</b> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>AutoGenerate</b> <i>pthing</i> [,&nbsp;<i>nSides</i>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>AutoGenerate</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <B>Boundary</b>.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pthing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An instance of the <a href="../Exemplars/Thing/Thing.htm">Thing </a> exemplar.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[nSides]</td>
+		<td>Integer</td>
+		<td>Optional</td>
+		<td>The number of sides in the <b>Boundary</b>. The minimum functional value is 2.</td>
+	</TR>
+	
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>AutoGenerate</b> method quickly creates a basic boundary with evenly spaced sides that fits around an existing object. If you create a boundary using the <b>AutoGenerate</b> method, the starting point is placed at a point on the x-axis relative to the size of the object, and at 0.0 on the y-axis. The remaining vertices are rendered and indexed sequentially, moving from point to point in a clockwise direction until the boundary forms a closed polygon.
+
+<p>The first parameter (<i>pThing</i>) references the object to determine the size of the boundary, but it does not assign the generated boundary to that object. To apply the created boundary to an object, the boundary must be added to the <a href="../Exemplars/Thing/BoundaryList.htm">Boundarylist</a> property of the object using the <a href="../PropertyList/Add.htm">Add</a> method. 
+
+<!--Example section-->
+<H3>Example</H3>
+
+<p>This example creates a <b>Boundary</b> around an existing object by using the <b>AutoGenerate</b> method. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a boundary without a specified size.
+<pre class="example">Set myOuterEdge = World.CreateBoundary</pre>
+
+<p class=comments>'Generate an eight-sided boundary.
+<pre class="example">myOuterEdge.<b>AutoGenerate myFireHydrant, 8</b></pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge
+
+End Sub</pre>
+
+
+
+</body>
+</html>

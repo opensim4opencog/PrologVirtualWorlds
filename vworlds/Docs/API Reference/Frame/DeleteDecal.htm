@@ -1,0 +1,135 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>DeleteDecal</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>DeleteDecal</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Deletes the specified decal from&nbsp;a <A href="Frame.htm">Frame</A> 
+object. <STRONG>DeleteDecal</STRONG>  
+       is a member of the <STRONG>Frame</STRONG> object.&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>DeleteDecal</STRONG> 
+      <EM>nMeshIndex</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The <STRONG>DeleteDecal</STRONG> method syntax has these parts: 
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name-->object</td>
+		<td><!--Type-->Frame</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->An 
+      object reference that accesses an object with 
+      a&nbsp;<STRONG>Frame</STRONG> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->nMeshIndex</td>
+		<td><!--Type-->Long</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->The 
+      index number of the mesh to delete.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section --></P>
+<H3>Return Value</H3>
+<p>
+This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->The 
+<EM>nMeshIndex</EM> parameter is generally set to any positive <b>Long</b>. such as 12. that represents the index of a 
+particular mesh. However, you can also set the parameter to . 1 or . 2 as shown in the following table.</P>
+<table class = "backlight">
+	<thead>
+		<TR>
+			<td>nMeshIndex Value</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+  <TR>
+    <TD >
+      <P align=left>Any positive <STRONG>Long</STRONG>.</P></TD>
+    <TD> Apply to the specified mesh index 
+  number.</TD></TR>
+  <TR>
+    <TD>
+      <P align=left>-1</P></TD>
+    <TD>Apply to all meshes in the specified frame.</TD></TR>
+
+	<TR>
+		<td >
+      <P align=left><!--Parameter name-->-2</P></td>
+		<td><!--Description-->Apply 
+      to all meshes in all frames of the hierarchy.</td>
+	</TR>
+</table>
+<!--Example section-->
+<H3>Example</H3>
+<p>This example deletes a decal from a frame in  a virtual world.
+<p>To run this example: You must have a decal attached to an object in your world.
+</p>
+<pre class="example">
+Sub DeleteLastDecal()
+Dim myFrame
+</pre>
+<P class="comments">'Set a reference to the frame where you want to delete the decal. 
+<PRE class="example">
+Set myFrame = User.Container.GetFrame
+</PRE>
+<P class="comments">'Delete the last decal you created. 
+<PRE class="example">myFrame.<B>DeleteDecal myFrame.GetDecalCount - 1</B>
+</pre>
+<p class="comments">'Trace the count of decals.
+<pre class="example">Trace myFrame.GetDecalCount
+
+End Sub
+</pre></PRE>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>FireEvent</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>FireEvent</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Thing</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Fires a specified broadcast event. <b>FireEvent</b> is a member of 
+the <a href="Thing.htm">Thing</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>FireEvent</b>&nbsp;<i>bstrEvent&nbsp;[,&nbsp;var]</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>FireEvent</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrEvent</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the event to fire.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[var]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The argument list for the event.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><b>FireEvent</b> is used to invoke event handlers that are to be broadcast to
+bystanders. For example, this method would be used to invoke the 
+<a href="../Events/OnEnter.htm">OnEnter</a>, <a href="../Events/OnLeave.htm">OnLeave</a>, 
+and <a href="../Events/OnTell.htm">OnTell</a> event handlers, among others. If
+needed, users can add their own event handlers or override existing ones. You can also define your own events and corresponding handlers by creating a subroutine that uses the name of the event, preceded by "On". For example, if your event is named "MyDisappear", the corresponding event handler would be defined as a subroutine named, "OnMyDisappear". For more information on using events and their corresponding handlers, and a list of events that are supported by Virtual Worlds, see the <a href="../Events/Event%20Handlers.htm">Event Handlers</a> topic.
+
+
+<p>The <i>var</i> parameter may contain a single value or an <b>Array</b>
+of parameter values.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+
+<p>This example uses the <b>FireEvent</b> method to invoke a user-created event handler. The subroutine is automatically fired in response to the FireEvent statement.
+<p class = comments>'Create the event handler.
+<pre class=example>Sub OnGameOver(theAvatar)</pre>
+<div class = comments>&nbsp;&nbsp;&nbsp;&nbsp;'Add custom functionality here.<br>&nbsp;&nbsp;&nbsp;&nbsp;'For example, display a confirmation in the Command Window.</div>
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;Trace "OnGameOver handler was fired." 
+End Sub</pre>
+<p class = comments>'Fire the event, which calls the created handler.
+<pre class=example>User.<b>FireEvent</b> "GameOver", User</pre>
+
+
+</body>
+</html>

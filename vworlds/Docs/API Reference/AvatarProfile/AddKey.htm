@@ -1,0 +1,204 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>AddKey</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> AddKey</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of AvatarProfile</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+Adds a new <EM>key/value pair</EM> 
+to&nbsp;an avatar profile. <STRONG>AddKey</STRONG> is a 
+member of the <A href="AvatarProfile.htm">AvatarProfile</A> object. 
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>AddKey </STRONG><EM>bstrKey, 
+      varKeyVal </EM>[,&nbsp;<EM>varStrGraphic</EM>]<EM> 
+      </EM>[,&nbsp;<EM>varAccess</EM>]<EM> 
+</EM>[,&nbsp;<EM>varOwner</EM>]</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>AddKey</STRONG> method syntax has these 
+parts:
+<TABLE class="backlight" style="HEIGHT: 496px; WIDTH: 639px">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Parameter name-->AvatarProfile</td>
+		<td><!--Type-->Required</td>
+		<td><!--Description--> 
+      An object reference to an <STRONG>AvatarProfile</STRONG> 
+  object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrKey</td>
+		<td><!--Parameter name--</td>>
+		<td><!--Type-->String</td>
+		<td><!--Description-->Required</td>
+<td>The name of the new key.</td>	</TR>
+	<TR>
+		<td class="boldItal">varKeyVal</td>
+		<td><!--Parameter name--</td>>
+		<td><!--Type-->String</td>
+		<td><!--Description-->Required</td>
+<td>The value of the new key.</td>		</TR>
+	<TR>
+		<td class="boldItal">[varStrGraphic]</td>
+		<td><!--Parameter name--</td>>
+		<td><!--Type-->String</td>
+		<td><!--Description-->Optional</td>
+<td>The&nbsp;URL of the graphic that contains an image for the new key.</td>		</TR>
+  <TR>
+    <TD class=boldItal>[varAccess]</TD>
+    <TD>Integer</TD>
+    <TD>Optional</TD>
+    <TD>A permissions flag set by the owner of key at the 
+      time of creation. The flag can be any one of the values shown in the following 
+table.</TD></TR>
+
+<!--This adds a blank row inside of which we add the flag table-->
+  <TR>
+    <TD class=boldItal>[varOwner]</TD>
+    <TD>Thing</TD>
+    <TD>Optional</TD>
+    <TD>The&nbsp;owner of the new key. By default, all keys 
+      created for an avatar's profile are owned by&nbsp;that avatar. However, 
+      if you create a key for another avatar's profile, you can retain control 
+      of the key by setting this parameter to your avatar, an object 
+      reference that accesses your avatar as a&nbsp;<b>Thing</b>    object.</TD></TR></TABLE>
+
+<!--Return Value section -->
+<H4>Enumerated Type for the <i>varAccess</i> Parameter</H4>
+<P>
+<TABLE class="backlight">
+  
+  <TR>
+    <TD class=boldItal>
+      <P align=center>Enumerated&nbsp;Type</P></TD>
+    <TD class=boldItal>
+      <P align=center> Value</P></TD>
+    <TD class=boldItal>
+      <P align=center> Description</P></TD></TR>
+  <TR class=line>
+    <TD colSpan=100></TD></TR>
+  <TR>
+    <TD>kKeyPublic </TD>
+    <TD>
+      <P align=center>0</P></TD>
+    <TD>Everyone can read the key. </TD></TR>
+  <TR>
+    <TD>kKeyFriends </TD>
+    <TD>
+      <P align=center>1</P></TD>
+    <TD>Only those avatars designated as friends can read&nbsp;the key.</TD></TR>
+  <TR>
+    <TD>kKeyPrivate </TD>
+    <TD>
+      <P align=center>2</P></TD>
+    <TD>Only the key owner can read the key.</TD></TR></TABLE></P>
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>When creating a new key, remember that an avatar profile 
+stores data in key/value pairs, such as Age    and 29. In&nbsp;this key/value 
+pair, Age&nbsp;represents the key and 29&nbsp;the value. Each key is a 
+string, although the value of the pair can be of any type, including a 
+<A href="../PropertyList/PropertyList.htm">PropertyList</A>   object.       
+                
+               
+  </P>
+<P>This method is used to add keys and key values to the profile of an avatar. To add 
+an object to a key list (a list of the key/value pairs in an avatar's profile), use the <A 
+href="../Exemplars/Avatar/AddToUserProfileList.htm"><B>AddToUserProfileList</B></A> method of the 
+<STRONG>Avatar</STRONG> object.</P>
+<P>An avatar's profile&nbsp;contains an unordered list of paired keys and 
+values.&nbsp;After you have inserted a key/value pair (element) into&nbsp;a map, 
+you can efficiently retrieve or delete the pair using the key to access it. You 
+can also iterate over all the elements in the map.&nbsp; 
+<P>A key/value pair maps unique keys to values. The key is a string that 
+represents the name of the property in the property map. The value is the 
+contents of the property. A property map uses the string that makes up the key 
+instead of an index number to access the value of each property.&nbsp;&nbsp;</P> 
+      
+            
+<H3>Example</H3>
+<p>
+This example checks each avatar in a room for a profile 
+key named "PassportID". If the key is not found, the program adds the key to the 
+avatar. Instead of using traditional numeric IDs for the passport, this program 
+generates a unique&nbsp;ID for each avatar in the room by concatenating the name 
+of the world, the user, and the date and time. </p>
+<!--Example text--><PRE class="example">
+Sub NewProfileKey()
+Dim myKeyOwner
+Dim allAvatars
+Dim myPassID
+</PRE>
+<p class="comments">
+'Substitute the&nbsp;name of your avatar for "Eve".
+<pre class="example">
+Set myKeyOwner = User.Container.FindWithin("Eve")
+Set allAvatars = User.Container.Avatars
+</pre>
+<p class="comments">'Check each avatar in the room.
+<pre class="example">
+For Each myUser In allAvatars
+</pre>
+<p class="comments">
+&nbsp;&nbsp;&nbsp;'If a passport doesn't exist, create a new passport key.
+<pre class="example">
+&nbsp;&nbsp;&nbsp; If Not myUser.Profile.IsValid("PassportID") Then
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; myPassID = WorldName &amp; myUser.Name &amp; now
+</pre>
+<p class="comments">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;'You must 
+also substitute a valid image for the Passport.gif image <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;'and a valid URL for the image file in the following statement.
+<pre class="example">
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; myUser.Profile.<b>AddKey "PassportID", myPassID, _
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; "http://c:/Passport Info/Passbook.gif", kKeyPublic, myKeyOwner</b>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Trace "New PassportID added to " &amp; myUser.Name &amp; _
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  myUser.Profile.KeyValue("PassportID")
+&nbsp;&nbsp;&nbsp; Else
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Trace myUser.Name &amp; "'s passport is validated!"
+&nbsp;&nbsp;&nbsp; End If
+Next
+End Sub</pre>
+
+<!--See also section-->
+<P class="greyed">  &nbsp;</P>  
+</body>
+</html>

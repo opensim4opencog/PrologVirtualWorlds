@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>ServerSide</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ServerSide</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>Boolean </b>flag that indicates whether the current method is running on
+the server. <b>ServerSide</b> is a read/write <b>Boolean</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<p>To set this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>ServerSide</b> = <i>BooleanValue</i></td>
+	</tr>
+</table>
+<p>To return this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>ServerSide</b></td>
+	</tr>
+</table>
+<!--Parameters table-->
+<p>The <b>ServerSide</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">BooleanValue</td>
+		<td>Boolean</td>
+		<td>Required</td>
+		<td>True is the method is executing on the server.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The server hosts a <b>World</b> object, as does each of the connected
+clients. On the server, the <b>ServerSide</b> property is initialized to <b>True</b>,
+but on each client it is initialized to <b>False</b>. For the currently
+executing method, <b>ServerSide</b> will be <b>True</b> if the method
+is executing on the server, and will be <b>False</b> if the method is executing
+on a client. This property is most useful when used inside methods that can be called from
+either the client or the server. By including code that determines where the method is
+running, the user can cause the method to take one course of action if it is running on
+the server, and another if it is running on a client.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>Result = World.ServerSide</pre>&nbsp;
+ 
+
+</body>
+</html>

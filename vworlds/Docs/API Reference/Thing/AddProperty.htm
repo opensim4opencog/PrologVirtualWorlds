@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>AddProperty</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AddProperty</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Thing</td>
+	</tr>
+</table><!--Topic Definition-->
+<P>Adds a property to a <A href="Thing.htm">Thing</A> object. <b>AddProperty</b> is a member of the <b>Thing</b> object. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>AddProperty</b>&nbsp;<i>bstrName</i>[, <i>var</i>][, <i>flags</i>][, <i>permission</i>][, <i>type</i>][, <i>bstrIID</i>][, <i>bstrType</i>]</td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>AddProperty</b> method syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the property to be added.</td>
+	</TR>
+<TR>
+		<td class="boldItal">var</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The value of the property to be added. If there is more than one value, a <A href="../PropertyList/PropertyList.htm">PropertyList</A> or an array can be used.</td>
+	</TR>
+<TR>
+		<td class="boldItal">flags</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>A flag or set of flags that&nbsp;specify system attributes of the property (See remarks.)</td>
+	</TR>
+<TR>
+		<td class="boldItal">permission</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>A flag or set of flags that represent Read, Write, Execute, and Add permissions (See
+    remarks.)</td>
+	</TR>
+<TR>
+		<td class="boldItal">type</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>The type of the property to add. (See remarks.)</td>
+	</TR>
+
+
+</TABLE><!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value. <!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<p>              
+          By adding a property to an object, you can customize the 
+attributes for the object.&nbsp; A property can contain almost any type of data 
+and should be used to hold data relevant to the object to which it belongs.&nbsp; 
+The first parameter, <EM>bstrName</EM>, must contain a string that will be the 
+name of the new property.&nbsp; The second parameter, <EM>var</EM>              
+               
+             
+         , should hold or refer to
+the actual value of the new property. </p>
+<P>The third parameter of this method,&nbsp; <em>flags,</em> employs a combination of flags to define the way the Virtual 
+Worlds system handles the new property.&nbsp; These flags are exposed by name as 
+read-only properties of the <STRONG>World</STRONG> object and are detailed in the 
+following table: </P>
+
+<table class="backlight">
+  <tr>
+    <td><b>Flag</b></td>
+    <td><b>Value</b></td>
+    <td><b>Description</b></td>
+  </tr>
+<tr class="line" ><td colspan=100></td></tr>
+  <tr>
+    <td><b>PSBIT_NONE</b></td>
+    <td><STRONG>0</STRONG></td>
+    <td>No flags are set on the property.&nbsp; This has 
+      the effect of making a property thats data will be accessed directly on 
+      the exemplar, saved in the world's checkpoint file, and sent to all connected clients.</td>
+  </tr>
+  <TR>
+    <TD><STRONG>PSBIT_COPYONGET</STRONG></TD>
+    <TD><STRONG>1</STRONG></TD>
+    <TD> [default] The property data will be accessed on&nbsp;the instance, rather 
+      than on the exemplar.</TD></TR>
+  <tr>
+    <td><b>PSBIT_NOTLOGGED</b>
+
+
+
+
+</td>
+    <td><b>2</b></td>
+    <td>Changes to the property will not be saved to the world's checkpoint file.</td>
+  </tr>
+  <tr>
+    <td><b>PSBIT_NOTREMOTED</b></td>
+    <td><b>4</b></td>
+    <td>Changes to the property will not be sent to any connected clients.</td>
+  </tr>
+  <TR>
+    <TD><STRONG>PSBIT_HIDDEN</STRONG></TD>
+    <TD><STRONG>256</STRONG></TD>
+    <TD>The property will not be displayed in the <STRONG>Object 
+      Explorer</STRONG>, but can still be accessed via script.</TD></TR>
+  <TR>
+    <TD><STRONG>PSBIT_SCRIPTDEFAULTPROPERTY</STRONG></TD>
+    <TD><STRONG>1</STRONG></TD>
+    <TD>A mnemonic equivalent of <STRONG>PSBIT_COPYONGET</STRONG>, which is 
+      the default value for properties added&nbsp;by 
+      <STRONG>AddProperty</STRONG>.</TD></TR>
+  <tr>
+    <td><STRONG>PSBIT_SCRIPTDEFAULTMETHOD</STRONG></td>
+    <td><STRONG>0</STRONG></td>
+    <td>A mnemonic equivalent of 
+      <STRONG>PSBIT_NONE</STRONG>, which is the default value for methods added 
+      by <STRONG>AddMethod</STRONG>
+                .</td>
+  </tr>
+</table>
+<P>The fourth parameter of this method, <EM>permission</EM>, uses <A href="../../Programmer's%20Guide/Security/security%20overview.htm#permissions">permission 
+flags</A> as detailed in the <A href="../../Programmer's%20Guide/Security/security%20overview.htm">Security Overview</A> in the Programmer's Guide. The default value for this parameter is 
+either <STRONG>PS_SCRIPTDEFAULTPROPERTY</STRONG> or 
+<STRONG>PS_SCRIPTDEFAULTCOLLECTION</STRONG> (if the added property is a 
+collection object).
+<P>The default permissions follow
+<ul>      
+  <li>Everyone has read permission.         
+  <li>The Exemplar has read and 
+  write permissions (and add, if it's a collection) for the property. 
+  <li>The Owner has read and write permissions (and add if it's a collection) for
+    the property.</li>
+</ul>
+
+<p>The fifth parameter of this method, <em>type</em>, can allow the newly added property to do strong 
+type checking any time the value is changed. The default&nbsp;type of a property is <strong>vbVariant</strong>, but it can be set to any of
+the <b>Variant</b>       subtypes&nbsp;listed 
+in the table that follows.&nbsp; Note that these values are made available by&nbsp;name in&nbsp;Microsoft Visual Basic Scripting Edition©.
+
+</p>
+<table class="backlight">
+	<tr>
+		<td><b>Variant Subtype</b></td>
+		<td><b>Explanation</b></td>
+	</tr>
+<tr class="line" ><td colspan=100></td></tr>
+	<tr>
+		<td>vbEmpty</td>
+		<td>Uninitialized data</td>
+	</tr>
+	<tr>
+		<td>vbNull</td>
+		<td>Contains no valid data</td>
+	</tr>
+	<tr>
+		<td>vbInteger</td>
+		<td>A number with no fractional part</td>
+	</tr>
+	<tr>
+		<td>vbLong</td>
+		<td>A number with no fractional part</td>
+	</tr>
+	<tr>
+		<td>vbSingle</td>
+		<td>A single-precision floating-point number (allows decimal fractions)</td>
+	</tr>
+	<tr>
+		<td>vbDouble</td>
+		<td>A double-precision floating-point number (allows decimal fractions)</td>
+	</tr>
+	<tr>
+		<td>vbString</td>
+		<td>A character string</td>
+	</tr>
+	<tr>
+		<td>vbObject</td>
+		<td>An Automation object</td>
+	</tr>
+	<tr>
+		<td>vbError</td>
+		<td>A Microsoft Visual Basic Script© error object</td>
+	</tr>
+	<tr>
+		<td>vbBoolean</td>
+		<td>A value that is either <b>True</b> or <b>False</b></td>
+	</tr>
+	<tr>
+		<td>vbVariant</td>
+		<td>A <b>Variant</b> value</td>
+	</tr>
+	<tr>
+		<td>vbByte</td>
+		<td>A byte value</td>
+	</tr>
+</table><!--Example section-->
+<H3>Example</H3>
+<p>In this example, a property named "<em>Coins</em>", with an initial value of
+5, is added to <em>AThing</em>. The third parameter,
+<b>PSBIT_NOTREMOTED</b></A>, indicates that the newly added 
+property should not be marshalled to any other clients.
+The fourth parameter expression, <b>PS_READ</b> +
+<b>PS_WRITE</b>, grants the owner both read- and write-access to this property.
+The fifth parameter, <b>vbInteger</b>, notifies <b>AddProperty</b> that the added
+property should be treated exclusively as an <b>Integer</b>.</p>
+
+<pre class="example">AThing.<b>AddProperty "Coins", 5, world.PSBIT_NOTREMOTED, world.PS_READ+world.PS_WRITE, vbInteger</b></pre>
+
+
+
+</body>
+</html>

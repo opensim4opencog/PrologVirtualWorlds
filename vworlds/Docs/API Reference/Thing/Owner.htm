@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Owner</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Owner</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Thing</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>Refers to the <a href="Thing.htm">Thing</a> that is the owner of the invoking object. 
+<b>Owner</b> is a read/write <b>Thing</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<P>To set the property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Owner</b> = <i>ThingValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table--></P>
+<p>To return the property:
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><I>object</I>.<B>Owner</B></TD></TR></TABLE>
+<P>The <b>Owner</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">ThingValue</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The owner of the invoking object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Owner</b> property is a security-oriented property that is 
+set during the creation process of an object and cannot be changed once 
+the object exists. Only the owner of an object or a wizard can perform 
+certain Virtual Worlds operations on the object, such as changing its 
+<A href="../Exemplars/Thing/Position.htm">Position</a> property.</P>
+
+<h3>Taking an Object</h3>
+<p>Only owners of an object can take, or pick up, that 
+object, unless you change the object's <b>IsTakeable</b>  property to 
+<b>True</b>. If the <b>IsTakeable</b> property is set to 
+<b>True</b>, any <b>Avatar</b> can take 
+the object. If another <b>Avatar</b> takes the 
+object, the container of the object changes from the room that the object was 
+in to the <b>Avatar</b>, while the value of the 
+<b>Owner</b> property remains the same. &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>The first example prints the location and Owner of an object before and after the object is moved. Create a new object and set its <b>IsTakeable</b> property to <b>True</b>.</p>
+<blockquote><pre class="example">
+Sub PrintKeyInfo()
+Dim thisKey, KeyOwner, KeyLocation
+</pre><p class="comments">
+'Get the key object.
+<pre class="example">
+Set thisKey = World.CreateInstance("Key", "Artifact", User.Container)
+
+</pre><p class="comments">
+
+'Get the key's current location and owner.
+<pre class="example">
+Set KeyLocation = thisKey.Container						
+Set KeyOwner = thisKey.Owner
+
+Print "Key's location: " &amp; KeyLocation.Name
+Print "Key's Owner is: " &amp; KeyOwner.Name
+</pre>
+<p class="comments">'Now place the key into the user's contents.
+<pre class="example">
+thisKey.MoveInto User
+
+'Get the key's current location and owner.
+<pre class="example">
+Set KeyLocation = thisKey.Container						
+Set KeyOwner = thisKey.Owner
+
+Print "Key's location: " &amp; KeyLocation.Name
+Print "Key's Owner is: " &amp; KeyOwner.Name
+
+End Sub
+</pre><p class="comments">
+'Execute the procedure in the Command Window.
+<pre class="example">
+PrintKeyInfo
+</pre></blockquote>
+<p>Notice that the value of the "KeyLocation" variable shows that the container has 
+changed, but the owner of the key remains the same. </p>
+<p>In the world, drop the key, and have another person log on and pick up the key. Then print the key's location and owner. Notice that the first user retains ownership of the key.
+</body>
+</html>

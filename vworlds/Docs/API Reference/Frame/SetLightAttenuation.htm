@@ -1,0 +1,110 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SetLightAttenuation</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetLightAttenuation</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets a light's attenuation. <b>SetLightAttenuation</b> is a member 
+of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetLightAttenuation</b>&nbsp;<i>nIndex, fConst, 
+		fLinear, fQuadratic</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetLightAttenuation</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nIndex</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The index of the light.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fConst</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The constant attenuation factor.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fLinear</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The linear attenuation factor.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fQuadratic</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The quadratic attenuation factor.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Lights that have a location (that is, are not infinitely far away) can have attenuation
+factors for calculating the attenuation of the light based on an object's distance from
+the light. The formula for the total attenuation factor is: </p>
+
+<blockquote>
+  <p>TAF = 1 / [<i>fConst</i> + <i>fLinear</i> * distance + <i>fQuadratic</i> *
+  (distance^2)]</p>
+</blockquote>
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.SetLightAttenuation 23, 2.0, 1.0, 0.0</pre>
+&nbsp;
+
+
+</body>
+</html>

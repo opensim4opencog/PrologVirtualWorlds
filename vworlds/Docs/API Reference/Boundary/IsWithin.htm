@@ -1,0 +1,129 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsWithin</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsWithin</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>
+Determines whether a coordinate lies within a specified <a href="Boundary.htm">Boundary</a>. <b>IsWithin</b> is a member of the <b>Boundary</b> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>IsWithin</b>(<i>fX, fY</i>)</td>
+	</tr>
+</table>
+ 
+<p>The <b>IsWithin</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <B>Boundary</b>.</td>
+	</TR>
+	
+	<TR>
+		<TD class="boldItal">fX	</TD>
+		<TD>Float</TD>
+		<TD>Required</TD>
+		<TD>The Boundary x-axis position of the vertex.	</TD>
+	</TR>
+	<TR>
+		<TD class="boldItal">fY	</TD>
+		<TD>Float</TD>
+		<TD>Required</TD>
+		<TD><!--Description-->The Boundary y-axis position of the vertex.</TD>
+	</TR>
+	
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Boolean</b> value.
+
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p> The <b>IsWithin</b> method verifies whether a specified boundary coordinate is located within the boundary that is invoking the method. If the coordinate, or <a href="Vertex.htm">Vertex</a>, lies inside the boundary, <b>IsWithin</b> returns <b>True</b>. Otherwise, <b>IsWithin</b> returns <b>False</b>.
+
+<p>The <i>fX</i> and <i>fY</i> coordinates are relative to the center point (0,0) of the object the boundary is assigned to. Because the points are relative to a common point, the <b>IsWithin</b> method is especially useful for determining whether several boundaries on the same object intersect with each other. For example, if a boundary is nested within another, passing any x-y boundary coordinate of the inner boundary to the <b>IsWithin</b> method will return <b>True</b> if the inner boundary is completely within the outer boundary. The values supplied only relate to the two-dimensional boundary coordinate system, not the 3-D world coordinate system. For more information on the coordinate system of boundaries, see the <a href="Boundary.htm">Boundary</a> topic.
+
+<!--Example section-->
+<H3>Examples</H3>
+
+
+<p>The first example creates a <b>Boundary</b> around an existing object and invokes the <b>IsWithin</b> method to verify whether a specified coordinate lies within the boundary. The argument "myObject" is the name of the existing object being passed to the subroutine, "myX" and "myY" are boundary coordinates, and "myBoundaryIndex" is the index number of the boundary that is invoking the method.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject, myX, myY, myBoundaryIndex)
+
+Dim myFireHydrant
+Dim myOuterEdge
+Dim myWithinFlag
+</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a boundary without a specified size..
+<pre class="example">Set myOuterEdge = World.CreateBoundary</pre>
+
+<p class=comments>'Generate an eight-sided boundary.
+<pre class="example">myOuterEdge.AutoGenerate myFireHydrant, 8</pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge</pre>
+
+<p class=comments>'Verify to see if the coordinate is within the boundary.
+<pre class="example">myWithinFlag = myFireHydrant.BoundaryList.Property(myBoundaryIndex).<b>IsWithin(myX, myY)</b>
+End Sub</pre>
+
+<p>Example 2
+
+<p>This example verifies whether a vertex is within the third boundary of an object by printing the return value to the Command Window. To use this example, substitute the name of an existing object for "myObject," and set the index number to an existing boundary in a <b>BoundaryList</b>.<br><br>
+<pre class="example">
+Dim result
+
+result = myObject.BoundaryList.Property(2).<b>IsWithin(3, 3)</b>
+Trace result</pre>
+
+
+</body>
+</html>

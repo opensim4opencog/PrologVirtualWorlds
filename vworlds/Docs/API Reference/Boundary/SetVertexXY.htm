@@ -1,0 +1,133 @@
+
+<!DOCTYPE html public "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<LINK rel="Stylesheet" href="../APIRef.css">
+<TITLE>SetVertexXY</TITLE>
+</HEAD>
+<BODY>
+<!--Header table -->
+<TABLE class="head">
+	<TR>
+		<TD><H2>SetVertexXY</H2>
+		</TD>
+		<TD class="space">
+		</TD>
+		<TD class="methodpic"><!--image is inserted here-->
+		</TD>
+		<TD class="greyed">Method of Boundary</TD>
+	</TR>
+</TABLE><!--Topic Definition-->
+
+<P>Changes the location of a vertex of a boundary contained in a <a href="../Exemplars/Thing/BoundaryList.htm">BoundaryList</a>. <b>SetVertexXY</b> is a member of the <a href="Boundary.htm">Boundary</a> object.
+
+<!--Syntax table--></P><B></B><B></B>
+<H3>Syntax</H3>
+<TABLE class="backlight">
+	<TR>
+		<TD><I>object</I>.<B>SetVertexXY</B>&nbsp;<EM>index,</EM> fX, 
+  fY
+		</TD>
+	</TR>
+</TABLE><!--Parameters table-->
+<p>The <b>SetVertexXY</b> method syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+
+	<THEAD>
+		<TR>
+			<TD>Parts
+			</TD>
+			<TD>Type
+			</TD>
+			<TD>Use
+			</TD>
+			<TD>Description
+			</TD>
+		</TR>
+	</THEAD><!--Parameters table: line divider-->
+	<TR class="line">
+		<TD colspan="100">
+		</TD>
+	</TR><!--Parameters table: contents-->
+	<TR>
+		<TD class="boldItal">object
+		</TD>
+		<TD>Boundary
+		</TD>
+		<TD>Required
+		</TD>
+		<TD>An object reference that accesses a <B>Boundary</b>.
+		</TD>
+	</TR>
+	<TR>
+		<TD class="boldItal">index
+		</TD>
+		<TD>Integer
+		</TD>
+		<TD>Required
+		</TD>
+		<TD>The index number of a vertex contained in a <B>BoundaryList</B>.</TD>
+	</TR>
+	<TR>
+		<TD class="boldItal">fX
+		</TD>
+		<TD>Float
+		</TD>
+		<TD>Required
+		</TD>
+		<TD>The new position of the vertex on the boundary x-axis.
+		</TD>
+	</TR>
+	<TR>
+		<TD class="boldItal">fY
+		</TD>
+		<TD>Float
+		</TD>
+		<TD>Required
+		</TD>
+		<TD><!--Description-->The 
+      new position of the vertex on the boundary x-axis.
+		</TD>
+	</TR>
+</TABLE><!--Return Value section -->
+<H3>Return Value</H3>
+<P>This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <B>SetVertexXY</B> method changes the x and y boundary coordinates of an existing vertex in a <B>Boundarylist</B>. The <i>index</i> argument specifies the index number of the vertex you want to edit. The <i>fX</i> and <i>fY</i> arguments specify the new location of the vertex on the boundary x-y plane, relative to the origin of the object the boundary surrounds. 
+
+<p>When a <b>Boundary</b> is created, the vertices of the polygon create edges of the boundary in the order that they are listed, moving from point to point. If a <b>Boundary</b> is created using the <a href="AutoGenerate.htm">AutoGenerate</a> method, the starting point is set to 0.0 on the boundary y-axis, and a point relative to the bounding box on the boundary x-axis. The start position x-axis coordinate is calculated internally, taking into account the size of the object that the boundary surrounds, and the center point of the object. If a <b>Boundary</b> is created based on a specified array of points, the start point is the first coordinate listed in the array. For more information on the coordinate system of boundaries, see the <a href="Boundary.htm">Boundary</a> topic.
+
+<H3>Example</H3>
+
+<p>This example creates a <b>Boundary</b> around an existing object by using the <a href="AutoGenerate.htm">AutoGenerate</a> method, and then moves a specific <a href="Vertex.htm">Vertex</a> on that boundary using the <b>SetVertexXY</b> method. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge
+</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a boundary without a specified size.
+<pre class="example">Set myOuterEdge = World.CreateBoundary</pre>
+
+<p class=comments>'Generate an eight-sided boundary.
+<pre class="example">myOuterEdge.AutoGenerate myFireHydrant, 8</pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge</pre>
+
+<p class=comments>'Change the location of the first vertex in the list.
+<pre class="example">myFireHydrant.BoundaryList.Property(0).<b>SetVertexXY 0, 4, 4</b>
+End Sub</pre>
+
+
+
+</BODY>
+</HTML>

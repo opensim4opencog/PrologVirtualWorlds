@@ -1,0 +1,202 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Handling User Interface Events</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Handling User Interface Events</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+       <P>User Interface Events</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P class=body>&nbsp;
+
+<!--How-to section -->
+
+<h3>Events and The Virtual Worlds Client Object</h3>
+
+<p>In addition to the system events that are described in the <a href="Event%20Handlers.htm">Event Handlers</a> section, Microsoft Virtual Worlds also includes events that are associated with the Virtual Worlds <b>Client</b> ActiveX&trade; object. Through an instance of this object, system events that are fired in response to world actions can be handled within the user interface. Writing script to handle these events provides a way to either extend the existing interface, or to create a completely separate interface. In addition, you can also create your own events that trigger changes in the user interface based on world events.
+
+<p>The Virtual Worlds <b>Client</b> object is included with the Virtual Worlds installation package. To access this object, create an instance of it by placing an &lt;OBJECT&gt; tag with the correct CLASSID in an .htm or .vbs file. 
+
+<p>The basic object tag is:<br><br>
+<pre class = example>&lt;object ID=<i>name</i> CLASSID="clsid:D4898803-20EF-11D0-8A96-00A0C9082583"&gt;&lt;/OBJECT&gt;</pre><br><br>
+
+<p>The <i>name</i> item is the user-assigned name by which other elements on that page will reference the instance of the <b>Client</b> object.
+
+<h3>Working With User Interface Events</h3>
+<p>The Virtual Worlds <b>Client</b> object provides an event handling structure that allows Web Page elements to receive Virtual Worlds UI Events. This structure conforms to the conventions of the Document Object Model (DOM). The structure follows this pattern:<br><br>
+
+<pre class=example>Sub theClient_OnUIEvent(Who, What, Args)
+
+Select Case What
+&nbsp;&nbsp;&nbsp;&nbsp;Case <i>eventname</i></pre>
+<div class=comments>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Perform actions as a result of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'the specified event being fired.</div>
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;Case <i>eventname2</i></pre>
+<div class=comments>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Perform an action as a result of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'the specified event being fired.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'....</div>
+<pre class=example>End Case
+
+End Sub</pre>
+
+<p>In the previous example, "theClient" refers to the name of the Virtual Worlds <b>Client</b> object that is determined by the ID tag of the <b>Client</b> object. the items &quot;<i>eventname</i>&quot; and &quot;<i>eventname2</i>&quot; correspond to any valid UI Event in the form of a <b>String</b>. The arguments &quot;Who&quot;, &quot;What&quot;, and &quot;Args&quot; are detailed in the following table.
+
+<p><TABLE class="backlight" STYLE="WIDTH:100%">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Argument</td>
+			<td>Type</td>
+			<td>Description</td>
+		</TR>
+
+	</thead>
+<tr class="line" ><td colspan=100></td></tr>
+
+		<TR>
+			<td class="boldital">Who</td>
+			<td>Thing</td>
+			<td>a reference to the object firing the event.</td>
+		</TR>
+		<TR>
+			<td class="boldital">What</td>
+			<td>String</td>
+			<td>The name of the event being fired.</td>
+		</TR>
+		<TR>
+			<td class="boldital">Args</td>
+			<td>Variant</td>
+			<td>Any additional arguments that are required by the event being fired. If there are multiple arguments for this parameter, they are typically passed in the form of an <b>Array</b> or <b>PropertyList</b>. </td>
+		</TR>
+</table>
+
+<p>To fire your own UI event, you can trigger a system event using the <a href="../World/FireUIEvent.htm">FireUIEvent</a> method of the <b>World</b> object. Your custom event can then respond to the specified event.
+
+<h3>Virtual Worlds User Interface Events</h3>
+
+<p>The following table provides details on the specific UI Events that Virtual Worlds fires through the Client object. 
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;For each event listed, the <b><i>Who</i></b> and <b><i>What</i></b> arguments described in the previous section also apply.
+<TABLE class="backlight" STYLE="WIDTH:100%">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>UI Event Handler</td>
+			<td>Description</td>
+			<td>Additional Parameters (<i>args</i>)</td>
+		</TR>
+	</thead>
+<tr class="line" ><td colspan=100></td></tr>
+	
+	<TR>
+		<td ><b>OnEnterInventory</b>(<i>pWhere</i>, <i>pWhat</i>)</td>
+		<td>Fired when an object moves from one container to another. This event is fired as a result of invoking a <b>Thing</b> exemplar method such as <b>MoveInto</b> or <b>Take</b>.</td>
+		<td><b><i>pWhere</i></b>: A reference to the container that the item was added to.
+		<p><b><i>pWhat</i></b>: A reference to the object that was added.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnLeaveInventory</b>(<i>pWhere</i>, <i>pWhat</i>)</td>
+		<td>Fired when an object changes its container and is removed from the inventory of another object. his event is fired as a result of invoking a <b>Thing</b> exemplar method such as <b>MoveInto</b> or <b>Drop</b>.</td>
+		<td><b><i>pWhere</i></b>: A reference to the container that the item was removed from.
+		<p><b><i>pWhat</i></b>: A reference to the object that was removed.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnEnterRoom</b>(<i>pWhere</i>, <i>pWhat</i>)</td>
+		<td>Fired when an object enters a room. This event is fired by such actions as the object being created or when the object enters a room through a portal. Note that this event is fired prior to the <b>OnEnterWorld</b> event.</td>
+		<td><b><i>pWhere</i></b>: A reference to the room that is entered.
+		<p><b><i>pWhat</i></b>: A reference to the object that is entering the room.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnLeaveRoom</b>(<i>pWhere</i>, <i>pWhat</i>)</td>
+		<td>Fired when an object leaves a room. This event is fired by such actions as the object being destroyed or when the object exits a room through a portal. Note that this event is fired prior to the <b>OnLeaveWorld</b> event.</td>
+		<td><b><i>pWhere</i></b>: A reference to the room that is left.
+		<p><b><i>pWhat</i></b>: A reference to the object that is leaving the room.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnCreateRoom</b>(<i>pThing</i>)</td>
+		<td>Fired when an instance of the <b>Room</b> exemplar is created.</td>
+		<td><b><i>pThing</i></b>A reference to the room that has been created.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnEnterWorld</b>()</td>
+		<td>Fired when an avatar connects to a world. Note that this event is fired after to the <b>OnEnterRoom</b> event.</td>
+		<td>None.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnLeaveWorld</b>()</td>
+		<td>Fired when an avatar leaves a world. Note that this event is fired after to the <b>OnLeaveRoom</b> event.</td>
+		<td>None.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnShowProfile</b>()</td>
+		<td>Fired when an <b>Avatar</b> clicks the <b>Profile</b> <b>MenuItem</b> of another <b>Avatar</b>.</td>
+		<td>None.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnEditProfile</b>()</td>
+		<td>Fired when a user clicks the <b>Profile</b> <b>MenuItem</b> of their own <b>Avatar</b>.</td>
+		<td>None.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnWhisper</b>()</td>
+		<td>Fired when the <b>Whisper</b> method of the <b>Avatar</b> exemplar (inherited from the <b>Thing</b> exemplar) is invoked.</td>
+		<td>None.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnHostStatusChanged</b>(<i>pTarget</i>)</td>
+		<td>Fired when an the Host privileges of an avatar are altered.</td>
+		<td><b><i>pTarget</i></b>: A reference to the avatar whose status is being changed.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnShowLogOffDialog</b>(<i>pTarget</i>)</td>
+		<td>Fired when a <b>Host</b> clicks the<b> LogOff...</b> menu item of another <b>Avatar</b>'s Profile list, or when a <b>Host</b> executes the <b>Logoff</b> method through script. This event is fired prior to the <b>OnLogOff</b> event.</td>
+		<td><b><i>pTarget</i></b>: A reference to the avatar that is disconnected.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnLogOff</b>(<i>pCaller</i>, <i>pTarget</i>, <i>bstrReason</i>)</td>
+		<td>Fired when an avatar has been disconnected by a <b>Host</b>. This event is fired after the <b>OnShowLogOffDialog</b> event is fired.</td>
+		<td><b><i>pCaller</i></b>: A reference to the <b>Host</b> that is logging the avatar off of a world.
+<p><b><i>pTarget</i></b>: A reference to the avatar being logged off.
+<p><b><i>bstrReason</i></b>: A string value that indicates the reason the avatar is being logged off.</td>		
+	</TR>
+	
+	<TR>
+		<td ><b>OnMoreAbout</b>(<i>pThis</i>)</td>
+		<td>Fired when the "More About..." option is clicked on the right-click popup menu of a <b>Thing</b>.</td>
+		<td><b><i>pThis</i></b>: A reference to the object that menu is associated with.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnEditObject</b>(<i>pThis</i>)</td>
+		<td>Fired when the <b>Properties...</b> menu item of a <b>Thing</b> is clicked.</td>
+		<td><b><i>pThis</i></b>: A reference to the object that Property page is associated with.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnShowDialog</b>(<i>bIsModal</i>, <i>bstrURL</i>,<br>&nbsp;<i>pArguments</i>, <i>bstrWindowFeatures</i>)</td>
+		<td>Fired when a <b>WebPage</b> object is left-clicked or when the <b>Show...</b> menu item of a <b>WebPage</b> object is clicked.</td>
+		<td><b><i>bIsModal</i></b>: A <b>Boolean</b> flag that indicates whether the page to be displayed is Modal or Modeless.
+<p><b><i>bstrURL</i></b>: The URL of the web page to display, in the form of a <b>String</b>.
+<p><b><i>pArguments</i></b>: A reference to the object that is passed into the dialog box.
+<p><b><i>bstrWindowFeatures</i></b>: a <b>String</b> that describes the display properties of the window to be displayed, such as the size and initial position.</td>		
+	</TR>
+	<TR>
+		<td ><b>OnShowTransportDialog</b>()</td>
+		<td>Fired when a user intersects with a <b>Boundary</b> that is associated with a <b>Portal</b> object.</td>
+		<td>None.</td>		
+	</TR>
+
+
+</TABLE>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>File Menu (Virtual Worlds Server)</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>File Menu (Virtual Worlds Server)</h1>
+
+<p>The <strong>File</strong> menu of the Virtual Worlds Server
+application handles operations that involve opening an existing
+world, creating a world, saving a world, renaming a world, and
+removing a world. You can save a world as a checkpoint file or
+export a world as a Microsoft Visual Basic Script© script file.</p>
+
+<p><img src="../images/vwsfile.gif" width="243" height="273"></p>
+
+<h2>File Menu Options</h2>
+
+<h3>New World... </h3>
+
+<p>Launches the <a href="../../uiref/worldwiz/wwiz1.htm"><strong>Create a World Wizard</strong></a> so that
+you can create a new world. While the Virtual Worlds Server has
+no set limit on the number of worlds it can host at the same
+time, server response may be slower if there are more than 20
+avatars in one room of a particular world or more than 100 in all rooms of
+all worlds.</p>
+
+<h3>Open... </h3>
+
+<p>Opens a Virtual World that has been previously saved as a
+checkpoint file, which is a Virtual Worlds binary file format used to
+store all of the world's information. The file name extension for
+checkpoint files is .VWC.   Use <b>Import...</b> to open a world that
+has been stored in a script file.</p>
+
+<p><strong>Important Note</strong>: the checkpoint file stores
+version information about the Virtual Worlds software that
+created it. A checkpoint file created by an earlier version of
+Virtual Worlds <em>cannot</em> be opened by a later version.</p>
+
+<h3>Save </h3>
+
+<p>Saves your currently selected world as a checkpoint file
+(ending in .VWC), to the <tt>~\Microsoft Virtual Worlds\Worlds</tt>
+directory. The Virtual Worlds Server application also
+creates a backup of your world as part of the world-saving
+process.  The checkpoint file format is not guaranteed to be
+valid for different versions of Virtual Worlds.  If you save
+your world (using <b>Save</b> or <b>Save As...</b>) with one version of
+Virtual Worlds, you must use the same version to open the world.  If
+you plan to upgrade Virtual Worlds software, <b>Export</b> your world
+to a script file, and then Import it when you have completed the
+software upgrade.  This menu choice is active only when a world window is
+selected.</p>
+
+<h3>Save As... </h3>
+
+<p>Saves your currently selected world as a checkpoint file
+(ending in .VWC) with a filename you choose, to the <tt>~\Microsoft Virtual Worlds\Worlds</tt>
+directory.  This command also creates a new backup file (ending in .BAK.VWC) for the world,
+using the new name. All activity is switched to the
+world with the new name you specify: the registry is changed to
+point to the freshly named checkpoint file, and any avatars in
+the world are sent a warning message, asking whether they want to
+switch to the newly-named world. This menu choice is active only
+when a world window is selected. </p>
+
+<h3>Delete<strong> </strong></h3>
+
+<p>Deletes the selected world from the server by deleting the
+world's checkpoint file and registry key. This menu choice is
+active only when a world window is selected.</p>
+
+<h3>Import... </h3>
+
+<p>Imports a world by loading a Microsoft Visual Basic Script©
+script file into the <a href="../../uiref/adminui/import.htm"><b>Import Script Wizard</b></a>. The
+script file must have been saved previously with either the <strong>Export</strong>
+or <strong>Export As...</strong> menu options. You can <strong>Import...</strong>
+a script file saved by an earlier version of Virtual Worlds into
+a current version. The same is not true for checkpoint files;
+before Virtual Worlds opens a checkpoint file, it determines
+whether or not the checkpoint file version is the same as that of
+the Virtual Worlds software. Checkpoint files created by earlier
+versions of Virtual Worlds will not be opened. </p>
+
+<h3>Export </h3>
+
+<p>Saves the world as a Microsoft Visual Basic Script© script
+file (with a .VBS suffix) to the <tt>~\Microsoft Virtual Worlds\Worlds</tt>
+directory. This option (and the <strong>Export As...</strong> option) provides
+compatibility between different versions of Virtual Worlds
+software. If you save the world as a script file using one
+version of Virtual Worlds, you can load the world (by using the <strong>Import...</strong>
+menu option) with another version. The same is not true for
+checkpoint files. This menu choice is active only when a world
+window is selected.</p>
+
+<h3>Export As... </h3>
+
+<p>Saves the world as a Microsoft Visual Basic Script© script
+file (with a .VBS suffix) to the <tt>~\Microsoft Virtual Worlds\Worlds</tt>
+directory, using the filename entered by the user. This option (and the <strong>Export</strong>
+option) provides compatibly between different versions of Virtual
+Worlds software. If you save the world as a script file using one
+version of Virtual Worlds, you can load the world (by using the <strong>Import...</strong>
+menu option) with another version. The same is not true for
+checkpoint files. This menu choice is active only when a world
+window is selected.</p>
+
+<h3>Exit </h3>
+
+<p>Closes the server after taking all worlds offline. </p>
+
+<h4>See Also</h4>
+
+<p><a href="vwssavas.htm">Save As ... Dialog Box</a><br>
+<a href="vwsexp.htm">Export As ... Dialog Box</a></p>
+</body>
+</html>

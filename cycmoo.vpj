@@ -1,0 +1,134 @@
+[CONFIGURATIONS]
+activeconfig=,Release
+config=,Release
+config=,Debug
+[GLOBAL]
+FILTERNAME=Source Files\nJSP\nOther Files\n
+FILTERPATTERN=*.java;*.c;*.cpp;*.cxx;*.hxx;*.prg;*.pas;*.dpr;*.asm;*.bas;*.sc;*.e\n*.jsp\n*.*\n
+FILTERAPPCOMMAND=\n\n\n
+FILTERASSOCIATEFILETYPES=0 0 0 
+macro_switchconfig=_on_switchconfig_java
+app_type_list=application,applet,custom
+workingdir=.
+version=6.0
+packname=Java - Empty Project
+MACRO=\n
+[COMPILER.Release]
+app_type=application
+packver=3
+compile=copts: savecurrent|concur|capture|dialog:_java_options_form:Compiler|readonly|menu: Compile:&Compilecmd: javac %cp "%f"otheropts: 
+make=copts: saveall|concur|capture|dialog:_java_options_form:Compiler|readonly|menu: Build:&Buildcmd: javamakeotheropts: 
+rebuild=copts: saveall|concur|capture|dialog:_java_options_form:Compiler|readonly|menu: Rebuild:&Rebuildcmd: javarebuildotheropts: 
+debug=copts: dialog:_java_options_form:Debugger|readonlymenu: Debug:&Debugcmd: jdb %cpotheropts: 
+apptool_debug_application=copts: dialog:_java_options_form:Debugger|readonlymenu: Debug:&Debugcmd: jdb %cpotheropts: 
+apptool_debug_applet=copts: dialog:_java_options_form:appletviewer|readonlymenu: Debug:&Debugcmd: appletviewer -debug %hotheropts: 
+apptool_debug_custom=copts: menu: Debug:&Debugcmd: jdb %cp LogicMooCycotheropts: 
+execute=copts: saveall|dialog:_java_options_form:Interpreter|readonly|buildfirst|concur|capture|menu: Execute:E&xecutecmd: java %cpotheropts: 
+apptool_execute_application=copts: saveall|dialog:_java_options_form:Interpreter|readonly|buildfirst|concur|capture|menu: Execute:E&xecutecmd: java %cpotheropts: 
+apptool_execute_applet=copts: saveall|dialog:_java_options_form:appletviewer|readonly|buildfirst|concur|capture|menu: Execute:E&xecutecmd: appletviewer %hotheropts: appletclass: LogicMooCyc
+apptool_execute_custom=copts: saveall|buildfirst|concur|capture|menu: Execute:E&xecutecmd: java %cp LogicMooCyc otheropts: 
+usertool_dash=copts: |savenone|menu: dash:-cmd: otheropts: 
+usertool_view_javadoc=copts: |hide|savecurrent|readonly|disablecapoutput|dialog:_java_options_form:javadocmenu: view javadoc:&View Javadoccmd: javaviewdocotheropts: 
+usertool_javadoc_all=copts: saveall|concur|capture|hide|dialog:_java_options_form:javadoc|readonly|savenone|menu: javadoc all:Javadoc Allcmd: javamakedoc javadoc -d docs %cp %{*.java}otheropts: 
+usertool_dash2=copts: |savenone|menu: dash2:-cmd: otheropts: 
+usertool_make_jar=copts: saveall|concur|capture|readonly|hide|savenone|dialog:_java_options_form:jar|menu: make jar:Make &Jarcmd: javamakejar jar cvf "LogicMooCyc.jar" %{*.*}otheropts: 
+usertool_java_options=copts: readonly|hide|savenone|nochangedir|disablecapoutput|menu: java options:Java &Options...cmd: javaoptionsotheropts: 
+user1=copts: |hide|menu: User 1:User 1cmd: otheropts: 
+user2=copts: |hide|menu: User 2:User 2cmd: otheropts: 
+includedirs=
+reffile=
+[COMPILER.Debug]
+app_type=application
+packver=3
+compile=copts: concur|capture|dialog:_java_options_form:Compiler|readonly|menu: Compile:&Compilecmd: javac -g %cp "%f"otheropts: 
+make=copts: saveall|concur|capture|dialog:_java_options_form:Compiler|readonly|menu: Build:&Buildcmd: javamakeotheropts: 
+rebuild=copts: saveall|concur|capture|dialog:_java_options_form:Compiler|readonly|menu: Rebuild:&Rebuildcmd: javarebuildotheropts: 
+debug=copts: dialog:_java_options_form:Debugger|readonlymenu: Debug:&Debugcmd: jdb %cpotheropts: 
+apptool_debug_application=copts: dialog:_java_options_form:Debugger|readonlymenu: Debug:&Debugcmd: jdb %cpotheropts: 
+apptool_debug_applet=copts: dialog:_java_options_form:appletviewer|readonlymenu: Debug:&Debugcmd: appletviewer -debug %hotheropts: 
+apptool_debug_custom=copts: menu: Debug:&Debugcmd: jdb %cp LogicMooCycotheropts: 
+execute=copts: saveall|dialog:_java_options_form:Interpreter|readonly|buildfirst|concur|capture|menu: Execute:E&xecutecmd: java %cpotheropts: 
+apptool_execute_application=copts: saveall|dialog:_java_options_form:Interpreter|readonly|buildfirst|concur|capture|menu: Execute:E&xecutecmd: java %cpotheropts: 
+apptool_execute_applet=copts: saveall|dialog:_java_options_form:appletviewer|readonly|buildfirst|concur|capture|menu: Execute:E&xecutecmd: appletviewer %hotheropts: appletclass: LogicMooCyc
+apptool_execute_custom=copts: saveall|buildfirst|concur|capture|menu: Execute:E&xecutecmd: java %cp LogicMooCyc otheropts: 
+usertool_dash=copts: |savenone|menu: dash:-cmd: otheropts: 
+usertool_view_javadoc=copts: |hide|savecurrent|readonly|disablecapoutput|dialog:_java_options_form:javadocmenu: view javadoc:&View Javadoccmd: javaviewdocotheropts: 
+usertool_javadoc_all=copts: saveall|concur|capture|hide|dialog:_java_options_form:javadoc|readonly|savenone|menu: javadoc all:Javadoc Allcmd: javamakedoc javadoc -d docs %cp %{*.java}otheropts: 
+usertool_dash2=copts: |savenone|menu: dash2:-cmd: otheropts: 
+usertool_make_jar=copts: saveall|concur|capture|readonly|hide|savenone|dialog:_java_options_form:jar|menu: make jar:Make &Jarcmd: javamakejar jar cvf "LogicMooCyc.jar" %{*.*}otheropts: 
+usertool_java_options=copts: readonly|hide|savenone|nochangedir|disablecapoutput|menu: java options:Java &Options...cmd: javaoptionsotheropts: 
+user1=copts: |hide|menu: User 1:User 1cmd: otheropts: 
+user2=copts: |hide|menu: User 2:User 2cmd: otheropts: 
+includedirs=
+reffile=
+[FILES]
+src\logicmoo\JavaRt.java
+src\logicmoo\LogicMoo.java
+src\logicmoo\SwiMoo.java
+src\logicmoo\agent\CycObjectResets.java
+src\logicmoo\agent\LogicMooAgency.java
+src\logicmoo\agent\MooAgentThread.java
+src\logicmoo\agent\MooCommandLine.java
+src\logicmoo\agent\MooCycRobot.java
+src\logicmoo\agent\MooIrcBot.java
+src\logicmoo\api\IActorCommandParser.java
+src\logicmoo\api\IMooClient.java
+src\logicmoo\api\LogicMooCycAccess.java
+src\logicmoo\cmd\ActorCommandParser.java
+src\logicmoo\net\CycWebServer.java
+src\logicmoo\net\LogicMooTelnetServer.java
+src\logicmoo\net\MooTelnetClientHandler.java
+src\logicmoo\net\TelnetProxyServer.java
+src\logicmoo\obj\LogicMooEvent.java
+src\logicmoo\plugin\CircleMudLoader.java
+src\logicmoo\util\Colour.java
+src\logicmoo\util\MD5.java
+src\logicmoo\util\Queue.java
+src\logicmoo\util\StatTable.java
+src\logicmoo\util\Ticker.java
+src\logicmoo\util\TickListener.java
+src\logicmoo\util\Util.java
+webapps\logimoo\areas.jsp
+webapps\logimoo\askassert.jsp
+webapps\logimoo\create.jsp
+webapps\logimoo\createaction.jsp
+webapps\logimoo\createarea.jsp
+webapps\logimoo\createcollection.jsp
+webapps\logimoo\createfunction.jsp
+webapps\logimoo\createmob.jsp
+webapps\logimoo\createnpc.jsp
+webapps\logimoo\createobject.jsp
+webapps\logimoo\createpredicate.jsp
+webapps\logimoo\createrole.jsp
+webapps\logimoo\cyclbot.jsp
+webapps\logimoo\dumpareas.jsp
+webapps\logimoo\index.jsp
+webapps\logimoo\loadcyclish.jsp
+webapps\logimoo\mainmenu.jsp
+webapps\logimoo\newmtfile.jsp
+webapps\logimoo\synchronizecyc.jsp
+webapps\logimoo\synchronizejamud.jsp
+webapps\logimoo\taxonomicpair.jsp
+webapps\logimoo\testkif.jsp
+webapps\logimoo\topnav.jsp
+webapps\logimoo\uploadkif-test.jsp
+webapps\logimoo\uploadkif.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\askassert.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\create.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\createarea.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\createcollection.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\createfunction.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\createmob.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\createnpc.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\createobject.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\createpredicate.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\createrole.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\index.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\mainmenu.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\newmtfile.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\synchronizecyc.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\synchronizejamud.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\topnav.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\uploadkif-test.jsp
+webapps\logimoo\WEB-INF\classes\org\opencyc\jsp\examples\uploadkif.jsp
+[ASSOCIATION]

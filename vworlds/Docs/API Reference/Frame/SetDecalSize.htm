@@ -1,0 +1,148 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SetDecalSize</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetDecalSize</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+Sets the size of the&nbsp;specified decal. 
+<STRONG>SetDecalSize</STRONG> is a member of&nbsp;the <A href="Frame.htm">Frame</A> 
+object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>origin</EM>.<STRONG>SetDecalSize</STRONG><EM> 
+      nMeshIndex, fHeight, fWidth, bScale</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>SetDecalSize</STRONG> method 
+syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name-->origin</td>
+		<td><!--Type-->Frame</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description--> 
+         An object reference to 
+      a&nbsp;<STRONG>Frame</STRONG>  object.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>nMeshIndex</TD>
+    <TD>Long</TD>
+    <TD>Required</TD>
+    <TD>The index number of the mesh.</TD></TR>
+  <TR>
+    <TD class=boldItal>fHeight</TD>
+    <TD>Float</TD>
+    <TD>Required</TD>
+    <TD>The height of the decal, in pixels.</TD></TR>
+  <TR>
+    <TD class=boldItal>fWidth</TD>
+    <TD>Float</TD>
+    <TD>Required</TD>
+    <TD>The&nbsp;width of the decal, in pixels.</TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->bScale</td>
+		<td><!--Type-->Boolean</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description--><STRONG>True</STRONG> 
+      if you want the depth of the decal taken into account when the decal is 
+      rendered.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->The 
+<EM>bScale</EM> parameter is set to <B>True</B>  if you want the depth taken into account 
+when Microsoft Virtual Worlds renders the decal. This parameter is also set to 
+<B>True</B> if the decal is a texture on a frame in a scene and is rendered 
+smaller when it is farther from the viewer and larger when it is closer to the 
+viewer. If you want to ignore the depth of the decal and render the decal the 
+same size whether it is near or far from the viewer, set the <EM>bScale</EM> 
+parameter to <B>False</B>.&nbsp;&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example changes the size and position of a previously created decal.</p>
+<PRE class="example">
+Sub ChangeDecalSizeAndPosition()
+Dim myFrame
+Dim myMeshIndex
+Dim myHeight
+Dim myWidth
+Dim myScale
+Dim myX
+Dim myY
+</PRE>
+<P class="comments">'Set a reference to the frame where you want to place the 
+decal.
+<PRE class="example">Set myFrame = User.Container.GetFrame
+</PRE>
+<P class="comments">'Create a decal.
+<PRE class="example">
+myFrame.CreateDecalFromText "This is the new Kiosk", "Kiosk"
+</PRE>
+<P class="comments">'Get the values for the variables, "myHeight", "myWidth", "myScale".
+<PRE class="example">myFrame.GetDecalSize 0, myHeight, myWidth, myScale</PRE>
+</pre><p class="comments">'Trace the values.
+<pre class="example">
+Trace "Decal height is: " &amp; myHeight
+Trace "Decal width is: " &amp; myWidth
+Trace "Decal height is: " &amp; myScale</pre>
+<P class="comments">'Change the values.
+<PRE class="example">myHeight = myHeight + .5
+myWidth = myWidth - .15</PRE>
+<P class="comments">'Set the decal to the new size.
+<PRE class="example">myFrame.<b>SetDecalSize 0, myHeight, myWidth, myScale</b></PRE>
+</pre><p class="comments">'Trace the values.
+<pre class="example">
+Trace "Decal height is: " &amp; myHeight
+Trace "Decal width is: " &amp; myWidth
+Trace "Decal height is: " &amp; myScale</pre>
+<P class="comments">'Get the origin of the decal.
+<PRE class="example">myFrame.GetDecalOrigin 0, myX, myY
+
+End Sub</PRE>
+</body>
+</html>

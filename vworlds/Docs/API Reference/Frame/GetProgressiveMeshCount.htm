@@ -1,0 +1,88 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetProgressiveMeshCount</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetProgressiveMeshCount</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P> Returns the number of progressive meshes contained by&nbsp;a frame. 
+<b>GetProgressiveMeshCount</b> is a member of the <A href="Frame.htm"><b>Frame</b></A> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetProgressiveMeshCount</b>()</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetProgressiveMeshCount</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a <STRONG>Variant</STRONG> that represents the number of progressive 
+meshes&nbsp;contained by a frame.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>A <B>Frame</B> contains a list of <I>visuals</I> (visual 
+objects) and a list of lights. A <i>mesh</i> is a visual object that is made up of a set of polygonal faces; it
+defines a set of vertices and a set of faces. A <i>progressive</i> <i>mesh</i> is a mesh 
+that is stored as a base mesh (a coarse version) and a set of records that are 
+used to increasingly refine the mesh. This allows you to set the level of detail 
+rendered for a mesh&nbsp;if the model that you are using 
+contains&nbsp;progressive meshes. &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example assigns the number of progressive meshes to "myMeshCount".</p>
+<pre class="example">
+Dim myFrame
+Dim myMeshCount
+
+Set myFrame = User.Container.GetFrame
+myMeshCount = myFrame.<b>GetProgressiveMeshCount</b></pre>
+
+</body>
+</html>

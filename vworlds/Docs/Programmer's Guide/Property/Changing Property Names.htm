@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Changing Property Names</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>Changing Property Names</h1>
+
+<p><!-- 10/23/98 --></p>
+
+<p>Editing property names can have one of the following results:</p>
+
+<ul>
+    <li>You cannot edit the name of a property that has been
+        inherited from an exemplar. You must first copy the
+        property (by editing its value) to create an object-local
+        version of it, and then you will be able to change the
+        property's name. </li>
+    <li>If you edit the name of a property that was inherited
+        from an exemplar but has a new value, then you will
+        actually create a new local version of that property, of
+        the same type and value as the original but with your new
+        name. The original exemplar property with the old name
+        will not be deleted; it still remains in the object,
+        unchanged. </li>
+    <li>If you edit the name of a property that exists only in
+        the object instance, then you are in fact changing the
+        name of that property. No property with the old name
+        remains, it will be replaced by the property with the new
+        name. However, be aware that renaming a property in this
+        way can potentially break any references made to the
+        property's old name. </li>
+</ul>
+
+<h2>To change a property's name:</h2>
+
+<ol>
+    <li>In the <b>Lists pane</b>, click the <a href="../../uiref/views/toolstab.htm"><b>Author Tools</b></a>
+        tab, and then click <a href="../../uiref/objexpl/intrface.htm"><b>Object Explorer</b></a>. </li>
+    <li>Right-click the property you want to change, and then
+        click <b>Edit Name</b>.<br>
+        The name of the property will be highlighted. </li>
+    <li>Type a new name for the property, and then press <font
+        size="2"><b>ENTER</b></font>. </li>
+</ol>
+
+</body>
+</html>

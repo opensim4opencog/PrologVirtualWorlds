@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Contents</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Contents</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of Thing</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <a href="../PropertyList/PropertyList.htm">PropertyList</a> that holds the objects
+contained by the calling object. <b>Contents</b> is a read/write <b>PropertyList</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Contents</b> = <i>PropertyListValue</i></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Contents</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Thing</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">PropertyListValue</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>A list that holds the objects inside the calling object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>A <b>Room</b> is contained within a <b>World</b>, and is part of
+the world's <b>Contents</b>. In the same way, objects are containted in a <b>Room</b>,
+and are part of its <b>Contents</b>. In contrast, the <a href="Container.htm">Container</a>
+property of <b>Thing</b> refers to the object that contains the calling object.</p>
+
+<p>All objects in the inventory of an avatar will be listed in the avatar's <b>Contents</b>.
+(In fact, an avatar's <i>inventory</i> is synonymous with an avatar's <i>contents</i>.)
+Only those objects at the same level inside the calling object will show up on that
+object's <b>Contents</b> list. For example, if an avatar has a box object in his
+or her inventory, the box object will appear in the avatar's <b>Contents</b>,
+although any objects <i>inside</i> the box will not appear on the same list. The objects
+inside the box would appear on the box's <b>Contents</b> list; if the box
+contains a smaller box, any objects within the smaller box will not appear on the larger
+box's list, and so on.</p>
+
+<p>This property will be empty if there are no objects inside the calling object.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>Set Result = AThing.Contents</pre>&nbsp;
+ 
+
+</body>
+</html>

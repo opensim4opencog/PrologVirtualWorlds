@@ -1,0 +1,144 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnPortalLeave</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnPortalLeave</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called in response to the <strong>PortalArrive</strong>
+event, which occurs when an object leaves a region through a <b>Portal</b>.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>OnPortalLeave(<i>ThePortal, LeavingObj, Index</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnPortalLeave</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+		<TR>
+		<td class="boldItal">ThePortal</td>
+		<td>Portal</td>
+		<td>Required</td>
+		<td>The portal through which the object is leaving.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">LeavingObj</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>A reference to the object leaving through the portal.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">Index</td>
+		<td>Integer</td>
+		<td>Required</td>
+		<td>Whether the object is departing for a primary or secondary destination.</td>
+	</TR>
+</TABLE>
+<p>The <b>PortalLeave</b> event supports these additional handlers:
+<TABLE class="backlight" STYLE="WIDTH:75%">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Event Handler</td>
+			<td>Description</td>
+
+		</TR>
+	</thead>
+<tr class="line" ><td colspan=100></td></tr>
+	<TR>
+		<td class="boldItal">OnPeerPortalLeave</td>
+		<td>The handler for other objects in the same <a href="../Thing/Container.htm">Container</a>.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContainerPortalLeave</td>
+		<td>The handler for the object's <a href="../Thing/Contents.htm">Contents</a>.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContentPortalLeave</td>
+		<td>The handler for the <b>Container</b> of the object.</td>
+		<td></td>
+		<td></td>
+	</TR>
+</TABLE>
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>This method is not normally called by the user; it responds to an internal event that
+occurs in Virtual Worlds when a file is dropped from the desktop into the world. If you
+find it necessary to override this event-handling method, <a href="../Thing/InvokeSuperMethod.htm">InvokeSuperMethod</a>
+should also be called to maintain the existing functionality of the overridden method. </p>
+
+<p>It is sometimes useful to override this method in order to display a farewell message
+or trigger other behaviors when a user departs.</p>
+
+<p>The parameter <i><tt>Index</tt></i> indicates whether the destination for which the
+object is departing is primary or secondary. Primary destinations are indicated with a
+value of -1. Secondary destinations are indicated with a value greater than -1.</p>
+<!--Example section-->
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">Sub OnPortalLeave(ThePortal, LeavingObj, Index)
+&nbsp;&nbsp;&nbsp;&nbsp;Trace LeavingObj.Name &amp; &quot; is leaving.&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod(Array(ThePortal, LeavingObj, Index))
+
+End Sub</pre>
+<!--Example text-->
+&nbsp;
+</pre>
+
+
+
+</body>
+</html>

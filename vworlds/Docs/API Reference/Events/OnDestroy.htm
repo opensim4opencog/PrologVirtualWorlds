@@ -1,0 +1,95 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnDestroy</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnDestroy</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called in response to a <b>Destroy</b> event.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>OnDestroy(<i>pThing</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnDestroy</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">pThing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object being destroyed.</td>
+	</TR>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>This method is not normally called by the user; it responds to an internal event that
+occurs in Virtual Worlds when an object is destroyed. This
+method can be overridden in script if you want to extend the behavior of the <b>OnDestroy</b>
+event handler. If you find it necessary to override this event-handling method,
+<strong>InvokeSuperMethod</strong> should also be called to maintain the existing functionality of the overridden method.</p>
+
+<p>An overriding version of this event handler works best if it created as a
+server-side method, but it can be created as a client-side method, if necessary.
+<!--Example section-->
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">Sub OnDestroy(TheThing)
+&nbsp;&nbsp;&nbsp;&nbsp;World.Trace TheThing.Name &amp; &quot; has been destroyed."
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod(TheThing)
+End Sub</pre>
+<!--Example text-->
+&nbsp;
+
+
+</body>
+</html>

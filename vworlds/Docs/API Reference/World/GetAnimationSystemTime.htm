@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetAnimationSystemTime</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetAnimationSystemTime</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+<p>Returns the number of&nbsp;milliseconds that have elapsed since the 
+world has been active. <STRONG>GetAnimationSystemTime</STRONG> is a&nbsp;member of the 
+<a href="World.htm">World</a> object. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<b><STRONG>GetAnimationSystemTime</STRONG></b></td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <STRONG>AnimationSystemTime</STRONG>  property syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal>object</TD>
+    <TD>World</TD>
+    <TD>Required</TD>
+    <TD>An&nbsp;object that&nbsp;references&nbsp;a <STRONG>World</STRONG> 
+      object.</TD></TR>
+
+</TABLE><!--Remarks section-->
+<H3>Return Value</H3>
+<P>This method returns a <STRONG>Long</STRONG> that represents the&nbsp;length of time that the world 
+has been running.</P>
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->The 
+time&nbsp;value stored by this property is marked each time&nbsp;the world 
+becomes active. The passage of time is not recorded when the world is inactive.
+<P>You can use this property in conjunction with the 
+<A href="../Exemplars/Thing/GetAnimationStartTime.htm">GetAnimationStartTime</A> 
+method to determine the exact keyframe of an animation&nbsp;during run-time. <!--Example section-->
+<H3>Example</H3>
+<p>This example determines how long an animation has been running and puts the number of milliseconds into the "myPositionClock" variable. </p>
+
+<pre class="example">
+Dim myPositionClock
+
+myPositionClock = myBaseball.<STRONG>GetAnimationSystemTime</STRONG> - _
+&nbsp;&nbsp;myBaseball.GetAnimationStartTime("Position")
+</pre>
+</body>
+</html>

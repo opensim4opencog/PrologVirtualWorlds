@@ -1,0 +1,166 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateInlineMethod</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateInlineMethod</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table><!--Topic Definition-->
+<P>Creates a method, the code for which is stored internally by Microsoft Virtual Worlds. 
+<b>CreateInlineMethod</b> is a member of the <a href="World.htm">World</a> object. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CreateInlineMethod</b>(<i>lFlags</i>, 
+		<i>bstrLanguage</i>, <i>bstrName</i>, <i>bstrCode</i>)</td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>CreateInlineMethod</b> method syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">lFlags</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The method creation attributes.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrLanguage</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The language used to create the method.&nbsp; 
+      This string MUST have the value "VBScript".&nbsp; JScript is not supported for inline methods at this time.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the method.&nbsp; This MUST be the 
+      same name as the subroutine or function name that you declare in the 
+      <EM>bstrCode</EM>    parameter.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrCode</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The code for the method that will be inserted inline.</td>
+	</TR>
+
+</TABLE><!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns 
+a reference to a <b>Method</b> object. <!--Remarks section-->
+<H3>Remarks</H3>
+<P>The significant difference between inline methods and 
+regular methods is that regular methods reference a script 
+<STRONG>Module</STRONG> object which in turn references code stored somewhere in 
+a text file.&nbsp; Inline methods, on the other hand, have their actual script 
+code stored internally by the Virtual Worlds system.&nbsp; The advantages to 
+using inline methods are<EM> </EM>instant distribution (no external script files 
+to manage), instant update (no module reloading required), and quick editing 
+(Virtual Worlds has a built-in editor).&nbsp; These advantages make inline 
+methods very handy for authoring&nbsp;relatively small behaviors and&nbsp;doing 
+quick 
+      prototyping.</P>
+<P class=Body>Possible values for the <EM>lFlags</EM> parameter include the constants as shown 
+in the following table.&nbsp; For convenience, these flag constants are exposed 
+as read-only properties of the <STRONG>World</STRONG> object.</P>
+<P>
+<TABLE class="backlight">
+  <THEAD>
+  <TR>
+    <TD>Constant</TH>
+    <TD>Value</TH>
+    <TD>Description</TD></TR></THEAD>
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR>
+  <TR>
+  <TR >
+    <TD><B>METHOD_CLIENT</B></TD>
+    <TD align=middle>1</TD>
+    <TD>Set this flag to run the method on&nbsp;a client.</TD></TR>
+  <TR >
+    <TD><B>METHOD_SERVER</B></TD>
+    <TD align=middle>2</TD>
+    <TD>Set this flag to run the method on the server.</TD></TR>
+  <TR vAlign=top>
+    <TD><B>METHOD_SYNC</B>
+    <TD align=middle>16</TD>
+    <TD>Set this flag to run the method synchronously on the server. By default, methods run 
+      asynchronously.</TD></TR></TABLE>
+
+<P>Use the <STRONG>METHOD_CLIENT</STRONG>    constant for 
+methods that run exclusively on&nbsp;a client. If the method is invoked from&nbsp;a client, it will 
+be&nbsp;run only on that client. However, if the method is invoked from the server, 
+it will be run remotely on all bystander clients.</P>
+<P>Use the <STRONG>METHOD_SERVER </STRONG> constant for those methods intended 
+to run only on the server. If the method is invoked from the server, it will 
+be&nbsp;run only on the server. If the method is invoked from a client, it will be 
+run remotely on the server.</P>
+<P>Methods that are&nbsp;invoked on the server are 
+normally&nbsp;run asynchronously: the code that invokes the 
+method will return without waiting for the method to complete on 
+the server.&nbsp; Should you want to explicitly wait for a server side method 
+to complete before the invocation returns (for example, to wait for return data from that method), you can use the 
+<STRONG>METHOD_SYNC</STRONG> constant.&nbsp; Note that 
+<STRONG>METHOD_SYNC</STRONG> only has functional meaning 
+when set on a server side method.&nbsp; Also note that 
+<STRONG>METHOD_SYNC</STRONG> should be used with caution:&nbsp;the client will 
+not do anything else until the server finishes executing the method in 
+question.&nbsp; If the server is very busy, the client could potentially be blocked for a significant amount of time.</P>
+<P>A method whose <STRONG>Flags</STRONG> property has both the 
+<STRONG>METHOD_CLIENT</STRONG> and <STRONG>METHOD_SERVER</STRONG> constants set runs wherever it is 
+invoked: If it is invoked on a client, it runs there, and if it is invoked on 
+the server, it runs there.&nbsp; <!--Example section--> For methods that 
+are designed to run on both&nbsp;a client and the server, you can combine the 
+flags by adding them together in this way:</P><PRE>World.METHOD_CLIENT + World.METHOD_SERVER</PRE>
+<P>The <EM>bstrCode</EM> parameter 
+contains the actual Microsoft Visual Basic Scripting Edition© code that will 
+execute when the method is invoked.&nbsp; This code must contain a complete 
+subroutine or function with the name specified in the <EM>bstrName</EM>        
+ parameter.
+<H3>Example</H3>
+<p>This code creates a new inline method called "Greet" 
+that will cause a <STRONG>Thing</STRONG> object to say "Hello, there!" when the 
+method is executed.&nbsp; Note that you would have to use the <A href="../Thing/AddMethod.htm">AddMethod</A>&nbsp;method of the 
+<STRONG>Thing</STRONG> object to actually associate&nbsp;the created&nbsp;inline 
+method with an actual in-world object.</p>
+<blockquote><pre>Dim Code, NewMethod
+Code = "Sub Greet: this.Say ""Hello, there!"": End Sub"
+Set NewMethod = _
+	World.CreateInlineMethod (World.METHOD_CLIENT + _
+	World.METHOD_SYNC, "VBScript", _
+	"Greet", Code)
+
+</pre></blockquote>
+&nbsp;
+
+
+</body>
+</html>

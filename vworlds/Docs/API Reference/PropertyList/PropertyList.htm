@@ -1,0 +1,80 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>PropertyList</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>PropertyList</h2></td>
+		<td class="space"></td>
+		<td class="collectionpic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Collection</P></td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P class=body>An indexed collection of custom-defined property items. The index for this collection starts at zero. The 
+<B>PropertyList</B> collection    
+   is a Microsoft Virtual Worlds data type. 
+<H3>Using the PropertyList Object</H3>
+<P>               
+  You can create an empty <B>PropertyList</B> 
+collection and populate it later, or, when you create the collection using 
+the&nbsp;<A 
+href="../world/CreatePropertyList.htm"><B>CreatePropertyList</B></A><B> 
+</B>method, you can initialize the first property in the parameters of the 
+method.</P>
+<P>The <A href="IsEmpty.htm"><B>IsEmpty</B></A> method checks if any items exist in the <B>PropertyList</B> collection. This method is useful when you want to create a collection that you want to use on more than one world.&nbsp;You can first check if the collection already exists and, if it does, you can leave the contents intact and add to the current collection instead of creating a new one.</P>
+
+<blockquote><PRE>
+Sub CreatePassports()
+Dim myPassports
+Dim myPassport
+Dim myPassportID
+</PRE>
+<p class="comments">'Create a new collection. The <i>varOrphan</i> parameter (set to True) indicates to Virtual Worlds whether the property list is attached to a world or orphaned.
+<pre class="example">
+If myInterworldPassports _
+&nbsp;&nbsp;Set myPassports = CreatePropertyList(myPassportID, True)
+
+myPassports.Add = myPassportID
+myPassports.Add = Name
+
+</pre></blockquote>
+
+<P><B>Note:</B>&nbsp;&nbsp;&nbsp;Because a <B>PropertyList</B> collection starts at 0, the index number for the first property&nbsp;is 0. However, the <B>Count</B> property starts the count at 1. Therefore, 
+the value of the <B>Count</B> property for "Property(0)"&nbsp;is 1.</P>
+
+<P>You can create a nested property list in Virtual Worlds. However, such a property list cannot be attached to a world, it must be 
+orphaned. To create a property list that doesn't reference a world, set the <EM>varOrphan</EM> parameter to <B>True</B>, as in the following code sample. The <EM>varOrphan</EM> parameter is set to <B>False</B> by default.&nbsp;&nbsp;
+
+<PRE>Set myPropertyList = <B>CreatePropertyList("PropertyOne", True)</B></PRE>
+
+<P>Although&nbsp;it is possible to create a property list with one or more property list elements, there is not much practical reason to do so. You cannot use either the <A href="../Thing/AddProperty.htm"><B>AddProperty</B></A> method of 
+<B>Thing</B> or the Object Explorer to add a composite property to a <B>Thing</B>. 
+
+<P>For information on how to iterate through a property list, see the <A href="Property.htm">Property</A> topic.</P>
+ 
+<p><b>Important</b>:&nbsp;&nbsp;&nbsp;If you modify a Virtual Worlds object after it has been added it to a property list (for example, changing the value of a <a href="../MenuItem/MenuItem.htm">MenuItem</a>), you must re-assign the object to the list to ensure that the change is remoted. The following example creates an instance of the <b>PropertyList</b> object, adds a <b>Vector</b> ("myVector") object with a value of (1, 1, 1), and then changes the value of the vector <i>after</i> it has been added to the list. After this value is changed, the vector is then re-assigned to the list to make sure that the value is updated.<br><br>
+
+<pre class=example>
+Dim myList
+Dim myVector
+
+myVector = World.CreateVector(1, 1, 1)
+
+Set myList = World.CreatePropertyList
+myList.Add myVector
+
+myList.Property(0).X = 2</pre>
+<p class=comments>'Re-assign the updated property to the list.
+<pre class=example><b>myList.Property(0) = myList.Property(0)</b>
+</pre>
+</BODY>
+</html>

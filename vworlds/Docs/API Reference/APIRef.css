@@ -1,0 +1,140 @@
+/*APIRef Stylesheet*/
+/*link behavior*/
+a {
+	text-decoration:none;
+	font:Verdana;
+	font-weight: bold;
+	color: blue;	
+	}
+a:hover{
+	text-decoration:underline;
+	}
+body{
+	font-family:Verdana;
+	font-size:10pt;
+	text-decoration:none;
+	}
+/*code formatting with no space above*/
+div.comments{
+	color:#009900;
+	font-family:"courier new";
+	font-size:10pt;
+	}
+h2{
+	font-weight:bold
+	}
+/*code comment formatting with space above*/
+P.comments{
+	color:#009900;
+	font-family:"courier new";
+	font-size:10pt;
+	}
+/*date formatting and position*/
+P.greyed{
+	color:gray; 
+	font-style:italic; 
+	vertical-align:center;
+	text-align:right;
+	}
+
+/*Example section settings*/
+pre.example{
+	font-family:"courier new";
+	font-size:10pt;
+	margin:0; 
+	position:relative;
+	
+	}
+/*Table backlight settings*/
+table.backlight{
+	background-color:#e8edf4; 
+	height:26px; 
+	width:100%;
+	padding:2;
+	}
+table.head{
+	width:100%; 
+	height:80;
+	
+	}
+/*default table settings*/
+td{
+	font-size:10pt; 
+	vertical-align:top;
+	padding:3px;
+	padding-right:15px;
+	}
+/*description after image top right*/
+td.greyed{
+	color:gray; 
+	font-style:italic;
+	vertical-align:super;
+	}
+td.cent{
+	vertical-align:sub;
+	}
+td.boldItal{
+	font-weight:bold; 
+	font-style:italic
+	}
+/*Image tags definitions*/
+td.methodpic{
+	background-image:URL(images/btnMethod5a.gif); 
+	background-repeat:no-repeat; 
+	background-attachment:fixed; 
+	background-position:center 40%;
+	width:90px;
+	}
+td.propertypic{
+	background-image:URL(images/btnProperty4.gif); 
+	background-repeat:no-repeat; 
+	background-attachment:fixed; 
+	background-position:center 40%;
+	width:90px;
+	}
+td.eventpic{
+	background-image:URL(images/foo.bmp); 
+	background-repeat:no-repeat; 
+	background-attachment:fixed; 
+	background-position:center 40%;
+	width:90px;
+	}
+td.datatypepic{
+	background-image:URL(images/btnCollection3.gif); 
+	background-repeat:no-repeat; 
+	background-attachment:fixed; 
+	background-position:center 40%;
+	width:90px;
+	}
+td.collectionpic{
+	background-image:URL(images/btnCollection2.gif); 
+	background-repeat:no-repeat; 
+	background-attachment:fixed; 
+	background-position:center 40%;
+	width:90px;
+	}
+td.objectpic{
+	background-image:URL(images/icnthng3.gif); 
+	background-repeat:no-repeat; 
+	background-attachment:fixed; 
+	background-position:center 40%;
+	width:90px;
+	}
+/*Spacing tag for header*/
+td.space{
+	width:10%;
+	}
+/*Parameters table heading*/
+thead{
+	font-weight:bold
+	}
+/*White line in parameters table*/
+tr.line{
+	background-color:white;
+	height:2px;
+	colspan:100%;
+	}
+
+
+
+

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Writing an Inline Method</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>Writing an Inline Method</h1>
+
+<p><!-- 10/23/98 --></p>
+
+<p>Inline methods provide Virtual Worlds authors with a quick and
+convenient way of adding methods to their objects. Besides their
+convenience, inline methods are the only type of method
+in which any changes are immediately broadcast to the server and
+to all connected clients. This is not true of methods in script
+modules.</p>
+
+<p>Writing an inline method involves two processes: </p>
+
+<ol>
+    <li>Adding a method to the object. This step associates an empty
+	method of a given name with the object.</li>
+    <li>Specifying the code for the body of the method. </li>
+</ol>
+
+<h2>To add a method to your object:</h2>
+
+<ol>
+    <li>In the <b>Object Explorer</b>, select the
+        object to which you want to add the inline method.</li>
+    <li>Right-click anywhere in the <b>Methods</b>
+        pane.</li>
+    <li>Click <b>Add New Method...</b>.</li>
+    <li>When the <a href="../../uiref/objexpl/newmet.htm"><b>New Method</b></a> editor opens, <ol
+        type="a">
+            <li>type a name for the method in the <b>Method
+                Name</b> input box,</li>
+            <li>choose <b>Client</b>, or <b>Server</b>,
+                or <b>Client and Server</b> in the <b>Execute
+                on</b> selection box. </li>
+        </ol>
+    </li>
+    <li>Click <b>OK</b>.</li>
+</ol>
+
+<h2>To enter the inline method code:</h2>
+
+<ol>
+    <li>In the <b>Methods</b> pane of the <b>Object
+        Explorer</b>, select the method that you added in
+        the preceding process.</li>
+    <li>Click the <b>Expand Dialog</b> button at the
+        right end of this line.</li>
+    <li>When the <b>Inline Method Editor</b> opens,
+        fill in the code for your inline method, and, if
+        applicable, arguments for your method. See the example
+        that follows.</li>
+    <li>Choose <b>Client</b>, or <b>Server</b>,
+        or <b>Client and Server</b> in the <b>Execute
+        on</b> selection box. Select the same choice here
+        that you did in the previous procedure.</li>
+    <li>Click <b>OK</b>.</li>
+</ol>
+
+<h3>Example</h3>
+
+<p>Here is a sample inline method you could add to one of your
+objects. The method shown here is named <em>BackTalk</em>, since
+it causes your object to &quot;say&quot; the string passed to it
+in reverse. After you have added a &quot;placeholder&quot;
+method, all you need to do is add the following text that is shown in <b>bold</b>.
+Do not forget to include the method parameter, <em>str</em>. The <b>Inline
+Method Editor</b> fills in the Sub header and End Sub lines
+for you. The Inline Method Editor appends two digits at
+the end of the subroutine name for its own use. They are not
+really part of the method name, so do not use them when you call
+this method.</p>
+
+<blockquote>
+    <pre>Sub BackTalk21(<b>str</b>)
+  <b>Dim NewStr
+  NewStr = StrReverse( str )
+  This.Say NewStr</b>
+End Sub</pre>
+</blockquote>
+
+<p>This is how you would invoke this method from the <b>Command
+Window</b>, assuming the method was added to <em>MyObj</em>:</p>
+
+<blockquote>
+    <pre>MyObj.BackTalk &quot;Xanadu&quot;</pre>
+</blockquote>
+
+<p>Here is the output as it would appear in the <b>Chat</b>
+window:</p>
+
+<blockquote>   <b>MyObj says,</b> &quot;udanaX&quot;</blockquote>
+
+</body>
+</html>

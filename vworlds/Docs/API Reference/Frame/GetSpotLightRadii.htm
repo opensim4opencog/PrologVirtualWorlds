@@ -1,0 +1,104 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetSpotLightRadii</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetSpotLightRadii</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Gets parameters for the umbra and penumbra of a spotlight. 
+<b>GetSpotLightRadii</b> is a member of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetSpotLightRadii</b>&nbsp;<i>nIndex, fUmbra, 
+		fPenumbra</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetSpotLightRadii</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nIndex</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The index of the light.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fUmbra</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The umbra angle in radians.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fPenumbra</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The penumbra angle in radians.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>A spotlight emits a cone of light that only illuminates objects that lie within the
+cone. The cone produces light of two degrees of intensity: a central, brightly-lit section
+(the umbra) acts as a point source, and a outer, dimly lit section (the penumbra) merges
+with the surrounding deep shadow.</p>
+
+<p>The second and third parameters of <b>GetSpotLightRadii</b> are <i>output</i>
+parameters. After this method executes, these parameters will be overwritten with new
+values.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.GetSpotLightRadii 1, Umbra, Penumbra</pre>
+&nbsp;
+
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>RemoveAll</title>
+	
+</head>
+
+<body>
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> RemoveAll</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of PropertyList</td>
+	</tr>
+</table>
+<P>Removes all items from a collection. 
+<STRONG>RemoveAll</STRONG>       is a member of the <A 
+href="PropertyList.htm">PropertyList</A>&nbsp;and&nbsp;<A 
+href="../PropertyMap/PropertyMap.htm">PropertyMap</A> collections.
+<P>
+
+<!--Summary of topic-->
+      
+          
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>RemoveAll</STRONG></td><!--syntax statement -->
+	</tr>
+
+</table>
+
+
+<!--arguments table-->
+<!--Parameters table-->
+<p>The <b>RemoveAll</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Parameters</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>
+      <P>PropertyList PropertyMap</P></td><!--Parameter name-->
+		<td>Required</td><!--Type-->
+		<td>An object reference that&nbsp;accesses a 
+      <STRONG>PropertyList</STRONG> or <STRONG>PropertyMap</STRONG> collection.</td><!--Description-->
+	</TR>
+
+</TABLE>
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>This method does not return a value. 
+<H3>Example</H3>
+<p>This example uses the <A href="IsEmpty.htm">IsEmpty</A> 
+property to check if a collection contains data and then removes all of the items from&nbsp;the collection. This example assumes that you have an existing collection named "myLibrary" that contains a collection of book titles.
+<pre class="example"><!--Example text-->
+Sub ClearCollection()
+
+If myLibrary.IsEmpty Then 
+&nbsp;&nbsp;&nbsp; Trace "Done"
+Else
+&nbsp;&nbsp;&nbsp;&nbsp;myLibrary.<strong>RemoveAll</strong>
+&nbsp;&nbsp;&nbsp;&nbsp;Trace "The collection is empty."
+End If
+
+End Sub
+</pre>
+ 
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SetVelocity</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetVelocity</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets the velocity of the calling frame relative to the reference frame. 
+<b>SetVelocity</b> is a member of the <A href="Frame.htm">Frame</a> 
+object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetVelocity</b>&nbsp;<i>pvwfRef, vX, vY, vZ</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetVelocity</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvwfRef</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>The frame for which you want to retrieve the velocity.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">vX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The x-component of the relative velocity.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">vY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The y-component of the relative velocity.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">vZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The z-component of the relative velocity.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The parameters determine the amount of movement per 
+frame for the specified object; dependent on the speed of the graphics card in 
+the client's computer.&nbsp;&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>myFrame.<STRONG>SetVelocity RefFrame, 10.0, 0.0, 0.0</STRONG>    </pre>
+&nbsp;
+
+
+</body>
+</html>

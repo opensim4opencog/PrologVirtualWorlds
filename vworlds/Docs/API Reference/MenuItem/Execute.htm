@@ -1,0 +1,94 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Execute</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Execute</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of MenuItem</td>
+	</tr>
+</table>
+<P>Runs&nbsp;the method associated with the specified menu 
+item.&nbsp;<STRONG>Execute</STRONG> is a member of the <STRONG>MenuItem</STRONG> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>Execute</STRONG></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Execute</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->MenuItem</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference to a 
+      <STRONG>MenuItem</STRONG>       object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->The 
+<STRONG>Execute</STRONG> method performs the action specified by the <A href="MenuItem.htm">MenuItem</A> object.&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example prints the properties of a user's menu items 
+to the Command Window, finds the <STRONG>Whisper</STRONG> menu item, and executes                 the method associated with it.</p>
+<pre class="example">
+Sub ExecuteWhisper()
+Dim myMenu
+Dim myMenuItem
+Dim mnuText
+
+Set myMenu = User.Menu
+mnuText = "Menu Text: Whisper to..., Method: WhisperTo"
+
+For Each myMenuItem In myMenu
+&nbsp;&nbsp;&nbsp;&nbsp;Print myMenuItem
+&nbsp;&nbsp;&nbsp;&nbsp;If myMenuItem.ToAscii = mnuText Then
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myMenuItem.<b>Execute</b>
+&nbsp;&nbsp;&nbsp;&nbsp;End If
+Next
+End Sub
+
+</pre>
+
+</body>
+</html>

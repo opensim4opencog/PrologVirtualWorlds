@@ -1,0 +1,124 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Rotate (Vector)</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Rotate </h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Vector</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>Rotates a <a href="Vector.htm">Vector</a> about the y-axis. <b>Rotate</b> is a member of the <b>Vector</b> data type.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>Rotate</b> <i>fTheta</i>, <i>pvres</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>Rotate</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Vector</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fTheta</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The radian angle value represented as a <b>Float</b> by which the vector is rotated.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvres</td>
+		<td>Vector</td>
+		<td>Required</td>
+		<td>A <b>Vector</b> that is assigned the result of the <b>Rotate</b> method.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<P>The <b>Vector</b> that invokes this method is not changed. The <b>Rotate</b> method rotates a <b>Vector</b> around the y-axis by multiplying the value of the calling <b>Vector</b> by the value supplied in the first parameter (<i>fTheta</i>), and assigning the result to the second parameter. The <i>fTheta</i> parameter is a radian value represented as a <b>Float</b>.
+
+<p>The <i>pvres</i> parameter must be instantiated as a <b>Vector</b> object before it is sent as a parameter.
+<!--Example section-->
+<H3>Examples</H3>
+<p>
+<p>The first example creates two vectors, and then rotates a vector and assigns the result to the second parameter. 
+<br><br>
+
+<pre class="example">Dim myVector1
+Dim myVectorResult
+</pre>
+<p class=comments>'Create the vectors.
+<pre class="example">Set myVector1 = World.CreateVector(1, 1, 1)
+Set myVectorResult = World.CreateVector(0, 0, 0)
+</pre>
+<p class=comments>'Rotate the vector.
+<pre class="example">myVector1.<b>Rotate 1.2, myVectorResult</b></pre>
+<p class=comments>'Display the new value in the Command Window.
+<pre class="example">Trace myVectorResult.ToAscii
+</pre>
+<p>Example 2
+<p>The second example rotates the invoking object by assigning the result of the <b>Rotate</b> method to that object.<br><br>
+<pre class="example">Dim myVector1</pre>
+<p class=comments>'Create the vector.
+<pre class="example">Set myVector1 = World.CreateVector(2, 2, 2)
+</pre>
+<p class=comments>'Call the <b>Rotate</b> method and multiply the values, 
+<br>'assigning the result to the calling vector.
+<pre class="example">myVector1.<b>Rotate 1.1, myVector1</b></pre>
+<p class=comments>'Display the result in the Command Window.
+<pre class="example">Trace myVecResult.ToAscii</pre>
+
+
+<pre class="example">
+<!--Example text-->
+&nbsp;
+</pre>
+<p class=comments>
+<div class=comments></div>
+
+
+</body>
+</html>

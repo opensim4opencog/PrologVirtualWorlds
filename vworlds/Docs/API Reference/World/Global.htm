@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Global</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Global</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Provides a way to add members to the <a href="World.htm">World</a> object. <b>Global</b> is a read/write <b>Thing</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>World</i>.<b>Global</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>Global</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">World</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An instance of the <b>World</b> object.</td>
+	</TR>
+	
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>Global</b> property of the <b>World</b> object allows only a world owner to add a method or property to the <b>World</b> object. The <b>Global</b> property is a reference to a <b>Thing</b> that allows the use of <a href="../Thing/AddMethod.htm">AddMethod</a> and <a href="../Thing/AddProperty.htm">AddProperty</a> to add members to the <b>World</b> object. After a member has been added using the <b>Global</b> property, the new member is accessible to all users of a world as a member of the <b>World</b> object. Note, however, that any objects created in a Global method are owned by the user, so <b>Global</b> won't have permission to modify them, even in the same method.
+
+<p>The <b>Global</b> property can also be used to remove an added method or property from the <b>World</b> object, using the <a href="../Thing/RemoveMethod.htm">RemoveMethod</a> and <a href="../Thing/RemoveProperty.htm">RemoveProperty</a> methods of the <b>Thing</b> object. 
+<!--Example section-->
+<H3>Example</H3>
+<p>To add a property to the World object:<br><br>
+
+<pre class="example">World.<b>Global</b>.AddProperty "myNewProperty"</pre>
+
+<p>To access the added property after it has been added to the <b>World</b> object:<br><br>
+<pre class="example">World.myNewProperty</pre>
+<!--See also section-->
+
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateScriptModule</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateScriptModule</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table><!--Topic Definition-->
+<P>Creates a script module. 
+<STRONG>CreateScriptModule</STRONG> is a member of the <A href="World.htm">World</A> 
+object. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<STRONG>CreateScriptModule</STRONG>(<EM>bstrName</EM>, 
+      <EM>bstrScriptPath, lFlags</EM>)</td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>CreateScriptModule</b> method syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->World</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>An object reference that accesses a 
+      <STRONG>World</STRONG>   object. If you do not specify a world, the default&nbsp;is the current world.</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>bstrName</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The name of the module.</TD></TR>
+  <TR>
+    <TD class=boldItal>bstrScriptPath</TD>
+    <TD>String</TD>
+    <TD>Required</TD>
+    <TD>The&nbsp;location where the module is stored, including the file name. This must be a URL.  </TD></TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->lFlags</td>
+		<td><!--Type-->Long</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->A 
+      flag that determines whether the module's methods run on the client or on 
+      the server.</td>
+	</TR>
+
+</TABLE><!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a <A href="../Module/Module.htm">Module</A> object. <!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>The <EM>bstrName</EM> parameter of 
+this    method contains the <EM>name</EM> of the&nbsp;module 
+that is to be created. This name can later be used&nbsp;either when creating a 
+method from this module (via <A href="CreateMethod.htm">CreateMethod</A>) 
+or to retreive a reference to this module object (via the <A href="Module.htm"> Module</A> property of the 
+<STRONG>World</STRONG>&nbsp;object).&nbsp; Module names must be 
+unique within the system.</P>
+<P>The <EM>bstrScriptPath </EM>parameter of this method must contain the filename of the text file that 
+contains the actual script code that the module will represent.&nbsp; If this 
+parameter contains less than a fully-qualified URL, the <A 
+href="RootURL.htm"><STRONG>RootURL</STRONG></A> property specifies the default path 
+that this method uses to search for the given script file.&nbsp; <!--Example section--></P>
+<P>    When you use the <A href="../World/CreateScriptModule.htm">CreateScriptModule</A> method to 
+create a script module, you specify whether the module will run on&nbsp;a 
+client, a server, or both by specifying the value for the <EM>lFlags</EM>     
+                
+         parameter.</P>
+<P>The flags used for a <b>Module</b> 
+object are made up of combinations of constants with 
+<STRONG>Long</STRONG> 
+       values as illustrated in the following table. You 
+can combine these flags by adding them together when a module contains&nbsp;code that should be run 
+on both the client and the server.&nbsp; For convenience, these constants are 
+available as&nbsp;read-only properties of the <STRONG>World</STRONG> 
+               
+                       object.&nbsp;&nbsp; 
+</P>
+<P>
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><B>Flag</B></TD>
+    <TD><B>Value</B></TD>
+    <TD><B>Description</B></TD></TR>
+  <TR class=line>
+    <TD colSpan=100></TD></TR>
+  <TR>
+    <TD><STRONG>MODULE_CLIENT</STRONG></TD>
+    <TD>1</TD>
+    <TD>Used for modules that contain methods designed to run on&nbsp;a 
+    client.</TD></TR>
+  <TR>
+    <TD><STRONG>MODULE_SERVER</STRONG></TD>
+    <TD>2</TD>
+    <TD>Used for modules containing methods that are designed to run on the 
+      server.</TD></TR></TABLE><!--Example section--></P>
+<H3>Example</H3>
+<p>This example creates a new script module named "Greet" 
+from a script file named "Greet.vbs". The code in the "Greet" module can run on both the client and server. You must have a prewritten script file named "Greet.vbs" stored in the location determined by the value of the <b>RootURL</b>     property, or you must specify the entire path for the module as a URL.</p>
+<pre class="example">
+Sub CreateGreet()
+Dim myGreetModule
+
+Set myGreetModule = World.<b>CreateScriptModule("Greet", "Greet.vbs", _
+&nbsp;&nbsp;&nbsp;&nbsp;MODULE_CLIENT + MODULE_SERVER)</b>
+
+Trace "New module successfully created."
+End Sub
+</pre>
+
+</body>
+</html>

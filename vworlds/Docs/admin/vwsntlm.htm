@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>User Authentication</title>
+<link rel="STYLESHEET" type="text/css" href="../vwgdoc.css"
+title="VWG">
+</head>
+
+<h1>User Authentication</h1>
+
+<p>Users connecting to the Virtual Worlds server can be authenticated using the NTLM (Windows NT Lan Manager) authentication scheme.
+The Virtual Worlds server, when running on Windows NT, can require clients to belong to the same domain if the NTLM Authentication
+option is turned on (on by default).  For most intranet scenarios, users will already be authenticated from their initial log on.
+<p>
+For internet scenarios, or users connecting from outside the domain, they will be presented with the standard Windows NT three-tiered logon dialog box (username, password, domain).  Users, not avatars, must be members of the domain the server occupies in order to complete the connection request.
+<p>
+
+<h2>To Toggle User Authentication:</h2>
+
+<ol>
+    <li>In the Virtual Worlds Server application, click the <strong>Tools</strong> menu,
+	and then click <b>User Authentication...</b>.</li>
+<li>Check (or uncheck) the "Require NTLM Authentication for Logins" to turn on (or off) NTLM Authentication.</li>
+
+</ol>
+<h2>To Set a Local User Group:</h2>
+
+<p>
+You may also further restrict server access by setting a Local Group within the server machine's domain.  If this item is checked, users must belong to that Local Group.
+
+On the server machine,
+<ol>
+<li>Ensure that you are logged in as an administrator in the local domain
+<li>Launch the User Manager from the Administrative Tools Start Menu shortcut (NT4) or Control Panel (Win2K). 
+<li>Switch to the local domain (to view local user accounts and groups)
+<li>If none of the existing local groups are sufficient, create a new local group via the User->Create New Local Group... menu item, say "VWorldsUsers"
+<li>Add users from the broader domain to "VWorldsUsers" or create new user accounts on the local domain and add them to the "VWorldsUsers" local group
+<li>If you are providing new user accounts, notify those people of their account information
+<li>Launch the Virtual Worlds server application, ensure you check the Require Local Group Membership checkbox in the Tools->User Authentication menu item and fill in the text box with "VWorldsUsers"
+</ol>
+<p>
+Note that users logging in will now have to enter the server name as the domain if Local Group Membership is required.
+
+<h4>See Also </h4>
+
+<p><a href="../uiref/adminui/vwstool.htm">Tools Menu</a><br>
+</p>
+</body>
+</html>

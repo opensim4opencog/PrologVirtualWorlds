@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>ModuleName</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ModuleName</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of the Module Object</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>Returns the name of the specified <A href="Module.htm">Module</A> object. <b>ModuleName</b> is a read-only <b>String</b>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>ModuleName</STRONG></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>ModuleName</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->Module</td>
+		<td><!--Required or Optional-->Required</td>
+		<td> An object reference to a 
+      <STRONG>Module</STRONG>      object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>You can use this property when you want to find out the 
+name of a particular module. </P>
+<P>A module receives its name when it is created (using the <A 
+href="../world/CreateScriptModule.htm"><STRONG>CreateScriptModule</STRONG></A>&nbsp;method). After the 
+module is created, its name can act as one of the parameters used in the <A 
+href="../world/CreateMethod.htm"><STRONG>CreateMethod</STRONG></A> method.&nbsp;&nbsp;
+
+<!--Example section-->  </P>
+<H3>Example</H3>
+<p>
+
+<pre class="example">
+Dim myModule
+
+Set myModule = World.Module("myScript")
+myModuleName = myModule.<b>ModuleName</b>
+</pre>
+
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SetPosition</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetPosition</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets the position of the calling frame relative to the specified reference frame. 
+<b>SetPosition</b> is a member of the <b>Frame</b> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetPosition</b>&nbsp;<i>pvwfRef, fPosX, fPosY, fPosZ</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetPosition</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvwfRef</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>The frame for which you want to retrieve the position.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fPosX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The x-coordinate offset of the new position of the frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fPosY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The y-coordinate offset of the new position of the frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fPosZ</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The z-coordinate offset of the new position of the frame.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Sets the <b>Frame</b> parameter to <b>Nothing</b> if you want the other input values in coordinates
+relative to the world's origin.  Set the <b>Frame</b> parameter to the parent of the calling frame
+to set the other input values relative to the parent frame's origin.</P>
+
+<p>The three coordinate arguments (fPosX, fPosY, and fPosZ) represent distances (or <i>offsets</i>) between the 
+corresponding coordinates of the invoking frame and the reference frame. &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.SetPosition RefFrame, 0.0, 2.0, 0.0</pre>
+&nbsp;
+
+
+</body>
+</html>

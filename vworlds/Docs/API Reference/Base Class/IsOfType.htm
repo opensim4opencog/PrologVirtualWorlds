@@ -1,0 +1,133 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsOfType</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsOfType</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Returns <STRONG>True</STRONG> if 
+the type or exemplar matches the specified 
+<EM>bstr</EM> parameter. <STRONG>IsOfType</STRONG> is a member 
+of&nbsp;all objects in Microsoft Virtual Worlds.&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>IsOfType</STRONG>(<EM>bstr</EM>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The <STRONG>IsOfType</STRONG> 
+method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name-->object</td>
+		<td><!--Type-->Thing</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->An 
+      object reference that may access any object in Virtual Worlds.</td>
+	</TR>
+	<TR>
+		<td class="boldItal"><!--Parameter name-->bstr</td>
+		<td><!--Type-->String</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->A 
+      string that 
+      evaluates to any valid Virtual Worlds or script type or 
+  exemplar.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->      </P>
+<H3>Return Value</H3>
+<p>A <STRONG>Boolean</STRONG>. If the type matches the 
+specified <EM>bstr</EM> parameter, then the <STRONG>IsOfType</STRONG> method returns <STRONG>True</STRONG>; 
+ otherwise, it returns <STRONG>False</STRONG>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here--> 
+This method is useful to determine if an object is a collection.&nbsp;Because 
+individual items in collections&nbsp;are accessed differently than individual 
+objects, you can use the <STRONG>IsOfType</STRONG> method to handle collections, 
+such as <A href="../PropertyList/PropertyList.htm">PropertyList</A>  and <A href="../PropertyMap/PropertyMap.htm">PropertyMap</A> objects, in a 
+loop.
+<P>You can also use the <b>IsOfType</b> property to validate whether an object is an 
+<A href="../Exemplars/Artifact/Artifact.htm">Artifact</A>, <A href="../Exemplars/Avatar/Avatar.htm">Avatar</A>, <A href="../Exemplars/Thing/Thing.htm">Thing</A>, or other object. For example, if you want to&nbsp;find 
+all of the artifacts in a <A href="../Exemplars/Room/Room.htm">Room</A> object and add their names 
+to a property list, you can use the following code.
+<blockquote><PRE>
+Set myArtifactList = CreatePropertyList
+
+For Each myObject In User.Container.Contents
+&nbsp;&nbsp;If myObject.<STRONG>IsOfType("Artifact")</STRONG> Then
+&nbsp;&nbsp;&nbsp; myArtifactList.Add myObject.ToAscii
+&nbsp;&nbsp;End If
+Next
+</PRE>
+<p class="comments">'Now print the items in the property list.
+<pre class="example">For i = 0 To myArtifactList.Count - 1
+&nbsp;&nbsp;Print myArtifactList.Property(i)
+Next
+</pre></blockquote>
+<!--Example section-->
+<H3>Example</H3>
+<p>This example uses the <STRONG>Keys</STRONG>     property list from the <A href="../AvatarProfile/AvatarProfile.htm">AvatarProfile</A> object to illustrate how to use the <b>IsOfType</b> method to check for a specific data type.</p>
+
+<pre class="example">
+Sub TestType()
+Dim myKey
+Dim myKeyList
+Dim myKeyCount
+</pre>
+<p class="comments">
+'Get the Keys collection.
+<pre class="example">
+Set myKeyList = User.Profile.Keys
+myKeyCount = myKeyList.Count - 1
+</pre>
+<p class="comments">'Trace each key to the Command Window<br>'if the <b>IsOfType</b> method returns "PropertyList".
+<pre class="example">If myKeyList.<STRONG>IsOfType("PropertyList")</STRONG> Then
+&nbsp;&nbsp;For myKey = 0 To myKeyCount
+&nbsp;&nbsp;&nbsp;&nbsp;Print myKeyList.Property(myKey)
+&nbsp;&nbsp;&nbsp;&nbsp;Trace&nbsp;Typename(User.Profile.KeyValue(myKeyList.Property(myKey)))
+&nbsp;&nbsp;Next
+End If
+End Sub
+</pre>  
+
+</body>
+</html>

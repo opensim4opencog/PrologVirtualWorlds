@@ -1,0 +1,124 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetLightAttenuation</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetLightAttenuation</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Gets a light's attenuation (constant, linear, and quadratic). 
+<b>GetLightAttenuation</b> is a member of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetLightAttenuation</b>&nbsp;<i>nIndex, fConst, 
+		fLinear, fQuadratic</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetLightAttenuation</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nIndex</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The index of the light that is associated with a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fConst</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>A <b>Variant</b> that will receive the return value for the constant attenuation factor. The default return value is 1.0.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fLinear</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>A <b>Variant</b> that will receive the return value for the linear attenuation factor. The default return value is 0.0.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fQuadratic</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>A <b>Variant</b> that will receive the return value for the quadratic attenuation factor. The default return value is 0.0.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value, but it populates the <i>fConst</i>, <i>fLinear</i>, and <i>fQuadratic</i> parameters with their respective values.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Directional, parallel, and ambient lights are not affected by the light attenuation values.
+<p>Light attenuation works closely with the range and color values of a light object to define the behavior of light over distance. The range of a light defines the endpoint of the attenuation. The RGB color values combine with the attenuation to produce the color intensity for each vertex within the range.
+
+<p>The three values returned by the <b>GetLightAttenuation</b> method correspond to three types of attenuation: constant, linear, and quadratic. All three values are normalized at 1.0, but each value has a different effect on the behavior of light over distance (See Figure 1).
+<p><img src="../Images/attngraf.gif" width=529 height=298 alt="" border="0">
+<p>Figure 1.
+<p>The formula for the total attenuation factor is: </p>
+
+<blockquote>
+  <p>TAF = 1 / [<i>fConstant</i> + <i>fLinear</i> * distance + <i>fQuadratic</i> *
+  (distance^2)]</p>
+</blockquote>
+
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example creates an instance of the <b>Frame</b> object, adds a light to that frame, and then invokes the <b>GetLightAttenuation</b> method to retrieve the attenuation factors. The example then displays each return value in the Command Window.<br><br>
+
+<pre class=example>Dim myFrame
+Set myFrame = World.CreateFrame
+myFrame.CreateLight</pre>
+<p class=comments>'Retrieve the attenuation factors.
+<pre class=example>myFrame.<b>GetLightAttenuation 0, myConst, myLinear, myQuadratic</b></pre>
+<p class=comments>'Display the results in the Command Window.
+<pre class=example>Trace &quot;The Constant value is: &quot; &amp; myConst
+Trace &quot;The Linear value is: &quot; &amp; myLinear
+Trace &quot;The Quadratic value is: &quot; &amp; myQuadratic
+</pre>
+
+
+</body>
+</html>

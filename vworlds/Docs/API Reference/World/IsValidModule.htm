@@ -1,0 +1,102 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>IsValidModule</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>IsValidModule</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>Returns a <b>Boolean</b> flag indicating whether a module has been added to a world. <b>IsValidModule</b> is a member of the  <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>World</i>.<b>IsValidModule</b>(<i>bstrName</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>IsValidModule</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">World</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrName</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of a module expressed as a <b>String.</b></td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Boolean</b>.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The <b>IsValidModule</b> method verifies whether a module has been added to a world. If the method returns <b>True</b>, the module has been added, and the members of that module can be accessed. If the method returns <b>False</b>, the module has not been successfully added to the world.
+
+<p>For more information on adding modules, see the  <a href="CreateScriptModule.htm">CreateScriptModule</a> topic. For more information on removing modules, see the <a href="RemoveModule.htm">RemoveModule</a> topic.
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example uses a subroutine to first verify that a module exists, and if so, then remove the module and display a confirmation in the Command Window. The parameter "myStrModuleName" is a <b>String</b>.
+
+<br><br>
+<pre class="example">Sub mySafeRemoveModule(myStrModuleName)
+Dim myFlag
+
+myFlag = World.<b>IsValidModule(myStrModuleName)</b>
+If myFlag = True Then
+&nbsp;&nbsp;&nbsp;&nbsp;World.RemoveModule myStrModuleName
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myStrModuleName &amp; " has been removed."
+Else
+&nbsp;&nbsp;&nbsp;&nbsp;Trace myStrModuleName &amp; " is not a valid module name."
+End If
+
+End Sub
+<!--Example text-->
+&nbsp;
+</pre>
+
+
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>DestroyObject</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>DestroyObject</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Permanently removes an object from the world. <b>DestroyObject</b> is a member of the <a href="World.htm">World</a> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>DestroyObject</b>&nbsp;<i>pthing</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>DestroyObject</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pthing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object to destroy.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method will fail on attempts to delete the <a href="User.htm">User</a>,
+the user's <a href="../Thing/Container.htm">Container</a>, other avatars,
+and rooms. Be very careful when using this method, because any object for which this
+method succeeds will be permanently deleted from the world.
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;Invoking the <b>DestroyObject</b> method will change the object reference to a stub, changing the <a href="../Thing/IsStub.htm">IsStub</a> property of the <a href="../Thing/Thing.htm">Thing</a> object to <b>True</b>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>The example code that follows destroys a previously-created object (named &quot;<i>Goner</i>&quot;)
+that is in the user's room (<b>User.Container</b>). An object reference, <i>MarkedObject</i>,
+is obtained by using the <b>Thing</b> method <a href="../Thing/FindWithin.htm">FindWithin</a>.</p>
+
+<pre class=example>Dim MarkedObject
+Set MarkedObject = User.Container.FindWithin(&quot;Goner&quot;)
+World.<b>DestroyObject MarkedObject</b></pre>
+&nbsp;
+<pre>  </pre>
+
+</body>
+</html>

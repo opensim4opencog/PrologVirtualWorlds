@@ -1,0 +1,149 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>TranslateVertexSafe</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>TranslateVertexSafe</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Boundary</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+
+<P>
+Moves an existing <a href="Vertex.htm">Vertex</a> to a new location. <b>TranslateVertexSafe</b> is a member of the <a href="Boundary.htm">Boundary</a> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>TranslateVertexSafe</b>(<i>nIndex, fX, fY</i>)</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>TranslateVertexSafe</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+
+	<thead>
+		<TR>
+			<td>Parts</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Boundary</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <B>Boundary</b>.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">nIndex</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>An expression that evaluates to a <b>Long</b>. Corresponds to the index number of a <b>Vertex</b> on a <b>Boundary</b>.</td>
+</TR>
+	<TR>
+		<TD class="boldItal">fX
+		</TD>
+		<TD>Float
+		</TD>
+		<TD>Required
+		</TD>
+		<TD>The new position of the vertex on the boundary x-axis.
+		</TD>
+	</TR>
+	<TR>
+		<TD class="boldItal">fY
+		</TD>
+		<TD>Float
+		</TD>
+		<TD>Required
+		</TD>
+		<TD><!--Description-->The new position of the vertex on the boundary y-axis.
+		</TD>
+	</TR>
+	
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method returns a <b>Boolean</b> value.
+
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p> The <b>TranslateVertexSafe</b> method translates (moves) a <b>Vertex</b> only if the translation results in the boundary maintaining a simple polygon, as opposed to a complex polygon (See Figure 1). A <b>Boundary</b> must be a simple polygon to function properly. If the <b>Vertex</b> is moved to a position that results in the boundary maintaining a simple polygon, the <b>TranslateVertexSafe</b> method returns <b>True</b>. Otherwise, the method returns <b>False</b>, and the relocation is not executed.
+<p><img src="../Images/Polygons2.GIF" width=216 height=144 alt="" border="0">
+<br>Figure 1.
+<p>The new coordinates are relative to the point of origin of the object the boundary is assigned to. The values supplied only relate to the two-dimensional boundary coordinate system, not the 3-D world coordinate system. For more information on the coordinate system of boundaries, see the <a href="Boundary.htm">Boundary</a> topic.
+
+<p> When a <b>Vertex</b> is moved using the <b>TranslateVertexSafe</b> method, the rendering and index order of the remaining points stays the same. 
+<!--Example section-->
+<H3>Examples</H3>
+
+
+<p>This example creates a <b>Boundary</b> around an existing object and invokes the <b>TranslateVertexSafe</b> method to move a specific <b>Vertex</b>. The argument "myObject" is the name of the existing object being passed to the subroutine.
+<br>
+<br>
+<pre class="example">
+Sub myBoundary(myObject)
+
+Dim myFireHydrant
+Dim myOuterEdge
+Dim myResult
+</pre>
+
+<p class=comments>'Obtain a reference to an existing object.
+<pre class="example">Set myFireHydrant = User.Container.FindWithin(myObject)</pre>
+
+<p class=comments>'Create a boundary without a specified size.
+<pre class="example">Set myOuterEdge = World.CreateBoundary</pre>
+
+<p class=comments>'Generate an eight-sided boundary.
+<pre class="example">myOuterEdge.AutoGenerate myFireHydrant, 8</pre>
+
+<p class=comments>'Apply the boundary to the existing object.
+<pre class="example">myFireHydrant.BoundaryList.Add myOuterEdge</pre>
+
+<p class=comments>'Move the third vertex.
+<pre class="example">myResult = myFireHydrant.BoundaryList.Property(0).<b>TranslateVertexSafe(2, 3, 3)</b></pre>
+<p class=comments>'Verify that the vertex was moved.
+<pre class="example">Trace myResult
+
+End Sub</pre>
+
+
+
+
+<!--See also section-->
+
+<P>
+<A href=""></A>
+<br>
+
+
+</body>
+</html>

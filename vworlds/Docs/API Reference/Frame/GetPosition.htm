@@ -1,0 +1,112 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetPosition</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetPosition</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Gets the position of the frame relative to the reference frame. 
+<b>GetPosition</b> is a member of the <b>Frame</b> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetPosition</b>&nbsp;<EM>pvwfRef, pfPosX, pfPosY, 
+      pfPosZ</EM></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetPosition</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>  An object reference&nbsp;to a <b>Frame</b>  object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvwfRef</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td><!--Description-->The 
+      reference frame. You want to get the position relative to this 
+    frame.&nbsp;</td>
+	</TR>
+  <TR>
+    <TD class=boldItal>pfPosX</TD>
+    <TD>Variant</TD>
+    <TD>Required</TD>
+    <TD>Receives the x-coordinate.</TD></TR>
+  <TR>
+    <TD class=boldItal>pfPosY</TD>
+    <TD>Variant</TD>
+    <TD>Required</TD>
+    <TD>Receives the y-coordinate.</TD></TR>
+	<TR>
+		<td class="boldItal">pfPosZ</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td><!--Description-->Receives 
+      the z-coordinate.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The three coordinates represent distances (or <i>offsets</i>) between the
+corresponding coordinates of the invoking frame and the reference frame.</P>
+
+<p>Set the <b>Frame</b> parameter to <b>Nothing</b> if you want the output values in coordinates
+relative to the world's origin.  Set the <b>Frame</b> parameter to the parent of the calling frame
+to produce output values relative to the parent frame's origin.</p>
+
+<p>The second, third, and fourth parameters of <b>GetPosition</b> are <i>output</i> 
+parameters. After this method executes, these parameters will be overwritten 
+with new values. &nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>myFrame.GetPosition RefFrame, x, y, z</pre>
+&nbsp;
+
+
+</body>
+</html>

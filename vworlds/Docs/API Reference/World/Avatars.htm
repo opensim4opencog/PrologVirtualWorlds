@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Avatars (World)</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Avatars</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<p> Returns the <A href="../Exemplars/Avatar/Avatar.htm">Avatar</A>    objects that exist 
+in&nbsp;a world. <STRONG>Avatars</STRONG>&nbsp;is a read-only 
+<STRONG>PropertyList</STRONG>. &nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><EM>object</EM>.<STRONG>Avatars</STRONG></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The&nbsp;<STRONG>Avatars</STRONG>  property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td><!--Type-->World</td>
+		<td><!--Required or Optional-->Required</td>
+		<td>   An&nbsp;object of type 
+      <STRONG>World</STRONG>. The default is the current world.</td>
+	</TR>
+
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->Because 
+this property is a property list, you can find out specific information about each avatar that exists in your world. See the <b>Example</b> section for more details.
+<p>You can also use the <b>Avatars</b> property if you're trying to track a custom key for all of the avatars for a game scenario, as described in the <A href="../AvatarProfile/AvatarProfile.htm">AvatarProfile</A> object.
+<!--Example section-->
+<H3>Example</H3>
+
+
+
+<p>This example displays the image file that is associated with each avatar listed in the <b>Avatars</b> property. The subroutine also verifies that the avatar listed is not a stub by checking the value of the <a href="../Thing/IsStub.htm">IsStub</a> property of each avatar.
+<p class=comments>
+<div class=comments></div>
+<pre class="example">
+Sub FindHosts()
+Dim myIsHost
+Dim myAvatar
+
+For Each myAvatar In <b>Avatars</b>
+&nbsp;&nbsp;If not Avatars.Property(myAvatar).IsStub Then
+&nbsp;&nbsp;&nbsp;&nbsp;Print Avatars.Property(myAvatar).Profile.KeyValue("SpriteGeometry")
+&nbsp;&nbsp;Else 
+&nbsp;&nbsp;&nbsp;&nbsp;Print &quot;IsStub&quot;
+&nbsp;&nbsp;End If
+Next
+
+End Sub
+</pre>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetProgressiveMeshFaceDetailRange</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetProgressiveMeshFaceDetailRange</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Gets the range of possible values for the number of faces in a mesh. 
+<b>GetProgressiveMeshFaceDetailRange</b> is a member of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetProgressiveMeshFaceDetailRange</b>&nbsp;<i>nMeshIndex, 
+		min, max</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetProgressiveMeshFaceDetailRange</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">min</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The minimum possible value for the number of faces in the mesh.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">max</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The maximum possible value for the number of faces in the mesh.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Gets the minimum and maximum possible values for the number of faces in a mesh with <i>Min</i>
+and <i>Max</i>. A number within this range must be used in any call to 
+<b>SetProgressiveMeshFaceDetail</b>.</p>
+
+<p>The second and third parameters of <b>GetProgressiveMeshFaceDetailRange</b> 
+are <i>output</i> parameters. After this method executes, these parameters will be
+overwritten with new values.</p>
+
+<p><i>nMeshIndex</i> is generally set to the index of a particular mesh, but can be set to
+two additional values. A value of <tt>-1</tt> indicates that this method should be applied
+to all meshes in the frame, and a value of <tt>-2</tt> indicates that this method should
+be applied to all meshes in all frames in the hierarchy.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.GetProgressiveMeshFaceDetailRange 15, Min, Max</pre>
+&nbsp;
+
+
+</body>
+</html>

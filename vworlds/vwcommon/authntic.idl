@@ -1,0 +1,142 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// Authntic.idl
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (Authntic.tlb) and marshalling code.
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+// This file includes the definition of the following interfaces:
+// 
+//	IAuthentication:	Contains the information necessary to specify a specific authentication
+//						attempt.  The includes properties like initialization status, NT credentials,
+//						NT security context,  a blob used to hold authentication handshake data, and
+//						user info for the authentication.  It also contains a pointer to an IVWAuthenticate
+//						interface when can further manipulate the authentication information.
+//						
+//	IVWAuthenticate:	Contains the higher level abstraction that can be used to 
+//						manipulate instances of the IAuthentication interface.
+//						Some of the functionality includes: Generating new security contexts, 
+//						setting package type (currently NTLM), Impersonating a context, Reverting 
+//						to the original context, etc..
+// 
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+import "oaidl.idl";
+import "ocidl.idl";
+interface IAuthentication;
+
+cpp_quote("#define SECURITY_WIN32")
+cpp_quote("#include \"sspi.h\"")
+cpp_quote("#include \"issperr.h\"")
+
+cpp_quote("#ifndef SECHANDLEDEFINED")
+cpp_quote("#define SECHANDLEDEFINED")
+typedef struct _SECHANDLE
+{
+    unsigned long dwLower;
+    unsigned long dwUpper;
+
+} SECHANDLE;
+cpp_quote("#endif")
+
+
+	[
+		object,
+		uuid(955A1319-731F-11D1-9082-00C04FD91EFE),
+		dual,
+		helpstring("IVWAuthenticate Interface"),
+		pointer_default(unique)
+	]
+	interface IVWAuthenticate : IDispatch
+	{
+		[id(1), helpstring("Generate a Client side NT security context")]
+		HRESULT GenerateClientContext([in] IAuthentication *pauth, [in] VARIANT_BOOL bShowDialog, [out, retval] VARIANT_BOOL *pbDone);
+
+		[id(2), helpstring("Generate a Server side NT security context")]
+		HRESULT GenerateServerContext([in] IAuthentication *pauth, [out, retval] VARIANT_BOOL *pbDone);
+
+		[propget, id(3), helpstring("Get the type of package used for authentication.. ie: NTLM"), restricted]
+		HRESULT Package([out, retval] BSTR *pbstrVal);
+
+		[propput, id(3), helpstring("Set the name of the package to be used for authenticaiton.. ie: NTLM"), restricted]
+		HRESULT Package([in] BSTR newVal);
+
+		[id(4), helpstring("Initialize security function table entrypoints depending on OS")]
+		HRESULT Initialize();
+
+		[id(5), helpstring("Clear context and credentials on a given IAuthentication ptr"), restricted]
+		HRESULT Terminate([in] IAuthentication *pauth);
+
+		[id(6), helpstring("Impersonate the security context contained in the IAuthentication ptr"), restricted]
+		HRESULT Impersonate([in] IAuthentication *pauth);
+
+		[id(7), helpstring("Revert the security context contained in the IAuthentication ptr"), restricted]
+		HRESULT RevertContext([in] IAuthentication *pauth);
+
+		[id(8), helpstring("Check if the security context 'user' is member of the named group"), restricted]
+		HRESULT IsGroupMember([in] IAuthentication *pauth, [in] BSTR bstrGroup, [out, retval] VARIANT_BOOL *pbIsMember);
+		
+		[id(9), helpstring("Retrieve Domain and Name string for an IAuthentication's context"), restricted]
+		HRESULT GetUserInfo([in] IAuthentication *pauth, [out]BSTR* pstrDomainAndName);
+		
+	};
+	
+	[
+		object,
+		uuid(3D3CE78F-7323-11D1-9082-00C04FD91EFE),
+		dual,
+		helpstring("IAuthentication Interface"),
+		pointer_default(unique)
+	]
+	interface IAuthentication : IDispatch
+	{
+		[propget, id(1), helpstring("Has initialization for this interface happened yet"), restricted]
+		HRESULT Initialized([out, retval] VARIANT_BOOL *pVal);
+		
+		[propput, id(1), helpstring("Set the initialization value for the interface"), restricted]
+		HRESULT Initialized([in] VARIANT_BOOL newVal);
+
+		[propget, id(2), helpstring("Has authentication succeeded")]
+		HRESULT Authenticated([out, retval] VARIANT_BOOL *pVal);
+
+		[propput, id(2), helpstring("Put authentication status"), restricted]
+		HRESULT Authenticated([in] VARIANT_BOOL newVal);
+
+		[propget, id(3), helpstring("Get the NT security credentials for this instance"), restricted]
+		HRESULT Credentials([out, retval] SECHANDLE *pVal);
+
+		[propput, id(3), helpstring("Put the NT security credentials for this instance"), restricted]
+		HRESULT Credentials([in] SECHANDLE newVal);
+
+		[propget, id(4), helpstring("Get the NT security context"), restricted]
+		HRESULT Context([out, retval] SECHANDLE *pVal);
+
+		[propput, id(4), helpstring("Put the NT security context"), restricted]
+		HRESULT Context([in] SECHANDLE newVal);
+
+		[id(5), helpstring("Set the authentication handshake data"), restricted]
+		HRESULT SetBlob([in] BYTE *pvBlob, [in] int cbBlob);
+
+		[id(6), helpstring("Get the bytecount of the authentication handshake"), restricted]
+		HRESULT GetBlobLength([out] int *pcbBlob);
+		
+		[id(7), helpstring("Copy the authentication handshake data"), restricted]
+		HRESULT CopyBlob([in] BYTE *pbDest);
+
+		[id(8), helpstring("Set the user info for the authentication if no valid context"), restricted]
+		HRESULT SetUserInfo([in] BSTR bstrUser, [in] BSTR bstrPassword, [in] BSTR bstrDomain);
+		
+		[propget, id(9), helpstring("returns a pointer to a SEC_WINNT_AUTH_IDENTITY struct filled with the user info"), restricted]
+		HRESULT AuthenticationData([out, retval] BYTE **ppVal);
+
+		[propput, id(10), helpstring("Pointer to the contained IVWAuthenticate Interface"), restricted]
+		HRESULT Authenticate([in] IVWAuthenticate * newVal);
+		
+		[propget, id(11), helpstring("Returns user and domain used for the authentication"), restricted]
+		HRESULT AuthenticationInfo([out, retval] BSTR *pbstrVal);
+	};

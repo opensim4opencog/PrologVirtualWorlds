@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>ServerName</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>ServerName</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>String</b> that contains the name of the Virtual Worlds server 
+the world resides on. <b>ServerName</b> is a read-only <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>ServerName</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>ServerName</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>For a world running locally, the <b>ServerName</b>
+property contains &quot;localhost&quot;. For a world hosted by a
+machine other than the one running the client, <b>ServerName</b>
+contains the name (or I.P. address) of that computer.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>Result = World.ServerName</pre>&nbsp;
+ 
+
+</body>
+</html>

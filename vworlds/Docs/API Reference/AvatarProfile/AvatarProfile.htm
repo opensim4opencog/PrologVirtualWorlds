@@ -1,0 +1,97 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>AvatarProfile</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2> AvatarProfile</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">Object</td>
+	</tr>
+</table>        
+      
+<P>The <b>AvatarProfile</b> object 
+for an avatar stores user information and preferences in <EM>key/value 
+pairs</EM>. It stores this data in key lists, which are composed 
+of key/value pairs.</P>
+<P>A key/value pair maps unique keys to values. The key is a string that 
+represents the name of the property in the property map. The value is the 
+contents of the property. A property map uses the string that makes up the key 
+instead of an index number to access the value of each property.</P>
+<P class=body>There are 19 predefined <A href="Keys.htm">Keys</A> that contain 
+default information, such as a user's real name or home page. </P>
+<H3>Using the   Object</H3>
+<p>To begin customizing&nbsp;the profile of 
+your&nbsp;avatar, use the <A href="AddKey.htm">AddKey</A> method to create new keys.&nbsp;You can 
+add objects,&nbsp;<A href="../PropertyList/PropertyList.htm">PropertyList</A>  objects, 
+text, and so on to your profile. The following statement adds a key that contains 
+the chess rating of&nbsp;an avatar.
+<blockquote>
+<p class="comments"> 'Add a chess rating key to your profile.
+<pre class="example">User.Profile.<b>AddKey "Chess Rating", "1854"</b></pre></blockquote>
+<p>  Anyone can add a key to anyone else's profile; 
+this ability is not limited to wizards. However, Microsoft Virtual Worlds has checks for 
+those who&nbsp;want&nbsp;some form of control over the keys added to their 
+profile. The <A href="BanObject.htm">BanObject</A> and <A href="UnbanObject.htm">UnbanObject</A>  methods&nbsp;provide that control. 
+To keep an avatar from adding a key to your profile, you&nbsp;can execute the 
+following statement.
+<P>
+<blockquote>
+<p class="comments">'Prevent another avatar from creating keys in your profile.
+<pre class="example">User.<b>BanObject = User.Container.FindWithin("Gracie")</b></pre></blockquote>
+<p>You can also choose who can see your key by setting the 
+<A href="KeyAccess.htm">KeyAccess</A> property when you create your key or 
+any time later. If you want to be the only person able to see the key, you would use the following statement.
+<blockquote>
+<p class="comments">  'Prevent another avatar from  viewing a key: set it to Private.
+<pre class="example">User.Profile.<STRONG>KeyAccess("Chess Rating") = 2</STRONG></pre></blockquote>
+<P>  Along with adding keys, you can also use the 
+<A href="RemoveKey.htm">RemoveKey</A>       method 
+to destroy keys. There is one caveat, though, with this method: To be able to 
+remove the key from the profile, you must be&nbsp;either the owner of the key or the 
+owner&nbsp;of the avatar that the key is attached to.&nbsp;The following 
+statement removes a key from&nbsp;your avatar's&nbsp;profile.
+<blockquote>
+<p class="comments">   'Remove a key from your profile.
+<pre class="example">User.Profile.<b>RemoveKey "Chess Rating"</b></pre></blockquote>
+<p>There are other checks that you can perform on 
+the profile of an avatar. To check&nbsp;whether a key is still valid, you can use the <A href="../PropertyMap/IsValid.htm">IsValid</A> 
+property.</p>
+<blockquote><P class=comments>'Check a key from your profile. 
+
+<PRE class=example>User.Profile.<B>IsValid(</B><B>"Chess Rating")</B>&nbsp;</PRE></blockquote>
+<P>  You can find 
+out who owns a key by using the <A href="KeyOwner.htm">KeyOwner</A> 
+property.</P>
+<blockquote><P class=comments>'Check a key from your profile. <PRE class=example>User.Profile.<B>KeyOwner(</B><B>"Chess Rating")</B>&nbsp;</PRE></blockquote>
+<P>      To find out&nbsp;the name 
+of an avatar,&nbsp;check the contents of the <A href="Avatar.htm">Avatar</A> 
+property.</P>
+<blockquote><P class=comments>  'Find an avatar's name. <PRE class=example>User.Profile.<B>Avatar</B>&nbsp;</PRE></blockquote>
+<H3>Extending the Scope of an Avatar's Profile</H3>
+<P class=body>You can use&nbsp;an avatar's profile to keep track of a user's 
+status in an online game or to send messages to another avatar when&nbsp;their 
+score in the game reaches a certain level.&nbsp;To keep similar information 
+up-to-date,&nbsp;just add a function to update&nbsp;the user's score. Usually, 
+the program would have to manually update each person's game score each time the 
+person played, and the person wouldn't have access to the score in other 
+worlds.&nbsp;However, if&nbsp;you use&nbsp;an avatar's profile to maintain each 
+person's game score, that&nbsp;information travels everywhere the avatar 
+goes.&nbsp; 
+<P>Hosts can set up rooms where people can gather and meet. The developer of the 
+chat room can include an event in a <A href="../Module/Module.htm">Module</A> to 
+poll each avatar as it enters the room. If any of the keys in the avatar's 
+profile match those of another profile, the&nbsp;event can display a web message 
+to the Virtual Worlds <A href="../Exemplars/WebPage/WebPage.htm">WebPage</A> 
+object, listing the other avatars in the room&nbsp;who have&nbsp;similar 
+interests.</P> 
+
+</BODY>
+</html>

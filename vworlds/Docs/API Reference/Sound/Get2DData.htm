@@ -1,0 +1,184 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Get2DData</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Get2DData</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of the Sound Object</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Returns the&nbsp;two-dimensional&nbsp;volume, frequency, and pan 
+information for a <A href="Sound.htm">Sound</A> object and places the information in the 
+<EM>pvarlVolume</EM>, <EM>pvarlFrequency</EM>, and <EM>pvarlPan</EM> parameters. <STRONG>Get2DData</STRONG> is a 
+member of the <STRONG>Sound</STRONG> object.
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<TABLE class=backlight>
+  
+  <TR>
+    <TD><!--Syntax statement--><EM>object</EM>.<STRONG>Get2DData</STRONG> <EM>pvarVolume, pvarlFrequency, 
+      pvarlPan</EM></TD></TR></TABLE>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>Get2DData</STRONG> method syntax has these parts:
+<TABLE class=backlight><!--Parameters table: Caption-->
+  <THEAD>
+  <TR>
+    <TD>Part</TD>
+    <TD>Type</TD>
+    <TD>Use</TD>
+    <TD>Description</TD></TR></THEAD><!--Parameters table: line divider-->
+  
+  <TR class=line>
+    <TD colSpan=100></TD></TR><!--Parameters table: contents-->
+  <TR>
+    <TD class=boldItal><!--Parameter name-->object</TD>
+    <TD><!--Type-->Sound</TD>
+    <TD><!--Required or Optional-->Required</TD>
+    <TD><!--Description-->  An object reference&nbsp;to a 
+      <STRONG>Sound</STRONG> object.</TD></TR>
+  <TR>
+    <TD class=boldItal>pvarlVolume</TD>
+    <TD>Long</TD>
+    <TD>Required</TD>
+    <TD>The volume of&nbsp;a sound, in hundredths of a decibel.</TD></TR>
+  <TR>
+    <TD class=boldItal>pvarlFrequency</TD>
+    <TD>Long</TD>
+    <TD>Required</TD>
+    <TD>The frequency of&nbsp;a sound, in hertz.</TD></TR>
+  <TR>
+    <TD class=boldItal><!--Parameter name-->pvarlPan</TD>
+    <TD><!--Type-->Long</TD>
+    <TD><!--Required or Optional-->Required</TD>
+    <TD><!--Description-->The amount by which one channel is louder than the 
+      other, in hundredths of a decibel.</TD></TR></TABLE>
+
+<!--Return Value section --></P>
+<H3>Return Value</H3>
+<p>This method does not return a value.&nbsp;&nbsp;<!--Remarks section-->&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->
+<P>The amount of <EM>attenuation</EM>&nbsp;applied to the sound means&nbsp;that 
+the volume is lowered by the specified amount of hundredths of decibels. The 2-D 
+sound effects include volume control, frequency of the sound effect, and volume 
+control for each speaker.&nbsp;</P>
+<P>     
+       
+           
+                  
+           
+  To create 3-D sound effects, refer to the <A href="../World/CreateSound.htm">CreateSound</a>, <A href="Sound.htm">Sound</A>, <A href="Get3DData.htm">Get3DData</A>, 
+or <A href="Set3DData.htm">Set3DData</A> topics.</P>
+<H4>Effects of the <EM>pvarlVolume</EM> Parameter</H4>
+<P>The <EM>pvarlVolume</EM>  
+ parameter is specified in hundredths of decibels (dB). Allowable values are&nbsp;from 0 (no 
+attenuation or weakening of the transmission signal)&nbsp;through -10,000 (silence). The value 0 
+represents the original, unadjusted volume of the stream. The value -10,000 
+indicates an audio volume attenuated by 100 dB, which, for all practical 
+purposes, is silence.</P>
+<H4>Effects of the <EM>pvarlFrequency</EM>Parameter</H4>
+<P>The <EM>pvarlFrequency</EM> 
+parameter represents the number of times the sound is sampled, and 
+is specified in hertz (Hz). This parameter must be in the range from 100 through 100,000. You can also set the value 
+to 0, which means that the sound is not sampled. Common frequency rates are 8,800 
+Hz, 14,400 Hz, and 22,000 Hz.</P>
+<H4>Effects of the <EM>pvarlPan</EM> Parameter</H4>
+<P>The value in the <EM>pvarlPan</EM> parameter is measured in hundredths of a 
+decibel (dB), in the range&nbsp;from -10,000 through 10,000. This parameter sets 
+the volume for each speaker, or channel. There are three possible settings for 
+the two channels:</P>
+<UL type=disc>
+  <LI>Set the right channel to silence:&nbsp;Use the value -10,000.&nbsp;The 
+  right channel is attenuated by 100 dB. 
+  <LI>Set the left channel to silence:&nbsp;Use the value 10,000.&nbsp;The left 
+  channel is attenuated by 100 dB. 
+  <LI>Set both channels to full volume: Use 0.&nbsp;Both channels are attenuated 
+  by 0 dB. </LI></UL>
+<P>The following table shows some of the possible settings for the <EM>lPan</EM> parameter. </P>
+<H5>Example Settings for Channel Pan</H5>
+<P>
+<table class=backlight>
+  <thead>
+  <tr>
+    <td>Value of the <EM>lPan</EM> 
+      parameter</td>
+    <td>Channel affected</td>
+    <td>Attenuation</td>
+    <td>Description</td></tr></thead>
+  
+  <tr class=line>
+    <td colSpan=100></td></tr>
+  <TR>
+    <TD>
+      <P align=center>-10,000</P></TD>
+    <TD>Right</TD>
+    <TD>
+      <P align=center>100 dB</P></TD>
+    <TD>The right channel is&nbsp;silent and the sound is 
+      heard from the left channel.</TD></TR>
+  <TR>
+    <TD>
+      <P align=center>10,000</P></TD>
+    <TD>Left</TD>
+    <TD>
+      <P align=center>100 dB</P></TD>
+    <TD>The&nbsp;left channel is silent and the sound is 
+      heard from the right channel.</TD></TR>
+  <TR>
+    <TD>
+      <P align=center>0</P></TD>
+    <TD>Neutral</TD>
+    <TD>
+      <P align=center>0 dB</P></TD>
+    <TD>Both channels are at full volume.</TD></TR>
+  <TR>
+    <TD>
+      <P align=center>-2173</P></TD>
+    <TD>Right</TD>
+    <TD>
+      <P align=center>21.73 dB</P></TD>
+    <TD>The left channel is at full volume and the right 
+      channel is attenuated by 21.73 dB.</TD></TR>
+  <TR>
+    <TD>
+      <P align=center>870</P></TD>
+    <TD>Left</TD>
+    <TD>
+      <P align=center>8.7 dB</P></TD>
+    <TD>The right channel is at full volume and the left 
+      channel is attenuated by 8.7 dB.</TD></TR></table></P>
+<P>As you can see from the previous table, at any setting 
+other than 0, one of the channels is at full volume and the other is attenuated. 
+By setting the <I>pvarPan</I> parameter to -2,173,&nbsp;the left channel&nbsp;is 
+automatically set to full volume, while&nbsp;the right channel is attenuated by 
+21.73 dB. Similarly, setting the <I>pvarPan</I> parameter to 
+870,&nbsp;attenuates the left channel&nbsp;by 8.7 dB, and automatically sets the 
+right channel&nbsp;to full volume.&nbsp;</P>
+<P>The <I>lPan</I> parameter acts&nbsp;conjunctively with the <EM>lVolume</EM> parameter 
+to adjust the effects of the sound.&nbsp;&nbsp;&nbsp;<!--Example section-->&nbsp;
+
+<!--Example section--></P>
+<H3>Example</H3>
+
+<pre class="example">
+  mySound.<b>Get2DData nVolume, nFrequency, nPan</b>
+</pre>  
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetDecalCount</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetDecalCount</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>
+Returns the number of decals in a specified <A href="Frame.htm">Frame</A> object 
+as a <STRONG>Long</STRONG>. <STRONG>GetDecalCount</STRONG> is a member of the <STRONG>Frame</STRONG> object.&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><!--Syntax statement--><EM>object</EM>.<STRONG>GetDecalCount</STRONG>()</td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<P>The&nbsp;<STRONG>GetDecalCount</STRONG> method syntax has these parts: 
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"><!--Parameter name-->object</td>
+		<td><!--Type-->Frame</td>
+		<td><!--Required or Optional-->Required</td>
+		<td><!--Description-->An 
+      object reference that accesses an object with 
+      a&nbsp;<STRONG>Frame</STRONG> object.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section --></P>
+<H3>Return Value</H3>
+<p>This method returns a count of the decals within a 
+specified frame.&nbsp;
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P><!--Insert Remarks here-->This 
+method is similar to a count property. When you execute this method, it searches 
+the specified frame and counts the number of decals within the frame. Common 
+usage for this method is safely iterating through the list of decals to 
+alter them.
+
+<!--Example section-->
+<H3>Examples</H3>
+<P>The first example creates a decal and displays it in a virtual world.</P><PRE class="example">
+Sub CreateKioskDecal(strDecalText)
+Dim myFrame
+Dim myDecalCount
+</PRE>
+<P class="comments">'Set a reference to the frame where you want to place the 
+decal. <PRE class="example">Set myFrame = User.Container.GetFrame
+</PRE>
+<P class="comments"> 'Get the number of decals. <PRE class="example">
+myDecalCount = myFrame.<b>GetDecalCount</b>
+Print myDecalCount
+</PRE>
+<p class="comments">
+'Check the number of decals in the frame.
+<pre class="example">
+If myDecalCount = 5 Then
+&nbsp;&nbsp;&nbsp;&nbsp;Print "You have reached the limit of the decals for this frame."
+&nbsp;&nbsp;&nbsp;&nbsp;Exit Sub
+Else</pre><div class="comments">&nbsp;&nbsp;&nbsp;&nbsp;'Okay to create the decal.</div><PRE class="example">&nbsp;&nbsp;&nbsp;&nbsp;myFrame.CreateDecalFromText strDecalText, "Kiosk"
+End If
+End Sub</PRE>
+
+<p>Example 2
+<p>The second example iterates through the decals in a frame 
+and changes their size.</p>
+<pre class="example">
+For i = 0 To myFrame.<b>GetDecalCount</b> - 1 
+&nbsp;&nbsp;&nbsp;&nbsp;myFrame.SetDecalSize 0, .5, .15, 2
+Next</pre >     
+    
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<title>Virtual Worlds Server Application</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css" title="VWG">
+</head>
+
+<body>
+
+<h1>Virtual Worlds Server Application</h1>
+
+<p>The Microsoft Virtual Worlds Server application runs one or more
+Virtual Worlds on a server computer. Until the server is running and the
+administrator has opened a world, no one can enter that world.</p>
+<p>The Virtual Worlds Server application also contains tools that help an administrator
+manage the worlds on the server and basic server maintenance tasks.  You can create new worlds, open worlds that have been created,
+save a world, delete a saved world, and monitor events in worlds that are active at a particular
+time.  You can also take a world offline to repair or change it, list a world in the Virtual Worlds
+Directory Service, set user authentication features, and link a world listing to a related World Wide Web page.</p>
+
+<p>The Virtual Worlds Server application interface consists of a menu bar, a <b>Server Log and Statistics</b>
+window, and one <b>World</b> window for each Virtual world that has been loaded.  (A world may be loaded at
+the server's startup, or while the server is already running.) </p>
+<br>Learn more about the: 
+
+<ul>
+  <li>The Server Log and Statistics Window</li>
+  <li>The World Window</li>
+</ul>
+
+<p><img src="vws.gif" width="302" height="274" alt="vws.gif (30103 bytes)"></p>
+
+<h2>Server Log and Statistics Window</h2>
+<p>The <b>Server Log and Statistics Window</b> is divided into two panes.
+The upper pane is the <b>Server Log Pane</b>, which displays system messages.
+The lower pane is the <b>Statistics Pane</b>, which displays network communication information.
+
+<h3>Server Log Pane Options</h3>
+
+<h4>Date/Time</h4>
+
+<p>You can check here for the exact time and date that a server event occurred. </p>
+
+<h4>Message</h4>
+
+<p>The messages displayed in this column include error messages and notification that the
+server is ready to receive users. </p>
+
+<h3>Statistics Pane</h3>
+
+<h4>Directory Service Information </h4>
+
+<p>This line indicates whether the server is connected to the Directory Server. If the
+world is listed in the Directory Server, people can select it from the Directory
+and be transported to that world.</p>
+
+<h4>Number of open worlds </h4>
+
+<p>This section contains information about the number of open worlds, their names, the
+number of avatars connected for each, and an indication of message flow from the server to
+each world. (The server is IDLE if no messages are sent; otherwise, details of the message
+are displayed.)</p>
+
+<h4>Client Connections </h4>
+
+<p>This section displays the total number of users connected to all open worlds that are
+currently hosted by the server. This information is important to the Server administrator
+because, in general, as the number of users increases, so does the system response time.
+Strictly speaking, however, it is the number of messages
+sent between the server and connected clients that is the principal factor in
+performance. A small number of avatars moving around and talking causes more
+client-server communication than a large number of avatars who are not as active.</p>
+
+<h4>Queue statistics </h4>
+
+<p>Server messages are placed in a <em>priority queue</em>, a list in which
+messages with higher priority are processed before messages with lower priority, and those that
+have the same priority are processed in the order they were received.  The
+queue statistics that are displayed include the status of the current message, the total number
+of messages in the queue, the total number of messages received from all clients, and the total
+number of messages that have been processed.  If there are many unprocessed requests in
+the queue, performance will suffer on the Virtual World clients.</p>
+
+<h4>Communication details </h4>
+
+<p>This section provides information about the quantity of data sent and received by the
+server. </p>
+
+<h2>The World Window</h2>
+
+<p>The title bar of this window displays the name of the world, whether it is accessible
+to external clients (public) or not (private), and the number of users. </p>
+
+<h3>World Window Options</h3>
+
+<h4>Date/Time</h4>
+
+<p>You can check here for the exact time and date that a world event occurred. </p>
+
+<h4>Messages</h4>
+
+<p>The messages displayed include notification that the world is ready to receive users,
+that the world is loaded into memory, and that users have entered or left the world. Error
+messages are also displayed in this window.</p>
+
+<h4>See Also:</h4>
+<p>
+
+<a href="../../admin/savewrld.htm">How Worlds Are Saved</a><br>
+<a href="../../admin/nods.htm">Adding Directory Services</a><br>
+</p>
+
+<h4>Tasks:</h4>
+
+<a href="../../admin/openchk.htm">Opening a World Checkpoint File</a><br>
+<a href="../../admin/savechk.htm">Saving a World as a Checkpoint File</a><br>
+<a href="../../admin/vwsdelw.htm">Deleting a World</a><br>
+<a href="../../admin/openscpt.htm">Importing a World Script File</a><br>
+<a href="../../admin/savescpt.htm">Exporting a World as a Script File</a><br>
+
+</body>
+</html>

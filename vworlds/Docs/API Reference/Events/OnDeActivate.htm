@@ -1,0 +1,125 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnDeactivate</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnDeactivate</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called in response to the <strong>Deactivate</strong>
+event, which occurs when the last <strong>Avatar</strong> disconnects from a room.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>OnDeactivate(<i>pRoom</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnDeactivate</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">pRoom</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>A reference to the room that the avatar is leaving.</td>
+	</TR>
+</TABLE>
+
+<p>The <b>Connect</b> event supports these additional handlers:
+<TABLE class="backlight" STYLE="WIDTH:75%">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Event Handler</td>
+			<td>Description</td>
+
+		</TR>
+	</thead>
+<tr class="line" ><td colspan=100></td></tr>
+	<TR>
+		<td class="boldItal">OnPeerDeactivate</td>
+		<td>The handler for other objects in the same <a href="../Thing/Container.htm">Container</a>.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContainerDeactivate</td>
+		<td>The handler for the object's <a href="../Thing/Contents.htm">Contents</a>.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContentDeactivate</td>
+		<td>The handler for the <b>Container</b> of the object.</td>
+		<td></td>
+		<td></td>
+	</TR>
+</TABLE>
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>This method responds to an internal <strong>Deactivate</strong>
+event that occurs in Virtual Worlds when the last <b>Avatar</b>
+disconnects from a room. This method is not normally called by the
+user.</p>
+
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;To ensure that the internal procedures that are tied to each event handler are invoked, you must call <b>InvokeSuperMethod</b> within the overridden subroutine. For more information on using this method, see the <a href="../Thing/InvokeSuperMethod.htm">InvokeSuperMethod</a> topic.
+<!--Example section-->
+<H3>Example</H3>
+<P>This example is a server-side method that displays a message on the server when a room is deactivated. <br><br>
+
+
+<pre class="example">
+Sub OnDeactivate(theRoom)
+&nbsp;&nbsp;&nbsp;&nbsp;Trace &quot;Deactivating&nbsp;&quot; &amp; theRoom.Name
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod(theRoom)
+End Sub
+
+</pre>
+
+</body>
+</html>

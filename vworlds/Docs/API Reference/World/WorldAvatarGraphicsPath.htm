@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>WorldAvatarGraphicsPath</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>WorldAvatarGraphicsPath</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>String</b> that holds the path to the directory
+in which avatar graphics files are located. This path is
+world-specific. <b>WorldAvatarGraphicsPath</b> is a read-only <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>WorldAvatarGraphicsPath</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>WorldAvatarGraphicsPath</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>Avatar graphics include sprite files (with .SPR file
+extensions) and sprite image files (with .GIF file extensions).
+
+<p>To find avatar graphics for a specific world, Virtual Worlds starts its search from 
+the <tt>Local Content</tt> directory.  The default path to the world avatar graphics directory is:</p>
+<tt>C:\Program Files\Microsoft Virtual Worlds\Local Content\Worlds\&lt;World Name&gt;\Avatar Graphics\.</tt></p>
+
+<p>This property is initialized when Virtual Worlds starts, as a
+combination of the contents of <a href="AvatarGraphicsPath.htm">AvatarGraphicsPath</a>
+and <a href="WorldName.htm">WorldName</a>.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p>This example displays the <b>WorldAvatarGraphicsPath</b> property in the Command Window.
+<br><br>
+<pre class=example>Trace World.<b>WorldAvatarGraphicsPath</b></pre>
+ 
+
+</body>
+</html>

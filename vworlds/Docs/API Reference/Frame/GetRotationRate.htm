@@ -1,0 +1,112 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>GetRotationRate</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>GetRotationRate</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Gets the rotation rate of the frame relative to the reference frame. 
+<b>GetRotationRate</b> is a member of the <b>Frame</b> object.
+&nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>GetRotationRate</b>&nbsp;<i>pvwfRef, prvX, 
+		prvY, prvZ, prvTheta</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>GetRotationRate</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pvwfRef</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>The reference frame.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">prvX</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The x-component of the rotation axis vector.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">prvY</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The y-component of the rotation axis vector.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">prvZ</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The z-component of the rotation axis vector.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">prvTheta</td>
+		<td>Variant</td>
+		<td>Required</td>
+		<td>The angular rotation rate.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</h3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>The rotation rate, <i>prvTheta</i>, expresses the fraction of a full rotation that is
+rendered in each successive frame. Reasonable values are typically between 0.01 and 0.5;
+these numbers represent 100 frames per complete rotation and two frames per complete
+rotation, respectively.
+&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.GetRotationRate RefFrame, xRot, yRot, zRot, RotRate</pre>
+&nbsp;
+
+
+</body>
+</html>

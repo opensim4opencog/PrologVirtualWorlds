@@ -1,0 +1,93 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>SetScale</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>SetScale</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of Frame</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P>Sets the scale of the frame. <b>SetScale</b> is a member of the 
+<b>Frame</b> object. &nbsp;
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>SetScale</b>&nbsp;<i>fX, fY</i></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>SetScale</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>Frame</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>Frame</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fX</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The x-component of the scale factor.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">fY</td>
+		<td>Float</td>
+		<td>Required</td>
+		<td>The y-component of the scale factor.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>Set the <b>Frame</b> parameter to <b>Nothing</b> if you want the other input values in coordinates
+relative to the world's origin.  Set the <b>Frame</b> parameter to the parent of the calling frame to 
+set the other input values relative to the parent frame's origin.
+<P><STRONG>Important:</STRONG>&nbsp;&nbsp;&nbsp;Do not set the scale to zero in 
+any coordinate or you may get undesireable results.&nbsp;&nbsp;
+
+<!--Example section-->
+<H3>Example</H3>
+<p><pre>MyFrame.SetScale ParentFrame, 0.5, 0.5, 0.5</pre>
+&nbsp;
+
+
+</body>
+</html>

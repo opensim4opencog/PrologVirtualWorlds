@@ -1,0 +1,68 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>Boundary</title>
+</head>
+
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>Boundary</h2></td>
+		<td class="space"></td>
+		<td class="datatypepic"><!--image is inserted here--></td>
+		<td class="greyed">
+      <P>Virtual Worlds Object</P>
+     </td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<P class=body>You can use the <b>Boundary</b> object to create a virtual border around a <a href="../Thing/Thing.htm">Thing</a> object. A boundary can behave as a trip wire that fires an event (or multiple events), which is one of the most powerful features of the Microsoft Virtual Worlds platform. Events enable a seemingly static world to react and adjust to user interaction, making a virtual space "come alive" with activity. For example, when an object collides with a boundary, the overrideable <a href="../Events/OnIntersectee.htm">OnIntersectee</a> and <a href="../Events/OnIntersecter.htm">OnIntersecter</a> events are fired, causing a sequence of actions to take place. By means of boundaries, events add this dynamic quality to the three-dimensional space, encouraging the user to explore and maintain an active presence in a particular world.
+
+<!--How-to section -->
+<H3>What is a Boundary?</H3>
+<p>A <b>Boundary</b> is an object composed of a set of points that encloses another object or area in 3-D space. Instead of the standard 3-D coordinate system, boundary points, called vertices, are placed on a separate 2-D x-y plane. Unlike other objects, boundary vertex coordinates are relative to the object they surround, not the world in which the object is located. The origin of the x- and y-axes (0,0) corresponds to the center point of the object the boundary is assigned to. The positive y-axis of the boundary coordinate system aligns with the direction the object faces. If you rotate the object in 3-D space, the boundary rotates as well, and the coordinates stay relative to the direction the object faces.
+<p><img src="../Images/Boundary5.gif" width=308 height=161 alt="" border="0">
+<p>When a boundary is created, it is not automatically connected to any particular object. To use a boundary, it must be assigned to an object by adding it to the <a href="../Exemplars/Thing/BoundaryList.htm">BoundaryList</a> property of the object using the <a href="../PropertyList/Add.htm">Add</a> method. The <b>BoundaryList</b> property is a <a href="../PropertyList/PropertyList.htm">PropertyList</a> that maintains a list of boundaries added to an object. Boundaries are added sequentially to this list, and if a boundary is removed from the list, the index numbers of any succeeding boundaries are decremented. The following example adds a boundary to the BoundaryList of an existing object using the <b>Add</b> method. The item "myObject" is an existing object, and the argument "myBoundary" is a boundary that has been created but not yet assigned to an object. <br><br>
+
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;myObject.BoundaryList.Add <i>myBoundary</i></pre>
+
+<p>You can access any valid <b>Boundary</b> method or property either before or after the assignment to the <b>BoundaryList</b> property of an object. For example, to invoke the <b>Rotate</b> method of a boundary you've created named "myBoundary" that has not yet been assigned to an object, you could use the following syntax:<br><br>
+
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;myBoundary.Rotate <i>newValue</i></pre>
+
+<p>However, to invoke a method for a specific <b>Boundary</b> after it has been assigned, you must acquire a reference to that individual item in the <b>BoundaryList</b>. In the following examples, the variable "myObject" represents an existing object. Both examples below acquire a reference to the third boundary in a boundary list, and then change the position of the boundary using the <a href="Rotate.htm">Rotate</a> method.
+<br><br>
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;Dim myList</pre>
+<div class=comments>&nbsp;&nbsp;&nbsp;&nbsp;'Acquire a reference to the third boundary in a BoundaryList.</div>
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;Set MyList = myObject.BoundaryList.Property(2)
+&nbsp;&nbsp;&nbsp;&nbsp;MyList.Rotate .2
+</pre>
+<p>Example 2
+<p class=comments>&nbsp;&nbsp;&nbsp;&nbsp;'Acquire a reference to a boundary and invoke the Rotate method.
+<pre class=example>&nbsp;&nbsp;&nbsp;&nbsp;myObject.BoundaryList.Property(2).Rotate .2
+</pre>
+<br>
+<p>A boundary can have a vertical "height," which is measured in meters (the standard unit of measurement in Virtual Worlds). This value does not correspond to a coordinate location, since boundaries use a 2-D x-y coordinate system. The height of the boundary is determined by the <a href="HeightLower.htm">HeightLower</a> and <a href="HeightUpper.htm">HeightUpper</a> properties, and is relative to the center point of the object. When a boundary is created, the height is undefined. However, when the boundary is assigned to an object, the boundary sets the <b>HeightUpper</b> and <b>HeightLower</b> properties to match the upper and lower edges of the <i>bounding box</i> of the object.
+<H3>What is a bounding box?</H3>
+<p>A bounding box is the smallest possible bounding volume cube that all of the polygons of an object will fit within. The radial distance between the bounding box and the boundary is calculated for each object, depending on the size of the bounding box and the center point of the object. For example, imagine a glass cube surrounding an entire building. The cube cannot touch the building itself, but it must be as close as possible to all sides of the building. This cube illustrates the bounding box of the building.
+
+
+<H3>Passable and Impassable Boundaries</H3>
+<p>A <b>Boundary</b> can be passable or impassable, as indicated by its <a href="IsPassable.htm"> IsPassable</a> property. The default value for this property is <b>False</b> (that is, impassable). An impassable <b>Boundary</b> does not allow anything to cross it, either going into the 3-D region it encloses, or out of it. In contrast, a passable <b>Boundary</b> places no restrictions on movements across it. If an avatar collides with either of these boundaries, an intersection event is fired.
+
+<p>Passable <b>Boundary</b> objects are especially useful in triggering events that cause other objects in a world to appear to respond to user interaction. An example of this is using boundaries to make the audible volume of a sound increase as an avatar approaches an object. Using several nested boundaries, you can set audio levels at increasing intervals per boundary in relation to the position of the object.
+
+<p>Impassable <b>Boundary</b> objects act as solid objects that enclose an object or area. When an object collides with an impassable boundary, an event is also fired. You can set this event to play a sound or create a visual effect to signify the collision.
+
+
+<br>
+
+
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// DirServ.idl : IDL source for DirServ.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (DirServ.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+//the server.
+	[
+		object,
+		uuid(40A94350-9AE4-11D0-8587-00A0C90F2911),
+		dual,
+		helpstring("IDServ Interface"),
+		pointer_default(unique)
+	]
+	interface IDServ : IDispatch
+	{
+		[helpstring("Call this to initialize this module, connects to default DS.")] 
+			HRESULT Connect();
+		
+		[helpstring("method ConnectEx")] 
+			HRESULT ConnectEx(BSTR bstrLocation,BSTR bstrAdmin, BSTR bstrPasswd);
+
+		[helpstring("Call this just before final release.")] 
+			HRESULT Disconnect();
+
+		[helpstring("Adds a user to the directory service, indexed by alias. state=0 for notInWorld.")] 
+			HRESULT AddUser(BSTR EmailName, BSTR InWorldAlias, BSTR ComputerName, BSTR Comment, 
+				LONG state);		
+		
+		[helpstring("Remove's a user by alias.")] 
+			HRESULT RemoveUser(BSTR InWorldAlias);
+		
+		[helpstring("Looks up user in DS and toggles flag.")] 
+			HRESULT LogUserOn(BSTR InWorldAlias);
+				
+		[helpstring("Looks up user in DS and toggles flag.")] 
+			HRESULT LogUserOff(BSTR InWorldAlias);
+
+		[helpstring("Gets a user's attribs. State=-1 if failed, 0 if outworld, 1 if in.")] 
+			HRESULT FindUser([in]BSTR inworldalias,[out]BSTR *emailname,[out] BSTR *computername,[out]BSTR *comment,[out]LONG *state);
+
+		[helpstring("method GetStatus")] HRESULT GetStatus(BSTR *bstrMsg);
+
+		[helpstring("method TestQueue")] HRESULT TestQueue(void);
+
+	};
+	
+[
+	uuid(40A94341-9AE4-11D0-8587-00A0C90F2911),
+	version(1.0),
+	helpstring("DirServ 1.0 Type Library")
+]
+library DIRSERVLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(40A94351-9AE4-11D0-8587-00A0C90F2911),
+		helpstring("DServ Class")
+	]
+	coclass DServ
+	{
+		[default] interface IDServ;
+	};
+	
+};

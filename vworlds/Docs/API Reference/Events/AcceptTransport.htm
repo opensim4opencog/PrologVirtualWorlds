@@ -1,0 +1,102 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>AcceptTransport</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AcceptTransport</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called on a <b>Thing</b> attempting to transport through a destination
+portal.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>AcceptTransport(<i>pThing</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>AcceptTransport</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  <TBODY>
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">pThing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object attempting to move through the portal.</td>
+	</TR>
+
+</TABLE>
+
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a Boolean.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>Returns a <strong>Boolean</strong> flag indicating whether a destination portal will
+accept transport of a given object.<strong> True</strong> will be returned if the portal
+allows transport; <strong>False</strong> otherwise.
+<p>This method is not normally called by the user; it responds to an internal event that
+occurs in Virtual Worlds when an object tries to arrive through a destination portal. This
+method and AllowTransport can be overridden in script so that
+only users meeting specified conditions can transport through the portal. If you find it
+necessary to override this event-handling method, <strong>InvokeSuperMethod</strong>
+should also be called to maintain the existing functionality of the overridden method.
+<!--Example section-->
+<H3>Example</H3>
+<p>
+
+
+<pre class="example">Function AcceptTransport(TheThing)
+&nbsp;&nbsp;&nbsp;&nbsp;Dim MoveOK</pre>
+<div class=comments>&nbsp;&nbsp;&nbsp;&nbsp;'(Calls the parent's AcceptTransport method)</div>
+<pre class="example">&nbsp;&nbsp;&nbsp;&nbsp;MoveOK = This.InvokeSuperMethod(TheThing)   
+&nbsp;&nbsp;&nbsp;&nbsp;AcceptTransport = MoveOK 
+End Function</pre>
+<!--Example text-->
+&nbsp;
+
+
+
+
+</body>
+</html>

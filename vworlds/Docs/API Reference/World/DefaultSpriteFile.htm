@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>DefaultSpriteFile</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>DefaultSpriteFile</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>String </b>that holds the name of the default sprite file. 
+<b>DefaultSpriteFile</b> is a read/write <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<p>To set this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>DefaultSpriteFile</b> = <i>StringValue</i></td>
+	</tr>
+
+</table>
+
+<p>To return this property:
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>DefaultSpriteFile</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>DefaultSpriteFile</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">StringValue</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The path to the default .spr file for an avatar.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<P>When Microsoft Virtual Worlds starts, this property is initialized to &quot;default.spr&quot;. The World Owner can change this property to default to any valid sprite file. Any user entering a world will be represented by the contents of this file unless she
+chooses to use a different sprite image.
+&nbsp;
+
+<!--Example section-->
+
+
+</body>
+</html>

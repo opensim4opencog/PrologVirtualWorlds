@@ -1,0 +1,127 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>OnConnect</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>OnConnect</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Event Handler</td>
+	</tr>
+</table>
+
+<!--Topic Definition-->
+<p>An event-handling method that is called in response to the <strong>Connect</strong>
+event, which occurs when an <strong>Avatar</strong> connects to a world.
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><b>Sub </b><b>OnConnect(<i>pAvatar</i>)</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>statements</i><br>
+<b>End Sub</b></td>
+	</tr>
+</table>
+
+
+<!--Parameters table-->
+<p>The <b>OnConnect</b> method syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr>
+
+<!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal"></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</TR>
+	<TR>
+		<td class="boldItal">pAvatar</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>A reference to the avatar who is connecting.</td>
+	</TR>
+</TABLE>
+
+<p>The <b>Connect</b> event supports these additional handlers:
+<TABLE class="backlight" STYLE="WIDTH:75%">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Event Handler</td>
+			<td>Description</td>
+
+		</TR>
+	</thead>
+<tr class="line" ><td colspan=100></td></tr>
+	<TR>
+		<td class="boldItal">OnPeerConnect</td>
+		<td>The handler for other objects in the same <a href="../Thing/Container.htm">Container</a>.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContainerConnect</td>
+		<td>The handler for the object's <a href="../Thing/Contents.htm">Contents</a>.</td>
+		<td></td>
+		<td></td>
+	</TR>
+<TR>
+		<td class="boldItal">OnContentConnect</td>
+		<td>The handler for the <b>Container</b> of the object.</td>
+		<td></td>
+		<td></td>
+	</TR>
+</TABLE>
+<!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method does not return a value.
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+<p>This method responds to an internal <strong>Connect</strong>
+event that occurs in Virtual Worlds when an <b>Avatar</b>
+connects to the world. This method is not normally called by the
+user.</p>
+
+<p>In addition, an overriding <strong>OnConnect</strong> method
+can run on either the client or the server; however, due to
+timing issues, it should be specified as a server-side method.</p>
+
+<p><b>Note</b>:&nbsp;&nbsp;&nbsp;To ensure that the internal procedures that are tied to each event handler are invoked, you must call <b>InvokeSuperMethod</b> within the overridden subroutine. For more information on using this method, see the <a href="../Thing/InvokeSuperMethod.htm">InvokeSuperMethod</a> topic.
+<!--Example section-->
+<H3>Example</H3>
+<P>&nbsp;
+
+
+<pre class="example">Sub OnConnect(theAvatar)
+&nbsp;&nbsp;&nbsp;&nbsp;Trace theAvatar.Name & " logged on at  " & Now()
+&nbsp;&nbsp;&nbsp;&nbsp;This.InvokeSuperMethod theAvatar
+End Sub
+
+</pre>
+
+</body>
+</html>

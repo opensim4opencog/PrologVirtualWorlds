@@ -1,0 +1,356 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 2.0">
+<title>Interactions with Objects</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css"
+title="VWG">
+</head>
+
+<body>
+
+<h1>Introduction to Objects</h1>
+
+<p><!-- 10/23/98 --></p>
+
+<h3>Objects</h3>
+
+<p>Virtual Worlds uses objects to represent the things in a
+virtual world. When you connect to a world, Virtual Worlds
+creates an object to represent you, which is called an avatar.
+Virtual Worlds uses objects to represent the other people in the
+world, the inanimate things in the world, and the world itself.
+All objects in a Virtual World are objects in the <i>object-oriented
+programming </i>sense, which you'll only be concerned with if you
+start to write your own custom methods. Many Virtual Worlds
+objects are also <i>visible objects</i>, which all users will see
+displayed in their view of the Virtual World. These would be
+analogous to physical objects, if, in fact, the virtual world
+were real. Some other Virtual Worlds objects are part of the
+Virtual Worlds architecture or are other parts of a virtual world
+and will not be visible.</p>
+
+<p>Each Virtual Worlds object has its own properties and its own
+methods, which are potentially accessible as soon as that object
+is placed in a Virtual World. If you are the owner of the object,
+then you can edit its properties directly. </p>
+
+<h3>Properties</h3>
+
+<p>A property is a named data value. More simply, a property is
+some piece of information about an object that can be represented
+as a number, a string, an array, or an object like a vector.</p>
+
+<p>For example, avatar objects in Virtual Worlds have a <strong>Name</strong>
+property and a <strong>Description</strong> property, each of
+which is a string, as well as other properties, some of which
+specify your avatar's appearance, including the following: </p>
+
+<ul>
+    <li><strong>GeometryName</strong> 
+  property (a reference to the graphics file that other people must have to view 
+  your avatar). 
+    <li><strong>Position</strong>, <strong>Direction</strong> and
+        <strong>Up</strong> properties (vectors that tell each
+        viewer where your avatar should be placed in a room, and
+        where it is facing). </li>
+</ul>
+<P>Properties can be added to (and sometimes removed from) an object. Also, a 
+property's name or value can be edited in some fashion. Typically, you edit an 
+object's properties in the <A href="../../uiref/objexpl/intrface.htm"><B>Object 
+Explorer</B></A> or in one of the object's <A 
+href="../../uiref/proppage/descrip.htm"><B>Property Pages</B></A>.</P>
+<P>The three most important pieces of information about any property are its 
+name, its type, and its value.</P>
+<UL>
+  <LI>A property's <I>name</I> dictates what that property will be called. If 
+  the property exists in an exemplar, all instances derived from the exemplar 
+  will have a property with the same name. Changing the name of a property can 
+  have far-ranging consequences, so be careful! 
+  <LI>A property's <I>type</I> indicates how the property's value will be stored 
+  in the Virtual Worlds checkpoint file, and how that data should be 
+  interpreted. For instance, if Virtual Worlds "knows" that a property's type is 
+  <STRONG>Float</STRONG>, it can store the property's value in the appropriate 
+  number of bytes and can reliably retrieve the same value later. In the absence 
+  of information about the type of data it is storing or retrieving, Virtual 
+  Worlds would not "know" how many bytes to read, or how to interpret what it 
+  had read. A property's type also helps Virtual Worlds to determine which 
+  editor should be used to change the value. 
+  <LI>A property's <I>value</I> is the data content of the property that 
+  determines how it is displayed. When you edit the properties of an object, you 
+  will usually be editing only their values; it is not usually necessary to edit 
+  a property's name once the property is created.&nbsp; For instance, changing 
+  the value of an object's <B>GeometryName</B> property will cause 
+  a different graphics file to be displayed for that object in a Virtual World. 
+  </LI></UL>
+<P>To access a property, use <EM>object.property</EM> notation. That is, form an 
+expression that starts with the name of the object, a period, and the name of 
+the property. For example, this assignment statement stores the <B>Name</B> property of <EM>MyObj</EM> in 
+the variable <EM>ObjName</EM>:</P>
+<BLOCKQUOTE><PRE>ObjName = MyObj.Name</PRE></BLOCKQUOTE>
+<P>The following assignment statement resets the <STRONG>Name</STRONG> property 
+to a different value, overwriting the former value.</P>
+<BLOCKQUOTE><PRE>MyObj.Name = "Coyote"</PRE></BLOCKQUOTE>
+<P>A property can hold a single value. (That value could, however, be a <B>PropertyList</B>, 
+<B>PropertyMap</B>, <B>Vector</B>, or other composite type. Each 
+of these types can store multiple values.) Virtual Worlds supports several 
+different types of values. The following types are supported for use by 
+Microsoft Visual Basic Scripting Edition<FONT size=2>©</FONT> with the COM data 
+type equivalents. The values returned by the Microsoft Visual Basic Scripting 
+Edition<FONT size=2>©</FONT> function <STRONG>VarType</STRONG> are also 
+shown.</P>
+<P>
+<TABLE border=1>
+  
+  <TR>
+    <TD bgColor=#c0c0c0><EM><B>VBS Type</B></EM></TD>
+    <TD bgColor=#c0c0c0><EM><B>COM Type</B></EM></TD>
+    <TD bgColor=#c0c0c0><EM><B>Description</B></EM></TD>
+    <TD bgColor=#c0c0c0><EM><STRONG>VarType Return Value 
+  (*)</STRONG></EM></TD></TR>
+  <TR>
+    <TD><STRONG>Byte</STRONG></TD>
+    <TD>VT_UI1</TD>
+    <TD>An integer number in the range 0-255 </TD>
+    <TD>17</TD></TR>
+  <TR>
+    <TD><STRONG>Integer</STRONG></TD>
+    <TD>VT_I2</TD>
+    <TD>An integer number in the range -32,768 to 32767 </TD>
+    <TD>2</TD></TR>
+  <TR>
+    <TD><STRONG>Long</STRONG></TD>
+    <TD>VT_I4</TD>
+    <TD>An integer number in the range -2,147,483,648 to 2,147,483,647</TD>
+    <TD>3</TD></TR>
+  <TR>
+    <TD><STRONG>Single</STRONG></TD>
+    <TD>VT_R4</TD>
+    <TD>A 4-byte floating point number </TD>
+    <TD>4</TD></TR>
+  <TR>
+    <TD><STRONG>Double</STRONG></TD>
+    <TD>VT_R8</TD>
+    <TD>An 8-byte floating point number </TD>
+    <TD>5</TD></TR>
+  <TR>
+    <TD><STRONG>String</STRONG></TD>
+    <TD>VT_BSTR</TD>
+    <TD>A text string of up to 32 KB in length </TD>
+    <TD>8</TD></TR>
+  <TR>
+    <TD><STRONG>Boolean</STRONG></TD>
+    <TD>VT_BOOL</TD>
+    <TD>Contains either <STRONG>True</STRONG> or <STRONG>False</STRONG> </TD>
+    <TD>11</TD></TR>
+  <TR>
+    <TD><STRONG>Object</STRONG></TD>
+    <TD>VT_DISPATCH </TD>
+    <TD>A reference to an Automation object, such as <STRONG>Vector</STRONG> 
+      or <STRONG>PropertyList </STRONG></TD>
+    <TD>9 </TD></TR></TABLE></P>
+<P>(*) - Other values returned by <STRONG>VarType</STRONG> include 0 for 
+<STRONG>Empty</STRONG> objects, 1 for <STRONG>Null</STRONG> objects, 10 for 
+Error, 12 for <STRONG>Variant</STRONG>, and 8192 for Arrays. Since Microsoft 
+Visual Basic Script<FONT size=2>©</FONT> supports only arrays of type 
+<STRONG>Variant</STRONG>, the actual return value will be 8192 + 12, or 
+8204.</P>
+<P>The <B>Currency</B> and <B>Time</B> data types are not supported in this 
+release. </P>
+<P>If it is necessary to store multiple values, a <B>PropertyList</B> or 
+<B>PropertyMap</B></A> object can be created. In such cases, the property's 
+value is the <B>PropertyList</B> or <B>PropertyMap</B> object (considered to be 
+a single value). The <B>PropertyList</B> or <B>PropertyMap</B> object is used to 
+manage the multiple values. </P>
+<H3>Methods</H3>
+<P><!-- 10/23/98 --></P>
+<P>A method is a named piece of code that is attached to an object; it is 
+commonly used to cause the object to perform some action, to read a property on 
+the object, or to set its value. Virtual Worlds also has a variety of utility 
+methods that can be used to create objects or to add methods or properties to 
+other objects. </P>
+<P>A method may be unique to an object (this is called an instance method), or 
+it may have been inherited from the object's parent exemplar. If you look at an 
+object's methods in the <STRONG>Object Explorer</STRONG> (to do this, select the 
+object, and look in the <STRONG>Methods</STRONG> pane), different icons are used 
+for instance methods and exemplar methods. </P>
+<P>A method can be <I>invoked</I> (told to run) in several ways. The most common 
+is by specifying its name and, when applicable, a set of one or more 
+<I>arguments</I>. Other ways include invoking a method from the <STRONG>Command 
+Window</STRONG>, from an object's shortcut menu, in response to certain Virtual 
+Worlds events, or from within other methods. </P>
+<P>Just as you need to know how many arguments a method requires, you also need 
+to know whether or not the method returns a value. A method that returns a value 
+is invoked differently from one that does not return a value. (A method that 
+returns a value is what many programming languages call a function; a method 
+without a return value is called a subroutine in some languages, and a procedure 
+in others.) </P>
+<P>In the following example, <a href="../../API%20Reference/Thing/IsValidProperty.htm">IsValidProperty</a>, a 
+method of the <a href="../../API%20Reference/Thing/Thing.htm">Thing</A> core object 
+type, is used to determine whether <EM>MyObject</EM> has a <STRONG>Name</STRONG> property. Because 
+<STRONG>IsValidProperty </STRONG>returns a <STRONG>Boolean</STRONG> value 
+(<STRONG>True</STRONG> or <STRONG>False</STRONG>), the expression on the right 
+side of the assignment simplifies to either <STRONG>True</STRONG> or 
+<STRONG>False</STRONG>; one of these values is then stored in 
+<EM>IsOKProperty</EM>. </P>
+<BLOCKQUOTE><PRE>IsOKProperty = MyObject.IsValidProperty( "Name" )</PRE></BLOCKQUOTE>
+<P>The major differences between methods that return a value and those that do 
+not are summarized in the following table: </P>
+<BLOCKQUOTE>
+  <TABLE border=2>
+    
+    <TR>
+      <TD bgColor=#c0c0c0><EM><STRONG>Method returns a value </STRONG></EM></TD>
+      <TD bgColor=#c0c0c0><EM><STRONG>Method does not return a value 
+        </STRONG></EM></TD></TR>
+    <TR>
+      <TD>Uses parentheses around arguments.</TD>
+      <TD>Does not use parentheses around arguments</TD></TR>
+    <TR>
+      <TD>Usually appears on right side of assignments </TD>
+      <TD>Never appears in assignments.</TD></TR>
+    <TR>
+      <TD>Function</TD>
+      <TD>Subroutine (or procedure) </TD></TR></TABLE></BLOCKQUOTE>
+<P>For those methods that do return a value, you also need to know whether the 
+returned value is an object reference. In such cases, Microsoft Visual Basic 
+Script<FONT size=2>©</FONT> requires the use of the <STRONG>Set</STRONG> 
+keyword. For example, you can create a property list by using <a href="../../API%20Reference/World/CreatePropertyList.htm">CreatePropertyList</a>,
+a method of <a href="../../API%20Reference/World/World.htm">World</a>. This method returns a reference 
+to (or address of) a <STRONG>PropertyList</STRONG> object, so 
+<STRONG>Set</STRONG> must be used. </P>
+<BLOCKQUOTE><PRE>Set FriendsList = World.CreatePropertyList</PRE></BLOCKQUOTE>
+<H3>Exemplars</H3>
+<P>An exemplar is similar to a template from which you make copies, which are 
+called <I>instances</I> in Virtual Worlds (as well as in object-oriented 
+programming in general). An instance inherits all of the properties and methods 
+from its exemplar, but can have additional properties and methods added to it. 
+Thus, making a change in the exemplar will affect all its instances as well.</P>
+<H3>Inheritance</H3>
+<P>When you create a new object, you must always choose an exemplar for the 
+object instance. The exemplar has properties and methods already present in it, 
+and these are <I>inherited</I> by the object instance. At first, if you query 
+properties in the instance, you are using the same property values as the 
+exemplar. As soon as you make some change to a property of the instance, that 
+property value will change, but only in the instance, not in the exemplar's 
+property. New memory is dedicated to store the updated data for your instance. 
+The exemplar's data for that property is no longer used for your object instance 
+and will be left unchanged.</P>
+<H3>Instances</H3>
+
+<p>An <i>instance</i> is any one particular object in a World.
+These are called "instances" because they share
+characteristics with other objects that were created, or <i>instanced</i>,
+from the same exemplar. An object instance has the following
+characteristics: </p>
+
+<ul>
+    <li>The object <i>is not </i>an 
+  exemplar, and can't be used to directly create more instances. 
+    <li>The object was created from one specific exemplar. 
+  From this exemplar, the instance inherits any properties or methods that have 
+  not been specifically overwritten in the instance. 
+    <li>You can override properties or methods inherited from 
+  the object's exemplar without worrying about changing the exemplar itself. 
+    <li>The object can be moved between different containers,
+        provided that the <strong>IsTakeable</strong> property
+        has the appropriate value (<strong>True</strong>). 
+    <li>The object always has a unique Owner, the avatar / object
+        that first created it. The Owner property is read-only
+        and cannot be changed. </li>
+</ul>
+
+<h3>Making New Object Instances</h3>
+
+<p>The easiest way to create new objects is to use the <strong>Add
+Objects Wizard</strong>. This wizard can be used to create one of
+several predefined objects. When you add a new object to a
+particular container using the <strong>Add Objects Wizard</strong>,
+you must choose a name and an exemplar.</p>
+
+<h3>Locations</h3>
+
+<p>Every visible object in Virtual Worlds has a Position property
+that specifies the object's location. The Position property
+contains three numbers, one each for the x-, y-, and
+z-coordinates of the object. The Position property is of type
+Vector, a Virtual Worlds Core object type that is used to store
+positions or directions of objects. </p>
+
+<h3>Contents and Containers</h3>
+
+<p>In Virtual Worlds, objects may contain other objects. Any
+object has one container and may have any number of items in its
+contents. Objects can move from one container to another. For
+instance, your avatar object will always be inside some room, so
+its Container is that room. Your avatar might also contain other
+objects that will show up in a Virtual Worlds client as objects
+you are holding or wearing. You can take objects out of the room
+container and place them in your avatar's Contents. Or you can
+trigger a Drop method to put the object back in the room. </p>
+
+<h3>Making Your Virtual World Modifiable by Users</h3>
+
+<p>End users will not have authoring tools; instead, they will
+load and use a standard Virtual Worlds client page. In order for
+objects to be modifiable by an end user, you must specifically
+assign methods to an object's shortcut menu. These methods must
+be carefully chosen and designed, to provide a good balance
+between allowing interactivity in your Virtual World and
+preventing end users from violating security or permanently
+harming the world. Typical shortcut menu options allow users to
+pick up or drop objects, wear the objects once they are picked
+up, or move objects to different positions in the room. More
+advanced options are possible also.</p>
+
+<h3>Editing Content</h3>
+
+<p><i>Content</i> is the art, music and sound effects that are
+attached to objects to make them "real." Virtual Worlds
+does not provide tools to edit this content, however. Instead, it
+is assumed that you already have your favorite sound-editing
+program or 3D-modeling program, and that you will be using these
+programs to generate the content. In Virtual Worlds, you add the
+content to see what it looks like or how it behaves in the
+Virtual World. If necessary, you can return to your
+content-editing programs to make changes. As soon as you make
+changes to the sources, you should be able to see the changed
+content in Virtual Worlds, with the exception of some caching
+considerations.</p>
+
+<h3>Making Your Content Accessible</h3>
+
+<p>On the server, each Virtual World has one or more declared <i>content
+roots</i>. There are four <A href="../../API%20Reference/World/World.htm">World</a>
+properties - , <A href="../../API%20Reference/World/ContentPath.htm">ContentPath</a>
+<A href="../../API%20Reference/World/AvatarGraphicsPath.htm">AvatarGraphicsPath</a>,
+<A href="../../API%20Reference/World/RootURL.htm">RootURL</a>,
+and <A href="../../API%20Reference/World/WorldContentPath.htm">WorldContentPath</a>
+- that are used to determine where to find content. A content
+root is an HTTP server location where the majority of the Virtual
+World's content elements are kept, so it's a good idea to store
+most of your content in that location. Naturally, this means that
+in order to run a Virtual World, you need your own Virtual Worlds
+server, and you also need the ability to serve content files via
+HTTP, although you can preview content files from a local machine
+during the construction phase.</p>
+
+<h3>Virtual Worlds Clients and Servers </h3>
+
+<p>Virtual Worlds uses the client and the server as two halves of
+a whole. Objects exist on both the client and the server, with
+the server tracking and updating clients and allowing them to
+talk to each other. By splitting tasks between client and server,
+data can be exchanged and used in the place it is actually
+needed. The server can maintain the master copy of the world, and
+each client only has to download the data that the server
+specifically sends to it. Conversely, the server needn't bother
+with time-consuming tasks such as actually drawing the Virtual
+World's graphics to the screen as that task is handled by the
+client.</p>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+<title>Directory Server Address Dialog Box (Virtual Worlds Server)</title>
+<link rel="STYLESHEET" type="text/css" href="../../vwgdoc.css" title="VWG">
+</head>
+
+<body>
+
+<h1>Directory Server Address Dialog Box (Virtual Worlds Server)</h1>
+
+<p>Use this dialog box to set the URL (Universal Resource Locator) for the location of the
+<b>Directory Services</b> server. The <b>Directory Services</b> server, a computer running Microsoft
+Site Server<font size="2">©</font>, lists all of the worlds that have been published to
+it. The Virtual Worlds Server application enables you to publish your world to the
+<b>Directory Services</b> server by using ADSI, the Active Directory Services Interface. This
+interface uses the Lightweight Directory Access Protocol, or LDAP, to enable client users
+to publish their worlds to the <b>Directory Services</b> server. Once your world is published to
+the <b>Directory Services</b> server, users in one virtual world can elect to visit another
+merely by clicking its name in the list of worlds that the <a href="../cliels/dirserv.htm"><b>Directory</b>
+dialog box</a> displays. </p>
+
+<p>To use this protocol, you need to enter two pieces of information: 
+
+<ul>
+  <li>The computer name for the <b>Directory Services</b> server</li>
+  <li>The name of the <b>Directory Services</b> directory</li>
+</ul>
+
+<p>For the example in the accompanying figure, the computer name is <em>carlh2</em>, and
+the <b>Directory Services</b> directory is <em>carlhvworld</em>. The last item, <em>dynamic</em>,
+indicates that any listing created by the <b>Directory Services</b> server will be stored
+dynamically (in memory), rather than on the client's hard disk.</p>
+
+<p><img src="../images/vwssetds.gif" width="550" height="218"></p>
+
+<h2>To use the <b>Directory Server Address</b> dialog box:</h2>
+
+<ol>
+  <li>Type the name of the machine that is hosting the <b>Directory Services</b> server, and the name
+    of the directory. The syntax for this line is <b>LDAP://</b>&lt;computer
+    name&gt;<b>/o=</b>&lt;directory&gt;<b>/ou=dynamic </b><blockquote>
+      <p>For example: </p>
+      <pre>LDAP://DSServer/o=DSList/ou=dynamic</pre>
+    </blockquote>
+  </li>
+  <li>Click <b>Set</b>.</li>
+  <li>Check the first line of the <b>Statistics</b> pane in the Virtual Worlds
+    Server application to see if your world is connected to the <b>Directory Services</b> server. If
+    your world successfully connects, the status message reads, &quot;Connected to
+    DS&quot;. If not, the status message reads, &quot;Not connected to DS&quot;.</li>
+</ol>
+
+<h4>See Also:</h4>
+<p>
+<a href="../../admin/nods.htm">Adding Directory Services</a><br>
+<a href="../../admin/stadmin.htm">Administrator's Guide Top Topic</a><br>
+</body>
+</html>

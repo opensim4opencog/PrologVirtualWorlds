@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>AvatarGraphicsPath</title>
+</head>
+<body>
+
+<!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>AvatarGraphicsPath</h2></td>
+		<td class="space"></td>
+		<td class="propertypic"><!--image is inserted here--></td>
+		<td class="greyed">Property of World</td>
+	</tr>
+</table>
+<!--Topic Definition-->
+<p>A <b>String</b> holding the path of the directory
+that contains avatar graphics. <b>AvatarGraphicsPath</b> is a read-only <b>String</b>.
+&nbsp;      
+         
+
+<!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>AvatarGraphicsPath</b></td>
+	</tr>
+</table>
+
+<!--Parameters table-->
+<p>The <b>AvatarGraphicsPath</b> property syntax has these parts:
+<TABLE class="backlight">
+<!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead>
+	
+<!--Parameters table: line divider-->
+<tr class="line" ><td colspan=100%></td></tr>
+
+<!--Parameters table: contents-->
+<tbody>
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+</tbody>
+</TABLE>
+
+<!--Remarks section-->
+<H3>Remarks</H3>
+
+<p>Avatar graphics include sprite files (whose filenames end in
+.SPR) and sprite image files (whose filenames end in .GIF).</p>
+
+
+<p>This property is initialized with the value in the
+AvatarGraphicsPath entry of the Windows Registry (the subkey is: 
+<b>\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\V-Worlds\Paths</b>).
+&nbsp;
+<p>The default path to this directory is:</p>
+
+<pre>C:\Program Files\Microsoft Virtual Worlds\Local Content\Avatar Graphics\.</pre>
+
+<!--Example section-->
+<H3>Example</H3>
+<p>To get the <b>AvatarGraphicsPath</b> value:</p>
+
+<pre><tt>   Result = World.<b>AvatarGraphicsPath</b></tt></pre>&nbsp;
+ 
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="APIRef.css">
+	<title>The Virtual Worlds Object Model</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><img src="images/docpic1.gif" width="535" height="100" alt border="0"></td>
+	</tr>
+	<tr>
+		<td><h2> Virtual Worlds API Overview</h2></td>
+	</tr>
+</table><!--How-to section -->
+<H3>Understanding the Documentation</H3>
+<p>
+The Microsoft Virtual Worlds API Documentation is split into three logical sections: <STRONG>Exemplars</STRONG>, 
+<STRONG>Objects</STRONG>, and <STRONG>Event Handlers</STRONG>.&nbsp;Under each major heading, there are several topics that explain how to access corresponding API features&nbsp;from a Microsoft ActiveScripting Language.&nbsp;Most of the 
+syntax and code examples given are for VBScript, but in most cases, JScript can also be used.
+
+<P>For each object and exemplar, the documentation includes an overview topic as well as topics for each of the properties and 
+methods of the object.
+
+<p>
+<img src="Images/sdkstructure.jpg" border=0 alt="">
+<p>
+
+<H3>API Syntax</H3>
+
+<h4>Properties</h4>
+<p>For both read/write and read-only properties, the <b>object</b> statement is the object that the property is associated with. The type of this object is described in the syntax description table that follows each syntax statement. Properties that are read/write include an assignment operator (=), and the required type described by the <i>typeValue</i> element. Properties that are read-only do not include the assignment. 
+<p>Read/Write property:
+<table class="backlight">
+	<tr>
+    	<td>
+      <P><i>object</i>.<B>Property</B> = <i>typeValue</i></td><!--syntax statement -->
+	</tr>
+</table>
+<p>Read-Only property:
+<table class="backlight">
+	<tr>
+    	<td>
+      <P><i>object</i>.<B>Property</B></td><!--syntax statement -->
+	</tr>
+</table>
+
+<h4>Methods</h4>
+<p>For methods, the <b>object</b> statement is the object that the method is associated with. The type of this object is described in the syntax description table that follows each syntax statement. Methods that have a return value include parentheses around the parameters. If a method has a return value but no parameters, an empty set of parentheses are included. If a method does not have a return value, no parentheses are included. 
+
+<p>The <i>arg1</i> and <i>arg2</i> statements represent required parameters. brackets surrounding a parameter (the <i>optionalArg1</i> and <i>optionalArg2</i> elements) indicate the parameter is optional. 
+<p>Method with a return value:
+<table class="backlight">
+	<tr>
+    	<td>
+      <P><i>object</i>.<B>Method</B>(<i>arg1</i>, <i>arg2</i> [,<i>optionalArg1</i>] [,<i>optionalArg2</i>], ...)</td> 
+	</tr>
+</table>
+<p>Method with no return value:
+<table class="backlight">
+	<tr>
+    	<td>
+      <P><i>object</i>.<B>Method</B>&nbsp;<i>arg1</i>, <i>arg2</i> [,<i>optionalArg1</i>] [,<i>optionalArg2</i>], ...</td>
+	</tr>
+</table>
+
+<h4>Event Handlers</h4>
+<p>Event handlers use the VBScript Function tag, which implies a return value. The <b>OnEventHandler</b> statement represents the name of the event handler. The arguments follow the conventions of method arguments, where an element with no brackets is required, whereas an element surrounded by brackets is optional. The statements element is the optional code that may be included in the Function. The return value of the Function is described in the statements section of the syntax description table. 
+<p>
+<table class="backlight">
+	<tr>
+		<td><b>Function OnEventHandler</b>(<i>arg1</i>, <i>arg2</i> [,<i>optionalArg1</i>] [,<i>optionalArg2</i>], ...)<br>
+<i>statements</i>
+<br><b>End Function</b></td>
+    
+	</tr>
+</table>
+<br><br>
+<H3>Exemplars</H3>
+<P>Exemplars are template objects used to create instances, or copies, of that object. Each instance of an exemplar inherits all of the properties and methods of the exemplar, but&nbsp;can then be further customized by changing property values or adding or removing properties or methods.</P>
+
+<P>Exemplars can be created from instances of other exemplars.&nbsp;This 
+provides for multiple levels of inheritance in some cases.</P>                 
+         
+<P>Microsoft Virtual Worlds provides a number of preconfigured exemplars to help represent objects you might want in a virtual 
+world such as artifacts, rooms, avatars, etc.&nbsp;All of&nbsp;these provided exemplars inherit from the Thing exemplar, so instances created from them will inherit properties and methods from both the specific exemplar and the Thing exemplar.
+<P>For more information on Exemplars, see the <STRONG>Programmer's Guide</STRONG>.
+<P>
+
+<H3>Objects</H3>
+<P>The objects in Virtual Worlds provide access to a&nbsp;core set of useful system features.&nbsp;Some of them, such as Thing and 
+World, provide much of the basic functionality of the Virtual Worlds platform while others, such as PropertyList, PropertyMap, and Vector, simply provide complex data types that are used throughout the API.&nbsp;Every Virtual Worlds object supports two methods 
+(<A href="Base%20Class/IsOfType.htm">IsOfType</A> and <A href="Base%20Class/ToAscii.htm">ToASCII</A>) and two properties (<A href="Base%20Class/Type.htm">Type</A> and <A href="Base%20Class/World.htm">World</A>) that are inherited from a common base class.&nbsp;Also, the Thing exemplar (and therefore all of the provided exemplars) inherits properties and methods from the Thing object.
+
+<P>The following table shows the relationship of all the <b>Exemplars</b> and <STRONG>Objects</STRONG>. Click a name 
+to view the corresponding help topic.
+
+<P>
+<table border="0" style="HEIGHT: 476px; WIDTH: 557px">
+<thead>
+<TR>
+<td align=middle>Exemplar Data Types</td>
+<td align=middle>Objects</td>
+</TR>
+</thead>
+<tr><td><!-- ------------------------- -->
+<IMG alt="Exemplar Hierarchy Map" border=0 isMap src  ="Images/ExemplarHierarchy.bmp" useMap=#ExMap > <!-- ------------------------- -->
+<MAP NAME="ExMap">
+<AREA SHAPE="RECT" COORDS="13,12,107,30"  
+HREF="Exemplars/Thing/Thing.htm" ><!-- ------------------------- -->
+<AREA SHAPE="RECT" COORDS="106,46,202,64"  
+HREF="Exemplars/Artifact/Artifact.htm"><!-- ------------------------- -->
+<AREA SHAPE="RECT" COORDS="201,80,316,98"  
+HREF="Exemplars/WebPage/WebPage.htm"><!-- ------------------------- -->
+<AREA SHAPE="RECT" COORDS="201,114,316,132"  
+HREF="Exemplars/StateMachine/StateMachine.htm"><!-- ------------------------- -->
+<AREA SHAPE="RECT" COORDS="108,148,204,166"  
+HREF="Exemplars/Avatar/Avatar.htm"><!-- ------------------------- -->
+<AREA SHAPE="RECT" COORDS="201,182,316,200"  
+HREF="Exemplars/Host/Host.htm"><!-- ------------------------- -->
+<AREA SHAPE="RECT" COORDS="106,210,202,228"  
+HREF="Exemplars/Light/Light.htm"><!-- ------------------------- -->
+<AREA SHAPE="RECT" COORDS="106,257,202,275"  
+HREF="Exemplars/Portal/Portal.htm"><!-- ------------------------- -->
+<AREA SHAPE="RECT" COORDS="201,291,316,309"  
+HREF="Exemplars/Portal/Portal.htm"><!-- ------------------------- -->
+<AREA SHAPE="RECT" COORDS="106,325,202,343"  
+HREF="Exemplars/Room/Room.htm"><!-- ------------------------- -->
+</MAP></td>
+<td><!-- ------------------------- -->
+<IMG alt="Objects in Virtual Worlds" border=0  isMap src  ="Images/Non-Exemplar%20Clickable%20Map.bmp" useMap=#Non-ExMap > <!-- ------------------------- --></td></TD>
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,13,103,31"  
+HREF="AvatarProfile/AvatarProfile.htm" ><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,47,103,65"  
+HREF="Boundary/Boundary.htm" ><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,81,103,99"  
+HREF="VWClient/Client.htm" ><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,115,103,133"  
+HREF="Frame/Frame.htm" ><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="0,0,0,0"  
+HREF="Exemplars/Light/Light.htm"><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,149,103,167"  
+HREF="MenuItem/MenuItem.htm" ><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,183,103,201"  
+HREF="Method/Method.htm" ><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,217,103,235"  
+HREF="Module/Module.htm" ><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,251,103,269"  
+HREF="PropertyList/PropertyList.htm" ><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,285,103,303"  
+HREF="PropertyMap/PropertyMap.htm" ><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,319,103,337"  
+HREF="Sound/Sound.htm" ><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,353,103,371"  
+HREF="Thing/Thing.htm" ><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,387,103,405"  
+HREF="Vector/Vector.htm" ><!-- ------------------------- -->
+<MAP NAME="Non-ExMap">
+<AREA SHAPE="RECT" COORDS="17,421,103,439"  
+HREF="World/World.htm" ><!-- ------------------------- -->
+</MAP></TD></tr>
+</table><P 
+              ></P></MAP></MAP></MAP></MAP></MAP></MAP></MAP></MAP></MAP></MAP></MAP></MAP></MAP></MAP>
+<P>
+<H3>Event Handlers</H3>
+<P>In addition to the properties and methods of exemplars and objects in Virtual Worlds, there is a complex event system.&nbsp;Events 
+fire in the world in response to a number of phenomena including data changes, avatar and object movements, avatars speaking, etc.&nbsp;Every time an event fires, the system calls a corresponding event handler or set of event handlers.&nbsp;These handlers almost always exist as specifically-named methods on objects and usually take a set of parameters appropriate for the event being handled.&nbsp;This section of the documentation discusses the purpose and syntactic information for each&nbsp;event handler called by the Virtual Worlds system.
+
+<P>For more information on events, see the <STRONG>Programmer's Guide</STRONG>.</P>      
+            
+         
+</body>
+</html>

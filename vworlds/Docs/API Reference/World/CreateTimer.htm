@@ -1,0 +1,118 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<Link rel="Stylesheet" href="../APIRef.css">
+	<title>CreateTimer</title>
+</head>
+<body><!--Header table -->
+<table class="head" >
+	<tr>
+		<td><h2>CreateTimer</h2></td>
+		<td class="space"></td>
+		<td class="methodpic"><!--image is inserted here--></td>
+		<td class="greyed">Method of World</td>
+	</tr>
+</table><!--Topic Definition-->
+<P>Creates a timer that periodically invokes a method on an object. 
+<b>CreateTimer</b> is a member of the <a href="World.htm">World</a> object. &nbsp; <!--Syntax table-->
+<H3>Syntax</H3>
+<table class="backlight">
+	<tr>
+    	<td><i>object</i>.<b>CreateTimer</b>(<i>msecPeriod</i>, <i>pthing</i>, <i>bstrMethod</i>&nbsp;[,&nbsp;<i>varArgs</i>])</td>
+	</tr>
+</table><!--Parameters table-->
+<p>The <b>CreateTimer</b> method syntax has these parts:
+<TABLE class="backlight"><!--Parameters table: Caption-->
+	<thead>
+		<TR>
+			<td>Part</td>
+			<td>Type</td>
+			<td>Use</td>
+			<td>Description</td>
+		</TR>
+	</thead><!--Parameters table: line divider-->
+  
+<tr class="line" ><td colspan=100></td></tr><!--Parameters table: contents-->
+
+	<TR>
+		<td class="boldItal">object</td>
+		<td>World</td>
+		<td>Required</td>
+		<td>An object reference that accesses a <b>World</b> object.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">msecPeriod</td>
+		<td>Long</td>
+		<td>Required</td>
+		<td>The duration between invocations, in milliseconds.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">pthing</td>
+		<td>Thing</td>
+		<td>Required</td>
+		<td>The object on which to invoke the method.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">bstrMethod</td>
+		<td>String</td>
+		<td>Required</td>
+		<td>The name of the method to invoke.</td>
+	</TR>
+	<TR>
+		<td class="boldItal">[varArgs]</td>
+		<td>Variant</td>
+		<td>Optional</td>
+		<td>A list of arguments with which the method will be called..</td>
+	</TR>
+
+</TABLE><!--Return Value section -->
+<H3>Return Value</H3>
+<p>
+This method returns a <b>Object</b>. <!--Remarks section-->
+<H3>Remarks</H3>
+<P>This method creates a timer that invokes the specified method on the specified
+object at specified periods.</P>
+<P>The method specified in <i>bstrMethod</i> <b>must</b> have at
+least one parameter - the timer - which is always the first argument passed to
+<i>bstrMethod</i>.  This parameter does not have to be used within <i>bstrMethod</i>;
+it is included only to provide a linkage between the timer object and the method
+it invokes. For example, the timer parameter can be used by the method specified in <i>bstrMethod</i> to destroy the timer when the timer 
+reaches the end of its cycle.</P>
+
+<p>If <i>bstrMethod</i> requires additional arguments (besides the timer), these should
+be collected into a property list in <i>varArgs</i>. This parameter holds any 
+arguments from the second one on.
+
+<P>Please note that if you do not specify a method name in <EM>bstrMethod</EM>, you MUST store the return value from 
+<STRONG>CreateTimer</STRONG> 
+         so that you can later destroy 
+the created timer.&nbsp; The corresponding <A href="DestroyTimer.htm">DestroyTimer</a> call<!--Example section--> 
+requires a reference to the timer that you wish to destroy: without that 
+reference the timer can never be destroyed.
+ <b>Note</b>:&nbsp;&nbsp;&nbsp;You can only pass arguments to this method by value (<i>byVal</i>); arguments that are passed by reference (<i>byRef</i>) are not valid.
+
+<H3>Example</H3>
+<p>In the example that follows, the <i>NewTimer</i> object invokes the <i>Tick</i> method on
+<i>Clock</i> once per second.  The <i>Tick</i> method has one parameter, the newly created timer object, which is passed
+implicitly each time <i>Tick</i> is invoked. The example assumes that the "Tick" method has been added to the "Clock" object.</p>
+<p class = comments>'Create a new timer, passing "myObject" as a parameter.
+<pre class=example>Set NewTimer = MyWorld.<b>CreateTimer (1000, Clock, "Tick", myObject)</b>
+</pre>
+<p class=comments>'The Tick method. Note that the new timer is passed as the parameter.
+<pre class=example>Sub Tick(NewTimer)
+Dim myCount
+
+</pre>
+<div class=comments>'Display a message with the firing time, using the Time VBScript function.</div>
+<pre class=example>Trace "Tick method fired at: " &amp; Time</pre>
+<p class=comments>'Destroy the timer object.
+<pre class=example>World.DestroyTimer NewTimer
+
+End Sub
+</pre>
+&nbsp;
+
+
+</body>
+</html>
