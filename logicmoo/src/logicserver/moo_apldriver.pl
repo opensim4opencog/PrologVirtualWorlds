@@ -148,7 +148,7 @@ m(Datum):-assert_possible(Datum).
 
 %//------------------------------------------------------------------------------
 
-assert_new(X):-assertn(fact(X)).
+assert_new(X):-assert_new(fact(X)).
 
 
 %//------------------------------------------------------------------------------
@@ -160,10 +160,10 @@ instance_possible(Datum):-ground(Datum),test_possible(Datum).
 %//------------------------------------------------------------------------------
 
 assert_known(end_of_file):-!.
-assert_known(Datum):-clause(fact(Datum),true),!,write_debug(assert_known,old(Datum)).
-assert_known((Head:-Body)):-fact(Head,Body),!,write_debug(assert_known,old(instance_possible(Head,Body))).
-assert_known((Head:-Body)):-assert(fact(Head,Body)),!,write_debug(assert_known,new(Head,while,Body)).
-assert_known(Datum):-assert(fact(Datum)),write_debug(assert_known,new(Datum)).
+assert_known(Datum):-clause(fact(Datum),true),!,writeDebug(assert_known,old(Datum)).
+assert_known((Head:-Body)):-fact(Head,Body),!,writeDebug(assert_known,old(instance_possible(Head,Body))).
+assert_known((Head:-Body)):-assert(fact(Head,Body)),!,writeDebug(assert_known,new(Head,while,Body)).
+assert_known(Datum):-assert(fact(Datum)),writeDebug(assert_known,new(Datum)).
 
 %//------------------------------------------------------------------------------
 
@@ -172,10 +172,10 @@ assert_possible(pp(Implicit,Explicit)):-assert(pp(Implicit,Explicit)),!.
 
 %//------------------------------------------------------------------------------
 
-test_known(Datum):-catch(fact(Datum)),write_debug(test_known,fact(Datum)).
+test_known(Datum):-catch(fact(Datum)),writeDebug(test_known,fact(Datum)).
 test_known(Goal):-fact(Goal,Body),test_known(Body),ground(Goal).
 test_known(Datum):-var(Datum),!,fail.
-test_known(Datum):-write_debug(test_known,nonfact(Datum)),fail.
+test_known(Datum):-writeDebug(test_known,nonfact(Datum)),fail.
 
 %//------------------------------------------------------------------------------
 
@@ -196,8 +196,8 @@ if(if(Datum)):-nonvar(Datum),fact(Datum,Requirements),if(Requirements).
 
 collect_known(Goal):-fact(Goal),ground(Goal).
 collect_known(Goal):-fact(Goal,true),ground(Goal).
-collect_known(Goal):-fact(Goal,Body),catch(collect_known(Body),_,fail),ground(Goal),write_debug(t,proven(Goal)).
-collect_known(Datum):-!,write_debug(t,failed(Datum)),fail.
+collect_known(Goal):-fact(Goal,Body),catch(collect_known(Body),_,fail),ground(Goal),writeDebug(t,proven(Goal)).
+collect_known(Datum):-!,writeDebug(t,failed(Datum)),fail.
 
 
 %collect_known(p(Datum,Datum2)):-catch(p(Datum,Datum2),_,fail).
@@ -207,9 +207,9 @@ collect_known(Datum):-!,write_debug(t,failed(Datum)),fail.
 %//------------------------------------------------------------------------------
 
 collect_possible(Datum):-collect_known(Datum).
-collect_possible(Datum):-nonvar(Datum),catch(Datum,_,fail),write_debug(c,proved(Datum)).
-collect_possible(Datum):-nonvar(Datum),!,write_debug(c,failed(Datum)),fail.
-collect_possible(_):-write_debug(c,unbound),!,fail.
+collect_possible(Datum):-nonvar(Datum),catch(Datum,_,fail),writeDebug(c,proved(Datum)).
+collect_possible(Datum):-nonvar(Datum),!,writeDebug(c,failed(Datum)),fail.
+collect_possible(_):-writeDebug(c,unbound),!,fail.
 
 %//------------------------------------------------------------------------------
 
@@ -243,7 +243,7 @@ sphrase(Datum,Datum2):-
 	catch(
 		(dcg_macro(Datum),catch(phrase(Datum,Datum2)),!),
 		error(existence_error(procedure, _/_), _),
-		(ground(Datum),[Datum]=Datum2,write_debug(c,faking(Datum)))
+		(ground(Datum),[Datum]=Datum2,writeDebug(c,faking(Datum)))
 	).
 
 ~(neq(Datum,Datum)).

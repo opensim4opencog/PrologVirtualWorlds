@@ -33,7 +33,8 @@
       prolog_current_thread/2,
       prolog_thread_exit/1,
       prolog_thread_self/1,
-      prolog_thread_at_exit/2,
+      prolog_thread_at_exit/1,
+      prolog_thread_signal/2,
       prolog_thread_join/2,
       prolog_notrace/1,
       prolog_statistics/0,
@@ -87,9 +88,10 @@ prolog_notrace(G):-notrace(G).
 % ========================================================================================
 prolog_thread_create(Goal,Id,Options):-thread_create(Goal,Id,Options).
 prolog_current_thread(Id,Status):-current_thread(Id,Status).
-prolog_thread_at_exit(Goal):-thread_at_exit(Goal).
+prolog_thread_exit(Goal):-thread_exit(Goal).
 prolog_thread_self(Id):-thread_self(Id).
-prolog_thread_at_exit(Id,Goal):-thread_at_exit(Id,Goal).
+prolog_thread_at_exit(Goal):-thread_at_exit(Goal).
+prolog_thread_signal(ID,Goal):-thread_signal(ID,Goal).
 prolog_thread_join(Id,X):-thread_join(Id,X).
 
 % ========================================================================================
@@ -187,12 +189,12 @@ sigma_ua(X):-processRequest(X).
 % Load the Moo header
 % -------------------------------------------------------------------
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 % -------------------------------------------------------------------
 % Load the Moo Engine
 % -------------------------------------------------------------------
-:-ensure_loaded('moo_bootstrap.pl').
+% :-ensure_loaded('moo_bootstrap.pl').
 
 % load files
 processBootstrap:-
@@ -219,16 +221,17 @@ java_object(_).
 
 
 
-main(Port):-
+user:main(Port):-trace,
    ignore(Port=5001),
    processBootstrap,
-   setMooOptionDefaults,
+   setMooOptionDefaults, trace,
    startLogicMoo,
    setMooOption(client,html),
    createPrologServer(80),
-   createPrologServer(Port),
-   callIfPlatformUnix((prologAtInitalization(['mod/mod_nani.pl']),prologAtInitalization(['mod/mod_eliza.pl']),
-         prologAtInitalization(bot),prologAtInitalization(bot2))).
+   createPrologServer(Port).
+
+   %callIfPlatformUnix((prologAtInitalization(['mod/mod_nani.pl']),prologAtInitalization(['mod/mod_eliza.pl']),
+    %     prologAtInitalization(bot),prologAtInitalization(bot2))).
    %throw(wait_now).
 
 
@@ -245,13 +248,13 @@ main(Port):-
 :- style_check(-string).
 
 %:-use_module(library(threadutil)).        
-system_dependant:prolog_thread_create(X,win32,_):-X.
+prolog_thread_create(X,win32,_):-X.
 prolog_thread_exit(_,_):-!.
-system_dependant:prolog_thread_at_exit(_,_):-!.
-system_dependant:prolog_thread_at_exit(_):-!.
+prolog_thread_at_exit(_,_):-!.
+prolog_thread_at_exit(_):-!.
 getThread(win32):-!.
 prolog_thread_exit(_):-!.
-threads:-!. %system_dependant:prolog_statistics.
+threads:-!. %prolog_statistics.
 
 mutex_unlock_all.
 
@@ -264,7 +267,7 @@ mutex_unlock(_,_).
 mutex_unlockall.
 
 
-system_dependant:prolog_current_thread(main,running).
+prolog_current_thread(main,running).
 
 %:-assert((thread_util:open_xterm(T,In,Out):-moo_server_break(T,In,Out))).
 
@@ -279,10 +282,10 @@ moo_server_message_hook(trace_mode(on),B,Lines):-
 	'$get_pid'(Pid),
 	fmtString(Title, 'SWI-Prolog Process ~w (pid ~d) interactor', [Id, Pid]),
 	tty_in(Stream),
-	system_dependant:prolog_thread_at_exit(main,(close(Stream))),
+	prolog_thread_at_exit(main,(close(Stream))),
 	set_input(Stream),
 	set_output(user_output),
-	system_dependant:prolog_thread_at_exit(system_dependant:prolog_thread_at_exit(main,set_input(Stream))).
+	prolog_thread_at_exit(prolog_thread_at_exit(main,set_input(Stream))).
 */
 :-current_input(Stream),assert(tty_in(Stream)).
 :-current_output(Stream),assert(tty_out(Stream)).

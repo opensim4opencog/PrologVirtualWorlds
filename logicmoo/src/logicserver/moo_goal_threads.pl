@@ -46,7 +46,7 @@ if_but_dont_remember(now, false, thing_knows_method(Thing, Invokation)):-
 
 if(now, Trueness, Fact):-
         if_but_dont_remember(now, Trueness, Fact),
-        assertn(recalled_fact(now, Trueness, Fact)).
+        assert_new(recalled_fact(now, Trueness, Fact)).
 
 if(was, Trueness, Fact):-recalled_fact(now, Trueness, Fact).
 

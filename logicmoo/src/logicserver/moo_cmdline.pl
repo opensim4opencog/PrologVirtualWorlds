@@ -1,10 +1,10 @@
-:- ensure_loaded('moo_swiprolog.pl').
+
 :- include('moo_header.pl').
 
 % ===================================================================
 % IMPORTS
 % ===================================================================
-%:-include('moo_header.pl').
+%% :-include('moo_header.pl').
 
 %S=(instance(A, 'BodyJunction')=>exists(B, exists(C, connected(A, C)and connected(A, B)and instance(C, 'AnatomicalStructure')and instance(B, 'AnatomicalStructure')and not equal(C, B)))),
 
@@ -18,12 +18,12 @@ cons:- !,
 
 writeMooMenu:-
          writeFmt('ask - switches to ask mode \ntell - switches back to tell mode\n '),
-         writeFmt('other cmds: system_dependant:prolog_statistics, ls, halt, contexts \n'),!.
+         writeFmt('other cmds: prolog_statistics, ls, halt, contexts \n'),!.
 
 
 
 :-dynamic(console_mode/1).
-:-assert_n(console_mode(ask)).
+:-assert_new(console_mode(ask)).
 
 console_loop(C):- console_mode(M),!,
       console_loop(M ,C).

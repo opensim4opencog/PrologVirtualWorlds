@@ -28,7 +28,7 @@ Also we should be able to in some situations:
 
 */
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 % ================================================
 % Superfulous Entry
 % ================================================

@@ -219,17 +219,17 @@ doing(_Avatar,_Action) --> [doing(_Avatar,_Action)],
 will --> will(_Avatar,_Action).
 will(_Avatar,_Action) --> [will(_Avatar,_Action)],
 	{p(avatar,_Avatar),p(action,_Action),c(will(_Avatar,_Action))}.
-		t(will(_Avatar,_Action)):-write_debug(t,will(_Avatar,_Action)).
+		t(will(_Avatar,_Action)):-writeDebug(t,will(_Avatar,_Action)).
 
 thing_part_p --> thing_part(_Avatar,_Thing).
 thing_part(_Thing1,_Thing1) --> [thing_part(_Thing1,_Thing2)],
 	{p(pthing,_Thing1),p(pthing,_Thing2),neq(_Thing1,_Thing2),c(thing_part(_Thing1,_Thing2))}.
-		t(thing_part(_Thing1,_Thing2)):-write_debug(t,thing_part(_Thing1,_Thing2)).
+		t(thing_part(_Thing1,_Thing2)):-writeDebug(t,thing_part(_Thing1,_Thing2)).
 
 know --> know(_Avatar,_mtransable).
 know(_Avatar,_mtransable) --> [know(_Avatar,_mtransable)],
 	{p(avatar,_Avatar),p(mtransable,_mtransable),c(know(_Avatar,_mtransable))}.
-		t(know(_Avatar,_mtransable)):-write_debug(t,know(_Avatar,_mtransable)).
+		t(know(_Avatar,_mtransable)):-writeDebug(t,know(_Avatar,_mtransable)).
 
 thing_prop --> thing_prop(_Avatar,_Attribute).
 thing_prop(_Avatar,_Attribute) --> [thing_prop(_Avatar,_Attribute)],
@@ -251,7 +251,7 @@ want_thing(_Avatar,_Thing)--> [want_thing(_Avatar,_Thing)],
 			% prototype Phrase %
 Phrase--> [Phrase],
 	{Phrase}.
-		Phrase:-write_debug(try,Phrase).
+		Phrase:-writeDebug(try,Phrase).
 */
 
 fact --> [has(Thing,is(Attrib,Value))], {p(thing,Thing),c(bindable(Thing,Attrib,Value))}.

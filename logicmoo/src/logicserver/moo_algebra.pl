@@ -1,9 +1,8 @@
 
-:-module(moo_algebra,[]).
+%:-module(moo_algebra,[]).
 
-end_of_file.
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 % ===================================================================
 % Contact: dmiles@users.sourceforge.net ; 
 % ===================================================================
@@ -356,7 +355,7 @@ handbox1(X >= Y):- RX is X, RY is Y,RX >= RY.
 'Fn'(F,A,R):-catch(eval_lr('Fn'(F,A),R),_,fail).
 
 
-%:-include('moo_header.pl').
+%% :-include('moo_header.pl').
 
 
 /*

@@ -257,16 +257,16 @@ dpttp(X) :-
 	dpttp(Name,X).
 
 dpttp1(X,Y:C) :-
-        nl,
-        write('XRay input formulas:'),
+        
+        writeSTDERR('XRay input formulas:'),
         apply_to_conjuncts(X,write_clause,_),
-        nl,
+        
 
 	constants(X,H),
 	(H = [] ->
-	    nl,write('Empty Herbrand universe.'),nl;
+	    true,writeSTDERR('Empty Herbrand universe.');
 	 %true ->
-	    nl,write('Herbrand universe':H),nl),
+	    true,writeSTDERR('Herbrand universe':H)),
 
 	classical_clauses(X,C0),
 	cnf(C0,C1),
@@ -275,10 +275,10 @@ dpttp1(X,Y:C) :-
 	matrix_reduction(C3,C),
 
         (verbose_flag ->
-	     nl,
-	     write('Classical output formulas:'),
+	     
+	     writeSTDERR('Classical output formulas:'),
 	     apply_to_list(C,write_clause,_),
-	     nl;
+	     true;
 	%true ->
 	     true),dpttp1(X,C,Y:C).
 
@@ -297,13 +297,13 @@ dpttp1(X,C,Y:C) :-
 		 apply_to_conjuncts(X,add_answer_preds,XQ)),
 
         (verbose_flag ->
-	     nl,
-	     write('Request formula:'),
+	     
+	     writeSTDERR('Request formula:'),
 	     apply_to_conjuncts(Q0,write_clause,_),
-	     nl,
-	     write('      compiled:'),
+	     
+	     writeSTDERR('      compiled:'),
 	     apply_to_list(Q,write_clause,_),
-	     nl,nl;
+	     true,true;
 	%true ->
 	     true), dpttp1(XQ,Q,C,Y:C).
 
@@ -345,10 +345,10 @@ dpttp1(X,Q,C,Y:C) :-
 	conjoin(XH,XR,Y),
 
         (verbose_flag -> 
-	     nl,
-	     write('XRay output formulas:'),
+	     
+	     writeSTDERR('XRay output formulas:'),
 	     apply_to_conjuncts(Y,write_clause,_),
-	     nl;
+	     true;
 	%true ->
 	     true),
 	!.
@@ -357,11 +357,11 @@ dpttp1(X) :-
 	dpttp1(X,_).
 
 dpttp2(Name,Y:Z) :-
-        nl,
-        write('XRay writing compiled clauses ... '),
+        
+        writeSTDERR('XRay writing compiled clauses ... '),
         write_ctheory(Name,Y),
 	write_cmm(Name,Z),
-	write('done.'),
+	writeSTDERR('done.'),
 	!.
 
 dpttp2(Y:Z) :-
@@ -369,15 +369,15 @@ dpttp2(Y:Z) :-
 	dpttp2(Name,Y:Z).
 
 dpttp3(Name) :-
-	nl,
-        write('XRay compiling clauses ... '),
+	
+        writeSTDERR('XRay compiling clauses ... '),
         compile_ctheory(Name),
-	write('done.'),
-        nl,
-        write('XRay compiling request ... '),
+	writeSTDERR('done.'),
+        
+        writeSTDERR('XRay compiling request ... '),
         compile_request(Name),
-	write('done.'),
-        nl,
+	writeSTDERR('done.'),
+        
         !.
 dpttp3 :-
 	Name = 'temp',
@@ -448,7 +448,7 @@ dont_compile_count_beliefs :- dont_count_beliefs.
 
 
 pttp_configuration :-
-	nl,format('PTTP CONFIGURATION:'),nl,
+	true,format('PTTP CONFIGURATION:'),
 	(count_beliefs_pred(true) ->
 	    format('PTTP counts no beliefs.');
 	    format('PTTP counts beliefs!')),
@@ -484,31 +484,31 @@ pttp_configuration :-
 %%% LEMMA CONFIGURATION
 
 lemma_configuration :-
-	nl,write('LEMMA CONFIGURATION:'),nl,nl,
+	true,writeSTDERR('LEMMA CONFIGURATION:'),
 	
-	write('Lemma handling'),
-	write(' = '),
+	writeSTDERR('Lemma handling'),
+	writeSTDERR(' = '),
 	(lemma_handling_flag ->
-	    write(on),
-	    nl,nl,
+	    writeSTDERR(on),
+	    
 	
-	    write(lemma_format),
-	    write(' = '),
-	    (lemma_format_parameter(P), write(P),write(' '),fail ; write('.')),
-	    nl,
+	    writeSTDERR(lemma_format),
+	    writeSTDERR(' = '),
+	    (lemma_format_parameter(P), writeSTDERR(P),writeSTDERR(' '),fail ; writeSTDERR('.')),
 	    
-	    write(lemma_mode),
-	    write(' = '),
-	    (lemma_mode_parameter(M),   write(M),write(' '),fail ; write('.')),
-	    nl,
 	    
-	    write(lemma_type),
-	    write(' = '),
-	    (lemma_type_parameter(T),   write(T),write(' '),fail ; write('.')),
-	    nl;
+	    writeSTDERR(lemma_mode),
+	    writeSTDERR(' = '),
+	    (lemma_mode_parameter(M),   writeSTDERR(M),writeSTDERR(' '),fail ; writeSTDERR('.')),
+	    
+	    
+	    writeSTDERR(lemma_type),
+	    writeSTDERR(' = '),
+	    (lemma_type_parameter(T),   writeSTDERR(T),writeSTDERR(' '),fail ; writeSTDERR('.')),
+	    true;
 	%true ->
-	    write(off)),
-	nl.
+	    writeSTDERR(off)),
+	true.
 
 %%% Lemma handling is turned on by lemma_handling,
 %%% off by no_lemma_handling.
@@ -684,17 +684,17 @@ lemma_format(disj) :-
 %%% XRay CONFIGURATION
 
 xray_configuration :-
-	nl,write('XRay CONFIGURATION:'),nl,nl,
+	true,writeSTDERR('XRay CONFIGURATION:'),
 	
-	write(delta_ordering),
-	write(' = '),
-	(delta_ordering(O), write(O),write(' '),fail ; write('.')),
-	nl,
+	writeSTDERR(delta_ordering),
+	writeSTDERR(' = '),
+	(delta_ordering(O), writeSTDERR(O),writeSTDERR(' '),fail ; writeSTDERR('.')),
 	
-	write(verbose_mode),
-	write(' = '),
-	(verbose_flag, write('on') ; write('off')),
-	nl.
+	
+	writeSTDERR(verbose_mode),
+	writeSTDERR(' = '),
+	(verbose_flag, writeSTDERR('on') ; writeSTDERR('off')),
+	true.
 
 %%% delta_ordering stears the order of admissibility 
 %%% and compatibility checking in delta rules
@@ -760,17 +760,17 @@ prolog_clause(_,true).
 %%% HOOKS CONFIGURATION
 
 hook_configuration :-
-	nl,write('HOOK CONFIGURATION:'),nl,nl,
+	true,writeSTDERR('HOOK CONFIGURATION:'),
 	
-	write('body hook handling     '),
-	write(' = '),
-	(body_hooks_flag -> write(on) ; write(off)),
-	nl,
+	writeSTDERR('body hook handling     '),
+	writeSTDERR(' = '),
+	(body_hooks_flag -> writeSTDERR(on) ; writeSTDERR(off)),
+	
 
-	write('predicate hook handling'),
-	write(' = '),
-	(pred_hooks_flag -> write(on) ; write(off)),
-	nl.
+	writeSTDERR('predicate hook handling'),
+	writeSTDERR(' = '),
+	(pred_hooks_flag -> writeSTDERR(on) ; writeSTDERR(off)),
+	true.
 
 %%% Hook handling is turned off by no_hook_handling
 
@@ -814,10 +814,10 @@ pttp(X) :-
         time(pttp1(X),'Compilation').
 
 pttp1(X) :-
-        nl,
-        write('PTTP input formulas:'),
+        
+        writeSTDERR('PTTP input formulas:'),
         apply_to_conjuncts(X,write_clause,_),
-        nl,
+        
         clauses(X,X0,1),
         apply_to_conjuncts(X0,add_count_beliefs,X1),
         apply_to_conjuncts(X1,add_ancestor,X2),
@@ -830,20 +830,20 @@ pttp1(X) :-
                 apply_to_conjuncts(X5,add_explaination_recording,Y);
         %true ->
                 Y = X5),
-        nl,
-        write('PTTP output formulas:'),
+        
+        writeSTDERR('PTTP output formulas:'),
         apply_to_conjuncts(Y,write_clause,_),
-        nl,
-        nl,
+        
+        
 
         File = 'temp.prolog',                     % Quintus Prolog on Sun
 %       File = 'darwin:>stickel>pttp>temp.prolog',% change file atom_codes for other systems
 
-        open(File,write,OutFile),
+        open(File,writeSTDERR,OutFile),
         write_clause_to_file(Y,OutFile),
         close(OutFile),
         compile(File),
-        nl,
+        
         !.
 
 write_clause_to_file((A,B),OutFile) :-
@@ -851,9 +851,9 @@ write_clause_to_file((A,B),OutFile) :-
 	write_clause_to_file(B,OutFile),
         !.
 write_clause_to_file(A,OutFile) :-
-	nl(OutFile),
-	write(OutFile,A),
-	write(OutFile,.),
+	true(OutFile),
+	writeSTDERR(OutFile,A),
+	writeSTDERR(OutFile,.),
 	!.
 
 
@@ -891,9 +891,9 @@ negative_literal(Lit) :-
 
 
 write_clause(A) :-
-        nl,
-        write(A),
-        write(.).
+        
+        writeSTDERR(A),
+        writeSTDERR(.).
 
 write_clause(A,_) :-                    % 2-ary predicate can be used as
         write_clause(A).                % argument of apply_to_conjuncts
@@ -920,11 +920,11 @@ add_count_beliefs((Head :- Body),(Head :- Body1)) :-
 
 write_search_progress(Level) :-
         flag(ncalls,N,N),
-        (N > 0 -> write(N) , write(' beliefs so far.') ; true),
-        nl,
-        write('Begin cost '),
-        write(Level),
-        write(' search...  ').
+        (N > 0 -> writeSTDERR(N) , writeSTDERR(' beliefs so far.') ; true),
+        
+        writeSTDERR('Begin cost '),
+        writeSTDERR(Level),
+        writeSTDERR(' search...  ').
 
 %%% A request can be timed by time(request).
 
@@ -934,24 +934,24 @@ time(X) :-
 time(X,Type) :-
         flag(ncalls,_,0),
 
-        system_dependant:prolog_statistics(runtime,[T1,_]),     % Quintus Prolog on Sun
+        prolog_statistics(runtime,[T1,_]),     % Quintus Prolog on Sun
 %        T1 is get-internal-run-time,  % Common KIF time function
 
         call(X),
 
-        system_dependant:prolog_statistics(runtime,[T2,_]),     % Quintus Prolog on Sun
+        prolog_statistics(runtime,[T2,_]),     % Quintus Prolog on Sun
         Secs is (T2 - T1) / 1000.0,     % Quintus measures runtime in milliseconds
 %        T2 is get-internal-run-time,  % Common KIF time function
 %        Secs is (T2 - T1) / 977.0,      % internal-time-units-per-second on Darwin
 
-        nl,
-        write(Type),
-        write(' time: '),
+        
+        writeSTDERR(Type),
+        writeSTDERR(' time: '),
         flag(ncalls,N,N),
-        (N > 0 -> write(N) , write(' beliefs in ') ; true),
-        write(Secs),
-        write(' seconds, including printing'),
-        nl.
+        (N > 0 -> writeSTDERR(N) , writeSTDERR(' beliefs in ') ; true),
+        writeSTDERR(Secs),
+        writeSTDERR(' seconds, including printing'),
+        true.
 
 
 
@@ -983,13 +983,13 @@ bhook2_p(Head :- Body) :-
 bhook1(Head :- Body) :-
 	(Head = _) ->
 	    Head =.. [P|_],
-	    nl,write(b1:(P)),nl,nl;
+	    true,writeSTDERR(b1:(P));
         %true ->
 	     true.
 bhook2(Head :- Body) :-
 	(Head = _) ->
 	    Head =.. [P|_],
-	    nl,write(b2:(P)),nl,nl;
+	    true,writeSTDERR(b2:(P));
         %true ->
 	     true.
 
@@ -1028,7 +1028,7 @@ phook1_tests(P,N,Result) :-
 	phook1_p(P,N),
 	!,
 	head(P,N,Head),
-	Body=(nl,write(p1:P),nl,fail),
+	Body=(true,writeSTDERR(p1:P),fail),
 	Result = (Head :- Body).
 phook1_tests(_,_,true).
 
@@ -1036,7 +1036,7 @@ phook2_tests(P,N,Result) :-
 	phook2_p(P,N),
 	!,
 	head(P,N,Head),
-	Body=(nl,write(p2:P),nl,fail),
+	Body=(true,writeSTDERR(p2:P),fail),
 	Result = (Head :- Body).
 phook2_tests(_,_,true).
 
@@ -1044,7 +1044,7 @@ phook3_tests(P,N,Result) :-
 	phook3_p(P,N),
 	!,
 	head(P,N,Head),
-	Body=(nl,write(p3:P),nl,fail),
+	Body=(true,writeSTDERR(p3:P),fail),
 	Result = (Head :- Body).
 phook3_tests(_,_,true).
 
@@ -1115,29 +1115,29 @@ read_matrix_loop(Stream,Matrix) :-
 
 write_ctheory(File,Context) :-
 	concat_atom(File,'.ctheory',ContextFile),
-	open(ContextFile,write,ContextStream),
+	open(ContextFile,writeSTDERR,ContextStream),
 	concat_atom(File,'.que',QFile),
-	open(QFile,write,QStream),
+	open(QFile,writeSTDERR,QStream),
         write_contrapositives(streams(ContextStream,QStream),Context),
         close(ContextStream),
         close(QStream),
 	get_file_info(ContextFile,size,ContextFileSize),
 	get_file_info(QFile,size,QFileSize),
-	nl,nl,
-	write(ContextFile),write(' written '),write(ContextFileSize),format(' bytes'),
-	write(QFile), write(' written '),write(QFileSize), format(' bytes'),
+	
+	writeSTDERR(ContextFile),writeSTDERR(' written '),writeSTDERR(ContextFileSize),format(' bytes'),
+	writeSTDERR(QFile), writeSTDERR(' written '),writeSTDERR(QFileSize), format(' bytes'),
 	!.
 
 write_cmm(File,Matrix) :-
 	concat_atom(File,'.cmm',MFile),
-	open(MFile,write,MStream),
+	open(MFile,writeSTDERR,MStream),
         write_matrix(MStream,Matrix),
         close(MStream),
 	!.
 
 write_request(File,Request) :-
 	concat_atom(File,'.que',QFile),
-	open(QFile,write,QStream),
+	open(QFile,writeSTDERR,QStream),
         write_request_only(QStream,Request),
         close(QStream),
 	!.
@@ -1169,29 +1169,29 @@ write_clauses(Stream,(A,B)) :-
         write_clauses(Stream,B),
         !.
 write_clauses(Stream,A) :-
-        write(Stream,A),
-        write(Stream,.),
-        nl(Stream),
+        writeSTDERR(Stream,A),
+        writeSTDERR(Stream,.),
+        true(Stream),
         !.
 write_clauses(A) :-
 	File = 'temp.pl',
-	open(File,write,Stream),
+	open(File,writeSTDERR,Stream),
 	write_clauses(Stream,A),
 	close(Stream).
 
 
 write_matrix(Stream,[]) :-
-	nl(Stream),
+	true(Stream),
         !.
 write_matrix(Stream,[E|L]) :-
-        write(Stream,E),
-        write(Stream,.),
-        nl(Stream),
+        writeSTDERR(Stream,E),
+        writeSTDERR(Stream,.),
+        true(Stream),
 	write_matrix(Stream,L),
         !.
 write_matrix(L) :-
 	File = 'temp.pl',
-	open(File,write,Stream),
+	open(File,writeSTDERR,Stream),
 	write_matrix(Stream,L),
 	close(Stream).
 
@@ -1218,16 +1218,16 @@ ask(Name,Request) :-
 	
 	dpttp1((request:-Request),Q,Matrix,Request1:Matrix),
 
-	nl,
-        write('XRay writing request ... '),
+	
+        writeSTDERR('XRay writing request ... '),
         write_request(Name,Request1),
-	write('done.'),
+	writeSTDERR('done.'),
 
-	nl,
-        write('XRay compiling request ... '),
+	
+        writeSTDERR('XRay compiling request ... '),
         compile_request(Name),
-	write('done.'),
-        nl,
+	writeSTDERR('done.'),
+        
         !.
 
 tell(Name,Wff) :-	
@@ -1236,21 +1236,21 @@ tell(Name,Wff) :-
 	dpttp(Name,NewContext).
 
 write_proved(Explaination,ExplainationEnd) :-
-        write('proved'),
+        writeSTDERR('proved'),
 	verbose_flag ->
-	        write(' by:'),
+	        writeSTDERR(' by:'),
 		write_explaination(Explaination,ExplainationEnd);
 	%true->
 		length(Explaination,X),
-		write(' qed ;-) ':X).
+		writeSTDERR(' qed ;-) ':X).
 
 write_explaination(Explaination,ExplainationEnd) :-
         Explaination == ExplainationEnd,
         !.
 write_explaination([X|Y],ExplainationEnd) :-
-	nl,
-        write(' '),
-        write(X),
+	
+        writeSTDERR(' '),
+        writeSTDERR(X),
         write_explaination(Y,ExplainationEnd).
 
 %%% SETTINGS for LEMMA HANDLING
@@ -1556,7 +1556,7 @@ disjoin2(_,B,B).
 
 write_lemmas(File) :-   
         concat_atom(File,'.lem',LFile),
-        open(LFile,write,LStream),
+        open(LFile,writeSTDERR,LStream),
         !,
         (static_lemma(X,Y,Z),
          write_clauses(LStream,static_lemma(X,Y,Z)),
@@ -1565,18 +1565,18 @@ write_lemmas(File) :-
 
 show_lemmas :-  
         show_dynamic_lemmas,fail;
-        nl,show_static_lemmas.
+        true,show_static_lemmas.
 
 show_dynamic_lemmas :- 
         (dynamic_lemma(X,Y,Z),
-         write(dynamic_lemma(X,Y,Z)),
-         nl,
+         writeSTDERR(dynamic_lemma(X,Y,Z)),
+         
          fail;
          true).
 show_static_lemmas :-
         (static_lemma(X,Y,Z),
-         write(static_lemma(X,Y,Z)),
-         nl,
+         writeSTDERR(static_lemma(X,Y,Z)),
+         
          fail;
          true).
 
@@ -1764,7 +1764,7 @@ lemmatize_dynamically_procedure(Result) :-
 
 lemmatize_dynamically_procedure(Rule) :-
 	Head = lemmatize_dynamically(_,_,_),
-	Body = (write(lemmatize_dynamically*not_in_charge),nl,true,fail),
+	Body = (writeSTDERR(lemmatize_dynamically*not_in_charge),true,fail),
 	Rule = (Head :- Body).
 
 lemmatize_statically_procedure(Result) :-
@@ -1784,7 +1784,7 @@ lemmatize_statically_procedure(Result) :-
 	Result = (Rule0,Rule1).
 lemmatize_statically_procedure(Rule) :-
 	Head = lemmatize_statically(_,_,_),
-	Body = (write(lemmatize_statically*not_in_charge),nl,true,fail),
+	Body = (writeSTDERR(lemmatize_statically*not_in_charge),true,fail),
 	Rule = (Head :- Body).
 
 default_assumptions_procedure(Result) :-
@@ -1819,7 +1819,7 @@ default_assumptions_procedure(Result) :-
 	conjoin(Rule0123,Rule4,Result).
 default_assumptions_procedure(Rule) :- 
 	Head = default_assumptions(_,_,_),
-	Body = (write(default_assumptions*not_in_charge),nl,true,fail),
+	Body = (writeSTDERR(default_assumptions*not_in_charge),true,fail),
 	Rule = (Head :- Body).
 
 %%% Compilation of run-time procedures for lemma handling
@@ -1835,7 +1835,7 @@ read_lem(Name,Wff) :-
 	read_clauses(LFile,Wff).	
 write_lem(File,LemmaProcs) :-
 	concat_atom(File,'.lem',LemmaFile),
-	open(LemmaFile,write,LemmaStream),
+	open(LemmaFile,writeSTDERR,LemmaStream),
         write_clauses(LemmaStream,LemmaProcs),
         close(LemmaStream),
 	!.
@@ -2601,15 +2601,15 @@ add_explaination_recording_args(Body,Explaination,ExplainationEnd,Body1) :-
                 Body1 =.. L1.
 
 write_proved(Explaination,ExplainationEnd) :-
-        write('proved by'),
+        writeSTDERR('proved by'),
         write_explaination(Explaination,ExplainationEnd).
 
 write_explaination(Explaination,ExplainationEnd) :-
         Explaination == ExplainationEnd,
         !.
 write_explaination([X|Y],ExplainationEnd) :-
-        write(' '),
-        write(X),
+        writeSTDERR(' '),
+        writeSTDERR(X),
         write_explaination(Y,ExplainationEnd).
 
 /*
@@ -2849,7 +2849,7 @@ procedures_with_tests([],_Clauses,true).
 
 
 bhook1_p(Head :- Body) :-
-	Body = (nl,write(_),nl,fail) ->
+	Body = (true,writeSTDERR(_),fail) ->
 	     /* eliminates predicate hooks */
 	     false;
 	functor(Head,request,_) ->
@@ -2859,13 +2859,13 @@ bhook1_p(Head :- Body) :-
 bhook1(Head :- Body) :-
 	functor(Head,gamma,_)  ->
 	     Head =.. [Pred,Arg1,Arg2|_],
-	     nl,write(trial:gamma(Arg1,Arg2)),nl;
+	     true,writeSTDERR(trial:gamma(Arg1,Arg2));
         functor(Head,alpha,_)  ->
 	     Head =.. [Pred,Arg1,Arg2|_],
-	     nl,write(trial:alpha(Arg1,Arg2)),nl;
+	     true,writeSTDERR(trial:alpha(Arg1,Arg2));
         Head = _ ->
 	     Head =.. [Pred|_],
-	     nl,write(trial:(Pred)),nl;
+	     true,writeSTDERR(trial:(Pred));
         %true ->
 	     true.
 
@@ -2874,13 +2874,13 @@ bhook2_p(Head :- Body) :-
 bhook2(Head :- Body) :-
 	functor(Head,gamma,_)  ->
 	     Head =.. [Pred,Arg1,Arg2|_],
-	     nl,write(success:gamma(Arg1,Arg2)),nl;
+	     true,writeSTDERR(success:gamma(Arg1,Arg2));
         functor(Head,alpha,_)  ->
 	     Head =.. [Pred,Arg1,Arg2|_],
-	     nl,write(success:alpha(Arg1,Arg2)),nl;
+	     true,writeSTDERR(success:alpha(Arg1,Arg2));
         Head = _ ->
 	     Head =.. [Pred|_],
-	     nl,write(success:(Pred)),nl;
+	     true,writeSTDERR(success:(Pred));
         %true ->
 	     true.
 
@@ -2901,12 +2901,12 @@ phook1_tests(P,N,Result) :-
 	head3(P,N,Head,Head3),
 	(P = gamma ->
 	    Head =.. [Pred,Arg1,Arg2|_],
-	    Body=(nl,write(enter*predicate:gamma(Arg1,Arg2)),nl,fail);
+	    Body=(true,writeSTDERR(enter*predicate:gamma(Arg1,Arg2)),fail);
 	 P = alpha ->
 	    Head =.. [Pred,Arg1,Arg2|_],
-	    Body=(nl,write(enter*predicate:alpha(Arg1,Arg2)),nl,fail);
+	    Body=(true,writeSTDERR(enter*predicate:alpha(Arg1,Arg2)),fail);
 	%true ->
-	    Body=(nl,write(enter*predicate:Head3),nl,fail)),
+	    Body=(true,writeSTDERR(enter*predicate:Head3),fail)),
 	Result = (Head :- Body).
 phook1_tests(_,_,true).
 
@@ -2916,12 +2916,12 @@ phook2_tests(P,N,Result) :-
 	head3(P,N,Head,Head3),
 	(P = gamma ->
 	    Head =.. [Pred,Arg1,Arg2|_],
-	    Body=(nl,write(end_of_tests*predicate:gamma(Arg1,Arg2)),nl,fail);
+	    Body=(true,writeSTDERR(end_of_tests*predicate:gamma(Arg1,Arg2)),fail);
 	 P = alpha ->
 	    Head =.. [Pred,Arg1,Arg2|_],
-	    Body=(nl,write(end_of_tests*predicate:alpha(Arg1,Arg2)),nl,fail);
+	    Body=(true,writeSTDERR(end_of_tests*predicate:alpha(Arg1,Arg2)),fail);
 	%true ->
-	    Body=(nl,write(end_of_tests*predicate:Head3),nl,fail)),
+	    Body=(true,writeSTDERR(end_of_tests*predicate:Head3),fail)),
 	Result = (Head :- Body).
 phook2_tests(_,_,true).
 
@@ -2931,12 +2931,12 @@ phook3_tests(P,N,Result) :-
 	head3(P,N,Head,Head3),
 	(P = gamma ->
 	    Head =.. [Pred,Arg1,Arg2|_],
-	    Body=(nl,write(failure*predicate:gamma(Arg1,Arg2)),nl,fail);
+	    Body=(true,writeSTDERR(failure*predicate:gamma(Arg1,Arg2)),fail);
 	 P = alpha ->
 	    Head =.. [Pred,Arg1,Arg2|_],
-	    Body=(nl,write(failure*predicate:alpha(Arg1,Arg2)),nl,fail);
+	    Body=(true,writeSTDERR(failure*predicate:alpha(Arg1,Arg2)),fail);
 	%true ->
-	    Body=(nl,write(failure*predicate:Head3),nl,fail)),
+	    Body=(true,writeSTDERR(failure*predicate:Head3),fail)),
 	Result = (Head :- Body).
 phook3_tests(_,_,true).
 
@@ -2988,7 +2988,7 @@ herbrand_preds([C|Cs],Wff) :-
 	herbrand_preds(Cs,Wffs),
 	conjoin((herbrand(C):-true),Wffs,Wff).
 
-add_answer_preds((request :- Request),(request :- (Request,nl,nl,write(answer:Vars),nl))) :-
+add_answer_preds((request :- Request),(request :- (Request,true,true,writeSTDERR(answer:Vars)))) :-
 	!,
 	variables(Request,Vars).
 add_answer_preds(R,R).
@@ -3220,7 +3220,7 @@ request_clause(WffI,WffO) :-
 %%% verbose predicate, chatting if verbose_mode is turned on
 verbose(X) :-
 	verbose_flag ->
-	        write(X),nl;
+	        writeSTDERR(X);
 	%true->
 		true.
 
@@ -3291,8 +3291,8 @@ builtin(>=,2).
 builtin(=<,2).
 builtin(is,2).
 builtin(display,1).
-builtin(write,1).
-builtin(nl,0).
+builtin(writeSTDERR,1).
+builtin(true,0).
 builtin(deduce_by,_).
 builtin(write_proved,_).
 builtin(search,_).

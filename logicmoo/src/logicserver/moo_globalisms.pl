@@ -1,3 +1,4 @@
+/*
 :-module(moo_globalisms,[
 	 setMooOption/1,
 	 setMooOption/2,
@@ -6,6 +7,10 @@
 	 ensureMooOption/2,
 	 ensureMooOption/3,
 	 setMooOptionDefaults/0]).
+*/
+
+
+% :-ensure_loaded(moo_threads).
 
 % Database
 :-dynamic(mooCache/1).

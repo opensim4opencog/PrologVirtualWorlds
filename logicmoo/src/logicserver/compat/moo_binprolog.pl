@@ -51,7 +51,7 @@ numbervars(X,_,Y,Z):-numbervars(X,Y,Z).
 arithmetic_function(_).
 
 % Gets statistical time that CPU has been used by prolog (Each prolog has their own)
-getCputime(Time):-system_dependant:prolog_statistics(runtime,[Time|_]).
+getCputime(Time):-prolog_statistics(runtime,[Time|_]).
 
 % http://www.swi.psy.uva.nl/projects/SWI-Prolog/Manual/sec-3.13.html#flag/3
 

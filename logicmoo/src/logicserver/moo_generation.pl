@@ -23,7 +23,7 @@
 % 
 % ===================================================================
 
-								   
+			  /*      				   
 :-module(moo_generation,
 	 [ 
 	 writeDebug/1,
@@ -39,11 +39,11 @@
 	 writeObject/2,
 	 writeObject/3,
 	 writeObject_conj/2]).
+					 */
 
+% :-include('moo_header.pl').
 
-:-include('moo_header.pl').
-
-:-use_module(moo_globalisms).
+% :-use_module(moo_globalisms).
 
 % Assertion Time Errors
 
@@ -303,6 +303,7 @@ setMooOptionExplicitWriteSettings:-
              setMooOption(disp_ground_forms='off').
 
 setMooOptionImplicitWriteSettings:-
+	       setMooOptionExplicitWriteSettings,
              setMooOption(disp_explicit='off'),
              setMooOption(disp_modification='on'),
              setMooOption(disp_debug='on'),
@@ -317,7 +318,15 @@ setMooOptionImplicitWriteSettings:-
              setMooOption(disp_answers_num_tries='on'),
              setMooOption(disp_cputime='on'),
              setMooOption(disp_compiled='on'),
-             setMooOption(disp_ground_forms='on').
+             setMooOption(disp_ground_forms='on'),
+	     setMooOption(traceOutput,yes),
+	      setMooOption(prover,decider),
+	      setMooOption(translationMode,flatRelational),
+	      setMooOption(decider,on),
+	      writeSTDERR(setMooOptionExplicitWriteSettings).
+
+
+
 
 
 
@@ -453,8 +462,6 @@ and a message string sent from Prolog to the user agent to request user input
 Where <cr> indicates a carriage return or some other suitable delimiter.
 
 */
-
-:-setMooOptionImplicitWriteSettings.
 
 
 

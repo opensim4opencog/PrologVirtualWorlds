@@ -1,8 +1,8 @@
 
-:-module(moo_fileutils,[]).
+%:-module(moo_fileutils,[]).
 
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 % ===========================================================
 % Context From File
@@ -300,7 +300,7 @@ save_each_assertion_of(Ctx):-mooCache(PredR,Form,Surface,Vars,Context,EXTID,User
                 writeFmt('~q.\n',[mooCache(PredR,Form,Surface,Vars,Context,EXTID,User,Status)]),fail.
 save_each_assertion_of(Ctx):-!.
 
-agentLoad(Filename):-ensure_loaded(Filename).
+agentLoad(Filename) :-ensure_loaded(Filename).
 
 
 % fguard(Template,RH,NVars,Explaination,Functor)

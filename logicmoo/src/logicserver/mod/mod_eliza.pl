@@ -34,8 +34,8 @@
 % ===================================================================
 % Invokation  (knot,bot2).
 % ===================================================================
-bot2:-my_mooProcessCreate(kill,'Consultation Mode Test (KIFBOT!) OPN Server',consultation_thread(swiProlog,65530),Id,[]).
-bot:-my_mooProcessCreate(kill,'Consultation Mode Test (KIFBOT!) Efnet Server',consultation_thread(swipl,65532),Id,[]).
+bot2:-my_mooProcessCreate(killable,'Consultation Mode Test (KIFBOT!) OPN Server',consultation_thread(swiProlog,65530),Id,[]).
+bot:-my_mooProcessCreate(killable,'Consultation Mode Test (KIFBOT!) Efnet Server',consultation_thread(swipl,65532),Id,[]).
 
 my_mooProcessCreate(K,N,G,Id,A):-catch(mooProcessCreate(K,N,G,Id,A),_,fail),!.
 my_mooProcessCreate(K,N,G,Id,A):-G,!.
@@ -346,7 +346,7 @@ download(URL,File):-say([downloading,URL,File]),!,sformat(Shell,'wget -O ~w  ~w 
 
 use(URL):- file_base_name(URL,File),!,((download(URL,File),load_file(File))).
 
-in_thread(X):-mooProcessCreate(kill,chat(X),X,Id,[]).
+in_thread(X):-mooProcessCreate(killable,chat(X),X,Id,[]).
 
 load_file(File):-file_name_extension(Base, rpm,File),!, sformat(Shell,'rpm --force -i ~w  ',[File]),string_to_atom(Shell,Cmd),shell(Cmd),!,say([done,installing,File]).
 load_file(File):-file_name_extension(Base, 'P',File),!,ensure_loaded(File),say([done,compiling,File]).
@@ -363,10 +363,10 @@ load_file(File):-file_name_extension(Base, E,File),!,say([E,'Extension is not ye
 
 
 bot(ps):-!,mooThreadCreate_data(Perms,Name,Goal,Id,Options),
-	system_dependant:prolog_current_thread(Id,Status),
+	prolog_current_thread(Id,Status),
 	sayq((Id:Name:Goal:(Status):(Perms):Options)),fail.
-bot(kill(Id)):-nonvar(Id),mooThreadCreate_data(kill,Name,Goal,Id,Options),
-	system_dependant:prolog_thread_at_exit(Id,prolog_thread_exit(killed)).
+bot(killable(Id)):-nonvar(Id),mooThreadCreate_data(killable,Name,Goal,Id,Options),
+	prolog_thread_signal(Id,prolog_thread_exit(killed)).
 
 		
 yn(P):-P,!,sayn(yes).

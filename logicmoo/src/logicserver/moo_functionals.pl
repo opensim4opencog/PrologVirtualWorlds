@@ -2,7 +2,7 @@
 % Purpose:
 % This takes logical sentence FmlIn and turns treated_as_function/1s into predicates except inside not_treated_as_function_while_inside/1.
 % ======================================================================
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 :-dynamic(not_treated_as_function_while_inside/1).
 :-dynamic(treated_as_function/1).

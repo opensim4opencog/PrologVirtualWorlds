@@ -6,7 +6,7 @@
 % Truth = Real Number or tabled_true or not_proved
 % How = Explaination Used
 % ================================================================================
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 % ==========================================================
 %  Consultation

@@ -1,4 +1,4 @@
-end_of_file.
+%end_of_file.
 
 onuserconnect(X):-new_fact(is_actor(X)).
 
@@ -496,7 +496,7 @@ C:\jakarta-tomcat\webapps\moo\WEB-INF\lib\cpj.jar;C:\jakarta-tomcat\lib\jasper.j
 progol_version('2.7.4 (Sicstus)').
 progol_manual('http://www.comlab.ox.ac.uk/oucl/groups/machlearn/PProgol/ppman_toc.html').
 
-sicstus_statistics(runtime,[X,_]):-system_dependant:prolog_statistics(cputime,X).
+sicstus_statistics(runtime,[X,_]):-prolog_statistics(cputime,X).
 
 :-
         nl, nl,
@@ -7710,7 +7710,7 @@ subst2( X, Sk, [A|As], [Ap|AS] ) :- subst( A,X,Sk,Ap ),
 
          /********************************  The End ***********************************/
 /* File:      consult.P
-** $Id: moo_unused.pl,v 1.4 2002-03-14 12:46:24 dmiles Exp $
+** $Id: moo_unused.pl,v 1.5 2002-03-29 22:43:19 dmiles Exp $
 */
 /*
 :- compiler_options([xpp_on]).
@@ -9470,7 +9470,7 @@ put_socket_chars(ClientRespStream,[Char|S]):-
       !,((ErorCode=0),put_socket_chars(ClientRespStream,S) ; dgbln(['Eror Writing to Socket (ClientRespStream)',ClientRespStream])).
 
 
-%:-include('moo_header.pl').
+%% :-include('moo_header.pl').
 
 
 
