@@ -17,15 +17,15 @@ public class JavaRt extends Thread {
 	}
 
 	/* Creates a non-started Server with a prolog @sourceFile */
-	public void JavaRt(String sourceFile) {
-		bootFile=sourceFile;
-	}
+	//public void JavaRt(String sourceFile) {
+	//	bootFile=sourceFile;
+	//}
 
 	/* Creates a @started Server with a prolog @sourceFile  */
-	public void JavaRt(String sourceFile, boolean started) {
-		bootFile=sourceFile;
-		if ( started ) runStatic();
-	}
+	//public void JavaRt(String sourceFile, boolean started) {
+	//	bootFile=sourceFile;
+	//	if ( started ) runStatic();
+	//}
 
 	/* Working Directory when started  */
 	public static String cwd = ".";
