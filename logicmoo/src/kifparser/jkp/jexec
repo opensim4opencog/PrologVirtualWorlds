@@ -1,5 +1,0 @@
-#!/bin/sh
-
-#export CLASSPATH; CLASSPATH=$CLASSPATH:..
-export CLASSPATH; CLASSPATH=.:..
-exec $@
