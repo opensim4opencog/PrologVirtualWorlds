@@ -87,8 +87,6 @@
 :- dynamic(hypothesis/1).
 :- multifile(inconsistencyCheck/3).
 :- dynamic(inconsistencyCheck/3).
-:- multifile(isMooOption/2).
-:- dynamic(isMooOption/2).
 :- multifile(nsub/5).
 :- dynamic(nsub/5).
 :- multifile(nsub3/2).
@@ -97,8 +95,8 @@
 :- dynamic(sub3/2).
 :- multifile(succ3/2).
 :- dynamic(succ3/2).
-:- multifile(value/2).
-:- dynamic(value/2).
+:- multifile(valueOfCounter/2).
+:- dynamic(valueOfCounter/2).
 % Predicates which are no longer needed
 %:- multifile(falsum/2).
 %:- dynamic(falsum/2).
@@ -125,36 +123,36 @@ motel_member(X, [_|L]) :-
 /**********************************************************************
  *
  * setCounter(+Counter,+Value)
- * creates a new counter Counter with value Value.
+ * creates a new counter Counter with valueOfCounter Value.
  *
  */
 
 setCounter(Counter,N) :-
-        assertaRE(value(Counter,N)),
+        assertaRE(valueOfCounter(Counter,N)),
         !.
 
 /**********************************************************************
  *
  * addCounter(+Counter,+Value)
- * adds Value to the current value of counter Counter.
+ * adds Value to the current valueOfCounter of counter Counter.
  *
  */
  
 addCounter(Counter,N) :-
-        retract(value(Counter,M)),
+        retract(valueOfCounter(Counter,M)),
         Sum is N + M,
-        assertaRE(value(Counter,Sum)),
+        assertaRE(valueOfCounter(Counter,Sum)),
         !.
 
 /**********************************************************************
  *
  * getCounter(+Counter,-Value)
- * retrieves the current value Value of counter Counter.
+ * retrieves the current valueOfCounter Value of counter Counter.
  *
  */
 
 getCounter(Counter,N) :-
-        value(Counter,N),
+        valueOfCounter(Counter,N),
         !.
 
 /**********************************************************************
@@ -228,10 +226,10 @@ loadLibraries(sicstus) :-
 	),
 	N is M+1,
 	assertaRE(gensym_counter(Prefix, N)),
-	name(Prefix,P1),
-	name(N,N1),
+	atom_codes(Prefix,P1),
+	atom_codes(N,N1),
 	append(P1,N1,V1),
-	name(V,V1),
+	atom_codes(V,V1),
 	!)),
 	assertzRE((getTwoRandomNumbers(RT,CT) :-
 	statistics(runtime,[RT,CT]))),
@@ -260,10 +258,10 @@ loadLibraries(eclipse) :-
 	),
 	N is M+1,
 	assertaRE(gensym_counter(Prefix, N)),
-	name(Prefix,P1),
-	name(N,N1),
+	atom_codes(Prefix,P1),
+	atom_codes(N,N1),
 	append(P1,N1,V1),
-	name(V,V1),
+	atom_codes(V,V1),
 	!)),
 	assertzRE((getTwoRandomNumbers(RT,CT) :-
 	statistics(runtime,[RT,CT]))),
@@ -313,10 +311,10 @@ loadLibraries(poplog) :-
 	),
 	N is M+1,
 	assertaRE(gensym_counter(Prefix, N)),
-	name(Prefix,P1),
-	name(N,N1),
+	atom_codes(Prefix,P1),
+	atom_codes(N,N1),
 	append(P1,N1,V1),
-	name(V,V1),
+	atom_codes(V,V1),
 	!)),
 	assertzRE((append([],L2,L2))),
 	assertzRE((append([A1|L1],L2,[A1|L3]) :-
@@ -342,10 +340,10 @@ loadLibraries(quintus) :-
 	),
 	N is M+1,
 	assertaRE(gensym_counter(Prefix, N)),
-	name(Prefix,P1),
-	name(N,N1),
+	atom_codes(Prefix,P1),
+	atom_codes(N,N1),
 	append(P1,N1,V1),
-	name(V,V1),
+	atom_codes(V,V1),
 	!)),
 	assertzRE((getTwoRandomNumbers(RT,CT) :-
 	statistics(runtime,[RT,CT]))),
@@ -445,7 +443,7 @@ getLibraries :-
 /***********************************************************************
  *
  * setMooOption(+Option,+Set)
- * set isMooOption Option to value Set.
+ * set isMooOption Option to valueOfCounter Set.
  *
  */
 
@@ -457,7 +455,7 @@ setMooOption(Option,Set) :-
 /**********************************************************************
  *
  * ifMooOption(+Option,+Set,+Goal)
- * executes Goal if the current value of Option is Set otherwise
+ * executes Goal if the current valueOfCounter of Option is Set otherwise
  * the predicate suceeds.
  *
  */
@@ -1272,8 +1270,8 @@ clashInHyp(CL) :-
 /***********************************************************************
  *
  * subsumes(+Name1,+Name2)
- * Parameter: Name1     concept or role name
- *            Name2     concept or role name
+ * Parameter: Name1     concept or role atom_codes
+ *            Name2     concept or role atom_codes
  * true iff Name1 subsumes Name2 in modal context []
  * (so Name1 and Name2 must both be concept names or role names).
  *
@@ -1287,8 +1285,8 @@ subsumes(N1,N2) :-
  *
  * subsumes(+MS,+Name1,+Name2)
  * Parameter: MS        modal context
- *            Name1     concept or role name
- *            Name2     concept or role name
+ *            Name1     concept or role atom_codes
+ *            Name2     concept or role atom_codes
  * true iff Name1 subsumes Name2 (so Name1 and Name2 must both be
  * concept names or role names).
  *
@@ -1746,7 +1744,7 @@ showHierarchy(Type) :-
 /***********************************************************************
  *
  * showHierarchy(+EnvName,+MS,+Type)
- * Parameter: EnvName   environment name
+ * Parameter: EnvName   environment atom_codes
  *            MS        modal context
  *            Type      'concepts' or 'roles'
  * display subsumption hierarchy in the modal context MS.
@@ -1788,7 +1786,7 @@ getHierarchy(Type,H) :-
 /***********************************************************************
  *
  * getHierarchy(+EnvName,+MS,+Type,-H)
- * Parameter: EnvName   environment name
+ * Parameter: EnvName   environment atom_codes
  *            MS        modal context
  *            Type      'concepts' or 'roles'
  * instantiates H with the internal representation of the subsumption 
@@ -1953,7 +1951,7 @@ testb(Env,MS) :-
 	
 find_concept(concepts,Env,MS) :-
 	getConceptName(Env,MS,Concept),
-	not(name(Concept,[99,111,110,99,101,112,116|_])),
+	not(atom_codes(Concept,[99,111,110,99,101,112,116|_])),
 	ifMooOption(testOutput,yes,(print(Concept), nl)),
 	addCounter(conceptsClassified,1),
 	find_concept1(concepts,Env,MS,Concept).
@@ -1978,7 +1976,7 @@ find_concept1(concepts,Env,MS,Concept) :-
 
 find_role(roles,Env,MS) :-
 	getRoleName(Env,MS,Role),
-	not(name(Role,[114,111,108,101|_])),
+	not(atom_codes(Role,[114,111,108,101|_])),
 	addCounter(rolesClassified,1),
 	find_role1(roles,Env,MS,Role).
 
@@ -2934,7 +2932,7 @@ compileEnvironment(FileName,EnvName) :-
 	write((:- dynamic(roleAttributes/5))), write('.'), nl,
 %	write((:- dynamic(given_inflLink/4))), write('.'), nl,
 %	write((:- dynamic(given_change/4))), write('.'), nl,
-	write((:- dynamic(value/2))), write('.'), nl,
+	write((:- dynamic(valueOfCounter/2))), write('.'), nl,
 	write((:- dynamic(isMooOption/2))), write('.'), nl,
 %	write((:- dynamic(environment/3))), write('.'), nl,
 %	write((:- dynamic(conceptHierarchy/3))), write('.'), nl,
@@ -3035,22 +3033,22 @@ termExpansion(on,env(Id),
               [CompCon/8,CompEq/9,CompIn/9,CompKb_in/10,CompRel/6]) :-
 	% Generate the names for the compiled in, kb_in, constraint, and rel
 	% predicates in environment Id.
-	name(Id,IdChars),
-	name(in,InChars),
+	atom_codes(Id,IdChars),
+	atom_codes(in,InChars),
 	append(InChars,[95,99,95|IdChars],CompInChars),
-	name(CompIn,CompInChars),
-	name(constraint,ConChars),
+	atom_codes(CompIn,CompInChars),
+	atom_codes(constraint,ConChars),
 	append(ConChars,[95,99,95|IdChars],CompConChars),
-	name(CompCon,CompConChars),
-	name(eq,EqChars),
+	atom_codes(CompCon,CompConChars),
+	atom_codes(eq,EqChars),
 	append(EqChars,[95,99,95|IdChars],CompEqChars),
-	name(CompEq,CompEqChars),
-	name('kb_in',Kb_inChars),
+	atom_codes(CompEq,CompEqChars),
+	atom_codes('kb_in',Kb_inChars),
 	append(Kb_inChars,[95,99,95|IdChars],CompKb_inChars),
-	name(CompKb_in,CompKb_inChars),
-	name('rel',RelChars),
+	atom_codes(CompKb_in,CompKb_inChars),
+	atom_codes('rel',RelChars),
 	append(RelChars,[95,99,95|IdChars],CompRelChars),
-	name(CompRel,CompRelChars),
+	atom_codes(CompRel,CompRelChars),
 	% Abolish any previously asserted clauses for the 
 	% compiled predicades
 	abolish(CompCon/8),
@@ -3100,7 +3098,7 @@ termExpansion(off,_) :-
 
 /**********************************************************************
  *
- * @(#) cnf.pl 1.4@(#)
+ * @(#) convertToLogicalCNF.pl 1.4@(#)
  *
  */
 
@@ -3387,12 +3385,12 @@ deMorgan(C1,C1) :-
 
 /***********************************************************************
  *
- * cnf(+C1,-C2)
+ * convertToLogicalCNF(+C1,-C2)
  * C2 is the conjunctive normalform of C1.
  *
  */
 
-cnf(C1,C6) :-
+convertToLogicalCNF(C1,C6) :-
 	normalizeNot(C1,C2),
 	logicalFlatten(C2,C3),
 	normalizeInverse(C3,C4),
@@ -3408,7 +3406,7 @@ cnf(C1,C6) :-
 /***********************************************************************
  *
  * memberConcept(+Concept,+Dag)
- * Arguments: Concept     concept name
+ * Arguments: Concept     concept atom_codes
  *            Dag         subsumption hierarchy
  * checks wether or not Concept occurs in the subsumption hierarchy.
  *
@@ -3423,7 +3421,7 @@ memberConceptSubtrees(Concept,List) :-
 /***********************************************************************
  *
  * memberDirectSubConcepts(+Concept,+Dag)
- * Arguments: Concept     concept name
+ * Arguments: Concept     concept atom_codes
  *            Dag         subsumption hierarchy
  * checks wether or not Concept occurs in the direct subconcepts of
  * the top concept of Dag.
@@ -3442,7 +3440,7 @@ memberDirectSubConcepts(Concept,List) :-
  * getDirectSuperConcepts(+EnvName,+MS,+Concept,-CL)
  * Arguments: EnvName     environment identifier
  *            MS          modal context
- *            Concept     concept name
+ *            Concept     concept atom_codes
  *            CL          list of concept names
  * CL is the list of all concept names which are direct super concepts
  * of Concept.
@@ -3460,7 +3458,7 @@ getDirectSuperConcepts(EnvName,MS,Concept,CL) :-
  * getAllSuperConcepts(+EnvName,+MS,+Concept,-CL)
  * Arguments: EnvName     environment identifier
  *            MS          modal context
- *            Concept     concept name
+ *            Concept     concept atom_codes
  *            CL          list of concept names
  * CL is the list of all concept names which are super concepts of
  * Concept.
@@ -3477,7 +3475,7 @@ getAllSuperConcepts(EnvName,MS,Concept,CL) :-
  * getDirectSubConcepts(+EnvName,+MS,+Concept,-CL)
  * Arguments: EnvName     environment identifier
  *            MS          modal context
- *            Concept     concept name
+ *            Concept     concept atom_codes
  *            CL          list of concept names
  * CL is the list of all concept names which are direct super concepts
  * of Concept.
@@ -3494,7 +3492,7 @@ getDirectSubConcepts(EnvName,MS,Concept,CL) :-
  * getAllSubConcepts(+EnvName,+MS,+Concept,-CL)
  * Arguments: EnvName     environment identifier
  *            MS          modal context
- *            Concept     concept name
+ *            Concept     concept atom_codes
  *            CL          list of concept names
  * CL is the list of all concept names which are super concepts of 
  * Concept.
@@ -3524,9 +3522,9 @@ getConcepts(EnvName,MS,['top'|CL]) :-
  * testDirectSuperConcept(+EnvName,+MS,+Concept1,+Concept2,-Concept)
  * Arguments: EnvName        environment identifier
  *            MS             modal context
- *            Concept1       concept name
- *            Concept2       concept name
- *            Concept        concept name
+ *            Concept1       concept atom_codes
+ *            Concept2       concept atom_codes
+ *            Concept        concept atom_codes
  * Concept is Concept1 iff Concept1 is a direct superconcept of Concept2
  * or
  * Concept is Concept2 iff Concept2 is a direct superconcept of Concept1
@@ -3545,9 +3543,9 @@ testDirectSuperConcept(EnvName,MS,Concept1,Concept2,Concept) :-
  * testDirectSubConcept(+EnvName,+MS,+Concept1,+Concept2,-Concept)
  * Arguments: EnvName        environment identifier
  *            MS             modal context
- *            Concept1       concept name
- *            Concept2       concept name
- *            Concept        concept name
+ *            Concept1       concept atom_codes
+ *            Concept2       concept atom_codes
+ *            Concept        concept atom_codes
  * Concept is Concept1 iff Concept1 is a direct subconcept of Concept2
  * or
  * Concept is Concept2 iff Concept2 is a direct subconcept of Concept1
@@ -3566,9 +3564,9 @@ testDirectSubConcept(EnvName,MS,Concept1,Concept2,Concept) :-
  * testSuperConcept(+EnvName,+MS,+Concept1,+Concept2,-Concept)
  * Arguments: EnvName        environment identifier
  *            MS             modal context
- *            Concept1       concept name
- *            Concept2       concept name
- *            Concept        concept name
+ *            Concept1       concept atom_codes
+ *            Concept2       concept atom_codes
+ *            Concept        concept atom_codes
  * Concept is Concept1 iff Concept1 is a direct superconcept of Concept2
  * or
  * Concept is Concept2 iff Concept2 is a direct superconcept of Concept1
@@ -3587,9 +3585,9 @@ testSuperConcept(EnvName,MS,Concept1,Concept2,Concept) :-
  * testSubConcept(+EnvName,+MS,+Concept1,+Concept2,-Concept)
  * Arguments: EnvName        environment identifier
  *            MS             modal context
- *            Concept1       concept name
- *            Concept2       concept name
- *            Concept        concept name
+ *            Concept1       concept atom_codes
+ *            Concept2       concept atom_codes
+ *            Concept        concept atom_codes
  * Concept is Concept1 iff Concept1 is a direct superconcept of Concept2
  * or
  * Concept is Concept2 iff Concept2 is a direct superconcept of Concept1
@@ -3716,7 +3714,7 @@ continueSolve(Env,MS,(card,app((FF:R),X),Rel,N),hyp(HYPS),ab(D),call(CALLS),(M1,
 	collectAllConstraints(Env,MS,[R],X,Rel,HYPS,D,CALLS,S),
 	findNumberRestriction(Rel,(M1,PTAbox),S,(M3,PT3)),
 	!,
-	comparison(Rel,M3,N).
+	comparisonForRestriction(Rel,M3,N).
 continueSolve(Env,MS,(card,app((FF:R),X),Rel,N),hyp(HYPS),ab(D),call(CALLS),(M1,PTAbox),PT3) :-
 	not(member(solveConstraint(Env,RL2,noEquivalence,_),CALLS)),
 	bagofOrNil(R1,AX2^RN2^S2^O2^F^PT2^(eq(Env,rn(AX2,RN2,S2,O2),modal(MS1),app((F:R),X),app((F:R1),X),hyp(HYPS),ab(D),call(CALLS),PT2), nonvar(F)),RL),
@@ -3724,7 +3722,7 @@ continueSolve(Env,MS,(card,app((FF:R),X),Rel,N),hyp(HYPS),ab(D),call(CALLS),(M1,
 	collectAllConstraints(Env,MS,RL,X,Rel,HYPS,D,CALLS1,S),
 	findNumberRestriction(Rel,(M1,PTAbox),S,(M3,PT3)),
 	!,
-	comparison(Rel,M3,N).
+	comparisonForRestriction(Rel,M3,N).
 
 collectAllFillers(Env,MS,R,X,HYPS,D,CALLS,S) :-
 	EqLiteral = eqGenerator(Env,AX,RN,S,O,MS,Y,app((FF:R),X),HYPS,D,CALLS,PT),
@@ -3745,7 +3743,7 @@ collectAllConstraints(_,_MS,_RL,_X,_Rel,_HYPS,_D,_CALLS,[]) :-
 
 /**********************************************************************
  * 
- * comparison(+Rel,+M,?N)
+ * comparisonForRestriction(+Rel,+M,?N)
  * if N is a variable then N is instantiated with M and the predicate
  * succeeds.
  * if N is a number, the predicates succeeds if then goal Rel(M,N)
@@ -3753,32 +3751,32 @@ collectAllConstraints(_,_MS,_RL,_X,_Rel,_HYPS,_D,_CALLS,[]) :-
  *
  */
 
-comparison(_Rel,M3,N) :-
+comparisonForRestriction(_Rel,M3,N) :-
 	var(N),
 	!,
 	N = M3.
-comparison(Rel,M3,N) :-
+comparisonForRestriction(Rel,M3,N) :-
 	number(M3), number(N),
 	Goal =.. [Rel,M3,N],
 	call(Goal).
-comparison(>=,noMaxRestriction,N) :-
+comparisonForRestriction(>=,noMaxRestriction,N) :-
 	!.
-comparison(>=,noMinRestriction,N) :-
+comparisonForRestriction(>=,noMinRestriction,N) :-
 	!,
 	fail.
-comparison(=<,noMaxRestriction,N) :-
+comparisonForRestriction(=<,noMaxRestriction,N) :-
 	!,
 	fail.
-comparison(=<,noMinRestriction,N) :-
+comparisonForRestriction(=<,noMinRestriction,N) :-
 	!.
-comparison(>=,M,noMaxRestriction) :-
+comparisonForRestriction(>=,M,noMaxRestriction) :-
 	!,
 	fail.
-comparison(>=,M,noMinRestriction) :-
+comparisonForRestriction(>=,M,noMinRestriction) :-
 	!.
-comparison(=<,M,noMaxRestriction) :-
+comparisonForRestriction(=<,M,noMaxRestriction) :-
 	!.
-comparison(=<,M,noMinRestriction) :-
+comparisonForRestriction(=<,M,noMinRestriction) :-
 	!,
 	fail.
 
@@ -3802,22 +3800,22 @@ findNumberRestriction('=<',(N,PT1),[],(noMaxRestriction,noConstraintsFound)) :- 
 findNumberRestriction(_,(noMinRestriction,_),[(N1,PT2,_)],(N1,PT2)) :- !.
 findNumberRestriction(_,(noMaxRestriction,_),[(N1,PT2,_)],(N1,PT2)) :- !.
 findNumberRestriction('=<',(M,_PT1),[(N1,PT2,_)],(N1,PT2)) :-
-	comparison(=<,N1,M),
+	comparisonForRestriction(=<,N1,M),
 	!.
 findNumberRestriction('=<',(M,PT1),[(_N1,_,_)],(M,PT1)) :-
 	!.
 findNumberRestriction('>=',(M,PT1),[(N1,_,_)],(M,PT1)) :-
-	comparison(>=,M,N1),
+	comparisonForRestriction(>=,M,N1),
 	!.
 findNumberRestriction('>=',(_M,_),[(N1,PT2,_)],(N1,PT2)) :-
 	!.
 findNumberRestriction('>=',(K,PT1),[(N1,_,_)|NL],(N2,PT3)) :-
 	findNumberRestriction('>=',(K,PT1,_),NL,(N2,PT3)),
-	comparison(>=,N2,N1),
+	comparisonForRestriction(>=,N2,N1),
 	!.
 findNumberRestriction('=<',(K,PT1),[(N1,_,_)|NL],(N2,PT3)) :-
 	findNumberRestriction('=<',(K,PT1,_),NL,(N2,PT3)),
-	comparison(=<,N2,N1),
+	comparisonForRestriction(=<,N2,N1),
 	!.
 findNumberRestriction(_,_,[(N1,PT1,_)|_NL],(N1,PT1)) :-
 	!.
@@ -3971,21 +3969,21 @@ typeOfDefinition(Env,MS,C,user) :-
 	!.
 typeOfDefinition(_,_,C,system) :-
 	atomic(C),
-	name(C,[99,111,110,99,101,112,116|_]),
+	atom_codes(C,[99,111,110,99,101,112,116|_]),
 	!.
 typeOfDefinition(Env,MS,R,user) :-
 	getRoleName(Env,MS,R),
 	!.
 typeOfDefinition(_,_,R,system) :-
 	atomic(R),
-	name(R,[114,111,108,101|_]),
+	atom_codes(R,[114,111,108,101|_]),
 	!.
 typeOfDefinition(Env,MS,not(C),Type) :-
 	!,
 	typeOfDefinition(Env,MS,C,Type).
-typeOfDefinition(_,_,normal(C),system) :-
+typeOfDefinition(_,_,normalWorld(C),system) :-
 	!.
-typeOfDefinition(_,_,not(normal(C)),system) :-
+typeOfDefinition(_,_,not(normalWorld(C)),system) :-
 	!.
 typeOfDefinition(_,_,_,user) :-
 	!.
@@ -4005,11 +4003,11 @@ typeOfDefinition(_,_,_,user) :-
 % 	someInterpretation(IL).
 % roleConjunction(X,IL) :-
 % 	nonvar(X),
-% 	name(X,[115,107,111,108,101,109|_]),
+% 	atom_codes(X,[115,107,111,108,101,109|_]),
 % 	allInterpretation(IL).
 % roleConjunction(X,IL) :-
 % 	nonvar(X),
-% 	not(name(X,[115,107,111,108,101,109|_])),
+% 	not(atom_codes(X,[115,107,111,108,101,109|_])),
 % 	someInterpretation(IL).
 
 
@@ -4088,13 +4086,13 @@ convertMS(Env,[MS1,Lits1],[bc(MOp,C)|L],WVL,[MS3,Lits3],WVL3) :-
  * 
  * 1) THE HEAD
  *    in(Env,RN,modal(W),A1,X,hyp(C1),ab(D),call(H1),Exp)
- *    Env is a internal environment name
- *    RN  is a rule name
+ *    Env is a internal environment atom_codes
+ *    RN  is a rule atom_codes
  *    W   is a world
- *    A1  is a concept name or the negation of a concept name
+ *    A1  is a concept atom_codes or the negation of a concept atom_codes
  *    X   is a free variable
  *    C1  is a list of clauses --- the hypotheses that can be used
- *    D   is a name identifying a specific abductive derivation
+ *    D   is a atom_codes identifying a specific abductive derivation
  *    H1  is a list of calls   --- the calls to in that have already
  *                                 been used
  *    Exp is a explanation term
@@ -4342,7 +4340,7 @@ getAxiom(Env,MS,Ax) :-
 /**********************************************************************
  *
  * getConceptName(+Env,+MS,CN)
- * succeeds if CN is a concept name in environment Env and modal context
+ * succeeds if CN is a concept atom_codes in environment Env and modal context
  * MS.
  *
  */
@@ -4355,7 +4353,7 @@ getConceptName(Env,MS1,CN) :-
 /**********************************************************************
  *
  * getRoleName(+Env,+MS,CN)
- * succeeds if CN is a role name in environment Env and modal context
+ * succeeds if CN is a role atom_codes in environment Env and modal context
  * MS.
  *
  */
@@ -4375,7 +4373,7 @@ getRoleName(Env,MS1,CN) :-
 /***********************************************************************
  *
  * memberElement(+Element,+Dag)
- * Parameter: Element     element name
+ * Parameter: Element     element atom_codes
  *            Dag         subsumption hierarchy
  * checks wether or not Element occurs in the subsumption hierarchy.
  *
@@ -4400,7 +4398,7 @@ memberElementSubtrees(Element,[_N1|NL]) :-
 /***********************************************************************
  *
  * memberDirectSubElements(+Element,+Dag)
- * Parameter: Element     element name
+ * Parameter: Element     element atom_codes
  *            Dag         subsumption hierarchy
  * checks wether or not Element occurs in the direct subelements of
  * the top element of Dag.
@@ -4424,7 +4422,7 @@ memberDirectSubElements(Element,[_N1|NL]) :-
  *
  * getDirectSuperElements(+Element,-CL,+Dag)
  * Parameter: Dag         subsumption hierarchy
- *            Element     element name
+ *            Element     element atom_codes
  *            CL          list of element names
  * CL is the list of all element names which are direct super elements
  * of Element.
@@ -4447,7 +4445,7 @@ getDirectSuperElements(Element,CL,[N1|NL]) :-
 /***********************************************************************
  *
  * getAllSuperElements(+Element,-CL,+Dag)
- * Parameter: Element     element name
+ * Parameter: Element     element atom_codes
  *            CL          list of element names
  *            Dag         subsumption hierarchy
  * CL is the list of all element names which are super elements of
@@ -4476,7 +4474,7 @@ getAllSuperElements(Element,CL2,CL1,[N1|NL]) :-
 /***********************************************************************
  *
  * getDirectSubElements(+Element,-CL,+Dag)
- * Parameter: Element     element name
+ * Parameter: Element     element atom_codes
  *            CL          list of element names
  *            Dag         subsumption hierarchy
  * CL is the list of all element names which are direct sub elements
@@ -4508,7 +4506,7 @@ getSubElements(CL,[node(CL1,_)|NL]) :-
 /***********************************************************************
  *
  * getAllSubElements(+Dag,+Element,-CL,+Dag)
- * Parameter: Element     element name
+ * Parameter: Element     element atom_codes
  *            CL          list of element names
  *            Dag         subsumption hierarchy
  * CL is the list of all element names which are sub elements of 
@@ -4554,9 +4552,9 @@ getElements(CL,[N1|NL]) :-
 /***********************************************************************
  *
  * testDirectSuperElement(+Element1,+Element2,-Element,+Dag)
- * Parameter: Element1       element name
- *            Element2       element name
- *            Element        element name
+ * Parameter: Element1       element atom_codes
+ *            Element2       element atom_codes
+ *            Element        element atom_codes
  *            Dag            subsumption hierarchy
  * Element is Element1 iff Element1 is a direct superelement of Element2
  * or
@@ -4578,9 +4576,9 @@ testDirectSuperElement(Element1,Element2,Element2,node(CL,NL)) :-
 /***********************************************************************
  *
  * testDirectSubElement(+Element1,+Element2,-Element,+Dag)
- * Parameter: Element1       element name
- *            Element2       element name
- *            Element        element name
+ * Parameter: Element1       element atom_codes
+ *            Element2       element atom_codes
+ *            Element        element atom_codes
  *            Dag            subsumption hierarchy
  * Element is Element1 iff Element1 is a direct subelement of Element2
  * or
@@ -4603,9 +4601,9 @@ testDirectSubElement(Element1,Element2,Element1,node(CL,NL)) :-
 /***********************************************************************
  *
  * testSuperElement(+Element1,+Element2,-Element,+Dag)
- * Parameter: Element1       element name
- *            Element2       element name
- *            Element        element name
+ * Parameter: Element1       element atom_codes
+ *            Element2       element atom_codes
+ *            Element        element atom_codes
  *            Dag            subsumption hierarchy
  * Element is Element1 iff Element1 is a direct superelement of Element2
  * or
@@ -4628,9 +4626,9 @@ testSuperElement(Element1,Element2,Element2,node(CL,NL)) :-
 /***********************************************************************
  *
  * testSubElement(+Element1,+Element2,-Element,+Dag)
- * Parameter: Element1       element name
- *            Element2       element name
- *            Element        element name
+ * Parameter: Element1       element atom_codes
+ *            Element2       element atom_codes
+ *            Element        element atom_codes
  *            Dag            subsumption hierarchy
  * Element is Element1 iff Element1 is a direct superelement of Element2
  * or
@@ -4696,7 +4694,7 @@ getCommonSubElements(CL1,CL2,Dag) :-
 /**********************************************************************
  *
  * getCurrentEnvironment(EnvName)
- * gets the name of the current environment
+ * gets the atom_codes of the current environment
  *
  */
 
@@ -4708,7 +4706,7 @@ getCurrentEnvironment(EnvName) :-
 /**********************************************************************
  *
  * makeEnvironment(+Name,+Comment)
- * creates new environement with name Name. Comment can be any string
+ * creates new environement with atom_codes Name. Comment can be any string
  * Name will become the current environment.
  *
  */
@@ -4717,8 +4715,8 @@ makeEnvironment(Name,Comment) :-
 	getTwoRandomNumbers(RT,CT),
 	FirstChar is 97 + (CT mod 26),
 	Runtime   is (RT mod 10000),
-	name(Runtime,RTChars),
-	name(EnvIdentifier,[FirstChar|RTChars]),
+	atom_codes(Runtime,RTChars),
+	atom_codes(EnvIdentifier,[FirstChar|RTChars]),
 	assertaRE(environment(Name,env(EnvIdentifier),Comment)),
 	retractallSpecial(currentEnvironment(_)),
 	assertaRE(currentEnvironment(env(EnvIdentifier))),
@@ -5039,7 +5037,7 @@ assertEqRule(Env,1) :-
 	gensym(axiom,AN1),
 	gensym(rule,RN1),
 	constructEqHead(Env,rn(AN1,RN1,user,lInR),W1,app((F:R),X),F,R,X,HYPS,AB,CALLS,equality,EqHead1),
-	constructMLCall(Env,rn(AX,_RN4,_S4,_O4),bodyMC(W1),headMC(W1),normal(R),X,HYPS,AB,CALLS,PT3,InHead2),
+	constructMLCall(Env,rn(AX,_RN4,_S4,_O4),bodyMC(W1),headMC(W1),normalWorld(R),X,HYPS,AB,CALLS,PT3,InHead2),
 	assertzRE(EqHead1),
 %       old code (uh 06.05.94)
 %	assertzRE((EqHead1 :- checkCallStack(CALLS,true),  simple_term(X))),
@@ -6899,11 +6897,11 @@ example(89) :-
 	defprimconcept(truth_value,adjective_property),
 	defprimrole(truth_mod),
 	defconcept(abstract_thing,and([thing,some(truth_mod,top),some(truth_mod,top)])),
-	defprimconcept(name,abstract_thing),
+	defprimconcept(atom_codes,abstract_thing),
 	defconcept(thing,and([property_filler,
 	some(det,determiner),
 	some(deitic_mpd,pointing),
-	some(named,name)])),
+	some(named,atom_codes)])),
 	defconcept(predicate,and([fss,
 	some(subject,thing),
 	some(purpose,predicate),
@@ -7569,7 +7567,7 @@ implout(P,P).
 % negin(+F1,-F2)
 % Parameter: F1   First-order formula
 %            F2   First-order formula
-% computes the negation normal form of F1 
+% computes the negation normalWorld form of F1 
 %
 % Author: Ullrich Hustadt
 
@@ -7632,7 +7630,7 @@ skolem(exists(X,P),P2,Vars) :-
 	skolem(P,P1,Vars),
 	gensym(f,F),
 	Sk =.. [F|Vars],
-	subst(P1,P2,X,Sk).
+	logicalSubst(P1,P2,X,Sk).
 skolem(and(L),and(L1),Vars) :-
 	!,
 	map(skolem,[Vars],L,L1).
@@ -7643,7 +7641,7 @@ skolem(P,P,_).
 
 
 %----------------------------------------------------------------------
-% subst(+F1,-F2,+X,+Sk)
+% logicalSubst(+F1,-F2,+X,+Sk)
 % Parameter: F1     First-order formula
 %            F2     First-order formula
 %            X      Variable that will be substituted
@@ -7652,41 +7650,41 @@ skolem(P,P,_).
 % 
 % Author: Ullrich Hustadt
 
-subst(T1,T2,X,Sk) :-
+logicalSubst(T1,T2,X,Sk) :-
 	(atomic(T1) ; var(T1)),
 	T1 == X,
 	!,
 	T2 = Sk.
-subst(T1,T2,X,_Sk) :-
+logicalSubst(T1,T2,X,_Sk) :-
 	(atomic(T1) ; var(T1)),
 	not(T1 == X),
 	!,
 	T2 = T1.
-subst(forall(Y,P),forall(Y,P),X,_Sk) :-
+logicalSubst(forall(Y,P),forall(Y,P),X,_Sk) :-
 	X == Y,
 	!.
-subst(forall(Y,P),forall(Y,P1),X,Sk) :-
+logicalSubst(forall(Y,P),forall(Y,P1),X,Sk) :-
 	!,
-	subst(P,P1,X,Sk).
-subst(exists(Y,P),exists(Y,P),X,_Sk) :-
+	logicalSubst(P,P1,X,Sk).
+logicalSubst(exists(Y,P),exists(Y,P),X,_Sk) :-
 	X == Y,
 	!.
-subst(exists(Y,P),exists(Y,P1),X,Sk) :-
+logicalSubst(exists(Y,P),exists(Y,P1),X,Sk) :-
 	!,
-	subst(P,P1,X,Sk).
-subst(and(L),and(L1),X,Sk) :-
+	logicalSubst(P,P1,X,Sk).
+logicalSubst(and(L),and(L1),X,Sk) :-
 	!,
-	map(subst,[X,Sk],L,L1).
-subst(or(L),or(L1),X,Sk) :-
+	map(logicalSubst,[X,Sk],L,L1).
+logicalSubst(or(L),or(L1),X,Sk) :-
 	!,
-	map(subst,[X,Sk],L,L1).
-subst(not(P),not(P1),X,Sk) :-
+	map(logicalSubst,[X,Sk],L,L1).
+logicalSubst(not(P),not(P1),X,Sk) :-
 	!,
-	subst(P,P1,X,Sk).
-subst(T1,T2,X,Sk) :-
+	logicalSubst(P,P1,X,Sk).
+logicalSubst(T1,T2,X,Sk) :-
 	!,
 	T1 =.. [F|Args],
-	map(subst,[X,Sk],Args,Args1),
+	map(logicalSubst,[X,Sk],Args,Args1),
 	T2 =.. [F|Args1].
 
 %----------------------------------------------------------------------
@@ -7712,7 +7710,7 @@ univout(P,P).
 % conjn(+F1,-F2)
 % Parameter: F1   First-order formula
 %            F2   First-order formula
-% computes the conjunctive normal form of F1
+% computes the conjunctive normalWorld form of F1
 %
 % Author: Ullrich Hustadt
 
@@ -8514,10 +8512,10 @@ weightOf_SimultChange(Ws,W) :-
  *
  * arithm_Mean([+-Value|+Values],+-Mean,+IsWellDefName)
  *
- *	Given a list of values (Values) and a predicate name for
+ *	Given a list of values (Values) and a predicate atom_codes for
  *	checking whether each of the values is well-defined this clause
  *	computes the arithmetical mean (Mean) over Values.
- *	Provided Mean is given the first value may be a variable.
+ *	Provided Mean is given the first valueOfCounter may be a variable.
  */
 
 arithm_Mean([],0.0,IsWellDefName) :-
@@ -8539,10 +8537,10 @@ arithm_Mean(Values,Mean,IsWellDefName) :-
  *
  * sum([+-Value|+Values],+-Sum,+IsWellDefName)
  *
- *	Given a list of values (Values) and a predicate name 
+ *	Given a list of values (Values) and a predicate atom_codes 
  *	(IsWellDefName) for checking whether each of the values is 
  *	well-defined this clause computes the sum (Sum) of the values.
- *	Provided Sum is given the first value may be a variable.
+ *	Provided Sum is given the first valueOfCounter may be a variable.
  */
 
 sum([Value|Values],Sum,IsWellDefName) :-
@@ -8567,7 +8565,7 @@ sum([],0.0,_).
  * product(+-Factor1,+Factor2,+Product,+IsWellDefName)
  * product(+Factor1,+-Factor2,+Product,+IsWellDefName)
  *
- *	Given two values (Factor1 and Factor2) and a predicate name 
+ *	Given two values (Factor1 and Factor2) and a predicate atom_codes 
  *	(IsWellDefName) for checking whether each of the values is 
  *	well-defined this clause computes the product (Product) of the 
 *	values.
@@ -8601,14 +8599,14 @@ product(Factor1,Factor2,Product,IsWellDefName) :-
  *
  * max([+-Value|+Values],+-Max,+IsWellDefName)
  *
- *	Given a list of values (Values) and a predicate name 
+ *	Given a list of values (Values) and a predicate atom_codes 
  *	(IsWellDefName) for checking whether each of the values is 
  *	well-defined this clause determines the maximum (Max) of the 
  *	values.
  *
  * max(+Value1,+Value2,+-Max)
  *
- *	returns the bigger value of Value1 and Value2 in Max.
+ *	returns the bigger valueOfCounter of Value1 and Value2 in Max.
  */
 
 motel_max([Max],Max,_) :-
@@ -8630,14 +8628,14 @@ lub(Value1,Value2,Value2).
  *
  * min([+-Value|+Values],+-Min,+IsWellDefName)
  *
- *	Given a list of values (Values) and a predicate name 
+ *	Given a list of values (Values) and a predicate atom_codes 
  *	(IsWellDefName) for checking whether each of the values is 
  *	well-defined this clause determines the minimum (Min) of the 
  *	values.
  *
  * min(+Value1,+Value2,+-Min)
  *
- *	returns the smaller value of Value1 and Value2 in Min.
+ *	returns the smaller valueOfCounter of Value1 and Value2 in Min.
  */
 
 motel_min([Min],Min,_) :-
@@ -8664,7 +8662,7 @@ glb(Value1,Value2,Value2).
 /***********************************************************************
  *
  * defprimconcept(+Environment,+Left)
- * Parameter: ConceptName       concept name
+ * Parameter: ConceptName       concept atom_codes
  * defines the concept ConceptName in modal context [].
  *
  */
@@ -8677,7 +8675,7 @@ defprimconcept(Left) :-
 /***********************************************************************
  *
  * defprimconcept(+Environment,+Left)
- * Parameter: ConceptName       concept name
+ * Parameter: ConceptName       concept atom_codes
  * defines the concept ConceptName in modal context [].
  *
  */
@@ -8701,7 +8699,7 @@ defprimconcept(Left,Right) :-
  *
  * defprimconcept(+Environment,+MS,+Left)
  * Parameter: ModalSequence     modal context
- *            ConceptName       concept name
+ *            ConceptName       concept atom_codes
  * defines the concept ConceptName in modal context ModalSequence.
  *
  */
@@ -8725,7 +8723,7 @@ defprimconcept(MS,Left,Right) :-
 /***********************************************************************
  *
  * defprimconcept(+Environment,+Left,+Right)
- * Parameter: ConceptName       concept name
+ * Parameter: ConceptName       concept atom_codes
  *            ConceptTerm       concept term
  * defines the concept ConceptName to be a subsetSpecial of the concept
  * ConceptTerm in modal context [].
@@ -8740,7 +8738,7 @@ defprimconcept(EnvName,Left,Right) :-
  *
  * defprimconcept(+Environment,+ModalSequence,+Left,+Right)
  * Parameter: ModalSequence     modal context
- *            ConceptName       concept name
+ *            ConceptName       concept atom_codes
  *            ConceptTerm       concept term
  * defines the concept ConceptName to be a subsetSpecial of the concept
  * ConceptTerm in modal context ModalSequence.
@@ -8750,8 +8748,8 @@ defprimconcept(EnvName,Left,Right) :-
 defprimconcept(EnvName,MS,L,R) :-
 	environment(EnvName,Env,_),
 %	nonvar(MS),
-	cnf(L,Left),
-	cnf(R,Right),
+	convertToLogicalCNF(L,Left),
+	convertToLogicalCNF(R,Right),
 	assertNames(Env,MS,Left,concept),
 	assertNames(Env,MS,Right,concept),
 	assertzRE(axiom(Env,MS,defprimconcept(MS,L,R))),
@@ -8762,9 +8760,9 @@ defprimconcept(EnvName,MS,L,R) :-
 	assertConceptLInR(Env,rn(AxiomName1,Origin,lInR),MS,L1,R1),
 	defList(Env,MS,DL,_),
 	negate(R1,NotRight1),
-	cnf(NotRight1,NotRight),
+	convertToLogicalCNF(NotRight1,NotRight),
 	negate(L1,NotLeft1),
-	cnf(NotLeft1,NotLeft),
+	convertToLogicalCNF(NotLeft1,NotLeft),
 	notClauseL(Env,MS,NotRight,NotLeft).
 
 
@@ -8814,7 +8812,7 @@ notClausesLR(Env,MS,Left,Right,DL2) :-
 /***********************************************************************
  *
  * defconcept(+ConceptName,+ConceptTerm)
- * Parameter: ConceptName       concept name
+ * Parameter: ConceptName       concept atom_codes
  *            ConceptTerm       concept term
  * defines the concept ConceptName to be equivalent to the concept
  * ConceptTerm in modal context [].
@@ -8842,7 +8840,7 @@ defconcept(EnvName,ConceptName,ConceptTerm) :-
  *
  * defconcept(+ModalSequence,+ConceptName,+ConceptTerm)
  * Parameter: ModalSequence     modal context
- *            ConceptName       concept name
+ *            ConceptName       concept atom_codes
  *            ConceptTerm       concept term
  * defines the concept ConceptName to be equivalent to the concept
  * ConceptTerm in modal context ModalSequence.
@@ -8852,8 +8850,8 @@ defconcept(EnvName,ConceptName,ConceptTerm) :-
 defconcept(EnvName,MS,CT1,CT2) :-
 	nonvar(EnvName),
 	environment(EnvName,Env,_),
-	cnf(CT1,ConceptTerm1),
-	cnf(CT2,ConceptTerm2),
+	convertToLogicalCNF(CT1,ConceptTerm1),
+	convertToLogicalCNF(CT2,ConceptTerm2),
 	assertNames(Env,MS,ConceptTerm1,concept),
 	assertNames(Env,MS,ConceptTerm2,concept),
 	assertzRE(axiom(Env,MS,defconcept(MS,CT1,CT2))),
@@ -8881,9 +8879,9 @@ defList(Env,MS,[(Origin,concept,ConceptName,CTO,ConceptTerm)|DL],
 	assertConceptRInL(Env,rn(AxiomName,Origin,rInL),MS,ConceptName,ConceptTerm),
 	assertConceptLInR(Env,rn(AxiomName,Origin,lInR),MS,ConceptName,ConceptTerm),
 	negate(ConceptTerm,NotRight1),
-	cnf(NotRight1,NotRight),
+	convertToLogicalCNF(NotRight1,NotRight),
 	negate(ConceptName,NotLeft1),
-	cnf(NotLeft1,NotLeft),
+	convertToLogicalCNF(NotLeft1,NotLeft),
 	notClausesLR(Env,MS,NotRight,NotLeft,NeededDL1),
 	defList(Env,MS,DL,NeededDL2),
 	append(NeededDL1,NeededDL2,NeededDL3).
@@ -8906,7 +8904,7 @@ undefList(EnvName,MS,[(Origin,role,RN,RTO,RT)|RDL]) :-
  *
  * assert_ind(+ModalSequence,+ABoxElement,+ConceptTerm)
  * Parameter: ModalSequence     modal context
- *            ABoxElement       name of ABox element
+ *            ABoxElement       atom_codes of ABox element
  *            ConceptTerm       concept term
  * adds ABoxElement to Concept in modal context ModalSequence.
  *
@@ -8951,9 +8949,9 @@ assert_ind(EnvName,MS,X,C) :-
  *
  * assert_ind(+ModalSequence,+ABoxElement1,+ABoxElement2,+Role)
  * Parameter: ModalSequence     modal context
- *            ABoxElement1      name of ABox element
- *            ABoxElement2      name of ABox element
- *            Role              role name
+ *            ABoxElement1      atom_codes of ABox element
+ *            ABoxElement2      atom_codes of ABox element
+ *            Role              role atom_codes
  * adds the pair (ABoxElement1,ABoxElement2) to Role in modal context
  * ModalSequence.
  *
@@ -8998,7 +8996,7 @@ assert_ind(EnvName,MS,X,Y,RT) :-
 /***********************************************************************
  *
  * defprimrole(+RN)
- * Parameter: RN        role name
+ * Parameter: RN        role atom_codes
  * defines the role RN in modal context [].
  * 
  */
@@ -9020,7 +9018,7 @@ defprimrole(EnvName,Role) :-
  *
  * defprimrole(+MS,+RN)
  * Parameter: MS        modal context
- *            RN        role name
+ *            RN        role atom_codes
  * defines the role RN in modal context MS.
  * 
  */
@@ -9041,7 +9039,7 @@ defprimrole(R1,R2) :-
 /***********************************************************************
  *
  * defprimrole(+RN,+Role)
- * Parameter: RN        role name
+ * Parameter: RN        role atom_codes
  *            Role      role term
  * defines the role RN to be a subsetSpecial of the role Role in modal
  * context [].
@@ -9065,7 +9063,7 @@ defprimrole(MS,RN,Role) :-
  *
  * defprimrole(+MS,+RN,+Role)
  * Parameter: MS        modal context
- *            RN        role name
+ *            RN        role atom_codes
  *            Role      role term
  * defines the role RN to be a subsetSpecial of the role Role in modal
  * context MS.
@@ -9087,7 +9085,7 @@ defprimrole(EnvName,MS,RN,Role) :-
 /***********************************************************************
  *
  * defrole(+RN,+Role)
- * Parameter: RN        role name
+ * Parameter: RN        role atom_codes
  *            Role      role term
  * defines role RN to be equivalent to the role Role in modal context
  * [].
@@ -9112,7 +9110,7 @@ defrole(EnvName,RN,Role) :-
  *
  * defrole(+MS,+RN,+Role)
  * Parameter: MS        modal context
- *            RN        role name
+ *            RN        role atom_codes
  *            Role      role term
  * defines the role RN to be equivalent to the role Role in modal
  * context MS.
@@ -9131,7 +9129,7 @@ defrole(EnvName,MS,RN,Role) :-
 /**********************************************************************
  *
  * defdisjoint(EnvName,MS,ConceptList)
- * Parameter: EnvName         environment name
+ * Parameter: EnvName         environment atom_codes
  *            MS              modal context
  *            ConceptList     list of concept names
  *
@@ -9200,9 +9198,9 @@ defclosed(EnvName,MS,X,Y,R) :-
  * Arguments: Type   'concept' or 'role'
  *            MS     modal context
  *            T      concept or role term
- * asserts for each concept name CN in T a fact
+ * asserts for each concept atom_codes CN in T a fact
  *            conceptName(CN)
- * and for each role name RN in T a fact
+ * and for each role atom_codes RN in T a fact
  *            roleName(RN)
  * These facts are used to distinguish concept and role names introduced 
  * by the user from those introduced by the system.
@@ -9215,28 +9213,28 @@ assertNames(Env,MS,CT,Type) :-
 	hop_map(assertName,[Env,MS,W1,G1],CNL1,_).
 
 assertName((concept,CN1),alreadyAsserted,Env,MS,W1,G1) :-
-% If the concept name is already asserted with identical modal sequence, 
+% If the concept atom_codes is already asserted with identical modal sequence, 
 % then we do nothing.
 	clause(conceptName(Env,MS,_,CN1),_),
 	!.
 assertName((role,CN1),alreadyAsserted,Env,MS,W1,G1) :-
-% If the role name is already asserted with identical modal sequence, 
+% If the role atom_codes is already asserted with identical modal sequence, 
 % then we do nothing.
 	clause(roleName(Env,MS,_,CN1),_),
 	!.
 assertName((concept,CN1),newAsserted,Env,MS,W1,G1) :-
-% Otherwise we assertzRE the concept name
-% Remember: The fact that the concept name is not already asserted with
+% Otherwise we assertzRE the concept atom_codes
+% Remember: The fact that the concept atom_codes is not already asserted with
 % identical modal sequence does not mean that we are not already able to 
-% deduce that the concept name is present in the modal context corresponding
+% deduce that the concept atom_codes is present in the modal context corresponding
 % to the modal sequence.
 	assertzRE((conceptName(Env,MS,W1,CN1) :- G1)),
 	!.
 assertName((role,CN1),newAsserted,Env,MS,W1,G1) :-
-% Otherwise we assertzRE the role name
-% Remember: The fact that the role name is not already asserted with
+% Otherwise we assertzRE the role atom_codes
+% Remember: The fact that the role atom_codes is not already asserted with
 % identical modal sequence does not mean that we are not already able to 
-% deduce that the role name is present in the modal context corresponding
+% deduce that the role atom_codes is present in the modal context corresponding
 % to the modal sequence.
 	assertzRE((roleName(Env,MS,W1,CN1) :- G1)),
 	!.
@@ -10021,7 +10019,7 @@ modalAxioms(EnvName,MS,k,MOp,A1) :-
 	assertMA(A1,
                  rel(Env,C,m(MOp,A),U,app(_FF:m(MOp,A),U)), 
 		 (not(not(world(Env,m(MOp,A),U,V)))), 
-		 (normal(Env,U), Goal)),
+		 (normalWorld(Env,U), Goal)),
 	assertaRE(modalAxioms(Env,MS,user,k,A1,MOp,A)),
 	!.
 modalAxioms(EnvName,MS,kd45,MOp,A1) :-
@@ -10033,7 +10031,7 @@ modalAxioms(EnvName,MS,kd45,MOp,A1) :-
 	assertMA(A1,
 	         rel(Env,C,m(MOp,A),U,app(_FF:m(MOp,A),V)), 
 		 (not(not(world(Env,m(MOp,A),U,V)))), 
-		 (normal(Env,U), Goal)),
+		 (normalWorld(Env,U), Goal)),
 	assertaRE(modalAxioms(Env,MS,user,kd45,A1,MOp,A)),
 	!.
 modalAxioms(EnvName,MS,kd4e,MOp,A) :-
@@ -10086,7 +10084,7 @@ modalAxioms(EnvName,MS,kt,MOp,A1) :-
 %% 	assertMA(A1,
 %%                  rel(Env,C,m(MOp,A),U,app(_FF:m(MOp,A),U)), 
 %% 		 (not(not(world(Env,m(MOp,A),W1,U)))),
-%% 		 (normal(Env,U), Goal)),
+%% 		 (normalWorld(Env,U), Goal)),
 %% 	assertaRE(modalAxioms(Env,MS,user,k,A1,MOp,A)),
 %% 	!.
 %% modalAxioms(EnvName,MS,kd45,MOp,A1) :-
@@ -10104,7 +10102,7 @@ modalAxioms(EnvName,MS,kt,MOp,A1) :-
 %% %	assertMA(A1,
 %% %                 rel(Env,C,m(MOp,A),U,app(_FF:m(MOp,A),U)), 
 %% %		 (not(not(world(Env,m(MOp,A),U,V)))), 
-%% %		 (normal(Env,U), Goal)),
+%% %		 (normalWorld(Env,U), Goal)),
 %% 	assertaRE(modalAxioms(Env,MS,user,kd45,A1,MOp,A)),
 %% 	!.
 %% modalAxioms(EnvName,MS,kd4e,MOp,A) :-
@@ -10162,12 +10160,12 @@ modalAxioms(EnvName,MS,kt,MOp,A1) :-
 
 /**********************************************************************
  *
- * normal(+EnvName,+World)
- * succeeds if World is normal, i.e. has a successor.
+ * normalWorld(+EnvName,+World)
+ * succeeds if World is normalWorld, i.e. has a successor.
  *
  */
 
-normal(_,_).
+normalWorld(_,_).
 
 /**********************************************************************
  *
@@ -10218,7 +10216,7 @@ setofOrNil(A,B,C) :-
 /***********************************************************************
  *
  * setMooOption(+Option,+Set)
- * set isMooOption Option to value Set.
+ * set isMooOption Option to valueOfCounter Set.
  *
  */
 
@@ -10229,7 +10227,7 @@ setMooOption(Option,Set) :-
 /**********************************************************************
  *
  * ifMooOption(+Option,+Set,+Goal)
- * executes Goal if the current value of Option is Set otherwise
+ * executes Goal if the current valueOfCounter of Option is Set otherwise
  * the predicate suceeds.
  *
  */
@@ -10947,8 +10945,8 @@ modClReplaceVarWithAtom([_-New|T],C,M) :-
 
 genconstant(M,V,N) :-
 	N is M+1,
-	name(M,N1),
-	name(V,[0's|N1]).
+	atom_codes(M,N1),
+	atom_codes(V,[0's|N1]).
 
 modRemoveTaut([],[]) :-
 	!.
@@ -12327,8 +12325,8 @@ cl([in([],determiner,f35(_M2))],[in([],thing,_M2)],c149),
 cl([in([],deitic_mpd,_M2,f36(_M2))],[in([],thing,_M2)],c150),
 cl([in([],pointing,f36(_M2))],[in([],thing,_M2)],c151),
 cl([in([],named,_M2,f37(_M2))],[in([],thing,_M2)],c152),
-cl([in([],name,f37(_M2))],[in([],thing,_M2)],c153),
-cl([in([],thing,_M2)],[in([],property_filler,_M2),in([],det,_M2,_N2),in([],determiner,_N2),in([],deitic_mpd,_M2,_O2),in([],pointing,_O2),in([],named,_M2,_P2),in([],name,_P2)],c154),
+cl([in([],atom_codes,f37(_M2))],[in([],thing,_M2)],c153),
+cl([in([],thing,_M2)],[in([],property_filler,_M2),in([],det,_M2,_N2),in([],determiner,_N2),in([],deitic_mpd,_M2,_O2),in([],pointing,_O2),in([],named,_M2,_P2),in([],atom_codes,_P2)],c154),
 cl([in([],thing,_Q2)],[in([],abstract_thing,_Q2)],c155),
 cl([in([],truth_mod,_Q2,f38(_Q2))],[in([],abstract_thing,_Q2)],c156),
 cl([in([],top,f38(_Q2))],[in([],abstract_thing,_Q2)],c157),
@@ -12585,8 +12583,8 @@ cl([in([],concept41,_D8)],[in([],state,_D8)],c407),
 cl([in([],predicate,_E8)],[in([],state,_E8)],c408),
 cl([in([],time,_E8,f43(_E8))],[in([],state,_E8)],c409),
 cl([in([],period,f43(_E8))],[in([],state,_E8)],c410),
-cl([in([],abstract_thing,_F8)],[in([],name,_F8)],c411),
-cl([in([],abstract_thing,_G8)],[in([],name,_G8)],c412),
+cl([in([],abstract_thing,_F8)],[in([],atom_codes,_F8)],c411),
+cl([in([],abstract_thing,_G8)],[in([],atom_codes,_G8)],c412),
 cl([in([],adjective_property,_H8)],[in([],truth_value,_H8)],c413),
 cl([in([],adjective_property,_I8)],[in([],truth_value,_I8)],c414),
 cl([in([],property_filler,_J8)],[in([],adjective_property,_J8)],c415),
@@ -12691,7 +12689,7 @@ cl([in([],town,_C)],[in([],voelklingen,_C)],c005)]).
  * getDirectFatherRoles(+EnvName,+MS,+Role,-RL)
  * Arguments: EnvName     environment identifier
  *            MS          modal context
- *            Role        role name
+ *            Role        role atom_codes
  *            RL          list of role names
  * RL is the list of all role names which are direct father roles
  * of Role.
@@ -12708,7 +12706,7 @@ getDirectFatherRoles(EnvName,MS,Role,RL) :-
  * getAllFatherRoles(+EnvName,+MS,+Role,-RL)
  * Arguments: EnvName     environment identifier
  *            MS          modal context
- *            Role        role name
+ *            Role        role atom_codes
  *            RL          list of role names
  * RL is the list of all role names which are father roles of
  * Role
@@ -12725,7 +12723,7 @@ getAllFatherRoles(EnvName,MS,Role,RL) :-
  * getDirectSonRoles(+EnvName,+MS,+Role,-RL)
  * Arguments: EnvName     environment identifier
  *            MS          modal context
- *            Role        role name
+ *            Role        role atom_codes
  *            RL          list of role names
  * RL is the list of all role names which are direct father roles
  * of Role
@@ -12742,7 +12740,7 @@ getDirectSonRoles(EnvName,MS,Role,RL) :-
  * getAllSonRoles(+EnvName,+MS,+Role,-RL)
  * Arguments: EnvName     environment identifier
  *            MS          modal context
- *            Role        role name
+ *            Role        role atom_codes
  *            RL          list of role names
  * RL is the list of all role names which are father roles of 
  * Role
@@ -12772,9 +12770,9 @@ getRoles(EnvName,MS,['top'|RL]) :-
  * testDirectFatherRole(+EnvName,+MS,+Role1,+Role2,-Role)
  * Arguments: EnvName     environment identifier
  *            MS          modal context
- *            Role1       role name
- *            Role2       role name
- *            Role        role name
+ *            Role1       role atom_codes
+ *            Role2       role atom_codes
+ *            Role        role atom_codes
  * Role is Role1 iff Role1 is a direct father role of Role2
  * or
  * Role is Role2 iff Role2 is a direct father role of Role1
@@ -12793,9 +12791,9 @@ testDirectFatherRole(EnvName,MS,Role1,Role2,Role) :-
  * testDirectSonRole(+EnvName,+MS,+Role1,+Role2,-Role)
  * Arguments: EnvName     environment identifier
  *            MS          modal context
- *            Role1       role name
- *            Role2       role name
- *            Role        role name
+ *            Role1       role atom_codes
+ *            Role2       role atom_codes
+ *            Role        role atom_codes
  * Role is Role1 iff Role1 is a direct subrole of Role2
  * or
  * Role is Role2 iff Role2 is a direct subrole of Role1
@@ -12814,9 +12812,9 @@ testDirectSonRole(EnvName,MS,Role1,Role2,Role) :-
  * testFatherRole(+EnvName,+MS,+Role1,+Role2,-Role)
  * Arguments: EnvName     environment identifier
  *            MS          modal context
- *            Role1       role name
- *            Role2       role name
- *            Role        role name
+ *            Role1       role atom_codes
+ *            Role2       role atom_codes
+ *            Role        role atom_codes
  * Role is Role1 iff Role1 is a direct father role of Role2
  * or
  * Role is Role2 iff Role2 is a direct father role of Role1
@@ -12835,9 +12833,9 @@ testFatherRole(EnvName,MS,Role1,Role2,Role) :-
  * testSonRole(+EnvName,+MS,+Role1,+Role2,-Role)
  * Arguments: EnvName     environment identifier
  *            MS          modal context
- *            Role1       role name
- *            Role2       role name
- *            Role        role name
+ *            Role1       role atom_codes
+ *            Role2       role atom_codes
+ *            Role        role atom_codes
  * Role is Role1 iff Role1 is a direct father role of Role2
  * or
  * Role is Role2 iff Role2 is a direct father role of Role1
@@ -13375,13 +13373,13 @@ find_Def_concept(Env,MS,Concept,List_of_Concepts) :-
 find_Def_concept1(Env,MS,Concept,CN) :-
 	conceptEqualSets(Env,_user,MS,CN,CT,AX),
 	atom(CN),
-	not(name(CN,[99,111,110,99,101,112,116|_])),	
+	not(atom_codes(CN,[99,111,110,99,101,112,116|_])),	
 	collect(CT,Liste),
 	member(Concept,Liste).
 find_Def_concept1(Env,MS,Concept,CN) :-
 	conceptSubsets(Env,_user,MS,CN,CT,AX),
 	atom(CN),
-	not(name(CN,[99,111,110,99,101,112,116|_])),
+	not(atom_codes(CN,[99,111,110,99,101,112,116|_])),
 	collect(CT,Liste),
 	member(Concept,Liste).
 find_Def_role(MS,Role,List_of_Roles) :-
@@ -13394,13 +13392,13 @@ find_Def_role(Env,MS,Role,List_of_Roles) :-
 find_Def_role1(Env,MS,Role,CN) :-
 	roleEqualSets(Env,_user,MS,CN,CT,AX),
 	atom(CN),
-	not(name(CN,[99,111,110,99,101,112,116|_])),	
+	not(atom_codes(CN,[99,111,110,99,101,112,116|_])),	
 	collect(CT,Liste),
 	member(Role,Liste).
 find_Def_role1(Env,MS,Role,CN) :-
 	roleSubsets(Env,_user,MS,CN,CT,AX),
 	atom(CN),
-	not(name(CN,[99,111,110,99,101,112,116|_])),
+	not(atom_codes(CN,[99,111,110,99,101,112,116|_])),
 	collect(CT,Liste),
 	member(Role,Liste).
 /****************************************************************************/
@@ -13873,7 +13871,7 @@ sb_defconcept(EnvName,MS,C1,supers(L),[]) :-
 /*---------------------------------------------------------------------------
  * sb_primelemrole(RName1,domain-range(CName1,CName2,CNameDef))
  * definiert eine neue generelle Rolle RName1 mit CName1 als domain, CName2 
- * als range und CNameDef als "default value restriction" in modal context [].
+ * als range und CNameDef als "default valueOfCounter restriction" in modal context [].
  *------------------------------------------*/
 
 
@@ -13884,7 +13882,7 @@ sb_primelemrole(RName1, 'domain-range'(CName1,CName2,CNameDef)):-
 /*---------------------------------------------------------------------------
  * sb_primelemrole(X,RName1,domain-range(CName1,CName2,CNameDef))
  * definiert eine neue generelle Rolle RName1 mit CName1 als domain, CName2 
- * als range und CNameDef als "default value restriction" in modal context []
+ * als range und CNameDef als "default valueOfCounter restriction" in modal context []
  * und X=environment bzw. in modal context X=MS und current environment.
  *------------------------------------------*/
 
@@ -13900,7 +13898,7 @@ sb_primelemrole(X,RName1, 'domain-range'(CName1,CName2,CNameDef)):-
 /*---------------------------------------------------------------------------
  * sb_primelemrole(EnvName,MS,RName1,domain-range(CName1,CName2,CNameDef))
  * definiert eine neue generelle Rolle RName1 mit CName1 als domain, CName2 
- * als range und CNameDef als "default value restriction" in modal context MS 
+ * als range und CNameDef als "default valueOfCounter restriction" in modal context MS 
  * und environment EnvName.
  *------------------------------------------*/
 
@@ -14298,7 +14296,7 @@ sb_ask(EnvName,MS,(irole(R,X,Y))) :-
 % sb_ask(EnvName,MS,(allRoles(+CName,-Info)))
 % Arguments: Cname ConceptName
 %	     Info is a list consisting of lists with elements:
-%               Rnames role-name
+%               Rnames role-atom_codes
 %	        Cnames domain 
 % 	        Min    Minimalnr. der role
 %              	Max    Maximalnr. der role
@@ -14325,7 +14323,7 @@ sb_ask(EnvName,MS,(allRoles(RName,CName,CNameRan,[RName,CName,CNameRan]))) :-
 % sb_fact(EnvName,MS,(all_roles(+CName,-Info)))
 % Arguments: Cname ConceptName
 %	     Info is a list consisting of lists with elements:
-%               Rnames role-name
+%               Rnames role-atom_codes
 %	        Cnames domain 
 % 	        Min    Minimalnr. der role
 %              	Max    Maximalnr. der role
@@ -15101,7 +15099,7 @@ assertConceptLInR(Env,rn(AxiomName,O,Orientation),MS,CN,all(R,D)) :-
 	assertaRE((InHead1 :- (checkCallStack(CALLS,Mark1), (call(G1), (EqLiteral, Body))))),
 	gensym(rule,RuleName2),
 	ruleName(AxiomName,RuleName2,O,Orientation,RN2),
-	convertInConsequence(Env,pr(3),RN2,MS,W1,not(normal(R)),X,
+	convertInConsequence(Env,pr(3),RN2,MS,W1,not(normalWorld(R)),X,
 			     HYPS,AB,CALLS,PT2,InHead2),
 	convertInAntecedent(Env,rn(AxiomName,_AnySource1,Orientation),
                             bodyMC(W1),headMC(W1),not(D),aaa,HYPS,AB,CALLS,PT1,Body2),
@@ -15132,7 +15130,7 @@ assertConceptLInR(Env,rn(AxiomName,O,Orientation),MS,CN,some(R,D)) :-
 	assertaRE((InHead1 :- (checkCallStack(CALLS,Mark1), (call(G1), (EqLiteral, Body))))),
 	gensym(rule,RuleName2),
 	ruleName(AxiomName,RuleName2,system,Orientation,RN2),
-	convertInConsequence(Env,pr(3),RN2,MS,W1,normal(R),X,
+	convertInConsequence(Env,pr(3),RN2,MS,W1,normalWorld(R),X,
 			     HYPS,AB,CALLS,PT2,InHead2),
 	constructMLMark(InHead2,Mark2),
 	assertaRE((InHead2 :- checkCallStack(CALLS,Mark2), (call(G1), Body))),
@@ -15411,7 +15409,7 @@ convertInAntecedent(Env,rn(AX,S1,_O1),MC1,MC2,
 	% construct equational literal
 	constructEqCall(Env,rn(AX,_RN1,_S2,_O2),MC1,MC2,Y,SF,R,X,HYPS,AB,CALLS,PT2,EqLiteral),
 	convertInAntecedent(Env,rn(AX,S1,_O3),MC1,MC2,D,Y,HYPS,AB,CALLS,PT1,Body),
-	constructMLCall(Env,rn(AX,_RN4,_S4,_O4),MC1,MC2,not(normal(R)),X,HYPS,AB,CALLS,PT3,InHead2),
+	constructMLCall(Env,rn(AX,_RN4,_S4,_O4),MC1,MC2,not(normalWorld(R)),X,HYPS,AB,CALLS,PT3,InHead2),
 	MC1 = bodyMC(W1),
 	C1 = closed(Env,MS,X,_,R),
 	C2 = collectAllFillers(Env,W1,R,X,HYPS,D,CALLS,S),
@@ -15780,7 +15778,7 @@ assertRoleLInRRestr4(Env,MS,R1,restr(R2,_C),R3,restr(R2,_CNF),AN1) :-
 	C2 = solveConstraint(Env,W1,(card,app((FF1:R2),X),'=<',N2),_,hyp(HYPS),ab(AB),call([Mark2|CALLS]),PT2),
 	constructSolveConMark(rn(AN1,RN,_S3,_O3),W1,FF2,R3,X,'>=',N3,HYPS,AB,CALLS,Mark3),
 	C3 = solveConstraint(Env,W1,(card,app((FF2:R3),X),'>=',N3),_,hyp(HYPS),ab(AB),call([Mark3|CALLS]),PT3),
-	assertaRE((C1 :- (checkCallStack(CALLS,Mark1), (call(G1), (C2, (C3, (subtractRestrictions(N2,N3,M), comparison('=<',M,N1)))))))),
+	assertaRE((C1 :- (checkCallStack(CALLS,Mark1), (call(G1), (C2, (C3, (subtractRestrictions(N2,N3,M), comparisonForRestriction('=<',M,N1)))))))),
 	!.
 
 
@@ -15934,9 +15932,9 @@ assertRoleRInL(Env,MS,R1,R2,AN) :-
  *
  * getComplementRole(+MS,restr(+R2,C),-R3,restr(+R2,-CNF))
  * CNF is the normalform of not(C).
- * If there is already a role name R for restr(R2,CNF) then R3
+ * If there is already a role atom_codes R for restr(R2,CNF) then R3
  * will be instantiated with R.
- * If there is no role name for restr(R2,CNF) then a role name R
+ * If there is no role atom_codes for restr(R2,CNF) then a role atom_codes R
  * is generated, clauses for R will be provided, and R3 will be
  * instantiated with R.
  *
@@ -15944,13 +15942,13 @@ assertRoleRInL(Env,MS,R1,R2,AN) :-
  
 getComplementRole(Env,MS,_R1,restr(R2,C),R3,restr(R2,CNF)) :-
 	negate(C,CN),
-	cnf(CN,CNF),
+	convertToLogicalCNF(CN,CNF),
 	roleEqualSets(Env,system,MS,R3,restr(R2,CNF),_AX),
 	!.
 getComplementRole(Env,MS,_R1,restr(R2,C),R3,restr(R2,CNF)) :-
 	gensym(role,R3),
 	negate(C,CN),
-	cnf(CN,CNF),
+	convertToLogicalCNF(CN,CNF),
 	gensym(axiom,AN),
 	assertaRE(roleEqualSets(Env,system,MS,R3,restr(R2,CNF),AN)),
 	assertRoleLInRRestr1(Env,MS,R3,restr(R2,CNF),AN),
@@ -15995,14 +15993,14 @@ assertRoleRInLRestr2(Env,MS,R1,restr(R2,_C),R3,restr(R2,_CNF),AN) :-
 	D2 = solveConstraint(Env,W1,(card,app((_FF3:R2),X),'>=',N2),_,hyp(HYPS),ab(AB),call([Mark2|CALLS]),PT2),
 	constructSolveConMark(rn(AN,RN,_S3,_O3),W1,_FF4,R3,X,'=<',_N3,HYPS,AB,CALLS,Mark3),
 	D3 = solveConstraint(Env,W1,(card,app((_FF5:R3),X),'=<',N3),_,hyp(HYPS),ab(AB),call([Mark3|CALLS]),PT3),
-	assertaRE((D1 :- (checkCallStack(CALLS,Mark1), (call(G1), (D2, (D3, (subtractRestrictions(N2,N3,M), comparison('>=',M,N1)))))))),
+	assertaRE((D1 :- (checkCallStack(CALLS,Mark1), (call(G1), (D2, (D3, (subtractRestrictions(N2,N3,M), comparisonForRestriction('>=',M,N1)))))))),
 	!.
 	
 	
 assertRoleRInLRestr3(Env,MS,R1,restr(R2,C),AN) :-
 	convertMS(positive,Env,[[],true],MS,[],[W1,G1],_),
 	negate(C,CN),
-	cnf(CN,CNF),
+	convertToLogicalCNF(CN,CNF),
 	gensym(rule,RN),
 	typeOfDefinition(Env,W1,CNF,S),
 	constructMLHead(Env,rn(AN,RN,S,user),
@@ -16037,7 +16035,7 @@ assertRoleRInLRestr4(Env,MS,R1,restr(R2,_C),R3,restr(R2,_CNF),AN) :-
 	                 HYPS,AB,CALLS,Mark3),
 	D3 = solveConstraint(Env,W1,(card,app((_FF5:R3),X),Rel,N3),_,
 	                     hyp(HYPS),ab(AB),call([Mark3|CALLS]),PT3),
-	assertaRE((D2 :- (checkCallStack(CALLS,Mark2), (call(G1), (D1, (D3, (addRestrictions(N1,N3,M), comparison(Rel,M,N2)))))))),
+	assertaRE((D2 :- (checkCallStack(CALLS,Mark2), (call(G1), (D1, (D3, (addRestrictions(N1,N3,M), comparisonForRestriction(Rel,M,N2)))))))),
 	!.
 	
 
@@ -16431,7 +16429,7 @@ verifySolution(TestSol,ExpectedSol) :-
  *                            T      is either 'concept' or 'role'
  *                            T1     is a concept term or role term
  *                            T2     is a concept term or role term
- *            CN        concept name
+ *            CN        concept atom_codes
  *            List2     List of triples (Origin,CN,CT)
  * unfolds concept terms or role terms so that in List2 for all tuples
  * (O,T,CN,all(R1,C1)), (O,T,CN,and([C1,...,Cn])), 
@@ -16704,7 +16702,7 @@ initialize :-
 	retractallSpecial(_,sub3/2),
 	retractallSpecial(_,nsub3/2),
 	retractallSpecial(_,succ3/2),
-	retractallSpecial(_,value/2),
+	retractallSpecial(_,valueOfCounter/2),
 	retractallSpecial(_,query/6),
 	assertaRE(environment(initial,env(e0),'Initial Environment')),
 	assertaRE(currentEnvironment(env(e0))),
@@ -16936,11 +16934,11 @@ deduceMOTEL(EnvName,MS,roleConstraints(X,R1,['>=',N1,'=<',N2,L,N3]),Exp) :-
 
 %----------------------------------------------------------------------
 % defineEquivalentRolename(+EnvName,+MS,+RoleTerm,-RoleName)
-% Arguments: EnvName   environment name
+% Arguments: EnvName   environment atom_codes
 %            MS        modal context (in list form)
 %            RoleTerm  role term (possibly non-atomic)
-%            RoleName  role name
-% if RoleTerm is either a variable or a role name, then RoleName is equal to
+%            RoleName  role atom_codes
+% if RoleTerm is either a variable or a role atom_codes, then RoleName is equal to
 % RoleTerm. Otherwise, a role RoleName equivalent to RoleTerm is defined.
 
 defineEquivalentRolename(_,_,R,_,R) :-
@@ -16959,11 +16957,11 @@ defineEquivalentRolename(EnvName,MS,R,_,R1) :-
 
 %----------------------------------------------------------------------
 % defineEquivalentConceptname(+EnvName,+MS,+RoleTerm,-RoleName)
-% Arguments: EnvName   environment name
+% Arguments: EnvName   environment atom_codes
 %            MS        modal context (in list form)
 %            ConceptTerm  role term (possibly non-atomic)
-%            ConceptName  role name
-% if ConceptTerm is either a variable or a concept name, then ConceptName is 
+%            ConceptName  role atom_codes
+% if ConceptTerm is either a variable or a concept atom_codes, then ConceptName is 
 % equal to ConceptTerm. Otherwise, a role ConceptName equivalent to 
 % ConceptTerm is defined.
 
@@ -16993,10 +16991,10 @@ removeDefinitionOfConceptname(C) :-
 
 %----------------------------------------------------------------------
 % removeDefinitionOfRolename(+EnvName,+MS,+RoleName)
-% Arguments: EnvName   environment name
+% Arguments: EnvName   environment atom_codes
 %            MS        modal context (in list form)
 %            RoleTerm  role term (possibly non-atomic)
-%            RoleName  role name
+%            RoleName  role atom_codes
 % removes the definition of RoleName.
 
 removeDefinitionOfRolename(R) :-
@@ -17532,7 +17530,7 @@ allowedAnswerConcept(Env,C) :-
 	not(D = not(E)),
 	!,
 	allowedAnswerConcept(Env,D).
-allowedAnswerConcept(_,normal(_)) :-
+allowedAnswerConcept(_,normalWorld(_)) :-
 	!,
 	fail.
 allowedAnswerConcept(_,not(normat(_))) :-
