@@ -10,7 +10,7 @@
 :- use_module(library(shlib)).        
 :- use_module(library(url)).        
 :- use_module(library(quintus)).        
-:-ensure_loaded(alarm).
+:-ensure_loaded(moo_alarm).
 
       
 :-use_module(library(threadutil)).        
