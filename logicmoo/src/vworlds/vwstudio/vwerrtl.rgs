@@ -1,0 +1,24 @@
+HKCR
+{
+	VWSTUDIO.VWErrorTool.1 = s 'VWErrorTool Class'
+	{
+		CLSID = s '{77B43660-792E-11D0-89AB-00A0C9054129}'
+	}
+	VWSTUDIO.VWErrorTool = s 'VWErrorTool Class'
+	{
+		CLSID = s '{77B43660-792E-11D0-89AB-00A0C9054129}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {77B43660-792E-11d0-89AB-00A0C9054129} = s 'VWErrorTool Class'
+		{
+			val AppID = s '{3159FDA1-EF7F-11CF-89A9-00A0C9054129}'
+			ProgID = s 'VWSTUDIO.VWErrorTool.1'
+			VersionIndependentProgID = s 'VWSTUDIO.VWErrorTool'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'both'
+			}
+		}
+	}
+}

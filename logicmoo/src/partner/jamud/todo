@@ -1,0 +1,167 @@
+
+ Player contains
+x	Name
+x	Channels (Set)
+	Actions (List or Set?)
+x	GrantedActions (Set, maybe a FlagList)
+x	Flags (FlagList)
+x	Attributes (an Attributes, go figure)
+x	Status (int)
+x	Trust (int)
+x	Info, Title (String and String)
+x	MudObject HOME
+x	MudObject BODY
+x	Connection
+x	Events (jamud.object.event.EventRegister)
+
+
+-  IMudObject contains
+x	Viewable, Named
+	Actions (HashSet?)
+x	GrantedActions
+x	Flags
+x	Attributes
+	Affects (List or Set? Can an affect be applied twice?)
+x	MudObjectContainer INSIDE
+x	MudObjectContainer PARENT
+x	Events (both as an anonymously available EventRegister and as XML)
+
+
+
+
+
+
+-  EventScript
+
+
+
+- Players with multiple characters, single home.
+	player logs in, may use channels, boards, etc. No body connected
+	$ engage <character>
+	find character (the name of the character will be its TID)
+	(load char if necessary, into home)
+	connect player to char
+	$ disengage
+	disconencts player from character (dangerous if not in a safe room)
+	
+
+
+- PlayerManager should contain a DEFAULT IPlayer, which at account creation is
+cloned, modified to fit the new player, set to a new src, and saved.
+
+
+
+- The "new" and "delete" commands to create and delete characters. An attribute of MAX_CHARACTERS can be set for any given player to limit them.
+
+
+
+-  Sections to be a hashmap of Section objects
+	class Section {
+		Name (String "Head", "Leg", etc)
+		Category (String "LARGE_HEAD", "SMALL_HEAD", etc)
+		Item (MudObject)
+	}
+
+	the command "get (foo) from (pouch.sidepocket)" should attempt to find a section named "sidepocket" on an item named "pouch". It should then attempt to locate an object "foo" from the contents of sidepocket, and should place that item in the immidiate actor's inventory (as a child mud object)
+
+
+
+-  Interpreter priorities should be spaced out by default
+	priority 0 is the highest priority, hence is matched FIRST
+
+	all priorities SHOULD BE CONFIGURABLE, but the default should be:
+	standardplayer 20
+	channels 25
+	boards 30
+	standardmudobject 40
+	socials 45
+
+
+
+-  Colour markup
+	%fb	set Foreground color to F, Background to B
+	f is 0 thru F
+	b is 0 thru 8
+
+	^ for reset
+
+	0 black
+	1 red
+	2 green
+	3 yellow
+	4 blue
+	5 magenta
+	6 cyan
+	7 white
+	8 grey
+	9 bright red
+	A bright green
+	B bright yellow
+	C bright blue
+	D bright magenta
+	E bright cyan
+	F bright white
+	
+
+
+
+-  The boot sequence
+1: Jamud.main(String[]) called
+2: Instance of Jamud is created
+3: XMLElements parsed
+	System Messages
+	Player Manager
+	Plugin Manager
+	Job, Race, Gender
+	Root Mud Object
+4: Initialize
+	Plugins started (if marked to do so)
+	Ticker started
+
+
+
+-  plugins
+ com.jamud.commands
+ x	PlayerCommandsPlugin
+	AdminCommands
+	BuildCommands
+ x	MudobjectCommandsPlugin
+ x	SocialsPlugin
+
+ com.jamud.connections
+ x	.StandardServer
+	.SslServer
+	.SshServer
+
+ com.jamud.communications
+ x	.ChannelsPlugin
+	.ThreadedBoardsPlugin
+	.LinearBoardsPlugin
+	.HelpPlugin
+	.NntpServer (Nntp access for ThreadedBoards)
+
+ com.jamud.metromud
+	.MetroMudConnection (connecting to a MetroMudServer)
+	.MetroMudServer (accept incoming MetroMudConnections)
+
+ com.jamud.creation
+ x	.StandardCreation
+
+
+
+
+- move help/posts to a common data system
+	see todo.persist
+
+
+
+- Bean Scripting Framework. How?
+	jamud.object.event.EventScript
+	ixnay on BSF, create a similar wrapper instead. BSF doesn't support all
+the things mobprogs etc require.
+
+
+
+- Data structures
+	see todo.persist
+

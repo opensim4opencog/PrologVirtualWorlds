@@ -1,0 +1,892 @@
+# Microsoft Developer Studio Generated Dependency File, included by vwsyst60.mak
+
+..\Vwcommon\Cathelp.cpp : \
+	"..\Vwcommon\cathelp.h"\
+	
+
+.\dlldatax.c : \
+	".\vwsys_dlldata.c"\
+	
+
+.\StdAfx.cpp : \
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwimpl.cpp"\
+	".\stdafx.h"\
+	
+
+.\vwsystem.cpp : \
+	"..\fastcomm\commlayr.h"\
+	"..\fastcomm\fastobj.h"\
+	"..\fastcomm\stdafx.h"\
+	"..\fastcomm\toolkit\lockfree.h"\
+	"..\fastcomm\toolkit\locks.h"\
+	"..\fastcomm\toolkit\tools.h"\
+	"..\fastcomm\toolkit\workq.h"\
+	"..\module\system\artifact.h"\
+	"..\module\system\avatar.h"\
+	"..\module\system\host.h"\
+	"..\module\system\IWportal.h"\
+	"..\module\system\portal.h"\
+	"..\module\system\room.h"\
+	"..\module\system\statemch.h"\
+	"..\module\system\vwsysexo.h"\
+	"..\module\system\vwthing.h"\
+	"..\module\system\WebPage.h"\
+	"..\property\avprof\profob.h"\
+	"..\property\menuitem\cmenuitm.h"\
+	"..\property\ocxproxy\vwocx.h"\
+	"..\tools\authntic\aobj.h"\
+	"..\tools\authntic\authobj.h"\
+	"..\tools\dirserv\attrib.h"\
+	"..\tools\dirserv\dqueue.h"\
+	"..\tools\dirserv\dserv.h"\
+	"..\tools\inetfile\dlthread.h"\
+	"..\tools\inetfile\inetmgro.h"\
+	"..\tools\vwanim\vwanimob.h"\
+	"..\tools\vwanim\vwanmtob.h"\
+	"..\tools\vwhtml\htmlwnd.h"\
+	"..\tools\vwhtml\vwhelper.h"\
+	"..\tools\vwhtml\vwhtmlob.h"\
+	"..\tools\vwhtml\wbbrowsr.h"\
+	"..\vwadmin\vwadmobj.h"\
+	"..\vwclient\vwcliobj.h"\
+	"..\vwclient\vwcliocx.h"\
+	"..\vwcomm\commobj.h"\
+	"..\Vwcommon\cathelp.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\Scripts.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vbsguids.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwcommon\vwutils.h"\
+	"..\vwobject\comobj.h"\
+	"..\vwobject\connlist.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\methdobj.h"\
+	"..\vwobject\plistobj.h"\
+	"..\vwobject\pmapobj.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwobject\scrptobj.h"\
+	"..\vwobject\thingobj.h"\
+	"..\vwobject\worldobj.h"\
+	"..\vwodb\vwodbobj.h"\
+	"..\vwserver\connserv.h"\
+	"..\vwserver\vwserve.h"\
+	"..\vwserver\wldinfo.h"\
+	"..\vwserver\wldlist.h"\
+	".\dlldatax.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+.\vwsystem.rc : \
+	".\artifact.rgs"\
+	".\authcate.rgs"\
+	".\authshun.rgs"\
+	".\avatar.rgs"\
+	".\avprof.rgs"\
+	".\dlthread.rgs"\
+	".\DServ.rgs"\
+	".\host.rgs"\
+	".\IWportal.rgs"\
+	".\portal.rgs"\
+	".\room.rgs"\
+	".\statemch.rgs"\
+	".\version.h"\
+	".\vwcliocx.rgs"\
+	".\vwsysex.rgs"\
+	".\vwsystem.rc2"\
+	".\vwthing.rgs"\
+	".\WebPage.rgs"\
+	
+
+..\vwobject\collenum.cpp : \
+	"..\vwcommon\propbase.h"\
+	"..\vwobject\collenum.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\comobj.cpp : \
+	"..\Vwcommon\cathelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\comobj.h"\
+	"..\vwobject\connlist.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwobject\thingobj.h"\
+	"..\vwobject\worldobj.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\connlist.cpp : \
+	"..\vwobject\connlist.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\marshbuf.cpp : \
+	"..\vwcomm\commobj.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\marshbuf.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\methdobj.cpp : \
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwobject\methdobj.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\plisthlp.cpp : \
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwobject\plistobj.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\plistobj.cpp : \
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwobject\collenum.h"\
+	"..\vwobject\plistobj.h"\
+	"..\vwobject\propsecu.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\pmaphlp.cpp : \
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\pmapobj.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\pmapobj.cpp : \
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\collenum.h"\
+	"..\vwobject\pmapobj.h"\
+	"..\vwobject\propsecu.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\propsecu.cpp : \
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\connlist.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwobject\thingobj.h"\
+	"..\vwobject\worldobj.h"\
+	".\stdafx.h"\
+	
+
+..\vwcommon\reghelp.cpp : \
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwobject\propsecu.h"\
+	".\stdafx.h"\
+	
+
+..\vwcommon\registry.cpp : \
+	".\stdafx.h"\
+	
+
+..\vwcommon\scripts.cpp : \
+	"..\vwcommon\CompMgr.h"\
+	"..\vwcommon\helpers.h"\
+	"..\vwcommon\Scripts.h"\
+	"..\vwcommon\vbsguids.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\scrptobj.cpp : \
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\Scripts.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\connlist.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwobject\scrptobj.h"\
+	"..\vwobject\thingobj.h"\
+	"..\vwobject\worldobj.h"\
+	".\stdafx.h"\
+	
+
+..\vwcommon\syshelp.cpp : \
+	"..\property\menuitem\cmenuitm.h"\
+	"..\property\ocxproxy\vwocx.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\plistobj.h"\
+	"..\vwobject\pmapobj.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\thinghlp.cpp : \
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwobject\thingobj.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\thingobj.cpp : \
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\connlist.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\methdobj.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwobject\thingobj.h"\
+	"..\vwobject\worldobj.h"\
+	".\stdafx.h"\
+	
+
+..\vwcommon\urlhelp.cpp : \
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\urlhelp.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\vwobject\worldevt.cpp : \
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\connlist.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwobject\thingobj.h"\
+	"..\vwobject\worldobj.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\worldfmt.cpp : \
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwcommon\vwutils.h"\
+	"..\vwobject\connlist.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwobject\thingobj.h"\
+	"..\vwobject\worldobj.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\worldhlp.cpp : \
+	"..\vwcommon\global.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\registry.h"\
+	"..\vwcommon\Scripts.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\urlhelp.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\connlist.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwobject\thingobj.h"\
+	"..\vwobject\worldobj.h"\
+	".\stdafx.h"\
+	".\version.h"\
+	
+
+..\vwobject\worldmar.cpp : \
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\connlist.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwobject\thingobj.h"\
+	"..\vwobject\worldobj.h"\
+	".\stdafx.h"\
+	
+
+..\vwobject\worldobj.cpp : \
+	"..\Vwcommon\cathelp.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\Scripts.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\comobj.h"\
+	"..\vwobject\connlist.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\methdobj.h"\
+	"..\vwobject\plistobj.h"\
+	"..\vwobject\pmapobj.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwobject\scrptobj.h"\
+	"..\vwobject\thingobj.h"\
+	"..\vwobject\worldobj.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\vwclient\vwcliobj.cpp : \
+	"..\vwclient\vwcliobj.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\urlhelp.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwserver\connserv.h"\
+	"..\vwserver\wldinfo.h"\
+	"..\vwserver\wldlist.h"\
+	".\stdafx.h"\
+	
+
+..\Vwclient\vwcliocx.cpp : \
+	"..\vwclient\vwcliocx.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	".\version.h"\
+	
+
+..\vwserver\connserv.cpp : \
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwserver\connserv.h"\
+	".\stdafx.h"\
+	
+
+..\vwserver\queue.cpp : \
+	".\stdafx.h"\
+	
+
+..\vwserver\vwserve.cpp : \
+	"..\fastcomm\commlayr.h"\
+	"..\fastcomm\stdafx.h"\
+	"..\fastcomm\toolkit\lockfree.h"\
+	"..\fastcomm\toolkit\locks.h"\
+	"..\fastcomm\toolkit\tools.h"\
+	"..\fastcomm\toolkit\workq.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\Scripts.h"\
+	"..\vwcommon\urlhelp.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwserver\commsite.h"\
+	"..\vwserver\connserv.h"\
+	"..\vwserver\vwserve.h"\
+	"..\vwserver\wldinfo.h"\
+	"..\vwserver\wldlist.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\vwserver\wldinfo.cpp : \
+	"..\vwcommon\propbase.h"\
+	"..\vwserver\wldinfo.h"\
+	".\stdafx.h"\
+	
+
+..\vwserver\wldlist.cpp : \
+	"..\vwserver\wldinfo.h"\
+	"..\vwserver\wldlist.h"\
+	".\stdafx.h"\
+	
+
+..\vwcomm\commcono.cpp : \
+	"..\vwcomm\commobj.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\stdafx.h"\
+	
+
+..\vwcomm\commfunc.cpp : \
+	"..\vwcomm\commobj.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\marshbuf.h"\
+	".\stdafx.h"\
+	
+
+..\vwcomm\commmsgo.cpp : \
+	"..\vwcomm\commobj.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\marshbuf.h"\
+	".\stdafx.h"\
+	
+
+..\vwcomm\commobj.cpp : \
+	"..\vwcomm\commobj.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\marshbuf.h"\
+	".\stdafx.h"\
+	
+
+..\vwcomm\tinfo.cpp : \
+	"..\vwcomm\commobj.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\vwodb\vwodbobj.cpp : \
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwodb\vwodbobj.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\vwadmin\vwadmobj.cpp : \
+	"..\vwadmin\vwadmobj.h"\
+	"..\vwcommon\propbase.h"\
+	".\stdafx.h"\
+	
+
+..\fastcomm\Toolkit\tools.cpp : \
+	"..\fastcomm\Toolkit\lockfree.cpp"\
+	"..\fastcomm\toolkit\lockfree.h"\
+	"..\fastcomm\toolkit\locks.h"\
+	"..\fastcomm\toolkit\tools.h"\
+	"..\fastcomm\Toolkit\workq.cpp"\
+	"..\fastcomm\toolkit\workq.h"\
+	".\stdafx.h"\
+	
+
+..\fastcomm\commlayr.cpp : \
+	"..\fastcomm\commlayr.h"\
+	"..\fastcomm\stdafx.h"\
+	"..\fastcomm\toolkit\lockfree.h"\
+	"..\fastcomm\toolkit\locks.h"\
+	"..\fastcomm\toolkit\tools.h"\
+	"..\fastcomm\toolkit\workq.h"\
+	
+
+..\fastcomm\fastcono.cpp : \
+	"..\fastcomm\commlayr.h"\
+	"..\fastcomm\fastobj.h"\
+	"..\fastcomm\stdafx.h"\
+	"..\fastcomm\toolkit\lockfree.h"\
+	"..\fastcomm\toolkit\locks.h"\
+	"..\fastcomm\toolkit\tools.h"\
+	"..\fastcomm\toolkit\workq.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	
+
+..\fastcomm\fastmsgo.cpp : \
+	"..\fastcomm\commlayr.h"\
+	"..\fastcomm\fastobj.h"\
+	"..\fastcomm\stdafx.h"\
+	"..\fastcomm\toolkit\lockfree.h"\
+	"..\fastcomm\toolkit\locks.h"\
+	"..\fastcomm\toolkit\tools.h"\
+	"..\fastcomm\toolkit\workq.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\marshbuf.h"\
+	
+
+..\fastcomm\fastobj.cpp : \
+	"..\fastcomm\commlayr.h"\
+	"..\fastcomm\fastobj.h"\
+	"..\fastcomm\stdafx.h"\
+	"..\fastcomm\toolkit\lockfree.h"\
+	"..\fastcomm\toolkit\locks.h"\
+	"..\fastcomm\toolkit\tools.h"\
+	"..\fastcomm\toolkit\workq.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwobject\marshbuf.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\tools\vwanim\vwanimob.cpp : \
+	"..\tools\vwanim\vwanimob.h"\
+	"..\tools\vwanim\vwanmtob.h"\
+	"..\vwcommon\propbase.h"\
+	".\stdafx.h"\
+	
+
+..\tools\vwanim\vwanmtob.cpp : \
+	"..\tools\vwanim\vwanmtob.h"\
+	"..\vwcommon\propbase.h"\
+	".\stdafx.h"\
+	
+
+..\tools\inetfile\dlthread.cpp : \
+	"..\tools\inetfile\dlthread.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\urlhelp.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\tools\inetfile\inetmgro.cpp : \
+	"..\tools\inetfile\dlthread.h"\
+	"..\tools\inetfile\inetmgro.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\urlhelp.h"\
+	".\stdafx.h"\
+	
+
+..\tools\vwhtml\htmlwnd.cpp : \
+	"..\tools\vwhtml\htmlwnd.h"\
+	"..\tools\vwhtml\vwhtmlob.h"\
+	"..\tools\vwhtml\wbbrowsr.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\stdafx.h"\
+	
+
+..\tools\vwhtml\vwhelper.cpp : \
+	"..\tools\vwhtml\vwhelper.h"\
+	"..\vwcommon\propbase.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\tools\vwhtml\vwhtmlob.cpp : \
+	"..\tools\vwhtml\htmlwnd.h"\
+	"..\tools\vwhtml\vwhtmlob.h"\
+	"..\tools\vwhtml\wbbrowsr.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\urlhelp.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\stdafx.h"\
+	
+
+..\tools\vwhtml\wbbrowsr.cpp : \
+	"..\tools\vwhtml\wbbrowsr.h"\
+	".\stdafx.h"\
+	
+
+..\tools\dirserv\attrib.cpp : \
+	"..\tools\dirserv\attrib.h"\
+	"..\tools\dirserv\dqueue.h"\
+	"..\tools\dirserv\dserv.h"\
+	"..\tools\dirserv\winmsgs.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\tools\dirserv\dqueue.cpp : \
+	"..\tools\dirserv\dqueue.h"\
+	"..\vwcommon\global.h"\
+	".\stdafx.h"\
+	
+
+..\tools\dirserv\dserv.cpp : \
+	"..\tools\dirserv\attrib.h"\
+	"..\tools\dirserv\dqueue.h"\
+	"..\tools\dirserv\dserv.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwtempl.h"\
+	".\stdafx.h"\
+	
+
+..\tools\authntic\aobj.cpp : \
+	"..\tools\authntic\aobj.h"\
+	"..\tools\authntic\authobj.h"\
+	"..\vwcommon\propbase.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\tools\authntic\authobj.cpp : \
+	"..\tools\authntic\authobj.h"\
+	"..\tools\authntic\logon.h"\
+	"..\vwcommon\propbase.h"\
+	".\stdafx.h"\
+	
+
+..\tools\authntic\logon.cpp : \
+	"..\tools\authntic\logon.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\vwcommon\profhelp.cpp : \
+	"..\vwcommon\profhelp.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	".\stdafx.h"\
+	
+
+..\property\avprof\profobj.cpp : \
+	"..\property\avprof\profob.h"\
+	"..\vwcommon\global.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\profhelp.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	".\stdafx.h"\
+	
+
+..\property\menuitem\cmenuitm.cpp : \
+	"..\property\menuitem\cmenuitm.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\property\ocxproxy\vwocx.cpp : \
+	"..\property\ocxproxy\vwocx.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	".\stdafx.h"\
+	
+
+..\module\system\artifact.cpp : \
+	"..\module\system\artifact.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+..\module\system\avatar.cpp : \
+	"..\module\system\avatar.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\profhelp.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwutils.h"\
+	"..\vwobject\propsecu.h"\
+	".\stdafx.h"\
+	
+
+..\module\system\host.cpp : \
+	"..\module\system\host.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\profhelp.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwutils.h"\
+	"..\vwobject\propsecu.h"\
+	".\stdafx.h"\
+	
+
+..\module\system\IWportal.cpp : \
+	"..\module\system\IWportal.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwutils.h"\
+	"..\vwobject\propsecu.h"\
+	".\stdafx.h"\
+	
+
+..\module\system\portal.cpp : \
+	"..\module\system\portal.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+..\module\system\room.cpp : \
+	"..\module\system\room.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\profhelp.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwutils.h"\
+	"..\vwobject\propsecu.h"\
+	".\stdafx.h"\
+	
+
+..\module\system\statemch.cpp : \
+	"..\module\system\statemch.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwsystem - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwsystem - Win32 Release MinSize"
+
+!ENDIF 
+
+..\module\system\vwsysexo.cpp : \
+	"..\module\system\vwsysexo.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\Scripts.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwtempl.h"\
+	"..\vwcommon\vwutils.h"\
+	"..\vwobject\connlist.h"\
+	"..\vwobject\marshbuf.h"\
+	"..\vwobject\propsecu.h"\
+	"..\vwobject\scrptobj.h"\
+	"..\vwobject\thingobj.h"\
+	"..\vwobject\worldobj.h"\
+	".\stdafx.h"\
+	
+
+..\module\system\vwthing.cpp : \
+	"..\module\system\vwthing.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	
+
+..\module\system\WebPage.cpp : \
+	"..\module\system\WebPage.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	

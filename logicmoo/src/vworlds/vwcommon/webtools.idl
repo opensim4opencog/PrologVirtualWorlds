@@ -1,0 +1,131 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// webtools.idl : IDL source for webtools.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (webtools.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IWorldWizHelper : Interface designed to help the HTML based world wizard. On initialization
+// the object which supports this interface will build a list of available worlds which can
+// be created based on the world kits which have been installed in the appropriate Virtual
+// Worlds directory. This list is then available to the HTML wizard via an property.
+//
+// IRoomWizHelper : Interface designed to help the HTML based room wizard. On initialization
+// the object which supports this interface will build a list of available rooms which can
+// be created based on the room kits which have been installed in the appropriate Virtual
+// Worlds directory. This list is then available to the HTML wizard via an property.
+//
+// IVWFileAccessTool : Interface designed to allow Virtual Worlds web pages (e.g. the server
+// world script importer) to access files directly on the hard drive.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+	[
+		object,
+		uuid(969AD684-5B00-11D1-88AE-00C04FC32EF3),
+		dual,
+		helpstring("IWorldWizHelper Interface"),
+		pointer_default(unique)
+	]
+	interface IWorldWizHelper : IDispatch
+	{
+		[propget, id(1), helpstring("List of all available world kits.")] HRESULT TypeNames([out, retval] VARIANT *pVal);
+		[id(2), helpstring("Initialize - invoke first.")] HRESULT initialize();
+	};
+
+	[
+		object,
+		uuid(969AD684-5B00-11D1-88AE-00C04FC32EF4),
+		dual,
+		helpstring("IRoomWizHelper Interface"),
+		pointer_default(unique)
+	]
+	interface IRoomWizHelper : IDispatch
+	{
+		[propget, id(1), helpstring("List of all available room kits.")] HRESULT TypeNames([out, retval] VARIANT *pVal);
+		[id(2), helpstring("Initialize - invoke first.")] HRESULT initialize([in] BSTR bstrInitialDirectory); 
+	};
+
+	[
+		object,
+		uuid(F5B9E8D2-74C4-11D1-B344-00C04FB6A5C8),
+		dual,
+		helpstring("IVWFileAccessTool Interface"),
+		pointer_default(unique)
+	]
+	interface IVWFileAccessTool : IDispatch
+	{
+		[id(1), helpstring("Brings up the open file dialog to choose a file, then returns that file's text.")] 
+		HRESULT ReadFile([in] BSTR bstrFilename, [out, retval] BSTR* bstrFileText);
+
+		[id(2), helpstring("Brings up the save file dialog to choose a filename, then save the text to that file")] 
+		HRESULT WriteFile([in] BSTR bstrFilename, [in] BSTR bstrFileText);
+
+		[id(3), helpstring("Brings up the standard color picker to choose a color")] 
+		HRESULT SelectColor([in] long dwInitialColor, [out, retval] long* pdwPickedColor);
+
+		[id(4), helpstring("Brings up the standard Open File Dialog")] 
+		HRESULT OpenFileDialog([in] BSTR bstrDefaultFilename, [in] long dwFileFlags, [in] BSTR bstrFileFilter, [out, retval] BSTR *pbstrFileName);
+		
+		[id(5), helpstring("Brings up the standard Save File Dialog")]
+		HRESULT SaveFileDialog([in] BSTR bstrDefaultFilename, [in] long dwFileFlags,  [in] BSTR bstrFileFilter, [out, retval] BSTR *pbstrFileName);
+		
+		[id(6), helpstring("Given a filename, returns TRUE if the file exists")]
+		HRESULT FileExists([in] BSTR bstrFileName, [out, retval] VARIANT_BOOL *pbExists);
+		
+		[id(7), helpstring("Returns the local world path")]
+		HRESULT GetWorldPath([out, retval] BSTR *pbstrFileName);
+
+		[id(8), helpstring("Returns the local help path")]
+		HRESULT GetHelpPath([out, retval] BSTR *pbstrPathName);
+	};
+
+
+
+#ifdef WEBTOOLSLIB
+[
+	uuid(969AD677-5B00-11D1-88AE-00C04FC32EF3),
+	version(1.0),
+	helpstring("webtools 1.0 Type Library")
+]
+library WEBTOOLSLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(969AD685-5B00-11D1-88AE-00C04FC32EF3),
+		helpstring("WorldWizHelper Class")
+	]
+	coclass WorldWizHelper
+	{
+		[default] interface IWorldWizHelper;
+	};
+
+	[
+		uuid(969AD685-5B00-11D1-88AE-00C04FC32EF4),
+		helpstring("RoomWizHelper Class")
+	]
+	coclass RoomWizHelper
+	{
+		[default] interface IRoomWizHelper;
+	};
+	[
+		uuid(F5B9E8D3-74C4-11D1-B344-00C04FB6A5C8),
+		helpstring("VWFileAccessTool Class")
+	]
+	coclass VWFileAccessTool
+	{
+		[default] interface IVWFileAccessTool;
+	};
+};
+#endif

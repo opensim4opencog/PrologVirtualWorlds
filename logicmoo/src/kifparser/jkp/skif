@@ -1,0 +1,99 @@
+
+
+A necessary subset of KIF (Knowledge Interchange Format) to
+support Horn clause based logical inference. 
+
+Some notations
+==============
+[<nonterminal>] denotes zero or one <nonterminal>
+<nonterminal>*  denotes zero or more <nonterminal>
+<nonterminal>+  denotes one or more <nonterminal>
+
+I. Forms /* The top-level entities */
+
+    <form> ::= <sentence>
+
+II. Sentences /* Similar to FOPL sentences. */
+
+
+    <sentence> ::= <logconst> | <relsent> | <logsent> |
+    <logconst> ::= true | false
+     <relsent> ::= (<relconst> <term>*)       /* similar to FOPL predicates */
+     <logsent> ::= (not <sentence>) | (and <sentence> <sentence>+) | 
+                   (or <sentence> <sentence>+) | (=> <sentence>+ <sentence>) | 
+                   (<= <sentence> <sentence>+) | (<=> <sentence> <sentence>) 
+
+
+III. Terms 
+
+       <term> ::= <indvar> | <string> | <objconst> | <funterm>
+				  | <integer> | <real>
+    <funterm> ::= (<funconst> <term>*, [<seqvar>])
+
+
+IV. Lexemes /* Basic lexical elements */
+
+    <indvar> ::= ?<word>     /* regular vairables  */
+    <seqvar> ::= @<word>     /* sequence variables for functions and
+                                relations of varying length argument lists */
+      <word> ::= <normal> | <word><normal> | <word>\<character>
+                 /* any non-nomralcharacter can be included in a word
+                    if it is  preceded by the "escape" character \  */
+
+      <string> ::= "<quotable>"
+    <quotable> ::= <strchar> | <quotable><strchar> | <quotable>\<character>
+     <strchar> ::= every character except " and \
+    /* quotable is a string of strchars. Every character, except " and \,
+    is a strchar. Use \" and \\ to include " and \ in quotaion marks. */
+
+    <constant> ::= any member of <word> except variables (starting with ? or @)
+                   and those reserved.
+
+	<integer> ::= [+|-]<digit>+
+	<basic_real> :: = [+|-]<digit>*.<digit>+ | [+|-]<digit>+.<digit>*
+	<real> ::= <basic_real>[(E|e)<integer>] |
+               <integer>(E|e)<integer>
+
+    /* reserved words:
+	*/
+    listof, quote, if, cond, not, and, or, forall, exists, 
+    defobject, deffunction, defrelation, deflogical  
+
+    There are four categories of constants. KIF does not provide syntactic
+    specifications to differentiate them. Instead, users must make the 
+    choices and use these constant consistently throughout. 
+
+    The four categories are:
+
+      <objconst> ::= <constant>           /* for object names */
+      <funconst> ::= <constant>           /* for function names */
+      <relconst> ::= <constant> | <relop> /* for relation or predicate names */
+         <relop> ::= = | \= | < | > | =< | >=
+      <logconst> ::= <constant>           /* unclear  */
+
+V. Alphabet  /* ASCII codes */
+
+   <character> ::= <normal> | <special> | <white> | <other>
+   <normal> ::= A | B | C | ... | Z | a | b | c | ... | z | 0 | 1 | 2 ... | 9
+   <special> ::=  < | > | = | + | - | * | / | & | ^ | ~ | _ | @ | $ | & |
+                  : | . | ! | ?
+   <white> ::= white space   /* used to separate lexemes, otherwise ignored */
+   <other> ::= any ASCII code other than normal, special and white.
+   <digit> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 
+
+
+Notes:
+
+	1. Changes from previous version:
+	   . discard horn sentence
+       . require that => (IMPLIES) and <= (IMPLIED) must have both premise
+         part and conclusion part
+
+	2. A skif reasoner will be available which will only handle implications 
+       that are of the form(Negation not allowed on the antecedent portion):
+
+	  (<= <relsent> <logsent>) or,
+
+	  (=> <logsent> <relsent>)
+
+

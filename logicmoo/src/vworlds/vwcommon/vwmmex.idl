@@ -1,0 +1,372 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// vwmmex.idl : IDL source 
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (vwsystem.tlb) and marshalling code.
+
+// Codes 0x0-0x01ff are reserved for the OLE group of
+// interfaces.  For VWMM, we start our codes at 0xe00.
+
+cpp_quote("#define VWMM_E_NOTINCONTENTS			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0e00)")
+cpp_quote("#define VWMM_E_NOTINCONTAINER		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0e01)")
+cpp_quote("#define VWMM_E_NOTWEARABLE			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0e02)")
+cpp_quote("#define VWMM_E_NOTWORN				MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0e03)")
+cpp_quote("#define VWMM_E_NOTANACCESSORY		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0e04)")
+cpp_quote("#define VWMM_E_INVALIDBOUNDARY		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0e05)")
+cpp_quote("#define VWMM_E_TAKEPERMISSIONDENIED	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0e06)")
+cpp_quote("#define VWMM_E_UNKNOWN				MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0e07)")
+cpp_quote("#define VWMM_E_LABELFONTSIZE			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0e08)")
+
+	import "oaidl.idl";
+	import "ocidl.idl";
+
+	import "vwobject.idl";
+	import "vwgeom.idl";
+	import "vwgeomsp.idl";
+	import "vector.idl";
+	import "vwadata.idl";
+	import "pickdata.idl";
+	import "isound.idl";
+	import "cellprop.idl";
+	import "menuitem.idl";
+
+	[
+		object,
+		uuid(717B5A96-7267-11d1-959F-00C04FD91F4D),
+		dual,
+		helpstring("MultimediaExemplar Interface"),
+		pointer_default(unique)
+	]
+	interface IMultimediaExemplar : IVWDispatch
+	{
+		// Property creators
+		[helpstring("Creates a VWorlds 3D geometry object")] 
+		HRESULT CreateGeometry([in] BSTR bstrGeometryName, [out, retval] IVWGeometry **ppgeometry);
+		[helpstring("Creates a VWorlds 3D frame object")] 
+		HRESULT CreateFrame([out, retval] IVWFrame **ppframe);
+		[helpstring("Creates a VWorlds sprite-geometry object")] 
+		HRESULT CreateSpritedGeometry([in] BSTR bstrGeometryName, [out, retval] IVWGeometrySprite **ppgeometry);
+		[helpstring("Creates a VWorlds 3D Vector object")] 
+		HRESULT CreateVector([in] float x, [in] float y, [in] float z, [out, retval] IVector ** ppvector);
+		[helpstring("Creates a VWorlds accessory data object")] 
+		HRESULT CreateAccessoryData([in] BSTR bstrAccessoryGraphic, [in] float fPosX, [in] float fPosY, [out, retval] IVWAccessoryData **ppaccessorydata);
+		[helpstring("Creates a VWorlds sound object")] 
+		HRESULT CreateSound([in] BSTR SoundURL, [in] VARIANT_BOOL bIs3D, [in] VARIANT_BOOL bIsLooping, [out, retval] ISound ** ppSound);
+		[helpstring("Creates a VWorlds propertyList/BoundaryList object")] 
+		HRESULT CreateBoundaryList([out, retval] IPropertyList **ppBoundaryList);
+		[helpstring("Creates an boundary object from an array of float pairs.  Fails if points are not a simple polygon.")] 
+		HRESULT CreateBoundary([in, optional] VARIANT varInitialValue, [out, retval] IBoundary** ppBoundary);
+		[hidden, helpstring("Creates a pick data property, used by studio tools.")] 
+		HRESULT CreatePickData([out, retval] IVWPickData** ppPickData);
+
+		[helpstring("OnAutoDownloadAccess - security policy checks if caller == user")] 
+		HRESULT OnAutoDownloadAccess([in]long lPerms, [out, retval] VARIANT_BOOL* bReturnValue);
+
+		// Thing methods
+		[helpstring("Returns a list of all named meshes")]
+		HRESULT GetNamedMeshes([out, retval] IPropertyList **ppMeshList);
+		[helpstring("Returns the texture of a named mesh")]
+		HRESULT GetNamedMeshTexture([in] BSTR bstrMeshName, [out, retval] BSTR *pbstrTextureURL);
+		[helpstring("Sets the texture of all meshes of the given name")]
+		HRESULT SetNamedMeshTexture([in] BSTR bstrMeshName, [in] BSTR bstrTextureURL);
+		[helpstring("Sets the texture of all meshes of the given name on this client")]
+		HRESULT SetNamedMeshTextureClient([in] BSTR bstrMeshName, [in] BSTR bstrTextureURL);
+		[helpstring("Gets the RGB Color of the first mesh of the given name")]
+		HRESULT GetNamedMeshColor([in] BSTR bstrMeshName, [out, retval] OLE_COLOR *pNewColor);
+		[helpstring("Sets the RGB Color of all meshes of the given name")]
+		HRESULT SetNamedMeshColor([in] BSTR bstrMeshName, [in] OLE_COLOR newColor);
+		[helpstring("Sets the RGB Color of all meshes of the given name on this client")]
+		HRESULT SetNamedMeshColorClient([in] BSTR bstrMeshName, [in] OLE_COLOR newColor);
+		[helpstring("Called when the geometry is first loaded to update the named mesh changes")]
+		HRESULT OnLoadGeometry([in] IVWFrame *pNewFrame);
+		[helpstring("")] 
+		HRESULT ComposeScene([in] IThing *pContext, [out, retval] IVWFrame **ppvwf);
+		[helpstring("")]
+		HRESULT GetFrame([out, retval] IVWFrame **ppvwf);
+		[helpstring("")]
+		HRESULT GetGeometryFrame([out, retval] IVWFrame **ppvwf);
+		[helpstring("")] 
+		HRESULT SetCamera();
+		[helpstring("")] 
+		HRESULT Approach([in] IThing *pThing);
+		[helpstring("")] 
+		HRESULT OnApproachDone();
+		[helpstring("")] 
+		HRESULT ApproachLocation([in] float fPosX, [in] float fPosY, [in] float fPosZ, [in] float fDirX, [in] float fDirY, [in] float fDirZ);
+		[helpstring("")]
+		HRESULT UpdateIsApproachable([in] IMenuItem *pmi);
+		[hidden, helpstring("")] 
+		HRESULT PositionOrientationHeartbeat([in] IThing *pThing);	
+		[hidden, helpstring("")] 
+		HRESULT OnPositionChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")]
+		HRESULT OnScaleChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")] 
+		HRESULT OnUpChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")] 
+		HRESULT OnDirectionChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("")] 
+		HRESULT GetAnimationFileKeys([out, retval] IPropertyList** ppKeyList);
+		[helpstring("")] 
+		HRESULT SetClientSystemTime([in] long lSystemTime);
+		[helpstring("")] 
+		HRESULT StartAnimation	(	[in] BSTR bstrPropertyName,
+										[in, optional] VARIANT varPathMap,
+										[in, optional] VARIANT varCallBack,
+										[in, optional] VARIANT varOptions,
+										[in, optional] VARIANT varTimeScale,
+										[in, optional] VARIANT varStartRange,
+										[in, optional] VARIANT varEndRange,
+										[in, optional] VARIANT varIndex);
+		[helpstring("")] 
+		HRESULT StopAnimation		([in] BSTR bstrPropertyName,
+									[in, optional] VARIANT varOptions);
+		[helpstring("")] 
+		HRESULT SetAnimationIndex	(	[in] BSTR bstrPropertyName, 
+										[in] VARIANT varIndex,
+										[in, optional] VARIANT varOptions);
+		[helpstring("")] 
+		HRESULT StartAnimationServer(	[in] BSTR bstrPropertyName,
+										[in, optional] VARIANT varPathMap,
+										[in, optional] VARIANT varCallBack,
+										[in, optional] VARIANT varOptions,
+										[in, optional] VARIANT varTimeScale,
+										[in, optional] VARIANT varStartRange,
+										[in, optional] VARIANT varEndRange,
+										[in, optional] VARIANT varIndex);
+		[helpstring("")] 
+		HRESULT StopAnimationServer([in] BSTR bstrPropertyName,
+									[in] VARIANT varValue,
+									[in, optional] VARIANT varOptions);
+
+		[helpstring("")]
+		HRESULT FinishAnimation(		[in] VARIANT varSetProp,
+										[in] VARIANT varCompleted,
+										[in] BSTR bstrPropertyName,
+										[in] BSTR bstrCallBack,
+										[in] VARIANT varValue);
+		[helpstring("")] 
+		HRESULT SetAnimationPropertyRequest(	[in] BSTR bstrPropertyName,
+												[in] VARIANT varStartTime,
+												[in] VARIANT varValue);
+		[helpstring("")] 
+		HRESULT SetAnimationIndexServer(	[in] BSTR bstrPropertyName, 
+											[in] VARIANT varIndex,
+											[in, optional] VARIANT varOptions);
+		[helpstring("")] 
+		HRESULT HandleStartAnimation(	[in] BSTR bstrPropertyName,
+										[in, optional] VARIANT varPathMap,
+										[in, optional] VARIANT varCallBack,
+										[in, optional] VARIANT varOptions,
+										[in, optional] VARIANT varTimeScale,
+										[in, optional] VARIANT varStartRange,
+										[in, optional] VARIANT varEndRange,
+										[in, optional] VARIANT varIndex);
+		[helpstring("")] 
+		HRESULT HandleStopAnimation([in] BSTR bstrPropertyName,
+									[in, optional] VARIANT varOptions);
+		[helpstring("")] 
+		HRESULT HandleStopAnimationWithRequest(	[in] BSTR bstrPropertyName,
+												[in] VARIANT varOptions);
+		[helpstring("")] 
+		HRESULT HandleSetAnimationIndex(	[in] BSTR bstrPropertyName, 
+											[in] VARIANT varIndex,
+											[in, optional] VARIANT varOptions);
+		[helpstring("")]
+		HRESULT GetAnimationSystemTime([out, retval] long* lCurrentAnimTime);
+		[helpstring("")]
+		HRESULT GetAnimationStartTime([in] BSTR bstrPropertyName,[out, retval] long* AnimStartTime);
+		[hidden, helpstring("")]
+		HRESULT OnBoundaryListChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")]
+		HRESULT OnIsConnectedChanged([in]long lHint, [in]VARIANT varHintData);
+		[hidden, helpstring("")] 
+		HRESULT OnVisibleChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")] 
+		HRESULT OnIsMoveableChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")] 
+		HRESULT OnRotationRateChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")] 
+		HRESULT OnRotationAxisChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")] 
+		HRESULT OnRenderQualityChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")] 
+		HRESULT OnGeometryChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")] 
+		HRESULT OnGeometryNameChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")] 
+		HRESULT OnContentsVisibleChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")] 
+		HRESULT FireIntersectEvent([in] IVWFrame *pvwfRef, [in] float fSrcX, [in] float fSrcY, [in] float fSrcZ, [in] float fDestX, [in] float fDestY, [in] float fDestZ, [in] IPropertyList *pIDataList);
+	
+	
+	
+		[helpstring("")] 
+		HRESULT DoGesture([in] int iGesture);
+		[helpstring("Invoke a Gesture by name")] 
+		HRESULT DoNamedGesture([in] BSTR bstrGestureName);
+		[helpstring("Get the text associated with a gesture")] 
+		HRESULT GestureText([in] BSTR bstrGesture, [out, retval] BSTR *pbstrText);
+		[helpstring("")] 
+		HRESULT DoGestureClient([in] IThing *pThingOriginator, [in] int iGesture);
+		[helpstring("")] 
+		HRESULT GetNamedGestures([out, retval] IPropertyList **ppGestureNameList);
+		[helpstring("")] 
+		HRESULT InitializeGraphics([in] BSTR bstrGeometry,
+									[in] float fXPos, [in] float fYPos, [in] float fZPos,
+									[in] float fXDir, [in] float fYDir, [in] float fZDir,
+									[in, optional, defaultvalue(1.0)] VARIANT varXScale,
+									[in, optional, defaultvalue(1.0)] VARIANT varYScale,
+									[in, optional, defaultvalue(1.0)] VARIANT varZScale);
+
+		[helpstring("")] 
+		HRESULT InitializeSpriteGraphics([in] BSTR bstrSprite,
+											[in] float fXPos, [in] float fYPos, [in] float fZPos,
+											[in] float fXDir, [in] float fYDir, [in] float fZDir,
+											[in, optional, defaultvalue(1.0)] VARIANT varXScale,
+											[in, optional, defaultvalue(1.0)] VARIANT varYScale,
+											[in, optional, defaultvalue(1.0)] VARIANT varZScale);
+
+		[helpstring("")]
+		HRESULT SetSound([in] BSTR bstrWaveURL,
+						 [in] VARIANT bIsLooping,
+						 [in, optional, defaultvalue(0)] VARIANT lVolume, 
+						 [in, optional, defaultvalue(0)] VARIANT lFrequency, 
+						 [in, optional, defaultvalue(0)] VARIANT lPan);
+						 
+		[helpstring("")]
+		HRESULT Set3DSound([in] BSTR bstrWaveURL,
+						 [in] VARIANT bIsLooping,
+						 [in, optional, defaultvalue(360)] VARIANT dwInsideConeAngle,
+						 [in, optional, defaultvalue(360)] VARIANT dwOutsideConeAngle,
+						 [in, optional, defaultvalue(0)] VARIANT lConeOutsideVolume,
+						 [in, optional, defaultvalue(0)] VARIANT flMinDistance,
+						 [in, optional, defaultvalue(1000)] VARIANT flMaxDistance);
+		[helpstring("")]
+		HRESULT SetClientSound([in] BSTR bstrWaveURL,
+						 [in] VARIANT bIsLooping,
+						 [in, optional, defaultvalue(0)] VARIANT lVolume, 
+						 [in, optional, defaultvalue(0)] VARIANT lFrequency, 
+						 [in, optional, defaultvalue(0)] VARIANT lPan);
+		[helpstring("")]
+		HRESULT SetClient3DSound([in] BSTR bstrWaveURL,
+						 [in] VARIANT bIsLooping,
+						 [in, optional, defaultvalue(360)] VARIANT dwInsideConeAngle,
+						 [in, optional, defaultvalue(360)] VARIANT dwOutsideConeAngle,
+						 [in, optional, defaultvalue(0)] VARIANT lConeOutsideVolume,
+						 [in, optional, defaultvalue(0)] VARIANT flMinDistance,
+						 [in, optional, defaultvalue(1000)] VARIANT flMaxDistance);
+		[helpstring("method Take")] 
+		HRESULT Take([in] IThing *pThing);
+		[helpstring("method Drop")] 
+		HRESULT Drop([in] IThing *pThing);
+		[helpstring("method Fall")] 
+		HRESULT Fall();
+		[helpstring("method DurationReset")] 
+		HRESULT DurationReset([in] BSTR bstrProperty, [in] long nLastDuration);
+
+		[helpstring("method OnSolidChanged")] 
+		HRESULT OnSolidChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("method UpdateSolidBoundary.  Server-side internal only.")] 
+		HRESULT UpdateSolidBoundary([in] float fMinX, [in] float fMinY, [in] float fMinZ, [in] float fMaxX, [in] float fMaxY, [in] float fMaxZ);
+
+		[helpstring("OnPosDirScaleAccess - checks security policy for position, direction, and scale before allowing set")] 
+		HRESULT OnPosDirScaleAccess([in]long lPerms, [out, retval] VARIANT_BOOL* bReturnValue);
+		[hidden, helpstring("")] 
+		HRESULT OnContentSystemEnter([in] IThing *pWhere, [in] IThing *pWho);
+		[hidden, helpstring("")] 
+		HRESULT OnContentSystemLeave([in] IThing *pWhere, [in] IThing *pWho);
+
+		[hidden, helpstring("")] 
+		HRESULT OnLabelPropertyChanged([in] long lHint, [in] VARIANT varHintData);
+						 				 
+		// Avatar methods		
+		[hidden, helpstring("")]
+		HRESULT OnCreate([in] IThing *pthing);
+		[hidden, helpstring("")] 
+		HRESULT OnWornAccessoriesChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("")] 
+		HRESULT LookToward([in] IThing *pThing);
+		[helpstring("")] 
+		HRESULT ObjectInView([in]IThing *pThing, [out, retval] VARIANT_BOOL *pbool);
+		[helpstring("")] 
+		HRESULT SetFieldOfView([in] int newView);
+		[helpstring("")] 
+		HRESULT UnWear([in] IThing *pThing);
+		[helpstring("")] 
+		HRESULT Wear([in] IThing *pThing);
+		[helpstring("Called when the IsAccessory property changes")] 
+		HRESULT OnIsAccessoryChanged([in] long lHint, [in] VARIANT varHintData);
+		[hidden, helpstring("")] 
+		HRESULT OnConnect(IThing *pAvatar);
+		[hidden, helpstring("")] 
+		HRESULT OnContentLeave([in] IThing *pWhere, [in] IThing *pWhat);
+		[helpstring("")]
+		HRESULT AddDefaultKeys();
+		[helpstring("Teleport transports you to a new room")]
+		HRESULT Teleport([in] IThing *pNewRoom);
+
+		[helpstring("returns the local path (if any) of the thumbnail of the avatar")]
+		HRESULT ThumbnailFileName([out, retval] BSTR *pbstrFileName);
+
+		// Artifact methods
+		[hidden, helpstring("")] 
+		HRESULT UpdateWear([in] IMenuItem *pmi);
+		[hidden, helpstring("")] 
+		HRESULT UpdateUnWear([in] IMenuItem *pmi);
+
+		// Room methods
+		[helpstring("")] 
+		HRESULT ValidatePosition([in] IThing *pObject, [in] IVector *pPosition, [out, retval] IVector **ppNewPos);
+		[helpstring("Finds the highest floor surface in the room.")] 
+		HRESULT FindFloorHeight([in] float fPosX, [in] float fPosY, [in] float fPosZ, [out, retval] float* fFloorHeight);
+		[helpstring("Handles Fog Property change")] 
+		HRESULT OnFogChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Handles Fog Color Property change")] 
+		HRESULT OnFogColorChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Handles Fog Start Property change")] 
+		HRESULT OnFogStartChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Handles Fog End Property change")] 
+		HRESULT OnFogEndChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Implements OnLoadGeometry on rooms to persist fog etc.")]
+		HRESULT OnRoomLoadGeometry([in] IVWFrame *pNewFrame);
+		[helpstring("")] 
+		HRESULT OnActivate([in] IThing *pRoom);
+		[helpstring("")] 
+		HRESULT OnDeactivate([in] IThing *pRoom);
+
+		// Portal methods	
+		[helpstring("server-side method that moves & positions transportee to destination portal")]
+		HRESULT TransportTo([in] IThing *pThing);
+		[hidden, helpstring("method OnIntersectee for handling approachs to portals")] 
+		HRESULT OnIntersectee([in] IThing *pIntersector, [in] float fX, [in] float fY, [in] float fZ,
+							  [in] int iEdgeCycIndex, [in] int iEdgeIndex,
+							  [in] VARIANT_BOOL bTransition);
+
+		//Light methods
+		[helpstring("Handles Light Type Property change")] 
+		HRESULT OnLightTypeChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Handles Light Color Property change")] 
+		HRESULT OnLightColorChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Handles Light Umbra Property change")] 
+		HRESULT OnLightUmbraChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Handles Light Penumbra Property change")] 
+		HRESULT OnLightPenumbraChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Handles Light Range Property change")] 
+		HRESULT OnLightRangeChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Handles Light Multiplier Property change")] 
+		HRESULT OnLightEnabledChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Handles Light Attenuation Property change")] 
+		HRESULT OnLightAttenuationChanged([in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Implements OnLoadGeometry on lights to create lighting etc.")]
+		HRESULT OnLightLoadGeometry([in] IVWFrame *pNewFrame);
+
+
+
+
+	};

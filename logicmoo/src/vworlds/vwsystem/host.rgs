@@ -1,0 +1,24 @@
+HKCR
+{
+	VWSYSTEM.Host.1 = s 'Host Class'
+	{
+		CLSID = s '{4874AC90-1B87-11d2-AC71-00104B26A373}'
+	}
+	VWSYSTEM.Host = s 'Host Class'
+	{
+		CurVer = s 'VWSYSTEM.Host.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {4874AC90-1B87-11d2-AC71-00104B26A373} = s 'Host Class'
+		{
+			ProgID = s 'VWSYSTEM.Host.1'
+			VersionIndependentProgID = s 'VWSYSTEM.Host'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

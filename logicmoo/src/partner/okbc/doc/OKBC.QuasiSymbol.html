@@ -1,0 +1,177 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- OKBC.QuasiSymbol | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class OKBC.QuasiSymbol
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class OKBC.QuasiSymbol
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----<A HREF="OKBC.Node.html">OKBC.Node</A>
+           |
+           +----<A HREF="OKBC.AbstractSymbol.html">OKBC.AbstractSymbol</A>
+                   |
+                   +----OKBC.QuasiSymbol
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>QuasiSymbol</STRONG>
+     extends OKBC.<A HREF="OKBC.AbstractSymbol.html">AbstractSymbol</A>
+{
+          // Fields 1
+     public <A CLASS=nound HREF="OKBC.QuasiPackage.html">QuasiPackage</A> <A HREF="#symbolPackage">symbolPackage</A>;
+
+          // Methods 8
+     public static <A CLASS=nound HREF="OKBC.AbstractSymbol.html">AbstractSymbol</A> <A HREF="#intern(java.lang.String, OKBC.AbstractPackage)">intern</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="OKBC.AbstractPackage.html">AbstractPackage</A>);
+     public static <A CLASS=nound HREF="OKBC.AbstractSymbol.html">AbstractSymbol</A> <A HREF="#intern(java.lang.String, OKBC.QuasiPackage)">intern</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="OKBC.QuasiPackage.html">QuasiPackage</A>);
+     public static <A CLASS=nound HREF="OKBC.AbstractSymbol.html">AbstractSymbol</A> <A HREF="#intern(java.lang.String, java.lang.String)">intern</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>);
+
+     public boolean <A HREF="#equals(java.lang.Object)">equals</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public boolean <A HREF="#keywordp()">keywordp</A>();
+     public boolean <A HREF="#string_equals_sign(OKBC.Node)">string_equals_sign</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public boolean <A HREF="#string_equals_sign(java.lang.String)">string_equals_sign</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>);
+     public <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#toString()">toString</A>();
+}
+</PRE>
+<P>
+<P>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Cross Reference</B></FONT></TD> </TR> </TABLE>
+<BR><DL>
+<DT><B>Returned By: </B>
+<DD>QuasiPackage.<A HREF="OKBC.QuasiPackage.html#find_symbol(java.lang.String)">find_symbol()</A>, QuasiPackage.<A HREF="OKBC.QuasiPackage.html#intern(OKBC.QuasiSymbol)">intern()</A>, QuasiPackage.<A HREF="OKBC.QuasiPackage.html#intern(java.lang.String)">intern()</A><P>
+</DL><BR>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Fields</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="symbolPackage"><FONT COLOR="#FF00FF">&middot;</FONT> symbolPackage</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.QuasiPackage.html">QuasiPackage</A> symbolPackage
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<P>
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="intern"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="intern(java.lang.String, OKBC.AbstractPackage)">intern</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.AbstractSymbol.html">AbstractSymbol</A> intern(<A HREF="java.lang.String.html">String</A> name, 
+                                       <A HREF="OKBC.AbstractPackage.html">AbstractPackage</A> thePackage) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="intern"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="intern(java.lang.String, OKBC.QuasiPackage)">intern</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.AbstractSymbol.html">AbstractSymbol</A> intern(<A HREF="java.lang.String.html">String</A> name, 
+                                       <A HREF="OKBC.QuasiPackage.html">QuasiPackage</A> thePackage) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="intern"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="intern(java.lang.String, java.lang.String)">intern</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.AbstractSymbol.html">AbstractSymbol</A> intern(<A HREF="java.lang.String.html">String</A> name, 
+                                       <A HREF="java.lang.String.html">String</A> thePackage) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="keywordp"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="keywordp()">keywordp</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean keywordp() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.AbstractSymbol.html#keywordp()">keywordp</A> in class <A HREF="OKBC.AbstractSymbol.html">AbstractSymbol</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="toString"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="toString()">toString</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.lang.String.html">String</A> toString() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="java.lang.Object.html#toString()">toString</A> in class <A HREF="java.lang.Object.html">Object</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="equals"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="equals(java.lang.Object)">equals</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean equals(<A HREF="java.lang.Object.html">Object</A> thing) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="java.lang.Object.html#equals(java.lang.Object)">equals</A> in class <A HREF="java.lang.Object.html">Object</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="string_equals_sign"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="string_equals_sign(java.lang.String)">string_equals_sign</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean string_equals_sign(<A HREF="java.lang.String.html">String</A> string) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="string_equals_sign"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="string_equals_sign(OKBC.Node)">string_equals_sign</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean string_equals_sign(<A HREF="OKBC.Node.html">Node</A> symbol) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

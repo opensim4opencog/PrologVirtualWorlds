@@ -1,0 +1,79 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// VRMLtoD3D.idl : IDL source for VRMLtoD3D.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (VRMLtoD3D.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IConvertVRMLGeometry : Used to load 3D scenes from VRML type files and convert them into 
+// D3DRM scene hierarchies.  This functionality is not currently implemented in the codebase,
+// but is provided as a template for future functionality
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+import "convgeom.idl";
+import "d2d.idl";
+import "inetfile.idl";
+
+
+	[
+		object,
+		uuid(724CFFED-CDE8-11D0-811D-00C04FB6A5C8),
+		dual,
+		helpstring("IConvertVRMLGeometry Interface"),
+		pointer_default(unique)
+	]
+	interface IConvertVRMLGeometry : IConvertGeometry
+	{
+		[id(31), helpstring("Read in the geometry scene from the specified file.")] 
+		HRESULT ReadScene([in] BSTR bstr, [in] ITextureCallback* pCGTCallback, [out, retval] VARIANT* pvarFrame); //var = IDirect3DRMFrame
+
+		[id(32), helpstring("Initialize the converter with D3D, D2D and the INetFile manager.")] 
+		HRESULT Init([in] LPDIRECT3DRM piD3DRMParam, [in] LPDIRECT2DRM piD2DRMParam, [in] IInternetFileManager* piInternetFileManagerParam);
+
+		[id(33), helpstring("The name of this converter (VRML to D3D Geometry Converter).")] 
+		HRESULT Name([out, retval] BSTR* pbstr);
+
+		[id(34), helpstring("The file extension related to this converter (WRL).")]
+		HRESULT Extensions([out, retval] BSTR* pbstr);
+
+		[propget, id(35), helpstring("Load textures found in the scene file?")] 
+		HRESULT LoadTextures([out, retval] VARIANT_BOOL *pVal);
+		[propput, id(35), helpstring("Load textures found in the scene file?")] 
+		HRESULT LoadTextures([in] VARIANT_BOOL newVal);
+
+		[propget, id(36), helpstring("if TRUE D3D texture objects will be assigned the file name used to load them.")] 
+		HRESULT KeepCachedTextureNames([out, retval] VARIANT_BOOL *pVal);
+		[propput, id(36), helpstring("if TRUE D3D texture objects will be assigned the file name used to load them.")] 
+		HRESULT KeepCachedTextureNames([in] VARIANT_BOOL newVal);
+
+#ifdef VRMLTOD3DLIB
+[
+	uuid(724CFFE0-CDE8-11D0-811D-00C04FB6A5C8),
+	version(1.0),
+	helpstring("VRML2D3D 1.0 Type Library")
+]
+library VRMLTOD3DLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(724CFFEE-CDE8-11D0-811D-00C04FB6A5C8),
+		helpstring("ConvertVRMLGeometry Class")
+	]
+	coclass ConvertVRMLGeometry
+	{
+		[default] interface IConvertVRMLGeometry;
+	};
+};
+#endif

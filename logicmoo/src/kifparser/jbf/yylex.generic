@@ -1,0 +1,617 @@
+// Simple Example Scanner Class
+
+// This lexer generates the following tokentypes
+//	integers -- INTEGER_LITERAL | LONG_LITERAL
+//	floating point -- FLOAT_LITERAL | DOUBLE_LITERAL
+//	booleans -- BOOLEAN_LITERAL
+//	strings -- STRING_LITERAL
+//	char constants -- CHARACTER_LITERAL
+//	identifier -- IDENTIFIER
+//	keywords -- <various>
+
+import java.io.*;
+import java.util.*;
+import jbf.*;
+import YYtokentypes;
+
+public
+class YYlex {
+
+// Define the eof we get from yyin
+public static final int EOF = -1;
+
+protected static final char YYESCAPE = '\\';
+protected static final char YYDQUOTE = '"';
+
+protected int ttype;
+
+protected YYlexbuffer yytext;
+
+protected YYhash keytable;
+
+/* store associated info; will be modified on each yylex call */
+public YYtoken yylval;
+
+public int yydebug;
+
+protected java.io.InputStream yyin;
+protected java.io.PrintStream yyout;
+
+public YYlex(java.io.InputStream fin) {this(fin,System.out);}
+public YYlex() {this(System.in,System.out);}
+
+public YYlex(java.io.InputStream fin, java.io.PrintStream fout)
+{
+    yyin = fin;
+    yyout = fout;
+    keytable = new YYhash();
+    yydebug = 0;
+    ttype = 0;
+    yylval = new YYtoken();
+    yytext = new YYlexbuffer(yyin,yyout);
+    definekeywords();
+}
+
+public void setdebug(boolean d) {yydebug = d?1:0; yytext.setdebug(d);}
+public void setdebug(int i) {yydebug = i>0?i:0; yytext.setdebug(i);}
+
+public
+void
+yylexerror(String s) throws LexException
+{
+    yyout.println("yylexerror: "
+		    + "char/line+char "
+		    + yytext.charno0()
+		    + "/"
+		    + yytext.lineno()
+		    + "+"
+		    + yytext.charno()
+		    + " ; "
+		    + s);
+    throw new LexException(s);
+}
+
+public
+YYtoken
+yyreport(YYtoken yylval)
+{
+    if(yylval != null) {
+	yyout.println("yylex: "
+		    + " char/line+char "
+		    + yylval.charno0()
+		    + "/"
+		    + yylval.lineno()
+		    + "+"
+		    + yylval.charno()
+		    + " /"
+		    + YYtokentypes.tokenname(yylval.tokentype())
+		    + "/(" + yylval.tokentype()
+		    + ") ; text=#"
+		    + yylval
+		    + "#");
+    } else {
+	yyout.println("yylex: "
+		    + " char/line+char "
+		    + yytext.charno0()
+		    + "/"
+		    + yytext.lineno()
+		    + "+"
+		    + yytext.charno()
+		    + " /EOF/");
+    }
+    return yylval;
+}
+
+public static final int CC_EOF = 1001;
+public static final int CC_DIGIT = 1002;
+public static final int CC_LETTER = 1003;
+public static final int CC_QUOTE = 1004;
+public static final int CC_WHITESPACE = 1005;
+
+protected int charclass(int ch)
+{
+    // ascii version
+    if(ch == EOF) return CC_EOF;
+    if(ch == '"' || ch == '\'') return CC_QUOTE;
+    if(ch <= ' ' || ch == 127) return CC_WHITESPACE;
+    if(ch >= '0' && ch <= '9') return CC_DIGIT;
+    if(ch >= 'a' && ch <= 'z') return CC_LETTER;
+    if(ch >= 'A' && ch <= 'Z') return CC_LETTER;
+    return ch;
+}
+
+public boolean isoctaldigit(int ch)
+{
+    return (ch >= '0' && ch <= '7');
+}
+
+public boolean ishexdigit(int ch)
+{
+    return ((ch >= 'a' && ch <= 'f')
+	    || (ch >= 'A' && ch <= 'F')
+	    || (ch >= '0' && ch <= '9'));
+}
+
+public boolean isidchar(int ch, boolean first)
+{
+    return ((ch >= 'a' && ch <= 'z')
+	    || (ch >= 'A' && ch <= 'Z')
+	    || (ch == '$')
+	    || (ch == '_')
+	    || (!first && (ch >= '0' && ch <= '9')));
+}
+
+public int hex2int(char c)
+    {return (c >= '0' && c <= '9')?c - '0':
+	    ((c >= 'a' && c <= 'f')?c - 'a':c-'A');}
+
+public int octal2int(char c) {return c - '0';}
+
+
+protected void collectcomments(int comch, int depth)
+    throws IOException, LexException
+{
+    int ch;
+
+    // uniline comment within multiline comment takes precedence
+    // so just sweep to eol/eof
+    if(comch == '/') {
+	ch = yytext.nextchar();
+	while(ch != EOF && ch != '\n') {
+	    ch = yytext.nextchar();
+	}
+	return;
+    }
+    // must be a multiline comment
+    for(;;) {
+	ch = yytext.nextchar();
+	switch (ch) {
+	    case EOF:
+		yylexerror("unterminated comment");
+		break;
+	    case '/':
+		ch = yytext.nextchar();
+		if(ch == '/' || ch == '*') {
+		    collectcomments(ch,depth+1);
+		} else {
+		    yytext.backup();
+		}
+		break;
+	    case '*':
+		ch = yytext.nextchar();
+		if(ch == '/') {
+		    return;
+		}
+		yytext.backup();
+		break;
+	    default: // absorb
+		break;
+	}
+    }
+} //collectcomments
+
+
+protected void collectwhitespace()
+    throws IOException, LexException
+{
+    int ch;
+    do {
+	ch = yytext.nextchar();
+    } while(charclass(ch) == CC_WHITESPACE);
+    yytext.backup();
+}//collectwhitespace
+
+
+protected void collectescape() throws IOException,
+LexException
+{
+    boolean isunicode = false;
+    int digits;
+    int digitmax;
+    int ch;
+
+    ch = yytext.nextchar();
+    if(ch == EOF) yylexerror("escape at EOF");
+    if(ch != 'u' && !isoctaldigit(ch)) {
+	return;
+    }
+    isunicode = (ch == 'u');
+    // parse an octal number or unicode
+    if(isunicode) {
+	ch = yytext.nextchar();
+	// verify that the u has at least one hexdigit
+	if(!ishexdigit(ch)) {
+	    yytext.backup();
+	    return;
+	}
+    }
+    digitmax = isunicode?3:2;
+    echar: for(digits=0;digits <digitmax;digits++) {
+	ch = yytext.nextchar();
+	if(!isoctaldigit(ch) && (!isunicode ||
+!ishexdigit(ch))) {
+	    // guess we are done
+	    yytext.backup();
+	    break;
+	}
+    }
+}
+
+protected void collectstring(int quotechar)
+    throws IOException, LexException
+{
+    int length=0; // of nonquote chars
+    int ch;
+
+    havestring: while(true) {
+	ch = yytext.nextchar();
+	if(ch == EOF) {
+	    if(quotechar == YYDQUOTE) {
+		yylexerror("unterminated string");
+	    } else {
+		yylexerror("unterminated quoted character");
+	    }
+	} else if(ch == quotechar) {
+	    break havestring;
+	} else if(ch == YYESCAPE) {
+	    collectescape();
+	    length++;
+	} else { // other
+	    length++;
+	}
+    } //for :havestring
+    yylval.settokentype((quotechar == '\''?CHARACTER_LITERAL
+					 :STRING_LITERAL));
+    // convert string to token
+    yytext.getlexeme(yylval.text());
+
+    // verify length of single quote string
+    if(quotechar == '\'' && length > 1) {
+	yylexerror("character quote too long");
+    }
+} //collectstring
+
+
+protected void collectnumber(int ch0)
+    throws IOException, LexException
+{
+    int ch;
+    int cc;
+    int i;
+    boolean ishex = false;
+    boolean dotseen = false;
+    boolean Eseen = false;
+    boolean Lseen = false;
+    boolean Xseen = false;
+
+    havenumber: for(;;) {
+	ch = yytext.nextchar();
+	cc = charclass(ch);
+	switch (cc) {
+	    case CC_DIGIT:
+		break;
+	    case CC_LETTER:
+		switch (ch) {
+		    case 'e': case 'E':
+			if(Eseen || Xseen) {
+			    yylexerror("bad float number format");
+			}
+			Eseen = true;
+			break;
+		    case 'l': case 'L':
+			if(Eseen || dotseen) {
+			    yylexerror("bad float number format");
+			}
+			Lseen = true;
+			break havenumber;
+		    case 'x': case 'X':
+			if(yytext.lastchar() != '0'
+			    || yytext.lexemesize() != 1) {
+			    yytext.backup();
+			    break havenumber;
+			}
+			Xseen = true;
+			break;
+		    default:
+			if(!Xseen || !ishexdigit(ch)) {
+			    yytext.backup();
+			    break havenumber;
+			}
+			break;
+		}
+		break;
+	    case '.':
+		if(dotseen || Eseen || Xseen) {
+		    yylexerror("bad float number format");
+		}
+		dotseen = true;
+		break;
+	    case '+': case '-':
+		if(yytext.lastchar() != 'e' && yytext.lastchar() != 'E') {
+		    yytext.backup();
+		    break havenumber;
+		}
+		break;
+	    default:
+		yytext.backup();
+		break havenumber;
+	} //switches
+    }//for :havenumber
+    if(Eseen || dotseen) {
+	yylval.settokentype(Eseen?DOUBLE_LITERAL:FLOAT_LITERAL);
+    } else {
+	yylval.settokentype(Lseen?LONG_LITERAL:INTEGER_LITERAL);
+    }
+    yytext.getlexeme(yylval.text());
+}//collectnumber
+ 
+
+protected void collectidentifier(int ch0)
+    throws IOException, LexException
+{
+    int ch = ch0;
+    Integer val;
+
+    do {ch = yytext.nextchar();} while(isidchar(ch,false));
+    yytext.backup();
+    // separate out keywords
+    yytext.getlexeme(yylval.text());
+// remind: this probably generates a lot of garbage
+// because StringBuffer does not support hashCode().
+    
+    val = (Integer)keytable.find(yylval.text());
+    if(val == null) {
+	// must be a id
+//remind: insert into the idtable
+	yylval.settokentype(IDENTIFIER);
+    } else {
+	yylval.settokentype(val);
+    }
+}//collectidentifier
+
+
+protected void collectdelimiter(int ch0)
+	throws IOException, LexException
+{
+    Integer val = null;
+    int ch;
+
+    // delimiters that can be only single character
+    switch (ch0) {
+    case '(':
+    case ')':
+    case ',':
+    case '.':
+    case ':':
+    case ';':
+    case '?':
+    case '[':
+    case ']':
+    case '{':
+    case '}':
+    case '~':
+	yylval.settokentype(YYtokentypes.Tokentype[ch0]);
+	yytext.getlexeme(yylval.text());
+	break;
+    // delimiters that are single or can be followed by '='
+    case '%':
+    case '!':
+    case '*':
+    case '/':
+    case '^':
+    case '=':
+	ch = yytext.nextchar();
+	if(ch != '=') {
+	    yytext.backup();
+	}
+	yytext.getlexeme(yylval.text());
+	val = (Integer)keytable.find(yylval.text());
+	if(val != null) {
+	    yylval.settokentype(val);
+	} else {
+	    yylval.settokentype(YYtokentypes.Tokentype[ch0]);
+	}
+	break;
+    // delimiters that can single, can be followed by '=',
+    //	    or form a repeated sequence of length 2 (e.g., &&)
+    case '&':
+    case '+':
+    case '-':
+    case '|':
+	ch = yytext.nextchar();
+	if(ch != '=' && ch != ch0) {
+	    yytext.backup();
+	} 
+	yytext.getlexeme(yylval.text());
+	val = (Integer)keytable.find(yylval.text());
+	if(val != null) {
+	    yylval.settokentype(val);
+	} else {
+	    yylval.settokentype(YYtokentypes.Tokentype[ch0]);
+	}
+	break;
+    // delimiters that can single or form a repeated sequence
+    //	    of length 2 or more (e.g., >>>) and then may have
+    //	    a final '='
+    case '<':
+    case '>':
+	// absorb repeating sequence
+	ch = yytext.nextchar();
+	while(ch == ch0) {ch = yytext.nextchar();}
+	if(ch != '=') {
+	    yytext.backup();
+	} 
+	// look for a prefix that is a delimiter
+	yytext.getlexeme(yylval.text());
+	@StringBuffer@ b = yylval.text();
+	int l = b.length();
+	while(l > 1) {
+	    val = (Integer)keytable.find(b);
+	    if(val != null) break;
+	    l--;
+	    b.setLength(l);
+	    yytext.backup();
+	}	
+	if(val != null) {
+	    yylval.settokentype(val);
+	} else {
+	    yylval.settokentype(YYtokentypes.Tokentype[ch0]);
+	}
+	break;
+    default:
+	    yylexerror("unexpected delimiter /" + ((int)ch0) + "/");
+    } //switch
+}//collectdelim
+
+
+/* recognize the next complete token */
+public
+Integer
+yylex() throws IOException, LexException
+{
+    int ch;
+    int cls;
+
+    yylval.clear();
+    yytext.purge();
+
+    for(;;) {
+	yytext.setmark();
+	ch = yytext.nextchar();
+	cls = charclass(ch);
+	switch (cls) {
+	    case CC_EOF:
+		break;
+	    case CC_DIGIT:
+		collectnumber(ch);
+		break;
+	    case CC_QUOTE:
+		collectstring(ch);
+		break;
+	    case CC_LETTER:
+		collectidentifier(ch);
+		break;
+	    case CC_WHITESPACE:
+		collectwhitespace();
+		continue;
+	    case '.': // potential floating point number
+		ch = yytext.peek();
+		if(charclass(ch) == CC_DIGIT) {
+		    collectnumber('.');
+		} else {
+		    collectdelimiter('.');
+		}
+		break;
+	    case '/': // potential comment
+		ch = yytext.nextchar();
+		if(ch == '*' || ch == '/') {
+		    collectcomments(ch,1);
+		    continue;
+		} else {
+		    yytext.backup();
+		    collectdelimiter('/');
+		}
+		break;
+	    default:
+		if(isidchar(ch,true)) {
+		    collectidentifier(ch);
+		} else {
+		    collectdelimiter(ch);
+		}
+		break;
+	} //switch
+	break;
+    } //for(;;)
+    yytext.getlexemelocation(yylval.location());
+    if(yydebug >= 1) {yyreport(yylval);}
+    return yylval.tokentype();
+}; //yylex
+
+
+@TOKENTYPES@
+
+protected void definekeyword(String s, Integer val) 
+{
+    keytable.insert(s,val);
+}
+
+protected void definekeywords() 
+{   
+//>calc>	definekeyword("print",YYtokentypes.PRINT);
+//>calc>	definekeyword("quit",YYtokentypes.QUIT);
+//>calc>	definekeyword("true",YYtokentypes.BOOLEAN_LITERAL);
+//>calc>	definekeyword("false",YYtokentypes.BOOLEAN_LITERAL);
+
+//>java>	definekeyword("true",BOOLEAN_LITERAL);
+//>java>	definekeyword("false",BOOLEAN_LITERAL);
+//>java>	definekeyword("abstract",ABSTRACT);
+//>java>	definekeyword("boolean",BOOLEAN);
+//>java>	definekeyword("break",BREAK);
+//>java>	definekeyword("byte",BYTE);
+//>java>	definekeyword("case",CASE);
+//>java>	definekeyword("catch",CATCH);
+//>java>	definekeyword("char",CHAR);
+//>java>	definekeyword("class",CLASS);
+//>java>	definekeyword("continue",CONTINUE);
+//>java>	definekeyword("default",DEFAULT);
+//>java>	definekeyword("do",DO);
+//>java>	definekeyword("double",DOUBLE);
+//>java>	definekeyword("else",ELSE);
+//>java>	definekeyword("extends",EXTENDS);
+//>java>	definekeyword("final",FINAL);
+//>java>	definekeyword("finally",FINALLY);
+//>java>	definekeyword("float",FLOAT);
+//>java>	definekeyword("for",FOR);
+//>java>	definekeyword("if",IF);
+//>java>	definekeyword("implements",IMPLEMENTS);
+//>java>	definekeyword("import",IMPORT);
+//>java>	definekeyword("instanceof",INSTANCEOF);
+//>java>	definekeyword("int",INT);
+//>java>	definekeyword("interface",INTERFACE);
+//>java>	definekeyword("long",LONG);
+//>java>	definekeyword("native",NATIVE);
+//>java>	definekeyword("new",NEW);
+//>java>	definekeyword("null",NULL);
+//>java>	definekeyword("package",PACKAGE);
+//>java>	definekeyword("private",PRIVATE);
+//>java>	definekeyword("protected",PROTECTED);
+//>java>	definekeyword("public",PUBLIC);
+//>java>	definekeyword("return",RETURN);
+//>java>	definekeyword("short",SHORT);
+//>java>	definekeyword("static",STATIC);
+//>java>	definekeyword("super",SUPER);
+//>java>	definekeyword("switch",SWITCH);
+//>java>	definekeyword("synchronized",SYNCHRONIZED);
+//>java>	definekeyword("this",THIS);
+//>java>	definekeyword("throw",THROW);
+//>java>	definekeyword("throws",THROWS);
+//>java>	definekeyword("transient",TRANSIENT);
+//>java>	definekeyword("try",TRY);
+//>java>	definekeyword("void",VOID);
+//>java>	definekeyword("volatile",VOLATILE);
+//>java>	definekeyword("while",WHILE);
+//>java>	definekeyword("%=",EQMOD);
+//>java>	definekeyword("!=",NE);
+//>java>	definekeyword("&=",EQAND);
+//>java>	definekeyword("*=",EQMUL);
+//>java>	definekeyword("+=",EQADD);
+//>java>	definekeyword("-=",EQSUB);
+//>java>	definekeyword("/=",EQDIV);
+//>java>	definekeyword("^=",EQXOR);
+//>java>	definekeyword("|=",EQOR);
+//>java>	definekeyword("==",EQEQ);
+//>java>	definekeyword("&&",ANDAND);
+//>java>	definekeyword("++",PLUSPLUS);
+//>java>	definekeyword("--",MINUSMINUS);
+//>java>	definekeyword("||",OROR);
+//>java>	definekeyword("<=",LE);
+//>java>	definekeyword(">=",GE);
+//>java>	definekeyword("<<=",EQLSHIFT);
+//>java>	definekeyword(">>=",EQRSHIFT);
+//>java>	definekeyword("<<",LSHIFT);
+//>java>	definekeyword(">>",RSHIFT);
+//>java>	definekeyword(">>>",LOGRSHIFT);
+//>java>	definekeyword(">>>=",EQLOGRSHIFT);
+}
+
+}; //class yylex

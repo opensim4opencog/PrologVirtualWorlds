@@ -1,0 +1,232 @@
+;; /home/siegel/temp4/EconomyContext-implications.kif
+
+
+(=> 
+  (instance ?ORG InternationalOrganizationOfCountries) 
+  (productionCapacityDuring ?ORG ?PRODUCT-TYPE ?TIME 
+    (PlusAll 
+      (TheSet ?COUNTRY 
+        (internationalOrg-MemberCountry ?ORG ?COUNTRY)) 
+      (FunctionToArg 2 
+        (KappFn 
+          (?C ?A) 
+          (productionCapacityDuring ?C ?PRODUCT-TYPE ?TIME ?A))))))
+
+(=> 
+  (and 
+    (grossDomesticProduct ?GE 
+      (YearFn ?X) ?GDP) 
+    (realGDPGrowthRateDuring ?GE 
+      (YearFn ?X) ?GROWTH-RATE)) 
+  (grossDomesticProduct ?GE 
+    (YearFn 
+      (SubtractionFn ?X 1)) 
+    (DivisionFn ?GDP 
+      (AdditionFn ?GROWTH-RATE 1))))
+
+(=> 
+  (and 
+    (grossDomesticProduct ?REGION ?TIME ?GDP) 
+    (industryFractionOfGDP ?REGION ?IND-TYPE ?TIME ?FRACTION)) 
+  (productionValueOfIndustryDuring ?REGION ?IND-TYPE ?TIME 
+    (MultiplicationFn ?GDP ?FRACTION)))
+
+(=> 
+  (and 
+    (instance ?AREA GeographicalAgent) 
+    (damages ?EVT ?FACILITIES) 
+    (industryFacilities 
+      (IndustryOfRegionFn ?INDUSTRY ?AREA) ?FACILITIES)) 
+  (maleficiary ?EVT ?AREA))
+
+(=> 
+  (and 
+    (damages ?EVT ?FACILITIES) 
+    (industryFacilities 
+      (IndustryOfRegionFn ?INDUSTRY ?AREA) ?FACILITIES)) 
+  (damages ?EVT 
+    (IndustryOfRegionFn ?INDUSTRY ?AREA)))
+
+(=> 
+  (and 
+    (exportAmountDuring ?REGION Product ?TIME ?EXP-VALUE) 
+    (instance ?EXP-VALUE Money) 
+    (instance ?PART-EXP-VALUE Money) 
+    (exportAmountDuring ?REGION ?PRODUCT-TYPE ?TIME ?PART-EXP-VALUE)) 
+  (exportRevenueFractionDuring ?REGION ?PRODUCT-TYPE ?TIME 
+    (QuantityConversionFn Percent 
+      (DivisionFn ?PART-EXP-VALUE ?EXP-VALUE))))
+
+(=> 
+  (and 
+    (laborForceDuring ?REGION ?TIME ?TOTAL) 
+    (laborForceOfIndustryOrOccupationDuring ?REGION ?COL ?TIME ?IND-NR)) 
+  (laborForceFractionDuring ?REGION ?COL ?TIME 
+    (DivisionFn ?IND-NR ?TOTAL)))
+
+(=> 
+  (and 
+    (grossDomesticProduct ?GE ?TIME ?GDP) 
+    (productionValueOfIndustryDuring ?GE ?IND-TYPE ?TIME ?MONEY)) 
+  (industryFractionOfGDP ?GE ?IND-TYPE ?TIME 
+    (QuantityConversionFn Percent 
+      (DivisionFn ?MONEY ?GDP))))
+
+(=> 
+  (exportThroughAmountDuring ?EXPORTER ?PRODUCT-TYPE ?THRU ?TIME 
+    ((MeasureFn (Giga CubicFoot) YearsDuration) 0)) 
+  (importFromThroughAmountDuring ?ANY-IMPORTER NaturalGas ?EXPORTER ?THRU ?TIME 
+    ((MeasureFn (Giga CubicFoot) YearsDuration) 0)))
+
+(=> 
+  (and 
+    (instance ?EXP-VALUE Money) 
+    (exportAmountDuring ?REGION Product ?TIME ?EXP-VALUE) 
+    (exportRevenueFractionDuring ?REGION ?PRODUCT-TYPE ?TIME ?FRACTION)) 
+  (exportAmountDuring ?REGION ?PRODUCT-TYPE ?TIME 
+    (MultiplicationFn ?EXP-VALUE ?FRACTION)))
+
+(=> 
+  (and 
+    (instance ?TIME TimeInterval) 
+    (holdsDuring ?TIME 
+      (nationalBudgetExpenditures ?REG ?ACONTEXT))) 
+  (totalBudgetExpenditures ?REG ?TIME ?ACONTEXT))
+
+(=> 
+  (and 
+    (distributionCapacity ?MOB ?PROD-TYPE ?CAPACITY) 
+    (distributionRate ?MOB ?PROD-TYPE ?RATE)) 
+  (greaterThanOrEqualTo ?CAPACITY ?RATE))
+
+(=> 
+  (and 
+    (instance ?COUNTRY IndependentCountry) 
+    (investmentAmountDuring ?COUNTRY Product ?TIME ?INVESTMENTS) 
+    (exportAmountDuring ?COUNTRY Product ?TIME ?EXPORTS) 
+    (instance ?EXPORTS Money) 
+    (consumptionAmountDuring ?COUNTRY Product ?TIME ?CONSUMPTION) 
+    (instance ?CONSUMPTION Money) 
+    (instance ?IMPORTS Money) 
+    (importAmountDuring ?COUNTRY Product ?TIME ?IMPORTS) 
+    (totalBudgetExpenditures 
+      (GovernmentFn ?COUNTRY) ?TIME ?EXPENDITURES)) 
+  (grossDomesticProduct ?COUNTRY ?TIME 
+    (SubtractionFn 
+      (AdditionFn ?CONSUMPTION ?EXPENDITURES ?EXPORTS ?INVESTMENT) ?IMPORTS)))
+
+(=> 
+  (and 
+    (laborForceDuring ?REGION ?TIME ?TOTAL) 
+    (laborForceFractionDuring ?REGION ?COL ?TIME ?FRACTION)) 
+  (laborForceOfIndustryOrOccupationDuring ?REGION ?COL ?TIME 
+    (MultiplicationFn ?TOTAL ?FRACTION)))
+
+(=> 
+  (and 
+    (importFromAmountDuring ?REGION2 Product ?REGION1 ?TIME ?PART-EXP-VALUE) 
+    (instance ?PART-EXP-VALUE Money) 
+    (instance ?EXP-VALUE Money) 
+    (exportAmountDuring ?REGION1 Product ?TIME ?EXP-VALUE)) 
+  (exportDestinationFractionDuring ?REGION1 ?REGION2 ?TIME 
+    (QuantityConversionFn Percent 
+      (DivisionFn ?PART-EXP-VALUE ?EXP-VALUE))))
+
+(=> 
+  (and 
+    (importAmountDuring ?REGION Product ?TIME ?IMP-VALUE) 
+    (instance ?IMP-VALUE Money) 
+    (instance ?PART-IMP-VALUE Money) 
+    (importAmountDuring ?REGION ?PRODUCT-TYPE ?TIME ?PART-IMP-VALUE)) 
+  (importExpenditureFractionDuring ?REGION ?PRODUCT-TYPE ?TIME 
+    (QuantityConversionFn Percent 
+      (DivisionFn ?PART-IMP-VALUE ?IMP-VALUE))))
+
+(=> 
+  (and 
+    (instance ?EXP-VALUE Money) 
+    (exportAmountDuring ?REGION1 Product ?TIME ?EXP-VALUE) 
+    (exportDestinationFractionDuring ?REGION1 ?REGION2 ?TIME ?FRACTION)) 
+  (importFromAmountDuring ?REGION2 Product ?REGION1 ?TIME 
+    (MultiplicationFn ?EXP-VALUE ?FRACTION)))
+
+(=> 
+  (and 
+    (importFromAmountDuring ?REGION1 Product ?REGION2 ?TIME ?PART-IMP-VALUE) 
+    (instance ?PART-IMP-VALUE Money) 
+    (instance ?IMP-VALUE Money) 
+    (importAmountDuring ?REGION1 Product ?TIME ?IMP-VALUE)) 
+  (importOriginFractionDuring ?REGION1 ?REGION2 ?TIME 
+    (QuantityConversionFn Percent 
+      (DivisionFn ?PART-IMP-VALUE ?IMP-VALUE))))
+
+(=> 
+  (and 
+    (instance ?IMP-VALUE Money) 
+    (importAmountDuring ?REGION Product ?TIME ?IMP-VALUE) 
+    (importExpenditureFractionDuring ?REGION ?PRODUCT-TYPE ?TIME ?FRACTION)) 
+  (importAmountDuring ?REGION ?PRODUCT-TYPE ?TIME 
+    (MultiplicationFn ?IMP-VALUE ?FRACTION)))
+
+(=> 
+  (instance ?ORG InternationalOrganizationOfCountries) 
+  (supplyFromThroughAmountDuring PlanetEarth ?PRODUCT-TYPE ?ORG ?PT ?TIME 
+    (PlusAll 
+      (TheSet ?COUNTRY 
+        (internationalOrg-MemberCountry ?ORG ?COUNTRY)) 
+      (FunctionToArg 2 
+        (KappFn 
+          (?C ?A) 
+          (supplyFromThroughAmountDuring PlanetEarth ?PRODUCT-TYPE ?C ?PT ?TIME ?A))))))
+
+(=> 
+  (and 
+    (instance ?IMP-VALUE Money) 
+    (importAmountDuring ?REGION1 Product ?TIME ?IMP-VALUE) 
+    (importOriginFractionDuring ?REGION1 ?REGION2 ?TIME ?FRACTION)) 
+  (importFromAmountDuring ?REGION1 Product ?REGION2 ?TIME 
+    (MultiplicationFn ?IMP-VALUE ?FRACTION)))
+
+(=> 
+  (exportThroughAmountDuring ?EXPORTER ?PRODUCT-TYPE ?THRU ?TIME ?AMOUNT) 
+  (importFromThroughAmountDuring ?ANY-IMPORTER NaturalGas ?EXPORTER ?THRU ?TIME 
+    (IntervalMaxFn ?AMOUNT)))
+
+(=> 
+  (instance ?ORG InternationalOrganizationOfCountries) 
+  (productionAmountDuring ?ORG ?PRODUCT-TYPE ?TIME 
+    (PlusAll 
+      (TheSet ?COUNTRY 
+        (internationalOrg-MemberCountry ?ORG ?COUNTRY)) 
+      (FunctionToArg 2 
+        (KappFn 
+          (?C ?A) 
+          (productionAmountDuring ?C ?PRODUCT-TYPE ?TIME ?A))))))
+
+(=> 
+  (and 
+    (grossDomesticProduct ?GE ?TIME ?GDP) 
+    (budgetExpenditures ?GE ?ITEM ?TIME ?MONEY)) 
+  (budgetExpenditureFractionOfGDP ?GE ?ITEM ?TIME 
+    (QuantityConversionFn Percent 
+      (DivisionFn ?MONEY ?GDP))))
+
+(=> 
+  (and 
+    (subclass ?ENERGYPRODUCT EnergyStuff) 
+    (exports ?VICTIMNATION ?ENERGYPRODUCT) 
+    (maleficiary ?ATTACK ?VICTIMNATION) 
+    (instance ?ATTACK MilitaryAttack) 
+    (agent ?ATTACK ?ATTACKER) 
+    (instance ?ATTACKER Country) 
+    (exportAmountDuring ?VICTIMNATION ?ENERGYPRODUCT 
+      (YearFn 1997) ?EXPORTAMOUNT) 
+    (greaterThan 
+      (DivisionFn ?EXPORTAMOUNT ?WORLDWIDE) 
+      (Percent 5)) 
+    (productionAmountDuring PlanetEarth ?ENERGYPRODUCT 
+      (YearFn 1997) ?WORLDWIDE)) 
+  (holdsDuring 
+    (WhenFn ?ATTACK) 
+    (economicStability 
+      (EconomicSystemFn PlanetEarth) Low)))

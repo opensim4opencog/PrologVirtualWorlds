@@ -1,0 +1,776 @@
+<style><!-- div.vbhtml_source { font-family: Courier New, monospace; font-size: 10pt; white-space: pre; } span.vbhtml_comment { color: green; } span.vbhtml_keyword { color: navy; } --></style>
+<pre><div class="vbhtml_source">VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  <span class="vbhtml_comment">'True</span>
+  Persistable = 0  <span class="vbhtml_comment">'NotPersistable</span>
+  DataBindingBehavior = 0  <span class="vbhtml_comment">'vbNone</span>
+  DataSourceBehavior  = 0  <span class="vbhtml_comment">'vbNone</span>
+  MTSTransactionMode  = 0  <span class="vbhtml_comment">'NotAnMTSObject</span>
+END
+Attribute VB_Name = "morphism"
+Attribute VB_GlobalNameSpace = <span class="vbhtml_keyword">False</span>
+Attribute VB_Creatable = <span class="vbhtml_keyword">False</span>
+Attribute VB_PredeclaredId = <span class="vbhtml_keyword">False</span>
+Attribute VB_Exposed = <span class="vbhtml_keyword">False</span>
+Attribute VB_Ext_KEY = "SavedWithClassBuilder6" ,"Yes"
+Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
+<span class="vbhtml_keyword">Option</span> <span class="vbhtml_keyword">Explicit</span>
+
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Enum</span> DISPIDs
+   DISPID_SHOWMESSAGE = &amp;H1&amp;
+   DISPID_TESTPROP
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Enum</span>
+
+<span class="vbhtml_keyword">Private</span> InvokeAddress <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>
+<span class="vbhtml_keyword">Private</span> GIONAddress <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>
+
+<span class="vbhtml_comment">'Public This As Datum</span>
+
+<span class="vbhtml_keyword">Dim</span> m_AllowShowMessage <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Boolean</span>
+<span class="vbhtml_keyword">Dim</span> m_TestProperty <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">String</span>
+
+<span class="vbhtml_comment">'Const NullArray = Empty</span>
+
+<span class="vbhtml_keyword">Private</span> m_fCheckedTLIArrayBounds <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Boolean</span>
+<span class="vbhtml_keyword">Private</span> m_fFixArrayBounds <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Boolean</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> create_datum(This) <span class="vbhtml_keyword">As</span> Datum
+    <span class="vbhtml_keyword">If</span> theDatums.IsValid(<span class="vbhtml_keyword">CStr</span>(ObjPtr(This))) <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Set</span> create_datum = theDatums.<span class="vbhtml_keyword">Property</span>(<span class="vbhtml_keyword">CStr</span>(ObjPtr(This))): <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Function</span>
+    <span class="vbhtml_keyword">Set</span> create_datum = <span class="vbhtml_keyword">New</span> Datum
+    theDatums.<span class="vbhtml_keyword">Property</span>(<span class="vbhtml_keyword">CStr</span>(ObjPtr(This))) = create_datum
+    <span class="vbhtml_keyword">Set</span> create_datum.Value = This
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> create_datum_from_com(Owner, NODEKIND, This) <span class="vbhtml_keyword">As</span> Datum
+ <span class="vbhtml_keyword">Dim</span> thisMember, thisAny, my_ref <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">String</span>, i <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>
+    my_ref = get_reference(This)
+ 
+    <span class="vbhtml_keyword">If</span> theDatums.IsValid(my_ref) <span class="vbhtml_keyword">Then</span>
+        <span class="vbhtml_keyword">Set</span> create_datum_from_com = theDatums.<span class="vbhtml_keyword">Property</span>(my_ref)
+    <span class="vbhtml_keyword">Else</span>
+        <span class="vbhtml_keyword">Set</span> create_datum_from_com = <span class="vbhtml_keyword">New</span> Datum
+        theDatums.<span class="vbhtml_keyword">Property</span>(my_ref) = create_datum_from_com
+    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+    create_datum_from_com.NODEKIND = NODEKIND
+    create_datum_from_com.SiteKind = Me.sitekind_from_object(This)
+    create_datum_from_com.MODELKIND = Me.MODELKIND_from_object(This)
+    
+    
+    <span class="vbhtml_keyword">Select</span> <span class="vbhtml_keyword">Case</span> TypeName(Owner)
+        <span class="vbhtml_keyword">Case</span> "Nothing", "Empty", "Null"
+            <span class="vbhtml_keyword">Set</span> Owner = theRootDatum
+        <span class="vbhtml_keyword">Case</span> <span class="vbhtml_keyword">Else</span>
+            <span class="vbhtml_keyword">If</span> sitekind_from_object(Owner) &lt;> create_datum_from_com.SiteKind <span class="vbhtml_keyword">Then</span>
+                Debug.<span class="vbhtml_keyword">Print</span> "cross domain errors"
+            <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Select</span>
+
+    <span class="vbhtml_keyword">Select</span> <span class="vbhtml_keyword">Case</span> create_datum_from_com.MODELKIND
+        <span class="vbhtml_keyword">Case</span> MODELKINDs.MODELKIND_ARRAY
+                create_datum_from_com.Value = This
+                create_datum_from_com.MemberName = my_ref
+                <span class="vbhtml_keyword">Set</span> create_datum_from_com.Origin = Owner
+                create_datum_from_com.TypeName = TypeName(This)
+                <span class="vbhtml_keyword">Set</span> create_datum_from_com.Models = <span class="vbhtml_keyword">New</span> PropertyMap
+                <span class="vbhtml_keyword">For</span> i = 0 <span class="vbhtml_keyword">To</span> <span class="vbhtml_keyword">UBound</span>(This, 1)
+                    create_datum_from_com.Models.<span class="vbhtml_keyword">Property</span>(<span class="vbhtml_keyword">CStr</span>(i)) = _
+                        create_datum_from_com(create_datum_from_com, NODEKIND_CONTENT, thisMember)
+                <span class="vbhtml_keyword">Next</span>
+        <span class="vbhtml_keyword">Case</span> MODELKIND_COLLECTION
+                <span class="vbhtml_keyword">Set</span> create_datum_from_com.Value = This
+                create_datum_from_com.MemberName = my_ref
+                <span class="vbhtml_keyword">Set</span> create_datum_from_com.Origin = Owner
+                create_datum_from_com.TypeName = TypeName(This)
+                <span class="vbhtml_keyword">Set</span> create_datum_from_com.Models = <span class="vbhtml_keyword">New</span> PropertyMap
+                <span class="vbhtml_keyword">For</span> <span class="vbhtml_keyword">Each</span> thisAny <span class="vbhtml_keyword">In</span> get_members(This)
+                    add_model_info create_datum_from_com, create_datum_from_com(This, NODEKIND_CONTENT, thisMember)
+                <span class="vbhtml_keyword">Next</span>
+        <span class="vbhtml_keyword">Case</span> MODELKIND_OBJECT
+                <span class="vbhtml_keyword">Set</span> create_datum_from_com.Value = This
+                create_datum_from_com.MemberName = my_ref
+                <span class="vbhtml_keyword">Set</span> create_datum_from_com.Origin = Owner
+                create_datum_from_com.TypeName = TypeName(This)
+                <span class="vbhtml_keyword">Set</span> create_datum_from_com.Models = <span class="vbhtml_keyword">New</span> PropertyMap
+                <span class="vbhtml_keyword">For</span> <span class="vbhtml_keyword">Each</span> thisMember <span class="vbhtml_keyword">In</span> get_members(This)
+                    <span class="vbhtml_keyword">If</span> (InStr(1, theHiddenMembers, thisMember.<span class="vbhtml_keyword">Name</span>, vbTextCompare) = 0 <span class="vbhtml_keyword">And</span> (thisMember.InvokeKind <span class="vbhtml_keyword">And</span> (INVOKE_FUNC <span class="vbhtml_keyword">Or</span> INVOKE_PROPERTYPUTREF <span class="vbhtml_keyword">Or</span> INVOKE_PROPERTYGET <span class="vbhtml_keyword">Or</span> INVOKE_EVENTFUNC))) <span class="vbhtml_keyword">Then</span>
+    <span class="vbhtml_comment">'                    Stop</span>
+                        add_model_info create_datum_from_com, create_datum_from_memberinfo(create_datum_from_com, thisMember)
+                    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+                <span class="vbhtml_keyword">Next</span>
+                
+        <span class="vbhtml_keyword">Case</span> MODELKIND_VALUE
+            create_datum_from_com.Value = This
+            create_datum_from_com.Models = <span class="vbhtml_keyword">New</span> PropertyMap
+            create_datum_from_com.Origin = Owner
+            create_datum_from_com.TypeName = TypeName(This)
+            
+        <span class="vbhtml_keyword">Case</span> <span class="vbhtml_keyword">Else</span>
+            <span class="vbhtml_keyword">Stop</span>
+    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Select</span>
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Function</span> create_datum_from_memberinfo(<span class="vbhtml_keyword">ByVal</span> Origin <span class="vbhtml_keyword">As</span> Datum, <span class="vbhtml_keyword">ByVal</span> thisMember <span class="vbhtml_keyword">As</span> MemberInfo) <span class="vbhtml_keyword">As</span> Datum
+ <span class="vbhtml_keyword">Dim</span> mp <span class="vbhtml_keyword">As</span> ParameterInfo, newDatum <span class="vbhtml_keyword">As</span> Datum, t
+            <span class="vbhtml_keyword">If</span> thisMember.<span class="vbhtml_keyword">Name</span> = "value" <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Function</span>
+            <span class="vbhtml_keyword">Set</span> create_datum_from_memberinfo = <span class="vbhtml_keyword">New</span> Datum
+<span class="vbhtml_comment">'            Stop</span>
+            <span class="vbhtml_keyword">If</span> Origin <span class="vbhtml_keyword">Is</span> <span class="vbhtml_keyword">Nothing</span> <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Stop</span>
+            <span class="vbhtml_keyword">Select</span> <span class="vbhtml_keyword">Case</span> thisMember.InvokeKind
+            
+                <span class="vbhtml_keyword">Case</span> InvokeKinds.INVOKE_FUNC, InvokeKinds.INVOKE_EVENTFUNC
+                    create_datum_from_memberinfo.MemberName = thisMember.<span class="vbhtml_keyword">Name</span>
+                    create_datum_from_memberinfo.NODEKIND = thisMember.InvokeKind
+                    <span class="vbhtml_keyword">Set</span> create_datum_from_memberinfo.Origin = Origin.Value
+                    create_datum_from_memberinfo.TypeName = vartype_pl(thisMember.ReturnType.VarType)
+                    <span class="vbhtml_keyword">Set</span> create_datum_from_memberinfo.Models = <span class="vbhtml_keyword">New</span> PropertyMap
+                    <span class="vbhtml_keyword">For</span> <span class="vbhtml_keyword">Each</span> mp <span class="vbhtml_keyword">In</span> thisMember.Parameters
+                        add_model_info create_datum_from_memberinfo, create_datum_from_param(create_datum_from_memberinfo, mp)
+                    <span class="vbhtml_keyword">Next</span>
+                
+                <span class="vbhtml_keyword">Case</span> InvokeKinds.INVOKE_PROPERTYPUTREF, InvokeKinds.INVOKE_PROPERTYGET
+                    <span class="vbhtml_keyword">Set</span> create_datum_from_memberinfo = <span class="vbhtml_keyword">New</span> Datum
+                    <span class="vbhtml_keyword">Set</span> create_datum_from_memberinfo.Value = thisMember
+                    create_datum_from_memberinfo.NODEKIND = NODEKIND_property
+                    create_datum_from_memberinfo.MemberName = thisMember.<span class="vbhtml_keyword">Name</span>
+                    <span class="vbhtml_keyword">Set</span> create_datum_from_memberinfo.Origin = Origin.Value
+                    <span class="vbhtml_keyword">Set</span> create_datum_from_memberinfo.Models = <span class="vbhtml_keyword">New</span> PropertyMap
+                    call_by_name_pred t, Origin.Value, thisMember.<span class="vbhtml_keyword">Name</span>
+                    create_datum_from_memberinfo.MODELKIND = MODELKIND_from_object(t)
+            <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Select</span>
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> create_datum_from_param(Owner <span class="vbhtml_keyword">As</span> Datum, mp <span class="vbhtml_keyword">As</span> ParameterInfo) <span class="vbhtml_keyword">As</span> Datum
+        <span class="vbhtml_keyword">Set</span> create_datum_from_param = <span class="vbhtml_keyword">New</span> Datum
+<span class="vbhtml_keyword">On</span> <span class="vbhtml_keyword">Error</span> <span class="vbhtml_keyword">Resume</span> <span class="vbhtml_keyword">Next</span>
+        create_datum_from_param.MemberName = mp.<span class="vbhtml_keyword">Name</span>
+        create_datum_from_param.NODEKIND = NODEKIND_CONTENT <span class="vbhtml_comment">' me.m NODEKIND_from_object(mp.DefaultValue)</span>
+<span class="vbhtml_comment">'        Stop</span>
+        <span class="vbhtml_keyword">If</span> mp.Default <span class="vbhtml_keyword">Then</span> create_datum_from_param.MODELKIND = MODELKIND_from_object(mp.DefaultValue)
+        <span class="vbhtml_keyword">Set</span> create_datum_from_param.Origin = Owner.Origin
+        <span class="vbhtml_keyword">Set</span> create_datum_from_param.Models = <span class="vbhtml_keyword">New</span> PropertyMap
+        create_datum_from_param.TypeName = vartype_pl(mp.VarTypeInfo.TypeInfo)
+        assign create_datum_from_param.Value, mp.DefaultValue
+<span class="vbhtml_comment">'        Stop</span>
+        create_datum_from_param.SiteKind = Owner.SiteKind
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> get_MODELKIND_from_object(This) <span class="vbhtml_keyword">As</span> MODELKINDs
+  <span class="vbhtml_keyword">Dim</span> m_TypeName <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">String</span>
+        m_TypeName = LCase(VBA.TypeName(This))
+    <span class="vbhtml_keyword">If</span> Right$(m_TypeName, 10) = "collection" <span class="vbhtml_keyword">Then</span>
+        get_MODELKIND_from_object = MODELKIND_COLLECTION
+        <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Function</span>
+    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+    <span class="vbhtml_keyword">If</span> Right$(m_TypeName, 1) = "s" <span class="vbhtml_keyword">Then</span>
+<span class="vbhtml_comment">'        Stop</span>
+        get_MODELKIND_from_object = MODELKIND_COLLECTION
+        <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Function</span>
+    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+    <span class="vbhtml_keyword">If</span> Right$(m_TypeName, 3) = "map" <span class="vbhtml_keyword">Then</span>
+        get_MODELKIND_from_object = MODELKIND_COLLECTION
+        <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Function</span>
+    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+    <span class="vbhtml_keyword">If</span> Right$(m_TypeName, 2) = "()" <span class="vbhtml_keyword">Then</span>
+        get_MODELKIND_from_object = MODELKIND_COLLECTION
+        <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Function</span>
+    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+    <span class="vbhtml_keyword">Select</span> <span class="vbhtml_keyword">Case</span> m_TypeName
+        <span class="vbhtml_keyword">Case</span> "empty", "null"
+            get_MODELKIND_from_object = MODELKIND_VALUE
+        <span class="vbhtml_keyword">Case</span> "nothing"
+            get_MODELKIND_from_object = MODELKIND_OBJECT
+        <span class="vbhtml_keyword">Case</span> "ithing", "thing"
+            get_MODELKIND_from_object = MODELKIND_OBJECT
+        <span class="vbhtml_keyword">Case</span> <span class="vbhtml_keyword">Else</span>
+            <span class="vbhtml_keyword">If</span> <span class="vbhtml_keyword">Not</span> IsObject(This) <span class="vbhtml_keyword">Then</span>
+                get_MODELKIND_from_object = MODELKIND_VALUE
+            <span class="vbhtml_keyword">Else</span>
+                get_MODELKIND_from_object = MODELKIND_OBJECT
+            <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Select</span>
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> create_datum_from_value(Origin <span class="vbhtml_keyword">As</span> Datum, vData <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Variant</span>) <span class="vbhtml_keyword">As</span> Datum
+        
+<span class="vbhtml_keyword">Set</span> create_datum_from_value = <span class="vbhtml_keyword">New</span> Datum
+        create_datum_from_value.Value = vData
+        create_datum_from_value.MemberName = "value"
+        create_datum_from_value.MODELKIND = Me.MODELKIND_from_object(vData)
+        <span class="vbhtml_keyword">Set</span> create_datum_from_value.Models = <span class="vbhtml_keyword">New</span> PropertyMap
+        <span class="vbhtml_keyword">Set</span> create_datum_from_value.Origin = <span class="vbhtml_keyword">Nothing</span>
+        create_datum_from_value.TypeName = vartype_pl(VarType(vData))
+<span class="vbhtml_comment">'Stop</span>
+        enum_model create_datum_from_value
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> create_datum_from_collection(Origin <span class="vbhtml_keyword">As</span> Datum, This) <span class="vbhtml_keyword">As</span> Datum
+    <span class="vbhtml_keyword">Dim</span> Obj
+        create_datum_from_collection = <span class="vbhtml_keyword">New</span> Datum
+        create_datum_from_collection.MemberName = "collection"
+        create_datum_from_collection.NODEKIND = NODEKIND_CONTENT
+        create_datum_from_collection.Models = <span class="vbhtml_keyword">New</span> PropertyMap
+        create_datum_from_collection.Origin = Origin.Value
+        assign create_datum_from_collection.Value, This
+        create_datum_from_collection.TypeName = TypeName(This)
+        <span class="vbhtml_keyword">For</span> <span class="vbhtml_keyword">Each</span> Obj <span class="vbhtml_keyword">In</span> This
+            add_model_info create_datum_from_collection, create_datum_from_anything(Origin.Value, Obj)
+        <span class="vbhtml_keyword">Next</span> Obj
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> create_datum_from_anything(Origin <span class="vbhtml_keyword">As</span> Datum, This) <span class="vbhtml_keyword">As</span> Datum
+        <span class="vbhtml_keyword">Stop</span>
+        <span class="vbhtml_comment">'Set create_datum_from_anything = New Datum</span>
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> create_datum_from_ithing(This <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Object</span>) <span class="vbhtml_keyword">As</span> Datum
+ <span class="vbhtml_keyword">Dim</span> ItemName <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Variant</span>
+    <span class="vbhtml_keyword">If</span> This.IsStub <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">On</span> <span class="vbhtml_keyword">Error</span> <span class="vbhtml_keyword">Resume</span> <span class="vbhtml_keyword">Next</span>
+    <span class="vbhtml_keyword">If</span> theDatums.IsValid(<span class="vbhtml_keyword">CStr</span>(ObjPtr(This))) <span class="vbhtml_keyword">Then</span>
+        <span class="vbhtml_keyword">Set</span> create_datum_from_ithing = theDatums.<span class="vbhtml_keyword">Property</span>(<span class="vbhtml_keyword">CStr</span>(ObjPtr(This)))
+        create_datum_from_ithing.Models = <span class="vbhtml_keyword">New</span> PropertyMap
+    <span class="vbhtml_keyword">Else</span>
+        <span class="vbhtml_keyword">Set</span> create_datum_from_ithing = <span class="vbhtml_keyword">New</span> Datum
+        theDatums.<span class="vbhtml_keyword">Property</span>(<span class="vbhtml_keyword">CStr</span>(ObjPtr(This))) = create_datum_from_ithing
+        create_datum_from_ithing.MemberName = This.<span class="vbhtml_keyword">Property</span>("Name")
+        create_datum_from_ithing.TypeName = This.<span class="vbhtml_keyword">Type</span>
+        create_datum_from_ithing.SiteKind = SITEKIND_VWTHING
+        create_datum_from_ithing.Value = This
+        create_datum_from_ithing.Origin = This.Container
+        create_datum_from_ithing.NODEKIND = NODEKIND_CONTENT
+        create_datum_from_ithing.Models = <span class="vbhtml_keyword">New</span> PropertyMap
+    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+    <span class="vbhtml_keyword">For</span> <span class="vbhtml_keyword">Each</span> ItemName <span class="vbhtml_keyword">In</span> This.Properties
+        add_model_info create_datum_from_ithing, create_datum_ithing_property(This, ItemName, This.<span class="vbhtml_keyword">Property</span>(ItemName))
+    <span class="vbhtml_keyword">Next</span>
+    <span class="vbhtml_keyword">For</span> <span class="vbhtml_keyword">Each</span> ItemName <span class="vbhtml_keyword">In</span> This.Contents
+        add_model_info create_datum_from_ithing, create_datum_from_ithing(This.Contents(ItemName))
+    <span class="vbhtml_keyword">Next</span>
+    <span class="vbhtml_keyword">For</span> <span class="vbhtml_keyword">Each</span> ItemName <span class="vbhtml_keyword">In</span> This.Methods
+        add_model_info create_datum_from_ithing, create_datum_ithing_method(This, ItemName, This.Method(ItemName))
+    <span class="vbhtml_keyword">Next</span>
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> create_datum_ithing_method(This <span class="vbhtml_keyword">As</span> IThing, <span class="vbhtml_keyword">ByVal</span> ItemName <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">String</span>, vData) <span class="vbhtml_keyword">As</span> Datum
+        <span class="vbhtml_keyword">Set</span> create_datum_ithing_method = <span class="vbhtml_keyword">New</span> Datum
+        create_datum_ithing_method.Origin = This
+        create_datum_ithing_method.MemberName = ItemName
+        create_datum_ithing_method.SiteKind = SITEKIND_VWTHING
+        create_datum_ithing_method.TypeName = "vt_variant"
+        create_datum_ithing_method.NODEKIND = NODEKIND_FUNCTION
+        <span class="vbhtml_keyword">Set</span> create_datum_ithing_method.Value = vData
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> create_datum_ithing_property(This <span class="vbhtml_keyword">As</span> IThing, <span class="vbhtml_keyword">ByVal</span> ItemName <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">String</span>, vData) <span class="vbhtml_keyword">As</span> Datum
+        <span class="vbhtml_keyword">Set</span> create_datum_ithing_property = <span class="vbhtml_keyword">New</span> Datum
+        create_datum_ithing_property.Origin = This
+        create_datum_ithing_property.MemberName = ItemName
+        create_datum_ithing_property.SiteKind = SITEKIND_VWTHING
+        create_datum_ithing_property.TypeName = TypeName(vData)
+        create_datum_ithing_property.NODEKIND = NODEKIND_property
+        <span class="vbhtml_keyword">If</span> IsObject(vData) <span class="vbhtml_keyword">Then</span>
+            <span class="vbhtml_keyword">Set</span> create_datum_ithing_property.Value = vData
+        <span class="vbhtml_keyword">Else</span>
+            create_datum_ithing_property.Value = vData
+        <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Sub</span> enum_model(This <span class="vbhtml_keyword">As</span> Datum)
+<span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Sub</span>
+    <span class="vbhtml_keyword">Set</span> This.Models = <span class="vbhtml_keyword">New</span> PropertyMap
+    <span class="vbhtml_keyword">Select</span> <span class="vbhtml_keyword">Case</span> This.SiteKind
+        <span class="vbhtml_keyword">Case</span> SiteKinds.SITEKIND_VWSERVER, SiteKinds.SITEKIND_WINCOM <span class="vbhtml_comment">' Standard COM</span>
+        <span class="vbhtml_keyword">Case</span> SiteKinds.SITEKIND_VWTHING
+        <span class="vbhtml_keyword">Case</span> SiteKinds.SITEKIND_PROLOG_CLIENT
+        <span class="vbhtml_keyword">Case</span> SiteKinds.SITEKIND_PROLOG_SERVER
+        <span class="vbhtml_keyword">Case</span> <span class="vbhtml_keyword">Else</span>
+    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Select</span>
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Sub</span>
+
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Sub</span> Class_Initialize()
+<span class="vbhtml_keyword">If</span> <span class="vbhtml_keyword">Not</span> m_ready_flag <span class="vbhtml_keyword">Then</span> preptheobjects
+<span class="vbhtml_comment">'   HookDispatch Me</span>
+<span class="vbhtml_comment">'On Error Resume Next</span>
+<span class="vbhtml_comment">'    theAddRefs.Add Me, CStr(ObjPtr(Me))</span>
+<span class="vbhtml_comment">'If Err Then Stop</span>
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Sub</span>
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Sub</span> Class_Terminate()
+ <span class="vbhtml_comment">'  UnHookDispatch Me</span>
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Sub</span>
+
+<span class="vbhtml_keyword">Property</span> <span class="vbhtml_keyword">Get</span> Models(This <span class="vbhtml_keyword">As</span> Datum) <span class="vbhtml_keyword">As</span> PropertyMap
+    <span class="vbhtml_keyword">Set</span> Models = This.Models
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Property</span>
+<span class="vbhtml_keyword">Property</span> <span class="vbhtml_keyword">Get</span> Properties(This <span class="vbhtml_keyword">As</span> Datum) <span class="vbhtml_keyword">As</span> PropertyMap
+    <span class="vbhtml_keyword">Set</span> Properties = typelist(This, NODEKIND_property)
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Property</span>
+<span class="vbhtml_keyword">Property</span> <span class="vbhtml_keyword">Get</span> Methods(This <span class="vbhtml_keyword">As</span> Datum) <span class="vbhtml_keyword">As</span> PropertyMap
+    <span class="vbhtml_keyword">Set</span> Methods = typelist(This, NODEKIND_FUNCTION)
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Property</span>
+<span class="vbhtml_keyword">Property</span> <span class="vbhtml_keyword">Get</span> Events(This <span class="vbhtml_keyword">As</span> Datum) <span class="vbhtml_keyword">As</span> PropertyMap
+    <span class="vbhtml_keyword">Set</span> Events = typelist(This, NODEKIND_EVENT)
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Property</span>
+<span class="vbhtml_keyword">Property</span> <span class="vbhtml_keyword">Get</span> Contents(This <span class="vbhtml_keyword">As</span> Datum) <span class="vbhtml_keyword">As</span> PropertyMap
+    <span class="vbhtml_keyword">Set</span> Contents = typelist(This, NODEKIND_CONTENT)
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Property</span>
+
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Sub</span> add_model_info(<span class="vbhtml_keyword">ByVal</span> This <span class="vbhtml_keyword">As</span> Datum, thisDatum <span class="vbhtml_keyword">As</span> Datum)
+        <span class="vbhtml_keyword">If</span> thisDatum <span class="vbhtml_keyword">Is</span> <span class="vbhtml_keyword">Nothing</span> <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Sub</span>
+        <span class="vbhtml_keyword">If</span> thisDatum.MemberName = "" <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Sub</span>
+        <span class="vbhtml_keyword">If</span> This.Models.IsValid(thisDatum.MemberName) <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Sub</span>
+<span class="vbhtml_comment">'        Stop</span>
+        This.Models.<span class="vbhtml_keyword">Property</span>(thisDatum.MemberName) = thisDatum
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Sub</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Sub</span> set_origin(This <span class="vbhtml_keyword">As</span> Datum, sObject, MemberName)
+    <span class="vbhtml_keyword">Set</span> This.Origin = sObject
+    This.MemberName = MemberName
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Sub</span>
+
+<span class="vbhtml_comment">'SDF  253-219-5129</span>
+<span class="vbhtml_comment">' scarlet68@hotmail.com</span>
+
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Function</span> typelist(This <span class="vbhtml_keyword">As</span> Datum, NODEKINDSearch <span class="vbhtml_keyword">As</span> NODEKINDs) <span class="vbhtml_keyword">As</span> PropertyMap
+    <span class="vbhtml_keyword">Dim</span> MemberName
+    <span class="vbhtml_keyword">Set</span> typelist = <span class="vbhtml_keyword">New</span> PropertyMap
+    <span class="vbhtml_keyword">For</span> <span class="vbhtml_keyword">Each</span> MemberName <span class="vbhtml_keyword">In</span> This.Models
+        <span class="vbhtml_keyword">If</span> This.Models.<span class="vbhtml_keyword">Property</span>(MemberName).This.NODEKIND = NODEKINDSearch <span class="vbhtml_keyword">Then</span> typelist.<span class="vbhtml_keyword">Property</span>(MemberName) = This.Models.<span class="vbhtml_keyword">Property</span>(MemberName)
+    <span class="vbhtml_keyword">Next</span>
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Property</span> <span class="vbhtml_keyword">Let</span> AllowShowMessage(<span class="vbhtml_keyword">ByVal</span> Allow <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Boolean</span>)
+
+   m_AllowShowMessage = Allow
+   
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Property</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Property</span> <span class="vbhtml_keyword">Get</span> AllowShowMessage() <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Boolean</span>
+   
+   AllowShowMessage = m_AllowShowMessage
+   
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Property</span>
+
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Sub</span> pvShowMessage(<span class="vbhtml_keyword">ByVal</span> Msg <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">String</span>)
+
+   MsgBox Msg
+   
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Sub</span>
+
+
+
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Function</span> IDispatchCallback_GetDISPID(<span class="vbhtml_keyword">ByVal</span> <span class="vbhtml_keyword">Name</span> <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">String</span>) <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>
+<span class="vbhtml_keyword">Dim</span> lIdx <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>
+
+   <span class="vbhtml_keyword">Select</span> <span class="vbhtml_keyword">Case</span> LCase$(<span class="vbhtml_keyword">Name</span>)
+      
+      <span class="vbhtml_keyword">Case</span> "showmessage"
+      
+         <span class="vbhtml_keyword">If</span> m_AllowShowMessage <span class="vbhtml_keyword">Then</span>
+            IDispatchCallback_GetDISPID = DISPID_SHOWMESSAGE
+         <span class="vbhtml_keyword">Else</span>
+            IDispatchCallback_GetDISPID = DISPID_UNKNOWN
+         <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+      
+      <span class="vbhtml_keyword">Case</span> "testproperty"
+         IDispatchCallback_GetDISPID = DISPID_TESTPROP
+      
+      <span class="vbhtml_keyword">Case</span> <span class="vbhtml_keyword">Else</span>
+         IDispatchCallback_GetDISPID = DISPID_UNKNOWN
+         
+   <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Select</span>
+   
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Property</span> <span class="vbhtml_keyword">Let</span> IDispatchCallback_GIONAddr(<span class="vbhtml_keyword">ByVal</span> RHS <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>)
+
+   GIONAddress = RHS
+   
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Property</span>
+
+
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Property</span> <span class="vbhtml_keyword">Get</span> IDispatchCallback_GIONAddr() <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>
+
+   IDispatchCallback_GIONAddr = GIONAddress
+   
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Property</span>
+
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Property</span> <span class="vbhtml_keyword">Let</span> IDispatchCallback_InvokeAddr(<span class="vbhtml_keyword">ByVal</span> RHS <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>)
+
+   InvokeAddress = RHS
+   
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Property</span>
+
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Property</span> <span class="vbhtml_keyword">Get</span> IDispatchCallback_InvokeAddr() <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>
+
+   IDispatchCallback_InvokeAddr = InvokeAddress
+   
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Property</span>
+
+
+<span class="vbhtml_keyword">Private</span> <span class="vbhtml_keyword">Function</span> IDispatchCallback_InvokeMethod(<span class="vbhtml_keyword">ByVal</span> InvokeType <span class="vbhtml_keyword">As</span> ITLib.InvokeKind, <span class="vbhtml_keyword">ByVal</span> DISPID <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>, Params() <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Variant</span>, Result <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Variant</span>) <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>
+<span class="vbhtml_keyword">Dim</span> Count <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>
+
+   <span class="vbhtml_keyword">On</span> <span class="vbhtml_keyword">Error</span> <span class="vbhtml_keyword">Resume</span> <span class="vbhtml_keyword">Next</span>
+   
+   <span class="vbhtml_comment">' Get the parameters count</span>
+   Count = <span class="vbhtml_keyword">UBound</span>(Params) + 1
+   
+   <span class="vbhtml_keyword">Select</span> <span class="vbhtml_keyword">Case</span> DISPID
+      
+      <span class="vbhtml_keyword">Case</span> DISPID_SHOWMESSAGE
+      
+         <span class="vbhtml_comment">' Show message has only 1</span>
+         <span class="vbhtml_comment">' parameter</span>
+         <span class="vbhtml_keyword">If</span> Count = 1 <span class="vbhtml_keyword">Then</span>
+         
+            <span class="vbhtml_keyword">If</span> VarType(Params(0)) = vbString <span class="vbhtml_keyword">Then</span>
+            
+               <span class="vbhtml_comment">' All parameters are OK.</span>
+               <span class="vbhtml_comment">' Call the sub.</span>
+               pvShowMessage Params(0)
+               
+            <span class="vbhtml_keyword">Else</span>
+            
+               <span class="vbhtml_comment">' Type mismatch error</span>
+               IDispatchCallback_InvokeMethod = DISP_E_TYPEMISMATCH
+               
+            <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+            
+         <span class="vbhtml_keyword">Else</span>
+         
+            <span class="vbhtml_comment">' Return Wrong number of parameters...</span>
+            IDispatchCallback_InvokeMethod = DISP_E_BADPARAMCOUNT
+            
+         <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+      
+      <span class="vbhtml_keyword">Case</span> DISPID_TESTPROP
+      
+         <span class="vbhtml_keyword">If</span> (InvokeType <span class="vbhtml_keyword">And</span> INVOKE_PROPERTYGET) = INVOKE_PROPERTYGET <span class="vbhtml_keyword">Or</span> (InvokeType <span class="vbhtml_keyword">And</span> INVOKE_FUNC) = INVOKE_FUNC <span class="vbhtml_keyword">Then</span>
+         
+            <span class="vbhtml_comment">' Property Get</span>
+            <span class="vbhtml_keyword">If</span> Count = 0 <span class="vbhtml_keyword">Then</span>
+            
+               <span class="vbhtml_comment">' Return the property value</span>
+               Result = m_TestProperty
+               
+            <span class="vbhtml_keyword">Else</span>
+            
+               <span class="vbhtml_comment">' Return Wrong number of parameters...</span>
+               IDispatchCallback_InvokeMethod = DISP_E_BADPARAMCOUNT
+               
+            <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+         
+         <span class="vbhtml_keyword">ElseIf</span> InvokeType = INVOKE_PROPERTYPUT <span class="vbhtml_keyword">Then</span>
+         
+            <span class="vbhtml_comment">' Parameter 1 contains the new value</span>
+            <span class="vbhtml_keyword">If</span> Count = 1 <span class="vbhtml_keyword">Then</span>
+            
+               <span class="vbhtml_comment">' TestProperty is a String</span>
+               <span class="vbhtml_keyword">If</span> VarType(Params(0)) = vbString <span class="vbhtml_keyword">Then</span>
+               
+                  m_TestProperty = Params(0)
+               
+               <span class="vbhtml_keyword">Else</span>
+               
+                  <span class="vbhtml_comment">' Type mismatch error</span>
+                  IDispatchCallback_InvokeMethod = DISP_E_TYPEMISMATCH
+
+               <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+               
+            <span class="vbhtml_keyword">Else</span>
+               
+               <span class="vbhtml_comment">' Return Wrong number of parameters...</span>
+               IDispatchCallback_InvokeMethod = DISP_E_BADPARAMCOUNT
+               
+            <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+         
+         <span class="vbhtml_keyword">Else</span>
+            IDispatchCallback_InvokeMethod = DISP_E_UNKNOWNNAME
+         <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+         
+   <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Select</span>
+   
+
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> OrderedVTableFunctions( _
+  <span class="vbhtml_keyword">ByVal</span> TLInf <span class="vbhtml_keyword">As</span> TypeLibInfo, _
+  IFaceName <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">String</span>) <span class="vbhtml_keyword">As</span> tli.MemberInfo()
+<span class="vbhtml_keyword">Dim</span> ti <span class="vbhtml_keyword">As</span> InterfaceInfo
+<span class="vbhtml_keyword">Dim</span> Bases <span class="vbhtml_keyword">As</span> TypeInfos
+<span class="vbhtml_keyword">Dim</span> MI <span class="vbhtml_keyword">As</span> MemberInfo
+<span class="vbhtml_keyword">Dim</span> OVF() <span class="vbhtml_keyword">As</span> MemberInfo
+<span class="vbhtml_keyword">Dim</span> MaxOffset <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Integer</span>
+<span class="vbhtml_keyword">Dim</span> CurOffset <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Integer</span>
+  <span class="vbhtml_comment">'Make sure we get a VTable interface before proceeding</span>
+  <span class="vbhtml_keyword">On</span> <span class="vbhtml_keyword">Error</span> <span class="vbhtml_keyword">Resume</span> <span class="vbhtml_keyword">Next</span>
+  <span class="vbhtml_keyword">Set</span> ti = TLInf.TypeInfos.NamedItem(IFaceName)
+  <span class="vbhtml_keyword">Set</span> ti = ti.VTableInterface
+  <span class="vbhtml_keyword">If</span> Err <span class="vbhtml_keyword">Or</span> ti <span class="vbhtml_keyword">Is</span> <span class="vbhtml_keyword">Nothing</span> <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Function</span>
+  <span class="vbhtml_keyword">On</span> <span class="vbhtml_keyword">Error</span> <span class="vbhtml_keyword">GoTo</span> 0
+  <span class="vbhtml_keyword">With</span> ti.Members
+    <span class="vbhtml_comment">'Largest VTableOffset is generally on the last</span>
+    <span class="vbhtml_comment">'member in this collection</span>
+    MaxOffset = .Item(.Count).VTableOffset
+    <span class="vbhtml_keyword">ReDim</span> OVF(MaxOffset \ 4)
+  <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">With</span>
+  <span class="vbhtml_keyword">Do</span> Until ti <span class="vbhtml_keyword">Is</span> <span class="vbhtml_keyword">Nothing</span>
+    <span class="vbhtml_comment">'Walk each member</span>
+    <span class="vbhtml_keyword">For</span> <span class="vbhtml_keyword">Each</span> MI <span class="vbhtml_keyword">In</span> ti.Members
+      CurOffset = MI.VTableOffset
+      <span class="vbhtml_keyword">If</span> CurOffset > MaxOffset <span class="vbhtml_keyword">Then</span>
+        <span class="vbhtml_comment">'This is extremely rare</span>
+        MaxOffset = CurOffset
+        <span class="vbhtml_keyword">ReDim</span> Preserve OVF(MaxOffset \ 4)
+      <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+      <span class="vbhtml_keyword">Set</span> OVF(CurOffset \ 4) = MI
+    <span class="vbhtml_keyword">Next</span>
+    <span class="vbhtml_comment">'Get the next base</span>
+    <span class="vbhtml_keyword">Set</span> Bases = ti.ImpliedInterfaces
+    <span class="vbhtml_keyword">Set</span> ti = <span class="vbhtml_keyword">Nothing</span>
+    <span class="vbhtml_keyword">If</span> Bases.Count <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Set</span> ti = Bases(1)
+  <span class="vbhtml_keyword">Loop</span>
+  OrderedVTableFunctions = OVF
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Sub</span> pl_obj_pred(ByRef pl_obj, <span class="vbhtml_keyword">ByVal</span> plstr)
+<span class="vbhtml_comment">'on error resume next</span>
+<span class="vbhtml_keyword">Dim</span> token, Args, arg(), temparg(), i <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>, tt
+  <span class="vbhtml_keyword">Dim</span> theObject <span class="vbhtml_keyword">As</span> IThing, Index <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>, temp, tempObject <span class="vbhtml_keyword">As</span> ithingwithrating
+  <span class="vbhtml_keyword">Dim</span> theinnerobj <span class="vbhtml_keyword">As</span> IThing, tempcollection <span class="vbhtml_keyword">As</span> Collection, targetedcollection <span class="vbhtml_keyword">As</span> Collection
+  <span class="vbhtml_keyword">Dim</span> type_Properties(), thevariant <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Variant</span>, member_pl_obj
+  <span class="vbhtml_keyword">Dim</span> theCount <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>
+    <span class="vbhtml_keyword">If</span> IsObject(plstr) <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Set</span> pl_obj = plstr: <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Sub</span>
+    plstr = pl_trim(plstr)
+    i = InStr(plstr, "(")
+    <span class="vbhtml_keyword">If</span> i > 0 <span class="vbhtml_keyword">Then</span>
+            token = Left(plstr, i - 1)
+            Args = pl_trim(Mid(plstr, i))
+        <span class="vbhtml_keyword">Else</span>
+            token = "atom"
+            Args = pl_trim(plstr)
+    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+    <span class="vbhtml_comment">'If TypeName(pl_obj) &lt;> "Empty" Then token = TypeName(pl_obj)</span>
+        
+    <span class="vbhtml_keyword">Select</span> <span class="vbhtml_keyword">Case</span> LCase(token)
+        <span class="vbhtml_keyword">Case</span> "single"
+            pl_obj = <span class="vbhtml_keyword">CSng</span>(pl_trim(Args))
+        <span class="vbhtml_keyword">Case</span> "byte", "vt_ui1", "vt_si1"
+            pl_obj = <span class="vbhtml_keyword">CByte</span>(pl_trim(Args))
+        <span class="vbhtml_keyword">Case</span> "long", "vt_ui4", "vt_si4"
+            pl_obj = <span class="vbhtml_keyword">CLng</span>(pl_trim(Args))
+        <span class="vbhtml_keyword">Case</span> "double"
+            pl_obj = <span class="vbhtml_keyword">CDbl</span>(pl_trim(Args))
+        <span class="vbhtml_keyword">Case</span> "integer", "short", "color", "int", "vt_ui2", "vt_si2"
+            pl_obj = Val(pl_trim(Args))
+        <span class="vbhtml_keyword">Case</span> "string", "vt_bstr"
+            pl_obj = parse_plstr_vbstr(Args)
+        <span class="vbhtml_keyword">Case</span> "world", "iworld"
+            <span class="vbhtml_keyword">Set</span> pl_obj = theIAvatar.World <span class="vbhtml_comment">':</span>
+        <span class="vbhtml_keyword">Case</span> "array"
+            pl_split_pred temp, pl_trim(Args, 2), ","
+            <span class="vbhtml_keyword">ReDim</span> tempar(<span class="vbhtml_keyword">UBound</span>(temp))
+            <span class="vbhtml_keyword">For</span> i = 0 <span class="vbhtml_keyword">To</span> <span class="vbhtml_keyword">UBound</span>(temp)
+                <span class="vbhtml_keyword">If</span> IsObject(pl_obj(temp(i))) <span class="vbhtml_keyword">Then</span>
+                    <span class="vbhtml_keyword">Set</span> tempar(i) = pl_obj(temp(i))
+                  <span class="vbhtml_keyword">Else</span>
+                    tempar(i) = pl_obj(temp(i))
+                <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+            <span class="vbhtml_keyword">Next</span> i
+            pl_obj = tempar
+        <span class="vbhtml_keyword">Case</span> "nothing"
+            <span class="vbhtml_keyword">Set</span> pl_obj = <span class="vbhtml_keyword">Nothing</span>
+        <span class="vbhtml_keyword">Case</span> "user_type"
+            pl_obj_pred pl_obj, Args
+        <span class="vbhtml_keyword">Case</span> "bool", "boolean"
+            pl_obj = IIf(InStr("truefalsefail", Args) = 1, <span class="vbhtml_keyword">True</span>, <span class="vbhtml_keyword">False</span>)
+        <span class="vbhtml_keyword">Case</span> "true"
+            pl_obj = <span class="vbhtml_keyword">True</span>
+        <span class="vbhtml_keyword">Case</span> "false", "fail"
+            pl_obj = <span class="vbhtml_keyword">False</span>
+        <span class="vbhtml_keyword">Case</span> "ithing"
+            pl_ithing_pred pl_obj, "ithing(" &amp; Args &amp; ")"
+        <span class="vbhtml_keyword">Case</span> "atom"
+            <span class="vbhtml_keyword">If</span> Val(pl_trim(plstr)) > 0 <span class="vbhtml_keyword">Or</span> pl_trim(plstr) = "0" <span class="vbhtml_keyword">Then</span> pl_obj = Val(pl_trim(plstr)): <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Sub</span>
+            pl_obj = parse_plstr_vbstr(plstr)
+        <span class="vbhtml_keyword">Case</span> "string"
+            pl_obj = parse_plstr_vbstr(Args)
+        <span class="vbhtml_keyword">Case</span> "ipropertymap"
+            pl_split_pred arg, pl_trim(Args, 2), ","
+            <span class="vbhtml_keyword">Set</span> pl_obj = theIAvatar.World.CreatePropertyMap
+            <span class="vbhtml_keyword">ReDim</span> temparg(1)
+            <span class="vbhtml_keyword">For</span> i = 0 <span class="vbhtml_keyword">To</span> <span class="vbhtml_keyword">UBound</span>(arg)
+                pl_split_pred temp, <span class="vbhtml_keyword">CStr</span>(arg(i)), "="
+                <span class="vbhtml_keyword">If</span> InStr(arg(i), "=") > 0 <span class="vbhtml_keyword">Then</span>
+                    pl_obj.<span class="vbhtml_keyword">Property</span>(parse_plstr_vbstr(temp(0))) = pl_trim(pl_obj(temp(1)))
+                 <span class="vbhtml_keyword">Else</span>
+                    pl_obj.<span class="vbhtml_keyword">Property</span>(parse_plstr_vbstr(temp(0))) = pl_trim(pl_obj(temp(0)))
+                <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+            <span class="vbhtml_keyword">Next</span>
+        <span class="vbhtml_keyword">Case</span> "ipropertylist", "propertylist"
+            pl_split_pred arg, pl_trim(Args, 2), ","
+            <span class="vbhtml_keyword">Set</span> pl_obj = <span class="vbhtml_keyword">New</span> PropertyList
+            <span class="vbhtml_keyword">For</span> i = 0 <span class="vbhtml_keyword">To</span> <span class="vbhtml_keyword">UBound</span>(arg)
+                pl_obj.Add pl_obj(arg(i))
+            <span class="vbhtml_keyword">Next</span>
+        <span class="vbhtml_keyword">Case</span> "collection"
+            pl_split_pred arg, pl_trim(Args, 2), ","
+            <span class="vbhtml_keyword">Set</span> pl_obj = <span class="vbhtml_keyword">New</span> Collection
+            <span class="vbhtml_keyword">For</span> i = 0 <span class="vbhtml_keyword">To</span> <span class="vbhtml_keyword">UBound</span>(arg)
+                pl_obj.Add pl_obj(arg(i))
+            <span class="vbhtml_keyword">Next</span>
+        <span class="vbhtml_keyword">Case</span> "ivector", "vector"
+            <span class="vbhtml_keyword">Set</span> temp = <span class="vbhtml_keyword">New</span> Vector
+            pl_split_pred arg, Args, ","
+            <span class="vbhtml_keyword">Select</span> <span class="vbhtml_keyword">Case</span> <span class="vbhtml_keyword">UBound</span>(arg)
+                <span class="vbhtml_keyword">Case</span> 2
+                    pl_obj_pred tt, arg(0): temp.X = tt
+                    pl_obj_pred tt, arg(1): temp.Y = tt
+                    pl_obj_pred tt, arg(2): temp.Z = tt
+                <span class="vbhtml_keyword">Case</span> 3
+                    <span class="vbhtml_comment">'temp.rotation = val(pl_trim(pl_obj(arg(0))))</span>
+                    pl_obj_pred tt, arg(1): temp.X = tt
+                    pl_obj_pred tt, arg(2): temp.Y = tt
+                    pl_obj_pred tt, arg(3): temp.Z = tt
+           <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Select</span>
+            <span class="vbhtml_keyword">Set</span> pl_obj = temp
+        <span class="vbhtml_keyword">Case</span> <span class="vbhtml_keyword">Else</span>
+            <span class="vbhtml_keyword">If</span> pl_obj = Null <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Set</span> pl_obj = java_vbscript_engine.Eval("New " &amp; token)
+            pl_split_pred arg, pl_trim(Args, 2), ","
+            pl_split_pred type_Properties, object_model_array_from_class_string(token), ","
+
+            <span class="vbhtml_keyword">If</span> <span class="vbhtml_keyword">UBound</span>(arg) &lt;= <span class="vbhtml_keyword">UBound</span>(type_Properties) <span class="vbhtml_keyword">Then</span> theCount = <span class="vbhtml_keyword">UBound</span>(arg) <span class="vbhtml_keyword">Else</span> theCount = <span class="vbhtml_keyword">UBound</span>(type_Properties)
+            <span class="vbhtml_keyword">Select</span> <span class="vbhtml_keyword">Case</span> theCount
+                <span class="vbhtml_keyword">Case</span> -1
+                    pl_ithing_pred pl_obj, "ithing(" &amp; token &amp; "_" &amp; Args &amp; "_)"
+                <span class="vbhtml_keyword">Case</span> <span class="vbhtml_keyword">Else</span>
+<span class="vbhtml_comment">'                    thevariant = pl_obj</span>
+                    <span class="vbhtml_keyword">For</span> i = 0 <span class="vbhtml_keyword">To</span> theCount
+                        pl_obj_pred member_pl_obj, arg(i)
+
+<span class="vbhtml_comment">'                        assign_value RecordField(pl_obj, type_Properties(i)), member_pl_obj</span>
+<span class="vbhtml_comment">'                        If Err Then assign_value pl_obj.Property(type_Properties(i)), member_pl_obj</span>
+                        
+                        <span class="vbhtml_keyword">If</span> IsObject(member_pl_obj) <span class="vbhtml_keyword">Then</span>
+                            <span class="vbhtml_keyword">Set</span> RecordField(pl_obj, <span class="vbhtml_keyword">CStr</span>(type_Properties(i))) = member_pl_obj
+                        <span class="vbhtml_keyword">Else</span>
+                            RecordField(pl_obj, <span class="vbhtml_keyword">CStr</span>(type_Properties(i))) = member_pl_obj
+                        <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+                        <span class="vbhtml_keyword">If</span> Err <span class="vbhtml_keyword">Then</span>
+                            <span class="vbhtml_keyword">If</span> IsObject(member_pl_obj) <span class="vbhtml_keyword">Then</span>
+                                <span class="vbhtml_keyword">Set</span> pl_obj.<span class="vbhtml_keyword">Property</span>(type_Properties(i)) = member_pl_obj
+                            <span class="vbhtml_keyword">Else</span>
+                                pl_obj.<span class="vbhtml_keyword">Property</span>(type_Properties(i)) = member_pl_obj
+                            <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+                        <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+                    <span class="vbhtml_keyword">Next</span>
+            <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Select</span>
+    <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Select</span>
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Sub</span>
+
+
+<span class="vbhtml_comment">'ID-147-60-74</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Sub</span> array_pl_pred(ByRef obj_pl, ParamArray This())
+<span class="vbhtml_keyword">Dim</span> temparray(), i <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Long</span>
+<span class="vbhtml_keyword">Select</span> <span class="vbhtml_keyword">Case</span> <span class="vbhtml_keyword">UBound</span>(This)
+    <span class="vbhtml_keyword">Case</span> -1
+        obj_pl = ""
+    <span class="vbhtml_keyword">Case</span> 0
+        obj_pl_pred obj_pl, This(0)
+    <span class="vbhtml_keyword">Case</span> <span class="vbhtml_keyword">Else</span>
+        <span class="vbhtml_keyword">ReDim</span> temparray(<span class="vbhtml_keyword">UBound</span>(This))
+        <span class="vbhtml_keyword">For</span> i = 0 <span class="vbhtml_keyword">To</span> <span class="vbhtml_keyword">UBound</span>(This)
+             obj_pl_pred temparray(i), This(i)
+        <span class="vbhtml_keyword">Next</span> i
+        obj_pl = Join(temparray, ",")
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Select</span>
+
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Sub</span>
+
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Sub</span> add_com_dll(<span class="vbhtml_keyword">ByVal</span> FileName)
+<span class="vbhtml_keyword">If</span> TypeName(DLLFiles) = "Nothing" <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Set</span> DLLFiles = <span class="vbhtml_keyword">New</span> PropertyMap
+<span class="vbhtml_keyword">If</span> DLLFiles.IsValid(FileName) <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Sub</span>
+
+<span class="vbhtml_keyword">Dim</span> ttlinfo  <span class="vbhtml_keyword">As</span> TypeLibInfo
+<span class="vbhtml_keyword">Set</span> ttlinfo = tli.TLIApplication.TypeLibInfoFromFile(FileName)
+DLLFiles.<span class="vbhtml_keyword">Property</span>(FileName) = ttlinfo
+theComClassBrowser.Text1.AddItem FileName
+<span class="vbhtml_comment">'</span>
+
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Sub</span>
+
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> create_instance1(<span class="vbhtml_keyword">ByVal</span> objecttype <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">String</span>, <span class="vbhtml_keyword">ByVal</span> instancename)
+<span class="vbhtml_keyword">Dim</span> ttlinfo  <span class="vbhtml_keyword">As</span> TypeLibInfo
+<span class="vbhtml_keyword">Dim</span> tinterfaceinfo <span class="vbhtml_keyword">As</span> InterfaceInfo
+<span class="vbhtml_keyword">Dim</span> theinstancewithinfo <span class="vbhtml_keyword">As</span> instancewithinfo
+<span class="vbhtml_keyword">Dim</span> ttypeinfo <span class="vbhtml_keyword">As</span> tli.TypeInfo
+
+<span class="vbhtml_keyword">For</span> <span class="vbhtml_keyword">Each</span> ttlinfo <span class="vbhtml_keyword">In</span> DLLFiles
+        <span class="vbhtml_keyword">Set</span> tinterfaceinfo = ttlinfo.TypeInfos.NamedItem(objecttype)
+            <span class="vbhtml_keyword">If</span> <span class="vbhtml_keyword">Not</span> (tinterfaceinfo <span class="vbhtml_keyword">Is</span> <span class="vbhtml_keyword">Nothing</span>) <span class="vbhtml_keyword">Then</span>
+                <span class="vbhtml_keyword">Set</span> theinstancewithinfo.theObject = CreateObject(ttlinfo.<span class="vbhtml_keyword">Name</span> &amp; "." &amp; objecttype)
+                <span class="vbhtml_keyword">Set</span> theinstancewithinfo.theinterfaceinfo = tinterfaceinfo
+                    theinstancewithinfo.thename = instancename
+              <span class="vbhtml_keyword">Set</span> theInstances.<span class="vbhtml_keyword">Property</span>(instancename) = theinstancewithinfo: create_instance1 = instancename
+                <span class="vbhtml_comment">'</span>
+                <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Function</span>
+            <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+<span class="vbhtml_keyword">Next</span>
+create_instance1 = "notfound"
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> set_property_value(<span class="vbhtml_keyword">ByVal</span> instancename, <span class="vbhtml_keyword">ByVal</span> PropertyName, <span class="vbhtml_keyword">ByVal</span> Value)
+<span class="vbhtml_keyword">Dim</span> tinterfaceinfo <span class="vbhtml_keyword">As</span> tli.InterfaceInfo
+<span class="vbhtml_keyword">Dim</span> theinstancewithinfo <span class="vbhtml_keyword">As</span> instancewithinfo
+<span class="vbhtml_keyword">Dim</span> tobject <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Object</span>
+<span class="vbhtml_keyword">Dim</span> themembers <span class="vbhtml_keyword">As</span> Members
+<span class="vbhtml_keyword">Dim</span> theproperty <span class="vbhtml_keyword">As</span> MemberInfo
+<span class="vbhtml_keyword">Dim</span> ttypeinfo <span class="vbhtml_keyword">As</span> tli.TypeInfo
+
+    <span class="vbhtml_keyword">Set</span> tobject = theInstances.<span class="vbhtml_keyword">Property</span>(instancename).theObject
+    <span class="vbhtml_keyword">Set</span> tinterfaceinfo = theInstances.<span class="vbhtml_keyword">Property</span>(instancename).theinterfaceinfo
+    <span class="vbhtml_keyword">Set</span> themembers = tinterfaceinfo.Members
+    <span class="vbhtml_keyword">For</span> <span class="vbhtml_keyword">Each</span> theproperty <span class="vbhtml_keyword">In</span> themembers
+        <span class="vbhtml_comment">'themember 'memberinfo</span>
+        <span class="vbhtml_keyword">If</span> theproperty.<span class="vbhtml_keyword">Name</span> = PropertyName <span class="vbhtml_keyword">Then</span>
+            <span class="vbhtml_keyword">Select</span> <span class="vbhtml_keyword">Case</span> theproperty.InvokeKind
+            
+                <span class="vbhtml_keyword">Case</span> INVOKE_PROPERTYPUT
+                <span class="vbhtml_keyword">Case</span> INVOKE_PROPERTYGET
+                <span class="vbhtml_keyword">Case</span> INVOKE_FUNC
+                                
+            
+            <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Select</span>
+                
+        <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">If</span>
+    <span class="vbhtml_keyword">Next</span>
+
+set_property_value = "notfound"
+<span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+    
+    
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Function</span> vp(<span class="vbhtml_keyword">ByVal</span> theObject): <span class="vbhtml_keyword">Set</span> vp = theObject: <span class="vbhtml_keyword">End</span> <span class="vbhtml_keyword">Function</span>
+
+
+<span class="vbhtml_keyword">Public</span> <span class="vbhtml_keyword">Sub</span> pl_ithing_pred(ByRef pl_ithing, <span class="vbhtml_keyword">ByVal</span> plstrIn)
+  <span class="vbhtml_keyword">Dim</span> vbstr, temp <span class="vbhtml_keyword">As</span> <span class="vbhtml_keyword">Object</span>, tempcollection <span class="vbhtml_keyword">As</span> Collection, targetedcollection <span class="vbhtml_keyword">As</span> Collection, plstr
+<span class="vbhtml_comment">'''VarPtr (theobject)</span>
+    <span class="vbhtml_keyword">If</span> IsObject(plstr) <span class="vbhtml_keyword">Then</span> <span class="vbhtml_keyword">Set</span> pl_ithing = plstr: <span class="vbhtml_keyword">Exit</span> <span class="vbhtml_keyword">Sub</span>
+    
+    get_all_ithings_pred tempcollection
+    <span class="vbhtml_keyword">Set</span> targetedcollection = <span class="vbhtml_keyword">New</span> Collection
+
+<span class="vbhtml_comment">'inline</span>
+    plstr = plstrIn
+    plstr = pl_trim(plstr, , <span class="vbhtml_keyword">True</span>)
+    plstr = Replace(plstr, ")", "\)")
+    plstr = Replace(plstr, "(", "\(")
+    plstr = Replace(plstr, "_", ".+")
+    plstr = Replace(plstr, " ", "")
+    java_vbscript_engine.ExecuteStatement ("regex.pattern = """ &amp; LCase(plstr) &amp; """")
+    
+   

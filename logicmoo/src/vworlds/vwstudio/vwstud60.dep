@@ -1,0 +1,502 @@
+# Microsoft Developer Studio Generated Dependency File, included by vwstud60.mak
+
+..\vwcommon\cathelp.cpp : \
+	"..\vwcommon\cathelp.h"\
+	
+
+.\dlldatax.c : \
+	".\vwstudio_dlldata.c"\
+	
+
+.\StdAfx.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwimpl.cpp"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+..\vwcommon\syshelp.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwevents.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+.\vwstudio.cpp : \
+	"..\module\studio\vwstuexo.h"\
+	"..\tools\geomtool\geomsel.h"\
+	"..\tools\geomtool\geomundo.h"\
+	"..\tools\geomtool\rottool.h"\
+	"..\tools\geomtool\scaletl.h"\
+	"..\tools\geomtool\trans3d.h"\
+	"..\tools\geomtool\undoutil.h"\
+	"..\tools\stdtools\ctrlmgr.h"\
+	"..\tools\stdtools\polytool.h"\
+	"..\tools\stdtools\rotat2d.h"\
+	"..\tools\stdtools\scale2d.h"\
+	"..\tools\stdtools\select.h"\
+	"..\tools\stdtools\trans2d.h"\
+	"..\tools\stdtools\undoitem.h"\
+	"..\tools\stdtools\undostak.h"\
+	"..\tools\stdtools\vwerrtl.h"\
+	"..\tools\stdtools\zoomtool.h"\
+	"..\tools\webtools\fileactl.h"\
+	"..\tools\webtools\rwhelper.h"\
+	"..\tools\webtools\wwhelper.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cathelp.h"\
+	"..\vwcommon\cmddel.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\dirserv.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vbsguids.h"\
+	"..\vwcommon\vwadmin.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwclient.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwhtml.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwobject_i.c"\
+	"..\vwcommon\vwodb.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwprop_i.c"\
+	"..\vwcommon\vwrnedit.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwsgfxut.h"\
+	"..\vwcommon\vwsutils.h"\
+	"..\vwcommon\vwsysex.h"\
+	"..\vwsystem\vwsystem.h"\
+	"..\vwsystem\vwsystem_i.c"\
+	".\dlldatax.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwstudio - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwstudio - Win32 Release MinSize"
+
+!ENDIF 
+
+.\vwstudio.rc : \
+	".\CopyTool.rgs"\
+	".\ctrlmgr.rgs"\
+	".\CutTool.rgs"\
+	".\delvert.cur"\
+	".\DelVert.rgs"\
+	".\delxslct.rgs"\
+	".\draw.cur"\
+	".\FileAcTl.rgs"\
+	".\GeomUndo.rgs"\
+	".\icon1.ico"\
+	".\InsVert.rgs"\
+	".\NavBound.rgs"\
+	".\navigate.cur"\
+	".\PolyTool.rgs"\
+	".\Rotat2D.rgs"\
+	".\rotate.cur"\
+	".\rottool.rgs"\
+	".\RWHelper.rgs"\
+	".\scale.cur"\
+	".\scale2d.rgs"\
+	".\ScaleTl.rgs"\
+	".\select.cur"\
+	".\select.rgs"\
+	".\Trans2d.rgs"\
+	".\translat.cur"\
+	".\UndoItem.rgs"\
+	".\undostak.rgs"\
+	".\version.h"\
+	".\vwerrtl.rgs"\
+	".\vwstudio.rc2"\
+	".\vwstuex.rgs"\
+	".\VWTrans.rgs"\
+	".\vxinsert.cur"\
+	".\WWHelper.rgs"\
+	".\zoomin.cur"\
+	".\zoomout.cur"\
+	".\ZoomTool.rgs"\
+	
+
+..\tools\stdtools\ctrlmgr.cpp : \
+	"..\tools\stdtools\ctrlmgr.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwsevent.h"\
+	".\stdafx.h"\
+	
+
+..\tools\stdtools\select.cpp : \
+	"..\tools\stdtools\select.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cmddel.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrnedit.h"\
+	"..\vwcommon\vwsutils.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwstudio - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwstudio - Win32 Release MinSize"
+
+!ENDIF 
+
+..\tools\stdtools\undoitem.cpp : \
+	"..\tools\geomtool\undoutil.h"\
+	"..\tools\stdtools\undoitem.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	".\stdafx.h"\
+	
+
+..\tools\stdtools\undostak.cpp : \
+	"..\tools\stdtools\undostak.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+..\tools\stdtools\vwerrtl.cpp : \
+	"..\tools\stdtools\vwerrtl.h"\
+	"..\vwcommon\d2d.h"\
+	".\stdafx.h"\
+	
+
+..\vwcommon\vwsgfxut.cpp : \
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\vwsgfxut.h"\
+	".\stdafx.h"\
+	
+
+..\vwcommon\vwsutils.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cmddel.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwsutils.h"\
+	".\stdafx.h"\
+	
+
+..\tools\geomtool\geomsel.cpp : \
+	"..\tools\geomtool\geomsel.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwstudio - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwstudio - Win32 Release MinSize"
+
+!ENDIF 
+
+..\tools\geomtool\geomundo.cpp : \
+	"..\tools\geomtool\geomundo.h"\
+	"..\tools\geomtool\undoutil.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	".\stdafx.h"\
+	
+
+..\tools\geomtool\rottool.cpp : \
+	"..\tools\geomtool\euler.h"\
+	"..\tools\geomtool\geomsel.h"\
+	"..\tools\geomtool\geomundo.h"\
+	"..\tools\geomtool\rottool.h"\
+	"..\tools\geomtool\undoutil.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vwrnedit.h"\
+	"..\vwcommon\vwsevent.h"\
+	".\stdafx.h"\
+	
+
+..\tools\geomtool\scaletl.cpp : \
+	"..\tools\geomtool\euler.h"\
+	"..\tools\geomtool\geomsel.h"\
+	"..\tools\geomtool\geomundo.h"\
+	"..\tools\geomtool\scaletl.h"\
+	"..\tools\geomtool\undoutil.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vwrnedit.h"\
+	"..\vwcommon\vwsevent.h"\
+	".\stdafx.h"\
+	
+
+..\tools\geomtool\trans3d.cpp : \
+	"..\tools\geomtool\geomsel.h"\
+	"..\tools\geomtool\geomundo.h"\
+	"..\tools\geomtool\trans3d.h"\
+	"..\tools\geomtool\undoutil.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cmddel.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrnedit.h"\
+	"..\vwcommon\vwsevent.h"\
+	"..\vwcommon\vwsutils.h"\
+	".\stdafx.h"\
+	
+
+..\tools\geomtool\undoutil.cpp : \
+	"..\tools\geomtool\undoutil.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	".\stdafx.h"\
+	
+
+..\tools\webtools\FileAcTl.cpp : \
+	"..\tools\webtools\fileactl.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+..\vwcommon\reghelp.cpp : \
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwobject\propsecu.h"\
+	".\stdafx.h"\
+	
+
+..\tools\webtools\rwhelper.cpp : \
+	"..\tools\webtools\rwhelper.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwstudio - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwstudio - Win32 Release MinSize"
+
+!ENDIF 
+
+..\tools\webtools\wwhelper.cpp : \
+	"..\tools\webtools\wwhelper.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\reghelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwstudio - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwstudio - Win32 Release MinSize"
+
+!ENDIF 
+
+..\tools\stdtools\polytool.cpp : \
+	"..\tools\geomtool\geomundo.h"\
+	"..\tools\geomtool\undoutil.h"\
+	"..\tools\stdtools\polytool.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cmddel.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\dirserv.h"\
+	"..\vwcommon\inetfile.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vwadmin.h"\
+	"..\vwcommon\vwanim.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwclient.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwhtml.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwodb.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrnedit.h"\
+	"..\vwcommon\vwserver.h"\
+	"..\vwcommon\vwsgfxut.h"\
+	"..\vwcommon\vwsutils.h"\
+	"..\vwcommon\vwsysex.h"\
+	"..\vwsystem\vwsystem.h"\
+	".\stdafx.h"\
+	
+
+..\tools\stdtools\rotat2d.cpp : \
+	"..\tools\geomtool\geomundo.h"\
+	"..\tools\geomtool\undoutil.h"\
+	"..\tools\stdtools\rotat2d.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vwrnedit.h"\
+	"..\vwcommon\vwsgfxut.h"\
+	".\stdafx.h"\
+	
+
+..\tools\stdtools\scale2d.cpp : \
+	"..\tools\geomtool\geomundo.h"\
+	"..\tools\geomtool\undoutil.h"\
+	"..\tools\stdtools\scale2d.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cmddel.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrnedit.h"\
+	"..\vwcommon\vwsgfxut.h"\
+	"..\vwcommon\vwsutils.h"\
+	".\stdafx.h"\
+	
+
+..\tools\stdtools\trans2d.cpp : \
+	"..\tools\geomtool\geomundo.h"\
+	"..\tools\geomtool\undoutil.h"\
+	"..\tools\stdtools\trans2d.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cmddel.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrnedit.h"\
+	"..\vwcommon\vwsutils.h"\
+	".\stdafx.h"\
+	
+
+..\tools\stdtools\ZoomTool.cpp : \
+	"..\tools\stdtools\zoomtool.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\cmddel.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\uitlimpl.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwrnedit.h"\
+	"..\vwcommon\vwsutils.h"\
+	".\stdafx.h"\
+	
+
+!IF  "$(CFG)" == "vwstudio - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "vwstudio - Win32 Release MinSize"
+
+!ENDIF 
+
+..\module\studio\vwstuexo.cpp : \
+	"..\module\studio\vwstuexo.h"\
+	"..\vwcommon\authntic.h"\
+	"..\vwcommon\avprof.h"\
+	"..\vwcommon\d2d.h"\
+	"..\vwcommon\menuitem.h"\
+	"..\vwcommon\objimpl.h"\
+	"..\vwcommon\ocxproxy.h"\
+	"..\vwcommon\propbase.h"\
+	"..\vwcommon\syshelp.h"\
+	"..\vwcommon\vwbuffer.h"\
+	"..\vwcommon\vwcomm.h"\
+	"..\vwcommon\vwobject.h"\
+	"..\vwcommon\vwprop.h"\
+	"..\vwcommon\vwsevent.h"\
+	"..\vwcommon\vwutils.h"\
+	".\stdafx.h"\
+	

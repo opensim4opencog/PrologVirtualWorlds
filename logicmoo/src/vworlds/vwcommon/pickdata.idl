@@ -1,0 +1,95 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// PickData.idl : IDL source for PickData.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (VWIPickData.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IVWPickData : Used during boundary editing to return information regarding the boundary
+// and thing found (picked) underneath a specified point on the screen.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+cpp_quote("enum {ePickedThing=0, ePickedBoundary=1};")
+
+	import "oaidl.idl";
+	import "cellprop.idl";
+	import "vwprop.idl";
+
+	[
+		object,
+		local,
+		dual,
+		uuid(DE671B90-A01D-11d1-84F3-00C04FB6A5C8),
+		helpstring("IVWPickData Interface"),
+		pointer_default(unique)
+	]
+	interface IVWPickData : IObjectProperty
+	{
+		[propget, helpstring("The list of boundaries associated with the thing whose boundary has been picked.")]
+		HRESULT BoundaryList([out, retval] IPropertyList **ppBoundaryList);
+		[propput, helpstring("The list of boundaries associated with the thing whose boundary has been picked.")]
+		HRESULT BoundaryList([in] IPropertyList *pBoundaryList);
+		[propget, helpstring("The thing whose boundary has been picked.")]
+		HRESULT Thing([out, retval] IThing **ppThing);
+		[propput, helpstring("The thing whose boundary has been picked.")]
+		HRESULT Thing([in] IThing *pThing);
+		[propget, helpstring("The boundary that has been picked.")]
+		HRESULT Boundary([out, retval] IBoundary **ppBoundary);
+		[propput, helpstring("The boundary that has been picked.")]
+		HRESULT Boundary([in] IBoundary *pBoundary);
+
+		[propget, helpstring("The index of the boundary within the boundary list.")]
+		HRESULT BoundaryIndex([out, retval] int *piBoundaryIndex);
+		[propput, helpstring("The index of the boundary within the boundary list.")]
+		HRESULT BoundaryIndex([in] int iBoundaryIndex);
+
+		[propget, helpstring("The index of the edge within the boundary.")]
+		HRESULT EdgeIndex([out, retval] int *piEdgeIndex);
+		[propput, helpstring("The index of the edge within the boundary.")]
+		HRESULT EdgeIndex([in] int iEdgeIndex);
+
+		[propget, helpstring("Data type. Currently always ePickedBoundary.")]
+		HRESULT DataType([out, retval] int *piDataType);
+		[propput, helpstring("Data type. Currently always ePickedBoundary.")]
+		HRESULT DataType([in] int iDataType);
+
+		[propget, helpstring("Was a vertex picked on the specified edge?")]
+		HRESULT VertexPicked([in] int nIndex, [out, retval] VARIANT_BOOL* vbPicked);
+		[propput, helpstring("Was a vertex picked on the specified edge?")]
+		HRESULT VertexPicked([in] int nIndex, [in] VARIANT_BOOL vbPicked);
+
+		[helpstring("Returns true if any vertices are picked.")]
+		HRESULT IsAnyVertexPicked([out, retval] VARIANT_BOOL* pvbPicked);
+
+		[propget, helpstring("The name of the thing whose boundary has been picked.")]
+		HRESULT Name([out, retval] BSTR* bstrName);
+
+	};
+
+#ifdef VWPICKDATALIB
+[
+	uuid(DE671B91-A01D-11d1-84F3-00C04FB6A5C8),
+	version(1.0),
+	helpstring("VWPickData 1.0 Type Library")
+]
+library VWPICKDATALib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(DE671B92-A01D-11d1-84F3-00C04FB6A5C8),
+		helpstring("VWPickData Class")
+	]
+	coclass VWPickData
+	{
+		[default] interface IVWPickData;
+	};
+};
+#endif
