@@ -21,26 +21,9 @@ import org.opencyc.xml.*;
  * The associated formula, microtheory, truth-value, direction, and remaining attributes are
  * is fetched later.
  *
- * @version $Id: AssertionsCollection.java,v 1.1 2002-04-06 22:05:42 dmiles Exp $
+ * @version $Id: AssertionsCollection.java,v 1.2 2002-04-06 22:19:26 dmiles Exp $
  * @author Douglas R. Miles
  *
- * <p>Copyright 2001 Cycorp, Inc., license is open source GNU LGPL.
- * <p><a href="http://www.opencyc.org/license.txt">the license</a>
- * <p><a href="http://www.opencyc.org">www.opencyc.org</a>
- * <p><a href="http://www.sourceforge.net/projects/opencyc">OpenCyc at SourceForge</a>
- * <p>
- * THIS SOFTWARE AND KNOWLEDGE BASE CONTENT ARE PROVIDED ``AS IS'' AND
- * ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE OPENCYC
- * ORGANIZATION OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE AND KNOWLEDGE
- * BASE CONTENT, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 public class AssertionsCollection {
@@ -181,19 +164,19 @@ public class AssertionsCollection {
 	 */
 	public void commitAssertions(String mt)  throws Exception  {
 		CycFort mtFort = ensureMt(mt);
-		commitAssertions1(mtFort);
-		commitAssertions2(mtFort);
-		commitAssertions3(mtFort);
-		commitAssertions4(mtFort);
-		commitAssertions5(mtFort);
-		commitAssertions6(mtFort);
-		commitAssertions7(mtFort);
+		commitAssertionsDefintional(mtFort);
+		commitAssertionsPredicateDefs(mtFort);
+		commitAssertionsCollectionDefs(mtFort);
+		commitAssertionsSpecialCollectionDefs(mtFort);
+		commitSecondaryConstantDefs(mtFort);
+		commitAssertionsOfRest(mtFort);
 	}
 
 	/**
 	 * Ensures the Mt is a valid Microtheory
 	 *
 	 * @param mt for formulas for this AssertionsCollection
+	 * <eca-home> All microtheory definitions 
 	 */
 	public CycFort ensureMt(String mt)  throws Exception  {
 		return cycAccess.getConstantByName(mt);
@@ -203,8 +186,9 @@ public class AssertionsCollection {
 	 * Adds the AssertionCollection to Mt
 	 *
 	 * @param mt for formulas for this AssertionsCollection
+	 * [08:09] <eca-home> All microtheory definitions (isa and other definitional assertions) second.
 	 */
-	public void commitAssertions1(CycFort mt)  throws Exception  {
+	public void commitAssertionsDefintional(CycFort mt)  throws Exception  {
 		Iterator forms = cycListCollection.iterator();
 		while ( forms.hasNext() ) {
 			CycList cycList = (CycList)  forms.next();
@@ -215,12 +199,15 @@ public class AssertionsCollection {
 		}
 	}
 
+
+
 	/**
 	 * Adds the AssertionCollection to Mt
 	 *
 	 * @param mt for formulas for this AssertionsCollection
+     * [08:10] <eca-home> All predicate definitions (isa, arity, argIsa, and other definitional assertions) third.
 	 */
-	public void commitAssertions2(CycFort mt)  throws Exception  {
+	public void commitAssertionsPredicateDefs(CycFort mt)  throws Exception  {
 		Iterator forms = cycListCollection.iterator();
 		while ( forms.hasNext() ) {
 			CycList cycList = (CycList)  forms.next();
@@ -231,8 +218,22 @@ public class AssertionsCollection {
 	 * Adds the AssertionCollection to Mt
 	 *
 	 * @param mt for formulas for this AssertionsCollection
+	 * [08:11] <eca-home> All collection definitions, in descending order of type, fourth.
 	 */
-	public void commitAssertions3(CycFort mt)  throws Exception  {
+	public void commitAssertionsCollectionDefs(CycFort mt)  throws Exception  {
+		Iterator forms = cycListCollection.iterator();
+		while ( forms.hasNext() ) {
+			CycList cycList = (CycList)  forms.next();
+		}
+	}
+
+	/**
+	 * Adds the AssertionCollection to Mt
+	 *
+	 * @param mt for formulas for this AssertionsCollection
+	 * [08:11] <eca-home> e.g. ThirdOrderCollections, then SecondOrderCollections (CollectionTypes), then Collections which genls Individual.
+	 */
+	public void commitAssertionsSpecialCollectionDefs(CycFort mt)  throws Exception  {
 		Iterator forms = cycListCollection.iterator();
 		while ( forms.hasNext() ) {
 			CycList cycList = (CycList)  forms.next();
@@ -243,8 +244,9 @@ public class AssertionsCollection {
 	 * Adds the AssertionCollection to Mt
 	 *
 	 * @param file for formulas for this AssertionsCollection
+	 * [08:11] <eca-home> All other constant definitions fifth
 	 */
-	public void commitAssertions4(CycFort mt)  throws Exception  {
+	public void commitSecondaryConstantDefs(CycFort mt)  throws Exception  {
 		Iterator forms = cycListCollection.iterator();
 		while ( forms.hasNext() ) {
 			CycList cycList = (CycList)  forms.next();
@@ -255,36 +257,16 @@ public class AssertionsCollection {
 	 * Adds the AssertionCollection to Mt
 	 *
 	 * @param mt for formulas for this AssertionsCollection
+	 * [08:11] <eca-home> Then all other assertions -- the non-definitional ones.
+	 * (and (isa ?GAF CycLClosedAtomicSentence) (operatorFormulas ?PRED ?GAF) (isa ?PRED OpenCycDefinitionalPredicate))
 	 */
-	public void commitAssertions5(CycFort mt)  throws Exception  {
+	public void commitAssertionsOfRest(CycFort mt)  throws Exception  {
 		Iterator forms = cycListCollection.iterator();
 		while ( forms.hasNext() ) {
 			CycList cycList = (CycList)  forms.next();
 		}
 	}
 
-	/**
-	 * Adds the AssertionCollection to Mt
-	 *
-	 * @param mt for formulas for this AssertionsCollection
-	 */
-	public void commitAssertions6(CycFort mt)  throws Exception  {
-		Iterator forms = cycListCollection.iterator();
-		while ( forms.hasNext() ) {
-			CycList cycList = (CycList)  forms.next();
-		}
-	}
 
-	/**
-	 * Adds the AssertionCollection to Mt
-	 *
-	 * @param mt for formulas for this AssertionsCollection
-	 */
-	public void commitAssertions7(CycFort mt)  throws Exception  {
-		Iterator forms = cycListCollection.iterator();
-		while ( forms.hasNext() ) {
-			CycList cycList = (CycList)  forms.next();
-		}
-	}
-
+ 
 	}
