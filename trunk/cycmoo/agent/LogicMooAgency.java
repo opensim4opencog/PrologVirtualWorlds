@@ -32,7 +32,7 @@ import ViolinStrings.Strings;
 
 public class LogicMooAgency extends Thread {
     
-    public static CycSymbol SYMBOL_NIL = new CycSymbol("NIL");
+    static public CycSymbol SYMBOL_NIL = new CycSymbol("NIL");
     private static LogicMooCycAccess cyc = null;
     private static Hashtable agents = null; 
 
@@ -44,13 +44,13 @@ public class LogicMooAgency extends Thread {
 	}
     }
 
-    public static void enumerateNPCs() {
+    static public void enumerateNPCs() {
 	Iterator supposed = cyc.queryArrayListSEL("EverythingPSC","(#$isa ?SEL #$IndividualAgent)").iterator();
 	while (supposed.hasNext()) {
 	    confirmNPC((CycFort)supposed.next());
 	}
     }
-    public static void confirmNPC(CycFort agent) {
+    static public void confirmNPC(CycFort agent) {
 	    MooCycRobot robot = (MooCycRobot)agents.get(agent);
 	    if (robot==null) {
 		robot = new MooCycRobot(agent);
@@ -59,7 +59,7 @@ public class LogicMooAgency extends Thread {
 	    }
     }
 
-    public static Hashtable getAgents() {
+    static public Hashtable getAgents() {
 	return agents;
     }
 

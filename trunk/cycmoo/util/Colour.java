@@ -14,10 +14,10 @@ public abstract class Colour {
 	private static final String ESC = (char)27 + "[";
 
 	/** ANSI clear-screen */
-	public static final String CLS = (ESC + (char)72) + (ESC + (char)74);
+	static public final String CLS = (ESC + (char)72) + (ESC + (char)74);
 
 	/** Table of Jamud markups to their ANSI equivalents */
-	public static final Hashtable COLOUR_TABLE = new Hashtable();
+	static public final Hashtable COLOUR_TABLE = new Hashtable();
 
 	//init values into COLOUR_TABLE
 	static {
@@ -67,7 +67,7 @@ public abstract class Colour {
 	 * @param colourize if true then Jamud markups are converted to ANSI<br>
 	 * if false then Jamud markups are removed.
 	 */
-	public static byte[] convert(byte[] text, boolean colourize) {
+	static public byte[] convert(byte[] text, boolean colourize) {
 		String J = new String(text);
 		return convert(J, colourize).getBytes();
 	}
@@ -78,7 +78,7 @@ public abstract class Colour {
 	 * @param colourize if true then Jamud markups are converted to ANSI<br>
 	 * if false then Jamud markups are removed.
 	 */
-	public static String convert(String text, boolean colourize) {
+	static public String convert(String text, boolean colourize) {
 		String out = "";
 		byte[] t = text.getBytes();
 		text = null;

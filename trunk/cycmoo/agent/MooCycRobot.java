@@ -27,7 +27,7 @@ public class MooCycRobot extends MooAgentThread {
 
     CycFort cycme = null;
 
-    public static Random rnd = new Random();
+    static public Random rnd = new Random();
     public MooCycRobot(CycFort aself){
 	super();
 	 cycme = aself;
@@ -87,7 +87,7 @@ public class MooCycRobot extends MooAgentThread {
 	}
     }
 
-    public static String dirrections = "nsewud";
+    static public String dirrections = "nsewud";
     public void moveRandomly(){
 	String rnddir = ""+dirrections.charAt(rnd.nextInt(6));
       //  System.out.println("" + cycme + " randomly tries go: " + rnddir);

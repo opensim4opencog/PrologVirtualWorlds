@@ -14,9 +14,9 @@ public class TelnetProxyServer extends Thread {
     private ServerSocket serverSocket = null;
     private int serverPort = 3666;
     private int clientPort = 3601;
-    public static ArrayList clients = new ArrayList();
+    static public ArrayList clients = new ArrayList();
 
-    public static void main(String[] arg) {
+    static public void main(String[] arg) {
 	try {
 	    TelnetProxyServer tps = new TelnetProxyServer(new Integer(arg[0]).intValue(),new Integer(arg[1]).intValue());
 	    tps.run();

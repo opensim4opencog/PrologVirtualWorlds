@@ -1,15 +1,11 @@
-package cycmoo;
+package cycmoo.api;
 
-import cycmoo.api.*;
 import cycmoo.agent.*;
 import cycmoo.cmd.*;
 import cycmoo.obj.*;
 import cycmoo.plugin.*;
 import cycmoo.net.*;
 import cycmoo.util.*;
-
-
-
 
 // Java
 import java.lang.*;
@@ -25,12 +21,20 @@ import bsh.*;
 import bsh.util.*;
 
 
+
 // OpenCyc
 import org.opencyc.api.*;
+import org.opencyc.javashell.*;
 import org.opencyc.cycobject.*;
+import org.opencyc.cyclobject.*;
 import org.opencyc.kif.*;
+import org.opencyc.javashell.*;
 import org.opencyc.util.*;
+import org.opencyc.chat.*;
 import org.opencyc.webserver.WebServer;
+import org.apache.oro.util.*;
+import org.opencyc.inferencesupport.*;
+import org.opencyc.constraintsolver.*;
 import org.apache.oro.util.*;
 
 // Util
@@ -41,7 +45,7 @@ import ViolinStrings.*;
 *
 * Collaborates with the <tt>Jamud</tt> class which manages the api connections.
 *
-* @version $Id: LogicMoo.java,v 1.2 2002-11-27 21:47:23 dmiles Exp $
+* @version $Id: LogicMoo.java,v 1.3 2003-06-13 10:04:47 dmiles Exp $
 * @author Douglas R. Miles
 *
 * <p>Copyright 2001 Cycorp, Inc., license is open source GNU LGPL.
@@ -65,32 +69,16 @@ import ViolinStrings.*;
 
 public class LogicMoo extends Thread {
 
-    //private  static Jamud logicmooInstance;
-    //private  static Area logicmooArea;
-    //    private  static PlayerManager logicmooPlayerManager;
-    //private  static Room logicmooTop;     
-    private  static Object initialObject; 
-    private  static bsh.Interpreter logicmooBeanShell;     
-    public static LogicMooCycAccess cyc=null;
-    public static LogicMoo moo=null;
-    private  static boolean running = false;
-
-    private static org.opencyc.webserver.WebServer cycWebserverThread=null;
-    private static cycmoo.net.LogicMooTelnetServer cycMooserverThread = null;
-
-    public static void main(String[] args) {
+    static public void main(String[] args) {
 	try {
 	    LogicMoo cm = new LogicMoo();
 	    while( cm.running && !cm.interrupted() ) {
 		Thread.sleep(10000);
 	    }
+	    //MooCommandLine.runClientAt(new PrintWriter(System.out,true),new BufferedReader(new InputStreamReader(System.in)));
 	} catch( Exception e ) {
 	    e.printStackTrace();
 	}
-
-
-
-	//        MooCommandLine.runClientAt(new PrintWriter(System.out,true),new BufferedReader(new InputStreamReader(System.in)));
     }
 
 
@@ -109,7 +97,7 @@ public class LogicMoo extends Thread {
     }
 
 
-    public static LogicMoo getInstance() {
+    static public LogicMoo getInstance() {
 	return moo;
     }
 
@@ -150,6 +138,19 @@ public class LogicMoo extends Thread {
      *
      **********************************************************/
 
+    static public CycConstant logicMooMt =  null;
+    static public CycConstant jamudMt =  null;
+    static public LogicMooAgency npc1 = null;
+    static public MooIrcBot opnIRCBot = null;
+    static public org.opencyc.chat.IrcChat wfIRCBot = null;
+    static public bsh.Interpreter logicmooBeanShell;     
+    static public LogicMooCycAccess cyc=null;
+    static public LogicMoo moo=null;
+    static public boolean running = false;
+
+    private static org.opencyc.webserver.WebServer cycWebserverThread=null;
+    private static cycmoo.net.LogicMooTelnetServer cycMooserverThread = null;
+
     public CycAccess getCycAccess() {
 	return(CycAccess)cyc;
     }
@@ -172,107 +173,19 @@ public class LogicMoo extends Thread {
 	if( running ) return;
 	else running = true;
 	Log.makeLog();
-	startPrimary();
-	startBeanShellThread();
-	Log.current.println("Starting LogicMOO (LogicMoo)");
-	startWebserverThread();
 	try {
-	    startIrcBot();
-	    cyc.constructMtFromFile("JamudMt.kif","BaseKB");
+	    logicMooMt =  cyc.makeCycConstantSafe("#$LogicMooMt");
+	    jamudMt =  cyc.makeCycConstantSafe("#$JamudMt"    /*TODO*/);
+	    cyc.assertIsaSafe(logicMooMt,     cyc.microtheory,     cyc.baseKB);
+	    cyc.assertIsaSafe(jamudMt,     cyc.microtheory,     cyc.baseKB);
+	    cyc.assertIsaSafe(jamudMt, cyc.reifiedMicrotheory,     cyc.baseKB);
+	    cyc.assertGenlMt(jamudMt,logicMooMt);
+	    cyc.assertGenlMt(logicMooMt,"HumanActivitiesMt");
+	    cyc.assertGenlMt(logicMooMt,"BuildingMt");
+	    cyc.assertGenlMt(logicMooMt,cyc.javaMt);
 	} catch( Exception e ) {
 	    e.printStackTrace();
 	}
-	startMooServerThread();
-	startNPCs();
-
-	//startNLParser();
-	//startSecondaryThread
-	//runPluginsDir();
-    }
-
-    static LogicMooAgency npc1 = null;
-
-    private synchronized static void startNPCs() {
-	npc1 = new LogicMooAgency(cyc);
-	npc1.start();
-    }
-
-
-    /*
-private synchronized static void runPluginsDir() {
-File dir = new File("logicmoo/plugins/");
-File[] files = dir.listFiles();
-for ( int i = 0 ; i<files.length; i++ ) {
-String classname = files[i].getName();
-if ( classname.endsWith(".class") ) {
-classname = "cycmoo.plugins."+classname.substring(0,classname.indexOf('.'));
-if ( !plugins.contains(classname) ) {
-Log.current.println("Starting " + classname);
-
-try {  
-Object obj = Class.forName(classname).newInstance();
-((Thread)obj).start();
-plugins.put(classname,obj);
-} catch ( Exception e ){
-e.printStackTrace();
-}
-}
-}
-}
-}		     */
-
-    public static MooIrcBot opnIRCBot = null;
-    public static MooIrcBot wfIRCBot = null;
-
-    public synchronized static void startIrcBot() {
-	//return;
-
-	if( opnIRCBot==null ) {
-	    try {
-		//   opnIRCBot = new MooIrcBot(cyc,"CycLBot","http://www.opencyc.org","irc.worldforge.org",6667,"#flood");
-		//   opnIRCBot.start();
-		wfIRCBot = new MooIrcBot(cyc,"CycLBot","http://www.opencyc.org","irc.openprojects.net",6667,"#opencyc");
-		wfIRCBot.start();
-	    } catch( Exception e ) {
-		e.printStackTrace();
-		Log.current.println("Aborted Cyc IrcBot");
-	    }
-	}
-    }
-
-    public synchronized static void startWebserverThread() {
-	if( cycWebserverThread==null ) {
-	    try {
-		Log.current.println("Starting Cyc Webserver");
-		cycWebserverThread = new org.opencyc.webserver.WebServer();
-		cycWebserverThread.start();
-		//cyc.registerUser("CycWebserver",cycWebserverThread);
-	    } catch( Exception e ) {
-		Log.current.println("Aborted Cyc Webserver");
-	    }
-	}
-    }
-
-    public synchronized static void startMooServerThread() {
-	if( cycMooserverThread==null ) {
-	    try {
-		Log.current.println("Starting Cyc Mooserver");
-		cycMooserverThread = new LogicMooTelnetServer();
-		cycMooserverThread.start();
-		//cyc.registerUser("CycMooserver",cycWebserverThread);
-	    } catch( Exception e ) {
-		Log.current.println("Aborted Cyc Mooserver");
-	    }
-	}
-    }
-
-
-
-    public static void setWriteToOut(boolean bool) {
-	//Log.current.writeToOut=bool;
-    }
-
-    public synchronized static void startBeanShellThread() {
 	Log.current.println("Starting Cyc Beanshell");
 	try {
 	    if( logicmooBeanShell==null ) {
@@ -287,222 +200,84 @@ e.printStackTrace();
 	    Log.current.println("Aborted Beanshell");
 	    e.printStackTrace();
 	}
-    }
-
-    public static CycConstant logicMooMt =  null;
-    public static CycConstant jamudMt =  null;
-
-    public synchronized static void startPrimary() {
-	if( logicMooMt!=null ) return;
-	try {
-	    logicMooMt =  cyc.makeCycConstantSafe("#$LogicMooMt");
-	    jamudMt =  cyc.makeCycConstantSafe("#$JamudMt"    /*TODO*/);
-	    cyc.assertIsaSafe(logicMooMt,     cyc.microtheory,     cyc.baseKB);
-	    cyc.assertIsaSafe(jamudMt,     cyc.microtheory,     cyc.baseKB);
-	    cyc.assertIsaSafe(jamudMt, cyc.reifiedMicrotheory,     cyc.baseKB);
-	    cyc.assertGenlMt(jamudMt,logicMooMt);
-	    cyc.assertGenlMt(logicMooMt,"HumanActivitiesMt");
-	    cyc.assertGenlMt(logicMooMt,"BuildingMt");
-	    cyc.assertGenlMt(logicMooMt,cyc.javaMt);
-	} catch( Exception e ) {
-	    e.printStackTrace();
+	Log.current.println("Starting LogicMOO (LogicMoo)");
+	if( cycWebserverThread==null ) {
+	    try {
+		Log.current.println("Starting Cyc Webserver");
+		cycWebserverThread = new org.opencyc.webserver.WebServer();
+		cycWebserverThread.start();
+		//cyc.registerUser("CycWebserver",cycWebserverThread);
+	    } catch( Exception e ) {
+		Log.current.println("Aborted Cyc Webserver");
+	    }
 	}
-    }
-
-
-    private synchronized void startSecondaryThread() {
+	if( wfIRCBot==null ) {
+	    try {
+	   wfIRCBot = new IrcChat(cyc,"CycLBot","http://www.opencyc.org","irc.freenode.net",6667,"#opencyc");
+		wfIRCBot .start();
+		//opnIRCBot = new MooIrcBot(cyc,"CycLBot","http://www.opencyc.org","irc.freenode.net",6667,"#opencyc");
+		//opnIRCBot.start();
+	    } catch( Exception e ) {
+		e.printStackTrace();
+		Log.current.println("Aborted Cyc IrcBot");
+	    }
+	}
+	try {
+	    cyc.constructMtFromFile("JamudMt.kif","BaseKB");
+	} catch( Exception e ) {
+	    //e.printStackTrace();
+	}
+      /*
+        if( cycMooserverThread==null ) {
+	    try {
+		Log.current.println("Starting Cyc Mooserver");
+		cycMooserverThread = new LogicMooTelnetServer();
+		cycMooserverThread.start();
+		//cyc.registerUser("CycMooserver",cycWebserverThread);
+	    } catch( Exception e ) {
+		Log.current.println("Aborted Cyc Mooserver");
+	    }
+	}
+        npc1 = new LogicMooAgency(cyc);
+	npc1.start();
+      */
+	/*
+	    if( !cycPlcStarted ) {
+	    try {
+	    cycPlcStarted = true; 
+	    //       JPL.init();
+	    //	consultFile("e2c.pl");
+	    } catch( Exception e ) {
+	    Log.current.println("Aborted Cyc NLParser");
+	    }
+	}
+	*/
 	//efnetIRCBot = startCycLBot(efnetIRCBot, "jllykifsh","irc.rt.ru");
-	try {
+	//   cyc.constructMtFromFile("JavaMt.kif","JavaMt");
+	//        cyc.constructMtFromFile("JamudMt.kif","BaseKB");
+	//  constructMtFromFile("LogicMooMt.kif","LogicMooMt");
+	/*
+	    File dir = new File("logicmoo/plugins/");
+	    File[] files = dir.listFiles();
+	    for( int i = 0 ; i<files.length; i++ ) {
+	    String classname = files[i].getName();
+	    if( classname.endsWith(".class") ) {
+	    classname = "cycmoo.plugins."+classname.substring(0,classname.indexOf('.'));
+	    if( !plugins.contains(classname) ) {
+	    Log.current.println("Starting " + classname);
+	
 	    try {
-		//   cyc.constructMtFromFile("JavaMt.kif","JavaMt");
+		Object obj = Class.forName(classname).newInstance();
+		((Thread)obj).start();
+		plugins.put(classname,obj);
 	    } catch( Exception e ) {
 		e.printStackTrace();
 	    }
-	    try {
-		//        cyc.constructMtFromFile("JamudMt.kif","BaseKB");
-	    } catch( Exception e ) {
-		e.printStackTrace();
 	    }
-	    try {
-		//  constructMtFromFile("LogicMooMt.kif","LogicMooMt");
-	    } catch( Exception e ) {
-		e.printStackTrace();
 	    }
-	} catch( Exception ee ) {
-	    ee.printStackTrace();
-	}
+	    }            
+	*/
     }
-
-    /***********************************************************
-     *  Jamud Booting
-     *
-     **********************************************************/
-
-    //private static Area logicmooTopMicrotheory;
-    private static Hashtable logicmooTopRooms;
-    private static Hashtable logicmooTopArtifacts;
-    private static Hashtable logicmooTopBodies;
-
-    public static boolean cycPlcStarted = false;
-
-    public synchronized static void startNLParser() {
-	if( !cycPlcStarted ) {
-	    try {
-		cycPlcStarted = true; 
-		//       JPL.init();
-		//	consultFile("e2c.pl");
-	    } catch( Exception e ) {
-		Log.current.println("Aborted Cyc NLParser");
-	    }
-	}
-
-    }
-
-    public static String queryRawPrologServer(String raw) throws Exception {
-	return queryRawPrologServer(raw,500);
-    }
-
-    public static String queryRawPrologServer(String raw, int time) throws Exception {
-	//ensureConnectedRawPrologServer();
-	StringBuffer sb = new StringBuffer("");
-	try {
-	    Socket pSock =new Socket("localhost" ,3677);
-	    //pSock.setSoTimeout(40);
-	    //pSock.setKeepAlive(true);
-	    //pSock.setSoLinger(true);
-	    //pSock.connect();
-	    PrintWriter pw = new PrintWriter(pSock.getOutputStream());
-	    pw.println("+"+raw + "\n");
-	    pw.flush();
-
-	    BufferedReader st = new BufferedReader(new InputStreamReader( pSock.getInputStream()));
-
-	    // Thread.sleep(time);
-	    //Thread.sleep(4000);
-	    String line = "";
-	    try {
-		while( (line = st.readLine())!=null ) {
-		    System.out.println(line);
-		    sb.append(line + "\n");
-		}
-	    } catch( IOException ee ) {
-		ee.printStackTrace();
-	    }
-	    System.out.println("pl ->" + raw);
-	    pSock.close();
-	} catch( Exception e ) {
-	    e.printStackTrace();
-	}
-	return sb.toString()+"<br>";
-
-    }
-
-    public static String e2c(String eng) throws Exception {
-	return cyc.queryRawPrologServer("(e2c('"+eng+"',Meaning),writeq(Meaning),nl).",2000);
-    }
-
-    public void sendCycNlWords() {
-	sendCycNlWords(new File("cycdump"));
-    }
-
-
-    public void allWordsSend(PrintWriter dump, Iterator allWords) {
-	while( allWords.hasNext() ) {
-	    CycFort thisWord = (CycFort)allWords.next();
-	    wordsSend(dump,thisWord);
-	}
-    }
-
-    public void wordsSend(PrintWriter dump, CycFort thisWord) {
-	Iterator ata = null;
-	try {
-	    ata = cyc.converseList("(ALL-TERM-ASSERTIONS " + thisWord.cyclify() + ")").iterator();
-	    while( ata.hasNext() ) {
-		assertToProlog(dump,ata.next().toString());
-	    }
-	} catch( Exception ee ) {
-	    dump.println("/*");
-	    dump.println(""+thisWord);
-	    dump.println(""+ee);
-	    dump.println("*/");
-	}
-    }
-
-    public void sendCycNlWords(File dumpfile) {
-	FileWriter fw = null;
-	try {
-	    fw = new FileWriter(dumpfile);
-	    PrintWriter dump = new PrintWriter(fw);
-	    //Iterator allWords = cyc.getAllInstances(cyc.getConstantByName("LexicalWord")).iterator();
-	    allWordsSend(dump,cyc.getAllInstances(cyc.getConstantByName("LexicalWord")).iterator());
-	    allWordsSend(dump,cyc.getAllInstances(cyc.getConstantByName("NLTerm")).iterator());
-	    allWordsSend(dump,cyc.getAllInstances(cyc.getConstantByName("ProposedPublicConstant-NL")).iterator());
-	    wordsSend(dump,cyc.getConstantByName("ThoughtTreasureMt"));
-	    wordsSend(dump,cyc.getConstantByName("TTGeneralEnglishMt"));            
-	} catch( Exception e ) {
-	    e.printStackTrace();
-	}
-	try {
-	    fw.close();
-	} catch( Exception e ) {
-	    e.printStackTrace();
-	}
-    }
-
-    public void assertToProlog(PrintWriter dump,Object term) throws Exception {
-	try {
-	    String id = term.toString().split(":")[1];
-	    CycList af = cyc.converseList("(ASSERTION-FORMULA (find-assertion-by-id " + id + "))");
-	    try {
-		if( !af.first().equals(cyc.comment) ) {
-		    dump.println(toPrologCycTerm(af)+".");
-		}
-	    } catch( Exception e ) {
-	    }
-	} catch( Exception ee ) {
-	}
-    }
-
-    public static String toPrologCycTerm(Object term) {
-	if( term==null ) return "null";
-	if( term instanceof CycConstant ) return toPrologCycAString(((CycConstant)term).cyclify());
-	if( term instanceof CycSymbol )	return  toPrologCycAString(term.toString());
-	if( term instanceof CycNart ) return "'$jCycNart'(" + toPrologCycString(((CycNart)term).cyclify()) +")";
-	if( term instanceof CycList ) return "'$jCycList'(" + toPrologCycList((CycList)term) +")";
-	if( term instanceof String ) return "'$jString'(" + toPrologCycString(term.toString()) +")";
-	if( term instanceof Integer ) return(term.toString());
-	if( term instanceof Float ) return(term.toString());
-	if( term instanceof CycVariable ) return "'$jCycVariable'('"+term.toString()+"')";
-	if( term instanceof CycAssertion ) return "'$jCycAssertion'("+toPrologCycTerm(((CycAssertion)term).getFormula()) +")";
-	return "'$jObject'(" +toPrologCycAString(term.toString())+")";
-    }
-
-
-    public static String toPrologCycList(CycList cyclist) {
-	if( cyclist==null || cyclist.isEmpty()  ) return "[]";
-	StringBuffer sb = new StringBuffer("[");
-	if( !cyclist.isProperList() ) {
-	    for( int i =0; i < cyclist.size(); i++ ) {
-		sb.append(toPrologCycTerm(cyclist.get(i))).append(", ");
-	    }
-	    return sb.append(toPrologCycTerm(cyclist.rest())).append("]").toString();
-	}
-	for( int i =0; i < cyclist.size()-1; i++ ) {
-	    sb.append(toPrologCycTerm(cyclist.get(i))).append(", ");
-	}
-
-	return sb.append(toPrologCycTerm(cyclist.get(cyclist.size()-1))).append("]").toString();
-    }
-
-
-    public static String toPrologCycString(String term) {
-	return "\""+Strings.change(term,"\"","\\\"")+"\"";
-    }
-
-    public static String toPrologCycAString(String term) {
-	return "'"+Strings.change(term,"'","\\'")+"'";
-    }
-
 }
 
 //</pre>

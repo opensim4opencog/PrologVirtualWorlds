@@ -19,7 +19,7 @@ public class LogicMooTelnetServer extends Thread {
     public boolean listening = true;
     private ServerSocket serverSocket = null;
     private int serverPort = 4444;
-    public static ArrayList clients = new ArrayList();
+    static public ArrayList clients = new ArrayList();
 
     public LogicMooTelnetServer() throws IOException {
 	serverSocket = new ServerSocket(serverPort);

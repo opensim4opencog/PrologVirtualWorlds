@@ -46,7 +46,6 @@ public class ActorCommandParser implements IMooClient, IActorCommandParser {
     protected LogicMooCycAccess cyc = null;
     protected IMooClient client = null;
     protected bsh.Interpreter bshell = null; 
-    protected static CycSymbol SYMBOL_NIL = new CycSymbol("NIL");
 
     public void setParaphrased(boolean onoff) {
         client.setParaphrased(onoff);
@@ -239,7 +238,7 @@ public class ActorCommandParser implements IMooClient, IActorCommandParser {
             return true;
         }
         if( cmd.equals("cyclify") ) {
-            println( cyc.toCycListString(params));
+            println( cyc.toCycListOrNull(params));
             return true;
         }
         if( cmd.equals("paraphrase") ) {
@@ -393,11 +392,11 @@ public class ActorCommandParser implements IMooClient, IActorCommandParser {
     return false;
     }
 
-
+    
     public void enactE2C(String params) {
         params = params.trim();
         try {
-            printRaw( Strings.change(Strings.change(Strings.change(cyc.e2c(params), "\\n"," "), "  "," "), "  "," ") + "\n");
+    //        printRaw( Strings.change(Strings.change(Strings.change(cyc.e2c(params), "\\n"," "), "  "," "), "  "," ") + "\n");
             printRaw( "\n");
         } catch( Exception e ) {
         }
@@ -407,15 +406,15 @@ public class ActorCommandParser implements IMooClient, IActorCommandParser {
         params = params.trim();
         try {
             if( params.endsWith(".") ) {
-                printFormat( cyc.queryRawPrologServer(params));
+      //          printFormat( cyc.queryRawPrologServer(params));
             } else {
-                printFormat( cyc.queryRawPrologServer(params + "."));
+        //        printFormat( cyc.queryRawPrologServer(params + "."));
             }
         } catch( Exception e ) {
         }
     }
 
-    public static String normalizeP(String text) {
+    static public String normalizeP(String text) {
         return Strings.change(Strings.change(text,"\\","\\\\"),"\"","\\\"");
     }
 
@@ -570,7 +569,10 @@ public class ActorCommandParser implements IMooClient, IActorCommandParser {
             String text = (String) ans.first().toString();
             // System.out.println(text);
             if( text.toLowerCase().startsWith(params.toLowerCase()) ) {
-                return(new CycNart(cyc.toCycList("(#$PortalFromToFn " + where.stringApiValue() + " " +  ((CycFort)ans.first()).cyclify() +  " " +((CycFort)ans.second()).cyclify() + " )")));
+                try {
+		    return(new CycNart(cyc.toCycList("(#$PortalFromToFn " + where.stringApiValue() + " " +  ((CycFort)ans.first()).cyclify() +  " " +((CycFort)ans.second()).cyclify() + " )")));
+		} catch (Exception e) {
+		}
             }
         }
         return null;
@@ -745,7 +747,7 @@ public class ActorCommandParser implements IMooClient, IActorCommandParser {
     public void enactQuery( String query) {
         try {
             println("");
-            printFormat( cyc.converseObject( "(cyc-query '" +cyc.toCycListString(query) + " #$InferencePSC)"));
+            printFormat( cyc.converseObject( "(cyc-query '" +cyc.toCycList(query) + " #$InferencePSC)"));
             println("");
         } catch( Exception e ) {
             println( ""+ e);
@@ -764,7 +766,7 @@ public class ActorCommandParser implements IMooClient, IActorCommandParser {
      */
     public void enactProve( String query) {
         try {
-            printFormat( cyc.converseObject( "(fi-prove '" +cyc.toCycListString(query) + " #$InferencePSC)"));
+            printFormat( cyc.converseObject( "(fi-prove '" +cyc.toCycList(query) + " #$InferencePSC)"));
         } catch( Exception e ) {
             println( ""+ e);
         }
@@ -785,7 +787,7 @@ public class ActorCommandParser implements IMooClient, IActorCommandParser {
     public void enactQueryUser( String query) {
         try {
             println("");
-            printFormat( cyc.converseObject( "(cyc-query '" +cyc.toCycListString(query) + " " + userMt.stringApiValue() + ")"),"<br>");
+            printFormat( cyc.converseObject( "(cyc-query '" +cyc.toCycList(query) + " " + userMt.stringApiValue() + ")"),"<br>");
             println("");
         } catch( Exception e ) {
             println( ""+ e);
@@ -806,7 +808,7 @@ public class ActorCommandParser implements IMooClient, IActorCommandParser {
 
     public void enactAssert(String sentence) {
         println("");
-        enactSubL("(cyc-assert '" +cyc.toCycListString(sentence) + " " + userMt.stringApiValue() + ")");
+        enactSubL("(cyc-assert '" +cyc.toCycListOrNull(sentence) + " " + userMt.stringApiValue() + ")");
         println("");
     }
 

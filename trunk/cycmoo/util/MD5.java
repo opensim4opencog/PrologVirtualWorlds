@@ -4,7 +4,7 @@ package cycmoo.util;
 /**
  * Implementation of RSA's MD5 hash generator
  *
- * @version    $Revision: 1.2 $
+ * @version    $Revision: 1.3 $
  * @author    Santeri Paavolainen <sjpaavol@cc.helsinki.fi>
  */
 public class MD5 {
@@ -388,7 +388,7 @@ public class MD5 {
    * @param hash    Array of bytes to convert to hex-string
    * @return    Generated hex string
    */
-  public static String asHex (byte hash[]) {
+  static public String asHex (byte hash[]) {
     StringBuffer buf = new StringBuffer(hash.length * 2);
     int i;
 

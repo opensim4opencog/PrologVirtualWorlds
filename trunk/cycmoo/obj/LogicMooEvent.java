@@ -22,12 +22,9 @@ import org.opencyc.javashell.*;
 import org.opencyc.util.*;
 import org.opencyc.webserver.WebServer;
 import org.apache.oro.util.*;
-import org.opencyc.templateparser.*;
 import org.opencyc.inferencesupport.*;
 import org.opencyc.constraintsolver.*;
-import org.opencyc.conversation.*;
 import org.apache.oro.util.*;
-
 
 public class LogicMooEvent extends QueryLiteral {
     private CycFort source = null;
@@ -128,7 +125,7 @@ public class LogicMooEvent extends QueryLiteral {
 
 
 
-    public static CycList initStringMsg(String formula) {
+    static public CycList initStringMsg(String formula) {
 	CycList cyclist = new CycList();
 	cyclist.add(formula);
 	return cyclist;
@@ -146,12 +143,12 @@ public class LogicMooEvent extends QueryLiteral {
 	return formula.toPrettyString(" ");
     }
 
-    public static LogicMooEvent makeEvent(IMooClient mc, String info){
+    static public LogicMooEvent makeEvent(IMooClient mc, String info){
 	return new LogicMooEvent(mc,info);
     }
 
 
-    public static Hashtable getListeners() {
+    static public Hashtable getListeners() {
 	return LogicMooCycAccess.plugins;
     }
 
@@ -163,17 +160,17 @@ public class LogicMooEvent extends QueryLiteral {
 
 
     // Inform Location
-    public static boolean informLocation(IMooClient exceptfor, CycFort target, String message) {
+    static public boolean informLocation(IMooClient exceptfor, CycFort target, String message) {
 	return eventLocation(exceptfor,target,makeEvent(exceptfor,message));
     }
 
     // Inform Actor
-    public static boolean informActor(IMooClient exceptfor, CycFort target, String message) {
+    static public boolean informActor(IMooClient exceptfor, CycFort target, String message) {
 	return eventActor(exceptfor,target,makeEvent(exceptfor,message));
     }
 
     // Inform All
-    public static boolean informAll(IMooClient exceptfor, String message) {
+    static public boolean informAll(IMooClient exceptfor, String message) {
 	return eventAll(exceptfor,makeEvent(exceptfor,message));
     }
 
@@ -181,17 +178,17 @@ public class LogicMooEvent extends QueryLiteral {
 
 
     // event Location
-    public static boolean eventLocation(IMooClient exceptfor, CycFort target, LogicMooEvent ev) {
+    static public boolean eventLocation(IMooClient exceptfor, CycFort target, LogicMooEvent ev) {
 	return ev.sendObject(exceptfor,target);
     }
 
     // event Actor
-    public static boolean eventActor(IMooClient exceptfor, CycFort target, LogicMooEvent ev) {
+    static public boolean eventActor(IMooClient exceptfor, CycFort target, LogicMooEvent ev) {
 	return ev.sendObject(exceptfor,target);
     }
 
     // event All
-    public static boolean eventAll(IMooClient exceptfor, LogicMooEvent ev) {
+    static public boolean eventAll(IMooClient exceptfor, LogicMooEvent ev) {
 	return ev.sendAll();
     }
 
