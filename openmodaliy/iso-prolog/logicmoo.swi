@@ -1,0 +1,102 @@
+% ===================================================================
+% PURPOSE
+% This File is the bootstrap SWI-Prolog listener to handle API requests
+% So first is loads the proper files and then starts up the system
+% ===================================================================
+
+
+:- style_check(-singleton).
+:- style_check(-discontiguous).
+:- style_check(-atom).
+
+%:-use_module(library(rdf)).
+
+%Load the TCP Library
+:- use_module(library(socket)).
+%:- use_module(library(unix)).
+:-use_module(library(system)).
+:- use_module(library(readutil)).
+:-use_module(library(listing)).
+:- use_module(library(shell)).
+:- use_module(library(shlib)).
+:- use_module(library(url)).
+:- use_module(library(quintus)).
+:- use_module(library(qsave)).
+:- use_module(library(sgml)).
+:- use_module(library(occurs)).
+%:-use_module(library(rdf)).
+
+:-redefine_system_predicate(system:shell(_)).
+:-redefine_system_predicate(system:shell).
+%:-redefine_system_predicate(system:prolog).
+:-redefine_system_predicate(system:shell(_,_)).
+:-redefine_system_predicate(system:halt).
+:-redefine_system_predicate(system:exit(_)).
+
+:-redefine_system_predicate(system:phrase(_,_,_)).
+:- module_transparent system:phrase/3.
+system:phrase(A, B, C) :-
+    '$strip_module'(A, D, E),
+        (   compound(E)
+        ->  (   E=[F|G]
+            ->  append(E, C, B)
+            ;   catch(call(user:E, B, C),Er,catch(call(A,B,C),Er2,(format(user_error,'\nDCGError ~w/~w in ~q \n',[Er,Er2,call(E, B, C)]),fail)))
+            )
+        ;   E==[]
+        ->  C=B
+        ;   B=[E|C]
+        ).
+
+/*
+system:phrase(A, B, C) :-
+            '$strip_module'(A, D, E),
+            (   E==[]
+            ->  C=B
+            ;   nonvar(E),
+                E=[F|G]
+            ->  append(E, C, B)
+            ;   call(A, B, C)
+            ).
+*/
+
+:- module_transparent system:phrase/3.
+/*
+system:phrase([], B,C ):-!,B=C.
+system:phrase([F|G],B, C):-!,append([F|G],C,B).
+system:phrase(A, B, C) :- compound(A),!,catch(call(A,B,C),_,fail).
+system:phrase(A, [A|C], C).
+*/
+
+
+
+
+
+
+
+
+
+
+help(_).
+
+
+nondet_arg(N,Term,V):- arg(N,Term,V).
+
+prolog_system(swi).
+
+ccl(C):-ensure_loaded(C).
+:-ensure_loaded('../world/cyc.el').
+:-ensure_loaded('logicmoo.pl').
+
+%end_of_file.
+
+%:-cd('../dynamic/').
+%:-ensure_loaded('../dynamic/world.persist').
+%:-ensure_loaded('../world/mea.prolog').
+:-runServerThread(3677,'LOGICMOO').
+:-runServerThread(6767,'Atlas').
+:-runServerThread(4040,'TELNETDX').
+%:-runServerThread(3679,'CycApiRequest').
+%:-runServerThread(3681,'PROLOG').
+%:-runServerThread(7777,'UOX').
+
+
