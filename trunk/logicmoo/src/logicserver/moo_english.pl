@@ -67,7 +67,7 @@ pp  --> [p, np].
 */
 
 %list_to_terms([],true):-!.
-list_to_terms([T1,T2,T3,T4,T5,T6],((T1,T2,T3,T4,T5,T6)) ).
+/*list_to_terms([T1,T2,T3,T4,T5,T6],((T1,T2,T3,T4,T5,T6)) ).
 list_to_terms([T1,T2,T3,T4,T5], ((T1,T2,T3,T4,T5)) ).
 list_to_terms([T1,T2,T3,T4], ((T1,T2,T3,T4)) ).
 list_to_terms([T1,T2,T3], ((T1,T2,T3)) ).
@@ -76,7 +76,7 @@ list_to_terms([T1,T2|T3L],T):-nonvar(T),T=( (T1,T2),T3 ),!,list_to_terms(T3L,T3)
 list_to_terms([T1|T2T3L],T):-nonvar(T),T=( T1,(T2,T3) ),!,list_to_terms(T2T3L,(T2,T3)).
 list_to_terms([T1],T1):-!.
 list_to_terms([T1|L],(T1,TL) ):-list_to_terms(L,TL).
-
+ */
 
 list_to_terms(List,(A,B)):-list_to_terms(A,AL),list_to_terms(B,BL),append(AL,BL,List).
 list_to_terms(List,(A;B)):-list_to_terms(A,AL),list_to_terms(B,BL),append(AL,[or|BL],List).
@@ -232,7 +232,6 @@ det(det(a))-->[a].
 noun(noun(man))-->[man].
 noun(noun(woman))-->[woman].
 verb(verb(loves))-->[loves].
-*/
 
 sentence(P) --> noun_phrase(X, P1, P), verb_phrase(X, P1).
 
@@ -288,7 +287,7 @@ trans_verb(X, Y, TV) --> [V], {TV=..[V,X,Y],w_v([V],_)}.
 intrans_verb(X, lives(X) ) --> [lives].
 intrans_verb(X, ITV ) --> [V], {ITV=..[V,X],w_v([V],_)}.
 
-% ?>
+*/
 
 to_surface(CHARS,Formula):-
          sentenceToList(CHARS,S),
