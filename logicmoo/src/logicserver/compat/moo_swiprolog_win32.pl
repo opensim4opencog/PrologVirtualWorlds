@@ -9,13 +9,13 @@
 :- style_check(-string).
 
 %:-use_module(library(threadutil)).        
-thread_create(X,win32,_):-X.
-thread_exit(_,_):-!.
-thread_at_exit(_,_):-!.
-thread_at_exit(_):-!.
-thread_self(win32):-!.
-thread_exit(_):-!.
-threads:-!. %statistics.
+system_dependant:prolog_thread_create(X,win32,_):-X.
+prolog_thread_exit(_,_):-!.
+system_dependant:prolog_thread_at_exit(_,_):-!.
+system_dependant:prolog_thread_at_exit(_):-!.
+getThread(win32):-!.
+prolog_thread_exit(_):-!.
+threads:-!. %system_dependant:statistics.
 
 mutex_unlock_all.
 
@@ -28,7 +28,7 @@ mutex_unlock(_,_).
 mutex_unlockall.
 
 
-current_thread(main,running).
+system_dependant:prolog_current_thread(main,running).
 
 %:-assert((thread_util:open_xterm(T,In,Out):-moo_server_break(T,In,Out))).
 
@@ -39,14 +39,14 @@ current_thread(main,running).
 :- asserta(((user:message_hook(A,B,C) :- moo_server_message_hook(A,B,C)))).
 
 moo_server_message_hook(trace_mode(on),B,Lines):-
-	catch(thread_self(Id),_,fail),
+	catch(getThread(Id),_,fail),
 	'$get_pid'(Pid),
 	fmtString(Title, 'SWI-Prolog Process ~w (pid ~d) interactor', [Id, Pid]),
 	tty_in(Stream),
-	thread_signal(main,(close(Stream))),
+	system_dependant:prolog_thread_at_exit(main,(close(Stream))),
 	set_input(Stream),
 	set_output(user_output),
-	thread_at_exit(thread_signal(main,set_input(Stream))).
+	system_dependant:prolog_thread_at_exit(system_dependant:prolog_thread_at_exit(main,set_input(Stream))).
 */
 :-current_input(Stream),assert(tty_in(Stream)).
 :-current_output(Stream),assert(tty_out(Stream)).
@@ -145,34 +145,34 @@ adoConnect :-
 
 			
 
-adoUpdate_odbc(NO_ODBC_TODO,String,KB,Ctx,TN,Maintainer):-!.
-adoUpdate_odbc(auth,String,KB,Ctx,TN,Maintainer):-!,
-      execSQLf('Insert into PrologMemory (AssertionID,SourceForm,SourceText,KnowledgeBase,Context,Creator) VALUES ("~q","auth","~s","~q","~q","~q")',[TN,String,KB,Ctx,Maintainer]).
-adoUpdate_odbc(Form,CL,KB,Ctx,TN,Maintainer):- !, 
-      execSQLf('Insert into PrologMemory (AssertionID,SourceForm,SourceText,KnowledgeBase,Context,Creator) VALUES ("~q","~q","~q","~q","~q","~q")',[TN,Form,CL,KB,Ctx,Maintainer]).
+adoUpdate_odbc(NO_ODBC_TODO,String,Context,TN,Maintainer):-!.
+adoUpdate_odbc(auth,String,Context,TN,Maintainer):-!,
+      execSQLf('Insert into PrologMemory (AssertionID,SourceForm,SourceText,KnowledgeBase,Context,Creator) VALUES ("~q","auth","~s","~q","~q","~q")',[TN,String,Context,Maintainer]).
+adoUpdate_odbc(Form,CL,Context,TN,Maintainer):- !, 
+      execSQLf('Insert into PrologMemory (AssertionID,SourceForm,SourceText,KnowledgeBase,Context,Creator) VALUES ("~q","~q","~q","~q","~q","~q")',[TN,Form,CL,Context,Maintainer]).
 
-%adoUpdate_memory(Form,CL,KB,Ctx,TN,Maintainer):-not('in-active-memory'(KB,Ctx)),!.
-adoUpdate_memory(prolog,CL,KB,Ctx,TN,Maintainer):-
+%adoUpdate_memory(Form,CL,Context,TN,Maintainer):-not('in-active-memory'(Context,Ctx)),!.
+adoUpdate_memory(prolog,CL,Context,TN,Maintainer):-
             unnumbervars(CL,UNCL),logOnFailure(assert(UNCL)).
             %sendNote(extreme_debug,contentManager,'asserted to working memory',CL).
 
-adoUpdate_memory(Form,CL,KB,Ctx,TN,Maintainer):-!.
+adoUpdate_memory(Form,CL,Context,TN,Maintainer):-!.
 
 % ==============================================
 %	Retrieve from ADO
 % ==============================================
-purge_entire_kb(KB):-retractall(mooCache(PredR,Form,Source,Prolog,KB,Ctx,TN,Maintainer,_)),execSQLf('DELETE FROM PrologMemory WHERE KnowledgeBase LIKE "~q"',[KB]) .
+purge_entire_theory(Context):-retractall(mooCache(PredR,Form,Source,Prolog,Context,TN,Maintainer,_)),execSQLf('DELETE FROM PrologMemory WHERE KnowledgeBase LIKE "~q"',[Context]) .
 
 
 
-get_store(cache_only,Form,Source,KB,Ctx,TN,Maintainer):-mooCache(PredR,Format,PrologFormS,CL,KB,Ctx,TN,Maintainer,_).
+get_store(cache_only,Form,Source,Context,TN,Maintainer):-mooCache(PredR,Format,PrologFormS,CL,Context,TN,Maintainer,_).
 
-get_store(odbc,Form,Source,KB,Ctx,TN,Maintainer):-
-         once(select_rs(Form,Source,KB,Ctx,TN,Maintainer,IPRset)),
+get_store(odbc,Form,Source,Context,TN,Maintainer):-
+         once(select_rs(Form,Source,Context,TN,Maintainer,IPRset)),
          once(save_rs(IPRset,mooCache)),
          actx_release_object(IPRset),
          fail.
-get_store(odbc,Form,Source,KB,Ctx,TN,Maintainer):-mooCache(PredR,Form,Source,KB,Ctx,TN,Maintainer).
+get_store(odbc,Form,Source,Context,TN,Maintainer):-mooCache(PredR,Form,Source,Context,TN,Maintainer).
 
 :-dynamic(wc/2).
 
@@ -181,16 +181,16 @@ sync_ado_cache:-
         adoConnect,
          retractall(mooCache(PredR,_,_,_,_,_,_)),
          sendNote(power_user,contentManage,'Refreshing ADO/ODBC Cache',' '),
-         once(select_rs(Form,Source,KB,Ctx,TN,Maintainer,IPRset)),
+         once(select_rs(Form,Source,Context,TN,Maintainer,IPRset)),
          once(save_rs(IPRset,mooCache)),
          actx_release_object(IPRset).
 sync_ado_cache:-!.
          
 
-select_rs(Form,Source,KB,Ctx,TN,Maintainer,IPRset):-         
+select_rs(Form,Source,Context,TN,Maintainer,IPRset):-         
          retractall(wc(_,_)),
          (var(Form) -> true ; assert(wc('SourceForm',Form))),
-         (var(KB) -> true ; assert(wc('KnowledgeBase',KB))),
+         (var(Context) -> true ; assert(wc('KnowledgeBase',Context))),
          (var(Ctx) -> true ; assert(wc('Context',Ctx))),
          (var(TN) -> true ; assert(wc('AssertionID',TN))),
          (var(Maintainer) -> true ; assert(wc('Creator',Maintainer))),

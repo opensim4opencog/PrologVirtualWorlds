@@ -1,5 +1,3 @@
-:-include('moo_header.pl').
-
 % ===================================================================
 % File: moo_sentence.P
 % Maintainer: Douglas Miles (dmiles@users.sourceforge.net) 
@@ -17,7 +15,7 @@
 %     Higher Order Predicates: 
 %               Temporal:  after (preconditional) , before (causality)
 %               FOL: not (Refuted)
-%               Model: not (Unknown), known (In the KB), possible (Not refuted) 
+%               Model: not (Unknown), known (In the Context), possible (Not refuted) 
 %     Type Predicates:
 %               domainV, domain-check
 %     
@@ -26,6 +24,9 @@
 % http://www.dyade.fr/fr/actions/vip/jgl/SPP/dowek.ps 
 % http://logic.stanford.edu/~cs157/lectures/lecture04/sld004.htm
 % ===================================================================
+:-module(moo_sentence,[
+	 getAssertionClauses/5]).
+
 :-include('moo_header.pl').
 
 /*----------------------------------------------------------------------
@@ -102,39 +103,39 @@ ttsurf:-tsurf((=>(instance(A, 'Transaction'),
 % ======================================================================
 % ======================================================================
 % Converts a KIF Surface Assertion to Entailment Tests
-% getAssertionClauses(-KB,-Ctx,-Prop,+NConjAssertsClauses,+KRVars,-AllFlagsO)
+% getAssertionClauses(-Context,-Ctx,-Prop,+NConjAssertsClauses,+KRVars,-AllFlagsO)
 % ======================================================================
 
 /*
-getAssertionClauses(KB,Ctx,Surface,surface,[/*Vars*/],[/*Flags*/]):-
+getAssertionClauses(Context,Surface,surface,[/*Vars*/],[/*Flags*/]):-
 	once(getConstants(atomic,Surface,Cs,_,_)),
 	intersection(Cs,[<=>,exists,and,or,'',equal,entails,forall,=>,not,possible,known],[]),!.
 */
-getAssertionClauses(KB,Ctx,Prop,NConjAssertsClauses,KRVars,AllFlags):- 
-	logOnFailure(canonicalizeProposition(KB,Ctx,Prop,CNF,DNF,ConjAssertsClauses,KRVars,AllFlags)),
+getAssertionClauses(Context,Prop,NConjAssertsClauses,KRVars,AllFlags):- 
+	logOnFailure(canonicalizeProposition(Context,Prop,CNF,DNF,ConjAssertsClauses,KRVars,AllFlags)),
 	debugOnFailure(putFeaturesInFormula(assertion,KRVars,ConjAssertsClauses,AllFlags,NConjAssertsClauses)),!.
 	
 % ======================================================================
 % Converts a KIF Surface Request to Entailment Tests
-% getRequestClauses(-KB,-Ctx,-Prop,+NConjAssertsClauses,+KRVars,-AllFlagsO)
+% getRequestClauses(-Context,-Ctx,-Prop,+NConjAssertsClauses,+KRVars,-AllFlagsO)
 % ======================================================================
 
-getRequestClauses(KB,Ctx,Surface,surface,[/*Vars*/],[/*Flags*/]):-
+getRequestClauses(Context,Surface,surface,[/*Vars*/],[/*Flags*/]):-
 	once(getConstants(atomic,Surface,Cs,_,_)),
 	intersection(Cs,[<=>,exists,and,or,equal,entails,forall,=>,<=,not,possible,known],[]),!.
 
-getRequestClauses(KB,Ctx,Prop,NConjAssertsClauses,KRVars,AllFlags):- 
-	canonicalizeProposition(KB,Ctx,Prop,CNF,DNF,ConjAssertsClauses,KRVars,AllFlags),
+getRequestClauses(Context,Prop,NConjAssertsClauses,KRVars,AllFlags):- 
+	canonicalizeProposition(Context,Prop,CNF,DNF,ConjAssertsClauses,KRVars,AllFlags),
 	logOnFailure(putFeaturesInFormula(request,KRVars,ConjAssertsClauses,AllFlags,NConjAssertsClauses)),!.
 	
 
 % ======================================================================
-% canonicalizeProposition(+KB,+Ctx,+Prop,-ConjAssertsClauses,+KRVars,-AllFlags)
+% canonicalizeProposition(+Context,+Ctx,+Prop,-ConjAssertsClauses,+KRVars,-AllFlags)
 % ======================================================================
-canonicalizeProposition(KB,Ctx,Prop,CNF,DNF,ConjAssertsClauses,KRVars,AllFlags):- 
+canonicalizeProposition(Context,Prop,CNF,DNF,ConjAssertsClauses,KRVars,AllFlags):- 
 	close_list(KRVars),!,                  
 	%writeObject(Prop,KRVars),
-	numbervars(Prop:KRVars:KB:Ctx),
+	numbervars(Prop:KRVars:Context:Ctx),
 	logOnFailure(getModeledPredicates(Prop,FmlInOpen)),!,
 	%writeObject('<hr>getModeledPredicates: \n',KRVars),
 	%writeObject(FmlInOpen,KRVars),
@@ -147,7 +148,7 @@ canonicalizeProposition(KB,Ctx,Prop,CNF,DNF,ConjAssertsClauses,KRVars,AllFlags):
 	%writeObject('<hr>NoFunctions: \n',KRVars),
 	%writeObject(NoFunctions,KRVars),
 	logOnFailure(
-	getNegationForm(toplevel,0,KB,Ctx,KRVars,Flags,Axiom,_,NNF,_)),!,
+	getNegationForm(toplevel,0,Context,KRVars,Flags,Axiom,_,NNF,_)),!,
 	%logOnFailure(getDisjForm(NNF,DNF)),!,
 	logOnFailure(getConjForm(NNF,CNF)),!,
 	%write_cnf_lit(CNF,KRVars),!,
@@ -333,50 +334,50 @@ putDomainsTogether(V,Flags,[domainV(V,FUnivListO)|Flags]):-
 
 %%% Negation Normal Form
 % -----------------------------------------------------------------
-%  getNegationForm(Axiom,Caller,ArgN,KB,Ctx,KRVars,PreQ,PreQ,+Fml,+UFreeV,-NNF,-Paths)
+%  getNegationForm(Axiom,Caller,ArgN,Context,KRVars,PreQ,PreQ,+Fml,+UFreeV,-NNF,-Paths)
 %
 % Fml,NNF:    See above.
 % UFreeV:      List of free variables in Fml.
 % Paths:      Number of disjunctive paths in Fml.
 
 % Variable as Formula collect its caller
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[dom(Var,[Caller:ArgN]) ],Var,UFreeV,Var,1):- isSlot(Var),!.
+getNegationForm(Caller,ArgN,Context,KRVars,[dom(Var,[Caller:ArgN]) ],Var,UFreeV,Var,1):- isSlot(Var),!.
 
 % Special case for Instance
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[dom(A,['$instanceof':Class])],instance(A,Class),UFreeV,instance(A,Class),1):-
+getNegationForm(Caller,ArgN,Context,KRVars,[dom(A,['$instanceof':Class])],instance(A,Class),UFreeV,instance(A,Class),1):-
 	isSlot(A),atom(Class),!.
 
 /*
 % Special case for Instance
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[dom(A,['$instanceof':Class])/*post(A,instance(A,Class))*/|PreQ],or(not(instance(A,Class)),Fml),UFreeV,Out,N):-
+getNegationForm(Caller,ArgN,Context,KRVars,[dom(A,['$instanceof':Class])/*post(A,instance(A,Class))*/|PreQ],or(not(instance(A,Class)),Fml),UFreeV,Out,N):-
 	not(Fml = exists(_,_)),
 	isSlot(A),atom(Class),!,
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,Fml,UFreeV,Out,N),!.
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ,Fml,UFreeV,Out,N),!.
 */
 
 
 % Atom as Formula (do nothing)     				    
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[],Term,UFreeV,Term,1):-not(compound(Term)),!.
+getNegationForm(Caller,ArgN,Context,KRVars,[],Term,UFreeV,Term,1):-not(compound(Term)),!.
 
 % Special case for string
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[],string(A),UFreeV,string(A),1):-!.
+getNegationForm(Caller,ArgN,Context,KRVars,[],string(A),UFreeV,string(A),1):-!.
 
 
 % Special cases for Equals
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[],equal(A,B),UFreeV,equal(A,B),1):-isSlot(B),isSlot(A),!.
+getNegationForm(Caller,ArgN,Context,KRVars,[],equal(A,B),UFreeV,equal(A,B),1):-isSlot(B),isSlot(A),!.
 
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,equal(A,Fml),UFreeV,Out,N):-isSlot(A),!,
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,equal(Fml,A),UFreeV,Out,N),!.
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,equal(A,Fml),UFreeV,Out,N):-isSlot(A),!,
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ,equal(Fml,A),UFreeV,Out,N),!.
 	
        						       
 /*
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[dom(X,[F1:Range1,F2:Range2])|PreQ],equal(Fml1,Fml2),UFreeV,Result,2):-
+getNegationForm(Caller,ArgN,Context,KRVars,[dom(X,[F1:Range1,F2:Range2])|PreQ],equal(Fml1,Fml2),UFreeV,Result,2):-
 	Fml1=..[holds,F1|Args1],hlPredicateAttribute(F1,'Function'),
 	Fml2=..[holds,F2|Args2],hlPredicateAttribute(F2,'Function'),!,
 	length(Args1,R1),Range1 is R1 +1,
 	length(Args2,R2),Range2 is R2 +1,
-	getNegationForm_Args(Caller,ArgN,Args1,_,true,KB,Ctx,KRVars,PreQ1,UFreeV,F1,1,Args1,ArgsO1),!,
-	getNegationForm_Args(Caller,ArgN,Args2,_,true,KB,Ctx,KRVars,PreQ2,UFreeV,F2,1,Args2,ArgsO2),!,
+	getNegationForm_Args(Caller,ArgN,Args1,_,true,Context,KRVars,PreQ1,UFreeV,F1,1,Args1,ArgsO1),!,
+	getNegationForm_Args(Caller,ArgN,Args2,_,true,Context,KRVars,PreQ2,UFreeV,F2,1,Args2,ArgsO2),!,
 	idGen(G2),
 	X='$VAR'(G2),!,
 	FmlO1=..[holds,F1|ArgsO1,X],
@@ -388,85 +389,85 @@ getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[dom(X,[F1:Range1,F2:Range2])|PreQ],eq
 	append(PreQ1,PreQ2,PreQ),!.
 
 %  Skolem Function as Formula (the PVersion leaves Skolem Intact)     				    
-getNegationForm(PIN,PIN,formula,ArgN,KB,Ctx,KRVars,[dom(Var,[Caller:ArgN],[])],Term,UFreeV,X,1):-
+getNegationForm(PIN,PIN,formula,ArgN,Context,KRVars,[dom(Var,[Caller:ArgN],[])],Term,UFreeV,X,1):-
 	Term=..[F|Args],  hlPredicateAttribute(F,'SkolemFunction'),!,
 	last(X,Args),!.
 
 % Skolem Function  (fix its args)
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[dom(Var,[Caller:ArgN],[]),equalSK(Var,Result)|PreQ],Term,UFreeV,Var,1):-
+getNegationForm(Caller,ArgN,Context,KRVars,[dom(Var,[Caller:ArgN],[]),equalSK(Var,Result)|PreQ],Term,UFreeV,Var,1):-
 	Term=..[F|Args],hlPredicateAttribute(F,'SkolemFunction'),!,
 	idGen(N),
 	Var='$VAR'(N),
-	getNegationForm_Args(Caller,ArgN,true,KB,Ctx,KRVars,PreQ,[Var|UFreeV],F,1,Args,ArgsO),
+	getNegationForm_Args(Caller,ArgN,true,Context,KRVars,PreQ,[Var|UFreeV],F,1,Args,ArgsO),
 	PResult=..[F|PArgsO],!,
 	Result=..[F|ArgsO],!.
 */	
 
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,necessary(F),UFreeV,NECESSARY,Paths) :- !,
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,F,UFreeV,NNF,Paths), 
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,necessary(F),UFreeV,NECESSARY,Paths) :- !,
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ,F,UFreeV,NNF,Paths), 
 	getConjForm(NNF,CNF), 
 	necessaryRule(necessary CNF, NECESSARY),!.
 
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,possible F,UFreeV,POSSIBLE,Paths) :- !,
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,F,UFreeV,NNF,Paths),
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,possible F,UFreeV,POSSIBLE,Paths) :- !,
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ,F,UFreeV,NNF,Paths),
 	getDisjForm(NNF,DNF),
 	possibleRule(possible DNF, POSSIBLE).
 
 
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[forall(X)|PreQ],forall(X,Fml),UFreeV, NNF,Paths) :- !,
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,Fml,UFreeV, NNF,Paths).
+getNegationForm(Caller,ArgN,Context,KRVars,[forall(X)|PreQ],forall(X,Fml),UFreeV, NNF,Paths) :- !,
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ,Fml,UFreeV, NNF,Paths).
 
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[replaceConsVar(X,'$existential'(Repl,SKF))|PreQ],exists(X,Fml),UFreeV, NNF,Paths) :- !,
+getNegationForm(Caller,ArgN,Context,KRVars,[replaceConsVar(X,'$existential'(Repl,SKF))|PreQ],exists(X,Fml),UFreeV, NNF,Paths) :- !,
 	 toMarkUp(kif,X,KRVars,Repl),
 	 subst( Fml, X, (Repl), SKF),!,
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,Fml,UFreeV,NNF,Paths).	
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ,Fml,UFreeV,NNF,Paths).	
 	
 /*
 % Function  (fix its args)								 % Treats as universal and Existential
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[post(Var,eval(Result,Var)),replaceConsVar(Var,Result),dom(Var,[F:Range,F:range,Caller:ArgN])|PreQ],Term,UFreeV,Var,1):-
+getNegationForm(Caller,ArgN,Context,KRVars,[post(Var,eval(Result,Var)),replaceConsVar(Var,Result),dom(Var,[F:Range,F:range,Caller:ArgN])|PreQ],Term,UFreeV,Var,1):-
 	Term=..[F|Args],hlPredicateAttribute(F,'Function'),!,
 	idGen(N),
 	Var='$VAR'(N),
 	PTerm=..[F|PArgs],!,
 	length(Args,R),Range is R +1,
-	getNegationForm_Args(Caller,ArgN,true,KB,Ctx,KRVars,PreQ,UFreeV,F,1,Args,ArgsO),
+	getNegationForm_Args(Caller,ArgN,true,Context,KRVars,PreQ,UFreeV,F,1,Args,ArgsO),
 	PResult=..[F|PArgsO],!,
 	Result=..[F|ArgsO],!.
 */
 	
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,A and B,UFreeV,NNF,Paths) :- !,
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ1,A,UFreeV,NNF1,Paths1),
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ2,B,UFreeV,NNF2,Paths2),
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,A and B,UFreeV,NNF,Paths) :- !,
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ1,A,UFreeV,NNF1,Paths1),
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ2,B,UFreeV,NNF2,Paths2),
 	append(PreQ1,PreQ2,PreQ),
 	Paths is Paths1 * Paths2,
 	(Paths1 > Paths2 -> (NNF = (NNF2 and NNF1));
 		            (NNF = (NNF1 and NNF2))),!.
 
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,A or B,UFreeV,NNF,Paths) :- !,
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ1,A,UFreeV,NNF1,Paths1),
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ2,B,UFreeV,NNF2,Paths2),
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,A or B,UFreeV,NNF,Paths) :- !,
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ1,A,UFreeV,NNF1,Paths1),
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ2,B,UFreeV,NNF2,Paths2),
 	append(PreQ1,PreQ2,PreQ),
 	Paths is Paths1 + Paths2,
 	(Paths1 > Paths2 -> (NNF = (NNF2 or NNF1));
 		            (NNF = (NNF1 or NNF2))),!.
 
 % Temporal Logic
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,not until(A,B),UFreeV,NNF,Paths) :-  
-		getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ1,not A,UFreeV,NNA,_), 
-		getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ2,not B,UFreeV,NNB,_), !,
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,not until(A,B),UFreeV,NNF,Paths) :-  
+		getNegationForm(Caller,ArgN,Context,KRVars,PreQ1,not A,UFreeV,NNA,_), 
+		getNegationForm(Caller,ArgN,Context,KRVars,PreQ2,not B,UFreeV,NNB,_), !,
 		( Fml1 = (NNB or  until(NNB,NNA or NNB)) ),
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ3,Fml1,UFreeV,NNF,Paths),!,
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ3,Fml1,UFreeV,NNF,Paths),!,
 	append(PreQ1,PreQ2,PreQ12),!,
 	append(PreQ12,PreQ3,PreQ),!.
 	
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,next F,UFreeV,NEXT,Paths) :- !,
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,F,UFreeV,NNF,Paths), 
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,next F,UFreeV,NEXT,Paths) :- !,
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ,F,UFreeV,NNF,Paths), 
 	nextRule(next NNF, NEXT),!.
 
 
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,until(A,B),UFreeV,NNF,Paths) :- !,
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ1,A,UFreeV,NNF1,Paths1),
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ2,B,UFreeV,NNF2,Paths2),
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,until(A,B),UFreeV,NNF,Paths) :- !,
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ1,A,UFreeV,NNF1,Paths1),
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ2,B,UFreeV,NNF2,Paths2),
 	append(PreQ1,PreQ2,PreQ),
 	Paths is Paths1 + Paths2,
 	NNF = until(NNF1, NNF2),
@@ -475,7 +476,7 @@ getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,until(A,B),UFreeV,NNF,Paths) :- !
 
 
 % NNF Continued
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,Fml,UFreeV,NNF,Paths) :-  
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,Fml,UFreeV,NNF,Paths) :-  
 	(
 		Fml =  not(not A)      ->  Fml1 = A;
 		 Fml =  not(necessary F)   -> Fml1 = possible (not F);
@@ -490,55 +491,55 @@ getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,Fml,UFreeV,NNF,Paths) :-
 		 Fml =  not((A => B))  -> Fml1 = A and not(B);
 		 Fml = (A <=> B)  -> Fml1 = (A and B) or (not A and not(B));
 		 Fml =  not((A <=> B)) -> Fml1 = (A and not(B)) or (not A and B)
-	 ),!,getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,Fml1,UFreeV,NNF,Paths),!.
+	 ),!,getNegationForm(Caller,ArgN,Context,KRVars,PreQ,Fml1,UFreeV,NNF,Paths),!.
 
 
 
 % Left over Terms
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[dom(F,[holds:1])|PreQ],(Term),UVars,(Result),1):- 
+getNegationForm(Caller,ArgN,Context,KRVars,[dom(F,[holds:1])|PreQ],(Term),UVars,(Result),1):- 
 	Term=..[holds,F|Args],isEntitySlot(F),!,
-	getNegationForm_Args(F,1,true,KB,Ctx,KRVars,PreQ,UVars,Args,ArgsO),!,
+	getNegationForm_Args(F,1,true,Context,KRVars,PreQ,UVars,Args,ArgsO),!,
 	Result=..[holds,F|ArgsO].
 	
 % Strip Not Holds and Loop over 
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,(Term),UVars,(Result),N):- 
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,(Term),UVars,(Result),N):- 
 	Term=..[holds,F|Args],
 	NTerm=..[F|Args], 
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,NTerm,UVars,Result,N),!.
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ,NTerm,UVars,Result,N),!.
  
 
 
 % Left over Terms
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,[dom(F,['AssignmentFn':1])|PreQ],(Term),UVars,(Result),1):- 
+getNegationForm(Caller,ArgN,Context,KRVars,[dom(F,['AssignmentFn':1])|PreQ],(Term),UVars,(Result),1):- 
 	Term=..['AssignmentFn',F|Args],isEntitySlot(F),!,
-	getNegationForm_Args(F,1,true,KB,Ctx,KRVars,PreQ,UVars,Args,ArgsO),!,
+	getNegationForm_Args(F,1,true,Context,KRVars,PreQ,UVars,Args,ArgsO),!,
 	Result=..['AssignmentFn',F|ArgsO].
 	
 % Strip Not Holds and Loop over 
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,(Term),UVars,(Result),N):- 
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,(Term),UVars,(Result),N):- 
 	Term=..['AssignmentFn',F|Args],
 	NTerm=..[F|Args], 
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,NTerm,UVars,Result,N),!.
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ,NTerm,UVars,Result,N),!.
  
 
 
 
 % Explore arguments
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,not(Term),UVars,not(Result),N):-
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,(Term),UVars,(Result),N),!.
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,not(Term),UVars,not(Result),N):-
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ,(Term),UVars,(Result),N),!.
 
 % Explore arguments
-getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ,(Term),UVars,(Result),1):-
+getNegationForm(Caller,ArgN,Context,KRVars,PreQ,(Term),UVars,(Result),1):-
 	Term=..[F|Args],
-	getNegationForm_Args(F,1,true,KB,Ctx,KRVars,PreQ,UVars,Args,ArgsO),!,
+	getNegationForm_Args(F,1,true,Context,KRVars,PreQ,UVars,Args,ArgsO),!,
 	Result=..[F|ArgsO].
 	
-getNegationForm_Args(Caller,ArgN,Truth,KB,Ctx,KRVars,[],UVars,[],[]):-!.
+getNegationForm_Args(Caller,ArgN,Truth,Context,KRVars,[],UVars,[],[]):-!.
 
-getNegationForm_Args(Caller,ArgN,Truth,KB,Ctx,KRVars,PreQ,UVars,[Arg|ArgS],[ArgO|ArgSO]):-
+getNegationForm_Args(Caller,ArgN,Truth,Context,KRVars,PreQ,UVars,[Arg|ArgS],[ArgO|ArgSO]):-
 	ArgNN is ArgN + 1,
-	getNegationForm(Caller,ArgN,KB,Ctx,KRVars,PreQ1,Arg,UVars,ArgO,Paths),
-	getNegationForm_Args(Caller,ArgNN,Truth,KB,Ctx,KRVars,PreQ2,UVars,ArgS,ArgSO),!,
+	getNegationForm(Caller,ArgN,Context,KRVars,PreQ1,Arg,UVars,ArgO,Paths),
+	getNegationForm_Args(Caller,ArgNN,Truth,Context,KRVars,PreQ2,UVars,ArgS,ArgSO),!,
 	append(PreQ1,PreQ2,PreQ),!.
 
 
@@ -782,7 +783,7 @@ replace_in_clause(T1,[],[T1],[],[]):-!.
 replace_in_clause(T1,[T2|Clause],PutFront,NewClause,Generalized):-
 	not(functor(T1,common,_)),
 	not(functor(T2,common,_)),
-	once(notrace(compareVariant(T1,T2,GT,Cost1,Cost2))),
+	once(system_dependant:prolog_notrace(compareVariant(T1,T2,GT,Cost1,Cost2))),
 		compare(Dif,Cost1,Cost2),
 		apply_mgu(Dif,Cost1,Cost2,T1,T2,GT,PutFront,Clause,NewClause,Generalized),!.
 
@@ -1584,7 +1585,7 @@ sent_and(Clause1, Clause2, [Clause1,Clause2]).
 % ============================================
 
 % Free Formulas are never 
-isTheorem(T,V):-notrace(isTheoremTrue(T,V)).
+isTheorem(T,V):-system_dependant:prolog_notrace(isTheoremTrue(T,V)).
 isTheoremTrue(V,FreeV):-isSlot(V),!,fail.
 isTheoremTrue(V,FreeV):-isReducedToTrue(V),!.
 
@@ -1713,140 +1714,140 @@ km_check(=>(P,=>(not(PP),_)),FreeV):-trace,deduceLogicallyEquiv(P,PP),!.
 % ==========================================
 % Not possible
 % ==========================================
-deduceGoal_sentence_op(possible,false,Depth,Table,possible(NewRequest),Agent,KB,Explaination):-!,
-        once(request_compile(not(NewRequest),NewRequest,KB,Agent,UVars,Given)),!,
+deduceGoal_sentence_op(possible,false,Depth,Table,possible(NewRequest),Agent,Context,Explaination):-!,
+        once(request_compile(not(NewRequest),NewRequest,Context,UVars,Given)),!,
 	functor(NewRequest,Predicate,_),
-	deduceGoal(Predicate,true,Depth,Table,(NewRequest),Agent,KB,Explaination).
+	deduceGoal(Predicate,true,Depth,Table,(NewRequest),Agent,Context,Explaination).
 
 % ==========================================
 % Is possible
 % ==========================================
-deduceGoal_sentence_op(possible,true,Depth,Table,possible(NewRequest),Agent,KB,Explaination):-!,
-        once(request_compile(not(NewRequest),NewRequest,KB,Agent,UVars,Given)),!,
+deduceGoal_sentence_op(possible,true,Depth,Table,possible(NewRequest),Agent,Context,Explaination):-!,
+        once(request_compile(not(NewRequest),NewRequest,Context,UVars,Given)),!,
 	functor(NewRequest,Predicate,_),
-	(deduceGoal(Predicate,false,Depth,Table,(NewRequest),Agent,KB,Explaination),!,fail);Explaination=possible(NewRequest).
+	(deduceGoal(Predicate,false,Depth,Table,(NewRequest),Agent,Context,Explaination),!,fail);Explaination=possible(NewRequest).
 
 % ============================================================
 % Forall True
 % ============================================================
-deduceGoal_sentence_op(forall,true,Depth,Table, forall(Var,UFormulaIN),Agent,KB,incode(not(exists(Var,not(UFormulaIN))),'AxFx -> ~Ex~Fx') * Explaination) :-! ,%true,
-	deduceGoal(exists,false,Depth,Table, exists(Var,not(UFormulaIN)),Agent,KB,Explaination).
+deduceGoal_sentence_op(forall,true,Depth,Table, forall(Var,UFormulaIN),Agent,Context,incode(not(exists(Var,not(UFormulaIN))),'AxFx -> ~Ex~Fx') * Explaination) :-! ,%true,
+	deduceGoal(exists,false,Depth,Table, exists(Var,not(UFormulaIN)),Agent,Context,Explaination).
 
 % ============================================================
 % Forall False
 % ============================================================
-deduceGoal_sentence_op(forall,false,Depth,Table, forall(Var,UFormulaIN),Agent,KB,incode(exists(Var,not(UFormulaIN)),'~AxFx -> Ex~Fx') * Explaination) :-! ,%true,
-	deduceGoal(exists,true,Depth,Table, exists(Var,not(UFormulaIN)),Agent,KB,Explaination).
+deduceGoal_sentence_op(forall,false,Depth,Table, forall(Var,UFormulaIN),Agent,Context,incode(exists(Var,not(UFormulaIN)),'~AxFx -> Ex~Fx') * Explaination) :-! ,%true,
+	deduceGoal(exists,true,Depth,Table, exists(Var,not(UFormulaIN)),Agent,Context,Explaination).
 
 % ============================================================
 % Does Exists
 % ============================================================
-deduceGoal_sentence_op(exists,true,Depth,Table,exists(Var,UFormulaIN),Agent,KB,Explaination) :-!,
-	writeDebug(subgoal(UFormulaIN,Agent,KB)),!,
-        once(request_compile((UFormulaIN),NewRequest,KB,Agent,UVars,Given)),!,
-	writeDebug(subgoal(NewRequest,Agent,KB)), 
+deduceGoal_sentence_op(exists,true,Depth,Table,exists(Var,UFormulaIN),Agent,Context,Explaination) :-!,
+	writeDebug(subgoal(UFormulaIN,Agent,Context)),!,
+        once(request_compile((UFormulaIN),NewRequest,Context,UVars,Given)),!,
+	writeDebug(subgoal(NewRequest,Agent,Context)), 
 	functor(NewRequest,Predicate,_),
-        deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,KB,Explaination),nonvar(Var).
+        deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,Context,Explaination),nonvar(Var).
 
 % ============================================================
 % Not Exists
 % ============================================================
-deduceGoal_sentence_op(exists,false,Depth,Table,exists(Var,UFormulaIN),Agent,KB,Explaination) :-!,
-	writeDebug(subgoal(not(UFormulaIN),Agent,KB)),!,
-        once(request_compile(not(UFormulaIN),NewRequest,KB,Agent,UVars,Given)),!,
-	writeDebug(subgoal(NewRequest,Agent,KB)), 
+deduceGoal_sentence_op(exists,false,Depth,Table,exists(Var,UFormulaIN),Agent,Context,Explaination) :-!,
+	writeDebug(subgoal(not(UFormulaIN),Agent,Context)),!,
+        once(request_compile(not(UFormulaIN),NewRequest,Context,UVars,Given)),!,
+	writeDebug(subgoal(NewRequest,Agent,Context)), 
 	functor(NewRequest,Predicate,_),
-        deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,KB,Explaination).
+        deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,Context,Explaination).
 
 % ============================================================
 % Does Imply
 % ============================================================
-deduceGoal_sentence_op('=>',true,Depth,Table,'=>'(Ante,Cons),Agent,KB,  Explaination) :-!,
-	prove_implication('=>',true,Depth,Table,'=>'(Ante,Cons),Agent,KB, Explaination).
+deduceGoal_sentence_op('=>',true,Depth,Table,'=>'(Ante,Cons),Agent,Context,  Explaination) :-!,
+	prove_implication('=>',true,Depth,Table,'=>'(Ante,Cons),Agent,Context, Explaination).
 	
 
-prove_implication('=>',true,Depth,Table,'=>'(Ante,Cons),Agent,KB, incode(asserted(Agent,Ante),'Does Imply') * incode(Cons,'Therefore Proves ')) :-!,
+prove_implication('=>',true,Depth,Table,'=>'(Ante,Cons),Agent,Context, incode(asserted(Agent,Ante),'Does Imply') * incode(Cons,'Therefore Proves ')) :-!,
 	idGen(ToRetract),!,
 	copy_term(Ante,Copy),
-	logOnFailure(invokeInsert([trusted,canonicalize],fsck,Copy,Agent,ToRetract,KB,Vars,'HypotheticalRequest')),
+	logOnFailure(invokeInsert([trusted,canonicalize],fsck,Copy,Agent,ToRetract,Context,Vars,'HypotheticalRequest')),
 	functor(Cons,Predicate,_),!,
-	deduceGoal(Predicate,true,Depth,Table,Cons,Agent,KB,Explaination),
-	destroyTN(KB,ToRetract,Agent).
+	deduceGoal(Predicate,true,Depth,Table,Cons,Agent,Context,Explaination),
+	destroyTN(Context,ToRetract,Agent).
 	
 /*
-prove_implication('=>',true,Depth,Table,'=>'(Ante,Cons),Agent,KB, incode(NewRequest,'Does Imply') * Explaination) :-!,
+prove_implication('=>',true,Depth,Table,'=>'(Ante,Cons),Agent,Context, incode(NewRequest,'Does Imply') * Explaination) :-!,
 	%numbervars(Ante,'hyp',0,_),!,
 	getAssertionClauses_inf('=>'(Ante,Cons),NewRequest,KRVars,Flags),
 	functor(NewRequest,Predicate,_),
-	deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,KB,Explaination).
+	deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,Context,Explaination).
 */
 
 % ============================================================
 % Does not Imply
 % ============================================================
-deduceGoal_sentence_op('=>',false,Depth,Table,'=>'(Ante,Cons),Agent,KB, incode(NewRequest,'Does Not Imply') * Explaination) :-!,
+deduceGoal_sentence_op('=>',false,Depth,Table,'=>'(Ante,Cons),Agent,Context, incode(NewRequest,'Does Not Imply') * Explaination) :-!,
 	%numbervars(Ante,'hyp',0,_),!,
 	getAssertionClauses_inf(not('=>'(Ante,Cons)),NewRequest,KRVars,Flags),
 	functor(NewRequest,Predicate,_),
-	deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,KB,Explaination).
+	deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,Context,Explaination).
 
 
 getAssertionClauses_inf((not((equal(_,_)'=>'_))),Out,Vars,Flags):- !,fail.
 getAssertionClauses_inf(not((_ '=>' not(equal(_,_)))),Out,Vars,Flags):- !,fail.
 getAssertionClauses_inf(In,Out,Vars,Flags):- %true,
-	getAssertionClauses(KB,Ctx,In,Mid,Vars,Flags),
+	getAssertionClauses(Context,In,Mid,Vars,Flags),
 	compile_conditionals(Mid,Out),!.
 	
 % ============================================================
 % Is equivalant
 % ============================================================
-deduceGoal_sentence_op('<=>',true,Depth,Table,'<=>'(Ante,Cons),Agent,KB,incode(NewRequest,'Is Equivalent') * Explaination) :-!,
+deduceGoal_sentence_op('<=>',true,Depth,Table,'<=>'(Ante,Cons),Agent,Context,incode(NewRequest,'Is Equivalent') * Explaination) :-!,
 	%numbervars(Ante,'hyp',0,_),!,
 	getAssertionClauses_inf('<=>'(Ante,Cons),NewRequest,KRVars,Flags),
 	functor(NewRequest,Predicate,_),
-	deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,KB, Explaination).
+	deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,Context, Explaination).
 
 % ============================================================
 % Is not equivalant
 % ============================================================
-deduceGoal_sentence_op('<=>',false,Depth,Table,'<=>'(Ante,Cons),Agent,KB,incode(NewRequest,'Is Not Equivalent') * Explaination) :-!,
+deduceGoal_sentence_op('<=>',false,Depth,Table,'<=>'(Ante,Cons),Agent,Context,incode(NewRequest,'Is Not Equivalent') * Explaination) :-!,
 	%numbervars(Ante,'hyp',0,_),!,
 	getAssertionClauses_inf(not('<=>'(Ante,Cons)),NewRequest,KRVars,Flags),
 	functor(NewRequest,Predicate,_),
-	deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,KB, Explaination).
+	deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,Context, Explaination).
 
 % ==========================================================
 % True/False Disjunct
 % ==========================================================
-deduceGoal_sentence_op(or,Logic,Depth,Table,or(A,B),Agent,KB,Explaination):- !,
+deduceGoal_sentence_op(or,Logic,Depth,Table,or(A,B),Agent,Context,Explaination):- !,
 	writeDebug(disjuncts),
 	(
 	functor(A,Predicate,_),
-	deduceGoal(Predicate,Logic,Depth,Table,A,Agent,KB,Explaination)
+	deduceGoal(Predicate,Logic,Depth,Table,A,Agent,Context,Explaination)
 	)
 	;
 	(
 	functor(A,Predicate,_),
-	deduceGoal(Predicate,Logic,Depth,Table,B,Agent,KB,Explaination)
+	deduceGoal(Predicate,Logic,Depth,Table,B,Agent,Context,Explaination)
 	).
 		
 % ==========================================================
 % True/False Conjunct
 % ==========================================================
-deduceGoal_sentence_op(_,Logic,Depth,Table,and(A,B),Agent,KB,ExplainationA * ExplainationB ):-!,
-	deduceGoal(holds,Logic,Depth,Table,A,Agent1,KB,ExplainationA ),
-	deduceGoal(holds,Logic,Depth,Table,B,Agent2,KB,ExplainationB ).
+deduceGoal_sentence_op(_,Logic,Depth,Table,and(A,B),Agent,Context,ExplainationA * ExplainationB ):-!,
+	deduceGoal(holds,Logic,Depth,Table,A,Agent1,Context,ExplainationA ),
+	deduceGoal(holds,Logic,Depth,Table,B,Agent2,Context,ExplainationB ).
 
 % ==========================================
 % Equal/Evaluate
 % ==========================================
 
 % Shunt a wild equals
-deduceGoal_sentence_op(equal,true,Depth,Table,equal(V2, V1),Agent,KB,P):-%true,
+deduceGoal_sentence_op(equal,true,Depth,Table,equal(V2, V1),Agent,Context,P):-%true,
 	var(V1),var(V2),!,V1=V2,!.
 	
-deduceGoal_sentence_op(equal,true,Depth,Table,equal(U,W),Agent,KB,P):-!,equal(U,W,P),!.  %defined in moo_equal.P
-deduceGoal_sentence_op(equal,false,Depth,Table,equal(U,W),Agent,KB,P):-!,not_equal(U,W,P),!. %defined in moo_equal.P
+deduceGoal_sentence_op(equal,true,Depth,Table,equal(U,W),Agent,Context,P):-!,equal(U,W,P),!.  %defined in moo_equal.P
+deduceGoal_sentence_op(equal,false,Depth,Table,equal(U,W),Agent,Context,P):-!,not_equal(U,W,P),!. %defined in moo_equal.P
 
 
 %:-include('moo_header.pl').

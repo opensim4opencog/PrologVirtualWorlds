@@ -244,20 +244,20 @@ sort_ant2(A,A):-!.
 % convert WFS-Prolog                  (can_to_rule((A,B),(AA,BB)))
 % ===================================================================
 
-can_to_rule(PROLOG,true,true,KB,Ctx,TN,Cost):-isSlot(PROLOG),!.
+can_to_rule(PROLOG,true,true,Context,TN,Cost):-isSlot(PROLOG),!.
 
-can_to_rule(PROLOG,true,true,KB,Ctx,TN):-member(PROLOG,[true,end_of_file,surf]),!.
+can_to_rule(PROLOG,true,true,Context,TN):-member(PROLOG,[true,end_of_file,surf]),!.
 
-can_to_rule((WFS:-true),Arg1,Arg2,KB,Ctx,TN):-!,can_to_rule(WFS,Arg1,Arg2,KB,Ctx,TN).
+can_to_rule((WFS:-true),Arg1,Arg2,Context,TN):-!,can_to_rule(WFS,Arg1,Arg2,Context,TN).
 
 
-%can_to_rule(resolve_skolem(A,B),skolem,(A=BB),KB,Ctx,TN):- !,krlog_to_prolog(B,BB).
-can_to_rule(WFS,WFS,predicate,KB,Ctx,TN):-
+%can_to_rule(resolve_skolem(A,B),skolem,(A=BB),Context,TN):- !,krlog_to_prolog(B,BB).
+can_to_rule(WFS,WFS,predicate,Context,TN):-
                 functor(WFS,F,A),predicates_PTTP_leaves_alone(F,A),!.
-can_to_rule((WFS:-BODY),WFS,[inline_rule(Cost)|BODY],KB,Ctx,TN):-
+can_to_rule((WFS:-BODY),WFS,[inline_rule(Cost)|BODY],Context,TN):-
                 functor(WFS,F,A),predicates_PTTP_leaves_alone(F,A),!.
-can_to_rule((WFS:-BODY),WFS,BODY,KB,Ctx,TN):-!.
-can_to_rule(WFS,WFS,fact,KB,Ctx,TN):-!.
+can_to_rule((WFS:-BODY),WFS,BODY,Context,TN):-!.
+can_to_rule(WFS,WFS,fact,Context,TN):-!.
 
 can_to_wfs_proc(X,end_of_file):-memberchk(X,[end_of_file,surf,true,false]),!.
 can_to_wfs_proc((X:-true),XX):-!,can_to_wfs_proc(X,XX),!.
@@ -339,10 +339,10 @@ tilde_t(T,TT):-T=..[F|A],atom_codes(F,FC),atom_codes(NF,[126|FC]),TT=..[NF|A],!.
 
 
 
-wrap_the_ants(true,true,KB,Context):-!.
-wrap_the_ants(Before,Wrapped,KB,Context):-build_ante(Before,AfterL,_),!,conv(AfterL,After),!,wrap_in_byrd(After,Wrapped,KB,Context).
+wrap_the_ants(true,true,Context,Context):-!.
+wrap_the_ants(Before,Wrapped,Context,Context):-build_ante(Before,AfterL,_),!,conv(AfterL,After),!,wrap_in_byrd(After,Wrapped,Context,Context).
 
-%wrap_in_byrd(After,Wrapped,KB,Context):-!,byrd_request_compile(After,Wrapped,KB,Context,Vars).
+%wrap_in_byrd(After,Wrapped,Context,Context):-!,byrd_request_compile(After,Wrapped,Context,Context,Vars).
 
 
 gen_occurs(A,B) :- A == B.
@@ -496,7 +496,7 @@ C:\jakarta-tomcat\webapps\moo\WEB-INF\lib\cpj.jar;C:\jakarta-tomcat\lib\jasper.j
 progol_version('2.7.4 (Sicstus)').
 progol_manual('http://www.comlab.ox.ac.uk/oucl/groups/machlearn/PProgol/ppman_toc.html').
 
-sicstus_statistics(runtime,[X,_]):-statistics(cputime,X).
+sicstus_statistics(runtime,[X,_]):-system_dependant:prolog_statistics(cputime,X).
 
 :-
         nl, nl,
@@ -5829,139 +5829,139 @@ Vars = [=('B',_h1002)|_h1105]
 ====================================================================*/
 
 % ===================================================================
-% add_kb_context(HB,DynStat,KB,Ctx,Prolog,NewProlog)  Converts And/Or/Implies terms to Proper Prolog
+% add_theory_context(HB,DynStat,Context,Prolog,NewProlog)  Converts And/Or/Implies terms to Proper Prolog
 % ====================================================================
-add_kb_context(HB,DynStat,KB,Ctx,true,true):-!.
-add_kb_context(h,DynStat,KB,Ctx,In,Out):- !,
+add_theory_context(HB,DynStat,Context,true,true):-!.
+add_theory_context(h,DynStat,Context,In,Out):- !,
           krlog_to_prolog(In,InP),              !,
-         add_kb_context_p(HB,DynStat,KB,Ctx,InP,Out).
-add_kb_context(b,DynStat,KB,Ctx,In,Out):-!,
+         add_theory_context_p(HB,DynStat,Context,InP,Out).
+add_theory_context(b,DynStat,Context,In,Out):-!,
          krlog_to_prolog(In,InP),              !,
-         add_kb_context_p(HB,DynStat,KB,Ctx,InP,Out).
+         add_theory_context_p(HB,DynStat,Context,InP,Out).
 
-add_kb_context_p(HB,DynStat,_,_,Var,Var):-var(Var),!.
-add_kb_context_p(HB,DynStat,_,_,'$VAR'(N),'$VAR'(N)):-!.
+add_theory_context_p(HB,DynStat,_,_,Var,Var):-var(Var),!.
+add_theory_context_p(HB,DynStat,_,_,'$VAR'(N),'$VAR'(N)):-!.
 
-add_kb_context_p(b,DynStat,KB,Ctx,not('equal'(T1,T2)),( T1 \== T2 )):-!.
-add_kb_context_p(h,DynStat,KB,Ctx,not('equal'(T1,T2)),nop):-!.
+add_theory_context_p(b,DynStat,Context,not('equal'(T1,T2)),( T1 \== T2 )):-!.
+add_theory_context_p(h,DynStat,Context,not('equal'(T1,T2)),nop):-!.
 
-add_kb_context_p(HB,DynStat,KB,Ctx, ':-'(A) , ':-'(AA)):-  !,
-            add_kb_context_p(HB,DynStat,KB,Ctx,A,AA).
-
-
-add_kb_context_p(HB,DynStat,KB,Ctx, ','(A,B) , (AA,BB)):-  !,
-            add_kb_context_p(HB,DynStat,KB,Ctx,A,AA),
-            add_kb_context_p(HB,DynStat,KB,Ctx,B,BB).
-
-add_kb_context_p(HB,DynStat,KB,Ctx, '/'(A,B) , '/'(AA,BB)):-  !,
-            add_kb_context_p(HB,DynStat,KB,Ctx,A,AA),
-            add_kb_context_p(HB,DynStat,KB,Ctx,B,BB).
-
-add_kb_context_p(HB,DynStat,KB,Ctx,(A ; B),(AA ; BB)):-  !,
-            add_kb_context_p(HB,DynStat,KB,Ctx,A,AA),
-            add_kb_context_p(HB,DynStat,KB,Ctx,B,BB).
-
-add_kb_context_p(HB,DynStat,KB,Ctx,(A:-B),(AA:-BB)):-  !,
-            add_kb_context_p(h,DynStat,KB,Ctx,A,AA),
-            add_kb_context_p(b,DynStat,KB,Ctx,B,BB).
-
-add_kb_context_p(HB,DynStat,KB,Ctx,not(not(TERM)),POS):- !,
-         add_kb_context_p(HB,DynStat,KB,Ctx,TERM,POS).
-
-add_kb_context_p(HB,DynStat,KB,Ctx, Num , Num):-  number(Num),!.
-
-add_kb_context_p(HB,DynStat,KB,Ctx, holds , KBCtx):-
-         atom_concat(KB,'_',KBU),
-         atom_concat(KBU,Ctx,KBCtx),!.
-
-add_kb_context_p(HB,DynStat,KB,Ctx, apply_dyn , DKBCtx):-
-         atom_concat(KB,'_',KBU),
-         atom_concat(KBU,Ctx,KBCtx),
-         atom_concat(KBCtx,'_dyn',DKBCtx),!.
-
-add_kb_context_p(HB,DynStat,KB,Ctx, neg_apply , KBCtx):-
-         atom_concat('neg_',KB,KBN),
-         atom_concat(KBN,'_',KBU),
-         atom_concat(KBU,Ctx,KBCtx),!.
-
-add_kb_context_p(HB,DynStat,KB,Ctx, neg_apply_dyn , DKBCtx):-
-         atom_concat('neg_',KB,KBN),
-         atom_concat(KBN,'_',KBU),
-         atom_concat(KBU,Ctx,KBCtx),
-         atom_concat(KBCtx,'_dyn',DKBCtx),!.
+add_theory_context_p(HB,DynStat,Context, ':-'(A) , ':-'(AA)):-  !,
+            add_theory_context_p(HB,DynStat,Context,A,AA).
 
 
-add_kb_context_p(HB,DynStat,KB,Ctx, Term , Out):-
+add_theory_context_p(HB,DynStat,Context, ','(A,B) , (AA,BB)):-  !,
+            add_theory_context_p(HB,DynStat,Context,A,AA),
+            add_theory_context_p(HB,DynStat,Context,B,BB).
+
+add_theory_context_p(HB,DynStat,Context, '/'(A,B) , '/'(AA,BB)):-  !,
+            add_theory_context_p(HB,DynStat,Context,A,AA),
+            add_theory_context_p(HB,DynStat,Context,B,BB).
+
+add_theory_context_p(HB,DynStat,Context,(A ; B),(AA ; BB)):-  !,
+            add_theory_context_p(HB,DynStat,Context,A,AA),
+            add_theory_context_p(HB,DynStat,Context,B,BB).
+
+add_theory_context_p(HB,DynStat,Context,(A:-B),(AA:-BB)):-  !,
+            add_theory_context_p(h,DynStat,Context,A,AA),
+            add_theory_context_p(b,DynStat,Context,B,BB).
+
+add_theory_context_p(HB,DynStat,Context,not(not(TERM)),POS):- !,
+         add_theory_context_p(HB,DynStat,Context,TERM,POS).
+
+add_theory_context_p(HB,DynStat,Context, Num , Num):-  number(Num),!.
+
+add_theory_context_p(HB,DynStat,Context, holds , ContextCtx):-
+         atom_concat(Context,'_',ContextU),
+         atom_concat(ContextU,Ctx,ContextCtx),!.
+
+add_theory_context_p(HB,DynStat,Context, apply_dyn , DContextCtx):-
+         atom_concat(Context,'_',ContextU),
+         atom_concat(ContextU,Ctx,ContextCtx),
+         atom_concat(ContextCtx,'_dyn',DContextCtx),!.
+
+add_theory_context_p(HB,DynStat,Context, neg_apply , ContextCtx):-
+         atom_concat('neg_',Context,ContextN),
+         atom_concat(ContextN,'_',ContextU),
+         atom_concat(ContextU,Ctx,ContextCtx),!.
+
+add_theory_context_p(HB,DynStat,Context, neg_apply_dyn , DContextCtx):-
+         atom_concat('neg_',Context,ContextN),
+         atom_concat(ContextN,'_',ContextU),
+         atom_concat(ContextU,Ctx,ContextCtx),
+         atom_concat(ContextCtx,'_dyn',DContextCtx),!.
+
+
+add_theory_context_p(HB,DynStat,Context, Term , Out):-
             Term=..[F|ARGS], 'explore_predicate'(F,_),!,
-            add_kb_context_l(HB,DynStat,KB,Ctx,ARGS,OARGS),
+            add_theory_context_l(HB,DynStat,Context,ARGS,OARGS),
             Out=..[F|OARGS].
 
-add_kb_context_p(HB,DynStat,KB,Ctx,P,NP):-is_kernel_based(P,NF),!,P=..[F|ARGS],NP=..[NF|ARGS].
-%add_kb_context_p(HB,stat,KB,Ctx,not(P),(ground(NP),'t not'(NP))):-is_kernel_based(P,NF),!,P=..[F|ARGS],NP=..[NF|ARGS].
+add_theory_context_p(HB,DynStat,Context,P,NP):-is_kernel_based(P,NF),!,P=..[F|ARGS],NP=..[NF|ARGS].
+%add_theory_context_p(HB,stat,Context,not(P),(ground(NP),'t not'(NP))):-is_kernel_based(P,NF),!,P=..[F|ARGS],NP=..[NF|ARGS].
 
-add_kb_context_p(h,DynStat,KB,Ctx,not(TERM),neg(AAA)):-
+add_theory_context_p(h,DynStat,Context,not(TERM),neg(AAA)):-
          TERM=..[F|ARGS],
          compile_w_add(F),!,
-         atom_concat(KB,'_',KBU),
-         atom_concat(KBU,Ctx,KBCtx),
+         atom_concat(Context,'_',ContextU),
+         atom_concat(ContextU,Ctx,ContextCtx),
          atom_concat('neg_',F,FN),
          dyn_StatArray(DynStat,DynStatArray),
          atom_concat(FN,DynStatArray,FNS),
          NTERM=..[FNS|ARGS],
-         suffix_op(NTERM,AAA,KBCtx).
+         suffix_op(NTERM,AAA,ContextCtx).
 
-add_kb_context_p(b,DynStat,KB,Ctx,not(TERM),not(AAA)):-
+add_theory_context_p(b,DynStat,Context,not(TERM),not(AAA)):-
          TERM=..[F|ARGS],
          compile_w_add(F),!,
-         atom_concat(KB,'_',KBU),
-         atom_concat(KBU,Ctx,KBCtx),
+         atom_concat(Context,'_',ContextU),
+         atom_concat(ContextU,Ctx,ContextCtx),
          atom_concat('neg_',F,FN),
          dyn_StatArray(DynStat,DynStatArray),
          atom_concat(FN,DynStatArray,FNS),
          NTERM=..[FNS|ARGS],
-         suffix_op(NTERM,AAA,KBCtx).
+         suffix_op(NTERM,AAA,ContextCtx).
 
-add_kb_context_p(b,DynStat,KB,Ctx,neg(TERM),not(AAA)):-
+add_theory_context_p(b,DynStat,Context,neg(TERM),not(AAA)):-
          TERM=..[F|ARGS],
          compile_w_add(F),!,
-         atom_concat(KB,'_',KBU),
-         atom_concat(KBU,Ctx,KBCtx),
+         atom_concat(Context,'_',ContextU),
+         atom_concat(ContextU,Ctx,ContextCtx),
          atom_concat('neg_',F,FN),
          dyn_StatArray(DynStat,DynStatArray),
          atom_concat(FN,DynStatArray,FNS),
          NTERM=..[FNS|ARGS],
-         suffix_op(NTERM,AAA,KBCtx).
+         suffix_op(NTERM,AAA,ContextCtx).
 
-add_kb_context_p(h,DynStat,KB,Ctx,not(TERM),neg(NEG)):-
-         add_kb_context_p(HB,DynStat,KB,Ctx,TERM,POS),!,
+add_theory_context_p(h,DynStat,Context,not(TERM),neg(NEG)):-
+         add_theory_context_p(HB,DynStat,Context,TERM,POS),!,
          POS=..[F|ARGS],
          atom_concat('neg_',F,FN),
          NEG=..[FN|ARGS].
 
-add_kb_context_p(b,DynStat,KB,Ctx,not(TERM),not(NEG)):-
-         add_kb_context_p(HB,DynStat,KB,Ctx,TERM,POS),!,
+add_theory_context_p(b,DynStat,Context,not(TERM),not(NEG)):-
+         add_theory_context_p(HB,DynStat,Context,TERM,POS),!,
          POS=..[F|ARGS],
          atom_concat('neg_',F,FN),
          NEG=..[FN|ARGS].
 
-add_kb_context_p(b,DynStat,KB,Ctx,neg(TERM),not(NEG)):-
-         add_kb_context_p(HB,DynStat,KB,Ctx,TERM,POS),!,
+add_theory_context_p(b,DynStat,Context,neg(TERM),not(NEG)):-
+         add_theory_context_p(HB,DynStat,Context,TERM,POS),!,
          POS=..[F|ARGS],
          atom_concat('neg_',F,FN),
          NEG=..[FN|ARGS].
 
 
-add_kb_context_p(HB,DynStat,KB,Ctx,TERM,AAA):-
+add_theory_context_p(HB,DynStat,Context,TERM,AAA):-
          TERM=..[F|ARGS],
          compile_w_add(F),!,
-         atom_concat(KB,'_',KBU),
-         atom_concat(KBU,Ctx,KBCtx),
+         atom_concat(Context,'_',ContextU),
+         atom_concat(ContextU,Ctx,ContextCtx),
          dyn_StatArray(DynStat,DynStatArray),
-         atom_concat(KBCtx,DynStatArray,FNS),
+         atom_concat(ContextCtx,DynStatArray,FNS),
          suffix_op(TERM,AAA,FNS).
 
-add_kb_context_p(HB,DynStat,KB,Ctx,A,AAA):-
-          prolog_to_hilog(A,AA,KB),
+add_theory_context_p(HB,DynStat,Context,A,AAA):-
+          prolog_to_hilog(A,AA,Context),
           dyn_StatArray(DynStat,DynStatArray),
           atom_concat(Ctx,DynStatArray,FNS),
           suffix_op(AA,AAA,FNS),!.
@@ -5972,10 +5972,10 @@ dyn_StatArray(dyn,'').
 %dyn_StatArray(dyn,'_dyn').
 dyn_StatArray(sen,'_sen').
 
-add_kb_context_l(HB,DynStat,KB,Ctx,[],[]).
-add_kb_context_l(HB,DynStat,KB,Ctx,[H|T],[HO|TO]):- !,
-            add_kb_context(HB,DynStat,KB,Ctx,H,HO),
-            add_kb_context_l(HB,DynStat,KB,Ctx,T,TO).
+add_theory_context_l(HB,DynStat,Context,[],[]).
+add_theory_context_l(HB,DynStat,Context,[H|T],[HO|TO]):- !,
+            add_theory_context(HB,DynStat,Context,H,HO),
+            add_theory_context_l(HB,DynStat,Context,T,TO).
 
 
 /*
@@ -6030,8 +6030,8 @@ parse_to_sterm(Clause,SClause,_ClauseVariables):-!,pterm_to_sterm(Clause,SClause
 
 
 
-kb_make_status_start(kb('logicEngine',_h233) = current).
-kb_info_db('logicEngine','/cygdrive/c/cygwin/tks/moo/belief_engine/logicEngine.can','/cygdrive/c/cygwin/tks/moo/belief_engine/logicEngine.xkb','/cygdrive/c/cygwin/tks/moo/belief_engine/logicEngine.pl').
+theory_make_status_start(theory('logicEngine',_h233) = current).
+theory_info_db('logicEngine','/cygdrive/c/cygwin/tks/moo/belief_engine/logicEngine.can','/cygdrive/c/cygwin/tks/moo/belief_engine/logicEngine.xtheory','/cygdrive/c/cygwin/tks/moo/belief_engine/logicEngine.pl').
 
 
 cmd_proc(['Assertion',Object],_Cxt,_TN,Vars):-!,tell_sterm_rev(Object,_Cxt,_TN,Vars).
@@ -6094,15 +6094,15 @@ Ctx: Prolog atom defining the context the assertion or command is ran in
 Tracking: Prolog Term provided by external source for tracking purposes
 CM: compile mode
 
-tell_sterm(STerm,Ctx,TN,KB,CM,Vars):- abolish_all_tables,
+tell_sterm(STerm,Ctx,TN,Context,CM,Vars):- abolish_all_tables,
             get_default_assertion_context(DCtx), !,  %supplies default context
-            getMooOption(opt_kb,DKB), !,  %supplies default KB
+            getMooOption(opt_theory,DContext), !,  %supplies default Context
             ignore((Ctx=DCtx)),!, % binds with CDTX if necessary
-            ignore((KB=DKB)),!, % binds with DKB if necessary
+            ignore((Context=DContext)),!, % binds with DContext if necessary
             sterm_to_surface_sform(STerm,Ctx,TN,Vars,SSURFACE),!, % Converts [not,[isa,_h133,animal]] -> [not,['instance',_h133,animal]]
             sterm_to_pterm(SSURFACE,PSURFACE), % Converts [not,['instance',_h133,animal]] -> not('instance'(_h133,animal))
             atom_concat(CM,'_compile',CM_compile),!, % build the caller predicate byrd_compile
-                CALL_CM_compile=..[CM_compile,surface(DynStat,PSURFACE,KB,Ctx,TN,Vars),CSURFACE],!,
+                CALL_CM_compile=..[CM_compile,surface(DynStat,PSURFACE,Context,TN,Vars),CSURFACE],!,
         %  CALL_CM_compile= byrd_compile(surface(not('instance'(_h133,animal)),'nil','GlobalContext',345,[=('TheAnimal',_h133)|_h233]),CSURFACE)
 
             ignore(CALL_CM_compile),
@@ -6111,8 +6111,8 @@ tell_sterm(STerm,Ctx,TN,KB,CM,Vars):- abolish_all_tables,
             do_to_conjuncts(CSURFACE,write_oclause_file_note),!,
 
             surface_to_assertions(SSURFACE,ASSERTIONS),!,
-            assertions_to_xkb(ASSERTIONS,Ctx,TN,KB,Vars,XKB),!,
-            tell_sterm_cj(XKB,CFORM,CM),!,
+            assertions_to_xtheory(ASSERTIONS,Ctx,TN,Context,Vars,XContext),!,
+            tell_sterm_cj(XContext,CFORM,CM),!,
             do_to_conjuncts(CFORM,write_oclause_memory),!,
             do_to_conjuncts(CFORM,write_oclause_file_note),!.
 */
@@ -6145,13 +6145,13 @@ cmd_proc([show,scenario]):-
                         _).
 
 cmd_proc([reset],_,_,_):-  !,
-      ua_out(event,start([reset],'Reseting Moo Logic Engine')),
+      writeIfOption(event,start([reset],'Reseting Moo Logic Engine')),
          %cmd_proc([context_create,'GlobalContext']),
-  %    cmd_proc(['read-file','databases/builtin/sample_kb.kif','GlobalContext']),
-  %    cmd_proc(['read-file','databases/builtin/belief_kb.kif','belief_context']),
-  %    cmd_proc(['read-file','databases/builtin/universal_kb.kif','universal_kb']),
-      %cmd_proc(['read-file','databases/builtin/merged_ontology_kb.kif','GlobalContext']),
-      ua_out(event,end([reset],'')).
+  %    cmd_proc(['read-file','databases/builtin/sample_theory.kif','GlobalContext']),
+  %    cmd_proc(['read-file','databases/builtin/belief_theory.kif','belief_context']),
+  %    cmd_proc(['read-file','databases/builtin/universal_theory.kif','universal_theory']),
+      %cmd_proc(['read-file','databases/builtin/merged_ontology_theory.kif','GlobalContext']),
+      writeIfOption(event,end([reset],'')).
 
   % retractall(showa),
 
@@ -6175,11 +6175,11 @@ cmd_proc([batch,FileName]):-
 % Reset Defaults And list them out
 cmd_proc([clear],_,_,_):-
       sendNote(user,logicEngine,'Insightfull information','Clearing All Non-System Cxts'),
-      retractall(kb(_,_,_,_)),
+      retractall(theory(_,_,_,_)),
       sendNote(user,logicEngine,'Insightfull information','Done Clearing').
 
 cmd_proc([msg,Class,Message],_,_,_):-
-               ua_out(Class,Message).
+               writeIfOption(Class,Message).
 
 cmd_proc([echo|REST],_,_,_):-
                sendNote(user,logicEngine,'Insightfull information',['echo: '|REST]).
@@ -6211,14 +6211,14 @@ cmd_proc(['read-file',FileName,Ctx],_,_,_):-!,
                once((
                      isMooOption(opt_language=Opt_language),
                      isMooOption(opt_precompiled=Opt_precompiled),
-                     isMooOption(opt_kb=Opt_kb),
+                     isMooOption(opt_theory=Opt_theory),
                      isMooOption(opt_compiler=Opt_compiler),
                      isMooOption(opt_notation=Opt_notation)
                )),
-               once(cmd_proc_act(['read-file',FileName,Ctx,Opt_kb,Opt_precompiled,Opt_language,Opt_notation,Opt_compiler])).
+               once(cmd_proc_act(['read-file',FileName,Ctx,Opt_theory,Opt_precompiled,Opt_language,Opt_notation,Opt_compiler])).
 
 /*
-cmd_proc_act(['read-file',FileName,Ctx,_Opt_kb,true,_Opt_language,_Opt_notation,_]):-
+cmd_proc_act(['read-file',FileName,Ctx,_Opt_theory,true,_Opt_language,_Opt_notation,_]):-
                         moo_B_see(FileName),
                         repeat,
                            conv_readS(_Chars,Assertion,_),
@@ -6228,8 +6228,8 @@ cmd_proc_act(['read-file',FileName,Ctx,_Opt_kb,true,_Opt_language,_Opt_notation,
 
 */
 
-cmd_proc_act(['read-file',FileName,Ctx,Opt_kb,Opt_precompiled,Opt_language,Opt_notation,Opt_compiler]):- !,
-               cmd_proc_act1(['read-file',FileName,Ctx,Opt_kb,Opt_precompiled,Opt_language,Opt_notation,Opt_compiler]).
+cmd_proc_act(['read-file',FileName,Ctx,Opt_theory,Opt_precompiled,Opt_language,Opt_notation,Opt_compiler]):- !,
+               cmd_proc_act1(['read-file',FileName,Ctx,Opt_theory,Opt_precompiled,Opt_language,Opt_notation,Opt_compiler]).
 
 
 cmd_proc_act1(['read-file',FileName,Ctx, nil,false,pnx_nf,kif,moo]):-
@@ -6243,41 +6243,41 @@ cmd_proc([context,delete,OldCxt, Source_File_optional_path]):-
          retract('resource_context',[context_exists_in_file,OldCxt, Source_File_optional_path]),
          retract('resource_context',['surface-instance',Source_File_optional_path, source_file_path]),
          retract('resource_context',[context_state,_Cxt, context_state_unloaded]),
-         retract('context_links_kb',[genMt,'all_contexts', OldCxt]).
+         retract('context_links_theory',[genMt,'all_contexts', OldCxt]).
 
 % ===================================================================
 
 cmd_proc([context_link,Ctx, _Subsumed_context]):-
-         assert('context_links_kb',[genMt,Ctx, _Subsumed_context]).
+         assert('context_links_theory',[genMt,Ctx, _Subsumed_context]).
 
 % ===================================================================
 
 cmd_proc([context_unlink,Ctx, _Subsumed_context]):-
-         retract('context_links_kb',[genMt,Ctx, _Subsumed_context]).
+         retract('context_links_theory',[genMt,Ctx, _Subsumed_context]).
 
 
 % ===================================================================
 %  context_ensure_loaded/1              %TODO
 % ===================================================================
 cmd_proc([context,ensure_loaded,_Cxt]):-
-            kb('resource_context',[context_state,_Cxt,State]),
+            theory('resource_context',[context_state,_Cxt,State]),
             member(State,[loaded_unchanged,loaded_changed]),!.
 
 cmd_proc([context,ensure_loaded,_Cxt]):-
             retractall('resource_context',[context_state,_Cxt,_]),
-            kb('resource_context',[context_exists_in_file,_Cxt, FileName]),
+            theory('resource_context',[context_exists_in_file,_Cxt, FileName]),
             cmd_proc(['read-file',_Cxt,FileName]),
             assert('resource_context',[context_state,_Cxt,loaded_unchanged]).
 
  % TODO
 /*
-cmd_proc([contexts]):-context_list(_R),ua_out(returned,_R).
-cmd_proc([context,load,CONTEXT]):-context_ensure_loaded(CONTEXT,_R),ua_out(returned,_R).
-cmd_proc([context,delete,CONTEXT]):-context_delete(CONTEXT,_R),ua_out(returned,_R).
-cmd_proc([context,save,CONTEXT]):-context_save(CONTEXT,CONTEXT,_R),ua_out(returned,_R).
-cmd_proc([context,merge,CONTEXT1,CONTEXT2]):-context_merge(CONTEXT1,CONTEXT2,_R),ua_out(returned,_R).
-cmd_proc([context,test,CONTEXT]):-context_changed(CONTEXT,_R),ua_out(returned,_R).
-cmd_proc([context,CONTEXT]):-context_changed(CONTEXT,_R),ua_out(returned,_R).
+cmd_proc([contexts]):-context_list(_R),writeIfOption(returned,_R).
+cmd_proc([context,load,CONTEXT]):-context_ensure_loaded(CONTEXT,_R),writeIfOption(returned,_R).
+cmd_proc([context,delete,CONTEXT]):-context_delete(CONTEXT,_R),writeIfOption(returned,_R).
+cmd_proc([context,save,CONTEXT]):-context_save(CONTEXT,CONTEXT,_R),writeIfOption(returned,_R).
+cmd_proc([context,merge,CONTEXT1,CONTEXT2]):-context_merge(CONTEXT1,CONTEXT2,_R),writeIfOption(returned,_R).
+cmd_proc([context,test,CONTEXT]):-context_changed(CONTEXT,_R),writeIfOption(returned,_R).
+cmd_proc([context,CONTEXT]):-context_changed(CONTEXT,_R),writeIfOption(returned,_R).
 
   */
 
@@ -6405,7 +6405,7 @@ deduceSurface(_Context_atom,[PredicateI|Args],[Explaination,[PredicateI|Args]]):
 
 
 
-deduceSurface_actual(_Context_atom,[P|ARGS],assertion(TrackingTerm)) :- kb(_Context_atom,TrackingTerm,[P|ARGS],_).
+deduceSurface_actual(_Context_atom,[P|ARGS],assertion(TrackingTerm)) :- theory(_Context_atom,TrackingTerm,[P|ARGS],_).
 deduceSurface_actual(_Context_atom,[P|ARGS],deduced):- nonvar(P),deduceSurface_specialized(_Context_atom,[P|ARGS]).
 deduceSurface_actual(_Context_atom,[P|ARGS],deduced):- ground([P|ARGS]),ground_deduceSurface(_Context_atom,[P|ARGS]).
 
@@ -6414,14 +6414,14 @@ deduceSurface_actual(_Context_atom,[P|ARGS],deduced):- ground([P|ARGS]),ground_d
 /*deduceSurface_specialized(_Context_atom,[AboutRels,P1,P2]) :- member(AboutRels,[genlInverse]),
                                        deduceSurface_transitively(_Context_atom,[subsumed_relation,P1,UnderPred1]),
                                        deduceSurface_transitively(_Context_atom,[subsumed_relation,P2,UnderPred2]),
-                                       kb(_Context_atom,[genlInverse,UnderPred1,UnderPred2]).
+                                       theory(_Context_atom,[genlInverse,UnderPred1,UnderPred2]).
 
   */
 
 % Instance_of
 deduceSurface_specialized(_Context_atom,['surface-instance',Entity,Class]):- deduceSurface_transitively(_Context_atom,['surface-instance',Entity,Class]).
 deduceSurface_transitively(_Context_atom,['surface-instance',Entity,Class]) :-
-                              kb(_Context_atom,['surface-instance',Entity,EClass]),
+                              theory(_Context_atom,['surface-instance',Entity,EClass]),
                               deduceSurface_specialized(_Context_atom,[genls,EClass,Class]).
 
 
@@ -6429,64 +6429,64 @@ deduceSurface_transitively(_Context_atom,['surface-instance',Entity,Class]) :-
 deduceSurface_specialized(_Context_atom,['surface-domain',Pred,ArgN,EClass]):-deduceSurface_transitively(_Context_atom,['surface-domain',Pred,ArgN,EClass]).
 deduceSurface_transitively(_Context_atom,['surface-domain',Pred,ArgN,EClass]) :-
                               deduceSurface_specialized(_Context_atom,[genls,EClass,Class]),
-                              kb(_Context_atom,['surface-domain',Pred,ArgN,Class]).
+                              theory(_Context_atom,['surface-domain',Pred,ArgN,Class]).
 
 % Context_atom Subsumption
 deduceSurface_specialized(_Context_atom,[genMt,C1,C2]) :- deduceSurface_transitively(_Context_atom,[genMt,C1,C2]).
 deduceSurface_transitively(_Context_atom,[genMt,P1,P1]).
-deduceSurface_transitively(_Context_atom,[genMt,P1,P2]):-kb(_Context_atom,[genMt,P1,P2]).
-deduceSurface_transitively(_Context_atom,[genMt,P1,P3]):-kb(_Context_atom,[genMt,P1,P2]),kb(_Context_atom,[genMt,P2,P3]).
-deduceSurface_transitively(_Context_atom,[genMt,P1,P4]):-kb(_Context_atom,[genMt,P1,P2]),kb(_Context_atom,[genMt,P2,P3]),kb(_Context_atom,[genMt,P3,P4]).
+deduceSurface_transitively(_Context_atom,[genMt,P1,P2]):-theory(_Context_atom,[genMt,P1,P2]).
+deduceSurface_transitively(_Context_atom,[genMt,P1,P3]):-theory(_Context_atom,[genMt,P1,P2]),theory(_Context_atom,[genMt,P2,P3]).
+deduceSurface_transitively(_Context_atom,[genMt,P1,P4]):-theory(_Context_atom,[genMt,P1,P2]),theory(_Context_atom,[genMt,P2,P3]),theory(_Context_atom,[genMt,P3,P4]).
 
 % Relation Subsumption
 deduceSurface_specialized(_Context_atom,[subsumed_relation,C1,C2]) :- deduceSurface_transitively(_Context_atom,[subsumed_relation,C1,C2]).
 deduceSurface_transitively(_Context_atom,[subsumed_relation,P1,P1]).
-deduceSurface_transitively(_Context_atom,[subsumed_relation,P1,P2]):-kb(_Context_atom,[subsumed_relation,P1,P2]).
-deduceSurface_transitively(_Context_atom,[subsumed_relation,P1,P3]):-kb(_Context_atom,[subsumed_relation,P1,P2]),kb(_Context_atom,[subsumed_relation,P2,P3]).
-deduceSurface_transitively(_Context_atom,[subsumed_relation,P1,P4]):-kb(_Context_atom,[subsumed_relation,P1,P2]),kb(_Context_atom,[subsumed_relation,P2,P3]),kb(_Context_atom,[subsumed_relation,P3,P4]).
+deduceSurface_transitively(_Context_atom,[subsumed_relation,P1,P2]):-theory(_Context_atom,[subsumed_relation,P1,P2]).
+deduceSurface_transitively(_Context_atom,[subsumed_relation,P1,P3]):-theory(_Context_atom,[subsumed_relation,P1,P2]),theory(_Context_atom,[subsumed_relation,P2,P3]).
+deduceSurface_transitively(_Context_atom,[subsumed_relation,P1,P4]):-theory(_Context_atom,[subsumed_relation,P1,P2]),theory(_Context_atom,[subsumed_relation,P2,P3]),theory(_Context_atom,[subsumed_relation,P3,P4]).
 
 % Class Subsumption
 deduceSurface_specialized(_Context_atom,[genls,C1,C2]) :- deduceSurface_transitively(_Context_atom,[genls,C1,C2]).
 
 deduceSurface_transitively(_Context_atom,[genls,Class,Class]).
-deduceSurface_transitively(_Context_atom,[genls,ChildClass,ParentClass]) :- kb(_Context_atom,[genls,ChildClass,ParentClass]).
-deduceSurface_transitively(_Context_atom,[genls,ChildClass,GrandParentClass]) :- kb(_Context_atom,[genls,ParentClass,GrandParentClass]),kb(_Context_atom,[genls,ChildClass,ParentClass]).
-deduceSurface_transitively(_Context_atom,[genls,ChildClass,GreatGrandParentClass]) :- kb(_Context_atom,[genls,GrandParentClass,GreatGrandParentClass]),kb(_Context_atom,[genls,ParentClass,GrandParentClass]),kb(_Context_atom,[genls,ChildClass,ParentClass]).
-deduceSurface_transitively(_Context_atom,[genls,ChildClass,GreatGreatGrandParentClass]) :- kb(_Context_atom,[genls,GreatGrandParentClass,GreatGreatGrandParentClass]),kb(_Context_atom,[genls,GrandParentClass,GreatGrandParentClass]),kb(_Context_atom,[genls,ParentClass,GrandParentClass]),kb(_Context_atom,[genls,ChildClass,ParentClass]).
+deduceSurface_transitively(_Context_atom,[genls,ChildClass,ParentClass]) :- theory(_Context_atom,[genls,ChildClass,ParentClass]).
+deduceSurface_transitively(_Context_atom,[genls,ChildClass,GrandParentClass]) :- theory(_Context_atom,[genls,ParentClass,GrandParentClass]),theory(_Context_atom,[genls,ChildClass,ParentClass]).
+deduceSurface_transitively(_Context_atom,[genls,ChildClass,GreatGrandParentClass]) :- theory(_Context_atom,[genls,GrandParentClass,GreatGrandParentClass]),theory(_Context_atom,[genls,ParentClass,GrandParentClass]),theory(_Context_atom,[genls,ChildClass,ParentClass]).
+deduceSurface_transitively(_Context_atom,[genls,ChildClass,GreatGreatGrandParentClass]) :- theory(_Context_atom,[genls,GreatGrandParentClass,GreatGreatGrandParentClass]),theory(_Context_atom,[genls,GrandParentClass,GreatGrandParentClass]),theory(_Context_atom,[genls,ParentClass,GrandParentClass]),theory(_Context_atom,[genls,ChildClass,ParentClass]).
 
 
 deduceSurface_actual(_Context_atom,[Pred,SubClass|Rest],deduced) :-
                         deduceSurface_specialized(_Context_atom,['surface-domain',Pred,1,'Class']),
                         deduceSurface_specialized(_Context_atom,[genls,SubClass,SuperClass]),
-                        kb(_Context_atom,[Pred,SuperClass|Rest]).
+                        theory(_Context_atom,[Pred,SuperClass|Rest]).
 
 deduceSurface_actual(_Context_atom,[Pred,Arg1,Arg2|Rest],deduced) :-
                         deduceSurface_specialized(_Context_atom,['surface-domain',Pred,2,'Class']),
                         deduceSurface_specialized(_Context_atom,[genls,Arg2,SuperClass]),
-                        kb(_Context_atom,[Pred,Arg1,SuperClass|Rest]).
+                        theory(_Context_atom,[Pred,Arg1,SuperClass|Rest]).
 
 deduceSurface_actual(_Context_atom,[Pred,Arg1,Arg2,Arg3|Rest],deduced) :-
                         deduceSurface_specialized(_Context_atom,['surface-domain',Pred,3,'Class']),
                         deduceSurface_specialized(_Context_atom,[genls,Arg3,SuperClass]),
-                        kb(_Context_atom,[Pred,Arg1,Arg2,SuperClass|Rest]).
+                        theory(_Context_atom,[Pred,Arg1,Arg2,SuperClass|Rest]).
 
 deduceSurface_actual(_Context_atom,[Pred,Arg1|Rest],deduced) :-
                         deduceSurface_specialized(_Context_atom,['surface-domain',Pred,1,'Relation']),
                         deduceSurface_specialized(_Context_atom,[subsumed_relation,Arg1,SuperRelation]),
-                        kb(_Context_atom,[Pred,SuperRelation|Rest]).
+                        theory(_Context_atom,[Pred,SuperRelation|Rest]).
 
 deduceSurface_actual(_Context_atom,[Pred,Arg1,Arg2|Rest],deduced) :-
                         deduceSurface_specialized(_Context_atom,['surface-domain',Pred,2,'Relation']),
                         deduceSurface_specialized(_Context_atom,[subsumed_relation,Arg2,SuperRelation]),
-                        kb(_Context_atom,[Pred,Arg1,SuperRelation|Rest]).
+                        theory(_Context_atom,[Pred,Arg1,SuperRelation|Rest]).
 
 deduceSurface_actual(_Context_atom,[Pred,Arg1,Arg2,Arg3|Rest],deduced) :-
                         deduceSurface_specialized(_Context_atom,['surface-domain',Pred,3,'Relation']),
                         deduceSurface_specialized(_Context_atom,[subsumed_relation,Arg3,SuperRelation]),
-                        kb(_Context_atom,[Pred,Arg1,Arg2,SuperRelation|Rest]).
+                        theory(_Context_atom,[Pred,Arg1,Arg2,SuperRelation|Rest]).
 
 
-ground_deduceSurface(_Context_atom,[P1,Arg1,Arg2]) :- kb(_Context_atom,[negationPreds,P1,P2]),not_deduceSurface(_Context_atom,[P2,Arg1,Arg2],_).
+ground_deduceSurface(_Context_atom,[P1,Arg1,Arg2]) :- theory(_Context_atom,[negationPreds,P1,P2]),not_deduceSurface(_Context_atom,[P2,Arg1,Arg2],_).
 ground_deduceSurface(_Context_atom,[P1,Arg1,Arg2]) :- deduceSurface_actual(_Context_atom,[genlInverse,P1,P2],_),deduceSurface_actual(_Context_atom,[P2,Arg2,Arg1,_]).
 
 % ===================================================================
@@ -6560,21 +6560,21 @@ possible_chain_actual(_Context_atom,[Pred,Arg1,Arg2,Arg3,Arg4,Arg5,Arg6]):-
 
 backwards_chain(_Context_atom,FormulaA,FormulaB) :- (nonvar(FormulaA);nonvar(FormulaB)),backwards_chain_nonvar(_Context_atom,FormulaA,FormulaB).
 
-backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- kb(_Context_atom,[=>,Antecedant,Consequent]).
-backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- kb(_Context_atom,[=>,Antecedant,Consequent]).
-backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- kb(_Context_atom,[=,>,Antecedant,Consequent]).
-backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- kb(_Context_atom,[ <=> ,Consequent,Antecedant]).
-backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- kb(_Context_atom,[ <=> ,Antecedant,Consequent]).
-backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- kb(_Context_atom,[ and,Antecedant,Consequent]).
-backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- kb(_Context_atom,[ and,Consequent,Antecedant]).
+backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- theory(_Context_atom,[=>,Antecedant,Consequent]).
+backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- theory(_Context_atom,[=>,Antecedant,Consequent]).
+backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- theory(_Context_atom,[=,>,Antecedant,Consequent]).
+backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- theory(_Context_atom,[ <=> ,Consequent,Antecedant]).
+backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- theory(_Context_atom,[ <=> ,Antecedant,Consequent]).
+backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- theory(_Context_atom,[ and,Antecedant,Consequent]).
+backwards_chain_nonvar(_Context_atom,Consequent,Antecedant):- theory(_Context_atom,[ and,Consequent,Antecedant]).
 
-%%backwards_chain_nonvar(_Context_atom,[P1|ARGS],Antecedant) :- kb(_,[subsumed_relation,P1,P2]),backwards_chain(_Context_atom,[P2|ARGS],Antecedant)  .
+%%backwards_chain_nonvar(_Context_atom,[P1|ARGS],Antecedant) :- theory(_,[subsumed_relation,P1,P2]),backwards_chain(_Context_atom,[P2|ARGS],Antecedant)  .
 %%%backwards_chain_nonvar(_Context_atom,[not,FormulaA],FormulaB):-not_backwards_chain(_Context_atom,FormulaA,FormulaB).
 %%backwards_chain_nonvar(_Context_atom,[not,FormulaA],FormulaB):-!,not_backwards_chain(_Context_atom,FormulaA,FormulaB).
 /*
 backwards_chain_nonvar(_Context_atom,[PredicateName|Args],Answer) :-  nonvar(PredicateName),
                need_more_answers,
-               kb('resource_context',[resource_located,PredicateName,_,Resource,Mode,_,_Often]),
+               theory('resource_context',[resource_located,PredicateName,_,Resource,Mode,_,_Often]),
                check_legal_modes(Args,Mode,_Context_atom),!,
                ask_resource(Resource,_Context_atom,[PredicateName|Args],Mode,[PredicateName|Args],Answer).
 
@@ -6765,10 +6765,10 @@ moo_I_deduce_nonvar(_Context_atom,[Same,FormulaA,FormulaB],_Depth,tabled_true,(F
 moo_I_deduce_nonvar(_Context_atom,[==,FormulaA,FormulaB],_Depth,tabled_true,(FormulaA==FormulaB)) :-!, FormulaA==FormulaB.
 
 % exists/1
-%moo_I_deduce_nonvar(_Context_atom,[exists,Entity],_Depth,tabled_true,['surface-instance',Entity,Class]) :- kb(_Context_atom,['surface-instance',Entity,Class]).
+%moo_I_deduce_nonvar(_Context_atom,[exists,Entity],_Depth,tabled_true,['surface-instance',Entity,Class]) :- theory(_Context_atom,['surface-instance',Entity,Class]).
 
 % class/1
-%moo_I_deduce_nonvar(_Context_atom,[class,Class],_Depth,tabled_true,['surface-instance',Entity,Class]) :- kb(_Context_atom,['surface-instance',Entity,Class]).
+%moo_I_deduce_nonvar(_Context_atom,[class,Class],_Depth,tabled_true,['surface-instance',Entity,Class]) :- theory(_Context_atom,['surface-instance',Entity,Class]).
 
 %member
 moo_I_deduce_nonvar(_Context_atom,[member,E,Set],_Depth,tabled_true,( [member_of,E,Set] )) :-
@@ -6781,7 +6781,7 @@ moo_I_deduce_nonvar(_Context_atom,[member,E,Set],_Depth,tabled_true,( Explainati
 moo_I_deduce_nonvar(_Context_atom,[var,X],_Depth,tabled_true,var(X)):-var(X),!.
 
 % skolemize/1
-moo_I_deduce_nonvar(_Context_atom,[Entity,SKOLEM],_Depth,tabled_true,['equal',SKOLEM]) :-kb(_Context_atom,['surface-instance',Entity,_Class]).
+moo_I_deduce_nonvar(_Context_atom,[Entity,SKOLEM],_Depth,tabled_true,['equal',SKOLEM]) :-theory(_Context_atom,['surface-instance',Entity,_Class]).
 moo_I_deduce_nonvar(_Context_atom,[skolemize,SKOLEM],_Depth,tabled_true,['equal',SKOLEM]) :-ignore(skolem_gen(SKOLEM)).
 
 % is
@@ -6858,7 +6858,7 @@ handle_skolem_explaination1(_Context_atom,[thereExists,_SkolemedEntity,Formula],
 
 handle_skolem_explaination1(_Context_atom,Consequent1,D,tabled_true, (Explaination '=>' SKOLEMEXPLAINATION '=>' asserted(Consequent1) '=>'asserted(Consequent2))) :-
       nonvar(Consequent1), not(deduceSurface(_Context_atom,Consequent1,_)),
-      kb(_Context_atom,[=>,Antecedant,[thereExists,_SkolemedEntity,[and,Consequent1,Consequent2]]]),
+      theory(_Context_atom,[=>,Antecedant,[thereExists,_SkolemedEntity,[and,Consequent1,Consequent2]]]),
       moo_I_deduce_nonvar(_Context_atom,[skolemize,_SkolemedEntity],D,tabled_true,SKOLEMEXPLAINATION),
       moo_I_deduce_nonvar(_Context_atom,Antecedant,D,_Result,Explaination),
       (moo_A_do_assert_list(_Context_atom,skolemized(SKOLEMEXPLAINATION),Consequent1)),
@@ -6866,7 +6866,7 @@ handle_skolem_explaination1(_Context_atom,Consequent1,D,tabled_true, (Explainati
 
 handle_skolem_explaination1(_Context_atom,Consequent2,D,tabled_true, (Explaination '=>' SKOLEMEXPLAINATION '=>' asserted(Consequent2) '=>'asserted(Consequent1))) :-
       nonvar(Consequent2), not(deduceSurface(_Context_atom,Consequent2,_)),
-      kb(_Context_atom,[=>,Antecedant,[thereExists,_SkolemedEntity,[and,Consequent1,Consequent2]]]),
+      theory(_Context_atom,[=>,Antecedant,[thereExists,_SkolemedEntity,[and,Consequent1,Consequent2]]]),
       moo_I_deduce_nonvar(_Context_atom,[skolemize,_SkolemedEntity],D,tabled_true,SKOLEMEXPLAINATION),
       moo_I_deduce_nonvar(_Context_atom,Antecedant,D,_Result,Explaination),
       (moo_A_do_assert_list(_Context_atom,skolemized(SKOLEMEXPLAINATION),Consequent1)),
@@ -6874,7 +6874,7 @@ handle_skolem_explaination1(_Context_atom,Consequent2,D,tabled_true, (Explainati
 
 handle_skolem_explaination1(_Context_atom,Consequent1,D,tabled_true, (Explaination '=>' SKOLEMEXPLAINATION '=>' asserted(Consequent1) )) :-
       nonvar(Consequent1),
-      kb(_Context_atom,[=>,Antecedant,[thereExists,_SkolemedEntity,Consequent1]]),
+      theory(_Context_atom,[=>,Antecedant,[thereExists,_SkolemedEntity,Consequent1]]),
       moo_I_deduce_nonvar(_Context_atom,[skolemize,_SkolemedEntity],D,tabled_true,SKOLEMEXPLAINATION),
       moo_I_deduce_nonvar(_Context_atom,Antecedant,D,_Result,Explaination),
       (moo_A_do_assert_list(_Context_atom,skolemized(SKOLEMEXPLAINATION),Consequent1)).
@@ -6943,10 +6943,10 @@ moo_I_conclusion(_Context_atom,[backwards_chain,true,Cons,Antec],_Depth,tabled_t
 
 
 moo_I_conclusion(_Context_atom,[asserted,true,FormulaA],_Depth,tabled_true,[asserted,FormulaA]) :-
-               kb(__Context_atom,FormulaA).
+               theory(__Context_atom,FormulaA).
 
 moo_I_conclusion(_Context_atom,[asserted,false,FormulaA],_Depth,tabled_true,[asserted,FormulaA]) :-
-               kb(__Context_atom,[not|FormulaA]).
+               theory(__Context_atom,[not|FormulaA]).
 
 moo_I_conclusion(_Context_atom,[deduced_forward,true,FormulaA],_Depth,tabled_true,[deduced_forward,true,FormulaA]) :-
                deduceSurface(__Context_atom,FormulaA,_Explaination).
@@ -6998,13 +6998,13 @@ tell_sterm(or(A,B)):-!,
 
 tell_sterm(PrologKR):-
         surface_to_normal(PrologKR,PrologForm),
-        assertions_to_xkb(PrologForm).
+        assertions_to_xtheory(PrologForm).
 
 surface_to_normal(PrologKR,PrologForm):-
         getNegationForm(PrologKR,PrologForm).
 
 
-assertions_to_xkb(PrologForm):-  %%trace,
+assertions_to_xtheory(PrologForm):-  %%trace,
                  mine_semanitics(PrologForm), %trace,
           write_clause_to_file(assert(PrologForm)),nl. % Asserts if Unknown
 
@@ -7186,25 +7186,25 @@ nnf2(Fml,FreeV,NNF,Paths) :-
 
 /*
 
-:-table('PrologMOO_BaseKB'/1).
-:-table('PrologMOO_BaseKB'/2).
-:-table('PrologMOO_BaseKB'/3).
-:-table('PrologMOO_BaseKB'/4).
-:-table('PrologMOO_BaseKB'/5).
-:-table('PrologMOO_BaseKB'/6).
-:-table('PrologMOO_BaseKB'/7).
-:-table('PrologMOO_BaseKB'/8).
-:-table('PrologMOO_BaseKB'/9).
+:-table('PrologMOO_BaseContext'/1).
+:-table('PrologMOO_BaseContext'/2).
+:-table('PrologMOO_BaseContext'/3).
+:-table('PrologMOO_BaseContext'/4).
+:-table('PrologMOO_BaseContext'/5).
+:-table('PrologMOO_BaseContext'/6).
+:-table('PrologMOO_BaseContext'/7).
+:-table('PrologMOO_BaseContext'/8).
+:-table('PrologMOO_BaseContext'/9).
 
-:-table('neg_PrologMOO_BaseKB'/1).
-:-table('neg_PrologMOO_BaseKB'/2).
-:-table('neg_PrologMOO_BaseKB'/3).
-:-table('neg_PrologMOO_BaseKB'/4).
-:-table('neg_PrologMOO_BaseKB'/5).
-:-table('neg_PrologMOO_BaseKB'/6).
-:-table('neg_PrologMOO_BaseKB'/7).
-:-table('neg_PrologMOO_BaseKB'/8).
-:-table('neg_PrologMOO_BaseKB'/9).
+:-table('neg_PrologMOO_BaseContext'/1).
+:-table('neg_PrologMOO_BaseContext'/2).
+:-table('neg_PrologMOO_BaseContext'/3).
+:-table('neg_PrologMOO_BaseContext'/4).
+:-table('neg_PrologMOO_BaseContext'/5).
+:-table('neg_PrologMOO_BaseContext'/6).
+:-table('neg_PrologMOO_BaseContext'/7).
+:-table('neg_PrologMOO_BaseContext'/8).
+:-table('neg_PrologMOO_BaseContext'/9).
 
 
 skolem2( F, X, FreeV, FmlSk) :-
@@ -7710,7 +7710,7 @@ subst2( X, Sk, [A|As], [Ap|AS] ) :- subst( A,X,Sk,Ap ),
 
          /********************************  The End ***********************************/
 /* File:      consult.P
-** $Id: moo_unused.pl,v 1.2 2002-03-08 14:39:52 dmiles Exp $
+** $Id: moo_unused.pl,v 1.3 2002-03-12 21:34:08 dmiles Exp $
 */
 /*
 :- compiler_options([xpp_on]).
@@ -8468,7 +8468,7 @@ is_exported(GAF):-
 
 chars_call_plex(Vars):-var(Vars),!,
       write_response_begin,
-      ignore(ua_out(disp_error,'syntax error'('format for chars_call_plex/1 is chars_call_plex("append(A,B,[a,b,c,1,2,3])").  (You passed in a variable)'),_)),
+      ignore(writeIfOption(disp_error,'syntax error'('format for chars_call_plex/1 is chars_call_plex("append(A,B,[a,b,c,1,2,3])").  (You passed in a variable)'),_)),
       write_response_end.
 
 chars_call_plex(Chars):-is_list(Chars),
@@ -8490,7 +8490,7 @@ chars_call_plex(Prolog):-!,
 
 chars_call(Vars):-var(Vars),!,
       write_response_begin,
-      ignore(ua_out(disp_error,'syntax error'('format for chars_call/1 is chars_call("append(A,B,[a,b,c,1,2,3])").  (You passed in a variable)'),_)),
+      ignore(writeIfOption(disp_error,'syntax error'('format for chars_call/1 is chars_call("append(A,B,[a,b,c,1,2,3])").  (You passed in a variable)'),_)),
       write_response_end.
 
 chars_call(Chars):-is_list(Chars),
@@ -8514,7 +8514,7 @@ tck:-trace,chars_call_kif("( = X ?Y ) ").
 
 chars_call_kif(Vars):-var(Vars),!,
       write_response_begin,
-      ignore(ua_out(disp_error,'syntax error'('format for chars_call_kif/1 is chars_call_kif("( member ?X (SetFn (1 2 3) ) )").  (You passed in a variable)'),_)),
+      ignore(writeIfOption(disp_error,'syntax error'('format for chars_call_kif/1 is chars_call_kif("( member ?X (SetFn (1 2 3) ) )").  (You passed in a variable)'),_)),
       write_response_end.
 
 chars_call_kif(Chars):-is_list(Chars),!,
@@ -8599,14 +8599,14 @@ ua_read_from_socket(OptionList):-
 ua_read(LocationObject):- ua_read(LocationObject,[]).
 
 ua_read(InFile,OptionList):-
-         ignore(member(xkb_output=XKBFile,OptionList)),
+         ignore(member(xtheory_output=XContextFile,OptionList)),
          write_response_begin,
-         ua_out(user,['beginning to compile ', InFile,' to ',XKBFile]),
-         ignore(can_to_xkb_file(_,InFile,XKBFile)),
-         ua_out(user,['done compiling ', InFile,' to ',XKBFile]),
-         ua_out(user,['beginning to load ', XKBFile]),
-         ignore(load_compiled(Ctx,XKBFile)),
-         ua_out(user,['finised loading ', XKBFile]),
+         writeIfOption(user,['beginning to compile ', InFile,' to ',XContextFile]),
+         ignore(can_to_xtheory_file(_,InFile,XContextFile)),
+         writeIfOption(user,['done compiling ', InFile,' to ',XContextFile]),
+         writeIfOption(user,['beginning to load ', XContextFile]),
+         ignore(load_compiled(Ctx,XContextFile)),
+         writeIfOption(user,['finised loading ', XContextFile]),
          write_response_end.
   */
 
@@ -9283,15 +9283,15 @@ add_nth_domain(PredicateName,Number,ArgClass):-
                   replace_nth(ArgClass,Number,CLASSES,NEWCLASSES),
                   retractall(nth_domain_list(PredicateName,NEWCLASSES)),
                   moo_X_assert(nth_domain_list(PredicateName,NEWCLASSES)),
-                  ua_out(domain,nth_domain_list(PredicateName,NEWCLASSES)).
+                  writeIfOption(domain,nth_domain_list(PredicateName,NEWCLASSES)).
 
 update_nth_domain(PredicateName,Number,ArgClass):-
                   retract(nth_domain_list(PredicateName,CLASSES)),!,
-                  ua_out(domainsuficient,nth_domain_list(PredicateName,CLASSES)),!,
+                  writeIfOption(domainsuficient,nth_domain_list(PredicateName,CLASSES)),!,
                   once(replace_nth(ArgClass,Number,CLASSES,NEWCLASSES)),
                   retractall(nth_domain_list(PredicateName,NEWCLASSES)),
                   moo_X_assert(nth_domain_list(PredicateName,NEWCLASSES)),
-                   ua_out(domain_new,nth_domain_list(PredicateName,NEWCLASSES)).
+                   writeIfOption(domain_new,nth_domain_list(PredicateName,NEWCLASSES)).
 
   */
 

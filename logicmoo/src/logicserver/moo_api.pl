@@ -3,8 +3,8 @@
 % Maintainer: Douglas Miles
 % Contact: dmiles@users.sourceforge.net ;
 % Version: 'moo_api.pl' 1.0.0
-% Revision:             $Revision: 1.3 $
-% Revised At:   $Date: 2002-03-08 14:39:50 $
+% Revision:             $Revision: 1.4 $
+% Revised At:   $Date: 2002-03-12 21:34:07 $
 
 % ===================================================================
 % PURPOSE
@@ -12,54 +12,54 @@
 % This file meets the needs of an external agent working for the needs of eigther an automated or human user
 % Interfacea with Java with XML to display explaination trees and variable bindings
 % It defines the default settings most users will use and gives a starting expected state.
-% Ask a KB, tell to a KB, retract from a KB, consult the user (this function is currently treated by ua_command/2, but it is planned to separate it),
+% Ask a Context, tell to a Context, retract from a Context, consult the user (this function is currently treated by ua_command/2, but it is planned to separate it),
 % Report status to Moo, initialization of the LE, and file-handling routines
 % ===================================================================
 
 % ===================================================================
 % EXPORTS   (Called  only by XSB Java server beans)
 % ===================================================================
-:-include('moo_header.pl').
-               /*
-:-module(moo_useragent,
+:-module(moo_api,
             [
-            initializeMooServerData/0,   % Loads appropriate KBs
-
+	    processRequest/1
+/*
             ua_ask/3,        % handles user invoked request
             uaInsert/4,         % handles user invoked assertions
             ua_retract/4,    % handles user invoked retractions
             ua_command/2, %allows user to define new terms, and handles consultation with user
 
-            define_kb/1,  %selects user's choice of a kb to load
-            rename_kb/1,  %allows server to rename a kb
-            reconstitute_kb/1,  %allows server to redefine the location of a kb
-            delete_kb/1,  %allows server to delete a kb from the IE
+            define_theory/1,  %selects user's choice of a theory to load
+            rename_theory/1,  %allows server to rename a theory
+            reconstitute_theory/1,  %allows server to redefine the location of a theory
+            delete_theory/1,  %allows server to delete a theory from the IE
 
             establish_status/1,
-            establish_status/2,  %loads and unloads kbs, reports status to server,
+            establish_status/2,  %loads and unloads theorys, reports status to server,
 
             verify_status/1,
-            verify_status/2,  %only reports status of kbs,
+            verify_status/2,  %only reports status of theorys,
 
-            server_startup_status/1,  %presets multiple kbs to be loaded at startup of IE,
-            kb_startup_status/1,  %presets a single kb to be loaded at startup of IE,
+            server_startup_status/1,  %presets multiple theorys to be loaded at startup of IE,
+            theory_startup_status/1,  %presets a single theory to be loaded at startup of IE,
 
-            ua_read/2 % -- (to be dropped) loads a single kb
+            ua_read/2 % -- (to be dropped) loads a single theory
+	    */
             ]).
-  */
 
+
+:-include('moo_header.pl').
 
 % ===================================================================
 % Other major predicates:
-% agentConsultation/3 (called by ua_out in moo_response.P, also by writeUAEvent, and by command_proc/3, by any predicate marked for consultation)
+% agentConsultation/3 (called by writeIfOption in moo_response.P, also by writeUAEvent, and by command_proc/3, by any predicate marked for consultation)
 % ===================================================================
 
 % ===================================================================
 % DEBUG PREDICATES
 % ===================================================================
 
-fme2:-ua_ask("(?P2 ?A1 ?2)", 'GlobalContext', [opt_kb='PrologMOOAddition',disp_debug=true,disp_note_user=true,disp_notes_nonuser=true]).
-fme3:-ua_ask("(?P3 ?A1 ?A2 ?A3)", 'GlobalContext', [opt_kb='PrologMOOAddition',disp_debug=true,disp_note_user=true,disp_notes_nonuser=true]).
+fme2:-ua_ask("(?P2 ?A1 ?2)", 'GlobalContext', [opt_theory='PrologMOOAddition',disp_debug=true,disp_note_user=true,disp_notes_nonuser=true]).
+fme3:-ua_ask("(?P3 ?A1 ?A2 ?A3)", 'GlobalContext', [opt_theory='PrologMOOAddition',disp_debug=true,disp_note_user=true,disp_notes_nonuser=true]).
 gme2:-ua_ask("(genls ?X ?Y)").
 
 % ===================================================================
@@ -67,7 +67,7 @@ gme2:-ua_ask("(genls ?X ?Y)").
 % ===================================================================
 
 
-% Stored persistantly as  kb_make_status_start(kb(Name,CanFileLocal)=StartupStatus)  in moo_persist.wfs
+% Stored persistantly as  theory_make_status_start(theory(Name,CanFileLocal)=StartupStatus)  in moo_persist.wfs
 
 
 % ===================================================================
@@ -79,8 +79,8 @@ initializeMooServerData :-!,
      % findall(L,library_directory(L),Library_directory),
       sendNote(user,logicEngine,'Initializing and Embedding Moo Logic Engine',['architecture=',Architecture,Host_cpu,Version,Release_date,Scheduling_strategy]),
       establish_startup_state,
-      sendNote(debug,logicEngine,'KBs are now loaded by contentManager',' '),
-      ensureMooKB('MooKernel','GlobalContext'),!.
+      sendNote(debug,logicEngine,'Contexts are now loaded by contentManager',' '),
+      ensureMooContext('MooKernel','GlobalContext'),!.
 
 %:-include('moo_header.pl').
 
@@ -97,9 +97,9 @@ processRequest(OptionsIn):-
 
 fixOptionsFromForeign([],[]):-!.
 
-fixOptionsFromForeign([context=Value|List],[opt_ctx_assert=Value,opt_ctx_request=Value|ARGS]):-     %TODO Sepatate KB/Ctx
+fixOptionsFromForeign([context=Value|List],[opt_ctx_assert=Value,opt_ctx_request=Value|ARGS]):-     %TODO Sepatate Context/Ctx
           fixOptionsFromForeign(List,ARGS).
-fixOptionsFromForeign([ctx=Value|List],[opt_ctx_assert=Value,opt_ctx_request=Value|ARGS]):-     %TODO Sepatate KB/Ctx
+fixOptionsFromForeign([ctx=Value|List],[opt_ctx_assert=Value,opt_ctx_request=Value|ARGS]):-     %TODO Sepatate Context/Ctx
           fixOptionsFromForeign(List,ARGS).
 fixOptionsFromForeign([sf=AValue|List],[sf=AValue|ARGS]):-atom(AValue),!,
           logOnFailure(fixOptionsFromForeign(List,ARGS)).
@@ -120,7 +120,7 @@ fixOptionsFromForeign([AName|List],[DName|ARGS]):-
 
 % transform_option(From,To)
 transform_option(author,user).
-transform_option(kb,opt_kb).
+transform_option(theory,opt_theory).
 transform_option(language,interp).
 transform_option(timeLimit,opt_timeout).
 transform_option(bindingLimit,opt_answers_max).
@@ -144,7 +144,7 @@ invokeRequest(Options):-memberchk(client=moo_xml,Options),!,
 % ===========================================================
 invokeRequest(Options):-memberchk(submit=tn_find,Options),!,
         ensureMooOption(opt_ctx_assert,'GlobalContext',Ctx),
-        ensureMooOption(opt_kb,'PrologMOO',KB),
+        ensureMooOption(opt_theory,'PrologMOO',Context),
         ensureMooOption(client,'java',CLIENT),
         ensureMooOption(sf,surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
@@ -152,49 +152,49 @@ invokeRequest(Options):-memberchk(submit=tn_find,Options),!,
          logOnFailure(getCleanCharsWhitespaceProper(Assertion_Chars,Show)),!,
          logOnFailure(getSurfaceFromChars(Show,STERM,Vars)),!,
          logOnFailure(getMooTermFromSurface(STERM,NEWFORM)),!,
-         write_out_kif_tn(Assertion_Chars,NEWFORM,Vars,Ctx,KB,Maintainer),!.
+         write_out_kif_tn(Assertion_Chars,NEWFORM,Vars,Ctx,Context,Maintainer),!.
 
-write_out_kif_tn(Assertion_Chars,computed(comment(_)),Vars,Ctx,KB,Maintainer):-
+write_out_kif_tn(Assertion_Chars,computed(comment(_)),Vars,Ctx,Context,Maintainer):-
          writeFmt('Syntax Error: Unmatched parentheses in "~s"\n',[Assertion_Chars]).
-write_out_kif_tn(Assertion_Chars,comment(_),Vars,Ctx,KB,Maintainer):-
+write_out_kif_tn(Assertion_Chars,comment(_),Vars,Ctx,Context,Maintainer):-
          writeFmt('Syntax Error: Unmatched parentheses in  "~s"\n',[Assertion_Chars]).
-write_out_kif_tn(Assertion_Chars,NEWFORM,Vars,Ctx,KB,Maintainer):-
+write_out_kif_tn(Assertion_Chars,NEWFORM,Vars,Ctx,Context,Maintainer):-
         copy_term((NEWFORM),(CNF)),
         numbervars(CNF,'$VAR',0,_),
-        mooCache(PredR,surface,CNF, _, KB,Ctx, TN, Maintainer, O),
-        mooCache(PredR,surface,OF, _, KB,Ctx, TN, Maintainer, O),
+        mooCache(PredR,surface,CNF, _, Context, TN, Maintainer, O),
+        mooCache(PredR,surface,OF, _, Context, TN, Maintainer, O),
         numbervars(OF,'$VAR',0,_),
         OF == CNF,!,
         writeFmt('~w\n',[TN]),!.
-write_out_kif_tn(Assertion_Chars,NEWFORM,Vars,Ctx,KB,Maintainer):-
-         writeFmt('Not found in ~w of ~w "~s"\n',[Ctx,KB,Assertion_Chars]).
+write_out_kif_tn(Assertion_Chars,NEWFORM,Vars,Ctx,Context,Maintainer):-
+         writeFmt('Not found in ~w of ~w "~s"\n',[Ctx,Context,Assertion_Chars]).
 
 % ===========================================================
 % Detroys an External TN
 % ===========================================================
 invokeRequest(Options):-memberchk(submit=tn_delete,Options),!,
         ensureMooOption(opt_ctx_assert,'GlobalContext',Ctx),
-        ensureMooOption(opt_kb,'PrologMOO',KB),
+        ensureMooOption(opt_theory,'PrologMOO',Context),
         ensureMooOption(client,'java',CLIENT),
         ensureMooOption(tn,0,TN),
         ensureMooOption(sf,surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
         ensureMooOption(user,'Web',User),
-        destroyTN(KB,TN,Ctx),
+        destroyTN(Context,TN,Ctx),
         saveMooCache.
 
-destroyTN(KB,TN,Ctx):-
-        retractall(mooCache(Literal,_,KB,Ctx,TN)),  %Facts
-        retractall(mooCache(Literal,AnteLiteral,_,KB,Ctx,TN)),   %Rules
-        retractall(mooCache(Surface,CLF,Flags,Vars,KB,Ctx,TN,Maintainer,TMResult)).
+destroyTN(Context,TN,Ctx):-
+        retractall(mooCache(Literal,_,Context,TN)),  %Facts
+        retractall(mooCache(Literal,AnteLiteral,_,Context,TN)),   %Rules
+        retractall(mooCache(Surface,CLF,Flags,Vars,Context,TN,Maintainer,TMResult)).
 
-destroyKB(KB):-
-        retractall(mooCache(KB,_)),
-        retractall(mooCache(KB,_,_)),
-        retractall(mooCache(KB,_,_,_)),
-        retractall(mooCache(Literal,_,KB,Ctx,TN)),  %Facts
-        retractall(mooCache(Literal,AnteLiteral,_,KB,Ctx,TN)),   %Rules
-        retractall(mooCache(Surface,CLF,Flags,Vars,KB,Ctx,TN,Maintainer,TMResult)),
+destroyContext(Context):-
+        retractall(mooCache(Context,_)),
+        retractall(mooCache(Context,_,_)),
+        retractall(mooCache(Context,_,_,_)),
+        retractall(mooCache(Literal,_,Context,TN)),  %Facts
+        retractall(mooCache(Literal,AnteLiteral,_,Context,TN)),   %Rules
+        retractall(mooCache(Surface,CLF,Flags,Vars,Context,TN,Maintainer,TMResult)),
         saveMooCache.
 
 % ===========================================================
@@ -202,95 +202,95 @@ destroyKB(KB):-
 % ===========================================================
 invokeRequest(Options):-memberchk(submit=tn_show,Options),!,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),
+        ensureMooOption(opt_theory='PrologMOO',Context),
         ensureMooOption(client='java',CLIENT),
         ensureMooOption(tn=0,TN),
         ensureMooOption(sf=surf,Assertion),
-        writeKnownFormsTN(_,KB:TN).
+        writeKnownFormsTN(_,Context:TN).
 
-writeKnownFormsTN(Ctx,KB:Word):-(atom(Word)),!,
-        writeKnownFormsAboutTerm(Ctx,KB:Word).
+writeKnownFormsTN(Ctx,Context:Word):-(atom(Word)),!,
+        writeKnownFormsAboutTerm(Ctx,Context:Word).
 
-writeKnownFormsAboutTerm(Ctx,KB:Word):-
-        mooCache(PredR,Fact,Pre,Type,true,KB,Agent,P),
+writeKnownFormsAboutTerm(Ctx,Context:Word):-
+        mooCache(PredR,Fact,Pre,Type,true,Context,P),
         contains_const((Fact,Pre),Word),
         flag(explaination_linenumber,LN,1),
         once(writeObject(P,_)),
         write('<hr>'),
         fail.
 
-writeKnownFormsAboutTerm(Ctx,KB:Word):-
-        mooCache(PredR,Fact,Type,true,KB,Agent,P),
+writeKnownFormsAboutTerm(Ctx,Context:Word):-
+        mooCache(PredR,Fact,Type,true,Context,P),
         contains_const(Fact,Word),
         flag(explaination_linenumber,LN,1),
         once(writeObject(P,_)),
         write('<hr>'),
         fail.
 
-writeKnownFormsAboutTerm(Ctx,KB:Word).
+writeKnownFormsAboutTerm(Ctx,Context:Word).
 
 contains_const(Fact,Word):-
         getConstants(atomic,Fact,List,_,_),!,
         memberchk(Word,List).
 
-writeKnownFormsTN(Ctx,KB:TN):-
+writeKnownFormsTN(Ctx,Context:TN):-
         writeFmt('\n</pre><H3><br>Compiled Forms</H3><pre>\n',[]),fail.
 
-writeKnownFormsTN(Ctx,KB:TN):-
+writeKnownFormsTN(Ctx,Context:TN):-
         flag(indent,_,0),
-        mooCache(Surface,CLF,Flags,Vars,KB,Ctx,TN,Maintainer,TMResult),
+        mooCache(Surface,CLF,Flags,Vars,Context,TN,Maintainer,TMResult),
         once(tam(Surface,Vars)),fail.
 /*
-writeKnownFormsTN(Ctx,KB:TN):-
+writeKnownFormsTN(Ctx,Context:TN):-
         flag(indent,_,0),
-        mooCache(Surface,CLF,Flags,Vars,KB,Ctx,TN,Maintainer,TMResult),
-        once(writeObject(writeq(mooCache(Flags,Vars,KB,Ctx,TN,Maintainer,TMResult)),Vars)),fail.
+        mooCache(Surface,CLF,Flags,Vars,Context,TN,Maintainer,TMResult),
+        once(writeObject(writeq(mooCache(Flags,Vars,Context,TN,Maintainer,TMResult)),Vars)),fail.
 
-writeKnownFormsTN(Ctx,KB:TN):-
+writeKnownFormsTN(Ctx,Context:TN):-
         flag(indent,_,0),
-        mooCache(Surface,CAN,Flags,Vars,KB,Ctx,TN,Maintainer,TMResult),
+        mooCache(Surface,CAN,Flags,Vars,Context,TN,Maintainer,TMResult),
         flag(clause_id,_,0),
-        tam(Surface,CAN,Flags,Vars,KB,Ctx,TN,Maintainer,Result),fail.
+        tam(Surface,CAN,Flags,Vars,Context,TN,Maintainer,Result),fail.
 */
-writeKnownFormsTN(Ctx,KB:TN):-
+writeKnownFormsTN(Ctx,Context:TN):-
         writeFmt('\n</pre><H3><br>Active Forms</H3><pre>\n',[]),fail.
 
-writeKnownFormsTN(Ctx,KB:TN):-
+writeKnownFormsTN(Ctx,Context:TN):-
         flag(clause_id,CLID,CLID),
         format('<hr>Clauses: ~w',[CLID]),fail.
 
-writeKnownFormsTN(Ctx,KB:TN):-
-        mooCache(Fact,Pre,Cost,KB,Agent,TN),
+writeKnownFormsTN(Ctx,Context:TN):-
+        mooCache(Fact,Pre,Cost,Context,TN),
         list_to_and(Pre,Ands),
         flag(indent,_,0),
         once(writeObject('<hr>',Vars)),
         once(writeObject(writeq(Fact:Pre),Vars)),
         once(writeObject(nl,Vars)),
-        once(writeObject('KB |= '(Ands,Fact),Vars)),fail.
+        once(writeObject('Context |= '(Ands,Fact),Vars)),fail.
 
-writeKnownFormsTN(Ctx,KB:TN):-
-        mooCache(Fact,Cost,KB,Agent,TN),
+writeKnownFormsTN(Ctx,Context:TN):-
+        mooCache(Fact,Cost,Context,TN),
         flag(indent,_,0),
         once(writeObject('<hr>',Vars)),
         once(writeObject(Fact,Vars)),fail.
 
 /*
-writeKnownFormsTN(Ctx,KB:TN):-
+writeKnownFormsTN(Ctx,Context:TN):-
         isMooOption(opt_debug=on),
-        writeKnownFormsTN_used(Ctx,KB:TN).
+        writeKnownFormsTN_used(Ctx,Context:TN).
 */
-writeKnownFormsTN(Ctx,KB:TN):-writeFmt('</pre>').
+writeKnownFormsTN(Ctx,Context:TN):-writeFmt('</pre>').
 
-writeKnownFormsTN_used(Ctx,KB:TN):-
+writeKnownFormsTN_used(Ctx,Context:TN):-
         writeFmt('\n</pre><H3><br>Belief Forms</H3><pre>\n',[]),
-        retractall(request_kb(X)),
-        asserta(request_kb(KB)),
-        mooCache(PredR,Fact,Ctx,KB:TN:_^Vars),
-        t_ado_cache(PredR,_,Fact, Vars, KB,Ctx, TN, Surf, on),
+        retractall(request_theory(X)),
+        asserta(request_theory(Context)),
+        mooCache(PredR,Fact,Ctx,Context:TN:_^Vars),
+        t_ado_cache(PredR,_,Fact, Vars, Context, TN, Surf, on),
         writeFmt('\n<hr>'),fail.
 
-writeKnownFormsTN_used(Ctx,KB:TN):-
-        mooCache(PredR,Fact, Ctx, Pre, KB:TN:_^Vars),
+writeKnownFormsTN_used(Ctx,Context:TN):-
+        mooCache(PredR,Fact, Ctx, Pre, Context:TN:_^Vars),
         toMarkUp(html,formula(entails(Pre,Fact)),Vars,O),
         writeFmt('\n~w<hr>',[O]),fail.
 
@@ -300,7 +300,7 @@ writeKnownFormsTN_used(Ctx,KB:TN):-
 % ===========================================================
 invokeRequest(Options):-memberchk(submit=ask,Options),!, make,
         ensureMooOption(opt_ctx_request='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),
+        ensureMooOption(opt_theory='PrologMOO',Context),
         ensureMooOption(sf=surf,Askion),
         atom_codes(Askion,Askion_Chars),
         ensureMooOption(user='Web',User),
@@ -308,7 +308,7 @@ invokeRequest(Options):-memberchk(submit=ask,Options),!, make,
         logOnFailure(getCleanCharsWhitespaceProper(Askion_Chars,Show)),!,
         logOnFailure(getSurfaceFromChars(Show,STERM,Vars)),!,
         logOnFailure(getMooTermFromSurface(STERM,NEWFORM)),!,
-        logOnFailure(invokeOperation(quiet,request(NEWFORM),Ctx,TrackingAtom,KB,User,Vars)).
+        logOnFailure(invokeOperation(quiet,request(NEWFORM),Ctx,TrackingAtom,Context,User,Vars)).
 
 
 % ===========================================================
@@ -317,46 +317,46 @@ invokeRequest(Options):-memberchk(submit=ask,Options),!, make,
 invokeRequest(Options):-memberchk(submit=tn_sync,Options),!,
        %  writeFmt(user_error,'ua: ~w\n',[Options]),flush_output(user_error),
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),
+        ensureMooOption(opt_theory='PrologMOO',Context),
         ensureMooOption(tn=_,EXTID),
         ensureMooOption(user='Web',User),
         ensureMooOption(sf=surf,Assertion),
         logOnFailure(atom_codes(Assertion,Codes)),
         getSurfaceFromChars(Codes,STERM,Vars),
         getMooTermFromSurface(STERM,Surface),
-        destroyTN(KB,EXTID,_),
-        once(invokeInsert([trusted,canonicalize],surface,Surface,Ctx,EXTID,KB,Vars,User)),!.
+        destroyTN(Context,EXTID,_),
+        once(invokeInsert([trusted,canonicalize],surface,Surface,Ctx,EXTID,Context,Vars,User)),!.
 
 invokeRequest(Options):-memberchk(submit=tn_form_update,Options),!,
        %  writeFmt(user_error,'ua: ~w\n',[Options]),flush_output(user_error),
         ensureMooOption(tn=_,EXTID),
         ensureMooOption(user='Web',User),
-        ensureMooOption(opt_kb='PrologMOO',KB),
+        ensureMooOption(opt_theory='PrologMOO',Context),
         ensureMooOption(sf=surf,Assertion),
         logOnFailure(atom_codes(Assertion,Codes)),
         getSurfaceFromChars(Codes,STERM,Vars),
         getMooTermFromSurface(STERM,Surface),
-        logOnFailure(retract(mooCache(PredR,surface,OldSurf,_,KB,Ctx,EXTID,_,_))),
-        destroyTN(KB,EXTID,_),
-        once(invokeInsert([trusted,canonicalize],surface,Surface,Ctx,EXTID,KB,Vars,User)),!.
+        logOnFailure(retract(mooCache(PredR,surface,OldSurf,_,Context,EXTID,_,_))),
+        destroyTN(Context,EXTID,_),
+        once(invokeInsert([trusted,canonicalize],surface,Surface,Ctx,EXTID,Context,Vars,User)),!.
 
 invokeRequest(Options):-memberchk(submit=canonicalize,Options),!,
-        ensureMooOption(opt_kb='PrologMOO',KB),
-        once(invokeKBCompilerProcess(KB)),write_ln('canonicalizing.\n').
+        ensureMooOption(opt_theory='PrologMOO',Context),
+        once(invokeContextCompilerProcess(Context)),write_ln('canonicalizing.\n').
 
-invokeRequest(Options):-memberchk(submit=blank_kb,Options),!,
-        ensureMooOption(opt_kb='PrologMOO',KB),
-        destroyKB(KB),
+invokeRequest(Options):-memberchk(submit=blank_theory,Options),!,
+        ensureMooOption(opt_theory='PrologMOO',Context),
+        destroyContext(Context),
         saveMooCache.
 
 
-invokeRequest(Options):-memberchk(submit=removeKbNameSpace,Options),!,
-        ensureMooOption(opt_kb='PrologMOO',KB),
-        destroyKB(KB),
-        retractall(mooCache(instance,surface,'instance'(KB,'KnowledgeBase'),'$VAR'(0),'MooKernel','GlobalContext',TN1,'WebUser',gaf)),
-        retractall(mooCache(instance,surface,'instance'(Ctx,'Context'),'$VAR'(0),KB,'GlobalContext',TN2,'WebUser',gaf)),
-        retractall(mooCache(instance,surface,'instance'('GlobalContext','Context'),'$VAR'(0),KB,'GlobalContext',TN2,'WebUser',gaf)),
-        retractall(mooCache(instance,surface,'sourcefile-of'(KB,Filename),'$VAR'(0),'MooKernel','GlobalContext',TN3,'WebUser',gaf)),
+invokeRequest(Options):-memberchk(submit=removeTheoryNameSpace,Options),!,
+        ensureMooOption(opt_theory='PrologMOO',Context),
+        destroyContext(Context),
+        retractall(mooCache(instance,surface,'instance'(Context,'KnowledgeBase'),'$VAR'(0),'MooKernel','GlobalContext',TN1,'WebUser',gaf)),
+        retractall(mooCache(instance,surface,'instance'(Ctx,'Context'),'$VAR'(0),Context,'GlobalContext',TN2,'WebUser',gaf)),
+        retractall(mooCache(instance,surface,'instance'('GlobalContext','Context'),'$VAR'(0),Context,'GlobalContext',TN2,'WebUser',gaf)),
+        retractall(mooCache(instance,surface,'sourcefile-of'(Context,Filename),'$VAR'(0),'MooKernel','GlobalContext',TN3,'WebUser',gaf)),
         !.
 
 % ===========================================================
@@ -364,7 +364,7 @@ invokeRequest(Options):-memberchk(submit=removeKbNameSpace,Options),!,
 % ===========================================================
 invokeRequest(Options):-memberchk(submit=verify_assert,Options),!,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),
+        ensureMooOption(opt_theory='PrologMOO',Context),
         ensureMooOption(client='java',CLIENT),
         ensureMooOption(sf=surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
@@ -372,14 +372,14 @@ invokeRequest(Options):-memberchk(submit=verify_assert,Options),!,
          logOnFailure(getCleanCharsWhitespaceProper(Assertion_Chars,Show)),!,
          logOnFailure(getSurfaceFromChars(Show,STERM,Vars)),!,
          logOnFailure(getMooTermFromSurface(STERM,NEWFORM)),!,
-         write_out_kif(Assertion_Chars,NEWFORM,Vars,Ctx,KB,Maintainer).
+         write_out_kif(Assertion_Chars,NEWFORM,Vars,Ctx,Context,Maintainer).
 
-write_out_kif(Assertion_Chars,computed(comment(_)),Vars,Ctx,KB,Maintainer):-
+write_out_kif(Assertion_Chars,computed(comment(_)),Vars,Ctx,Context,Maintainer):-
          writeFmt('Syntax Error: Unmatched parentheses in "~s"',[Assertion_Chars]).
-write_out_kif(Assertion_Chars,comment(_),Vars,Ctx,KB,Maintainer):-
+write_out_kif(Assertion_Chars,comment(_),Vars,Ctx,Context,Maintainer):-
          writeFmt('Syntax Error: Unmatched parentheses in "~s"',[Assertion_Chars]).
-write_out_kif(Assertion_Chars,NEWFORM,Vars,Ctx,KB,Maintainer):-
-        logOnFailure(getTruthCheckResults(tell,[untrusted],surface,NEWFORM,Ctx,STN,KB,Vars,Maintainer,Result)),
+write_out_kif(Assertion_Chars,NEWFORM,Vars,Ctx,Context,Maintainer):-
+        logOnFailure(getTruthCheckResults(tell,[untrusted],surface,NEWFORM,Ctx,STN,Context,Vars,Maintainer,Result)),
         (Result=accept(_) ->
                         (toMarkUp(kif,NEWFORM,Vars,Out),writeFmt('~w\n',[Out]),!)
                         ;
@@ -395,33 +395,33 @@ write_out_kif(Assertion_Chars,NEWFORM,Vars,Ctx,KB,Maintainer):-
 % ===========================================================
 invokeRequest(Options):-memberchk(submit=show_dag,Options),!,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),
+        ensureMooOption(opt_theory='PrologMOO',Context),
         ensureMooOption(user='Web',User),
         writeFmt('<pre>\n',[]),
         retractall(drawn(_)),
-        draw_context_dag(Ctx,KB,Ctx,0),!,
+        draw_context_dag(Ctx,Context,0),!,
         writeFmt('</pre>\n',[]).
 
 tcdag(C):-retractall(drawn(_)),draw_context_dag('PrologMOO',C,0).
 
 :-dynamic(drawn/1).
 
-draw_context_dag(KB,Ctx,N):-
+draw_context_dag(Context,N):-
         assert(drawn(Ctx)),
         make_space(N,O),
         writeFmt('~w<strong>~w</strong>\n',[O,Ctx]),
         NN is N + 1,!,
-        show_subs(KB,Ctx,NN).
+        show_subs(Context,NN).
 
-show_subs(KB,Ctx,8):-!.
-%show_subs(Top,KB,Top,_):-!.
+show_subs(Context,8):-!.
+%show_subs(Top,Context,Top,_):-!.
 
-show_subs(KB,Ctx,NN):-
-        context_dag(KB,Ctx,Sub),
+show_subs(Context,NN):-
+        context_dag(Context,Sub),
         not(drawn(Sub)),
-        draw_context_dag(KB,Sub,NN),
+        draw_context_dag(Context,Sub,NN),
         fail.
-show_subs(KB,Ctx,NN):-!.
+show_subs(Context,NN):-!.
 
 
 make_space(1,' ->'):-!.
@@ -438,7 +438,7 @@ make_space(N,O):-
 % ===========================================================
 invokeRequest(Options):-memberchk(submit=assert,Options),!,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),
+        ensureMooOption(opt_theory='PrologMOO',Context),
         ensureMooOption(sf=surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
         ensureMooOption(user='Web',User),
@@ -447,7 +447,7 @@ invokeRequest(Options):-memberchk(submit=assert,Options),!,
         logOnFailure(getCleanCharsWhitespaceProper(Assertion_Chars,Show)),!,
         logOnFailure(getSurfaceFromChars(Show,STERM,Vars)),!,
         logOnFailure(getMooTermFromSurface(STERM,NEWFORM)),!,
-        logOnFailure(invokeOperation(verbose,assert(NEWFORM),Ctx,TN,KB,User,Vars)).
+        logOnFailure(invokeOperation(verbose,assert(NEWFORM),Ctx,TN,Context,User,Vars)).
 
 
 % ===========================================================
@@ -455,22 +455,22 @@ invokeRequest(Options):-memberchk(submit=assert,Options),!,
 % ===========================================================
 invokeRequest(Options):-memberchk(submit=canonicalize,Options),!,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),
-        logOnFailure(invokeKBCompilerProcess(KB)).
+        ensureMooOption(opt_theory='PrologMOO',Context),
+        logOnFailure(invokeContextCompilerProcess(Context)).
 
 
 % ===========================================================
 % Create Knowledge Base (New)
 % ===========================================================
-invokeRequest(Options):-memberchk(submit=register_kb,Options),!,
+invokeRequest(Options):-memberchk(submit=register_theory,Options),!,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),
+        ensureMooOption(opt_theory='PrologMOO',Context),
         ensureMooOption(client='java',CLIENT),
         ensureMooOption(user='Web',User),
         saveMooCache,
         getDefaultImageFilepath(IF),
         open(IF,append,Handle,[close_on_abort(false),buffer(full)]),
-        assert(save_can_to_file(KB,Handle)),
+        assert(save_can_to_file(Context,Handle)),
         !.
 
 :-dynamic(save_can_to_file/2).
@@ -480,7 +480,7 @@ invokeRequest(Options):-memberchk(submit=register_kb,Options),!,
 % ===========================================================
 invokeRequest(Options):-memberchk(submit=retract,Options),!,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),
+        ensureMooOption(opt_theory='PrologMOO',Context),
         ensureMooOption(sf=surf,Retraction),
         atom_codes(Retraction,Retraction_Chars),
         ensureMooOption(user='Web',User),
@@ -491,7 +491,7 @@ invokeRequest(Options):-memberchk(submit=retract,Options),!,
          logOnFailure(getMooTermFromSurface(STERM,NEWFORM)),!,
               once(( NEWFORM=comment(_) ->
                      (do_chars(Show),!,FORM=_) ;(!,
-                     logOnFailure(invokeOperation(verbose,retract(NEWFORM),Ctx,TN,KB,User,Vars))
+                     logOnFailure(invokeOperation(verbose,retract(NEWFORM),Ctx,TN,Context,User,Vars))
                      ))).
 
 
@@ -500,7 +500,7 @@ invokeRequest(Options):-memberchk(submit=retract,Options),!,
 % ===========================================================
 invokeRequest(Options):-memberchk(submit='Delete Assertion',Options),!,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),
+        ensureMooOption(opt_theory='PrologMOO',Context),
         ensureMooOption(asid=_,AID),
         ensureMooOption(user='Web',User),
         ensureMooOption(interp='kif',Interp),
@@ -508,17 +508,17 @@ invokeRequest(Options):-memberchk(submit='Delete Assertion',Options),!,
         delete_assertion(AID).
 
 delete_assertion(AID):-
-        retract(mooCache(PredR,Form,SURF,Vars,KB,Ctx,AID,Maintainer,_)),
-        delete_assertion_disp(Form,SURF,Vars,KB,Ctx,AID,Maintainer),
+        retract(mooCache(PredR,Form,SURF,Vars,Context,AID,Maintainer,_)),
+        delete_assertion_disp(Form,SURF,Vars,Context,AID,Maintainer),
         fail.
 
 delete_assertion(AID):-writeFmt('<H3><Font Color=Red>Done Deleting.</Font></H3>',[]).
 
-delete_assertion_disp(Form,SURF,Vars,KB,Ctx,AID,Maintainer):-
+delete_assertion_disp(Form,SURF,Vars,Context,AID,Maintainer):-
         toMarkUp(html,SURF,Vars,SAtom),
         writeFmt('<IMG src="pixmaps/bullet.gif" asrtid=~w><nobr>',[AID]),
-        writeFmt('<b>~w</b> ID<font color=red>~w</font> in KB: <font color=green>~w</font>  CTX: <font color=green>~w</font>  Maintainer: <font color=green>~w</font>',[Form,AID,KB,Ctx,Maintainer]),
-        %format_o('&nbsp;&nbsp;~w&nbsp;Enabled&nbsp;&nbsp;<br>',checkbox(AID,OnOff)),
+        writeFmt('<b>~w</b> ID<font color=red>~w</font> in Context: <font color=green>~w</font>  CTX: <font color=green>~w</font>  Maintainer: <font color=green>~w</font>',[Form,AID,Context,Maintainer]),
+        %format_o('&nbsp;&nbsp;~w&nbsp;Enabled&nbsp;&nbsp;<br>',chectheoryox(AID,OnOff)),
         writeFmt('~w<br>',[SAtom]),!.
 
 invokeRequest(Options):-
@@ -547,10 +547,10 @@ parse_prolog_cmd(Prolog):-
 parse_prolog_cmd(Prolog):-writeFmt('\nCall "~w" failed',[Prolog]),!.
 callFromWeb(Prolog,CMD,Vars):-var(CMD),!.
 callFromWeb(Prolog,CMD,Vars):-
-        thread_self(Id),
+        getThread(Id),
         ensureMooOption('$socket_out',user_output,Out),
         ensureMooOption('$socket_in',user_input,In),
-        invokePrologCommand(Id,In,Out,CMD,Vars,Results),
+        invokePrologCommandRDF(Id,In,Out,CMD,Vars,Results),
         writeFmt('\n       Results: ~w\n',[Results]),!.
 
 
@@ -564,90 +564,90 @@ invokeRequest(Options):-memberchk(logicforms=logicforms,Options),!,
 
 
 % ===========================================================
-% Un-Canonicalize on KB/Ctx
+% Un-Canonicalize on Context/Ctx
 % ===========================================================
 
 invokeRequest(Options):-
         memberchk(cmd='Un-Canonicalize',Options),!,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),!,
+        ensureMooOption(opt_theory='PrologMOO',Context),!,
         (unsetMooOption(opt_surface_check=_)),
         (setMooOption(opt_surface_check=untrusted)),
         (unsetMooOption(opt_tracking_number=_)),
         (setMooOption(opt_tracking_number=supplied)),!,
         (unsetMooOption(opt_canonicalizer=_)),
         (setMooOption(opt_canonicalizer=byrd)),!,
-        writeFmt('<H2>Un-Canonicalizing  KB:~w Ctx:~w.  This process may take several minutes.. Do not navigate away.</H2>',[KB,Ctx]),
-        mark_all_surface_to_uncanonicalized(KB,Ctx),!.
+        writeFmt('<H2>Un-Canonicalizing  Context:~w Ctx:~w.  This process may take several minutes.. Do not navigate away.</H2>',[Context,Ctx]),
+        mark_all_surface_to_uncanonicalized(Context,Ctx),!.
 
 % ===========================================================
-% Invoke Load SKB on KB/Ctx (POST)
+% Invoke Load SContext on Context/Ctx (POST)
 % ===========================================================
 
 invokeRequest(Options):-
-                memberchk(KB='Load SKB',Options),!,
-                (unsetMooOption(opt_kb=_)),
-                (setMooOption(opt_kb=KB)),
+                memberchk(Context='Load SContext',Options),!,
+                (unsetMooOption(opt_theory=_)),
+                (setMooOption(opt_theory=Context)),
                 ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-                ensureMooOption(opt_kb='PrologMOO',KB),!,
-                fmtString(FileChars,'C:/mool/SUO/~w.can',[KB]),!,string_to_atom(FileChars,Filename),!,
+                ensureMooOption(opt_theory='PrologMOO',Context),!,
+                fmtString(FileChars,'C:/mool/SUO/~w.can',[Context]),!,string_to_atom(FileChars,Filename),!,
                 (unsetMooOption(opt_surface_check=_)),
                 (setMooOption(opt_surface_check=trusted)),
                 idGen(TN1),
                 idGen(TN2),
                 idGen(TN3),
                 idGen(TN4),
-                retractall(mooCache(PredR,_,_,_,KB,Ctx,_,_,_)),
-                assertaClean(mooCache(instance,surface,'instance'(KB,'KnowledgeBase'),'$VAR'(0),'MooKernel','GlobalContext',TN1,'WebUser',gaf)),
-                assertaClean(mooCache(instance,surface,'instance'(Ctx,'Context'),'$VAR'(0),KB,'GlobalContext',TN4,'WebUser',gaf)),
-                assertaClean(mooCache(instance,surface,'instance'('GlobalContext','Context'),'$VAR'(0),KB,'GlobalContext',TN2,'WebUser',gaf)),
-                assertaClean(mooCache('sourcefile-of',surface,'sourcefile-of'(KB,Filename),'$VAR'(0),'MooKernel','GlobalContext',TN3,'WebUser',gaf)),
-                load_kif_to_kb_ctx(KB,Filename,'GlobalContext','MooWeb').
+                retractall(mooCache(PredR,_,_,_,Context,_,_,_)),
+                assertaClean(mooCache(instance,surface,'instance'(Context,'KnowledgeBase'),'$VAR'(0),'MooKernel','GlobalContext',TN1,'WebUser',gaf)),
+                assertaClean(mooCache(instance,surface,'instance'(Ctx,'Context'),'$VAR'(0),Context,'GlobalContext',TN4,'WebUser',gaf)),
+                assertaClean(mooCache(instance,surface,'instance'('GlobalContext','Context'),'$VAR'(0),Context,'GlobalContext',TN2,'WebUser',gaf)),
+                assertaClean(mooCache('sourcefile-of',surface,'sourcefile-of'(Context,Filename),'$VAR'(0),'MooKernel','GlobalContext',TN3,'WebUser',gaf)),
+                load_kif_to_theory_ctx(Context,Filename,'GlobalContext','MooWeb').
 
 % ===========================================================
 % load_from_can_file (Knowledge Base File)
 % ===========================================================
-invokeRequest(Options):-memberchk(cmd='Load SKB',Options),!,
+invokeRequest(Options):-memberchk(cmd='Load SContext',Options),!,
                 ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-                ensureMooOption(opt_kb='PrologMOO',KB),!,
-                fmtString(FileChars,'C:/mool/SUO/~w.can',[KB]),!,string_to_atom(FileChars,Filename),!,
+                ensureMooOption(opt_theory='PrologMOO',Context),!,
+                fmtString(FileChars,'C:/mool/SUO/~w.can',[Context]),!,string_to_atom(FileChars,Filename),!,
                 (unsetMooOption(opt_surface_check=_)),
                 (setMooOption(opt_surface_check=trusted)),
                 idGen(TN1),
                 idGen(TN2),
                 idGen(TN3),
                 idGen(TN4),
-                retractall(mooCache(PredR,_,_,KB,Ctx,_,_,_)),
-                assertaClean(mooCache(instance,surface,'instance'(KB,'KnowledgeBase'),'$VAR'(0),'MooKernel','GlobalContext',TN1,'WebUser',gaf)),
-                assertaClean(mooCache(instance,surface,'instance'(Ctx,'Context'),'$VAR'(0),KB,'GlobalContext',TN4,'WebUser',gaf)),
-                assertaClean(mooCache(instance,surface,'instance'('GlobalContext','Context'),'$VAR'(0),KB,'GlobalContext',TN2,'WebUser',gaf)),
-                assertaClean(mooCache('sourcefile-of',surface,'sourcefile-of'(KB,Filename),'$VAR'(0),'MooKernel','GlobalContext',TN3,'WebUser',gaf)),
-                load_kif_to_kb_ctx(KB,Filename,'GlobalContext','MooWeb').
+                retractall(mooCache(PredR,_,_,Context,_,_,_)),
+                assertaClean(mooCache(instance,surface,'instance'(Context,'KnowledgeBase'),'$VAR'(0),'MooKernel','GlobalContext',TN1,'WebUser',gaf)),
+                assertaClean(mooCache(instance,surface,'instance'(Ctx,'Context'),'$VAR'(0),Context,'GlobalContext',TN4,'WebUser',gaf)),
+                assertaClean(mooCache(instance,surface,'instance'('GlobalContext','Context'),'$VAR'(0),Context,'GlobalContext',TN2,'WebUser',gaf)),
+                assertaClean(mooCache('sourcefile-of',surface,'sourcefile-of'(Context,Filename),'$VAR'(0),'MooKernel','GlobalContext',TN3,'WebUser',gaf)),
+                load_kif_to_theory_ctx(Context,Filename,'GlobalContext','MooWeb').
 
 
 % ===========================================================
-% Invoke Canonicalizer on KB/Ctx (GET)
+% Invoke Canonicalizer on Context/Ctx (GET)
 % ===========================================================
 invokeRequest(Options):-
         memberchk(cmd='Canonicalize',Options),!,%trace,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),!,
+        ensureMooOption(opt_theory='PrologMOO',Context),!,
         (unsetMooOption(opt_surface_check=_)),
         (setMooOption(opt_surface_check=untrusted)),
         (unsetMooOption(opt_tracking_number=_)),
         (setMooOption(opt_tracking_number=supplied)),!,
         (unsetMooOption(opt_canonicalizer=_)),
         (setMooOption(opt_canonicalizer=byrd)),!,
-        writeFmt('<H2>Canonicalizing  KB:~w Ctx:~w.  This process may take several minutes.. <br>This process must be done once and should not be interupted<br>Wait until this page is completely loaded before clicking <br>any links and do not navigate away.</H2>',[KB,Ctx]),
-        logOnFailure(canonicalizeMooKBHTML(KB,Ctx)),!.
+        writeFmt('<H2>Canonicalizing  Context:~w Ctx:~w.  This process may take several minutes.. <br>This process must be done once and should not be interupted<br>Wait until this page is completely loaded before clicking <br>any links and do not navigate away.</H2>',[Context,Ctx]),
+        logOnFailure(canonicalizeMooContextHTML(Context,Ctx)),!.
 
 % ===========================================================
-% Invoke Canonicalizer on KB/Ctx (POST)
+% Invoke Canonicalizer on Context/Ctx (POST)
 % ===========================================================
 invokeRequest(Options):-
-        member(KB='Canonicalize',Options),!,
-        (unsetMooOption(opt_kb=_)),
-        (setMooOption(opt_kb=KB)),
+        member(Context='Canonicalize',Options),!,
+        (unsetMooOption(opt_theory=_)),
+        (setMooOption(opt_theory=Context)),
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
         (unsetMooOption(opt_surface_check=_)),
         (setMooOption(opt_surface_check=untrusted)),
@@ -655,18 +655,18 @@ invokeRequest(Options):-
         (setMooOption(opt_tracking_number=supplied)),!,
         (unsetMooOption(opt_canonicalizer=_)),
         (setMooOption(opt_canonicalizer=byrd)),!,
-        writeFmt('<H2>Canonicalizing  KB:~w Ctx:~w.  This process may take several minutes.. <br>This process must be done once and should not be interupted<br>Wait until this page is completely loaded before clicking <br>any links and do not navigate away.</H2>',[KB,Ctx]),
-        logOnFailure(canonicalizeMooKBHTML(KB,Ctx)),!.
+        writeFmt('<H2>Canonicalizing  Context:~w Ctx:~w.  This process may take several minutes.. <br>This process must be done once and should not be interupted<br>Wait until this page is completely loaded before clicking <br>any links and do not navigate away.</H2>',[Context,Ctx]),
+        logOnFailure(canonicalizeMooContextHTML(Context,Ctx)),!.
 
 
 % ===========================================================
-% Invoke Surface Checker on KB/Ctx
+% Invoke Surface Checker on Context/Ctx
 % ===========================================================
 invokeRequest(Options):-
         memberchk(cmd='Surface Check',Options),!,%trace,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        ensureMooOption(opt_kb='PrologMOO',KB),!,
-        logOnFailure(surface_check_entire_kb_ctx(KB,Ctx)),!,
+        ensureMooOption(opt_theory='PrologMOO',Context),!,
+        logOnFailure(surface_check_entire_theory_ctx(Context,Ctx)),!,
         writeFmt('<hr>Done Surface Check\n',[]).
 
 % ===========================================================
@@ -699,41 +699,41 @@ invokeRequest(Options):-memberchk(cmd='Save Image',Options),!,saveMooCache.
 % ===========================================================
 invokeRequest(Options):-memberchk(client='command',Options),memberchk(submitbuttonUp='Create',Options),!,
                         ensureMooOption(newCtxName='GlobalContext',Ctx),
-                        ensureMooOption(kb='PrologMOO',KB),
+                        ensureMooOption(theory='PrologMOO',Context),
                         ensureMooOption(user='Web',User),
                         idGen(TN2),
-                        assertaClean(mooCache(instance,surface,'instance'(Ctx,'Context'),'$VAR'(0),KB,'GlobalContext',TN2,User,on)).
+                        assertaClean(mooCache(instance,surface,'instance'(Ctx,'Context'),'$VAR'(0),Context,'GlobalContext',TN2,User,on)).
 
 
 % ===========================================================
-% KB/Ctx ComboBoxs
+% Context/Ctx ComboBoxs
 % ===========================================================
 show_available_contexts:-
         findall(Atom,
-                (mooCache(PredR,surface,('instance'(Ctx,'Context'):_), KB,_, _, _, _),concat_atom([KB,':',Ctx],Atom)),
+                (mooCache(PredR,surface,('instance'(Ctx,'Context'):_), Context,_, _, _, _),concat_atom([Context,':',Ctx],Atom)),
                 List),
         writeq(List),nl.
 
 
-getCtxListForKB(KB,['GlobalContext'|Sorted]):-
-        findall(Ctx,mooCache(_,_,_, _, KB,Ctx, _, _, _),UList),!,sort(UList,Sorted).
-getCtxListForKB(KB,['GlobalContext']):-!.
+getCtxListForContext(Context,['GlobalContext'|Sorted]):-
+        findall(Ctx,mooCache(_,_,_, _, Context, _, _, _),UList),!,sort(UList,Sorted).
+getCtxListForContext(Context,['GlobalContext']):-!.
 
-show_available_contexts_in_combobox(KB,null):-
-        getCtxListForKB(KB,List),
+show_available_contexts_in_combobox(Context,null):-
+        getCtxListForContext(Context,List),
         toMarkUp(html,select(ctx,List),_,Out),write(Out).
 
-show_available_contexts_in_combobox(KB,Selected):-
-        getCtxListForKB(KB,List),
+show_available_contexts_in_combobox(Context,Selected):-
+        getCtxListForContext(Context,List),
         toMarkUp(html,select(ctx,[Selected|List]),_,Out),write(Out).
 
 
-getListOfKB(KBList):-
-        findall(KB,mooCache(_,_,_, _, KB,Ctx, _, _, _),UList),!,sort(UList,KBList).
+getListOfContext(ContextList):-
+        findall(Context,mooCache(_,_,_, _, Context, _, _, _),UList),!,sort(UList,ContextList).
 
-show_available_kbs_in_combobox(Out):-
-                findall(KB,mooCache(PredR,surface,('instance'(KB,'KnowledgeBase'):_), 'MooKernel',_, _, _, _),List),
-                toMarkUp(html,select(kb,List),_,Out).
+show_available_theorys_in_combobox(Out):-
+                findall(Context,mooCache(PredR,surface,('instance'(Context,'KnowledgeBase'):_), 'MooKernel',_, _, _, _),List),
+                toMarkUp(html,select(theory,List),_,Out).
 
 % =================================================
 % Useragent Control Panel
@@ -741,12 +741,12 @@ show_available_kbs_in_combobox(Out):-
 invokeRequest(Options):-memberchk(client='controlpanel',Options),
         memberchk(kill=_,Options),!,
         member(kill=ID,Options),
-        catch(thread_signal(ID,thread_exit(user_killed(ID))),_,true),
+        catch(system_dependant:prolog_thread_at_exit(ID,prolog_thread_exit(user_killed(ID))),_,true),
         invokeRequest([client='controlpanel']).
 
 
 invokeRequest(Options):-memberchk(client='controlpanel',Options), !,
-        showMooProcesses.
+        showMooProcessHTML.
 
 % ===========================================================
 % TQ HOOK
@@ -759,30 +759,51 @@ invokeRequest(Options):-memberchk(client='tqsystem',Options),!,ignore(invokeTest
 
 invokeRequest(Options):-memberchk(client=command,Options),!.
 
-invokeRequest(Options):-writeFmt('
+invokeRequest(Options):-%trace,
+   writeFmt('
 <html>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <meta name="Keywords" content="PROLOG Artificial Intelligence Ontology AI MOO Linguistics Philosophy DARPA Doulgas Miles">
 <meta name="Description" content="PROLOG Artificial Intelligence Ontology AI MOO Linguistics Philosophy DARPA">
-<title>LogicMOO</title>
+<title>LogicMOO request ~q</title>
+<LINK REL="stylesheet" TYPE="text/css" HREF="http://msdn.microsoft.com/msdn-online/shared/css/ie4.css" />
 </head>
 
 <body>
-
-<p><b><span style="font-size: 10.0pt; font-family: Verdana"><font color="#008080">Welcome
-to the </font><a href="http://logicmoo.sourceforge.net"><font color="#008080">PrologMOO</font></a></span><span style="font-size:10.0pt;font-family:Verdana;color:teal">!</span></b></p>
-<p><span style="font-size: 10.0pt; font-family: Verdana">Your request was: "~q"</span></p>
-<p><span style="font-size: 10.0pt; font-family: Verdana"><a href="login">You
-would like</a></span><span style="font-size:10.0pt;font-family:Verdana"><a href="login">
-log in and try it out</a>.</span></p>',[Options]),
-showMooProcesses,
-writeFmt('
+',[Options]),
+%showMooProcessHTML,
+write('
+<pre>
+                               _)\\.-.
+              .-.__,___,_.-=-. )\\`  a`\\_
+          .-.__\\__,__,__.-=-. `/  \\     `\\
+          {~,-~-,-~.-~,-,;;;;\\ |   \'--;`)/
+           \\-,~_-~_-,~-,(_(_(;\\/   ,;/
+            &quot;,-.~_,-~,-~,)_)_)\'.  ;;(               W E L C O M E
+              `~-,_-~,-~(_(_(_(_\\  `;\\                   t o
+        ,          `&quot;~~--,)_)_)_)\\_   \\               J a M U D
+        |\\              (_(_/_(_,   \\  ;
+        \\ \'-.       _.--\'  /_/_/_)   | |
+         \'--.\\    .\'          /_/    | |
+             ))  /       \\      |   /.\'
+            //  /,        | __.\'|  ||
+           //   ||        /`    (  ||           the java-based mud in
+          ||    ||      .\'       \\ \\\\           T E C H N I C O L O R
+          ||    ||    .\'_         \\ \\\\	       (Web Interface)
+           \\\\   //   / _ `\\        \\ \\\\__
+     jgs    \'-\'/(   _  `\\,;        \\ \'--:,
+             `&quot;`  `&quot;` `-,,;         `&quot;`&quot;,,;</pre>
+<form method="GET" action="login">
+Player Name:&nbsp;&nbsp;<input type="text" name="username" size="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Password:&nbsp;&nbsp;<input type="text" name="password" size="20">&nbsp;&nbsp;&nbsp;
+<input type="submit" value="Login" name="loginbutton">
+</form>
 </body>
 
 </html>
-').
+'),   showMooStatisticsHTML.
 
 
 give_kif_window:-!. %Given
@@ -803,37 +824,37 @@ give_editor_window:-!,
 %  End of moo_useragent.P
 % ===================================================================================================
 
-getKbStatus('MooKernel'):-writeFmt('Browse Only\n',[]),!.
-getKbStatus(KB):-
-        isKBCompilerProcess(KB,Progress),
-        writeFmt('<A href=controlpanel.jsp?kb=~w><font color=green>Canonicalizing</font></a>\n',[KB]),!.
+getTheoryStatus('MooKernel'):-writeFmt('Browse Only\n',[]),!.
+getTheoryStatus(Context):-
+        isContextCompilerProcess(Context,Progress),
+        writeFmt('<A href=controlpanel.jsp?theory=~w><font color=green>Canonicalizing</font></a>\n',[Context]),!.
 
-getKbStatus(KB):-
-        isUncanonicalized(KB),
-        invokeKBCompilerProcess(KB),
-        isKBCompilerProcess(KB,Progress),
-        writeFmt('<A href=controlpanel.jsp?kb=~w><font color=green>Canonicalizing</font></a>\n',[KB]),!.
+getTheoryStatus(Context):-
+        isUncanonicalized(Context),
+        invokeContextCompilerProcess(Context),
+        isContextCompilerProcess(Context,Progress),
+        writeFmt('<A href=controlpanel.jsp?theory=~w><font color=green>Canonicalizing</font></a>\n',[Context]),!.
 
-getKbStatus(KB):-
-        isUncanonicalized(KB),
-        isKBCurrentlyInUse(OtherKB,Status),!,
-        writeFmt('<font color=orange>Waiting for ~w</font>\n',[OtherKB]).
+getTheoryStatus(Context):-
+        isUncanonicalized(Context),
+        isContextCurrentlyInUse(OtherContext,Status),!,
+        writeFmt('<font color=orange>Waiting for ~w</font>\n',[OtherContext]).
 
-getKbStatus(KB):-
-        isKBCurrentlyInUse(KB,Status),
+getTheoryStatus(Context):-
+        isContextCurrentlyInUse(Context,Status),
         writeFmt('<font color=orange>Busy ~w</font>\n',[Status]).
 
-getKbStatus(KB):-
-        isKbUntransfered(KB),
-        writeFmt('<A href=skb_to_prolog.jsp?kb=~w><font color=red>Update</font></a>\n',[KB]),!.
+getTheoryStatus(Context):-
+        isTheoryUntransfered(Context),
+        writeFmt('<A href=stheory_to_prolog.jsp?theory=~w><font color=red>Update</font></a>\n',[Context]),!.
 
-getKbStatus(KB):-
-        isSourceNewerThenImage(KB),
-        writeFmt('<A href=skb_to_prolog.jsp?kb=~w><font color=red>Needs Update</font></a>\n',[KB]),!.
+getTheoryStatus(Context):-
+        isSourceNewerThenImage(Context),
+        writeFmt('<A href=stheory_to_prolog.jsp?theory=~w><font color=red>Needs Update</font></a>\n',[Context]),!.
 
-getKbStatus(KB):-isKnowledgeBaseLoaded(KB,_),writeFmt('<A href="askInsert.jsp?kb=~w">Ask/Insert</A>\n',[KB]),!.
+getTheoryStatus(Context):-isKnowledgeBaseLoaded(Context,_),writeFmt('<A href="askInsert.jsp?theory=~w">Ask/Insert</A>\n',[Context]),!.
 
-getKbStatus(KB):-writeFmt('Unknown\n',[]),!.
+getTheoryStatus(Context):-writeFmt('Unknown\n',[]),!.
 
 % ===================================================================
 %  INVOKE REQUEST INTERFACE USED BY REQUEST AGENTS
@@ -843,8 +864,8 @@ getKbStatus(KB):-writeFmt('Unknown\n',[]),!.
 
 % =======================================================================================
 
-invokeRequestAndWriteUserAgent(Formula,Ctx,TrackingAtom,KB,User,Vars,CPU):-
-         invokeRequestToBuffer(Formula,Ctx,TrackingAtom,KB,User,Vars,CPU),
+invokeRequestAndWriteUserAgent(Formula,Ctx,TrackingAtom,Context,User,Vars,CPU):-
+         invokeRequestToBuffer(Formula,Ctx,TrackingAtom,Context,User,Vars,CPU),
          writeUserAgentBuffer.
 
 
@@ -868,7 +889,7 @@ writeUserAgentBuffer:-!.
 % Send to debugger
 % ===========================================================
 writeAnswersUserAgent(UResultsSoFar,Result,InExplaination,Status):-
-        notrace((once(writeDebug(writeAnswersUserAgent(UResultsSoFar,Result,InExplaination,Status))),fail)).
+        system_dependant:prolog_notrace((once(writeDebug(writeAnswersUserAgent(UResultsSoFar,Result,InExplaination,Status))),fail)).
 
 % ===========================================================
 % Hide certain returns
@@ -939,74 +960,11 @@ length_explaination(P * Explaination,Length):- !,
 length_explaination(_,1):- !.
 
 
-setMooOptionDefaults:-
-             (unsetMooOption(_)),
-             setMooOption(opt_callback='sendNote'),
-             setMooOption(cb_consultation='off'),
-             setMooOption(opt_debug='off'),
-             setMooOption(cb_error='off'),
-             setMooOption(cb_result_each='off'),
-
-% User Agent Defaults for Blank Variables
-             setMooOption(opt_cxt_request='GlobalContext'),
-             setMooOption(opt_ctx_assert='GlobalContext'),
-             setMooOption(opt_tracking_number='generate'),
-             setMooOption(opt_agent='ua_parse'),
-             setMooOption(opt_precompiled='off'),
-             getMooOption(opt_kb,KB),setMooOption(opt_kb=KB),
-             setMooOption(opt_notation='kif'),
-             setMooOption(opt_timeout=2),
-             setMooOption(opt_readonly='off'),
-             setMooOption(opt_debug='off'),
-             setMooOption(opt_compiler='Byrd'),
-             setMooOption(opt_language = 'pnx_nf'),
-
-%Request Limits
-             setMooOption(opt_answers_min=1),
-             setMooOption(opt_answers_max=999), %TODO Default
-             setMooOption(opt_backchains_max=5),
-             setMooOption(opt_deductions_max=100),
-             setMooOption(opt_backchains_max_neg=5),
-             setMooOption(opt_deductions_max_neg=20),
-             setMooOption(opt_forwardchains_max=1000),
-             setMooOption(opt_max_breath=1000), %TODO Default
-
-%Request Contexts
-             setMooOption(opt_explore_related_contexts='off'),
-             setMooOption(opt_save_justifications='off'),
-             setMooOption(opt_deductions_assert='on'),
-             setMooOption(opt_truth_maintence='on'),
-             setMooOption(opt_forward_assertions='on'),
-             setMooOption(opt_deduce_domains='on'),
-             setMooOption(opt_notice_not_say=off),
-
-
-%Request Pobibility
-             setMooOption(opt_certainty_max=1),
-             setMooOption(opt_certainty_min=1),
-             setMooOption(opt_certainty=1),
-             setMooOption(opt_resource_commit='on').
-
 unset_promiscuous:-
                 setMooOption(opt_deduce_domains='off').
 set_promiscuous:-
                 setMooOption(opt_deduce_domains='on').
 
-
-
-% ===================================================================
-% File 'Moo_operation.pl'
-% Maintainers: Douglas Miles
-% Contact: dmiles@users.sourceforge.net
-% Version: 'Moo_operation.pl' 1.0.0
-% ===================================================================
-% ===================================================================
-% PURPOSE
-% This File is the bootstrap for the Moo Infence engine one first calls "[moo_operation]"
-% So first is loads the proper files and then starts up the system
-% ===================================================================
-
-:-include('moo_header.pl').
 
 % ===================================================================
 % EXPORTS
@@ -1014,10 +972,6 @@ set_promiscuous:-
 
 register_belief_module(_ModuleName).
 
-
-canonicalizer_module('moo_normal').
-compiler_module('moo_byrd').
-version_tag(kbl).
 
 /*
 Loads and compiles a Maintainerial KIF file
@@ -1054,26 +1008,26 @@ Mainly it gives us a way to do bulk load/unloads and separation user data from g
 
 
 /* Assertion
-agentInsert(+KIFCharsIn,+Ctx,+KB,+User).
+agentInsert(+KIFCharsIn,+Ctx,+Context,+User).
 KIFCharsIn = "(instance virginia Computer)"
 Ctx = 'Computers and Things'
-KB = 'PrologMOO' currently must be set to 'PrologMOO'
+Context = 'PrologMOO' currently must be set to 'PrologMOO'
 */
 
-agentInsert(KIFCharsIn,Ctx,KB,User):-
+agentInsert(KIFCharsIn,Ctx,Context,User):-
         set_automation,
-        agentInsert(KIFCharsIn,Ctx,TN,KB,User).
+        agentInsert(KIFCharsIn,Ctx,TN,Context,User).
 
 
 /*
 Now the predicates that you most want
 Invokes a request
-agentRequest(+KIFCharsIn,+Ctx,+KB,+User,-UResultsSoFar,-Result,-Explaination,-Status).
+agentRequest(+KIFCharsIn,+Ctx,+Context,+User,-UResultsSoFar,-Result,-Explaination,-Status).
 
 Input variables:
 KIFCharsIn = "(instance ?What Computer)"
 Ctx = 'Computers and Things'  % Any legal Atom that helps you book keep
-KB = 'PrologMOO' currently must be set to 'PrologMOO'
+Context = 'PrologMOO' currently must be set to 'PrologMOO'
 User = ''  There are times when error messages about redundant assertions happen.. and for bookkeeping all assertions have an author atom.. perhaps you can even use the source file name it came from.
 
 output variables:
@@ -1138,30 +1092,30 @@ set_automation:-
 %  BATCH INTERFACE
 % ===================================================================
 
-invokeOperation(Verbose,surf,Ctx,Tracking,KB,User,Vars):-!.
-invokeOperation(Verbose,Fml,Ctx,TN,KB,User,Vars):-!,
-                once(invokeOperationProc(Verbose,Fml,Ctx,TN,KB,User,Vars)),!.
+invokeOperation(Verbose,surf,Ctx,Tracking,Context,User,Vars):-!.
+invokeOperation(Verbose,Fml,Ctx,TN,Context,User,Vars):-!,
+                once(invokeOperationProc(Verbose,Fml,Ctx,TN,Context,User,Vars)),!.
 
-invokeOperationProc(Verbose,TERM,Ctx,TN,KB,User,Vars):-TERM =..[note|T],!,
+invokeOperationProc(Verbose,TERM,Ctx,TN,Context,User,Vars):-TERM =..[note|T],!,
                 assert(title(T)),
                 WT=..['note '|T],
                 writeObject(Verbose,WT,Vars),!,
                 writeObject(Verbose,'\n\n;; Assertions \n\n',Vars),!,
                 clear_moo_memory,set_promiscuous,!.
 
-invokeOperationProc(Verbose,TERM,Ctx,TN,KB,User,Vars):-TERM =..[answer|T],!,batch_answer(T).
+invokeOperationProc(Verbose,TERM,Ctx,TN,Context,User,Vars):-TERM =..[answer|T],!,batch_answer(T).
 
-invokeOperationProc(Verbose,TERM,Ctx,TN,KB,User,Vars):-TERM =..[abort],!,assert(tq_ignored).
-invokeOperationProc(Verbose,'deduce-domains'(on),Ctx,TN,KB,User,Vars):-!,set_promiscuous,!.
-invokeOperationProc(Verbose,'deduce-domains'(true),Ctx,TN,KB,User,Vars):-!,set_promiscuous,!.
-invokeOperationProc(Verbose,'deduce-domains'(false),Ctx,TN,KB,User,Vars):-!,unset_promiscuous,!.
-invokeOperationProc(Verbose,'deduce-domains'(off),Ctx,TN,KB,User,Vars):-!,unset_promiscuous,!.
+invokeOperationProc(Verbose,TERM,Ctx,TN,Context,User,Vars):-TERM =..[abort],!,assert(tq_ignored).
+invokeOperationProc(Verbose,'deduce-domains'(on),Ctx,TN,Context,User,Vars):-!,set_promiscuous,!.
+invokeOperationProc(Verbose,'deduce-domains'(true),Ctx,TN,Context,User,Vars):-!,set_promiscuous,!.
+invokeOperationProc(Verbose,'deduce-domains'(false),Ctx,TN,Context,User,Vars):-!,unset_promiscuous,!.
+invokeOperationProc(Verbose,'deduce-domains'(off),Ctx,TN,Context,User,Vars):-!,unset_promiscuous,!.
 
-invokeOperationProc(Verbose,end_of_file,Ctx,TN,KB,User,Vars):-!.
+invokeOperationProc(Verbose,end_of_file,Ctx,TN,Context,User,Vars):-!.
 
-invokeOperationProc(Verbose,'file_comment'(C),SourceCtx,SourceTN,KB,User,Vars):-!,nl,write(C),!.
-invokeOperationProc(Verbose,'browser-only'(_),SourceCtx,SourceTN,KB,User,Vars):-!.
-invokeOperationProc(Verbose,'execute-prolog'(Code),SourceCtx,SourceTN,KB,User,Vars):-!,
+invokeOperationProc(Verbose,'file_comment'(C),SourceCtx,SourceTN,Context,User,Vars):-!,nl,write(C),!.
+invokeOperationProc(Verbose,'browser-only'(_),SourceCtx,SourceTN,Context,User,Vars):-!.
+invokeOperationProc(Verbose,'execute-prolog'(Code),SourceCtx,SourceTN,Context,User,Vars):-!,
 once(((%                writeq(Code),nl,
                 atom_codes(Code,Codes),
 %               writeq(Codes),nl,
@@ -1171,124 +1125,123 @@ once(((%                writeq(Code),nl,
                 atom_to_term(Atom,Term,V)
 
                 );writeFmt('could not parse ~w\n',[Code])),once(((once(catch(Term,_,fail)),writeFmt('Exec Suceeded',[]));writeFmt('Exec Failed',[])))).
-invokeOperationProc(Verbose,'load-kb'(Filename),SourceCtx,SourceTN,KB,User,Vars):-!,fail,agent_load_kif_quiet(Filename,'GlobalContext','Anonymous').
-invokeOperationProc(Verbose,'load-kb-show'(Filename),SourceCtx,SourceTN,KB,User,Vars):-!,
+invokeOperationProc(Verbose,'load-theory'(Filename),SourceCtx,SourceTN,Context,User,Vars):-!,fail,agent_load_kif_quiet(Filename,'GlobalContext','Anonymous').
+invokeOperationProc(Verbose,'load-theory-show'(Filename),SourceCtx,SourceTN,Context,User,Vars):-!,
         agent_load_kif(Filename,'GlobalContext','Anonymous').
 
-invokeOperationProc(Verbose,retract(nil),Ctx,TN,KB,User,Vars):-!.
+invokeOperationProc(Verbose,retract(nil),Ctx,TN,Context,User,Vars):-!.
 
-invokeOperationProc(Verbose,request(nil),Ctx,TN,KB,User,Vars):-!.
+invokeOperationProc(Verbose,request(nil),Ctx,TN,Context,User,Vars):-!.
 
-invokeOperationProc(Verbose,(nil),Ctx,TN,KB,User,Vars):-!.
+invokeOperationProc(Verbose,(nil),Ctx,TN,Context,User,Vars):-!.
 
-invokeOperationProc(Verbose,tell(nil),Ctx,TN,KB,User,Vars):-!.
+invokeOperationProc(Verbose,tell(nil),Ctx,TN,Context,User,Vars):-!.
 
-invokeOperationProc(Verbose,assert(end_of_file),Ctx,TN,KB,User,Vars):- !.
+invokeOperationProc(Verbose,assert(end_of_file),Ctx,TN,Context,User,Vars):- !.
 
-invokeOperationProc(Verbose,assert(NEWFORM),Ctx,TN,KB,User,Vars):-  !,
-        invokeOperationProc(Verbose,assert([trusted,canonicalize,to_mem],NEWFORM),Ctx,TN,KB,User,Vars).
+invokeOperationProc(Verbose,assert(NEWFORM),Ctx,TN,Context,User,Vars):-  !,
+        invokeOperationProc(Verbose,assert([trusted,canonicalize,to_mem],NEWFORM),Ctx,TN,Context,User,Vars).
 
-invokeOperationProc(Verbose,assert(Flags,NEWFORM),Ctx,TN,KB,User,Vars):-  !,
+invokeOperationProc(Verbose,assert(Flags,NEWFORM),Ctx,TN,Context,User,Vars):-  !,
         flag('Axioms Compiled',AC,AC+1),
         LN is AC + 1,
         flag(explaination_linenumber,_,LN),
         writeObject(Verbose,nl,Vars),
         writeObject(Verbose,NEWFORM,Vars),
         writeObject(Verbose,nl,Vars),
-        logOnFailure(invokeInsert(Flags,surface,NEWFORM,Ctx,TN,KB,Vars,User)),
-        ignore((getMooOption(opt_debug=off,on),Verbose=verbose,writeKnownFormsTN(Ctx,KB:TN))).
+        logOnFailure(invokeInsert(Flags,surface,NEWFORM,Ctx,TN,Context,Vars,User)),
+        ignore((getMooOption(opt_debug=off,on),Verbose=verbose,writeKnownFormsTN(Ctx,Context:TN))).
 
 
-invokeOperationProc(Verbose,retract(Fml),Ctx,TN,KB,User,Vars):-
+invokeOperationProc(Verbose,retract(Fml),Ctx,TN,Context,User,Vars):-
          flag('Axioms Compiled',AC,AC+1),
          writeObject(Verbose,nl,Vars),
          writeObject(Verbose,retract(Fml),Vars),
          writeObject(Verbose,nl,Vars),
-         retract_pterm(Fml,Ctx,TN,KB,User,Vars).
+         retract_pterm(Fml,Ctx,TN,Context,User,Vars).
 
-invokeOperationProc(Verbose,canonicalize(Q),Ctx,TN,KB,User,Vars):-!,
+invokeOperationProc(Verbose,canonicalize(Q),Ctx,TN,Context,User,Vars):-!,
          writeObject(Verbose,nl,Vars),
          writeObject(Verbose,canonicalize(Q),Vars),
-         invokeRequestWithTime(canonicalize(Q),_,Ctx,TN,KB,User,Vars,CPU1), assert(findings(CPU1)).
+         invokeRequestWithTime(canonicalize(Q),_,Ctx,TN,Context,User,Vars,CPU1), assert(findings(CPU1)).
 
-invokeOperationProc(Verbose,request(Q),Ctx,TN,KB,User,Vars):-!,
+invokeOperationProc(Verbose,request(Q),Ctx,TN,Context,User,Vars):-!,
          writeObject(Verbose,'\n\n\n;; Request \n\n',Vars),
          writeObject(Verbose,'request '(Q),Vars),
          writeObject(Verbose,nl,Vars),
-         invokeRequestWithTime(request(Q),Ctx,TN,KB,User,Vars,CPU1), assert(findings(CPU1)).
+         invokeRequestWithTime(request(Q),Ctx,TN,Context,User,Vars,CPU1), assert(findings(CPU1)).
 
-invokeOperationProc(Verbose,request(N,Q),Ctx,TN,KB,User,Vars):-!,
+invokeOperationProc(Verbose,request(N,Q),Ctx,TN,Context,User,Vars):-!,
          writeObject(Verbose,'\n\n\n;; Timed Request \n\n',Vars),
          writeObject(Verbose,'request '(Q),Vars),
          writeObject(Verbose,nl,Vars),
-         invokeRequestWithTime(request(N,Q),Ctx,TN,KB,User,Vars,CPU1), assert(findings(CPU1)).
+         invokeRequestWithTime(request(N,Q),Ctx,TN,Context,User,Vars,CPU1), assert(findings(CPU1)).
 
-invokeOperationProc(Verbose,requestyn(Q),Ctx,TN,KB,User,Vars):-!,
+invokeOperationProc(Verbose,requestyn(Q),Ctx,TN,Context,User,Vars):-!,
          writeObject(Verbose,'\n\n\n;; Yes/No Request \n\n',Vars),
          writeObject(Verbose,'request '(Q),Vars),
          writeObject(Verbose,nl,Vars),
-         invokeRequestWithTime(requestyn(Q),Ctx,TN,KB,User,Vars,CPU1), assert(findings(CPU1)).
+         invokeRequestWithTime(requestyn(Q),Ctx,TN,Context,User,Vars,CPU1), assert(findings(CPU1)).
 
 
-invokeOperationProc(Verbose,Fml,Ctx,TN,KB,User,Vars):-               % Default Left-over
+invokeOperationProc(Verbose,Fml,Ctx,TN,Context,User,Vars):-               % Default Left-over
              toFSCK(Fml,Ctx,TN,Assertion,SourceCtx,SourceTN),
-             invokeOperation(Verbose,assert(Assertion),SourceCtx,SourceTN,KB,User,Vars).
+             invokeOperation(Verbose,assert(Assertion),SourceCtx,SourceTN,Context,User,Vars).
 
-invokeRequestWithTime(Q,Ctx,TN,KB,User,Vars,CPU):-
-                invokeRequestAndWriteUserAgent(Q,Ctx,TN,KB,User,Vars,CPU),
+invokeRequestWithTime(Q,Ctx,TN,Context,User,Vars,CPU):-
+                invokeRequestAndWriteUserAgent(Q,Ctx,TN,Context,User,Vars,CPU),
                 assert(request_time(CPU)).
 
 
 % ===============================================================
 % AGENT REQUEST (Chars)
 % ===============================================================
-:-include('moo_header.pl').
 
 tkq1:-agentRequest("(isa Joe ?Class)",'GlobalContext','PrologMOO','Dmiles',U,R,P).
 tkq2:-agentRequest("(isa on Relation)",'GlobalContext','PrologMOO','Dmiles',U,R,P).
 
 
-agentRequest(KIFCharsIn,Ctx,KB,User,UResultsSoFar,Result,Explaination):-
-        agentRequest(KIFCharsIn,Ctx,KB,User,UResultsSoFar,Result,Explaination,Status),
+agentRequest(KIFCharsIn,Ctx,Context,User,UResultsSoFar,Result,Explaination):-
+        agentRequest(KIFCharsIn,Ctx,Context,User,UResultsSoFar,Result,Explaination,Status),
         (Status = done(_) -> ! ; true).
 
 
-agentRequest(KIFCharsIn,Ctx,KB,User,UResultsSoFar,Result,Explaination,Status):-
+agentRequest(KIFCharsIn,Ctx,Context,User,UResultsSoFar,Result,Explaination,Status):-
         isCharCodelist(KIFCharsIn),!,
         string_clean(KIFCharsIn,KIFChars),
         logOnFailure(ask_parse_chars(KIFChars,FmlInOpen,Vars)),!,
-        agentRequest(KIFCharsIn,FmlInOpen,Vars,Ctx,KB,User,UResultsSoFar,Result,Explaination,Status).
+        agentRequest(KIFCharsIn,FmlInOpen,Vars,Ctx,Context,User,UResultsSoFar,Result,Explaination,Status).
 
 
-agentRequest(KIFCharsIn,FmlInOpen,Vars,Ctx,KB,User,UResultsSoFar,Result,Explaination,Status):-
-        notrace((
+agentRequest(KIFCharsIn,FmlInOpen,Vars,Ctx,Context,User,UResultsSoFar,Result,Explaination,Status):-
+        system_dependant:prolog_notrace((
         retractall(answer_found(_)),
         retractall(t_answer_found(_)),
         retractall(tabled_f(_)),
-        retractall(mooCache(deduceInstanceTable(KB,Class,Set))),
-        ignore(findall(_,expireOptimizationsInKB(_,_,_),_)),
+        retractall(mooCache(deduceInstanceTable(Context,Class,Set))),
+        ignore(findall(_,expireOptimizationsInContext(_,_,_),_)),
         retractall(table_g(_)),
         retractall(cpuend(_)),
         retractall(tabled_t(_)),
         retractall(table_g(_)),
         retractall(proving(_)),
-        getMooOption(opt_kb,QKB),!,ignore((KB=QKB)),!,
+        getMooOption(opt_theory,QContext),!,ignore((Context=QContext)),!,
         get_default_request_context(QCTX),!,ignore((Ctx=QCTX)),!,
-        logOnFailure(ensureMooKB(KB,Ctx)),!,
+        logOnFailure(ensureMooContext(Context,Ctx)),!,
         flag('$Returned Answers',_,0),
         flag('$UAnswers',_,0))),
         TN = User, % Tracks request based on 'User'
-        destroyTN(KB,TN,_Ctx),  % Removes previous Request
+        destroyTN(Context,TN,_Ctx),  % Removes previous Request
         getOpenVariablesWFF(FmlInOpen,Vars,ChaseVars),
         getPrologVars(ChaseVars,QVars,_,_),
         RequestPrototype=..[request|QVars],
-        notrace((not(not((
-                getAssertionClauses(KB,Ctx,'<=>'(FmlInOpen,RequestPrototype),CAN,Vars,Flags),
-                assert(mooCache(FmlInOpen,CAN,Flags,Vars,KB,Ctx,TN,User,Result)),!,
-                (recanonicalizeTN(KB,TN)),    % Compile Belief
+        system_dependant:prolog_notrace((not(not((
+                getAssertionClauses(Context,'<=>'(FmlInOpen,RequestPrototype),CAN,Vars,Flags),
+                assert(mooCache(FmlInOpen,CAN,Flags,Vars,Context,TN,User,Result)),!,
+                (recanonicalizeTN(Context,TN)),    % Compile Belief
                 assert(tq_attempted_request),
                 writeDebug(blue,'Stage 1 - Compilation ':CAN:Flags)))))),!,
-        agentRequestEach(FmlInOpen,RequestPrototype,ChaseVars,Ctx,KB,User,UResultsSoFar,Result,Explaination,Status),
+        agentRequestEach(FmlInOpen,RequestPrototype,ChaseVars,Ctx,Context,User,UResultsSoFar,Result,Explaination,Status),
         commitCleanExplaination(Explaination,ExplainationOut).
 
 
@@ -1297,28 +1250,28 @@ agentRequest(KIFCharsIn,FmlInOpen,Vars,Ctx,KB,User,UResultsSoFar,Result,Explaina
 % ======================================================
 
 % Check For Undefines
-agentRequestEach(KIFCharsIn,Formula,Vars,Ctx,KB,User,UResultsSoFar,Result,Explaination,Status):-  fail,
+agentRequestEach(KIFCharsIn,Formula,Vars,Ctx,Context,User,UResultsSoFar,Result,Explaination,Status):-  fail,
                 once(getConstants(atomic,Formula,UsedConstants,_,_)),
                 logOnFailure(checkAllConstantsHaveTypes(Formula,UsedConstants,UnDefinedList)),
                 UnDefinedList=[_|_],!,writeObject(undefined_constants(UnDefinedList),_),!,fail.
 
 % Check For Theorem
-agentRequestEach(FmlInOpen,URequest,UVars,Ctx,KB,User,1,['Result' = 'True'],formula(instance(FormulaIN,'Theorem')),done(true:thereom)):-
+agentRequestEach(FmlInOpen,URequest,UVars,Ctx,Context,User,1,['Result' = 'True'],formula(instance(FormulaIN,'Theorem')),done(true:thereom)):-
         resetTableFlags,
         writeDebug(purple,'Stage 2 - Theorem Check ':FmlInOpen),
         isTheorem(FmlInOpen,_),!,
         retain_yes,sendNote('(theorem)'),!.
 
 % Call Belief
-agentRequestEach(FmlInOpen,URequest,UVars,Ctx,KB,User,UA, UVars,Explaination,Result):-
-        agentBelief(FmlInOpen,URequest,UVars,Ctx,KB,User,UA, UVars, Explaination,Result).
+agentRequestEach(FmlInOpen,URequest,UVars,Ctx,Context,User,UA, UVars,Explaination,Result):-
+        agentBelief(FmlInOpen,URequest,UVars,Ctx,Context,User,UA, UVars, Explaination,Result).
 
 % Request Failed
-agentRequestEach(FmlInOpen,URequest,UVars,Ctx,KB,User,0,['Result'='none'|_],'Unproven',done(possible:searchfailed)):-
+agentRequestEach(FmlInOpen,URequest,UVars,Ctx,Context,User,0,['Result'='none'|_],'Unproven',done(possible:searchfailed)):-
         flag('$UAnswers',UA,UA),UA<1,!.
 
 % Request Succeeded
-agentRequestEach(FmlInOpen,URequest,UVars,Ctx,KB,User,UA,['Result'='true'|_],found(UA),done(true:UA)):-!,
+agentRequestEach(FmlInOpen,URequest,UVars,Ctx,Context,User,UA,['Result'='true'|_],found(UA),done(true:UA)):-!,
         flag('$UAnswers',UA,UA).
 
 
@@ -1336,7 +1289,7 @@ commitCleanExplaination(Explaination,Explaination):-!.
 
 
 getRequestDefaults(URequest,OAnswers,BackchainsMax,Deductions):-
-        notrace((
+        system_dependant:prolog_notrace((
         (getMooOption(opt_backchains_max=BackchainsMax)),
         (getMooOption(opt_deductions_max=Deductions)),!,
         ignore((ground(URequest) -> Answers=1 ; Answers=PAnswers)),
@@ -1344,7 +1297,7 @@ getRequestDefaults(URequest,OAnswers,BackchainsMax,Deductions):-
         ignore(BackchainsMax=30),ignore(Answers=60),OAnswers is Answers,!)).
 
 set_quit_time(Num):-
-        notrace((
+        system_dependant:prolog_notrace((
         (getMooOption(opt_timeout=QuitTime)),!,ignore(QuitTime=5),!,
         retractall(cpuend(_)),
         getCputime(Now),
@@ -1375,17 +1328,17 @@ edify_vars([H|T],[H|NT]):-
 :-dynamic(request_total_time/1).
 
 
-invokeRequestToBuffer(findall(V,Formula),Ctx,TrackingAtom,KB,User,Vars,CPU):-!,
-        invokeRequestToBuffer(Formula,Ctx,TrackingAtom,KB,User,Vars,CPU).
-invokeRequestToBuffer(request(Formula),Ctx,TrackingAtom,KB,User,Vars,CPU):-!,
-         invokeRequestToBuffer(Formula,Ctx,TrackingAtom,KB,User,Vars,CPU),!.
-invokeRequestToBuffer(requestyn(Formula),Ctx,TrackingAtom,KB,User,Vars,CPU):-!,
-         invokeRequestToBuffer(Formula,Ctx,TrackingAtom,KB,User,Vars,CPU),!.
+invokeRequestToBuffer(findall(V,Formula),Ctx,TrackingAtom,Context,User,Vars,CPU):-!,
+        invokeRequestToBuffer(Formula,Ctx,TrackingAtom,Context,User,Vars,CPU).
+invokeRequestToBuffer(request(Formula),Ctx,TrackingAtom,Context,User,Vars,CPU):-!,
+         invokeRequestToBuffer(Formula,Ctx,TrackingAtom,Context,User,Vars,CPU),!.
+invokeRequestToBuffer(requestyn(Formula),Ctx,TrackingAtom,Context,User,Vars,CPU):-!,
+         invokeRequestToBuffer(Formula,Ctx,TrackingAtom,Context,User,Vars,CPU),!.
 
-invokeRequestToBuffer(canonicalize(Formula),Ctx,TrackingAtom,KB,User,Vars,CPU):-!,
+invokeRequestToBuffer(canonicalize(Formula),Ctx,TrackingAtom,Context,User,Vars,CPU):-!,
         retractall(requestBuffer_db(_,_,_,_)),
         retractall(final_answer(_)),
-        getAssertionClauses(PreQ,KB,Ctx,Formula,Out,Vars,P),
+        getAssertionClauses(PreQ,Context,Formula,Out,Vars,P),
         retain_answer(Out),
         writeObject('$spacer',Vars),
         asserta(tq_passed),
@@ -1394,25 +1347,25 @@ invokeRequestToBuffer(canonicalize(Formula),Ctx,TrackingAtom,KB,User,Vars,CPU):-
         writeObject_conj(Out,Vars).
 
 
-invokeRequestToBuffer(Formula,Ctx,TrackingAtom,KB,User,Vars,CPU):-
+invokeRequestToBuffer(Formula,Ctx,TrackingAtom,Context,User,Vars,CPU):-
         getCputime(Start),!,
-        logOnFailure(createRequestResponseBuffer_proc(Formula,Ctx,TrackingAtom,KB,User,Vars)),
+        logOnFailure(createRequestResponseBuffer_proc(Formula,Ctx,TrackingAtom,Context,User,Vars)),
         getCputime(End),ignore(Start=0),ignore(End=0),
         retractall(request_total_time(_)),
         CPU is End - Start,!,ignore(CPU=0),!,
         assert(request_total_time(CPU)),!.
 
 
-createRequestResponseBuffer_proc(FmlInOpen,Ctx,TrackingAtom,KB,User,Vars):-
+createRequestResponseBuffer_proc(FmlInOpen,Ctx,TrackingAtom,Context,User,Vars):-
         assert(tq_attempted_request),
         retractall(requestBuffer_db(_,_,_,_)),
         retractall(final_answer((_))),
-        agentRequest(KIFCharsIn,FmlInOpen,Vars,Ctx,KB,User,UResultsSoFar,Result,Explaination,Status),
+        agentRequest(KIFCharsIn,FmlInOpen,Vars,Ctx,Context,User,UResultsSoFar,Result,Explaination,Status),
         ignore(logOnFailure(retain_answer(Result))),
         writeDebug(addToResultBuffer(UResultsSoFar,Result,Explaination,Status)),
         addToResultBuffer(UResultsSoFar,Result,Explaination,Status),!. % Buffer Calls Itteration via failure
 
-createRequestResponseBuffer_proc(FmlInOpen,Ctx,TrackingAtom,KB,User,Vars):-!.
+createRequestResponseBuffer_proc(FmlInOpen,Ctx,TrackingAtom,Context,User,Vars):-!.
 
 
 % ===========================================================

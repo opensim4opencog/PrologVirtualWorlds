@@ -168,9 +168,9 @@ rule(H) :-
 */   
 
 rul(H,Tf):-
-	mooCache(H, Tf, KB, Ctx,Explaination).
+	mooCache(H, Tf, Context, Ctx,Explaination).
 rul(H,Tf):-
-	mooCache(H, Tf,_, KB, Ctx,Explaination).
+	mooCache(H, Tf,_, Context, Ctx,Explaination).
 
 /* \end{verbatim}
 
@@ -550,7 +550,7 @@ explain(G) :-
 explain(G,C) :-
    explain(G,C,[]).
 explain(G,C,R) :-
-   statistics(runtime,_),
+   system_dependant:prolog_statistics(runtime,_),
    ex(G,C,R).
 :- dynamic false/6.
 /* \end{verbatim}
@@ -570,14 +570,14 @@ ex(G,C,R) :-
    append(C,R,CR),
    nl,
    writeln(['Prob( ',G,' | ',CR,' ) = ',Pr]),
-   statistics(runtime,[_,Time]),
+   system_dependant:prolog_statistics(runtime,[_,Time]),
    writeln(['Runtime: ',Time,' msec.']).
 ex(G,C,R) :-
    \+ done(G,C,R,_,_),
    append(C,R,CR),
    nl,
    writeln(['Prob( ',G,' | ',CR,' ) = ',0.0]),
-   statistics(runtime,[_,Time]),
+   system_dependant:prolog_statistics(runtime,[_,Time]),
    writeln(['Runtime: ',Time,' msec.']).
 
 ans(G,C,R0,R,P,T) :-

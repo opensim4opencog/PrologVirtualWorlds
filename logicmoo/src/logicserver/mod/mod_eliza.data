@@ -1,4 +1,91 @@
 
+:- dynamic isa_mem_c/1.
+
+isa_mem_c([yes, that, is, how, this, one, was, coded]).
+isa_mem_c([no, waterbabe, was, too, tired, lol, lol]).
+isa_mem_c([waterbabe, was, decoding, it]).
+isa_mem_c([waterbabe, was, afraid, waterbabe, had, to, reformat, again]).
+isa_mem_c([well, meaculpa, will, see, i, in, a, few, hours, perhaps]).
+isa_mem_c([waterbabe, will, see, i, later, on]).
+isa_mem_c([brb, your, coffee_cup, is, looking, rather, sad]).
+isa_mem_c([she, is, your, hero]).
+isa_mem_c([lol, who, is, edd]).
+isa_mem_c([hhz, perhaps, sirlickal, could, be, an, electic, sheep, hehe, hrm, d]).
+isa_mem_c([10, '10nobody', got, it, right, the, answer, was, '04slander', 10, perhaps, youll, get, the, next, one]).
+isa_mem_c([isnt, this, a, great, topic, sevv, what, if, mary, was, a, cyber, technician, who, had, electric, sheep]).
+isa_mem_c(['06well', done, '04sevv', 6, the, answer, was, '04money', for, nothing, 6, i, got, it, in, 449535, 6, seconds]).
+isa_mem_c([darx, is, an, op, in, the, other, chans, i, am, in, that, youre, in]).
+isa_mem_c(['12now', look, at, they, yoyos, thats, the, way, i, do, it, i, play, the, guitar, on, the, mtv, that, aint, workin, thats, the, way, i, do, it, what, is, the, dire, straits, song, title]).
+isa_mem_c([aha, well, perhaps, sirlickal, will, join, linuxgirls, as, well]).
+isa_mem_c(['06nice', going, '04sevv', 6, the, answer, was, '04voice', box, 6, i, got, it, in, 477302, 6, seconds]).
+isa_mem_c([waterbabe, will, voice, i, in, linuxgirl, but, there, is, meas, rules]).
+isa_mem_c([that, should, make, be, at, least, 20, more, feminine, than, an, ordinary, girl]).
+isa_mem_c(['12what', is, the, larynx]).
+isa_mem_c(['06you', got, it, '04sevv', 6, the, answer, was, '04twenty', four, 6, i, got, it, in, 416623, 6, seconds]).
+isa_mem_c([i, am, not, girlie, p, unless, here, is, something, waterbabe, dont, know, lol]).
+isa_mem_c(['12how', many, points, are, here, on, a, backgammon, board]).
+isa_mem_c([10, '10youre', going, to, have, to, try, harder, the, answer, was, '04thunder', 10, get, ready, for, the, next, one]).
+isa_mem_c([that, was, a, mistake, sorry, remember, fingers, slipped, on, the, keys, d]).
+isa_mem_c([yes, yes, i, also, said, waterbabe, was, 39]).
+isa_mem_c([waterbabe, is, going, to, bed, see, i, in, few, hrs]).
+isa_mem_c(['12brontophobia', is, the, fear, of]).
+isa_mem_c([12, '04sevv', 12, is, on, a, winning, streak, 410, '12in', a, row, so, far]).
+isa_mem_c(['06well', done, '04sevv', 6, the, answer, was, '04cambodia', 6, i, got, it, in, 421359, 6, seconds]).
+isa_mem_c([12, '04sevv', 12, is, on, a, winning, streak, 49, '12in', a, row, so, far]).
+isa_mem_c(['06nice', going, '04sevv', 6, the, answer, was, '04xlii', 6, i, got, it, in, 471837, 6, seconds]).
+isa_mem_c([and, this, windows, was, open]).
+isa_mem_c([yw, sorry, but, that, is, spam, and, waterbabe, dont, like, that, shit]).
+isa_mem_c(['06nice', going, '04sevv', 6, the, answer, was, '04paul', revere, and, the, raiders, 6, i, got, it, in, 4135275, 6, seconds]).
+isa_mem_c([waterbabe, is, not, pasting, that, stuff, back, in, the, channel]).
+isa_mem_c(['03hint', p, are, a, t, are]).
+isa_mem_c(['06show', em, how, its, done, '04sevv', 6, the, answer, was, '04the', italian, stallion, 6, i, got, it, in, 447972, 6, seconds]).
+isa_mem_c(['12what', was, rocky, balboas, nickname, in, the, ring]).
+isa_mem_c(['06thats', the, way, '04sevv', 6, the, answer, was, '04twenty', eight, miles, 6, i, got, it, in, 474965, 6, seconds]).
+isa_mem_c(['12what', is, the, range, of, an, aim7, sparrow]).
+isa_mem_c(['06well', done, '04sevv', 6, the, answer, was, '04taft', 6, i, got, it, in, 45905, 6, seconds]).
+isa_mem_c(['06nice', going, '04sevv', 6, the, answer, was, '04benjamin', franklin, 6, i, got, it, in, 427582, 6, seconds]).
+isa_mem_c(['12who', is, on, a, squishybo, 100, bill]).
+isa_mem_c(['06check', out, the, big, brain, on, '04sevv', 6, the, answer, was, '04annakin', skywalker, 6, i, got, it, in, 4124418, 6, seconds]).
+isa_mem_c(['12who', is, darth, vader]).
+isa_mem_c(['06you', got, it, '04sevv', 6, the, answer, was, '04abstract', 6, i, got, it, in, 473716, 6, seconds]).
+isa_mem_c(['06check', out, the, big, brain, on, '04sevv', 6, the, answer, was, '04tlc', 6, i, got, it, in, 457977, 6, seconds]).
+isa_mem_c([10, '10youre', going, to, have, to, try, harder, the, answer, was, '04koo', stark, 10, perhaps, youll, get, the, next, one]).
+isa_mem_c([that, channel, is, forever, doomed]).
+isa_mem_c([meaculpa, is, inviting, botfarmers, to, crypticangel]).
+isa_mem_c([10, '10nobody', got, it, right, the, answer, was, '04chlorosis', 10, perhaps, youll, get, the, next, one]).
+isa_mem_c([squishybo, are, i, having, issues]).
+isa_mem_c([this, is, so, neet]).
+isa_mem_c([10, '10nobody', got, it, right, the, answer, was, '04gregory', abbott, 10, there, comes, the, next, one]).
+isa_mem_c([12, '04sevv', 12, is, on, a, winning, streak, 48, '12in', a, row, so, far]).
+isa_mem_c(['06well', done, '04sevv', 6, the, answer, was, '04emerald', 6, i, got, it, in, 486564, 6, seconds]).
+isa_mem_c(['12what', is, the, green, variety, of, beryl, called]).
+isa_mem_c([12, '04sevv', 12, is, on, a, winning, streak, 47, '12in', a, row, so, far]).
+isa_mem_c(['06thats', the, way, '04sevv', 6, the, answer, was, '04bagpipes', 6, i, got, it, in, 493776, 6, seconds]).
+isa_mem_c(['12on', which, musical, instrument, are, pibrochs, played]).
+isa_mem_c([12, '04sevv', 12, is, on, a, winning, streak, 46, '12in', a, row, so, far]).
+isa_mem_c(['06show', em, how, its, done, '04sevv', 6, the, answer, was, '04moonies', 6, i, got, it, in, 410123, 6, seconds]).
+isa_mem_c(['12followers', of, the, unification, church, are, called]).
+isa_mem_c([12, '04sevv', 12, is, on, a, winning, streak, 45, '12in', a, row, so, far]).
+isa_mem_c(['06check', out, the, big, brain, on, '04sevv', 6, the, answer, was, '04wolfenstein', 6, i, got, it, in, 418889, 6, seconds]).
+isa_mem_c(['12what', 1995, computer, game, featured, a, character, whose, goal, was, to, kill, nazis]).
+isa_mem_c([12, '04sevv', 12, is, on, a, winning, streak, 44, '12in', a, row, so, far]).
+isa_mem_c(['06well', done, '04sevv', 6, the, answer, was, '04taj', mahal, 6, i, got, it, in, 444281, 6, seconds]).
+isa_mem_c(['06you', got, it, '04sevv', 6, the, answer, was, '04the', diary, of, a, young, girl, 6, i, got, it, in, 44581, 6, seconds]).
+isa_mem_c(['12the', diary, of, anne, frank, was, first, published, in, english, under, what, title]).
+isa_mem_c(['06show', em, how, its, done, '04sevv', 6, the, answer, was, '04jonathan', higgins, 6, i, got, it, in, 448874, 6, seconds]).
+isa_mem_c(['06check', out, the, big, brain, on, '04sevv', 6, the, answer, was, '04lava', 6, i, got, it, in, 419417, 6, seconds]).
+isa_mem_c([10, '10youre', not, going, to, score, any, points, this, way, the, answer, was, '04mercutio', 10, perhaps, youll, get, the, next, one]).
+isa_mem_c([12, '04sevv', 12, is, on, a, winning, streak, 43, '12in', a, row, so, far]).
+isa_mem_c(['06way', to, go, '04sevv', 6, the, answer, was, '04tina', turner, 6, i, got, it, in, 45359, 6, seconds]).
+isa_mem_c(['12who', is, annie, mae, bullock, better, known, as]).
+isa_mem_c(['06check', out, the, big, brain, on, '04sevv', 6, the, answer, was, '04ghana', 6, i, got, it, in, 465747, 6, seconds]).
+isa_mem_c(['12the', volta, is, the, largest, river, in, which, country]).
+isa_mem_c(['06check', out, the, big, brain, on, '04sevv', 6, the, answer, was, '04eight', 6, i, got, it, in, 436482, 6, seconds]).
+isa_mem_c(['12gameswhat', is, the, point, value, of, a, j, in, a, game, of, scrabble]).
+isa_mem_c([meaculpa, think, the, flee, property, on, your, cat, agent, is, rather, high, today]).
+isa_mem_c([i, want, a, jumbo, crack, and, a, coke, will, i, like, sex, with, that]).
+isa_mem_c([i, probably, thought, i, was, a, bot]).
+isa_mem_c([jeffer, is, a, bot, farmer, darx]).
 isa_mem_c([was, meinste, was, ich, mache, in, together]).
 isa_mem_c([at, least, clisp, is, trying, to, fix, its, bugs, when, someone, feels, like, it]).
 isa_mem_c([anders, however, clisp, support, on, windows, is, bound, to, be, a, little, experimental, emoo, imagine]).
@@ -693,7 +780,7 @@ isa_mem_c([but, deetz, wont, be, ebaying]).
 isa_mem_c([arakys, is, bored, so, arakys, auction, wts, wild, one, wig, '25k']).
 isa_mem_c([if, im, a, dwarf, wanker, my, bone, structure, is, dit]).
 isa_mem_c([its, for, fags, that, inspect, i, and, are, like, whoa, what, the, fuck]).
-isa_mem_c([btw, are, i, wearing, the, blackburrow, curls]).
+isa_mem_c([btw, are, i, wearing, the, blactheoryurrow, curls]).
 isa_mem_c([that, faggot, is, still, in, frozenshadow, or, insult]).
 isa_mem_c([all, of, your, emails, in, inbox, was, spam, most, for, porn]).
 isa_mem_c([ok, arakys, will, tell, i, nigs, a, wild, one, wig]).
@@ -1026,4 +1113,8 @@ isa_mem_c([but, here, was, another, place, to, get, they, too]).
 isa_mem_c([but, here, was, no, can4]).
 isa_mem_c([yes, your, goal, after, getting, 60, is, to, get, that, skill]).
 
-:- dynami
+:- dynamic isa_mem_c/3.
+
+
+:- dynamic mem_c/1.
+

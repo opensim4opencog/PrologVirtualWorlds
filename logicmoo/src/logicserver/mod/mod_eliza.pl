@@ -1,4 +1,4 @@
-%:-prologAtInitalization(['mod/nani.sig']),prologAtInitalization(['mod/eliza.sig']),prologAtInitalization(kbot),prologAtInitalization(kbot2)
+%:-prologAtInitalization(['mod/nani.sig']),prologAtInitalization(['mod/eliza.sig']),prologAtInitalization(bot),prologAtInitalization(bot2)
 % ===================================================================
 % COMPLIER OPTIONS
 % ===================================================================
@@ -32,10 +32,10 @@
 :-dynamic(server_environment/1).
 
 % ===================================================================
-% Invokation  (knot,kbot2).
+% Invokation  (knot,bot2).
 % ===================================================================
-kbot2:-my_mooProcessCreate(kill,'Consultation Mode Test (KIFBOT!) OPN Server',consultation_thread(swiProlog,65530),Id,[]).
-kbot:-my_mooProcessCreate(kill,'Consultation Mode Test (KIFBOT!) Efnet Server',consultation_thread(swipl,65532),Id,[]).
+bot2:-my_mooProcessCreate(kill,'Consultation Mode Test (KIFBOT!) OPN Server',consultation_thread(swiProlog,65530),Id,[]).
+bot:-my_mooProcessCreate(kill,'Consultation Mode Test (KIFBOT!) Efnet Server',consultation_thread(swipl,65532),Id,[]).
 
 my_mooProcessCreate(K,N,G,Id,A):-catch(mooProcessCreate(K,N,G,Id,A),_,fail),!.
 my_mooProcessCreate(K,N,G,Id,A):-G,!.
@@ -326,7 +326,7 @@ english_to_kif(ENG):-ado_tuple(L,P,A,B),
 	E=ENG.
 	
 ado_tuple(Logic,P,A,B):-
-	mooCache(Surface,CLF,Flags,Vars,KB,Ctx,TN,Author,TMResult),
+	mooCache(Surface,CLF,Flags,Vars,Context,TN,Author,TMResult),
 	Surface=..[P,A,B],
 	ground((P,A,B)).
 
@@ -354,8 +354,8 @@ load_file(File):-file_name_extension(Base, 'p',File),!,ensure_loaded(File),say([
 load_file(File):-file_name_extension(Base, 'pro',File),!,ensure_loaded(File),say([done,compiling,File]).
 load_file(File):-file_name_extension(Base, 'swi',File),!,ensure_loaded(File),say([done,compiling,File]).
 load_file(File):-file_name_extension(Base, 'PRO',File),!,ensure_loaded(File),say([done,compiling,File]).
-load_file(File):-file_name_extension(Base, daml,File),file_name_extension(Base, kif,KIFFile),!, sformat(Shell,'cat ~w |python ./rdfx2kif.py ~w > ~w.kif  ',[File,Base,Base]),string_to_atom(Shell,Cmd),shell(Cmd),!,agent_load_kif_surface(KIFFile,KB,Ctx,User,AX),say([loaded,AX,'axioms.  Now canonicalizing...']).
-load_file(File):-file_name_extension(File, kif,KIFFile),!,sformat(Shell,'cat ~w |python ./rdfx2kif.py ~w > ~w.kif  ',[File,File,File]),string_to_atom(Shell,Cmd),shell(Cmd),!,agent_load_kif_surface(KIFFile,KB,Ctx,User,AX),say([loaded,AX,'axioms.  Now canonicalizing...']).
+load_file(File):-file_name_extension(Base, daml,File),file_name_extension(Base, kif,KIFFile),!, sformat(Shell,'cat ~w |python ./rdfx2kif.py ~w > ~w.kif  ',[File,Base,Base]),string_to_atom(Shell,Cmd),shell(Cmd),!,agent_load_kif_surface(KIFFile,Context,User,AX),say([loaded,AX,'axioms.  Now canonicalizing...']).
+load_file(File):-file_name_extension(File, kif,KIFFile),!,sformat(Shell,'cat ~w |python ./rdfx2kif.py ~w > ~w.kif  ',[File,File,File]),string_to_atom(Shell,Cmd),shell(Cmd),!,agent_load_kif_surface(KIFFile,Context,User,AX),say([loaded,AX,'axioms.  Now canonicalizing...']).
 
 perl(CMD):-sformat(Shell,'perl -c "~w"  ',[CMD]),string_to_atom(Shell,Cmd),shell(Cmd).
 
@@ -363,10 +363,10 @@ load_file(File):-file_name_extension(Base, E,File),!,say([E,'Extension is not ye
 
 
 bot(ps):-!,mooThreadCreate_data(Perms,Name,Goal,Id,Options),
-	current_thread(Id,Status),
+	system_dependant:prolog_current_thread(Id,Status),
 	sayq((Id:Name:Goal:(Status):(Perms):Options)),fail.
 bot(kill(Id)):-nonvar(Id),mooThreadCreate_data(kill,Name,Goal,Id,Options),
-	thread_signal(Id,thread_exit(killed)).
+	system_dependant:prolog_thread_at_exit(Id,prolog_thread_exit(killed)).
 
 		
 yn(P):-P,!,sayn(yes).
@@ -395,7 +395,7 @@ pp(H):-say(nv(['i don''t know about',H])),!.
 %surf(Num):-say([assertion,Num,not,found]).
 
 			
-kbsize:-predicate_property(mooCache(_,_,_,_,_,_,_,_,_),number_of_clauses(X)),say(X).
+theorysize:-predicate_property(mooCache(_,_,_,_,_,_,_,_,_),number_of_clauses(X)),say(X).
 
 /*
 doc(Const):-mooCache(PredR,_,documentation(Const,F),Vars,_,_,Num,_,_),!,my_toMarkUp(kif,F,Vars,O),sayn(O),!.
@@ -1659,8 +1659,8 @@ e_rules([[dit,10],[
 
 
 %chattingWith(Channel,User).
-%:-kbot.
-%:-kbot2.
+%:-bot.
+%:-bot2.
 
 
 

@@ -29,10 +29,10 @@
     No vertex can appear twice in a path.
 */
 
-tupleToGraphComp3(P,A,B).
 
-/*
-:- module(ugraphs, [
+
+
+:- module(moo_uwdgraphs, [
 	vertices_edges_to_ugraph/3,
 	vertices/2,
 	edges/2,
@@ -45,7 +45,7 @@ tupleToGraphComp3(P,A,B).
 	neighbours/3,
 	complement/2,
 	compose/3,
-	transitive_closure/2,
+    %    transitive_closure/2,
 	symmetric_closure/2,
 	top_sort/2,
 	max_path/5,
@@ -61,7 +61,7 @@ tupleToGraphComp3(P,A,B).
 	coloring/3,
 	colouring/3
    ]).
-
+		  /*
 :- use_module(library(ordsets), [
 	my_ord_add_element/3,
 	my_ord_del_element/3,
@@ -88,8 +88,8 @@ tupleToGraphComp3(P,A,B).
 
 :- use_module(library(random), [
 	random/1
-   ]).
-	    */
+   ]).			   */
+	    
 %   vertices_edges_to_ugraph(+Vertices, +Edges, -Graph)
 %   is true if Vertices is a list of vertices, Edges is a list of edges,
 %   and Graph is a graph built from Vertices and Edges.  Vertices and

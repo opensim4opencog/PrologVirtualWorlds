@@ -5,12 +5,12 @@
 
 :-include('moo_header.pl').
 :-dynamic(complete_goal/1).
-:-multifile(expireOptimizationsInKB/3).
+:-multifile(expireOptimizationsInContext/3).
 :-ensure_loaded(library(occurs)).
        
 
 
-agentBelief(FmlInOpen,Literal,VarsRequested,Ctx,KB,User,PA, VarsRequested,found(PA),answer(true:PA)):-
+agentBelief(FmlInOpen,Literal,VarsRequested,Ctx,Context,User,PA, VarsRequested,found(PA),answer(true:PA)):-
 	resetTableFlags, 
 	flag('$UAnswers',_,0),
 	writeDebug(green,'Stage 3 - Positive ':FmlInOpen ),  
@@ -18,7 +18,7 @@ agentBelief(FmlInOpen,Literal,VarsRequested,Ctx,KB,User,PA, VarsRequested,found(
 	flag('$UAnswers',UA,UA+1),
 	flag('$UAnswers',PA,PA).
 
-agentBelief(FmlInOpen,NLiteral,VarsRequested,Ctx,KB,User,PA, VarsRequested,found(NA),done(false:NA)):-%trace,
+agentBelief(FmlInOpen,NLiteral,VarsRequested,Ctx,Context,User,PA, VarsRequested,found(NA),done(false:NA)):-%trace,
 	flag('$UAnswers',PA,PA),PA<1,
 	(NLiteral=..[TopFunctor|Args],(atom_concat('~',FN,TopFunctor);atom_concat('~',TopFunctor,FN))),!,Literal=..[FN|Args],
 	writeDebug(red,'Stage 4 - Negative ':not(FmlInOpen)),
@@ -92,7 +92,7 @@ A Derived PrototypeRef:
 */
 
 
-mooBeliefLiteral(Depth,SubVarSeek,Goal):-mooCache(Goal,_,KB,Ctx,TN). 
+mooBeliefLiteral(Depth,SubVarSeek,Goal):-mooCache(Goal,_,Context,TN). 
 
 mooBeliefLiteral(Depth,SubVarSeek,subclass('$Class'(S),'$Class'(C))):-!,
 	mooCache(A, B, deduceSingleSubclassPathList(S, 'Entity', List)),
@@ -100,7 +100,7 @@ mooBeliefLiteral(Depth,SubVarSeek,subclass('$Class'(S),'$Class'(C))):-!,
 	member(C,List).
 
 mooBeliefLiteral(Depth,SubVarSeek,domain('$Relation'(R,_),'$Quantity'(N,_),'$Class'(C))):-!,
-	mooCache(KB, A, domain_vector(R, N, List,_)),
+	mooCache(Context, A, domain_vector(R, N, List,_)),
 	nth1(N,List,C).
 	
                        
@@ -112,8 +112,8 @@ mooBeliefLiteral(Depth,SubVarSeek,Goal):-
 mooBeliefLiteral(TopFunctor,Arity,Depth,SubVarSeek,Goal):-noBackchainFunctors(TopFunctor),!,
 	noBackchainFunctorsCall(TopFunctor,Arity,Depth,SubVarSeek,Goal).
 	
-noBackchainFunctorsCall(TopFunctor,Arity,Depth,SubVarSeek,Goal):-!,fail. %mooCache(Goal,_,KB,Ctx,TN). 
-%mooCache(Goal,Ante,ExplainationID:KRVars:KR,KB,Ctx,TN).	
+noBackchainFunctorsCall(TopFunctor,Arity,Depth,SubVarSeek,Goal):-!,fail. %mooCache(Goal,_,Context,TN). 
+%mooCache(Goal,Ante,ExplainationID:KRVars:KR,Context,TN).	
 	
 % Blocked preds including all .*On (just backchaining)
 noBackchainFunctors(disjointDecomposition). noBackchainFunctors(domain). 
@@ -180,7 +180,7 @@ stableModel(TopFunctor,PrototypeRef,Pattern,GoalPrototype):-
 
 % Discover Family Rules
 stableModel(TopFunctor,PrototypeRef,Pattern,GoalPrototype):-
-	mooCache(Pattern,A,ExplainationID:KRVars:KR,KB,Ctx,TN),
+	mooCache(Pattern,A,ExplainationID:KRVars:KR,Context,TN),
 	once(ensureProtoRef(TopFunctor,_,Pattern,RulePrototypeRef,_)),
 	not(RulePrototypeRef=PrototypeRef),
 	writeDebug(linking(Pattern,GoalPrototype)),
@@ -348,7 +348,7 @@ mooBeliefBuildTableLevel(PrototypeRef,ThisNextDepth,SubVarSeek,TopFunctor,NumVar
 	% ----------------------------------------------------------------------
 	NextLowerDepth is ThisNextDepth -1,
 	% ----------------------------------------------------------------------
-	mooCache(Goal,Ante,ExplainationID:KRVars:KR,KB,Ctx,TN), 
+	mooCache(Goal,Ante,ExplainationID:KRVars:KR,Context,TN), 
 	% ----------------------------------------------------------------------
 	% Not already Figured from sub prototypes
 	% ----------------------------------------------------------------------
@@ -369,7 +369,7 @@ mooBeliefBuildTableLevel(PrototypeRef,ThisNextDepth,SubVarSeek,TopFunctor,NumVar
 	% Invoke Rule that upon deterministic (good or bad) the 'Lits' should have been undeepened.
 	% ----------------------------------------------------------------------
 	mooBeliefLiteralTryLitVars(PrototypeRef,NextLowerDepth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,
-		Ante,ExplainationID:KRVars:KR,KB,Ctx,TN,Lits),
+		Ante,ExplainationID:KRVars:KR,Context,TN,Lits),
 	% ----------------------------------------------------------------------
 	% Fail forces more solutions to be found
 	% ----------------------------------------------------------------------
@@ -384,12 +384,12 @@ mooBeliefBuildTableLevel(PrototypeRef,ThisNextDepth,SubVarSeek,TopFunctor,NumVar
 
 % Deterministically Find 'Body Belief Mechanism' and call it non deterministicly
 mooBeliefLiteralTryLitVars(PrototypeRef,DepthToExplore,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,
-	Ante,ExplainationID:KRVars:KR,KB,Ctx,TN,Lits):-
-	mooBeliefLiteralTryBodyMechanism(PrototypeRef,DepthToExplore,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Ante,ExplainationID:KRVars:KR,KB,Ctx,TN,Lits).     
+	Ante,ExplainationID:KRVars:KR,Context,TN,Lits):-
+	mooBeliefLiteralTryBodyMechanism(PrototypeRef,DepthToExplore,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Ante,ExplainationID:KRVars:KR,Context,TN,Lits).     
 	
 % fullfills obligation above: " 'Lits' should have been undeepened"
 mooBeliefLiteralTryLitVars(PrototypeRef,DepthToExplore,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,
-	_Ante,ExplainationID:KRVars:KR,KB,Ctx,TN,Lits):-undeepenEach(Lits),!,fail.
+	_Ante,ExplainationID:KRVars:KR,Context,TN,Lits):-undeepenEach(Lits),!,fail.
 
 % =========================================================
 % Body Belief Mechanisms
@@ -400,7 +400,7 @@ mooBeliefLiteralTryLitVars(PrototypeRef,DepthToExplore,SubVarSeek,TopFunctor,Num
 % DEBUGGING HACK BLOCK ALL ~HEADS  (Negated Goal Literals)
 % ----------------------------------------------------------------------
 mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,
-	Ante,ExplainationID:KRVars:KR,KB,Ctx,TN,Lits):-
+	Ante,ExplainationID:KRVars:KR,Context,TN,Lits):-
 	% Write Ante to debugger
 	writeDebug(Ante),
 	% No negs
@@ -415,9 +415,9 @@ mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,N
 % ExAction: Definite failure (hack for now)
 % ----------------------------------------------------------------------
 mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,
-	't~Head'(BodyGoal,HeadV,BodyV,HV),ExplainationID:KRVars:KR,KB,Ctx,TN,Lits):-
+	't~Head'(BodyGoal,HeadV,BodyV,HV),ExplainationID:KRVars:KR,Context,TN,Lits):-
 	buildVarSeek(HV^[],PreviousVarSeek,BodyVarSeek,BodyGoal,NewBodyGoal),!,
-	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,BodyGoal).
+	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,BodyGoal).
 
 % ----------------------------------------------------------------------
 % Condition: The body is not related to head in any way
@@ -426,9 +426,9 @@ mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,N
 % ExAction: Definite failure (hack for now)
 % ----------------------------------------------------------------------
 mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,
-	't~Univb'(BodyGoal,HeadV,BodyV,UB),ExplainationID:KRVars:KR,KB,Ctx,TN,Lits):-!,
+	't~Univb'(BodyGoal,HeadV,BodyV,UB),ExplainationID:KRVars:KR,Context,TN,Lits):-!,
 	buildVarSeek([]^UB,PreviousVarSeek,BodyVarSeek,BodyGoal,NewBodyGoal),!,
-	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,BodyGoal),!.
+	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,BodyGoal),!.
 
 	
 % ----------------------------------------------------------------------
@@ -439,22 +439,22 @@ mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,N
 % ----------------------------------------------------------------------
 
 mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,
-	't~HeadUnivb'(BodyGoal,HeadV,BodyV,HV,UB),ExplainationID:KRVars:KR,KB,Ctx,TN,Lits):-
+	't~HeadUnivb'(BodyGoal,HeadV,BodyV,HV,UB),ExplainationID:KRVars:KR,Context,TN,Lits):-
 	arg(1,BodyGoal,G),%arg(1,G,P),
 	arg(1,G,[_|_]),!,fail.
 
 mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,
-	't~HeadUnivb'(BodyGoal,HeadV,BodyV,HV,[UB]),ExplainationID:KRVars:KR,KB,Ctx,TN,Lits):-!,
+	't~HeadUnivb'(BodyGoal,HeadV,BodyV,HV,[UB]),ExplainationID:KRVars:KR,Context,TN,Lits):-!,
 	writeDebug(red,bagof(UB,BodyGoal,HV)),!,
 	bagof(UB,
 		mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,
 			TopFunctor,NumVars,FreeVs,Arity,Goal,
-			GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,BodyGoal),Ignored).
+			GoalPrototype,Context,Lits,ExplainationID,TN,BodyGoal),Ignored).
 
 mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,
-	't~HeadUnivb'(BodyGoal,HeadV,BodyV,HV,UB),ExplainationID:KRVars:KR,KB,Ctx,TN,Lits):-!,
+	't~HeadUnivb'(BodyGoal,HeadV,BodyV,HV,UB),ExplainationID:KRVars:KR,Context,TN,Lits):-!,
 	buildVarSeek(HV^UB,PreviousVarSeek,BodyVarSeek,BodyGoal,NewBodyGoal),!,
-	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,BodyGoal).
+	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,BodyGoal).
 
 
 % ----------------------------------------------------------------------
@@ -464,9 +464,9 @@ mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,N
 % ExAction: Definite failure (hack for now)
 % ----------------------------------------------------------------------
 mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,
-	't~HeadBodyc'(BodyGoal,HeadV,BodyV,HV,BC),ExplainationID:KRVars:KR,KB,Ctx,TN,Lits):-!,
+	't~HeadBodyc'(BodyGoal,HeadV,BodyV,HV,BC),ExplainationID:KRVars:KR,Context,TN,Lits):-!,
 	buildVarSeek(HV^BC,PreviousVarSeek,BodyVarSeek,BodyGoal,NewBodyGoal),!,
-	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,BodyGoal).
+	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,BodyGoal).
 
 % ----------------------------------------------------------------------
 % Condition: Head Vars (HVs), and all body connected (BCs) and some disjoint Body variables (UBs)
@@ -475,13 +475,13 @@ mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,N
 % ExAction: Definite failure (hack for now)
 % ----------------------------------------------------------------------
 mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,
-	't~HeadBodycUnivb'(BodyGoal,HeadV,BodyV,HV,BC,UB),ExplainationID:KRVars:KR,KB,Ctx,TN,Lits):-!,
+	't~HeadBodycUnivb'(BodyGoal,HeadV,BodyV,HV,BC,UB),ExplainationID:KRVars:KR,Context,TN,Lits):-!,
 	buildVarSeek(HV^BC^UB,PreviousVarSeek,BodyVarSeek,BodyGoal,NewBodyGoal),!,
-	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,BodyGoal).
+	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,BodyGoal).
 	
 % Sanity Check
 mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,
-	Unk,ExplainationID:KRVars:KR,KB,Ctx,TN,Lits):-
+	Unk,ExplainationID:KRVars:KR,Context,TN,Lits):-
 	writeDebug(unknownMechanism:mooBeliefLiteralTryBodyMechanism(Unk)),!,fail.
 
 
@@ -491,21 +491,21 @@ mooBeliefLiteralTryBodyMechanism(PrototypeRef,Depth,PreviousVarSeek,TopFunctor,N
 :-index(mooBeliefCallBodyJunctions(0,0,0,0,0,0,0,0,0,0,0,0,0,0,1)).
 
 % First/Then
-mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,
+mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,
 	(CPos1,CPos2)):-!,
-	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,CPos1),
-	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,CPos2).
+	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,CPos1),
+	mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,CPos2).
 
 % disjoint eigther/or
-mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,
+mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,
 	or(CPos1,CPos2)):-!,
-	(mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,CPos1),!);
-	(mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,CPos2),!).
+	(mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,CPos1),!);
+	(mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,CPos2),!).
 
 % clean of further junctions
-mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,ExplainationID,TN,
+mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,
 	CPos):-%trace,
-	mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,CPos).
+	mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,CPos).
 
 
 % =========================================================
@@ -521,16 +521,16 @@ mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor
 
 
 % Only Universal Body Vars in this Proposition
-mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,
+mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,
 	't~'(LiteralGoal,CUniversalBody,[],[],[])):-!,
-	once(mooBeliefCallProposition(PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,LiteralGoal)).
+	once(mooBeliefCallProposition(PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,LiteralGoal)).
 
 
 % Only Body Vars in this Proposition
-mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,
+mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,
 	't~'(LiteralGoal,CUniversalBody,CBodyOnlyConected,CHeadVSingleInBody,CSplitHeadVar)):-!,
 	selectMech(CUniversalBody,CBodyOnlyConected,CHeadVSingleInBody,CSplitHeadVar,HeadV,BodyV,LiteralGoal,ClauseVarSeek,NewLiteralGoal),!,
-	mooBeliefCallProposition(PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,NewLiteralGoal).
+	mooBeliefCallProposition(PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,NewLiteralGoal).
 
 selectMech(  []  ,  []  ,  []  ,  []  ,
 	HeadV,BodyV,LiteralGoal,ClauseVarSeek,'$once'(LiteralGoal)).
@@ -574,12 +574,12 @@ selectMech(CUniversalBody,CBodyOnlyConected,CHeadVSingleInBody,CSplitHeadVar,
 
 
 % Only Body Vars in this Proposition
-mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,
+mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,
 	't~'(LiteralGoal,CUniversalBody,CBodyOnlyConected,[],[])):-!,
 	oneGround(HeadV),
-	mooBeliefCallProposition(PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,LiteralGoal).
+	mooBeliefCallProposition(PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,LiteralGoal).
 
-mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Lits,
+mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,
 	Ante):-	trace,
 	writeDebug(unkown:HeadV:BodyV:Ante),fail.
 
@@ -595,27 +595,27 @@ oneGround([_,A,_|B]):-!,ground(A);ground(B).
 % 	Loops back into starting a new table 
 % =========================================================
 
-mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,
+mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,
 	'$oneGround'(Vars)):-!,oneGround(Vars),!.
 
-mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,
+mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,
 	'$once'(Goal)):-
-	mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,
+	mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,
 	Goal),!.
 
-mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,
+mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,
 	'$findAll'(Vs,Goal)):-
-	findall(Vs,mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,
+	findall(Vs,mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,
 	Goal),VsU),sort(VsU,VsS),!,member(Vs,VsS).
 	
-mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,
+mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,
 	if_then(Condition,LiteralGoal)):-
 	mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,
-		TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,Condition),!,
+		TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Condition),!,
 	mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,
-		TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,LiteralGoal).
+		TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,LiteralGoal).
 
-mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,KB,Ctx,NewLiteralGoal):-
+mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,NewLiteralGoal):-
 	mooBeliefLiteral(Depth,SubVarSeek,NewLiteralGoal).
 
 % =========================================================
@@ -711,7 +711,7 @@ mooBeliefLiteral(Depth,_,'$grInstance'(Term),'$grInstance',_,Rest,Body,GoalTempl
 		mooBeliefLiteral(Depth,PreviousVarSeek,instance(Term,_)).
 
 mooBeliefLiteral(Depth,_,'$grDomain'(P,N,Goal),'$grDomain',_,Rest,Body,GoalTemplate,More):-!,
-		mooCache(domain(P,N,Goal),_,KB,Ctx,TN).
+		mooCache(domain(P,N,Goal),_,Context,TN).
 
 
 mooBeliefLiteral(Depth,PreviousVarSeek,Goal,'Z_Uvar_',Two,Rest,Body,SingleUVar,[]):-!,
@@ -773,7 +773,7 @@ mooBeliefLiteral(Depth,_,'$unifyCheck'(Term1,Term2,_),'$unifyCheck',_,Rest,Body,
 		
 mooBeliefLiteral(Depth,_,Term,_,'$g',Rest,Body,GoalTemplate,More):-!,ground(Term).
 
-mooBeliefLiteral(Depth,PreviousVarSeek,Goal,Major,Two,Rest,Body,GoalTemplate,More):-mooCache(Goal,_,KB,Ctx,TN). % ExplainationID:KRVars:KR
+mooBeliefLiteral(Depth,PreviousVarSeek,Goal,Major,Two,Rest,Body,GoalTemplate,More):-mooCache(Goal,_,Context,TN). % ExplainationID:KRVars:KR
 		   */     										
 
 si(TopFunctor,X):-
@@ -863,8 +863,8 @@ mcf(URealLiteral,Bm):-
 	resetTableFlags,%trace,		 
 	wrapPatternArgs(URealLiteral,RealLiteral),!,
 	getCputime(B),
-     %   findall(URealLiteral,(deduceCanGoal(KB,Ctx,RealLiteral,Bm),write(URealLiteral),nl),Total),
-        findall(URealLiteral,(deduceDepthBoundGoal(RealLiteral,KB,Ctx,[],Bm,O),write(URealLiteral:O),nl),Total),
+     %   findall(URealLiteral,(deduceCanGoal(Context,RealLiteral,Bm),write(URealLiteral),nl),Total),
+        findall(URealLiteral,(deduceDepthBoundGoal(RealLiteral,Context,[],Bm,O),write(URealLiteral:O),nl),Total),
 	getCputime(E),
 	sort(Total,Sorted),
 	length(Total,N),
@@ -878,21 +878,21 @@ mcf(URealLiteral,Bm):-
 % Export to prolog file
 % ===================================
 
-exportToProlog(KB):-
-	tell(KB),fail.
+exportToProlog(Context):-
+	tell(Context),fail.
 	
-exportToProlog(KB):-
+exportToProlog(Context):-
 	format(':-include(''moo_header.pl'').\n\n'),
-	mooCache(Goal,ExplainationID:KRVars:KR,KB,Ctx,TN),
+	mooCache(Goal,ExplainationID:KRVars:KR,Context,TN),
 	format('~q.\n\n',[Goal:-accessed(ExplainationID,KRVars,KR,TN)]),
 	fail.
-exportToProlog(KB):-
-	mooCache(Goal,A,ExplainationID:KRVars:KR,KB,Ctx,TN),
+exportToProlog(Context):-
+	mooCache(Goal,A,ExplainationID:KRVars:KR,Context,TN),
 	format('~q :-\n\t\t\t~q.\n\n',[Goal,(mooBeliefLiteral(Depth,PreviousVarSeek,A),accessed(ExplainationID,KRVars,KR,TN))]),
 	fail.
 	
-exportToProlog(KB):-
-	told,[KB].
+exportToProlog(Context):-
+	told,[Context].
 
 
 accessed(ExplainationID,KRVars,KR,TN).
@@ -900,109 +900,109 @@ accessed(ExplainationID,KRVars,KR,TN).
 
 :-index(deduceInCurrentModel(0,0,0,1,0)).
 
-deduceInCurrentModel(KB,Ctx,P,[],P):-!.
-deduceInCurrentModel(KB,Ctx,P,prove(_),_):-!,fail.
-deduceInCurrentModel(KB,Ctx,P,ifThen(_,_),_):-!,fail.
-deduceInCurrentModel(KB,Ctx,P,impossible(_),_):-!,fail.
-deduceInCurrentModel(KB,Ctx,P,and(_,_),_):-!,fail.
-deduceInCurrentModel(KB,Ctx,P,not(_),_):-!,fail.
-deduceInCurrentModel(KB,Ctx,P,TopFunctor,P):-functor(TopFunctor,function,_),!,fail. %%ground(TopFunctor).
-deduceInCurrentModel(KB,Ctx,P,'$existential'(v(_,V,_),Y,TopFunctor),[TopFunctor|P]):-!,ignore(unify_with_occurs_check(TopFunctor,V)),!.
-deduceInCurrentModel(KB,Ctx,P,(A,Literal),O):-!,deduceInCurrentModel(KB,Ctx,P,A,M),deduceInCurrentModel(KB,Ctx,M,Literal,O).
-deduceInCurrentModel(KB,Ctx,P,Literal,[TN|P]):-
+deduceInCurrentModel(Context,P,[],P):-!.
+deduceInCurrentModel(Context,P,prove(_),_):-!,fail.
+deduceInCurrentModel(Context,P,ifThen(_,_),_):-!,fail.
+deduceInCurrentModel(Context,P,impossible(_),_):-!,fail.
+deduceInCurrentModel(Context,P,and(_,_),_):-!,fail.
+deduceInCurrentModel(Context,P,not(_),_):-!,fail.
+deduceInCurrentModel(Context,P,TopFunctor,P):-functor(TopFunctor,function,_),!,fail. %%ground(TopFunctor).
+deduceInCurrentModel(Context,P,'$existential'(v(_,V,_),Y,TopFunctor),[TopFunctor|P]):-!,ignore(unify_with_occurs_check(TopFunctor,V)),!.
+deduceInCurrentModel(Context,P,(A,Literal),O):-!,deduceInCurrentModel(Context,P,A,M),deduceInCurrentModel(Context,M,Literal,O).
+deduceInCurrentModel(Context,P,Literal,[TN|P]):-
 	isDeducedOrKnown(Literal,TN).
 
 isNotAvailable(P,Literal):-fail.
 isDeducedOrKnownEitherWay(L,P):-isDeducedOrKnown(L,P).
 
 
-deduceDepthBoundGoal([],KB,Ctx,P,Bm,P):-!.
-deduceDepthBoundGoal([Body|Second],KB,Ctx,P,Bm,O):-!, 
+deduceDepthBoundGoal([],Context,P,Bm,P):-!.
+deduceDepthBoundGoal([Body|Second],Context,P,Bm,O):-!, 
        % not(usedAtLeastEver(TN)),
-	deduceDepthBoundGoal(Body,KB,Ctx,P,Bm,M),
+	deduceDepthBoundGoal(Body,Context,P,Bm,M),
 	Bn is Bm -1,
-	deduceDepthBoundGoal(Second,KB,Ctx,M,Bn,O).
+	deduceDepthBoundGoal(Second,Context,M,Bn,O).
 
-%deduceDepthBoundGoal(Literal,KB,Ctx,P,Bm,P):-writeDebug(deduceDepthBoundGoal(Literal,KB,Ctx,P,Bm)),fail.
-deduceDepthBoundGoal(Literal,KB,Ctx,P,Bm,P):-Bm <1,!,deduceInCurrentModel(KB,_Ctx,P,Literal,O).
+%deduceDepthBoundGoal(Literal,Context,P,Bm,P):-writeDebug(deduceDepthBoundGoal(Literal,Context,P,Bm)),fail.
+deduceDepthBoundGoal(Literal,Context,P,Bm,P):-Bm <1,!,deduceInCurrentModel(Context,_Ctx,P,Literal,O).
 
-deduceDepthBoundGoal(and(Body,Second),KB,Ctx,P,Bm,O):-!,
+deduceDepthBoundGoal(and(Body,Second),Context,P,Bm,O):-!,
        % not(usedAtLeastEver(TN)),
-	deduceInCurrentModel(KB,Ctx,[TN:KRVars|P],Body,M),
+	deduceInCurrentModel(Context,[TN:KRVars|P],Body,M),
 	Bn is Bm -1,
-	deduceDepthBoundGoal(Second,KB,Ctx,M,Bn,O).
+	deduceDepthBoundGoal(Second,Context,M,Bn,O).
 
-deduceDepthBoundGoal(not(Body),KB,Ctx,P,Bm,O):-!,
-	deduceDepthBoundGoal(impossible(Body),KB,Ctx,P,Bm,O).
+deduceDepthBoundGoal(not(Body),Context,P,Bm,O):-!,
+	deduceDepthBoundGoal(impossible(Body),Context,P,Bm,O).
 
-deduceDepthBoundGoal(Literal,KB,Ctx,P,Bm,O):-
-	(deduceInCurrentModel(KB,_Ctx,P,Literal,O);
-			(mooCache(Literal,Body,TN:KRVars:_,KB,_Ctx,_),
+deduceDepthBoundGoal(Literal,Context,P,Bm,O):-
+	(deduceInCurrentModel(Context,_Ctx,P,Literal,O);
+			(mooCache(Literal,Body,TN:KRVars:_,Context,_Ctx,_),
 			((length(KRVars,Goal),(Goal<Bm))),
 			not((memberchk(TN:KRVars,P),numbervars(Literal,'$VAR',0,_),isDeducedOrKnownEitherWay(Literal,_))),
 			writeDebug(deduceUsageOfRule(Body,Bm,TN,KRVars,P,Literal)),
-			deduceUsageOfRule(KB,Ctx,TN,KRVars,P,Literal,Body,Bm,O))).
+			deduceUsageOfRule(Context,TN,KRVars,P,Literal,Body,Bm,O))).
 			% Was Asserted
 			
 /*
-deduceUsageOfRule(KB,Ctx,TN,KRVars,P,Literal,Body,0,O):-!,
-	deduceInCurrentModel(KB,Ctx,P,Body,O).
+deduceUsageOfRule(Context,TN,KRVars,P,Literal,Body,0,O):-!,
+	deduceInCurrentModel(Context,P,Body,O).
 */
 
-deduceUsageOfRule(KB,Ctx,TN,KRVars,P,Literal,unoptimized(Body),D,O):-!,fail.
+deduceUsageOfRule(Context,TN,KRVars,P,Literal,unoptimized(Body),D,O):-!,fail.
 
-deduceUsageOfRule(KB,Ctx,TN,KRVars,P,Literal,[],Bm,P).
+deduceUsageOfRule(Context,TN,KRVars,P,Literal,[],Bm,P).
 
-deduceUsageOfRule(KB,Ctx,TN,KRVars,P,Literal,ifThen(findall(Vars,Firstly),Second),Bm,[O|M]):-!,
+deduceUsageOfRule(Context,TN,KRVars,P,Literal,ifThen(findall(Vars,Firstly),Second),Bm,[O|M]):-!,
        % not(usedAtLeastEver(TN)),
 	Bn is Bm -1,
 	findall(Vars,
-		(deduceDepthBoundGoal(Firstly,KB,Ctx,[TN:KRVars|P],Bn,M),stableGround(Vars)),List),
+		(deduceDepthBoundGoal(Firstly,Context,[TN:KRVars|P],Bn,M),stableGround(Vars)),List),
 	sort(List,ListS),
 	writeDebug(green,getPrologVars(Vars)),
 	member(Vars,ListS),
-	deduceDepthBoundGoal(Second,KB,Ctx,P,Bn,O),
+	deduceDepthBoundGoal(Second,Context,P,Bn,O),
 	putDeducedNew(Literal,O,[M,O]).
 	
 
-deduceUsageOfRule(KB,Ctx,TN,KRVars,P,Literal,'$existential'(v(_,V,_),Y,TopFunctor),Bm,[TN:TopFunctor|P]):-!,ignore(unify_with_occurs_check(TopFunctor,V)),!.
+deduceUsageOfRule(Context,TN,KRVars,P,Literal,'$existential'(v(_,V,_),Y,TopFunctor),Bm,[TN:TopFunctor|P]):-!,ignore(unify_with_occurs_check(TopFunctor,V)),!.
 
-deduceUsageOfRule(KB,Ctx,TN,KRVars,P,Literal,ifThen(Firstly,Second),Bm,[O|M]):-!,
+deduceUsageOfRule(Context,TN,KRVars,P,Literal,ifThen(Firstly,Second),Bm,[O|M]):-!,
        % not(usedAtLeastEver(TN)),
 	Bn is Bm -1,
-	deduceDepthBoundGoal(Firstly,KB,Ctx,[TN:KRVars|P],Bn,M),
+	deduceDepthBoundGoal(Firstly,Context,[TN:KRVars|P],Bn,M),
 	stableGround(Firstly),
-	deduceDepthBoundGoal(Second,KB,Ctx,P,Bn,O),
+	deduceDepthBoundGoal(Second,Context,P,Bn,O),
 	putDeducedNew(Literal,O,[M,O]).
 
 
-deduceUsageOfRule(KB,Ctx,TN,KRVars,P,Literal,prove(Body),D,O):-!,
+deduceUsageOfRule(Context,TN,KRVars,P,Literal,prove(Body),D,O):-!,
 	 not(memberchk(TN:KRVars,P)),!,
 	D2 is D -1,
-	deduceDepthBoundGoal(Body,KB,Ctx,[TN:KRVars|P],D2,O),
+	deduceDepthBoundGoal(Body,Context,[TN:KRVars|P],D2,O),
 	putDeducedNew(Literal,O).
 
 /*
-	deduceInCurrentModel(KB,Ctx,[r(TN,Body,KRVars)|P],Body,O),!,
+	deduceInCurrentModel(Context,[r(TN,Body,KRVars)|P],Body,O),!,
 	putDeducedNew(Literal,O).
   */
 
-deduceUsageOfRule(KB,Ctx,TN,KRVars,P,Literal,Body,D,O):-ground(Literal),!,
+deduceUsageOfRule(Context,TN,KRVars,P,Literal,Body,D,O):-ground(Literal),!,
        % not(usedAtLeastEver(TN)),
-	deduceInCurrentModel(KB,Ctx,[r(TN,Body,KRVars)|P],Body,O),!,
+	deduceInCurrentModel(Context,[r(TN,Body,KRVars)|P],Body,O),!,
 	putDeducedNew(Literal,O).
 	
 
-deduceUsageOfRule(KB,Ctx,TN,KRVars,P,Literal,Body,D,O):-
+deduceUsageOfRule(Context,TN,KRVars,P,Literal,Body,D,O):-
 	D2 is D -1,
-	deduceDepthBoundGoal(Body,KB,Ctx,[TN:KRVars|P],D2,O),
+	deduceDepthBoundGoal(Body,Context,[TN:KRVars|P],D2,O),
 	putDeducedNew(Literal,O).
 
 
 isNotAvailableBackChain(_,_):-fail.
 
 isDeducedOrKnown(Lit,Explaination):-
-	(mooCache(Lit,_, KB, Ctx, Explaination);recorded(Lit,Lit:Explaination)).
+	(mooCache(Lit,_, Context, Ctx, Explaination);recorded(Lit,Lit:Explaination)).
 putDeduced(Lit,Explaination):-(isDeducedOrKnown(Lit,_);recorda(Lit,Lit:Explaination)),!,writeDebug(green,learned(Lit)).
 putDeducedNew(Lit,Explaination):-recorda(Lit,Lit:Explaination).
 
@@ -1022,65 +1022,65 @@ mooCache(holds(v('Abstract', modalProperty, ['Relation', 'Predicate', 'BinaryPre
 
 :-index(deduceGoal(0,0,1,1,0,1,1)).
 
-deduceGoal(KB,Ctx,ExplainationIn,MaxVars,(H,T),ExplainationOut):-
-	deduceGoal(KB,Ctx,ExplainationIn,MaxVars,H,ExplainationMid),
-	deduceGoal(KB,Ctx,ExplainationMid,MaxVars,T,ExplainationOut).
+deduceGoal(Context,ExplainationIn,MaxVars,(H,T),ExplainationOut):-
+	deduceGoal(Context,ExplainationIn,MaxVars,H,ExplainationMid),
+	deduceGoal(Context,ExplainationMid,MaxVars,T,ExplainationOut).
 
 /*
-deduceGoal(KB,Ctx,ExplainationIn,MaxVars,not NLiteral,Refs):-!,% trace,
+deduceGoal(Context,ExplainationIn,MaxVars,not NLiteral,Refs):-!,% trace,
 	NLiteral=..[TopFunctor|Args],(atom_concat('~',FN,TopFunctor);atom_concat('~',TopFunctor,FN)),!,
-		not(Literal=..[FN|Args],!,deduceGoal(KB,Ctx,ExplainationIn,MaxVars,Literal,Refs)),!.
+		not(Literal=..[FN|Args],!,deduceGoal(Context,ExplainationIn,MaxVars,Literal,Refs)),!.
 */
 
-deduceGoal(KB,Ctx,ExplainationIn,MaxVars,\+ Literal,ExplainationIn):-!,not(deduceGoal(KB,Ctx,[neg|ExplainationIn],MaxVars,Literal,_)),!.
+deduceGoal(Context,ExplainationIn,MaxVars,\+ Literal,ExplainationIn):-!,not(deduceGoal(Context,[neg|ExplainationIn],MaxVars,Literal,_)),!.
 
 
 
 	
-deduceGoal(KB,Ctx,ExplainationIn,MaxVars,'$existential'(v(_,TopFunctor,_),A,TopFunctor),_):-!,ignore(V=TopFunctor). %,numbervars(TopFunctor,'skolem',0,_),!.
+deduceGoal(Context,ExplainationIn,MaxVars,'$existential'(v(_,TopFunctor,_),A,TopFunctor),_):-!,ignore(V=TopFunctor). %,numbervars(TopFunctor,'skolem',0,_),!.
 
 /*
-deduceGoal(KB,Ctx,ExplainationIn,MaxVars,Literal,ExplainationOut):-
-		Literal=..[TopFunctor|Args],deduceGoalF(KB,Ctx,ExplainationIn,MaxVars,TopFunctor,Literal,Args,ExplainationOut).
+deduceGoal(Context,ExplainationIn,MaxVars,Literal,ExplainationOut):-
+		Literal=..[TopFunctor|Args],deduceGoalF(Context,ExplainationIn,MaxVars,TopFunctor,Literal,Args,ExplainationOut).
 
-deduceGoalF(KB,Ctx,ExplainationIn,MaxVars,holds,Literal,[v(_,TopFunctor,_)|Args],Ref):-
-	atom(TopFunctor),!,NewGoal=..[TopFunctor|Args],deduceGoalDB(KB,Ctx,ExplainationIn,MaxVars,NewGoal,Ref).
-deduceGoalF(KB,Ctx,ExplainationIn,MaxVars,holds,Literal,[TopFunctor|Args],Ref):-!,
-	atom(TopFunctor),NewGoal=..[TopFunctor|Args],deduceGoalDB(KB,Ctx,ExplainationIn,MaxVars,NewGoal,Ref).
-deduceGoalF(KB,Ctx,ExplainationIn,MaxVars,TopFunctor,Literal,Args,Ref):-
-	NewGoal=..[holds,TopFunctor|Args],deduceGoalDB(KB,Ctx,ExplainationIn,MaxVars,NewGoal,Ref).
-deduceGoalF(KB,Ctx,ExplainationIn,MaxVars,TopFunctor,Literal,Args,Ref):-
-	NewGoal=..[holds,v(_,TopFunctor,_)|Args],deduceGoalDB(KB,Ctx,ExplainationIn,MaxVars,NewGoal,Ref).
+deduceGoalF(Context,ExplainationIn,MaxVars,holds,Literal,[v(_,TopFunctor,_)|Args],Ref):-
+	atom(TopFunctor),!,NewGoal=..[TopFunctor|Args],deduceGoalDB(Context,ExplainationIn,MaxVars,NewGoal,Ref).
+deduceGoalF(Context,ExplainationIn,MaxVars,holds,Literal,[TopFunctor|Args],Ref):-!,
+	atom(TopFunctor),NewGoal=..[TopFunctor|Args],deduceGoalDB(Context,ExplainationIn,MaxVars,NewGoal,Ref).
+deduceGoalF(Context,ExplainationIn,MaxVars,TopFunctor,Literal,Args,Ref):-
+	NewGoal=..[holds,TopFunctor|Args],deduceGoalDB(Context,ExplainationIn,MaxVars,NewGoal,Ref).
+deduceGoalF(Context,ExplainationIn,MaxVars,TopFunctor,Literal,Args,Ref):-
+	NewGoal=..[holds,v(_,TopFunctor,_)|Args],deduceGoalDB(Context,ExplainationIn,MaxVars,NewGoal,Ref).
 
 
 mooRulebase(RealLiteral,Body,TN:KRVars):-
 	mooCache(RealLiteral,guard(RFVH,FVH,Body,CLID,KRVars,RuleVars,UnivLiteral,BodyUniv,
-	BodySelfConnected,Shared,PrivLiteral,FakeLiteral),Key,KB,Ctx,TN).
+	BodySelfConnected,Shared,PrivLiteral,FakeLiteral),Key,Context,TN).
 
 
 finishgaf(Literal,Bm):-
-        mooCache(Lit,_, KB, Ctx, TN),
+        mooCache(Lit,_, Context, Ctx, TN),
         memberchk_cnj(Lit,Body),
         mooRulebase(Literal,Body,RN),    %%  trace,
-	deduceCanGoal(KB,Ctx,Literal,Body,0).
+	deduceCanGoal(Context,Literal,Body,0).
 	
 
-deduceCanGoal(KB,Ctx,'$existential'(v(_,V,_),Y,TopFunctor)):-!,ignore(unify_with_occurs_check(TopFunctor,V)),!.
-deduceCanGoal(KB,Ctx,(A,Literal)):-!,
-	deduceCanGoal(KB,Ctx,A),deduceCanGoal(KB,Ctx,Literal).
-deduceCanGoal(KB,Ctx,Literal):-mooCache(Literal,_, KB, Ctx, TN).
+deduceCanGoal(Context,'$existential'(v(_,V,_),Y,TopFunctor)):-!,ignore(unify_with_occurs_check(TopFunctor,V)),!.
+deduceCanGoal(Context,(A,Literal)):-!,
+	deduceCanGoal(Context,A),deduceCanGoal(Context,Literal).
+deduceCanGoal(Context,Literal):-mooCache(Literal,_, Context, Ctx, TN).
 
-deduceCanGoal(KB,Ctx,Literal,Bm):-
-	deduceCanGoal(KB,Ctx,Literal);
+deduceCanGoal(Context,Literal,Bm):-
+	deduceCanGoal(Context,Literal);
 	( Bm>0, 
         mooRulebase(Literal,Body,RN,Goal),
 	Goal<Bm,     %trace,
 	Bn is Bm -1,
-	deduceCanGoal(KB,Ctx,Literal,Body,Bn)).
+	deduceCanGoal(Context,Literal,Body,Bn)).
 	
-deduceCanGoal(KB,Ctx,Literal,Body,Bn):-ground(Literal),!,deduceCanGoal(KB,Ctx,Body,Bn),!,not(mooCache(Literal,_, KB, Ctx, _)).
-deduceCanGoal(KB,Ctx,Literal,Body,0):-!,deduceCanGoal(KB,Ctx,Body).
-deduceCanGoal(KB,Ctx,Literal,Body,N):-deduceCanGoal(KB,Ctx,Body,N).
+deduceCanGoal(Context,Literal,Body,Bn):-ground(Literal),!,deduceCanGoal(Context,Body,Bn),!,not(mooCache(Literal,_, Context, Ctx, _)).
+deduceCanGoal(Context,Literal,Body,0):-!,deduceCanGoal(Context,Body).
+deduceCanGoal(Context,Literal,Body,N):-deduceCanGoal(Context,Body,N).
 
 memberchk_cnj(Lit,(Lit,_)).	
 memberchk_cnj(Lit,(Lit)).	
@@ -1091,23 +1091,23 @@ mooRulebase(RealLiteral,Body,TN,N):-
 
 mooRulebase(RealLiteral,Body,TN:KRVars):-
 	mooCache(RealLiteral,guard(RFVH,FVH,Body,CLID,KRVars,RuleVars,UnivLiteral,BodyUniv,
-	BodySelfConnected,Shared,PrivLiteral,FakeLiteral),Key,KB,Ctx,TN).
+	BodySelfConnected,Shared,PrivLiteral,FakeLiteral),Key,Context,TN).
 	
 								    */
 
 
 	%,ground(RealLiteral))).
-	%deduceCanGoal(KB,Ctx,Body,Bn).
+	%deduceCanGoal(Context,Body,Bn).
 
 /*
 mcf(URealLiteral,Bm):- Bn is Bm +1,
 	unwrapPatterns(RealLiteral,URealLiteral),
-	%mooCache(Lit,_, KB, Ctx, TN),
+	%mooCache(Lit,_, Context, Ctx, TN),
 */
 /*
 	memberchk_cnj(Lit,Body),
-	%not((ground(RealLiteral),deduceCanGoal(KB,Ctx,Body))),
-	deduceCanGoal(KB,Ctx,Body),
+	%not((ground(RealLiteral),deduceCanGoal(Context,Body))),
+	deduceCanGoal(Context,Body),
 	write_int(Body,RealLiteral),fail.
 %	memberchk_cnj(Lit,Body),(ground(MG) -> (write(RealLiteral),nl,fail) ; ).
 */
@@ -1124,7 +1124,7 @@ mcf(URealLiteral,Bm):- Bn is Bm +1,
 createLocalDistrict(Econ):-
 	resetTableFlags,
 	mooCache(RealLiteral,guard(RFVH,FVH,Body,CLID,KRVars,RuleVars,UnivLiteral,
-		BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral),Key,KB,Ctx,TN),
+		BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral),Key,Context,TN),
 	createMerchant(Econ,TN,FakeLiteral,RealLiteral,Body,RuleVars),fail.
 createLocalDistrict(Econ):-!.
 
@@ -1181,7 +1181,7 @@ supply(X):-asserta(sup(X)).
 
 %comodity(Buyer,Econ,'$existential'(v(_,V,_),_,TopFunctor),2):-ignore(V=TopFunctor),!.
 comodity(Buyer,Econ,Lit,1):-
-	mooCache(Lit,_, KB, Ctx, TN),
+	mooCache(Lit,_, Context, Ctx, TN),
 	once(flag(TN,X,X+1)),X<6.
 
 
@@ -1295,8 +1295,8 @@ getSuppliersMenu(Stack,Literal,SuppliersMenu):-
 
 		       
 /*
-deduceGoal(KB,Ctx,[consumer(TN,Goal,)|ExplainationIn],MaxVars,g(RealLiteral,ImportantVars),[sm(Literal,TN)|ExplainationIn]):-
-		mooCache(RealLiteral,_, KB, Ctx, TN),
+deduceGoal(Context,[consumer(TN,Goal,)|ExplainationIn],MaxVars,g(RealLiteral,ImportantVars),[sm(Literal,TN)|ExplainationIn]):-
+		mooCache(RealLiteral,_, Context, Ctx, TN),
 		(not(ground(ImportantVars)) -> ! ; true ). %,not(member(TN,Refs)).
   */
   
@@ -1307,17 +1307,17 @@ deduceGoal(KB,Ctx,[consumer(TN,Goal,)|ExplainationIn],MaxVars,g(RealLiteral,Impo
 
 
 
-deduceGoal(KB,Ctx,[Consumer|ExplainationIn],MaxVars,g(RealLiteral,ImportantVars),ExplainationOut):-MaxVars>0,
+deduceGoal(Context,[Consumer|ExplainationIn],MaxVars,g(RealLiteral,ImportantVars),ExplainationOut):-MaxVars>0,
 	ignore(tn(bogus,PVars,RealLiteral) = Consumer),
 	ignore(MaxVars=PVars),NMaxVars is MaxVars - 1,
 	ensureKey(RealLiteral,CallLiteral,Depth,HashKey),	
-	mooCache(RealLiteral,guard(RFVH,FVH,Body,CLID,KRVars,RuleVars,UnivLiteral,BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral),Key,KB,Ctx,TN),
+	mooCache(RealLiteral,guard(RFVH,FVH,Body,CLID,KRVars,RuleVars,UnivLiteral,BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral),Key,Context,TN),
 	copy_term(Body,BodyInstanceCopy),numbervars(BodyInstanceCopy,'$',0,NBodyVarsLeft),
 	compare(CmpPrevious,PVars,NBodyVarsLeft),
 	writeq(mooCacheCall(RealLiteral,CallLiteral,CmpPrevious,MaxVars,PVars,NBodyVarsLeft)),nl,
 	mooCacheCall(CmpPrevious,[Consumer|ExplainationIn],MaxVars,PVars,NBodyVarsLeft,
 		RealLiteral,CallLiteral,BodyInstanceCopy,RFVH,FVH,Body,CLID,KRVars,RuleVars,
-		UnivLiteral,BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral,Key,KB,Ctx,TN,ExplainationOut).
+		UnivLiteral,BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral,Key,Context,TN,ExplainationOut).
 
 
 
@@ -1369,7 +1369,7 @@ getArgsdr([],[]).   getArgsdr([v(_,V,_)|T],[V|TT]):-!,getArgsdr(T,TT).
 % Tries to give table (Must have been at least prevoius calls as well (A B Goal))
 deduceGoalCall(>,[A,B,Goal|ExplainationIn],MaxVars,PVars,NBodyVarsLeft,
 	RealLiteral,CallLiteral,BodyInstanceCopy,RFVH,FVH,Body,CLID,KRVars,RuleVars,
-	UnivLiteral,BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral,Key,KB,Ctx,TN,[did(RealLiteral),A,B,Goal|ExplainationIn]):-
+	UnivLiteral,BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral,Key,Context,TN,[did(RealLiteral),A,B,Goal|ExplainationIn]):-
 	writeq(tryingToGiveOneAnswer(CallLiteral)),recorded(TN,RealLiteral),!,
 	writeq(did(RealLiteral)),nl,!.   % Give Table only if have it
 
@@ -1377,13 +1377,13 @@ deduceGoalCall(>,[A,B,Goal|ExplainationIn],MaxVars,PVars,NBodyVarsLeft,
 /*
 mooCacheCall(>,Previous,MaxVars,PVars,NBodyVarsLeft,
 	RealLiteral,CallLiteral,BodyInstanceCopy,RFVH,FVH,Body,CLID,KRVars,RuleVars,
-	UnivLiteral,BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral,Key,KB,Ctx,TN,[preproved(CallLiteral)|ExplainationOut):-!,
+	UnivLiteral,BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral,Key,Context,TN,[preproved(CallLiteral)|ExplainationOut):-!,
 	member(RealLiteral,Previous),member(preproved(CallLiteral)).
 */
 
 mooCacheCall(_,Previous,MaxVars,PVars,NBodyVarsLeft,
 	RealLiteral,CallLiteral,BodyInstanceCopy,RFVH,FVH,Body,CLID,KRVars,RuleVars,
-	UnivLiteral,BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral,Key,KB,Ctx,TN,[gave(RealLiteral)|Previous]):-
+	UnivLiteral,BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral,Key,Context,TN,[gave(RealLiteral)|Previous]):-
 	recorded(TN,CallLiteral,Ref),!, % Known call table
 	writeq(tryingToGiveAllAnswers(CallLiteral)),
 	recorded(TN,RealLiteral),   % Give Full Table
@@ -1391,12 +1391,12 @@ mooCacheCall(_,Previous,MaxVars,PVars,NBodyVarsLeft,
 	
 mooCacheCall(_,Previous,MaxVars,PVars,NBodyVarsLeft,
 	RealLiteral,CallLiteral,BodyInstanceCopy,RFVH,FVH,Body,CLID,KRVars,RuleVars,
-	UnivLiteral,BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral,Key,KB,Ctx,TN,ExplainationOut):-
+	UnivLiteral,BodyUniv,BodySelfConnected,Shared,PrivLiteral,FakeLiteral,Key,Context,TN,ExplainationOut):-
 	recorda(TN,CallLiteral,Ref),!, % Table the call
 	writeq((slide:TN:NVars: (<):PVars:(<):MaxVars:PTN)),nl,
 	findall(Shared,((
 	     %   call_with_depth_limit(
-				deduceGoal(KB,_Ctx,[tn(TN,NVars,Body),PIN|ExplainationIn],NMaxVars,Body,ExitP) %,ground(Shared)   %
+				deduceGoal(Context,_Ctx,[tn(TN,NVars,Body),PIN|ExplainationIn],NMaxVars,Body,ExitP) %,ground(Shared)   %
 	      %  ,90,DL),ground(Shared)
 			)),Sols),
 			list_to_set(Sols,SolsS),
@@ -1427,14 +1427,14 @@ mooCacheCall(_,Previous,MaxVars,PVars,NBodyVarsLeft,
   %      recorda(TN,Session,Ref),
 
 
-deduceGoal(KB,Ctx,ExplainationIn,MaxVars,Literal,Ref):-Literal=..[TopFunctor|Args],!,
+deduceGoal(Context,ExplainationIn,MaxVars,Literal,Ref):-Literal=..[TopFunctor|Args],!,
 	not(member(Literal,Ref)),
-	deduceGoalF(KB,Ctx,ExplainationIn,MaxVars,TopFunctor,Literal,Args,[Literal|Ref]).
+	deduceGoalF(Context,ExplainationIn,MaxVars,TopFunctor,Literal,Args,[Literal|Ref]).
 	
-deduceGoalF(KB,Ctx,ExplainationIn,MaxVars,holds,Orig,Args,Ref):-!,fail.
-deduceGoalF(KB,Ctx,ExplainationIn,MaxVars,TopFunctor,Orig,Args,Ref):-
+deduceGoalF(Context,ExplainationIn,MaxVars,holds,Orig,Args,Ref):-!,fail.
+deduceGoalF(Context,ExplainationIn,MaxVars,TopFunctor,Orig,Args,Ref):-
 	Literal=..[holds,TopFunctor|Args],
-	deduceGoal(KB,Ctx,ExplainationIn,MaxVars,Literal,Ref).
+	deduceGoal(Context,ExplainationIn,MaxVars,Literal,Ref).
 
 */
 
@@ -1451,7 +1451,7 @@ ig(X):-ig(X,X).
 
 ig(Y,X):-
 	resetTableFlags,
-       findall(Y,(deduceGoalD(KB,Ctx,[tn(0,55,request)],50,X,Out),write(Y),nl),L),
+       findall(Y,(deduceGoalD(Context,[tn(0,55,request)],50,X,Out),write(Y),nl),L),
        nl,nl,writeq(L),nl,
        length(L,N),
        sort(L,LS),

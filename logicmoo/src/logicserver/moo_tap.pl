@@ -107,13 +107,13 @@ id(Goal,DC) :-
 id(Goal, _, _,DC) :- DC <1,!,fail.
 
 id(Goal, _, _,DC) :-
-   fact(Goal,KB,Context,ETracking,ITracking).
+   fact(Goal,Context,Context,ETracking,ITracking).
 
 id(Goal, Bound, Bound,DC) :-
-   fact(Goal,KB,Context,ETracking,ITracking).
+   fact(Goal,Context,Context,ETracking,ITracking).
 
 id(Goal, [_|Bound0], Bound,DC) :-
-    rule(Goal , Cost, Body, KB, Ctx, TN, CLID),
+    rule(Goal , Cost, Body, Context, Ctx, TN, CLID),
     id_body(Body, Bound0, Bound,DC).
 
 id_body([], Bound, Bound,DC).
@@ -205,14 +205,14 @@ fair_solve(D, Delta, (A, B)) :-
 /*  should do more system preds explicitly  */
 
 fair_solve(D, Delta, A) :-
-    fact(A,KB,Context,ETracking,ITracking), fail,
+    fact(A,Context,Context,ETracking,ITracking), fail,
     !. %,
     %call(A).
 
 fair_solve(D, Delta, A) :-
     D > 0,
     D1 is D - 1,
-    rule(A, Depth, B,KB,Ctx,TN, CLID),
+    rule(A, Depth, B,Context,TN, CLID),
     fair_solve(D1, Delta, B).
 
 
@@ -251,7 +251,7 @@ save_db_state(F):-
       listing(resolve_skolem),
       told.
 
-wr(KR,pnf(KR,Ctx,TN)):-rule(Goal, Depth, Body,KB,Ctx,TN, CLID),
+wr(KR,pnf(KR,Ctx,TN)):-rule(Goal, Depth, Body,Context,TN, CLID),
             KP= (=>(Body,Goal)),
             prolog_to_krlog(KP,KR).
 
@@ -275,16 +275,16 @@ wr(KR,pnf(KR,Ctx,TN)):-rule(Goal, Depth, Body,KB,Ctx,TN, CLID),
 % yes
 % ===================================================================
 /*
-fact('instance-of'(A,C),KB,Ctx,(TN1:TN2), (CN1:CN2)):-
-         fact('instance-of'(A,B),KB,Ctx,TN1, CN1),
-         fact('subclass-of'(B,C),KB,Ctx,TN2, CN2).
+fact('instance-of'(A,C),Context,(TN1:TN2), (CN1:CN2)):-
+         fact('instance-of'(A,B),Context,TN1, CN1),
+         fact('subclass-of'(B,C),Context,TN2, CN2).
 */
-%fact('same'(A,A),All_KBs,All_Ctxs,'Kernel', 'Skolemization').
+%fact('same'(A,A),All_Contexts,All_Ctxs,'Kernel', 'Skolemization').
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% $Id: moo_tap.pl,v 1.2 2002-03-08 14:39:51 dmiles Exp $
+% $Id: moo_tap.pl,v 1.3 2002-03-12 21:34:08 dmiles Exp $
 % Sicstus Prolog
 % Copyright (C) 1993: Bernhard Beckert and Joachim Posegga
 %                     Universit"at Karlsruhe
@@ -357,7 +357,7 @@ iterate(VarLim,Current,Goal,Result) :-
 %            substitutions for closing branches are considered)
 %
 
-lt_prove(Goal,UnExp,Lits,FreeV,VarLim) :- fact(Goal,KB,Ctx,TN, CLID).
+lt_prove(Goal,UnExp,Lits,FreeV,VarLim) :- fact(Goal,Context,TN, CLID).
 
 lt_prove((A,B),UnExp,Lits,FreeV,VarLim) :- !,
         lt_prove(A,[B|UnExp],Lits,FreeV,VarLim).
@@ -413,7 +413,7 @@ lt_prove(Lit,[(UnivV:Next)|UnExp],Lits,DisV,FreeV,_,VarLim) :-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% $Id: moo_tap.pl,v 1.2 2002-03-08 14:39:51 dmiles Exp $
+% $Id: moo_tap.pl,v 1.3 2002-03-12 21:34:08 dmiles Exp $
 % Sicstus Prolog
 % Copyright (C) 1993: Bernhard Beckert and Joachim Posegga
 %                     Universit"at Karlsruhe
@@ -446,11 +446,11 @@ provefml(Name) :-
         fml(Name,Limit,F),
         write(Name),
         nnf(F,NNF),
-   statistics(cputime,_),
+   system_dependant:prolog_statistics(cputime,_),
         (lt_prove(NNF,Limit)
-           -> (statistics(cputime,Time),
+           -> (system_dependant:prolog_statistics(cputime,Time),
                format(' proved in ~w msec, VarLim = ~w ~n',[Time,Limit]))
-           ; (statistics(cputime,Time),
+           ; (system_dependant:prolog_statistics(cputime,Time),
               format(' no explaination after ~w msec. ~n',[Time]))).
 
 % ------------------------------------------------------------
@@ -464,11 +464,11 @@ incprovefml(Name) :-
         fml(Name,_,F),
         write(Name),
         nnf(F,NNF),
-        statistics(cputime,_),
+        system_dependant:prolog_statistics(cputime,_),
         (lt_prove(NNF,Limit)
-           -> (statistics(cputime,Time),
+           -> (system_dependant:prolog_statistics(cputime,Time),
              format('  proved in ~w msec, found VarLim = ~w ~n',[Time,Limit]))
-           ; (statistics(cputime,Time),
+           ; (system_dependant:prolog_statistics(cputime,Time),
               format(' no explaination after ~w msec. ~n',[Time]))).
 
 % ------------------------------------------------------------
@@ -484,11 +484,11 @@ uv_provefml(Name) :-
         fml(Name,Limit,F),
         write(Name),
         nnf(F,NNF),
-        statistics(cputime,_),
+        system_dependant:prolog_statistics(cputime,_),
         (prove_uv(NNF,Limit)
-           -> (statistics(cputime,Time),
+           -> (system_dependant:prolog_statistics(cputime,Time),
                format(' proved in ~w msec, VarLim = ~w ~n',[Time,Limit]))
-           ; (statistics(cputime,Time),
+           ; (system_dependant:prolog_statistics(cputime,Time),
               format(' no explaination after ~w msec. ~n',[Time]))).
 
 % ------------------------------------------------------------
@@ -502,11 +502,11 @@ uv_incprovefml(Name) :-
         fml(Name,_,F),
         write(Name),
         nnf(F,NNF),
-        statistics(cputime,_),
+        system_dependant:prolog_statistics(cputime,_),
         (prove_uv(NNF,Limit)
-           -> (statistics(cputime,Time),
+           -> (system_dependant:prolog_statistics(cputime,Time),
              format('  proved in ~w msec, found VarLim = ~w ~n',[Time,Limit]))
-           ; (statistics(cputime,Time),
+           ; (system_dependant:prolog_statistics(cputime,Time),
               format(' no explaination after ~w msec. ~n',[Time]))).
 
 
@@ -833,9 +833,9 @@ l_solve(X, PROVING,Depth) :-
     l_solve(G, [X | PROVING],Depth2).
 
 
-rule(G  =>  X) :- rule(X, Depth, G,KB,Ctx,TN, CLID).
-%fact(G  =>  X) :- rule(X, Depth, G,KB,Ctx,TN, CLID).
-fact(X) :- fact(X,KB,Ctx,TN, CLID).
+rule(G  =>  X) :- rule(X, Depth, G,Context,TN, CLID).
+%fact(G  =>  X) :- rule(X, Depth, G,Context,TN, CLID).
+fact(X) :- fact(X,Context,TN, CLID).
 
 
 

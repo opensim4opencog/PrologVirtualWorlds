@@ -1,3 +1,11 @@
+
+:-module(moo_transitiveclosure,
+   [eraseTransitiveClosureCache/0,
+   deduceTransitiveClosure_PartialOrderingRelation/5]).
+
+:-use_module(moo_generation).
+:-use_module(moo_globalisms).
+
 :-include('moo_header.pl').
 
 % =====================================================================================================
@@ -16,57 +24,57 @@ myUniv(holds(P,AB),[P|AB]):-!.
 
 
 eraseTransitiveClosureCache:-
-	retractall(mooCache(KB,_Ctx,tc(UN,_,_))),!,
-	retractall(mooCache(KB,_Ctx,tc(domainFn(_,UN),_),_)),!,
-	retractall(mooCache(KB,_Ctx,tc(domainFn(UN,_),_),_)),!,
-	retractall(mooCache(KB,_Ctx,tc(rangeFn(_,UN),_),_)),!,
-	retractall(mooCache(KB,_Ctx,tc(rangeFn(UN,_),_),_)),!,
+	retractall(mooCache(Context,_Ctx,tc(UN,_,_))),!,
+	retractall(mooCache(Context,_Ctx,tc(domainFn(_,UN),_),_)),!,
+	retractall(mooCache(Context,_Ctx,tc(domainFn(UN,_),_),_)),!,
+	retractall(mooCache(Context,_Ctx,tc(rangeFn(_,UN),_),_)),!,
+	retractall(mooCache(Context,_Ctx,tc(rangeFn(UN,_),_),_)),!,
 	writeDebug(eraseTransitiveClosureCache).
 
 
-%eraseTransitiveClosureCache(KB,Ctx,Var):-expireOptimizationsInKB(KB,Ctx,Assertion),fail.
+%eraseTransitiveClosureCache(Context,Var):-expireOptimizationsInContext(Context,Assertion),fail.
 
-eraseTransitiveClosureCache(KB,Ctx,Var):-var(Var),!.
-eraseTransitiveClosureCache(KB,Ctx,UN):-number(UN),!.
-eraseTransitiveClosureCache(KB,Ctx,[]):-!.
-eraseTransitiveClosureCache(KB,Ctx,[H|L]):-!,
-	eraseTransitiveClosureCache(KB,Ctx,H),
-	eraseTransitiveClosureCache(KB,Ctx,L),!.
+eraseTransitiveClosureCache(Context,Var):-var(Var),!.
+eraseTransitiveClosureCache(Context,UN):-number(UN),!.
+eraseTransitiveClosureCache(Context,[]):-!.
+eraseTransitiveClosureCache(Context,[H|L]):-!,
+	eraseTransitiveClosureCache(Context,H),
+	eraseTransitiveClosureCache(Context,L),!.
 
-eraseTransitiveClosureCache(KB,Ctx,UN):-atom(UN),
-	%writeDebug(eraseTransitiveClosureCache(KB,Ctx,UN)),
-	retractall(mooCache(KB,_Ctx,tc(UN,_,_))),!,
-	retractall(mooCache(KB,_Ctx,tc(domainFn(_,UN),_),_)),!,
-	retractall(mooCache(KB,_Ctx,tc(domainFn(UN,_),_),_)),!,
-	retractall(mooCache(KB,_Ctx,tc(rangeFn(_,UN),_),_)),!,
-	retractall(mooCache(KB,_Ctx,tc(rangeFn(UN,_),_),_)),!.
+eraseTransitiveClosureCache(Context,UN):-atom(UN),
+	%writeDebug(eraseTransitiveClosureCache(Context,UN)),
+	retractall(mooCache(Context,_Ctx,tc(UN,_,_))),!,
+	retractall(mooCache(Context,_Ctx,tc(domainFn(_,UN),_),_)),!,
+	retractall(mooCache(Context,_Ctx,tc(domainFn(UN,_),_),_)),!,
+	retractall(mooCache(Context,_Ctx,tc(rangeFn(_,UN),_),_)),!,
+	retractall(mooCache(Context,_Ctx,tc(rangeFn(UN,_),_),_)),!.
 	
 
-eraseTransitiveClosureCache(KB,Ctx,UN):-
+eraseTransitiveClosureCache(Context,UN):-
 	getConstants(atomic,UN,Consts,_,_),
-	logOnFailure(eraseTransitiveClosureCache(KB,Ctx,Consts)).
+	logOnFailure(eraseTransitiveClosureCache(Context,Consts)).
 
 writeDebug_tc(_).
 
-storeInCacheIffNew(KB,Ctx,S,C,P):-(mooCache(KB,Ctx,tc(S,C),_)),!.
-storeInCacheIffNew(KB,Ctx,S,C,P):-asserta(mooCache(KB,Ctx,tc(S,C),P)),!.
+storeInCacheIffNew(Context,S,C,P):-(mooCache(Context,tc(S,C),_)),!.
+storeInCacheIffNew(Context,S,C,P):-asserta(mooCache(Context,tc(S,C),P)),!.
 
-storeInCacheIffNew(KB,Ctx,S,C,P):-!.
+storeInCacheIffNew(Context,S,C,P):-!.
 
 % =====================================================================================================
 %% TC for PartialOrderingRelation
 % =====================================================================================================
-deduceTransitiveClosure_PartialOrderingRelation(KB,Ctx,Predicate,S,C,
+deduceTransitiveClosure_PartialOrderingRelation(Context,Predicate,S,C,
 %        sfind(instance(Predicate,'PartialOrderingRelation')) *
      	sfind(subclass('PartialOrderingRelation','TransitiveRelation'))  *
 	Explaination  
-	):- deduceTransitiveClosure_Redir(KB,Ctx,'PartialOrderingRelation',Predicate,S,C,Explaination). 
+	):- deduceTransitiveClosure_Redir(Context,'PartialOrderingRelation',Predicate,S,C,Explaination). 
 	
-deduceTransitiveClosure_PartialOrderingRelation(KB,Ctx,Predicate,S,S,
+deduceTransitiveClosure_PartialOrderingRelation(Context,Predicate,S,S,
 %	sfind(instance(Predicate,'PartialOrderingRelation')) * 
 	sfind(subclass('PartialOrderingRelation','ReflexiveRelation')) * 
 	sfindi('=>'(instance(Predicate,'ReflexiveRelation'),
-	forall(S,holds(Predicate,S,S))))):- isAxiomInKB(
+	forall(S,holds(Predicate,S,S))))):- isAxiomInContext(
 	sfind(instance(Predicate,'PartialOrderingRelation')) * 
 	sfind(subclass('PartialOrderingRelation','ReflexiveRelation')) * 
 	sfind('=>'(instance(Predicate,'ReflexiveRelation'),
@@ -75,164 +83,164 @@ deduceTransitiveClosure_PartialOrderingRelation(KB,Ctx,Predicate,S,S,
 % =====================================================================================================
 %% TC for TotalOrderingRelation
 % =====================================================================================================
-deduceTransitiveClosure_TotalOrderingRelation(KB,Ctx,Predicate,S,C,
+deduceTransitiveClosure_TotalOrderingRelation(Context,Predicate,S,C,
       %  sfind(instance(Predicate,'TotalOrderingRelation')) *
  	sfind(subclass('TotalOrderingRelation','PartialOrderingRelation')) 
-	):- deduceTransitiveClosure_PartialOrderingRelation(KB,Ctx,Predicate,S,C,Explaination). 
+	):- deduceTransitiveClosure_PartialOrderingRelation(Context,Predicate,S,C,Explaination). 
 
 % =====================================================================================================
 %% TC for TransitiveRelation
 % =====================================================================================================
-deduceTransitiveClosure_TransitiveRelation(KB,Ctx,Predicate,S,C,Explaination):- 
-	deduceTransitiveClosure_Redir(KB,Ctx,'TransitiveRelation',Predicate,S,C,Explaination). 
+deduceTransitiveClosure_TransitiveRelation(Context,Predicate,S,C,Explaination):- 
+	deduceTransitiveClosure_Redir(Context,'TransitiveRelation',Predicate,S,C,Explaination). 
 
 
 % =====================================================================================================
 %% Generic Transitive Relation
 % =====================================================================================================
-deduceTransitiveClosure_Redir(KB,Ctx,RType,Predicate,S,C, Explaination  *
+deduceTransitiveClosure_Redir(Context,RType,Predicate,S,C, Explaination  *
 	       sfindi( 
 	   =>(instance(Predicate,'TransitiveRelation'),
 	       forall(C,forall(D,forall(S,
 	=>(and(holds(Predicate,S,D),holds(Predicate,D,C)),holds(Predicate,S,C)))))))
 		):-
-	    /*   isAxiomInKB( 
+	    /*   isAxiomInContext( 
 	   =>(instance(Predicate,'TransitiveRelation'),
 	       forall(C,forall(D,forall(S,
 	=>(and(holds(Predicate,S,D),holds(Predicate,D,C)),holds(Predicate,S,C))))))),!,	*/
 		
-		(deduceTransitiveClosure_O_TransitiveRelation(KB,Ctx,Predicate,S,C,Explaination)).
+		(deduceTransitiveClosure_O_TransitiveRelation(Context,Predicate,S,C,Explaination)).
 
-deduceTransitiveClosure_O_TransitiveRelation(KB,Ctx,Predicate,S,C,Explaination):-nonvar(C),!,
-	deduceTransitiveClosure_rl_TransitiveRelation(KB,Ctx,Predicate,S,C,Explaination).
-deduceTransitiveClosure_O_TransitiveRelation(KB,Ctx,Predicate,S,C,Explaination):-nonvar(S),!,
-	deduceTransitiveClosure_lr_TransitiveRelation(KB,Ctx,Predicate,S,C,Explaination).
-deduceTransitiveClosure_O_TransitiveRelation(KB,Ctx,Predicate,S,C,Explaination):-!,
-	deduceTransitiveClosure_open_TransitiveRelation(KB,Ctx,Predicate,S,C,Explaination).
+deduceTransitiveClosure_O_TransitiveRelation(Context,Predicate,S,C,Explaination):-nonvar(C),!,
+	deduceTransitiveClosure_rl_TransitiveRelation(Context,Predicate,S,C,Explaination).
+deduceTransitiveClosure_O_TransitiveRelation(Context,Predicate,S,C,Explaination):-nonvar(S),!,
+	deduceTransitiveClosure_lr_TransitiveRelation(Context,Predicate,S,C,Explaination).
+deduceTransitiveClosure_O_TransitiveRelation(Context,Predicate,S,C,Explaination):-!,
+	deduceTransitiveClosure_open_TransitiveRelation(Context,Predicate,S,C,Explaination).
 
 % =====================================================================================================
 %% Generic Transitive Open 
 % =====================================================================================================
 
-deduceTransitiveClosure_open_TransitiveRelation(KB,Ctx,Predicate,S,C,Explaination):-
+deduceTransitiveClosure_open_TransitiveRelation(Context,Predicate,S,C,Explaination):-
 	%KeyTerm 'myUniv'  [holdsFn,Predicate],!,
-	deduceTransitiveClosure_open_t_TransitiveRelation(KB,Ctx,Predicate,Predicate,S,C,Explaination).
+	deduceTransitiveClosure_open_t_TransitiveRelation(Context,Predicate,Predicate,S,C,Explaination).
 
-deduceTransitiveClosure_open_t_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,_):-
-	once(table_make_deduceTransitiveClosure_open_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate)),fail.
-deduceTransitiveClosure_open_t_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,P):-
+deduceTransitiveClosure_open_t_TransitiveRelation(Context,KeyTerm,Predicate,S,C,_):-
+	once(table_make_deduceTransitiveClosure_open_0_TransitiveRelation(Context,KeyTerm,Predicate)),fail.
+deduceTransitiveClosure_open_t_TransitiveRelation(Context,KeyTerm,Predicate,S,C,P):-
 	DataTerm 'myUniv'  [Predicate,S,C],
-	mooCache(KB,_Ctx,tc(Predicate,DataTerm),P).
+	mooCache(Context,_Ctx,tc(Predicate,DataTerm),P).
 
-table_make_deduceTransitiveClosure_open_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate):-
-		mooCache(KB,_Ctx,tc(KeyTerm,complete,table)),!.
-table_make_deduceTransitiveClosure_open_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate):-
+table_make_deduceTransitiveClosure_open_0_TransitiveRelation(Context,KeyTerm,Predicate):-
+		mooCache(Context,_Ctx,tc(KeyTerm,complete,table)),!.
+table_make_deduceTransitiveClosure_open_0_TransitiveRelation(Context,KeyTerm,Predicate):-
 		once((
-		mooCache(KB,_Ctx,tc(KeyTerm,incomplete,table));assert(mooCache(KB,_Ctx,tc(KeyTerm,incomplete,table))))),fail.
-table_make_deduceTransitiveClosure_open_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate):-
+		mooCache(Context,_Ctx,tc(KeyTerm,incomplete,table));assert(mooCache(Context,_Ctx,tc(KeyTerm,incomplete,table))))),fail.
+table_make_deduceTransitiveClosure_open_0_TransitiveRelation(Context,KeyTerm,Predicate):-
 		(DataTerm 'myUniv'  [Predicate,S,C]),
-		make_deduceTransitiveClosure_open_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,P),
-		once(storeInCacheIffNew(KB,Ctx,KeyTerm,DataTerm,P)),fail.
+		make_deduceTransitiveClosure_open_0_TransitiveRelation(Context,KeyTerm,Predicate,S,C,P),
+		once(storeInCacheIffNew(Context,KeyTerm,DataTerm,P)),fail.
 
-table_make_deduceTransitiveClosure_open_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate):-
-		retractall(mooCache(KB,_Ctx,tc(KeyTerm,incomplete,table))),
-		assert(mooCache(KB,_Ctx,tc(KeyTerm,complete,table))).
+table_make_deduceTransitiveClosure_open_0_TransitiveRelation(Context,KeyTerm,Predicate):-
+		retractall(mooCache(Context,_Ctx,tc(KeyTerm,incomplete,table))),
+		assert(mooCache(Context,_Ctx,tc(KeyTerm,complete,table))).
 		
 
 
-make_deduceTransitiveClosure_open_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,P):-
+make_deduceTransitiveClosure_open_0_TransitiveRelation(Context,KeyTerm,Predicate,S,C,P):-
 	(Call  'myUniv'   [Predicate,S,C]),
-	getFactForTransitiveClosure(KB,Ctx,Call,P).
+	getFactForTransitiveClosure(Context,Call,P).
 
-make_deduceTransitiveClosure_open_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,(P *Explaination )):-
+make_deduceTransitiveClosure_open_0_TransitiveRelation(Context,KeyTerm,Predicate,S,C,(P *Explaination )):-
 	(Call  'myUniv'   [Predicate,S,M]),
-	getFactForTransitiveClosure(KB,Ctx,Call,P),
-	deduceTransitiveClosure_O_TransitiveRelation(KB,Ctx,Predicate,M,C,Explaination).
+	getFactForTransitiveClosure(Context,Call,P),
+	deduceTransitiveClosure_O_TransitiveRelation(Context,Predicate,M,C,Explaination).
 
 % =====================================================================================================
 %% Generic Transitive Left to Right 
 % =====================================================================================================
 
-deduceTransitiveClosure_lr_TransitiveRelation(KB,Ctx,Predicate,S,C,Explaination):-
+deduceTransitiveClosure_lr_TransitiveRelation(Context,Predicate,S,C,Explaination):-
 	KeyTerm 'myUniv'  [rangeFn,Predicate,S],!,
-	deduceTransitiveClosure_l_r_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,Explaination).
+	deduceTransitiveClosure_l_r_TransitiveRelation(Context,KeyTerm,Predicate,S,C,Explaination).
 
 
-deduceTransitiveClosure_l_r_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,_):-
-	once(table_deduceTransitiveClosure_l_r_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S)),fail.
+deduceTransitiveClosure_l_r_TransitiveRelation(Context,KeyTerm,Predicate,S,C,_):-
+	once(table_deduceTransitiveClosure_l_r_0_TransitiveRelation(Context,KeyTerm,Predicate,S)),fail.
 	
-deduceTransitiveClosure_l_r_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,P):-
+deduceTransitiveClosure_l_r_TransitiveRelation(Context,KeyTerm,Predicate,S,C,P):-
 	%writeDebug(silver,have_tabel(KeyTerm)),
 	DataTerm 'myUniv'  [Predicate,S,C],!,
-	mooCache(KB,_Ctx,tc(KeyTerm,DataTerm),P).
+	mooCache(Context,_Ctx,tc(KeyTerm,DataTerm),P).
 	
 
-table_deduceTransitiveClosure_l_r_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S):-
-		mooCache(KB,_Ctx,tc(KeyTerm,complete,table)),!.
+table_deduceTransitiveClosure_l_r_0_TransitiveRelation(Context,KeyTerm,Predicate,S):-
+		mooCache(Context,_Ctx,tc(KeyTerm,complete,table)),!.
 
-table_deduceTransitiveClosure_l_r_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S):-
+table_deduceTransitiveClosure_l_r_0_TransitiveRelation(Context,KeyTerm,Predicate,S):-
 		once((
-		mooCache(KB,_Ctx,tc(KeyTerm,incomplete,table));assert(mooCache(KB,_Ctx,tc(KeyTerm,incomplete,table))))),fail.
+		mooCache(Context,_Ctx,tc(KeyTerm,incomplete,table));assert(mooCache(Context,_Ctx,tc(KeyTerm,incomplete,table))))),fail.
 
-table_deduceTransitiveClosure_l_r_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S):-
+table_deduceTransitiveClosure_l_r_0_TransitiveRelation(Context,KeyTerm,Predicate,S):-
 		(DataTerm 'myUniv'  [Predicate,S,C]),
-		deduceTransitiveClosure_l_r_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,P),
-		once(storeInCacheIffNew(KB,Ctx,KeyTerm,DataTerm,P)),fail.
+		deduceTransitiveClosure_l_r_0_TransitiveRelation(Context,KeyTerm,Predicate,S,C,P),
+		once(storeInCacheIffNew(Context,KeyTerm,DataTerm,P)),fail.
 		
-table_deduceTransitiveClosure_l_r_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S):-
-		retractall(mooCache(KB,_Ctx,tc(KeyTerm,incomplete,table))),
-		assert(mooCache(KB,_Ctx,tc(KeyTerm,complete,table))),!.
+table_deduceTransitiveClosure_l_r_0_TransitiveRelation(Context,KeyTerm,Predicate,S):-
+		retractall(mooCache(Context,_Ctx,tc(KeyTerm,incomplete,table))),
+		assert(mooCache(Context,_Ctx,tc(KeyTerm,complete,table))),!.
 
 
-deduceTransitiveClosure_l_r_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,P):-
+deduceTransitiveClosure_l_r_0_TransitiveRelation(Context,KeyTerm,Predicate,S,C,P):-
 	(Call  'myUniv'   [Predicate,S,C]),
-	getFactForTransitiveClosure(KB,Ctx,Call,P).
+	getFactForTransitiveClosure(Context,Call,P).
 
-deduceTransitiveClosure_l_r_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,(P *Explaination )):-
+deduceTransitiveClosure_l_r_0_TransitiveRelation(Context,KeyTerm,Predicate,S,C,(P *Explaination )):-
 	(Call  'myUniv'   [Predicate,S,M]),
-	getFactForTransitiveClosure(KB,Ctx,Call,P),
-	deduceTransitiveClosure_O_TransitiveRelation(KB,Ctx,Predicate,M,C,Explaination).
+	getFactForTransitiveClosure(Context,Call,P),
+	deduceTransitiveClosure_O_TransitiveRelation(Context,Predicate,M,C,Explaination).
 
 % =====================================================================================================
 %% Generic Transitive  Right  to Left
 % =====================================================================================================
 
-deduceTransitiveClosure_rl_TransitiveRelation(KB,Ctx,Predicate,S,C,Explaination):-
+deduceTransitiveClosure_rl_TransitiveRelation(Context,Predicate,S,C,Explaination):-
 	KeyTerm 'myUniv'  [domainFn,Predicate,C],!,
-	deduceTransitiveClosure_r_l_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,Explaination).
+	deduceTransitiveClosure_r_l_TransitiveRelation(Context,KeyTerm,Predicate,S,C,Explaination).
 
-deduceTransitiveClosure_r_l_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,_):-
-		table_deduceTransitiveClosure_r_l_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,C),fail.
-deduceTransitiveClosure_r_l_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,P):-
+deduceTransitiveClosure_r_l_TransitiveRelation(Context,KeyTerm,Predicate,S,C,_):-
+		table_deduceTransitiveClosure_r_l_0_TransitiveRelation(Context,KeyTerm,Predicate,C),fail.
+deduceTransitiveClosure_r_l_TransitiveRelation(Context,KeyTerm,Predicate,S,C,P):-
 		%writeDebug(have_tabel(KeyTerm)),
-		DataTerm 'myUniv'  [Predicate,S,C],!,mooCache(KB,_Ctx,tc(KeyTerm,DataTerm),P).
+		DataTerm 'myUniv'  [Predicate,S,C],!,mooCache(Context,_Ctx,tc(KeyTerm,DataTerm),P).
 
-table_deduceTransitiveClosure_r_l_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,C):-
-		mooCache(KB,_Ctx,tc(KeyTerm,complete,table)),!.
+table_deduceTransitiveClosure_r_l_0_TransitiveRelation(Context,KeyTerm,Predicate,C):-
+		mooCache(Context,_Ctx,tc(KeyTerm,complete,table)),!.
 
-table_deduceTransitiveClosure_r_l_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,C):-
+table_deduceTransitiveClosure_r_l_0_TransitiveRelation(Context,KeyTerm,Predicate,C):-
 		once((
-		mooCache(KB,_Ctx,tc(KeyTerm,incomplete,table));assert(mooCache(KB,_Ctx,tc(KeyTerm,incomplete,table))))),fail.
+		mooCache(Context,_Ctx,tc(KeyTerm,incomplete,table));assert(mooCache(Context,_Ctx,tc(KeyTerm,incomplete,table))))),fail.
 
-table_deduceTransitiveClosure_r_l_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,C):-
+table_deduceTransitiveClosure_r_l_0_TransitiveRelation(Context,KeyTerm,Predicate,C):-
 		(DataTerm 'myUniv'  [Predicate,S,C]),
-		deduceTransitiveClosure_r_l_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,P),
-		once(storeInCacheIffNew(KB,Ctx,KeyTerm,DataTerm,P)),fail.
+		deduceTransitiveClosure_r_l_0_TransitiveRelation(Context,KeyTerm,Predicate,S,C,P),
+		once(storeInCacheIffNew(Context,KeyTerm,DataTerm,P)),fail.
 
-table_deduceTransitiveClosure_r_l_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,C):-
-		retractall(mooCache(KB,_Ctx,tc(KeyTerm,incomplete,table))),assert(mooCache(KB,_Ctx,tc(KeyTerm,complete,table))),!.
+table_deduceTransitiveClosure_r_l_0_TransitiveRelation(Context,KeyTerm,Predicate,C):-
+		retractall(mooCache(Context,_Ctx,tc(KeyTerm,incomplete,table))),assert(mooCache(Context,_Ctx,tc(KeyTerm,complete,table))),!.
 
 
-deduceTransitiveClosure_r_l_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,P):-
+deduceTransitiveClosure_r_l_0_TransitiveRelation(Context,KeyTerm,Predicate,S,C,P):-
 	(Call  'myUniv'   [Predicate,S,C]),
-	getFactForTransitiveClosure(KB,Ctx,Call,P).
+	getFactForTransitiveClosure(Context,Call,P).
 
-deduceTransitiveClosure_r_l_0_TransitiveRelation(KB,Ctx,KeyTerm,Predicate,S,C,(P2 * P)):-
+deduceTransitiveClosure_r_l_0_TransitiveRelation(Context,KeyTerm,Predicate,S,C,(P2 * P)):-
 	(Call  'myUniv'   [Predicate,M,C]),
-	getFactForTransitiveClosure(KB,Ctx,Call,P),
-	deduceTransitiveClosure_O_TransitiveRelation(KB,Ctx,Predicate,S,M,P2).
+	getFactForTransitiveClosure(Context,Call,P),
+	deduceTransitiveClosure_O_TransitiveRelation(Context,Predicate,S,M,P2).
 
-isAxiomInKB(_):-!. %TODO
+isAxiomInContext(_):-!. %TODO
 
 
 

@@ -18,7 +18,7 @@ cons:- !,
 
 writeMooMenu:-
          writeFmt('ask - switches to ask mode \ntell - switches back to tell mode\n '),
-         writeFmt('other cmds: statistics, ls, halt, contexts \n'),!.
+         writeFmt('other cmds: system_dependant:prolog_statistics, ls, halt, contexts \n'),!.
 
 
 
@@ -34,11 +34,11 @@ console_loop(tell,SOURCEFORM):-
 
 console_loop(ask,SOURCEFORM):- 
             once(console_read('Ask> ',SOURCEFORM,Vars)),
-            invokeOperation(verbose,request(SOURCEFORM),Ctx,TN,KB,CM,Vars).
+            invokeOperation(verbose,request(SOURCEFORM),Ctx,TN,Context,CM,Vars).
       
 console_loop(cmd,SOURCEFORM):- 
             once(console_read('Command> ',SOURCEFORM,Vars)),
-            invokeOperation(verbose,cmd(SOURCEFORM),Ctx,TN,KB,CM,Vars).
+            invokeOperation(verbose,cmd(SOURCEFORM),Ctx,TN,Context,CM,Vars).
 
 console_read(P,FORM,Vars):-
          nl,write(P),cons_read(Askion_Chars),
@@ -52,7 +52,7 @@ console_read(P,FORM,Vars):-
 cons_read(Chars):-repeat,told,seen,readKIF(Chars),Chars=[_,_|_].
 
 lpInsert(Insert_chars):-
-      tell(Insert_chars,Ctx,TN,KB,CM).
+      tell(Insert_chars,Ctx,TN,Context,CM).
 
 lpInsert_file(File):-lp_file(File).
 
@@ -65,7 +65,7 @@ lp_clear:-do_clear.
 
 lp_save(FileName):-!.
 
-lp_ask(Chars):-ask(Chars,_Cxt,KB).
+lp_ask(Chars):-ask(Chars,_Cxt,Context).
 
    
 cons_help:-!.
@@ -91,8 +91,8 @@ do_tokens([halt]):- halt.
 do_tokens([bye]):- abort.
 %do_chars([116,109|Number]):-catch((number_codes(Value,Number),set_tm_level(Value)),_,show_tm_level).
 do_tokens([prolog]):- writeFmt('Type ""cons"" to return to Logic Engine.\n ',[]),abort.
-do_tokens([can,X]):-canonicalizeMooKBHTML('PrologMOO',X).
-do_tokens([can,X]):-canonicalizeMooKBHTML('PrologMOO',X).
+do_tokens([can,X]):-canonicalizeMooContextHTML('PrologMOO',X).
+do_tokens([can,X]):-canonicalizeMooContextHTML('PrologMOO',X).
 do_tokens([can]):-do_tokens([can,'GlobalContext']).
 do_tokens(L):-P=..L,once(P),!.
 do_tokens(X):-writeFmt('could not parse: ~q.\n',[X]).
@@ -100,17 +100,17 @@ do_tokens(X):-writeFmt('could not parse: ~q.\n',[X]).
 
 
 
-kb_define(KB):-invokeInsert(forall,surface,'instance'(KB,'KnowledgeBase'),'GlobalContext',TN,KB,Vars,Maintainer),
-                     invokeInsert(forall,surface,'instance'('GlobalContext','Context'),'GlobalContext',TN2,KB,Vars,Maintainer),
-                     ensureMooKB(KB,'GlobalContext').
+theory_define(Context):-invokeInsert(forall,surface,'instance'(Context,'KnowledgeBase'),'GlobalContext',TN,Context,Vars,Maintainer),
+                     invokeInsert(forall,surface,'instance'('GlobalContext','Context'),'GlobalContext',TN2,Context,Vars,Maintainer),
+                     ensureMooContext(Context,'GlobalContext').
 
-ctx_define(Ctx):-invokeInsert(forall,surface,'instance'(Ctx,'Context'),'GlobalContext',TN,SKB,Vars,Maintainer),ensureMooKB(KB,Ctx).
+ctx_define(Ctx):-invokeInsert(forall,surface,'instance'(Ctx,'Context'),'GlobalContext',TN,SContext,Vars,Maintainer),ensureMooContext(Context,Ctx).
 
-set_ctx(Context):-ensureMooKB(KnowledgeBase,Context).
-set_kb(KnowledgeBase):-ensureMooKB(KnowledgeBase,'GlobalContext').
+set_ctx(Context):-ensureMooContext(KnowledgeBase,Context).
+set_theory(KnowledgeBase):-ensureMooContext(KnowledgeBase,'GlobalContext').
 
 my_call(fol,_):-retractall(version_tag(_)),assert(version_tag(fol)),writeFmt('% Entering FOL mode.\n',[]),!.
-my_call(kbl,_) :-retractall(version_tag(_)),assert(version_tag(kbl)),writeFmt('% Entering KBL mode.\n',[]),!.
+my_call(theoryl,_) :-retractall(version_tag(_)),assert(version_tag(theoryl)),writeFmt('% Entering ContextL mode.\n',[]),!.
 
 my_call(cd(Term),_Vars):-cd(Term),pwd.
 

@@ -6,7 +6,7 @@
 % ===================================================================
 
 
-:-multifile(expireOptimizationsInKB/3).
+:-multifile(expireOptimizationsInContext/3).
 
 :- style_check(-singleton).
 :- style_check(-discontiguous).
@@ -24,25 +24,25 @@
 isNonVar(Denotation):-not(isSlot(Denotation)).
 
 % Is var means to Moo this is a Slot
-isSlot(Denotation):-notrace((isVarProlog(Denotation);isVarObject(Denotation))),!.
+isSlot(Denotation):-system_dependant:prolog_notrace((isVarProlog(Denotation);isVarObject(Denotation))),!.
 
 isSlot(Denotation,Denotation):- isVarProlog(Denotation),!.
 isSlot(Denotation,PrologVar):- isVarObject(Denotation,PrologVar),!.
 
 isHiddenSlot(Term):-fail.
 
-isVarProlog(A):-notrace((var(A);A='$VAR'(_))).
+isVarProlog(A):-system_dependant:prolog_notrace((var(A);A='$VAR'(_))).
 
-isVarObject(Denotation):-notrace((
+isVarObject(Denotation):-system_dependant:prolog_notrace((
 		  isObject(Denotation,BaseType),
 		  arg(1,Denotation,Value),!,isSlot(Value))).
 
-isVarObject(Denotation,Value):-notrace((
+isVarObject(Denotation,Value):-system_dependant:prolog_notrace((
 		  isObject(Denotation,BaseType),
 		  arg(1,Denotation,Value),!,isSlot(Value))).
 	
 isObject(Denotation,BaseType):-
-	notrace(((atom(BaseType) ->
+	system_dependant:prolog_notrace(((atom(BaseType) ->
 		  (atom_concat('$',BaseType,F),functor(Denotation,F,2));
 		  (functor(Denotation,F,2),atom_concat('$',BaseType,F))
 		 ),!)).
@@ -123,7 +123,7 @@ isEntityFunction(Term,FnT,ArgsT):-Term=..[FnT|ArgsT],hlPredicateAttribute(FnT,'F
 % ===================================================================
 
 getPrologVars(Term, Vars, Singletons, Multiples) :-
-    notrace((getPrologVars(Term, VarList, []),
+    system_dependant:prolog_notrace((getPrologVars(Term, VarList, []),
     close_list(VarList),
     keysort(VarList, KeyList),
     split_key_list(KeyList, Vars, Singletons, Multiples))).
@@ -151,7 +151,7 @@ getPrologVars(I, N, Term, V0, V) :-
 % ===================================================================
 
 getAllPrologVars(Term, Vars, Singletons, Multiples) :-
-    notrace((getAllPrologVars(Term, VarList, []),
+    system_dependant:prolog_notrace((getAllPrologVars(Term, VarList, []),
     close_list(VarList),
     keysort(VarList, KeyList),
     split_key_list(KeyList, Vars, Singletons, Multiples))).
@@ -174,7 +174,7 @@ getAllPrologVars(I, N, Term, V0, V) :-
 % ===================================================================
 
 getSlots(Term, Vars, Singletons, Multiples) :-
-    notrace((getSlots(Term, VarList, []),
+    system_dependant:prolog_notrace((getSlots(Term, VarList, []),
     close_list(VarList),
     keysort(VarList, KeyList),
     split_key_list(KeyList, Vars, Singletons, Multiples))).
@@ -205,7 +205,7 @@ getSlots(I, N, Term, V0, V) :-
 % ===================================================================
 
 getConstants(Types,Term, Vars, Singletons, Multiples) :-
-    notrace((getConstants(Types,Term, VarList, []),
+    system_dependant:prolog_notrace((getConstants(Types,Term, VarList, []),
     close_list(VarList),
     keysort(VarList, KeyList),
     split_key_list(KeyList, Vars, Singletons, Multiples))).
@@ -257,10 +257,10 @@ asserta_if_new(A):-asserta(A),!.
 pvar_gen('$VAR'(N)):-idGen(N),!.
 
 
-tn_link(Clause,ETracking,KB,ETracking):-!.
+tn_link(Clause,ETracking,Context,ETracking):-!.
 
-tn_link(Clause,ETracking,KB,kba(KB,Num)):-atomic(ETracking),atom_codes(ETracking,[84,45|Rest]),!,number_codes(Num,Rest).
-tn_link(Clause,ETracking,KB,kbb(KB,ETracking)):-!.
+tn_link(Clause,ETracking,Context,theorya(Context,Num)):-atomic(ETracking),atom_codes(ETracking,[84,45|Rest]),!,number_codes(Num,Rest).
+tn_link(Clause,ETracking,Context,theoryb(Context,ETracking)):-!.
 
 
 ignore(X,Y):-ignore((X,Y)).
@@ -487,8 +487,8 @@ assert_prolog(PTERM_NATIVE,Vars):-PTERM_NATIVE=..[C,X,Y],'surface-instance'(C,'J
          assert_prolog(Y,Vars).
 assert_prolog(X,_Vars) :- predicate_property(X,built_in),!. 
 assert_prolog(X,_Vars) :- ground(X),retract(X),fail.
-assert_prolog(X,_Vars) :- /* not(exists_in_database(X)),!, */ assert(X). %, ua_out(modification,(X),Vars).
-assert_prolog(_X,_Vars) :- !. %,not(exists_in_database(X)), assert_prolog(X). %ua_out(disp_modification,assert_prolog(X),Vars)
+assert_prolog(X,_Vars) :- /* not(exists_in_database(X)),!, */ assert(X). %, writeIfOption(modification,(X),Vars).
+assert_prolog(_X,_Vars) :- !. %,not(exists_in_database(X)), assert_prolog(X). %writeIfOption(disp_modification,assert_prolog(X),Vars)
 
 assert_prolog(Context_atom,WFF,Vars):-
          add_context(Context_atom,WFF,WFFAC),
@@ -582,16 +582,16 @@ union([X|L1],L2,[X|L3]) :-
 union([],L,L).
 */
 % ===================================================================
-%  safe_kb_info_db(KB_Name,Can,WFS,PFile) Creates file paths
+%  safe_theory_info_db(Context_Name,Can,WFS,PFile) Creates file paths
 % ===================================================================
 
 
-safe_kb_info_db(KB_Name,Can,WFS,PFile):-
-                  kb_make_status_start(kb(KB_Name,Can)=_),!,
+safe_theory_info_db(Context_Name,Can,WFS,PFile):-
+                  theory_make_status_start(theory(Context_Name,Can)=_),!,
                   add_file_extension(".wfs",Can,WFS),
                   add_file_extension(".P",Can,PFile),!.
 
-safe_kb_info_db(KB_Name,error,error,error):- sendNote(error,ioSubsystem,'KB file not found',['the KB is like not correct ',KB_Name]),!,fail.
+safe_theory_info_db(Context_Name,error,error,error):- sendNote(error,ioSubsystem,'Context file not found',['the Context is like not correct ',Context_Name]),!,fail.
 
                   
 actual_file_name(SourceFile,SourceFileLocal):-
@@ -677,7 +677,7 @@ consult_as_dynamic(FilenameLocal):-
 
 % Usage: subst(+Fml,+X,+Sk,?FmlSk)
 
-subst(A,B,C,D):-notrace(nd_subst(A,B,C,D)),!.
+subst(A,B,C,D):-system_dependant:prolog_notrace(nd_subst(A,B,C,D)),!.
 
 nd_subst(  Var, VarS,SUB,SUB ) :- Var==VarS,!.
 nd_subst(        P, X,Sk,        P1 ) :- functor(P,_,N),nd_subst1( X, Sk, P, N, P1 ).
@@ -756,7 +756,7 @@ crossref_vars(Fml,Frozen,FmlVars = FrozenVars):-
 % Usage: repl(+Fml,+X,+Sk,?FmlSk)
 
 replc(Fml,X,Sk,FmlSk):-
-	notrace(repl(Fml,X,Sk,FmlSk)),!.
+	system_dependant:prolog_notrace(repl(Fml,X,Sk,FmlSk)),!.
 /*
 	copy_term(Fml,FmlX),
 	numbervars(FmlX),
@@ -849,7 +849,7 @@ real_prolog_file_name(_FileName,AbsoluteFile):-
 
 add_file_user_lib_directory(_LocalFile,AbsoluteFile):- 
          name(_LocalFile,FileNameString),
-         once((('LOGIC_ENGINE_RT'(RTD),!,name(RTD,RTDString));((ua_out(cb_error,'MOO_XSB_RT Not Set in Environment',_),RTDString=[])))),
+         once((('LOGIC_ENGINE_RT'(RTD),!,name(RTD,RTDString));((writeIfOption(cb_error,'MOO_XSB_RT Not Set in Environment',_),RTDString=[])))),
          once(append(RTDString,[47|FileNameString],LEPAth)),
          name(AbsoluteFile,LEPAth).
 
@@ -880,6 +880,10 @@ min(X,Y,Min) :-
 		Min = X;
 	%true ->
 		Min = Y.
+
+
+
+isCharCodelist([]).  isCharCodelist([A|T]):-integer(A),A>9,A<128,isCharCodelist(T).
 
 
 nop.
@@ -1179,7 +1183,7 @@ conjunctsToList((Ante),[(Ante)]).
 
 
 prologEach([],Item,_):-!.
-prologEach([Item|Rest],Test,Goal):-notrace((
+prologEach([Item|Rest],Test,Goal):-system_dependant:prolog_notrace((
 	not(not((Item=Test,Goal))),!,
 	prologEach(Rest,Test,Goal),!)).
 
@@ -1469,5 +1473,43 @@ fdelete([Replace|Rest],F,Out):-
 
 fdelete([Replace|Rest],F,[Replace|Out]):-
        fdelete(Rest,F,Out),!.
+
+
+
+% ===================================================================
+% getCleanCharsWhitespaceProper/2.. Cleans String Up before parser uses it
+% ===================================================================
+
+getCleanCharsWhitespaceProper([],[]):-!.
+getCleanCharsWhitespaceProper(X,Z) :- !,logOnFailure(ascii_clean(X,Y)),!,logOnFailure(getCleanCharsWhitespaceProper3(Y,Z)),!.
+
+% Converts not ANSI Chars to whitespace 
+ascii_clean([],[]):-!.
+ascii_clean([X|String],[Y|Out]) :- transpose_char(X,Y),!,ascii_clean(String,Out).
+
+
+string_clean(X,X).
+
+transpose_char(10,32).
+%transpose_char(32,32).
+%transpose_char(X,32):-not(integer(X)),!.
+%transpose_char(X,32):-X<33,!.
+transpose_char( X , X).
+   
+% Blocks of Spaces are removed from a Charlist 
+getCleanCharsWhitespaceProper3([],[]).
+getCleanCharsWhitespaceProper3([32],[]).
+getCleanCharsWhitespaceProper3([10],[]).
+getCleanCharsWhitespaceProper3([13],[]).
+getCleanCharsWhitespaceProper3([32,32],[]).
+getCleanCharsWhitespaceProper3([32,32,32],[]).
+getCleanCharsWhitespaceProper3([X],[X]):-!.
+getCleanCharsWhitespaceProper3([32,32,32,32,32,32,32|String],[32|Out]) :-!, getCleanCharsWhitespaceProper3(String,Out),!.
+getCleanCharsWhitespaceProper3([32,32,32,32,32|String],[32|Out]) :- !,getCleanCharsWhitespaceProper3(String,Out),!.
+getCleanCharsWhitespaceProper3([32,32,32|String],[32|Out]) :-!, getCleanCharsWhitespaceProper3(String,Out),!.
+getCleanCharsWhitespaceProper3([32,32|String],[32|Out]) :- !,getCleanCharsWhitespaceProper3(String,Out),!.
+getCleanCharsWhitespaceProper3([X|String],[X|Out]) :- !,getCleanCharsWhitespaceProper3(String,Out),!.
+getCleanCharsWhitespaceProper3(X,X):-!.
+
 
 

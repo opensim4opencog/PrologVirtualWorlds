@@ -35,20 +35,20 @@ getCleanCharsWhitespaceProper(X,Z):-string_clean(X,C),!,string_to_list(C,List),!
 :- asserta(((user:message_hook(A,B,C) :- moo_server_message_hook(A,B,C)))).
 
 moo_server_message_hook(trace_mode(on),B,Lines):-
-	catch(thread_self(Id),_,fail),
+	catch(getThread(Id),_,fail),
 	'$get_pid'(Pid),
 	fmtString(Title, 'SWI-Prolog Process ~w (pid ~d) interactor', [Id, Pid]),
 	tty_in(Stream),
-	thread_signal(main,(close(Stream))),
+	system_dependant:prolog_thread_at_exit(main,(close(Stream))),
 	set_input(Stream),
 	set_output(user_output),
-	thread_at_exit(thread_signal(main,set_input(Stream))).
+	system_dependant:prolog_thread_at_exit(system_dependant:prolog_thread_at_exit(main,set_input(Stream))).
 */
 :-current_input(Stream),assert(tty_in(Stream)).
 :-current_output(Stream),assert(tty_out(Stream)).
 
 
-bt(ID):-thread_signal(ID,trace)			.
+bt(ID):-system_dependant:prolog_thread_at_exit(ID,trace)			.
 
 moo_server_message_hook(A,B,Lines):-
 	'$get_pid'(Pid),

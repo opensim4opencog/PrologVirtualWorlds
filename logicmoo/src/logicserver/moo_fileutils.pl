@@ -1,40 +1,43 @@
 
+:-module(moo_fileutils,[]).
+
+
 :-include('moo_header.pl').
 
 % ===========================================================
 % Context From File
 % ===========================================================
-ctxFromFile(BadCtxName,Filename,KB):-
+ctxFromFile(BadCtxName,Filename,Context):-
                 catch(atom_codes(BadCtxName,Codes),_,Codes=[]),
                 length(Codes,L),L<3,
                 file_base_name(Filename,BaseCtxName),
                 file_name_extension(CtxName,Extension,BaseCtxName),
                 writeFmt('<B color=red>No name was given, so a Context called <font color=green>~w</font> is being created.<p>',[CtxName]),
-                load_kif_to_kb_ctx(CtxName,Filename,'GlobalContext','MooWeb').
+                load_kif_to_theory_ctx(CtxName,Filename,'GlobalContext','MooWeb').
 
-ctxFromFile(CtxName,Filename,KB):-!,
+ctxFromFile(CtxName,Filename,Context):-!,
                 idGen(TN1),
                 idGen(TN3),
-                assertaClean(mooCache(PredR,surface,'instance'(CtxName,'Context'),'$VAR'(0),KB,'GlobalContext',TN1,'WebUser',on)),
-                assertaClean(mooCache(PredR,surface,'sourcefile'(CtxName,Filename),'$VAR'(0),KB,'GlobalContext',TN3,'WebUser',on)),
-                load_kif_to_kb_ctx(KB,Filename,CtxName,'MooWeb').
+                assertaClean(mooCache(PredR,surface,'instance'(CtxName,'Context'),'$VAR'(0),Context,'GlobalContext',TN1,'WebUser',on)),
+                assertaClean(mooCache(PredR,surface,'sourcefile'(CtxName,Filename),'$VAR'(0),Context,'GlobalContext',TN3,'WebUser',on)),
+                load_kif_to_theory_ctx(Context,Filename,CtxName,'MooWeb').
 
 
 
 
-load_kif_to_kb_ctx(KB,FileName,Ctx,User):-!,
+load_kif_to_theory_ctx(Context,FileName,Ctx,User):-!,
         ignore(User='MooWeb'),
         assert(telling_file),
 %%         atom_concat(FileName,'.compiled.pl',DBG),
 %%         tell(DBG),
          get_default_assertion_context(DCtx), !,ignore((Ctx=DCtx)),!,
-         getMooOption(opt_kb,DKB), !,  ignore((KB=DKB)),!,
+         getMooOption(opt_theory,DContext), !,  ignore((Context=DContext)),!,
 
-         writeFmt('Reading In ~w to ~w with a default context of ~w <p>',[FileName,KB,Ctx]),nl,
+         writeFmt('Reading In ~w to ~w with a default context of ~w <p>',[FileName,Context,Ctx]),nl,
          flag('Axioms Compiled',_,0),
          safe_file_open(FileName,'r',INPUT),
          repeat,   %trace,
-                load_kif_to_kb_ctx_display(KB,Ctx,User,INPUT),
+                load_kif_to_theory_ctx_display(Context,User,INPUT),
                 close(INPUT),
                 flag('Axioms Compiled',AX,AX),
          writeFmt('\n% Compiled ~w axioms.\n',[AX]),
@@ -45,13 +48,13 @@ load_kif_to_kb_ctx(KB,FileName,Ctx,User):-!,
 
 ado_to_prolog(FileName):-
         tell(FileName),
-        mooCache(Pred, Head, Type, Logic,KB, Ctx, Explaination),
-        w_ado_cache(Pred, Head, Type, Logic,KB, Ctx, Explaination),
+        mooCache(Pred, Head, Type, Logic,Context, Ctx, Explaination),
+        w_ado_cache(Pred, Head, Type, Logic,Context, Ctx, Explaination),
         fail.
 
 ado_to_prolog(FileName):-
-        mooCache(Pred, Head, Cond,Type, Logic,KB, Ctx, Explaination),
-        w_ado_cache(Pred, Head, Cond,Type, Logic,KB, Ctx, Explaination),
+        mooCache(Pred, Head, Cond,Type, Logic,Context, Ctx, Explaination),
+        w_ado_cache(Pred, Head, Cond,Type, Logic,Context, Ctx, Explaination),
         fail.
 ado_to_prolog(FileName):-told.
 
@@ -62,13 +65,13 @@ atom_to_prolog(FileName):-
 
 
 atom_to_prolog:-
-        mooCache(Pred, Head, Type, Logic,KB, Ctx, Explaination),
-        a_ado_cache(Pred, Head, Type, Logic,KB, Ctx, Explaination),
+        mooCache(Pred, Head, Type, Logic,Context, Ctx, Explaination),
+        a_ado_cache(Pred, Head, Type, Logic,Context, Ctx, Explaination),
         fail.
 
 atom_to_prolog:-
-        mooCache(Pred, Head, Cond,Type, Logic,KB, Ctx, Explaination),
-        a_ado_cache(Pred, entails(Head, Cond),Type, Logic,KB, Ctx, Explaination),
+        mooCache(Pred, Head, Cond,Type, Logic,Context, Ctx, Explaination),
+        a_ado_cache(Pred, entails(Head, Cond),Type, Logic,Context, Ctx, Explaination),
         fail.
 
 atom_to_prolog:-
@@ -77,9 +80,9 @@ atom_to_prolog:-
 
 atom_to_prolog.
 
-a_ado_cache(argOf, Head, Type, true,KB, Ctx, Explaination):-!.
-a_ado_cache(documentation, Head, Type, true,KB, Ctx, Explaination):-!.
-a_ado_cache(Pred, FOO,Type, Logic,KB, Ctx, Explaination):-
+a_ado_cache(argOf, Head, Type, true,Context, Ctx, Explaination):-!.
+a_ado_cache(documentation, Head, Type, true,Context, Ctx, Explaination):-!.
+a_ado_cache(Pred, FOO,Type, Logic,Context, Ctx, Explaination):-
         getConstants(atomic,FOO,List,_,_),
         assert_list(List).
 
@@ -100,17 +103,17 @@ assert_list_n(A):-
 
 
 
-w_ado_cache(argOf, Head, Type, true,KB, Ctx, Explaination):-!.
-w_ado_cache(documentation, Head, Type, true,KB, Ctx, Explaination):-!.
+w_ado_cache(argOf, Head, Type, true,Context, Ctx, Explaination):-!.
+w_ado_cache(documentation, Head, Type, true,Context, Ctx, Explaination):-!.
 
-w_ado_cache(Pred, Head, Type, true,KB, Ctx, Explaination):-
+w_ado_cache(Pred, Head, Type, true,Context, Ctx, Explaination):-
         format('~q.~n',[Head]),!.
-w_ado_cache(Pred, Head, Type, false,KB, Ctx, Explaination):-
+w_ado_cache(Pred, Head, Type, false,Context, Ctx, Explaination):-
         format('not_~q.~n',[Head]),!.
-w_ado_cache(Pred, Head, Pre, Type, true,KB, Ctx, Explaination):-
+w_ado_cache(Pred, Head, Pre, Type, true,Context, Ctx, Explaination):-
         pre_to_b(Pre,B),
         format('~q:-~q.~n',[Head,B]),!.
-w_ado_cache(Pred, Head, Pre, Type, false,KB, Ctx, Explaination):-
+w_ado_cache(Pred, Head, Pre, Type, false,Context, Ctx, Explaination):-
         pre_to_b(Pre,B),
         format('not_~q:-~q.~n',[Head,B]),!.
 
@@ -120,15 +123,15 @@ pre_to_b(not(B),BBO):-pre_to_b(B,BB),BB=..[F|A],atom_concat('not_',F,NF),BBO=..[
 pre_to_b(B,B).
 
 
-load_kif_to_kb_ctx_display(KB,Ctx,User,Stream):-at_end_of_stream(Stream),!.
+load_kif_to_theory_ctx_display(Context,User,Stream):-at_end_of_stream(Stream),!.
 
-load_kif_to_kb_ctx_display(KB,Ctx,User,Stream):-
+load_kif_to_theory_ctx_display(Context,User,Stream):-
                       once((
                                 source_from_stream(Stream,_,SOURCEFORM,Vars),
                                 catch(
                                                 (
                                                                         flag('Axioms Compiled',X,X+1),
-                                                                        invokeInsert([trusted,nocanonicalize],surface,SOURCEFORM,Ctx,TN,KB,Vars,User)
+                                                                        invokeInsert([trusted,nocanonicalize],surface,SOURCEFORM,Ctx,TN,Context,Vars,User)
                                                 ),
 
                                         E,
@@ -147,19 +150,19 @@ lmerge:-tell_from_kif(forall,'c:/mooL/SUO/PrologMOO.can','PrologMOO','GlobalCont
 
 kif_file(File):-tell_from_kif(forall,File,File,'GlobalContext',Maintainer).
 
-tell_from_kif(SourceFile):-!,tell_from_kif(forall,SourceFile,KB_Name,Ctx,SourceFile).
+tell_from_kif(SourceFile):-!,tell_from_kif(forall,SourceFile,Context_Name,Ctx,SourceFile).
 
-tell_from_kif(SourceFile,KB_Name):-!,tell_from_kif(forall,SourceFile,KB_Name,Ctx,SourceFile).
+tell_from_kif(SourceFile,Context_Name):-!,tell_from_kif(forall,SourceFile,Context_Name,Ctx,SourceFile).
 
-tell_from_kif(Driver,SourceFile,KB_Name,Ctx,Maintainer):-
-            sendNote(debug,kifParser,['Loading Moo KIF/CAN file into ',Driver,' as',KB_Name,Ctx,from,SourceFile],' '),
-            ignore(safe_kb_info_db(KB_Name,SourceFile,WFSFile,_)),
+tell_from_kif(Driver,SourceFile,Context_Name,Ctx,Maintainer):-
+            sendNote(debug,kifParser,['Loading Moo KIF/CAN file into ',Driver,' as',Context_Name,Ctx,from,SourceFile],' '),
+            ignore(safe_theory_info_db(Context_Name,SourceFile,WFSFile,_)),
             ignore(Maintainer=SourceFile),
             safe_file_open(SourceFile,'r',INPUT),
             repeat,
                once((
                      once(readKIF(INPUT,CHARS)),
-                     once(invokeInsert(Driver,chars,CHARS,Ctx,TN,KB_Name,Vars,Maintainer))
+                     once(invokeInsert(Driver,chars,CHARS,Ctx,TN,Context_Name,Vars,Maintainer))
                      )),
             at_end_of_stream(INPUT),!,
             file_close(INPUT),
@@ -202,56 +205,56 @@ load_kif_as_prolog(SourceFile):- !,
             consult_as_dynamic(PLocation).
 
 % ===================================================================
-%  Export Surface Forms as KIF (From a KB and Context)
+%  Export Surface Forms as KIF (From a Context and Context)
 % ===================================================================
 
 
-export_kif_from_source(KB,DestFile):-
-         export_kif_from_source(KB,Ctx,DestFile,full_cmt).
+export_kif_from_source(Context,DestFile):-
+         export_kif_from_source(Context,DestFile,full_cmt).
 
-export_kif_from_source(KB,Ctx,DestFile):-
-         export_kif_from_source(KB,Ctx,DestFile,full_cmt).
+export_kif_from_source(Context,DestFile):-
+         export_kif_from_source(Context,DestFile,full_cmt).
 
-export_kif_from_source(KB,Ctx,DestFile,Fmt):-
+export_kif_from_source(Context,DestFile,Fmt):-
          add_file_extension(".kif",DestFile,PLocation),
          safe_file_open(PLocation,'w',OUTPUT),
          sendNote(debug,kifParser,'Saving kif from Prolog.',[saving,to,PLocation]),
-         export_kif_from_source_0(Fmt,KB,Ctx,OUTPUT).
+         export_kif_from_source_0(Fmt,Context,OUTPUT).
 
-export_kif_from_source_0(Format,KB,Ctx,OUTPUT):-
-         get_store(forall,surface,(Surface:Vars),KB,Ctx,TN,Maintainer),
+export_kif_from_source_0(Format,Context,OUTPUT):-
+         get_store(forall,surface,(Surface:Vars),Context,TN,Maintainer),
          unnumbervars((Surface:Vars),(USurface:UVars)),
          toMarkUp(kif,USurface,UVars,Chars),
-         ( Format=full_cmt -> writeFmt(OUTPUT,'\n; KB:~q  Ctx:~q  TN:~q  Auth:~q\n~s\n',[KB,Ctx,TN,Maintainer,Chars]);
+         ( Format=full_cmt -> writeFmt(OUTPUT,'\n; Context:~q  Ctx:~q  TN:~q  Auth:~q\n~s\n',[Context,TN,Maintainer,Chars]);
          ( Format=terse -> writeFmt(OUTPUT,'\n~s\n',[Chars]);
          ( Format=pnx_nf -> writeFmt(OUTPUT,'\n( pnx_nf ~s ~w ''~w'' )\n',[Chars,Ctx,TN])))),
          fail.
 
-export_kif_from_source_0(Format,KB,Ctx,OUTPUT):-!.
+export_kif_from_source_0(Format,Context,OUTPUT):-!.
 
 % ===================================================================
 
 
 agent_load_kif_quiet(Filename,GlobalContext,User):-
-        agent_load_kif_surface(Filename,KB,Ctx,User,AX,quiet).
+        agent_load_kif_surface(Filename,Context,User,AX,quiet).
 
 agent_load_kif(Filename,Ctx,User):-
-        agent_load_kif_surface(Filename,KB,Ctx,User,AX,loud).
+        agent_load_kif_surface(Filename,Context,User,AX,loud).
 
 
-agent_load_kif_surface(Filename,KB,Ctx,User,AX,Verbose):-
+agent_load_kif_surface(Filename,Context,User,AX,Verbose):-
         ignore(User='Automation'),
         (unsetMooOption(opt_surface_check=_)),
         (setMooOption(opt_surface_check=trusted)),
          get_default_assertion_context(DCtx), !,ignore((Ctx=DCtx)),!,
-         getMooOption(opt_kb,DKB), !,  ignore((KB=DKB)),!,
+         getMooOption(opt_theory,DContext), !,  ignore((Context=DContext)),!,
         idGen(TN1),
         idGen(TN2),
         idGen(TN3),
-        assertaClean(mooCache(PredR,surface,'instance'(KB,'KnowledgeBase'),'$VAR'(0),'MooKernel','GlobalContext',TN1,User,gaf)),
-        assertaClean(mooCache(PredR,surface,'instance'('GlobalContext','Context'),'$VAR'(0),KB,'GlobalContext',TN2,User,gaf)),
-        assertaClean(mooCache(PredR,surface,'sourcefile-of'(KB,Filename),'$VAR'(0),'MooKernel','GlobalContext',TN3,User,gaf)),
-        writeFmt(user_error,'% Reading In ~w to ~w with a default context of ~w \n',[Filename,KB,Ctx]),
+        assertaClean(mooCache(PredR,surface,'instance'(Context,'KnowledgeBase'),'$VAR'(0),'MooKernel','GlobalContext',TN1,User,gaf)),
+        assertaClean(mooCache(PredR,surface,'instance'('GlobalContext','Context'),'$VAR'(0),Context,'GlobalContext',TN2,User,gaf)),
+        assertaClean(mooCache(PredR,surface,'sourcefile-of'(Context,Filename),'$VAR'(0),'MooKernel','GlobalContext',TN3,User,gaf)),
+        writeFmt(user_error,'% Reading In ~w to ~w with a default context of ~w \n',[Filename,Context,Ctx]),
         flag('Axioms Compiled',_,0),
         safe_file_open(Filename,'r',INPUT),!,
            repeat,
@@ -263,7 +266,7 @@ agent_load_kif_surface(Filename,KB,Ctx,User,AX,Verbose):-
                            PROLOG=comment(_)
                             ;
 
-                          remember_ado(PROLOG,Vars,KB,Ctx,User,Verbose)
+                          remember_ado(PROLOG,Vars,Context,User,Verbose)
                             )))),
                      at_end_of_stream(INPUT), !,
         close(INPUT),
@@ -272,13 +275,13 @@ agent_load_kif_surface(Filename,KB,Ctx,User,AX,Verbose):-
         ignore(retract(findings(CPU,RESULT))),
         ignore(findall(T,retract(title(T)),Title)),!.
 
-remember_ado(Surface,Vars,KB,Ctx,User,quiet):-!,
+remember_ado(Surface,Vars,Context,User,quiet):-!,
         flag('Axioms Compiled',AX,AX+1),
-        once(invokeInsert([untrusted,canonicalize],surface,Surface,Ctx,TN,KB,Vars,User)).
+        once(invokeInsert([untrusted,canonicalize],surface,Surface,Ctx,TN,Context,Vars,User)).
 
-remember_ado(Surface,Vars,KB,Ctx,User,_):-!,
+remember_ado(Surface,Vars,Context,User,_):-!,
         flag('Axioms Compiled',AX,AX+1),
-        once(invokeInsert([untrusted,canonicalize],surface,Surface,Ctx,TN,KB,Vars,User)),
+        once(invokeInsert([untrusted,canonicalize],surface,Surface,Ctx,TN,Context,Vars,User)),
         ignore((writeObject(formula(Surface),Vars))),nl.
 
 agentSave(FileName,Ctx):-
@@ -293,15 +296,15 @@ agentSave(FileName,Ctx):-
         told.
 
 
-save_each_assertion_of(Ctx):-mooCache(PredR,Form,Surface,Vars,KB,Ctx,EXTID,User,Status),
-                writeFmt('~q.\n',[mooCache(PredR,Form,Surface,Vars,KB,Ctx,EXTID,User,Status)]),fail.
+save_each_assertion_of(Ctx):-mooCache(PredR,Form,Surface,Vars,Context,EXTID,User,Status),
+                writeFmt('~q.\n',[mooCache(PredR,Form,Surface,Vars,Context,EXTID,User,Status)]),fail.
 save_each_assertion_of(Ctx):-!.
 
 agentLoad(Filename):-ensure_loaded(Filename).
 
 
 % fguard(Template,RH,NVars,Explaination,Functor)
-fguard(RH,NVars,surf(KB,TN,CID,[]),Functor):-!.
+fguard(RH,NVars,surf(Context,TN,CID,[]),Functor):-!.
 
       %  not(recorded(Functor,Template,FRef)),
         %unify_with_occurs_check(Template,RH).
@@ -320,9 +323,9 @@ instance(v(_G235, _G236, _G237), v('Abstract', _G240, ['Class'|_G244])):instance
 guard(Functor,RealHead:Head,RFVH:FVH,Body,TN,CID,KRVars,RuleVars,UnivHead,BodyUniv,BodySelfConnected,RealShared):-
         unify_with_occurs_check(RFVH,FVH), %unifies list of 'real' prolog variables
         recorded(TN,KRVars,Ref),!,
-        writeDebugS(bumping(KRVars)),!,
+        writeDebugFast(bumping(KRVars)),!,
         catch(exit(Ref,cut),_,fail).
-        %(catch(fail(Ref),_,(writeDebugS(missing(Copy)),fail)),fail),write(bollk),nl.
+        %(catch(fail(Ref),_,(writeDebugFast(missing(Copy)),fail)),fail),write(bollk),nl.
 %       catch(exit(Ref,previousCallMoreSpecific(KRVars,Copy)),_,fail),fail.
                                            */
 
@@ -349,15 +352,15 @@ guard(Functor,RealHead:Head,RFVH:FVH,Body,TN,CID,KRVars,RuleVars,UnivHead,BodyUn
 
 
         %(Result=cut -> !,),
-        %catch(erase(Ref),_,writeDebugS(missingRef(Vars))).
+        %catch(erase(Ref),_,writeDebugFast(missingRef(Vars))).
 %       processResult(Result,TN,CID,F,KRVars,RB,Session,Ref),!,
 %       ground(RealShared).
 
 %processResult(Result,TN,CID,F,Vars,RB,Session,Ref):-var(Result),!, % normal completion
 
 %processResult(previousCallMoreSpecific(Vars,Copy),TN,CID,F,KRVars,RB,Session,Ref):- % decendant aborted to here
-        %catch(erase(Ref),_,writeDebugS(missingRefInpreviousCallMoreSpecific(KRVars))),
- %       writeDebugS(previousCallMoreSpecific(KRVars,Vars,Copy)). %,!,fail.
+        %catch(erase(Ref),_,writeDebugFast(missingRefInpreviousCallMoreSpecific(KRVars))),
+ %       writeDebugFast(previousCallMoreSpecific(KRVars,Vars,Copy)). %,!,fail.
 
 
 
@@ -378,18 +381,18 @@ unguard(TN,F,Vars,Session):-
         recorded(TN,Session,Ref),!,erase(Ref),!.
 
 unguard(TN,F,Vars,Session):-
-        writeDebugS(somethingKilled(Session)).
+        writeDebugFast(somethingKilled(Session)).
 
 
 mooCall(X):-
-        mooCache(X, Cost,KB, Ctx,surf(KB,TN,CID,[])).
+        mooCache(X, Cost,Context, Ctx,surf(Context,TN,CID,[])).
 
 mooCall(X):-
-        mooCache(X, Cost,KB, Ctx,surf(KB,TN,CID,[])).
+        mooCache(X, Cost,Context, Ctx,surf(Context,TN,CID,[])).
 
 
-mooCall(Flags,KB):-
-        mooCache(Cons, Ante,Vars,KB, Ctx,TN).
+mooCall(Flags,Context):-
+        mooCache(Cons, Ante,Vars,Context, Ctx,TN).
 
 guard(Functor,RealHead:Head,RFVH:FVH,Body,TN,CID,KRVars,RuleVars,UnivHead,BodyUniv,BodySelfConnected,RealShared):-!,
 %        not(Functor=not(_)),
@@ -433,21 +436,21 @@ va:- compile_show('PrologMOO',valence,2,Debug).
 ensure_all_compiled:-!.
 
 ensure_all_compiled:-
-        getAllMooKB(X),
-        compileKB(X),fail.
+        getAllMooContext(X),
+        compileContext(X),fail.
 
 
-getAllMooKB(X):-fail.
+getAllMooContext(X):-fail.
 
-compileKB(KB):-!.
-compileKB(KB):-
-        compileInstanceSubclass(KB).
+compileContext(Context):-!.
+compileContext(Context):-
+        compileInstanceSubclass(Context).
 
 
 
-make_kb(KB):-
-        retractall(mooCache(KB,_,_)),
-        atom_concat(KB,'.prolog',PrologFile),
+make_theory(Context):-
+        retractall(mooCache(Context,_,_)),
+        atom_concat(Context,'.prolog',PrologFile),
         tell(PrologFile),
         format('
 
@@ -457,16 +460,16 @@ make_kb(KB):-
 :- style_check(-string).
 
         '),
-        image_to_prolog(KB),!,
+        image_to_prolog(Context),!,
         told,
-        save_make_kb(PrologFile,KB,FeatureFile),
-        atom_concat(KB,'.pl',OutputFile),
+        save_make_theory(PrologFile,Context,FeatureFile),
+        atom_concat(Context,'.pl',OutputFile),
         concat_atom([cat,FeatureFile,PrologFile,'>',OutputFile],' ',Cmd),
         format('~n~w~n',[Cmd]).
 
 
-save_make_kb(PrologFile,KB,FeatureFile):-
-        atom_concat(KB,'.feature',FeatureFile),
+save_make_theory(PrologFile,Context,FeatureFile):-
+        atom_concat(Context,'.feature',FeatureFile),
         tell(FeatureFile),
         format('
 
@@ -476,81 +479,81 @@ save_make_kb(PrologFile,KB,FeatureFile):-
 :- style_check(-string).
 
         '),
-        save_features_kb(KB),
+        save_features_theory(Context),
         told.
 
-save_features_kb(KB):-
+save_features_theory(Context):-
         format('~n~n% Predicates~n~n'),
-        mooCache(KB,type(dynamic),Data),
+        mooCache(Context,type(dynamic),Data),
         format(':-~q.~n',[dynamic(Data)]),fail.
 
-save_features_kb(KB):-
+save_features_theory(Context):-
         format('~n~n% Predicates~n~n'),
-        mooCache(KB,type(dynamic),Data),
+        mooCache(Context,type(dynamic),Data),
         format(':-~q.~n',[tabled(Data)]),fail.
 
 /*
-save_features_kb(KB):-
+save_features_theory(Context):-
         format('~n~n% Tables~n~n'),
-        mooCache(KB,type(tabled),Data),
+        mooCache(Context,type(tabled),Data),
         format(':-~q.~n',[tabled(Data)]),fail.
   */
 
 /*
-save_features_kb(KB):-
+save_features_theory(Context):-
         format('~n~n% Not Tabled ~n~n'),
-        mooCache(KB,type(dynamic),Data),
-        not(mooCache(KB,type(tabled),Data)),
+        mooCache(Context,type(dynamic),Data),
+        not(mooCache(Context,type(tabled),Data)),
         format(':-~q.~n',[prolog(Data)]),fail.
 */
 
-save_features_kb(KB):-
+save_features_theory(Context):-
         format('~n~n% Rules~n~n'),
-        mooCache(KB,type(rule),Data),
+        mooCache(Context,type(rule),Data),
         format('~q.~n',[rules_for(Data)]),fail.
 
-save_features_kb(KB):-
+save_features_theory(Context):-
         format('~n~n% No Rules For~n~n'),
-        mooCache(KB,type(dynamic),Data),
-        not(mooCache(KB,type(rule),Data)),
+        mooCache(Context,type(dynamic),Data),
+        not(mooCache(Context,type(rule),Data)),
         format('~q.~n',[no_rules_for(Data)]),fail.
 
-save_features_kb(KB):-
+save_features_theory(Context):-
         format('~n~n% Facts~n~n'),
-        mooCache(KB,type(fact),Data),
+        mooCache(Context,type(fact),Data),
         format('~q.~n',[facts_for(Data)]),fail.
 
-save_features_kb(KB):-
+save_features_theory(Context):-
         format('~n~n% No Facts~n~n'),
-        mooCache(KB,type(dynamic),Data),
-        not(mooCache(KB,type(fact),Data)),
+        mooCache(Context,type(dynamic),Data),
+        not(mooCache(Context,type(fact),Data)),
         format('~q.~n',[no_facts_for(Data)]),fail.
 
-save_features_kb(KB):-
+save_features_theory(Context):-
         format('~n~n% No Rules/Facts~n~n'),
-        mooCache(KB,type(dynamic),Data),
-        not(mooCache(KB,type(fact),Data)),
-        not(mooCache(KB,type(rule),Data)),
+        mooCache(Context,type(dynamic),Data),
+        not(mooCache(Context,type(fact),Data)),
+        not(mooCache(Context,type(rule),Data)),
         format('~q.~n',[no_assertions_for(Data)]),fail.
 
-save_features_kb(KB):-
+save_features_theory(Context):-
         format('~n~n% Lemma Reqs:~n~n'),
-        findall((F-C),mooCache(KB,type(F/A),(C/N)),Edges),
+        findall((F-C),mooCache(Context,type(F/A),(C/N)),Edges),
         keysort(Edges,Sorted),
         format('lemma_edges(~q).~n~n',[Sorted]),!.
 
 
 image_to_prolog:-
         tell('PrologMOO.pl'),
-        image_to_prolog(KB),
+        image_to_prolog(Context),
         told.
 
 
-image_to_prolog(KB):-
+image_to_prolog(Context):-
         hardcoded(HardCoded),
-        image_to_prolog([holds,neg(lit)|HardCoded],KB).
+        image_to_prolog([holds,neg(lit)|HardCoded],Context).
 
-image_to_prolog(Flags,KB):-format(
+image_to_prolog(Flags,Context):-format(
 '
 :- op(400,fy,~~).
 %:- op(500,xfy,:).
@@ -628,20 +631,20 @@ mcl(X,Y):-
 
 
 
-image_to_prolog(Flags,KB):-
-        mooCache(Cons, Cost,KB, Ctx,Explaination),
-                convertPrologWFS(Flags,KB,Activation,Explaination,Cons,Prolog),
+image_to_prolog(Flags,Context):-
+        mooCache(Cons, Cost,Context, Ctx,Explaination),
+                convertPrologWFS(Flags,Context,Activation,Explaination,Cons,Prolog),
         writeAsProlog(Prolog),fail.
 
 
-image_to_prolog(Flags,KB):-
-        mooCache(Cons, Ante,Cost,KB, Ctx,Explaination),
-        convertPrologWFS(Flags,KB,Activation,Explaination,(Cons:-Ante),Prolog),
+image_to_prolog(Flags,Context):-
+        mooCache(Cons, Ante,Cost,Context, Ctx,Explaination),
+        convertPrologWFS(Flags,Context,Activation,Explaination,(Cons:-Ante),Prolog),
         writeAsProlog(Prolog),fail.
 
 
 
-image_to_prolog(Flags,KB):-!.
+image_to_prolog(Flags,Context):-!.
 
 
 
@@ -655,21 +658,21 @@ tabled_consult(File):-
         told.
 
 /*
-tkb(KB):-
+ttheory(Context):-
         tell('tabling.log'),
-        mooCache(Cons, Cost,KB, Ctx,Explaination),
-        assertClauseTable(KB,Cons,Explaination),fail.
+        mooCache(Cons, Cost,Context, Ctx,Explaination),
+        assertClauseTable(Context,Cons,Explaination),fail.
 
-tkb(KB):-
-        mooCache(Cons, Ante,Cost,KB, Ctx,Explaination),
-        assertClauseTable(KB,(Cons:-Ante),Explaination),fail.
+ttheory(Context):-
+        mooCache(Cons, Ante,Cost,Context, Ctx,Explaination),
+        assertClauseTable(Context,(Cons:-Ante),Explaination),fail.
 
-tkb(KB):-told.
+ttheory(Context):-told.
 
 */
 
-assertClauseTable(KB,WFS,Explaination):-
-        convertPrologWFS(Flags,KB,assertClauseTable,Explaination,WFS,Prolog),
+assertClauseTable(Context,WFS,Explaination):-
+        convertPrologWFS(Flags,Context,assertClauseTable,Explaination,WFS,Prolog),
         getTermExpansionLogged(Prolog,Tabled),
         assertAll(Tabled),!.
 
@@ -686,8 +689,8 @@ tconsult(File):-
         seen,
         told.
 
-assertClauseTable(KB,WFS,Explaination):-
-        convertPrologWFS(Flags,KB,assertClauseTable,Explaination,WFS,Prolog),
+assertClauseTable(Context,WFS,Explaination):-
+        convertPrologWFS(Flags,Context,assertClauseTable,Explaination,WFS,Prolog),
         getTermExpansionLogged(Prolog,Tabled),
         assertAll(Tabled).
 
@@ -707,15 +710,15 @@ write_te_list([X|T]):-!,write_te_list(X),write_te_list(Y).
 write_te_list(X):-format('~q.\n',X).
 
 
-convertPrologWFS(Flags,KB,Activation,surf(KB,TN,CID,KRVars),
+convertPrologWFS(Flags,Context,Activation,surf(Context,TN,CID,KRVars),
         (C :- A),
         ((
         RealHead :-
                 guard(Functor,(RealHead:Head),(RFVH:FVH),Body,TN,CID,KRVars,
                 RuleVars,UnivHead,BodyUniv,BodySelfConnected,Shared)))):-!,
         functor(C,F,_),convertNegations((not),F,Functor,_),
-        convertRuleHeadWFS(Flags,KB,Activation,C,Head,RuleHead),
-        convertRuleBodyWFS(Flags,KB,Activation,RuleHead,A,Body),!,
+        convertRuleHeadWFS(Flags,Context,Activation,C,Head,RuleHead),
+        convertRuleBodyWFS(Flags,Context,Activation,RuleHead,A,Body),!,
         getPrologVars(KRVars,RuleVars,_,_),!,
         getPrologVars(Head,FVH,_,_),!,set_partition(RuleVars,FVH,_,_,HeadVars),
         getPrologVars(Body,FVB,BSingles,_),!,set_partition(RuleVars,FVB,_,_,BodyVars),
@@ -723,9 +726,9 @@ convertPrologWFS(Flags,KB,Activation,surf(KB,TN,CID,KRVars),
         set_partition(PrivBody,BSingles,BodySelfConnected,_,BodyUniv),!,
         copy_term((Head,FVH,PrivHead),(RealHead,RFVH,UnivHead)).
 
-convertPrologWFS(Flags,KB,Activation,Explaination,(C),(RH:- fguard(RH,NVars,Explaination,Functor))):-!,
+convertPrologWFS(Flags,Context,Activation,Explaination,(C),(RH:- fguard(RH,NVars,Explaination,Functor))):-!,
         functor(C,F,_),convertNegations((not),F,Functor,_),
-        convertFactHeadWFS(Flags,KB,Activation,C,RH),
+        convertFactHeadWFS(Flags,Context,Activation,C,RH),
         functor(RH,F,A),functor(Template,F,A),Template=..[F|NVars].
 
 
@@ -740,21 +743,21 @@ writeAsProlog((H,T)):-format('\n\t~q,',[H]),writeAsProlog(T),!.
 writeAsProlog([H|T]):-format('\n\t~q,',[H]),writeAsProlog(T),!.
 writeAsProlog(C):-format('\n\t ~q.~n',[C]),!.
 
-recordIfNew(Activation,KB,Cons,Type):-!.
+recordIfNew(Activation,Context,Cons,Type):-!.
 
-recordIfNew(Activation,KB,Cons,Type):-
+recordIfNew(Activation,Context,Cons,Type):-
         atom(Type),!,
         functor(Cons,Pred,Arity),
-        recordIfNewCache(KB,Type,Pred/Arity),!.
-recordIfNew(Activation,KB,Cons,Type):-
+        recordIfNewCache(Context,Type,Pred/Arity),!.
+recordIfNew(Activation,Context,Cons,Type):-
         functor(Type,T,A),
         functor(Cons,Pred,Arity),
-        recordIfNewCache(KB,(T/A),(Pred/Arity)).
+        recordIfNewCache(Context,(T/A),(Pred/Arity)).
 
-recordIfNewCache(KB,Type,Data):-
-        mooCache(KB,type(Type),Data),!.
-recordIfNewCache(KB,Type,Data):-
-        assertz(mooCache(KB,type(Type),Data)),!.
+recordIfNewCache(Context,Type,Data):-
+        mooCache(Context,type(Type),Data),!.
+recordIfNewCache(Context,Type,Data):-
+        assertz(mooCache(Context,type(Type),Data)),!.
 
 
 
@@ -793,26 +796,26 @@ Subclasses of Abstract
 
 
 /*
-compile_to_file(STANDARDPred,Arity,KB):-
-        make_relation_profile(KB,STANDARDPred,Logic,Arity,N,Module,SourceInfo,Functor),
+compile_to_file(STANDARDPred,Arity,Context):-
+        make_relation_profile(Context,STANDARDPred,Logic,Arity,N,Module,SourceInfo,Functor),
         open(SourceInfo, write, Stream, [buffer(full),type(text),alias(STANDARDPred)]),
-        compile_show(STANDARDPred,KB,STANDARDPred,Arity,Debug),
+        compile_show(STANDARDPred,Context,STANDARDPred,Arity,Debug),
         close(STANDARDPred).
 */
-compile_to_file(STANDARDPred,Arity,KB):-
-        make_relation_profile(KB,STANDARDPred,Logic,Arity,N,Module,SourceInfo,Functor),!,
+compile_to_file(STANDARDPred,Arity,Context):-
+        make_relation_profile(Context,STANDARDPred,Logic,Arity,N,Module,SourceInfo,Functor),!,
         open(SourceInfo, write, Stream, [buffer(full),type(text),alias(STANDARDPred)]),
-        compile_show(Stream,KB,STANDARDPred,Arity,Debug),!,
+        compile_show(Stream,Context,STANDARDPred,Arity,Debug),!,
         close(Stream),!.
 
-compile_show(KB,STANDARDPred,Arity,Debug):-
+compile_show(Context,STANDARDPred,Arity,Debug):-
         current_output(Stream),!,
-        compile_show(Stream,KB,STANDARDPred,Arity,Debug),!.
+        compile_show(Stream,Context,STANDARDPred,Arity,Debug),!.
 
 
-compile_show(Stream,KB,STANDARDPred,Arity,Debug):-
+compile_show(Stream,Context,STANDARDPred,Arity,Debug):-
         ignore(Debug=no_debug),!,
-        make_relation_profile(KB,STANDARDPred,Logic,Arity,N,Module,SourceInfo,Functor),
+        make_relation_profile(Context,STANDARDPred,Logic,Arity,N,Module,SourceInfo,Functor),
         mkImported(full,Functor,Arity,Logic,Vect,Ctx,ExplainationIn,Explaination,Imported),
         mkArgsAtom(Arity,ArgsAtom),
         mkHolds(STANDARDPred,Arity,Vect,Cons),
@@ -824,7 +827,7 @@ File: "~w"
 
 Maintainer:      dmiles@users.sourceforge.net [Douglas R. Miles]
 
-Purpose:  Individual loading of Moo KB Predicates.
+Purpose:  Individual loading of Moo Context Predicates.
 
 Exported:
         explaination_line/2,                                                                    % ExplainationIn of Explaination Formats
@@ -839,7 +842,7 @@ Type of SourceInfo: predicate_module (generated runtime)
 Module:   ~q
 STANDARD:   ~q
 Cons:   ~q
-KB:   ~q
+Context:   ~q
 Debug:  ~q
 </font>
 */
@@ -855,11 +858,11 @@ Debug:  ~q
 :-include(\'moo_multifile.P\').
 
 % =====================================================
-% belief_module(KB,Ctx,STANDARDPred,Cons,Imported,ConnectionType,SourceInfo,HowOften).
-%       KB = The KnowedgeBase
+% belief_module(Context,STANDARDPred,Cons,Imported,ConnectionType,SourceInfo,HowOften).
+%       Context = The KnowedgeBase
 %       Ctx = The Context
 %       STANDARDPred = The Functor\'s STANDARD Name
-%       Goal = Functors STANDARD Prototype       "goal(Logic,ExplainationIn,holds(STANDARDPred,A,B),Ctx,KB,ExplainationOut)"
+%       Goal = Functors STANDARD Prototype       "goal(Logic,ExplainationIn,holds(STANDARDPred,A,B),Ctx,Context,ExplainationOut)"
 %       Imported = Functor\'s Prolog Prototype
 %       ConnectionType = \'prolog\'  meaning its compiled by consulting this file to memory.
 %       SourceInfo = The connection parameters
@@ -896,14 +899,14 @@ belief_module(
         Functor,ArgsAtom,  % Comment bk_Functor
         Functor,ArgsAtom,  % Comment fw_Functor
         Functor,ArgsAtom,  % Comment gaf_Functor
-        Module,STANDARDPred,Cons,KB,Debug, % Comments
+        Module,STANDARDPred,Cons,Context,Debug, % Comments
         Module,Dash,Dash,Dash,Dash,  % module/2
-        KB,STANDARDPred,STANDARDPred,ArgsAtom,KB,Functor,ArgsAtom,SourceInfo, % belief_module/5
+        Context,STANDARDPred,STANDARDPred,ArgsAtom,Context,Functor,ArgsAtom,SourceInfo, % belief_module/5
         Index,Index,Index,Index,    % index/1
         Dash,Dash,Dash,Dash      % dynamic/1
         ]),!,
-        create_entry_points(Stream,non_singleValued,Functor,KB,STANDARDPred,Arity,N,Module,Debug,ArgsAtom),!,
-        make_pred_data(Stream,Functor,KB,STANDARDPred,Arity,N,Module,Debug,ArgsAtom),!.
+        create_entry_points(Stream,non_singleValued,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom),!,
+        make_pred_data(Stream,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom),!.
 
 mkArgsAtom(Arity,ArgsAtom):-
         length(Arglist,Arity),
@@ -934,25 +937,25 @@ put_in_n(NN,Value,[]).
 put_in_n(NN,Value,[Value|L]):-put_in_n(NN,Value,L).
 
 
-create_head(Tag,KB,STANDARDPred,Logic,Args,Head):-
-        concat_atom([Tag,KB,'_',STANDARDPred],Functor),
+create_head(Tag,Context,STANDARDPred,Logic,Args,Head):-
+        concat_atom([Tag,Context,'_',STANDARDPred],Functor),
         Head=..[Functor|Args],!.
 
 
 % ===============================================================
-% make_relation_profile(-KB,-STANDARDPred,-Logic,-Arity,+N,+Module,+SourceInfo,+Functor)
+% make_relation_profile(-Context,-STANDARDPred,-Logic,-Arity,+N,+Module,+SourceInfo,+Functor)
 % ===============================================================
-make_relation_profile(KB,STANDARDPred,Logic,Arity,N,Module,SourceInfo,Functor):-!,
-        ignore(KB='PrologMOO'),
+make_relation_profile(Context,STANDARDPred,Logic,Arity,N,Module,SourceInfo,Functor):-!,
+        ignore(Context='PrologMOO'),
         ignore(STANDARDPred='attribute'),
         ignore(Arity=2),
         is(N,(Arity + 4)),
-        concat_atom([KB,'_',STANDARDPred],Module),
+        concat_atom([Context,'_',STANDARDPred],Module),
         concat_atom([Module,Arity],Functor),
         concat_atom(['pred_', Module, '.pl' ],SourceInfo),!.
 
 
-create_entry_points(Stream,non_singleValued,Functor,KB,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):-
+create_entry_points(Stream,non_singleValued,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):-
 format(Stream,'
 % ==================================================================================
 % <B>Entry Points</B> for <font color=red>non_singleValued</font>   <font size=+1 color=green>~w/~w</font>
@@ -976,7 +979,7 @@ full_~w(Logic,~w, Ctx,ExplainationIn,Explaination):-
         Functor,ArgsAtom,Functor,ArgsAtom
         ]),!. % never fails
 
-make_pred_data(Stream,Functor,KB,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):-
+make_pred_data(Stream,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):-
 format(Stream,'
 
 % ================================================================================================================
@@ -999,40 +1002,40 @@ make_head_t(false,STANDARDPred,N,Cons):-
                 Cons=..[STANDARDPredN|Args],!.
 
 
-getrule(STANDARDPred,Arity,Cons,Precond, KB,Ctx, surf(KB,TN,CID),Vars):-
+getrule(STANDARDPred,Arity,Cons,Precond, Context, surf(Context,TN,CID),Vars):-
         make_head_t(true,STANDARDPred,Arity,Cons),
-        mooCache(Cons, A1,A2,A3, Cost,KB, Ctx,surf(KB,TN,CID,Vars)),
+        mooCache(Cons, A1,A2,A3, Cost,Context, Ctx,surf(Context,TN,CID,Vars)),
         once((append(A1,A2,AM),
         append(AM,A3,Precond))).
-getrule(STANDARDPred,Arity,Cons,Precond, KB,Ctx, surf(KB,TN,CID),Vars):-
+getrule(STANDARDPred,Arity,Cons,Precond, Context, surf(Context,TN,CID),Vars):-
         make_head_t(false,STANDARDPred,Arity,Cons),
-        mooCache(Cons, A1,A2,A3, Cost,KB, Ctx,surf(KB,TN,CID,Vars)),
+        mooCache(Cons, A1,A2,A3, Cost,Context, Ctx,surf(Context,TN,CID,Vars)),
         once((append(A1,A2,AM),
         append(AM,A3,Precond))).
 
 % True GAFS
-make_pred_data(Stream,Functor,KB,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):-
+make_pred_data(Stream,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):-
         make_head_t(true,STANDARDPred,Arity,Cons),
-        mooCache(Cons, Precon, KB,Ctx, TID),
+        mooCache(Cons, Precon, Context, TID),
         write_rulenum(Stream,TID),
-        numbervars((Cons, Precon, KB,Ctx, TID,Vars),'$VAR',15,_),
-        submit_ado_cache(Stream,STANDARDPred,Cons, Precon, KB,Ctx, TID,Vars),fail.
+        numbervars((Cons, Precon, Context, TID,Vars),'$VAR',15,_),
+        submit_ado_cache(Stream,STANDARDPred,Cons, Precon, Context, TID,Vars),fail.
 
 % False GAFS
-make_pred_data(Stream,Functor,KB,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):-
+make_pred_data(Stream,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):-
         make_head_t(false,STANDARDPred,Arity,Cons),
-        mooCache(Cons, Precon, KB,Ctx, TID),
+        mooCache(Cons, Precon, Context, TID),
         write_rulenum(Stream,TID),
-        numbervars((Cons, Precon, KB,Ctx, TID,Vars),'$VAR',15,_),
-        submit_ado_cache(Stream,STANDARDPred,Cons, Precon, KB,Ctx, TID,Vars),fail.
+        numbervars((Cons, Precon, Context, TID,Vars),'$VAR',15,_),
+        submit_ado_cache(Stream,STANDARDPred,Cons, Precon, Context, TID,Vars),fail.
 
 % True then Fasle Rules
-make_pred_data(Stream,Functor,KB,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):- %trace,
-        getrule(STANDARDPred,Arity,Cons,Precond, KB,Ctx, TID,Vars), %trace,
+make_pred_data(Stream,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):- %trace,
+        getrule(STANDARDPred,Arity,Cons,Precond, Context, TID,Vars), %trace,
         write_rulenum(Stream,TID),
         close_list(Vars),
-        numbervars((Stream,STANDARDPred,Cons,Precond, KB,Ctx, TID,Vars),'$VAR',15,_),
-        submit_ado_cache(Stream,STANDARDPred,Cons,Precond, KB,Ctx, TID,Vars),fail.
+        numbervars((Stream,STANDARDPred,Cons,Precond, Context, TID,Vars),'$VAR',15,_),
+        submit_ado_cache(Stream,STANDARDPred,Cons,Precond, Context, TID,Vars),fail.
 
        % toMarkUp(kif,DispExplaination,Vars,PrettyForm),
         %logOnFailure(format(Stream,'/*~n</B><font color=green>~n~nForms:~n~n~s~nFlags: ~w \n</font><B>*/',[PrettyForm,Flags])),
@@ -1041,72 +1044,72 @@ make_pred_data(Stream,Functor,KB,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):- %
 
 
 % Write footer
-make_pred_data(Stream,Functor,KB,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):-
+make_pred_data(Stream,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):-
         getPrettyDateTime(String),
         format(Stream,'\n/* \n Last Saved: ~s</B></font>\n</PRE>*/\n\n\n',[String]),!.
 
 
-%submit_ado_cache(Stream,STANDARDPred,Cons,_,_,Logic, KB, Ctx, Explaination * _):-trace,fail.
+%submit_ado_cache(Stream,STANDARDPred,Cons,_,_,Logic, Context, Ctx, Explaination * _):-trace,fail.
 
 
 % No antecedents flags
-submit_ado_cache(Stream,STANDARDPred,Cons, [], KB,Ctx, TID,Vars):-
+submit_ado_cache(Stream,STANDARDPred,Cons, [], Context, TID,Vars):-
         Cons=..[_|Arguments],
         append(Arguments,[Ctx,TID],Args),  !,
-        create_head('gaf_',KB,STANDARDPred,true,Args,PrologHead),
+        create_head('gaf_',Context,STANDARDPred,true,Args,PrologHead),
         format(Stream,'~n~q.~n',[PrologHead]),!.
 
 % With antecedents flags
-submit_ado_cache(Stream,STANDARDPred,Cons,Ante, KB,Ctx, TID,Vars):-
+submit_ado_cache(Stream,STANDARDPred,Cons,Ante, Context, TID,Vars):-
         Cons=..[_|Arguments],
         numbervars(SubCtx),
         append(Arguments,[Ctx,ExplainationIn,[explaination_line(TID,VarsRef)|ExplainationOut]],Args),
-        create_head('bk_',KB,STANDARDPred,true,Args,PrologHead),
+        create_head('bk_',Context,STANDARDPred,true,Args,PrologHead),
         format(Stream,'~n ~q :- \n',[PrologHead]),!,
         %format(Stream,'\t~q,~n',[not_near_member(TID,ExplainationIn)]), !,
       %  findall(Neg,member(-(Neg),Ante),NegS),
         % findall(Pos,member(+(Pos),Ante),PosS),
         %format(Stream,'\t~q,~n',[minor_interception(PosS,NegS,ExplainationIn,ExplainationMid)]),
-        %write_std_flags(Stream,KB,Flags,(Cons:Ante)),!,
+        %write_std_flags(Stream,Context,Flags,(Cons:Ante)),!,
         format(Stream,'\t~q,~n',[subcontext(Ctx,SubCtx)]),
-        write_prolog_body_clause(Stream,Ante,STANDARDPred,Cons,Ante,KB, SubCtx, TID,Vars,ExplainationIn,ExplainationOut),!,
+        write_prolog_body_clause(Stream,Ante,STANDARDPred,Cons,Ante,Context, SubCtx, TID,Vars,ExplainationIn,ExplainationOut),!,
         format(Stream,'\t~q.~n~n',[(ground(Vars),VarsRef=Vars)]),!.
 
-write_std_flags(Stream,KB,Flags,Term):-
-        write_lllist(Stream,KB,Flags),!.
+write_std_flags(Stream,Context,Flags,Term):-
+        write_lllist(Stream,Context,Flags),!.
 
-write_lllist(Stream,KB,[]):-!.
-write_lllist(Stream,KB,[Arg|List]):-
-        format(Stream,'\tk~w_~q,~n',[KB,Arg]),
-        write_lllist(Stream,KB,List),!.
+write_lllist(Stream,Context,[]):-!.
+write_lllist(Stream,Context,[Arg|List]):-
+        format(Stream,'\tk~w_~q,~n',[Context,Arg]),
+        write_lllist(Stream,Context,List),!.
 
 
 /*
 
-submit_ado_cache(Stream,STANDARDPred,Cons,Ante,Flags,Logic, KB, Ctx, TID * Vars):-
-        write_prolog_rule(Stream,STANDARDPred,Cons,Ante,Flags,Logic, KB, Ctx, TID,Vars),!.
+submit_ado_cache(Stream,STANDARDPred,Cons,Ante,Flags,Logic, Context, Ctx, TID * Vars):-
+        write_prolog_rule(Stream,STANDARDPred,Cons,Ante,Flags,Logic, Context, Ctx, TID,Vars),!.
 
-write_prolog_rule(Stream,STANDARDPred,Cons,Ante,Flags,Logic, KB, Ctx, TID,Vars):-
+write_prolog_rule(Stream,STANDARDPred,Cons,Ante,Flags,Logic, Context, Ctx, TID,Vars):-
         format(Stream,' ~q. ~n',[explaination_line(TID,Vars,DispExplaination)]),
         Cons=..[_|Arguments],
         append(Arguments,[Ctx,ExplainationIn,(ExplainationOut * TID,Vars)],Args),
-        create_head('bachchain_',KB,STANDARDPred,Logic,Args,PrologHead),
+        create_head('bachchain_',Context,STANDARDPred,Logic,Args,PrologHead),
         format(Stream,' ~q :- ~n',[PrologHead]),
-        write_prolog_body_start(Stream,Ante,STANDARDPred,Cons,Ante,Flags,Logic, KB, Ctx, TID,Vars,ExplainationIn,ExplainationMid),!,
-        write_prolog_body_clause(Stream,Ante,STANDARDPred,Cons,Ante,Flags,Logic, KB, Ctx, TID,Vars,ExplainationMid,ExplainationOut),!.
+        write_prolog_body_start(Stream,Ante,STANDARDPred,Cons,Ante,Flags,Logic, Context, Ctx, TID,Vars,ExplainationIn,ExplainationMid),!,
+        write_prolog_body_clause(Stream,Ante,STANDARDPred,Cons,Ante,Flags,Logic, Context, Ctx, TID,Vars,ExplainationMid,ExplainationOut),!.
 
 */
-%       write_prolog_body_clause(Stream,Ante,STANDARDPred,Cons,Ante,Flags,Logic, KB, Ctx, TID,Vars,ExplainationMid,ExplainationOut),!.
+%       write_prolog_body_clause(Stream,Ante,STANDARDPred,Cons,Ante,Flags,Logic, Context, Ctx, TID,Vars,ExplainationMid,ExplainationOut),!.
 
-write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,[], KB, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-!,
+write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,[], Context, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-!,
         format('\t~w,~n',[ExplainationIn=ExplainationOut]).
 
-write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,[Ante], KB, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-!,%trace,
-        write_prolog_term(Stream,OrigAnte,KB,Flags,Caller,FlagsSTANDARDPred,Cons,Ante,KB, Ctx, TID,Vars,ExplainationIn,ExplainationOut),!.
+write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,[Ante], Context, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-!,%trace,
+        write_prolog_term(Stream,OrigAnte,Context,Flags,Caller,FlagsSTANDARDPred,Cons,Ante,Context, Ctx, TID,Vars,ExplainationIn,ExplainationOut),!.
 
-write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,[Ante|More], KB, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-!,%trace,
-        write_prolog_term(Stream,OrigAnte,KB,Flags,Caller,FlagsSTANDARDPred,Cons,Ante,KB, Ctx, TID,Vars,ExplainationIn,ExplainationMid),
-        write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,More, KB, Ctx, TID,Vars,ExplainationMid,ExplainationOut),!.
+write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,[Ante|More], Context, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-!,%trace,
+        write_prolog_term(Stream,OrigAnte,Context,Flags,Caller,FlagsSTANDARDPred,Cons,Ante,Context, Ctx, TID,Vars,ExplainationIn,ExplainationMid),
+        write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,More, Context, Ctx, TID,Vars,ExplainationMid,ExplainationOut),!.
 
 
 
@@ -1116,11 +1119,11 @@ check_begin_flags(FlagsList,ExplainationIn,ExplainationOut):-ExplainationIn=Expl
 
 
 
-write_prolog_term(Stream,OrigAnte,KB,Flags,Caller,FlagsSTANDARDPred,Cons,Useless, KB, Ctx, TID,Vars,ExplainationIn,ExplainationIn):- useless(Useless),!.
-write_prolog_term(Stream,OrigAnte,KB,Flags,Caller,FlagsSTANDARDPred,Cons,Ante, KB, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-
+write_prolog_term(Stream,OrigAnte,Context,Flags,Caller,FlagsSTANDARDPred,Cons,Useless, Context, Ctx, TID,Vars,ExplainationIn,ExplainationIn):- useless(Useless),!.
+write_prolog_term(Stream,OrigAnte,Context,Flags,Caller,FlagsSTANDARDPred,Cons,Ante, Context, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-
         Ante=..[P|Arguments],
         append(Arguments,[Ctx,ExplainationIn,ExplainationOut],Args),
-        create_head('fw_',KB,P,true,Args,PrologHead),
+        create_head('fw_',Context,P,true,Args,PrologHead),
         format(Stream,'\t~q,~n',[PrologHead]),!.
 
 useless(domainC(_,[])).
@@ -1128,10 +1131,10 @@ useless(domainA(_,[])).
 
 
 
-make_disp_explaination(true,surf(KB,TID),Vars,Cons,Conds,via(entails(CondsO,Cons),Vars) * surf(KB,TID)):-fix_conds(Conds,CondsO),!.
-make_disp_explaination(false,surf(KB,TID),Vars,Cons,Conds,via(entails(CondsO,not(Cons)),Vars) * surf(KB,TID)):-fix_conds(Conds,CondsO),!.
-make_disp_explaination(true,surf(KB,TID,ID),Vars,Cons,Conds,via(entails(CondsO,Cons),Vars) * surf(KB,TID,ID)):-fix_conds(Conds,CondsO),!.
-make_disp_explaination(false,surf(KB,TID,ID),Vars,Cons,Conds,via(entails(CondsO,not(Cons)),Vars) * surf(KB,TID,ID)):-fix_conds(Conds,CondsO),!.
+make_disp_explaination(true,surf(Context,TID),Vars,Cons,Conds,via(entails(CondsO,Cons),Vars) * surf(Context,TID)):-fix_conds(Conds,CondsO),!.
+make_disp_explaination(false,surf(Context,TID),Vars,Cons,Conds,via(entails(CondsO,not(Cons)),Vars) * surf(Context,TID)):-fix_conds(Conds,CondsO),!.
+make_disp_explaination(true,surf(Context,TID,ID),Vars,Cons,Conds,via(entails(CondsO,Cons),Vars) * surf(Context,TID,ID)):-fix_conds(Conds,CondsO),!.
+make_disp_explaination(false,surf(Context,TID,ID),Vars,Cons,Conds,via(entails(CondsO,not(Cons)),Vars) * surf(Context,TID,ID)):-fix_conds(Conds,CondsO),!.
 
 fix_conds(Var,Var):-isSlot(Var),!.
 fix_conds([],true):-!.

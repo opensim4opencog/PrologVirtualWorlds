@@ -2,7 +2,12 @@
 % NATIVE SOAPD SERVER FOR SWI-PROLOG
 % ===========================================================
 
+			    
+:-module(moo_soap,[]).
+
 :-include('moo_header.pl').
+
+:-dynamic(xmlCurrentOpenTags/2).
 
 serviceSoapRequest(In,Out):-
       writeSTDERR('SOAP Request'),
@@ -16,7 +21,7 @@ read_do_soap(Source):-
         read_do_soap(Stream,user_output).
 
 read_do_soap(Source,Out):-
-       thread_self(Self),
+       getThread(Self),
         write(Out,'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'),
        % writeFmt(Out,'<?xml version="1.0" encoding="ISO-8859-1"?>\n<answer thread="~w">\n',[Self]),
         catch(flush_output(Out),_,true),
@@ -42,12 +47,25 @@ structure_to_options([element(Ptag, ['xmlns:moo'=Server], Inner)],[opt_server=Se
 
 
 
+xmlOpenTag(Name):-getThread(Self),asserta(xmlCurrentOpenTags(Self,A)),writeFmtServer('<~w>',[Name]),!.
+xmlOpenTagW(Out,Name,Text):-getThread(Self),asserta(xmlCurrentOpenTags(Self,A)),writeFmtServer(Out,'~w',[Text]),!.
+
+xmlCloseTag(Name):-getThread(Self),ignore(retract(xmlCurrentOpenTags(Self,A))),writeFmtServer('</~w>',[Name]),!.
+xmlCloseTagW(Name,Text):-getThread(Self),ignore(retract(xmlCurrentOpenTags(Self,A))),writeFmtServer('~w',[Text]),!.
+xmlCloseTagW(Out,Name,Text):-getThread(Self),ignore(retract(xmlCurrentOpenTags(Self,A))),writeFmtServer(Out,'~w',[Text]),!.
+
+xmlClearTags:-getThread(Self),retractall(xmlCurrentOpenTags(Self,A)).
+
+xmlExitTags:-getThread(Self),retract(xmlCurrentOpenTags(Self,A)),writeFmtServer('</~w>',[Name]),fail.
+xmlExitTags.
+
+
 % ===========================================================
 % Insert
 % ===========================================================
 parse_moo_soap(Options):-memberchk(submit=assert,Options),!,
         getMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        getMooOption(opt_kb='PrologMOO',KB),
+        getMooOption(opt_theory='PrologMOO',Context),
         getMooOption(sf=surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
         getMooOption(user='Web',User),
@@ -55,21 +73,21 @@ parse_moo_soap(Options):-memberchk(submit=assert,Options),!,
         logOnFailure(getMooOption(tn=_,EXTID)),
         %sendNote(user,'Assert',formula(NEWFORM),'Ok.'). %,logOnFailure(saveMooCache)
         logOnFailure(getCleanCharsWhitespaceProper(Assertion_Chars,Show)),!,
-        xml_assert(Show,Ctx,KB,User).
+        xml_assert(Show,Ctx,Context,User).
 
-xml_assert(Show,Ctx,KB,User):-
+xml_assert(Show,Ctx,Context,User):-
         getSurfaceFromChars(Show,STERM,Vars),
         getMooTermFromSurface(STERM,NEWFORM),
-        xml_assert(Show,NEWFORM,Vars,Ctx,KB,User).
+        xml_assert(Show,NEWFORM,Vars,Ctx,Context,User).
 
-xml_assert(Show,Ctx,KB,User):-!,
+xml_assert(Show,Ctx,Context,User):-!,
         writeFmt('<assertionResponse accepted="false">\nUnable to parse: "~s"\n</assertionResponse>\n',[Show]).
 
-xml_assert(Show,NEWFORM,Vars,Ctx,KB,User):-
-        logOnFailure(getTruthCheckResults(tell,[untrusted],surface,NEWFORM,Ctx,STN,KB,Vars,Maintainer,Result)),
+xml_assert(Show,NEWFORM,Vars,Ctx,Context,User):-
+        logOnFailure(getTruthCheckResults(tell,[untrusted],surface,NEWFORM,Ctx,STN,Context,Vars,Maintainer,Result)),
         (Result=accept(_) ->
                         (
-                        once(invokeInsert([trusted,canonicalize,to_mem],surface,NEWFORM,Ctx,EXTID,KB,Vars,User)),
+                        once(invokeInsert([trusted,canonicalize,to_mem],surface,NEWFORM,Ctx,EXTID,Context,Vars,User)),
                         write('<assertionResponse accepted="true">\nOk.\n</assertionResponse>\n')
                         )
                         ;
@@ -81,7 +99,7 @@ xml_assert(Show,NEWFORM,Vars,Ctx,KB,User):-
                         )
         ),!.
 
-xml_assert(Show,NEWFORM,Vars,Ctx,KB,User):-!.
+xml_assert(Show,NEWFORM,Vars,Ctx,Context,User):-!.
 
 
 % ===========================================================
@@ -91,7 +109,7 @@ parse_moo_soap(Options):-memberchk(submit=ask,Options),!,make,
         %write('<!DOCTYPE moo:ask SYSTEM "/opt/tomcat-4.0/webapps/moo-1.4b1/dtd/java_prolog.dtd">\n'),
         write('<moo:ask xmlns:moo="http://localhost">\n'),
         getMooOption(opt_ctx_request='GlobalContext',Ctx),
-        getMooOption(opt_kb='PrologMOO',KB),
+        getMooOption(opt_theory='PrologMOO',Context),
         getMooOption(sf=surf,Askion),
         atom_codes(Askion,Askion_Chars),
         getMooOption(user='Web',User),
@@ -101,12 +119,12 @@ parse_moo_soap(Options):-memberchk(submit=ask,Options),!,make,
          logOnFailure(getMooTermFromSurface(STERM,NEWFORM)),!,
               logOnFailure(once(( NEWFORM=comment(_) ->
                      (writeFmt('<error>Syntax Error: Unmatched parentheses in "~s"</error>\n',[Show]),!,FORM=_) ;(!,
-                     logOnFailure(invokeRequest_xml(NEWFORM,ChaseVars,Ctx,TrackingAtom,KB,User,Vars,CPU))
+                     logOnFailure(invokeRequest_xml(NEWFORM,ChaseVars,Ctx,TrackingAtom,Context,User,Vars,CPU))
                      )))),
         write('</moo:ask>\n').
 
-invokeRequest_xml(NEWFORM,ChaseVars,Ctx,TrackingAtom,KB,User,Vars,CPU):-
-        invokeRequestToBuffer(NEWFORM,ChaseVars,Ctx,TrackingAtom,KB,User,Vars,CPU),
+invokeRequest_xml(NEWFORM,ChaseVars,Ctx,TrackingAtom,Context,User,Vars,CPU):-
+        invokeRequestToBuffer(NEWFORM,ChaseVars,Ctx,TrackingAtom,Context,User,Vars,CPU),
         final_answer(Logic:How),
         invoke_final_answer(Logic,How,CPU).
 
@@ -225,4 +243,5 @@ write_e(34):-write('&qt;'),!.
 write_e(60):-write('&lt;'),!.
 write_e(62):-write('&gt;'),!.
 write_e(C):-put_code(C),!.
+
 

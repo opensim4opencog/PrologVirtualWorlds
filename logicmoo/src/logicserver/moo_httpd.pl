@@ -2,31 +2,21 @@
 % SOCKET SERVER - Looks at first charicater of request and decides between:
 %  Http, Native or Soap and replies accordingly
 % ===========================================================
+:-module(moo_httpd,[
+   createPrologServer/1,
+   xmlPrologServer/1,
+   read_line_with_nl/3,
+   decodeRequest/2,
+   invokePrologCommandRDF/6]).
 
-:- ensure_loaded(library(readutil)).
-:- ensure_loaded(library(socket)).
-:- include('moo_header.pl').
-:- ensure_loaded('moo_swiprolog.pl').
+:-include(moo_header).
 
-:-dynamic(xmlCurrentOpenTags/2).
+:-use_module(moo_threads).
+
 :-dynamic(isKeepAlive/1).
-:-dynamic(isConsoleOverwritten/0).
-:-dynamic(isMooProcess/5).
-
-
-
-cs:-
-        setMooOption(client,html),
-        createPrologServer(80),
-        createPrologServer(5001),
-        cleanOldProcesses.
 
 createPrologServer(Port) :-
         mooProcessCreate(nokill,'Moo XML/SOAP Server Socket',xmlPrologServer(Port),_,[]).
-
-win32:-
-        setMooOption(client=html),
-        xmlPrologServer(5001).
 
 xmlPrologServer(Port):-
         tcp_socket(ServerSocket),
@@ -47,7 +37,7 @@ serviceAcceptedClientSocket(ClientSocket):-
         tcp_open_socket(ClientSocket, In, Out),
         catch(serviceIO(In,Out),E,writeSTDERR(serviceIO(In,Out)=E)),
         ignore((catch(flush_output(Out),_,true),catch(tcp_close_socket(ClientSocket),_,true))),
-        thread_exit(complete),!.
+        prolog_thread_exit(complete),!.
 
 mutex_call(Goal,Id):-
                         mutex_create(Id),
@@ -68,26 +58,6 @@ please_tcp_bind(ServerSocket, Port):-
         please_tcp_bind(ServerSocket, Port))),!.
 
 
-saveUserInput:-retractall(isConsoleOverwritten),flush_output.
-writeSavedPrompt:-not(isConsoleOverwritten),!.
-writeSavedPrompt:-flush_output.
-writeOverwritten:-isConsoleOverwritten,!.
-writeOverwritten:-assert(isConsoleOverwritten).
-
-cleanOldProcesses:-notrace(cleanOldProcessesTracable).
-
-cleanOldProcessesTracable:-
-        saveUserInput,
-        current_thread(Id,Status),
-        handleProcessStatus(Id,Status),fail.
-cleanOldProcessesTracable:-writeSavedPrompt,!.
-cleanOldProcessesTracable:-!.
-
-handleProcessStatus(Id,running):-!. %Normal
-handleProcessStatus(Id,exited(complete)):-!,thread_join(Id,_),!.
-handleProcessStatus(Id,true):-!, writeSTDERR('% Process ~w complete.\n',[Id]),!,thread_join(Id,_),writeOverwritten,!.
-handleProcessStatus(Id,exception(Error)):-!, writeSTDERR('% Process ~w exited with exceptions: ~q \n',[Id,Error]),!,thread_join(Id,_),!,writeOverwritten.
-handleProcessStatus(Id,O):-!, writeSTDERR('% Process ~w exited "~q". \n',[Id,O]),!,thread_join(Id,_),!,writeOverwritten.
 
 
 serviceIO(In,Out):-
@@ -150,6 +120,7 @@ read_line_with_nl(C, Fd, [C|T], Tail) :-
         read_line_with_nl(C2, Fd, T, Tail).
 
 
+
 decodeRequest(RequestEncoded,[file=Request]):-
       concat_atom([X],'?',RequestEncoded),
       www_form_encode(Request,X),!.
@@ -160,7 +131,7 @@ decodeRequest(RequestEncoded,[file=Request|ENCARGS]):-
       decodeRequestArguments(ArgList,ENCARGS).
 
 decodeRequestArguments([],[]):-!.
-decodeRequestArguments([ctx=Value|List],[ctx=CValue,kb=KValue|ARGS]):-
+decodeRequestArguments([ctx=Value|List],[ctx=CValue,theory=KValue|ARGS]):-
           concat_atom([KValue,CValue],':',Value),!,
           decodeRequestArguments(List,ARGS).
 decodeRequestArguments([Arg|List],[DName=DValue|ARGS]):-
@@ -192,7 +163,7 @@ decodeRequestAtom(A,A):-!.
 % ===========================================================
 
 serviceNativeRequest(_,In,Out):-
-        thread_self(Session),
+        getThread(Session),
         retractall(isKeepAlive(Session)),
         xmlClearTags,
         repeat,
@@ -201,7 +172,7 @@ serviceNativeRequest(_,In,Out):-
                         E,
                         writeErrMsg(Out,E)),
                 %writeSTDERR(PrologGoal:ToplevelVars),
-                invokePrologCommand(Session,In,Out,PrologGoal,ToplevelVars,Returns),
+                invokePrologCommandRDF(Session,In,Out,PrologGoal,ToplevelVars,Returns),
                 notKeepAlive(Out,Session),!.
 
 notKeepAlive(Out,Session):-isKeepAlive(Session),
@@ -212,33 +183,13 @@ notKeepAlive(Out,Session):-isKeepAlive(Session),
 notKeepAlive(Out,Session):-catch(flush_output(Out),_,true).
 
 
+keep_alive:-getThread(Me),retractall(isKeepAlive(Me)),assert(isKeepAlive(Me)),writeFmtFlushed('<keepalive/>\n',[]).
+goodbye:-getThread(Me),retractall(isKeepAlive(Me)),writeFmtServer('<bye/>/n',[]).
 
-xmlOpenTag(Name):-thread_self(Self),asserta(xmlCurrentOpenTags(Self,A)),writeFmtServer('<~w>',[Name]),!.
-xmlOpenTagW(Out,Name,Text):-thread_self(Self),asserta(xmlCurrentOpenTags(Self,A)),writeFmtServer(Out,'~w',[Text]),!.
 
-xmlCloseTag(Name):-thread_self(Self),ignore(retract(xmlCurrentOpenTags(Self,A))),writeFmtServer('</~w>',[Name]),!.
-xmlCloseTagW(Name,Text):-thread_self(Self),ignore(retract(xmlCurrentOpenTags(Self,A))),writeFmtServer('~w',[Text]),!.
-xmlCloseTagW(Out,Name,Text):-thread_self(Self),ignore(retract(xmlCurrentOpenTags(Self,A))),writeFmtServer(Out,'~w',[Text]),!.
+invokePrologCommandRDF(Session,In,Out,PrologGoal,ToplevelVars,Returns):-var(PrologGoal),!.
 
-xmlClearTags:-thread_self(Self),retractall(xmlCurrentOpenTags(Self,A)).
-
-xmlExitTags:-thread_self(Self),retract(xmlCurrentOpenTags(Self,A)),writeFmtServer('</~w>',[Name]),fail.
-xmlExitTags.
-
-writeSTDERR(F):-writeSTDERR('~q',[F]).
-writeSTDERR(F,A):-notrace((
-        format(user_error,F,A),
-        nl(user_error),
-        flush_output(user_error))).
-
-keep_alive:-thread_self(Me),retractall(isKeepAlive(Me)),assert(isKeepAlive(Me)),writeFmtFlushed('<keepalive/>\n',[]).
-goodbye:-thread_self(Me),retractall(isKeepAlive(Me)),writeFmtServer('<bye/>/n',[]).
-
-createProcessedGoal(Goal):-mooProcessCreate((thread_at_exit((thread_self(Id),thread_exit(i_am_done(Id)))),Goal),Id,[]).
-
-invokePrologCommand(Session,In,Out,PrologGoal,ToplevelVars,Returns):-var(PrologGoal),!.
-
-invokePrologCommand(Session,In,Out,PrologGoal,ToplevelVars,Returns):-
+invokePrologCommandRDF(Session,In,Out,PrologGoal,ToplevelVars,Returns):-
         term_to_atom(Session,Atom),concat_atom(['$answers_for_session',Atom],AnswersFlag),
         writeFmtServer(Out,'<prolog:solutions goal="~q">\n',[PrologGoal]),
         flag(AnswersFlag,_,0),
@@ -264,8 +215,7 @@ callNondeterministicPrologCommand(Session,AnswersFlag,In,Out,PrologGoal,Toplevel
            Err,writeErrMsg(Out,Err,PrologGoal)),!.
 
 
-writeErrMsg(Out,E):-message_to_string(E,S),writeFmtFlushed(Out,'<prolog:error>~s</prolog:error>\n',[S]),!.
-writeErrMsg(Out,E,Goal):-message_to_string(E,S),writeFmtFlushed(Out,'<prolog:error>goal "~q" ~s</prolog:error>\n',[Goal,S]),!.
+
 
 
 callNondeterministicPrologCommand(Session,AnswersFlag,In,Out,PrologGoal,ToplevelVars):-
@@ -289,6 +239,7 @@ writePrologToplevelVarsXML2(Out,[Term|REST]):-!,Term=..[_,N,V],
          writeFmtFlushed(Out,'       <prolog:p>~w = ~q</prolog:p>\n',[N,V]),
          writePrologToplevelVarsXML2(Out,REST),!.
 
+
 writeFmtServer(A,B,C):-!.
 writeFmtServer(A,B):-!.
 
@@ -296,62 +247,6 @@ writeFmtServer(A,B,C):-
         writeFmtFlushed(A,B,C).
 writeFmtServer(A,B):-
         writeFmtFlushed(A,B).
-
-writeFileToStream(Dest,Filename):-
-        catch((
-        open(Filename,'r',Input),
-        repeat,
-                get_code(Input,Char),
-                put(Dest,Char),
-        at_end_of_stream(Input),
-        close(Input)),E,
-        writeFmtFlushed('<prolog:error goal="~q">~w</prolog:error>\n',[writeFileToStream(Dest,Filename),E])).
-
-
-% ===========================================================
-% THREAD SERVICE
-% ===========================================================
-
-mooProcessCreate(Perms,Name,Goal,Id,Options):-
-        thread_create((thread_at_exit(mooProcessSelfClean),Goal),Id,Options),
-        asserta(isMooProcess(Perms,Name,Goal,Id,Options)).
-
-mooProcessCreate(Name,Goal,Id,Options):-
-        thread_create((thread_at_exit(mooProcessSelfClean),Goal),Id,Options),
-        asserta(isMooProcess(kill,Name,Goal,Id,Options)).
-
-mooProcessCreate(Goal,Id,Options):-
-        thread_create((thread_at_exit(mooProcessSelfClean),Goal),Id,Options),
-        asserta(isMooProcess(kill,thread(Id),Goal,Id,Options)).
-
-mooProcessCreate(Goal):-
-        mooProcessCreate(Goal,Id,[detach(true)]).
-
-isMooProcess(ID,Goal):-
-        isMooProcess(_,_,Goal,ID,_).
-
-debugProcess(T):-thread_signal(T, (attach_console, trace)).
-
-
-mooProcessSelfClean:-ignore((thread_self(Id),retractall(isMooProcess(Perms,Name,Goal,Id,Options)))).
-
-
-showMooProcesses:-
-        writeFmt('<pre>'),statistics,writeFmt('</pre>'),
-        writeFmt('<hr><table border=1 width=80%><th>Id</th><th>Name</th><th>Status</th><th>Actions</th><th>Options</th><th>Goals</th>',[]),
-        current_thread(Id,Status),
-        isMooProcess(Perms,Name,Goal,Id,Options),
-        writeMooProcessesHTML(Perms,Name,Goal,Id,Options,Status),
-        fail.
-showMooProcesses:-
-        writeFmt('</table>',[]).
-
-
-writeMooProcessesHTML(nokill,Name,Goal,Id,Options,Status):-
-        writeFmt('<tr><td>~w</td><td><nobr>~w</td><td>~w</td><td>&nbsp;</a></td><td>~w</td><td>~w</td><tr>\n ',[Id,Name,Status,Options,Goal]),!.
-
-writeMooProcessesHTML(Perms,Name,Goal,Id,Options,Status):-
-        writeFmt('<tr><td>~w</td><td><nobr>~w</td><td>~w</td><td><A href="controlpanel.jsp?kill=~w">Kill</a></td><td>~w</td><td>~w</td><tr>\n ',[Id,Name,Status,Id,Options,Goal]),!.
 
 
 throwMoo(Module,Type,Details):-
