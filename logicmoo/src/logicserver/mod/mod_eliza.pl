@@ -1652,7 +1652,7 @@ e_rules([[dit,10],[
 
 
 
-:-['mod/mod_eliza.data''].
+:-['mod/mod_eliza.data'].
 
 
 %chattingWith(Channel,User).
