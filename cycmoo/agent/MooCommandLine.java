@@ -48,11 +48,11 @@ public class MooCommandLine extends MooAgentThread {
     }
 
 
-    public static void main(String[] params) {
+    static public void main(String[] params) {
 	runClientAt(new PrintWriter(System.out,true),new BufferedReader(new InputStreamReader(System.in)));
     }
 
-    public static void runClientAt(PrintWriter pout, BufferedReader pin) {
+    static public void runClientAt(PrintWriter pout, BufferedReader pin) {
 	MooCommandLine who = new MooCommandLine(pout,pin);
 	who.run();
     }

@@ -35,7 +35,7 @@ public class CircleMudLoader {
     public LogicMooCycAccess cyc = null;
     public CycFort mudMt = null;
 
-    public static void main(String arg[]) {
+    static public void main(String arg[]) {
         int argmnt = 0;
         CircleMudLoader cml = new CircleMudLoader();
         cml.cycfile = new PrintWriter(System.out);
@@ -115,13 +115,13 @@ public class CircleMudLoader {
         br.close();
     }
 
-    public static String getDirectionWards(String num) {
+    static public String getDirectionWards(String num) {
         return getDirection(num)+"-Generally";
     }
 
 
 
-    public static String getDirection(String num) {
+    static public String getDirection(String num) {
         if ( num.startsWith("D") ) num = num.substring(1);
         switch ( num.charAt(0) ) {
             case '0':
@@ -140,7 +140,7 @@ public class CircleMudLoader {
         return "North";
     }
 
-    public static String getDirectionState(String num) {
+    static public String getDirectionState(String num) {
         if ( num.startsWith("D") ) num = num.substring(1);
         switch ( num.charAt(0) ) {
             case '0':
@@ -422,12 +422,12 @@ public class CircleMudLoader {
         }
     }
 
-    public static String quotedString(String stuff) {
+    static public String quotedString(String stuff) {
 
         return "\""+Strings.change(stuff,"\"","'")+"\"";
     }
 
-    public static String readUpLine(BufferedReader br) {
+    static public String readUpLine(BufferedReader br) {
         try {
             return br.readLine().trim();
         } catch ( Exception e ) {
@@ -435,7 +435,7 @@ public class CircleMudLoader {
         }
     }
 
-    public static String readUpTilde(BufferedReader br) throws Exception {
+    static public String readUpTilde(BufferedReader br) throws Exception {
         String line = br.readLine().trim();
         if ( line.endsWith("~") ) {
             if ( line.length()==1 ) return "";

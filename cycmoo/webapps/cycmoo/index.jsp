@@ -1,10 +1,10 @@
-<%@ page language="java" import="cycmoo.*, org.opencyc.constraintsolver.*,org.opencyc.cycobject.*, org.opencyc.kif.*, org.opencyc.jsp.*, org.opencyc.util.*,org.opencyc.api.*,org.opencyc.inferencesupport.*,org.opencyc.webserver.*, java.util.*,com.oreilly.servlet.*,com.oreilly.servlet.multipart.*,java.io.*" %>
-<jsp:useBean id="theLogicMoo" scope="application" class="cycmoo.LogicMoo"/>
+<%@ page language="java" import="cycmoo.api.*, org.opencyc.constraintsolver.*,org.opencyc.cycobject.*, org.opencyc.kif.*, org.opencyc.util.*,org.opencyc.api.*,org.opencyc.inferencesupport.*,org.opencyc.webserver.*, java.util.*,com.oreilly.servlet.*,com.oreilly.servlet.multipart.*,java.io.*" %>
+<jsp:useBean id="theLogicMoo" scope="application" class="cycmoo.api.LogicMoo"/>
 
 <%
 CycAccess cycAccess = theLogicMoo.getCycAccess();
 
-String myHostAddr="12.211.44.132";
+String myHostAddr="12.228.240.2";
 
 %>
 <HTML>

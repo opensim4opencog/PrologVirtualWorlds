@@ -68,13 +68,10 @@ cycmoo\agent\MooAgentThread.java
 cycmoo\agent\MooCommandLine.java
 cycmoo\agent\MooCycRobot.java
 cycmoo\agent\MooIrcBot.java
-cycmoo\api\CiaoMoo.java
-cycmoo\api\Creation.java
 cycmoo\api\IActorCommandParser.java
 cycmoo\api\IMooClient.java
 cycmoo\api\LogicMoo.java
 cycmoo\api\LogicMooCycAccess.java
-cycmoo\api\SwiMoo.java
 cycmoo\cmd\ActorCommandParser.java
 cycmoo\net\CycWebServer.java
 cycmoo\net\LogicMooTelnetServer.java

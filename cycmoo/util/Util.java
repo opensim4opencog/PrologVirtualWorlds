@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
  */
 public abstract class Util {
 
-	public static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	static public final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
    /**
     * Replaces all instances of String original with
@@ -23,7 +23,7 @@ public abstract class Util {
     * @param replacement Text to replace original
     * @return source with all instances of original changed to replacement
     */
-   public static String replace(String source, String original, String replacement) {
+   static public String replace(String source, String original, String replacement) {
 		if(source == null || original == null)
 			return null;
 
@@ -34,7 +34,7 @@ public abstract class Util {
    }
 
 
-	public static byte[] replace(byte[] source, byte[] original, byte[] replacement) {
+	static public byte[] replace(byte[] source, byte[] original, byte[] replacement) {
 		byte[] ret = new byte[source.length];
 		int I = 0,	//source counter
 			J = 0,	//ret counter
@@ -83,13 +83,13 @@ public abstract class Util {
 	}
 
 
-   public static String concatStrings(String[] strings) {
+   static public String concatStrings(String[] strings) {
       return concatStrings(strings, " ");
    }
 
 
 
-   public static String concatStrings(String[] strings, String spacer) {
+   static public String concatStrings(String[] strings, String spacer) {
 		if(spacer == null) spacer = " ";
 
 		int len = 0;
@@ -123,7 +123,7 @@ public abstract class Util {
     * @param add_text Line of text to add
     * @return Text, a newLine, and add_Text
     */
-   public static String addLine(String all, String add_text) {
+   static public String addLine(String all, String add_text) {
       return all + "\n" + add_text;
    }
    
@@ -135,7 +135,7 @@ public abstract class Util {
     * @param all Text to remove last line from
     * @return all with the last line cut off
     */   
-   public static String remLine(String all) {
+   static public String remLine(String all) {
 		return all.substring(0, all.lastIndexOf("\n"));
    }
    
@@ -149,7 +149,7 @@ public abstract class Util {
     * @param text Text to apply backspaces to
     * @return Text without backspaces
     */
-   public static String cleanBackSpace(String text) {
+   static public String cleanBackSpace(String text) {
       String OOO = "";
       if(text != null) {
          byte B = (byte)(char) 8;
@@ -181,7 +181,7 @@ public abstract class Util {
     * @param text String to clean Escape characters from
     * @return cleaned version of text
     */
-   public static String cleanup(String text) {
+   static public String cleanup(String text) {
 		if(text == null || text.length() == 0) return "";
       String K = "", J = cleanBackSpace(text);
       for(int I=0; I<J.length(); I++) {
@@ -201,7 +201,7 @@ public abstract class Util {
 	 * @param key String containing all allowed characters
 	 * @return boolan true if src contains only characters in key
 	 */
-	public static boolean verifyString(String src, String key) {
+	static public boolean verifyString(String src, String key) {
 		if(src == null || key == null)
 			return false;
 
@@ -224,7 +224,7 @@ public abstract class Util {
     * @param cleanWhite boolean indicating whether extra white space should be ignored
     * @return formatted version of text
     */
-   public static String format(String text, int width, boolean cleanWhite) {
+   static public String format(String text, int width, boolean cleanWhite) {
       if(text==null || text.length()==0)
 			return "";
 
@@ -274,7 +274,7 @@ public abstract class Util {
 	 * st[0] would be "big stick"
 	 * st[1] would be "little dude"</pre>
 	 */
-	public static String[] commandSplit(String command) {
+	static public String[] commandSplit(String command) {
 		String[] ret = new String[2];
 		int L = 0;
 
@@ -308,7 +308,7 @@ public abstract class Util {
     * @param delim String deliminator
     * @return String[2] containing halves of src
     */
-	public static String[] split(String src, String delim) {
+	static public String[] split(String src, String delim) {
 		int I = src.indexOf(delim), J = delim.length();
 		String[] ret = new String[2];
 		if(I < 0) {
@@ -333,7 +333,7 @@ public abstract class Util {
     * @param delim char deliminator
     * @return String[2] containing halves of src
     */
-	public static String[] split(String src, char delim) {
+	static public String[] split(String src, char delim) {
 		int I = src.indexOf(delim);
 		String[] ret = new String[2];
 		if(I < 0) {
@@ -357,11 +357,11 @@ public abstract class Util {
 	 * @param desiredLen integer length to make text
 	 * @return lengthened version of text
 	 */
-	public static String fixLength(String text, int desiredLen) {
+	static public String fixLength(String text, int desiredLen) {
 		return fixLength(text, desiredLen, ' ');
 	}
 
-	public static String fixLength(String text, int desiredLen, char filler) {
+	static public String fixLength(String text, int desiredLen, char filler) {
 		if(text==null)
 			text = "";
 
@@ -396,11 +396,11 @@ public abstract class Util {
 	 * @param addLeft if true, adds proceding spaces. false adds trailing spaces
 	 * @return lengthened version of text
 	 */
-	public static String fixLength(String text, int desiredLen, boolean addLeft) {
+	static public String fixLength(String text, int desiredLen, boolean addLeft) {
 		return fixLength(text, desiredLen, ' ', addLeft);
 	}
 
-	public static String fixLength(String text, int desiredLen, char filler, boolean addLeft) {
+	static public String fixLength(String text, int desiredLen, char filler, boolean addLeft) {
 		if(addLeft) {
 			int i = text.length();
 
@@ -426,7 +426,7 @@ public abstract class Util {
 	}
 
 
-	public static String cleanWhiteSpace(String text) {
+	static public String cleanWhiteSpace(String text) {
 		byte space = (byte) ' ', tab = (byte) '\t',
 			cr = (byte) '\r', lf = (byte) '\n';
 
@@ -449,7 +449,7 @@ public abstract class Util {
 	}
 
 
-	public static String convertMillis(long millis) {
+	static public String convertMillis(long millis) {
 		String tm = " sec";
 
 		int s = (int) (millis / 1000);

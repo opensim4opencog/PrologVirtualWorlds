@@ -172,14 +172,14 @@ public abstract class MooAgentThread extends Thread implements IMooClient {
 	    mt = me.getUserMt();
 	}
 	try {
-	    nclassloader = new NClassLoader("/opt/sourceforge/logicmoo/src/",".class","");
+	    nclassloader = new NClassLoader("/opt/sourceforge/logicmoo/class_root/",".class","");
 	    meclass = nclassloader.findClass("cycmoo.cmd.ActorCommandParser");
 	    Constructor cons = meclass.getConstructors()[0];
 	    me = (IActorCommandParser)meclass.newInstance();
 	    me.setData(cyc,name,loc,mt,this);
 	    nclassloader = null;
 	    meclass = null;
-	    // System.out.println("reloadInterpretor = " + me.getClass());
+	    System.out.println("reloadInterpretor = " + me.getClass());
 	} catch( Exception e ) {
 	    e.printStackTrace();
 	}

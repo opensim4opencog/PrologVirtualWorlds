@@ -1,6 +1,5 @@
 package cycmoo.api;
 
-import cycmoo.*;
 import cycmoo.agent.*;
 import cycmoo.cmd.*;
 import cycmoo.obj.*;
@@ -33,10 +32,8 @@ import org.opencyc.javashell.*;
 import org.opencyc.util.*;
 import org.opencyc.webserver.WebServer;
 import org.apache.oro.util.*;
-import org.opencyc.templateparser.*;
 import org.opencyc.inferencesupport.*;
 import org.opencyc.constraintsolver.*;
-import org.opencyc.conversation.*;
 import org.apache.oro.util.*;
 
 // Util
@@ -47,7 +44,7 @@ import ViolinStrings.*;
 *
 * Collaborates with the <tt>Jamud</tt> class which manages the api connections.
 *
-* @version $Id: LogicMooCycAccess.java,v 1.2 2002-11-27 21:47:23 dmiles Exp $
+* @version $Id: LogicMooCycAccess.java,v 1.3 2003-06-13 10:04:47 dmiles Exp $
 * @author Douglas R. Miles
 *
 * <p>Copyright 2001 Cycorp, Inc., license is open source GNU LGPL.
@@ -78,37 +75,37 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
     private  static bsh.Interpreter logicmooBeanShell;     
     private  static boolean running = false;
 
+    
 
+    static public CycConstant reifiedMicrotheory = null;
+    static public CycConstant javaMt = null;
+    static public CycConstant cycadministrator = null;
+    static public CycConstant opencycproject = null;
+    static public CycConstant functionalRelation = null;
 
-    public static CycConstant reifiedMicrotheory = null;
-    public static CycConstant javaMt = null;
-    public static CycConstant cycadministrator = null;
-    public static CycConstant opencycproject = null;
-    public static CycConstant functionalRelation = null;
+    static public CycConstant cycVoid = null;
+    static public CycConstant cycNull = null;
+    static public CycConstant cycHasArrayMember = null;
+    static public CycConstant cycHasMethod = null;
+    static public CycConstant cycHasSlot = null;
+    static public CycConstant cycClassInstance = null;
+    static public CycConstant cycHasSlotValue = null;
+    static public CycConstant geographicalRegion = null;
+    static public CycConstant cycArrayOfClass = null;
 
-    public static CycConstant cycVoid = null;
-    public static CycConstant cycNull = null;
-    public static CycConstant cycHasArrayMember = null;
-    public static CycConstant cycHasMethod = null;
-    public static CycConstant cycHasSlot = null;
-    public static CycConstant cycClassInstance = null;
-    public static CycConstant cycHasSlotValue = null;
-    public static CycConstant geographicalRegion = null;
-    public static CycConstant cycArrayOfClass = null;
-
-    public static LogicMoo moo = null;
+    static public LogicMoo moo = null;
 
     // CycConstant & Class -> CycConstant key of Fields | DataMethod | Method
-    public static HashMap thisClassTemplates = new HashMap();
+    static public HashMap thisClassTemplates = new HashMap();
 
     // CycConstant || Class -> Class || CycConstant 
-    public static HashMap cycKnowsClass = new HashMap();
-    public static HashMap cycKnowsObjectAsConstant = new HashMap();
-    //public static HashMap cycKnowsMicrotheory = new HashMap();
-    //public static HashMap cycKnowsExit = new HashMap();
-    public static HashMap cycKnowsNPC = new HashMap();
-    //public static HashMap cycKnowsPlayer = new HashMap();
-    //public static HashMap cycKnowsInanimate = new HashMap();
+    static public HashMap cycKnowsClass = new HashMap();
+    static public HashMap cycKnowsObjectAsConstant = new HashMap();
+    //static public HashMap cycKnowsMicrotheory = new HashMap();
+    //static public HashMap cycKnowsExit = new HashMap();
+    static public HashMap cycKnowsNPC = new HashMap();
+    //static public HashMap cycKnowsPlayer = new HashMap();
+    //static public HashMap cycKnowsInanimate = new HashMap();
 
     /**
      * Constructs a new CycAssertionsFactory object.
@@ -132,6 +129,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 	super(myAgentName,cycProxyAgentName,agentCommunity);
 	startPrimary();
     }
+
 
     /**
      * Constructs a new LogicMooCycAccess object given a host name, port, communication mode and persistence indicator.
@@ -163,7 +161,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 	return(CycAssertionsFactory)this;
     }
     public  LogicMoo getLogicMoo() {
-	moo = cycmoo.LogicMoo.getInstance();
+	moo = LogicMoo.getInstance();
 	return moo;
     }
 
@@ -211,7 +209,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
      *
      **********************************************************/
 
-    public static File ontologyFile(String file) {
+    static public File ontologyFile(String file) {
 	File f = null;
 	f=new File(file);
 	if ( f.exists() ) return f;
@@ -259,14 +257,14 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 
     public CycList queryMt(String query) {
 	try {
-	    return converseList( "(cyc-query '" +toCycListString(query) + " " + " #$EverythingPSC)");
+	    return converseList( "(cyc-query '" +toCycList(query).cyclify() + " " + " #$EverythingPSC)");
 	} catch ( Exception e ) {
 	    return null;
 	}
     }
     public CycList queryMt2(String query) {
 	try {
-	    CycList result =  converseList( "(cyc-query '" +toCycListString(query) + " #$EverythingPSC)");
+	    CycList result =  converseList( "(cyc-query '" +toCycList(query).cyclify() + " #$EverythingPSC)");
 	    if ( result.size()==0 ) return result;
 	    CycList answer = new CycList();
 	    Iterator iter = result.iterator();
@@ -283,7 +281,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 
     public CycList queryMt3(String query) {
 	try {
-	    CycList result =  converseList( "(cyc-query '" +toCycListString(query) + " #$EverythingPSC)");
+	    CycList result =  converseList( "(cyc-query '" +toCycList(query).cyclify() + " #$EverythingPSC)");
 	    if ( result.size()==0 ) return result;
 	    CycList answer = new CycList();
 	    Iterator iter = result.iterator();
@@ -380,7 +378,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 
     public void assertKif(String sentence, CycFort mt) throws Exception {
 	startPrimary();
-	assertWithTranscriptNoWffCheck(toCycList(sentence),mt);
+	assertWithTranscriptNoWffCheck(toCycList(sentence).cyclify() ,mt);
     }
 
     /***********************************************************
@@ -402,6 +400,17 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 	    if ( sample instanceof CycFort ) if ( sample.toString().toLowerCase().indexOf(test)==0 ) return(CycFort)sample;
 	}
 	return null;
+    }
+
+    public CycList toCycList(String cycl) {
+        try {
+            return (CycList)(new CycListKifParser(this)).read(cycl);
+        } catch (Exception e){
+            return null;
+        }
+    }
+    public CycList toCycListOrNull(String cycl) {
+        return toCycList(cycl);
     }
 
     public synchronized  CycFort makeCycFort(Object obj) {
@@ -438,8 +447,6 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 	return null;
 
     }
-
-
 
     public String cyclify(Object obj) {
 
@@ -1212,31 +1219,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
     }
 
 
-    /**
-     * Cyclifys a sentence a string
-     */
-    public  CycList toCycList(String sentence) {
-	try {
-	    return(((CycList)((new CycListKifParser(this)).read(sentence))));
-	} catch ( Exception e ) {
-	    return null;
-	}
-
-    }
-    /**
-     * Cyclifys a sentence to a string
-     */
-    public  String toCycListString(String sentence) {
-	try {
-	    return(((CycList)((new CycListKifParser(this)).read(sentence))).cyclify());
-	} catch ( Exception e ) {
-	    return null;
-	}
-
-    }
-
-
-    public static String cleanString(String name) {
+    static public String cleanString(String name) {
 	if ( name==null ) return "null";
 	String tryName = name;
 	if ( name.startsWith("#$") ) tryName = name.substring(2);
@@ -1252,7 +1235,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 	if ( inp instanceof CycFort ) return(CycFort)inp;
 	if ( inp instanceof CycList ) return new CycNart((CycList)inp);
 	if ( inp instanceof String ) return locateCycFortString((String)inp,type);
-	return new CycNart( toCycList(""+inp)); 
+	return new CycNart(toCycListOrNull(""+inp)); 
     }
 
     public  CycFort locateCycFortString(String name, String type) {
@@ -1339,7 +1322,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 
 	ArrayList al = null;
 	try {
-	    al = converseList("(cyc-query '(#$mudKeyword ?Const ?String) #$EverythingPSC )");
+	    al = converseList("(cyc-query '(#$mudKeyword ?Symbol ?String) #$EverythingPSC )");
 	} catch ( Exception e ) {
 	    e.printStackTrace();
 	}
@@ -1374,18 +1357,19 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 	return -999;
     }
 
-    public static String queryRawPrologServer(String raw) throws Exception {
+/*
+    static public String queryRawPrologServer(String raw) throws Exception {
 	return LogicMoo.queryRawPrologServer(raw,500);
     }
 
-    public static String queryRawPrologServer(String raw, int time) throws Exception {
+    static public String queryRawPrologServer(String raw, int time) throws Exception {
 	 return LogicMoo.queryRawPrologServer(raw,time);
     }
 
-    public static String e2c(String eng) throws Exception {
+    static public String e2c(String eng) throws Exception {
 	return LogicMoo.e2c(eng);
     }
-
+*/
 
 
      /***********************************************************
@@ -1393,7 +1377,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
      *
      **********************************************************/
 
-    public static Hashtable plugins = new Hashtable();
+    static public Hashtable plugins = new Hashtable();
     
 
     public synchronized void reloadInterpretors() {

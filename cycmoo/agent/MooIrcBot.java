@@ -136,7 +136,7 @@ public class MooIrcBot extends MooAgentThread implements IMooClient {
      * Provide a command line function to launch the MooIrcBot application.  
      *     
      */
-    public static void main(String[] args) {
+    static public void main(String[] args) {
 	try {
 	    MooIrcBot ircBot = new MooIrcBot();
 	    ircBot.cyc = new LogicMooCycAccess();
@@ -382,7 +382,9 @@ public class MooIrcBot extends MooAgentThread implements IMooClient {
 
     public boolean serviceToken(String from, String hostmask, String returnpath,String token,String params) {
 	if ( token.equalsIgnoreCase(params)) params ="";
-	System.out.println("token: '" + token + "' params: '" + params + "'");
+        if (params.startsWith(token)) params = params.substring(token.length());
+        params = params.trim();
+        System.out.println("token: '" + token + "' params: '" + params + "'");
 	ircDestination = returnpath;
 
 	if( token.equals("ping") ) {
