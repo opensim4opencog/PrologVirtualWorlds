@@ -2,8 +2,8 @@
  * 
  * Now prolog can call java!!!
  * 
- *  File:    $Id: javart.c,v 1.2 2002-03-18 10:46:41 dmiles Exp $
- *  Date:    $Date: 2002-03-18 10:46:41 $
+ *  File:    $Id: javart.c,v 1.3 2002-03-18 14:32:04 dmiles Exp $
+ *  Date:    $Date: 2002-03-18 14:32:04 $
  *  Author:  Douglas Miles
  *  
  * This library is free software; you can redistribute it and/or
@@ -48,11 +48,15 @@ static JavaVMOption options[4];
 
 static jint result_of_JNI_CreateJavaVM=-1; /* Means not created */
 
-static jclass class_pointer_JavaRt = 0; /*  Uninitialized */
+static jclass class_pointer_JavaRt = 0;	/*  Uninitialized */
 
 static jclass class_jstring;
 
 static jclass class_jobject;
+
+static atom_t JAVA_OBJECT;
+static atom_t JAVA_INSTANCE;
+static atom_t JAVA_PARSE;
 
 /*
 static jclass class_jchar;
@@ -136,14 +140,14 @@ foreign_t java_prep_vm()
 	{
 	/* Allows it to be called more then once */
 	if (class_pointer_JavaRt) PL_succeed;
-	
-	{
-	
-	cp = malloc( 8192 ); 
-	
-	sprintf(cp, "-Djava.class.path=%s", getenv( "CLASSPATH" ) );
 
-		
+	{
+
+		cp = malloc( 8192 ); 
+
+		sprintf(cp, "-Djava.class.path=%s", getenv( "CLASSPATH" ) );
+
+
 		options[0].optionString = "-Djava.compiler=NONE";	/* disable JIT */
 		options[1].optionString = cp;	/* user classes */
 		options[2].optionString = "-Djava.library.path=.";	/* set native library path */
@@ -152,10 +156,10 @@ foreign_t java_prep_vm()
 		// options[3].optionString = "-verbose:jni";   	/* print JNI-related messages */
 
 
-	    //  fprintf(stderr, "%% %s\n",options[1].optionString);
+		//  fprintf(stderr, "%% %s\n",options[1].optionString);
 
 		vm_args.version = JNI_VERSION_1_2;
-		
+
 		vm_args.options = options;
 		vm_args.nOptions = 4;
 		vm_args.ignoreUnrecognized = 1;     
@@ -173,61 +177,58 @@ foreign_t java_prep_vm()
 			PL_fail;
 			}
 
-	class_pointer_JavaRt = javart_FindClass("logicmoo/JavaRt");
+		class_pointer_JavaRt = javart_FindClass("logicmoo/JavaRt");
 
+		class_jobject = javart_FindClass("java/lang/Object");
 
-	class_jstring = javart_FindClass("java/lang/String");
+		class_jstring = javart_FindClass("java/lang/String");
 
-	 class_jobject = javart_FindClass("java/lang/Object");
-	
+		if (!class_pointer_JavaRt || !class_jstring)
+			{
+			fprintf(stderr, "Can't find \"logicmoo.JavaRt\" (Set Your Classpath)\n");
+			PL_fail;
+			}
 
-  
-    if (!class_pointer_JavaRt || !class_jstring || !class_jobject)
-		{
-		fprintf(stderr, "Can't find \"logicmoo.JavaRt\" (Set Your Classpath)\n");
-		PL_fail;
-		}
-    
-	invoke_object_method = JNI_ENV->GetStaticMethodID(jni_env, 
-													  class_pointer_JavaRt, 
-													  "invokeObject",
-													  "(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;");
-	if (!invoke_object_method)
-		{
-		fprintf(stderr, "Cant GetStaticMethodID (invokeObject)\n");
-		PL_fail;
-		}
-	PL_succeed;
+		invoke_object_method = JNI_ENV->GetStaticMethodID(jni_env, 
+														  class_pointer_JavaRt, 
+														  "invokeObject",
+														  "(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;");
+		if (!invoke_object_method)
+			{
+			fprintf(stderr, "Cant GetStaticMethodID (invokeObject)\n");
+			PL_fail;
+			}
+		PL_succeed;
 	}
 
 	}
 
-		/*
-	Java Type  Native Type  Description  
-	-----------------------------------
-	boolean  jboolean  unsigned 8 bits  
-	byte  jbyte  signed 8 bits  
-	char  jchar  unsigned 16 bits  
-	short  jshort  signed 16 bits  
-	int  jint  signed 32 bits  
-	long  jlong  signed 64 bits  
-	float  jfloat  32 bits  
-	double  jdouble  64 bits  
-	void  void  N/A  
-	
-	*/
+/*
+Java Type  Native Type  Description  
+-----------------------------------
+boolean  jboolean  unsigned 8 bits  
+byte  jbyte  signed 8 bits  
+char  jchar  unsigned 16 bits  
+short  jshort  signed 16 bits  
+int  jint  signed 32 bits  
+long  jlong  signed 64 bits  
+float  jfloat  32 bits  
+double  jdouble  64 bits  
+void  void  N/A  
 
-	/*	
-	class_jclass = javart_FindClass("java/lang/Class");
-	
-	class_jboolean = javart_FindClass("java/lang/Boolean");
-	class_jbyte = javart_FindClass("java/lang/Byte");
-	class_jchar = javart_FindClass("java/lang/Char");
-	class_jshort = javart_FindClass("java/lang/Short");
-	class_jint = javart_FindClass("java/lang/Integer");
-	class_jlong = javart_FindClass("java/lang/Long");
-	class_jfloat = javart_FindClass("java/lang/Float");
-	*/
+*/
+
+/*	
+class_jclass = javart_FindClass("java/lang/Class");
+
+class_jboolean = javart_FindClass("java/lang/Boolean");
+class_jbyte = javart_FindClass("java/lang/Byte");
+class_jchar = javart_FindClass("java/lang/Char");
+class_jshort = javart_FindClass("java/lang/Short");
+class_jint = javart_FindClass("java/lang/Integer");
+class_jlong = javart_FindClass("java/lang/Long");
+class_jfloat = javart_FindClass("java/lang/Float");
+*/
 
 
 jstring intToHash(term_t temp_term)
@@ -250,26 +251,33 @@ static jobjectArray list2MethodArgs(term_t arg_list)
 
 	term_t prolog_list = PL_copy_term_ref(arg_list);	/* copy as we need to write */
 
-	jobjectArray method_args=(jobjectArray) JNI_ENV->NewObjectArray(jni_env,
-																	MAX_ARGS,
-																	(jclass) class_jobject,
-																	chars_to_jstring(""));  
+	jobjectArray method_args;
 
+//	class_jobject = javart_FindClass("java/lang/Object");
+
+	while ( PL_get_list(prolog_list, temp_term, prolog_list) ) countup++;
+
+
+	fprintf(stderr, "listlen = %i \n", countup);
+
+	method_args=(jobjectArray) JNI_ENV->NewObjectArray(jni_env,
+													   countup,
+													   (jclass) class_jobject,
+													   NULL);  
+
+
+	countup=0;
+
+	prolog_list = PL_copy_term_ref(arg_list);	/* copy as we need to write */
 
 	while ( PL_get_list(prolog_list, temp_term, prolog_list) )
 		{
-		//printf("%s ", arg);
-		countup++;
 		JNI_ENV->SetObjectArrayElement(jni_env,
 									   method_args,
 									   countup,
 									   (jobject) term_to_jobject(temp_term));
-		//printf("(%d)\n ", countup);
+		countup++;
 		}
-
-	sprintf(temp_parse,"%i",countup);
-
-	JNI_ENV->SetObjectArrayElement(jni_env,method_args, (int) 0, chars_to_jstring(temp_parse));	// Sets length
 
 	return method_args;
 
@@ -292,8 +300,10 @@ static jobject term_to_jobject(term_t temp_term)
 			sprintf(temp_parse,"_%p",temp_term);
 			return chars_to_jstring(temp_parse);
 		case PL_ATOM:
+			if (PL_get_nil(temp_term)) return (jobject) list2MethodArgs(temp_term);
+			
 			PL_get_atom_nchars(temp_term,&len,&temp_string);
-
+						
 			// Special Atoms
 			switch (len)
 				{
@@ -301,8 +311,6 @@ static jobject term_to_jobject(term_t temp_term)
 					if (PL_unify_atom_chars(temp_term,"false"))	return chars_to_jstring("bf");
 				case 0:
 					return chars_to_jstring("s");
-				case 2:
-					if (PL_unify_atom_chars(temp_term,"[]")) return chars_to_jstring("$");
 				case 4:
 					if (PL_unify_atom_chars(temp_term,"true")) return chars_to_jstring("bt");
 					if (PL_unify_atom_chars(temp_term,"$$$$")) return chars_to_jstring("oJavaRt");
@@ -325,59 +333,35 @@ static jobject term_to_jobject(term_t temp_term)
 			return chars_to_jstring(temp_parse);
 		case PL_TERM:
 
-			if (PL_get_nil(temp_term)) return chars_to_jstring("$");
-
 			if (PL_is_list(temp_term))	return(jobject) list2MethodArgs(temp_term);
 
 			{
-				STRING temp_string_n;
-				int arity;
 				atom_t name = PL_new_term_ref();
 
 				PL_get_name_arity(temp_term, &name, &arity);
 
-				if (arity == 0) return term_to_jobject( name);
-
-				PL_get_atom_nchars(name,&len,&temp_string_n);
-
-				if (temp_string_n[0] == '$')
+				if (name == JAVA_OBJECT || name == JAVA_INSTANCE)
 					{
-					switch (arity)
-						{
-						case 1:
-							if (PL_unify_atom_chars(name,"$java_object"))
-								{
-								term_t arg1 = PL_new_term_ref();
-								PL_get_arg(1, temp_term, arg1);
-								return(jstring) intToHash(arg1);
-								}
-							if (PL_unify_atom_chars(name,"$java_param"))
-								{
-								term_t arg1 = PL_new_term_ref();
-								PL_get_arg(1, temp_term, arg1);
-								PL_get_atom_nchars(arg1,&len,&temp_string);
-								sprintf(temp_parse,"%s",temp_string);
-								return chars_to_jstring(temp_parse);
-								}
-						case 2:
-							if (PL_unify_atom_chars(name,"$java_instance"))
-								{
-								term_t arg1 = PL_new_term_ref();
-								PL_get_arg(1, temp_term, arg1);
-								return(jstring) intToHash(arg1);
-								}
-						}
+					term_t arg1 = PL_new_term_ref();
+					PL_get_arg(1, temp_term, arg1);
+					return(jstring) intToHash(arg1);
+					}
+				if (name == JAVA_PARSE)
+					{
+					term_t arg1 = PL_new_term_ref();
+					PL_get_arg(1, temp_term, arg1);
+					PL_get_atom_nchars(arg1,&len,&temp_string);
+					sprintf(temp_parse,"%s",temp_string);
+					return chars_to_jstring(temp_parse);
 					}
 				PL_get_chars(temp_term,&temp_string,CVT_ALL);
 				sprintf(temp_parse,"t%s",temp_string);
 				return chars_to_jstring(temp_parse);
 			}
-
-		default:
-			PL_get_chars(temp_term,&temp_string,CVT_ALL);
-			sprintf(temp_parse,"u%s",temp_string);
-			return chars_to_jstring(temp_parse);
 		}
+	PL_get_chars(temp_term,&temp_string,CVT_ALL);
+	sprintf(temp_parse,"u%s",temp_string);
+	return chars_to_jstring(temp_parse);
 
 	}
 
@@ -388,7 +372,7 @@ foreign_t pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg
 	foreign_t prolog_result;
 
 	STRING method_result_chars;
-	term_t temp_term = PL_new_term_ref();	   /* variable for the elements */	java_prep_vm();
+	term_t temp_term = PL_new_term_ref();	   /* variable for the elements */  
 
 	result_string_object = JNI_ENV->CallStaticObjectMethod(jni_env,
 														   class_pointer_JavaRt,
@@ -426,11 +410,21 @@ foreign_t pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg
 
 	}
 
+
 install_t install()
 	{
 	PL_register_foreign("java_create_vm", 0, java_prep_vm, 0);
 	PL_register_foreign("java_destroy_vm", 0, destroy_vm, 0);
 	PL_register_foreign("java_invoke_object_protected", 4, pl_java_invoke_object, 0);
+
+	JAVA_OBJECT= PL_new_atom("$java_object");
+	JAVA_INSTANCE = PL_new_atom("$java_instance");
+	JAVA_PARSE = PL_new_atom("$java_parse");
+
+	PL_register_atom(JAVA_OBJECT);
+	PL_register_atom(JAVA_INSTANCE);
+	PL_register_atom(JAVA_PARSE);
+
 	}
 
 /*
