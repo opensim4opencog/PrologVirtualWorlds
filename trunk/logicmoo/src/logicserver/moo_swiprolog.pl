@@ -144,6 +144,15 @@ fmtString(Y,Z):-sformat(Y,Z).
 :-assert(debug_tests).
 
 :-ensure_loaded('moo_bootstrap.pl').
+   
+load_modules:-
+   moduleFile(_,Filename),
+   ensure_loaded(Filename),fail.
+   %include(Filename),fail.
+load_modules:-!.
+
+:-load_modules.
+
 
 % =============================================
 % Load the Moo header and Engine 
@@ -153,7 +162,7 @@ prologAtInitalization(V):-at_initialization(V),!,logOnFailureIgnore(V).
 
 :-setMooOptionDefaults.
 
-sigma_ua(X):-moo_ua(X).
+sigma_ua(X):-processRequest(X).
 
 
 :-callIfPlatformUnix(prologAtInitalization(cs)).	 	

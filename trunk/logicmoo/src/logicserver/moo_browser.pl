@@ -40,7 +40,7 @@ So ... this means we have Three States of any Canonical assertion...  on/in_mem/
 % ===========================================================
 % Search For Constant (Atom)
 % ===========================================================
-parse_moo_enable(Options):-memberchk(show='find',Options),!,
+invokeBrowserRequest(Options):-memberchk(show='find',Options),!,
 	getMooOption(word='instance',Word),
 	getMooOption(opt_ctx_assert='GlobalContext',Ctx),
 	getMooOption(opt_kb='PrologMOO',KB),
@@ -54,7 +54,7 @@ disp_word_to_surface(Word,KB,_Ctx,Out):-
 	retractall(pkids(_)),
 	mooCache(PredR,SurfaceTODO,SURF,PROLOG,KB,Ctx,AID,Maintainer,OnOff),
 	getConstants(atomic,SURF,Atoms,_,_),memberchk(Word,Atoms),  
-	assertion_display(SurfaceTODO,SURF,PROLOG,KB,Ctx,AID,Maintainer,OnOff),
+	writeAssertion(SurfaceTODO,SURF,PROLOG,KB,Ctx,AID,Maintainer,OnOff),
 	fail.	
 
 disp_word_to_surface(Word,KB,Ctx,Out):-!,setof(retract(pkids(INTID)),Out).
@@ -62,7 +62,7 @@ disp_word_to_surface(Word,KB,Ctx,Out):-!,setof(retract(pkids(INTID)),Out).
 % ===========================================================
 % Search For Tracking Number
 % ===========================================================
-parse_moo_enable(Options):-(memberchk(submit=editaid,Options);memberchk(dispasid=dispasid,Options)),!,  
+invokeBrowserRequest(Options):-(memberchk(submit=editaid,Options);memberchk(dispasid=dispasid,Options)),!,  
 	getMooOption(opt_ctx_assert='GlobalContext',Ctx),
 	getMooOption(opt_kb='PrologMOO',KB),
 	getMooOption(asid=_,AID),
@@ -76,12 +76,12 @@ disp_tn_to_surface(KB,bogus,Out):-!.
 
 disp_tn_to_surface(KB,TN,Out):-
 	mooCache(PredR,Format,SURF,Prolog,KB,Ctx,TN,Maintainer,OnOff), 
-	assertion_display(Format,SURF,Prolog,KB,Ctx,TN,Maintainer,OnOff),
+	writeAssertion(Format,SURF,Prolog,KB,Ctx,TN,Maintainer,OnOff),
 	fail.	
 
 disp_tn_to_surface(KB,Out):- %isMooOption(disp_notes_nonuser=on),
 	mooCache(PredR,Format,SURF,Prolog,KB,Ctx,TN,Maintainer,OnOff),  
-	assertion_display(Format,SURF,Prolog,KB,Ctx,TN,Maintainer,OnOff),
+	writeAssertion(Format,SURF,Prolog,KB,Ctx,TN,Maintainer,OnOff),
 	fail.	
 
 disp_tn_to_surface(KB,_,Out):-!,setof(retract(pkids(INTID)),Out).
@@ -93,7 +93,7 @@ aid_to_number(AID,Number):- atom_to_term(AID,Number,_),!.
 % ===========================================================
 % Search For State (Atom) (rejected,on,gaf).. etc
 % ===========================================================
-parse_moo_enable(Options):-memberchk(show='state',Options),!,
+invokeBrowserRequest(Options):-memberchk(show='state',Options),!,
 	getMooOption(word='disabled',Word),
 	getMooOption(opt_ctx_assert='GlobalContext',Ctx),
 	getMooOption(opt_kb='PrologMOO',KB),
@@ -106,7 +106,7 @@ parse_moo_enable(Options):-memberchk(show='state',Options),!,
 disp_status_to_surface(Status,KB,Ctx,Out):-
 	retractall(pkids(_)),
 	mooCache(PredR,SurfaceTODO,SURF,Prolog,KB,Ctx,AID,Maintainer,Status),
-	assertion_display(SurfaceTODO,SURF,Prolog,KB,Ctx,AID,Maintainer,Status),
+	writeAssertion(SurfaceTODO,SURF,Prolog,KB,Ctx,AID,Maintainer,Status),
 	fail.	
 
 disp_status_to_surface(Status,KB,Ctx,Out):-!,setof(retract(pkids(INTID)),Out).
@@ -114,7 +114,7 @@ disp_status_to_surface(Status,KB,Ctx,Out):-!,setof(retract(pkids(INTID)),Out).
 % ===========================================================
 % Search Disabled Assertion
 % ===========================================================
-parse_moo_enable(Options):-
+invokeBrowserRequest(Options):-
 	memberchk(cmd='Show Disabled',Options),!,
 	getMooOption(opt_ctx_assert='GlobalContext',Ctx),
 	getMooOption(opt_kb='PrologMOO',KB),
@@ -126,7 +126,7 @@ parse_moo_enable(Options):-
 	
 show_disabled_assertions(KB,Ctx):-
 	mooCache(PredR,Form,Formula,Prolog,KB,Ctx,AID,Maintainer,OnOff),not(OnOff=on),not(OnOff=uncanonicalized),
-	assertion_display(Form,Formula,Prolog,KB,Ctx,AID,Maintainer,OnOff),
+	writeAssertion(Form,Formula,Prolog,KB,Ctx,AID,Maintainer,OnOff),
 	fail.
 	
 show_disabled_assertions(KB,Ctx):-writeFmt('<H3><Font Color=Red>Done.</Font></H3>',[]).
@@ -149,7 +149,7 @@ draw_update_enable(KB,As):-!,
 % Show Assertions (Surface)
 % ===========================================================
 
-assertion_display(surface,SURF,Vars,KB,Ctx,AID,Maintainer,OnOff):- !,
+writeAssertion(surface,SURF,Vars,KB,Ctx,AID,Maintainer,OnOff):- !,
 	assert(pkids(INTID)),
 	toMarkUp(html,SURF,Vars,SAtom),
 	%toMarkUp(kif,SURF,Vars,KIF),
@@ -163,7 +163,7 @@ assertion_display(surface,SURF,Vars,KB,Ctx,AID,Maintainer,OnOff):- !,
 % Show Assertions (HL)
 % ===========================================================
 
-assertion_display(surface,WFS,Vars,KB,Ctx,AID,Maintainer,OnOff):- %isMooOption(disp_notes_nonuser=on),
+writeAssertion(surface,WFS,Vars,KB,Ctx,AID,Maintainer,OnOff):- %isMooOption(disp_notes_nonuser=on),
 	assert(pkids(INTID)),
 	toMarkUp(html,formula(WFS),Vars,SAtom),
 	%toMarkUp(kif,SURF,Vars,KIF),
@@ -173,7 +173,7 @@ assertion_display(surface,WFS,Vars,KB,Ctx,AID,Maintainer,OnOff):- %isMooOption(d
 	writeFmt('<b>~w</b> ID<font color=red>~w:~w</font> in KB: <font color=green>~w</font>  CTX: <font color=green>~w</font>  Maintainer: <font color=green>~w</font> Status: <font color=puple>~w</font>',['Surface',AID,KB,Ctx,Maintainer,OnOff]),
 	writeFmt('~w',[SAtom]),!.
 /*
-assertion_display(skolem,WFS,Vars,KB,Ctx,AID,Maintainer,OnOff):- %isMooOption(disp_notes_nonuser=on),
+writeAssertion(skolem,WFS,Vars,KB,Ctx,AID,Maintainer,OnOff):- %isMooOption(disp_notes_nonuser=on),
 	assert(pkids(INTID)),
 	toMarkUp(html,formula(WFS),Vars,SAtom),
 	%toMarkUp(kif,SURF,Vars,KIF),
@@ -183,7 +183,7 @@ assertion_display(skolem,WFS,Vars,KB,Ctx,AID,Maintainer,OnOff):- %isMooOption(di
 	writeFmt('<b>~w</b> ID<font color=red>~w:~w</font> in KB: <font color=green>~w</font>  CTX: <font color=green>~w</font>   Status: <font color=puple>~w</font>',['Skolem',AID,KB,Ctx,OnOff]),
 	writeFmt('~w',[SAtom]),!.
 */
-assertion_display(Head,Tail,Vars,KB,Ctx,AID,Maintainer,OnOff):- %isMooOption(disp_notes_nonuser=on),
+writeAssertion(Head,Tail,Vars,KB,Ctx,AID,Maintainer,OnOff):- %isMooOption(disp_notes_nonuser=on),
 	assert(pkids(INTID)),
 	toMarkUp(html,formula((Head:-Tail)),Vars,SAtom),
 	%toMarkUp(kif,SURF,Vars,KIF),
@@ -208,7 +208,7 @@ on_to_check(_,_,' ').
 
 
 % Disables
-parse_moo_enable(Options):-     
+invokeBrowserRequest(Options):-     
 		memberchk(submit='Change',Options),
 		memberchk(ue='Disable',Options),  %trace,
 		findall(N,(member(N=on,Options),number(N)),List),
@@ -224,7 +224,7 @@ parse_moo_enable(Options):-
 
 
 % Enables
-parse_moo_enable(Options):-   
+invokeBrowserRequest(Options):-   
 		memberchk(submit='Change',Options),
 		memberchk(ue='Enable',Options),   %trace,
 		findall(N,(member(N=on,Options),number(N)),List),
@@ -339,7 +339,7 @@ disable_can(PrologForm):-!.
 % ===========================================================
 % Disable Assertion
 % ===========================================================
-parse_moo_enable(Options):-memberchk(submit='Disable Assertion',Options),!,
+invokeBrowserRequest(Options):-memberchk(submit='Disable Assertion',Options),!,
 	getMooOption(opt_ctx_assert='GlobalContext',Ctx),
 	getMooOption(opt_kb='PrologMOO',KB),
 	getMooOption(asid=_,AID),
@@ -372,7 +372,7 @@ show_disable_assertions(Form,SURF,Vars,KB,Ctx,AID,Maintainer,OnOff):-
 % ===========================================================
 % Enable Assertion
 % ===========================================================
-parse_moo_enable(Options):-memberchk(submit='Enable Assertion',Options),!,
+invokeBrowserRequest(Options):-memberchk(submit='Enable Assertion',Options),!,
 	getMooOption(opt_ctx_assert='GlobalContext',Ctx),
 	getMooOption(opt_kb='PrologMOO',KB),
 	getMooOption(asid=_,AID),
@@ -413,7 +413,7 @@ show_enable_assertions(Form,SURF,Vars,KB,Ctx,AID,Maintainer,OnOff):-
 % ===========================================================
 % Edit Assertion
 % ===========================================================
-parse_moo_enable(Options):-memberchk(t='ea',Options),!,
+invokeBrowserRequest(Options):-memberchk(t='ea',Options),!,
 	getMooOption(opt_ctx_assert='GlobalContext',Ctx),
 	getMooOption(opt_kb='PrologMOO',KB),
 	getMooOption(asid=_,AID),

@@ -5,23 +5,71 @@
 % This File is the bootstrap for the Moo Infence engine For SWI-Prolog
 % So first is loads the proper files and then starts up the system
 % ===================================================================
-   :-use_module(library(dynamic),[asserta/1, asserta/2, assertz/1, assertz/2, assert/1, assert/2, retract/1, retractall/1, abolish/1, clause/2, clause/3, current_predicate/1, current_predicate/2, dynamic/1, data/1, wellformed_body/3]).
-:-use_module(library(format)).
 
-/*
+%:- use_module(library(iso)). 
+%:-use_module(library(dynamic),[asserta/1, asserta/2, assertz/1, assertz/2, assert/1, assert/2, retract/1, retractall/1, abolish/1, clause/2, clause/3, current_predicate/1, current_predicate/2, dynamic/1, data/1, wellformed_body/3]).
+%:-use_module(library(format)).
+%:- use_module(library(linda)). 
+
+
+%:- module(_, [],[assertions,functions]).
+                        
 :-use_module(library(system)).
 :-use_module(library(read)).
 :-use_module(library(prolog_sys)).
+:-use_module(library(sort)).
+
+:- use_module(library(aggregates)).
+:- use_module(library(prompt)).
+:- use_module(library(errhandle)).  
+:- use_module(library(format)).
+:- use_module(library('graphs/ugraphs')).
+:- use_module(library(write)).
+:- use_module(library(atom2term)).
+:- use_module(library(term_to_string)).
+:- use_module(library(terms_vars)).
+:- use_module(library(idlists)).
+:- use_module(library(use_url)).
+:- use_module(library(vndict)).
+:- use_module(library(queues)).
+:- use_module(library(lsets)).
+:- use_module(library(lists)).
+:- use_module(library(llists)).
+:- use_module(library(listing)).
+:- use_module(library(sets)).
+:- use_module(library(keys)).
+:- use_module(library(arrays)).
+:- use_module(library(dcg)).
+%:- use_module(library(trace)).
+:- use_module(library('sockets/sockets')).
+:- use_module(library('javall/javart')).
+:- use_module(library('javall/jtopl')).
+
+
+
+
+
+
+      
+:-include('moo_bootstrap.pl').
+
+/*
 %%:-use_module(library(iso)).
 :- use_module(library(libpaths)). 
 
 */
 
-:- use_module(library(linda)). 
-%:- use_module(library(io)). 
-:- use_module(library(iso)). 
                 
-%main(_):-write(hello),nl.
+main(_):-
+   moduleFile(prolog(_),Filename),
+   use_module(Filename),fail.
+main(_):-!.
+
+end_of_file.
+
+
+
+
 
 %:- use_package(debug).
 %:- use_package(trace).
@@ -56,7 +104,6 @@ style_check( _).
 style_check( _).
 
 
-
 multi_module(X):-
 	dynamic(X),
 	multifile(X),
@@ -71,6 +118,7 @@ writeModeSet(Mode):-
 	(unsetMooOption(client=_)),
 	(setMooOption(client=Mode)),!.
 
+:-call(trace).                                                  
 :-ensure_loaded('moo_utility.pl').
 
 %:-absolute_file_name(.,Local),assert('LOGIC_ENGINE_RT'(Local)),assert(library_directory(Local)).
