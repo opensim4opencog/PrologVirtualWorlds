@@ -263,6 +263,8 @@ public class JNIPrologServer extends Thread {
 				}
 			case 'u':
 				return arg.substring(1);
+			case 't':
+				return arg.substring(1);
 		}
 		return arg;
 	}
