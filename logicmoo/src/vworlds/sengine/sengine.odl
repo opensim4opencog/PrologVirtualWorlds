@@ -1,0 +1,107 @@
+// SEngine.odl : type library source for SEngine.exe
+
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (SEngine.tlb).
+
+[ uuid(2C06A6F1-D0C2-11CF-8A96-00A0C9082583), version(1.0) ]
+library SEngine
+{
+	importlib("stdole32.tlb");
+	
+	//  Primary dispatch interface for CSEngineDoc
+	
+	[ uuid(2C06A6F2-D0C2-11CF-8A96-00A0C9082583) ]
+	dispinterface ISEngin
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CSEngineDoc)
+			[id(1)] BSTR StatusText;
+			[id(2)] IDispatch* XObject;
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CSEngineDoc)
+			[id(3)] void DoMessageBox(BSTR msg);
+			[id(4)] IDispatch* CreateNewX();
+			[id(5)] IDispatch* CreateObject(BSTR lpzClassName);
+			[id(6)] SCODE InvokeScriptlet(BSTR strScript);
+			[id(7)] void CreateOCXView(BSTR progid);
+			[id(8)] IDispatch* CreateOCX(BSTR oleid);
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CSEngineDoc
+	
+	[ uuid(2C06A6F0-D0C2-11CF-8A96-00A0C9082583) ]
+	coclass Document
+	{
+		[default] dispinterface ISEngin;
+	};
+
+
+	//  Primary dispatch interface for CDBGView
+	
+	[ uuid(4CA95520-0B1C-11D0-8A96-00A0C9082583) ]
+	dispinterface IDBGView
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CDBGView)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CDBGView)
+			[id(1)] void OnTrace(BSTR str);
+			[id(2)] void OnError(BSTR str);
+			[id(3)] void OnConnect(IDispatch* pWorld);
+			[id(4)] void OnDisconnect(IDispatch* pWorld);
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for CDBGView
+
+	[ uuid(4CA95521-0B1C-11D0-8A96-00A0C9082583) ]
+	coclass DBGVIEW
+	{
+		[default] dispinterface IDBGView;
+	};
+
+
+	//  Primary dispatch interface for COCXView
+	
+	[ uuid(812E6309-0C8C-11D0-8A96-00A0C9082583) ]
+	dispinterface IOCXView
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(COCXView)
+			//}}AFX_ODL_PROP
+			
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(COCXView)
+			//}}AFX_ODL_METHOD
+
+	};
+
+	//  Class information for COCXView
+
+	[ uuid(812E630A-0C8C-11D0-8A96-00A0C9082583) ]
+	coclass OCXVIEW
+	{
+		[default] dispinterface IOCXView;
+	};
+
+	//{{AFX_APPEND_ODL}}
+};

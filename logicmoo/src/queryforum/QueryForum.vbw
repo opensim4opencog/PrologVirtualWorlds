@@ -1,0 +1,12 @@
+frmBrowser = 0, 0, 0, 0, C, 176, 176, 440, 589, C
+frmAbout = 0, 0, 309, 413, , 198, 198, 462, 611, C
+frmODBCLogon = 0, 0, 0, 0, C, 44, 44, 308, 457, C
+frmOptions = 0, 0, 0, 0, C, 66, 66, 330, 479, C
+frmUserModel = 44, 44, 353, 457, , 88, 88, 352, 501, C
+modQueryForum = -282, 67, 343, 381, 
+QueryObject = 44, 44, 308, 457, Z, 22, 22, 544, 435, C
+frmMain = 0, 0, 309, 413, , 88, 88, 607, 530, C
+frmLogon = 0, 0, 409, 416, , 0, 0, 264, 413, C
+BotConnection = 110, 110, 542, 604, 
+modVWObjects = -77, 139, 355, 633, 
+WorldWalker = 22, 22, 689, 546, 

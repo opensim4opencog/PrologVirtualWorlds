@@ -1,0 +1,1504 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- OKBC.Cons | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class OKBC.Cons
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class OKBC.Cons
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----<A HREF="OKBC.Node.html">OKBC.Node</A>
+           |
+           +----OKBC.Cons
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>Cons</STRONG>
+     extends OKBC.<A HREF="OKBC.Node.html">Node</A>
+{
+          // Constructors 14
+     public <A HREF="#Cons(boolean)">Cons</A>(boolean);
+     public <A HREF="#Cons(boolean, java.lang.Object)">Cons</A>(boolean, <A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public <A HREF="#Cons(byte)">Cons</A>(byte);
+     public <A HREF="#Cons(byte, java.lang.Object)">Cons</A>(byte, <A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public <A HREF="#Cons(double)">Cons</A>(double);
+     public <A HREF="#Cons(double, java.lang.Object)">Cons</A>(double, <A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public <A HREF="#Cons(float)">Cons</A>(float);
+     public <A HREF="#Cons(float, java.lang.Object)">Cons</A>(float, <A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public <A HREF="#Cons(java.lang.Object)">Cons</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public <A HREF="#Cons(java.lang.Object, java.lang.Object)">Cons</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public <A HREF="#Cons(long)">Cons</A>(long);
+     public <A HREF="#Cons(long, java.lang.Object)">Cons</A>(long, <A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public <A HREF="#Cons(short)">Cons</A>(short);
+     public <A HREF="#Cons(short, java.lang.Object)">Cons</A>(short, <A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+
+          // Methods 85
+     public static <A CLASS=nound HREF="OKBC.Cons.html">Cons</A> <A HREF="#append_all(OKBC.Cons)">append_all</A>(<A CLASS=nound HREF="OKBC.Cons.html">Cons</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#append_cons(OKBC.Node, OKBC.Node)">append_cons</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#assoc(java.lang.Object, OKBC.Node)">assoc</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#cdr_or_NIL(OKBC.Node)">cdr_or_NIL</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#copy_tree(OKBC.Node)">copy_tree</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#find_equal(java.lang.Object, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">find_equal</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#first_if_list(OKBC.Node)">first_if_list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#firstn(int, OKBC.Node)">firstn</A>(int, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#getf(OKBC.Node, java.lang.Object)">getf</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#intersection_equal(OKBC.Node, OKBC.Node, OKBC.Kb)">intersection_equal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#last(OKBC.Node)">last</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list()">list</A>();
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#list_if_not(OKBC.Node)">list_if_not</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static boolean <A HREF="#listp(java.lang.Object)">listp</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public static void <A HREF="#main(java.lang.String[])">main</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>[]);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#mapcar_cons(OKBC.Node, OKBC.Node)">mapcar_cons</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#mapcar_first(OKBC.Node)">mapcar_first</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static boolean <A HREF="#member_eql(java.lang.Object, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">member_eql</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     public static boolean <A HREF="#member_equal(java.lang.Object, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">member_equal</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     public static boolean <A HREF="#member_frame_list(OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">member_frame_list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     public static boolean <A HREF="#member_test(java.lang.Object, OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">member_test</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#nthcdr(int, OKBC.Node)">nthcdr</A>(int, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#pretty_print(OKBC.Node)">pretty_print</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#pretty_print(OKBC.Node, OKBC.Node)">pretty_print</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#pretty_print(OKBC.Node, int)">pretty_print</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, int);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#pretty_print(OKBC.Node, int, OKBC.Node)">pretty_print</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, int, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#pretty_print(OKBC.Node, int, java.io.PrintStream)">pretty_print</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, int, <A CLASS=nound HREF="java.io.PrintStream.html">PrintStream</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#pretty_print(OKBC.Node, int, java.io.PrintWriter)">pretty_print</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, int, <A CLASS=nound HREF="java.io.PrintWriter.html">PrintWriter</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#pretty_print(OKBC.Node, java.io.PrintStream)">pretty_print</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.io.PrintStream.html">PrintStream</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#pretty_print(OKBC.Node, java.io.PrintWriter)">pretty_print</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.io.PrintWriter.html">PrintWriter</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#remove_duplicates(OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">remove_duplicates</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#remove_eql(java.lang.Object, OKBC.Node, OKBC.Kb)">remove_eql</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#remove_equal(java.lang.Object, OKBC.Node, OKBC.Kb)">remove_equal</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#remove_test(java.lang.Object, OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">remove_test</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#remove_test(java.lang.Object, OKBC.Node, OKBC.Node, long, int, OKBC.Kb, OKBC.TruthValue)">remove_test</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, long, int, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#rest_if_list(OKBC.Node)">rest_if_list</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#reverse(OKBC.Node)">reverse</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#set_difference(OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">set_difference</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#sublis(java.lang.Object, OKBC.Node, OKBC.Kb)">sublis</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#substitute(java.lang.Object, java.lang.Object, OKBC.Node, OKBC.Kb)">substitute</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#substitute_test(java.lang.Object, java.lang.Object, OKBC.Node, OKBC.Node, OKBC.Kb)">substitute_test</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#toList(java.util.Vector)">toList</A>(<A CLASS=nound HREF="java.util.Vector.html">Vector</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#toNode_or_tail(java.lang.Object)">toNode_or_tail</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public static <A CLASS=nound HREF="java.util.Vector.html">Vector</A> <A HREF="#toVector(OKBC.Node)">toVector</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Cons.html">Cons</A> <A HREF="#vectorToCons(java.util.Vector)">vectorToCons</A>(<A CLASS=nound HREF="java.util.Vector.html">Vector</A>);
+
+     public <A CLASS=nound HREF="OKBC.Cons.html">Cons</A> <A HREF="#assoc(java.lang.Object)">assoc</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#car()">car</A>();
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#cdr()">cdr</A>();
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#cdr_or_NIL()">cdr_or_NIL</A>();
+     public <A CLASS=nound HREF="java.util.Enumeration.html">Enumeration</A> <A HREF="#elements()">elements</A>();
+     protected void <A HREF="#encode(java.io.PrintWriter, boolean)">encode</A>(<A CLASS=nound HREF="java.io.PrintWriter.html">PrintWriter</A>, boolean);
+     public <A CLASS=nound HREF="OKBC.Enumerator.html">Enumerator</A> <A HREF="#enumerate_list()">enumerate_list</A>();
+     public boolean <A HREF="#equals(java.lang.Object)">equals</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public int <A HREF="#hashCode()">hashCode</A>();
+     public boolean <A HREF="#isEmpty()">isEmpty</A>();
+     public int <A HREF="#length()">length</A>();
+     public int <A HREF="#length(int)">length</A>(int);
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#nth(int)">nth</A>(int);
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#nth(java.lang.Integer)">nth</A>(<A CLASS=nound HREF="java.lang.Integer.html">Integer</A>);
+     public void <A HREF="#set_car(java.lang.Object)">set_car</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public void <A HREF="#set_cdr(java.lang.Object)">set_cdr</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>);
+     public void <A HREF="#set_nth(int, OKBC.Node)">set_nth</A>(int, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#toString()">toString</A>();
+     public <A CLASS=nound HREF="OKBC.Values.html">Values</A> <A HREF="#toValues()">toValues</A>();
+     public <A CLASS=nound HREF="OKBC.Values2.html">Values2</A> <A HREF="#toValues2()">toValues2</A>();
+     public <A CLASS=nound HREF="OKBC.Values3.html">Values3</A> <A HREF="#toValues3()">toValues3</A>();
+     public <A CLASS=nound HREF="OKBC.Values4.html">Values4</A> <A HREF="#toValues4()">toValues4</A>();
+     public <A CLASS=nound HREF="OKBC.Cons.html">Cons</A> <A HREF="#union_equal(java.lang.Object, OKBC.Kb, OKBC.TruthValue)">union_equal</A>(<A CLASS=nound HREF="java.lang.Object.html">Object</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+}
+</PRE>
+<P>
+<P>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Cross Reference</B></FONT></TD> </TR> </TABLE>
+<BR><DL>
+<DT><B>Returned By: </B>
+<DD>Connection.<A HREF="OKBC.Connection.html#make_connection_key()">make_connection_key()</A>, Cons.<A HREF="OKBC.Cons.html#append_all(OKBC.Cons)">append_all()</A>, Cons.<A HREF="OKBC.Cons.html#assoc(java.lang.Object)">assoc()</A>, Cons.<A HREF="OKBC.Cons.html#union_equal(java.lang.Object, OKBC.Kb, OKBC.TruthValue)">union_equal()</A>, Cons.<A HREF="OKBC.Cons.html#vectorToCons(java.util.Vector)">vectorToCons()</A>, KslNetworkConnection.<A HREF="OKBC.KslNetworkConnection.html#make_connection_key()">make_connection_key()</A>, KslNetworkConnection.<A HREF="OKBC.KslNetworkConnection.html#make_connection_key_from_parts(java.lang.String, int, OKBC.Symbol, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">make_connection_key_from_parts()</A>, LocalConnection.<A HREF="OKBC.LocalConnection.html#make_connection_key()">make_connection_key()</A>, LocalConnection.<A HREF="OKBC.LocalConnection.html#make_connection_key_from_parts()">make_connection_key_from_parts()</A>, NetworkConnection.<A HREF="OKBC.NetworkConnection.html#make_connection_key()">make_connection_key()</A>, SimpleNetworkConnection.<A HREF="OKBC.SimpleNetworkConnection.html#make_connection_key()">make_connection_key()</A>, SimpleNetworkConnection.<A HREF="OKBC.SimpleNetworkConnection.html#make_connection_key_from_parts(java.lang.String, int, java.lang.String)">make_connection_key_from_parts()</A>, TupleStore.<A HREF="OKBC.TupleStore.html#facts_full_indexed_under(java.lang.Object)">facts_full_indexed_under()</A>, TupleStore.<A HREF="OKBC.TupleStore.html#facts_full_indexed_under(java.lang.Object, boolean)">facts_full_indexed_under()</A>, TupleStore.<A HREF="OKBC.TupleStore.html#facts_locally_full_indexed_under(java.lang.Object)">facts_locally_full_indexed_under()</A>, TupleStore.<A HREF="OKBC.TupleStore.html#fetch_local(OKBC.Cons, boolean, OKBC.Node, int, OKBC.Trie, OKBC.NumberLocation, OKBC.TupleStoreTester)">fetch_local()</A>, TupleStore.<A HREF="OKBC.TupleStore.html#get_candidates(java.lang.Object)">get_candidates()</A><P>
+</DL><BR>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(java.lang.Object, java.lang.Object)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(<A HREF="java.lang.Object.html">Object</A> theCar, 
+               <A HREF="java.lang.Object.html">Object</A> theCdr) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(byte, java.lang.Object)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(byte theCar, 
+               <A HREF="java.lang.Object.html">Object</A> theCdr) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(short, java.lang.Object)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(short theCar, 
+               <A HREF="java.lang.Object.html">Object</A> theCdr) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(long, java.lang.Object)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(long theCar, 
+               <A HREF="java.lang.Object.html">Object</A> theCdr) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(float, java.lang.Object)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(float theCar, 
+               <A HREF="java.lang.Object.html">Object</A> theCdr) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(double, java.lang.Object)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(double theCar, 
+               <A HREF="java.lang.Object.html">Object</A> theCdr) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(boolean, java.lang.Object)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(boolean theCar, 
+               <A HREF="java.lang.Object.html">Object</A> theCdr) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(java.lang.Object)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(<A HREF="java.lang.Object.html">Object</A> theCar) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(byte)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(byte theCar) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(short)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(short theCar) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(long)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(long theCar) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(float)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(float theCar) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(double)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(double theCar) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Cons"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Cons(boolean)">Cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Cons(boolean theCar) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="enumerate_list"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="enumerate_list()">enumerate_list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Enumerator.html">Enumerator</A> enumerate_list() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#enumerate_list()">enumerate_list</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="car"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="car()">car</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> car() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#car()">car</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="cdr"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="cdr()">cdr</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> cdr() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#cdr()">cdr</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="cdr_or_NIL"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="cdr_or_NIL()">cdr_or_NIL</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> cdr_or_NIL() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="cdr_or_NIL"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="cdr_or_NIL(OKBC.Node)">cdr_or_NIL</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> cdr_or_NIL(<A HREF="OKBC.Node.html">Node</A> expression) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="set_car"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="set_car(java.lang.Object)">set_car</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void set_car(<A HREF="java.lang.Object.html">Object</A> new_car) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="set_cdr"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="set_cdr(java.lang.Object)">set_cdr</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void set_cdr(<A HREF="java.lang.Object.html">Object</A> new_cdr) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="elements"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="elements()">elements</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.util.Enumeration.html">Enumeration</A> elements() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#elements()">elements</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list()">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4, 
+                           <A HREF="OKBC.Node.html">Node</A> n5) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4, 
+                           <A HREF="OKBC.Node.html">Node</A> n5, 
+                           <A HREF="OKBC.Node.html">Node</A> n6) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4, 
+                           <A HREF="OKBC.Node.html">Node</A> n5, 
+                           <A HREF="OKBC.Node.html">Node</A> n6, 
+                           <A HREF="OKBC.Node.html">Node</A> n7) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4, 
+                           <A HREF="OKBC.Node.html">Node</A> n5, 
+                           <A HREF="OKBC.Node.html">Node</A> n6, 
+                           <A HREF="OKBC.Node.html">Node</A> n7, 
+                           <A HREF="OKBC.Node.html">Node</A> n8) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4, 
+                           <A HREF="OKBC.Node.html">Node</A> n5, 
+                           <A HREF="OKBC.Node.html">Node</A> n6, 
+                           <A HREF="OKBC.Node.html">Node</A> n7, 
+                           <A HREF="OKBC.Node.html">Node</A> n8, 
+                           <A HREF="OKBC.Node.html">Node</A> n9) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4, 
+                           <A HREF="OKBC.Node.html">Node</A> n5, 
+                           <A HREF="OKBC.Node.html">Node</A> n6, 
+                           <A HREF="OKBC.Node.html">Node</A> n7, 
+                           <A HREF="OKBC.Node.html">Node</A> n8, 
+                           <A HREF="OKBC.Node.html">Node</A> n9, 
+                           <A HREF="OKBC.Node.html">Node</A> n10) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4, 
+                           <A HREF="OKBC.Node.html">Node</A> n5, 
+                           <A HREF="OKBC.Node.html">Node</A> n6, 
+                           <A HREF="OKBC.Node.html">Node</A> n7, 
+                           <A HREF="OKBC.Node.html">Node</A> n8, 
+                           <A HREF="OKBC.Node.html">Node</A> n9, 
+                           <A HREF="OKBC.Node.html">Node</A> n10, 
+                           <A HREF="OKBC.Node.html">Node</A> n11) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4, 
+                           <A HREF="OKBC.Node.html">Node</A> n5, 
+                           <A HREF="OKBC.Node.html">Node</A> n6, 
+                           <A HREF="OKBC.Node.html">Node</A> n7, 
+                           <A HREF="OKBC.Node.html">Node</A> n8, 
+                           <A HREF="OKBC.Node.html">Node</A> n9, 
+                           <A HREF="OKBC.Node.html">Node</A> n10, 
+                           <A HREF="OKBC.Node.html">Node</A> n11, 
+                           <A HREF="OKBC.Node.html">Node</A> n12) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4, 
+                           <A HREF="OKBC.Node.html">Node</A> n5, 
+                           <A HREF="OKBC.Node.html">Node</A> n6, 
+                           <A HREF="OKBC.Node.html">Node</A> n7, 
+                           <A HREF="OKBC.Node.html">Node</A> n8, 
+                           <A HREF="OKBC.Node.html">Node</A> n9, 
+                           <A HREF="OKBC.Node.html">Node</A> n10, 
+                           <A HREF="OKBC.Node.html">Node</A> n11, 
+                           <A HREF="OKBC.Node.html">Node</A> n12, 
+                           <A HREF="OKBC.Node.html">Node</A> n13) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4, 
+                           <A HREF="OKBC.Node.html">Node</A> n5, 
+                           <A HREF="OKBC.Node.html">Node</A> n6, 
+                           <A HREF="OKBC.Node.html">Node</A> n7, 
+                           <A HREF="OKBC.Node.html">Node</A> n8, 
+                           <A HREF="OKBC.Node.html">Node</A> n9, 
+                           <A HREF="OKBC.Node.html">Node</A> n10, 
+                           <A HREF="OKBC.Node.html">Node</A> n11, 
+                           <A HREF="OKBC.Node.html">Node</A> n12, 
+                           <A HREF="OKBC.Node.html">Node</A> n13, 
+                           <A HREF="OKBC.Node.html">Node</A> n14) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4, 
+                           <A HREF="OKBC.Node.html">Node</A> n5, 
+                           <A HREF="OKBC.Node.html">Node</A> n6, 
+                           <A HREF="OKBC.Node.html">Node</A> n7, 
+                           <A HREF="OKBC.Node.html">Node</A> n8, 
+                           <A HREF="OKBC.Node.html">Node</A> n9, 
+                           <A HREF="OKBC.Node.html">Node</A> n10, 
+                           <A HREF="OKBC.Node.html">Node</A> n11, 
+                           <A HREF="OKBC.Node.html">Node</A> n12, 
+                           <A HREF="OKBC.Node.html">Node</A> n13, 
+                           <A HREF="OKBC.Node.html">Node</A> n14, 
+                           <A HREF="OKBC.Node.html">Node</A> n15) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node)">list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list(<A HREF="OKBC.Node.html">Node</A> n0, 
+                           <A HREF="OKBC.Node.html">Node</A> n1, 
+                           <A HREF="OKBC.Node.html">Node</A> n2, 
+                           <A HREF="OKBC.Node.html">Node</A> n3, 
+                           <A HREF="OKBC.Node.html">Node</A> n4, 
+                           <A HREF="OKBC.Node.html">Node</A> n5, 
+                           <A HREF="OKBC.Node.html">Node</A> n6, 
+                           <A HREF="OKBC.Node.html">Node</A> n7, 
+                           <A HREF="OKBC.Node.html">Node</A> n8, 
+                           <A HREF="OKBC.Node.html">Node</A> n9, 
+                           <A HREF="OKBC.Node.html">Node</A> n10, 
+                           <A HREF="OKBC.Node.html">Node</A> n11, 
+                           <A HREF="OKBC.Node.html">Node</A> n12, 
+                           <A HREF="OKBC.Node.html">Node</A> n13, 
+                           <A HREF="OKBC.Node.html">Node</A> n14, 
+                           <A HREF="OKBC.Node.html">Node</A> n15, 
+                           <A HREF="OKBC.Node.html">Node</A> n16) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="toNode_or_tail"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="toNode_or_tail(java.lang.Object)">toNode_or_tail</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> toNode_or_tail(<A HREF="java.lang.Object.html">Object</A> o) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="length"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="length()">length</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public int length() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#length()">length</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="listp"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="listp(java.lang.Object)">listp</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static boolean listp(<A HREF="java.lang.Object.html">Object</A> x) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="length"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="length(int)">length</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public int length(int soFar) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="assoc"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="assoc(java.lang.Object, OKBC.Node)">assoc</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> assoc(<A HREF="java.lang.Object.html">Object</A> key, 
+                            <A HREF="OKBC.Node.html">Node</A> list) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="getf"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="getf(OKBC.Node, java.lang.Object)">getf</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> getf(<A HREF="OKBC.Node.html">Node</A> list, 
+                           <A HREF="java.lang.Object.html">Object</A> key) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="assoc"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="assoc(java.lang.Object)">assoc</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Cons.html">Cons</A> assoc(<A HREF="java.lang.Object.html">Object</A> key) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="set_difference"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="set_difference(OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">set_difference</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> set_difference(<A HREF="OKBC.Node.html">Node</A> list1, 
+                                     <A HREF="OKBC.Node.html">Node</A> list2, 
+                                     <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                     <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="firstn"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="firstn(int, OKBC.Node)">firstn</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> firstn(int n, 
+                             <A HREF="OKBC.Node.html">Node</A> list) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="nthcdr"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="nthcdr(int, OKBC.Node)">nthcdr</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> nthcdr(int n, 
+                             <A HREF="OKBC.Node.html">Node</A> list) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="reverse"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="reverse(OKBC.Node)">reverse</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> reverse(<A HREF="OKBC.Node.html">Node</A> list) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="list_if_not"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="list_if_not(OKBC.Node)">list_if_not</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> list_if_not(<A HREF="OKBC.Node.html">Node</A> thing) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="first_if_list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="first_if_list(OKBC.Node)">first_if_list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> first_if_list(<A HREF="OKBC.Node.html">Node</A> thing) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="rest_if_list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="rest_if_list(OKBC.Node)">rest_if_list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> rest_if_list(<A HREF="OKBC.Node.html">Node</A> thing) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="substitute_test"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="substitute_test(java.lang.Object, java.lang.Object, OKBC.Node, OKBC.Node, OKBC.Kb)">substitute_test</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> substitute_test(<A HREF="java.lang.Object.html">Object</A> new_val, 
+                                      <A HREF="java.lang.Object.html">Object</A> old_val, 
+                                      <A HREF="OKBC.Node.html">Node</A> tree, 
+                                      <A HREF="OKBC.Node.html">Node</A> test, 
+                                      <A HREF="OKBC.Kb.html">Kb</A> kb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="substitute"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="substitute(java.lang.Object, java.lang.Object, OKBC.Node, OKBC.Kb)">substitute</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> substitute(<A HREF="java.lang.Object.html">Object</A> new_val, 
+                                 <A HREF="java.lang.Object.html">Object</A> old_val, 
+                                 <A HREF="OKBC.Node.html">Node</A> tree, 
+                                 <A HREF="OKBC.Kb.html">Kb</A> kb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="sublis"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="sublis(java.lang.Object, OKBC.Node, OKBC.Kb)">sublis</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> sublis(<A HREF="java.lang.Object.html">Object</A> substitutions, 
+                             <A HREF="OKBC.Node.html">Node</A> tree, 
+                             <A HREF="OKBC.Kb.html">Kb</A> kb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="mapcar_first"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="mapcar_first(OKBC.Node)">mapcar_first</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> mapcar_first(<A HREF="OKBC.Node.html">Node</A> list) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="mapcar_cons"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="mapcar_cons(OKBC.Node, OKBC.Node)">mapcar_cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> mapcar_cons(<A HREF="OKBC.Node.html">Node</A> list1, 
+                                  <A HREF="OKBC.Node.html">Node</A> list2) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="remove_eql"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="remove_eql(java.lang.Object, OKBC.Node, OKBC.Kb)">remove_eql</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> remove_eql(<A HREF="java.lang.Object.html">Object</A> obj, 
+                                 <A HREF="OKBC.Node.html">Node</A> n, 
+                                 <A HREF="OKBC.Kb.html">Kb</A> kb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="remove_equal"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="remove_equal(java.lang.Object, OKBC.Node, OKBC.Kb)">remove_equal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> remove_equal(<A HREF="java.lang.Object.html">Object</A> obj, 
+                                   <A HREF="OKBC.Node.html">Node</A> list, 
+                                   <A HREF="OKBC.Kb.html">Kb</A> kb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="remove_duplicates"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="remove_duplicates(OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">remove_duplicates</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> remove_duplicates(<A HREF="OKBC.Node.html">Node</A> list, 
+                                        <A HREF="OKBC.Node.html">Node</A> test, 
+                                        <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                        <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+public static Node remove_duplicates(Node list) {
+    if (list == null || list == _NIL) { return _NIL; }
+    Cons ret = null;
+    Enumeration e = list.elements();
+    for (; e.hasMoreElements() ;) {
+      Node element = (Node)(e.nextElement());
+      if (ret == null) { ret = new Cons(element); }
+      else if (!member_eql(element, ret, kb, kb_local_only_p)) 
+	{ ret = new Cons(element, ret); }
+    }
+    // System.out.println("remove_duplicates(" + list + ") -> " + ret);
+    return ret;
+  }
+
+  public static Node remove_duplicates(Node list, Node test) {
+    if (list == null || list == _NIL) { return _NIL; }
+    Cons ret = null;
+    Enumeration e = list.elements();
+    for (; e.hasMoreElements() ;) {
+      Node element = (Node)(e.nextElement());
+      if (ret == null) { ret = new Cons(element); }
+      else if (!member_test(element, ret, test, kb, kb_local_onlyl_p))
+	{ ret = new Cons(element, ret); }
+    }
+    // System.out.println("remove_duplicates(" + list + ", " + test + ") -> " + ret);
+    return ret;
+  }
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="remove_test"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="remove_test(java.lang.Object, OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">remove_test</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> remove_test(<A HREF="java.lang.Object.html">Object</A> obj, 
+                                  <A HREF="OKBC.Node.html">Node</A> list, 
+                                  <A HREF="OKBC.Node.html">Node</A> test, 
+                                  <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                  <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="remove_test"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="remove_test(java.lang.Object, OKBC.Node, OKBC.Node, long, int, OKBC.Kb, OKBC.TruthValue)">remove_test</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> remove_test(<A HREF="java.lang.Object.html">Object</A> obj, 
+                                  <A HREF="OKBC.Node.html">Node</A> list, 
+                                  <A HREF="OKBC.Node.html">Node</A> test, 
+                                  long index, 
+                                  int max, 
+                                  <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                  <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="member_test"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="member_test(java.lang.Object, OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">member_test</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static boolean member_test(<A HREF="java.lang.Object.html">Object</A> obj, 
+                                     <A HREF="OKBC.Node.html">Node</A> list, 
+                                     <A HREF="OKBC.Node.html">Node</A> test, 
+                                     <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                     <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="isEmpty"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="isEmpty()">isEmpty</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean isEmpty() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#isEmpty()">isEmpty</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="find_equal"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="find_equal(java.lang.Object, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">find_equal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> find_equal(<A HREF="java.lang.Object.html">Object</A> obj, 
+                                 <A HREF="OKBC.Node.html">Node</A> list, 
+                                 <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                 <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="member_equal"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="member_equal(java.lang.Object, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">member_equal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static boolean member_equal(<A HREF="java.lang.Object.html">Object</A> obj, 
+                                      <A HREF="OKBC.Node.html">Node</A> list, 
+                                      <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                      <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="member_eql"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="member_eql(java.lang.Object, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">member_eql</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static boolean member_eql(<A HREF="java.lang.Object.html">Object</A> obj, 
+                                    <A HREF="OKBC.Node.html">Node</A> list, 
+                                    <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                    <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="union_equal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="union_equal(java.lang.Object, OKBC.Kb, OKBC.TruthValue)">union_equal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Cons.html">Cons</A> union_equal(<A HREF="java.lang.Object.html">Object</A> obj, 
+                           <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                           <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+Obsolete
+  public boolean member_equal(Object obj) {
+    Node o = Node.toNode(obj);
+    Enumeration e = this.elements();
+    for (; e.hasMoreElements() ;) {
+      Object elt = e.nextElement();
+      if (elt.equals(o)) { return true; }
+    }
+    return false;
+  }
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="intersection_equal"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="intersection_equal(OKBC.Node, OKBC.Node, OKBC.Kb)">intersection_equal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> intersection_equal(<A HREF="OKBC.Node.html">Node</A> lista, 
+                                         <A HREF="OKBC.Node.html">Node</A> listb, 
+                                         <A HREF="OKBC.Kb.html">Kb</A> kb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="equals"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="equals(java.lang.Object)">equals</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean equals(<A HREF="java.lang.Object.html">Object</A> thing) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="java.lang.Object.html#equals(java.lang.Object)">equals</A> in class <A HREF="java.lang.Object.html">Object</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="append_cons"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="append_cons(OKBC.Node, OKBC.Node)">append_cons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> append_cons(<A HREF="OKBC.Node.html">Node</A> a, 
+                                  <A HREF="OKBC.Node.html">Node</A> b) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="append_all"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="append_all(OKBC.Cons)">append_all</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Cons.html">Cons</A> append_all(<A HREF="OKBC.Cons.html">Cons</A> list_of_lists) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="toString"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="toString()">toString</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.lang.String.html">String</A> toString() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="java.lang.Object.html#toString()">toString</A> in class <A HREF="java.lang.Object.html">Object</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="pretty_print"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="pretty_print(OKBC.Node)">pretty_print</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> pretty_print(<A HREF="OKBC.Node.html">Node</A> form) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="pretty_print"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="pretty_print(OKBC.Node, int)">pretty_print</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> pretty_print(<A HREF="OKBC.Node.html">Node</A> form, 
+                                   int indent) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="pretty_print"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="pretty_print(OKBC.Node, java.io.PrintStream)">pretty_print</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> pretty_print(<A HREF="OKBC.Node.html">Node</A> form, 
+                                   <A HREF="java.io.PrintStream.html">PrintStream</A> stream) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="pretty_print"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="pretty_print(OKBC.Node, java.io.PrintWriter)">pretty_print</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> pretty_print(<A HREF="OKBC.Node.html">Node</A> form, 
+                                   <A HREF="java.io.PrintWriter.html">PrintWriter</A> stream) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="pretty_print"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="pretty_print(OKBC.Node, OKBC.Node)">pretty_print</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> pretty_print(<A HREF="OKBC.Node.html">Node</A> form, 
+                                   <A HREF="OKBC.Node.html">Node</A> stream) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="pretty_print"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="pretty_print(OKBC.Node, int, OKBC.Node)">pretty_print</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> pretty_print(<A HREF="OKBC.Node.html">Node</A> form, 
+                                   int indent, 
+                                   <A HREF="OKBC.Node.html">Node</A> stream) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="pretty_print"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="pretty_print(OKBC.Node, int, java.io.PrintStream)">pretty_print</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> pretty_print(<A HREF="OKBC.Node.html">Node</A> form, 
+                                   int indent, 
+                                   <A HREF="java.io.PrintStream.html">PrintStream</A> stream) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="pretty_print"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="pretty_print(OKBC.Node, int, java.io.PrintWriter)">pretty_print</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> pretty_print(<A HREF="OKBC.Node.html">Node</A> form, 
+                                   int indent, 
+                                   <A HREF="java.io.PrintWriter.html">PrintWriter</A> stream) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="toList"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="toList(java.util.Vector)">toList</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> toList(<A HREF="java.util.Vector.html">Vector</A> v) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="vectorToCons"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="vectorToCons(java.util.Vector)">vectorToCons</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Cons.html">Cons</A> vectorToCons(<A HREF="java.util.Vector.html">Vector</A> v) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="encode"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="encode(java.io.PrintWriter, boolean)">encode</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void encode(<A HREF="java.io.PrintWriter.html">PrintWriter</A> s, 
+                         boolean client_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#encode(java.io.PrintWriter, boolean)">encode</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="nth"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="nth(int)">nth</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> nth(int n) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#nth(int)">nth</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="nth"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="nth(java.lang.Integer)">nth</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> nth(<A HREF="java.lang.Integer.html">Integer</A> n) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#nth(java.lang.Integer)">nth</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="set_nth"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="set_nth(int, OKBC.Node)">set_nth</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void set_nth(int n, 
+                       <A HREF="OKBC.Node.html">Node</A> to) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#set_nth(int, OKBC.Node)">set_nth</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="toValues"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="toValues()">toValues</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Values.html">Values</A> toValues() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#toValues()">toValues</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="toValues2"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="toValues2()">toValues2</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Values2.html">Values2</A> toValues2() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#toValues2()">toValues2</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="toValues3"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="toValues3()">toValues3</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Values3.html">Values3</A> toValues3() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#toValues3()">toValues3</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="toValues4"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="toValues4()">toValues4</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Values4.html">Values4</A> toValues4() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Node.html#toValues4()">toValues4</A> in class <A HREF="OKBC.Node.html">Node</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="copy_tree"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="copy_tree(OKBC.Node)">copy_tree</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> copy_tree(<A HREF="OKBC.Node.html">Node</A> tree) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="last"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="last(OKBC.Node)">last</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> last(<A HREF="OKBC.Node.html">Node</A> list) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="member_frame_list"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="member_frame_list(OKBC.Node, OKBC.Node, OKBC.Kb, OKBC.TruthValue)">member_frame_list</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static boolean member_frame_list(<A HREF="OKBC.Node.html">Node</A> thing, 
+                                           <A HREF="OKBC.Node.html">Node</A> list, 
+                                           <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                           <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="toVector"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="toVector(OKBC.Node)">toVector</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="java.util.Vector.html">Vector</A> toVector(<A HREF="OKBC.Node.html">Node</A> list) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="hashCode"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="hashCode()">hashCode</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public int hashCode() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="java.lang.Object.html#hashCode()">hashCode</A> in class <A HREF="java.lang.Object.html">Object</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="main"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="main(java.lang.String[])">main</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void main(<A HREF="java.lang.String.html">String</A>[] arg) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

@@ -1,0 +1,66 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+
+// 3dsToD3D.idl : IDL source for 3dsToD3D.dll
+//
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// ITextureCallback : Interface to be implemented by objects which will load textures when
+// requested by the geometry converter.
+// 
+// IConvertGeometry : Base interface used to load 3D scenes from various file types and 
+// convert them into scene hierarchies.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+	import "oaidl.idl";
+	import "ocidl.idl";
+
+	import "d2d.idl";
+	import "inetfile.idl";
+
+	[
+		object,
+		local,
+		uuid(F40634C0-1F05-11d1-811D-00C04FB6A5C8),
+		dual,
+		helpstring("ITextureCallback Interface"),
+		pointer_default(unique)
+	]
+	interface ITextureCallback : IUnknown
+	{
+		[helpstring("method LoadTextureCB")] 
+		HRESULT LoadTextureCallback(BSTR bstr, LPDIRECT3DRMTEXTURE* ppD3DTexture);
+	}
+
+	[
+		object,
+		uuid(9AF93F40-CABD-11d0-811D-00C04FB6A5C8),
+		dual,
+		helpstring("IConvertGeometry Interface"),
+		pointer_default(unique)
+	]
+	interface IConvertGeometry : IDispatch
+	{
+	
+		[id(1), helpstring("Read in the geometry scene from the specified file.")] 
+		HRESULT ReadScene([in] BSTR bstr, [in] ITextureCallback *pCGTCallback , [out, retval] VARIANT* pvarFrame); 
+		[id(2), helpstring("Initialize the converter with D3D, D2D and the INetFile manager.")] 
+		HRESULT Init([in] LPDIRECT3DRM piD3DRMParam, [in] LPDIRECT2DRM piD2DRMParam, [in] IInternetFileManager* piInternetFileManagerParam);
+		[id(3), helpstring("The name of this converter.")] 
+		HRESULT Name([out, retval] BSTR* pbstr);
+		[id(4), helpstring("The file extension related to this converter.")] 
+		HRESULT Extensions([out, retval] BSTR* pbstr);
+		[propget, id(5), helpstring("Load textures found in the scene file?")] 
+		HRESULT LoadTextures([out, retval] VARIANT_BOOL *pVal);
+		[propput, id(5), helpstring("Load textures found in the scene file?")] 
+		HRESULT LoadTextures([in] VARIANT_BOOL newVal);
+		[propget, id(6), helpstring("if TRUE texture objects will be assigned the file name used to load them.")] 
+		HRESULT KeepCachedTextureNames([out, retval] VARIANT_BOOL *pVal);
+		[propput, id(6), helpstring("if TRUE texture objects will be assigned the file name used to load them.")] 
+		HRESULT KeepCachedTextureNames([in] VARIANT_BOOL newVal);
+	};

@@ -1,0 +1,1085 @@
+....\....\....\....\....\....\....\....\....\....\....\....\....\....\....\....
+
+20020117 -
+   Massive amount of code work done to get groundwork layed out for the new
+code-base. I've got the classes layed out, with the methods, and some are even
+filled in. I've already managed to abstract large portions of code out and
+save some space and brain-power. I like this "design" thing, it's so much
+simpler than just hacking at it all the time.
+
+  Of note: the changes above mentioned are not in CVS... they reside in a sub-
+directory whose name is listed in .cvsignore and it will stay there until I get
+good results back, and some feedback. I really REALLY want this to be the last
+re-design, so I hope I got everything in layout right.
+
+20020113 -
+   Fixed a catch in Player.enact. Did some debug work on a set of OLC commands
+someone (dmiles) has begun writing for the mud. I'm almost ready to put
+together the code for the redesign... so close!
+
+20020108 -
+   Nanoxml released a new version, just thought you'd like to know.
+
+20020106 -
+   Made changes to the save/toXMLElement/load methods of MudObject to eliminate
+empty ATTRIBUTES tags, and to append rather than overrwire existing attributes
+from XML when loading. Also added a method to start the mud directly with the
+XML ini file without jamud doing the parsing.
+
+20020104 -
+   I've been on a vacation, so sue me. Actually, my brain has been dead, and my
+soul has been empty. I'm trying to pick up the peaces of my mind and start to
+actually do some work again. Sorry for the delay!
+
+20011215 -
+   Initialized was replaced with Initializable, in order to generate less
+confusion. Generally I aim for *more* confusion, but hey. They asked nicely.
+
+20011215 -
+   Finally made good on some suggestions to enable the InterpreterManager to
+function within different modes. Now you can specify in jamud.xml whether it
+will use only exact matches (as opposed to startswith matching also), and also
+whether to ignore case or not. Added the methods findCommand, exactCommand,
+matchCommand, findCommandIgnoreCase, exactCommandIgnoreCase, and of course
+matchCommandIgnoreCase to InterpreterManager.
+
+   Work on the UML and the proposal for the data/mud redesign is still in the
+works, but I've decided not to eschew updates on the current settings in the
+interim. That is to say that even though I may be working on a new setup, I'll
+put all the non-related changes in the already posted code. I may at one point
+set up a new branch in CVS, once I get proof-of-concept for the new data stuff
+working.
+
+20011209 -
+   Four days of UML later, and I've got a much more sound idea of where
+I'm heading. Now if I can just communicate it effectively. Luckily the UML tool
+I've chosen can export its diagrams to gif format (for documentation and for
+use in the white-paper).
+
+20011205 -
+   Began final redesign of datastructures. After this, we should have an API
+which is flexible enough to do damn near anything.
+
+20011128 -
+   Been awake for something like thirty hours. Added cr to crlf conversions in
+the AnsiColour.parseColourMarkup method. Rewrote the old cleanBackSpace method
+for optimization. Added back-space parsing to StandardConnection. Added a
+standard flag for player colour-- Colour.PLAYER_FLAG_COLOUR and modified the
+'colour' command and StandardCreation accordingly. Added some pretty colours to
+the default prompt and the motd.
+
+20011127 -
+   Fixed some annoyances in Player.initialize and all the login stuff. Modified
+StandardCreation a bit to do the placement of created home and body. Fixed some
+annoying bugs in EventRegister, and modified the events of JamudEventTrigger to
+return a boolean. Modified EventRegister and PlayerManager to use a Set rather
+than an ArrayList, internally.
+
+20011126 -
+   Finished reworking of interpreters for extended modularity. These changes
+are based in part from suggestions coming from John and Loren, but a bit
+different in the stacking of interpreters and the comletion of commands. Fixed
+a stupid bug which wasn't initializing mudobjects.
+
+20011123 -
+   patch is the coolest command ever. Why didn't someone tell be about this
+earlier? Created readme (with all-important GNU license attached). Added some
+failure messages to build.xml
+
+20011121 -
+   Set up a chron job to build a nightly tarball from what's on cvs-- runs at
+8am EST... I had to make sure I wouldn't be actively working on it, and that
+seemed like the most logical time-frame. Nightly tarball is available from
+http://papasmurf.datastacks.com/jamud/backup/cvs-recent/jamud-cvs.tar.gz
+
+20011120 -
+   Got some code submissions via email, I'm so happy! I immediately applied the
+changes in question (because they were good suggestions). I must make sure to
+email them back. Consolidated Named directly into Viewable, and did the same
+for their MudObject* counterparts. Fixed some stupidness in the way that a
+MudObjectContainer looks for children by keyword.
+
+20011119 -
+   Rewrote chunks of the build file. Finished preliminary work on Initialized
+interface (modified existing plugins to build correctly now that their parent,
+JamudPlugin, inherits it). Modified Attributes slightly to allow a string
+value to be in either the VALUE attribute or in the contents.
+
+20011118 -
+   Had some ideas for a couple of interfaces, Initialized and XMLEnabled. The
+point behind the latter is obvious, but the first one is a bit of an idea I had
+just recently. I'm going to make it so that MudObjects, MudObjectContainers and
+their ilk must be initialize() before events will work, or before their
+contents will be allowed to change. The point in this is to be able to call a
+recursive terminate() method to essentially halt all activity in the mud for
+whatever purpose (say, a soft reboot, or an area dump).
+
+20011117 -
+   JamudPlugin no longer uses a HashMap for params, but instead parses itself
+as a jamud.util.Attributes. This will require modifications to any plugins and
+to any configuration XML for current settings.
+
+20011111 -
+   Check out that date. 20011002 was cooler though. Moved jamud.post stuff to
+jamud.board in a bold statement to youths everywhere. BoardManager is now
+essentially similiar to ChannelManager, in that it's simply a repository, a
+wrapper for a synchronized Collection (a HashSet, actually). Someone expressed
+interest in putting together a LinearBoardsPlugin (as opposed to a Threaded
+one), which is why I'm suddenly cleaning up my act.
+
+20011108 -
+   Renamed this file from "changelog.txt" to "journal"
+
+20011107 -
+   Finally posted to CVS. I can't believe it worked. Well I can believe it, I'm
+just surprised.
+
+20011106 -
+   Added jamud.util.Colour and put some rudimentary colour parsing into the
+com.jamud.connections.AnsiColour class. This was not nearly as difficult as I
+had been dreading. Colour is now indicated by %fg, where f is the foreground
+colour, and b is the background colour. See the javadoc for the Colour class if
+you need more details. Proposed to my girlfriend; I love you, Jenni Lilly.
+
+20011105 -
+   Fixed a small bug in FlagList. I may rename it to FlagSet, and add some XML
+wrappers to it for ease-of-use. FlagList is also now case-sensitive. Fixed a
+bug which was preventing flags on Player from loading/saving. Removed the class
+jamud.util.Colour, but will probably add it back later only totally changed. On
+another note, I think I'm going to rename this file to "journal" come the
+first public release, and actually use "changelog" for simple changes between
+releases. I mean, who wants to read all this stuff anyway?
+
+20011103 -
+   Built with nanoxml2.1.1 (NanoXML/Java). Upgraded my machine from an AMD K6-2
+400 to a P3 600. Everything is so speedy, thanks mouse!
+
+20011029 -
+   Created MudObjectListener (which implements JamudEventListener). This is for
+use in wrapping scripted elements and event-forwarding in MudObjects and in
+MudObjectContainers. Removed the jamud.script.* package, because I no longer
+will reference script languages from a central point-- instead I will reference
+scripted events by the CLASS tag, which will load an instance of the class
+specified and treat it as a MudObjectListener.
+
+20011026 -
+   Using more of the java.util.Collections family instead of the traditional
+Vectors and Hashtables. MudObject now lazy-loads a MudObjectContainer (which
+makes TemporaryMudObject work considerably more akin to as designed). The
+printAction methods on MudObject and MudObjectContainer now do all the parsing
+of actor and target names, etc, and only as necessary (eg: if there are print
+event listeners). Renamed some methods-- the attempted rule is that getters
+must have setters, otherwise they're the same method name, just without the
+"get" prefix. eg- since there is no setMudObjectRoot, I've renamed the method
+getMudObjectRoot() to be mudObjectRoot(). It makes sense! I promise!
+
+20011025 -
+   Began optimization run. God help us all.
+
+20011024 -
+   Finally fixed a stupid bug that's been annoying the hell out of me in the
+way MudObjects load their containers. Now an object actually will know its
+parent, and vice verse. Moved the parse method out of Social and into the
+MudObject.parseAction methods.
+
+20011023 -
+   Added public subclasses of Entrance (Entrance$North, Entrance$South) to be
+used in the CLASS attribute of the Entrance tag. This is to cut back on the
+amount of XML necessary for a standard primary-direction entrance. These sub-
+classes have default names and messages (and do not save modifications to XML)
+
+20011020 -
+   Reworked Entrance and created TemporaryEntrance. Removed TemplateEntrance
+and MudObjectEntrance. This simplifies things quite a bit, and works the same.
+I may add a CLASS tag to Entrance to allow for different entrance classes.
+
+20011014 -
+   dos2unix'd all the source files. Got Socials to parse correctly, and to be
+displayed to the entire room. Implemented the "look" command. StandardCreation
+now creates a MudObject to be used as a body for a Player. Converted the file
+socials.xml to use the modified markup ('$' instead of '%'). Player bodies
+save correctly when the player saves.
+
+20011013 -
+   Linkdeath, redirects, and reconnects all work with the StandardConnection &
+Player and all the event subscriptions, etc. Got com.jamud.communications and
+the Channels class to work and load channels and channelcommands. The first
+actual commands in alpha 5 were successfully executed.
+
+   Infrastructure for keeping a total run-time count (for Mud-time) is now in
+place and working, updating once a tick. Began work on a highly-modular class
+for parsing run-time into a mud-based date.
+
+20011008 -
+   Socials will load now, with the com.jamud.commands.SocialCommands plugin.
+
+20011003 -
+   Fleshed out the logIn methods of Player. That's a lot of fleshing.
+
+20011002 -
+   Created TemporaryMudObject and TemporaryMudObjectContainer classes. These
+are identical to their name-sakes except for the overridden save methods, which
+return null or don't do anything at all. These are for MudObjects which are not
+meant to be saved. Usefull if you're creating a hack 'n slash mud, and don't
+want a hojillion orcs being saved into the mud.
+
+20010930 -
+   Created jamud.object.Creation interface. A plugin would ideally set the
+Creation object to be some instance thereof, thus allowing the actual actions
+of creation to be customized in many many ways.  Began modifications to Player
+for the use of the PlayerInterpreter.
+   New version of nanoxml has arrived. And it's got a new interface (yay) to
+use instead of the direct XMLElement. Let it be known; converting was a pain.
+
+20010926 -
+   3:35am: I finally got the mud to boot, load, and start a plugin. The plugin
+is com.jamud.connections.StandardServer. At this point all it did was open a
+socket, start a thread or two (one for reading from the socket, and one timed
+for command execution), and then print out a system message (which was loaded
+from initialization dynamically). I am so tired I can no longer think. g'night
+
+20010923 -
+   Modifications to jamud.object.Connection and Player. Player is no longer an
+abstract class, and Connection has been upgraded from interface to abstract
+class.  Reworked Ticker and TickListener to be more complex (and slightly more
+useful). Rebuild jamud.util.Attributes to allow saving to XML (similar to the
+PARAMS section of an applet, but with more diverse data types).
+
+20010917 -
+   Successfull compile of the jamud.* packages. Now to fix the com.jamud.*
+stuff.
+
+20010916 -
+   Got ant (from the jakarta project) configured for building jamud. It's
+actually quite cool. I'm slightly worried that I'm going to get about a million
+angry people telling me that I should have used make, but blah. Ran the first
+try at compiling. Now comes the wonderful chain of compile, fix, compile, fix.
+
+20010913 -
+   The thinner I slice the actual core of the mud, the more usefull it becomes.
+Thus the core of the mud contains places to store Posts and Channels, but it
+does not actively load them. These are now plugins which are loaded later (and
+hence may be turned on/off during development or for custom upgrades). The only
+thing that the actual Jamud object does for itself are Messages, Plugins, the
+Root MudObject, and ScriptLanguages.
+
+20010911 -
+   Twin Towers blown up. More reworkings on interpreters.
+
+20010909 -
+   Sometimes the obvious escapes me. This is a re-write, another total rebuild
+of the very idea of a mud. The previous build was the fourth, we are now onto
+the fifth generation of the idea, and this one seems to be a doozy.
+
+20010903 -
+   This is now officially a rewrite. Modularity is our goal, and we will not
+stop until we have her!
+
+20010831 -
+   Lots of hacking into the save methods of Board and Post. Removed the need
+for the PARENT and VNUM tags for Post.
+
+20010830 -
+   MudObject now has static and final methods to get a MudObject by lid or by
+tid. MudObject, MudObjectContainer, and MudObjectRoot now have a save method
+which works similar to the toXMLElement methods, except that it will also write
+an element to a file if it has a SRC tag. Moved post-related things to the new
+jamud.post package. Posts should be a lot more "sane" shortly. 
+
+20010827 -
+   TemplateEntrance now loads from MudObjectContainer.
+
+20010825 -
+   Final bits of work on jamud.obj.event package. It should now scale to allow
+anyone to add their own event-types which can then be used in conjunction with
+the existing EventRegister class (and without collisions)
+
+20010822 -
+   Happy birthday, changelog!
+
+20010821 -
+   Why am I calling it an 'Exit'? An Exit is way to leave a place, it defines
+only where you came from. An Entrance, on the other hand, defines where you are
+going-- which is exactly what I am trying to record. Therefore, I am renaming
+Exit to Entrance. I think it's been backwards for a long time. An Entrance is a
+stand-alone object which has a state, a type, and a travel(MudObject) method.
+When the travel method is called, a typical exit would echo some text to the
+MudObject's current container, remove the MudObject from that container, then
+add it to a new container. The place the MudObject is coming from is totally
+arbitrary. However, the Entrances available from within a MudObjectContainer
+(ie, the ones leading away from it) are returned by the getExit(String) method.
+I know it's a little bit of double-think... but hey, it seems logical now.
+
+20010819 -
+   Some work with Exit and TidExit. I'm hoping to be able to get a working obj
+model soon.
+
+20010817 -
+   Slight screwing with jamud.cmd.Player* stuff. Just simplifications and a bit
+more code-reuse. Don't get so excited.
+
+20010816 -
+   Converted jamud.Jamud to use the new MudObjectRoot instead of an AreaManager
+and just generally cleaned the code a bit. Of note, I've been standardizing
+most xml-loadable classes to have a blank constructor, a static loadClass(xml)
+method, and a load(xml) method. It just seems a bit cleaner that way. It also
+allows later classes which extend these classes to fall back on the existing
+original loading code. jamud.Jamud is no longer a statically accessible class,
+instead it is a singleton, and the instance must be obtained through the static
+method Jamud.currentInstance.
+
+   I want to buy the book Design Patterns, but I'm too damn broke. I also want
+to read The Art of Computer Programming, but that's even MORE expensive, and I
+don't think I'm ready yet to really understand what it's saying. I'm slowly
+trying to make the transition from 'random coder' to 'real programmer'. It is a
+long and arduous path, fraught with danger and a lot of people who tell a whole
+bunch of lies.
+
+20010815 -
+   Did considerable work on Social, MudObjectInterpreter. I've also modified
+MudObjectGranted and MudObjectTrusted to make use of inheritence, and have
+begun my previously mentioned modifications to make all MudObject commands
+return a String. I also re-wrote the parser for Socials to be a hell of a lot
+more speedy and efficient (and one-pass). My girlfriend just told me she thinks
+java in emacs looks pretty. And she's all mine!
+
+   You know, I haven't updated the web page in ages, let alone put out a build
+or release to keep anyone happy/interested. I really ought to do that soon
+before people think I've disappeared into the negaverse or something.
+
+20010814 -
+   More vague tinkering.
+
+20010813 -
+   Messed with Board and Post-- realized I can make them into extensions of
+MudObjectRoot and MudObject, respectively. Added some stuff pertaining to lid
+(load id) and tid (template id) to MudObject. These replace the annoying vnum.
+lid is a self-incrementing long. It is used for keeping a unique id for every
+MudObject. tid is a String. If a MudObject is a template, then a (weak)
+reference to it is kept in a special table called Templates (in addition to
+any othere references). Clones of a template do share the tid, but gain no
+additional references. This ought to hypothetically enable both a method for
+specific and arbitrary uniqueness. A tid can be used to emulate ROT resets, or
+to link a destination MudObjectContainer to a TidExit. This process may
+require some revision for it to work right. Added SRC tags to MudObject, to
+keep area files small and evenly distributed.
+
+20010808 -
+   Read some interesting optimization tips today. May have to attempt to use
+them at some point.
+
+20010806 -
+   Got the guts of MudObject written in, including XMLElement related workings.
+Some changes to the event system to fit the structure as it stands, and some
+random code cleanup here in there (as I came across code, I cleaned). Looking
+back, I've learned a lot of things while working on this mud. I've almost got
+style!
+
+   I'm beginning to wonder how I survived without emacs all this time. Thanks
+to that, there's a lot of formatting problems which have been (or are being)
+resolved as I come across the files.
+
+20010802 -
+   Created jamud.util.Attributes as a wrapper for java.util.Properties-- it's
+essentially the same exact class but with some overloading of the getAttribute
+method. This is primarily for use with an n3.net.nanoxml.XMLElement as when
+loading settings etc from files.
+
+   Wrote jamud.event.EventRegister around 3:54am this morning, er, tomorrow
+morning. Each MudObject and MudObjectContainer will manage its own events now,
+rather than having a massive central event repository (eg; no more
+jamud.obj.event.EventManager). I've also worked it a bit so that event sub-
+scriptions will not prevent the subscriber from being garbage collected. I
+have yet to test whether the class actually does this, but it looks good on
+paper. Or rather, it looks good on emacs.
+
+20010801 -
+   Got everything into CVS on my working machine. In the "off" time, I've been
+working on a re-arrangement of the jamud.obj package into simpler MudObjects
+and MudObjectContainers. Of course, this means I have to modify everything
+else in the Entire Universe.
+
+   All MudObject actions (formerly BodyGranted, BodyTrusted) will return a
+String reply in the near future. This is for future use to keep the different
+parts of textual data each in their own place. It's like planning ahead, but
+without nasty side-effects like organization.
+
+   NanoXML has gone "gold" with version 2.0, and jamud now uses it.
+
+   I'll begin to apply a code reformatter for those of you out there unlucky
+enough to try and actually read it. I've been informed that the formatting is
+all over the damn place, and no wonder; I've used around 5 different editors
+through-out the making of jamud! 
+
+---
+a great lapse...
+---
+
+20010523 -
+   Introduced Util.cleanWhiteSpace method. Modified Util.format to use it
+rather than the ignoreCr option. From the user's point-of-view, things should
+look all back to normal with this release. Seriously considering using CVS and
+GNU make in the near future. Fixed spelling error in ScriptLanguage interface.
+
+20010522 -
+   Clean compile! Fixed a bug in EventScript.loadEventScript with attempting to
+load scripts from unknown languages (eg: won't crash anymore). Ended up making
+modifications to nanoxml code anyway (adding some overloaded methods back in).
+Maybe I'll get lucky and those methods will be in future releases :)
+
+20010520 -
+   Finished preliminary conversions. Found that some methods have changed names
+in the new version of nanoxml. Note to self: check for things like that in the
+future.
+
+20010515 -
+   Began to move away from use of the "customized" (read "Frankenstein-ed")
+nanoxml jar and package in favour of the new (and unmodified) betas of nanoxml
+v2. Decided NOT to include the nanoxml jar with the builds from this point
+forward. Instead it's up to the user to obtain the latest copy of nanoxml from
+the nanoxml home page (http://nanoxml.sourceforge.net/).
+
+20010503 -
+   Created jamud.obj.ViewableGroup to handle lookups by keywords (Inventory now
+extends ViewableGroup). Modified Body.getSemiClone to clone the event scripts,
+too. Modified some Exception trapping code to print the stack trace (make
+things so much easier).
+
+20010501 -
+   Removed Plugin class in favour of just the JamudPlugin class. Currently the
+events for Room, Body, Player, PlayerMask are all correctly working. Affect,
+Area, and Item are not yet functional. I will be modifying the metromud plugin
+shortly.
+
+20010430 -
+   Successfully implemented the first script under the new system. See the
+com.jamud.scripts.iava package. Loaded, created, and executed the onTick and
+onEnter(Body) script events for a Room.
+
+20010427 -
+   Got everything to compile neatly again.
+
+20010426 -
+   Added JAR property to PLUGIN, to load plugins out of their respective jar-
+files without having to mess with the classpath in order to do it. Removed the
+automatic ticking of plugins (if you want your plugin to tick, you'll have to
+register it with the proper onTick event). Had a birthday.
+
+20010420 -
+   Yay! Why is everyone so easy-going and droopy-eyed today? hmmm...
+
+20010417 -
+   Proof-of-concept, the jamudsnoop plugin modifications went very well, and
+the new event system seems to be working just fine. Now to get the scripting
+stuff properly converted.
+
+20010416 -
+   Moved all the standard commands to a plugin. Modified the manner in which
+commands are stored (the PlayerInterpreter now houses both the Trusted and the
+Granted commands for Player, and the same with BodyInterpreter). Added a sort
+method to alphabetize the command stack. The event model seems to be working,
+I will attempt to convert the JamudSnoop plugin tomorrow to use the new event
+system. Wish me luck.
+
+20010410 -
+   Got it all to compile finally. I think that counts as a hack. I feel so
+dirty. Noticeably better memory usage on papasmurf (
+
+20010329 -
+   Rewrote the jamud.util.Util.replace method to use byte[] instead of String.
+Nanoxml released a new beta, started looking through it for updates. May import
+the new code to replace the old. Continued to update the event stuff. Now have
+Room, Body and Area done.
+
+20010328 -
+   Completed toXmlElement methods in jamud.obj classes. That may bring down the
+memory usage a bit (no more messy String concatenations). Started removing some
+of the current script code (but saving it someplace else, for reference). Had a
+gratifying realization that these improvements will be really really cool.
+
+20010327 -
+   Generally finished with basic code for the event framework, beginning work
+on actually adding it in for use. Removed iava package from main distro. Added
+jamud.obj.event, and jamud.script packages. For now am leaving the older event
+stuff alone (in parallel to upcoming code). Started adding toXmlElement method
+to anything that loads/saves to xml. Replaced code in toXml methods of touched
+classes to wrap to the XmlElement returned from the new method. Cleaned up a
+lot of wasted memory, variables, etc in the touched classes (due to some
+innefficient inheritence used in parsing common xml properties, and in storing
+common fields)
+
+20010326 -
+   Began changes to event system. This is going to be a big undertaking. Also
+will be making enormous modifications to the way scripting is handled, changes
+which will hopefully yield the ability to use more than one language in Jamud.
+
+20010322 -
+   Modified messages to be more dynamic (idea from joop). 
+
+20010320 -
+   Fixed bug in jamud.obj.Inventory (was affecting the GIVE command). Added
+NO_DROP checking to DROP and GIVE. Added IN_MSG and OUT_MSG tags to EXIT. Added
+the code to use those messages to MOVE and GO methods in BodyMethods. Added the
+&PURGE and &TICK commands. Renamed GRANT to &GRANT and TRUST to &TRUST, and 
+PLUGIN to &PLUGIN. Fixed bug in Room.fetchBody(String) 
+
+20010319 -
+   Added WEAR, WORN, and REMOVE commands. Added WEARLOCATIONS to Race and Item.
+Modified FlagList to auto-lowercase flags contained.
+
+20010318 -
+   Had some wonderful ideas for a plugin-based battle system. Removed failed
+attempts at hard-coded fights, replaced with jamud.plugin.Fight interface. Also
+had damn great idea for a distributed-server approach to mudding (where every
+player can have their own little "hometown" server, from which they can then
+walk to any other server) which may be appended to the MetroMud protocol and
+plugin. Made some modifications to Body, to allow for the availability of such
+a plugin. Fixed a bug in the DROP command. Modified the flagging system of Item
+and updated the sample areas accordingly. The jamud.obj.affect package is there
+but non-functional as of yet. Generic code cleanup.
+
+20010313 -
+   Suffered from some serious brain-drain, but feeling mostly better now. Added
+abstracts Named, Vnumbered, Flagged, and modified Viewable to be an abstract. I
+plan to simplify the manner in which base values in the 3 key obj are handled
+(they being Body, Item, and Room). This is in part because I'm also working on
+the OLC plugin and realized what a mess I'd made of things. I skipped the
+weekly release on SourceForge this weekend due to the fact that there weren't
+any changes to speak of.
+
+20010304 -
+   Began work on the jamud.obj.affect package. Affects will eventually be able
+to apply themselves to the various fields of the Item, Room, and Body objects.
+Plans also include scripted Affects, and arbitrary loading/unloading via a
+publicly accessable AffectManager.
+
+20010304 -
+   Began modifications to Item. Will phase out item types in favour of a
+universal Item with different (and arbitrary) flags. Also created a StatList
+class for handling String-String and String-int mappings. Planning on working
+in affects and the USE command in the near future.
+
+20010301 -
+   Went through all of jamud.obj and cleaned. Modified Room and Exit so that a
+room may now contain an arbitrary number of named exits. Added the GO command
+for using non-standard exit directions (also works with normal 6 exit dirs).
+Added linkdeath-checking to boot local linkdead players on tick. Added IDLE to
+FINGER information. Just had an idea for a silly plugin. Added save() call to
+logOut() of Player
+
+20010227 -
+   Added new interface PlayerMaskUpdateListener (my god that's a long name, but
+that's what it does) to jamud.plugin and added subscription support for it to
+PlayerEventManager. Also modified PlayerMask to optionally trigger that event.
+Fixed annoying bug in PlayerInterpreter and BodyInterpreter which would parse
+commands in the wrong order. Rewrote some Util methods to run faster/cleaner
+(using byte[] instead of String etc).
+
+20010226 -
+   Moved all MetroManager classes to their own package, aside from the main
+jamud release. MetroManager is now fully a plugin. Modified PlayerMask to no
+longer have MetroManager-specific methods (getMud).
+
+20010222 -
+   Replaced FIFOBuffer with Queue (does almost the same thing, except with
+Object rather than String). Removed silly String-parsing in MetroOut by adding
+a non-public MetroData class. Made some modifications to MetroManager, added
+getShortName to PlayerMask (returns the name minus the mud information if the
+PlayerMask is not local). Modified MetroIn with an SoTimeout (so that a call to
+halt will actually close the socket, rather than waiting forever for that one
+last read). Fixed bug with presence in MetroManager (same name on a different
+mud would disallow a player to log on locally)-- problem was with the way
+Player.logIn(String) checked if that name was already logged on.
+
+20010219 -
+   Added four new interfaces to jamud.cmd (PlayerGranted, PlayerTrusted,
+BodyGranted, BodyTrusted). Modified all references to Skill, Command, and Body
+and Player Methods to instead point to these interfaces. Also modified the
+above classes to implement their respective interfaces (Skill implements
+BodyGranted, Command implements PlayerGranted and BodyMethod and PlayerMethod
+implement BodyTrusted and PlayerTrusted, respectively. A plugin may later add
+an object implementing these interfaces to the Interpreters where they may then
+be accessed by players.
+
+   Fixed bug in Player.tick wherein a cleared cmdBuffer would return null and
+hence an error was thrown.
+
+20010218 -
+   Marked all of the non-instantiated classes (jamud.Util, for example) to be
+abstract.
+
+20010217 -
+   Fixed some ugliness with Colour.convert so that it not only works better, it
+is also far more efficient. Added codes for echo on/off, and escaped { and }.
+Did a lot of code cleanup in some dusty classes. Modified Room and Item so that
+getType is a String rather than an int (and modified the toXml() and load
+methods accordingly). Also modified the ITEM structure, so that SHORT is now a
+property of the DESC tag, like everything else. This means minor changes to the
+area files.
+
+20010216 -
+   Lots of work on MetroManager. Loaded it successfully, and got it sharing
+tells and channels. Still some problems with presence.
+
+20010215 -
+   More code cleaning. Added getJamudState to JamudPlugin. Plugins now have a
+total of four states (rather than two). Modified JamudSnoop to reflect change
+(note, further modifications to JamudSnoop will be noted in its own changelog)
+Modified StandardServer and MetroManager, same. Will hopefully have the Metro
+stuff working in the very near future. Trimmed code, but also added comments,
+so line size isn't decreasing much. Messed with the way passwords are turned
+into hashes (two different players with the same password won't have the same
+hash now)
+
+20010213 -
+   A day of general code clean-up. Commented almost all of jamud.obj.Player.
+I'm trying to bring things back below the 10K mark until I'm done with fixing
+the MetroMud protocol (better clean now than messy later)
+
+20010211 -
+   Fixed a bug in StandardServer. Modified initialize and terminate events to
+throw Exceptions (which are caught in the PLUGIN command). Began to move
+MetroManager to a plugin. Changed channels to be subscription based. Looking in
+to making all subscription references into weak references (allowing an event
+subscriber to be finalized even if it's subscribed to something).
+
+20010209 -
+   Messed with some skills, discovered an annoyance with the way iava deals
+with importing packages (sometimes it knows to look through imports, sometimes
+it doesn't). Added some formatting to the PLUGINS command (made it prettier).
+Added javadoc comments to important jamud.plugin classes. Fixed previously
+mentioned annoyance with iava.
+
+20010208 -
+   Rather than screwing around with wrapper classes for XMLElement, I have
+instead taken the available sources and done with nanoxml what I had done with
+iava. Slight modifications to classnames to prevent confusion with the original
+nanoxml classes (XMLElement is now XmlElement, etc.). Modified JamudPlugin and
+Plugin. Plugins should now extend JamudPlugin rather than implementing it. You
+may now add PARAM tags to a plugin (similar to how an applet works). Moved the
+standard server thread to a plugin (but kept it within the package). Modified
+Jamud.loadJamud(String) so that it parses the ini file the same regardless of
+the order of the elements contained within.
+
+20010205 -
+   Mucked with plugins (of course). The Plugin object is now a wrapper for the
+MUD to directly affect the JamudPlugin contained within. Plugins are not always
+initialized at mud boot-time, I've added an AUTO tag to PLUGIN to indicate
+whether it should or should not be (true, false). I've also added a grant-based
+PLUGINS command to allow an administrator to start/stop/view plugins (modeled
+slightly after services). Created a help file for the new command. Also made
+modifications to PluginSnoop; it no longer tries to unload itself from the list
+of plugins when terminated. This *should* be how all future plugins work; they
+are loaded at mud boot, and are only initialized/terminated afterwards (never
+unloaded). Moved INVENTORY from PLAYER to BODY. Began adding infrastructure for
+worn items.
+
+20010204 -
+   Removed SshConnection class (will instead work on a plugin that accepts JSSE
+SSLSockets and passes them with the serverAccept method of PlayerManager.
+
+20010203 -
+   It's 3am, and I just wrote Jamud's first plugin! And it works!! JamudSnoop
+has successfully subscribed and unsubscribed to all the existing events. It has
+also demonstrated my horrid ineptitude with swing components.
+
+20010201 -
+   Removed useless Log class (since I'm going to use an event-based plugin for
+logging instead). Commented out code to start the "Secure Server" since I still
+don't HAVE a secure server. Started to mess with JSSE (maybe SSL instead of SSH
+for a possible future secure socket?). A lot of repairs to Socials and to the
+SocialConverter class. Added granted Commands. Modified the GRANT command (see
+help grant). Modified the help system to check for trust. Added VERSION command
+
+20010131 -
+   Fixed problem with re-written iava which would not allow scripted methods to
+be called from withing scripted skills. Began putting code in place for event-
+based plugins. Added scrolling checks to Player.println, such that only X lines
+are output at a time, with a prompt at page-breaks. Added CONFIG SCROLL command
+and settings. Added really basic Email address validation to Creation and the
+CONFIG EMAIL command. Began concept for scripted item-based skills.
+
+20010130 -
+   Added Jobs. Did something evil and modified Util.fixLength to work OPPOSITE
+of how it currently works. I think that it is more intuitive now, and it also
+has the capability of trimming to length. Added job display to WHO command.
+
+20010129 -
+   Modified the sweet bejesus out of iava, fixing some problems with scoping
+(problems meaning I wanted it to do something other than what it wanted to do).
+Scripts in Body, Skill and Room may now make use of top-level variable
+declarations. Variables declared in a Skill and updated later are only updated
+for the Body calling the Skill.
+
+20010126 -
+   Created Races (Nolan!). Reworked socials to allow/deny based on gender,
+race, and job. Added race display to WHO command.
+
+20010125 -
+   Gender class added; MetroManager, Body, PlayerMask and Socials updated to
+reflect this change (thanks Nolan). Started to include iava source (I've made
+some modifications for use specifically with jamud-- as part of the licensing
+agreement I have to make the source for those changes available). Changes the
+file layout of the weekly build distros. re: gender, minor changes to Player
+and Area files required-- add a GENDER="MALE" property in the Body tags. Also
+changed the order of elements in Jamud.xml (GENDERS has to come before AREALIST
+or else the bodies from the areas will not load with the correct genders, as
+there are no genders to load).
+
+20010124 -
+   Got the PostManager working with threads! Have modified PostInterpreter to
+work with these new changes. It's a little weird at first, but it makes sense
+after a couple of tries.
+
+20010123 -
+   Had a brain-storm about Plugins. Concept for EventManager started. Moved
+much of the Jamud class to static (no longer requires a reference to the main
+Jamud class to be passed along, just call on it statically). Commented out most
+of PostInterpreter while I'm redoing it. Did some general cleanup/maintenance
+to many of the classes I came across (note the decrease in line-count)
+
+20010122 -
+   Wrote up concept for threaded postings. Ripped out existing posting code. If
+I screw this up too badly, I can always restore from backup. Fixed a bug in
+creation for hermaphs assigning them a sex int of 4 rather than 3.
+
+20010118 -
+   Added GRANT command. Fixed small bug in BodyInterpreter. Changed date format
+in changelog to YYYYMMDD because it makes more sense, as someone pointed out
+(thanks Nolan).
+
+20010116 -
+   Went crazy. Repaired onEnter (in Body and Room), fixed onArrive (in Body)
+and corrected onTick (in Body and Room). Implemented the first scripted, grant-
+based skill 'bla'. Found some bugs (?) in Iava. Started a concept for a really
+good users-guide to JaMUD (administrative, development, player). Used a lot of
+parenthesis in changelog. Renamed jamud.util.List to jamud.util.FlagList (to
+fix some name collisions with java.util.List), and updated all the classes to
+reflect this change. Reworked Interpreter to handle battles better; added a 
+FIFOBuffer to Fight, body commands are redirected to that buffer in a fight,
+and read on a tick-basis from the battle. Fixed small bug in Util.loadStatList.
+
+20010115 -
+   Added onEnter event to Room, added onTrigger event to Body.
+
+20010114 -
+   Modified BodyInterpreter so that all Body object can execute Socials, not
+just those with a Player behind them. Added some methods to BodyWrapper to make
+using the scripts easier. For information on what methods are available within
+a script, look at the BodyWrapper, and RoomWrapper classes (Items don't have
+scriptable events as of yet-- I can't think of any). Moved jamud.script.* to
+jamud.obj.script.* Added onTick events to Room.
+
+20010113 -
+   Ripped out ScriptEnvironment and ScriptEvent classes; will instead be
+calling the IavaMethods directly from an IavaRuntime loaded from the SCRIPT
+tag. Body is currently the only one with a scriptable event, onTick(). I may
+eventually remove resets in favour of Area and Room onTick() events.
+
+20010112 -
+   Added ScriptEnvironment and ScriptEvent. Filled in BodyWrapper, ItemWrapper
+and RoomWrapper. Started to add scripting to Body. Fixed Body.clone
+
+20010111 -
+   Fixed some problems with error trapping in connections and in creation. I
+may need to re-work connections a little.
+
+20010110 -
+   Cleaned up aliases a little. Added CONFIG ALIAS command. Executing an alias
+no longer appends ALIAS #OFF to the front and ALIAS #ON to the end. Commands
+executed within an alias are not set as the !! command. Replaced pmoteEchoLine
+and peersEchoLine and other such crap with println's of various arguments.
+Added BOOT command (kicks player off). Fixed some problems in Player.ready and
+Player.logOut
+
+20010109 -
+   Added NOTE FORMAT command. Made it so Login/Logouts show socket IP in the
+server console. Added some safety-net error trapping to tick in Player so that
+if an exception is thrown it is caught, and the player logsout gracefully with
+an error, rather than the whole thread exploding. Prototyping with Iava to
+start adding in scripted resets soon. Changed the backup distros to not include
+the non-jar classes and the batch files (saves space).
+
+20010105 -
+   Added ALIAS and UNALIAS commands. Added ALIASLIST tag to Player. Added Alias
+to jamud.cmd. Moved Social to jamud.cmd (and updated other classes to reflect
+this). Aliases are multi-lined, and are put into the command Buffer (ie: not
+executed all at once). The ALIAS command is also one DAMN big if/else tree.
+
+20010104 -
+   Added TRUST command (sets player trust level). Fixed a bug in the
+SocialConverter that was parsing the parts incorrectly (switching target and
+peers). Added ':' as an alias for 'emote'. Uncommented FLAG constants in Item.
+Added FLAG_TAKE checking to the GET command. Began structure for granted skills
+and commands (as opposed to trust-based). Added POOFIN, POOFOUT, GOTO, ECHO,
+and GECHO commands.
+
+20010102 -
+   Is it just me, or is that date hard to read? Added an Inventory class which
+is basically just a wrapper of a Vector which does the '2.item' parsing trans-
+parently. It also has a set of getView and getNames and a loadInventory and a
+toXml, to speed up inventory loading and saving. Tried to finally implement the
+SSH layer, but I screwed something up quite badly, and had to restore the class
+to its former state.
+
+20010101 -
+   Happy New Year
+
+20001228 -
+   Fixed a bit of weirdness in the way Connections handle dropped sockets (in
+that it wouldn't throw an error until it failed a write, and would just return
+infinite blank lines when read from). Some very very very basic battle code is
+in, so you can get a hint of how battles will work. Added kill and flee
+commands. Added a hack to the room related gets and fetches so that 'get
+2.junk' or 'look 2.ghost' now work. Note: SshConnection is still just a renamed
+copy of StdConnection... it doesn't really provide a SSH-TRANSPORT layer yet.
+It's unfortunately still just a placeholder while I get ssh nailed down.
+
+20001227 -
+   Rewrote the internals of the List class. It is no longer quite as stupid.
+
+20001226 -
+   Added socket command. Added getConnection method to Player, and added some
+related methods to the PlyConnection interface. Mucked around with Connections
+and how they relate to the Player (expect some bugginess until I get these
+changes hammered out). Also, due to some changes, you need java 1.3.0 or higher
+to run or compile jamud.
+
+20001224 -
+   Implemented a command buffer in Player. Player now implements TickListener
+and has built-in lag. This will enable things such as multi-line aliases, the
+force command, and the high-trust lag command. This also moves execution of
+commands away from the source thread (ie: just because I used the force command
+to make a player do something doesn't mean my thread has to actually do all
+the work). Added Force and PLag (Player-Lag) commands.
+
+20001221 -
+   Finished my Christmas shopping. Damn the mall.
+
+20001215 -
+   Added back-ground colour codes to jamud.util.Colour and added a }n markup in
+the colour-parser to indicate changing bg colour. After all the searching, the
+ANSI codes were so... SIMPLE (considering they're just 10+ their text-colour
+counterparts)
+
+20001213 -
+   Totally ripped apart jamud.cmd classes. Moved from a giant if-else tree to
+an array of PlayerMethod and BodyMethod objects, each of which contains a
+Method object (from java.lang.reflect) which can be invoked. It seems much
+cleaner this way! Also removed the debugging println's from MetroManager (they
+were getting on my nerves in a spammy way). Now using nanoxml v.1.6.7. Also
+made sure to include licensing information. Removing Iava from directory until
+I start actually using it.
+
+20001208 -
+   added equals(Object) to Body, Item, and Post. Reasoning for horrible bug is
+now known (.indexOf uses .equals, not == to find the first matching instance),
+and armed with this understanding we draw strength! Got the metro mudding
+protocol working! Channels, Tells, and presence are all now being shared
+between muds. Made Player extend PlayerMask, and moved the get and put methods
+of Player to getProperty and putProperty. Plans still abound to add more things
+to the metro mud protocol (login-time, mud-uptime, etc), but not yet. Plans
+include re-working of the Interpreter to separate Body-oriented commands and
+Player-oriented commands.
+
+20001205 -
+   Added fetchItem to Body and Room, added fetchBody to Room. Tweaked the
+nipples of fate. She liked it.
+
+20001204 -
+   Fixed yon bug with a bit of a hack. Plan to add fetchItem and fetchBody
+methods where appropriate which will both return the Object and remove it from
+the current Vector. Turned the mud back on on papasmurf.
+
+20001130 -
+   Discovered a HORRIBLE and DASTARDLY bug in Room.exit implemented a short-
+term fix. Took the mud offline for a little bit until I am satisfied that I
+have squashed it in every possible location. The problem was with
+Vector.remove(Object). It was removing an object OTHER THAN the one I was
+passing it. Likewise Vector.indexOf(Object) was returning the wrong index of
+the object in question. Some digging revealed that Vector is just a wrapper
+for ArrayList. ArrayList.indexOf(Object) is not returning the actual index of
+the object being passed. However, if I cycle through each object in the array
+and compare it to the one I want to remove, I can find the CORRECT index, and
+then use ArrayList.remove(int) to get rid of it. However in discovering this I
+converted most of the Vectors into ArraLists (so now nothing is synchronized,
+uh oh). I'm going to convert them all back to Vectors soon and post the "fixed"
+code. I'm not sure if the error is in my use of indexOf, or if I've located an
+obscure bug. I'm not sure which I'd prefer.
+
+20001129 -
+   Fixing things, getting it all to compile. Removed ChannelConnection and
+PostConnection classes. I'm not even sure why the heck those were there to
+begin with. Protocol for the up-and-coming MetroMud UDP stuff is a rip-off from
+RWHO. Added IMPORT and EXPORT tags to CHANNEL.
+
+20001128 -
+   Rejoice, for I have return'ed. Major work on MetroIn, MetroOut, MetroManager
+and MetroMud classes. Added PlayerMask (common variables between Players and
+MetroMud entities). Possible addition of a command cueue, and hence another
+Thread between the Connection and the Interpreter. Connection reads from the
+net and stashes that line of data in the cueue. This new Thread will have a
+'lag' value, and will loop and lag, loop and lag; reading a line-by-line from
+the cueue. This will allow for macros, forced commands, scripts, etc. Possibly
+adding bg-colour codes in Colour (fg markup is '{n', bg markup will be '}n',
+where 'n' is the colour-code).
+
+   Also of note: someone finally expressed interest in submitting their own
+code. Anyone out there with an idea; don't be afraid to shout it out, or code
+it up and throw it at me! Really, *I Won't Complain*
+
+20001106 -
+   Experiencing brain-drain. My soul is empty.
+
+20001103 -
+   Some more work on the fight stuff. Moved and shuffled different classes
+around in the vain hope that organization would lead to enlightenment. Found
+Iava (a different script interpreter), may decide to drop FESI. Attempting to
+work out an event-based trigger system for mobprogs. Also playing with ideas
+for the scope of mobprogs functions-- should they all be unique, or can each
+mobile use scripts from a larger 'cache' of functions?
+
+20001031 -
+   Renamed SMTPConnection to SmtpConnection. Added NntpConnection. Began
+concept for News Reader access to postings, and threaded postings. Damn weekend
+job is eating up all my coding time. I should start doing this at work :)
+
+20001023 -
+   Minor modifications to StdConnection, SshConnection, and PlayerManager
+classes. Modifications to the metromudding concept (intra-mud communications).
+
+20001016 -
+   Major modifications to Channel. Creation of ChannelConnection. Beginning
+basis for intra-mud channels is functional. Added ID tag to JAMUD (used as a
+unique identifier between muds... can be short name or ip or whatever). Cleaned
+up a couple of kludges.
+
+20001015 -
+   Now compiling with SDK1.3
+
+20001010 -
+   Added # functionality (echo, no operation) to Interpreter. Began concept for
+intra-mud channels. 
+
+20001006 -
+   SSH is giving me a headache.
+
+20001005 -
+   Added GIVE command.
+
+20001004 -
+   Added GET, DROP, INVENTORY, SOCIALS commands. Added ! and !! functionality
+to the Interpreter (! is last command. !!<string> appends <string> to last
+command). Also, fixed some case-sensitivity problems.
+
+20001003 -
+   Changed markup in POST and HELP from "BODY" to "DESC" (to maintain some kind
+of standard across elements). Also, Moved TITLE to SHORT in HELP, and changed
+SUBJECT to SHORT in POST. This keeps the DESC element standard. Added method
+Util.xml_toMarkup and Util.xml_fromMarkup to convert things like &LT; to "<"
+and vise-verse. This is primarily to keep users from accidentally screwing up
+posts so that when the mud re-loads it crashes. Removed LID concept. Converted
+some Hashtables to Vectors. Began implementation of inventory. SocialConverter
+works :-)
+
+20001002 -
+   Added ConfigMethods. Moved color(colour), email and prompt setting changes
+to config. Added CONFIG command. Modified listed displays (who, unr, note list,
+config, etc) to look the same.
+
+20000929 -
+   Created general anarchy by moving Interpreters to jamud.cmd. Modified and
+otherwise messed with Statlists. Added Util.saveStatList method. The good news
+is it works, and I believe it to be a better way to store integer-based stats
+for the player. SEX and LEVEL moved to statlist.
+
+20000928 -
+   Fixed an annoying bug in NOTE CLEAR. Fixed some stupidness in Interpreters
+(no longer does it break into an array then recombine). Added prompts to
+creation. Added player-gender and level. Fixed bug in Player.ready so that the
+prompt is now parsed for colour markups. Added check in Player.println to
+ensure Player is logged on before trying to parse a null prompt. Added MOTD
+command.
+
+20000927 -
+   Added interface jamud.obj.Viewable (public String getDesc()). Added save
+method to player. Added NOTE REMOVE to PostMethods (and it works). Updated the
+javadoc. Added Socials, and social loading, and social execution (not finished)
+to the Interpreter. Wrote up a short concept describing markup for socials and
+an example social entry. Modified to save on quit.
+
+20000925 -
+   Started a documentation system for the various xml ini-files.
+
+20000919 -
+   Added SMTP forwarding capability to PostManager with the SMTPConnection
+class and a Ticker. Fixed bug with List which was causing an error in
+Player.load. Removed NodeList class totally in favour of Vectors. Added
+rudimentary finger command (with PlayerManager.findPlayer method). Started
+using updated nanoxml components (1.6.4). Created new classes StdConnection and
+SSHConnection, each interfacing Connection (for transparent SSH connections).
+
+20000915 -
+   Functional idea for battle-system concept created. Looks like I may be able
+to actually have the kill command in this version! At Last! Fixed silly fallacy
+in jamud.util.Ticker class (added the halt() method). Updated javadoc for the
+again (it's been a while). I *really* need to add comments to these things. I
+have a concept for creation that also is in great need of implementation. I
+feel like I'm falling behind.
+
+20000914 -
+   Note Posting is now fully functional. Note removal on the other hand is not.
+Also, channels are modified and customizeable entirely from the ini file. Added
+the CLEAR command to clear the screen. Began adding some colour to common
+activities. Created a CLOSE file. There is now OPEN, MOTD, and CLOSE for the
+various portions of logging in/out. Fixed a stupid bug in Util.NodeList's
+getChild(int) method. 
+
+20000913 -
+   The insanity continues. Boards now may be accessed and read from at run-time
+(but may not yet be written to). Prompt and Title may now be changed by the
+player-in-question. Made some modifications to NodeList to allow it to be
+enumerated.
+
+20000912 -
+   I must have gone crazy. Channels are now trust-based and loaded from file at
+boot, as are boards. Colour.convert is actively colourizing text! A Help system
+is in and working (though I've only made one file so far). Added new class;
+jamud.util.NodeList for various reasons. A general amount of fiddling was
+applied to most classes. I should do this "caffeinne" thing more often.
+  
+20000908 -
+   Fixed bug which disallowed Creation (was saving before they were really
+logged on). Added jamud.util.Colour class. Separated .java from .class files
+and only included classes in jamud.jar. Updated javadoc for first time in too
+long. Made mental note to add more comments to actual code.
+
+20000907 -
+   Fixed a small bug in Room.peopleView and Room.itemView. Added channels (use
+in communications, CHANNELS command, and saving to pfile). Fixed another bud
+in Player and Connection classes that was occurring on a reconnect or a
+connection-redirect.
+
+20000905 -
+   Added framework for PostMethods. Began concept of SMTP forwarding of private
+postings. Added MD5.java, and passwords are now hashed before being stored.
+
+20000904 -
+   Major modifications to Interpreter and InterpreterMethods. Created the
+classes PostMethods and ChannelMethods (to handle post and channel commands,
+respectively). Possible revamp of PostManager looms in the near future. Added
+jamud.util.NodeList
+
+20000825 -
+   Implemented STATLIST section of Body. Playerfiles are saving correctly.
+Resets can load items and mobiles. Created concept and test implementation for
+postings. Removed Faux-Enum class (because it's useless). Modified
+Player.loadPlayer and SAVE, to no longer require ending in ".xml". 
+
+20000822 -
+   Completed toXml methods of common-use jamud.obj classes. Player saving
+implemented and seems to be working just fine. Room.loadRoom, Item.loadItem,
+Player.loadPlayer, Body.loadBody, Exit.loadExit, Reset.loadReset, Area.loadArea
+completed for current use. Moved text XML keywords to public, static, final
+Strings. Created jamud.util.FileAccess class (containing fillFile and loadFile
+methods originally from jamud.util.Util). Started keeping a changelog.

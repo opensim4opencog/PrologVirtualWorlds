@@ -1,0 +1,118 @@
+
+
+Channel and Player presence should be able to be wrapped as IRC.
+
+Tells (Channel) and Player presence should be able to be wrapped as Jabber.
+
+Boards (and Posts) should be able to be wrapped as NNTP.
+
+Players should be able to log in via telnet, ssl-telnet, ssh (which should all support full ANSI)
+
+Players should be able to log in using clients (which may use HTML for colour)
+
+Should support MCP (Mud Client Protocol)?
+
+
+
+interface XMLEnabled
+	void load(IXMLElement)
+	void toXMLElement(IXMLElement)
+	IXMLElement toXMLElement()
+
+
+interface Initialized extends JamudEventTrigger
+	int initializedState()
+	boolean initialize()
+	boolean terminate()
+
+
+interface IManager extends XMLEnabled, Initialized
+
+
+interface Persistent extends JamudEventTrigger, java.lang.reflect.InvocationHandler
+- Wrapper tag for paging and profiling. Should automatically pageIn when any part of the "stub" is accessed
+	long lastAccessedAt()	System.currentMillis of last time accessed
+	boolean isPagedOut()	is the object has been reduced to a "stub"
+	boolean pageOut()	reduces the object to a minimal "stub"
+	boolean pageIn()	restores object from "stub"
+
+
+interface IPersistenceManager extends IManager
+- Interface for the possible overridding of the default PersistenceManager
+	Iterator loaded()
+	
+
+
+class PersistenceManager implements IPersistenceManager
+- Contains references to all Persistent objects (as added by their respective managers). Handles the time-out for calling pageOut on its contents, with arbitrary interval and threshold.
+	Iterator iterator()	all contained Persistent
+
+
+interface IFactory extends XMLEnabled
+	String getName()
+	Object manufacture(IXMLElement)
+
+
+interface IMudRoot extends IManager
+	Iterator iterator()	top-level IMudObject members
+	IMudObject resolve(String[])	find an IMudObject by its path
+
+
+class MudRoot implements IMudRoot
+- The manager for the in-game noun tree (rooms, areas, items, mobiles)
+
+
+class IMudFactory extends IFactory
+	IMudObject manufacture(IXMLElement)
+
+
+class MudFactory implements IMudFactory
+- The default factory, which loads standard MudObjects. It is simply a wrapper for creating a MudObject, calling load, and returning it. Other implementations may actually take part in their products construction.
+
+
+interface IDataRoot extends IManager
+- Interface for the possible overridding of the default DataRoot
+	Iterator iterator()	top-level IData members
+	IData resolve(String[])	find an IData by its path
+
+
+class DataRoot implements IDataRoot
+- The manager for utility data (messages, posts, help)
+
+
+
+
+1:  How it works
+Jamud starts, finds its settings in an IXMLElement
+
+
+Deffinition, XML-Intantiated:
+Given tag <FOO CLASS="foo.Bar"> represented as an IXMLElement named xmlE:
+	Class c = Class.forName(xmlE.getAttribute("CLASS", null));
+	XMLEnabled XE = (XMLEnabled) c.newInstance();
+	XE.load(xmlE);
+
+
+Find the tag <PERSISTENCEMANAGER>. XML-Instantiated result should be an instanceof IPersistenceManager. This is now the persistence manager.
+
+Find the tag <DATAROOT>. XML-Instantiated result should be an instanceof IDataRoot. The default DataRoot's load(IXMLElement) method will have loaded various factories (IDataFactory). Factories are also XML-Instantiated.
+
+Find the tag <MUDROOT>. XML-Instantiated result should be an instanceof IMudRoot. The default MudRoot's load(IXMLElement) method will have loaded various factoried (IMudFactory). Factories are also XML-Instantiated.
+
+Note: Neither the default DataRoot nor the default MudRoot load IData or IMudObject elements from their load(IXMLElement) methods. Plugins should do this.
+
+Find the tag <PLUGINMANAGER>. XML-Intantiated result should be an instanceof IPluginManager. The default PluginManager's load(IXMLElement) method will have loaded varioud plugins (IJamudPlugin). Plugins are also XML-Instantiated.
+
+Find the tag <PLAYERMANAGER>. XML-Instantiated result should be an instanceof IPlayerManager. The default PlayerManager's load(IXMLElement) method will have loaded various factories (IPlayerFactory). Factories are also XML-Instantiated.
+
+Find the tag <CHANNELMANAGER>. XML-Instantated result should be an instanceof IChannelManager. The default ChannelManager's load(IXMLElement) method will have loaded various factories (IChannelFactory).
+
+
+Jamud.initialize is called
+
+	persistenceManager.initialize
+	dataRoot.initialize
+	mudRoot.initialize
+	playerManager.initialize
+	channelManager.initialize
+	pluginManager.initialize

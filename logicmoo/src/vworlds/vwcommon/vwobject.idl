@@ -1,0 +1,1519 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// vwobject.idl : IDL source for vwobject.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (vwobject.tlb) and marshalling code.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IWorld : Interface for the global current state, derived from IObjectProperty. The world state is
+// kept on the server, and saved to the a Virtual Worlds database in a checkpoint (.vwc) file
+// on the server machine.  This interface  includes methods to create new exemplars, 
+// to create instances of objects and methods, to manage marshalling and remoting of 
+// property changes between client and server, to get the current object in the world (this), 
+// and helper methods to validate names.  Clients connect to a world on the server 
+// through this interface. 
+//
+// Note: In general, a method Foo follows these naming convention:
+//	Foo				Script entry point
+//	FooEx			Script entry point with extra parameter
+//	FooExt			C++ internal method, usually restricted, has the ShouldExecute and ShouldRemote blocks
+//	FooInt			C++ internal method not exposed by COM, generally called by FooExt's ShouldExecute block
+//	FooIntHelper	C++ internal method not exposed by COM, called by FooInt, factors out functionality
+//
+// IVWObjectSite : Interface used by tools, OCX's to sync on events like a new user connection,
+// property change, etc.  To add a custom event that you want to handle, we recommend 
+// creating a custom UI event.  
+//
+// IVWDispatch : Base interface based on IDispatch that adds methods for loading VWorlds modules.
+//
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+	interface IAvatarProfile;
+	interface IThing;
+	interface IObjectProperty;
+	interface IPropertyMap;
+	interface IPropertyList;
+	interface IMethod;
+	interface IModule;
+	interface IPropertySecurity;
+
+	import "oaidl.idl";
+	import "vwcomm.idl";
+	import "vwprop.idl";
+	import "avprof.idl";
+
+// constant object indices for well-known objects
+cpp_quote("#define NULL_OBJECT						0")
+cpp_quote("#define WORLD_OBJECT						1")
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// Definition of bit field values for marshall routine's options.
+//
+// First 4 bits are for byval/ref..
+// Second 4 bits are for marshalling destination (byguid/byid)
+// Third 4 bits are for format (binary/VBScript)
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+cpp_quote("#define MARSHALL_BYVALUE						0x00000001")
+cpp_quote("#define MARSHALL_BYREF						0x00000002")
+
+cpp_quote("#define MARSHALL_BYGUID						0x00000010")
+cpp_quote("#define MARSHALL_BYID						0x00000020")
+
+cpp_quote("#define MARSHALL_TODISK						0x00000100")
+cpp_quote("#define MARSHALL_TONETWORK					0x00000200")
+cpp_quote("#define MARSHALL_TOMEMORY					0x00000400")
+
+// the masks. don't use these directly.
+cpp_quote("#define MARSHALL_BYVALUEMASK					0xFFFFFFF0")
+cpp_quote("#define MARSHALL_IDMASK						0xFFFFFF0F")
+cpp_quote("#define MARSHALL_LOCATIONMASK				0xFFFFF0FF")
+
+// macros to help set these options
+cpp_quote("#define MARSHALLDEST(a,b) ((a & MARSHALL_IDMASK) | b)")
+cpp_quote("#define MARSHALLREF(a,b) ((a & MARSHALL_BYVALUEMASK) | b)")
+cpp_quote("#define MARSHALLLOCATION(a,b) ((a & MARSHALL_LOCATIONMASK) | b)")
+
+// macros to help test these options.
+cpp_quote("#define EXTRACTREF(a) (a & ~(MARSHALL_BYVALUEMASK))")
+cpp_quote("#define EXTRACTID(a) (a & ~(MARSHALL_IDMASK))")
+cpp_quote("#define EXTRACTLOCATION(a) (a & ~(MARSHALL_LOCATIONMASK))")
+
+// flags for CreateMethod/CreateInlineMethod
+cpp_quote("#define METHOD_CLIENT						0x00000001")
+cpp_quote("#define METHOD_SERVER						0x00000002")
+
+cpp_quote("#define METHOD_SYNC							0x00000010")
+
+cpp_quote("#define METHOD_INLINE						0x00000100")
+
+cpp_quote("#define METHOD_PROPERTYPUT					0x00001000")
+cpp_quote("#define METHOD_PROPERTYGET					0x00002000")
+
+// the masks. don't use these directly.
+cpp_quote("#define METHOD_CLIENTSERVERMASK				0xFFFFFFF0")
+cpp_quote("#define METHOD_SYNCMASK						0xFFFFFF0F")
+cpp_quote("#define METHOD_INLINEMASK					0xFFFFF0FF")
+cpp_quote("#define METHOD_INVOKEMASK					0xFFFF0FFF")
+
+// macros to help set these options
+cpp_quote("#define METHODCLIENTSERVER(a,b) ((a & METHOD_CLIENTSERVERMASK) | b)")
+cpp_quote("#define METHODSYNC(a,b) ((a & METHOD_SYNCMASK) | b)")
+cpp_quote("#define METHODINLINE(a,b) ((a & METHOD_INLINEMASK) | b)")
+cpp_quote("#define METHODINVOKE(a,b) ((a & METHOD_INVOKEMASK) | b)")
+
+// flags for CreateCOMModule\CreateScriptModule
+cpp_quote("#define MODULE_CLIENT						0x00000001")
+cpp_quote("#define MODULE_SERVER						0x00000002")
+
+cpp_quote("#define MODULE_LOCAL							0x00000010")
+
+// the masks. don't use these directly.
+cpp_quote("#define MODULE_CLIENTSERVERMASK				0xFFFFFFF0")
+cpp_quote("#define MODULE_LOCALMASK						0xFFFFFF0F")
+
+// macros to help set these options
+cpp_quote("#define MODULECLIENTSERVER(a,b) ((a & MODULE_CLIENTSERVERMASK) | b)")
+cpp_quote("#define MODULELOCAL(a,b) ((a & MODULE_LOCALMASK) | b)")
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// We define custom HRESULTs for error reporting.
+// Since codes 0x0-0x01ff are reserved for the OLE group of
+// interfaces, we start our codes at 0x200 and go up from
+// there.  The custom HR's for VWObject are defined in this IDL, but others
+// are defined in the others IDLs in the \vwcommon directory.
+//
+// HRESULT ranges by interface are:
+// OLE				0x0 - 0x01ff
+// VWObject			0x200
+// VWClient			0x300
+// VWAdmin			0x300 (commented out)
+// AvatarProfile	0x380
+// VWServer			0x400
+// VWComm			0x500
+// VWODB			0x600
+// VWSound			0x700
+// VWUIObjs			0x800
+// VWStats			0x900
+// CellProp			0xa00
+// VWNvTarg			0xb00
+// VWSysEx			0xc00
+// InetFile			0xd00
+// VWAnim			0xd80
+// VWMM				0xe00
+// VWFrame			0xe80
+// VWFound			0xf00
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+// VWObject custom HR's start at 0x200.
+
+cpp_quote("#define VWOBJECT_S_NOTREMOTED			MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_ITF, 0x0201)")
+cpp_quote("#define VWOBJECT_S_NOTINSTANCED			MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_ITF, 0x0202)")
+cpp_quote("#define VWOBJECT_S_ALREADYDISCONNECTED	MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_ITF, 0x0203)")
+ 
+cpp_quote("#define VWOBJECT_E_INVOKEEXCEPTION		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0201)")
+cpp_quote("#define VWOBJECT_E_FILEEXCEPTION			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0202)")
+cpp_quote("#define VWOBJECT_E_FILEREADERROR			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0203)")
+cpp_quote("#define VWOBJECT_E_INVALIDMODULE			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0204)")
+cpp_quote("#define VWOBJECT_E_COLLECTIONERROR		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0205)")
+cpp_quote("#define VWOBJECT_E_WRONGPROPERTYTYPE		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0206)")
+cpp_quote("#define VWOBJECT_E_UNKNOWNTYPE			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0207)")
+cpp_quote("#define VWOBJECT_E_INVALIDPROPERTYLIST	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0208)")
+cpp_quote("#define VWOBJECT_E_PROPERTYEXISTS		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0209)")
+cpp_quote("#define VWOBJECT_E_INVALIDPROPERTYMAP	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x020A)")
+cpp_quote("#define VWOBJECT_E_PROPERTYNOTEXIST		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x020C)")
+cpp_quote("#define VWOBJECT_E_METHODEXISTS			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x020D)")
+cpp_quote("#define VWOBJECT_E_METHODNOTEXIST		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x020F)")
+cpp_quote("#define VWOBJECT_E_INVALIDMETHOD			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0210)")
+cpp_quote("#define VWOBJECT_E_INVALIDMETHODMAP		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0211)")
+cpp_quote("#define VWOBJECT_E_CONNECTIONERROR		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0212)")
+cpp_quote("#define VWOBJECT_E_INVALIDCREATUREMAP	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0213)")
+cpp_quote("#define VWOBJECT_E_EXEMPLAREXISTS		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0214)")
+cpp_quote("#define VWOBJECT_E_INVALIDOBJECT			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0215)")
+cpp_quote("#define VWOBJECT_E_EXEMPLARNOTEXIST		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0216)")
+cpp_quote("#define VWOBJECT_E_INVALIDEXEMPLARMAP	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0217)")
+cpp_quote("#define VWOBJECT_E_CREATUREEXISTS		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0218)")
+cpp_quote("#define VWOBJECT_E_INVALIDTOOLMAP		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0219)")
+cpp_quote("#define VWOBJECT_E_INVALIDMODULEMAP		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x021A)")
+cpp_quote("#define VWOBJECT_E_STUBOBJECT			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x021B)")
+cpp_quote("#define VWOBJECT_E_UNKNOWNPROPERTYTYPE	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x021C)")
+cpp_quote("#define VWOBJECT_E_UNKNOWNMESSAGETYPE	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x021D)")
+cpp_quote("#define VWOBJECT_E_MODULEEXISTS			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x021E)")
+cpp_quote("#define VWOBJECT_E_MODULENOTEXIST		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x021F)")
+cpp_quote("#define VWOBJECT_E_TOOLEXISTS			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0220)")
+cpp_quote("#define VWOBJECT_E_TOOLNOTEXIST			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0221)")
+cpp_quote("#define VWOBJECT_E_INVALIDMODULETYPE		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0222)")
+cpp_quote("#define VWOBJECT_E_UNKNOWNPROGID			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0223)")
+cpp_quote("#define VWOBJECT_E_INVALIDCONNECTION		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0224)")
+cpp_quote("#define VWOBJECT_E_INTERFACENOTSUPPORTED	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0225)")
+cpp_quote("#define VWOBJECT_E_INVALIDTRACELEVEL		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0226)")
+cpp_quote("#define VWOBJECT_E_COLLECTIONLEVEL		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0227)")
+cpp_quote("#define VWOBJECT_E_PERMISSION_DENIED		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0228)")
+cpp_quote("#define VWOBJECT_E_SYNTAX_ERROR			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0229)")
+cpp_quote("#define VWOBJECT_E_UNKNOWNTRACECOMPONENT	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x022A)")
+cpp_quote("#define VWOBJECT_E_ALREADYCONNECTED		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x022B)")
+cpp_quote("#define VWOBJECT_E_OBJECTNOTFOUND		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x022C)")
+cpp_quote("#define VWOBJECT_E_UNKNOWNCLSIDINDEX		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x022D)")
+cpp_quote("#define VWOBJECT_E_INVALIDLISTINDEX		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x022E)")
+cpp_quote("#define VWOBJECT_E_EMPTYPROPERTYLIST		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x022F)")
+cpp_quote("#define VWOBJECT_E_TYPE_MISMATCH			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0230)")
+cpp_quote("#define VWOBJECT_E_INVALIDDEFAULTSCRIPT	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0231)")
+cpp_quote("#define VWOBJECT_E_INVALIDWORLD			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0232)")
+cpp_quote("#define VWOBJECT_E_INVALIDBITSTATE		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0233)")
+cpp_quote("#define VWOBJECT_E_EVENTABORTED			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0234)")
+cpp_quote("#define VWOBJECT_E_EXEMPLARNOTFERTILE	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0235)")
+cpp_quote("#define VWOBJECT_E_INVALIDPROPERTYNAME	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0236)")
+cpp_quote("#define VWOBJECT_E_INVALIDEXEMPLARTYPE	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0237)")
+cpp_quote("#define VWOBJECT_E_INVALIDINSTANCENAME	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0238)")
+cpp_quote("#define VWOBJECT_E_INVALIDSCRIPTENGINE	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0239)")
+cpp_quote("#define VWOBJECT_E_UNKNOWNSCRIPTERROR	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x023a)")
+cpp_quote("#define VWOBJECT_E_INVALIDCONTAINER		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x023b)")
+cpp_quote("#define VWOBJECT_E_AVATARNOTEXIST		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x023c)")
+cpp_quote("#define VWOBJECT_E_INVALIDSECURITY		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x023d)")
+cpp_quote("#define VWOBJECT_E_ONLYRECONNECTFROMCLIENT		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x023e)")
+cpp_quote("#define VWOBJECT_E_OBJECTNOTEXEMPLAR		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x023f)")
+cpp_quote("#define VWOBJECT_E_INSTANCENOTCLONEABLE	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0240)")
+cpp_quote("#define VWOBJECT_E_EXEMPLARNOTCLONEABLE	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0241)")
+cpp_quote("#define VWOBJECT_E_INVALIDURLFORMAT		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0242)")
+cpp_quote("#define VWOBJECT_E_INVALIDDESTINATION	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0243)")
+cpp_quote("#define VWOBJECT_E_ONLYSERVERSIDE		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0244)")
+cpp_quote("#define VWOBJECT_E_INVALIDPARENT			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0245)")
+cpp_quote("#define VWOBJECT_E_INVALIDWORLDREGISTRY	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0246)")
+cpp_quote("#define VWOBJECT_E_PROCESSMSGEXCEPTION	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0247)")
+cpp_quote("#define VWOBJECT_E_INVALIDBSTRSIZE		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0248)")
+cpp_quote("#define VWOBJECT_E_ALREADYDESTROYED		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0249)")
+cpp_quote("#define VWOBJECT_E_INVALIDEXEMPLAR		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x024a)")
+cpp_quote("#define VWOBJECT_E_INVALIDPASSWORD		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x024b)")
+cpp_quote("#define VWOBJECT_E_CANTDESTROYUSER		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x024c)")
+cpp_quote("#define VWOBJECT_E_CANTDESTROYCONTAINER	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x024d)")
+cpp_quote("#define VWOBJECT_E_CANTDESTROYROOM		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x024e)")
+cpp_quote("#define VWOBJECT_E_INVALIDCONTENTPATH	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x024f)")
+cpp_quote("#define VWOBJECT_E_INVALIDAVATARGRAPHICSPATH	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0250)")
+cpp_quote("#define VWOBJECT_E_INVALIDAVATARPATH		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0251)")
+cpp_quote("#define VWOBJECT_E_INVALIDPROFILE		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0252)")
+cpp_quote("#define VWOBJECT_E_INVALIDHELPPATH		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0253)")
+cpp_quote("#define VWOBJECT_E_INVALIDWORLDPATH		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0254)")
+cpp_quote("#define VWOBJECT_E_CANTDESTROYAVATAR		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0255)")
+cpp_quote("#define VWOBJECT_E_INVALIDDSURL			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0256)")
+cpp_quote("#define VWOBJECT_E_NOTCLIENTMODULE		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0257)")
+cpp_quote("#define VWOBJECT_E_NOTSERVERMODULE		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0258)")
+cpp_quote("#define VWOBJECT_E_NOTSAFEFORSCRIPTING	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0259)")
+cpp_quote("#define VWOBJECT_E_INVALIDPROFILEVERSION	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x025a)")
+cpp_quote("#define VWOBJECT_E_INVALIDCLIENTVERSION	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x025b)")
+cpp_quote("#define VWOBJECT_E_SCRIPTNOTFOUND		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x025c)")
+cpp_quote("#define VWOBJECT_E_COMPONENTNOTFOUND		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x025d)")
+cpp_quote("#define VWOBJECT_E_INVALIDONACCESSMETHOD	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x025e)")
+cpp_quote("#define VWOBJECT_E_EXTERNALCALLONLY		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x025f)")
+cpp_quote("#define VWOBJECT_E_EXCEEDEDOBJECTQUOTA	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0260)")
+cpp_quote("#define VWOBJECT_E_CANTDESTROYEXEMPLAR	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0261)")
+cpp_quote("#define VWOBJECT_E_INVALIDMETHODNAME		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0262)")
+cpp_quote("#define VWOBJECT_E_INVALIDWORLDNAME		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0263)")
+cpp_quote("#define VWOBJECT_E_INVALIDAVATARNAME		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0264)")
+cpp_quote("#define VWOBJECT_E_INVALIDNAME			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0265)")
+cpp_quote("#define VWOBJECT_E_NORECONNECTTOSAMEWORLD	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0266)")
+cpp_quote("#define VWOBJECT_E_INVALIDPERMISSIONS	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0267)")
+cpp_quote("#define VWOBJECT_E_INVALIDDIRECTORYSERVICEPAGE	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0268)")
+cpp_quote("#define VWOBJECT_E_PARSESCRIPTERROR		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0269)")
+cpp_quote("#define VWOBJECT_E_MODULESHUTDOWN		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x026A)")
+cpp_quote("#define VWOBJECT_E_CANTCREATEAVATAR		MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x026B)")
+cpp_quote("#define VWOBJECT_E_RUNTIMESCRIPTERROR	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x026C)")
+cpp_quote("#define VWOBJECT_E_UNAUTHENTICATEDCONNECTION	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x026D)")
+cpp_quote("#define VWOBJECT_E_COPYINGNOTSUPPORTED	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x026E)")
+	[
+		object,
+		uuid(590D9854-A417-11CF-9BF0-0080C7A56A8A),
+		dual,
+		helpstring("IWorld Interface"),
+		pointer_default(unique)
+	]
+	interface IWorld : IObjectProperty
+	{
+const DISPID DISPID_WORLD_CONNECTINT =	101;
+const DISPID DISPID_WORLD_CREATEAVATAR = 102;
+const DISPID DISPID_WORLD_DISCONNECTINT = 103;
+const DISPID DISPID_WORLD_SAVECHECKPOINT = 104;
+const DISPID DISPID_WORLD_CREATEINSTANCEINT = 105;
+const DISPID DISPID_WORLD_CREATEEXEMPLARINT = 108;
+const DISPID DISPID_WORLD_DESTROYOBJECT = 110;
+//const DISPID DISPID_WORLD_DESTROYOBJECTBYID = 111;
+const DISPID DISPID_WORLD_CONVERTINSTANCETOEXEMPLAR = 112;
+const DISPID DISPID_WORLD_CONVERTEXEMPLARTOINSTANCE = 113;
+const DISPID DISPID_WORLD_CREATECOMMODULE = 114;
+const DISPID DISPID_WORLD_CREATESCRIPTMODULE = 116;
+const DISPID DISPID_WORLD_REMOVEMODULE = 117;
+const DISPID DISPID_WORLD_SYNCHRONIZE = 118;
+const DISPID DISPID_WORLD_ENABLELOGGING = 119;
+const DISPID DISPID_WORLD_CREATEOBJECTINT = 120;
+const DISPID DISPID_WORLD_DELETEOBJECTINT = 121;
+const DISPID DISPID_WORLD_CREATECOMMODULEEX = 122;
+const DISPID DISPID_WORLD_CREATESCRIPTMODULEEX = 123;
+const DISPID DISPID_WORLD_CLONEINSTANCE = 124;
+const DISPID DISPID_WORLD_REGISTERINTEREST = 125;
+const DISPID DISPID_WORLD_UNREGISTERINTEREST = 126;
+const DISPID DISPID_WORLD_SAVETOSCRIPT = 128;
+const DISPID DISPID_WORLD_DISCONNECTAVATAR = 129;
+const DISPID DISPID_WORLD_DISCONNECTCLIENT = 130;
+const DISPID DISPID_WORLD_SAVECHECKPOINTAS = 131;
+const DISPID DISPID_WORLD_UPDATEGLOBALPATHS = 132;
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Note: In general, a method Foo follows these naming convention:
+		//	Foo			Script entry point
+		//	FooEx		Script entry point with extra parameter
+		//	FooExt		C++ internal method, usually restricted, has ShouldExecute, ShouldRemote blocks
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Methods for  connecting/disconnecting/reconnecting  to a world and creating an avatar
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		[helpstring("Called from script to create an avatar with a name and password: looks for profile, remotes if needed, calls ConnectInt to do rest of work")] 
+		HRESULT Connect([in] BSTR bstrName, [in] BSTR bstrPassword, [out, retval] IThing** ppthing);
+		[helpstring("Called from script to disconnects current avatar: saves profile, remotes if needed, calls DisconnectInt to do rest of work")] 
+		HRESULT Disconnect();
+
+		[helpstring("Creates new avatar with optional identifier using DefaultAvatarExemplar, does authentication if needed, increments avatar count"),
+			 id(DISPID_WORLD_CREATEAVATAR)] 
+		HRESULT CreateAvatar([in] BSTR bstrName, [in] BSTR bstrPassword, [in, optional] VARIANT bstrGUID, [out, retval] BSTR* pbstrNewName);
+
+		// Internal methods: only to be called on server by core code
+		[hidden, helpstring("Internal method to handle avatar connection"), id(DISPID_WORLD_CONNECTINT)] 
+		HRESULT ConnectInt([in] BSTR bstrName, [in] BSTR bstrPassword, [in] VARIANT varProfile, [out, retval] IThing** ppthing);
+		[hidden, helpstring("Interenal method to disconnect avatar connection"), id(DISPID_WORLD_DISCONNECTINT)] 
+		HRESULT DisconnectInt();
+
+		[hidden, helpstring("Disconnects an avatar, used by hosts to disconnect avatars other than themselves"), id(DISPID_WORLD_DISCONNECTAVATAR)] 
+		HRESULT DisconnectAvatar([in] IThing* pAvatar);
+		[hidden, helpstring("Disconnects current avatar and client"), id(DISPID_WORLD_DISCONNECTCLIENT)] 
+		HRESULT DisconnectClient([in] IThing* pAvatar);
+
+		// Used to asynchronously connect to a new server.		
+		[hidden, helpstring("Checks for non-null caller, calls ReconnectExt to do real work of reconnecting")] 
+		HRESULT Reconnect([in] BSTR bstrURL, [in] BSTR bstrName, [in] BSTR bstrPassword);
+		// internal method called by the interworld portal
+		[hidden, helpstring("Method called from client-side  to connect to a new world when you are already logged into one")] 
+		HRESULT ReconnectExt([in] BSTR bstrURL, [in] BSTR bstrName, [in] BSTR bstrPassword);
+				
+		// Server-side activation methods, called during connection/disconnection
+		[restricted, helpstring("Method to activate a room when the first user logs in")] 
+		HRESULT ActivateRoom([in] IThing* pthing);
+		[restricted, helpstring("Method to deactive a room when the last user logs out")] 
+		HRESULT DeactivateRoom([in] IThing* pthing);
+
+		[helpstring("Called from client to be sure the client and server are in the same state before proceeding further"), 
+			id(DISPID_WORLD_SYNCHRONIZE)]
+		HRESULT Synchronize();
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Methods related to Virtual Worlds Object Database, or VWODB
+		// VWODB handles the saving of changes to the world
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+		// Get .vwc checkpoint filename
+		[restricted, propget, helpstring("Returns checkpoint file name  (.vwc) where state of world database is stored")] 
+		HRESULT Database([out, retval] BSTR* pbstr);
+
+		// Methods to open checkpoint files and save changes in them or write to more human-readable script file
+		[restricted, helpstring("Opens checkpoint .vwc file  for writing, create new one if appropriate")] 
+		HRESULT OpenDatabase([in] BSTR bstr, [in] VARIANT_BOOL bCreate, [in] VARIANT_BOOL bOverwrite);
+		[helpstring("Save state of world database in current checkpoint .vwc file"),
+			 id(DISPID_WORLD_SAVECHECKPOINT)] 
+		HRESULT SaveDatabase();
+		[helpstring("Save state of world database in checkpoint .vwc file specified as a string"), 
+			id(DISPID_WORLD_SAVECHECKPOINTAS)] 
+		HRESULT SaveDatabaseAs(BSTR bstrNewName);
+		[helpstring("Saves state of world database in more readable VBScript format in file specified by the string you provide"), 
+			id(DISPID_WORLD_SAVETOSCRIPT)]
+		HRESULT SaveToScript([in] BSTR bstrFilename);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Methods for processing log records - records of changes made to VWODB
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		// Internal method to process log records (from object store)
+		[restricted, helpstring("Read in log record from a marshall buffer, e.g., when a client logs into the world and gets current state")]
+		HRESULT ProcessLogRecord([in] IUnMarshallBuffer *pbuffer);
+
+		// Enable object store logging
+		[helpstring("Enables or disables logging (recording) of changes in world state"), id(DISPID_WORLD_ENABLELOGGING)] 
+		HRESULT EnableLogging([in] VARIANT_BOOL boolval);
+
+		[propget, helpstring("Checks if logging in enabled in a world, if true, logging is on")] 
+		HRESULT IsLoggingEnabled([out, retval] VARIANT_BOOL* pbool);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Methods to manage creation, deletion and copying (or cloning) of objects,
+		// both exemplars and instances 
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		// Internal object creation/deletion methods
+		[hidden, helpstring("Creates new CComThing, sets ref to world, updates world database"), id(DISPID_WORLD_CREATEOBJECTINT)] 
+		HRESULT CreateObjectInt([in] long lval, [out, retval] IThing** ppthing);
+		[hidden, helpstring("Deletes object from world database"), id(DISPID_WORLD_DELETEOBJECTINT)] 
+		HRESULT DeleteObjectInt([in] IThing* pthing);
+
+		// Methods to create an object instance
+		[helpstring("Called from script - does some parameter checking, calls CreateInstanceExt")] 
+		HRESULT CreateInstance([in] BSTR bstrName, [in] VARIANT varExemplar, 
+			[in, optional] VARIANT varContainer, [out, retval] IThing** ppthing);
+		[restricted, helpstring("Checks that parent is exemplar & not avatar, calls CreateInstantInt to do rest")] 
+		HRESULT CreateInstanceExt([in] BSTR bstrName, [in] VARIANT varExemplar, 
+			[in] IThing* pthingContainer, [out, retval] IThing** ppthing);
+		[hidden, helpstring("Calls methods to do execution, remoting, create new object, set owner, fire creation events"), id(DISPID_WORLD_CREATEINSTANCEINT)] 
+		HRESULT CreateInstanceInt([in] BSTR bstrName, [in] IThing* pthingExemplar, 
+			[in] IThing* pthingContainer, [out, retval] IThing** ppthing);
+
+		// Exemplar creation
+		[helpstring("Called from script, calls CreateExemplarEx")] 
+		HRESULT CreateExemplar([in] BSTR bstrType, 
+			[in] VARIANT varExemplar, [out, retval] IThing** ppthing);
+		[hidden, helpstring("Does param checking, calls CreateExemplarExt")] 
+		HRESULT CreateExemplarEx([in] BSTR bstrName, [in] BSTR bstrType, 
+			[in] VARIANT varExemplar, [out, retval] IThing** ppthing);
+
+		[restricted, helpstring("Does param checking, sets exemplar's parent, calls CreateExemplarInt")] 
+		HRESULT CreateExemplarExt([in] BSTR bstrName, [in] BSTR bstrType, 
+			[in] VARIANT varExemplar, [out, retval] IThing** ppthing);
+		[hidden, helpstring("Calls methods to do execution, remoting, set owner, fire creation events "), id(DISPID_WORLD_CREATEEXEMPLARINT)] 
+		HRESULT CreateExemplarInt([in] BSTR bstrName, [in] BSTR bstrType, 
+			[in] IThing* pthingExemplar, [out, retval] IThing** ppthing);
+
+		// Create root-level exemplar (has no exemplar of its own)
+		[restricted, helpstring("Wrapper for CreateExemplarExt with no name or parent exemplar, used to create base Thing exemplar")] 
+		HRESULT CreateRootExemplar([in] BSTR bstrType, 
+			[out, retval] IThing** ppthing);
+
+		// Methods to manage copying, deletion, & lookup of objects
+		[helpstring("Makes a copy of an object by creating new instance with same exemplar and copyging all properties and methods"),
+			id(DISPID_WORLD_CLONEINSTANCE)] 
+		HRESULT CloneInstance([in] BSTR bstrName, [in] IThing* pthingSource, 
+			[out, retval] IThing** ppthing);
+
+		// remove object by name
+		[helpstring("Calls methods for exection, remoting, firing events. Deletes by setting object's container to NULL, IsStub==TRUE, and deleting from database"), 
+			id(DISPID_WORLD_DESTROYOBJECT)] 
+		HRESULT DestroyObject([in] IThing* pthing);
+		// remove object by ID
+		[hidden, helpstring("Gets reference to object through ID, calls DestroyObject")] 
+		HRESULT DestroyObjectByID([in] long lval);
+
+		// lookup object by name (in world scope)
+		[restricted, propget, helpstring("Calls into database to get a reference to an object by its name")] 
+		HRESULT ObjectByName([in] BSTR bstr, [out, retval] IThing** ppthing);
+
+		// lookup object by ID (in world scope)
+		[hidden, propget, helpstring("Calls into database to get a reference to an object by its name")] 
+		HRESULT ObjectByID([in] long lval, [out, retval] IThing** ppthing);
+
+		// lookup exemplar by type (in world scope)
+		[propget, helpstring("Looks up exemplar in exemplar property map and returns reference to that exemplar")] 
+		HRESULT Exemplar([in] BSTR bstrType, [out, retval] IThing** ppthing);
+
+		[helpstring("Checks if exemplar exists in exemplar property, returns true if it does")] 
+		HRESULT IsValidExemplar([in] BSTR bstrType, [out, retval] VARIANT_BOOL* pbool);
+
+		// get exemplar map
+		[hidden, propget, helpstring("Returns a reference to exemplar property map - collection which contains name, exemplar IThing**'s")] 
+		HRESULT Exemplars([out, retval] IPropertyMap** pppropertymap);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Creation of Object Properties and Methods
+		//
+		// Note on property types:
+		//	native properties: stick value into VARIANT
+		//	string = VT_BSTR, number = VT_I4, float = VT_R4, VARIANT_BOOL = VT_VARIANT_BOOL
+		//
+		//	object properties: stick IDispatch into VARIANT
+		//	IDispatch = VT_DISPATCH
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		// Create custom data types that are not derived from an exemplar,
+		// e.g., collections like a PropertyList or PropertyMap, or a Vector
+		[restricted, helpstring("")] 
+		HRESULT CreateObjectProperty([in] BSTR bstrProgID, 
+			[out, retval] IObjectProperty** ppproperty);
+		[restricted, helpstring("")] 
+		HRESULT CreateObjectPropertyExt([in] REFCLSID clsid, 
+			[in] IUnknown* punk, [out, retval] IObjectProperty** ppproperty);
+
+		// Methods to create World Methods
+		[hidden, helpstring("Create a method by DISPID rather than name (not currently used)")] 
+		HRESULT CreateMethodByDispID([in] long lFlags, [in] VARIANT varModule, [in] DISPID dispid, 
+			[out, retval] IMethod** ppmethod);
+		[helpstring("Create a new method in a C++ or script module")] 
+		HRESULT CreateMethod([in] long lFlags, [in] VARIANT varModule, [in] BSTR bstrName, 
+			[out, retval] IMethod** ppmethod);
+		[helpstring("Creates a new method with method code contained inline as the fourth parameter")]
+		HRESULT CreateInlineMethod([in] long lFlags, [in] BSTR bstrLanguage, [in] BSTR bstrName, 
+			[in] BSTR bstrCode, [out, retval] IMethod** ppmethod);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Module creation, deletion, and management
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		// Script methods to create modules
+		[hidden, helpstring("Called in script to create a C++ code module using the COM ProgId, used to initially set up system & multimedia exemplars"), id(DISPID_WORLD_CREATECOMMODULE)] 
+		HRESULT CreateCOMModule([in] BSTR bstrName, [in] BSTR bstrProgID, 
+			[in] long lFlags, [out, retval] IModule** ppmodule);
+		[helpstring("Called by script to create a new VBScript or JavaScript code module using the script file"), 
+			id(DISPID_WORLD_CREATESCRIPTMODULE)] 
+		HRESULT CreateScriptModule([in] BSTR bstrName, [in] BSTR bstrScriptPath, 
+			[in] long lFlags, [out, retval] IModule** ppmodule);
+
+		[hidden, helpstring("Called by CreateCOMModule to create new CComCOMModule and set reference to world"),
+			id(DISPID_WORLD_CREATECOMMODULEEX)] 
+		HRESULT CreateCOMModuleEx([in] BSTR bstrName, [in] BSTR bstrProgID,
+			[in] long lFlags, [out, retval] IModule** ppmodule);
+		[hidden, helpstring("Called by CreateCOMModule to create new CComScriptModule and set reference to world"), id(DISPID_WORLD_CREATESCRIPTMODULEEX)] 
+		HRESULT CreateScriptModuleEx([in] BSTR bstrName, [in] BSTR bstrScriptPath,
+			[in] long lFlags, [out, retval] IModule** ppmodule);
+
+		// Remove module by name
+		[helpstring("Calls method to execute and remote removing a module from world's module map"), id(DISPID_WORLD_REMOVEMODULE)] 
+		HRESULT RemoveModule([in] BSTR bstrName);
+
+		// Get module by name
+		[propget, helpstring("Looks up module in Modules map, returns reference to it or create special :VBScript module")] 
+		HRESULT Module([in] BSTR bstrName, [out, retval] IModule** ppmodule);
+
+		[helpstring("Checks if module is in Modules map")] 
+		HRESULT IsValidModule([in] BSTR bstrName, [out, retval] VARIANT_BOOL* pbool);
+
+		// get module map
+		[hidden, propget, helpstring("Used internally to get Modules property map")] 
+		HRESULT Modules([out, retval] IPropertyMap** pppropmap);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Tool creation, deletion, and management
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		// Methods for creating tools
+		[hidden, helpstring("Gets CLSID from ProgID, then calls CreateToolExt to add tool to Tools map")] 
+		HRESULT CreateTool([in] BSTR bstrName, [in] BSTR bstrProgID, 
+			[out, retval] IUnknown** ppunk);
+		[hidden, helpstring("Adds tool using an interface pointer to Tools map")] 
+		HRESULT CreateToolFromInterface([in] BSTR bstrName, [in] IUnknown* punk);
+		[restricted, helpstring("Does a CoCreateInstance for CLSID, checks that it is safe for scripting, and adds it to the Tools map")] 
+		HRESULT CreateToolExt([in] BSTR bstrName, [in] REFCLSID clsid, 
+			[out, retval] IUnknown** ppunk);
+
+		// Remove tool by name
+		[hidden, helpstring("Deletes tool from Tools map")] 
+		HRESULT RemoveTool([in] BSTR bstrName);
+
+		// Is tool valid?
+		[hidden, helpstring("Checks if tool is in Tools map")] 
+		HRESULT IsValidTool([in] BSTR bstrName, [out, retval] VARIANT_BOOL* pbool);
+
+		// Get tool by name
+		[hidden, propget, helpstring("Checks that world exists, then call ToolExt to look up tool in Tools map, returns reference to it")] 
+		HRESULT Tool([in] BSTR bstrName, [out, retval] IUnknown** ppunk);
+		[restricted, propget, helpstring("Check params, look up tool in Tools map & return a refrence to it")] 
+		HRESULT ToolExt([in] BSTR bstrName, [out, retval] IUnknown** ppunk);
+
+		// Get tool map
+		[restricted, propget, helpstring("Internal C++ method to get a reference to the Tools property map")] 
+		HRESULT Tools([out, retval] IPropertyMap** pppropmap);
+
+		[restricted, helpstring("Creates a new tools property map, initializes it with property map parameter")] 
+		HRESULT InitializeTools([in] IPropertyMap* ppropmap);
+
+		// initialize world with connection
+		[restricted, helpstring("Sets client connection and initializes flags for ExecuteSync, RemoteSync, Logging")] 
+		HRESULT InitializeConnection([in] IVWCommConnection* pvwcommconnection);
+		[restricted, helpstring("Removes connection and user from world")] 
+		HRESULT DisconnectConnection([in] IVWCommConnection* pvwcommconnection);
+
+		// Methods called on world by VWODB when opening & creating world databased
+		[restricted, helpstring("Called when hen VWODB opens existing world db")]
+		HRESULT OnOpenWorld([in] VARIANT_BOOL bPersist);
+		[restricted, helpstring("Called when VWODB creates new world db")]
+		HRESULT OnCreateWorld();
+
+		// Methods to process network messages
+		[restricted, helpstring("Handles message for property change, etc., between client and server, calls ProcessMesageExt")] 
+		HRESULT ProcessMessage([in] IVWCommMessage* pmessage);
+		[restricted, helpstring("Decodes what type of message it is and unmarshalls it accordingly")] 
+		HRESULT ProcessMessageExt([in] unsigned char ch, [in] IUnMarshallBuffer* pUBuffer, [out] HRESULT* recvhr, [out] VARIANT* pvar);
+
+		// Methods to handle current connection
+		[restricted, propget, helpstring("Internal method to get current connection")] 
+		HRESULT Connection([out, retval] IVWCommConnection** ppvwcommconnection);
+		[restricted, propput, helpstring("Internal method to set current connection")] 
+		HRESULT Connection([in] IVWCommConnection* pvwcommconnection);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Helper functions to get properties that manage remoting
+		//
+		// See extensive comments on various possible states in worldobj.cpp (one <PAGE DOWN> from top)
+		//	ShouldExecute:		After checking params, call function to do the work? (usually true on both client and server)
+		//	ShouldExecuteSync:	Can call other functions to do work while in synchronous call?
+		//	ShouldRemote:		Need to upate clients? (usually true on server)
+		//	ShouldRemoteSync:	Need to update if in synchronous call?
+		//	ShouldNotify:		Need to call method to notify of property or method change and 
+		//						update date last modified? (See Notify... methods further down)
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		[restricted, propget, helpstring("")] 
+		HRESULT ShouldExecute([out, retval] VARIANT_BOOL* pbool);
+		[restricted, propget, helpstring("")] 
+		HRESULT ShouldExecuteSync([out, retval] VARIANT_BOOL* pbool);
+		[restricted, propget, helpstring("")] 
+		HRESULT ShouldRemote([out, retval] VARIANT_BOOL* pbool);
+		[restricted, propget, helpstring("")] 
+		HRESULT ShouldRemoteSync([out, retval] VARIANT_BOOL* pbool);
+		[restricted, propget, helpstring("")] 
+		HRESULT ShouldNotify([out, retval] VARIANT_BOOL* pbool);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// LocalMode:  only local machine client is connected directly to a world with an object 
+		// database - the client does not connect to a server, and no remoting of changes to other
+		// clients takes place. Used when running world creation scripts in SEngine.  Also helpful
+		// for lightweight debugging.  
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		[restricted, propget, helpstring("Internal method to check whether world is running locally - only local client is connected,")] 
+		HRESULT LocalMode([out, retval] VARIANT_BOOL* pbool);
+		[restricted, propput, helpstring("Internal method to set whether world is running locally - only local client is connected.")] 
+		HRESULT LocalMode([in] VARIANT_BOOL boolval);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// FreezeEvents:  Toggles firing of in-world system events and OLE events on changes on and off
+		// By default, events are fired on client and server, but are not fired during ProcessLogRecord, 
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+		[restricted, propget, helpstring("Internal method to check whether in-world system events or OLE events are fired on changes")] 
+		HRESULT FreezeEvents([out, retval] VARIANT_BOOL* pbool);
+		[restricted, propput, helpstring("Internal method to set whether in-world system events or OLE events are fired on changes")] 
+		HRESULT FreezeEvents([in] VARIANT_BOOL boolval);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// EnableSecurity:  Toggles whether in-world security is checked before allowing changes
+		// to objects.  If turned off, any user can change any property or method on any object -
+		// security bits and access methods are not checked.
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		[propget, helpstring("Check if world-level security is turned on (policy whether wizards, etc., can modify objects)")] 
+		HRESULT EnableSecurity([out, retval] VARIANT_BOOL* pbool);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Methods to set, enable traces and report & format messages
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		[hidden, helpstring("Set whether trace messages are enabled for Command Window, etc. (Use IsTraceEnabled to check this value.)")] 
+		HRESULT EnableTrace([in] VARIANT_BOOL boolval);
+
+		[hidden, propget, helpstring("Check if trace messages will be printed out on Command Window, etc. (Use EnableTrace to set this value.)")] 
+		HRESULT IsTraceEnabled([out, retval] VARIANT_BOOL* pbool);
+
+		[hidden, propget, helpstring("Get current level of traces that are shown")] 
+		HRESULT TraceLevel([in] BSTR bstr, [out, retval] int* ival);
+		[hidden, propput, helpstring("Set trace level from 0-5, with 0 being the most verbose, and 5 not showing any (see enums at end of file")] 
+		HRESULT TraceLevel([in] BSTR bstr, [in] int ival);
+
+		[hidden, helpstring("Removes the property TraceLevel from the component map.  Not used.")]
+		HRESULT RemoveTraceLevel([in] BSTR bstr);
+
+		// Fire events to client
+		[helpstring("Used to notify client of system message - the BSTR param you specify appears in Command Window in VW Authoring Client. Useful for debugging.")] 
+		HRESULT Trace([in] BSTR bstr);
+		[hidden, helpstring("Used to notify client of an event - might be a whisper, system warning, etc.  You specify a type (See VWReportTypes enum below) that can be filtered for in the UI. Appears in Command Window in VW Authoring Client.")] 
+		HRESULT Report([in] BSTR bstr, [in] long lType);
+
+		[helpstring("Calls methods to convert different object types to ASCII and then prints to trace")] 
+		HRESULT Print([in] VARIANT varAnything);
+
+		// Helper functions to format strings
+		[helpstring("Used to format a string that can be traced out for debugging purposes or in marshalling a world to script.")] 
+		HRESULT Format([in] BSTR bstrIn, [in] IPropertyList *pObjects, [in] IThing *pPOV,
+					   [out, retval] BSTR *bstrOut);
+		[helpstring("Used to format a sentence.  Not used.")] 
+		HRESULT FormatSentences([in] BSTR bstrIn, [in] IPropertyList *pObjects,
+								[in] IThing *pPOV, [out, retval] BSTR *bstrOut);
+
+		[restricted, propget, helpstring("Used to determine if world is connected when getting marshalling bits (FALSE if connecting locally)")] 
+		HRESULT IsConnected([out, retval] VARIANT_BOOL* pbool);
+
+		// Get/put server side flag - Client-side, this flag is set to FALSE by VWClientObject. 
+		// Server-side, this flag is set to true by by VWServer.
+		[propget, helpstring("Checks if on the server")] 
+		HRESULT ServerSide([out, retval] VARIANT_BOOL* pbool);
+		[restricted, propput, helpstring("Internal method to set if we're on the server")] 
+		HRESULT ServerSide([in] VARIANT_BOOL boolval);
+
+		// Get avatar by name
+		[restricted, propget, helpstring("Internal method to return a pointer to a pointer to an avatar using name")] 
+		HRESULT Avatar([in] BSTR bstrName, [out, retval] IThing** ppthing);
+
+		// Get avatar by GUID
+		[restricted, propget, helpstring("Internal method to return a pointer to a pointer to an avatar using its GUID (globally unique identifier)")] 
+		HRESULT AvatarByGUID([in] BSTR bstrName, [out, retval] IThing** ppthing);
+
+		// Embedded IThing for global properties and methods
+		[propget, helpstring("Gets the core Global object that contains basic properties and methods for a specific world, like WorldName")] 
+		HRESULT Global([out, retval] IThing** ppthing);
+
+		// Note: needed since Owner is now hard-coded in IThing, not an added property
+		[propget, helpstring("Gets the avatar object that created the world, known as the world owner")]
+		HRESULT Owner([out, retval] IThing** ppthing);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Properties used during method invocation:
+		//	User:		the current avatar
+		//	This:		the object the method is being invoke on
+		//	Caller:		the object that has called the method
+		//	Super:		the root object of the This, usually the Thing Exemplar
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		// Get user  - the  connected avatar that is invoking a method
+		[propget, helpstring("Gets the current avatar")] 
+		HRESULT User([out, retval] IThing** ppthing);
+		[restricted, propput, helpstring("Sets the current avatar")] 
+		HRESULT User([in] IThing* pthing);
+	
+		// Get calling "this" thing during an method invocation
+		[propget, helpstring("Returns the current thing")]
+		HRESULT This([out, retval] IThing** ppthing);
+		[restricted, propput, helpstring("Internal method to set current thing")] 
+		HRESULT This([in] IThing* pthing);
+
+		// Get "Calling" thing during method invocation
+		[propget, helpstring("Internal method to return caller of method currently being invoked")]
+		HRESULT Caller([out, retval] IThing** ppthing);
+		[restricted, propput, helpstring("Internal method to set caller of method currently being invoked")] 
+		HRESULT Caller([in] IThing *pthing);
+
+		// Get "Super" thing during method invocation, usually the base exemplar, Thing_Exemplar
+		[restricted, propget, helpstring("Internal method to returns base exemplar")]
+		HRESULT Super([out, retval] IThing** ppthing);
+		[restricted, propput, helpstring("Internal method to set base exemplar")] 
+		HRESULT Super([in] IThing *pthing);
+
+		// Get  "Call Stack Permissions" object during method invocation
+		[restricted, propget, helpstring("Get the PropertySecurity object - contains instance, exemplar, caller, etc.")]
+		HRESULT SecurityContext([out, retval] IPropertySecurity** ppSecurity);
+		[restricted, propput, helpstring("Set the PropertySecurity object - contains instance, exemplar, caller, etc.")] 
+		HRESULT SecurityContext([in] IPropertySecurity *pSecurity );
+
+		// Are we currently executing a property change on the server?
+		[restricted, propget, helpstring("Internal method to check if a property change is being executed on server")] 
+		HRESULT IsInPropChange([out, retval] VARIANT_BOOL* pbool);
+		[restricted, propput, helpstring("Internal method to set if a property change is being executed on server")] 
+		HRESULT IsInPropChange([in] VARIANT_BOOL boolval);
+
+		[helpstring("Helper method to set World.IsEventAborted to TRUE")] 
+		HRESULT AbortEvent();
+
+		// IsEventAborted: checked in FireWhisperEventHelper, FireEventExtHelper to see if an event has been aborted
+		[restricted, propget, helpstring("Internal method to check if an event should be aborted")] 
+		HRESULT IsEventAborted([out, retval] VARIANT_BOOL* pbool);
+		[restricted, propput, helpstring("Internal method to set if an event should be aborted.  Not used.")] 
+		HRESULT IsEventAborted([in] VARIANT_BOOL boolval);
+
+		// Helper methods to check common object types
+		[helpstring("Helper method to determine if an object is an exemplar")] 
+		HRESULT IsExemplar([in] IThing* pthing, [out, retval] VARIANT_BOOL* pbool);
+		[helpstring("Helper method to determine if an object is an avatar")] 
+		HRESULT IsAvatar([in] IThing* pthing, [out, retval] VARIANT_BOOL* pbool);
+		[helpstring("Helper method to determine if an object is a room")] 
+		HRESULT IsRoom([in] IThing* pthing, [out, retval] VARIANT_BOOL* pbool);
+
+		// World-level critical section for managing access to world state data (i.e. This, Caller)
+		[restricted, helpstring("Internal method to lock access to world state data at start of InvokeMethodExtHelper")]
+		HRESULT LockWorld();
+		[restricted, helpstring("Internal method to free up access to world state data at end of InvokeMethodExtHelper")]
+		HRESULT UnlockWorld();
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// OLE events called through IObjectSite for UserConnect and UserDisconnect.
+		// Note: it is better to use the UI events OnEnterWorld and OnLeaveWorld, fired from OnSystemConnect and OnSystemDisconnect
+		// since these events occur later in the connect sequence and you can be sure the user is actually in the world
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		// The parameter pthing is the user.
+		[restricted, helpstring("Event fired when a user connects to a world ")] 
+		HRESULT NotifyUserConnect([in] IThing* pthing);
+		[restricted, helpstring("Event fired when a user disconnects from a world")] 
+		HRESULT NotifyUserDisconnect([in] IThing* pthing);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// FireUIEvent
+		// OLE event called through IObjectSite. Used to fire events to update the UI, e.g., when 
+		// e a user becomes an author in the VW Authoring client, a new panel appears in the UI.
+		// There are helper methods defined in vwsysex.idl to fire UI events to particular 
+		// avatars/clients, and to fire a RemoteUIEvent from the server.
+		// Paramters are the thing firing the event, the name of the event, and an optional argument
+		// that is passed to the UI (additional text info, another object, etc.)
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		[helpstring("Fires an event on a thing with a name and optional arguments you specifiy")]
+		HRESULT FireUIEvent([in] IThing* pthing, [in] BSTR bstrEventName, [in, optional] VARIANT varArg);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Methods to display various types of IE windows in the same thread.
+		//	ShowHTML... methods take the text (with HTML tags) you want to display as a string parameter 
+		//	ShowURL... methods take an URL as a string parameter and display that URL
+		//
+		// Generally, we fire UI events and handle them by using ShowModal/ModelessDialog
+		// but since these dialogs are popped up in different threads,
+		// we ran run into some COM marshalling problems and decided to hold off fixing
+		// some of these issues for the Object Explorer tool.
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+		[helpstring("Called by script to popup an HTML window of specified title and text (string of HTML) at optional initial x, y coordinates")]
+		HRESULT ShowHTML([in] BSTR bstrTitle, [in] BSTR bstrHtml,
+							[in, optional, defaultvalue(0)] VARIANT cx, 
+							[in, optional, defaultvalue(0)] VARIANT cy);
+		[helpstring("ShowHTML functionality with an added argument you can pass in, such as a world object, and plus the width (x) and height (y) of the window")]
+		HRESULT ShowHTMLEx([in] BSTR bstrWinName, [in] BSTR bstrTitle, [in] BSTR bstrHtml, [in] VARIANT dispArg,
+							[in, optional, defaultvalue(0)] VARIANT x, 
+							[in, optional, defaultvalue(0)] VARIANT y, 
+							[in, optional, defaultvalue(0)] VARIANT cx, 
+							[in, optional, defaultvalue(0)] VARIANT cy);
+		[restricted, helpstring("Same as ShowHTMLEx, but with an internal method called by C++ with additional safemode argument")]
+		HRESULT ShowHTMLExt(	[in] BSTR bstrWinName, 
+								[in] BSTR bstrHtml, 
+								[in] BSTR bstrTitle, 
+								[in] VARIANT_BOOL bSafeMode,
+								[in] IDispatch *pdispArg, 
+								[in] int x, 
+								[in] int y, 
+								[in] int cx, 
+								[in] int cy);
+
+		[helpstring("Called by script to popup an HTML window with specified title, using a file specified by URL at optional initial x, y coordinates")]
+		HRESULT ShowURL([in] BSTR bstrTitle, [in] BSTR bstrUrl,
+						[in, optional, defaultvalue(0)] VARIANT cx, 
+						[in, optional, defaultvalue(0)] VARIANT cy);
+		[helpstring("ShowURL functionality with an added argument you can pass in, such as a world object, and plus the width (x) and height (y) of the window")]
+		HRESULT ShowURLEx([in] BSTR bstrWinName, [in] BSTR bstrTitle, [in] BSTR bstrUrl, [in] VARIANT dispArg,
+							[in, optional, defaultvalue(0)] VARIANT x, 
+							[in, optional, defaultvalue(0)] VARIANT y, 
+							[in, optional, defaultvalue(0)] VARIANT cx, 
+							[in, optional, defaultvalue(0)] VARIANT cy);
+		[restricted, helpstring("Same as ShowHTMLEx, but with an internal method called by C++ with additional safemode argument")]
+		HRESULT ShowURLExt(		[in] BSTR bstrWinName,
+								[in] VARIANT_BOOL bPopup,
+								[in] BSTR bstrUrl, 
+								[in] BSTR bstrTitle, 
+								[in] VARIANT_BOOL bSafeMode,
+								[in] IDispatch *pdispArg, 
+								[in] int x, 
+								[in] int y, 
+								[in] int cx, 
+								[in] int cy);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// Notify methods - send OLE events using IObjectSite for:
+		//	InvokeMethod -  a method has been invoked	
+		//	PropertyChanged - the value of a property has been changed (or a new one added)
+		//	MethodChanged - a method has been changed (or a new one added)
+		//	ModuleChanged - a script module has been changed (or a new one added)
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		[restricted, helpstring("")] 
+		HRESULT NotifyInvokeMethod([in] IThing* pthing, [in] BSTR bstr, [in] DISPPARAMS* pdispparams);
+
+		[restricted, helpstring("")] 
+		HRESULT NotifyPropertyChanged([in] IThing* pthing, [in] BSTR bstr, [in] long lHint, [in] VARIANT varHintData);
+		[restricted, helpstring("")] 
+		HRESULT NotifyMethodChanged([in] IThing* pthing, [in] BSTR bstr, [in] long lHint, [in] VARIANT varHintData);
+		[restricted, helpstring("")] 
+		HRESULT NotifyModuleChanged([in] BSTR bstr, [in] long lHint, [in] VARIANT varHintData);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// SendXXX methods:
+		// Internal methods called from the server to marshall down various objects
+		//
+		//	SendContainer:	Sends container and all of container's contents
+		//					Can be sent to client or bystanders
+		//	SendContents:	Does a SendThing for each thing in a container, and a SendContents for the 
+		//					that thing's contents. To be sent, at least one of these conditions must be met:
+		//						Container is open 
+		//						Caller of this method forces sending by setting last boolean parameter to TRUE
+		//						A thing has IsNoticeable set to true
+		//					Can be sent to client or bystanders
+		//	SendWorld:		Sends world to client 
+		//	SendExemplar:	Called only by SendExemplars to client
+		//	SendThingById:	Does a get_ObjectByID and then a SendThing - not used.
+		//	SendThing:		Calls MarshallThing and does a SendCommandExt
+		//					Can be sent to client, BystandersExclUser, Bystanders
+		//	SendModule:		Called only by SendModules to soClient
+		//	SendObjectProperty: Not used.
+		//	SendMethod:		Not used
+		//
+		// The intial parameter determines who the object is marshalled to - these are defined
+		//	in the enum SendObjectConstant. Choices are:
+		//	soClient:			The client
+		//	soBystanders:		All objects in the same container
+		//	soAvatars:			All avatars
+		//	soBystandersExclUser:	All objects in the same container, execpt the user
+		//	soAvatarsExclUser:	All avatars, except the user
+		//
+		// SendCommandXXX methods
+		// Internal methods that marshall objects both server->client and client->server. 
+		// For the intial parameter, there are two other values used:
+		//		soServer:		Sending something from client to server
+		//		soAvatar:		To particular avatar
+		//
+		// The SendXXXCommands wrap all the data, with a command header into a marshall buffer,
+		//	and call into SendMessageExt,which sends the marshall buffer to an IVWCommConnection
+		// Send a command by specifying:
+		//	dispid			See definitions at beginning of IWorld or IThing  interface definitions - CreateInstance, etc.
+		//	wFlags			Indicate the type of command (property put etc.)
+		//	pdispparams,	Parameters for the command that you pass through
+		//
+		// In addition, SendThing and SendObjectProperty log the commands and have additional parameters:
+		//	pthing/pprop	The object the command is being set for
+		//	lFlags			World flags to indicate not remoted, etc. (see PSBIT_ definitions in vwprop.idl)
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		[restricted, helpstring("See comment block above.")]
+		HRESULT SendContainer([in] long lval, [in] IThing* pthing);
+		[restricted, helpstring("See comment block above.")]
+		HRESULT SendContents([in] long lval, [in] IThing* pthing, [in] VARIANT_BOOL bForceOpen);
+
+		[restricted, helpstring("See comment block above.")]
+		HRESULT SendWorld([in] long lval);
+		[restricted, helpstring("See comment block above.")]
+		HRESULT SendExemplar([in] long lval, [in] IThing* pthing, [in] BSTR bstr);
+		[restricted, helpstring("See comment block above.")]
+		HRESULT SendThingByID([in] long lval, [in] long lID);
+		[restricted, helpstring("See comment block above.")]
+		HRESULT SendThing([in] long lval, [in] IThing* pthing);
+		[restricted, helpstring("See comment block above.")]
+		HRESULT SendModule([in] long lval, [in] IModule* pmodule, [in] BSTR bstr);
+#if 0
+		[restricted, helpstring("See comment block above.")]
+		HRESULT SendObjectProperty([in] long lval, [in] IObjectProperty* pprop);
+		[restricted, helpstring("See comment block above.")]
+		HRESULT SendMethod([in] long lval, [in] IMethod* pmethod);
+#endif
+
+		[restricted, helpstring("See comment block above.  bReply is set to true and means method is called synchronously if you want client to wait for reply")] 
+		HRESULT SendWorldCommand([in] VARIANT_BOOL bReply, 
+			[in] DISPID dispid, [in] WORD wFlags, [in] DISPPARAMS* pdispparams, [out] HRESULT* recvhr, [out] VARIANT* pvar);
+		[restricted, helpstring("See comment block above.")]
+		HRESULT SendThingCommand([in] long lFlags, [in] IThing* pthing, 
+			[in] DISPID dispid, [in] WORD wFlags, [in] DISPPARAMS* pdispparams);
+		[restricted, helpstring("See comment block above.")]
+		HRESULT SendObjectPropertyCommand([in] long lFlags,[in] IObjectProperty* pprop,  
+			[in] DISPID dispid, [in] WORD wFlags, [in] DISPPARAMS* pdispparams);
+
+		[restricted, helpstring("See comment block above.  bSync indicates whether client will wait for HR in recvhr and variant in pvar to be sent back.")] 
+		HRESULT SendWorldCommandExt([in] VARIANT_BOOL bReply, [in] VARIANT_BOOL bSync, 
+			[in] DISPID dispid, [in] WORD wFlags, [in] DISPPARAMS* pdispparams, 
+			[out] HRESULT* recvhr, [out] VARIANT* pvar);
+		[restricted, helpstring("See comment block above.  bSync indicates whether client will wait for HR in recvhr and variant in pvar to be sent back.")]
+		HRESULT SendThingCommandExt([in] VARIANT_BOOL bReply, [in] VARIANT_BOOL bSync, [in] long lFlags, [in] IThing* pthing, 
+			[in] DISPID dispid, [in] WORD wFlags, [in] DISPPARAMS* pdispparams, [out] HRESULT* recvhr, [out] VARIANT* pvar);
+		[restricted, helpstring("See comment block above.  bSync indicates whether client will wait for HR in recvhr and variant in pvar to be sent back.")]
+		HRESULT SendObjectPropertyCommandExt([in] VARIANT_BOOL bReply, [in] VARIANT_BOOL bSync, [in] long lFlags, [in] IObjectProperty* pprop, 
+			[in] DISPID dispid, [in] WORD wFlags, [in] DISPPARAMS* pdispparams, [out] HRESULT* recvhr, [out] VARIANT* pvar);
+
+		[restricted, helpstring("See comment block above.  Modules have DISPID's for module reloading, etc. See IModule interfaces in vwprop.idl")]
+		HRESULT SendModuleCommand([in] IModule* pmodule, [in] DISPID dispid, [in] WORD wFlags, [in] DISPPARAMS* pdispparams);
+		[restricted, helpstring("See comment block above.  Methods have DISPID's in IMethod interface in vwprop.idl.")]
+		HRESULT SendMethodCommand([in] IMethod* pmethod, [in] DISPID dispid, [in] WORD wFlags, [in] DISPPARAMS* pdispparams);
+		
+		[restricted, helpstring("Logs a command for a Thing using the Thing's ID")]
+		HRESULT LogThingCommand([in] IThing* pthing, [in] DISPID dispid, [in] WORD wFlags, [in] DISPPARAMS* pdispparams);
+		[restricted, helpstring("Logs a command for the World object")]
+		HRESULT LogWorldCommand([in] DISPID dispid, [in] WORD wFlags, [in] DISPPARAMS* pdispparams);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// WriteCommandHeader writes header information into the marshall buffer about the command
+		// being sent and whether the client will wait for a reply.
+		// Parameters are:
+		//	pBuffer		The IMarshallBuffer - see vwbuffer.idl for more comments.
+		//	ucReply		Value can be "R" for ReplyWithVariant.or "N" for no reply.
+		//	ucCommand	Values can be:
+		//				O - IThing byval
+		//				P - IObjectProperty byval
+		//				D - IMethod byval
+		//				E - IThing (exemplar) byval
+		//				W - global IThing (World) byval
+		//				M - IModule byval
+		//
+		//				o - IThing command
+		//				p - IObjectProperty command
+		//				d - IMethod command
+		//				w - IWorld command
+		//				m - IModule command
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		[restricted, helpstring("Write header for marshall buffer.  See vwbuffer.idl for more comments on IMarshallBuffer.")]
+		HRESULT WriteCommandHeader([in] IMarshallBuffer* pBuffer, [in] unsigned char ucReply, [in] unsigned char ucCommand);
+		[restricted, helpstring("Writes out the call stack for a method invokation (this, exemplar, user, caller, etc.) so security can be checked")]
+		HRESULT WriteCommandCallstack([in] IMarshallBuffer* pBuffer);
+
+		[hidden, helpstring("Sets a Thing's IsNoticeable property to TRUE and does a SendContainer to update clients. Not used."), id(DISPID_WORLD_REGISTERINTEREST)] 
+		HRESULT RegisterInterest([in] IThing* pthing);
+		[hidden, helpstring("Sets a Thing's IsNoticeable property to FALSE. Not used"), id(DISPID_WORLD_UNREGISTERINTEREST)] 
+		HRESULT UnregisterInterest([in] IThing* pthing);
+
+		// Marshall/unmarshall thing
+		[restricted, helpstring("Writes data about Thing into a buffer for remoting between server and client.  Puts in a type into the marshall buffer (0: GUID/BYREF,1: GUID/BYVAL,2: ID/BYREF,3: ID/BYVAL., then calls Thing.Marshall")] 
+		HRESULT MarshallThing([in] IThing* pthing, [in] DWORD dwOptions, [in] IMarshallBuffer* pmarshallbuffer);
+		[restricted, helpstring("Reads data about a Thing from the buffer.  Gets the type (as above) and does a CreateObjectInt as appropriate and returns the Thing as pvar")] 
+		HRESULT UnMarshallThing([in] IUnMarshallBuffer* punmarshallbuffer, [out] IThing** ppthing);
+
+		// Marshall/unmarshall property
+		[restricted, helpstring("Writes data about a variant (BOOL, etc.) into a buffer for remoting between server and client.")] 
+		HRESULT MarshallProperty([in] VARIANT var, [in] DWORD dwOptions, [in] IMarshallBuffer* pmarshallbuffer);
+		[restricted, helpstring("Reads data about a variant from the buffer.")] 
+		HRESULT UnMarshallProperty([in] IUnMarshallBuffer* punmarshallbuffer, [out] VARIANT* pvar);
+
+		// Helper functions for object properties
+		[restricted, helpstring("Writes data about an ObjectProperty into a buffer for remoting between server and client. lhint is a CLSID used to determine whether to MarshallThing, MarshallModule, or the object property's Marshall method.")] 
+		HRESULT MarshallObjectProperty([in] IObjectProperty* pprop, [in] long lHint, [in] DWORD dwOptions, [in] IMarshallBuffer* pmarshallbuffer);
+		[restricted, helpstring("Reads data about an ObjectProperty from the buffer.")] 
+		HRESULT UnMarshallObjectProperty([in] IUnMarshallBuffer* punmarshallbuffer, [out] IObjectProperty** ppprop);
+
+		// Marshall/unmarshall module
+		[restricted, helpstring("Writes data about a code module into a buffer for remoting between server and client.")] 
+		HRESULT MarshallModule([in] IModule* pmodule, [in] DWORD dwOptions, [in] IMarshallBuffer* pmarshallbuffer);
+		[restricted, helpstring("Reads data about a code module from the buffer.")] 
+		HRESULT UnMarshallModule([in] REFCLSID clsid, [in] IUnMarshallBuffer* punmarshallbuffer, [out] IModule** ppmodule);
+
+		// Marshall/unmarshall DISPPARAMS
+		[restricted, helpstring("Writes data about a method's parameters into a buffer for remoting between server and client.")] 
+		HRESULT MarshallDISPPARAMS([in] DISPPARAMS* pdispparams, [in] IMarshallBuffer* pmarshallbuffer, [in] DWORD dwOptions);
+		[restricted, helpstring("Reads data on parameters from the buffer.")] 
+		HRESULT UnMarshallDISPPARAMS([in] IUnMarshallBuffer* punmarshallbuffer, [in, out] DISPPARAMS* pdispparams);
+
+		// Marshall to script
+		[restricted, helpstring("Writes out the definition of a property to a string")]
+		HRESULT MarshallPropertyToScript([in] VARIANT var, [in] DWORD dwOptions, [in] BSTR bstrContext, [out] VARIANT_BOOL *pbAsVal, [out] BSTR *pbstrOut);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// CheckPolicy 
+		// Helper method to allow you to look at security policy on a Thing level, rather than a bit level.
+		// Some OnXXXAcess methods call this - for example, wizards can always set ObjectQuota on an avatar.
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		// Flags for CheckPolicy methods - pass in the flag for the condition you want to have met
+		const unsigned long CP_WIZARD = 1;		// Caller is wizard
+		const unsigned long CP_OWNER = 2;		// Caller is owner
+		const unsigned long CP_WORLDOWNER = 4;	// Caller is world owner
+		const unsigned long CP_CALLER = 8;		// Caller's owner is same as object's owner
+#if 0
+		const unsigned long CP_LIST = 16;
+		const unsigned long CP_SUBEXEMPLAR = 32;
+#endif
+
+		[helpstring("See comment block above. Called from script - calls into CheckPolicyExt to checks caller permission, returns a TRUE if allowed. var no longer used.")]
+		HRESULT CheckPolicy([in] IThing *pThing, [in] unsigned long lFlags, [in, optional] VARIANT var, [out, retval] VARIANT_BOOL *pbAccessOk);
+		[restricted, helpstring("See comment block above. Internal method thatchecks whether the caller has permission to read/write to the object. var no longer used ")]
+		HRESULT CheckPolicyExt([in] IThing *pThing, [in] unsigned long lFlags, [in, optional] VARIANT var);
+		
+		// Internal methods to check for marshalling support
+		[restricted, helpstring("Checks if property type is supported by IWorld marshalling")] 
+		HRESULT ValidateProperty([in] VARIANT var);
+		// 
+		[restricted, helpstring("Checks if properties within DISPPARAMS are supported by IWorld marshalling")] 
+		HRESULT ValidateDISPPARAMS([in] DISPPARAMS* pdispparams);
+		// check IObjectSafety or CATID
+		[restricted, helpstring("Check if object is safe for scripting,  see if it implements IObjectSafety or has CATID_SafeForScripting. dwOptions is safety options.")]
+		HRESULT ValidateObjectSafety([in] REFCLSID clsid, [in] IUnknown* punk, [in] DWORD dwOptions);
+
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		// ValidateXXXName..
+		// Validates acceptable property/object names
+		// All names must follow:
+		//		Not null
+		//		Less than 256 characters in length
+		//		Cannot contain  <  >  %  ?  ,  ;  : "  #  {  }  |  \n  \t  \"
+		//	
+		//	PropertyName:	Begin with alphanumerical characer, no spaces or periods
+		//	MethodName:		If an OnXXXAccess method, check for METHOD_CLIENT+METHOD_SERVER
+		//	InstanceName:	Same as all names, above
+		//	ExemplarType:	Cannot have a name of "Thing"
+		//	WorldName:		WorldName + DirectoryPath + .vwc file ext must be < 256 characters in length 
+		//	AvatarName:		Must be between 3 and 12 characters in length and not include a space
+		///////////////////////////////////////////////////////////////////////////////////////////////
+
+		// ValidateXXXName methods
+		// Return a bool value to indicate whether method succeeded
+		[hidden, helpstring("See comment block above. ")] 
+		HRESULT ValidatePropertyName([in] BSTR bstrName, [out, retval] VARIANT_BOOL* pboolVal);
+		[hidden, helpstring("See comment block above. ")] 
+		HRESULT ValidateMethodName([in] BSTR bstrName, [in] long psbits, [out, retval] VARIANT_BOOL* pboolVal);
+		[hidden, helpstring("See comment block above. ")] 
+		HRESULT ValidateInstanceName([in] BSTR bstrName, [out, retval] VARIANT_BOOL* pboolVal);
+		[hidden, helpstring("See comment block above. ")] 
+		HRESULT ValidateExemplarType([in] BSTR bstrType, [out, retval] VARIANT_BOOL* pboolVal);
+		[hidden, helpstring("See comment block above. ")] 
+		HRESULT ValidateWorldName([in] BSTR bstrName, [out, retval] VARIANT_BOOL* pboolVal);
+		[hidden, helpstring("See comment block above. ")] 
+		HRESULT ValidateAvatarName([in] BSTR bstrName, [out, retval] VARIANT_BOOL* pboolVal);
+
+		// Internal ValidateXXXNameExt methods called by correponding ValidateXXXName to do work
+		[restricted, helpstring("See comment block above. ")] 
+		HRESULT ValidatePropertyNameExt([in] BSTR bstrName);
+		[restricted, helpstring("See comment block above. ")] 
+		HRESULT ValidateMethodNameExt([in] BSTR bstrName, [in] long psbits);
+		[restricted, helpstring("See comment block above. ")] 
+		HRESULT ValidateInstanceNameExt([in] BSTR bstrName);
+		[restricted, helpstring("See comment block above. ")] 
+		HRESULT ValidateExemplarTypeExt([in] BSTR bstrType);
+		[restricted, helpstring("See comment block above. ")] 
+		HRESULT ValidateWorldNameExt([in] BSTR bstrName);
+		[restricted, helpstring("See comment block above. ")] 
+		HRESULT ValidateAvatarNameExt([in] BSTR bstrName);
+
+		// Clone a Variant property
+		[hidden, helpstring("Creates a copy of an ObjectProperty")]
+		HRESULT CloneProperty([in] VARIANT source, [out,retval] VARIANT *pDest);
+
+		[hidden, helpstring("Method for debugging - traces out a Thing or ObjectProperty's name in the debugger.  Not used.")]
+		HRESULT DumpProperty([in] VARIANT var);
+
+		[hidden, propget, helpstring("Gets current VWorlds version out of string resource file")]
+		HRESULT Version([out, retval] BSTR* pbstr);
+
+		// Get status of world
+		[hidden, helpstring("Method for debugging - returns a string describing what's happening if in a ProcessMessage (receiving a module, processing a command, etc. Not used.")]
+		HRESULT GetStatus([out, retval] BSTR* pbstr);
+
+		// Compression helpers
+		[restricted, helpstring("Adds VWSYSTEM and VWMM CLSID's to world's clsid table in CWorldObject constructor.")]
+		HRESULT AddCLSIDToTable([in] REFCLSID clsid);
+
+		[hidden, helpstring("Creates world-specific content paths, help path, directory service path, sets SDK installed flag"), id(DISPID_WORLD_UPDATEGLOBALPATHS)]
+		HRESULT UpdateGlobalPaths();
+	};
+
+	[
+		object,
+		uuid(590D9856-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("IVWObjectSite Interface"),
+		pointer_default(unique)
+	]
+	interface IVWObjectSite : IUnknown
+	{
+		[helpstring("Event fired when a user connects (only fired to that user since user is not fully connected yet). pthing is user.")] 
+		HRESULT OnUserConnect([in] IThing* pthing);
+		[helpstring("Event fired when a user disconnects(only fired to that user since user has been disconnected already). pthing is user.")] 
+		HRESULT OnUserDisconnect([in] IThing* pthing);
+		[helpstring("Event fired when a user is in a world already and then connects to another world using an interworld portal or directory services.  bstrURL is URL for the world, bstrName is avatar name, bstrPassword is the avatar password.")] 
+		HRESULT OnUserReconnect(BSTR bstrURL, BSTR bstrName, BSTR bstrPassword);
+
+		[helpstring("Event fired on object pthing with name bstrName to update the UI.  Additional info can be passed along in varArg as a PropertyList or other variant.")]
+		HRESULT OnUIEvent([in] IThing *pthing, [in] BSTR bstrEventName, [in] VARIANT varArg);
+
+		[helpstring("Event fired when a method with name bstrName is invoked on pthing using pdispparams.")] 
+		HRESULT OnInvokeMethod([in] IThing* pthing, [in] BSTR bstrName, [in] DISPPARAMS* pdispparams);
+
+		// Note: for more information on hints, see enums near end of file
+		[helpstring("Event fired when a property with name bstrName is changed on pthing. lHint describes type of change (new property, change in existing oneetc.) with additional varHintData.")] 
+		HRESULT OnPropertyChanged([in] IThing* pthing, [in] BSTR bstrName, [in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Event fired when a method with name bstrName is changed on pthing.  lHint describes type of change (new method, change in existing method, etc.) with additional varHintData. ")] 
+		HRESULT OnMethodChanged([in] IThing* pthing, [in] BSTR bstrName, [in] long lHint, [in] VARIANT varHintData);
+		[helpstring("Event fired when a code module with name bstrName is changed.  lHint describes type of change (new method, change in existing method, etc.) with additional varHintData. ")] 
+		HRESULT OnModuleChanged([in] BSTR bstrName, [in] long lHint, [in] VARIANT varHintData);
+
+		[helpstring("Event to notify client of system message. bstr is message. text")] 
+		HRESULT OnTrace([in] BSTR bstr);
+		[helpstring("Event to notify client of a system event - might be a whisper, system warning, etc. bstr is message text, lType is a value (See VWReportTypes enum below) that can be filtered for in the UI.")] 
+		HRESULT OnReport([in] BSTR bstr, [in] long lType);
+	};
+
+	[
+		object,
+		uuid(590D9858-A417-11CF-9BF0-0080C7A56A8A),
+		dual,
+		helpstring("IVWDispatch Interface"),
+		pointer_default(unique)
+	]
+	interface IVWDispatch : IDispatch
+	{
+const DISPID DISPID_VWDISPATCH_INSTALL = 1000;
+const DISPID DISPID_VWDISPATCH_ONLOAD = 1001;
+const DISPID DISPID_VWDISPATCH_ONUNLOAD = 1002;
+
+		[restricted, helpstring("Initializes a module with the current world")] 
+		HRESULT Initialize([in] IWorld* pworld);
+
+		[restricted, helpstring("Method called from destructor")] 
+		HRESULT Terminate();
+
+		[helpstring("Initial method called to create new exemplar objects and add/set properties and methods."), id(DISPID_VWDISPATCH_INSTALL)]
+		HRESULT Install([in] IModule* pmodule);
+
+		[helpstring("Method called when module is loaded into world"), id(DISPID_VWDISPATCH_ONLOAD)]
+		HRESULT OnLoad(/* [in] IModule* pmodule */);
+		[helpstring("Method called when module is unloaded from world"), id(DISPID_VWDISPATCH_ONUNLOAD)]
+		HRESULT OnUnload(/* [in] IModule* pmodule */);
+	};
+
+	typedef 
+	[
+		uuid(590D9860-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum ModuleConstant
+	{
+		[helpstring("")] mcCOM = 0,	
+		[helpstring("")] mcScript = 1,	
+	} ModuleConstant;
+
+	typedef 
+	[
+		uuid(590D9862-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum SendObjectConstant
+	{
+		[helpstring("")] soClient = 0,	
+		[helpstring("")] soBystanders = 1,	
+		[helpstring("")] soAvatars = 2,	
+		[helpstring("")] soServer = 3,	
+		[helpstring("")] soBystandersExclUser = 4,
+		[helpstring("")] soAvatarsExclUser = 5,	
+		[helpstring("")] soAvatar = 6,
+	} SendObjectConstant;
+
+	typedef 
+	[
+		uuid(590D9864-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum VWTraceLevels
+	{
+		[helpstring("")] VWT_VERBOSE = 0,
+		[helpstring("")] VWT_DUMP = 1,
+		[helpstring("")] VWT_METHOD = 2,
+		[helpstring("")] VWT_IMPORTANT = 3,
+		[helpstring("")] VWT_ERROR = 4,
+		[helpstring("")] VWT_NONE = 5,
+	} VWTraceLevels;
+
+	typedef 
+	[
+		uuid(590D9866-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("Predefined report types for IWorld::Report")
+	]
+	enum VWReportTypes
+	{
+		[helpstring("Report an execution or syntax error")] 
+		VWR_ERROR = -1,
+		[helpstring("Print to standard output")] 
+		VWR_PRINT = 0,
+		[helpstring("Echo commands entered by user")] 
+		VWR_ECHO = 1,
+		[helpstring("Report result of evaluating an expression")] 
+		VWR_EVAL = 2,
+		[helpstring("Display a prompt in an input window")] 
+		VWR_PROMPT = 3,
+		[helpstring("Cheap version of perfmon info. Comma-delimited statistics.")] 
+		VWR_PERFLOG = 4,
+		[helpstring("Report a cross-room page")] 
+		VWR_PAGE = 5,
+	} VWReportTypes;
+
+	typedef 
+	[
+		uuid(590D9870-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum MenuItemHint
+	{
+		[helpstring("")] miFlags = 0,	
+		[helpstring("")] miUserData = 1,	
+		[helpstring("")] miSubMenu = 2,	
+		[helpstring("")] miStatusText = 3,	
+		[helpstring("")] miMethod = 4,	
+		[helpstring("")] miOnUpdateMethod = 5,	
+		[helpstring("")] miArguments = 6,	
+		[helpstring("")] miOwner = 7,	
+		[helpstring("")] miMenuText = 8,	
+		[helpstring("")] miSortOrder = 9,	
+		[helpstring("")] miTarget = 10,	
+		[helpstring("")] miAddTargetParameter = 11,	
+		[helpstring("")] miIsOverlayItem = 12,	
+		[helpstring("")] miIsProximitySensitive = 13,	
+	} MenuItemHint;
+
+	typedef 
+	[
+		uuid(590D987a-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum MethodHint
+	{
+		[helpstring("")] meFlags = 0,	
+		[helpstring("")] meModule = 1,	
+		[helpstring("")] meArguments = 2,	
+		[helpstring("")] meDispID = 3,	
+		[helpstring("")] meMethodName = 4,	
+		[helpstring("")] meCode = 5,	
+	} MethodHint;
+
+	typedef 
+	[
+		uuid(590D987c-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum PropertyListHint
+	{
+		[helpstring("")] plAdd = 0,	
+		[helpstring("")] plInsertAt = 1,	
+		[helpstring("")] plRemove = 2,	
+		[helpstring("")] plRemoveAt = 3,	
+		[helpstring("")] plRemoveAll = 4,	
+		[helpstring("")] plPut = 5,	
+	} PropertyListHint;
+
+	typedef 
+	[
+		uuid(590D987e-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum PropertyMapHint
+	{
+		[helpstring("")] pmPut = 0,	
+		[helpstring("")] pmRemove = 1,	
+		[helpstring("")] pmRemoveAll = 2,	
+	} PropertyMapHint;
+
+	typedef 
+	[
+		uuid(590D9880-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum ThingHint
+	{
+		// NOTE: ThingHints can't collide with property hints
+		[helpstring("")] thAdd = 100,	
+		[helpstring("")] thPut = 101,	
+		[helpstring("")] thRemove = 102,	
+	} ThingHint;
+
+	typedef
+	[
+		uuid(590D9884-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum CLSIDHint
+	{
+		[helpstring("")] clsidNull = 0,
+		// NOTE: clsid tags must start at 1
+		[helpstring("")] clsidPropertyList = 1,
+		[helpstring("")] clsidPropertyMap = 2,
+		[helpstring("")] clsidCOMModule = 3,
+		[helpstring("")] clsidScriptModule = 4,
+		[helpstring("")] clsidMethod = 5,
+		[helpstring("")] clsidThing = 6,
+		[helpstring("")] clsidWorld = 7,
+		[helpstring("")] clsidMenuItem = 8,
+		[helpstring("")] clsidOCXProxy = 9,
+		[helpstring("")] clsidAvatarProfile = 10,
+		[helpstring("")] clsidAvatarProfileData = 11,
+#ifdef VWMM
+		[helpstring("")] clsidVector = 8,
+		[helpstring("")] clsidVWGeometry = 10,
+		[helpstring("")] clsidVWGeometrySprite = 11,
+		[helpstring("")] clsidVWGeometryArticulated = 12,
+		[helpstring("")] clsidBoundaryList = 13,
+		[helpstring("")] clsidBoundary = 14,
+#endif
+		[helpstring("")] clsidUnknown = 255,
+	} CLSIDHint;
+
+	typedef 
+	[
+		uuid(590D9886-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum ModuleHint
+	{
+		[helpstring("")] moCreate = 0,	
+		[helpstring("")] moRemove = 1,	
+	} ModuleHint;
+
+	typedef 
+	[
+		uuid(590D9888-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum COMModuleHint
+	{
+		[helpstring("")] cmName = 10,	
+		[helpstring("")] cmFlags = 11,	
+		[helpstring("")] cmCLSID = 12,	
+		[helpstring("")] cmProgID = 13,	
+	} COMModuleHint;
+
+	typedef 
+	[
+		uuid(590D988A-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum ScriptModuleHint
+	{
+		[helpstring("")] smName = 10,	
+		[helpstring("")] smFlags = 11,	
+		[helpstring("")] smScriptPath = 12,	
+	} ScriptModuleHint;
+
+	typedef 
+	[
+		uuid(590D988C-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum ObjectPropertyHint
+	{
+		[helpstring("")] opType = 50,
+	} ObjectPropertyHint;
+
+#ifdef VWOBJECTLIB
+[
+	uuid(590D986E-A417-11CF-9BF0-0080C7A56A8A),
+	version(1.0),
+	helpstring("vwobject 1.0 Type Library")
+]
+library VWOBJECTLib
+{
+	importlib("stdole32.tlb");
+
+	
+	[
+		uuid(590D986F-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("PropertyCollection Object")
+	]
+
+	coclass PropertyCollection
+	{
+		[default] interface IPropertyCollection;
+	};
+
+	[
+		uuid(590D9871-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("PropertySecurity Object")
+	]
+
+	coclass PropertySecurity
+	{
+		[default] interface IPropertySecurity;
+	};
+
+	[
+		uuid(590D9873-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("PropertyList Object")
+	]
+
+	coclass PropertyList
+	{
+		[default] interface IPropertyList;
+	};
+
+	[
+		uuid(590D9875-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("PropertyMap Object")
+	]
+	coclass PropertyMap
+	{
+		[default] interface IPropertyMap;
+	};
+
+	[
+		uuid(590D9877-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("COMModule Object")
+	]
+	coclass COMModule
+	{
+		[default] interface ICOMModule;
+	};
+
+	[
+		uuid(590D9879-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("ScriptModule Object")
+	]
+	coclass ScriptModule
+	{
+		[default] interface IScriptModule;
+	};
+
+	[
+		uuid(590D987B-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("Method Object")
+	]
+	coclass Method
+	{
+		[default] interface IMethod;
+	};
+
+	[
+		uuid(590D987D-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("Thing Object")
+	]
+	coclass Thing
+	{
+		[default] interface IThing;
+	};
+
+	[
+		uuid(590D987F-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("World Object")
+	]
+	coclass World
+	{
+		[default] interface IWorld;
+	};
+};
+#endif

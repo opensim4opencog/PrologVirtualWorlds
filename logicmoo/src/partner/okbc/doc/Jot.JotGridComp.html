@@ -1,0 +1,164 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- Jot.JotGridComp | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class Jot.JotGridComp
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-Jot.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class Jot.JotGridComp
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----<A HREF="java.awt.Component.html">java.awt.Component</A>
+           |
+           +----Jot.JotGridComp
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>JotGridComp</STRONG>
+     extends java.awt.<A HREF="java.awt.Component.html">Component</A>
+     implements com.shafir.jct.<A HREF="com.shafir.jct.JctGridComponent.html">JctGridComponent</A>
+{
+          // Fields 1
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#okbcNode">okbcNode</A>;
+
+          // Constructors 2
+     public <A HREF="#JotGridComp(Jot.JotUI)">JotGridComp</A>(<A CLASS=nound HREF="Jot.JotUI.html">JotUI</A>);
+     public <A HREF="#JotGridComp(Jot.JotUI, OKBC.Node, java.lang.String, OKBC.SlotType)">JotGridComp</A>(<A CLASS=nound HREF="Jot.JotUI.html">JotUI</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>);
+
+          // Methods 5
+     public <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#getSortString()">getSortString</A>();
+     public boolean <A HREF="#isEditable()">isEditable</A>();
+     public void <A HREF="#paintOnSurface(java.awt.Graphics, java.awt.Component, int)">paintOnSurface</A>(<A CLASS=nound HREF="java.awt.Graphics.html">Graphics</A>, <A CLASS=nound HREF="java.awt.Component.html">Component</A>, int);
+     public <A CLASS=nound HREF="java.awt.Dimension.html">Dimension</A> <A HREF="#preferredSize(java.awt.Component)">preferredSize</A>(<A CLASS=nound HREF="java.awt.Component.html">Component</A>);
+     public <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#toString()">toString</A>();
+}
+</PRE>
+<P>
+<P>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Fields</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="okbcNode"><FONT COLOR="#FF00FF">&middot;</FONT> okbcNode</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> okbcNode
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<P>
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="JotGridComp"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="JotGridComp(Jot.JotUI)">JotGridComp</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public JotGridComp(<A HREF="Jot.JotUI.html">JotUI</A> _ui) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="JotGridComp"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="JotGridComp(Jot.JotUI, OKBC.Node, java.lang.String, OKBC.SlotType)">JotGridComp</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public JotGridComp(<A HREF="Jot.JotUI.html">JotUI</A> _ui, 
+                      <A HREF="OKBC.Node.html">Node</A> n, 
+                      <A HREF="java.lang.String.html">String</A> s, 
+                      <A HREF="OKBC.SlotType.html">SlotType</A> _type) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="paintOnSurface"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="paintOnSurface(java.awt.Graphics, java.awt.Component, int)">paintOnSurface</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void paintOnSurface(<A HREF="java.awt.Graphics.html">Graphics</A> g, 
+                              <A HREF="java.awt.Component.html">Component</A> surface, 
+                              int ALIGN_val) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Implements:</B>
+<DD><A HREF="com.shafir.jct.JctGridComponent.html#paintOnSurface(java.awt.Graphics, java.awt.Component, int)">paintOnSurface</A> in interface <A HREF="com.shafir.jct.JctGridComponent.html">JctGridComponent</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="preferredSize"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="preferredSize(java.awt.Component)">preferredSize</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.awt.Dimension.html">Dimension</A> preferredSize(<A HREF="java.awt.Component.html">Component</A> surface) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Implements:</B>
+<DD><A HREF="com.shafir.jct.JctGridComponent.html#preferredSize(java.awt.Component)">preferredSize</A> in interface <A HREF="com.shafir.jct.JctGridComponent.html">JctGridComponent</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="isEditable"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="isEditable()">isEditable</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean isEditable() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Implements:</B>
+<DD><A HREF="com.shafir.jct.JctGridComponent.html#isEditable()">isEditable</A> in interface <A HREF="com.shafir.jct.JctGridComponent.html">JctGridComponent</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="toString"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="toString()">toString</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.lang.String.html">String</A> toString() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="java.awt.Component.html#toString()">toString</A> in class <A HREF="java.awt.Component.html">Component</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="getSortString"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="getSortString()">getSortString</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.lang.String.html">String</A> getSortString() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Implements:</B>
+<DD><A HREF="com.shafir.jct.JctGridComponent.html#getSortString()">getSortString</A> in interface <A HREF="com.shafir.jct.JctGridComponent.html">JctGridComponent</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-Jot.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

@@ -1,0 +1,174 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IAvatarProfile : Allows key/value pairs to be added/removed to/from the profile. Each key 
+// can have privileges defined which determine who can read/write to that key. Each key can 
+// also have the filename of a graphic associated with it. Specific users can be banned 
+// altogether from accessing the profile.
+//
+// IAvatarProfileData : Access the data (value, graphic, owner and privileges) of each key.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+	import "oaidl.idl";
+	import "vwprop.idl";
+	import "vwobject.idl";
+
+// Codes 0x0-0x01ff are reserved for the OLE group of
+// interfaces.  We start our codes at 0x380.
+
+cpp_quote("#define VWAVATARPROFILE_E_INVALIDKEYMAP				MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0380)")
+cpp_quote("#define VWAVATARPROFILE_E_INVALIDBANNEDOBJECTLIST	MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0381)")
+cpp_quote("#define VWAVATARPROFILE_E_KEYNOTEXIST				MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0382)")
+cpp_quote("#define VWAVATARPROFILE_E_KEYEXISTS					MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0383)")
+cpp_quote("#define VWAVATARPROFILE_E_BANNEDOBJECT				MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0384)")
+cpp_quote("#define VWAVATARPROFILE_E_PERMISSIONDENIED			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0385)")
+cpp_quote("#define VWAVATARPROFILE_E_INVALIDOWNER				MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0386)")
+
+	[
+		object,
+		uuid(D4E7472B-2953-11D1-AFB6-00C04FB915AA),
+		dual,
+		helpstring("IAvatarProfile Interface"),
+		pointer_default(unique)
+	]
+	interface IAvatarProfile : IObjectProperty
+	{
+const DISPID DISPID_AVATARPROFILE_ADDKEY = 1;
+const DISPID DISPID_AVATARPROFILE_KEYVALUE = 2;
+const DISPID DISPID_AVATARPROFILE_KEYGRAPHIC = 3;
+const DISPID DISPID_AVATARPROFILE_KEYOWNER = 4;
+const DISPID DISPID_AVATARPROFILE_KEYACCESS = 5;
+const DISPID DISPID_AVATARPROFILE_REMOVEKEY = 6;
+const DISPID DISPID_AVATARPROFILE_VERIFYKEY = 7;
+const DISPID DISPID_AVATARPROFILE_AVATAR = 8;
+const DISPID DISPID_AVATARPROFILE_BANOBJECT = 9;
+const DISPID DISPID_AVATARPROFILE_UNBANOBJECT = 10;
+const DISPID DISPID_AVATARPROFILE_WRITETODISK = 11;
+const DISPID DISPID_AVATARPROFILE_READFROMDISK = 12;
+const DISPID DISPID_AVATARPROFILE_KEYS = 14;
+const DISPID DISPID_AVATARPROFILE_RESET = 15;
+
+		[restricted, id(DISPID_AVATARPROFILE_RESET), helpstring("Removes all keys from the profile and removes all bannings.")] 
+		HRESULT Reset(void);
+
+		[propget, id(DISPID_AVATARPROFILE_KEYS), helpstring("All the keys in the profile.")] 
+		HRESULT Keys([out, retval] IPropertyList** ppKeyList);
+
+		[helpstring("Is bstrKey in the avatar profile?")] 
+		HRESULT IsValid([in] BSTR bstrKey, [out, retval] VARIANT_BOOL* pbValid);
+
+		[id(DISPID_AVATARPROFILE_ADDKEY), helpstring("Add a key to the profile.")] 
+		HRESULT AddKey([in] BSTR bstrKey, [in] VARIANT varKeyVal, [in, optional] VARIANT varStrGraphic, [in, optional] VARIANT varAccess, [in, optional] VARIANT varOwner);
+		
+		[propget, id(DISPID_AVATARPROFILE_KEYVALUE), helpstring("The actual value of a specific key.")] 
+		HRESULT KeyValue([in] BSTR bstrKey, [out, retval] VARIANT *pvarKeyVal);
+		[propput, id(DISPID_AVATARPROFILE_KEYVALUE), helpstring("The actual value of a specific key.")] 
+		HRESULT KeyValue([in] BSTR bstrKey, [in] VARIANT varKeyVal);
+		
+		[propget, id(DISPID_AVATARPROFILE_KEYGRAPHIC), helpstring("The filename of the graphic associated with a specific key.")] 
+		HRESULT KeyGraphic([in] BSTR bstrKey, [out, retval] BSTR *pbstrGraphic);
+		[propput, id(DISPID_AVATARPROFILE_KEYGRAPHIC), helpstring("The filename of the graphic associated with a specific key.")] 
+		HRESULT KeyGraphic([in] BSTR bstrKey, [in] BSTR bstrGraphic);
+		
+		[propget, id(DISPID_AVATARPROFILE_KEYOWNER), helpstring("The owner of a specific key (as passed to AddKey).")] 
+		HRESULT KeyOwner([in] BSTR bstrKey, [out, retval] IThing **ppOwner);
+		//[propput, id(DISPID_AVATARPROFILE_KEYOWNER), helpstring("method put_KeyOwner")] 
+		//HRESULT KeyOwner([in] BSTR bstrKey, [in] IThing *pOwner);
+
+		[propget, id(DISPID_AVATARPROFILE_KEYACCESS), helpstring("The access privileges of a specific key.")] 
+		HRESULT KeyAccess([in] BSTR bstrKey, [out, retval] short* sAccess);
+		[propput, id(DISPID_AVATARPROFILE_KEYACCESS), helpstring("The access privileges of a specific key.")] 
+		HRESULT KeyAccess([in] BSTR bstrKey, [in] short sAccess);
+		
+		[id(DISPID_AVATARPROFILE_REMOVEKEY), helpstring("Remove a specific key.")] 
+		HRESULT RemoveKey([in] BSTR bstrKey);
+		
+		[id(DISPID_AVATARPROFILE_BANOBJECT), helpstring("Bans a specific thing from adding keys to the profile.")] 
+		HRESULT BanObject([in] IThing *pThing);
+		[id(DISPID_AVATARPROFILE_UNBANOBJECT), helpstring("Un-bans a specific thing from adding keys to the profile.")] 
+		HRESULT UnbanObject([in] IThing *pThing);
+		
+//		[id(DISPID_AVATARPROFILE_VERIFYKEY), helpstring("method VerifyKey")] 
+//		HRESULT VerifyKey([in] BSTR bstrKey, [in] IThing *pOwner, [out, retval] VARIANT_BOOL *pbPassed);
+
+		[propget, id(DISPID_AVATARPROFILE_AVATAR), helpstring("The avatar associated with this profile (the avatar can circumvent banning and privileges).")] 
+		HRESULT Avatar([out, retval] IThing **pThing);
+		[restricted, propput, id(DISPID_AVATARPROFILE_AVATAR), helpstring("The avatar associated with this profile (the avatar can circumvent banning and privileges).")] 
+		HRESULT Avatar([in] IThing *pThing);
+
+		[restricted, id(DISPID_AVATARPROFILE_WRITETODISK), helpstring("Write the profile to disk in the form of a .vwc file")] 
+		HRESULT WriteToDisk([in] BSTR bstrFilename);
+
+		[restricted, id(DISPID_AVATARPROFILE_READFROMDISK), helpstring("Read the profile from a .vwc file")] 
+		HRESULT ReadFromDisk([in] BSTR bstrFilename);
+	};
+
+	typedef 
+	[
+		uuid(08DE86DC-5C5E-11d1-BB35-00C04FC2CAB1),
+		helpstring("KeyAccess constants for profile keys")
+	]
+	enum KeyAccessConstant
+	{
+		[helpstring("Anyone can read this key")] kKeyPublic = 0,	
+		[helpstring("Only Friends can read this key")] kKeyFriend = 1,	
+		[helpstring("Only I can read this key")] kKeyPrivate = 2	
+	} KeyAccessConstant;
+
+	typedef 
+	[
+		uuid(8ED15F62-7275-11d1-BB39-00C04FC2CAB1),
+		helpstring("Remoting Hints for profile")
+	]
+	enum ProfileHint
+	{
+		// NOTE: ThingHints can't collide with property hints
+		[helpstring("AddKey")] profileAddKey = 0,	
+		[helpstring("put_KeyValue")] profileKeyValue = 1,	
+		[helpstring("put_KeyGraphic")] profileKeyGraphic = 2,	
+		[helpstring("put_keyOwner")] profileKeyOwner = 3,	
+		[helpstring("put_keyAccess")] profileKeyAccess = 4,	
+		[helpstring("RemoveKey")] profileRemoveKey = 5,	
+		[helpstring("BanObject")] profileBanObject = 6,	
+		[helpstring("UnbanObject")] profileUnbanObject = 7	
+	} ProfileHint;
+
+	[
+		object,
+		uuid(D4E7472D-2953-11D1-AFB6-00C04FB915AA),
+		dual,
+		helpstring("IAvatarProfileData Interface"),
+		pointer_default(unique)
+	]
+	interface IAvatarProfileData : IObjectProperty
+	{
+const DISPID DISPID_AVATARPROFILEDATA_VALUE = 1;
+const DISPID DISPID_AVATARPROFILEDATA_GRAPHIC = 2;
+const DISPID DISPID_AVATARPROFILEDATA_OWNER = 3;
+const DISPID DISPID_AVATARPROFILEDATA_ACCESS = 4;
+
+		[propget, id(DISPID_AVATARPROFILEDATA_VALUE), helpstring("The actual value of the key.")] 
+		HRESULT Value([out, retval] VARIANT *pvarValue);
+		[propput, id(DISPID_AVATARPROFILEDATA_VALUE), helpstring("The actual value of the key.")] 
+		HRESULT Value([in] VARIANT varValue);
+		
+		[propget, id(DISPID_AVATARPROFILEDATA_GRAPHIC), helpstring("The filename of the graphic associated with the key.")] 
+		HRESULT Graphic([out, retval] BSTR *pbstrGraphic);
+		[propput, id(DISPID_AVATARPROFILEDATA_GRAPHIC), helpstring("The filename of the graphic associated with the key.")] 
+		HRESULT Graphic([in] BSTR bstrGraphic);
+		
+		[propget, id(DISPID_AVATARPROFILEDATA_OWNER), helpstring("The owner of the key.")] 
+		HRESULT Owner([out, retval] IThing **ppOwner);
+		[propput, id(DISPID_AVATARPROFILEDATA_OWNER), helpstring("The owner of the key.")] 
+		HRESULT Owner([in] IThing *pOwner);
+
+		[propget, id(DISPID_AVATARPROFILEDATA_ACCESS), helpstring("The access privileges of the key.")] 
+		HRESULT Access([out, retval] short* sAccess);
+		[propput, id(DISPID_AVATARPROFILEDATA_ACCESS), helpstring("The access privileges of the key.")] 
+		HRESULT Access([in] short sAccess);
+	};

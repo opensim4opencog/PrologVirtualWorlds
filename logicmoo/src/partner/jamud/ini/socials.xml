@@ -1,0 +1,2046 @@
+<SOCIALS>
+<SOCIAL NAME="gack">
+  <ACT_NOTARG>Gaaack!</ACT_NOTARG>
+  <PER_NOTARG>$n gacks with dismay!</PER_NOTARG>
+  <ACT_BADTARG>That person isn't here.</ACT_BADTARG>
+  <ACT_ACTTARG>*GACK!*</ACT_ACTTARG>
+  <PER_ACTTARG>Appalled, $n gacks at $mself!</PER_ACTTARG>
+  <ACTOR>Appalled, you gack at $N.</ACTOR>
+  <TARGET>$n gacks, and looks your way, dismayed.</TARGET>
+  <PEERS>$n gacks expressively, shooting $N a dismayed look.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="kiss">
+  <ACT_NOTARG>Isn't there someone you want to kiss?</ACT_NOTARG>
+  <ACT_BADTARG>Never around when required.</ACT_BADTARG>
+  <ACT_ACTTARG>All the lonely people :(</ACT_ACTTARG>
+  <ACTOR>You kiss $M.</ACTOR>
+  <TARGET>$n kisses you.</TARGET>
+  <PEERS>$n kisses $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="bounce">
+  <ACT_NOTARG>BOIINNNNNNGG!</ACT_NOTARG>
+  <PER_NOTARG>$n bounces around with a happy smile.</PER_NOTARG>
+  <ACT_BADTARG>You don't see your plaything.</ACT_BADTARG>
+  <ACT_ACTTARG>You bounce your head like a basketball.</ACT_ACTTARG>
+  <PER_ACTTARG>$n plays basketball with $s head.</PER_ACTTARG>
+  <ACTOR>You bounce onto $S lap and wiggle about.</ACTOR>
+  <TARGET>$n bounces onto your lap and wiggles about.</TARGET>
+  <PEERS>$n bounces onto $N's lap and wiggles about.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="smile">
+  <ACT_NOTARG>You smile happily.</ACT_NOTARG>
+  <PER_NOTARG>$n smiles happily.</PER_NOTARG>
+  <ACT_BADTARG>There's no one by that name around.</ACT_BADTARG>
+  <ACT_ACTTARG>You smile at yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n smiles at $mself.</PER_ACTTARG>
+  <ACTOR>You smile at $M.</ACTOR>
+  <TARGET>$n smiles at you.</TARGET>
+  <PEERS>$n beams a smile at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="dance">
+  <ACT_NOTARG>Feels silly, doesn't it?</ACT_NOTARG>
+  <PER_NOTARG>$n dances wildly before you!</PER_NOTARG>
+  <ACT_BADTARG>Eh, WHO?</ACT_BADTARG>
+  <ACT_ACTTARG>You skip and dance around by yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n skips a light Fandango.</PER_ACTTARG>
+  <ACTOR>You lead $M to the dancefloor.</ACTOR>
+  <TARGET>$n sends you across the dancefloor.</TARGET>
+  <PEERS>$n sends $N across the dancefloor.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="cackle">
+  <ACT_NOTARG>You cackle gleefully.</ACT_NOTARG>
+  <PER_NOTARG>$n throws back $s head and cackles with insane glee!</PER_NOTARG>
+  <ACT_BADTARG>You can't find a friend to cackle with.</ACT_BADTARG>
+  <ACT_ACTTARG>You cackle at yourself.  Now, THAT'S strange!</ACT_ACTTARG>
+  <PER_ACTTARG>$n is really crazy now!  $e cackles at $mself.</PER_ACTTARG>
+  <ACTOR>You cackle gleefully at $N</ACTOR>
+  <TARGET>$n cackles gleefully at you.  Better keep your distance from $m.</TARGET>
+  <PEERS>$n cackles gleefully at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="laugh">
+  <ACT_NOTARG>You fall down laughing.</ACT_NOTARG>
+  <PER_NOTARG>$n falls down laughing.</PER_NOTARG>
+  <ACT_BADTARG>You can't find the butt of your joke.</ACT_BADTARG>
+  <ACT_ACTTARG>You laugh at yourself.  I would, too.</ACT_ACTTARG>
+  <PER_ACTTARG>$n laughs at $mself.  Let's all join in!!!</PER_ACTTARG>
+  <ACTOR>You laugh at $N mercilessly.</ACTOR>
+  <TARGET>$n laughs at you mercilessly.  Hmmmmph.</TARGET>
+  <PEERS>$n laughs at $N mercilessly.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="giggle">
+  <ACT_NOTARG>You giggle.</ACT_NOTARG>
+  <PER_NOTARG>$n giggles.</PER_NOTARG>
+  <ACT_BADTARG>You giggle by yourself, since you can't find a partner to giggle with.</ACT_BADTARG>
+  <ACT_ACTTARG>You giggle at yourself, which makes you giggle at yourself, which makes you ...</ACT_ACTTARG>
+  <PER_ACTTARG>$n giggles at $mself.  $e must be nervous or something.</PER_ACTTARG>
+  <ACTOR>You giggle in $S presence.</ACTOR>
+  <TARGET>$n giggles at you.  Hope it's not contagious!</TARGET>
+  <PEERS>$n giggles at $N's actions.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="shake">
+  <ACT_NOTARG>You shake your head.</ACT_NOTARG>
+  <PER_NOTARG>$n shakes $s head.</PER_NOTARG>
+  <ACT_BADTARG>Sorry good buddy, but that person doesn't seem to be here.</ACT_BADTARG>
+  <ACT_ACTTARG>You are shaken by yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n shakes and quivers like a bowl full of jelly.</PER_ACTTARG>
+  <ACTOR>You shake $S hand.</ACTOR>
+  <TARGET>$n shakes your hand.</TARGET>
+  <PEERS>$n shakes $N's hand.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="puke">
+  <ACT_NOTARG>You puke...chunks everywhere!!! YUK!</ACT_NOTARG>
+  <PER_NOTARG>$n pukes.</PER_NOTARG>
+  <ACT_BADTARG>Once again?</ACT_BADTARG>
+  <ACT_ACTTARG>You puke on yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n pukes on $s clothes.</PER_ACTTARG>
+  <ACTOR>You puke on $M.</ACTOR>
+  <TARGET>$n spews vomit and pukes all over your clothing!</TARGET>
+  <PEERS>$n pukes on $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="growl">
+  <ACT_NOTARG>Grrrrrrrrrr...</ACT_NOTARG>
+  <PER_NOTARG>$n growls.</PER_NOTARG>
+  <ACT_BADTARG>No one can see you growl that far.</ACT_BADTARG>
+  <ACT_ACTTARG>You growl at yourself.  Boy, do you feel bitter!</ACT_ACTTARG>
+  <PER_ACTTARG>$n growls at $mself.  This could get interesting...</PER_ACTTARG>
+  <ACTOR>Grrrrrrrrrr....take that, $N!!!</ACTOR>
+  <TARGET>$n growls at you.  Hey, two can play it that way!</TARGET>
+  <PEERS>$n growls at $N.  Better leave the room before the fighting starts.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="scream">
+  <ACT_NOTARG>ARRRRRRRRRRGH!!!!!</ACT_NOTARG>
+  <PER_NOTARG>$n screams loudly!</PER_NOTARG>
+  <ACT_BADTARG>Your lungs can't reach that far!</ACT_BADTARG>
+  <ACT_ACTTARG>You scream at yourself.  Yes, that's ONE way of relieving tension!</ACT_ACTTARG>
+  <PER_ACTTARG>$n screams loudly at $mself!  Is there a full moon up?</PER_ACTTARG>
+  <ACTOR>ARRRRRRRRRRGH!!!!!  Yes, it MUST have been $S fault!!!</ACTOR>
+  <TARGET>$n screams at you!  That's not nice!  *sniff*</TARGET>
+  <PEERS>$n screams loudly at $N.  Better leave before $n blames you, too!!!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="comfort">
+  <ACT_NOTARG>Do you feel uncomfortable?</ACT_NOTARG>
+  <ACT_BADTARG>Comfort who?</ACT_BADTARG>
+  <ACT_ACTTARG>You make a vain attempt to comfort yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n has no one to comfort $m but $mself</PER_ACTTARG>
+  <ACTOR>You comfort $M.</ACTOR>
+  <TARGET>$n comforts you.</TARGET>
+  <PEERS>$n comforts $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="sigh">
+  <ACT_NOTARG>You sigh.</ACT_NOTARG>
+  <PER_NOTARG>$n sighs.</PER_NOTARG>
+  <ACT_BADTARG>You really sigh, since you don't see your friend.</ACT_BADTARG>
+  <ACT_ACTTARG>You sigh at yourself.  You MUST be lonely.</ACT_ACTTARG>
+  <PER_ACTTARG>$n sighs at $mself.  What a sorry sight.</PER_ACTTARG>
+  <ACTOR>You sigh as you think of $M.</ACTOR>
+  <TARGET>$n sighs as $e thinks of you.  Touching, huh?</TARGET>
+  <PEERS>$n sighs at the sight of $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="sulk">
+  <ACT_NOTARG>You sulk.</ACT_NOTARG>
+  <PER_NOTARG>$n sulks in the corner.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="hug">
+  <ACT_NOTARG>Hug who?</ACT_NOTARG>
+  <ACT_BADTARG>Sorry, friend, I can't see that person here.</ACT_BADTARG>
+  <ACT_ACTTARG>You hug yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n hugs $mself in a vain attempt to get friendship.</PER_ACTTARG>
+  <ACTOR>You hug $M.</ACTOR>
+  <TARGET>$n hugs you.</TARGET>
+  <PEERS>$n hugs $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="snuggle">
+  <ACT_NOTARG>Who?</ACT_NOTARG>
+  <ACT_BADTARG>They aren't here.</ACT_BADTARG>
+  <ACT_ACTTARG>You snuggle up, getting ready to sleep.</ACT_ACTTARG>
+  <PER_ACTTARG>$n snuggles up, getting ready to sleep.</PER_ACTTARG>
+  <ACTOR>You snuggle $M.</ACTOR>
+  <TARGET>$n snuggles up to you.</TARGET>
+  <PEERS>$n snuggles up to $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="cuddle">
+  <ACT_NOTARG>Who do you feel like cuddling today?</ACT_NOTARG>
+  <ACT_BADTARG>They aren't here.</ACT_BADTARG>
+  <ACT_ACTTARG>You must feel very cuddly indeed ... :)</ACT_ACTTARG>
+  <PER_ACTTARG>$n cuddles up to $s shadow.  What a sorry sight.</PER_ACTTARG>
+  <ACTOR>You cuddle $M.</ACTOR>
+  <TARGET>$n cuddles you.</TARGET>
+  <PEERS>$n cuddles $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="nuzzle">
+  <ACT_NOTARG>Nuzzle who??</ACT_NOTARG>
+  <ACT_BADTARG>No.. they aren't here..</ACT_BADTARG>
+  <ACT_ACTTARG>I'm sorry, friend, but that's impossible.</ACT_ACTTARG>
+  <ACTOR>You nuzzle $S neck softly.</ACTOR>
+  <TARGET>$n softly nuzzles your neck.</TARGET>
+  <PEERS>$n softly nuzzles $N's neck.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="cry">
+  <ACT_NOTARG>Waaaaah..</ACT_NOTARG>
+  <PER_NOTARG>$n bursts into tears.</PER_NOTARG>
+  <ACT_BADTARG>Who's that?</ACT_BADTARG>
+  <ACT_ACTTARG>You cry to yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n sobs quietly to $mself.</PER_ACTTARG>
+  <ACTOR>You cry on $S shoulder.</ACTOR>
+  <TARGET>$n cries on your shoulder.</TARGET>
+  <PEERS>$n cries on $N's shoulder.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="poke">
+  <ACT_NOTARG>Poke who??</ACT_NOTARG>
+  <ACT_BADTARG>You can't poke someone who's not here!.</ACT_BADTARG>
+  <ACT_ACTTARG>You poke yourself in the ribs, feeling very silly.</ACT_ACTTARG>
+  <PER_ACTTARG>$n pokes $mself in the ribs, looking very sheepish.</PER_ACTTARG>
+  <ACTOR>You poke $M in the ribs.</ACTOR>
+  <TARGET>$n pokes you in the ribs.</TARGET>
+  <PEERS>$n pokes $N in the ribs.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="accuse">
+  <ACT_NOTARG>Accuse who??</ACT_NOTARG>
+  <PER_NOTARG>$n is in an accusing mood.</PER_NOTARG>
+  <ACT_BADTARG>Accuse somebody who's not even there ??</ACT_BADTARG>
+  <ACT_ACTTARG>You accuse yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n seems to have a bad conscience.</PER_ACTTARG>
+  <ACTOR>You look accusingly at $M.</ACTOR>
+  <TARGET>$n looks accusingly at you.</TARGET>
+  <PEERS>$n looks accusingly at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="grin">
+  <ACT_NOTARG>You grin evilly.</ACT_NOTARG>
+  <PER_NOTARG>$n grins evilly.</PER_NOTARG>
+  <ACT_BADTARG>You must be delirious.</ACT_BADTARG>
+  <ACT_ACTTARG>You grin at youself.  You must be getting very bad thoughts.</ACT_ACTTARG>
+  <PER_ACTTARG>$n grins at $mself.  You must wonder what's in $s mind.</PER_ACTTARG>
+  <ACTOR>You grin evilly at $M.</ACTOR>
+  <TARGET>$n grins evilly at you.  Hmmm.  Better keep your distance.</TARGET>
+  <PEERS>$n grins evilly at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="bow">
+  <ACT_NOTARG>You bow deeply.</ACT_NOTARG>
+  <PER_NOTARG>$n bows deeply.</PER_NOTARG>
+  <ACT_BADTARG>Who's that?</ACT_BADTARG>
+  <ACT_ACTTARG>You kiss your toes.</ACT_ACTTARG>
+  <PER_ACTTARG>$n folds up like a jacknife and kisses $s own toes.</PER_ACTTARG>
+  <ACTOR>You bow before $M.</ACTOR>
+  <TARGET>$n bows before you.</TARGET>
+  <PEERS>$n bows before $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="applaud">
+  <ACT_NOTARG>Clap, clap, clap.</ACT_NOTARG>
+  <PER_NOTARG>$n gives a round of applause.</PER_NOTARG>
+  <ACT_BADTARG>You give your imaginary round of applause to your imaginary friend.</ACT_BADTARG>
+  <ACT_ACTTARG>You applaud at yourself.  Boy, are we conceited!</ACT_ACTTARG>
+  <PER_ACTTARG>$n applauds at $mself.  Boy, are we conceited!</PER_ACTTARG>
+  <ACTOR>You clap at $N's actions.</ACTOR>
+  <TARGET>$n gives you a round of applause.  You MUST'VE done something good!</TARGET>
+  <PEERS>$n claps at $N's actions.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="blush">
+  <ACT_NOTARG>Your cheeks are burning.</ACT_NOTARG>
+  <PER_NOTARG>$n blushes.</PER_NOTARG>
+  <ACT_BADTARG>You blush as you notice that person isn't here.</ACT_BADTARG>
+  <ACT_ACTTARG>You blush at your own folly.</ACT_ACTTARG>
+  <PER_ACTTARG>$n blushes as $e notices $s boo-boo.</PER_ACTTARG>
+  <ACTOR>You get all flustered up seeing $M.</ACTOR>
+  <TARGET>$n blushes as $e sees you here.  Such an effect on people!</TARGET>
+  <PEERS>$n blushes as $e sees $N here.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="burp">
+  <ACT_NOTARG>You burp loudly.</ACT_NOTARG>
+  <PER_NOTARG>$n burps loudly.</PER_NOTARG>
+  <ACT_BADTARG>You can't find your victim.</ACT_BADTARG>
+  <ACT_ACTTARG>You burp at yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n burps at $mself.  What a sick sight.</PER_ACTTARG>
+  <ACTOR>You burp loudly to $M in response.</ACTOR>
+  <TARGET>$n burps loudly in response to your remark.</TARGET>
+  <PEERS>$n burps loudly in response to $N's remark.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="chuckle">
+  <ACT_NOTARG>You chuckle politely.</ACT_NOTARG>
+  <PER_NOTARG>$n chuckles politely.</PER_NOTARG>
+  <ACT_BADTARG>You can't find a friend to chuckle with.</ACT_BADTARG>
+  <ACT_ACTTARG>You chuckle at your own joke, since no one else would.</ACT_ACTTARG>
+  <PER_ACTTARG>$n chuckles at $s own joke, since none of you would.</PER_ACTTARG>
+  <ACTOR>You chuckle at $S joke.</ACTOR>
+  <TARGET>$n chuckles at your joke.</TARGET>
+  <PEERS>$n chuckles at $N's joke.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="clap">
+  <ACT_NOTARG>You clap your hands together.</ACT_NOTARG>
+  <PER_NOTARG>$n shows $s approval by clapping $s hands together.</PER_NOTARG>
+  <ACT_BADTARG>You clap for nothing.</ACT_BADTARG>
+  <ACT_ACTTARG>You clap at your own performance.</ACT_ACTTARG>
+  <PER_ACTTARG>$n claps at $s own performance.</PER_ACTTARG>
+  <ACTOR>You clap at $S performance.</ACTOR>
+  <TARGET>$n claps at your performance.</TARGET>
+  <PEERS>$n claps at $N's performance.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="cough">
+  <ACT_NOTARG>Yuck, try to cover your mouth next time!</ACT_NOTARG>
+  <PER_NOTARG>$n coughs loudly.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="curtsey">
+  <ACT_NOTARG>You curtsey to your audience.</ACT_NOTARG>
+  <PER_NOTARG>$n curtseys gracefully.</PER_NOTARG>
+  <ACT_BADTARG>You curtsey to no one in particular.</ACT_BADTARG>
+  <ACT_ACTTARG>You curtsey to your audience (yourself).</ACT_ACTTARG>
+  <PER_ACTTARG>$n curtseys to $mself, since no one is paying attention to $m.</PER_ACTTARG>
+  <ACTOR>You curtsey to $M.</ACTOR>
+  <TARGET>$n curtseys gracefully for you.</TARGET>
+  <PEERS>$n curtseys gracefully to $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="fart">
+  <ACT_NOTARG>Where are your manners ?</ACT_NOTARG>
+  <PER_NOTARG>$n lets off a real rip-roarer ... a greenish cloud envelops $n!</PER_NOTARG>
+  <ACT_BADTARG>You can't hold it that long!</ACT_BADTARG>
+  <ACT_ACTTARG>You fart at yourself.  You deserve it.</ACT_ACTTARG>
+  <PER_ACTTARG>$n farts at $mself.  Better $m than you.</PER_ACTTARG>
+  <ACTOR>You fart at $M.  Boy, you are sick.</ACTOR>
+  <TARGET>$n farts in your direction.  You gasp for air.</TARGET>
+  <PEERS>$n farts in the direction of $N.  Better flee before $e turns to you!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="flip">
+  <ACT_NOTARG>You flip head over heels.</ACT_NOTARG>
+  <PER_NOTARG>$n flips head over heels.</PER_NOTARG>
+  <ACT_BADTARG>You can't find the person.</ACT_BADTARG>
+  <ACT_ACTTARG>You tumble all over the room.</ACT_ACTTARG>
+  <PER_ACTTARG>$n does some nice tumbling and gymnastics.</PER_ACTTARG>
+  <ACTOR>You flip $M over your shoulder.</ACTOR>
+  <TARGET>$n flips you over $s shoulder.  Hmmmm.</TARGET>
+  <PEERS>$n flips $N over $s shoulder.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="fondle">
+  <ACT_NOTARG>Who needs to be fondled ?</ACT_NOTARG>
+  <ACT_BADTARG>You fondly try to fondle someone not in the room, but who cares.</ACT_BADTARG>
+  <ACT_ACTTARG>You fondly fondle yourself, feels funny doesn't it?</ACT_ACTTARG>
+  <PER_ACTTARG>$n fondly fondles $mself - this is going too far!!</PER_ACTTARG>
+  <ACTOR>You fondly fondle $M.</ACTOR>
+  <TARGET>$n fondly fondles you.</TARGET>
+  <PEERS>$n fondly fondles $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="frown">
+  <ACT_NOTARG>You frown disapprovingly.</ACT_NOTARG>
+  <PER_NOTARG>$n frowns.</PER_NOTARG>
+  <ACT_BADTARG>You don't see any reason to frown.</ACT_BADTARG>
+  <ACT_ACTTARG>You frown at yourself.  Poor baby.</ACT_ACTTARG>
+  <PER_ACTTARG>$n frowns at $mself.  What a sad puppy....</PER_ACTTARG>
+  <ACTOR>You frown at what $E did.</ACTOR>
+  <TARGET>$n frowns at what you did.</TARGET>
+  <PEERS>$n frowns at what $N did.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="gasp">
+  <ACT_NOTARG>You gasp in astonishment.</ACT_NOTARG>
+  <PER_NOTARG>$n gasps in astonishment.</PER_NOTARG>
+  <ACT_BADTARG>You need to panic.</ACT_BADTARG>
+  <ACT_ACTTARG>You look at yourself and gasp!</ACT_ACTTARG>
+  <PER_ACTTARG>$n takes one look at $mself and gasps in astonisment!</PER_ACTTARG>
+  <ACTOR>You gasp as you realize what $E did.</ACTOR>
+  <TARGET>$n gasps as $e realizes what you did.</TARGET>
+  <PEERS>$n gasps as $e realizes what $N did.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="glare">
+  <ACT_NOTARG>You glare at nothing in particular.</ACT_NOTARG>
+  <PER_NOTARG>$n glares around $m.</PER_NOTARG>
+  <ACT_BADTARG>You try to glare at somebody who is not present.</ACT_BADTARG>
+  <ACT_ACTTARG>You glare icily at your feet, they are suddenly very cold.</ACT_ACTTARG>
+  <PER_ACTTARG>$n glares at $s feet, what is bothering $m?</PER_ACTTARG>
+  <ACTOR>You glare icily at $M.</ACTOR>
+  <TARGET>$n glares icily at you, you feel cold to your bones.</TARGET>
+  <PEERS>$n glares at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="groan">
+  <ACT_NOTARG>You groan loudly.</ACT_NOTARG>
+  <PER_NOTARG>$n groans loudly.</PER_NOTARG>
+  <ACT_BADTARG>You see no reason to groan.</ACT_BADTARG>
+  <ACT_ACTTARG>You groan as you realize what you have done.</ACT_ACTTARG>
+  <PER_ACTTARG>$n groans as $e realizes what $e has done.</PER_ACTTARG>
+  <ACTOR>You groan at the sight of $M.</ACTOR>
+  <TARGET>$n groans at the sight of you.</TARGET>
+  <PEERS>$n groans at the sight of $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="grope">
+  <ACT_NOTARG>Whom do you wish to grope ??</ACT_NOTARG>
+  <ACT_BADTARG>Try someone who's here.</ACT_BADTARG>
+  <ACT_ACTTARG>You grope yourself - YUCK.</ACT_ACTTARG>
+  <PER_ACTTARG>$n gropes $mself - YUCK.</PER_ACTTARG>
+  <ACTOR>Well, what sort of noise do you expect here?</ACTOR>
+  <TARGET>$n gropes you.</TARGET>
+  <PEERS>$n gropes $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="hiccup">
+  <ACT_NOTARG>*HIC*</ACT_NOTARG>
+  <PER_NOTARG>$n hiccups.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="lick">
+  <ACT_NOTARG>You lick your mouth and smile.</ACT_NOTARG>
+  <PER_NOTARG>$n licks $s mouth and smiles.</PER_NOTARG>
+  <ACT_BADTARG>Lick away, nobody's here with that name.</ACT_BADTARG>
+  <ACT_ACTTARG>You lick your own eyebrows.</ACT_ACTTARG>
+  <PER_ACTTARG>$n licks $s own eyebrows.</PER_ACTTARG>
+  <ACTOR>You lick $N's jawline delicately.</ACTOR>
+  <TARGET>$n licks your jawline delicately.</TARGET>
+  <PEERS>$n licks $N's jawline delicately.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="love">
+  <ACT_NOTARG>You love the whole world.</ACT_NOTARG>
+  <PER_NOTARG>$n loves everybody in the world.</PER_NOTARG>
+  <ACT_BADTARG>Alas, your love is not present...</ACT_BADTARG>
+  <ACT_ACTTARG>Well, we already know you love yourself (lucky someone does !)</ACT_ACTTARG>
+  <PER_ACTTARG>$n loves $mself, can you believe it ?</PER_ACTTARG>
+  <ACTOR>You tell your true feelings to $N.</ACTOR>
+  <TARGET>$n whispers to you sweet words of love.</TARGET>
+  <PEERS>$n whispers softly to $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="moan">
+  <ACT_NOTARG>You start to moan.</ACT_NOTARG>
+  <PER_NOTARG>$n starts moaning.</PER_NOTARG>
+  <ACT_BADTARG>You see no cause to moan.</ACT_BADTARG>
+  <ACT_ACTTARG>You moan at yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n makes $mself moan.</PER_ACTTARG>
+  <ACTOR>You moan for the loss of $M.</ACTOR>
+  <TARGET>$n moans at the sight of you.  Hmmmm.</TARGET>
+  <PEERS>$n moans for the loss of $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="nibble">
+  <ACT_NOTARG>Nibble on who ?</ACT_NOTARG>
+  <ACT_BADTARG>Sorry, not present.</ACT_BADTARG>
+  <ACT_ACTTARG>You nibble on your OWN ear ???????????????????</ACT_ACTTARG>
+  <PER_ACTTARG>$n nibbles on $s OWN ear (I wonder how it is done !!).</PER_ACTTARG>
+  <ACTOR>You nibble on $N's ear.</ACTOR>
+  <TARGET>$n nibbles on your ear.</TARGET>
+  <PEERS>$n nibbles on $N's ear.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="pout">
+  <ACT_NOTARG>Ah, don't take it so hard.</ACT_NOTARG>
+  <PER_NOTARG>$n pouts.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="ruffle">
+  <ACT_NOTARG>You've got to ruffle SOMEONE.</ACT_NOTARG>
+  <ACT_BADTARG>Might be a bit difficult.</ACT_BADTARG>
+  <ACT_ACTTARG>You ruffle your hair, wondering how far you can go before the rest think you're crazy.</ACT_ACTTARG>
+  <PER_ACTTARG>$n ruffles $s hair - weirdo!</PER_ACTTARG>
+  <ACTOR>You ruffle $N's hair playfully.</ACTOR>
+  <TARGET>$n ruffles your hair playfully.</TARGET>
+  <PEERS>$n ruffles $N's hair playfully.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="shiver">
+  <ACT_NOTARG>Brrrrrrrrr.</ACT_NOTARG>
+  <PER_NOTARG>$n shivers uncomfortably.</PER_NOTARG>
+  <ACT_BADTARG>You don't see any reason to shiver.</ACT_BADTARG>
+  <ACT_ACTTARG>You shiver to yourself?</ACT_ACTTARG>
+  <PER_ACTTARG>$n scares $mself to shivers.</PER_ACTTARG>
+  <ACTOR>You shiver at the thought of fighting $M.</ACTOR>
+  <TARGET>$n shivers at the suicidal thought of fighting you.</TARGET>
+  <PEERS>$n shivers at the thought of fighting $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="shrug">
+  <ACT_NOTARG>You shrug.</ACT_NOTARG>
+  <PER_NOTARG>$n shrugs helplessly.</PER_NOTARG>
+  <ACT_BADTARG>You shrug to no one in particular.</ACT_BADTARG>
+  <ACT_ACTTARG>You shrug to yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n shrugs to $mself.  What a strange person.</PER_ACTTARG>
+  <ACTOR>You shrug in response to $S question.</ACTOR>
+  <TARGET>$n shrugs in response to your question.</TARGET>
+  <PEERS>$n shrugs in response to $N's question.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="sing">
+  <ACT_NOTARG>You raise your clear (?) voice towards the sky.</ACT_NOTARG>
+  <PER_NOTARG>HEY CLERICS! I COULD USE A HEAL!  $n has begun to sing.</PER_NOTARG>
+  <ACT_BADTARG>You see no one to sing to.</ACT_BADTARG>
+  <ACT_ACTTARG>You sing a little ditty to yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n sings a little ditty to $mself.</PER_ACTTARG>
+  <ACTOR>You sing a ballad to $M.</ACTOR>
+  <TARGET>$n sings a ballad to you!  How sweet!</TARGET>
+  <PEERS>$n sings a ballad to $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="slap">
+  <ACT_NOTARG>What is the sound of one hand slapping?</ACT_NOTARG>
+  <ACT_BADTARG>How about slapping someone in the same room as you ??</ACT_BADTARG>
+  <ACT_ACTTARG>You slap yourself, silly you.</ACT_ACTTARG>
+  <PER_ACTTARG>$n slaps $mself, really strange ...</PER_ACTTARG>
+  <ACTOR>*thwock!* You slap $N ringingly.</ACTOR>
+  <TARGET>$n slaps you stingingly.</TARGET>
+  <PEERS>*thwock!* $n slaps $N!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="smirk">
+  <ACT_NOTARG>You smirk.</ACT_NOTARG>
+  <PER_NOTARG>$n smirks.</PER_NOTARG>
+  <ACT_BADTARG>You want to smirk to whom?</ACT_BADTARG>
+  <ACT_ACTTARG>You smirk at yourself.  Okay.....</ACT_ACTTARG>
+  <PER_ACTTARG>$n smirks at $s own 'wisdom'.</PER_ACTTARG>
+  <ACTOR>You smirk at $S saying.</ACTOR>
+  <TARGET>$n smirks at your saying.</TARGET>
+  <PEERS>$n smirks at $N's saying.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="snap">
+  <ACT_NOTARG>Eureka!  You snap your fingers.</ACT_NOTARG>
+  <PER_NOTARG>$n snaps $s fingers.</PER_NOTARG>
+  <ACT_BADTARG>You must be very agitated.</ACT_BADTARG>
+  <ACT_ACTTARG>You snap yourself to attention.</ACT_ACTTARG>
+  <PER_ACTTARG>$n snaps $mself to attention.</PER_ACTTARG>
+  <ACTOR>You snap back at $M.</ACTOR>
+  <TARGET>$n snaps back at you!</TARGET>
+  <PEERS>$n snaps back at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="sneeze">
+  <ACT_NOTARG>Gesundheit !</ACT_NOTARG>
+  <PER_NOTARG>$n sneezes.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="snicker">
+  <ACT_NOTARG>You snicker softly.</ACT_NOTARG>
+  <PER_NOTARG>$n snickers softly.</PER_NOTARG>
+  <ACT_BADTARG>Huh?</ACT_BADTARG>
+  <ACT_ACTTARG>You snicker at your own evil thoughts.</ACT_ACTTARG>
+  <PER_ACTTARG>$n snickers at $s own evil thoughts.</PER_ACTTARG>
+  <ACTOR>You snicker with $M about your shared secret.</ACTOR>
+  <TARGET>$n snickers with you about your shared secret.</TARGET>
+  <PEERS>$n snickers with $N about their shared secret.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="sniff">
+  <ACT_NOTARG>You sniff sadly. *SNIFF*</ACT_NOTARG>
+  <PER_NOTARG>$n sniffs sadly.</PER_NOTARG>
+  <ACT_BADTARG>You see no reason to sniff.</ACT_BADTARG>
+  <ACT_ACTTARG>You sniff sadly at your lost opportunities.</ACT_ACTTARG>
+  <PER_ACTTARG>$n sniffs sadly at $mself.  Something MUST be bothering $m.</PER_ACTTARG>
+  <ACTOR>You sniff sadly at the way $E is treating you.</ACTOR>
+  <TARGET>$n sniffs sadly at the way you are treating $m.</TARGET>
+  <PEERS>$n sniffs sadly at the way $N is treating $m.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="snore">
+  <ACT_NOTARG>Zzzzzzzzzzzzzzzzz.</ACT_NOTARG>
+  <PER_NOTARG>$n snores loudly.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="squeeze">
+  <ACT_NOTARG>Where, what, how, WHO ???</ACT_NOTARG>
+  <ACT_BADTARG>Where, what, how, WHO ???</ACT_BADTARG>
+  <ACT_ACTTARG>You squeeze yourself - try to relax a little!</ACT_ACTTARG>
+  <PER_ACTTARG>$n squeezes $mself.</PER_ACTTARG>
+  <ACTOR>You squeeze $M fondly.</ACTOR>
+  <TARGET>$n squeezes you fondly.</TARGET>
+  <PEERS>$n squeezes $N fondly.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="stare">
+  <ACT_NOTARG>You stare at the sky.</ACT_NOTARG>
+  <PER_NOTARG>$n stares at the sky.</PER_NOTARG>
+  <ACT_BADTARG>You stare and stare but can't see that person anywhere...</ACT_BADTARG>
+  <ACT_ACTTARG>You stare dreamily at yourself - enough narcissism for now.</ACT_ACTTARG>
+  <PER_ACTTARG>$n stares dreamily at $mself - NARCISSIST!</PER_ACTTARG>
+  <ACTOR>You stare dreamily at $N, completely lost in $S eyes..</ACTOR>
+  <TARGET>$n stares dreamily at you, completely lost in your eyes.</TARGET>
+  <PEERS>$n stares dreamily at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="thank">
+  <ACT_NOTARG>Thank you too.</ACT_NOTARG>
+  <ACT_BADTARG>No one answers to that name here.</ACT_BADTARG>
+  <ACT_ACTTARG>You thank yourself since nobody else wants to !</ACT_ACTTARG>
+  <PER_ACTTARG>$n thanks $mself since you won't.</PER_ACTTARG>
+  <ACTOR>You thank $N heartily.</ACTOR>
+  <TARGET>$n thanks you heartily.</TARGET>
+  <PEERS>$n thanks $N heartily.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="twiddle">
+  <ACT_NOTARG>You patiently twiddle your thumbs.</ACT_NOTARG>
+  <PER_NOTARG>$n patiently twiddles $s thumbs.</PER_NOTARG>
+  <ACT_BADTARG>You don't see the person here.</ACT_BADTARG>
+  <ACT_ACTTARG>You twiddle your ears like Dumbo.</ACT_ACTTARG>
+  <PER_ACTTARG>$n twiddles $s own ears like Dumbo.</PER_ACTTARG>
+  <ACTOR>You twiddle $S ears.</ACTOR>
+  <TARGET>$n twiddles your ears.</TARGET>
+  <PEERS>$n twiddles $N's ears.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="wave">
+  <ACT_NOTARG>You wave.</ACT_NOTARG>
+  <PER_NOTARG>$n waves happily.</PER_NOTARG>
+  <ACT_BADTARG>They didn't wait for you to wave goodbye.</ACT_BADTARG>
+  <ACT_ACTTARG>Are you going on adventures as well??</ACT_ACTTARG>
+  <PER_ACTTARG>$n waves goodbye to $mself.</PER_ACTTARG>
+  <ACTOR>You wave goodbye to $N.</ACTOR>
+  <TARGET>$n waves goodbye to you.  Have a good journey.</TARGET>
+  <PEERS>$n waves goodbye to $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="whistle">
+  <ACT_NOTARG>You whistle appreciatively.</ACT_NOTARG>
+  <PER_NOTARG>$n whistles appreciatively.</PER_NOTARG>
+  <ACT_BADTARG>You don't see nothing special to whistle at.</ACT_BADTARG>
+  <ACT_ACTTARG>You whistle a little tune to yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n whistles a little tune to $mself.</PER_ACTTARG>
+  <ACTOR>You whistle at the sight of $M.</ACTOR>
+  <TARGET>$n whistles at the sight of you.</TARGET>
+  <PEERS>$n whistles at the sight of $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="wiggle">
+  <ACT_NOTARG>Your wiggle your bottom.</ACT_NOTARG>
+  <PER_NOTARG>$n wiggles $s bottom.</PER_NOTARG>
+  <ACT_BADTARG>You must be alone.</ACT_BADTARG>
+  <ACT_ACTTARG>You wiggle about like a fish.</ACT_ACTTARG>
+  <PER_ACTTARG>$n wiggles about like a fish.</PER_ACTTARG>
+  <ACTOR>You wiggle your bottom toward $M.</ACTOR>
+  <TARGET>$n wiggles $s bottom toward you.</TARGET>
+  <PEERS>$n wiggles $s bottom toward $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="wink">
+  <ACT_NOTARG>Have you got something in your eye?</ACT_NOTARG>
+  <PER_NOTARG>$n winks suggestively.</PER_NOTARG>
+  <ACT_BADTARG>No one with that name is present.</ACT_BADTARG>
+  <ACT_ACTTARG>You wink at yourself ?? - what are you up to?</ACT_ACTTARG>
+  <PER_ACTTARG>$n winks at $mself - something strange is going on...</PER_ACTTARG>
+  <ACTOR>You wink suggestively at $N.</ACTOR>
+  <TARGET>$n winks suggestively at you.</TARGET>
+  <PEERS>$n winks at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="yawn">
+  <ACT_NOTARG>You must be tired.</ACT_NOTARG>
+  <PER_NOTARG>$n yawns.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="snowball">
+  <ACT_NOTARG>Who do you want to throw a snowball at?</ACT_NOTARG>
+  <ACT_BADTARG>You stand with the snowball in your hand because your victim is not here.</ACT_BADTARG>
+  <ACT_ACTTARG>You conjure a snowball from the thin air and throw it at yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n conjures a snowball out of the thin air and throws it at $mself.</PER_ACTTARG>
+  <ACTOR>You throw a snowball in $N's face.</ACTOR>
+  <TARGET>$n conjures a snowball from the thin air and throws it at you.</TARGET>
+  <PEERS>$n conjures a snowball from the thin air and throws it at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="french">
+  <ACT_NOTARG>Kiss whom?</ACT_NOTARG>
+  <ACT_BADTARG>Your heart is filled with despair as that person is not here.</ACT_BADTARG>
+  <ACT_ACTTARG>You gather yourself in your arms and try to kiss yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n makes an attempt at kissing $mself.</PER_ACTTARG>
+  <ACTOR>You give $N a long and passionate kiss, it seems to last forever...</ACTOR>
+  <TARGET>$n gives you a long and passionate kiss, it seems to last forever...</TARGET>
+  <PEERS>$n kisses $N passionately.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="comb">
+  <ACT_NOTARG>You comb your hair - perfect.</ACT_NOTARG>
+  <PER_NOTARG>$n combs $s hair, what a dashing specimen !</PER_NOTARG>
+  <ACT_BADTARG>That person is not here.</ACT_BADTARG>
+  <ACT_ACTTARG>You pull your hair, but it will not be combed.</ACT_ACTTARG>
+  <PER_ACTTARG>$n tries to comb $s tangled hair.</PER_ACTTARG>
+  <ACTOR>You patiently untangle $N's hair - what a mess !</ACTOR>
+  <TARGET>$n pulls your hair in an attempt to comb it.</TARGET>
+  <PEERS>$n tries patiently to untangle $N's hair.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="massage">
+  <ACT_NOTARG>Massage what?  Thin air?</ACT_NOTARG>
+  <ACT_BADTARG>You can only massage someone in the same room as you.</ACT_BADTARG>
+  <ACT_ACTTARG>You practice yoga as you try to massage yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n gives a show on yoga-positions, trying to massage $mself.</PER_ACTTARG>
+  <ACTOR>You gently massage $N's shoulders.</ACTOR>
+  <TARGET>$n gently massages your shoulders - Ahhhhhhhhhh...</TARGET>
+  <PEERS>$n massages $N's shoulders.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="tickle">
+  <ACT_NOTARG>Whom do you want to tickle?</ACT_NOTARG>
+  <ACT_BADTARG>Who is that??</ACT_BADTARG>
+  <ACT_ACTTARG>You tickle yourself, how funny!</ACT_ACTTARG>
+  <PER_ACTTARG>$n tickles $mself.</PER_ACTTARG>
+  <ACTOR>You tickle $N.</ACTOR>
+  <TARGET>$n tickles you - ho ho ho.</TARGET>
+  <PEERS>$n tickles $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="pat">
+  <ACT_NOTARG>Pat who?</ACT_NOTARG>
+  <ACT_BADTARG>Who, where, what?</ACT_BADTARG>
+  <ACT_ACTTARG>You pat yourself on your head, very reassuring.</ACT_ACTTARG>
+  <PER_ACTTARG>$n pats $mself on the head.</PER_ACTTARG>
+  <ACTOR>You pat $N on $S head.</ACTOR>
+  <TARGET>$n pats you on your head.</TARGET>
+  <PEERS>$n pats $N on $S head.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="curse">
+  <ACT_NOTARG>You swear loudly for a long time.</ACT_NOTARG>
+  <PER_NOTARG>$n swears : #@*"*&amp;^*#$@*&amp;! !!!!!</PER_NOTARG>
+  <ACT_BADTARG>You can't find the victim of your frustrations.</ACT_BADTARG>
+  <ACT_ACTTARG>You swear at your own mistakes.</ACT_ACTTARG>
+  <PER_ACTTARG>$n starts swearing at $mself.  Why don't you help?</PER_ACTTARG>
+  <ACTOR>You swear at $M.</ACTOR>
+  <TARGET>$n swears at you!  Where are the manners?</TARGET>
+  <PEERS>$n swears at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="pray">
+  <ACT_NOTARG>You feel righteous, and maybe a little foolish.</ACT_NOTARG>
+  <PER_NOTARG>$n begs and grovels to the powers that be.</PER_NOTARG>
+  <ACT_BADTARG>No such person around; your prayers vanish into the endless voids.</ACT_BADTARG>
+  <ACT_ACTTARG>Talk about narcissism...</ACT_ACTTARG>
+  <PER_ACTTARG>$n performs some strange yoga-exercises and mumbles a prayer to $mself.</PER_ACTTARG>
+  <ACTOR>You crawl in the dust before $M.</ACTOR>
+  <TARGET>$n kisses the dirt at your feet.</TARGET>
+  <PEERS>$n falls down and grovels in the dirt before $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="beg">
+  <ACT_NOTARG>You beg the gods for mercy.</ACT_NOTARG>
+  <PER_NOTARG>The gods fall down laughing at $n's request for mercy.</PER_NOTARG>
+  <ACT_BADTARG>Your money-lender seems to be out for the moment.</ACT_BADTARG>
+  <ACT_ACTTARG>Begging yourself for money doesn't help.</ACT_ACTTARG>
+  <ACTOR>You desperately try to squeeze a few coins from $M.</ACTOR>
+  <TARGET>$n begs $N for a dime or two - or twenty !</TARGET>
+  <PEERS>$n begs you for money. You graciously let $m peep at your fortune.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="cringe">
+  <ACT_NOTARG>You cringe in terror.</ACT_NOTARG>
+  <PER_NOTARG>$n cringes in terror!</PER_NOTARG>
+  <ACT_BADTARG>I don't see anyone by that name here.. what are you afraid of?</ACT_BADTARG>
+  <ACT_ACTTARG>I beg your pardon?</ACT_ACTTARG>
+  <ACTOR>You cringe away from $M.</ACTOR>
+  <TARGET>$n cringes away from you.</TARGET>
+  <PEERS>$n cringes away from $N in mortal terror.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="daydream">
+  <ACT_NOTARG>You dream of better times.</ACT_NOTARG>
+  <PER_NOTARG>$n looks absent-minded, his eyes staring into space.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="fume">
+  <ACT_NOTARG>Take it easy now! count to ten, very slowly.</ACT_NOTARG>
+  <PER_NOTARG>$n grits $s teeth and fumes with rage.</PER_NOTARG>
+  <ACT_BADTARG>Fume away... they ain't here.</ACT_BADTARG>
+  <ACT_ACTTARG>That's right - hate yourself!</ACT_ACTTARG>
+  <PER_ACTTARG>$n clenches $s fists and stomps his feet, fuming with anger.</PER_ACTTARG>
+  <ACTOR>You stare at $M, fuming.</ACTOR>
+  <TARGET>$n stares at you, fuming with rage!</TARGET>
+  <PEERS>$n stares at $N, fuming with rage.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="grovel">
+  <ACT_NOTARG>You grovel in the dirt.</ACT_NOTARG>
+  <PER_NOTARG>$n grovels in the dirt.</PER_NOTARG>
+  <ACT_BADTARG>Who?</ACT_BADTARG>
+  <ACT_ACTTARG>That seems a little silly to me.</ACT_ACTTARG>
+  <ACTOR>You grovel before $M</ACTOR>
+  <TARGET>$n grovels in the dirt before you.</TARGET>
+  <PEERS>$n grovels in the dirt before $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="hop">
+  <ACT_NOTARG>You hop around like a little kid.</ACT_NOTARG>
+  <PER_NOTARG>$n hops around like a little kid.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="nudge">
+  <ACT_NOTARG>Nudge whom?</ACT_NOTARG>
+  <ACT_BADTARG>Who?</ACT_BADTARG>
+  <ACT_ACTTARG>You nudge yourself, for some strange reason.</ACT_ACTTARG>
+  <PER_ACTTARG>$n nudges $mself, to keep $mself awake.</PER_ACTTARG>
+  <ACTOR>You nudge $M.</ACTOR>
+  <TARGET>$n nudges you.</TARGET>
+  <PEERS>$n nudges $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="ponder">
+  <ACT_NOTARG>You ponder the question.</ACT_NOTARG>
+  <PER_NOTARG>$n sits down and thinks deeply.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="punch">
+  <ACT_NOTARG>Punch whom?</ACT_NOTARG>
+  <ACT_BADTARG>You can't find your boxing partner.</ACT_BADTARG>
+  <ACT_ACTTARG>You punch yourself.  You deserve it.</ACT_ACTTARG>
+  <PER_ACTTARG>$n punches $mself.  Why don't you join in?</PER_ACTTARG>
+  <ACTOR>You punch $M playfully.</ACTOR>
+  <TARGET>$n punches you playfully.  OUCH!</TARGET>
+  <PEERS>$n punches $N playfully.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="snarl">
+  <ACT_NOTARG>You grizzle your teeth and look mean.</ACT_NOTARG>
+  <PER_NOTARG>$n snarls angrily.</PER_NOTARG>
+  <ACT_BADTARG>No need to snarl!</ACT_BADTARG>
+  <ACT_ACTTARG>You snarl at yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n snarls at $mself.</PER_ACTTARG>
+  <ACTOR>You snarl at $M.</ACTOR>
+  <TARGET>$n snarls at you, for some reason.</TARGET>
+  <PEERS>$n snarls at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="spank">
+  <ACT_NOTARG>Spank whom?</ACT_NOTARG>
+  <ACT_BADTARG>Your hand can't find your victim!</ACT_BADTARG>
+  <ACT_ACTTARG>You spank yourself....HMMMMMMM...</ACT_ACTTARG>
+  <PER_ACTTARG>$n spanks $mself....HMMMMMMM...</PER_ACTTARG>
+  <ACTOR>You spank $M playfully.</ACTOR>
+  <TARGET>$n spanks you playfully.  OUCH!</TARGET>
+  <PEERS>$n spanks $N playfully.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="hand">
+  <ACT_NOTARG>Kiss whose hand?</ACT_NOTARG>
+  <ACT_BADTARG>You can't find a lady in THIS group.</ACT_BADTARG>
+  <ACT_ACTTARG>You kiss your own hand.</ACT_ACTTARG>
+  <PER_ACTTARG>$n kisses $s own hand.</PER_ACTTARG>
+  <ACTOR>You kiss $S hand.</ACTOR>
+  <TARGET>$n kisses your hand.  How continental!</TARGET>
+  <PEERS>$n kisses $N's hand.  How continental!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="yodel">
+  <ACT_NOTARG>You think of Julie Andrews and start to yodel.</ACT_NOTARG>
+  <PER_NOTARG>$n begins to yodel:  HEY!! CLERICS!! I COULD USE A HEAL!!!</PER_NOTARG>
+  <ACT_BADTARG>That person just escaped!</ACT_BADTARG>
+  <ACT_ACTTARG>Well, it's up to you if you want to damage your hearing.</ACT_ACTTARG>
+  <PER_ACTTARG>$n yodels to $mself.  What a sado-masochist.</PER_ACTTARG>
+  <ACTOR>$N covers $S ears as you begin to yodel.</ACTOR>
+  <TARGET>$n yodels to you...you cringe and turn away.</TARGET>
+  <PEERS>$n yodels to $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="faint">
+  <ACT_NOTARG>You faint.</ACT_NOTARG>
+  <PER_NOTARG>$n faints.</PER_NOTARG>
+  <ACT_BADTARG>You fall on the floor and look stupid--really suave.</ACT_BADTARG>
+  <ACTOR>You faint into $S arms.</ACTOR>
+  <TARGET>$n just fainted into YOUR arms.</TARGET>
+  <PEERS>$n faints into $N's open arms.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="pinch">
+  <ACT_NOTARG>You say, 'A pinch of this, and a dab of that.'</ACT_NOTARG>
+  <PER_NOTARG>$n says, 'A pinch of this and a dab of that.'</PER_NOTARG>
+  <ACT_BADTARG>You'd like to, wouldn't you?</ACT_BADTARG>
+  <ACT_ACTTARG>You pinch yourself to see if you are dreaming!</ACT_ACTTARG>
+  <PER_ACTTARG>$n pinches $mself to see if $e is dreaming!</PER_ACTTARG>
+  <ACTOR>You squeeze $S bottom and grin.</ACTOR>
+  <TARGET>$n pinches your bottom and grins.</TARGET>
+  <PEERS>$n pinches $N's bottom and grins.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="stroke">
+  <ACT_NOTARG>You stroke the air vaguely.</ACT_NOTARG>
+  <PER_NOTARG>$n makes vague stroking motions.</PER_NOTARG>
+  <ACT_BADTARG>Maybe you should practice on yourself first.</ACT_BADTARG>
+  <ACT_ACTTARG>You are about to do something you'd rather not be caught doing.</ACT_ACTTARG>
+  <ACTOR>You gently stroke $S inner thigh.  $N inhales sharply.</ACTOR>
+  <TARGET>$n gently strokes your inner thigh.  You inhale sharply.</TARGET>
+  <PEERS>$N exhales sharply and suddenly.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="apologize">
+  <ACT_NOTARG>You apologize until you are blue in the face.</ACT_NOTARG>
+  <PER_NOTARG>$n apologizes profusely.</PER_NOTARG>
+  <ACT_BADTARG>Who's that?</ACT_BADTARG>
+  <ACTOR>You might as well apologize because $E sure as hell won't.</ACTOR>
+  <TARGET>$n apologizes to you and begs for forgiveness.</TARGET>
+  <PEERS>$n apologizes to $N with a very sincere look on $s face.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="caress">
+  <ACT_NOTARG>Who do you wish to caress?</ACT_NOTARG>
+  <PER_NOTARG>$n looks for someone to caress.</PER_NOTARG>
+  <ACT_BADTARG>You're S.O.L., buddy.</ACT_BADTARG>
+  <ACTOR>You tenderly caress $M.</ACTOR>
+  <TARGET>$n tenderly caresses your body.</TARGET>
+  <PEERS>$n tenderly caresses $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="stagger">
+  <ACT_NOTARG>You stagger blindly around the room.</ACT_NOTARG>
+  <PER_NOTARG>$n staggers blindly around the room.</PER_NOTARG>
+  <ACT_BADTARG>Stagger into whom!?!?</ACT_BADTARG>
+  <ACTOR>You stagger toward $N as the room begins to spin.</ACTOR>
+  <TARGET>$n staggers blindly into you.</TARGET>
+  <PEERS>$n staggers into $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="snort">
+  <ACT_NOTARG>You snort derisively.</ACT_NOTARG>
+  <PER_NOTARG>$n snorts derisively.</PER_NOTARG>
+  <ACT_BADTARG>Snort at whom?</ACT_BADTARG>
+  <ACT_ACTTARG>You snort derisively at yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n snorts derisively at $sself.</PER_ACTTARG>
+  <ACTOR>You snort derisively at $N.</ACTOR>
+  <TARGET>$n snorts at you.</TARGET>
+  <PEERS>$n snorts derisively at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="slobber">
+  <ACT_NOTARG>You slobber down your front.</ACT_NOTARG>
+  <PER_NOTARG>$n slobbers all over $mself.</PER_NOTARG>
+  <ACT_BADTARG>Slobber on WHOM?</ACT_BADTARG>
+  <ACTOR>You slobber on $N.</ACTOR>
+  <TARGET>$n slobbers disgustingly on you.</TARGET>
+  <PEERS>$n slobbers on $N  **Yuck**</PEERS>
+</SOCIAL>
+<SOCIAL NAME="blink">
+  <ACT_NOTARG>You bat your eyelashes.</ACT_NOTARG>
+  <PER_NOTARG>$n blinks innocently.</PER_NOTARG>
+  <ACT_BADTARG>Feign innocence for whom?</ACT_BADTARG>
+  <ACT_ACTTARG>You try to convince yourself of your innocence.</ACT_ACTTARG>
+  <ACTOR>You blink innocently at $N.</ACTOR>
+  <TARGET>$n blinks innocently at you.</TARGET>
+  <PEERS>$n blinks innocently at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="tease">
+  <ACT_NOTARG>What a tease.   SHEESH.</ACT_NOTARG>
+  <PER_NOTARG>$n looks around for someone to tease.</PER_NOTARG>
+  <ACT_BADTARG>Tease whom?</ACT_BADTARG>
+  <ACT_ACTTARG>You tease yourself. NYAH NYAH NYAH.</ACT_ACTTARG>
+  <PER_ACTTARG>$n teases $mself.</PER_ACTTARG>
+  <ACTOR>You tease $N in a playful way.</ACTOR>
+  <TARGET>$n sticks $s tongue out at you, what a DORK!!</TARGET>
+  <PEERS>$n sticks $s tongue out at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="knee">
+  <ACT_NOTARG>You raise one knee, preparing to do justice...</ACT_NOTARG>
+  <PER_NOTARG>$n cocks one knee threateningly.</PER_NOTARG>
+  <ACT_BADTARG>Whom do you wish to render impotent?</ACT_BADTARG>
+  <ACT_ACTTARG>What ARE you thinking !?!??!?!?!?!</ACT_ACTTARG>
+  <ACTOR>You knee $M hard in the groin.</ACTOR>
+  <TARGET>$n suddenly knees you in the groin!  You fall to your knees in agony.</TARGET>
+  <PEERS>$N doubles over in pain as $n knees $M in the groin!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="flirt">
+  <ACT_NOTARG>You flirt outrageously.</ACT_NOTARG>
+  <PER_NOTARG>$n is an outrageous flirt.</PER_NOTARG>
+  <ACT_BADTARG>Sorry no one here to flirt with. :(</ACT_BADTARG>
+  <ACT_ACTTARG>You flirt with yourself -- what ARE you trying to gain!?!?!?</ACT_ACTTARG>
+  <PER_ACTTARG>$n flirts with $mself, wonder what $e is trying to accomplish?</PER_ACTTARG>
+  <ACTOR>You flirt with $N trying to get $S attention.</ACTOR>
+  <TARGET>$n flirts with you.</TARGET>
+  <PEERS>$n flirts with $N, hmmm wonder what $e wants? *wink*</PEERS>
+</SOCIAL>
+<SOCIAL NAME="tip">
+  <ACT_NOTARG>You tip your hat gallantly.</ACT_NOTARG>
+  <PER_NOTARG>$n gallantly tips $s hat.</PER_NOTARG>
+  <ACT_BADTARG>But there is no one here to impress?!?!</ACT_BADTARG>
+  <ACTOR>You tip your hat to $N.</ACTOR>
+  <TARGET>$n gallantly tips $s hat to you.</TARGET>
+  <PEERS>$n gallantly tips $s hat to $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="lust">
+  <ACT_NOTARG>Your hormones begin to rage.</ACT_NOTARG>
+  <PER_NOTARG>$n has that look of lust in $s eyes --- Get away QUICK!</PER_NOTARG>
+  <ACT_BADTARG>Whom are you trying to lust after?</ACT_BADTARG>
+  <ACT_ACTTARG>Oh, please! You aren't THAT great...</ACT_ACTTARG>
+  <PER_ACTTARG>$n lusts after $mself, lonely eh?</PER_ACTTARG>
+  <ACTOR>You have lust after $N.</ACTOR>
+  <TARGET>$n lusts after your delectable body.</TARGET>
+  <PEERS>$n looks lustily at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="flutter">
+  <ACT_NOTARG>You flutter your eyelashes seductively.</ACT_NOTARG>
+  <PER_NOTARG>$n flutters $s eyelashes seductively.</PER_NOTARG>
+  <ACT_BADTARG>EH? Can't see them here.</ACT_BADTARG>
+  <ACTOR>You flutter your eyelashes at $N, trying to be seductive.</ACTOR>
+  <TARGET>$n flutters $s eyelashes at you coyly.</TARGET>
+  <PEERS>$n flirts with $N, flutters $s eyelashes at $M.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="bark">
+  <ACT_NOTARG>You bark loudly.</ACT_NOTARG>
+  <PER_NOTARG>$n barks like a dog. GO DAWGS SIC 'EM!!! WOOF! WOOF! WOOF! WOOF!</PER_NOTARG>
+  <ACT_BADTARG>Bark at whom?</ACT_BADTARG>
+  <ACT_ACTTARG>You bark at yourself and jump back in fear.</ACT_ACTTARG>
+  <PER_ACTTARG>$n barks at $mself and cowers in fear.</PER_ACTTARG>
+  <ACTOR>You bark at $N scaring $M silly -- SHAME ON YOU!!</ACTOR>
+  <TARGET>$n barks loudly at you, you back away, because $e might bite too!!</TARGET>
+  <PEERS>$n barks at $N scaring $M senseless.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="howl">
+  <ACT_NOTARG>You howl at the moon.</ACT_NOTARG>
+  <PER_NOTARG>$n howls at the moon.</PER_NOTARG>
+  <ACT_BADTARG>Who? What? Where?</ACT_BADTARG>
+  <ACTOR>You howl soulfully at $N.</ACTOR>
+  <TARGET>$n howls soulfully at you.</TARGET>
+  <PEERS>$n howls at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="babble">
+  <ACT_NOTARG>You babble endlessly.</ACT_NOTARG>
+  <PER_NOTARG>$n babbles endlessly, won't $e EVER shut up?</PER_NOTARG>
+  <ACT_BADTARG>Whom do you wish to annoy with your babble?</ACT_BADTARG>
+  <ACT_ACTTARG>You babble on and on to yourself, FINALLY! someone who LISTENS!!</ACT_ACTTARG>
+  <PER_ACTTARG>$n babbles quietly to $mself.</PER_ACTTARG>
+  <ACTOR>You babble to $N for hours on end.</ACTOR>
+  <TARGET>$n babbles at you. You nod mechanically, hoping $e will shut up soon.</TARGET>
+  <PEERS>$n babbles to $N for what seems an eternity, how can $N stand it?</PEERS>
+</SOCIAL>
+<SOCIAL NAME="ramble">
+  <ACT_NOTARG>You ramble on and on.</ACT_NOTARG>
+  <PER_NOTARG>$n rambles on about a boring exploit.</PER_NOTARG>
+  <ACT_BADTARG>??EH??</ACT_BADTARG>
+  <ACTOR>You ramble on to $N about your past adventures.</ACTOR>
+  <TARGET>$n tells you a rather boring tale, you feign interest.</TARGET>
+  <PEERS>$n blithers on and on to $N about something.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="hush">
+  <ACT_NOTARG>SHHHHHHHHHHHHHHHHHHHHHH</ACT_NOTARG>
+  <PER_NOTARG>$n requests everyone quiet down.  Shhhhhhhhhhh...</PER_NOTARG>
+  <ACT_BADTARG>Who needs to be silenced?</ACT_BADTARG>
+  <ACT_ACTTARG>You realize you are loud and obnoxious and try to silence yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n covers $s mouth in an attempt to silence $mself.</PER_ACTTARG>
+  <ACTOR>You nicely ask $N to be more quiet.</ACTOR>
+  <TARGET>$n kindly requests that you please quiet down.</TARGET>
+  <PEERS>$n nicely asks $N to be more quiet.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="threaten">
+  <ACT_NOTARG>You threaten everyone with your overwhelming presence.</ACT_NOTARG>
+  <PER_NOTARG>You feel threatened in the presence of the great $n.</PER_NOTARG>
+  <ACT_BADTARG>Whom do you wish to intimidate?</ACT_BADTARG>
+  <ACTOR>You stand tall as you threaten $N.</ACTOR>
+  <TARGET>$n threatens you...oooooooh scary *laugh*</TARGET>
+  <PEERS>$n threatens $N forcefully.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="roll">
+  <ACT_NOTARG>You roll your eyes in disgust.</ACT_NOTARG>
+  <PER_NOTARG>$n rolls $s eyes, disgusted.</PER_NOTARG>
+  <ACT_BADTARG>You should be disgusted with yourself because you look so foolish.</ACT_BADTARG>
+  <ACT_ACTTARG>At whom do you wish to roll your eyes?</ACT_ACTTARG>
+  <ACTOR>You look at $N and roll your eyes in disgust.</ACTOR>
+  <TARGET>$n rolls $s eyes at you.</TARGET>
+  <PEERS>$n rolls $s eyes in disgust at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="swoon">
+  <ACT_NOTARG>You swoon.</ACT_NOTARG>
+  <PER_NOTARG>$n swoons in absolute ecstasy.</PER_NOTARG>
+  <ACT_BADTARG>Who?</ACT_BADTARG>
+  <ACTOR>You look at $N and swoon in ecstasy.</ACTOR>
+  <TARGET>$n looks at you and swoons in ecstasy.</TARGET>
+  <PEERS>$n looks at $N and swoons in ecstasy.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="bird">
+  <ACT_NOTARG>You flick a bird...How obscene!</ACT_NOTARG>
+  <PER_NOTARG>$n flicks a bird at no one in particular.</PER_NOTARG>
+  <ACT_BADTARG>Don't you hate to waste a good obscene gesture like that?</ACT_BADTARG>
+  <ACTOR>You shoot a bird at $N.</ACTOR>
+  <TARGET>$n gives you the bird...What an ass!</TARGET>
+  <PEERS>$n gives $N the bird.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="eyebrow">
+  <ACT_NOTARG>You raise an eyebrow at the notion.</ACT_NOTARG>
+  <PER_NOTARG>$n raises an eyebrow.</PER_NOTARG>
+  <ACT_BADTARG>Forget it.  They aren't here.</ACT_BADTARG>
+  <ACTOR>You raise your eyebrow at $N.</ACTOR>
+  <TARGET>$n raises an eyebrow at you.</TARGET>
+  <PEERS>$n raises an eyebrow at $N's weird actions.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="serenade">
+  <ACT_NOTARG>You raise your voice in a loud serenade to your invisible love.</ACT_NOTARG>
+  <PER_NOTARG>$n raises $s voice to serenade the world.</PER_NOTARG>
+  <ACT_BADTARG>The one that you wish to serenade has left you to sing to yourself.</ACT_BADTARG>
+  <ACT_ACTTARG>You sing a loud serenade to yourself.  What type of person are you?!</ACT_ACTTARG>
+  <PER_ACTTARG>$n serenades $mself.  What an ego!</PER_ACTTARG>
+  <ACTOR>You raise your voice in a loving serenade to $N.</ACTOR>
+  <TARGET>$n serenades you, you are swept away by $s voice.</TARGET>
+  <PEERS>$n raises $s voice in a loving serenade to $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="grimace">
+  <ACT_NOTARG>You grimace painfully at the thought.</ACT_NOTARG>
+  <PER_NOTARG>$n grimaces painfully at the thought.</PER_NOTARG>
+  <ACT_BADTARG>You grimace at no one in particular.</ACT_BADTARG>
+  <ACT_ACTTARG>You grimace painfully at your thoughts.</ACT_ACTTARG>
+  <PER_ACTTARG>$n grimaces painfully to $mself.</PER_ACTTARG>
+  <ACTOR>You grimace at $N.</ACTOR>
+  <TARGET>$n grimaces at you.  What could be wrong?</TARGET>
+  <PEERS>$n grimaces at $n.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="boggle">
+  <ACT_NOTARG>You boggle at the concept.</ACT_NOTARG>
+  <PER_NOTARG>$n boggles at the concept.</PER_NOTARG>
+  <ACT_BADTARG>Boggle away.  They've left.</ACT_BADTARG>
+  <ACT_ACTTARG>You boggle at yourself.  Hmmm...intriguing.</ACT_ACTTARG>
+  <PER_ACTTARG>$n boggles quietly to $mself.</PER_ACTTARG>
+  <ACTOR>You boggle at $N.</ACTOR>
+  <TARGET>$n boggles at you.</TARGET>
+  <PEERS>$n boggles at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="beckon">
+  <ACT_NOTARG>You beckon for everyone to follow.</ACT_NOTARG>
+  <PER_NOTARG>$n beckons for everyone to follow.</PER_NOTARG>
+  <ACT_BADTARG>So sorry, that person has already left.</ACT_BADTARG>
+  <ACT_ACTTARG>You beckon to your shadow to follow.</ACT_ACTTARG>
+  <PER_ACTTARG>$n beckons to $s shadow to follow.</PER_ACTTARG>
+  <ACTOR>You beckon for $N to follow -- sure hope they do!</ACTOR>
+  <TARGET>$n beckons for you to follow.</TARGET>
+  <PEERS>$n beckons $N to follow...hmmm what's going on?</PEERS>
+</SOCIAL>
+<SOCIAL NAME="wonder">
+  <ACT_NOTARG>You wonder about how things could have been.</ACT_NOTARG>
+  <PER_NOTARG>$n gets a blank stare on $s face.  What could $e be wondering about?</PER_NOTARG>
+  <ACT_BADTARG>You wonder what would have happened had they been here.</ACT_BADTARG>
+  <ACT_ACTTARG>You wonder about yourself and your purpose here.</ACT_ACTTARG>
+  <PER_ACTTARG>A blank stare crosses $n's face.  What could $e be wondering about?</PER_ACTTARG>
+  <ACTOR>You look at $N and wonder what will happen.</ACTOR>
+  <TARGET>$n looks at you quizzically.</TARGET>
+  <PEERS>$n looks at $N and wonders....</PEERS>
+</SOCIAL>
+<SOCIAL NAME="worry">
+  <ACT_NOTARG>You worry about what's going to happen.</ACT_NOTARG>
+  <PER_NOTARG>A troubled look suddenly crosses $n's face.  Wonder what's wrong?</PER_NOTARG>
+  <ACT_BADTARG>Well they obviously aren't worried -- they left!</ACT_BADTARG>
+  <ACT_ACTTARG>You worry about what's going to happen.</ACT_ACTTARG>
+  <PER_ACTTARG>A troubled look suddenly crosses $n's face.  Wonder what's wrong?</PER_ACTTARG>
+  <ACTOR>You look at $N worriedly.</ACTOR>
+  <TARGET>$n looks at you worriedly.</TARGET>
+  <PEERS>$n looks at $N with a troubled gaze.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="drool">
+  <ACT_NOTARG>You drool down the front of your shirt.</ACT_NOTARG>
+  <PER_NOTARG>$n drools all over $mself -- making a TERRIBLE mess!</PER_NOTARG>
+  <ACT_BADTARG>Oh fine, make a pool of slobber -- they aren't even here!</ACT_BADTARG>
+  <ACT_ACTTARG>You drool down the front of your shirt.</ACT_ACTTARG>
+  <PER_ACTTARG>$n drools all over $mself -- making a TERRIBLE mess!</PER_ACTTARG>
+  <ACTOR>You drool messily on $N.</ACTOR>
+  <TARGET>$n looks at you lustily and drools.</TARGET>
+  <PEERS>$n drools upon $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="nod">
+  <ACT_NOTARG>You nod.</ACT_NOTARG>
+  <PER_NOTARG>$n nods.</PER_NOTARG>
+  <ACT_BADTARG>Nod your head off -- they aren't here.</ACT_BADTARG>
+  <ACT_ACTTARG>You attempt to nod at yourself and get dizzy instead.</ACT_ACTTARG>
+  <PER_ACTTARG>$n nods quietly to $mself.  What a wacko.</PER_ACTTARG>
+  <ACTOR>You nod at $N.</ACTOR>
+  <TARGET>$n nods at you in agreement.</TARGET>
+  <PEERS>$n nods at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="purr">
+  <ACT_NOTARG>MMMMMMEEEEEEEEEOOOOOOOOOOOOOWWWWWWWWWWW!!!!!!!!!!!</ACT_NOTARG>
+  <PER_NOTARG>$n purrs contentedly.</PER_NOTARG>
+  <ACT_BADTARG>You silly cat!  They aren't here.</ACT_BADTARG>
+  <ACT_ACTTARG>You purr quietly to yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n purrs contentedly to $mself.</PER_ACTTARG>
+  <ACTOR>You rub up against $N and purr contentedly.</ACTOR>
+  <TARGET>$n rubs up against you and purrs contentedly.</TARGET>
+  <PEERS>$n rubs against $N and purrs contentedly.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="point">
+  <ACT_NOTARG>You point in every direction.</ACT_NOTARG>
+  <PER_NOTARG>$n points excitedly!</PER_NOTARG>
+  <ACT_BADTARG>You point at no one in particular.</ACT_BADTARG>
+  <ACT_ACTTARG>You point at yourself, obviously very confused.</ACT_ACTTARG>
+  <PER_ACTTARG>$n points at $mself, obviously very confused.</PER_ACTTARG>
+  <ACTOR>You point at $N.</ACTOR>
+  <TARGET>$n points at you.  How rude!</TARGET>
+  <PEERS>$n points excitedly at $N!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="rub">
+  <ACT_NOTARG>You rub your hands together in greedy anticipation.</ACT_NOTARG>
+  <PER_NOTARG>$n rubs $s hands together in greedy anticipation.</PER_NOTARG>
+  <ACT_BADTARG>Shame to waste those talented hands, but they've already left.</ACT_BADTARG>
+  <ACT_ACTTARG>You rub yourself...lingering a little too long in some places.</ACT_ACTTARG>
+  <PER_ACTTARG>$n rubs $mself...what a creep!</PER_ACTTARG>
+  <ACTOR>You give $N a nice, long, kinky rubdown.</ACTOR>
+  <TARGET>$n gives you a rubdown, running $s hands over your tense shoulders...Mmmm...</TARGET>
+  <PEERS>$n gives $N a nice long rubdown.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="bleed">
+  <ACT_NOTARG>You bleed profusely -- making a horrible mess!</ACT_NOTARG>
+  <PER_NOTARG>$n weakly bleeds all over the floor.</PER_NOTARG>
+  <ACT_BADTARG>Bleed on whom?</ACT_BADTARG>
+  <ACT_ACTTARG>You bleed all over yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n bleeds profusely all over $mself.</PER_ACTTARG>
+  <ACTOR>You bleed on $N -- ewww!</ACTOR>
+  <TARGET>$n bleeds on you -- ewww!  Get away!!</TARGET>
+  <PEERS>$n bleeds on $N.  Watch out, YOU might be next!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="highfive">
+  <ACT_NOTARG>You jump in the air and give a BIG high five to...umm...absolutely nothing.</ACT_NOTARG>
+  <PER_NOTARG>$n wildly high fives the air, looking very foolish -- very foolish indeed.</PER_NOTARG>
+  <ACT_BADTARG>Sorry, they have already left.</ACT_BADTARG>
+  <ACT_ACTTARG>You try to give yourself a high five.  What ARE you thinking?</ACT_ACTTARG>
+  <PER_ACTTARG>$n tries to high five $mself, but ends up looking foolish instead.</PER_ACTTARG>
+  <ACTOR>You jump in the air and give a BIG high five to $N!</ACTOR>
+  <TARGET>$n gives you a BIG high five!  Way to go!!</TARGET>
+  <PEERS>$n enthusiastically high-five's $N!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="propose">
+  <ACT_NOTARG>You propose to everyone in the room.</ACT_NOTARG>
+  <PER_NOTARG>$n proposes to everyone in the room.  Very odd.</PER_NOTARG>
+  <ACT_BADTARG>You must be lonely.  They aren't here.</ACT_BADTARG>
+  <ACT_ACTTARG>You are SO full of yourself!</ACT_ACTTARG>
+  <PER_ACTTARG>$n proposes to $mself -- how narcissistic!</PER_ACTTARG>
+  <ACTOR>You kneel and romantically propose to $N.</ACTOR>
+  <TARGET>$n gets down on one knee and romantically proposes to you.</TARGET>
+  <PEERS>$n gets on one knee and proposes to $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="peer">
+  <ACT_NOTARG>You peer around yourself intently.</ACT_NOTARG>
+  <PER_NOTARG>$n peers around $mself intently.</PER_NOTARG>
+  <ACT_BADTARG>They aren't here.</ACT_BADTARG>
+  <ACT_ACTTARG>You get a little cross-eyed with your attempts to stare yourself down.</ACT_ACTTARG>
+  <PER_ACTTARG>$n peers at $mself, crossing $s eyes in the process.</PER_ACTTARG>
+  <ACTOR>You peer intently at $N.</ACTOR>
+  <TARGET>$n peers at you intently.</TARGET>
+  <PEERS>$n peers intently at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="worship">
+  <ACT_NOTARG>You prostrate yourself and worship the gods!</ACT_NOTARG>
+  <PER_NOTARG>$n prostrates $mself and worships the gods!</PER_NOTARG>
+  <ACT_BADTARG>You can't worship someone who isn't here.</ACT_BADTARG>
+  <ACT_ACTTARG>You worship yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n worships $mself.</PER_ACTTARG>
+  <ACTOR>You fall on your knees and worship $N.</ACTOR>
+  <TARGET>$n falls to the ground and worships you.</TARGET>
+  <PEERS>$n falls on $s knees and worships $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="bearhug">
+  <ACT_NOTARG>Whom do you wish to bearhug?</ACT_NOTARG>
+  <ACT_BADTARG>Perhaps you should shower your affections on someone who is here?</ACT_BADTARG>
+  <ACT_ACTTARG>You vainly clutch yourself in a bearhug for consolation.</ACT_ACTTARG>
+  <PER_ACTTARG>$n hugs $mself as tightly as possible.  Looks like $e could use a hand.</PER_ACTTARG>
+  <ACTOR>You overwhelm $N with a great, big, hulking bearhug.</ACTOR>
+  <TARGET>$n clutches you tightly in an overwhelming bearhug!</TARGET>
+  <PEERS>$n encompasses $N in an ENORMOUS bearhug!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="innocent">
+  <ACT_NOTARG>You innocently whistle a tune.</ACT_NOTARG>
+  <PER_NOTARG>$n looks around and whistles innocently.</PER_NOTARG>
+  <ACT_BADTARG>Don't even TRY -- they've already left.</ACT_BADTARG>
+  <ACTOR>You look at $N and bat your eyelashes -- the picture of innocence!</ACTOR>
+  <TARGET>$n looks at you and innocently bats $s eyelashes.</TARGET>
+  <PEERS>$n bats $s eyelashes innocently at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="collapse">
+  <ACT_NOTARG>You collapse on the floor from exhaustion.</ACT_NOTARG>
+  <PER_NOTARG>$n dramatically collapses to the floor from exhaustion.</PER_NOTARG>
+  <ACT_BADTARG>They've already left, just collapse on the floor.</ACT_BADTARG>
+  <ACTOR>You collapse right into $N's arms.</ACTOR>
+  <TARGET>Suddenly, $n collapses into your arms from exhaustion.</TARGET>
+  <PEERS>$n collapses right into $N's arms.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="stretch">
+  <ACT_NOTARG>You lean back and streeeeeettch your arms and legs.</ACT_NOTARG>
+  <PER_NOTARG>$n stretches luxuriously.  Kinda makes you want to doesn't it?</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="spam">
+  <ACT_NOTARG>You mutter, 'spam' quietly to yourself again and again.</ACT_NOTARG>
+  <PER_NOTARG>$n rests in a corner and mutters 'spam' quietly to $mself.</PER_NOTARG>
+  <ACT_BADTARG>Spam away -- they've left.</ACT_BADTARG>
+  <ACTOR>You SPAM $N mercilessly!</ACTOR>
+  <TARGET>You've been SPAMMED by $n!</TARGET>
+  <PEERS>$n spams $N!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="boast">
+  <ACT_NOTARG>You boast loudly of all your amazing accomplishments.</ACT_NOTARG>
+  <PER_NOTARG>$n boasts loudly in a pigheaded fashion.</PER_NOTARG>
+  <ACT_BADTARG>Your ego takes a blow.  They've already left.</ACT_BADTARG>
+  <ACT_ACTTARG>You boast to yourself of all your great feats!  Your own biggest fan.</ACT_ACTTARG>
+  <PER_ACTTARG>$n boasts to $mself -- what an ego!</PER_ACTTARG>
+  <ACTOR>You boast to $N of all your great deeds.</ACTOR>
+  <TARGET>Once again, $n boasts to you, what a bloated ego!</TARGET>
+  <PEERS>$n boasts to $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="squirm">
+  <ACT_NOTARG>You squirm uncontrollably in your consternation.</ACT_NOTARG>
+  <PER_NOTARG>$n squirms uncontrollably, suddenly looking very uncomfortable.</PER_NOTARG>
+  <ACTOR>You look at $N and squirm with delight.</ACTOR>
+  <TARGET>$n looks at you and squirms with delight.</TARGET>
+  <PEERS>$n looks at $N and squirms with delight.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="moo">
+  <ACT_NOTARG>You chew your cud and moo plaintively.  Muh-OOOOO!</ACT_NOTARG>
+  <PER_NOTARG>$n turns cowlike eyes on you, chews $s cud, and moos plaintively.</PER_NOTARG>
+  <ACT_BADTARG>You'd better find someone else to moo at.</ACT_BADTARG>
+  <ACT_ACTTARG>You settle down into the center of your bovine Zen; the foolish world thinks you're just mooing.</ACT_ACTTARG>
+  <PER_ACTTARG>$n is mooing at $mself again...  You look for an exit...</PER_ACTTARG>
+  <ACTOR>You focus all your bovine Zen on $N, and speak your thoughts.  Muh-OOOOO!</ACTOR>
+  <TARGET>$n moos at you.  What could that possibly mean?</TARGET>
+  <PEERS>Slowly, $n looks at $N, chews $s cud, and muh-OOOOs!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="moon">
+  <ACT_NOTARG>You drop your drawers and moon everyone in the room!</ACT_NOTARG>
+  <PER_NOTARG>$n drops $s pants and gives you the vertical smile!</PER_NOTARG>
+  <ACT_BADTARG>You stand, with your pants around your ankles, looking VERY silly!</ACT_BADTARG>
+  <ACT_ACTTARG>You try to moon yourself, but you can't see your A** that well.</ACT_ACTTARG>
+  <PER_ACTTARG>$n nearly goes into convulsions while trying to moon $mself.</PER_ACTTARG>
+  <ACTOR>You bend over and moon $N.</ACTOR>
+  <TARGET>$n bends over and gives you the vertical smile!</TARGET>
+  <PEERS>$n drops $s pants and rudely moons $N!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="goose">
+  <ACT_NOTARG>Who would you like to goose?</ACT_NOTARG>
+  <ACT_BADTARG>You should go hunting for another victim, they left.</ACT_BADTARG>
+  <ACT_ACTTARG>You pinch yourself on the rear, you must be desperate.</ACT_ACTTARG>
+  <PER_ACTTARG>$n pinches $mself on the rear.</PER_ACTTARG>
+  <ACTOR>You tenderly goose $N on the tush.</ACTOR>
+  <TARGET>$n gooses you tenderly!</TARGET>
+  <PEERS>$n reaches around $N's backside and gooses $M tenderly.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="wince">
+  <ACT_NOTARG>You wince in agony.</ACT_NOTARG>
+  <PER_NOTARG>$n winces in agony.</PER_NOTARG>
+  <ACTOR>You look at $N and wince at $S remark.</ACTOR>
+  <TARGET>$n winces at your remark.</TARGET>
+  <PEERS>$n winces at $N's remark.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="type">
+  <ACT_NOTARG>You can't type for crap tonight!  You give up in frustration!</ACT_NOTARG>
+  <PER_NOTARG>$n throws $s hands up in disgust at $s lousy typing skills!</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="brb">
+  <ACT_NOTARG>Hope to see you soon!</ACT_NOTARG>
+  <PER_NOTARG>$n will be right back!</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="mutter">
+  <ACT_NOTARG>You mutter quietly to yourself.</ACT_NOTARG>
+  <PER_NOTARG>$n mutters something quietly to $mself.</PER_NOTARG>
+  <ACT_BADTARG>There's nothing left for you to say, they've left!</ACT_BADTARG>
+  <ACT_ACTTARG>You mutter quietly to yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n mutters something quietly to $mself.</PER_ACTTARG>
+  <ACTOR>You mutter something to $N.</ACTOR>
+  <TARGET>$n looks at you and mutters something nasty under $s breath.</TARGET>
+  <PEERS>$n looks at $N and mutters something nasty under $s breath.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="rofl">
+  <ACT_NOTARG>You roll on the floor, laughing hysterically.</ACT_NOTARG>
+  <PER_NOTARG>$n falls to the ground and rolls around laughing hysterically.</PER_NOTARG>
+  <ACTOR>You fall to the floor laughing at $N's remark.</ACTOR>
+  <TARGET>$n rolls on the floor laughing at your antics!</TARGET>
+  <PEERS>$n rolls on the floor laughing at $N's antics!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="sob">
+  <ACT_NOTARG>You sob quietly to yourself.</ACT_NOTARG>
+  <PER_NOTARG>$n sobs in misery.</PER_NOTARG>
+  <ACTOR>You sob quietly to yourself because $N has hurt your feelings so badly.</ACTOR>
+  <TARGET>You feel like a cad because you've made $n sob.</TARGET>
+  <PEERS>$n sobs quietly to $mself because $N was a jerk!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="pant">
+  <ACT_NOTARG>You pant lustily.</ACT_NOTARG>
+  <PER_NOTARG>$n pants lustily.</PER_NOTARG>
+  <ACTOR>You pant lustily at $M.</ACTOR>
+  <TARGET>$n looks at you and pants lustily...</TARGET>
+  <PEERS>$n looks at $N and pants lustily.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="whine">
+  <ACT_NOTARG>You whine to anyone who will listen to you.</ACT_NOTARG>
+  <PER_NOTARG>$n whines pathetically to anyone who will listen.</PER_NOTARG>
+  <ACT_BADTARG>They really don't care.</ACT_BADTARG>
+  <ACT_ACTTARG>You whine to yourself, probably the only one who will listen.</ACT_ACTTARG>
+  <PER_ACTTARG>$n whines to $mself.  At least $e isn't bitching to YOU.</PER_ACTTARG>
+  <ACTOR>You whine to $M, hoping desperately that at least $E will give a damn.</ACTOR>
+  <TARGET>$n whines pathetically to you.  What a loser!</TARGET>
+  <PEERS>$n whines pathetically to $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="flex">
+  <ACT_NOTARG>You flex your muscles proudly!</ACT_NOTARG>
+  <PER_NOTARG>$n flexes $s muscles...what a stud!?!</PER_NOTARG>
+  <ACTOR>You show off to $N, flexing your muscles proudly.</ACTOR>
+  <TARGET>$n flexes $s muscles in a vain attempt to show off to you.</TARGET>
+  <PEERS>$n flexes $s muscles, in a vain attempt to impress $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="embrace">
+  <ACT_NOTARG>Who would you like to embrace?</ACT_NOTARG>
+  <ACT_BADTARG>Your heart breaks as you realize you are alone.</ACT_BADTARG>
+  <ACT_ACTTARG>You try to console yourself with a loving embrace.</ACT_ACTTARG>
+  <PER_ACTTARG>$n tries to console $mself by wrapping $s arms around $mself.</PER_ACTTARG>
+  <ACTOR>You wrap your arms around $N in a warm and loving embrace.</ACTOR>
+  <TARGET>$n takes you in $s arms in a warm and loving embrace.</TARGET>
+  <PEERS>$n wraps $s arms around $N in a warm and loving embrace.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="duck">
+  <ACT_NOTARG>DUCK!!!!</ACT_NOTARG>
+  <PER_NOTARG>$n ducks defensively.</PER_NOTARG>
+  <ACTOR>You duck defensively, anticipating the oncoming swipe from $N.</ACTOR>
+  <TARGET>$n ducks, please oh please don't hit $m!</TARGET>
+  <PEERS>$n ducks, anticipating $N's reaction.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="bonk">
+  <ACT_NOTARG>***BONK!!!***</ACT_NOTARG>
+  <ACT_BADTARG>***BONK*** they left...</ACT_BADTARG>
+  <ACT_ACTTARG>You bonk yourself, fool that you are.</ACT_ACTTARG>
+  <PER_ACTTARG>$n bonks $mself and grimaces in pain.</PER_ACTTARG>
+  <ACTOR>You bonk $N on the head for being such a moron.</ACTOR>
+  <TARGET>$n bonks you on the head for being so foolish.</TARGET>
+  <PEERS>$n bonks $N on the head for being such an UTTER moron.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="squeal">
+  <ACT_NOTARG>You squeal with delight!</ACT_NOTARG>
+  <PER_NOTARG>$n lets out a sudden squeal of delight!</PER_NOTARG>
+  <ACTOR>You look at $N and squeal with delight!</ACTOR>
+  <TARGET>$n looks at you and squeals with delight!</TARGET>
+  <PEERS>$n squeals with delight at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="tackle">
+  <ACT_NOTARG>You're going to tackle everyone in the room?!</ACT_NOTARG>
+  <ACTOR>You tackle $N playfully.</ACTOR>
+  <TARGET>$n brings you down in a playful tackle!</TARGET>
+  <PEERS>$n playfully tackles $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="spit">
+  <ACT_NOTARG>You spit in utter disgust.</ACT_NOTARG>
+  <PER_NOTARG>$n spits in utter disgust!</PER_NOTARG>
+  <ACT_BADTARG>Your victim isn't here.</ACT_BADTARG>
+  <ACT_ACTTARG>You spit on yourself, pretty nasty eh?</ACT_ACTTARG>
+  <PER_ACTTARG>$n spits on $mself...what a sicko!</PER_ACTTARG>
+  <ACTOR>You spit on $N...you're gross!</ACTOR>
+  <TARGET>$n spits on you -- how gross!</TARGET>
+  <PEERS>$n spits on $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="life">
+  <ACT_NOTARG>You try to get a life, and fail.</ACT_NOTARG>
+  <PER_NOTARG>$n tries to get a life, and fails.</PER_NOTARG>
+  <ACT_BADTARG>Who needs a life?</ACT_BADTARG>
+  <ACT_ACTTARG>But you have none to give!</ACT_ACTTARG>
+  <PER_ACTTARG>$n attempts to give $mself a life, but has none to spare.</PER_ACTTARG>
+  <ACTOR>$N needs to get a life!</ACTOR>
+  <TARGET>You need to get a life!</TARGET>
+  <PEERS>$N needs to get a life!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="mosh">
+  <ACT_NOTARG>You mosh insanely around the room!</ACT_NOTARG>
+  <PER_NOTARG>$n moshes insanely around the room!</PER_NOTARG>
+  <ACT_BADTARG>Hmmm...  your victim found a new dance partner.</ACT_BADTARG>
+  <ACT_ACTTARG>Masochist!</ACT_ACTTARG>
+  <PER_ACTTARG>$n throws $mself on the floor, grinding $mself into a bloody pulp</PER_ACTTARG>
+  <ACTOR>You mosh sadistically against $N ... you WILL be punished.</ACTOR>
+  <TARGET>$n slams into you, moshing painfully against you.  That REALLY hurts!</TARGET>
+  <PEERS>$n bounces off of $N in a vain attempt to mosh... what a LOSER.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="flinch">
+  <ACT_NOTARG>EEEK... You flinch in obvious pain.</ACT_NOTARG>
+  <PER_NOTARG>$n flinches in obvious pain... you wonder what $e did THIS time.</PER_NOTARG>
+  <ACT_BADTARG>Relax, $E is gone.</ACT_BADTARG>
+  <ACT_ACTTARG>You can't belive what you've done...</ACT_ACTTARG>
+  <PER_ACTTARG>$n twitches violently, shocked at $s own behavior.</PER_ACTTARG>
+  <ACTOR>Don't you wish you could just crawl under a rock and die?</ACTOR>
+  <TARGET>$n flinches in response to your cold rebuke.</TARGET>
+  <PEERS>$n sneaks a glance at $N and flinches.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="air">
+  <ACT_NOTARG>You grab your air guitar and play for all you're worth.</ACT_NOTARG>
+  <PER_NOTARG>$n air-guitars like a mad man ... EXCELLENT!!!</PER_NOTARG>
+  <ACT_BADTARG>Awww... you have no audience!</ACT_BADTARG>
+  <ACT_ACTTARG>You play softly to yourself.</ACT_ACTTARG>
+  <ACTOR>You hope $E appreciates your (total lack of) talent.</ACTOR>
+  <TARGET>$n plays a most excellent tune for you on $s most excellent air guitar.</TARGET>
+  <PEERS>$n is surrounded by air groupies.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="tweak">
+  <ACT_NOTARG>Tweak who?</ACT_NOTARG>
+  <ACT_BADTARG>*Sniff*  That cheek seems to be missing.</ACT_BADTARG>
+  <ACT_ACTTARG>You can't DO that.</ACT_ACTTARG>
+  <ACTOR>You gently tweak $S cheek.  Isn't $E so CUTE?</ACTOR>
+  <TARGET>$n lovingly tweaks your cheek.  It reminds you of Grandma... sniff...</TARGET>
+  <PEERS>$n tweaked $N's cheek... don't they look so adorable together?</PEERS>
+</SOCIAL>
+<SOCIAL NAME="peck">
+  <ACT_NOTARG>Wouldn't you like to do that to a person, or do you prefer air?</ACT_NOTARG>
+  <ACT_BADTARG>I guess you scared them away...</ACT_BADTARG>
+  <ACT_ACTTARG>You must REALLY like yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n tries in vain to wrap $s lips around $s cheeks.</PER_ACTTARG>
+  <ACTOR>Risking a slap to the face, you give $N a peck on the cheek.</ACTOR>
+  <TARGET>$n pecks you on the cheek, how sweet!</TARGET>
+  <PEERS>$n smiles and gives $N a chaste peck on the cheek.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="explode">
+  <ACT_NOTARG>You feel the blood boiling in your veins!</ACT_NOTARG>
+  <PER_NOTARG>$n turns a deep red, fighting to contain $s temper...</PER_NOTARG>
+  <ACT_BADTARG>Temper Temper... they left.</ACT_BADTARG>
+  <ACT_ACTTARG>Your soul burns brightly then fades to nothing.</ACT_ACTTARG>
+  <PER_ACTTARG>$n implodes!!!  Only a grease spot remains where $e once stood.</PER_ACTTARG>
+  <ACTOR>You feel your rage explode deep in the pit of your stomach...</ACTOR>
+  <TARGET>$n is ANGRY with you... I'd run if I were you!!!</TARGET>
+  <PEERS>$n burns holes through $N with his explosive anger!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="raspberry">
+  <ACT_NOTARG>You stick your tongue out at ... well, no one.</ACT_NOTARG>
+  <PER_NOTARG>$n sticks $s tongue out, catching a few flies in the process.</PER_NOTARG>
+  <ACT_BADTARG>Hang your tongue out if you like, $e isn't here.</ACT_BADTARG>
+  <ACT_ACTTARG>You try to stick your tongue out at yourself... somehow, it isn't the same.</ACT_ACTTARG>
+  <ACTOR>You give $N the raspberry... and spit all over yourself.</ACTOR>
+  <TARGET>You are splattered with saliva as $n gives you the raspberry... HOW RUDE!</TARGET>
+  <PEERS>$n gives $N the raspberry... PHBT!  What a mess... Spit EVERYWHERE!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="flash">
+  <ACT_NOTARG>You grin and strut as you open your coat and show what you've got!</ACT_NOTARG>
+  <PER_NOTARG>$n rips $s clothes off and parades naked around the room!</PER_NOTARG>
+  <ACT_BADTARG>Exhibitionist, that person isn't here!</ACT_BADTARG>
+  <ACT_ACTTARG>That's sick.</ACT_ACTTARG>
+  <PER_ACTTARG>PERVERT PRESENT!  $n is trying to flash $mself</PER_ACTTARG>
+  <ACTOR>Swiftly you jerk open your jacket, trying to get $M to notice you.</ACTOR>
+  <TARGET>You gasp!  $n has just revealed $s "equipment" to you!</TARGET>
+  <PEERS>Cover your eyes, $n is exposing $mself to $n!  EWWWW!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="strip">
+  <ACT_NOTARG>You do a slow strip tease for the people...</ACT_NOTARG>
+  <PER_NOTARG>$n begins a slow, erotic strip-tease act...</PER_NOTARG>
+  <ACT_BADTARG>Your toy doesn't seem to be here...</ACT_BADTARG>
+  <ACT_ACTTARG>You can't DO that in public!</ACT_ACTTARG>
+  <ACTOR>You start to undress $N ... one piece of clothing at a time...</ACTOR>
+  <TARGET>$n has started to strip you... woah BABY!</TARGET>
+  <PEERS>$n runs $s hands over $Ns body, slowly stripping away the clothing...</PEERS>
+</SOCIAL>
+<SOCIAL NAME="undress">
+  <ACT_NOTARG>You start to undress in the shadows, waiting for someone to notice.</ACT_NOTARG>
+  <PER_NOTARG>$n begins to undress... $e is VERY sexy... *Pant*</PER_NOTARG>
+  <ACT_BADTARG>They are not here...</ACT_BADTARG>
+  <ACT_ACTTARG>A mirror would work better...</ACT_ACTTARG>
+  <ACTOR>You undress $M with your eyes... Kinky.</ACTOR>
+  <TARGET>Feeling exposed, you sense $n undressing you with $s eyes...</TARGET>
+  <PEERS>You feel the temperature of the room rise as $n lusts on $N...</PEERS>
+</SOCIAL>
+<SOCIAL NAME="tongue">
+  <ACT_NOTARG>You slowly give your tongue a nice workout.</ACT_NOTARG>
+  <ACT_BADTARG>Never around when required...</ACT_BADTARG>
+  <ACT_ACTTARG>You slowly tongue yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n slowly tongues $mself... ICK.</PER_ACTTARG>
+  <ACTOR>Mmmm... you give $N a good working over with your tongue...</ACTOR>
+  <TARGET>$n wraps $s tongue around you, moving it across your young, nubile flesh...</TARGET>
+  <PEERS>$n slides $s tongue over $N's body...</PEERS>
+</SOCIAL>
+<SOCIAL NAME="view">
+  <ACT_NOTARG>You sit back and watch the world go by.</ACT_NOTARG>
+  <PER_NOTARG>$n kicks back and enjoys the view.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="grumble">
+  <ACT_NOTARG>You grumble distractedly to yourself</ACT_NOTARG>
+  <PER_NOTARG>$n grumbles and growls. You wonder what's wrong...</PER_NOTARG>
+  <ACT_BADTARG>That person is presently AWOL.</ACT_BADTARG>
+  <ACT_ACTTARG>Why bother?</ACT_ACTTARG>
+  <ACTOR>You grumble at $N, disgusted with their presence.</ACTOR>
+  <TARGET>$n is grumbling at you... what'd you do?</TARGET>
+  <PEERS>$n seems to be a grumpy bear... $e is grumbling at poor $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="cheer">
+  <ACT_NOTARG>You cheer and dance as the joy within you bursts forth!</ACT_NOTARG>
+  <PER_NOTARG>$n cheers and sings... $e is just BURSTING with joy!</PER_NOTARG>
+  <ACT_BADTARG>Who? Huh? Where?  They're not here, that's for sure</ACT_BADTARG>
+  <ACT_ACTTARG>You cheer silently for yourself since nobody else will</ACT_ACTTARG>
+  <PER_ACTTARG>$n resorts to cheering for $mself... how sad.</PER_ACTTARG>
+  <ACTOR>You cheer $N on and wish $M good luck!</ACTOR>
+  <TARGET>You are cheered on by $n... you feel so loved!</TARGET>
+  <PEERS>*Yay!*  Go $N!!!  $n cheers $M on.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="plead">
+  <ACT_NOTARG>You beg and plead to anyone who will listen.</ACT_NOTARG>
+  <PER_NOTARG>$n pleads $s case to anyone who will listen... You ALMOST feel sorry for $s.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="charge">
+  <ACT_NOTARG>You charge into the fray!</ACT_NOTARG>
+  <PER_NOTARG>$n charges into the fray!  All guts, no brains.</PER_NOTARG>
+  <ACT_BADTARG>Nobody 'round with that name, Mister!</ACT_BADTARG>
+  <ACT_ACTTARG>You run your head into a brick wall.  OUCH!</ACT_ACTTARG>
+  <ACTOR>With surprising dexterity, you head-butt $N!</ACTOR>
+  <TARGET>OOF!  $n rammed $s head into your stomach!  That HURT.</TARGET>
+  <PEERS>$n ducks down low, charges forward, and head-butts $N!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="criticize">
+  <ACT_NOTARG>Yes, but who?</ACT_NOTARG>
+  <ACT_BADTARG>Where oh where has my victim gone, oh where oh where...</ACT_BADTARG>
+  <ACT_ACTTARG>You criticize yourself profusely.</ACT_ACTTARG>
+  <PER_ACTTARG>$n tears $mself apart, cursing $s own stupidity.</PER_ACTTARG>
+  <ACTOR>You criticize $M with all the warmth of a snake.</ACTOR>
+  <TARGET>$n informs you that your attempts need some MAJOR adjustments.</TARGET>
+  <PEERS>With a nasty grin, $n rips apart $Ns efforts.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="run">
+  <ACT_NOTARG>You run away in terror and horror!</ACT_NOTARG>
+  <PER_NOTARG>$n runs away in utter terror!</PER_NOTARG>
+  <ACT_BADTARG>No reason to be afraid, they aren't here.</ACT_BADTARG>
+  <ACT_ACTTARG>Are you THAT ugly?</ACT_ACTTARG>
+  <PER_ACTTARG>$n looks in the mirror, sees $s face, and runs away terrified!</PER_ACTTARG>
+  <ACTOR>You run away from $N in complete terror!</ACTOR>
+  <TARGET>$n runs from you, fearing for $s life!</TARGET>
+  <PEERS>$n runs away from $N in utter terror and horror!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="judge">
+  <ACT_NOTARG>Yes, but who?</ACT_NOTARG>
+  <ACT_BADTARG>They aren't here right now.</ACT_BADTARG>
+  <ACT_ACTTARG>You don't REALLY want to do that.</ACT_ACTTARG>
+  <ACTOR>You judge $m on a scale of 1 to 10.</ACTOR>
+  <TARGET>$n judges your actions on a scale of 1 to 10 and comes up with ZERO!!!</TARGET>
+  <PEERS>On a scale from 1 to 10, $n thinks $N is a complete ZERO!!!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="insane">
+  <ACT_NOTARG>You feel your sanity slipping away...</ACT_NOTARG>
+  <PER_NOTARG>Before your eyes, $n's sanity is slipping away...</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="cover">
+  <ACT_NOTARG>You cover your ears to protect them from the noise.</ACT_NOTARG>
+  <PER_NOTARG>$n covers $s ears to protect them from all the noise.</PER_NOTARG>
+  <ACT_BADTARG>They aren't here right now.</ACT_BADTARG>
+  <ACT_ACTTARG>No... I don't think so.</ACT_ACTTARG>
+  <ACTOR>You glare at $N and cover your ears.</ACTOR>
+  <TARGET>$n covers $s ears because of you... you are TOO LOUD!</TARGET>
+  <PEERS>$n glares at $N and covers $s ears.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="flare">
+  <ACT_NOTARG>You flare your nostrils disdainfully.</ACT_NOTARG>
+  <PER_NOTARG>$n flares $s nostrils disdainfully.</PER_NOTARG>
+  <ACT_BADTARG>Flare if you wish, but that person isn't here to see it.</ACT_BADTARG>
+  <ACT_ACTTARG>*Sniff*  But you should LOVE yourself!</ACT_ACTTARG>
+  <ACTOR>You flare your nostrils disdainfully at $N... HOW RUDE!</ACTOR>
+  <TARGET>$n flares $s nostrils disdainfully at you... what'd you DO???</TARGET>
+  <PEERS>$n flares $s nostrils disdainfully at $N and turns up $s snobbish nose.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="head">
+  <ACT_NOTARG>You toss your head haughtily.</ACT_NOTARG>
+  <PER_NOTARG>$n tosses $s head haughtily.</PER_NOTARG>
+  <ACT_BADTARG>That person is AWOL.</ACT_BADTARG>
+  <ACT_ACTTARG>Why would you do that?</ACT_ACTTARG>
+  <ACTOR>You toss your head haughtily at $N.</ACTOR>
+  <TARGET>$n tossed $s head haughtily at you... :(</TARGET>
+  <PEERS>$n tosses her head haughtily at $N... what an ATTITUDE!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="pie">
+  <ACT_NOTARG>You pick up a pie and toss it around for a bit.</ACT_NOTARG>
+  <PER_NOTARG>$n picks up a pie and tosses it around for a bit.</PER_NOTARG>
+  <ACT_BADTARG>That person isn't here...</ACT_BADTARG>
+  <ACT_ACTTARG>You bury your face in the pie... yummmmm!!! :)</ACT_ACTTARG>
+  <PER_ACTTARG>$n buries $s face in the pie, licking the pan clean.</PER_ACTTARG>
+  <ACTOR>You toss a pie at $N and hit $M right in the FACE!</ACTOR>
+  <TARGET>$n tossed a pie in your face... and now you are all covered in GOO!</TARGET>
+  <PEERS>$n tosses a pie at $N and hits $m right in the FACE!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="cower">
+  <ACT_NOTARG>You cower in a corner.</ACT_NOTARG>
+  <PER_NOTARG>$n cowers in a corner and whimpers softly.</PER_NOTARG>
+  <ACT_BADTARG>That person is AWOL at the moment.</ACT_BADTARG>
+  <ACT_ACTTARG>You are afraid of your own shadow!</ACT_ACTTARG>
+  <PER_ACTTARG>$n cowers in the corner afraid of $s own shadow</PER_ACTTARG>
+  <ACTOR>You cower away from $N and $S harsh words.</ACTOR>
+  <TARGET>You scared poor $n!  Now $S is cowering in a corner, afraid for $s life.</TARGET>
+  <PEERS>$n cowers in a corner, terrified that $N will come after $m.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="noogie">
+  <ACT_NOTARG>You can't noogie the AIR!  It has no head.</ACT_NOTARG>
+  <ACT_BADTARG>That person has gone off to other lands...</ACT_BADTARG>
+  <ACT_ACTTARG>You rub your head and create a static charge...</ACT_ACTTARG>
+  <PER_ACTTARG>$n rubs $s OWN head and creates a static charge... *ZAP*</PER_ACTTARG>
+  <ACTOR>You grab $N, get $M in a head lock and NOOGIE $M!</ACTOR>
+  <TARGET>Oh NO, $n grabs you, throws you in a head lock and NOOGIES you!</TARGET>
+  <PEERS>$n grabs $N in a head lock and NOOGIES $M... ARGH!!!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="yeehaw">
+  <ACT_NOTARG>You mount your pony(?) and shout YEEEEEEEHAAAAAAAW!</ACT_NOTARG>
+  <PER_NOTARG>$n bounces up and down screaming *YEEEEEEHAAAAAAW!*</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="pissed">
+  <ACT_NOTARG>You are PISSED!</ACT_NOTARG>
+  <PER_NOTARG>$n is PISSED so watch out!</PER_NOTARG>
+  <ACT_BADTARG>That person is not here...</ACT_BADTARG>
+  <ACT_ACTTARG>You are PISSED at yourself!</ACT_ACTTARG>
+  <PER_ACTTARG>$n is so pissed at $mself.  How could $e be so stupid???</PER_ACTTARG>
+  <ACTOR>You turn a stoney gaze toward $N... you are SOOO pissed at $N!</ACTOR>
+  <TARGET>$n is pissed at you now... What do you think $e'll DO?</TARGET>
+  <PEERS>$n glares at $n.... $n is SOOO PISSED at $m!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="passout">
+  <ACT_NOTARG>You belch and pass out.</ACT_NOTARG>
+  <PER_NOTARG>$n is OBVIOUSLY intoxicated... $e burps loudly and passes out!</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="adjust">
+  <ACT_NOTARG>You look around, make sure nobody is watching, and you adjust your "Tool."</ACT_NOTARG>
+  <PER_NOTARG>$n looks around slyly, smiles, then reaches down and "adjusts" $mself...</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="scratch">
+  <ACT_NOTARG>You scratch yourself contentedly.</ACT_NOTARG>
+  <PER_NOTARG>$n reaches down and scratches $mself...  Now $e looks VERY happy.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="meditate">
+  <ACT_NOTARG>You assume a very comfortable position and begin to meditate.</ACT_NOTARG>
+  <PER_NOTARG>$n rests and begins to meditate... $e chants softly to $mself.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="bkiss">
+  <ACT_NOTARG>You blow kisses to the air.</ACT_NOTARG>
+  <PER_NOTARG>$n blows kisses at no one in particular.</PER_NOTARG>
+  <ACT_BADTARG>You kiss falls to the ground with no one to go to.</ACT_BADTARG>
+  <ACT_ACTTARG>You blow a kiss to yourself... isn't the world beautiful?</ACT_ACTTARG>
+  <PER_ACTTARG>$n blows a kiss to $mself, obviously very in love.</PER_ACTTARG>
+  <ACTOR>You blow a kiss at $N and wonder if $E will catch it.</ACTOR>
+  <TARGET>$n blows a kiss at you and hopes you'll blow one back at $m.</TARGET>
+  <PEERS>$n blows a kiss at $N ... isn't $e so CUTE?</PEERS>
+</SOCIAL>
+<SOCIAL NAME="beer">
+  <ACT_NOTARG>You pull out a six-pack.</ACT_NOTARG>
+  <PER_NOTARG>$n starts to juggle a six-pack of beer.</PER_NOTARG>
+  <ACT_BADTARG>The bottle crashes to the floor and shatters.</ACT_BADTARG>
+  <ACT_ACTTARG>You pop off the top and down a beer.</ACT_ACTTARG>
+  <PER_ACTTARG>$n pops the top off a bottle of beer and downs it in one gulp.</PER_ACTTARG>
+  <ACTOR>You toss a bottle of beer at $N.</ACTOR>
+  <TARGET>$n tossed you a bottle of beer... I think $e wants something...</TARGET>
+  <PEERS>$n tosses a bottle of beer at $N ... let's just hope $e'll catch it!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="bcatch">
+  <ACT_NOTARG>You reach out and rescue the bottle from its flight.</ACT_NOTARG>
+  <PER_NOTARG>$n reaches out and grabs the bottle of beer tossed to $m.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="claw">
+  <ACT_NOTARG>You tighten your hands into a fist.</ACT_NOTARG>
+  <PER_NOTARG>$n clenches $s fists until blood drips from them...</PER_NOTARG>
+  <ACT_BADTARG>They aren't here to claw.</ACT_BADTARG>
+  <ACT_ACTTARG>You claw yourself to shreds!</ACT_ACTTARG>
+  <PER_ACTTARG>$n rips $mself to shreds with $s fingernails!</PER_ACTTARG>
+  <ACTOR>You claw $S eyes out... GROSS!</ACTOR>
+  <TARGET>$n buries $s nails in your eyes and you are blinded by your own blood!</TARGET>
+  <PEERS>$n buries $s nails in $N's eyes ... OH GOD, THE BLOOD!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="rose">
+  <ACT_NOTARG>Who would you like to give it to?</ACT_NOTARG>
+  <ACT_BADTARG>They seem to have left.</ACT_BADTARG>
+  <ACT_ACTTARG>You give yourself a rose and feel a little sad...</ACT_ACTTARG>
+  <PER_ACTTARG>$n gives $mself a rose, dont you feel sorry for $m?</PER_ACTTARG>
+  <ACTOR>You give $M a pretty rose.</ACTOR>
+  <TARGET>$n hands you a beautiful ---'---,--{@</TARGET>
+  <PEERS>$n hands $N a beautiful rose.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="laces">
+  <ACT_NOTARG>Whose laces?</ACT_NOTARG>
+  <ACT_BADTARG>Whose laces?</ACT_BADTARG>
+  <ACT_ACTTARG>You tie your own shoelaces together, try to walk, and promptly fall.</ACT_ACTTARG>
+  <PER_ACTTARG>$n cleverly ties $s own shoelaces together, tries to walk, and sprawls flat on the floor.</PER_ACTTARG>
+  <ACTOR>With the greatest of stealth, you tie $S shoelaces together.</ACTOR>
+  <TARGET>You try to take a step, and you hit the world facedown!  Someone must have tied your shoelaces together!</TARGET>
+  <PEERS>$n sneaks up to $N and ties $S shoelaces together.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="tag">
+  <ACT_NOTARG>Tag whom?</ACT_NOTARG>
+  <PER_NOTARG>$n casts about for someone to tag.</PER_NOTARG>
+  <ACT_BADTARG>Who were you going to tag, then?</ACT_BADTARG>
+  <ACT_ACTTARG>Unable to catch anyone else, you do the intelligent thing and tag yourself. You're still IT!</ACT_ACTTARG>
+  <PER_ACTTARG>Unable to catch anyone else, $n tags $mself.  Are you impressed?</PER_ACTTARG>
+  <ACTOR>>From nowhere, you pounce on $N and TAG $M remorselessly!  BWAHAHA!!!</ACTOR>
+  <TARGET>$n pounces on you and &gt;&gt;&gt; TAGS &lt;&lt;&lt; you!  You're IT!</TARGET>
+  <PEERS>$n dives from the shadows and TAGS $N.  $N IS IT!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="tank">
+  <ACT_NOTARG>You boldly offer to tank for your everyone else.  Are you sure you know what you're getting into?</ACT_NOTARG>
+  <PER_NOTARG>$n offers to tank!</PER_NOTARG>
+  <ACT_BADTARG>Tank for whom?</ACT_BADTARG>
+  <ACT_ACTTARG>No one will tank for you, eh?!? WELL, YOU'LL SHOW THEM!  (right?)</ACT_ACTTARG>
+  <PER_ACTTARG>In dazzling chivalry, $n offers to tank-- for $mself!</PER_ACTTARG>
+  <ACTOR>You offer to tank for $N.</ACTOR>
+  <TARGET>$n offers to tank for you!</TARGET>
+  <PEERS>$n offers to tank for $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="starve">
+  <ACT_NOTARG>You show your prominent ribs and hope that someone will take pity.</ACT_NOTARG>
+  <PER_NOTARG>$n is withering before your eyes!  Starvation!</PER_NOTARG>
+  <ACT_BADTARG>Sorry, but that person isn't around-- looks like you'll starve.</ACT_BADTARG>
+  <ACTOR>You throw yourself upon $S mercy, begging for food.</ACTOR>
+  <TARGET>$n is starving before your eyes!  Could you spare some food, please?</TARGET>
+  <PEERS>$n begs $N for food.  One would think that magic would have cured hunger by now...</PEERS>
+</SOCIAL>
+<SOCIAL NAME="aargh">
+  <ACT_NOTARG>AAAAAARRRRRRGGGGGGHHHHHH!!!!!!</ACT_NOTARG>
+  <PER_NOTARG>$n throws back $s head and howls in profound frustration!</PER_NOTARG>
+  <ACT_BADTARG>You get even MORE frustrated when you can't find anyone to throttle!</ACT_BADTARG>
+  <ACT_ACTTARG>You scream in frustration at your own stupidity!</ACT_ACTTARG>
+  <PER_ACTTARG>$n screams in frustration at $s own stupidity!</PER_ACTTARG>
+  <ACTOR>You scream your frustration and grab for $S throat with both hands!</ACTOR>
+  <TARGET>$n grabs for your throat with two hands, howling in frustration!</TARGET>
+  <PEERS>$n howls in frustration, and leaps for $N, trying to throttle $M!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="homework">
+  <ACT_NOTARG>Your suddenly remember that you have to defend your thesis today...</ACT_NOTARG>
+  <PER_NOTARG>$n looks stricken.  Could $e have blown off some important homework?</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="puff">
+  <ACT_NOTARG>You mimic Puff at her most annoying.</ACT_NOTARG>
+  <PER_NOTARG>$n says, "Did you know that I'm written in C?"</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="yae">
+  <ACT_NOTARG>You sigh, burdened with Yet Another Eeediot.</ACT_NOTARG>
+  <PER_NOTARG>$n sighs, burdened with Yet Another Eeediot.</PER_NOTARG>
+  <ACT_BADTARG>There are plenty of Eeediots, but that one doesn't seem to be present.</ACT_BADTARG>
+  <ACT_ACTTARG>You bonk yourself for the Eeediot you are!</ACT_ACTTARG>
+  <PER_ACTTARG>$n bonks $mself, HARD, and curses $mself for the Eeediot $e is!</PER_ACTTARG>
+  <ACTOR>There's Yet Another Eeediot in the room, and you're looking right at $M.</ACTOR>
+  <TARGET>$n glares at you, obviously not impressed with your intelligence.</TARGET>
+  <PEERS>$n clearly believes that $N is an Eeediot!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="lightbulb">
+  <ACT_NOTARG>*Ding!*  Inspiration!</ACT_NOTARG>
+  <PER_NOTARG>A light bulb appears above $n's head!</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="voodoo">
+  <ACT_NOTARG>Bad juju like this has to be directed at a person.</ACT_NOTARG>
+  <PER_NOTARG>$n looks hostile for a moment.</PER_NOTARG>
+  <ACT_BADTARG>Your hatred finds no such target.</ACT_BADTARG>
+  <ACT_ACTTARG>You stab a pin into your own voodoo doll!  Agony!</ACT_ACTTARG>
+  <PER_ACTTARG>$n jabs a pin into $s own voodoo doll, and twitches in agony!</PER_ACTTARG>
+  <ACTOR>You stare daggers at $N, jabbing pins into $S effigy.</ACTOR>
+  <TARGET>Your heart lurches in your chest, and fiery pain stabs through your skull!</TARGET>
+  <PEERS>$n glares balefully at $N while stabbing a pin into a voodoo doll.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="ogg">
+  <ACT_NOTARG>Ogg who?</ACT_NOTARG>
+  <ACT_BADTARG>You can't find your target.</ACT_BADTARG>
+  <ACT_ACTTARG>If you do that, the universe will explode.</ACT_ACTTARG>
+  <PER_ACTTARG>$n almost oggs $mself, but wisely reconsiders.</PER_ACTTARG>
+  <ACTOR>Engage!</ACTOR>
+  <TARGET>$n oggs your head with photon torpedos!  You are reeling.</TARGET>
+  <PEERS>$n oggs $N's head with photon torpedos!  $N reels.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="confused">
+  <ACT_NOTARG>Your confusion is showing.</ACT_NOTARG>
+  <PER_NOTARG>$n blinks slowly...</PER_NOTARG>
+  <ACT_BADTARG>No wonder you're confused.</ACT_BADTARG>
+  <ACTOR>You blink slowly, trying to decipher $S comment.</ACTOR>
+  <TARGET>$n blinks slowly.  Maybe you left a word out of your sentence?</TARGET>
+  <PEERS>$n blinks slowly.  Maybe $N left a word out of $S sentence...</PEERS>
+</SOCIAL>
+<SOCIAL NAME="beam">
+  <ACT_NOTARG>You beam delightedly at nothing in particular.</ACT_NOTARG>
+  <PER_NOTARG>$n beams broadly at nothing in particular.</PER_NOTARG>
+  <ACT_BADTARG>You look pretty silly beaming at imaginary friends...</ACT_BADTARG>
+  <ACT_ACTTARG>Well, aren't you special?</ACT_ACTTARG>
+  <PER_ACTTARG>$n beams at $mself, obviously pleased.</PER_ACTTARG>
+  <ACTOR>You dazzle $N with your smile.</ACTOR>
+  <TARGET>$n must like you a great deal to beam at you so broadly!</TARGET>
+  <PEERS>$n must like $N a great deal to beam at $M so broadly!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="bite">
+  <ACT_NOTARG>You glare around, muttering "Bite me..." under your breath.</ACT_NOTARG>
+  <PER_NOTARG>$n glares around, muttering "Bite me..." under $s breath.</PER_NOTARG>
+  <ACT_BADTARG>Hungry?  No such luck.</ACT_BADTARG>
+  <ACT_ACTTARG>You bite your knuckle in anguish.</ACT_ACTTARG>
+  <PER_ACTTARG>$n bites $s knuckle in anguish...the tragedy!</PER_ACTTARG>
+  <ACTOR>You bite $N on the neck.</ACTOR>
+  <TARGET>$n bites you on the neck.</TARGET>
+  <PEERS>$n bites $N on the neck!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="discodance">
+  <ACT_NOTARG>Groovy!</ACT_NOTARG>
+  <PER_NOTARG>$n discos wildly!</PER_NOTARG>
+  <ACT_BADTARG>It's okay, you can disco solo too.</ACT_BADTARG>
+  <ACTOR>You grab $N and disco wildly!  Groovy!</ACTOR>
+  <TARGET>$n grabs you and does $m best Travolta!</TARGET>
+  <PEERS>$n grabs $N and does $m best Travolta!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="scuff">
+  <ACT_NOTARG>You scuff your foot sheepishly.</ACT_NOTARG>
+  <PER_NOTARG>$n scuffs $s foot in the dirt, looking very sheepish.</PER_NOTARG>
+  <ACT_BADTARG>They aren't here.</ACT_BADTARG>
+  <ACTOR>You scuff your foot, avoiding $N's gaze.</ACTOR>
+  <TARGET>$n scuffs $s foot and shyly avoids your gaze.</TARGET>
+  <PEERS>$n scuffs $s foot and shyly avoids $N's gaze.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="whap">
+  <ACT_NOTARG>Whap who?</ACT_NOTARG>
+  <ACT_BADTARG>Whiff...</ACT_BADTARG>
+  <ACT_ACTTARG>Ow! You give yourself a resounding whap upside the head.</ACT_ACTTARG>
+  <PER_ACTTARG>Biff!  $n whaps $mself upside the head!</PER_ACTTARG>
+  <ACTOR>You whap $N upside the head!</ACTOR>
+  <TARGET>HEY!  $n whaps you upside the head!</TARGET>
+  <PEERS>With a resounding WHAP!, $n reprimands $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="lag">
+  <ACT_NOTARG>Yes, yes.</ACT_NOTARG>
+  <PER_NOTARG>$n is   m o v i n g      v  e    ry  sl  o w   l   y ...</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="chortle">
+  <ACT_NOTARG>Heh.</ACT_NOTARG>
+  <PER_NOTARG>$n chortles mischievously.</PER_NOTARG>
+  <ACT_BADTARG>Took you a while to get that....they aren't here.</ACT_BADTARG>
+  <ACT_ACTTARG>You chortle at your own joke.</ACT_ACTTARG>
+  <PER_ACTTARG>$n chortles at $s own joke.  Don't bother.</PER_ACTTARG>
+  <ACTOR>You chortle mischievously at $N.</ACTOR>
+  <TARGET>$n chortles mischievously at you.</TARGET>
+  <PEERS>$n chortles mischievously at $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="zerbert">
+  <ACT_NOTARG>Gotta zerbert SOMEBODY.</ACT_NOTARG>
+  <ACT_BADTARG>You missed.</ACT_BADTARG>
+  <ACT_ACTTARG>Careful, people are staring...</ACT_ACTTARG>
+  <PER_ACTTARG>$n looks around furtively, and then bends over and blows loudly into $s own navel!</PER_ACTTARG>
+  <ACTOR>You lift $N's shirt and blow loudly into $S navel!</ACTOR>
+  <TARGET>Yeek!  $n lifts your shirt and blows loudly into your navel!</TARGET>
+  <PEERS>$n lifts $N's shirt and blows loudly into $S navel!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="twitch">
+  <ACT_NOTARG>You twitch nervously.</ACT_NOTARG>
+  <PER_NOTARG>$n twitches nervously.</PER_NOTARG>
+  <ACT_BADTARG>Nervous? They aren't even here.</ACT_BADTARG>
+  <ACTOR>You twitch involuntarily at $N's presence.</ACTOR>
+  <TARGET>$n notices you and twitches.</TARGET>
+  <PEERS>$N must really be getting to $n...</PEERS>
+</SOCIAL>
+<SOCIAL NAME="leer">
+  <ACT_NOTARG>You peer around the room, leering like the pervert you are!</ACT_NOTARG>
+  <PER_NOTARG>$n peers about, leering like a filthy pervert!</PER_NOTARG>
+  <ACT_BADTARG>You'll have to settle for memories -- that person isn't here.</ACT_BADTARG>
+  <ACT_ACTTARG>Desperation has reached new heights, hasn't it?</ACT_ACTTARG>
+  <PER_ACTTARG>$n leers at $mself shamelessly.</PER_ACTTARG>
+  <ACTOR>You leer at $N like the pervert you are.</ACTOR>
+  <TARGET>$n eyes you up and down, leering like a filthy pervert!</TARGET>
+  <PEERS>$n eyes $N up and down, leering like a filthy pervert!</PEERS>
+</SOCIAL>
+<SOCIAL NAME="polite">
+  <ACT_NOTARG>You give a polite little chuckle.</ACT_NOTARG>
+  <PER_NOTARG>$n gives a polite little chuckle.</PER_NOTARG>
+  <ACT_BADTARG>You can't find a friend to chuckle with.</ACT_BADTARG>
+  <ACT_ACTTARG>You chuckle at your own joke, since no one else would.</ACT_ACTTARG>
+  <PER_ACTTARG>$n chuckles at $s own joke, since none of you would.</PER_ACTTARG>
+  <ACTOR>You indicate your underappreciation of $S joke.</ACTOR>
+  <TARGET>$n gives a politle but unappreciative chuckle to your joke.</TARGET>
+  <PEERS>$n gives a polite little chuckle to $N's joke.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="mischievous">
+  <ACT_NOTARG>You give a mischievous smile at the trouble you have in mind.</ACT_NOTARG>
+  <PER_NOTARG>$n grins mischievously at a nasty idea.</PER_NOTARG>
+  <ACT_BADTARG>You must be delirious.</ACT_BADTARG>
+  <ACT_ACTTARG>You grin mischievously to yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n grins mischievously to $mself.</PER_ACTTARG>
+  <ACTOR>You grin mischievously at $M, thinking an evil thought.</ACTOR>
+  <TARGET>$n grins mischievously at you.  You inch toward the door.</TARGET>
+  <PEERS>$n grins mischievously at $N.  $m must be thinking something evil.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="accept">
+  <ACT_NOTARG>You accept the proferred apology graciously.</ACT_NOTARG>
+  <PER_NOTARG>$n graciously accepts the proferred apology.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="anticipate">
+  <ACT_NOTARG>You murmur 'Sssssoonnn, my presssssciousssss...'</ACT_NOTARG>
+  <PER_NOTARG>$n murmurs 'Ssssssooonnnn, my pressssscioussss...'</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="shudder">
+  <ACT_NOTARG>You shudder at the horror and repress tears.</ACT_NOTARG>
+  <PER_NOTARG>$n shudders at the horror and represses tears.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="powertrip">
+  <ACT_NOTARG>You scream 'The PPppppPOOOOoooWWWwwwErrRRR!' and writhe.</ACT_NOTARG>
+  <PER_NOTARG>$n writhes, screaming 'The PPppppPOOOOoooWWWwwwErrRRR!'</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="mull">
+  <ACT_NOTARG>You mull over the idea at hand, asking for patience.</ACT_NOTARG>
+  <PER_NOTARG>$n mulls over the idea at hand.  Please be patient.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="wait">
+  <ACT_NOTARG>You wait patiently.</ACT_NOTARG>
+  <PER_NOTARG>$n waits patiently.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="bat">
+  <ACT_NOTARG>You bat your long, dark lashes and smile innocently.</ACT_NOTARG>
+  <PER_NOTARG>$n bats $s long, dark lashes and smiles innocently.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="sage">
+  <ACT_NOTARG>You nod sagely.</ACT_NOTARG>
+  <PER_NOTARG>$n nods sagely.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="contemplate">
+  <ACT_NOTARG>You bite your lip contemplatively.</ACT_NOTARG>
+  <PER_NOTARG>$n bites $s lip contemplatively.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="agree">
+  <ACT_NOTARG>You agree absolutely.</ACT_NOTARG>
+  <PER_NOTARG>$n agrees absolutely.</PER_NOTARG>
+  <ACT_BADTARG>Sorry, your target is absent.</ACT_BADTARG>
+  <ACT_ACTTARG>You find yourself most agreeable.</ACT_ACTTARG>
+  <PER_ACTTARG>$n finds $mself the most agreeable being alive.</PER_ACTTARG>
+  <ACTOR>You nod in enthusiastic agreement with $N.</ACTOR>
+  <TARGET>$n nods in enthusiastic agreement with you.</TARGET>
+  <PEERS>$n nods in enthusiastic agreement with $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="toast">
+  <ACT_NOTARG>You raise a glass of champagne in a toast.</ACT_NOTARG>
+  <PER_NOTARG>$n raises $s glass of champagne in a toast.</PER_NOTARG>
+  <ACT_BADTARG>Your object of praise is absent.</ACT_BADTARG>
+  <ACT_ACTTARG>You grin evilly and toast yourself.</ACT_ACTTARG>
+  <PER_ACTTARG>$n grins evilly and toasts $mself.</PER_ACTTARG>
+  <ACTOR>You raise your glass of champagne to $S.</ACTOR>
+  <TARGET>$n silently toasts you.</TARGET>
+  <PEERS>$n silently toasts $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="conspire">
+  <ACT_NOTARG>You wink conspiratorily, waiting for the countersign.</ACT_NOTARG>
+  <PER_NOTARG>$n winks conspiratorily, waiting for the countersign.</PER_NOTARG>
+  <ACT_BADTARG>Even you conspire against yourself.</ACT_BADTARG>
+  <ACT_ACTTARG>$n is paranoid enough to distrust even $mself.</ACT_ACTTARG>
+  <ACTOR>You induct $S into your private conspiracy with a wink.</ACTOR>
+  <TARGET>$n inducts you into $m private conspiracy with a wink.</TARGET>
+  <PEERS>$n winks conspiratorily at $N.  You wonder what this can mean.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="support">
+  <ACT_NOTARG>You fully support the plan.</ACT_NOTARG>
+  <PER_NOTARG>$n fully supports the plan.</PER_NOTARG>
+  <ACT_BADTARG>Sorry, friend, I can't see that person here.</ACT_BADTARG>
+  <ACT_ACTTARG>You hug yourself sadly.</ACT_ACTTARG>
+  <PER_ACTTARG>$n hugs $mself sadly.  Perhaps you could help?</PER_ACTTARG>
+  <ACTOR>You hug $M supportively and smile.</ACTOR>
+  <TARGET>$n hugs you supportively and smiles.</TARGET>
+  <PEERS>$n hugs $N supportively and smiles.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="pound">
+  <ACT_NOTARG>You make vague pounding motions with your fist at the thought.</ACT_NOTARG>
+  <PER_NOTARG>$n makes vague pounding motions with $m fist at the thought.</PER_NOTARG>
+  <ACT_BADTARG>Sorry, friend, I can't see that person here.</ACT_BADTARG>
+  <ACTOR>You pound $M into a bloody mass.</ACTOR>
+  <TARGET>$n pounds you into a bloody mass.</TARGET>
+  <PEERS>$n pounds $N into a bloody mass.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="wrist">
+  <ACT_NOTARG>You hold out out a wrist for a slap.</ACT_NOTARG>
+  <PER_NOTARG>$n holds out a wrist for a slap.</PER_NOTARG>
+  <ACT_BADTARG>Sorry, friend, I can't see that person here.</ACT_BADTARG>
+  <ACT_ACTTARG>You slap your own wrist.</ACT_ACTTARG>
+  <PER_ACTTARG>$n slaps $m own wrist.</PER_ACTTARG>
+  <ACTOR>You slaps $M wrist sharply.</ACTOR>
+  <TARGET>$n slaps your wrist sharply.</TARGET>
+  <PEERS>$n slaps $N's wrist sharply.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="romeo">
+  <ACT_NOTARG>You light up a Romeo y Julietta cigar and puff contentedly.</ACT_NOTARG>
+  <PER_NOTARG>$n lights up a Romeo y Julietta cigar and puffs contentedly.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="camel">
+  <ACT_NOTARG>You pretend you are a camel.</ACT_NOTARG>
+  <PER_NOTARG>$n pretends to be a camel.</PER_NOTARG>
+  <ACT_BADTARG>You don't see that personhere.</ACT_BADTARG>
+  <ACT_ACTTARG>You light a Camel cigarette and inhale sharply.</ACT_ACTTARG>
+  <PER_ACTTARG>$n lights a Camel cigarette and inhales sharply.</PER_ACTTARG>
+  <ACTOR>You light a Camel cigarette for $M.</ACTOR>
+  <TARGET>$n lights a Camel cigarette for you.</TARGET>
+  <PEERS>$n lights a Camel cigarette for $N.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="whip">
+  <ACT_NOTARG>You crack your bullwhip menacingly.</ACT_NOTARG>
+  <PER_NOTARG>$n cracks a bullwhip menacingly.</PER_NOTARG>
+  <ACT_BADTARG>Sorry, friend, I can't see that person here.</ACT_BADTARG>
+  <ACT_ACTTARG>You whip yourself into a frenzy.</ACT_ACTTARG>
+  <PER_ACTTARG>$n whips $mself into a frenzy.</PER_ACTTARG>
+  <ACTOR>You flick your whip across $M bare back.</ACTOR>
+  <TARGET>$n flicks a whip across your back... the pain.. the pleasure..</TARGET>
+  <PEERS>$n flicks $s whip across $N's bare back.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="cramp">
+  <ACT_NOTARG>You gasp and clutch your abdomen, wheezing with the pain.</ACT_NOTARG>
+  <PER_NOTARG>$n gasps and clutches $m abdomen in agony.</PER_NOTARG>
+  <ACT_BADTARG>Suffering as you are, you didn't see that person slip out.</ACT_BADTARG>
+  <ACTOR>You hammerlock $M, screaming, "AAAAARRRRRGH!! I HAVE A CRAMP!!!"</ACTOR>
+  <TARGET>$n hammerlocks you, screaming "AAAAARRRRRGH!! I HAVE A CRAMP!!!"</TARGET>
+  <PEERS>$n hammerlocks $N, screaming, "AAAAARRRRRGH!! I HAVE A CRAMP!!!".</PEERS>
+</SOCIAL>
+<SOCIAL NAME="make">
+  <ACT_NOTARG>You breathe heavily and wetly.</ACT_NOTARG>
+  <PER_NOTARG>$n breathes heavily and wetly.</PER_NOTARG>
+  <ACT_BADTARG>Sorry, friend, I can't see that person here.</ACT_BADTARG>
+  <ACTOR>You steam up the windows with $M.</ACTOR>
+  <TARGET>$n starts steaming up the windows with you.</TARGET>
+  <PEERS>$n and $N start steaming up the windows.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="sweep">
+  <ACT_NOTARG>You look at your empty arms and sigh.</ACT_NOTARG>
+  <PER_NOTARG>$n looks at $s empty arms and sighs.</PER_NOTARG>
+  <ACT_BADTARG>The object of your kiss is absent.</ACT_BADTARG>
+  <ACTOR>You sweep $M into your arms and kiss $M long and deeply.</ACTOR>
+  <TARGET>$n sweeps you into $s arms and kisses you long and deeply.</TARGET>
+  <PEERS>$n sweeps $N into $s arms and kisses $M long and deeply.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="buff">
+  <ACT_NOTARG>You buff your nails on your cloak.</ACT_NOTARG>
+  <PER_NOTARG>$n buffs $s nails on $s cloak.</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="liver">
+  <ACT_NOTARG>You look angrily for someone to disembowel.</ACT_NOTARG>
+  <PER_NOTARG>$n angrily for someone to disembowel.</PER_NOTARG>
+  <ACT_BADTARG>The object of your wrath is absent.</ACT_BADTARG>
+  <ACTOR>You rip out $S liver and eat it.</ACTOR>
+  <TARGET>$n rips out your liver and eats it.</TARGET>
+  <PEERS>$n rips out $N's liver and eats it.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="wrestle">
+  <ACT_BADTARG>Sorry, friend, I can't see that person here.</ACT_BADTARG>
+  <ACT_ACTTARG>You wrestle with your conscience.</ACT_ACTTARG>
+  <PER_ACTTARG>$n wrestles with $m conscience.</PER_ACTTARG>
+  <ACTOR>You wrestle $M to the floor and pin $M there.</ACTOR>
+  <TARGET>$n wrestles you to the floor and pins you.</TARGET>
+  <PEERS>$n wrestles $N to the floor, pinning $M there.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="tie">
+  <ACT_NOTARG>You toy with a pair of handcuffs suggestively.</ACT_NOTARG>
+  <PER_NOTARG>$n toys suggestively with a pair of handcuffs.</PER_NOTARG>
+  <ACT_BADTARG>Sorry, friend, I can't see that person here.</ACT_BADTARG>
+  <ACTOR>You grab $N and tie $M to the bedposts.</ACTOR>
+  <TARGET>$n grabs you and ties you securely to a four poster bed.</TARGET>
+  <PEERS>$n grabs $N and ties $S to a four poster bed.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="tight">
+  <ACT_BADTARG>Sorry, friend, I can't see that person here.</ACT_BADTARG>
+  <ACTOR>You hold $M tightly in your arms.</ACTOR>
+  <TARGET>$n holds you in $m arms.</TARGET>
+  <PEERS>$n holds $N tightly in $m arms.</PEERS>
+</SOCIAL>
+<SOCIAL NAME="fatality">
+  <ACTOR>You intone, '$N wins.  Fatality.'</ACTOR>
+  <TARGET>$n intones, '$N wins.  Fatality.'</TARGET>
+  <PEERS>$n intones, '$N wins.  Fatality.'</PEERS>
+</SOCIAL>
+<SOCIAL NAME="yowl">
+  <ACT_NOTARG>You yowl in frustration.</ACT_NOTARG>
+  <PER_NOTARG>$n yowls in frustration!</PER_NOTARG>
+</SOCIAL>
+<SOCIAL NAME="silly">
+  <ACT_NOTARG>You do the silly walk all around the room.</ACT_NOTARG>
+  <PER_NOTARG>$n does the silly walk all around the room.  $e *is* silly.</PER_NOTARG>
+</SOCIAL>
+</SOCIALS>

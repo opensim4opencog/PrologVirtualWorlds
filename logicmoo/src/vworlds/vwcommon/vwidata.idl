@@ -1,0 +1,100 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// VWIData.idl : IDL source for VWIData.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (VWIData.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IVWGeometry : Interface for object properties used to return information regarding
+// intersections with boundaries (e.g. IVWFrame's MoveToPosition method returns an ordered
+// list of intersect datas describing the intersections that occurred with the movement vector
+// described by the moving the frame to the new position).
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+cpp_quote("enum {eHit=0, ePassedOver=1, ePassedUnder=2};")
+
+	import "oaidl.idl";
+	import "cellprop.idl";
+
+	[
+		object,
+		local,
+		dual,
+		uuid(91D38000-64C0-11d0-89AA-00A0C9054129),
+		helpstring("IVWFrame Interface"),
+		pointer_default(unique)
+	]
+	interface IVWIntersectData : IObjectProperty
+	{
+		[propget, helpstring("The list of boundaries associated with the thing whose boundary has been intersected.")]
+		HRESULT BoundaryList([out, retval] IPropertyList **ppBoundaryList);
+		[restricted, propput, helpstring("The list of boundaries associated with the thing whose boundary has been intersected.")]
+		HRESULT BoundaryList([in] IPropertyList *pBoundaryList);
+
+		[propget, helpstring("The index of the boundary (within the boundary list) that has been intersected.")]
+		HRESULT BoundaryIndex([out, retval] int *piBoundaryIndex);
+		[restricted, propput, helpstring("The index of the boundary (within the boundary list) that has been intersected.")]
+		HRESULT BoundaryIndex([in] int iBoundaryIndex);
+
+		[propget, helpstring("The index of the edge (within the boundary) that has been intersected.")]
+		HRESULT EdgeIndex([out, retval] int *piEdgeIndex);
+		[restricted, propput, helpstring("The index of the edge (within the boundary) that has been intersected.")]
+		HRESULT EdgeIndex([in] int iEdgeIndex);
+
+		[propget, helpstring("The distance to the point of intersection (from the start of the movement vector).")]
+		HRESULT DistToIntersect([out, retval] float *pfDist);
+		[restricted, propput, helpstring("The distance to the point of intersection (from the start of the movement vector).")]
+		HRESULT DistToIntersect([in] float fDist);
+
+		[propget, helpstring("Was intersected edge passed over or under 0 = hit, 1 = passed over, 2 = passed under.")]
+		HRESULT Passed([out, retval] BYTE *pbPassed);
+		[restricted, propput, helpstring("Was intersected edge passed over or under 0 = hit, 1 = passed over, 2 = passed under.")]
+		HRESULT Passed([in] BYTE bPassed);
+
+		[propget, helpstring("Was edge cycle entered or exited 1 = enter, 0 = exit")]
+		HRESULT Transition([out, retval] BYTE *pbTransition);
+		[restricted, propput, helpstring("Was edge cycle entered or exited 1 = enter, 0 = exit")]
+		HRESULT Transition([in] BYTE bTransition);
+
+		[propget, helpstring("Projection of movement vector onto plane of intersection.")]
+		HRESULT Projection([out, retval] IVector **ppvProjection);
+		[restricted, propput, helpstring("Projection of movement vector onto plane of intersection.")]
+		HRESULT Projection([in] IVector *pvProjection);
+
+		[restricted, helpstring("Get all elements of the intersection data")]
+		HRESULT Get([out] IPropertyList **ppBoundaryList, 
+		            [out] int *piBoundaryIndex,
+					[out] int *piEdgeIndex,
+					[out] float *pfDist,
+					[out] BYTE *pbPassed,
+					[out] BYTE *pbTransition,
+					[out] IVector **ppvProjection);
+	};
+
+#ifdef VWINTERSECTDATALIB
+[
+	uuid(FE10CC80-6AD0-11D0-89AA-00A0C9054129),
+	version(1.0),
+	helpstring("VWIntersectData 1.0 Type Library")
+]
+library VWINTERSECTDATALib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(79573080-64C0-11d0-89AA-00A0C9054129),
+		helpstring("VWIntersectData Class")
+	]
+	coclass VWIntersectData
+	{
+		[default] interface IVWIntersectData;
+	};
+};
+#endif

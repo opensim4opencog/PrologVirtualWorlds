@@ -1,0 +1,523 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- Jot.Procedures | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class Jot.Procedures
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-Jot.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class Jot.Procedures
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----Jot.Procedures
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>Procedures</STRONG>
+     extends java.lang.<A HREF="java.lang.Object.html">Object</A>
+{
+          // Fields 46
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#askPretty">askPretty</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#checkLocal">checkLocal</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#checkNewChildren">checkNewChildren</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#childP">childP</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#enumerateTest">enumerateTest</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#fetchPrettySlots">fetchPrettySlots</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getBasicProperties">getBasicProperties</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getDirectInstancesList">getDirectInstancesList</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getDirectInstancesListOriginal">getDirectInstancesListOriginal</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getDirectSubsInstances">getDirectSubsInstances</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getDirectSubsList">getDirectSubsList</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getDirectSubsListOriginal">getDirectSubsListOriginal</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getDirectSubsSlots">getDirectSubsSlots</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getDirectSupersList">getDirectSupersList</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getDirectSupersListOriginal">getDirectSupersListOriginal</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getKbProperties">getKbProperties</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getOwnSlotValuesList">getOwnSlotValuesList</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getOwnSlotValuesListOriginal">getOwnSlotValuesListOriginal</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getOwnSlotsList">getOwnSlotsList</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getOwnSlotsListOriginal">getOwnSlotsListOriginal</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPopupProperties">getPopupProperties</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettyDetails">getPrettyDetails</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettyFacetValues">getPrettyFacetValues</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettyFacetsAndValues">getPrettyFacetsAndValues</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettyFrameSentences">getPrettyFrameSentences</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettyGrid2">getPrettyGrid2</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettyKbTypes">getPrettyKbTypes</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettyKbsOfType">getPrettyKbsOfType</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettyMatching">getPrettyMatching</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettyNextChildren">getPrettyNextChildren</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettyOpenableKbs">getPrettyOpenableKbs</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettySlotValues">getPrettySlotValues</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettySlots">getPrettySlots</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getPrettySlotsFacets">getPrettySlotsFacets</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getRootsAndChildren">getRootsAndChildren</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getTemplateSlotsList">getTemplateSlotsList</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#getTemplateSlotsListOriginal">getTemplateSlotsListOriginal</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#mapDirectSubsInstances">mapDirectSubsInstances</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#mapDirectSubsSlots">mapDirectSubsSlots</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#matchList">matchList</A>;
+     public static <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#pathToRoot">pathToRoot</A>;
+     public static <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#pathToRootEnumerate">pathToRootEnumerate</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#pretty">pretty</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#prettyList">prettyList</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#prettyListFrame">prettyListFrame</A>;
+     public static final <A CLASS=nound HREF="OKBC.Procedure.html">Procedure</A> <A HREF="#prettyOnlyList">prettyOnlyList</A>;
+
+          // Constructors 1
+     public <A HREF="#Procedures(OKBC.Kb)">Procedures</A>(<A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+
+}
+</PRE>
+<P>
+<P>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Fields</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettyKbTypes"><FONT COLOR="#0000FF">&middot;</FONT> getPrettyKbTypes</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettyKbTypes
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettyKbsOfType"><FONT COLOR="#0000FF">&middot;</FONT> getPrettyKbsOfType</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettyKbsOfType
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettyOpenableKbs"><FONT COLOR="#0000FF">&middot;</FONT> getPrettyOpenableKbs</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettyOpenableKbs
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettyMatching"><FONT COLOR="#0000FF">&middot;</FONT> getPrettyMatching</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettyMatching
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="matchList"><FONT COLOR="#0000FF">&middot;</FONT> matchList</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> matchList
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="pretty"><FONT COLOR="#0000FF">&middot;</FONT> pretty</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> pretty
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="prettyList"><FONT COLOR="#0000FF">&middot;</FONT> prettyList</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> prettyList
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="prettyListFrame"><FONT COLOR="#0000FF">&middot;</FONT> prettyListFrame</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> prettyListFrame
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="prettyOnlyList"><FONT COLOR="#0000FF">&middot;</FONT> prettyOnlyList</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> prettyOnlyList
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettySlots"><FONT COLOR="#0000FF">&middot;</FONT> getPrettySlots</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettySlots
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="fetchPrettySlots"><FONT COLOR="#0000FF">&middot;</FONT> fetchPrettySlots</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> fetchPrettySlots
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettySlotValues"><FONT COLOR="#0000FF">&middot;</FONT> getPrettySlotValues</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettySlotValues
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettyFacetValues"><FONT COLOR="#0000FF">&middot;</FONT> getPrettyFacetValues</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettyFacetValues
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettyFacetsAndValues"><FONT COLOR="#0000FF">&middot;</FONT> getPrettyFacetsAndValues</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettyFacetsAndValues
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettySlotsFacets"><FONT COLOR="#0000FF">&middot;</FONT> getPrettySlotsFacets</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettySlotsFacets
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettyDetails"><FONT COLOR="#0000FF">&middot;</FONT> getPrettyDetails</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettyDetails
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettyGrid2"><FONT COLOR="#0000FF">&middot;</FONT> getPrettyGrid2</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettyGrid2
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getDirectSubsInstances"><FONT COLOR="#0000FF">&middot;</FONT> getDirectSubsInstances</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getDirectSubsInstances
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getDirectSubsSlots"><FONT COLOR="#0000FF">&middot;</FONT> getDirectSubsSlots</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getDirectSubsSlots
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="mapDirectSubsInstances"><FONT COLOR="#0000FF">&middot;</FONT> mapDirectSubsInstances</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> mapDirectSubsInstances
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="mapDirectSubsSlots"><FONT COLOR="#0000FF">&middot;</FONT> mapDirectSubsSlots</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> mapDirectSubsSlots
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getRootsAndChildren"><FONT COLOR="#0000FF">&middot;</FONT> getRootsAndChildren</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getRootsAndChildren
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getDirectSubsListOriginal"><FONT COLOR="#0000FF">&middot;</FONT> getDirectSubsListOriginal</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getDirectSubsListOriginal
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getDirectSupersListOriginal"><FONT COLOR="#0000FF">&middot;</FONT> getDirectSupersListOriginal</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getDirectSupersListOriginal
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getDirectInstancesListOriginal"><FONT COLOR="#0000FF">&middot;</FONT> getDirectInstancesListOriginal</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getDirectInstancesListOriginal
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getOwnSlotsListOriginal"><FONT COLOR="#0000FF">&middot;</FONT> getOwnSlotsListOriginal</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getOwnSlotsListOriginal
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getTemplateSlotsListOriginal"><FONT COLOR="#0000FF">&middot;</FONT> getTemplateSlotsListOriginal</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getTemplateSlotsListOriginal
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getOwnSlotValuesListOriginal"><FONT COLOR="#0000FF">&middot;</FONT> getOwnSlotValuesListOriginal</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getOwnSlotValuesListOriginal
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getDirectSubsList"><FONT COLOR="#0000FF">&middot;</FONT> getDirectSubsList</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getDirectSubsList
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getDirectSupersList"><FONT COLOR="#0000FF">&middot;</FONT> getDirectSupersList</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getDirectSupersList
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getDirectInstancesList"><FONT COLOR="#0000FF">&middot;</FONT> getDirectInstancesList</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getDirectInstancesList
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getOwnSlotsList"><FONT COLOR="#0000FF">&middot;</FONT> getOwnSlotsList</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getOwnSlotsList
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getTemplateSlotsList"><FONT COLOR="#0000FF">&middot;</FONT> getTemplateSlotsList</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getTemplateSlotsList
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getOwnSlotValuesList"><FONT COLOR="#0000FF">&middot;</FONT> getOwnSlotValuesList</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getOwnSlotValuesList
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettyNextChildren"><FONT COLOR="#0000FF">&middot;</FONT> getPrettyNextChildren</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettyNextChildren
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="childP"><FONT COLOR="#0000FF">&middot;</FONT> childP</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> childP
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="checkNewChildren"><FONT COLOR="#0000FF">&middot;</FONT> checkNewChildren</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> checkNewChildren
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPopupProperties"><FONT COLOR="#0000FF">&middot;</FONT> getPopupProperties</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPopupProperties
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getKbProperties"><FONT COLOR="#0000FF">&middot;</FONT> getKbProperties</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getKbProperties
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getBasicProperties"><FONT COLOR="#0000FF">&middot;</FONT> getBasicProperties</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getBasicProperties
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="getPrettyFrameSentences"><FONT COLOR="#0000FF">&middot;</FONT> getPrettyFrameSentences</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> getPrettyFrameSentences
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="pathToRoot"><FONT COLOR="#0000FF">&middot;</FONT> pathToRoot</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Procedure.html">Procedure</A> pathToRoot
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="pathToRootEnumerate"><FONT COLOR="#0000FF">&middot;</FONT> pathToRootEnumerate</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Procedure.html">Procedure</A> pathToRootEnumerate
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="enumerateTest"><FONT COLOR="#0000FF">&middot;</FONT> enumerateTest</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> enumerateTest
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="checkLocal"><FONT COLOR="#0000FF">&middot;</FONT> checkLocal</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> checkLocal
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="askPretty"><FONT COLOR="#0000FF">&middot;</FONT> askPretty</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Procedure.html">Procedure</A> askPretty
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<P>
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Procedures"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Procedures(OKBC.Kb)">Procedures</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Procedures(<A HREF="OKBC.Kb.html">Kb</A> kb) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-Jot.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

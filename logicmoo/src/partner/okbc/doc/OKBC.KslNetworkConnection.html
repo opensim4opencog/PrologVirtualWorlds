@@ -1,0 +1,166 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- OKBC.KslNetworkConnection | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class OKBC.KslNetworkConnection
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class OKBC.KslNetworkConnection
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----<A HREF="OKBC.Node.html">OKBC.Node</A>
+           |
+           +----<A HREF="OKBC.SessionInfo.html">OKBC.SessionInfo</A>
+                   |
+                   +----<A HREF="OKBC.Connection.html">OKBC.Connection</A>
+                           |
+                           +----<A HREF="OKBC.NetworkGeneral.html">OKBC.NetworkGeneral</A>
+                                   |
+                                   +----<A HREF="OKBC.NetworkConnection.html">OKBC.NetworkConnection</A>
+                                           |
+                                           +----OKBC.KslNetworkConnection
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>KslNetworkConnection</STRONG>
+     extends OKBC.<A HREF="OKBC.NetworkConnection.html">NetworkConnection</A>
+{
+          // Fields 1
+     public static <A CLASS=nound HREF="OKBC.KslNetworkConnection.html">KslNetworkConnection</A> <A HREF="#kslNetworkConnection">kslNetworkConnection</A>;
+
+          // Methods 6
+     public static void <A HREF="#ensure_registered()">ensure_registered</A>();
+     public static <A CLASS=nound HREF="OKBC.NetworkConnection.html">NetworkConnection</A> <A HREF="#establish_NetworkConnection_connection(java.lang.String, int, OKBC.Symbol, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">establish_NetworkConnection_connection</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>, int, <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>);
+     public static <A CLASS=nound HREF="OKBC.NetworkConnection.html">NetworkConnection</A> <A HREF="#establish_anonymous_connection(java.lang.String, int)">establish_anonymous_connection</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>, int);
+     public static <A CLASS=nound HREF="OKBC.Cons.html">Cons</A> <A HREF="#make_connection_key_from_parts(java.lang.String, int, OKBC.Symbol, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">make_connection_key_from_parts</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>, int, <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>, <A CLASS=nound HREF="java.lang.String.html">String</A>);
+
+     public <A CLASS=nound HREF="OKBC.Connection.html">Connection</A> <A HREF="#establish(OKBC.Node)">establish</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public <A CLASS=nound HREF="OKBC.Cons.html">Cons</A> <A HREF="#make_connection_key()">make_connection_key</A>();
+}
+</PRE>
+<P>
+<P>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Fields</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="kslNetworkConnection"><FONT COLOR="#0000FF">&middot;</FONT> kslNetworkConnection</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.KslNetworkConnection.html">KslNetworkConnection</A> kslNetworkConnection
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<P>
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="ensure_registered"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="ensure_registered()">ensure_registered</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void ensure_registered() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="make_connection_key"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="make_connection_key()">make_connection_key</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Cons.html">Cons</A> make_connection_key() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.NetworkConnection.html#make_connection_key()">make_connection_key</A> in class <A HREF="OKBC.NetworkConnection.html">NetworkConnection</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="make_connection_key_from_parts"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="make_connection_key_from_parts(java.lang.String, int, OKBC.Symbol, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">make_connection_key_from_parts</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Cons.html">Cons</A> make_connection_key_from_parts(<A HREF="java.lang.String.html">String</A> hst, 
+                                                     int prt, 
+                                                     <A HREF="OKBC.Symbol.html">Symbol</A> conn_meth, 
+                                                     <A HREF="java.lang.String.html">String</A> usr_id, 
+                                                     <A HREF="java.lang.String.html">String</A> passwd, 
+                                                     <A HREF="java.lang.String.html">String</A> sess_id, 
+                                                     <A HREF="java.lang.String.html">String</A> sess_key, 
+                                                     <A HREF="java.lang.String.html">String</A> lib) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="establish_anonymous_connection"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="establish_anonymous_connection(java.lang.String, int)">establish_anonymous_connection</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.NetworkConnection.html">NetworkConnection</A> establish_anonymous_connection(<A HREF="java.lang.String.html">String</A> hst, 
+                                                                  int prt) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="establish"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="establish(OKBC.Node)">establish</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Connection.html">Connection</A> establish(<A HREF="OKBC.Node.html">Node</A> initargs) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Connection.html#establish(OKBC.Node)">establish</A> in class <A HREF="OKBC.Connection.html">Connection</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="establish_NetworkConnection_connection"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="establish_NetworkConnection_connection(java.lang.String, int, OKBC.Symbol, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">establish_NetworkConnection_connection</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.NetworkConnection.html">NetworkConnection</A> establish_NetworkConnection_connection(<A HREF="java.lang.String.html">String</A> hst, 
+                                                                          int prt, 
+                                                                          <A HREF="OKBC.Symbol.html">Symbol</A> conn_meth, 
+                                                                          <A HREF="java.lang.String.html">String</A> usr_id, 
+                                                                          <A HREF="java.lang.String.html">String</A> passwd, 
+                                                                          <A HREF="java.lang.String.html">String</A> sess_id, 
+                                                                          <A HREF="java.lang.String.html">String</A> sess_key, 
+                                                                          <A HREF="java.lang.String.html">String</A> lib) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.NetworkConnection.html#establish_NetworkConnection_connection(java.lang.String, int, OKBC.Symbol, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">establish_NetworkConnection_connection</A> in class <A HREF="OKBC.NetworkConnection.html">NetworkConnection</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>
