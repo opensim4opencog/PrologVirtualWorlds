@@ -92,7 +92,7 @@ public class JNIPrologServer extends Thread {
 		}
 
 		Array.set(stringClassArrayOfOne,0,stringClass);
-		debug=5;
+		debug=0;
 		allObjects = new HashMap();
 		allObjects.put("oJNIPrologServer",new JNIPrologServer());                
 		allObjects.put("oSystem",System.class);                
@@ -161,15 +161,15 @@ public class JNIPrologServer extends Thread {
 	throws Exception {
 
 		// Get/Set Fields
-		if ( methodName.startsWith("sfield") ) {
+		if ( methodName.startsWith("field") ) {
 			Field innerField;
 			if ( methodName.charAt(7)=='s' ) {
-				innerField = getFieldForObject(innerInstance,methodName.substring(8));
-				innerField.set(innerInstance,args[0]);
+				innerField = getFieldForObject(innerInstance,(String)args[0]);
+				innerField.set(innerInstance,args[1]);
 				return innerField.get(innerInstance);
 			}
 			if ( methodName.charAt(7)=='g' ) {
-				innerField = getFieldForObject(innerInstance,methodName.substring(8));
+				innerField = getFieldForObject(innerInstance,(String)args[0]);
 				return innerField.get(innerInstance);
 			}
 		}
