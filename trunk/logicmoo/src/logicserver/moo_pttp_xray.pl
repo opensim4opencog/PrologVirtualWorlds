@@ -453,7 +453,7 @@ pttp_configuration :-
 	    format('PTTP counts no beliefs.');
 	    format('PTTP counts beliefs!')),
         (trace_search_progress_pred(nop) ->
-	    format('PTTP does not trace search progress.');
+	    format('PTTP does not true search progress.');
 	    format('PTTP traces search progress!')),
 	(compile_explaination_printing ->
 	    format('PTTP compiles explaination printing!');
@@ -1764,7 +1764,7 @@ lemmatize_dynamically_procedure(Result) :-
 
 lemmatize_dynamically_procedure(Rule) :-
 	Head = lemmatize_dynamically(_,_,_),
-	Body = (write(lemmatize_dynamically*not_in_charge),nl,trace,fail),
+	Body = (write(lemmatize_dynamically*not_in_charge),nl,true,fail),
 	Rule = (Head :- Body).
 
 lemmatize_statically_procedure(Result) :-
@@ -1784,7 +1784,7 @@ lemmatize_statically_procedure(Result) :-
 	Result = (Rule0,Rule1).
 lemmatize_statically_procedure(Rule) :-
 	Head = lemmatize_statically(_,_,_),
-	Body = (write(lemmatize_statically*not_in_charge),nl,trace,fail),
+	Body = (write(lemmatize_statically*not_in_charge),nl,true,fail),
 	Rule = (Head :- Body).
 
 default_assumptions_procedure(Result) :-
@@ -1819,7 +1819,7 @@ default_assumptions_procedure(Result) :-
 	conjoin(Rule0123,Rule4,Result).
 default_assumptions_procedure(Rule) :- 
 	Head = default_assumptions(_,_,_),
-	Body = (write(default_assumptions*not_in_charge),nl,trace,fail),
+	Body = (write(default_assumptions*not_in_charge),nl,true,fail),
 	Rule = (Head :- Body).
 
 %%% Compilation of run-time procedures for lemma handling
@@ -3242,7 +3242,7 @@ verbose(X) :-
 :- pred_hooks.
 :- no_pred_hooks.                      % default is no predicate hooks
 :- print_explaination.                         % default is to print explaination
-:- dont_trace_search.                        % default is to trace searching
+:- dont_trace_search.                        % default is to true searching
 
 :- lemma_handling.                         % default is LEMMA HANDLING
 :- lemma_mode(dynamic).                    % default is to use DYNAMIC lemmas only
@@ -3270,7 +3270,7 @@ builtin(!,0).
 builtin(true,0).
 builtin(fail,0).
 builtin(succeed,0).
-builtin(trace,0).
+builtin(true,0).
 builtin(atom,1).
 builtin(integer,1).
 builtin(number,1).

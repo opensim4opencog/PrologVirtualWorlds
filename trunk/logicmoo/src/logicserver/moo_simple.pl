@@ -112,7 +112,7 @@ deduceSurface_easy(subclass(A,B),Context,Explaination * incode(holds(subclass,A,
 % make_disjoint_classes(Context,Ctx)
 % ===================================================
 
-deduceSurface_easy(disjoint(A,B),Context,  Explaination * incode(holds(disjoint,A,B),Composition) ):-%trace,
+deduceSurface_easy(disjoint(A,B),Context,  Explaination * incode(holds(disjoint,A,B),Composition) ):-%true,
 	member(Composition,[disjointDecomposition,exhaustiveDecomposition,partition]),
 	deduceSurface_gaf(G,Context,Explaination),
 	G=..[Composition,C|Children],
@@ -536,7 +536,7 @@ deduceSurfaceDomainVector(N,Predicate,VectS,Context,ExplainationO):-
 buildDomainsListForRelation(Context,Ctx):-mooCache(Context,_Ctx,done(buildDomainsListForRelation)),!.
 buildDomainsListForRelation(Context,Ctx):- 
 	once(getRelationsListFromContext(Rs,Context,Ctx)),
-	member(Predicate,Rs),  %trace, 	
+	member(Predicate,Rs),  %true, 	
 	once(deduceValence(Context,Predicate,N,_Explaination)),
 	once(deduceHoldsNDomVect(N,Predicate,VectS,Context,Ctx)),
 	%writeDebug(green,domain_vector(Predicate,N,VectS)),
@@ -625,7 +625,7 @@ proveInstance(Logic,Depth,Table,X,Class,Agent,Context,Explaination):-var(X),!,fa
 proveInstance(Logic,Depth,Table,X,Class,Agent,Context,Explaination):-
 	memberchk(defering_to_gafs(Logic,_),Table),!,fail.
 	
-proveInstance(Logic,Depth,Table,X,Class,Agent,Context, Explaination2 * Explaination):- %trace,
+proveInstance(Logic,Depth,Table,X,Class,Agent,Context, Explaination2 * Explaination):- %true,
 	compound(X),X=..[P|List],!,
 	proveInstance_compound(Logic,Depth,Table,P,List,X,Class,Agent,Context,Explaination).
 	

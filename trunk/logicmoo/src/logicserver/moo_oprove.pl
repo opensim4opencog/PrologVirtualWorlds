@@ -192,7 +192,7 @@ deduceGoal(findAllUsingGafs(Literal,UVars,Depth),VarsRequested,Ctx,Context, All)
 
 % Find All UsingBackResolution
 deduceGoal(findAllUsingBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, AccumulatedOut):-
-	%trace,
+	%true,
 	ensureKey(Literal,Key,HashKey,VCount,Pointer),!,
 	%VCount < Depth,
 	not(recorded(findAllUsingBackResolution,Literal)),
@@ -258,7 +258,7 @@ examineRuleForInfo(Literal,Key,VCount,Pointer,VarsRequested,UVars,Depth,Explaina
 	not(recorded(Pointer,Explaination)),
 	recorda(Pointer,Explaination),
 	testReqListViability(ReqList,RecPointers,ReqKeys),
-	%trace,
+	%true,
 	%write(ReqList),nl,nl,
 	examineRuleForProving(Literal,Key,VCount,Pointer,VarsRequested,UVars,Depth,RecPointers,ReqKeys,Explaination,KeyInfo),
 	keysort(KeyInfo,RKeyInfo),
@@ -273,14 +273,14 @@ examineRuleForProving(Literal,Key,VCount,Pointer,VarsRequested,UVars,Depth,[Item
 
 examineRuleForProving(Literal,Key,VCount,Pointer,VarsRequested,UVars,Depth,lit(Req,ReqKey,RVCount,ReqPointer),ReqKeys,Explaination,Info):-
 	recorded(ReqPointer,'-'(Len,OtherLitKeys),Ref),
-	trace,nonvar(Len),!,
+	true,nonvar(Len),!,
 	examineRuleForProving2(Literal,Key,Len,OtherLitKeys,Ref,VCount,Pointer,VarsRequested,UVars,Depth,lit(Req,ReqKey,RVCount,ReqPointer),ReqKeys,Explaination,Info),!.
 
 examineRuleForProving2(Literal,Key,Len,OtherLitKeys,Ref,VCount,Pointer,VarsRequested,UVars,Depth,lit(Req,ReqKey,RVCount,ReqPointer),ReqKeys,Explaination,
 	nonvar(Ref),
 	NLen - delayed(Req,ReqPointer,UVars,[Key|OtherLitKeys])):-
 	not(not(memberchk(Key,OtherLitKeys))),erase(Ref),
-        trace,
+        true,
 	NLen is Len + 1,recordaLogged(ReqPointer,(NLen-[Key|OtherLitKeys])),!.
 
 examineRuleForProving2(Literal,Key,Len,OtherLitKeys,Ref,VCount,Pointer,VarsRequested,UVars,Depth,lit(Req,ReqKey,RVCount,ReqPointer),ReqKeys,Explaination,
@@ -429,7 +429,7 @@ should_cut(RA,UA,Deductions,Answers,more(true:UA)):-!.
 
 
 % Negative Request       
-agentRequestEach(FmlInOpen,URequest,UVars,Ctx,Context,User,UA2,['Result'='false'],Explaination,done(false:FmlInOpen:Explaination)):-%trace,
+agentRequestEach(FmlInOpen,URequest,UVars,Ctx,Context,User,UA2,['Result'='false'],Explaination,done(false:FmlInOpen:Explaination)):-%true,
 	flag('UAnswers',UA,UA),UA<1, % only calls in no answers found previous    
 	URequest=..[F|Args],
 	NegURequest=..['~request'|Args],
@@ -875,11 +875,11 @@ deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,[Literal],Ctx,Context,
 	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context, ExplainationOut ). % Completeion
 	
 deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,[Literal|LiteralList],Ctx,Context,ExplainationOut):-
-	deduceGoal(DB,VarsIn,VarsMid,BackchainsMax,ExplainationIn, Literal,Ctx,Context, ExplainationMid ),!, %trace,
+	deduceGoal(DB,VarsIn,VarsMid,BackchainsMax,ExplainationIn, Literal,Ctx,Context, ExplainationMid ),!, %true,
 	deduceGoal(DB,VarsMid,VarsOut,BackchainsMax,ExplainationMid, LiteralList,Ctx,Context,ExplainationOut).
 
 deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,tabled_or([LiteralList]),Ctx,Context,ExplainationOut):-!,
-	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,LiteralList,Ctx,Context, ExplainationOut). %trace,
+	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,LiteralList,Ctx,Context, ExplainationOut). %true,
 	
 deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,tabled_or([LiteralList|DisjLiteralList]),Ctx,Context,ExplainationOut):-
 	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn, LiteralList,Ctx,Context, ExplainationOut)
@@ -894,7 +894,7 @@ deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,proved_gaf_or([_,N|Mor
 	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,proved_gaf_or([N|More]),Ctx,Context,ExplainationOut).
 
 deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,or([LiteralList]),Ctx,Context,ExplainationOut):-!,
-	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,LiteralList,Ctx,Context, ExplainationOut).  %trace,
+	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,LiteralList,Ctx,Context, ExplainationOut).  %true,
 	
 deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,or([LiteralList|DisjLiteralList]),Ctx,Context,ExplainationOut):-
 	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn, LiteralList,Ctx,Context, ExplainationOut)
@@ -946,7 +946,7 @@ group_access_legal(N:VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Con
 
 /*
 deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context, ExplainationOut):-
-	%trace,
+	%true,
       %  not(memberchk(Literal,ExplainationIn)),
    %     not(mrecordedLogged(trying_rules,Literal)),
 	recordaLogged(trying_rules,Literal),
@@ -956,16 +956,16 @@ deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context, E
 			ThisCost < BackchainsMax
 			%not(memberchk(Explaination,ExplainationIn))
 		       % not(memberchk(Literal,ReqList))
-			)),GettingThere),!, %trace,
+			)),GettingThere),!, %true,
 		list_to_set(GettingThere,[S|ET]),
 		writeDebug(cyan,Literal =  [S|ET]),
-		length(Set,Cost),  %trace,
+		length(Set,Cost),  %true,
 		Cost < BackchainsMax,
 		make_junts(VarsIn,ExplainationIn,Literal, [S|ET],GettingThereBetter,ExplainationJunt,MVarsOut),!,
 		writeDebug(cyan,new_goal(GettingThereBetter)),
 		%writeObject(new_goal(GettingThereBetter),_),
 		BackchainN is BackchainsMax - Cost,
-		makeSubexplaination(ExplainationIn,Literal,GettingThereFaster,ExplainationJunt,ExplainationMid), %trace,
+		makeSubexplaination(ExplainationIn,Literal,GettingThereFaster,ExplainationJunt,ExplainationMid), %true,
 		deduceGoal(DB,MVarsOut,VarsOut,BackchainN,ExplainationMid,GettingThereBetter,_Ctx,Context,ExplainationOut).
 */		
 makeSubexplaination(ExplainationIn,Literal,[[GettingThereFaster]],Explaination,ExplainationMid):-!,
@@ -1381,7 +1381,7 @@ p_deducePossibleInstancesFromClasslist(Context,[Class|Classes],[Arg|ArgS]):-
 	p_deduceInstanceTable(Context,Arg,Class),
 	p_deducePossibleInstancesFromClasslist(Context,Classes,ArgS).
 	
-p_deduceInstanceTable(Context,Arg,Class):- % trace,
+p_deduceInstanceTable(Context,Arg,Class):- % true,
 	deduceGoal(DB,VarsIn,VarsOut,true,4,g_h([]),holds(instance,Arg,Class),Ctx,Context,Explaination),safe_arg(Arg).
 	
 % every description is eigther too general or too specific in most scenario cases.. 
@@ -2249,7 +2249,7 @@ prove_goal(Predicate,Logic,Depth,Table,Var,Agent,Context,Explaination):-
 	!,fail.
 
 
-%prove_goal(Predicate,Logic,Depth,Table,Var,Agent,Context,Explaination):-trace,fail
+%prove_goal(Predicate,Logic,Depth,Table,Var,Agent,Context,Explaination):-true,fail
 
 
 
@@ -2363,7 +2363,7 @@ instanciate_finate(Predicate,Logic,Depth,Table,holds(holdsDuring,T,S),Agent,Cont
 	nonvar(T),nonvar(S).
 		
 	%%instance_all(Context,Predicate,Arg,SO). %,ground(Arg,SO).
-instanciate_finate(Predicate,Logic,Depth,Table,holds(Predicate,Arg,SO),Agent,Context):-%trace,
+instanciate_finate(Predicate,Logic,Depth,Table,holds(Predicate,Arg,SO),Agent,Context):-%true,
 	instance_all(Context,Predicate,[Arg,SO]). %,ground(Arg,SO).
 
 instanciate_finate(Predicate,Logic,Depth,Table,holds(Predicate,Arg,S,O),Agent,Context):-
@@ -2566,7 +2566,7 @@ finite_goal(Predicate,TF,Depth,Table,holds(Predicate,Arg1,Arg2),Agent,Context,Ex
 finite_goal(Predicate,true,Depth,Table,Fact,Agent,Context,Explaination * Explaination2 ):-
 	writeDebug(calling_backchain(Fact,Table)),
 	confirm_callable((Fact)),
-	Depth2 is Depth -1,!,  %trace,
+	Depth2 is Depth -1,!,  %true,
 	client_rulebase_spec(Predicate,true,Fact, Agent,Context, Conditions, Explaination, F,Type),
 	confirm_rule(Predicate,true,Fact, Agent,Context, Conditions, Explaination, F,Type,Depth,Table,NewTable,NewConds),
 	deduceGoal(holds,true,Depth2,[Fact|NewTable],NewConds,Agent,Context,Explaination2),

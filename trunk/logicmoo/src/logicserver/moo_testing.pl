@@ -112,9 +112,9 @@ run_batch(Sub):-
 
 
 
-:-assert(oddeven).
+:-dynamic(oddeven/0).
 
-:-assert(last_tq('TES')).
+%:-assert(last_tq('TES')).
 
 :-dynamic(tq_ignored/0).
 :-dynamic(tq_skipped/0).
@@ -404,7 +404,6 @@ dump_table:-
 % ========================================================================================
 :-dynamic(request_time/1).
 
-:-dynamic(isMooOption(debug_tests,true)).
 
 testTQFileWriteHTML(FileName,User,TimeRequired,Result,Title,Mods):-isMooOption(debug_tests,true),!,
          file_base_name(FileName,FileBaseName),
@@ -498,7 +497,6 @@ evaluate_result('Syntax_Errors'):-!.
 retain_answer(Var):-var(Var),!.
 retain_answer(:):-!.
 retain_answer((_=X)):-!,retain_answer(X),!.
-retain_answer((_:_:X^_G33048)):-!,retain_answer(X),!.
 retain_answer(A * B):-!,retain_answer(A),retain_answer(B),!.
 retain_answer(X):-is_list(X),!,retain_answer_list(X).
 retain_answer(X):-compound(X),!,ra(X),X=..XX,retain_answer_list(XX).

@@ -3,8 +3,8 @@
 % Maintainer: Douglas Miles
 % Contact: dmiles@users.sourceforge.net ;
 % Version: 'moo_api.pl' 1.0.0
-% Revision:             $Revision: 1.4 $
-% Revised At:   $Date: 2002-03-12 21:34:07 $
+% Revision:             $Revision: 1.5 $
+% Revised At:   $Date: 2002-03-14 12:46:23 $
 
 % ===================================================================
 % PURPOSE
@@ -629,7 +629,7 @@ invokeRequest(Options):-memberchk(cmd='Load SContext',Options),!,
 % Invoke Canonicalizer on Context/Ctx (GET)
 % ===========================================================
 invokeRequest(Options):-
-        memberchk(cmd='Canonicalize',Options),!,%trace,
+        memberchk(cmd='Canonicalize',Options),!,%true,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
         ensureMooOption(opt_theory='PrologMOO',Context),!,
         (unsetMooOption(opt_surface_check=_)),
@@ -663,7 +663,7 @@ invokeRequest(Options):-
 % Invoke Surface Checker on Context/Ctx
 % ===========================================================
 invokeRequest(Options):-
-        memberchk(cmd='Surface Check',Options),!,%trace,
+        memberchk(cmd='Surface Check',Options),!,%true,
         ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
         ensureMooOption(opt_theory='PrologMOO',Context),!,
         logOnFailure(surface_check_entire_theory_ctx(Context,Ctx)),!,
@@ -759,7 +759,7 @@ invokeRequest(Options):-memberchk(client='tqsystem',Options),!,ignore(invokeTest
 
 invokeRequest(Options):-memberchk(client=command,Options),!.
 
-invokeRequest(Options):-%trace,
+invokeRequest(Options):-%true,
    writeFmt('
 <html>
 
@@ -872,7 +872,7 @@ invokeRequestAndWriteUserAgent(Formula,Ctx,TrackingAtom,Context,User,Vars,CPU):-
 % ===========================================================
 % Cite Buffer
 % ===========================================================
-writeUserAgentBuffer:-%trace,
+writeUserAgentBuffer:-%true,
         retract(requestBuffer_db(UResultsSoFar,Result,Explaination,Status)),
         once(writeAnswersUserAgent(UResultsSoFar,Result,Explaination,Status)),fail.
 
@@ -889,7 +889,7 @@ writeUserAgentBuffer:-!.
 % Send to debugger
 % ===========================================================
 writeAnswersUserAgent(UResultsSoFar,Result,InExplaination,Status):-
-        system_dependant:prolog_notrace((once(writeDebug(writeAnswersUserAgent(UResultsSoFar,Result,InExplaination,Status))),fail)).
+        ((once(writeDebug(writeAnswersUserAgent(UResultsSoFar,Result,InExplaination,Status))),fail)).
 
 % ===========================================================
 % Hide certain returns
@@ -1214,7 +1214,7 @@ agentRequest(KIFCharsIn,Ctx,Context,User,UResultsSoFar,Result,Explaination,Statu
 
 
 agentRequest(KIFCharsIn,FmlInOpen,Vars,Ctx,Context,User,UResultsSoFar,Result,Explaination,Status):-
-        system_dependant:prolog_notrace((
+        ((
         retractall(answer_found(_)),
         retractall(t_answer_found(_)),
         retractall(tabled_f(_)),
@@ -1235,7 +1235,7 @@ agentRequest(KIFCharsIn,FmlInOpen,Vars,Ctx,Context,User,UResultsSoFar,Result,Exp
         getOpenVariablesWFF(FmlInOpen,Vars,ChaseVars),
         getPrologVars(ChaseVars,QVars,_,_),
         RequestPrototype=..[request|QVars],
-        system_dependant:prolog_notrace((not(not((
+        ((not(not((
                 getAssertionClauses(Context,'<=>'(FmlInOpen,RequestPrototype),CAN,Vars,Flags),
                 assert(mooCache(FmlInOpen,CAN,Flags,Vars,Context,TN,User,Result)),!,
                 (recanonicalizeTN(Context,TN)),    % Compile Belief
@@ -1289,7 +1289,7 @@ commitCleanExplaination(Explaination,Explaination):-!.
 
 
 getRequestDefaults(URequest,OAnswers,BackchainsMax,Deductions):-
-        system_dependant:prolog_notrace((
+        ((
         (getMooOption(opt_backchains_max=BackchainsMax)),
         (getMooOption(opt_deductions_max=Deductions)),!,
         ignore((ground(URequest) -> Answers=1 ; Answers=PAnswers)),
@@ -1297,7 +1297,7 @@ getRequestDefaults(URequest,OAnswers,BackchainsMax,Deductions):-
         ignore(BackchainsMax=30),ignore(Answers=60),OAnswers is Answers,!)).
 
 set_quit_time(Num):-
-        system_dependant:prolog_notrace((
+        ((
         (getMooOption(opt_timeout=QuitTime)),!,ignore(QuitTime=5),!,
         retractall(cpuend(_)),
         getCputime(Now),

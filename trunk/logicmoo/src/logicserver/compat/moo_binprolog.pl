@@ -11,7 +11,7 @@
 
 index(_).
 
-%:-trace.
+%:-true.
 %:-eager.
 
 % SWI-Ops (just in case)

@@ -87,7 +87,7 @@ neg_equals(A,B):- not(A=B).
 :-dynamic(tabling/1).
 
 debug_w(('Completed' : 'Request' : goal :Goal)):-!. % each here
-debug_w(X):-send_note(debug,trace,'Step',X).
+debug_w(X):-send_note(debug,true,'Step',X).
 debug_w(_):-!.
 
 
@@ -284,7 +284,7 @@ fact('instance-of'(A,C),Context,(TN1:TN2), (CN1:CN2)):-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% $Id: moo_tap.pl,v 1.3 2002-03-12 21:34:08 dmiles Exp $
+% $Id: moo_tap.pl,v 1.4 2002-03-14 12:46:24 dmiles Exp $
 % Sicstus Prolog
 % Copyright (C) 1993: Bernhard Beckert and Joachim Posegga
 %                     Universit"at Karlsruhe
@@ -413,7 +413,7 @@ lt_prove(Lit,[(UnivV:Next)|UnExp],Lits,DisV,FreeV,_,VarLim) :-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% $Id: moo_tap.pl,v 1.3 2002-03-12 21:34:08 dmiles Exp $
+% $Id: moo_tap.pl,v 1.4 2002-03-14 12:46:24 dmiles Exp $
 % Sicstus Prolog
 % Copyright (C) 1993: Bernhard Beckert and Joachim Posegga
 %                     Universit"at Karlsruhe

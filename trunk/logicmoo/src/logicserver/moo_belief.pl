@@ -18,7 +18,7 @@ agentBelief(FmlInOpen,Literal,VarsRequested,Ctx,Context,User,PA, VarsRequested,f
 	flag('$UAnswers',UA,UA+1),
 	flag('$UAnswers',PA,PA).
 
-agentBelief(FmlInOpen,NLiteral,VarsRequested,Ctx,Context,User,PA, VarsRequested,found(NA),done(false:NA)):-%trace,
+agentBelief(FmlInOpen,NLiteral,VarsRequested,Ctx,Context,User,PA, VarsRequested,found(NA),done(false:NA)):-%true,
 	flag('$UAnswers',PA,PA),PA<1,
 	(NLiteral=..[TopFunctor|Args],(atom_concat('~',FN,TopFunctor);atom_concat('~',TopFunctor,FN))),!,Literal=..[FN|Args],
 	writeDebug(red,'Stage 4 - Negative ':not(FmlInOpen)),
@@ -168,7 +168,7 @@ ensureProtoRef(TopFunctor,GoalPrototype,Goal,PrototypeRef,NumVars):-
 		 (      writeDebug(creating(GoalPrototype)),
 			recorda(TopFunctor,GoalPrototype:NumVars,PrototypeRef),
 			% Discover stable Model
-			% trace,
+			% true,
 			stableModel(TopFunctor,PrototypeRef,Goal,GoalPrototype))))),!.
 	
 
@@ -300,7 +300,7 @@ mooBeliefCompleteTableLevel(PrototypeRef,DepthToExplore,SubVarSeek,TopFunctor,Nu
 
 mooBeliefBuildTableLevel(PrototypeRef,ThisNextDepth,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype):-
 	% ----------------------------------------------------------------------------------------
-	% trace to debugger
+	% true to debugger
 	% ----------------------------------------------------------------------------------------
 	writeDebug(mooBeliefBuildTableLevel(ThisNextDepth,Goal,GoalPrototype,SubVarSeek,TopFunctor,NumVars,FreeVs,Arity)),
 	% ----------------------------------------------------------------------------------------
@@ -504,7 +504,7 @@ mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor
 
 % clean of further junctions
 mooBeliefCallBodyJunctions(HeadV,BodyV,PrototypeRef,Depth,BodyVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,ExplainationID,TN,
-	CPos):-%trace,
+	CPos):-%true,
 	mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,CPos).
 
 
@@ -580,7 +580,7 @@ mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFu
 	mooBeliefCallProposition(PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,LiteralGoal).
 
 mooBeliefPropositionMechanism(HeadV,BodyV,PrototypeRef,Depth,ClauseVarSeek,TopFunctor,NumVars,FreeVs,Arity,Goal,GoalPrototype,Context,Lits,
-	Ante):-	trace,
+	Ante):-	true,
 	writeDebug(unkown:HeadV:BodyV:Ante),fail.
 
 oneGround([]).
@@ -623,7 +623,7 @@ mooBeliefCallProposition(PrototypeRef,Depth,SubVarSeek,TopFunctor,NumVars,FreeVs
 % It also rebuilds the seekage afterwards
 % =========================================================
 buildVarSeek(_,PreviousVarSeek,PreviousVarSeek,Goal,Goal):-!.
-%trace,!.
+%true,!.
 
 willFindSeek(_,PreviousVarSeek,PreviousVarSeek,Goal,Goal):-!.
 
@@ -860,7 +860,7 @@ wrapPatternArgs(URealLiteral,RealLiteral):-!,
 	
 
 mcf(URealLiteral,Bm):-
-	resetTableFlags,%trace,		 
+	resetTableFlags,%true,		 
 	wrapPatternArgs(URealLiteral,RealLiteral),!,
 	getCputime(B),
      %   findall(URealLiteral,(deduceCanGoal(Context,RealLiteral,Bm),write(URealLiteral),nl),Total),
@@ -1027,7 +1027,7 @@ deduceGoal(Context,ExplainationIn,MaxVars,(H,T),ExplainationOut):-
 	deduceGoal(Context,ExplainationMid,MaxVars,T,ExplainationOut).
 
 /*
-deduceGoal(Context,ExplainationIn,MaxVars,not NLiteral,Refs):-!,% trace,
+deduceGoal(Context,ExplainationIn,MaxVars,not NLiteral,Refs):-!,% true,
 	NLiteral=..[TopFunctor|Args],(atom_concat('~',FN,TopFunctor);atom_concat('~',TopFunctor,FN)),!,
 		not(Literal=..[FN|Args],!,deduceGoal(Context,ExplainationIn,MaxVars,Literal,Refs)),!.
 */
@@ -1061,7 +1061,7 @@ mooRulebase(RealLiteral,Body,TN:KRVars):-
 finishgaf(Literal,Bm):-
         mooCache(Lit,_, Context, Ctx, TN),
         memberchk_cnj(Lit,Body),
-        mooRulebase(Literal,Body,RN),    %%  trace,
+        mooRulebase(Literal,Body,RN),    %%  true,
 	deduceCanGoal(Context,Literal,Body,0).
 	
 
@@ -1074,7 +1074,7 @@ deduceCanGoal(Context,Literal,Bm):-
 	deduceCanGoal(Context,Literal);
 	( Bm>0, 
         mooRulebase(Literal,Body,RN,Goal),
-	Goal<Bm,     %trace,
+	Goal<Bm,     %true,
 	Bn is Bm -1,
 	deduceCanGoal(Context,Literal,Body,Bn)).
 	
@@ -1134,7 +1134,7 @@ solveLiteral(Lit):-
 %	createFreeEconomy(Econ),
 %	resetTableFlags,
 	Econ=1,
-	createBuyer(Econ,Buyer,Lit), trace,
+	createBuyer(Econ,Buyer,Lit), true,
 	setBuyerDemand(Econ,Buyer,Lit),
 	giveCash(Econ,Buyer,200),!,
 	researchShopping(Econ,Buyer,[Cost-Best|TodoList]),!,
@@ -1402,7 +1402,7 @@ mooCacheCall(_,Previous,MaxVars,PVars,NBodyVarsLeft,
 			list_to_set(Sols,SolsS),
 			length(SolsS,N),!,
 	N>0,
-	%trace,
+	%true,
 	write(TN:returned:N),
 	member(Shared,SolsS),
 	recorda(TN,RealLiteral:Body).
@@ -1415,7 +1415,7 @@ mooCacheCall(_,Previous,MaxVars,PVars,NBodyVarsLeft,
 
 		%ground(UnivLiteral), % Makes sure this is valid
 		%not(Functor=not(_)),
-	erase(Ref),%trace,
+	erase(Ref),%true,
 
 	%copy_term(RFVH,Session),
 	%numbervars(Session,'$',0,_),

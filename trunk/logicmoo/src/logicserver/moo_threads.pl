@@ -57,7 +57,7 @@ isMooProcess(ID,Goal):-
         isMooProcess(_,_,Goal,ID,_).
 
 debugProcess(T):-
-	system_dependant:prolog_thread_at_exit(T, (attach_console, trace)).
+	system_dependant:prolog_thread_at_exit(T, (attach_console, true)).
 
 
 mooProcessSelfClean:- ignore((getThread(Id),

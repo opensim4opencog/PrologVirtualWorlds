@@ -669,7 +669,7 @@ help.','
 /* \end{verbatim}
 
 \subsection{Tracing}
-Tracing is used to trace the details of the search tree. It is ugly
+Tracing is used to true the details of the search tree. It is ugly
 except for very small programs.
 \index{tracing}
 \begin{verbatim} */
@@ -756,7 +756,7 @@ traverse(if(H,assumed)) :-
 traverse(if(H,given)) :-
     writeln([H,' is a given controllable.']).
 traverse(if(H,not)) :-
-    writeln([~ H,' is a negation - I cannot trace it. Sorry.']).
+    writeln([~ H,' is a negation - I cannot true it. Sorry.']).
 traverse(if(H,B)) :-
     B \== true,
     B \== builtin,

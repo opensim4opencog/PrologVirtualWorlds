@@ -1,13 +1,22 @@
+:-module(moo_java,[
+   startJava/0,
+   startJamund/0,
+   createJamud/0,
+   loadJamudReferences/0]).
+
+
+
+
 startJava:-
-	 java_start("/opt/sourceforge/logicmoo/src:/opt/sourceforge/logicmoo/src/partner/jamud/src:/opt/sourceforge/logicmoo/lib/:cos.jar:/opt/sourceforge/logicmoo/lib/ecs-1.4.1.jar:/opt/sourceforge/logicmoo/lib/jdom.jar:/opt/sourceforge/logicmoo/lib/jaxp.jar:/opt/sourceforge/logicmoo/lib/rdf-api-2001-01-19.jar:/opt/sourceforge/logicmoo/lib/plc.jar:/opt/sourceforge/logicmoo/lib/cpj.jar:/opt/sourceforge/logicmoo/lib/nanoxml.jar:/opt/sourceforge/logicmoo/lib/jpl.jar:/opt/sourceforge/logicmoo/lib/crawler.jar").
+	 javart:java_start("/opt/sourceforge/logicmoo/src:/opt/sourceforge/logicmoo/src/partner/jamud/src:/opt/sourceforge/logicmoo/lib/:cos.jar:/opt/sourceforge/logicmoo/lib/ecs-1.4.1.jar:/opt/sourceforge/logicmoo/lib/jdom.jar:/opt/sourceforge/logicmoo/lib/jaxp.jar:/opt/sourceforge/logicmoo/lib/rdf-api-2001-01-19.jar:/opt/sourceforge/logicmoo/lib/plc.jar:/opt/sourceforge/logicmoo/lib/cpj.jar:/opt/sourceforge/logicmoo/lib/nanoxml.jar:/opt/sourceforge/logicmoo/lib/jpl.jar:/opt/sourceforge/logicmoo/lib/crawler.jar").
 
 startJamud:-
 	 jamud_object(JAMUD),!,
-	 java_invoke_method(JAMUD,startJamud(_X)).
+	 javart:java_invoke_method(JAMUD,startJamud(_X)).
 
 createJamud:-
-	 java_create_object('logicmoo.LogicMoo',JAMUD),
-	 %java_object(JAMUD)
+	 javart:java_create_object('logicmoo.LogicMoo',JAMUD),
+	 %javart:java_object(JAMUD)
 	 format('\njamud.Jamud=~q\n',[JAMUD]),!,
 	 assert(jamud_object(JAMUD)),!.
 			
@@ -17,8 +26,8 @@ createJamud:-
 
 loadJamudReferences:-
                jamud_object(JAMUD),
-	 java_invoke_method(JAMUD,getJamudInstance(Instance)),
-	 java_invoke_method(JAMUD,getJamudMudObjectRoot(MudRoot)),!,
+	 javart:java_invoke_method(JAMUD,getJamudInstance(Instance)),
+	 javart:java_invoke_method(JAMUD,getJamudMudObjectRoot(MudRoot)),!,
 	 assert(jamud_instance(Instance)),
 	 assert(jamud_root(MudRoot)),
 	 showInstanceValue(MudRoot).
@@ -36,12 +45,12 @@ showInstanceValue(_Object):-!.
 
 :-dynamic(classToPLStructure/2).
 
-java_classToPLStructure(Object,Term):-
+javaClassToPLStructure(Object,Term):-
 	 nonvar(Object),classToPLStructure(Object,Term),!.
 
-java_classToPLStructure(Object,Term):-
+javaClassToPLStructure(Object,Term):-
       jamud_object(JAMUD),
-      java_invoke_method(JAMUD,classToPLStructure(Object,Term)),!,
+      javart:java_invoke_method(JAMUD,classToPLStructure(Object,Term)),!,
       assert(classToPLStructure(Object,Term)).
 
 getInstanceValue(Object,ActualName,Value):-
@@ -52,10 +61,10 @@ getInstanceValue(Object,Name,Value):-
 getInstanceValue(Object,Name,ActualName,Value):-
       getInstanceValue(Object,Name,ActualName,Value,_Type).
 
-:-dynamic(java_object_known/1).
+:-dynamic(javart:java_object_known/1).
 
 inferJavatypeMemberFnTuples(equal('JavaMemberFn'('JavaObjectFn'(Object),Name),Result)):-
-      java_object(Object),java_object_known(Object),
+      javart:java_object(Object),javart:java_object_known(Object),
       getJavatypeValueFn(Object,Name,_ActualName,Result).
 
 getJavatypeValueFn(Object,ActualName,Value):-
@@ -68,11 +77,11 @@ getJavatypeValueFn(Object,Name,ActualName,'JavaValueFn'(Type,Value)):-
 
 
 getInstanceValue(Object,Name,ActualName,Value,Type):-
-      java_classToPLStructure(Object,Term),
+      javaClassToPLStructure(Object,Term),
       get_call_term_from_class(Object,Term,Name,Value,Type,ActualName,CallTerm),
       catch(CallTerm,E,format('\nAttempting "~q" resulted in ~q\n',[CallTerm,E])).
 
-get_call_term_from_class(Object,Term,Name,Value,Type,Name,java_get_value(Object,MethodCall)):-
+get_call_term_from_class(Object,Term,Name,Value,Type,Name,javart:java_get_value(Object,MethodCall)):-
       catch(arg(1,Term,Arg1),_,fail),
       arg(1,Arg1,FieldsList),
       member(Field,FieldsList),
@@ -80,7 +89,7 @@ get_call_term_from_class(Object,Term,Name,Value,Type,Name,java_get_value(Object,
       arg(1,Field,Type),
       MethodCall=..[ActualName,Value].
 
-get_call_term_from_class(Object,Term,Name,Value,Type,ActualName,java_invoke_method(Object,MethodCall)):-
+get_call_term_from_class(Object,Term,Name,Value,Type,ActualName,javart:java_invoke_method(Object,MethodCall)):-
       catch(arg(2,Term,Arg1),_,fail),
       arg(1,Arg1,MethodsList),
       member(Method,MethodsList),

@@ -2,11 +2,13 @@
 % OPERATOR PRECEDANCE
 % ===================================================================
 
+/*
 :- style_check(-singleton).
 :- style_check(-discontiguous).
 :- style_check(-atom).
 :- style_check(-string).
-	      
+  */
+              
 :- op(1200,fx,::-).         /* operator for integrity constraints */
 
 %:- op(1200,xfx,<--).

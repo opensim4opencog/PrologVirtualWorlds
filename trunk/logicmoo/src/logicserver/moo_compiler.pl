@@ -171,9 +171,9 @@ canonicalizeMooContextHTML(Context):-!.
 clearCanonicalizerWarnings(Context):-retractall(canonicalizerWarnings(Context,_,_)),!.
 
 sendCanonicalizerWarning(Warning,Data,Surface,Rule,CLID,Flags,KRVars,Context,TN,Anontate,Matrix,
-	[canonicalizerWarning(Warning,Data):-true]):-
+	[(canonicalizerWarning(Warning,Data):-true)]):-
        % writeq(Warning:Data),nl,
-       not(not(canonicalizerWarnings(Context,Warning,Data)))  -> ifInteractive(write(','));
+       \+ ( \+ (canonicalizerWarnings(Context,Warning,Data)))  -> ifInteractive(write(','));
 	(assertz(canonicalizerWarnings(Context,Warning,Data)),
 	ifInteractive(writeObject(nv([nl,Warning,nl,writeq(Data),nl,Surface,nl,nl]),KRVars))),!.
 
@@ -216,10 +216,10 @@ recanonicalizeTN(Context,TN):-
 		writeFmt('\n100% complete.  Examined ~w internal lemma structures for ~w. Facts:~w  Rules:~w  \n',[ExplainationID,Context,Facts,Rules]))),!.
 	
 writePercentAndTimeReset:-
-	system_dependant:prolog_notrace((flag('$last_written_percent',_,1),getCputime(Now),!,flag('$cputime_percent_start',_,Now))).
+	((flag('$last_written_percent',_,1),getCputime(Now),!,flag('$cputime_percent_start',_,Now))).
 	
 writePercentAndTime(Format,SoFar,Total,Steps):-
-        system_dependant:prolog_notrace((
+        ((
 		flag('$last_written_percent',LastPercent,LastPercent),
 	        NewPercent is (SoFar/Total * 100),
 		NextPercent is LastPercent + Steps, 
@@ -244,6 +244,7 @@ deduceLegalToCan(Surface,_):-
 	once(getConstants(atomic,Surface,Consts,_,_)),
 	member(Word,Consts),
 	deduceDisabledSurfaceConst(Word),!,fail.
+
 deduceLegalToCan(Surface,_):-!.
 	
 :-dynamic(deduceDisabledSurfaceConst/1).
@@ -308,7 +309,6 @@ canonicalizeLemme(Surface,Rule,Cons,Ante,NewAnteR,Flags,KRVars,Context,TN,Mainta
 % =============================================================
 
 canonicalizeLemme(Surface,Rule,Cons,Ante,NewAnteR,Flags,KRVars,Context,TN,Maintainer,Result,Assertions):-
-	%ifInteractive((NewAnteR \== NewAnteLA, (write('\n':NewAnteLA:'\n':NewAnteR),nl,nl,trace))),
 	getPrologVars(Cons,HeadSlots,_,_),
 	adjustSkolemOrder(HeadSlots,NewAnteR,NewAnteL),!,
 	nonWrappedCan(HardCoded),
@@ -317,17 +317,17 @@ canonicalizeLemme(Surface,Rule,Cons,Ante,NewAnteR,Flags,KRVars,Context,TN,Mainta
 	selectSign(EntailedHead,Sign),!,
 	copy_term(EntailedHead,USeed),
 	convertNegations(lit,USeed,ProtoType,_),
-	numbervars(ProtoType,'$',0,_),
+	numbervars(ProtoType,('$'),0,_),
 	selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,EntailedHead,ConditionalBody,Matrix),!,
 	flag(clause_id,CLID,CLID+1),
-	setMooOption(putAttributeStructures,Surface:Rule:CLID:Flags:KRVars:Context:Ctx:TN),!,
+	setMooOption(putAttributeStructures,(Surface,Rule,CLID,Flags,KRVars,Context,Ctx,TN)),!,
 	catch(putAttributeStructures(Context,Flags,Matrix,EmbededArgs),
 		mooException(argDomains,Type,Details,DebugOnError),
 		(set_prolog_flag(debug_on_error, DebugOnError),
 		sendCanonicalizerWarning(Type,Details,Surface,Rule,CLID,Flags,KRVars,
 								Context,TN,Ctx,Matrix,EmbededArgs))),!,
 	convertNegations(lit,EmbededArgs,LiteralMatrix,_),
-	createFunctionalClauses(Rule:KRVars,LiteralMatrix,Clauses),
+	createFunctionalClauses(':'(Rule,KRVars),LiteralMatrix,Clauses),
 	mergeClauses(ProtoType,Clauses,Rule,CLID,Flags,KRVars,Context,TN,Assertions),!.
 
 
@@ -351,21 +351,21 @@ mergeClauses(ProtoType,[Matrix|Rest],KR,CLID,Flags,KRVars,Context,TN,Assertions)
 
 % =============================================================
 
-getAssertMatrix(ProtoType,(C:-true),KR,CLID,KRVars,Context,TN,[mooCache(C,ExplainationID:KRVars:KR,Context,TN)]):-
+getAssertMatrix(ProtoType,(C:-true),KR,CLID,KRVars,Context,TN,[mooCache(C,(ExplainationID,KRVars,KR),Context,TN)]):-
 	flag(explaination_id,ExplainationID,ExplainationID+1).
 
-getAssertMatrix(ProtoType,(C:-A),KR,CLID,KRVars,Context,TN,[mooCache(C,A,ExplainationID:KRVars:KR,Context,TN)]):-
+getAssertMatrix(ProtoType,(C:-A),KR,CLID,KRVars,Context,TN,[mooCache(C,A,(ExplainationID,KRVars,KR),Context,TN)]):-
 	flag(explaination_id,ExplainationID,ExplainationID+1).
-getAssertMatrix(ProtoType,C,KR,CLID,KRVars,Context,TN,[mooCache(C,ExplainationID:KRVars:KR,Context,TN)]):-
+getAssertMatrix(ProtoType,C,KR,CLID,KRVars,Context,TN,[mooCache(C,(ExplainationID,KRVars,KR),Context,TN)]):-
 	flag(explaination_id,ExplainationID,ExplainationID+1).
 		 
 % =============================================================
 
 createFunctionalClauses(Rule,[],[]).
-createFunctionalClauses(Rule,[C:-true|More],[C|Clauses]):-!,
+createFunctionalClauses(Rule,[(C:-true)|More],[C|Clauses]):-!,
 	createFunctionalClauses(Rule,More,Clauses).
-createFunctionalClauses(Rule,[C:-A|More],Clauses):-!,
-	createFunctionalClauses(Rule,C:-A,SomeClauses),!,
+createFunctionalClauses(Rule,[(C:-A)|More],Clauses):-!,
+	createFunctionalClauses(Rule,(C:-A),SomeClauses),!,
 	createFunctionalClauses(Rule,More,MoreClauses),
 	append(SomeClauses,MoreClauses,Clauses),!.
 createFunctionalClauses(Rule,[C|More],Clauses):-!,
@@ -459,12 +459,12 @@ mapOnConj(Goal,LogAnte,ConditionalBody):-!,
 % =============================================================
 
 convertBodyToHolds(LogAnte,ConditionalBody):-!,
-	system_dependant:prolog_notrace((convertNegations(not,LogAnte,NottedLogAnte,_),
+	((convertNegations(not,LogAnte,NottedLogAnte,_),
 	nonWrappedCan(Nowrap),
 	convertToHolds([holds|Nowrap],NottedLogAnte,ConditionalBody))).
 
 convertToHolds(Flags,Mid,Term):-
-	%system_dependant:prolog_notrace
+	%
 	(mapOnConj(convertToHoldsProp(Flags),Mid,Term)),!.
 	
 convertToHoldsProp(Flags,(Term),(Term)):-isSlot(Term),!.
@@ -482,13 +482,13 @@ convertToHoldsProp([Wrap|_],Term,Term):-!.
 % =============================================================
 
 containsSkolems(Flags,EntailedHeadLiteral):-
-	system_dependant:prolog_notrace((getPrologVars(EntailedHeadLiteral,Vars,_,_),!,member(Each,Vars),member(replaceConsVar(Each,_),Flags),!)).
+	((getPrologVars(EntailedHeadLiteral,Vars,_,_),!,member(Each,Vars),member(replaceConsVar(Each,_),Flags),!)).
 
 	
-selectBestRuleMatrix(Sign,HeadSlots,Flags,_,EntailedHead,[],[EntailedHead:-guarded_(EntailedHead)]):-!.
+selectBestRuleMatrix(Sign,HeadSlots,Flags,_,EntailedHead,[],[ (EntailedHead:-guarded_(EntailedHead)) ]):-!.
 selectBestRuleMatrix(Sign,HeadSlots,Flags,_,EntailedHead,[true],[EntailedHead]):-!.
-selectBestRuleMatrix(Sign,HeadSlots,Flags,[],EntailedHead,Body,[EntailedHead:-novars_(Body)]):-!.
-selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,EntailedHead,ConditionalBody,[EntailedHead:-NewBodListGuarded]):-
+selectBestRuleMatrix(Sign,HeadSlots,Flags,[],EntailedHead,Body,[ (EntailedHead:-novars_(Body)) ]):-!.
+selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,EntailedHead,ConditionalBody,[( EntailedHead:-NewBodListGuarded) ]):-
 	getPrologVars(EntailedHead:ConditionalBody,AllVars,_,_),
 	getPrologVars(ConditionalBody,BodyVars,BodyVarsSingleMaybeHead,BodyVarsConnectedAndMaybeHead),
 	set_partition(HeadSlots,BodyVars,PrivateHead,PrivateBody,AllSharedHB),!,
@@ -504,7 +504,7 @@ selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,EntailedHead,ConditionalBody,[E
 	%prologPartitionList(NewBodListWrappedS,Item,sharedVars(Item,HeadSlots),Shared,Unshared),
 	%list_to_comma(Shared,SharedT),
 	%list_to_comma(Unshared,UnsharedT),
-	%selectRule(Sign,ConjPosNegFA,DiscPosNegFA,NewBodListGuarded),!.%trace.*/
+	%selectRule(Sign,ConjPosNegFA,DiscPosNegFA,NewBodListGuarded),!.%true.*/
 	
 
 % =============================================================
@@ -516,7 +516,7 @@ intersectionMath(Start,Scale,L1,L2,L12,New):-set_partition(L1,L2,_,_,L12),!,
 
 reorderAnteListAddPropositionalMechanisms(Sign,List,HeadSlots,BodyVars,UniversalBody,HeadSlotsSingleInBody,BodyOnlyConected,SplitHeadVar,Result):-
 	reorderAnteListAddPropositionalMechanismEach(Sign,List,HeadSlots,BodyVars,UniversalBody,HeadSlotsSingleInBody,BodyOnlyConected,SplitHeadVar,KeyedResult),!,
-	keysort(KeyedResult,SortedResult),%trace,
+	keysort(KeyedResult,SortedResult),%true,
 	removeKeys(SortedResult,Result),!.
 	
 removeKeys([],[]).
@@ -694,12 +694,12 @@ Prolog: impossible(instance(_, 'Object')) :- impossible(before(_,_))
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,EntailedHead,
 		SharedPos,UnsharedPos,
 		SharedNeg,UnsharedNeg,
-	[impossible(EntailedHead) :- impossible(Negs)],
+	[(impossible(EntailedHead) :- impossible(Negs))],
 		HeadSlots,BodyVars,VAllShare,SharedPosV,SharedNegV,
 		PrivateHead,PrivateBody,UnsharedPos,UnsharedNeg):-!.
 
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,[],[not(Negs)],not(EntailedHead),
-	[impossible(EntailedHead) :- impossible(Negs)],
+	[(impossible(EntailedHead) :- impossible(Negs))],
 		HeadSlots,BodyVars,
 		PrivateHead,PrivateBody,
 		SharedPos,SharedNeg,[]/*No shared Vars*/):-!.
@@ -711,22 +711,6 @@ selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,EntailedHead,
 		HeadSlots,BodyVars,VAllShare,SharedPosV,SharedNegV,
 		PrivateHead,PrivateBody,UnsharedPos,UnsharedNeg):-!.
 
-
-
-/*     selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,EntailedHead,
-		/*SharedPos*/ SharedPos,/*SharedNeg*/ SharedNeg,
-		/*UnsharedPos*/ UnsharedPos,/*UnsharedNeg*/ UnsharedNeg,
-		Matrix,
-		/*HeadSlots*/ HeadSlots,/*BodyVars*/ BodyVars,/*AllVars*/ AllVars,
-		/*AllSharedHB*/ AllSharedHB,/*SharedPosV*/ SharedPosV,/*SharedNegV*/ SharedNegV,
-		/*PrivateHead*/ PrivateHead,/*PrivateBody*/ PrivateBody),!.
-selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,EntailedHead,
-		/*SharedPos*/ SharedPos,/*SharedNeg*/ SharedNeg,
-		/*UnsharedPos*/ UnsharedPos,/*UnsharedNeg*/ UnsharedNeg,
-		[EntailedHead:- Body],
-		/*HeadSlots*/ HeadSlots,/*BodyVars*/ BodyVars,/*AllVars*/ AllVars,
-		/*AllSharedHB*/ AllSharedHB,/*SharedPosV*/ SharedPosV,/*SharedNegV*/ SharedNegV,
-		/*PrivateHead*/ PrivateHead,/*PrivateBody*/ PrivateBody):-*/
 
 
 
@@ -744,7 +728,7 @@ Prolog: neg(instance(A, 'UnaryConstantFunctionQuantity')):- neg(range(A, 'Consta
 */
 					       % no possitives
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,[],[not(Negs)],not(EntailedHead),
-	[impossible(EntailedHead) :- impossible(ConditionalBody)],
+	[(impossible(EntailedHead) :- impossible(ConditionalBody))],
 		HeadSlots,BodyVars,
 		[],[],	% No varables private on head or body /*All shared Vars*/
 		SharedPos,SharedNeg,AllSharedHB):-!.
@@ -765,13 +749,13 @@ Prolog: neg(beforeOrEqual(D, xB)) :- beforeOrEqual(xC, D),  instance(A, 'Object'
 
 
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,Pos,Negs,EntailedHead,
-	[impossible(EntailedHead):- prove(ifThen([Item|Rest],Negs))],
+	[(impossible(EntailedHead):- prove(ifThen([Item|Rest],Negs)))],
 		HeadSlots,BodyVars,
 		PrivateHead,PrivateBody,
 		[Shared|PosV],SharedNeg,[S|Hared]  /*One Or More shared Vars*/):-!.
 
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,ConditionalBody,not(EntailedHead),
-	[impossible(EntailedHead):- prove(ifThen([Item|Rest],Negs))],
+	[(impossible(EntailedHead):- prove(ifThen([Item|Rest],Negs)))],
 	HeadSlots,BodyVars,PrivateHead,PrivateBody,[S|Hared]):-
 	splitNegations(ConditionalBody,Pos,Negs), Pos=[_|_],   % At least one possitive
 	prologEach(Negs,Item,sharedVars(Item,EntailedHead)),   % All negated body variables are shared with head
@@ -821,7 +805,7 @@ selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,Pos,Negs,EntailedHead,
 
 
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails((Body),not(EntailedHeadLiteral)),
-		[impossible(EntailedHeadLiteral) :- ifThen(findall(Shared,Passed),Unshared)]):-
+		[(impossible(EntailedHeadLiteral) :- ifThen(findall(Shared,Passed),Unshared))]):-
 	notSkolemFlags(Flags),
 	splitNegations(Body,Pos,[]),
 	prologPartitionList(Pos,Item,sharedVars(Item,EntailedHeadLiteral),Passed,Unshared),
@@ -852,8 +836,8 @@ Prolog: instance(xB, 'TimePoint') :- findall(A,instance(A, 'Object'))
 */
 
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails([true],EntailedHeadLiteral),
-		[EntailedHeadLiteral :- NewAnte,
-		 searchable(EntailedHeadLiteral)]):-
+		[(EntailedHeadLiteral :- ( NewAnte,
+		 searchable(EntailedHeadLiteral)))]):-
 	containsSkolems(Flags,EntailedHeadLiteral),
 	getPrologVars(EntailedHeadLiteral,ConVars,_,_),
 	add_skolems_to_body(Flags,true,EntailedHeadLiteral,ConVars,NewAnte),
@@ -861,8 +845,8 @@ selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails([true],EntailedHeadLite
 	sharedVars(EntailedHeadLiteral,Thing,SharedVars).
 
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails(Thing,EntailedHeadLiteral),
-		[EntailedHeadLiteral :- ifThen(findall(SharedVars,Thing),NewAnte),
-		 searchable(EntailedHeadLiteral):-searchable(Thing)]):-
+		[(EntailedHeadLiteral :- ifThen(findall(SharedVars,Thing),NewAnte)),
+		 (searchable(EntailedHeadLiteral):-searchable(Thing))]):-
 	containsSkolems(Flags,EntailedHeadLiteral),
 	getPrologVars(EntailedHeadLiteral,ConVars,_,_),
 	add_skolems_to_body(Flags,true,EntailedHeadLiteral,ConVars,NewAnte),
@@ -888,8 +872,8 @@ selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails([true],(Fact)),[(NewCon
 
 			
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails((ThingNotConnetedToHead),(EntailedHeadLiteral)),
-		[searchable(EntailedHeadLiteral) :- searchable(ThingNotConnetedToHead)]):-
-	not(sharedVars(EntailedHeadLiteral,ThingNotConnetedToHead)),
+		[(searchable(EntailedHeadLiteral) :- searchable(ThingNotConnetedToHead))]):-
+	\+ (sharedVars(EntailedHeadLiteral,ThingNotConnetedToHead)),
 	getPrologVars(ThingNotConnetedToHead,_,_,[]),!.
 	
 
@@ -907,10 +891,10 @@ Prolog: impossible(instance(A, 'Object')) :- union([D],searchable(beforeOrEqual(
 */
 
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails((OnlyNegationsConnetedToHead),not(EntailedHeadLiteral)),
-		[impossible(EntailedHeadLiteral) :- searchable(Pos),impossible(Negs)]):-
+		[( impossible(EntailedHeadLiteral) :- (searchable(Pos),impossible(Negs)) )]):-
 	splitNegations(OnlyNegationsConnetedToHead,Pos,Negs),
 	sharedVars(Negs,EntailedHeadLiteral,_),
-	not(sharedVars(Pos,EntailedHeadLiteral,_)),!.
+	\+ (sharedVars(Pos,EntailedHeadLiteral,_)),!.
 	
 /*
 replaceConsVar(xB, '$existential'([63, 84, 73, 77, 69, 50], exists(xC, and(instance(xC, 'TimePoint'), and(instance([63, 84, 73, 77, 69, 50], 'TimePoint'), and(before(xC, [63, 84, 73, 77, 69, 50]), forall(D, =>(and(beforeOrEqual(xC, D), beforeOrEqual(D, [63, 84, 73, 77, 69, 50])), time(A, D))))))))), 
@@ -924,7 +908,7 @@ Prolog: time(A, D) :- prove(instance(A, 'Object'),beforeOrEqual(xC, D),beforeOrE
 
 
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails((Body),(EntailedHeadLiteral)),
-		[EntailedHeadLiteral:- prove(Body)]):-
+		[ (EntailedHeadLiteral:- prove(Body) )]):-
 	splitNegations(Body,Pos,[]),
 	not(containsSkolems(Flags,EntailedHeadLiteral:Body)),
 	prologEach(Pos,Item,sharedVars(Item,EntailedHeadLiteral)),!.
@@ -958,7 +942,7 @@ Prolog: subclass(E, D):- domain(A, C, E), domain(B, C, D), subrelation(A, B).
 */
 
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails((Body),(EntailedHeadLiteral)),
-		[(EntailedHeadLiteral) :- prove(Body)]):-
+		[((EntailedHeadLiteral) :- prove(Body))]):-
 	sharedVars(EntailedHeadLiteral,Body,ListOfShared),
 	getPrologVars(EntailedHeadLiteral,EntailedHeadLiteralAll,_,_),
 	getPrologVars(Body,BodyAll,_,_),
@@ -974,17 +958,17 @@ Prolog: disjointRelation(A, D):- domain(A, B, C), domain(D, B, E), disjoint(C, E
 */
 
 selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails((Body),(EntailedHeadLiteral)),
-		[(EntailedHeadLiteral) :- ifThen(Passed,Failed)]):-
+		[((EntailedHeadLiteral) :- ifThen(Passed,Failed))]):-
 	splitNegations(Body,Pos,[]),
 	prologPartitionList(Pos,Item,sharedVars(Item,EntailedHeadLiteral),Passed,Failed),!.
 
 
 
-selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails(Body,not(Head)),[impossible(Head):-once(prove(NewAnte))]):-
+selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails(Body,not(Head)),[(impossible(Head) :- once(prove(NewAnte)))]):-
 	getPrologVars(Head,ConVars,_,_),!,
 	add_skolems_to_body(Flags,Body,Head,ConVars,NewAnte),!.
 
-selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails(Body,Head),[Head:-unoptimized(NewAnte)]):-
+selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails(Body,Head),[(Head:-unoptimized(NewAnte))]):-
 	getPrologVars(Head,ConVars,_,_),!,
 	add_skolems_to_body(Flags,Body,Head,ConVars,NewAnte),!.
 
@@ -992,19 +976,19 @@ selectBestRuleMatrix(Sign,HeadSlots,Flags,KRVars,entails(Body,Head),[Head:-unopt
 notSkolemFlags(Flags):-not(member(replaceConsVar(_,_),Flags)).
 
 splitNegations(List,Pos,Neg):-
-	system_dependant:prolog_notrace((prologPartitionList(List,Item,isNegation(Item),NegT,PosT),!,NegT=Neg,PosT=Pos)).
+	((prologPartitionList(List,Item,isNegation(Item),NegT,PosT),!,NegT=Neg,PosT=Pos)).
 	
 sharedVars(Item1,Item2):-
-	system_dependant:prolog_notrace((sharedVars(Item1,Item2,SharedVars,Item1Only,Item2Only),!,SharedVars=[_|_])).
+	((sharedVars(Item1,Item2,SharedVars,Item1Only,Item2Only),!,SharedVars=[_|_])).
 	
 sharedVars(Item1,Item2,SharedVars):-
-	system_dependant:prolog_notrace((sharedVars(Item1,Item2,SharedVars,Item1Only,Item2Only),!)).
+	((sharedVars(Item1,Item2,SharedVars,Item1Only,Item2Only),!)).
 	
 sharedVars(Item1,Item2,SharedVars,Item1Only,Item2Only):-
-	system_dependant:prolog_notrace((getPrologVars(Item1,V1s,_,_),getPrologVars(Item2,V2s,_,_),!,
+	((getPrologVars(Item1,V1s,_,_),getPrologVars(Item2,V2s,_,_),!,
 	set_partition(V1s,V2s,Item1Only,Item2Only,SharedVars),!)).
 
-isNegation(Item):-system_dependant:prolog_notrace((isSlot(Item);(Item=not(V),nonvar(V));(functor(Item,F,A),atom_concat(~,_,F)))).
+isNegation(Item):-((isSlot(Item);(Item=not(V),nonvar(V));(functor(Item,F,A),atom_concat(~,_,F)))).
 	
 
 
@@ -1163,7 +1147,7 @@ selectBestBodyMechanism(Seed,UniversalBody,HeadSlotsSingleInBody,BodyOnlyConecte
 
 /* 
 selectBestPropositionMechanism(Sign,Conditional,CVars,HeadSlots,ConditionalClass,
-	CUniversalBody,CHeadSlotsSingleInBody,CBodyOnlyConected,CSplitHeadVar):-%trace,
+	CUniversalBody,CHeadSlotsSingleInBody,CBodyOnlyConected,CSplitHeadVar):-%true,
 	appendFunct(''(Conditional),'Z_Uvar_',CUniversalBody,Conditional1),!,
 	appendFunct(Conditional1,'amulitHeadVar_',CSplitHeadVar,Conditional2),
 	appendFunct(Conditional2,'singleHeadVar_',CHeadSlotsSingleInBody,Conditional3),
@@ -1212,9 +1196,9 @@ putAttributeStructures(Context,Anontate,Flags,Formula,SlotStructure):-
 
 
 localCanonicalizerNotice(Type,Details):-
-       getMooOption(putAttributeStructures,Surface:Rule:CLID:Flags:KRVars:Context:Ctx:TN),
+       getMooOption(putAttributeStructures,(Surface,Rule,CLID,Flags,KRVars,Context:Ctx,TN)),
        % writeq(Warning:Data),nl,
-       (not(not(canonicalizerWarnings(Context,Type,Details)))  -> ifInteractive(write(','));
+       ( \+ ( \+ (canonicalizerWarnings(Context,Type,Details)))  -> ifInteractive(write(','));
 	(assertz(canonicalizerWarnings(Context,Type,Details)),
 	ifInteractive(writeObject(nv([nl,Details,nl,Type,nl,Surface,nl,nl]),KRVars)))),!.
 
@@ -1240,7 +1224,7 @@ putPropositionAttributes(Context,Anontate,Flags,Caller,ArgN,'$existential'(ArgIn
 	
 
 getDomainsForVar(Caller,ArgN,ArgIn,Flags,Domains):-!,member(domainV(Var,Domains),Flags),Var==ArgIn,!.
-getDomainsForVar(Caller,ArgN,ArgIn,Flags,[]):-!,write(getDomainsForVar(Caller,ArgN,ArgIn,Flags,[])),trace.
+getDomainsForVar(Caller,ArgN,ArgIn,Flags,[]):-!,write(getDomainsForVar(Caller,ArgN,ArgIn,Flags,[])),true.
 
 putPropositionAttributes(Context,Anontate,Flags,Caller,ArgN,[],[]):-!.
 
@@ -1323,7 +1307,7 @@ putPropositionAttributesArguments(Context,Anontate,Flags,Caller,N,[Arg|ArgS],[Ar
 %:-dynamic(putAtomAttributeProc/6).
 
 putAtomAttribute(Context,Anontate,Flags,Caller,ArgN,ArgIn,SlotStructure):-
-	var(ArgIn),write(putAtomAttribute(Context,Anontate,Flags,Caller,ArgN,ArgIn,SlotStructure)),trace,fail.
+	var(ArgIn),write(putAtomAttribute(Context,Anontate,Flags,Caller,ArgN,ArgIn,SlotStructure)),true,fail.
 
 % Quoted Atom
 putAtomAttribute(Context,Anontate,Flags,Caller,ArgN,ArgIn,SlotStructure):-atom_concat('"',_,ArgIn),!,
@@ -1467,7 +1451,7 @@ getConstraintStructureForClass(Orig,Class,[]):-
 	localCanonicalizerWarning('Problem: Class is not connected to Knowledgebase ontology',(Class)),!.
 	
 
-deduceSingleSubclassPathList(Entity,Origin,Destination,Path):-not(ground((Origin,Destination))),trace,fail.
+deduceSingleSubclassPathList(Entity,Origin,Destination,Path):-not(ground((Origin,Destination))),true,fail.
 
 deduceSingleSubclassPathList(InheritableRelation, 'InheritableRelation', _, ['Abstract','Relation']):-!.
 
@@ -1587,7 +1571,7 @@ import_ado_cache_all_on:-
 	setOption(decider,on).
 	
 import_ado_cache(ContextName,Context):-
-	mooCache(_, surface, Axiom, Vars, ContextName, Context, Tracking, User, Status),%trace,
+	mooCache(_, surface, Axiom, Vars, ContextName, Context, Tracking, User, Status),%true,
 	ado_cache_moo_assertKIF(Axiom,Tracking,Context,Context,ContextName),
 	fail.
 	

@@ -209,7 +209,7 @@ main:-
 	/* we will bring it forground to log it */
                 retract(event(TimeStamp,Where,Goal)),
 		not(Goal=true),
-		write_debug(trace,trying(TimeStamp,Where,Goal)),
+		write_debug(true,trying(TimeStamp,Where,Goal)),
 		(
                 (
                 integer(TimeStamp),
@@ -232,7 +232,7 @@ main:-
 		(
 		not(NewExpires=1),
 		assertz_new(event(Expiration,Where,NewState)),
-		write_debug(trace,restacking(Where,NewState))
+		write_debug(true,restacking(Where,NewState))
 		)
 		;
 		true
@@ -443,18 +443,18 @@ do_execute(Static_Code,Declares,Completed):-
 		(
 		Do_Code
 		,
-		write_debug(trace,do_success(Static_Code,Declares,Completed))
+		write_debug(true,do_success(Static_Code,Declares,Completed))
 		)
 		;
 		(
-		write_debug(trace,do_failed(Static_Code,Declares,Completed))
+		write_debug(true,do_failed(Static_Code,Declares,Completed))
 		,
 		fail
 		)
 		),
 		_ErrorCode,
 			(
-			 write_debug(trace,error(_ErrorCode))
+			 write_debug(true,error(_ErrorCode))
 			  ,
 			  fail
 			     )
@@ -511,7 +511,7 @@ must_be_bound_ops(Op):-member((Op/_),[not/1,call/1,bound/1,nonvar/1,integer/1]),
 
 /*
 to_do_once(Where,Who,P_Answer_Atom)),
-	write_debug(trace,stacking(Where,Who,P_Answer_Atom)).
+	write_debug(true,stacking(Where,Who,P_Answer_Atom)).
 */
 
 
@@ -546,10 +546,10 @@ my_prolog(P_Answer_Atom):-!,
 	/* we will overwirite any previos settings */
 	unify_Globals(Vars),
 
-	/* write to trace */
+	/* write to true */
 	trial(P_Answer,Vars),
 
-	write_debug(trace,
+	write_debug(true,
 		[attempting,term(P_Answer_Atom,P_Answer,Vars)]),
 	
 	call_with_depth_limit(once(attempt(P_Answer,Vars)),40,_).
@@ -598,13 +598,13 @@ create_new_clause((Head:-Body)):-!,
 	not(Head=Body),
 	not(clause(Body,Head)),
 	assert((Head:-Body)),
-	write_debug(trace,asserted((Head:-Body))).
+	write_debug(true,asserted((Head:-Body))).
 
 attempt(display(Output),_Vars):-!,term_to_string(Output,Post),post(Post).
 attempt(WriteOutput,_Vars):-
 	WriteOutput=..[Write|Output],
 	member(Write,[write,output,post,writeq,say,print,printf]),!,
-	write_debug(trace,output(Output)),
+	write_debug(true,output(Output)),
 	post(Output).
 
 trial(WriteOutput,_Vars):-
@@ -615,19 +615,19 @@ trial(WriteOutput,_Vars):-
 attempt(getVars(Vars),Vars):-!.
 trial(getVars(Vars),Vars):-!.
 
-attempt(true,_Vars):-!,write_debug(trace,true).
-attempt(!,_Vars):-!,write_debug(trace,!).
+attempt(true,_Vars):-!,write_debug(true,true).
+attempt(!,_Vars):-!,write_debug(true,!).
 
 /*
 attempt(Goal,_Vars):-
 	predicate_property(Goal,_),Goal,
-	write_debug(trace,Goal).
+	write_debug(true,Goal).
 */
 expanded_clause(Head,Body):-get_clauses(Head,Body,_).
 
 attempt(Goal,_Vars):-
 	get_clauses(Goal,Expand,_),!,
-	write_debug(trace,expand(Goal,Expand)),
+	write_debug(true,expand(Goal,Expand)),
 	attempt(Expand,_Vars).
 
 get_clauses(Head,Body,1):-
@@ -658,14 +658,14 @@ attempt(Goal,_Vars):-
 		Error,
 		on_err(Error)
 	),
-	write_debug(trace,success(Goal)).
+	write_debug(true,success(Goal)).
 
 on_err(error(existence_error(procedure, Pred),_)):-!,
 	ask_about(Pred),
-	write_debug(trace,learn(Pred)),
+	write_debug(true,learn(Pred)),
 	fail.
 
-on_err(Error):-!,write_debug(trace,Error),fail.
+on_err(Error):-!,write_debug(true,Error),fail.
 
 ask_about(Question):-post(["i do not understand ",Question]).
 
@@ -685,7 +685,7 @@ ask_about(Question):-post(["i do not understand ",Question]).
 
 	/* ok we have a list Datatype Now all or execution will be on a list */
 	
-	/* succeed if we can trace P_Answer_Plus_Plus to Goal */
+	/* succeed if we can true P_Answer_Plus_Plus to Goal */
 	/*          (which we weakly bind to true)     */
 /*
 	((Goal=true);true),
@@ -702,7 +702,7 @@ ask_about(Question):-post(["i do not understand ",Question]).
 	
 	/* when its done .. it will msg the "solution" for now */
 /*
-	write_debug(trace,
+	write_debug(true,
 	succeed(P_Answer_Plus_Plus,Goal,Proof_Tree,RulesUsed)).
 */
 		/* and now it loops back to the top of main */
@@ -725,14 +725,14 @@ unboundVar(Var):-asserta(varTable(Var,_Unbound)).
 
 unify_Globals1(Var=Val):-
 	(	
-	varTable(Var,Val),write_debug(trace,varTable(Var,Val))
+	varTable(Var,Val),write_debug(true,varTable(Var,Val))
 	);
 	(
 	nonvar(Var),nonvar(Val),asserta(varTable(Var,Val)),
-		write_debug(trace,asserta(varTable(Var,Val)))
+		write_debug(true,asserta(varTable(Var,Val)))
 	);
 	(
-	true %Var=Val,write_debug(trace,Var=Val)
+	true %Var=Val,write_debug(true,Var=Val)
 	).
 
 :-op(700,xfx,':=').
@@ -767,8 +767,8 @@ unify_Globals1(Var=Val):-
 
 putlog(Weird_Stuff):-write_debug(minor,Weird_Stuff).
 
-write_debug(trace,Message):-!,
-        any_to_string([trace,Message],S),
+write_debug(true,Message):-!,
+        any_to_string([true,Message],S),
 	chars_to_atom(S,A),
 	msg("0",A).
 

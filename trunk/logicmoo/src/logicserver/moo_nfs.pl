@@ -66,14 +66,14 @@ FORMULA SYNTAX
 
 %
 
-:- op(400,fy,known),  % Necessity, Always
-   op(400,fy,consistent),  % Possibly, Eventually
-   op(400,fy,next),  % Next time
-   op(400,fy,  not   ),    % negation
-   op(500,xfy, and ),   % conjunction
-   op(600,xfy,or),   % disjunction
-   op(650,xfy, =>  ),  % implication
-   op(700,xfy, <=>  ). % equivalence
+:- op(400,fy,known).  % Necessity, Always
+:- op(400,fy,consistent).  % Possibly, Eventually
+:- op(400,fy,next).  % Next time
+:- op(400,fy,  not   ).    % negation
+:- op(500,xfy, and ).   % conjunction
+:- op(600,xfy,or).   % disjunction
+:- op(650,xfy, =>  ).  % implication
+:- op(700,xfy, <=>  ). % equivalence
 
 %%% Negation Normal Form
 

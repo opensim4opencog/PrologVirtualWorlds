@@ -6192,7 +6192,7 @@ cmd_proc([recompile,system],_,_,_):-recompile_all.
 
 
 cmd_proc([disp_debug,X],_,_,_):-retractall(disp_debugger(_)),assert(disp_debugger(X)).
-cmd_proc([trace,X],_,_,_):-retractall(tracer(_)),assert(tracer(X)).
+cmd_proc([true,X],_,_,_):-retractall(tracer(_)),assert(tracer(X)).
 cmd_proc([explaination,X],_,_,_):-retractall(displayexplaination(_)),assert(displayexplaination(X)).
 
 cmd_proc(['read-file',me],_,_,_):-!,
@@ -7004,8 +7004,8 @@ surface_to_normal(PrologKR,PrologForm):-
         getNegationForm(PrologKR,PrologForm).
 
 
-assertions_to_xtheory(PrologForm):-  %%trace,
-                 mine_semanitics(PrologForm), %trace,
+assertions_to_xtheory(PrologForm):-  %%true,
+                 mine_semanitics(PrologForm), %true,
           write_clause_to_file(assert(PrologForm)),nl. % Asserts if Unknown
 
 
@@ -7710,7 +7710,7 @@ subst2( X, Sk, [A|As], [Ap|AS] ) :- subst( A,X,Sk,Ap ),
 
          /********************************  The End ***********************************/
 /* File:      consult.P
-** $Id: moo_unused.pl,v 1.3 2002-03-12 21:34:08 dmiles Exp $
+** $Id: moo_unused.pl,v 1.4 2002-03-14 12:46:24 dmiles Exp $
 */
 /*
 :- compiler_options([xpp_on]).
@@ -8510,7 +8510,7 @@ chars_call(Prolog):-!,
          call_in_xml(Term,Vars),
          write_response_end.
 
-tck:-trace,chars_call_kif("( = X ?Y ) ").
+tck:-true,chars_call_kif("( = X ?Y ) ").
 
 chars_call_kif(Vars):-var(Vars),!,
       write_response_begin,
@@ -8971,10 +8971,10 @@ normalize_names_ss([H|T],[HN|TN]):-
                   normalize_names_ss(T,TN).
 
 
-clauses_to_pclauses(IN,OUT):-%trace,
+clauses_to_pclauses(IN,OUT):-%true,
          clauses_to_pclauses0(IN,MID0),!,
-         unjoin_pclauses(MID0,MID1), %trace,
-         clauses_to_pclauses2(MID1,MID2),          %trace,
+         unjoin_pclauses(MID0,MID1), %true,
+         clauses_to_pclauses2(MID1,MID2),          %true,
          clauses_to_pclauses3(MID2,MID3),
          clauses_to_pclauses2(MID3,MID4),
          clauses_to_pclauses4(MID4,MID5),
@@ -9011,7 +9011,7 @@ delete_duplicates([H|T],[H|Rest]):-!,
 
 unjoin_pclauses(Var,Var):-isSlot(Var),!.
 unjoin_pclauses([],[]):-!.
-unjoin_pclauses([H|T],Out):-%trace,
+unjoin_pclauses([H|T],Out):-%true,
       clause_to_pclauses(H,HOut),
       unjoin_pclauses(T,TOut),
       append(HOut,TOut,Out).
@@ -9159,8 +9159,8 @@ constrain_wff(';'(A,B),';'(AA,BB)):-   !,
          constrain_wff(A,AA),constrain_wff(B,BB).
 
 % Add the constraints
-constrain_wff(A,C):- %trace,
-         once(constrain_wff_0(A,B)),  %trace,
+constrain_wff(A,C):- %true,
+         once(constrain_wff_0(A,B)),  %true,
          once(constrain_wff_move(B,C)),!.
 
 % Ignore Varaibles and constants
@@ -9185,7 +9185,7 @@ constrain_wff_0(GAF,AGAF):-
 
 
 % This is called without connectives being present
-constrain_wff_1(GAF,CONSTRAINTS):-  %trace,
+constrain_wff_1(GAF,CONSTRAINTS):-  %true,
                GAF=..[P|ARGS],
                constrain_wff_arg(GAF,P,ARGS,1,ARGCONSTRAINTS),
                constrain_wff_funct(ARGCONSTRAINTS,GAF,CONSTRAINTS).
@@ -9383,10 +9383,10 @@ constrain_wff_argtypes(end_of_file,true).
 constrain_wff_argtypes(entails(Ante,Cons),Out):-
         constrain_wff_argtypes((Cons:-Ante),Out).
 
-constrain_wff_argtypes((not(Cons):-Ante),(not(NCons):-FAnte)):-%trace,
+constrain_wff_argtypes((not(Cons):-Ante),(not(NCons):-FAnte)):-%true,
         constrain_wff_argtypes((Cons:-Ante),(NCons:-FAnte)).
 
-constrain_wff_argtypes((Cons:-Ante),(NCons:-FAnte)):-%trace,
+constrain_wff_argtypes((Cons:-Ante),(NCons:-FAnte)):-%true,
         Cons=..[RType,Cast,P|Args],!,
         logOnFailure(add_f2(P,1,Args,Ante,Nargs,FAnte)),
         NCons=..[RType,Cast,P|Nargs].

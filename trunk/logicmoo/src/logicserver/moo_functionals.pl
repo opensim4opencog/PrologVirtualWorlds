@@ -11,9 +11,9 @@
 
 % Functional Normal Form - Removes Functions and replaces with NewVars then puts them in Flags with information
 getFunctionalForm(Axiom,NewFlags,NewVars,OTerm):-
-       % trace,
+       % true,
 	logOnFailure(getFunctionFlags(toplevel,1,GFlags,Axiom)),!,
-	% trace,
+	% true,
 	logOnFailure(setFunctionFlags(GFlags,Axiom,NewFlags,NewVars,OTerm)),!. % apply flags
 
 setFunctionFlags([],Axiom,[],[],Axiom):-!.
@@ -56,7 +56,7 @@ getFunctionFlags(Caller,ArgN,Flags,Term):-
 	Term=..[Q,V|MTerm],memberchk(Q,[forall,exists]),!,
 	logOnFailure(getFunctionFlags_l(toplevel,1,Flags,MTerm)).
 
-getFunctionFlags(Caller,ArgN,Flags,[A|ArgS]):-!, %trace,
+getFunctionFlags(Caller,ArgN,Flags,[A|ArgS]):-!, %true,
 	logOnFailure(getFunctionFlags_l(Caller,ArgN,Flags,[A|ArgS])).
 
 getFunctionFlags(Caller,ArgN,Flags,Term):-
@@ -68,7 +68,7 @@ getFunctionFlags(Caller,ArgN,Flags,Term):-
 % Special case for Instance
 getFunctionFlags(Caller,ArgN,[dom(A,['$instanceof':Class])],instance(A,Class)):-isSlot(A),atom(Class),!.
 
-getFunctionFlags(Caller,ArgN,Flags,Term):-!, %trace,
+getFunctionFlags(Caller,ArgN,Flags,Term):-!, %true,
 	Term=..[F|ArgS],
 	logOnFailure(getFunctionFlags_l(F,1,Flags,ArgS)).
 	
@@ -92,7 +92,7 @@ test_extend_functions(Term):-
 	write_conj_test_function(KRVars,Clauses),
 	format('\n\n</pre>').
 				
-write_conj_test_function(KRVars,A):-system_dependant:prolog_notrace(write_conj_test_function1(KRVars,A)).
+write_conj_test_function(KRVars,A):-(write_conj_test_function1(KRVars,A)).
 
 write_conj_test_function1(KRVars,A):-isSlot(A),format('~q\n',A),!.
 write_conj_test_function1(KRVars,and(A,B)):-
@@ -199,7 +199,7 @@ get_do_job(Original,Original):-!.
 
 % Skip getPrologVars and some terms
 get_job_sent(Original,Term,In,Tasks):-
-	system_dependant:prolog_notrace((isSlot(Term);
+	((isSlot(Term);
 	atom(Term);
 	list(Term);
 	number(Term))),!,fail.
@@ -339,9 +339,9 @@ get_job_sent(Original,Holds,In,Tasks):-
 	Holds=..[_|Args],!,
 	get_job_sent(Original,Args,In,Tasks).
 
-has_sub_job(Original,Args):- system_dependant:prolog_notrace(not(not(get_job_sent(Original,Args,_)))),!.
-no_sub_job(Original,Arg):-system_dependant:prolog_notrace((Arg=..[_|Args],!,no_sub_job(Original,Args))).
-no_sub_job(Original,Args):-system_dependant:prolog_notrace((not(get_job_sent(Original,Args,_)))),!.
+has_sub_job(Original,Args):- (not(not(get_job_sent(Original,Args,_)))),!.
+no_sub_job(Original,Arg):-((Arg=..[_|Args],!,no_sub_job(Original,Args))).
+no_sub_job(Original,Args):-((not(get_job_sent(Original,Args,_)))),!.
 
 
 % ===========================================================

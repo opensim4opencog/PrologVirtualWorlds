@@ -36,7 +36,7 @@ load_kif_to_theory_ctx(Context,FileName,Ctx,User):-!,
          writeFmt('Reading In ~w to ~w with a default context of ~w <p>',[FileName,Context,Ctx]),nl,
          flag('Axioms Compiled',_,0),
          safe_file_open(FileName,'r',INPUT),
-         repeat,   %trace,
+         repeat,   %true,
                 load_kif_to_theory_ctx_display(Context,User,INPUT),
                 close(INPUT),
                 flag('Axioms Compiled',AX,AX),
@@ -1030,8 +1030,8 @@ make_pred_data(Stream,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom
         submit_ado_cache(Stream,STANDARDPred,Cons, Precon, Context, TID,Vars),fail.
 
 % True then Fasle Rules
-make_pred_data(Stream,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):- %trace,
-        getrule(STANDARDPred,Arity,Cons,Precond, Context, TID,Vars), %trace,
+make_pred_data(Stream,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom):- %true,
+        getrule(STANDARDPred,Arity,Cons,Precond, Context, TID,Vars), %true,
         write_rulenum(Stream,TID),
         close_list(Vars),
         numbervars((Stream,STANDARDPred,Cons,Precond, Context, TID,Vars),'$VAR',15,_),
@@ -1040,7 +1040,7 @@ make_pred_data(Stream,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom
        % toMarkUp(kif,DispExplaination,Vars,PrettyForm),
         %logOnFailure(format(Stream,'/*~n</B><font color=green>~n~nForms:~n~n~s~nFlags: ~w \n</font><B>*/',[PrettyForm,Flags])),
 %       make_disp_explaination(Logic,TID,Vars,Cons,Ante,DispExplaination),
-%       format(Stream,'~q. ~n~n',[explaination_line(TID,Vars,DispExplaination)])         %trace,
+%       format(Stream,'~q. ~n~n',[explaination_line(TID,Vars,DispExplaination)])         %true,
 
 
 % Write footer
@@ -1049,7 +1049,7 @@ make_pred_data(Stream,Functor,Context,STANDARDPred,Arity,N,Module,Debug,ArgsAtom
         format(Stream,'\n/* \n Last Saved: ~s</B></font>\n</PRE>*/\n\n\n',[String]),!.
 
 
-%submit_ado_cache(Stream,STANDARDPred,Cons,_,_,Logic, Context, Ctx, Explaination * _):-trace,fail.
+%submit_ado_cache(Stream,STANDARDPred,Cons,_,_,Logic, Context, Ctx, Explaination * _):-true,fail.
 
 
 % No antecedents flags
@@ -1104,10 +1104,10 @@ write_prolog_rule(Stream,STANDARDPred,Cons,Ante,Flags,Logic, Context, Ctx, TID,V
 write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,[], Context, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-!,
         format('\t~w,~n',[ExplainationIn=ExplainationOut]).
 
-write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,[Ante], Context, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-!,%trace,
+write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,[Ante], Context, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-!,%true,
         write_prolog_term(Stream,OrigAnte,Context,Flags,Caller,FlagsSTANDARDPred,Cons,Ante,Context, Ctx, TID,Vars,ExplainationIn,ExplainationOut),!.
 
-write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,[Ante|More], Context, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-!,%trace,
+write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,[Ante|More], Context, Ctx, TID,Vars,ExplainationIn,ExplainationOut):-!,%true,
         write_prolog_term(Stream,OrigAnte,Context,Flags,Caller,FlagsSTANDARDPred,Cons,Ante,Context, Ctx, TID,Vars,ExplainationIn,ExplainationMid),
         write_prolog_body_clause(Stream,OrigAnte,STANDARDPred,Cons,More, Context, Ctx, TID,Vars,ExplainationMid,ExplainationOut),!.
 
