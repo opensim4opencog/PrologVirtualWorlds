@@ -1,3 +1,4 @@
+
 :-write('% Loading Bootstrap'),nl.
 	
 % utility modules
@@ -25,6 +26,7 @@
 :-moduleEnsureLoaded('moo_icl.pl').
 :-moduleEnsureLoaded('moo_tap.pl').
 :-moduleEnsureLoaded('moo_simple.pl').
+:-moduleEnsureLoaded('moo_pttp_xray.pl').
 :-moduleEnsureLoaded('moo_belief.pl').
 
 % other
@@ -40,5 +42,4 @@
 
 :-write('% Loading Image'),nl.
 :-moduleEnsureLoaded('moo_image.data').
-
 
