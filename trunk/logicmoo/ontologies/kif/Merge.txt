@@ -4390,7 +4390,7 @@ is .000000001 &%SecondDurations.")
 .000000000001 units of the &%UnitOfMeasure.  For example, (&%PicoFn 
 &%Ampere) is .000000000001 &%Amperes.")
 
-(equal
+(equals
 	(PicoFn ?UNIT)
 	(MeasureFn .000000000001 ?UNIT))
 

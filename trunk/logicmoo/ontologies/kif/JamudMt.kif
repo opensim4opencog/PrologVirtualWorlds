@@ -1,0 +1,37 @@
+
+
+;; spatiallyIncludes
+;; (genlPreds surroundsCompletely spatiallyIncludes)
+;; (genlPreds spatiallySubsumes spatiallyIncludes)
+;; (genlPreds cospatial spatiallyIncludes)
+;; (genlPreds spatiallyContains spatiallyIncludes)
+
+
+;;Mt : SpatialGVocabularyMt
+;;(arg2Isa spatiallyIncludes SpatialThing)
+;;(arg2Isa spatiallyContains SpatialThing)
+;;(arg2Isa surrounds-3D SpatialThing)
+;;(arg2Isa cospatial SpatialThing)
+;;(arg2Isa spatiallySubsumes SpatialThing)
+;;(arg2Isa spatiallyDisjoint SpatialThing)
+;;(arg2Isa touchesDirectly SpatialThing)
+;;(arg2Isa spatiallyIntersects SpatialThing)
+;;(arg2Isa surroundsCompletely SpatialThing)
+;;(arg2Isa touches SpatialThing)
+
+(isa MudArea Collection)
+(genls MudArea RegionType)
+;;(genls MudArea SpatialThing)
+
+(isa Room1 MudArea)
+(isa Room2 MudArea)
+(isa Hammer1 PhysicalDevice)
+(isa Hammer2 PhysicalDevice)
+
+(isa Actor1 Player)
+
+(objectFoundInLocation Hammer1 Room1)
+(objectFoundInLocation Hammer2 Room2)
+(objectFoundInLocation Actor1 Room1)
+
+
