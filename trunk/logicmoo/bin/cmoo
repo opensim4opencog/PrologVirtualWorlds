@@ -1,6 +1,7 @@
-i#!/bin/bash
+#!/bin/bash
 
 cd ../src/logicserver
 
-/home/clip/bin/prolog moo_ciao
+/home/clip/bin/ciaosh
 
+cd -
