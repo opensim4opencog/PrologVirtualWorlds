@@ -17,10 +17,10 @@ import org.opencyc.xml.*;
 /**
  * Provides the behavior and attributes of OpenCyc AssertionsCollection.<p>
  * <p>
- * Assertions are read from a file loadFile(File file) or added in via addFormula()
+ * Assertions are read from a file load(File file) or added in via addFormula()
  * The assertions may then be added to a OpenCyc server in the given setDefaultKB
  *
- * @version $Id: AssertionsCollection.java,v 1.6 2002-04-08 03:08:18 dmiles Exp $
+ * @version $Id: AssertionsCollection.java,v 1.7 2002-04-08 04:12:37 dmiles Exp $
  * @author Douglas R. Miles
  *
  */
@@ -134,7 +134,7 @@ public class AssertionsCollection {
 	 */
 	public void addFile(File file, String mt)  throws Exception  {
 		resetAssertions();
-		loadFile(file);
+		load(file);
 		commitAssertions(mt);
 	}
 
@@ -144,23 +144,33 @@ public class AssertionsCollection {
 	 *
 	* @param file for formulas for this AssertionsCollection
 	 */
-	public void loadFile(File file) throws Exception {
-		Reader r = new BufferedReader(new FileReader(file));
-		StreamTokenizer st = new StreamTokenizer(r);
-		while ( r.ready() )
-			addFormula(st);
+	public void load(File file) throws Exception {
+		load((Reader)new FileReader(file));
 	}
-
+		
 	/**
-	 * Adds the formula (StreamTokenizer) to this AssertionCollection.
+	 * Adds the contents of the InputStream to this AssertionCollection.
 	 *
-	 * @param StreamTokenizer of the formula for this AssertionsCollection
+	* @param file for formulas for this AssertionsCollection
 	 */
-	public void addFormula(StreamTokenizer formula) throws Exception {
-		CycListParser cycListParser = new CycListParser(cycAccess);
-		addFormula((CycList) cycListParser.read(formula));
+	public void load(InputStream is) throws Exception {
+		load((Reader)new InputStreamReader(is)); 
 	}
-
+	/**
+	 * Adds the contents of the Reader to this AssertionCollection.
+	 *
+	* @param file for formulas for this AssertionsCollection
+	 */
+	public void load(Reader r) throws Exception {
+		BufferedReader br = new BufferedReader(r); 
+		CycListParser cycListParser = new CycListParser(cycAccess);
+		StreamTokenizer st = new StreamTokenizer(br);
+		st.commentChar(';');
+		while ( br.ready() )
+			addFormula((CycList) cycListParser.read(st));
+		
+	}
+	
 	/**
 	 * Adds the formula (String) to this AssertionCollection.
 	 *
@@ -171,7 +181,6 @@ public class AssertionsCollection {
 		addFormula((CycList) cycListParser.read(formula));
 	}
 
-
 	/**
 	 * Adds the formula (CycList) to this AssertionCollection.
 	 *
@@ -179,7 +188,11 @@ public class AssertionsCollection {
 	 */
 	public void addFormula(CycList formula) throws Exception {
 
-		// Catches anded Assertions
+	    if (formula==null) return;
+
+
+	     /*
+	        // Catches anded Assertions
 		ArrayList simpler = ConstraintRule.simplifyConstraintRuleExpression(formula);
 		if ( simpler.size()>1 ) {
 			Iterator simpleIterations = simpler.iterator();
@@ -188,23 +201,32 @@ public class AssertionsCollection {
 			return;
 		}
 
-		ConstraintRule cycLiteral = new ConstraintRule(formula);
+	     */
+		   ConstraintRule cycLiteral = new ConstraintRule(formula);
 
-		// Variables Or predicate argument is not a constant cause this formula to be asserted last 
-		if ( !cycLiteral.isGround() || ( !(formula.first() instanceof CycConstant)) ) {
+		   System.out.println(cycLiteral.cyclify());
+		
+		   // Variables Or predicate argument is not a constant cause this formula to be asserted last 
+		if ( !cycLiteral.isGround() /*|| ( !(formula.first() instanceof CycConstant))*/ ) {
 			cycAssertionsOfRest.add(formula);
 			return;
 		}
 
+		System.out.print("Gaf for ");
+		
 		// Can assume only Gafs beyond here
-		CycConstant cycPredicate = cycLiteral.getPredicate();
+		CycFort cycPredicate = cycLiteral.getPredicate();
 
+		System.out.println(cycPredicate);
+		
 		if ( cycPredicate.equals(cycAccess.genlMt) ) {
+			System.out.println("cycAssertionsMtDefs");
 			cycAssertionsMtDefs.add(formula);
 			return;
 		}
 
 		if ( cycPredicate.equals(cycAccess.isa) ) {
+			System.out.println("addFormulaIsa");
 			if ( cycLiteral.getArity()!=3 )
 				throw new CycApiException("'isa' is not arity 3? - " + formula.toString());
 			addFormulaIsa(formula);
@@ -212,6 +234,7 @@ public class AssertionsCollection {
 		}
 
 		if ( cycPredicate.equals(cycAccess.genls) ) {
+			System.out.println("addFormulaGenls");
 			if ( cycLiteral.getArity()!=3 )
 				throw new CycApiException("'genls' is not arity 3? - " + formula.toString());
 			addFormulaGenls(formula);
@@ -219,7 +242,10 @@ public class AssertionsCollection {
 		}
 
 		// Since Gaf add it to first part of cycAssertionsOfRest
+		
 		cycAssertionsOfRest.add(0,formula);
+		System.out.println("cycAssertionsOfRest");
+		
 	}
 
 	/**
@@ -390,7 +416,7 @@ public class AssertionsCollection {
 	public void testFileLoad(Writer pw) {
 		try {
 			File f = new File("/testkifload.kif");
-			loadFile(f);
+			load(f);
 			setDefaultMt("testMt");
 			writeAssertions( pw,defaultMt);
 		} catch ( Exception e ) {
