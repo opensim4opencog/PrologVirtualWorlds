@@ -1,25 +1,17 @@
 package swijni;
 
 import java.util.Hashtable;
-import java.lang.String;
 import java.lang.reflect.*;
 import java.io.*;
 import java.util.*;
 import java.lang.*;
+//import java.awt.*;
+//import jpl.*;
+//import jpl.fli.*;
 
 
 public class JavaRt extends Thread {
 
-
-    /* Creates a non-started Server */
-    public  void JavaRt() {
-	createState();
-    }
-
-    /* Starts an instance of a PrologServer running as thread*/
-    public void run() {
-	createState();
-    }
 
     /* Working Directory when started  */
     public static String cwd = ".";
@@ -28,18 +20,18 @@ public class JavaRt extends Thread {
     /* Introspections version of the String Class in a 1-D array containing a Class[0]=String.getClass()  */
     public static Class[] stringClassArrayOfOne;
     /* Debug=0 (None), Debug=1 (Minor), Debug=2 (Extreme)  */
-    public static int debug=2;
+    public static int debug=0;
     /* Dictionary of All objects available to Scripting engine  */
     public static HashMap allObjects;
 
-    /* Starts an instance of a PrologServer from commandline */
-    public static void main( String argv[] ) {
+    /* Creates a non-started Server */
+    public  void JavaRt() {
+	ensureState();
+    }
 
-	//TODO Parse argv[] properly
-	if( argv.length>0 ) {
-	    bootFile=argv[0];
-	}
-	createState();
+    /* Starts an instance of a PrologServer running as thread*/
+    public void run() {
+	ensureState();
     }
 
     /* Scripting Engine is running = true*/
@@ -48,7 +40,7 @@ public class JavaRt extends Thread {
     }
 
     /* Ensures Scripting Engine is running*/
-    public synchronized static void createState() {
+    public synchronized static void ensureState() {
 	if( isStarted() ) return;
 	try {
 	    stringClassArrayOfOne = (Class[])(Array.newInstance(Class.class,1));
@@ -63,71 +55,76 @@ public class JavaRt extends Thread {
 
     }
 
+    /* Starts an instance of a PrologServer from commandline */
+    public static void main( String argv[] ) {
+
+	//TODO Parse argv[] properly
+	if( argv.length>0 ) {
+	    bootFile=argv[0];
+	}
+	ensureState();
+    }
+
     /* Prolog Will call these */
 
-    public  static String createObject(String className) {
+    public  static boolean forgetObject(int hashcode) {
+	ensureState();
 	try {
-	    return nameForInstance(createGlobal(className));
+	    String intKey = "o" + hashcode;
+	    if( allObjects.get(intKey) ==null )	return false;
+	    allObjects.remove(intKey);
+	    return true;
+	} catch( Exception e ) {
+	    return false;
+	}
+    }
+
+    public static Object createObject(String className, Object[] params) {
+	try {
+	    Object innerInstance = newObject(findClass(className),params);
+	    rememberObject(innerInstance);
+	    return innerInstance;
 	} catch( Exception e ) {
 	    return makeError(e);
 	}
     }
 
-    public  static String forgetObject(String objectName) {
-	try {
-	    delInstance(findInstance(objectName));
-	} catch( Exception e ) {
-	    return makeError(e);
-	}
-	return "void";
-    }
-
-    public  static void addInstance(Object innerInstance) {
-	if(innerInstance==null) return;
+    public static void rememberObject(Object innerInstance) {
+	if( innerInstance==null ) return;
 	allObjects.put("o" + innerInstance.hashCode(),innerInstance);
     }
 
-    public  static void delInstance(Object innerInstance) {
-	if(innerInstance==null) return;
-	String intKey = "o" + innerInstance.hashCode();
-	if( allObjects.get(intKey) ==null ) return;
-	allObjects.remove(intKey);
-    }
-
-    /* Creates a new Object for a className */
-    public  static Object createGlobal(String className) throws Exception {
-	Class innerClass = findClass(className);
-	Object innerInstance = innerClass.newInstance();
-	addInstance(innerInstance);
-	return innerInstance;
-    }
-
-    public  static String invokeObject(String objectName,String methodName, Object[] params) {
-	if( allObjects==null ) createState();
-	if( debug>1 ) System.err.println("invokeObject("+objectName +","+ methodName +","+ params + ")");
-	Object innerInstance = argToObject(objectName);
-	if( innerInstance==null )      return makeError(new Exception("Object not found in catalog \"" + objectName +"\""));
-	if( debug>1 ) System.err.println("Found Instance: \"" + innerInstance +"\"" );
+    public  static String invokeObject(Object innerInstance,String methodName, Object[] args) {
+	ensureState();
 	try {
-	    return objectToProlog(invokeObjectReal(innerInstance,(String)argToObject(methodName),argsToObjectVector(params)));
+	    try {
+		Method method = classFromInstance(innerInstance).getMethod(methodName,getClasses(args));
+	    return objectToProlog(method.invoke(innerInstance,args));
+	    } catch( NoSuchMethodException me ) {
+		throw new Exception("" + me + " " + getClasses(args)[0] + " " + getClasses(args)); 
+	    }
 	} catch( Exception e ) {
 	    return makeError(e);
 	}
     }
 
-
-    public  static Object invokeObjectReal(Object innerInstance,String methodName, Object[] args) 
-    throws Exception {
-
-	// Get/Set Fields
-	if( methodName.startsWith("$") ) {
-	    Field innerField = getFieldForObject(innerInstance,(String)args[0]);
-	    if( methodName.charAt(1)=='s' ) innerField.set(innerInstance,args[1]);
-	    return innerField.get(innerInstance);
+    public static String setObjectField(Object innerInstance,String fieldName, Object prolog_value) {
+	ensureState();
+	try {
+	    classFromInstance(innerInstance).getField(fieldName).set(innerInstance,prolog_value);
+	    return "true";
+	} catch( Exception e ) {
+	    return makeError(e);
 	}
+    }
 
-	// Invokes Methods
-	return getMethodForObject(innerInstance,methodName,getClasses(args)).invoke(innerInstance,args);
+    public static String getObjectField(Object innerInstance,String fieldName) {
+	ensureState();
+	try {
+	    return objectToProlog(classFromInstance(innerInstance).getField(fieldName).get(innerInstance));
+	} catch( Exception e ) {
+	    return makeError(e);
+	}
     }
 
     public  static Class[] getClasses(Object[] objs) {
@@ -135,438 +132,139 @@ public class JavaRt extends Thread {
     }
 
     public  static Class[] getClasses(Object[] objs, int len) {
-	if( len==0 ) return null;
-
-	Class[] toReturnClasses=null;
-	try {
-	    toReturnClasses = (Class[])Array.newInstance(Class.class,len);
-	} catch( Exception e ) {
-	    fatalEvent(e);
+	Class[] toReturnClasses = new Class[len];
+	for( int i = 0 ; i < len; i++ ) {
+	    if( objs[i]==null )
+		toReturnClasses[i]=null;
+	    else toReturnClasses[i]=objs[i].getClass();
 	}
-	for( int i = 0 ; i < len; i++ )	toReturnClasses[i]=objs[i].getClass();
 	return toReturnClasses;
     }
 
-
-    private static Method getMethodForObject(Object obj,String methodName,Class[] argClasses) 
-    throws Exception {
-	return classFromInstance(obj).getMethod(methodName,argClasses);
+    public  static Class classFromInstance(Object innerInstance) throws NullPointerException {
+	if( innerInstance instanceof Class ) return(Class)innerInstance;
+	return innerInstance.getClass();
     }
 
-    private static Field getFieldForObject(Object obj,String methodName) 
-    throws Exception {
-	return classFromInstance(obj).getField(methodName);
-    }
-
-    public  static Class classFromInstance(Object obj) {
-	if( obj instanceof Class )     return(Class)obj;
-	return obj.getClass();
-    }
-
-    public  static Object[] argsToObjectVector(Object[] args) {
-	int len = args.length;
-	Object toReturnObjects[]=new Object[len];
-	int source = 0;
-	for( int i = 0 ; i < len ; i++ ) {
-	    toReturnObjects[i ]=argToObject( (Object) args[ i ]);
-	    if( debug >1 )
-		System.err.println("Arg" + i + "=\"" + args[i] + "\" -> " + toReturnObjects[i].toString());
-	}
-	return toReturnObjects;
-    }                     
-
-    public  static Object argToObject(Object arg) {
-	if( arg instanceof String ) return stringToObj((String)arg);
-	if( arg.getClass().isArray() ) return argsToObjectVector((Object[])arg);
-	return arg;
-    }
-
-    public  static Object stringToObj(String arg) {
-
-	char fc = arg.charAt(0);
-	switch( fc ) {
-	    case 'o':
-		return findInstance(arg);
-	    case 'b':
-		if( arg.charAt(1)=='t' ) return new Boolean(true);
-		else return new	Boolean(false);
-	    case 's':
-		return arg.substring(1);
-	    case 'n':
-		return null;
-	    case '$':
-		return null;
-	    case 'i':
-		try {
-		    return new java.lang.Integer(arg.substring(1));
-		} catch( Exception e ) {
-		    warnEvent(e);
-		    return new java.lang.Integer(0);
-		}
-	    case 'l':
-		try {
-		    return new java.lang.Float(arg.substring(2));
-		} catch( Exception e ) {
-		    warnEvent(e);
-		    return new java.lang.Float(0);
-		}
-	    case 'u':
-		return arg.substring(1);
-	    case 't':
-		return arg.substring(1);
-	}
-	return arg;
-    }
-
-    public  static String objectToProlog(Object obj ) {
-	if( obj==null )	return "void";
-	if( obj.getClass().isPrimitive() )  return obj.toString();
-	if( debug>1 ) System.err.println("objectToProlog(" + obj + ")");
-	addInstance(obj);
-	/*
-		try {
-		    if ( obj.getClass().getDeclaredMethod("toString",null)!=null ) 
-			return obj.toString(); 
-		} catch ( NoSuchMethodException e ) {
-		}
-	*/
-	return nameForInstance(obj);
-    }
-
-    public  static Object mktype(String arg) {
-	int comma = arg.indexOf(',');
-	try {
-	    return makeInstanceFromClass(arg.substring(5,comma++),arg.substring(comma,arg.length()-1));
-	} catch( Exception e ) {
-	    return makeError(e);
-	}
-    }
-
-    public  static Object mktype(String theType,String theData)
-    throws Exception {
-	if( theType.equals("Long") ) {
-	    try {
-		return new java.lang.Long(theData);
-	    } catch( Exception e ) {
-		warnEvent(e);
-		return new java.lang.Long(0);
-	    }
-	}
-	if( theType.equals("Integer") ) {
-	    try {
-		return new java.lang.Integer(theData);
-	    } catch( Exception e ) {
-		warnEvent(e);
-		return new java.lang.Integer(0);
-	    }
-	}
-	if( theType.equals("Short") ) {
-	    try {
-		return new Short(theData);
-	    } catch( Exception e ) {
-		warnEvent(e);
-		return new Short((short)0);
-	    }
-	}
-	if( theType.equals("Float") ) {
-	    try {
-		return new java.lang.Float(theData);
-	    } catch( Exception e ) {
-		warnEvent(e);
-		return new java.lang.Float(0);
-	    }
-	}
-	if( theType.equals("Byte") ) {
-	    try {
-		return new Byte(theData);
-	    } catch( Exception e ) {
-		warnEvent(e);
-		return new Byte((byte)0);
-	    }
-	}
-	if( theType.equals("Byte") ) {
-	    try {
-		return new Byte(theData);
-	    } catch( Exception e ) {
-		warnEvent(e);
-		return new Byte((byte)0);
-	    }
-	}
-	if( theType.equals("Boolean") ) {
-	    try {
-		return new Boolean(theData);
-	    } catch( Exception e ) {
-		warnEvent(e);
-		return new Boolean(false);
-	    }
-	}
-	if( theType.equals("Char") ) {
-	    try {
-		return new Character(theData.charAt(0));
-	    } catch( Exception e ) {
-		warnEvent(e);
-		return new Character('\0');
-	    }
-	}
-	if( theType.equals("Class") ) {
-	    try {
-		return findClass(theData);
-	    } catch( Exception e ) {
-		warnEvent(e);
-		return Object.class;
-	    }
-	}
-	if( theType.equals("String") ) return theData;
-	// if (theType.equals("Date")) return new Date(theData);
-	return makeInstanceFromClass( theType, theData);
-    }
-
-    public  static Object makeInstanceFromClass(String theType,String theData)
-    throws Exception {
-	Class newClass = findClass(theType);
-	try {
-	    return newClass.getConstructor(stringClassArrayOfOne).newInstance(makeObjectArray(theData));
-	} catch( Exception e ) {
-	    return newClass.newInstance();
-	}
-    }
-
-    static Class findClass(String theData) throws Exception {
-	try {
-	    return Class.forName( theData);
-	} catch( Exception e ) {
-	    try {
-		return Class.forName("java.lang." + theData);
-	    } catch( Exception ee ) {
-		throw ee;
-	    }
-	}
-    }
-
-    /* Queries the interface for an Instance (all supers)*/
-    public  static String getInstanceDef(String instanceName) {
-	try {
-	    return getInstanceDef(findInstance(instanceName));
-	} catch( Exception e ) {
-	    return makeError(e );
-	}
-    }
-
-    public  static String getInstanceDef(Object obj) {
-	try {
-	    return "'$java_object'("  + classToVector(obj.getClass())  + ":"  + obj.hashCode()+ ")";
-	} catch( Exception e ) {
-	    return makeError(e );
-	}
-    }
-
-    /* Queries the interface for an Instance (all className)*/
-    public  static String getClassDef(String className) {
-	try {
-	    return getClassDef(findClass(className));
-	} catch( Exception e ) {
-	    return makeError(e );
-	}
-    }
-
-    public  static String getClassDef(Class clsd) {
-	try {
-	    return classToVector(clsd);
-	} catch( Exception e ) {
-	    return makeError(e );
-	}
-    }
-
-    /* Find an instance in allObjects based on HashCode */
-    public  static Object findInstance(String instanceName) {
-	try {
-	    if( debug>1 ) System.out.println("searching for= " + instanceName);
-	    return allObjects.get(instanceName);
-	} catch( Exception e ) {
-	    warnEvent(e);
-	    return null;
-	}
-    }
-
-    /* Return public  instance name (HashCode)*/
-    public  static String nameForInstance(Object innerInstance) {
-	return "'$java_instance'(" +innerInstance.hashCode() + "," + toScriptingName(innerInstance.getClass().getName()) +"('" + innerInstance.toString() + "'))";
-    }
-
-
-    /* Equivalent Bindings for Class Definition into Prolog List */
-    public  static String instanceToVector(Object instance, int depth) {
-	Class pClass = instance.getClass();
-	StringBuffer interfaceList= new StringBuffer();
-	interfaceList.append("class(" + toPrologString(pClass.getName())+ ",fields([");
-	interfaceList.append(membersValuesToVector(instance, pClass.getFields()));
-	interfaceList.append("]),methods([");
-	interfaceList.append(membersValuesToVector(instance, pClass.getMethods()));
-	interfaceList.append("]))");
-	return interfaceList.toString();
-    }
-
-
-
-
-
-    /* Serializes Instance Members into Prolog List */
-    public  static String membersValuesToVector(Object instance, Member[] pMembs) {
-	StringBuffer interfaceList= new StringBuffer();
-	for( int nMemb=0 ;nMemb < pMembs.length; nMemb++ ) {
-	    if( nMemb>0 ) interfaceList.append(",");
-	    interfaceList.append(memberValueToVector(instance, pMembs[nMemb]));
-	}
-	return interfaceList.toString();
-    }
-
-    /* Serializes Instance Member into Prolog List */
-    public  static String memberValueToVector(Object instance,Member pMemb) {
-	if( pMemb instanceof Method ) return methodValueToVector(instance,(Method)pMemb);
-	if( pMemb instanceof Field ) return fieldValueToVector(instance,(Field)pMemb);
-	return toScriptingName(pMemb.getName());
-    }
-
-
-    /* Serializes Methods into Prolog List */
-    public  static String methodValueToVector(Object instance, Method pMemb) {
-	String lcname=  pMemb.getName().toLowerCase();
-	if( pMemb.getParameterTypes().length==0 )
-
-	    try {
-		if( lcname.startsWith("get") || pMemb.getReturnType().getName().endsWith("String") )
-		    return methodToVector(pMemb) + "=" + toPrologString(pMemb.invoke(instance,null));
-	    } catch( Exception e ) {
-		return methodToVector(pMemb) + "=" + makeError(e);
-	    }
-	return methodToVector(pMemb) + "=uncalled";
-
-    }
-
-
-    public  static String fieldValueToVector(Object instance, Field sField) {
-	try {
-	    return fieldToVector(sField) + "=" + toPrologString(sField.get(instance));
-	} catch( Exception e ) {
-	    return fieldToVector(sField) + "=" + makeError(e);
-	}
-    }
-
-
-
-    /* Serializes Class Definition into Prolog List */
-    public  static String classToVector(Class pClass) {
-	StringBuffer interfaceList= new StringBuffer();
-	interfaceList.append("class(" + toPrologString(pClass.getName())+ ",fields([");
-	interfaceList.append(membersToVector(pClass.getFields()));
-	interfaceList.append("]),methods([");
-	interfaceList.append(membersToVector(pClass.getMethods()));
-	interfaceList.append("]))");
-	return interfaceList.toString();
-    }
-
-
-    /* Serializes Members into Prolog List */
-    public  static String membersToVector(Member[] pMembs) {
-	StringBuffer interfaceList= new StringBuffer();
-	for( int nMemb=0 ;nMemb < pMembs.length; nMemb++ ) {
-	    if( nMemb>0 ) interfaceList.append(",");
-	    interfaceList.append(memberToVector(pMembs[nMemb]));
-	}
-	return interfaceList.toString();
-    }
-
-    /* Serializes Member into Prolog List */
-    public  static String memberToVector( Member pMemb) {
-	if( pMemb instanceof Method ) return methodToVector((Method)pMemb);
-	if( pMemb instanceof Field ) return fieldToVector((Field)pMemb);
-	return toScriptingName(pMemb.getName());
-    }
-
-    /* Serializes Methods into Prolog List */
-    public  static String methodToVector(Method pMemb) {
-	StringBuffer interfaceList= new StringBuffer();
-	//                interfaceList.append(toScriptingName(Modifier.toString(pMemb.getModifiers())));
-	//                interfaceList.append("(");
-	interfaceList.append(toScriptingName(pMemb.getName()));
-	interfaceList.append("(");
-	interfaceList.append(typeToName(pMemb.getReturnType().getName()));
-	//                interfaceList.append(",[");
-	interfaceList.append(parameterTypesToVector(pMemb.getParameterTypes()));
-	interfaceList.append(")");
-	return interfaceList.toString();
-    }
-
-    public  static String parameterTypesToVector(Class[] pMembs) {
-	StringBuffer interfaceList= new StringBuffer();
-	for( int nMemb=0 ;nMemb < pMembs.length; nMemb++ ) {
-	    //if (nMemb>0) 
-	    interfaceList.append(",");
-	    interfaceList.append(parameterToVector(pMembs[nMemb]));
-	}
-	return interfaceList.toString();
-    }
-
-    public  static String fieldToVector(Field sField) {
-	return toScriptingName(sField.getName()) + "(" + toScriptingName(sField.getType().getName()) +")";
-    }
-
-    public  static String parameterToVector(Class paramClass) {
-	return typeToName(paramClass.getName());
-    }
-
-    public  static void warnEvent(Exception e) {
-	if( debug>0 )System.err.println("warning: " + e);
-    }
-
-    public  static void fatalEvent(Exception e) {
-	System.err.println("FATAL ERROR: "+e);
-    }
 
     public  static String makeError(Exception e) {
 	return "error('"+e+"')";
     }
 
-    public  static String makeError(String e) {
-	return "error('"+e+"')";
-    }
-
-    public  static String typeToName(String someName) {
-	if( someName.equals("void") ) return "void";
-	if( someName.startsWith("java.lang.") )	return typeToName(someName.substring(10));
-	return toScriptingName(someName);
-    }
-    public  static String toScriptingName(String someName) {
-	return toPrologString(someName);
-    }
-
-    public  static String toPrologString(Object someName) {
-	if( someName == null ) return "null";
-	return "'" + someName.toString() + "'";
-    }
-
-    public  static Object[] makeObjectArray(Object a) {
-	Object[] toReturnObject=null; 
+    public static Class findClass(String className) throws Exception {
 	try {
-	    toReturnObject = (Object[])Array.newInstance(Object.class,1); 
+	    return Class.forName(className);
 	} catch( Exception e ) {
-	    fatalEvent(e);
+	    try {
+		return Class.forName("java.lang." + className);
+	    } catch( Exception ee ) {
+		throw e;
+	    }
 	}
-	toReturnObject[0] = a;
-	return toReturnObject;
     }
 
-    public  static Class[] makeClassArray(Class a) {
-	Class[] toReturnClasses=null; 
+    public static int newInt(int value) {
+	return value;
+    }
+
+    public static  Float newFloat(float value) {
+	return new Float(value);
+    }
+
+    public static  String newString(String value) {
+	return new String(value);
+    }
+
+    public static  Object newNull() {
+	return null;
+    }
+
+    public static  Object newBoolean(boolean tf) {
+	return new Boolean(tf);
+    }
+
+    public static Object findObject(int hashcode) {
+	return allObjects.get("o" + hashcode);
+    }
+
+    public static Object newObject(Class innerClass, Object[] args) {
+	ensureState();
 	try {
-	    toReturnClasses = (Class[])Array.newInstance(Class.class,1); 
+	    Object innerInstance =  innerClass.getConstructor(getClasses(args)).newInstance(args);
+	    return objectToProlog(innerInstance);
 	} catch( Exception e ) {
-	    fatalEvent(e);
+	    return makeError(e);
 	}
-	toReturnClasses[0] = a;
-	return toReturnClasses;
     }
 
+    public  static String StringToProlog(Object someName) {
+	return "'" + someName + "'";
+    }
+
+    public  static String objectToProlog(Object innerInstance ) {
+	if( innerInstance==null )   return "$null";
+	if( innerInstance instanceof Void ) return "'Void'";
+	if( innerInstance instanceof Number ) return innerInstance.toString();
+	//if( object instanceof Byte ) return(Integer)object;
+	//if( object instanceof Integer )	   return object;
+	//if( object instanceof Long ) return object;
+	//if( object instanceof Double ) return object;
+	if( innerInstance instanceof Character ) return "`"+innerInstance;
+	if( innerInstance instanceof Iterator )	return "`"+innerInstance;
+	if( innerInstance instanceof Boolean ) {
+	    if( innerInstance.equals(Boolean.TRUE) ) return "$true";
+	    return "$false";
+	}
+	if( innerInstance instanceof String ) return StringToProlog(innerInstance);
+	if( innerInstance instanceof Class ) return "$java_class("+StringToProlog(((Class)innerInstance).getName())+")";
+	Class jclass = innerInstance.getClass(); 
+	if( innerInstance instanceof Iterator )	return iteratorToList(jclass,(Iterator)innerInstance);
+	if( innerInstance instanceof Collection ) return iteratorToList(jclass,((Collection)innerInstance).iterator());
+	if( jclass.isArray() ) return arrayToPrologList(jclass,(Object[])innerInstance);
+	if( jclass.isPrimitive() ) {
+	    if( jclass == boolean.class ) {
+		if( Boolean.TRUE.equals(innerInstance) ) return "$true";
+		return "$false";
+	    }
+	    if( jclass == char.class ) return "`"+innerInstance;
+	    return innerInstance.toString();
+
+	}
+	rememberObject(innerInstance);
+	return "'$java_object'(" +innerInstance.hashCode() + ")";
+    } 
+
+    /* Serializes Array into OpenCyc List */ 
+    public static String arrayToPrologList(Class parent,Object[] pMembs) {
+	int len = pMembs.length; 
+	if( len<1 ) return "$java_array(" + StringToProlog(parent.getName()) + ",[])";
+	StringBuffer sb = new StringBuffer("$java_array(" + StringToProlog(parent.getName()) + ",[" + objectToProlog(pMembs[0]));
+	for( int nMemb=1 ; nMemb < len; nMemb++ ) sb.append(",").append(objectToProlog(pMembs[nMemb]));
+	sb.append("])");
+	return sb.toString(); 
+    } 
+
+
+    /* Serializes Iterator into OpenCyc List */ 
+    public static synchronized String iteratorToList(Class parent,Iterator pMembs) {
+	StringBuffer sb = new StringBuffer("$iterator(" + StringToProlog(parent.getName()) + ",[");
+	if( pMembs.hasNext() ) sb.append(objectToProlog(pMembs.next()));
+	while( pMembs.hasNext() ) sb.append(",").append(objectToProlog(pMembs.next()));
+	sb.append("])");
+	return sb.toString(); 
+    } 
+
+    public static Object createCollection(Class innerClass, Object[] objs) {
+	try {
+	    Collection col = (Collection)(innerClass.newInstance());
+	    for( int i=0 ; i<objs.length ; i++ ) {
+		col.add(objs[i]);
+	    }
+	    return col;
+	} catch( Exception e ) {
+	    return makeError(e);
+	}
+    }
 }
 
 
