@@ -87,8 +87,8 @@
 :- dynamic(hypothesis/1).
 :- multifile(inconsistencyCheck/3).
 :- dynamic(inconsistencyCheck/3).
-:- multifile(option/2).
-:- dynamic(option/2).
+:- multifile(isMooOption/2).
+:- dynamic(isMooOption/2).
 :- multifile(nsub/5).
 :- dynamic(nsub/5).
 :- multifile(nsub3/2).
@@ -242,8 +242,8 @@ loadLibraries(sicstus) :-
 	append(L1,L2,L3))),
 	assertzRE((not(Goal) :- call(\+ Goal))),
 	assertzRE((once(Goal) :- Goal, !)),
-	assertzRE((onceOrMore(Goal) :- option(allProofs,yes), Goal)),
-	assertzRE((onceOrMore(Goal) :- not(option(allProofs,yes)), Goal, !)),
+	assertzRE((onceOrMore(Goal) :- isMooOption(allProofs,yes), Goal)),
+	assertzRE((onceOrMore(Goal) :- not(isMooOption(allProofs,yes)), Goal, !)),
 	assertzRE((motel_ask(A1) :- deduce(A1))),
 	assertzRE((motel_ask(A1,A2) :- deduce(A1,A2))),
 	assertzRE((motel_ask(A1,A2,A3) :- deduce(A1,A2,A3))),
@@ -278,8 +278,8 @@ loadLibraries(eclipse) :-
 	assertzRE((motel_ask(A1,A2,A3,A4) :- deduce(A1,A2,A3,A4))),
 	assertzRE((map(A1,A2,A3) :- hop_map(A1,A2,A3))),
 	assertzRE((map(A1,A2,A3,A4) :- hop_map(A1,A2,A3,A4))),
-	assertzRE((onceOrMore(Goal) :- option(allProofs,yes), Goal)),
-	assertzRE((onceOrMore(Goal) :- not(option(allProofs,yes)), Goal, !)),
+	assertzRE((onceOrMore(Goal) :- isMooOption(allProofs,yes), Goal)),
+	assertzRE((onceOrMore(Goal) :- not(isMooOption(allProofs,yes)), Goal, !)),
 	!.
 loadLibraries(swiprolog) :-
 	assertzRE((motel_ask(A1) :- deduce(A1))),
@@ -299,22 +299,10 @@ loadLibraries(swiprolog) :-
 	assertzRE((retractallSpecial(Head) :- retract(Head), fail)),
 	assertzRE((retractallSpecial(Head) :- retract((Head :- _Body)), fail)),
 	assertzRE((retractallSpecial(_))),
-	assertzRE((onceOrMore(Goal) :- option(allProofs,yes), Goal)),
-	assertzRE((onceOrMore(Goal) :- not(option(allProofs,yes)), Goal, !)),
-	(predicate_property(feature(_X,_Y),_Z),
-	 feature(version,Version), 
-	 Version > 20400,
-	 redefine_system_predicate(member(_X,_Y)),
-	 redefine_system_predicate(memberchkSpecial(_X,_Y)),
-	 redefine_system_predicate(intersection(_X,_Y,_Z)),
-	 redefine_system_predicate(intersection(_X,_Y)),
-	 redefine_system_predicate(prologListSubtract(_X,_Y,_Z)),
-	 redefine_system_predicate(unionSpecial(_X,_Y,_Z)),
-	 redefine_system_predicate(unionSpecial(_X,_Y)),
-	 redefine_system_predicate(special_list_to_set(_X,_Y)),
-	 redefine_system_predicate(subsetSpecial(_X,_Y)),
-	 redefine_system_predicate(logicalFlatten(_X,_Y))); true,
-	!.
+	assertzRE((onceOrMore(Goal) :- isMooOption(allProofs,yes), Goal)),
+	assertzRE((onceOrMore(Goal) :- not(isMooOption(allProofs,yes)), Goal, !)).
+
+
 loadLibraries(poplog) :-
 	op(600,xfy,':'),
 	assertzRE((gensym(Prefix, V) :-
@@ -340,8 +328,8 @@ loadLibraries(poplog) :-
 	assertzRE((map(A1,A2,A3) :- hop_map(A1,A2,A3))),
 	assertzRE((map(A1,A2,A3,A4) :- hop_map(A1,A2,A3,A4))),
 	assertzRE((once(Goal) :- Goal, !)),
-	assertzRE((onceOrMore(Goal) :- option(allProofs,yes), Goal)),
-	assertzRE((onceOrMore(Goal) :- not(option(allProofs,yes)), Goal, !)),
+	assertzRE((onceOrMore(Goal) :- isMooOption(allProofs,yes), Goal)),
+	assertzRE((onceOrMore(Goal) :- not(isMooOption(allProofs,yes)), Goal, !)),
 	assertzRE((saveMOTEL(F) :- save_program(F))),
 	!.
 loadLibraries(quintus) :-
@@ -365,8 +353,8 @@ loadLibraries(quintus) :-
 	statistics(runtime,[RT|_]))),
 	assertzRE((not(Goal) :- call(\+ Goal))),
 	assertzRE((once(Goal) :- Goal, !)),
-	assertzRE((onceOrMore(Goal) :- option(allProofs,yes), Goal)),
-	assertzRE((onceOrMore(Goal) :- not(option(allProofs,yes)), Goal, !)),
+	assertzRE((onceOrMore(Goal) :- isMooOption(allProofs,yes), Goal)),
+	assertzRE((onceOrMore(Goal) :- not(isMooOption(allProofs,yes)), Goal, !)),
 	assertzRE((motel_ask(A1) :- deduce(A1))),
 	assertzRE((motel_ask(A1,A2,A3,A4) :- deduce(A1,A2,A3,A4))),
 	assertzRE((motel_ask(A1,A2) :- deduce(A1,A2))),
@@ -457,13 +445,13 @@ getLibraries :-
 /***********************************************************************
  *
  * setMooOption(+Option,+Set)
- * set option Option to value Set.
+ * set isMooOption Option to value Set.
  *
  */
 
 setMooOption(Option,Set) :-
-	retractallSpecial(option(Option,_)),
-	assertaRE(option(Option,Set)),
+	retractallSpecial(isMooOption(Option,_)),
+	assertaRE(isMooOption(Option,Set)),
 	!.
 
 /**********************************************************************
@@ -546,12 +534,12 @@ nonmember(Element, Set) :-
 	nonvar(Set),
 	not(member(Element, Set)).
 
-%   intersection(+Set1, +Set2, ?Intersection)
+%   intersectionOfLists(+Set1, +Set2, ?Intersection)
 %   is true when all three arguments are lists representing sets,
 %   and Intersection contains every element of Set1 which is also
 %   an element of Set2, the order of elements in Intersection
 %   being the same as in Set1.  That is, Intersection represents
-%   the intersection of the sets represented by Set1 and Set2.
+%   the intersectionOfLists of the sets represented by Set1 and Set2.
 %   If Set2 is a partial list, Intersection will be empty, which
 %   is not, of course, correct.  If Set1 is a partial list, this
 %   predicate will run away on backtracking.  Set1 and Set2 should
@@ -559,24 +547,24 @@ nonmember(Element, Set) :-
 %   Set1 may survive in Intersection.  It is worthy of note that
 %   if Set1 is an ordset, Intersection is an ordset, despite Set2.
 
-intersection([], _, []).
-intersection([Element|Elements], Set, Intersection) :-
+intersectionOfLists([], _, []).
+intersectionOfLists([Element|Elements], Set, Intersection) :-
 	memberchkSpecial(Element, Set),
 	!,
 	Intersection = [Element|Rest],
-	intersection(Elements, Set, Rest).
-intersection([_|Elements], Set, Intersection) :-
-	intersection(Elements, Set, Intersection).
+	intersectionOfLists(Elements, Set, Rest).
+intersectionOfLists([_|Elements], Set, Intersection) :-
+	intersectionOfLists(Elements, Set, Intersection).
 
 
 
-%   intersection(+ListOfSets, ?Intersection)
-%   is true when Intersection is the intersection of all the sets in
+%   intersectionOfLists(+ListOfSets, ?Intersection)
+%   is true when Intersection is the intersectionOfLists of all the sets in
 %   ListOfSets.  The order of elements in Intersection is taken from
 %   the first set in ListOfSets.  This has been turned inside out to
 %   minimise the storage turnover.
 
-intersection([Set|Sets], Intersection) :-
+intersectionOfLists([Set|Sets], Intersection) :-
 	intersection1(Set, Sets, Intersection).
 
 intersection1([], _, []).
@@ -732,7 +720,7 @@ permutation([X|Xs], Ys1, [_|Zs]) :-
 
 % MOTEL is free software; you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
-% the Free Software Foundation; either version 1, or (at your option)
+% the Free Software Foundation; either version 1, or (at your isMooOption)
 % any later version.
 
 % MOTEL is distributed in the hope that it will be useful,
@@ -2149,7 +2137,7 @@ find_concept26(concepts,Env,MS,Concept,[C1|R]) :-
 find_concept3(_Env,_MS,_Concept,[],Z,Z) :- 
 	!.
 find_concept3(Env,MS,Concept,[and(L1)|R],Z,K) :-
-	intersection(Z,L1,Z1),
+	intersectionOfLists(Z,L1,Z1),
 	find_concept3(Env,MS,Concept,R,Z1,K),
 	!.
 
@@ -2219,7 +2207,7 @@ find_pconcept27(concepts,Env,MS,Primconcept,C1):-
 find_pconcept3(_Env,_MS,_Primconcept,[],Z,Z) :- 
 	!.
 find_pconcept3(Env,MS,Primconcept,[and(L1)|R],Z,K) :-
-	intersection(Z,L1,Z1),
+	intersectionOfLists(Z,L1,Z1),
 	find_pconcept3(Env,MS,Primconcept,R,Z1,K),
 	!.
 
@@ -2328,7 +2316,7 @@ find_role26(roles,Env,MS,Role,[C1|R]) :-
 find_role30(_Env,_MS,_Role,[],Z,Z) :- 
 	!.
 find_role30(Env,MS,Role,[and(L1)|R],Z,K) :-
-	intersection(Z,L1,Z1),
+	intersectionOfLists(Z,L1,Z1),
 	find_role30(Env,MS,Role,R,Z1,K),
 	!.
 
@@ -2465,7 +2453,7 @@ find_prole27(roles,Env,MS,Primrole,C1):-
 find_prole3(_Env,_MS,_Primrole,[],Z,Z) :- 
 	!.
 find_prole3(Env,MS,Primrole,[and(L1)|R],Z,K) :-
-	intersection(Z,L1,Z1),
+	intersectionOfLists(Z,L1,Z1),
 	find_prole3(Env,MS,Primrole,R,Z1,K),
 	!.
 
@@ -2947,7 +2935,7 @@ compileEnvironment(FileName,EnvName) :-
 %	write((:- dynamic(given_inflLink/4))), write('.'), nl,
 %	write((:- dynamic(given_change/4))), write('.'), nl,
 	write((:- dynamic(value/2))), write('.'), nl,
-	write((:- dynamic(option/2))), write('.'), nl,
+	write((:- dynamic(isMooOption/2))), write('.'), nl,
 %	write((:- dynamic(environment/3))), write('.'), nl,
 %	write((:- dynamic(conceptHierarchy/3))), write('.'), nl,
 %	write((:- dynamic(roleHierarchy/3))), write('.'), nl,
@@ -3628,7 +3616,7 @@ testSubConcept(EnvName,MS,Concept1,Concept2,Concept) :-
 
 getCommonSuperConcepts(EnvName,MS,CL1,CL2) :-
 	hop_map(getAllSuperConcepts,[EnvName,MS],CL1,CLL1),
-	intersection(CLL1,CL2).
+	intersectionOfLists(CLL1,CL2).
 
 /***********************************************************************
  *
@@ -3644,7 +3632,7 @@ getCommonSuperConcepts(EnvName,MS,CL1,CL2) :-
 
 getCommonSubConcepts(EnvName,MS,CL1,CL2) :-
 	hop_map(getAllSubConcepts,[EnvName,MS],CL1,CLL1),
-	intersection(CLL1,CL2).
+	intersectionOfLists(CLL1,CL2).
 
 /***********************************************************************
  *
@@ -4674,7 +4662,7 @@ testSubElement(Element1,Element2,Element2,node(CL,NL)) :-
 
 getCommonSuperElements(CL1,CL2,Dag) :-
 	hop_map(getAllSuperElements,[Dag],CL1,CLL1),
-	intersection(CLL1,CL2).
+	intersectionOfLists(CLL1,CL2).
 
 /***********************************************************************
  *
@@ -4689,7 +4677,7 @@ getCommonSuperElements(CL1,CL2,Dag) :-
 
 getCommonSubElements(CL1,CL2,Dag) :-
 	hop_map(getAllSubElements,[Dag],CL1,CLL1),
-	intersection(CLL1,CL2).
+	intersectionOfLists(CLL1,CL2).
 
 
 
@@ -4897,7 +4885,7 @@ clearEnvironment(EnvName) :-
 	retractallSpecial(Env,consistencyDerivation/3),
 	retractallSpecial(Env,hypothesis/1),
 	retractallSpecial(Env,inconsistencyCheck/3),
-	retractallSpecial(Env,option/2),
+	retractallSpecial(Env,isMooOption/2),
 	retractallSpecial(nsub(_,Env,_,_,_)),
 	retractallSpecial(Env,nsub3/2),
 	retractallSpecial(Env,sub3/2),
@@ -5231,7 +5219,7 @@ assertInRule(Env,7,AN7) :-
 	!.
 assertInRule(Env,8,AN7) :-
 	% For all X: X in set(S2) and X in set(S3) and 
-	%            intersection(S2,S3,S1) => X in S1
+	%            intersectionOfLists(S2,S3,S1) => X in S1
 	% Priority 1 (low priority)
 	gensym(rule,RN8),
 	constructKBHead(Env,pr(1),rn(AN7,RN8,system,lInR),MS,set(S1),X,
@@ -5240,13 +5228,13 @@ assertInRule(Env,8,AN7) :-
 			set(S2),X,HYPS,D,CALLS,PT2,Antecedent2),
 	constructMLCall(Env,rn(AN7,_RN3,_S3,_O3),bodyMC(MS),headMC(MS),
 			set(S3),X,HYPS,D,CALLS,PT3,Antecedent3),
-	L1 = intersection([S2,S3],S1),
+	L1 = intersectionOfLists([S2,S3],S1),
 	constructMLMark(Consequence1,AxiomHead1),
 	assertzRE((Consequence1 :- checkCallStack(CALLS,AxiomHead1), (Antecedent3, (Antecedent2, L1)))),
 	!.
 assertInRule(Env,9,AN7) :-
 	% For all X: X in set(S2) and X in set(S3) and 
-	%            intersection(S2,S3,S1) => X in S1
+	%            intersectionOfLists(S2,S3,S1) => X in S1
 	% Priority 1 (low priority)
 	gensym(rule,RN8),
 	constructKBHead(Env,pr(1),rn(AN7,RN8,system,lInR),MS,not(set(S1)),X,
@@ -5480,7 +5468,7 @@ copyEnvironment(Name1,Name2) :-
 	copyAll(Env1,Env2,roleSubsets/6),
 %	copyAll(Env1,Env2,sub/4),
 %	copyAll(Env1,Env2,succ/4),
-%	copyAll(Env1,Env2,option/2),
+%	copyAll(Env1,Env2,isMooOption/2),
 %	copyAll(Env1,Env2,nsub/4),
 	term_expansion(copy,off,Env1,Env2),
 	!.
@@ -7548,7 +7536,7 @@ translate(X,Clauses) :-
 % Author: Ullrich Hustadt
 
 implout(equivalent(P,Q),and([or([not(P1),Q1]),or([P1,not(Q1)])])) :-
-	option(translationMode,flatRelational),
+	isMooOption(translationMode,flatRelational),
 	!,
 	implout(P,P1),
 	implout(Q,Q1).
@@ -9357,11 +9345,11 @@ forallQuantify([X|VL],F1,forall(X,F2)) :-
 
 axiomToFOL(MC,VL,_,in,C,F) :-
 	!,
-	option(translationMode,TM),
+	isMooOption(translationMode,TM),
 	malcToFOL(TM,U,VL,C,F1),
 	modalContextToFOL(MC,[],U,F1,F).
 axiomToFOL(MC,VL,C1,Op,C2,F) :-
-	option(translationMode,TM),
+	isMooOption(translationMode,TM),
 	malcToFOL(TM,U,VL,C1,F1),
 	malcToFOL(TM,U,VL,C2,F2),
 	F3 =.. [Op,F1,F2],
@@ -9381,14 +9369,14 @@ modalContextToFOL([bc(O,C)|MC],U1,V,F3,
 	          forall(A,forall(U2,implies(and([F1,rel(X1,m(O,A),U1,U2)]),F4)))) :-
 	convertMS(e1,[U1,true],[bc(O,C)],[],
 	          [U2,((once(_G),rel(e1,X1,m(O,A),U1,U2)),true)],_),
-	option(translationMode,TM),
+	isMooOption(translationMode,TM),
 	malcToFOL(TM,U1,[A],C,F1),
 	modalContextToFOL(MC,U2,V,F3,F4).
 modalContextToFOL([dc(O,C)|MC],U1,V,F3,
 	          forall(V,and([F1,F4]))) :-
 	convertMS(e1,[U1,true],[dc(O,C)],[],
 	          [app(W1 : m(O,A), U1),_G],_),
-	option(translationMode,TM),
+	isMooOption(translationMode,TM),
 	malcToFOL(TM,U1,[A],C,F1),
 	modalContextToFOL(MC,[app(typed(W1,m(O,A)), U1)],V,F3,F4).
 
@@ -9628,10 +9616,10 @@ relConjunction(_U,_X,[],_,true) :-
 	!.
 relConjunction(U,X,[Y1],R,F) :-
 	!,
-	option(translationMode,TM),
+	isMooOption(translationMode,TM),
 	malcToFOL(TM,U,[X,Y1],R,F).
 relConjunction(U,X,[Y1|YL],R,and([F1,F2])) :-
-	option(translationMode,TM),
+	isMooOption(translationMode,TM),
 	malcToFOL(TM,U,[X,Y1],R,F1),
 	relConjunction(U,X,YL,R,F2).
 
@@ -9654,7 +9642,7 @@ nVars(_,[]).
 
 
 printSystemSyntax(CL) :-
-	option(prover,P),
+	isMooOption(prover,P),
 	printSystemSyntax(P,CL).
 
 printSystemSyntax(S,[(false <- T1)|CL]) :-
@@ -9774,13 +9762,13 @@ implicationToNHProlog(HL1,TL1,(HL1 :- TL1)) :-
 
 
 clausesToSystemSyntax(CL1,CL2) :-
-	option(prover,setheo),
+	isMooOption(prover,setheo),
 	clausesToSystemSyntax('LOP',CL1,CL2).
 clausesToSystemSyntax(CL1,CL2) :-
-	option(prover,otter),
+	isMooOption(prover,otter),
 	clausesToSystemSyntax(otter,CL1,CL2).
 clausesToSystemSyntax(CL1,CL1) :-
-	option(prover,decider),
+	isMooOption(prover,decider),
 	!.
 
 clausesToSystemSyntax('NHProlog',[cl(HL,TL)|CL],[C2|CL2]) :-
@@ -9847,7 +9835,7 @@ implicationToLOP(HL1,TL1,(HL1 <- TL1)) :-
 % Author: Ullrich Hustadt
 
 envToFOL(Name,CL) :-
-	option(translationMode,flatRelational),
+	isMooOption(translationMode,flatRelational),
 	!,
 	translateModalAxioms(Name,CL1),
 	translateAxioms(Name,CL2),
@@ -10230,13 +10218,13 @@ setofOrNil(A,B,C) :-
 /***********************************************************************
  *
  * setMooOption(+Option,+Set)
- * set option Option to value Set.
+ * set isMooOption Option to value Set.
  *
  */
 
 setMooOption(Option,Set) :-
-        retractallSpecial(option(Option,_)),
-        assertaRE(option(Option,Set)).
+        retractallSpecial(isMooOption(Option,_)),
+        assertaRE(isMooOption(Option,Set)).
 
 /**********************************************************************
  *
@@ -10247,7 +10235,7 @@ setMooOption(Option,Set) :-
  */
 
 ifMooOption(Option,Set,Goal) :-
-        (option(Option,Set) ->
+        (isMooOption(Option,Set) ->
 	    call(Goal)
 	;
 	    true
@@ -10302,7 +10290,7 @@ modInference(CL1,Bool,CL,stat(N3,N4)) :-
 	length(CL3,N3),
 	modFindClause(CL3,CL4),
 	length(CL4,N4),
-	(option(decider,on) ->
+	(isMooOption(decider,on) ->
 	    CL = CL4
 	;
 	    CL = CL3
@@ -11730,7 +11718,7 @@ modTranslateInDecide([cl(ListH,ListR,ProofTree)|T],Erg) :-
 
 
 modEnvToFOL(Name,CL) :-
-	option(translationMode,flatRelational),
+	isMooOption(translationMode,flatRelational),
 	!,
 	modTranslateModalAxioms(Name,CL1),
 	modTranslateAxioms(Name,CL2),
@@ -12875,7 +12863,7 @@ testSonRole(Env,MS,Role1,Role2,Role) :-
 
 getCommonFatherRoles(EnvName,MS,RL1,RL2) :-
 	hop_map(getAllFatherRoles,[EnvName,MS],RL1,RLL1),
-	intersection(RLL1,RL2).
+	intersectionOfLists(RLL1,RL2).
 
 /***********************************************************************
  *
@@ -12891,7 +12879,7 @@ getCommonFatherRoles(EnvName,MS,RL1,RL2) :-
 
 getCommonSonRoles(EnvName,MS,RL1,RL2) :-
 	hop_map(getAllSonRoles,[EnvName,MS],RL1,RLL1),
-	intersection(RLL1,RL2).
+	intersectionOfLists(RLL1,RL2).
 
 /**********************************************************************
  *
@@ -13424,7 +13412,7 @@ find_Def_role1(Env,MS,Role,CN) :-
 
 collect(CT,Liste) :-
 	collect1(CT,L),
-	(option(prover,Decider) ->
+	(isMooOption(prover,Decider) ->
 	    Liste = L;
 	    collect2(L,Liste)),
 	!.
@@ -13446,7 +13434,7 @@ collect1([X|R],L) :-
 	union1(X,L1,L),
 	!.
 collect1([X|R],L) :-
-%	option(prover,_Decider),
+%	isMooOption(prover,_Decider),
 	var(X),
 	collect1(R,L),
 	!.
@@ -13477,7 +13465,7 @@ collect1(X,[X|L]) :-
 	(clause(conceptName(Env,_,_,X),_);clause(roleName(Env,_,_,X),_)),
 	!.
 collect1(X,[]) :-
-%	option(prover,_Decider),
+%	isMooOption(prover,_Decider),
 	var(X),
 	!.
 
@@ -16709,7 +16697,7 @@ initialize :-
 	retractallSpecial(_,consistencyDerivation/3),
 	retractallSpecial(_,hypothesis/1),
 	retractallSpecial(_,inconsistencyCheck/3),
-	retractallSpecial(_,option/2),
+	retractallSpecial(_,isMooOption/2),
 	retractallSpecial(sub(_,_,_,_,_)),
 	retractallSpecial(nsub(_,_,_,_,_)),
 	retractallSpecial(succ(_,_,_,_,_)),
@@ -16886,7 +16874,7 @@ deduce(P1,P2,P3) :-
 	deduce(EnvName,MS,Query,Proof).
 
 deduce(EnvName,MS,elementOf(X,C),Exp) :-
-	option(prover,setheo),
+	isMooOption(prover,setheo),
 	!,
 	deduceSetheo(EnvName,MS,elementOf(X,C),Exp).
 /* deduce(EnvName,MS,elementOf(X,C),Exp) :-
@@ -16895,7 +16883,7 @@ deduce(EnvName,MS,elementOf(X,C),Exp) :-
 deduce(EnvName,MS,X,Exp) :-
 	deduceMOTEL(EnvName,MS,X,Exp).
 deduceMOTEL(EnvName,MS,elementOf(X,C),Exp) :-
-	option(queryCaching,on),
+	isMooOption(queryCaching,on),
 	retractallSpecial(hypothesis(_)),
  	environment(EnvName,Env,_),
  	convertMS(negative,Env,[[],true],MS,[],[W1,G1],_),
@@ -17139,7 +17127,7 @@ getQuery(Env,W1,C0,X,Exp,Goal) :-
 
 performQuery(X,G1,Goal) :-
 	nonvar(X),
-	not(option(allProofs,yes)),
+	not(isMooOption(allProofs,yes)),
 	!,
  	once((call((call(G1), Goal)), atomic(X))).
 performQuery(X,G1,Goal) :-
