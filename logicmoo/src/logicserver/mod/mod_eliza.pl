@@ -3,6 +3,9 @@
 % COMPLIER OPTIONS
 % ===================================================================
 
+%module(mod_eliza).
+
+
 :- style_check(-singleton).
 :- style_check(-discontiguous).
 :- style_check(-atom).

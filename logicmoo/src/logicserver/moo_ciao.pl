@@ -14,7 +14,7 @@
 :-use_module(library(sort)).
 
 
-
+:- use_module(library(concurrency)). 
 :- use_module(library(file_utils)).
 :- use_module(library(aggregates)).
 :- use_module(library(prompt)).
@@ -133,12 +133,11 @@ processBootstrap:-
       fail.
 */
 
-
 % load files
 
 processBootstrap:-
    moduleFile(_,Filename),
-   (consult(Filename)),fail.
+   use_module(Filename),fail.
 
 processBootstrap:-!.
 
@@ -163,8 +162,55 @@ processBootstrap:-!.
          prologAtInitalization(kbot),prologAtInitalization(kbot2))).
 */
 
+startJava:-
+	 java_start("/opt/sourceforge/logicmoo/src:/opt/sourceforge/logicmoo/src/partner/jamud/src:/opt/sourceforge/logicmoo/lib/:cos.jar:/opt/sourceforge/logicmoo/lib/ecs-1.4.1.jar:/opt/sourceforge/logicmoo/lib/jdom.jar:/opt/sourceforge/logicmoo/lib/jaxp.jar:/opt/sourceforge/logicmoo/lib/rdf-api-2001-01-19.jar:/opt/sourceforge/logicmoo/lib/plc.jar:/opt/sourceforge/logicmoo/lib/cpj.jar:/opt/sourceforge/logicmoo/lib/nanoxml.jar:/opt/sourceforge/logicmoo/lib/jpl.jar:/opt/sourceforge/logicmoo/lib/crawler.jar").
+
+startJamud:-
+	 jamud_object(JAMUD),!,
+	 java_invoke_method(JAMUD,startJamud(X)).
+
+createJamud:-
+	 java_create_object('logicmoo.LogicMoo',JAMUD),
+	 %java_object(JAMUD)
+	 format('\njamud.Jamud=~q\n',[JAMUD]),!,
+	 assert(jamud_object(JAMUD)),!.
+			
+createJamud:-
+	    format('\nCould not create the LogicMOO object\n',[]).
+	 
+
+loadJamudReferences:-
+	 jamud_object(JAMUD),
+	 java_invoke_method(JAMUD,getJamudInstance(Instance)),
+	 java_invoke_method(JAMUD,getJamudMudObjectRoot(MudRoot)),!,
+	 assert(jamud_instance(Instance)),
+	 assert(jamud_root(MudRoot)),
+	 writeFmt('Jamud started\n').
+
+startLogicMoo:-
+	 startJava,
+	 createJamud,
+	 startJamud,
+	 loadJamudReferences.
+
+
+
+%:-initialization(startLogicMoo).
+
+
+doTopLoop:-
+    eng_status.
+
+
+
 main(_):-
-   processBootstrap,setMooOptionDefaults.
+   %processBootstrap,
+   %setMooOptionDefaults,
+   startLogicMoo,
+   throw(wait_now).
+
+
+
 
 
 

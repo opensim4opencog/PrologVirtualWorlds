@@ -206,8 +206,8 @@ getDefaultImageFilepath(X):-
 
 
 save_ado_cache:-saveMooCache.
-
-
+                                                                                                                         
+                                                                                                                         
 saveMooCache:-
                 save_can_to_file(KB,Handle),close(Handle),
                 retractall(save_can_to_file(KB,Handle)),
