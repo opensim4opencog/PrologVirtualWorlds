@@ -18,7 +18,7 @@ import com.jamud.communications.*;
 import com.jamud.creation.*;
 import net.n3.nanoxml.*;
 
-public class LogicMoo {
+public class LogicMoo extends JNIPrologServer {
 
 		/*
 		Constructor called by prolog code:
@@ -121,6 +121,9 @@ public class LogicMoo {
 						}
 				}
 		}
+
+
+
 
 
 		
