@@ -34,7 +34,7 @@ import javax.servlet.jsp.*;
 *
 * Collaborates with the <tt>CycConnection</tt> class which manages the api connections.
 *
-* @version $Id: CycMooAccess.java,v 1.3 2002-04-16 21:05:53 dmiles Exp $
+* @version $Id: CycMooAccess.java,v 1.4 2002-04-17 06:58:14 dmiles Exp $
 * @author Douglas R. Miles, Stephen L. Reed
 *
 * <p>Copyright 2001 Cycorp, Inc., license is open source GNU LGPL.
@@ -61,8 +61,8 @@ public class CycMooAccess extends CycAccess {
      * Constructs a new CycMooAccess object.
      */
     public CycMooAccess() throws IOException, UnknownHostException, CycApiException {
-	super();
-	cycMooAccessInit();
+        super();
+        cycMooAccessInit();
     }
 
     /**
@@ -74,10 +74,10 @@ public class CycMooAccess extends CycAccess {
      * @param agentCommunity the agent community to which the cyc proxy agent belongs
      */
     public CycMooAccess (String myAgentName,
-			 String cycProxyAgentName,
-			 int agentCommunity) throws IOException, CycApiException  {
-	super(myAgentName,cycProxyAgentName,agentCommunity);
-	cycMooAccessInit();
+                         String cycProxyAgentName,
+                         int agentCommunity) throws IOException, CycApiException  {
+        super(myAgentName,cycProxyAgentName,agentCommunity);
+        cycMooAccessInit();
     }
 
     /**
@@ -91,58 +91,63 @@ public class CycMooAccess extends CycAccess {
      */
     public CycMooAccess(String hostName, int basePort, int communicationMode, boolean persistentConnection)
     throws IOException, UnknownHostException, CycApiException {
-	super( hostName,  basePort,  communicationMode,  persistentConnection);
-	cycMooAccessInit();
+        super( hostName,  basePort,  communicationMode,  persistentConnection);
+        cycMooAccessInit();
     }
 
 
     public ArrayList getMts()  throws Exception {
-	return(ArrayList) getAllInstances(microtheory);
+        return(ArrayList) getAllInstances(microtheory);
     }
 
     public ArrayList getCollections()  throws Exception {
-	return(ArrayList) getAllInstances(collection);
+        return(ArrayList) getAllInstances(collection);
     }
 
     private void cycMooAccessInit()  throws CycApiException {
-	try {
-	    cycMooHTMLTool = new HTMLUtils();
-	    HTMLUtils.cycAccess = this;
+        try {
+            cycMooHTMLTool = new HTMLUtils();
+            HTMLUtils.cycAccess = this;
 
-	    argIsa = getConstantByName("#$argIsa");
-	    argGenl = getConstantByName("#$argGenl");
-	    resultIsa = getConstantByName("#$resultIsa");
-	    resultGenl = getConstantByName("#$resultGenl");
-	    predicate = getConstantByName("#$Predicate");
-	    relation = getConstantByName("#$Relation");
-	    functionalRelation = getConstantByName("#$FunctionalRelation");
-	    microtheory = getConstantByName("#$Microtheory");
-	    cyclist = getConstantByName("#$Cyclist");
-	    predarity = getConstantByName("#$arity");
-	    genlpreds = getConstantByName("#$genlPreds");
-	    cycadministrator = getConstantByName("#$CycAdministrator");
-	    opencycproject = getConstantByName("#$OpenCycProject");
-	    cyclistDefinitionalMt = getConstantByName("#$CyclistDefinitionalMt");
-	    cycBasedProject = getConstantByName("#$Cyc-BasedProject");
-	    metaRelation = getConstantByName("#$MetaRelation");
-	    logicMooMt = makeCycConstant("#$LogicMooMt");
-	    jamudMt = makeCycConstant("#$JamudMt");
-	    javaMt = makeCycConstant("#$JavaMt");
-	    makeCycConstantError = makeCycConstant("#$MakeCycConstantErrorFn");
-	    assertIsa(logicMooMt,microtheory,baseKB);
-	    assertIsa(jamudMt,microtheory,baseKB);
-	    assertIsa(javaMt,microtheory,baseKB);
-	    assertGenlMt(jamudMt,logicMooMt);
-	    assertGenlMt(logicMooMt,"ArtifactGVocabularyMt");
-	    assertGenlMt(logicMooMt,"ArtifactGMt");
-	    assertGenlMt(logicMooMt,"HumanActivitiesMt");
-	    assertGenlMt(logicMooMt,"AgentGVocabularyMt");
-	    assertGenlMt(logicMooMt,"AnimalActivitiesVocabularyMt");
-	    assertGenlMt(logicMooMt,javaMt);
 
-	} catch ( Exception e ) {
-	    throw new CycApiException(""+e);
-	}
+            cycTrue = getConstantByName("#$True");
+            cycFalse = getConstantByName("#$False");
+            cycVoid = getConstantByName("#$voidValue");
+
+            argIsa = getConstantByName("#$argIsa");
+            argGenl = getConstantByName("#$argGenl");
+            resultIsa = getConstantByName("#$resultIsa");
+            resultGenl = getConstantByName("#$resultGenl");
+            predicate = getConstantByName("#$Predicate");
+            relation = getConstantByName("#$Relation");
+            functionalRelation = getConstantByName("#$FunctionalRelation");
+            microtheory = getConstantByName("#$Microtheory");
+            cyclist = getConstantByName("#$Cyclist");
+            predarity = getConstantByName("#$arity");
+            genlpreds = getConstantByName("#$genlPreds");
+            cycadministrator = getConstantByName("#$CycAdministrator");
+            opencycproject = getConstantByName("#$OpenCycProject");
+            cyclistDefinitionalMt = getConstantByName("#$CyclistDefinitionalMt");
+            cycBasedProject = getConstantByName("#$Cyc-BasedProject");
+            metaRelation = getConstantByName("#$MetaRelation");
+            logicMooMt = makeCycConstant("#$LogicMooMt");
+            jamudMt = makeCycConstant("#$JamudMt");
+            javaMt = makeCycConstant("#$JavaMt");
+            makeCycConstantError = makeCycConstant("#$MakeCycConstantErrorFn");
+            assertIsa(logicMooMt,microtheory,baseKB);
+            assertIsa(jamudMt,microtheory,baseKB);
+            assertIsa(javaMt,microtheory,baseKB);
+            assertGenlMt(jamudMt,logicMooMt);
+            assertGenlMt(logicMooMt,"ArtifactGVocabularyMt");
+            assertGenlMt(logicMooMt,"ArtifactGMt");
+            assertGenlMt(logicMooMt,"HumanActivitiesMt");
+            assertGenlMt(logicMooMt,"AgentGVocabularyMt");
+            assertGenlMt(logicMooMt,"AnimalActivitiesVocabularyMt");
+            assertGenlMt(logicMooMt,javaMt);
+
+        } catch ( Exception e ) {
+            throw new CycApiException(""+e);
+        }
 
     }
 
@@ -157,20 +162,20 @@ public class CycMooAccess extends CycAccess {
     * @param arg3 the third argument of the predicate
      */
     public void assertGaf (CycFort mt,
-			   CycConstant predicate,
-			   CycFort arg1,
-			   CycFort arg2,
-			   CycFort arg3)
+                           CycConstant predicate,
+                           CycFort arg1,
+                           CycFort arg2,
+                           CycFort arg3)
     throws IOException, UnknownHostException, CycApiException {
-	// (predicate <CycFort> <CycFort>)
-	String command = withBookkeepingInfo() +
-			 "(cyc-assert '(" +
-			 predicate.stringApiValue() + " " +
-			 arg1.stringApiValue() + " " +
-			 arg2.stringApiValue() + " " +
-			 arg3.stringApiValue() + " )" +
-			 mt.stringApiValue() + " ))";
-	converseVoid(command);
+        // (predicate <CycFort> <CycFort>)
+        String command = withBookkeepingInfo() +
+                         "(cyc-assert '(" +
+                         predicate.stringApiValue() + " " +
+                         arg1.stringApiValue() + " " +
+                         arg2.stringApiValue() + " " +
+                         arg3.stringApiValue() + " )" +
+                         mt.stringApiValue() + " ))";
+        converseVoid(command);
     }
 
     /**
@@ -184,20 +189,20 @@ public class CycMooAccess extends CycAccess {
     * @param arg3 the third argument of the predicate
      */
     public void assertGaf (CycFort mt,
-			   CycConstant predicate,
-			   CycFort arg1,
-			   Integer arg2,
-			   CycFort arg3)
+                           CycConstant predicate,
+                           CycFort arg1,
+                           Integer arg2,
+                           CycFort arg3)
     throws IOException, UnknownHostException, CycApiException {
-	// (predicate <CycFort> <CycFort>)
-	String command = withBookkeepingInfo() +
-			 "(cyc-assert '(" +
-			 predicate.stringApiValue() + " " +
-			 arg1.stringApiValue() + " " +
-			 arg2.toString() + " " +
-			 arg3.stringApiValue() + " )" +
-			 mt.stringApiValue() + " ))";
-	converseVoid(command);
+        // (predicate <CycFort> <CycFort>)
+        String command = withBookkeepingInfo() +
+                         "(cyc-assert '(" +
+                         predicate.stringApiValue() + " " +
+                         arg1.stringApiValue() + " " +
+                         arg2.toString() + " " +
+                         arg3.stringApiValue() + " )" +
+                         mt.stringApiValue() + " ))";
+        converseVoid(command);
     }
 
     /**
@@ -211,18 +216,18 @@ public class CycMooAccess extends CycAccess {
     * @param arg3 the third argument of the predicate
      */
     public void assertGaf (CycFort mt,
-			   CycConstant predicate,
-			   CycFort arg1,
-			   Integer arg2)
+                           CycConstant predicate,
+                           CycFort arg1,
+                           Integer arg2)
     throws IOException, UnknownHostException, CycApiException {
-	// (predicate <CycFort> <CycFort>)
-	String command = withBookkeepingInfo() +
-			 "(cyc-assert '(" +
-			 predicate.stringApiValue() + " " +
-			 arg1.stringApiValue() + " " +
-			 arg2.toString() + " )" +
-			 mt.stringApiValue() + " ))";
-	converseVoid(command);
+        // (predicate <CycFort> <CycFort>)
+        String command = withBookkeepingInfo() +
+                         "(cyc-assert '(" +
+                         predicate.stringApiValue() + " " +
+                         arg1.stringApiValue() + " " +
+                         arg2.toString() + " )" +
+                         mt.stringApiValue() + " ))";
+        converseVoid(command);
     }
 
 
@@ -231,9 +236,9 @@ public class CycMooAccess extends CycAccess {
      * Returns a with-bookkeeping-info macro expresssion.
      */
     private String withBookkeepingInfo () {
-	return "(with-bookkeeping-info (new-bookkeeping-info " +
-	cycadministrator.stringApiValue() + " (the-date) " +
-	opencycproject.stringApiValue() + " (the-second)) ";
+        return "(with-bookkeeping-info (new-bookkeeping-info " +
+        cycadministrator.stringApiValue() + " (the-date) " +
+        opencycproject.stringApiValue() + " (the-second)) ";
     }
 
     /**
@@ -244,7 +249,7 @@ public class CycMooAccess extends CycAccess {
     *  @param <tt>CycFort</tt> mt2 the parent Microtheory that lends it's assertions to the child
      */
     public void assertGenlMt(CycFort mt1, CycFort mt2) throws IOException, CycApiException {
-	assertGaf(baseKB,genlMt,mt1,mt2);
+        assertGaf(baseKB,genlMt,mt1,mt2);
     }
 
     /**
@@ -256,7 +261,7 @@ public class CycMooAccess extends CycAccess {
      */
 
     public void assertGenlMt(CycFort mt1, String mt2) throws IOException, CycApiException {
-	assertGaf(baseKB,genlMt,mt1,makeCycConstant(mt2));
+        assertGaf(baseKB,genlMt,mt1,makeCycConstant(mt2));
     }
 
 
@@ -272,26 +277,31 @@ public class CycMooAccess extends CycAccess {
 
 
     public CycConstant makeCycConstant(String name) {
-	String tryName = null;
-	if ( name.startsWith("#$") )
-	    tryName = name.substring(2);
-	else
-	    tryName = name;
 
-	try {
-	    if ( isValidConstantName(tryName) )
-		try {
-		    return super.makeCycConstant(tryName);
-		} catch ( Exception e ) {
-		    return super.makeCycConstant(tryName+ "LogicMoo");
-		} else
-		System.out.println("!isValidConstantName='"+name+"'");
-	    return null;
-	    //throw new CycApiException("makeCycConstant: !isValidConstantName='"+name+"'");
-	} catch ( Exception ee ) {
-	    System.out.println("!makeCycConstant: "+ ee + "='"+name+"'");
-	    return null;
-	}
+        String tryName = name;
+        if ( name.startsWith("#$") )
+            tryName = name.substring(2);
+
+        tryName = Strings.change(tryName,'$','_');
+        tryName = Strings.change(tryName,')','_');
+        tryName = Strings.change(tryName,'(','_');
+        tryName = Strings.change(tryName,' ','_');
+        tryName = Strings.change(tryName,'.','_');
+        tryName = Strings.change(tryName,'@','_');
+        try {
+            if ( isValidConstantName(tryName) )
+                try {
+                    return super.makeCycConstant(tryName);
+                } catch ( Exception e ) {
+                    return super.makeCycConstant(tryName+ "LogicMoo");
+                } else
+                System.out.println("!isValidConstantName='"+name+"'");
+            return null;
+            //throw new CycApiException("makeCycConstant: !isValidConstantName='"+name+"'");
+        } catch ( Exception ee ) {
+            System.out.println("!makeCycConstant: "+ ee + "='"+name+"'");
+            return null;
+        }
     }
 
     /**
@@ -302,7 +312,7 @@ public class CycMooAccess extends CycAccess {
      */
 
     public boolean isMetaRelation( CycFort cycPredicate) throws IOException, CycApiException {
-	return isa(cycPredicate,metaRelation);
+        return isa(cycPredicate,metaRelation);
     }
 
     /**
@@ -316,10 +326,10 @@ public class CycMooAccess extends CycAccess {
      */
 
     public static CycList makeGaf(CycConstant cycPredicate, CycConstant arg1, CycConstant arg2) {
-	CycList cycList = new CycList(cycPredicate);
-	cycList.add(arg1);
-	cycList.add(arg2);
-	return cycList;
+        CycList cycList = new CycList(cycPredicate);
+        cycList.add(arg1);
+        cycList.add(arg2);
+        return cycList;
     }
 
     /**
@@ -332,7 +342,7 @@ public class CycMooAccess extends CycAccess {
      */
 
     public CycList makeIsa(CycConstant term, String type) {
-	return makeGaf(isa,term,makeCycConstant(type));
+        return makeGaf(isa,term,makeCycConstant(type));
     }
 
     /**
@@ -345,255 +355,292 @@ public class CycMooAccess extends CycAccess {
      */
 
     public CycList makeIsa(CycConstant term, CycConstant type) {
-	return makeGaf(isa,term,type);
+        return makeGaf(isa,term,type);
     }
 
-    public static ArrayList cycKnowsClass = new ArrayList();
-    public static ArrayList cycKnowsObject = new ArrayList();
 
-    public void assertJavaObjectAndDef(CycFort dataMt,Object object) {
-	if ( object==null ) return;
-	assertJavaObject(dataMt,object);
+    public Object makePrimitiveObjectForCycList(Class jclass, Object value) {
+        if ( jclass == java.lang.Boolean.TYPE ) if ( value.equals(Boolean.TRUE) ) return cycTrue;
+            else return cycFalse;
+        if ( jclass == java.lang.Integer.TYPE ) return new Integer(""+value);
+        if ( jclass == java.lang.Byte.TYPE ) return new Integer(""+value);
+        if ( jclass == java.lang.Void.TYPE ) return cycVoid;
+        if ( jclass == java.lang.Long.TYPE ) return new Long(""+value);
+        if ( jclass == java.lang.Character.TYPE ) return  new String("`" + value);
+        if ( jclass == java.lang.Double.TYPE ) return new CycSymbol("|" + value + "|");
+        if ( jclass == java.lang.Float.TYPE ) return new CycSymbol("|" + value + "|");
+        return null;
     }
+
+    public Object makeNonPrimitiveObjectForCycList(Object value) {
+        if ( value instanceof String ) return value;
+        if ( value instanceof Boolean )  if ( value.equals(Boolean.TRUE)) return cycTrue;
+            else return cycFalse;
+        if ( value instanceof Character ) return  new String("`" + value);
+        if ( value instanceof Integer ) return value;
+        if ( value instanceof Long ) return value;
+        if ( value instanceof Double ) return value;
+        if ( value instanceof Float ) return value;
+        if ( value instanceof Byte ) return (Integer)value;
+        return null;
+    }
+
+    public static HashMap cycKnowsObject = new HashMap();
+
+    public Object makeCycJavaObject(CycFort dataMt,Object object) {
+        if ( object==null ) return cycNull;
+        Class jclass = object.getClass();
+        if ( jclass.isPrimitive() )  return makePrimitiveObjectForCycList(jclass, object);
+        Object cycjobject = makeNonPrimitiveObjectForCycList(object);
+        if ( cycjobject!=null ) return cycjobject;
+
+        if ( cycKnowsObject.containsKey(object) ) return cycKnowsObject.get(object);
+        System.out.println("assertJavaObject: " + object);
+
+        CycConstant  cycclass = makeCycJavaClass(jclass);
+        String  thisobjname = "HYP-"+cycclass.toString()+object.hashCode();
+        CycConstant cycobject = makeCycConstant(thisobjname);
+        cycKnowsObject.put(object,cycobject);
+
+        try {
+            assertIsa((CycFort)cycobject,(CycFort)cycclass,dataMt);
+        } catch ( Exception e ) {
+            e.printStackTrace(System.out);
+        }
+
+        syncJavaObject(dataMt, object,cycobject);
+        return cycobject;
+    }
+
+    public void syncJavaObjectArray(CycFort dataMt, Object object,CycConstant cycobject) {
+        System.out.println("syncJavaObjectArray " + object );
+        CycList assertme = new CycList(cycHasArrayMember);
+        assertme.add(cycobject);
+        assertme.add(null);
+        assertme.add(null);
+        for ( int i=0 ; i < ((Object[])object).length; i++ ) {
+            Object submember = makeCycJavaObject(dataMt,((Object[])object)[i]);
+            try {
+                assertme.set(3,new Integer(i));
+                assertme.set(4,submember);
+                assertWithTranscriptNoWffCheck(assertme,dataMt);
+            } catch ( Exception e ) {
+                e.printStackTrace(System.err);
+            }
+        }
+    }
+
+    public void syncJavaObject(CycFort dataMt, Object object,CycConstant cycobject) {
+        Class jclass = object.getClass();
+        if ( jclass.isArray() ) {
+            syncJavaObjectArray(dataMt,object, cycobject);
+            return;
+        }
+
+        System.out.println("syncJavaObject " + object );
+        HashMap template = (HashMap)cycAccessClassTemplates.get(jclass);
+        Iterator it = template.keySet().iterator();
+        while ( it.hasNext() ) {
+            Object cycaccess = it.next();
+            if ( cycaccess instanceof CycConstant ) {
+                syncJavaObjectMember( dataMt, cycobject, object ,(CycConstant)cycaccess, template.get(cycaccess));
+            }
+        }
+    }
+
+    public void syncJavaObjectMember(CycFort dataMt, CycConstant cycobject, Object object, CycConstant cycaccess, Object accessmember) {
+        System.out.println("while {syncJavaObject " + cycobject + " " + cycaccess + " " + accessmember + "}" );
+        try {
+            if ( accessmember instanceof DataMethod ) syncJavaObjectDataMethod( dataMt, cycobject, object, cycaccess, (DataMethod)accessmember);
+            //	    if ( accessmember instanceof Method ) syncJavaObjectMethod( dataMt, cycobject, object, cycaccess, (Method)accessmember);
+            if ( accessmember instanceof Field ) syncJavaObjectField( dataMt, cycobject, object, cycaccess, (Field)accessmember);
+        } catch ( Exception e ) {
+            e.printStackTrace( System.out);
+        }
+    }
+
+    public void syncJavaObjectField(CycFort dataMt, CycConstant cycobject, Object object, CycConstant cycaccess, Field accessmember) 
+    throws Exception{
+        CycList assertme = new CycList(cycHasArrayMember);    //"#$hasFieldValue"
+        assertme.add(cycaccess);
+        assertme.add(makeCycJavaObject(dataMt,accessmember.get(object)));
+        assertWithTranscriptNoWffCheck(assertme,dataMt);
+    }
+
+    public void syncJavaObjectMethod(CycFort dataMt, CycConstant cycobject, Object object, CycConstant cycaccess, Method accessmember) 
+    throws Exception{
+        CycList assertme = new CycList(cycHasArrayMember);    //"#$hasMethodValue"
+        assertme.add(cycaccess);
+        assertme.add(makeCycJavaObject(dataMt,accessmember.invoke(object,null)));
+        assertWithTranscriptNoWffCheck(assertme,dataMt);
+    }
+
+    public void syncJavaObjectDataMethod(CycFort dataMt, CycConstant cycobject, Object object, CycConstant cycaccess, DataMethod accessmember) 
+    throws Exception{
+        CycList assertme = new CycList(cycHasArrayMember);    //"#$hasMethodValue"
+        assertme.add(cycaccess);
+        assertme.add(makeCycJavaObject(dataMt,accessmember.get(object)));
+        assertWithTranscriptNoWffCheck(assertme,dataMt);
+    }
+
+
+    // CycConstant & Class -> CycConstant key of Fields | DataMethod | Method
+    public static HashMap cycAccessClassTemplates = new HashMap();
+
+    // CycConstant || Class -> Class || CycConstant 
+    public static HashMap cycKnowsClass = new HashMap();
+
+    public CycConstant makeCycJavaClass(Class jclass) throws CycApiException {
+        if ( jclass==null ) throw new CycApiException("null makeCycJavaClass");
+        CycConstant cycjclass  = (CycConstant)cycKnowsClass.get(jclass);
+        if ( cycjclass!=null ) return cycjclass;
+        String classname = jclass.getName();
+        String fclassname = flattenJavaClassname(classname);
+        System.out.println("makeCycJavaClass " + classname + " -> " + fclassname);
+        cycjclass = makeCycConstant(fclassname + "Class");
+        cycKnowsClass.put(jclass,cycjclass);
+        cycKnowsClass.put(cycjclass,jclass);
+        HashMap template = new HashMap();
+        cycAccessClassTemplates.put(jclass,template);
+        cycAccessClassTemplates.put(cycjclass,template);
+
+        if ( jclass.toString().startsWith("class java.") || jclass.isPrimitive() )
+            return cycjclass;
+
+        try {
+            assertIsa(cycjclass,collection,javaMt);
+
+            Class superjclass = jclass.getSuperclass();
+            if ( superjclass != null ) {
+                CycConstant cycsuperjclass = makeCycJavaClass(superjclass);
+                assertGenls(cycjclass,cycsuperjclass,javaMt);
+            }
+        } catch ( Exception e ) {
+            e.printStackTrace(System.err);
+            throw new CycApiException("makeCycJavaClass: " + e );
+        }
+
+        Field[] fields = jclass.getFields();
+        for ( int i =0; i<fields.length;i++ ) {
+            Field field=fields[i];
+            CycConstant cycfieldjclass = makeCycJavaClass(field.getType());
+            CycConstant cycfield = makeCycJavaMember("Field",field.getName());
+            template.put(cycfield,field);
+            assertIsaJavaFieldOf(cycjclass,cycfield,cycfieldjclass);
+        }
+
+        Method[] methods = jclass.getDeclaredMethods();
+        for ( int i =0; i<methods.length;i++ ) {
+            Method method = methods[i];
+            CycConstant cycmethodjclass = makeCycJavaClass(method.getReturnType());
+            String methodname = method.getName();
+            CycConstant cycmethod = makeCycJavaMember("Method",methodname);
+            template.put(cycmethod,method);
+            Class[] params = method.getParameterTypes();
+            assertIsaJavaMethodOf(cycjclass,cycmethod,params,cycmethodjclass);
+
+            if ( methodname.startsWith("get") || params.length==0 ) {
+                String dataname = methodname.substring(2);
+                CycConstant cycdatamethod = makeCycJavaMember("DataMethod",dataname);
+                Object returntypearray = Array.newInstance(method.getReturnType(),1);
+                Method setmethod = null;
+                try {
+                    setmethod = jclass.getMethod("set"+dataname,(Class[])returntypearray); 
+                } catch ( Exception e ) {
+                }
+                DataMethod datamethod = new DataMethod(dataname,method,setmethod);
+                assertIsaJavaDataMethodOf(cycjclass,cycdatamethod,cycmethodjclass);
+            }
+
+        }
+        return cycjclass;
+    }
+
+    public void assertIsaJavaFieldOf(CycConstant cycjclass,CycConstant cycfield,CycConstant cycfieldjclass) {
+    }
+
+    public void assertIsaJavaDataMethodOf(CycConstant cycjclass,CycConstant cycdatamethod, CycConstant cycmethodjclass) {
+    }
+
+    public void assertIsaJavaMethodOf(CycConstant cycjclass,CycConstant cycmethod,Class[] params, CycConstant cycmethodjclass) {
+    }
+
+
+    /*
+    String methodparams = makeJavaClassesDef(params);
+    try {
+    assertWithTranscriptNoWffCheck(
+      "(#$hasJavaMethod " +  cycClassName 
+      + " (#$JavaMethodAccessFn " + methodname + " " + methodparams + " ) " 
+      + returntypename +  " )", (CycFort)javaMt);
+    } catch ( Exception e ) {
+    e.printStackTrace(System.err);
+    }
+    String cycDMName = null;
+    if ( params.length==0 || !(returntype == Void.class) ) {
+    if ( methodname.startsWith("get") ) {
+    cycDMName = makeCycJavaMember("DataMethod",methodname.substring(2));
+    // if ( isJavaReconstuctable(returntype) )	cycDMName = makeCycJavaMember("DataMethod",methodname);
+    if ( cycDMName!=null ) {
+    // DataMethod
+    DataMethod dm = new DataMethod(cycDMName,method);
+    template.put(cycDMName,dm);
+    try {
+    assertWithTranscriptNoWffCheck(
+      "(#$hasJavaDataMethod " + cycClassName 
+      + " " + cycDMName + "  " 
+      + returntypename +  " )",(CycFort) javaMt);
+    } catch ( Exception e ) {
+    e.printStackTrace(System.err);
+    }
+    
+    }
+    }
+    }
+    return template;
+    }
+    }
+    public String makeJavaClassesDef(Class jclass[]) {
+    StringBuffer cdefs = new StringBuffer(10);
+    for ( int i = 0 ; i < jclass.length ; i ++ ) {
+        assertJavaClass(jclass[i]); 
+        cdefs.append(" ").append(makeCycJavaConstantForJavaClass(jclass[i]));
+    }
+    return cdefs.toString();
+    }
+    */    
+
 
 
     public String flattenJavaClassname(String cltype) {
-	String ctype = cltype;
-	String suffix = "";
-
-	if ( cltype.startsWith("[L") ) {
-	    ctype = cltype.substring(2);
-	    suffix = "Array";
-	} else if ( cltype.startsWith("[") ) {
-	    ctype = cltype.substring(1);
-	    suffix = "Array";
-	} else {
-
-	}
-
-	int i = ctype.lastIndexOf('.');
-	if ( i>0 ) {
-	    return Strings.change(ctype.substring(i+1),';','_')+suffix;
-	} else {
-	    return Strings.change(ctype,';','_')+suffix;
-	}
+        String ctype = cltype;
+        String suffix = "";
+        if ( cltype.startsWith("[L") ) {
+            ctype = cltype.substring(2);
+            suffix = "Array";
+        } else if ( cltype.startsWith("[") ) {
+            ctype = cltype.substring(1);
+            suffix = "Array";
+        }
+        int i = ctype.lastIndexOf('.');
+        if ( i>0 ) {
+            return Strings.change(ctype.substring(i+1),';','_')+suffix;
+        } else {
+            return Strings.change(ctype,';','_')+suffix;
+        }
     }
 
-    public String makeCycJavaConstant(String ctype,String name) {
-	String type = flattenJavaClassname(ctype);
-	CycConstant nameC = makeCycConstant(name + "_" + type);
-	CycConstant typeC = makeCycConstant("Java" + type);
-	try {
-	    assertIsa(typeC,collection,javaMt);
-	    assertIsa(nameC,typeC,javaMt);
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.err);
-	}
-	return nameC.stringApiValue();
-    }
-
-    public static HashMap cycJavaConstantForJavaClass = new HashMap();
-
-    public String makeCycJavaConstantForJavaClass(Class name) {
-	CycConstant nameC = (CycConstant)cycJavaConstantForJavaClass.get(name);
-	if ( nameC!=null ) return nameC.stringApiValue();
-	String classname = name.getName();
-	String fclassname = flattenJavaClassname(classname);
-	System.out.println("makeCycJavaConstantForJavaClass " + classname + " -> " + fclassname);
-	nameC = makeCycConstant(fclassname + "Class");
-	cycJavaConstantForJavaClass.put(name,nameC);
-	CycConstant typeC = makeCycConstant("ClassClass");
-	try {
-	    assertIsa(nameC,collection,javaMt);
-	    assertIsa(nameC,typeC,javaMt);
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.err);
-	}
-	return nameC.stringApiValue();
-    }
-
-
-
-    public String assertJavaObject(CycFort dataMt,Object object) {
-	System.out.println("assertJavaObject: " + object);
-	if ( object==null ) return null;
-	Class aclass = object.getClass();
-	if ( isJavaReconstuctable(aclass) ) return toReification(dataMt,object);
-	if ( cycKnowsObject.contains(object) ) return toReification(dataMt,object);
-	String thisobjname = toReification(dataMt,object);
-	String thisobjclass = makeCycJavaConstantForJavaClass(aclass);
-	try {
-	    assertIsa((CycFort)makeCycConstant(thisobjname),(CycFort)makeCycConstant(thisobjclass),dataMt);
-	} catch (Exception e) {
-	}
-	cycKnowsObject.add(object);
-	if ( aclass.isArray() ) {
-	    for ( int i=0 ; i < ((Object[])object).length; i++ ) {
-		String submember = assertJavaObject(dataMt,((Object[])object)[i]);
-		try {
-		    if ( submember!=null ) assertWithTranscriptNoWffCheck("(#$javaArrayContains " + thisobjname + " " + i + " " + submember + " )",dataMt);
-		} catch ( Exception e ) {
-		    e.printStackTrace(System.err);
-		}
-	    }
-	    return toReification(dataMt,object);
-	}
-	HashMap template = makeJavaClassDef(aclass);
-	assertJavaObjectMemberValues(dataMt, thisobjname, object,template);
-	return toReification(dataMt,object);
-    }
-
-    public void assertJavaObjectMemberValues(CycFort dataMt, String objectname, Object object,HashMap template) {
-	Iterator it = template.keySet().iterator();
-	while ( it.hasNext() ) {
-	    Object value = null;
-	    Object accessname = it.next();
-	    Object accessmethod =template.get(accessname);
-	    String name = null;
-
-	    if ( accessmethod instanceof Field ) {
-		try {
-		    value = ((Field)accessmethod).get(object);
-		    if ( value!=null ) assertWithTranscriptNoWffCheck( "#$hasFieldValue " + objectname + " " + accessname + " " + assertJavaObject(dataMt,value) + " )",dataMt);
-		} catch ( Exception e ) {
-		    e.printStackTrace(System.err);
-		}
-
-	    } else {
-		if ( accessmethod instanceof DataMethod ) {
-		    DataMethod dm = (DataMethod)accessmethod;
-		    name = dm.cycname;
-		    try {
-			value  = dm.method.invoke(object,null);
-			if ( value!=null ) assertWithTranscriptNoWffCheck( "#$hasMethodValue " + objectname  + " " + accessname + " " + assertJavaObject(dataMt,value) + " )",dataMt);
-		    } catch ( Exception e ) {
-			e.printStackTrace(System.err);
-		    }
-
-		}
-	    }
-
-	}
-    }
-
-    // hasMethodValue
-    // hasFieldValue 
-    // javaArrayContains
-
-    // hasJavaMethod
-    // JavaMethodFn
-    public static HashMap cycAccessClassTemplates = new HashMap();
-
-
-    public HashMap makeJavaClassDef(Class aclass) {
-	if ( aclass==null ) return new HashMap();
-	if ( isJavaReconstuctable(aclass) ) return new HashMap();
-
-	HashMap template = (HashMap)cycAccessClassTemplates.get(aclass);
-	if ( template != null )	return template;
-	template = new HashMap();
-	String cycClassName = makeCycJavaConstantForJavaClass(aclass);
-	System.out.println("serializing " + cycClassName);
-	cycAccessClassTemplates.put(aclass,template);
-	cycAccessClassTemplates.put(cycClassName,template);
-	makeJavaClassDef(aclass.getSuperclass());
-
-	Field[] fields = aclass.getFields();
-	for ( int i =0; i<fields.length;i++ ) {
-	    Field field=fields[i];
-	    makeJavaClassDef(field.getType());
-	    String cycFieldName = makeCycJavaConstant("Field",field.getName());
-	    String cycFieldResultType = makeCycJavaConstantForJavaClass(field.getType());
-	    template.put(cycFieldName,field);
-	    try {
-		assertWithTranscriptNoWffCheck(
-					      "(#$hasJavaField " + cycClassName + " " + cycFieldName + "  " + cycFieldResultType +  " )", javaMt);
-	    } catch ( Exception e ) {
-		e.printStackTrace(System.err);
-	    }
-	}
-
-	Method[] methods = aclass.getMethods();
-	for ( int i =0; i<methods.length;i++ ) {
-	    Method method = methods[i];
-	    Class returntype = method.getReturnType();
-	    String returntypename = makeCycJavaConstantForJavaClass(returntype);
-	    makeJavaClassDef(returntype);
-	    String methodname = makeCycJavaConstant("Method",method.getName());
-	    template.put(methodname,method);
-	    Class[] params = method.getParameterTypes();
-	    String methodparams = makeJavaClassesDef(params);
-	    try {
-		assertWithTranscriptNoWffCheck(
-					      "(#$hasJavaMethod " +  cycClassName 
-					      + " (#$JavaMethodAccessFn " + methodname + " " + methodparams + " ) " 
-					      + returntypename +  " )", (CycFort)javaMt);
-	    } catch ( Exception e ) {
-		e.printStackTrace(System.err);
-	    }
-	    String cycDMName = null;
-	    if ( params.length==0 || !(returntype == Void.class) ) {
-		if ( methodname.startsWith("get") ) cycDMName = makeCycJavaConstant("DataMethod",methodname.substring(2));
-		// if ( isJavaReconstuctable(returntype) )	cycDMName = makeCycJavaConstant("DataMethod",methodname);
-		if ( cycDMName!=null ) {
-		    // DataMethod
-		    DataMethod dm = new DataMethod(cycDMName,method);
-		    template.put(cycDMName,dm);
-		    try {
-			assertWithTranscriptNoWffCheck(
-						      "(#$hasJavaDataMethod " + cycClassName 
-						      + " " + cycDMName + "  " 
-						      + returntypename +  " )",(CycFort) javaMt);
-		    } catch ( Exception e ) {
-			e.printStackTrace(System.err);
-		    }
-
-		}
-	    }
-	}
-	return template;
-    }
-
-    public String makeJavaClassesDef(Class aclass[]) {
-	StringBuffer cdefs = new StringBuffer(10);
-	for ( int i = 0 ; i < aclass.length ; i ++ ) {
-	    makeJavaClassDef(aclass[i]); 
-	    cdefs.append(" ").append(makeCycJavaConstantForJavaClass(aclass[i]));
-	}
-	return cdefs.toString();
-    }
-
-    public String toReification(CycFort dataMt,Object object) {
-	if ( object instanceof String )	return "\""+object+"\"";
-	Class aclass = object.getClass();
-	if ( isJavaReconstuctable(aclass) ) return ""+object;
-	if ( aclass.isArray() ) {
-	    return reifyConstant(dataMt,"HYPCollectionOf-"+flattenJavaClassname(aclass.getName())+object.hashCode(),aclass);
-	}
-	return reifyConstant(dataMt,"HYP-"+flattenJavaClassname(aclass.getName())+object.hashCode(),aclass);
-    }
-
-    public String reifyConstant(CycFort dataMt,String name, Class aclass) {
-	try {
-	    CycConstant nameC = makeCycConstant(name);
-	    assertIsa((CycFort)nameC,(CycFort)makeCycConstant(makeCycJavaConstantForJavaClass(aclass)),dataMt);
-	    return nameC.stringApiValue();
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.err);
-	    return name; 
-	}
-    }
-
-    public boolean isJavaReconstuctable(Class aclass) {
-	if ( aclass == null ) return false;
-	if ( aclass.isArray() )	return false;
-	try {
-	    if ( aclass.isPrimitive()
-		 || (Modifier.isFinal(aclass.getModifiers()) && aclass.getDeclaredMethod("toString",null)!=null ) )  return true;
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.err);
-	}
-	return false;
+    public CycConstant makeCycJavaMember(String ctype,String name) {
+        String type = flattenJavaClassname(ctype);
+        CycConstant nameC = makeCycConstant(name + "_" + type);
+        CycConstant typeC = makeCycConstant("Java" + type);
+        try {
+            assertIsa(typeC,collection,javaMt);
+            assertIsa(nameC,typeC,javaMt);
+        } catch ( Exception e ) {
+            e.printStackTrace(System.err);
+        }
+        return nameC;
     }
 
 
@@ -609,14 +656,14 @@ public class CycMooAccess extends CycAccess {
     public void assertWithTranscriptNoWffCheck(String sentence, CycFort mt)
     throws IOException, UnknownHostException, CycApiException {
 
-	String command =
-	"(clet ((*the-cyclist* " + cyclist.cyclify() + "))\n" +
-	"   (without-wff-semantics (ke-assert-now\n" +
-	"    '" + sentence + "\n" +
-	"    " + mt.cyclify() + ")))";
+        String command =
+        "(clet ((*the-cyclist* " + cyclist.cyclify() + "))\n" +
+        "   (without-wff-semantics (ke-assert-now\n" +
+        "    '" + sentence + "\n" +
+        "    " + mt.cyclify() + ")))";
 
-	// System.out.println("assertWithTranscript: " + command);
-	converseVoid(command);
+        // System.out.println("assertWithTranscript: " + command);
+        converseVoid(command);
     }
 
 
@@ -631,175 +678,175 @@ public class CycMooAccess extends CycAccess {
 
     public void assertWithTranscriptNoWffCheck(CycList sentence, CycFort mt)
     throws IOException, UnknownHostException, CycApiException {
-	if ( sentence==null )
-	    throw new CycApiException("assertWithTranscriptNoWFFCheck: sentence==null");
-	if ( mt==null )
-	    throw new CycApiException("assertWithTranscriptNoWFFCheck: mt==null " + sentence.cyclify());
-	if ( cyclist==null )
-	    throw new CycApiException("assertWithTranscriptNoWFFCheck: cyclist==null" + sentence.cyclify());
+        if ( sentence==null )
+            throw new CycApiException("assertWithTranscriptNoWFFCheck: sentence==null");
+        if ( mt==null )
+            throw new CycApiException("assertWithTranscriptNoWFFCheck: mt==null " + sentence.cyclify());
+        if ( cyclist==null )
+            throw new CycApiException("assertWithTranscriptNoWFFCheck: cyclist==null" + sentence.cyclify());
 
-	String command =
-	"(clet ((*the-cyclist* " + cyclist.cyclify() + "))\n" +
-	"   (without-wff-semantics (ke-assert-now\n" +
-	"    '" + sentence.cyclify() + "\n" +
-	"    " + mt.cyclify() + ")))";
+        String command =
+        "(clet ((*the-cyclist* " + cyclist.cyclify() + "))\n" +
+        "   (without-wff-semantics (ke-assert-now\n" +
+        "    '" + sentence.cyclify() + "\n" +
+        "    " + mt.cyclify() + ")))";
 
-	// System.out.println("assertWithTranscript: " + command);
-	converseVoid(command);
+        // System.out.println("assertWithTranscript: " + command);
+        converseVoid(command);
     }
 
     public static ArrayList intersectsArrayList(ArrayList l1, ArrayList l2) {
-	ArrayList list = new ArrayList();
-	Iterator list1 = l1.iterator();
-	while ( list1.hasNext() ) {
-	    Object  item = list1.next();
-	    if ( l2.contains(item) ) list.add(item);
-	}
-	return list;
+        ArrayList list = new ArrayList();
+        Iterator list1 = l1.iterator();
+        while ( list1.hasNext() ) {
+            Object  item = list1.next();
+            if ( l2.contains(item) ) list.add(item);
+        }
+        return list;
     }
 
     public void createCollection(
-				String microtheoryname,String username, String collectionname,
-				String genlsname,String commentname,String categoryname)  throws CycApiException {
-	try {
-	    setCyclist(username);
-	    CycConstant microtheorynameC = makeCycConstantOrNull(microtheoryname);
-	    CycConstant usernameC = makeCycConstantOrNull(username);
-	    CycConstant microtheoryC = makeCycConstantOrNull(microtheoryname);
-	    CycConstant collectionnameC = makeCycConstantOrNull(collectionname);
-	    CycConstant genlsnameC = makeCycConstantOrNull(genlsname);
-	    CycConstant categorynameC = makeCycConstantOrNull(categoryname);
-	    if ( microtheoryname!=null && collectionname!=null ) {
-		assertIsa(collectionnameC,collection,microtheoryC);
-		if ( genlsnameC!= null ) {
-		    assertGenls(collectionnameC,genlsnameC,microtheoryC);
-		}
-		if ( categorynameC!= null ) {
-		    assertIsa(collectionnameC,categorynameC,microtheoryC);
-		}
-		if ( commentname.length()>3 ) {
-		    assertComment(collectionnameC,commentname,microtheoryC);
-		}
-	    }
+                                String microtheoryname,String username, String collectionname,
+                                String genlsname,String commentname,String categoryname)  throws CycApiException {
+        try {
+            setCyclist(username);
+            CycConstant microtheorynameC = makeCycConstantOrNull(microtheoryname);
+            CycConstant usernameC = makeCycConstantOrNull(username);
+            CycConstant microtheoryC = makeCycConstantOrNull(microtheoryname);
+            CycConstant collectionnameC = makeCycConstantOrNull(collectionname);
+            CycConstant genlsnameC = makeCycConstantOrNull(genlsname);
+            CycConstant categorynameC = makeCycConstantOrNull(categoryname);
+            if ( microtheoryname!=null && collectionname!=null ) {
+                assertIsa(collectionnameC,collection,microtheoryC);
+                if ( genlsnameC!= null ) {
+                    assertGenls(collectionnameC,genlsnameC,microtheoryC);
+                }
+                if ( categorynameC!= null ) {
+                    assertIsa(collectionnameC,categorynameC,microtheoryC);
+                }
+                if ( commentname.length()>3 ) {
+                    assertComment(collectionnameC,commentname,microtheoryC);
+                }
+            }
 
-	} catch ( Exception e ) {
-	    throw new CycApiException("createPredicate: " + e);
-	}
+        } catch ( Exception e ) {
+            throw new CycApiException("createPredicate: " + e);
+        }
 
     }
 
     public static PrintWriter getPrintWriter(Writer w) {
-	if ( w==null ) return new PrintWriter(System.out);
-	if ( w instanceof PrintWriter )	return(PrintWriter)w;
-	return new PrintWriter(w);
+        if ( w==null ) return new PrintWriter(System.out);
+        if ( w instanceof PrintWriter ) return(PrintWriter)w;
+        return new PrintWriter(w);
     }
 
 
     public void createPredicate(
-			       String microtheoryname,String username, 
-			       String predicatename, String genlpredsname, String arityname,
-			       String commentname, String categoryname,
-			       String[] arg, String[] isagenl ) throws CycApiException {
-	try {
-	    setCyclist(username);
-	    String realarityname = aryFromString(arityname);
-	    int arityN = arityFromString(realarityname).intValue();
-	    CycConstant microtheorynameC = makeCycConstantOrNull(microtheoryname);
-	    CycConstant usernameC = makeCycConstantOrNull(username);
-	    CycConstant microtheoryC = makeCycConstantOrNull(microtheoryname);
-	    CycConstant predicatenameC = makeCycConstantOrNull(predicatename);
-	    CycConstant genlpredsnameC = makeCycConstantOrNull(genlpredsname);
-	    CycConstant categorynameC = makeCycConstantOrNull(categoryname);
-	    CycConstant realaritynameC = makeCycConstantOrNull(realarityname);
+                               String microtheoryname,String username, 
+                               String predicatename, String genlpredsname, String arityname,
+                               String commentname, String categoryname,
+                               String[] arg, String[] isagenl ) throws CycApiException {
+        try {
+            setCyclist(username);
+            String realarityname = aryFromString(arityname);
+            int arityN = arityFromString(realarityname).intValue();
+            CycConstant microtheorynameC = makeCycConstantOrNull(microtheoryname);
+            CycConstant usernameC = makeCycConstantOrNull(username);
+            CycConstant microtheoryC = makeCycConstantOrNull(microtheoryname);
+            CycConstant predicatenameC = makeCycConstantOrNull(predicatename);
+            CycConstant genlpredsnameC = makeCycConstantOrNull(genlpredsname);
+            CycConstant categorynameC = makeCycConstantOrNull(categoryname);
+            CycConstant realaritynameC = makeCycConstantOrNull(realarityname);
 
 
-	    if ( microtheoryname!=null && predicatename!=null && realarityname!=null ) {
-		assertIsa(predicatenameC,predicate,microtheoryC);
-		assertIsa(predicatenameC,realaritynameC,microtheoryC);
-		assertGaf(microtheoryC,predarity,predicatenameC, new Integer(arityN));
-		if ( genlpredsnameC!= null ) {
-		    assertGaf(microtheoryC,genlpreds,predicatenameC,genlpredsnameC);
-		}
-		if ( categorynameC!= null ) {
-		    assertIsa(predicatenameC,categorynameC,microtheoryC);
-		}
-		if ( commentname.length()>3 ) {
-		    assertComment(predicatenameC,commentname,microtheoryC);
-		}
-		for ( int i=1 ; i <= arityN ;i++ ) {
-		    if ( isagenl[i].startsWith("G") ) {
-			assertGaf(microtheoryC,argGenl,predicatenameC, new Integer( i),makeCycConstant(arg[i]));
-		    } else {
-			assertGaf(microtheoryC,argIsa,predicatenameC, new Integer( i),makeCycConstant(arg[i]));
-		    }
-		}
-	    }
+            if ( microtheoryname!=null && predicatename!=null && realarityname!=null ) {
+                assertIsa(predicatenameC,predicate,microtheoryC);
+                assertIsa(predicatenameC,realaritynameC,microtheoryC);
+                assertGaf(microtheoryC,predarity,predicatenameC, new Integer(arityN));
+                if ( genlpredsnameC!= null ) {
+                    assertGaf(microtheoryC,genlpreds,predicatenameC,genlpredsnameC);
+                }
+                if ( categorynameC!= null ) {
+                    assertIsa(predicatenameC,categorynameC,microtheoryC);
+                }
+                if ( commentname.length()>3 ) {
+                    assertComment(predicatenameC,commentname,microtheoryC);
+                }
+                for ( int i=1 ; i <= arityN ;i++ ) {
+                    if ( isagenl[i].startsWith("G") ) {
+                        assertGaf(microtheoryC,argGenl,predicatenameC, new Integer( i),makeCycConstant(arg[i]));
+                    } else {
+                        assertGaf(microtheoryC,argIsa,predicatenameC, new Integer( i),makeCycConstant(arg[i]));
+                    }
+                }
+            }
 
-	} catch ( Exception e ) {
-	    throw new CycApiException("createPredicate: " + e);
-	}
+        } catch ( Exception e ) {
+            throw new CycApiException("createPredicate: " + e);
+        }
 
     }
     public void createFunction(
-			      String microtheoryname,String username, 
-			      String functionname, String genlpredsname,String arityname,
-			      String commentname, String categoryname,
-			      String resultisaname,String resultisagenlname,
-			      String[] arg, String[] isagenl )  throws CycApiException {
-	try {
-	    setCyclist(username);
-	    CycConstant microtheorynameC = makeCycConstantOrNull(microtheoryname);
-	    CycConstant usernameC = makeCycConstantOrNull(username);
-	    CycConstant microtheoryC = makeCycConstantOrNull(microtheoryname);
-	    CycConstant functionnameC = makeCycConstantOrNull(functionname);
-	    CycConstant genlpredsnameC = makeCycConstantOrNull(genlpredsname);
-	    CycConstant categorynameC = makeCycConstantOrNull(categoryname);
-	    CycConstant resultisanameC = makeCycConstantOrNull(resultisaname);
-	    int arityN = Integer.parseInt(arityname);
+                              String microtheoryname,String username, 
+                              String functionname, String genlpredsname,String arityname,
+                              String commentname, String categoryname,
+                              String resultisaname,String resultisagenlname,
+                              String[] arg, String[] isagenl )  throws CycApiException {
+        try {
+            setCyclist(username);
+            CycConstant microtheorynameC = makeCycConstantOrNull(microtheoryname);
+            CycConstant usernameC = makeCycConstantOrNull(username);
+            CycConstant microtheoryC = makeCycConstantOrNull(microtheoryname);
+            CycConstant functionnameC = makeCycConstantOrNull(functionname);
+            CycConstant genlpredsnameC = makeCycConstantOrNull(genlpredsname);
+            CycConstant categorynameC = makeCycConstantOrNull(categoryname);
+            CycConstant resultisanameC = makeCycConstantOrNull(resultisaname);
+            int arityN = Integer.parseInt(arityname);
 
-	    if ( microtheoryname!=null && functionname!=null ) {
-		assertIsa(functionnameC,functionalRelation,microtheoryC);
-		assertGaf(microtheoryC,predarity,functionnameC, new Integer(arityN));
-		if ( genlpredsnameC!= null ) {
-		    assertGaf(microtheoryC,genlpreds,functionnameC,genlpredsnameC);
-		}
-		if ( categorynameC!= null ) {
-		    assertIsa(functionnameC,categorynameC,microtheoryC);
-		}
-		if ( resultisanameC!= null ) {
-		    if ( resultisagenlname.startsWith("G") )
-			assertGaf(microtheoryC,resultGenl,functionnameC,resultisanameC);
-		    else
-			assertGaf(microtheoryC,resultIsa,functionnameC,resultisanameC);
-		}
-		if ( commentname.length()>3 ) {
-		    assertComment(functionnameC,commentname,microtheoryC);
-		}
-		for ( int i=1 ; i <= arityN ;i++ ) {
-		    if ( isagenl[i].startsWith("G") ) {
-			assertGaf(microtheoryC,argGenl,functionnameC, new Integer( i),makeCycConstant(arg[i]));
-		    } else {
-			assertGaf(microtheoryC,argIsa,functionnameC, new Integer( i),makeCycConstant(arg[i]));
-		    }
-		}
-	    }
+            if ( microtheoryname!=null && functionname!=null ) {
+                assertIsa(functionnameC,functionalRelation,microtheoryC);
+                assertGaf(microtheoryC,predarity,functionnameC, new Integer(arityN));
+                if ( genlpredsnameC!= null ) {
+                    assertGaf(microtheoryC,genlpreds,functionnameC,genlpredsnameC);
+                }
+                if ( categorynameC!= null ) {
+                    assertIsa(functionnameC,categorynameC,microtheoryC);
+                }
+                if ( resultisanameC!= null ) {
+                    if ( resultisagenlname.startsWith("G") )
+                        assertGaf(microtheoryC,resultGenl,functionnameC,resultisanameC);
+                    else
+                        assertGaf(microtheoryC,resultIsa,functionnameC,resultisanameC);
+                }
+                if ( commentname.length()>3 ) {
+                    assertComment(functionnameC,commentname,microtheoryC);
+                }
+                for ( int i=1 ; i <= arityN ;i++ ) {
+                    if ( isagenl[i].startsWith("G") ) {
+                        assertGaf(microtheoryC,argGenl,functionnameC, new Integer( i),makeCycConstant(arg[i]));
+                    } else {
+                        assertGaf(microtheoryC,argIsa,functionnameC, new Integer( i),makeCycConstant(arg[i]));
+                    }
+                }
+            }
 
-	} catch ( Exception e ) {
-	    throw new CycApiException("createPredicate: " + e);
-	}
+        } catch ( Exception e ) {
+            throw new CycApiException("createPredicate: " + e);
+        }
     }
 
 
     public ArrayList getArrayList(String mt,String collectionname) {
-	try {
-	    CycList query = new CycList(isa);
-	    CycVariable variable = new CycVariable("?INST");
-	    query.add(variable);
-	    query.add(makeCycConstant(collectionname));
-	    return(ArrayList) askWithVariable(query,variable,makeCycConstant(mt));
-	} catch ( Exception e ) {
-	    return new ArrayList();
-	}
+        try {
+            CycList query = new CycList(isa);
+            CycVariable variable = new CycVariable("?INST");
+            query.add(variable);
+            query.add(makeCycConstant(collectionname));
+            return(ArrayList) askWithVariable(query,variable,makeCycConstant(mt));
+        } catch ( Exception e ) {
+            return new ArrayList();
+        }
     }
 
     /**
@@ -812,76 +859,76 @@ public class CycMooAccess extends CycAccess {
      */
 
     public ArrayList getArrayListQuerySEL(String mt,String query) {
-	try {
-	    StringBuffer queryBuffer = new StringBuffer();
-	    queryBuffer.append("(clet ((*cache-inference-results* nil) ");
-	    queryBuffer.append("       (*compute-inference-results* nil) ");
-	    queryBuffer.append("       (*unique-inference-result-bindings* t) ");
-	    queryBuffer.append("       (*generate-readable-fi-results* nil)) ");
-	    queryBuffer.append("  (without-wff-semantics ");
-	    queryBuffer.append("    (ask-template '" + "?SEL" + " ");
-	    queryBuffer.append("                  '" + query + " ");
-	    queryBuffer.append("                  #$" + mt + " ");
-	    queryBuffer.append("                  0 nil nil nil)))");
-	    System.out.println(queryBuffer.toString());
-	    return(ArrayList)converseList(queryBuffer.toString());
-	} catch ( Exception e ) {
-	    return new ArrayList();
-	}
+        try {
+            StringBuffer queryBuffer = new StringBuffer();
+            queryBuffer.append("(clet ((*cache-inference-results* nil) ");
+            queryBuffer.append("       (*compute-inference-results* nil) ");
+            queryBuffer.append("       (*unique-inference-result-bindings* t) ");
+            queryBuffer.append("       (*generate-readable-fi-results* nil)) ");
+            queryBuffer.append("  (without-wff-semantics ");
+            queryBuffer.append("    (ask-template '" + "?SEL" + " ");
+            queryBuffer.append("                  '" + query + " ");
+            queryBuffer.append("                  #$" + mt + " ");
+            queryBuffer.append("                  0 nil nil nil)))");
+            System.out.println(queryBuffer.toString());
+            return(ArrayList)converseList(queryBuffer.toString());
+        } catch ( Exception e ) {
+            return new ArrayList();
+        }
     }
 
 
 
 
     public static Integer arityFromString(String term) {
-	switch ( term.charAt(0) ) {
-	    case 'V':
-		return new Integer(0);
-	    case 'U':
-		return new Integer(1);
-	    case 'B':
-		return new Integer(2);
-	    case 'T':
-		return new Integer(3);
-	    case 'Q':
-		if ( term.charAt(2) =='a' )
-		    return new Integer(4);
-		else
-		    return new Integer(5);
-	}
-	return null;
+        switch ( term.charAt(0) ) {
+            case 'V':
+                return new Integer(0);
+            case 'U':
+                return new Integer(1);
+            case 'B':
+                return new Integer(2);
+            case 'T':
+                return new Integer(3);
+            case 'Q':
+                if ( term.charAt(2) =='a' )
+                    return new Integer(4);
+                else
+                    return new Integer(5);
+        }
+        return null;
     }
 
     public static String aryFromString(String term) {
-	return term;
+        return term;
     }
 
     public static String aryFromInt(int term) {
 
-	switch ( term ) {
-	    case 0:
-		return "VariableArity" ;
-	    case 1:
-		return "Unary" ;
-	    case 2:
-		return "Binary";
-	    case 3:
-		return "Ternary";
-	    case 4:
-		return "Quaternary";
-	    case 5:
-		return "Quintary" ;
-	}
-	return null;
+        switch ( term ) {
+            case 0:
+                return "VariableArity" ;
+            case 1:
+                return "Unary" ;
+            case 2:
+                return "Binary";
+            case 3:
+                return "Ternary";
+            case 4:
+                return "Quaternary";
+            case 5:
+                return "Quintary" ;
+        }
+        return null;
     }
 
 
     public CycConstant makeCycConstantOrNull(String name) {
-	if ( name==null ) return null;
-	if ( name.length()<2 ) return null;
-	if ( name.startsWith("<") ) return null;
-	if ( name.startsWith("*") ) return null;
-	return makeCycConstant(name);
+        if ( name==null ) return null;
+        if ( name.length()<2 ) return null;
+        if ( name.startsWith("<") ) return null;
+        if ( name.startsWith("*") ) return null;
+        return makeCycConstant(name);
     }
 
     public static CycConstant argIsa = null;
@@ -905,20 +952,51 @@ public class CycMooAccess extends CycAccess {
     public static CycConstant opencycproject = null;
     public static CycConstant functionalRelation = null;
 
+    public static CycConstant cycTrue = null;
+    public static CycConstant cycFalse = null;
+    public static CycConstant cycVoid = null;
+    public static CycConstant cycNull = null;
+    public static CycConstant cycHasArrayMember = null;
+    public static CycConstant cycHasMethod = null;
+    public static CycConstant cycHasDataMethod = null;
+    public static CycConstant cycHasField = null;
+    public static CycConstant cycHasMethodValue = null;
+    public static CycConstant cycHasDataMethodValue = null;
+    public static CycConstant cycHasFieldValue = null;
+
     public static Object cycMooHTMLTool = null;
 
     public final class DataMethod {
-	public String cycname = null;
-	public String dataname = null;
-	public Method method = null;
-	public DataMethod(String acycname, Method amethod) {
-	    cycname = acycname;  
-	    method = amethod;  
-	}
+
+        public String dataname = null;
+        public Method getmethod = null;
+        public Method setmethod = null;
+        public DataMethod(String adataname, Method agetmethod, Method asetmethod) {
+            dataname = adataname;  
+            getmethod = agetmethod;  
+            setmethod = asetmethod;  
+        }
+
+        public Object get(Object object) {
+            return getmethod.invoke(object,null);
+        }
+        public void set(Object object,Object value) {
+            Object[] param = {value};
+            setmethod.invoke(object,param);
+        }
     }
 
 
 }
+
+
+
+
+
+
+
+
+
 
 
 
