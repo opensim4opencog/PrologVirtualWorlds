@@ -1,0 +1,245 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// VWAnim.idl : IDL source for VWAnim.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (VWAnim.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IVWAnimator : The primary interface for the tool that allows creation of animations.
+// Animations are events which can be invoked with specific arguments at specific time periods.
+// They can run indefinitely or stop after a specified period. Animations can be of several
+// different types which differ in their behavior when invoked. Some just invoke a named
+// method on a thing, some call a method on a callback interface passed to the animation
+// creation method and some fire in-world or UI events.
+//
+// IVWAnimation : Interface to the animations themselves.
+//
+// IVWAnimationCallback : Interface to be implemented by an object which will receive the
+// animation invokation for a 'callback' type animation.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+interface IVWAnimator;
+interface IVWAnimation;
+interface IVWAnimationCallback;
+
+cpp_quote("#define VWANIM_E_ANIMATIONNOTEXIST			MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0d81)")
+
+	[
+		object,
+		uuid(FF08F5A2-2E6B-11D0-89AB-00A0C9054129),
+		dual,
+		helpstring("IVWAnimator Interface"),
+		pointer_default(unique)
+	]
+	interface IVWAnimator : IDispatch
+	{
+		import "oaidl.idl";
+		import "vwobject.idl";
+
+		[restricted, helpstring("Initializes the animation control object")] 
+		HRESULT Initialize([in] IWorld *pWorld);
+		[restricted, helpstring("Terminates the animation control object")] 
+		HRESULT Terminate();
+
+		[helpstring("Adds a new event to the animation list")] 
+		HRESULT CreateEvent([in] int msecPeriod, [in] IThing *pThing, [in] BSTR bstrEvent, 
+			[in, optional] VARIANT varArgs, [out, retval] IVWAnimation **ppAnimation);
+		[restricted, helpstring("Adds a new event to the animation list")] 
+		HRESULT CreateEventExt([in] int msecPeriod, [in] IThing *pThing, [in] BSTR bstrEvent, 
+			[in] DISPPARAMS* dispparams, [out, retval] IVWAnimation **ppAnimation);
+
+		[helpstring("Adds a new UI event to the animation list")] 
+		HRESULT CreateUIEvent([in] int msecPeriod, [in] IThing *pThing, [in] BSTR bstrEvent, 
+			[in, optional] VARIANT varArgs, [out, retval] IVWAnimation **ppAnimation);
+
+		[helpstring("Adds a new method to the animation list")] 
+		HRESULT Create([in] int msecPeriod, [in] IThing *pThing, [in] BSTR bstrMethod, 
+			[in, optional] VARIANT varArgs, [out, retval] IVWAnimation **ppAnimation);
+		[restricted, helpstring("Adds a new method to the animation list")] 
+		HRESULT CreateExt([in] int msecPeriod, [in] IThing *pThing, [in] BSTR bstrMethod, 
+			[in] DISPPARAMS* dispparams, [out, retval] IVWAnimation **ppAnimation);
+		[restricted, helpstring("Adds a new closed method to the animation list")] 
+		HRESULT CreateClosedExt([in] int msecPeriod, [in] int iInvokeMax, [in] IThing *pThing, [in] BSTR bstrMethod, 
+			[in] DISPPARAMS* dispparams, [out, retval] IVWAnimation **ppAnimation);
+
+		[helpstring("Adds a new method synchronized with an existing animation")]
+		HRESULT CreateSynchronized([in] IVWAnimation *pAnimation, [in] IThing *pThing, 
+			[in] BSTR bstrMethod, [in, optional] VARIANT varArgs, [out, retval] IVWAnimation **ppAnimation);
+		[restricted, helpstring("Adds a new method synchronized with an existing animation")]
+		HRESULT CreateSynchronizedExt([in] IVWAnimation *pAnimation, [in] IThing *pThing, 
+			[in] BSTR bstrMethod, [in] DISPPARAMS* dispparams, [out, retval] IVWAnimation **ppAnimation);
+
+		[helpstring("Adds a new event synchronized with an existing animation")]
+		HRESULT CreateSynchronizedEvent([in] IVWAnimation *pAnimation, [in] IThing *pThing, 
+			[in] BSTR bstrEvent, [in, optional] VARIANT varArgs, [out, retval] IVWAnimation **ppAnimation);
+		[restricted, helpstring("Adds a new event synchronized with an existing animation")]
+		HRESULT CreateSynchronizedEventExt([in] IVWAnimation *pAnimation, [in] IThing *pThing, 
+			[in] BSTR bstrEvent, [in] DISPPARAMS* dispparams, [out, retval] IVWAnimation **ppAnimation);
+
+		[helpstring("Adds a new UI event synchronized with an existing animation")]
+		HRESULT CreateSynchronizedUIEvent([in] IVWAnimation *pAnimation, [in] IThing *pThing,  
+			[in] BSTR bstrEvent, [in, optional] VARIANT varArgs, [out, retval] IVWAnimation **ppAnimation);
+
+		[restricted, helpstring("Adds a new callback event to the animation list")]
+		HRESULT CreateCallbackExt([in] int msecPeriod, [in] IVWAnimationCallback *pacb, [out, retval] IVWAnimation **ppAnimation);
+
+		[helpstring("Remove an animation from the animation list")]
+		HRESULT Remove([in] IVWAnimation *pAnimation);
+
+		[helpstring("Remove all animations associated with a thing")]
+		HRESULT RemoveThingAnimations([in] IThing *pThing);
+
+		[helpstring ("Deletes all animations")]
+		HRESULT RemoveAll();
+
+		[propget, helpstring ("Returns the current animation")]
+		HRESULT CurrentAnimation([out, retval] IVWAnimation **ppAnimation);
+	};
+
+	[
+		object,
+		uuid(FF08F5A4-2E6B-11D0-89AB-00A0C9054129),
+		dual,
+		helpstring("IVWAnimation Interface"),
+		pointer_default(unique)
+	]
+	interface IVWAnimation : IDispatch
+	{
+		import "oaidl.idl";
+		import "vwobject.idl";
+
+		[restricted, helpstring("Initializes the animation object")] 
+		HRESULT Initialize([in] IWorld *pWorld);
+		[restricted, helpstring("Terminates the animation object")] 
+		HRESULT Terminate();
+
+		[helpstring("Invokes the animation method")]
+		HRESULT Invoke([in] int msecNow);
+
+		[helpstring("Returns a cloned animation object")]
+		HRESULT Clone([out, retval] IVWAnimation **ppAnimation);
+
+		[propget, helpstring("Returns time (msec) when last invoked")]
+		HRESULT TimeOfLastInvocation([out, retval] int *pmsec);
+
+		[propget, helpstring("Returns the time (in msec) when the animation was created")]
+		HRESULT TimeOfCreation([out, retval] int *pmsec);
+
+		[propget, helpstring("Returns the current time during invocation")]
+		HRESULT CurrentTime([out, retval] int *pmsec);
+
+		[propget, helpstring("Returns the number of times that the animation has been invoked")]
+		HRESULT TimesInvoked([out, retval] int *pcInvoked);
+
+		[restricted, propput, helpstring("Animation period")]
+		HRESULT Period([in] int msecPeriod);
+		[propget, helpstring("Animation period")]
+		HRESULT Period([out, retval] int *pmsecPeriod);
+
+		[restricted, propput, helpstring("Maximum invoke count")]
+		HRESULT InvokeMax([in] int iInvokeMax);
+		[propget, helpstring("Maximum invoke count")]
+		HRESULT InvokeMax([out, retval] int *iInvokeMax);
+
+		[restricted, propput, helpstring("Associated IThing")]
+		HRESULT Thing([in] IThing *pthing);
+		[propget, helpstring("Associated IThing")]
+		HRESULT Thing([out, retval] IThing **ppthing);
+
+		[restricted, propput, helpstring("Associated User")]
+		HRESULT User([in] IThing *pthing);
+		[propget, helpstring("Associated User")]
+		HRESULT User([out, retval] IThing **ppthing);
+
+		[restricted, propput, helpstring("Method to call")]
+		HRESULT Method([in] BSTR bstrMethod);
+		[propget, helpstring("Method to call")]
+		HRESULT Method([out, retval] BSTR *pbstrMethod);
+
+		[restricted, propput, helpstring("Event to fire")]
+		HRESULT Event([in] BSTR bstrEvent);
+		[propget, helpstring("Event to fire")]
+		HRESULT Event([out, retval] BSTR *pbstrEvent);
+
+		[restricted, propput, helpstring("UI Event to fire")]
+		HRESULT UIEvent([in] BSTR bstrEvent);
+		[propget, helpstring("UI Event to fire")]
+		HRESULT UIEvent([out, retval] BSTR *pbstrEvent);
+
+		[restricted, propput, helpstring("Callback function to call")]
+		HRESULT Callback([in] IVWAnimationCallback *pacb);
+		[propget, helpstring("Callback function to call")]
+		HRESULT Callback([out, retval] IVWAnimationCallback **ppacb);
+
+		[restricted, propget, helpstring("Arguments passed to animation when invoked.")] 
+		HRESULT ArgumentsExt([out, retval] DISPPARAMS** ppdispparams);
+		[restricted, propput, helpstring("Arguments passed to animation when invoked.")] 
+		HRESULT ArgumentsExt([in] DISPPARAMS* pdispparams);
+
+//		[restricted, propget, helpstring("")] 
+//		HRESULT Arguments([out, retval] VARIANT* pvar);
+		[propput, helpstring("Arguments passed to with the UI event when invoked.")] 
+		HRESULT UIArguments([in] VARIANT var);
+	};
+
+	[
+		object,
+		uuid(FF08F5A6-2E6B-11D0-89AB-00A0C9054129),
+		helpstring("IVWAnimationCallback Interface"),
+		pointer_default(unique)
+	]
+	interface IVWAnimationCallback : IUnknown
+	{
+		import "oaidl.idl";
+
+		[helpstring("Invokes the animation callback function")]
+		HRESULT Invoke(IVWAnimation *pani);
+	}
+
+#ifdef VWANIMLIB
+[
+	uuid(FF08F5A0-2E6B-11D0-89AB-00A0C9054129),
+	version(1.0),
+	helpstring("VWAnim 1.0 Type Library")
+]
+library VWANIMLib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(FF08F5A8-2E6B-11D0-89AB-00A0C9054129),
+		helpstring("VWAnimator Class")
+	]
+	coclass VWAnimator
+	{
+		[default] interface IVWAnimator;
+	};
+
+	[
+		uuid(FF08F5AA-2E6B-11D0-89AB-00A0C9054129),
+		helpstring("VWAnimation Class")
+	]
+	coclass VWAnimation
+	{
+		[default] interface IVWAnimation;
+	};
+
+	[
+		uuid(FF08F5AC-2E6B-11D0-89AB-00A0C9054129),
+		helpstring("VWAnimationCallback Class")
+	]
+	coclass VWAnimationCallback
+	{
+		[default] interface IVWAnimationCallback;
+	};
+
+
+};
+#endif

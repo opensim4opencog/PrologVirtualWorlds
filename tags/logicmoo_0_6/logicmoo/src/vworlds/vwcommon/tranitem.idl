@@ -1,0 +1,79 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// TranItem.idl : IDL source for VW??.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (VW?.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IVWTransactionItem : Used by the Transaction Item object property. Transaction items are
+// created inside a transaction machine. The purpose of a transaction item is to allow the
+// creation of object instances (when directed by the transaction machine) with specified
+// attributes (name, exemplar type etc.).
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+	import "oaidl.idl";
+	import "vwprop.idl";
+
+	[
+		object,
+		local,
+		dual,
+		uuid(5E447409-E532-11d1-8119-00C04FC2A129),
+		helpstring("Transaction Machine Item Interface"),
+		pointer_default(unique)
+	]
+	interface IVWTransactionItem : IObjectProperty
+	{
+	[propget, helpstring("use to get transaction item name")]
+	HRESULT Name([out, retval] BSTR *pbstrName);
+	[propput, helpstring("Use to set transaction item name")]
+	HRESULT Name([in] BSTR bstrName);
+
+	[propget, helpstring("use to get transaction item description")]
+	HRESULT Description([out, retval] BSTR *pbstrDescription);
+	[propput, helpstring("Use to set transaction item description")]
+	HRESULT Description([in] BSTR bstrDescription);
+
+	[propget, helpstring("use to get transaction item graphic")]
+	HRESULT Graphic([out, retval] BSTR *pbstrGraphic);
+	[propput, helpstring("Use to set transaction item graphic")]
+	HRESULT Graphic([in] BSTR bstrGraphic);
+
+	[propget, helpstring("use to get transaction item exemplar type")]
+	HRESULT ExemplarType([out, retval] BSTR *pbstrExemplarType);
+	[propput, helpstring("Use to set transaction item exemplar type")]
+	HRESULT ExemplarType([in] BSTR bstrExemplarType);
+
+	[propget, helpstring("get property map containing additional values to modify ExemplarType, e.g., IsAccessory, true")]
+	HRESULT PropertyValues([out, retval] IPropertyMap  **pPropertyMap);
+	[propput, helpstring("set a property map for a transaction item")]
+	HRESULT PropertyValues([in] IPropertyMap **pPropertyMap);
+	};
+
+#ifdef VWTRANSACTIONITEMLIB
+[
+	uuid(90B06F65-E532-11d1-8119-00C04FC2A129),
+	version(1.0),
+	helpstring("TransactionMachine Item 1.0 Type Library")
+]
+library VWTRANSACTIONITEMLib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(BE47064B-E532-11d1-8119-00C04FC2A129),
+		helpstring("TransactionMachine Item Class")
+	]
+	coclass VWTransactionItem
+	{
+		[default] interface IVWTransactionItem;
+	};
+};
+#endif

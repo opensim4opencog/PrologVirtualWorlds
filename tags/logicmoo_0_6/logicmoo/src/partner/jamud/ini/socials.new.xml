@@ -1,0 +1,24 @@
+<SOCIALS>
+
+<SOCIAL NAME="strut">
+    <ALLOW GENDER="male;" />
+    <ACT_NOTARG>You strut like the kind of man you are.</ACT_NOTARG>
+    <PER_NOTARG>$n struts in a very manly manner.</PER_NOTARG>
+</SOCIAL>
+
+<SOCIAL NAME="strut">
+    <ALLOW GENDER="female;" />
+    <ACT_NOTARG>You strut your hot stuff.</ACT_NOTARG>
+    <PER_NOTARG>$n struts, showing off her 'goods'.</PER_NOTARG>
+</SOCIAL>
+
+<SOCIAL NAME="waggle">
+    <ALLOW RACE="minotaur;" />
+    <ACT_NOTARG>You waggle your eyebrows as only a minotaur can.</ACT_NOTARG>
+    <PER_NOTARG>$n waggles $s eyebrows as only a minotaur can.</PER_NOTARG>
+    <ACTOR>You waggle your $r eyebrows at $N.</ACTOR>
+    <PEERS>$n waggles $s $r eyebrows at $N.</PEERS>
+    <TARGET>$n waggles $s $r eyebrows at you.</TARGET>
+</SOCIAL>
+
+</SOCIALS>

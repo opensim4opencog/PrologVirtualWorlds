@@ -1,0 +1,90 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<LINK REL="stylesheet" TYPE="text/css" HREF="http://msdn.microsoft.com/msdn-online/shared/css/ie4.css" />
+
+<title>SUO-KIF DAML (DARPA)</title>
+<SCRIPT LANGUAGE=vbscript>
+Sub document_oncontextmenu
+	window.event.returnValue=false
+End Sub
+</SCRIPT>
+
+<base target="_self">
+
+</head>
+
+<body>
+
+<p class="section1"><span style="font-size: 10.0pt; font-family: Verdana"><b>Use
+a KIF/CycL like language&nbsp; to represent shared activities among autonomic
+agent.&nbsp; Java, Prolog libraries integrate with a first
+person MOO system to provide debugging and agent programming facilities.</b></span></p>
+<p class="section1"><span style="font-size: 10.0pt; font-family: Verdana">Java Libraries
+are provided that you need to use KIF (Like <a href="http://suo.ieee.org">Standard
+Upperlevel Ontology</a> - <a href="http://logic.stanford.edu/kif/dpans.html">Knowledge
+Interchange Format</a>) and soon enough <a href="http://www.daml.org">DAML</a> (<a href="http://www.darpa.mil">DARPA</a>
+Agent Markup Language) content into an episodic simulation simulation of a
+virtual world (maybe a </span><span style="font-size:10.0pt;font-family:Verdana">first person
+simulation).&nbsp; The programming languages used are Prolog, Java.&nbsp; Combining powerful tools:
+JaMUD and various Edinburgh style of Prologs (mainly so far SWI-Prolog&nbsp; SWI-Prolog is a stable, free,
+professional distribution of the prolog virtual machine and compiler.&nbsp;&nbsp;)<br>
+I am working on and trying other prologs like B-Prolog, BinProlog and
+CIAO-Prolog&nbsp;<br>
+<br>
+The goal is to represent episodic models of memory, diagrams for belief
+engines.&nbsp;<br>
+<br>
+<span style="color:forestgreen">A simple&nbsp;example of agent orientated
+programming inside a Moo:</span></span></p>
+<ul>
+  <li>
+    <p class="section1"><span style="font-size:10.0pt;font-family:Verdana">
+A Rain Agent that enters a room object and emotes that it is raining.&nbsp;
+It then begins adding a 'wetness&nbsp;counter'&nbsp;property to each object in
+the room.&nbsp; The longer&nbsp;it stays in the room the more&nbsp;it
+increments. (This does not have any functional impact on the current workings of
+the objects in the room)</span><o:p>
+</o:p>
+  </li>
+  <li>
+    <p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana">Later
+you may want to&nbsp;write another&nbsp;agent who enters the room&nbsp;called
+'Sun Agent' who's duty is to look for objects that have the property 'wetness'
+to decrement.</span><o:p>
+    &nbsp;</li>
+  <li>
+    <p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana">A&nbsp;third
+agent called 'Common Cold' can go thru and look for both a 'health property' and
+a 'wetness property' and then decide to alter the 'smile method' from emoting
+'beaming smile' to 'tries to smile from behind a stuffed up nose'.</span><o:p>
+    &nbsp;</li>
+</ul>
+<p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana;color:green">Why
+is this important?</span><o:p>
+</o:p>
+</p>
+<p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana">As
+since all of these actions are moving thru representation (it can be depicted in
+triples or graphically)&nbsp;an agent may analyze the structure and build a 'story script'. The properties of such a script
+are in an ontological in nature and are best and are understood in a propositional
+language the represents an instantiated
+scene.&nbsp; Since
+information about the methods and properties are public at the time the system
+may at&nbsp;later replay the scenario re placing objects in original scene in a non-deterministic way.&nbsp;</span><o:p></o:p>
+</p>
+<p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana"> As we discover new
+facts incrementally we learn the situation was not
+correctly represented.&nbsp; Since the situation is persistable we can re-instantiate
+the&nbsp;episode and put better-educated agents to the task of understanding.&nbsp; I hope will further our technology&nbsp;and
+searchable of
+'scenario' and will allow better&nbsp;rule styles to be designed.</span><o:p>
+</o:p>
+</p>
+
+</body>
+
+</html>

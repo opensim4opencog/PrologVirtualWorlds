@@ -1,0 +1,129 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// Vector.idl : IDL source for Vector.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (Vector.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IVector : Interface for the Vector object property. Allows all common vector operations
+// to be performed on the property.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+	import "oaidl.idl";
+	import "vwprop.idl";
+
+cpp_quote("EXTERN_C const IID LIBID_VECTORLib;")
+
+	[
+		object,
+		uuid(27EB8909-1842-11D0-89A9-00A0C9054129),
+		dual,
+		local,
+		helpstring("IVector Interface"),
+		pointer_default(unique)
+	]
+	interface IVector : IObjectProperty
+	{
+const DISPID DISPID_VECTOR_X = 101;
+const DISPID DISPID_VECTOR_Y = 102;
+const DISPID DISPID_VECTOR_Z = 103;
+const DISPID DISPID_VECTOR_SET = 104;
+const DISPID DISPID_VECTOR_GET = 105;
+const DISPID DISPID_VECTOR_ADD = 106;
+const DISPID DISPID_VECTOR_SUBTRACT = 107;
+const DISPID DISPID_VECTOR_NORM = 108;
+const DISPID DISPID_VECTOR_SCALE = 109;
+const DISPID DISPID_VECTOR_LENGTH = 110;
+const DISPID DISPID_VECTOR_ROTATION = 111;
+const DISPID DISPID_VECTOR_ROTATE = 112;
+const DISPID DISPID_VECTOR_ROTATEABOUTAXIS = 113;
+const DISPID DISPID_VECTOR_GETEULERANGLES = 114;
+
+		[propget, helpstring("Put/get x component of vector."), id(DISPID_VECTOR_X)] 
+		HRESULT x([out, retval] float* pfx);
+		[propput, helpstring("Put/get x component of vector."), id(DISPID_VECTOR_X)] 
+		HRESULT x([in] float fx);
+
+		[propget, helpstring("Put/get y component of vector."), id(DISPID_VECTOR_Y)] 
+		HRESULT y([out, retval] float* pfy);
+		[propput, helpstring("Put/get y component of vector."), id(DISPID_VECTOR_Y)] 
+		HRESULT y([in] float fy);
+
+		[propget, helpstring("Put/get z component of vector."), id(DISPID_VECTOR_Z)] 
+		HRESULT z([out, retval] float* pfz);
+		[propput, helpstring("Put/get z component of vector."), id(DISPID_VECTOR_Z)] 
+		HRESULT z([in] float fz);
+
+		[helpstring("Set x,y,z of vector."), id(DISPID_VECTOR_SET)] 
+		HRESULT set([in] float fx, [in] float fy, [in] float fz);
+
+		[restricted, helpstring("Get x,y,z of vector."), id(DISPID_VECTOR_GET)] 
+		HRESULT get([out] float *pfx, [out] float *pfy, [out] float *pfz);
+
+		[helpstring("Adds a vector to the current vector and puts result in another vector"), id(DISPID_VECTOR_ADD)]
+		HRESULT Add([in] IVector *pv, [in] IVector *pvres);
+		[helpstring("Subtracts a vector from the current vector and puts result in another vector"), id(DISPID_VECTOR_SUBTRACT)]
+		HRESULT Subtract([in] IVector *pv, [in] IVector *pvres);
+		[helpstring("Normalizes a vector and puts result in another vector"), id(DISPID_VECTOR_NORM)]
+		HRESULT Normalize([in] IVector *pvres);
+		[helpstring("Scales a vector and puts result in another vector"), id(DISPID_VECTOR_SCALE)]
+		HRESULT Scale([in] float scale, [in] IVector *pvres);
+		[helpstring("Rotates a vector about the y axis"), id(DISPID_VECTOR_ROTATE)]
+		HRESULT Rotate([in] float fTheta, [in] IVector *pvres);
+
+		[helpstring("Returns the length of a vector"), id(DISPID_VECTOR_LENGTH)]
+		HRESULT Length([out, retval] float *pfl);
+	
+		[propget, helpstring("Returns the rotation of a vector about the y axis relative to the vector 1, 0, 0"), id(DISPID_VECTOR_ROTATION)]
+		HRESULT Rotation([out, retval] float *pfTheta);
+
+
+		[helpstring("Rotates the vector about the given axis by supplied radian angle."), id(DISPID_VECTOR_ROTATEABOUTAXIS)]
+		HRESULT RotateAboutAxis([in] float fTheta, [in] float fAxisX, [in] float fAxisY, [in] float fAxisZ);
+		[hidden, helpstring("Returns the radian rotation of vector about each axis relative to the vector 1,0,0"), id(DISPID_VECTOR_GETEULERANGLES)]
+		HRESULT GetEulerAngles([out] VARIANT* fAngleX, [out] VARIANT* fAngleY, [out] VARIANT* fAngleZ);
+	};
+
+	typedef 
+	[
+		uuid(590D9872-A417-11CF-9BF0-0080C7A56A8A),
+		helpstring("")
+	]
+	enum VectorHint
+	{
+		[helpstring("")] veX = 0,	
+		[helpstring("")] veY = 1,	
+		[helpstring("")] veZ = 2,	
+		[helpstring("")] veSet = 3,	
+	} VectorHint;
+
+#ifdef VECTORLIB
+
+[
+	uuid(27EB8907-1842-11D0-89A9-00A0C9054129),
+	version(1.0),
+	helpstring("Vector 1.0 Type Library")
+]
+library VECTORLib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(27EB890D-1842-11D0-89A9-00A0C9054129),
+		helpstring("VectorObject Class")
+	]
+	coclass Vector
+	{
+		[default] interface IVector;
+	};
+
+};
+
+#endif

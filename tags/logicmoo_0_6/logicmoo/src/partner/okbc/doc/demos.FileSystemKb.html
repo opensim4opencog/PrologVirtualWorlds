@@ -1,0 +1,1066 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Sat Aug 21 05:59:39 PDT 1999 -->
+<!-- demos.FileSystemKb | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class demos.FileSystemKb
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-demos.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class demos.FileSystemKb
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----<A HREF="OKBC.Node.html">OKBC.Node</A>
+           |
+           +----<A HREF="OKBC.Kb.html">OKBC.Kb</A>
+                   |
+                   +----<A HREF="OKBC.StandardDefaultsKb.html">OKBC.StandardDefaultsKb</A>
+                           |
+                           +----demos.FileSystemKb
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>FileSystemKb</STRONG>
+     extends OKBC.<A HREF="OKBC.StandardDefaultsKb.html">StandardDefaultsKb</A>
+{
+          // Fields 4
+     protected static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_directory">_directory</A>;
+     protected static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_length">_length</A>;
+     protected static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_write_date">_write_date</A>;
+     protected static <A CLASS=nound HREF="OKBC.Cons.html">Cons</A> <A HREF="#file_system_kb_behavior_alist">file_system_kb_behavior_alist</A>;
+
+          // Constructors 1
+     public <A HREF="#FileSystemKb()">FileSystemKb</A>();
+
+          // Methods 59
+     protected static void <A HREF="#ensure_registered()">ensure_registered</A>();
+     protected static <A CLASS=nound HREF="OKBC.Kb.html">Kb</A> <A HREF="#get_kb_type_internal()">get_kb_type_internal</A>();
+     public static void <A HREF="#main(java.lang.String[])">main</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>[]);
+
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#allocate_frame_handle_internal(OKBC.Node, OKBC.ContextName, OKBC.Node)">allocate_frame_handle_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.ContextName.html">ContextName</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     protected void <A HREF="#attach_facet_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.TruthValue)">attach_facet_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#attach_slot_internal(OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.TruthValue)">attach_slot_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#class_p_internal(OKBC.Node, OKBC.TruthValue)">class_p_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#close_kb_internal(OKBC.Node)">close_kb_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     protected <A CLASS=nound HREF="OKBC.Values2.html">Values2</A> <A HREF="#coerce_to_frame_internal(OKBC.Node, OKBC.TruthValue, OKBC.TruthValue)">coerce_to_frame_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     public <A CLASS=nound HREF="OKBC.Connection.html">Connection</A> <A HREF="#connection()">connection</A>();
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#create_class_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.TruthValue)">create_class_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#create_facet_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.TruthValue)">create_facet_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#create_individual_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.TruthValue)">create_individual_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Kb.html">Kb</A> <A HREF="#create_kb_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Connection)">create_kb_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#create_kb_locator_internal(OKBC.Node, OKBC.Connection)">create_kb_locator_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#create_slot_internal(OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.TruthValue)">create_slot_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#decontextualize_internal(OKBC.Node, OKBC.ContextName)">decontextualize_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.ContextName.html">ContextName</A>);
+     protected void <A HREF="#delete_facet_internal(OKBC.Node, OKBC.TruthValue)">delete_facet_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#delete_frame_internal(OKBC.Node, OKBC.TruthValue)">delete_frame_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#delete_slot_internal(OKBC.Node, OKBC.TruthValue)">delete_slot_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#detach_facet_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.TruthValue)">detach_facet_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#detach_slot_internal(OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.TruthValue)">detach_slot_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#expunge_kb_internal(OKBC.Node, OKBC.Connection, OKBC.TruthValue)">expunge_kb_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#expunge_kb_internal(OKBC.Node, OKBC.TruthValue)">expunge_kb_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#facet_p_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.TruthValue)">facet_p_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#facet_p_internal(OKBC.Node, OKBC.TruthValue)">facet_p_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#find_kb_locator_internal(OKBC.Node, OKBC.Connection)">find_kb_locator_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#get_behavior_supported_values_internal(OKBC.Node)">get_behavior_supported_values_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#get_behavior_values_internal(OKBC.Node)">get_behavior_values_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     protected <A CLASS=nound HREF="OKBC.Values3.html">Values3</A> <A HREF="#get_class_instances_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.Node, OKBC.TruthValue)">get_class_instances_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Values3.html">Values3</A> <A HREF="#get_class_subclasses_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.Node, OKBC.TruthValue)">get_class_subclasses_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Values3.html">Values3</A> <A HREF="#get_class_superclasses_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.Node, OKBC.TruthValue)">get_class_superclasses_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Values4.html">Values4</A> <A HREF="#get_facet_values_in_detail_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.Node, OKBC.ValueSelector, OKBC.TruthValue)">get_facet_values_in_detail_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.ValueSelector.html">ValueSelector</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Values2.html">Values2</A> <A HREF="#get_frame_in_kb_internal(OKBC.Node, OKBC.TruthValue, OKBC.TruthValue)">get_frame_in_kb_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#get_frame_name_internal(OKBC.Node, OKBC.TruthValue)">get_frame_name_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#get_frame_pretty_name_internal(OKBC.Node, OKBC.TruthValue)">get_frame_pretty_name_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Values2.html">Values2</A> <A HREF="#get_frame_slots_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.TruthValue)">get_frame_slots_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Values3.html">Values3</A> <A HREF="#get_instance_types_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.Node, OKBC.TruthValue)">get_instance_types_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#get_kb_behaviors_internal(OKBC.Connection)">get_kb_behaviors_internal</A>(<A CLASS=nound HREF="OKBC.Connection.html">Connection</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#get_kb_frames_internal(OKBC.TruthValue)">get_kb_frames_internal</A>(<A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#get_kb_roots_internal(OKBC.Node, OKBC.TruthValue)">get_kb_roots_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Values2.html">Values2</A> <A HREF="#get_slot_facets_internal(OKBC.Node, OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.TruthValue)">get_slot_facets_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Values4.html">Values4</A> <A HREF="#get_slot_values_in_detail_internal(OKBC.Node, OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.Node, OKBC.ValueSelector, OKBC.TruthValue)">get_slot_values_in_detail_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.InferenceLevel.html">InferenceLevel</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.ValueSelector.html">ValueSelector</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#open_kb_internal(OKBC.Node, OKBC.Connection, OKBC.TruthValue)">open_kb_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Connection.html">Connection</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#openable_kbs_internal(OKBC.Connection, OKBC.Node)">openable_kbs_internal</A>(<A CLASS=nound HREF="OKBC.Connection.html">Connection</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#primitive_p_internal(OKBC.Node, OKBC.TruthValue)">primitive_p_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#put_behavior_values_internal(OKBC.Node, OKBC.Node)">put_behavior_values_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     protected void <A HREF="#put_class_superclasses_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">put_class_superclasses_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#put_facet_values_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.ValueSelector, OKBC.TruthValue)">put_facet_values_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.ValueSelector.html">ValueSelector</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#put_frame_name_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">put_frame_name_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#put_frame_pretty_name_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">put_frame_pretty_name_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#put_instance_types_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">put_instance_types_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#put_slot_values_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.ValueSelector, OKBC.TruthValue)">put_slot_values_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.SlotType.html">SlotType</A>, <A CLASS=nound HREF="OKBC.ValueSelector.html">ValueSelector</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#rename_facet_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">rename_facet_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#rename_slot_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">rename_slot_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     protected void <A HREF="#save_kb_as_internal(OKBC.Node)">save_kb_as_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#save_kb_internal(OKBC.TruthValue)">save_kb_internal</A>(<A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+     public void <A HREF="#set_connection(OKBC.Connection)">set_connection</A>(<A CLASS=nound HREF="OKBC.Connection.html">Connection</A>);
+     protected <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#slot_p_internal(OKBC.Node, OKBC.TruthValue)">slot_p_internal</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.TruthValue.html">TruthValue</A>);
+}
+</PRE>
+<P>
+<P>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Fields</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_directory"><FONT COLOR="#0000FF">&middot;</FONT> _directory</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected static final <A HREF="OKBC.Symbol.html">Symbol</A> _directory
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_write_date"><FONT COLOR="#0000FF">&middot;</FONT> _write_date</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected static final <A HREF="OKBC.Symbol.html">Symbol</A> _write_date
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_length"><FONT COLOR="#0000FF">&middot;</FONT> _length</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected static final <A HREF="OKBC.Symbol.html">Symbol</A> _length
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="file_system_kb_behavior_alist"><FONT COLOR="#0000FF">&middot;</FONT> file_system_kb_behavior_alist</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected static <A HREF="OKBC.Cons.html">Cons</A> file_system_kb_behavior_alist
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<P>
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="FileSystemKb"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="FileSystemKb()">FileSystemKb</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public FileSystemKb() </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="ensure_registered"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="ensure_registered()">ensure_registered</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected static void ensure_registered() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_kb_type_internal"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="get_kb_type_internal()">get_kb_type_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected static <A HREF="OKBC.Kb.html">Kb</A> get_kb_type_internal() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="decontextualize_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="decontextualize_internal(OKBC.Node, OKBC.ContextName)">decontextualize_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> decontextualize_internal(<A HREF="OKBC.Node.html">Node</A> value, 
+                                           <A HREF="OKBC.ContextName.html">ContextName</A> from_context) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#decontextualize_internal(OKBC.Node, OKBC.ContextName)">decontextualize_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="connection"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="connection()">connection</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Connection.html">Connection</A> connection() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#connection()">connection</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="set_connection"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="set_connection(OKBC.Connection)">set_connection</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void set_connection(<A HREF="OKBC.Connection.html">Connection</A> conn) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#set_connection(OKBC.Connection)">set_connection</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_instance_types_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_instance_types_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.Node, OKBC.TruthValue)">get_instance_types_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Values3.html">Values3</A> get_instance_types_internal(<A HREF="OKBC.Node.html">Node</A> instance, 
+                                                 <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> inference_level, 
+                                                 <A HREF="OKBC.Node.html">Node</A> number_of_values, 
+                                                 <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.StandardDefaultsKb.html#get_instance_types_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.Node, OKBC.TruthValue)">get_instance_types_internal</A> in class <A HREF="OKBC.StandardDefaultsKb.html">StandardDefaultsKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="primitive_p_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="primitive_p_internal(OKBC.Node, OKBC.TruthValue)">primitive_p_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> primitive_p_internal(<A HREF="OKBC.Node.html">Node</A> the_class, 
+                                       <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#primitive_p_internal(OKBC.Node, OKBC.TruthValue)">primitive_p_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_class_instances_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_class_instances_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.Node, OKBC.TruthValue)">get_class_instances_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Values3.html">Values3</A> get_class_instances_internal(<A HREF="OKBC.Node.html">Node</A> the_class, 
+                                                  <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> inference_level, 
+                                                  <A HREF="OKBC.Node.html">Node</A> number_of_values, 
+                                                  <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.StandardDefaultsKb.html#get_class_instances_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.Node, OKBC.TruthValue)">get_class_instances_internal</A> in class <A HREF="OKBC.StandardDefaultsKb.html">StandardDefaultsKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_class_superclasses_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_class_superclasses_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.Node, OKBC.TruthValue)">get_class_superclasses_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Values3.html">Values3</A> get_class_superclasses_internal(<A HREF="OKBC.Node.html">Node</A> the_class, 
+                                                     <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> inference_level, 
+                                                     <A HREF="OKBC.Node.html">Node</A> number_of_values, 
+                                                     <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.StandardDefaultsKb.html#get_class_superclasses_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.Node, OKBC.TruthValue)">get_class_superclasses_internal</A> in class <A HREF="OKBC.StandardDefaultsKb.html">StandardDefaultsKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_class_subclasses_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_class_subclasses_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.Node, OKBC.TruthValue)">get_class_subclasses_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Values3.html">Values3</A> get_class_subclasses_internal(<A HREF="OKBC.Node.html">Node</A> the_class, 
+                                                   <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> inference_level, 
+                                                   <A HREF="OKBC.Node.html">Node</A> number_of_values, 
+                                                   <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.StandardDefaultsKb.html#get_class_subclasses_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.Node, OKBC.TruthValue)">get_class_subclasses_internal</A> in class <A HREF="OKBC.StandardDefaultsKb.html">StandardDefaultsKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="class_p_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="class_p_internal(OKBC.Node, OKBC.TruthValue)">class_p_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> class_p_internal(<A HREF="OKBC.Node.html">Node</A> thing, 
+                                   <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#class_p_internal(OKBC.Node, OKBC.TruthValue)">class_p_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="facet_p_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="facet_p_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.TruthValue)">facet_p_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> facet_p_internal(<A HREF="OKBC.Node.html">Node</A> thing, 
+                                   <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> inference_level, 
+                                   <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_frame_pretty_name_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_frame_pretty_name_internal(OKBC.Node, OKBC.TruthValue)">get_frame_pretty_name_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> get_frame_pretty_name_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                                 <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#get_frame_pretty_name_internal(OKBC.Node, OKBC.TruthValue)">get_frame_pretty_name_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_frame_name_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_frame_name_internal(OKBC.Node, OKBC.TruthValue)">get_frame_name_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> get_frame_name_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                          <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#get_frame_name_internal(OKBC.Node, OKBC.TruthValue)">get_frame_name_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="coerce_to_frame_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="coerce_to_frame_internal(OKBC.Node, OKBC.TruthValue, OKBC.TruthValue)">coerce_to_frame_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Values2.html">Values2</A> coerce_to_frame_internal(<A HREF="OKBC.Node.html">Node</A> thing, 
+                                              <A HREF="OKBC.TruthValue.html">TruthValue</A> error_p, 
+                                              <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#coerce_to_frame_internal(OKBC.Node, OKBC.TruthValue, OKBC.TruthValue)">coerce_to_frame_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_frame_in_kb_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_frame_in_kb_internal(OKBC.Node, OKBC.TruthValue, OKBC.TruthValue)">get_frame_in_kb_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Values2.html">Values2</A> get_frame_in_kb_internal(<A HREF="OKBC.Node.html">Node</A> thing, 
+                                              <A HREF="OKBC.TruthValue.html">TruthValue</A> error_p, 
+                                              <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#get_frame_in_kb_internal(OKBC.Node, OKBC.TruthValue, OKBC.TruthValue)">get_frame_in_kb_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_behavior_values_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_behavior_values_internal(OKBC.Node)">get_behavior_values_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> get_behavior_values_internal(<A HREF="OKBC.Node.html">Node</A> behavior) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#get_behavior_values_internal(OKBC.Node)">get_behavior_values_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_kb_behaviors_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_kb_behaviors_internal(OKBC.Connection)">get_kb_behaviors_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> get_kb_behaviors_internal(<A HREF="OKBC.Connection.html">Connection</A> connection) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#get_kb_behaviors_internal(OKBC.Connection)">get_kb_behaviors_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_behavior_supported_values_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_behavior_supported_values_internal(OKBC.Node)">get_behavior_supported_values_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> get_behavior_supported_values_internal(<A HREF="OKBC.Node.html">Node</A> behavior) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#get_behavior_supported_values_internal(OKBC.Node)">get_behavior_supported_values_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="put_behavior_values_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="put_behavior_values_internal(OKBC.Node, OKBC.Node)">put_behavior_values_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void put_behavior_values_internal(<A HREF="OKBC.Node.html">Node</A> behavior, 
+                                               <A HREF="OKBC.Node.html">Node</A> values) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#put_behavior_values_internal(OKBC.Node, OKBC.Node)">put_behavior_values_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_kb_frames_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_kb_frames_internal(OKBC.TruthValue)">get_kb_frames_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> get_kb_frames_internal(<A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#get_kb_frames_internal(OKBC.TruthValue)">get_kb_frames_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_kb_roots_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_kb_roots_internal(OKBC.Node, OKBC.TruthValue)">get_kb_roots_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> get_kb_roots_internal(<A HREF="OKBC.Node.html">Node</A> selector, 
+                                        <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#get_kb_roots_internal(OKBC.Node, OKBC.TruthValue)">get_kb_roots_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_frame_slots_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_frame_slots_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.TruthValue)">get_frame_slots_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Values2.html">Values2</A> get_frame_slots_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                              <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> inference_level, 
+                                              <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                              <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.StandardDefaultsKb.html#get_frame_slots_internal(OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.TruthValue)">get_frame_slots_internal</A> in class <A HREF="OKBC.StandardDefaultsKb.html">StandardDefaultsKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="slot_p_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="slot_p_internal(OKBC.Node, OKBC.TruthValue)">slot_p_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> slot_p_internal(<A HREF="OKBC.Node.html">Node</A> thing, 
+                                  <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#slot_p_internal(OKBC.Node, OKBC.TruthValue)">slot_p_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_slot_values_in_detail_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_slot_values_in_detail_internal(OKBC.Node, OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.Node, OKBC.ValueSelector, OKBC.TruthValue)">get_slot_values_in_detail_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Values4.html">Values4</A> get_slot_values_in_detail_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                                        <A HREF="OKBC.Node.html">Node</A> slot, 
+                                                        <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> inference_level, 
+                                                        <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                                        <A HREF="OKBC.Node.html">Node</A> number_of_values, 
+                                                        <A HREF="OKBC.ValueSelector.html">ValueSelector</A> value_selector, 
+                                                        <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.StandardDefaultsKb.html#get_slot_values_in_detail_internal(OKBC.Node, OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.Node, OKBC.ValueSelector, OKBC.TruthValue)">get_slot_values_in_detail_internal</A> in class <A HREF="OKBC.StandardDefaultsKb.html">StandardDefaultsKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="facet_p_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="facet_p_internal(OKBC.Node, OKBC.TruthValue)">facet_p_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> facet_p_internal(<A HREF="OKBC.Node.html">Node</A> thing, 
+                                   <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#facet_p_internal(OKBC.Node, OKBC.TruthValue)">facet_p_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_slot_facets_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_slot_facets_internal(OKBC.Node, OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.TruthValue)">get_slot_facets_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Values2.html">Values2</A> get_slot_facets_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                              <A HREF="OKBC.Node.html">Node</A> slot, 
+                                              <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> inference_level, 
+                                              <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                              <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.StandardDefaultsKb.html#get_slot_facets_internal(OKBC.Node, OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.TruthValue)">get_slot_facets_internal</A> in class <A HREF="OKBC.StandardDefaultsKb.html">StandardDefaultsKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="get_facet_values_in_detail_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="get_facet_values_in_detail_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.Node, OKBC.ValueSelector, OKBC.TruthValue)">get_facet_values_in_detail_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Values4.html">Values4</A> get_facet_values_in_detail_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                                         <A HREF="OKBC.Node.html">Node</A> slot, 
+                                                         <A HREF="OKBC.Node.html">Node</A> facet, 
+                                                         <A HREF="OKBC.InferenceLevel.html">InferenceLevel</A> inference_level, 
+                                                         <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                                         <A HREF="OKBC.Node.html">Node</A> number_of_values, 
+                                                         <A HREF="OKBC.ValueSelector.html">ValueSelector</A> value_selector, 
+                                                         <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.StandardDefaultsKb.html#get_facet_values_in_detail_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.InferenceLevel, OKBC.SlotType, OKBC.Node, OKBC.ValueSelector, OKBC.TruthValue)">get_facet_values_in_detail_internal</A> in class <A HREF="OKBC.StandardDefaultsKb.html">StandardDefaultsKb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="create_kb_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="create_kb_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Connection)">create_kb_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Kb.html">Kb</A> create_kb_internal(<A HREF="OKBC.Node.html">Node</A> name, 
+                                   <A HREF="OKBC.Node.html">Node</A> kb_locator, 
+                                   <A HREF="OKBC.Node.html">Node</A> initargs, 
+                                   <A HREF="OKBC.Connection.html">Connection</A> connection) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#create_kb_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Connection)">create_kb_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="create_kb_locator_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="create_kb_locator_internal(OKBC.Node, OKBC.Connection)">create_kb_locator_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> create_kb_locator_internal(<A HREF="OKBC.Node.html">Node</A> thing, 
+                                             <A HREF="OKBC.Connection.html">Connection</A> connection) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#create_kb_locator_internal(OKBC.Node, OKBC.Connection)">create_kb_locator_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="find_kb_locator_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="find_kb_locator_internal(OKBC.Node, OKBC.Connection)">find_kb_locator_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> find_kb_locator_internal(<A HREF="OKBC.Node.html">Node</A> thing, 
+                                           <A HREF="OKBC.Connection.html">Connection</A> connection) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#find_kb_locator_internal(OKBC.Node, OKBC.Connection)">find_kb_locator_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="allocate_frame_handle_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="allocate_frame_handle_internal(OKBC.Node, OKBC.ContextName, OKBC.Node)">allocate_frame_handle_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> allocate_frame_handle_internal(<A HREF="OKBC.Node.html">Node</A> frame_name, 
+                                                 <A HREF="OKBC.ContextName.html">ContextName</A> frame_type, 
+                                                 <A HREF="OKBC.Node.html">Node</A> frame_handle) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#allocate_frame_handle_internal(OKBC.Node, OKBC.ContextName, OKBC.Node)">allocate_frame_handle_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="attach_slot_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="attach_slot_internal(OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.TruthValue)">attach_slot_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void attach_slot_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                       <A HREF="OKBC.Node.html">Node</A> slot, 
+                                       <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                       <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#attach_slot_internal(OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.TruthValue)">attach_slot_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="detach_slot_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="detach_slot_internal(OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.TruthValue)">detach_slot_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void detach_slot_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                       <A HREF="OKBC.Node.html">Node</A> slot, 
+                                       <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                       <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#detach_slot_internal(OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.TruthValue)">detach_slot_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="attach_facet_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="attach_facet_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.TruthValue)">attach_facet_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void attach_facet_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                        <A HREF="OKBC.Node.html">Node</A> slot, 
+                                        <A HREF="OKBC.Node.html">Node</A> facet, 
+                                        <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                        <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#attach_facet_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.TruthValue)">attach_facet_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="detach_facet_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="detach_facet_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.TruthValue)">detach_facet_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void detach_facet_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                        <A HREF="OKBC.Node.html">Node</A> slot, 
+                                        <A HREF="OKBC.Node.html">Node</A> facet, 
+                                        <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                        <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#detach_facet_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.TruthValue)">detach_facet_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="put_slot_values_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="put_slot_values_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.ValueSelector, OKBC.TruthValue)">put_slot_values_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void put_slot_values_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                           <A HREF="OKBC.Node.html">Node</A> slot, 
+                                           <A HREF="OKBC.Node.html">Node</A> values, 
+                                           <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                           <A HREF="OKBC.ValueSelector.html">ValueSelector</A> value_selector, 
+                                           <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#put_slot_values_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.ValueSelector, OKBC.TruthValue)">put_slot_values_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="put_facet_values_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="put_facet_values_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.ValueSelector, OKBC.TruthValue)">put_facet_values_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void put_facet_values_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                            <A HREF="OKBC.Node.html">Node</A> slot, 
+                                            <A HREF="OKBC.Node.html">Node</A> facet, 
+                                            <A HREF="OKBC.Node.html">Node</A> values, 
+                                            <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                            <A HREF="OKBC.ValueSelector.html">ValueSelector</A> value_selector, 
+                                            <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#put_facet_values_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.ValueSelector, OKBC.TruthValue)">put_facet_values_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="put_class_superclasses_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="put_class_superclasses_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">put_class_superclasses_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void put_class_superclasses_internal(<A HREF="OKBC.Node.html">Node</A> the_class, 
+                                                  <A HREF="OKBC.Node.html">Node</A> new_superclasses, 
+                                                  <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#put_class_superclasses_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">put_class_superclasses_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="put_instance_types_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="put_instance_types_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">put_instance_types_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void put_instance_types_internal(<A HREF="OKBC.Node.html">Node</A> instance, 
+                                              <A HREF="OKBC.Node.html">Node</A> new_types, 
+                                              <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#put_instance_types_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">put_instance_types_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="put_frame_name_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="put_frame_name_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">put_frame_name_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> put_frame_name_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                          <A HREF="OKBC.Node.html">Node</A> new_name, 
+                                          <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#put_frame_name_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">put_frame_name_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="put_frame_pretty_name_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="put_frame_pretty_name_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">put_frame_pretty_name_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void put_frame_pretty_name_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                                 <A HREF="OKBC.Node.html">Node</A> new_name, 
+                                                 <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#put_frame_pretty_name_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">put_frame_pretty_name_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="create_class_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="create_class_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.TruthValue)">create_class_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> create_class_internal(<A HREF="OKBC.Node.html">Node</A> name, 
+                                        <A HREF="OKBC.Node.html">Node</A> direct_types, 
+                                        <A HREF="OKBC.Node.html">Node</A> direct_superclasses, 
+                                        <A HREF="OKBC.Node.html">Node</A> primitive_p, 
+                                        <A HREF="OKBC.Node.html">Node</A> doc, 
+                                        <A HREF="OKBC.Node.html">Node</A> template_slots, 
+                                        <A HREF="OKBC.Node.html">Node</A> template_facets, 
+                                        <A HREF="OKBC.Node.html">Node</A> own_slots, 
+                                        <A HREF="OKBC.Node.html">Node</A> own_facets, 
+                                        <A HREF="OKBC.Node.html">Node</A> handle, 
+                                        <A HREF="OKBC.Node.html">Node</A> pretty_name, 
+                                        <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#create_class_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.TruthValue)">create_class_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="delete_frame_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="delete_frame_internal(OKBC.Node, OKBC.TruthValue)">delete_frame_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void delete_frame_internal(<A HREF="OKBC.Node.html">Node</A> frame, 
+                                        <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#delete_frame_internal(OKBC.Node, OKBC.TruthValue)">delete_frame_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="create_facet_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="create_facet_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.TruthValue)">create_facet_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> create_facet_internal(<A HREF="OKBC.Node.html">Node</A> name, 
+                                        <A HREF="OKBC.Node.html">Node</A> frame, 
+                                        <A HREF="OKBC.Node.html">Node</A> slot, 
+                                        <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                        <A HREF="OKBC.Node.html">Node</A> direct_types, 
+                                        <A HREF="OKBC.Node.html">Node</A> doc, 
+                                        <A HREF="OKBC.Node.html">Node</A> own_slots, 
+                                        <A HREF="OKBC.Node.html">Node</A> own_facets, 
+                                        <A HREF="OKBC.Node.html">Node</A> handle, 
+                                        <A HREF="OKBC.Node.html">Node</A> pretty_name, 
+                                        <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#create_facet_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.TruthValue)">create_facet_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="delete_facet_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="delete_facet_internal(OKBC.Node, OKBC.TruthValue)">delete_facet_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void delete_facet_internal(<A HREF="OKBC.Node.html">Node</A> slot, 
+                                        <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#delete_facet_internal(OKBC.Node, OKBC.TruthValue)">delete_facet_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="create_slot_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="create_slot_internal(OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.TruthValue)">create_slot_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> create_slot_internal(<A HREF="OKBC.Node.html">Node</A> name, 
+                                       <A HREF="OKBC.Node.html">Node</A> frame, 
+                                       <A HREF="OKBC.SlotType.html">SlotType</A> slot_type, 
+                                       <A HREF="OKBC.Node.html">Node</A> direct_types, 
+                                       <A HREF="OKBC.Node.html">Node</A> doc, 
+                                       <A HREF="OKBC.Node.html">Node</A> own_slots, 
+                                       <A HREF="OKBC.Node.html">Node</A> own_facets, 
+                                       <A HREF="OKBC.Node.html">Node</A> handle, 
+                                       <A HREF="OKBC.Node.html">Node</A> pretty_name, 
+                                       <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#create_slot_internal(OKBC.Node, OKBC.Node, OKBC.SlotType, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.TruthValue)">create_slot_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="delete_slot_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="delete_slot_internal(OKBC.Node, OKBC.TruthValue)">delete_slot_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void delete_slot_internal(<A HREF="OKBC.Node.html">Node</A> slot, 
+                                       <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#delete_slot_internal(OKBC.Node, OKBC.TruthValue)">delete_slot_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="create_individual_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="create_individual_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.TruthValue)">create_individual_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> create_individual_internal(<A HREF="OKBC.Node.html">Node</A> name, 
+                                             <A HREF="OKBC.Node.html">Node</A> direct_types, 
+                                             <A HREF="OKBC.Node.html">Node</A> doc, 
+                                             <A HREF="OKBC.Node.html">Node</A> own_slots, 
+                                             <A HREF="OKBC.Node.html">Node</A> own_facets, 
+                                             <A HREF="OKBC.Node.html">Node</A> handle, 
+                                             <A HREF="OKBC.Node.html">Node</A> pretty_name, 
+                                             <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#create_individual_internal(OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.Node, OKBC.TruthValue)">create_individual_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="rename_slot_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="rename_slot_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">rename_slot_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> rename_slot_internal(<A HREF="OKBC.Node.html">Node</A> slot, 
+                                       <A HREF="OKBC.Node.html">Node</A> new_name, 
+                                       <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#rename_slot_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">rename_slot_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="rename_facet_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="rename_facet_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">rename_facet_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> rename_facet_internal(<A HREF="OKBC.Node.html">Node</A> facet, 
+                                        <A HREF="OKBC.Node.html">Node</A> new_name, 
+                                        <A HREF="OKBC.TruthValue.html">TruthValue</A> kb_local_only_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#rename_facet_internal(OKBC.Node, OKBC.Node, OKBC.TruthValue)">rename_facet_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="close_kb_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="close_kb_internal(OKBC.Node)">close_kb_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void close_kb_internal(<A HREF="OKBC.Node.html">Node</A> save_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#close_kb_internal(OKBC.Node)">close_kb_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="expunge_kb_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="expunge_kb_internal(OKBC.Node, OKBC.Connection, OKBC.TruthValue)">expunge_kb_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void expunge_kb_internal(<A HREF="OKBC.Node.html">Node</A> kb_locator, 
+                                      <A HREF="OKBC.Connection.html">Connection</A> connection, 
+                                      <A HREF="OKBC.TruthValue.html">TruthValue</A> error_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#expunge_kb_internal(OKBC.Node, OKBC.Connection, OKBC.TruthValue)">expunge_kb_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="save_kb_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="save_kb_internal(OKBC.TruthValue)">save_kb_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> save_kb_internal(<A HREF="OKBC.TruthValue.html">TruthValue</A> error_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#save_kb_internal(OKBC.TruthValue)">save_kb_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="save_kb_as_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="save_kb_as_internal(OKBC.Node)">save_kb_as_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void save_kb_as_internal(<A HREF="OKBC.Node.html">Node</A> new_name_or_locator) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#save_kb_as_internal(OKBC.Node)">save_kb_as_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="open_kb_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="open_kb_internal(OKBC.Node, OKBC.Connection, OKBC.TruthValue)">open_kb_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> open_kb_internal(<A HREF="OKBC.Node.html">Node</A> kb_locator, 
+                                   <A HREF="OKBC.Connection.html">Connection</A> connection, 
+                                   <A HREF="OKBC.TruthValue.html">TruthValue</A> error_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#open_kb_internal(OKBC.Node, OKBC.Connection, OKBC.TruthValue)">open_kb_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="openable_kbs_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="openable_kbs_internal(OKBC.Connection, OKBC.Node)">openable_kbs_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected <A HREF="OKBC.Node.html">Node</A> openable_kbs_internal(<A HREF="OKBC.Connection.html">Connection</A> connection, 
+                                        <A HREF="OKBC.Node.html">Node</A> place) </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.Kb.html#openable_kbs_internal(OKBC.Connection, OKBC.Node)">openable_kbs_internal</A> in class <A HREF="OKBC.Kb.html">Kb</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="expunge_kb_internal"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="expunge_kb_internal(OKBC.Node, OKBC.TruthValue)">expunge_kb_internal</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   protected void expunge_kb_internal(<A HREF="OKBC.Node.html">Node</A> kb_locator, 
+                                      <A HREF="OKBC.TruthValue.html">TruthValue</A> error_p) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="main"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="main(java.lang.String[])">main</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static void main(<A HREF="java.lang.String.html">String</A>[] argv) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-demos.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

@@ -1,0 +1,263 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<LINK REL="stylesheet" TYPE="text/css" HREF="http://msdn.microsoft.com/msdn-online/shared/css/ie4.css" />
+
+<title>SUO-KIF DAML (DARPA)</title>
+<SCRIPT LANGUAGE=vbscript>
+Sub document_oncontextmenu
+	window.event.returnValue=false
+End Sub
+</SCRIPT>
+
+<base target="_self">
+
+</head>
+
+<body>
+
+<p class="section1"><span style="font-size: 10.0pt; font-family: Verdana"><b>Use
+a KIF like language (SUO-IEEE) to represent shared active episodic
+memories.&nbsp; Java, Prolog and Visual Basic libraries integrate with a first
+person VRML/MOO system to provide debugging and agent facilities.</b></span></p>
+<p class="section1"><span style="font-size: 10.0pt; font-family: Verdana">Libraries
+are provided that you need to use SUO-KIF (<a href="http://suo.ieee.org">Standard
+Upperlevel Ontology</a> - <a href="http://logic.stanford.edu/kif/dpans.html">Knowledge
+Interchange Format</a>) and <a href="http://www.daml.org">DAML</a> (<a href="http://www.darpa.mil">DARPA</a>
+Agent Markup Language) content into an episodic simulation simulation of a
+virtual world </span><span style="font-size:10.0pt;font-family:Verdana">first person
+VRML/MOO system.&nbsp; The programming languages used where Prolog, Java, and
+Visual Basic.&nbsp; Combining powerful tools: Microsoft Virtual Worlds
+and two Edinburgh style of Prologs SWI-Prolog/B-Prolog we can represent episodic models of memory, diagrams for belief
+engines, or fun 3D role playing games.&nbsp; SWI-Prolog is a stable, free,
+professional distribution of the prolog virtual machine and compiler.&nbsp;
+Microsoft Virtual Worlds provides a complementary graphical environment: It
+supports rapid prototyping of distributed multi-user applications of 3D virtual
+communities with streaming media and chat.&nbsp; But most importantly it
+supports a persistent, changeable world state that preserves object level
+information. B-Prolog is a recent addition thanks to work being done by Feng-Fa
+Zhou.</span></p>
+<p class="section1"><font color="#008000"><span style="font-size:10.0pt;font-family:Verdana">The
+Virtual Worlds Group</span></font> <span style="font-size:10.0pt;font-family:Verdana"><a href="http://vworlds.research.microsoft.com/"><font color="#000080">http://vworlds.research.microsoft.com</font><span style="color: navy">
+</span></a>is an organization of individuals who are dedicated to helping
+advance the body of research on online multi-user applications. The founding
+members of this group are employees of </span><span style="font-size:10.0pt"><a href="http://research.microsoft.com"><span style="font-family: Verdana"><font color="#000080">Microsoft
+Research</font></span><span style="font-family:Verdana;color:navy"> </span></a></span><span style="font-size:10.0pt;font-family:Verdana">and
+have created a software platform that enables users to build these applications
+and quickly prototype user interfaces. They have released the source code of the
+Virtual Worlds software in conjunction with the binary builds in an effort to
+actively foster research. The platform is very general purpose and, as such, can
+be used to build almost any type of multi-user application. You don't have to
+know C++; you should have a basic knowledge of scripting. Interface and object
+behavior is programmable in languages like VBScript, Jscript, DHTML and now
+available through the Prolog compiler.</span><o:p>
+</o:p>
+<br>
+</p>
+<p class="section1"><span style="font-size:10.0pt;font-family:Verdana;color:green">PrologVirtualWorlds
+Architecture Background</span><o:p>
+</o:p>
+<br>
+<span style="font-size:10.0pt;font-family:Verdana">The Microsoft Virtual Worlds
+Service&nbsp;is&nbsp;an object remote brokering system: It is based on
+many clients and a server&nbsp;sharing references to instances. (COM/ActiveX
+Objects)&nbsp;
+PrologVirtualWorlds takes advantage of this by connecting
+to virtual worlds as an (in)visible Avatar to programmatically alter objects and
+invoke methods.&nbsp; It can&nbsp;create or remove properties, design new
+methods, and manufacture new object types.&nbsp; Other agents may assist in work
+and run from different machines or languages.&nbsp;&nbsp;An agent itself is an
+object and can alter it's own interface members,&nbsp;or of others.&nbsp; The
+server maintains the consistency of the objects and facilitates news that may
+have affected an agent. </span><span style="font-size: 10.0pt; font-family: Verdana">This</span><span style="font-size:10.0pt;font-family:Verdana">
+allows us power beyond&nbsp;conventional object orientated programming.<br>
+<br>
+<span style="color:forestgreen">A simple&nbsp;example of agent orientated
+programming inside a Moo:</span></span></p>
+<ul>
+  <li>
+    <p class="section1"><span style="font-size:10.0pt;font-family:Verdana">
+A Rain Agent that enters a room object and emotes that it is raining.&nbsp;
+It then begins adding a 'wetness&nbsp;counter'&nbsp;property to each object in
+the room.&nbsp; The longer&nbsp;it stays in the room the more&nbsp;it
+increments. (This does not have any functional impact on the current workings of
+the objects in the room)</span><o:p>
+</o:p>
+  </li>
+  <li>
+    <p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana">Later
+you may want to&nbsp;write another&nbsp;agent who enters the room&nbsp;called
+'Sun Agent' who's duty is to look for objects that have the property 'wetness'
+to decrement.</span><o:p>
+    &nbsp;</li>
+  <li>
+    <p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana">A&nbsp;third
+agent called 'Common Cold' can go thru and look for both a 'health property' and
+a 'wetness property' and then decide to alter the 'smile method' from emoting
+'beaming smile' to 'tries to smile from behind a stuffed up nose'.</span><o:p>
+    &nbsp;</li>
+</ul>
+<p class="section1" style="margin:0in;margin-bottom:.0001pt">
+</o:p>
+</p>
+<p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana;color:green">Why
+is this important?</span><o:p>
+</o:p>
+</p>
+<p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana">As
+since all of these actions are moving thru representation terms&nbsp; (it can be
+graphically depicted)&nbsp;another agent may in tandem try to analyze what had
+just happened and build a 'story script' object. The properties of such a script
+are in an action-level-ontology&nbsp;language the represents an instantiated
+scene ('story script' objects have a method called replay).&nbsp; Since
+information about the methods and properties were public at the time the system
+may at&nbsp;later replay the scenario placing different objects in place of the
+originals in a non-deterministic way.&nbsp;</span><o:p>
+</o:p>
+</p>
+<p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana">Sometimes
+we do not have all of the information to heuristically search for a given
+situation.&nbsp; As we discover new facts,&nbsp;the situation we learn was not
+correctly represented. Since the situation is persistable we can re-instantiate
+the&nbsp;episode and put better-educated agents to the task of understanding.&nbsp;
+This one day I hope will further our technology&nbsp;and searchablity of
+'scenario' and will allow better&nbsp;rule styles to be designed.</span><o:p>
+</o:p>
+</p>
+<p class="section1" style="margin:0in;margin-bottom:.0001pt">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana;color:green">Brokering
+Model </span><span style="font-size:10.0pt;font-family:Verdana;color:teal">(sites
+are not places on the&nbsp;internet&nbsp;they are memory spaces that the object
+resides in)</span><span style="font-size:10.0pt;font-family:Verdana"> &nbsp;</span><o:p>
+</o:p>
+</p>
+<table border="1" cellpadding="0" width="100%" bgcolor="floralwhite" style="width:100.0%;mso-cellspacing:1.5pt;background:floralwhite;mso-padding-alt:
+ 0in 0in 0in 0in">
+  <tr>
+    <td width="24%" style="width:24.0%;padding:.75pt .75pt .75pt .75pt">
+      <p class="MsoNormal" align="center" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+  auto;text-align:center"><span style="font-size:10.0pt;font-family:Verdana">Virtual
+      World Server Site</span><span style="font-family:&quot;Arial Unicode MS&quot;"><o:p>
+      </o:p>
+      </span></p>
+    </td>
+    <td width="76%" style="width:76.0%;padding:.75pt .75pt .75pt .75pt">
+      <p class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span style="font-size:10.0pt;font-family:Verdana">It
+      holds the persistable objects and maintains the World Model Database.&nbsp;
+      The server system uses TCP and soon UDP to communicate to clients (Client
+      Site) about changes to the objects they are referencing.&nbsp;&nbsp;</span><span style="font-family:&quot;Arial Unicode MS&quot;"><o:p>
+      </o:p>
+      </span></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="24%" style="width:24.0%;padding:.75pt .75pt .75pt .75pt">
+      <p class="MsoNormal" align="center" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+  auto;text-align:center"><span style="font-size:10.0pt;font-family:Verdana">Virtual
+      World Client Site</span><span style="font-family:&quot;Arial Unicode MS&quot;"><o:p>
+      </o:p>
+      </span></p>
+    </td>
+    <td width="76%" style="width:76.0%;padding:.75pt .75pt .75pt .75pt">
+      <p class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:auto"><span style="font-size:10.0pt;font-family:Verdana">This
+      holds object interfaces shaped like the server objects.&nbsp; So they look
+      and act real to programmed code.&nbsp; When you invoke a method on an
+      object, a signal is sent to the server and it resolves the method to the
+      proper inheritance level.&nbsp; The correct code at the correct site is
+      then executed.&nbsp; If you expected a return object,&nbsp;it gives you a
+      proxy reference to the returned object.</span><span style="font-family:&quot;Arial Unicode MS&quot;"><o:p>
+      </o:p>
+      </span></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="24%" style="width:24.0%;padding:.75pt .75pt .75pt .75pt">
+      <p class="MsoNormal" align="center" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+  auto;text-align:center"><span style="font-size:10.0pt;font-family:Verdana">Prolog
+      Virtual Worlds Client Site</span><span style="font-family:&quot;Arial Unicode MS&quot;"><o:p>
+      </o:p>
+      </span></p>
+    </td>
+    <td width="76%" style="width:76.0%;padding:.75pt .75pt .75pt .75pt">
+      <p align="center" style="margin:0in;margin-bottom:.0001pt;text-align:center"><span style="font-size:10.0pt;font-family:Verdana"><br>
+      This site holds references to the Virtual Worlds Client Site Interface
+      Objects.&nbsp;<br>
+      This allows access in the below domains</span><o:p>
+      </o:p>
+      </p>
+      <table border="1" cellpadding="0" width="100%" style="width:100.0%;mso-cellspacing:
+   1.5pt;mso-padding-alt:0in 0in 0in 0in">
+        <tr>
+          <td width="43%" style="width:43.0%;padding:.75pt .75pt .75pt .75pt">
+            <p class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+    auto"><span style="font-size:10.0pt;font-family:Verdana">Typelibinfo&nbsp;Morphism
+            Engine (TLM)</span><span style="font-family:&quot;Arial Unicode MS&quot;"><o:p>
+            </o:p>
+            </span></p>
+          </td>
+          <td width="57%" style="width:57.0%;padding:.75pt .75pt .75pt .75pt">
+            <p class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+    auto"><span style="font-size:10.0pt;font-family:Verdana"><br>
+            This is the&nbsp;wrapper site that resolves Prolog termed objects to
+            the Virtual World Client Site.&nbsp; It also reshapes the objects
+            based on user's belief settings. It is where the initial overloading&nbsp;of
+            method/properties takes place.&nbsp; Redirecting it to the proper
+            site/interface and&nbsp;properly reacts to prolog events.<br>
+            &nbsp;</span><span style="font-family:&quot;Arial Unicode MS&quot;"><o:p>
+            </o:p>
+            </span></p>
+          </td>
+        </tr>
+        <tr>
+          <td width="43%" style="width:43.0%;padding:.75pt .75pt .75pt .75pt">
+            <p class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+    auto"><span style="font-size:10.0pt;font-family:Verdana">PrologClient Site
+            (PCS)</span><span style="font-family:&quot;Arial Unicode MS&quot;"><o:p>
+            </o:p>
+            </span></p>
+          </td>
+          <td width="57%" style="width:57.0%;padding:.75pt .75pt .75pt .75pt">
+            <p class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+    auto"><span style="font-size:10.0pt;font-family:Verdana"><br>
+            PLWIN.EXE that is using SWIACTX.<br>
+            The programmer places&nbsp;the code here&nbsp;to manipulate agents
+            and objects.&nbsp;</span><span style="font-family:&quot;Arial Unicode MS&quot;"><o:p>
+            </o:p>
+            </span></p>
+          </td>
+        </tr>
+        <tr>
+          <td width="43%" style="width:43.0%;padding:.75pt .75pt .75pt .75pt">
+            <p class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+    auto"><span style="font-size:10.0pt;font-family:Verdana">PrologServer Site
+            (PSS)</span><span style="font-family:&quot;Arial Unicode MS&quot;"><o:p>
+            </o:p>
+            </span></p>
+          </td>
+          <td width="57%" style="width:57.0%;padding:.75pt .75pt .75pt .75pt">
+            <p class="MsoNormal" style="mso-margin-top-alt:auto;mso-margin-bottom-alt:
+    auto"><span style="font-size:10.0pt;font-family:Verdana">The object models
+            are kept track of&nbsp;inside a prolog wrapper ProQuery.dll that
+            uses another instance of&nbsp;SWI Prolog that is dedicated to the
+            (u/w) graph walking of object models and resolving both ways from&nbsp;the
+            Prolog Client terms to the&nbsp;Morphism wrapper objects.&nbsp; This
+            site was optional but really sped up the delivery of information and
+            later can be used to persist your prolog discontiguous global
+            settings. </span><span style="font-family:&quot;Arial Unicode MS&quot;"><o:p>
+            </o:p>
+            </span></p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+</body>
+
+</html>

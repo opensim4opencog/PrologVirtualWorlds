@@ -1,0 +1,277 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// VWRender.idl : IDL source for VWRender.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (VWRender.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IVWRender : Base interface for all interfaces pertaining to rendering. Rendering can be 
+// defined as composing 2D or 3D scenes from a scene graph (frame hierarchy) and displaying
+// those scenes on the screen at a specified location (in a specified window). 
+// A full description of many rendering concepts can be found in the "3D Graphics in 
+// Virtual Worlds" white paper.
+//
+// IVWRenderRoot : Interface for 2D+3D renderer. This interface is designed for a renderer 
+// capable of rendering 3D scenes on 2D backgrounds with 2D overlays in the foreground.
+// Once the scene to be rendered has been specified, the Render and Update methods of this
+// interface will be invoked regularly to render the current scene state onto a back buffer
+// (a block of memory representing a surface) and then copy (bit block transfer or blt) the
+// contents of that back buffer to the screen. The back buffer can be created explicitly
+// by the renderer if requested. If not it will be created by Direct3D and will not be 
+// available to the renderer directly.
+//
+// IVWRender2D : Interface for 2D only renderer.
+//
+// IVWRender3D : Interface for 3D only renderer.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+	import "oaidl.idl";
+	import "vwframe.idl";
+
+	interface IVWRenderRoot;
+
+// REVIEW: we don't want to import the idl because that causes this
+//  IDL to be rebuilt
+//	import "d2d.idl";
+cpp_quote("#ifndef __DDRAW_INCLUDED__")
+	typedef int* LPDIRECTDRAW;
+	typedef int* LPDIRECTDRAWSURFACE;
+	typedef int* LPDIRECTDRAWCLIPPER;
+cpp_quote("#endif")
+
+cpp_quote("#ifndef __d2d_h__")
+	typedef IDispatch* LPDIRECT2DRM;
+	typedef IDispatch* LPDIRECT2DRMFRAME;
+	typedef IDispatch* LPDIRECT2DRMIMAGE;
+cpp_quote("#endif")
+
+// Hacks to allow use of D3D types.
+// cpp_quote("#include <d3drm.h>")
+cpp_quote("#ifndef __D3DRM_H__")
+	typedef int* LPDIRECT3DRM;
+	typedef int* LPDIRECT3DRMFRAME;
+	typedef int* LPDIRECT3DRMVIEWPORT;
+cpp_quote("#endif")
+
+
+cpp_quote("#define fBackClippingPlane 1000")
+cpp_quote("#define fFrontClippingPlane 0.1")
+cpp_quote("#define fDefaultField 0.07")
+
+	// Forward declarations.
+	interface IVWRender3D;
+	interface IVWRender2D;
+
+	[
+		object,
+		local,
+		uuid(60CE4B22-FFF0-11CF-89A9-00A0C9054129),
+		dual,
+		helpstring("IVWRender Interface"),
+		pointer_default(unique)
+	]
+	interface IVWRender : IDispatch
+	{
+		[helpstring("Handle an activate event (window received focus).")]
+		HRESULT HandleActivate([in] WPARAM wParam);
+		[helpstring("Handle a paint event (need to redraw).")]
+		HRESULT HandlePaint([in] HDC hDC);
+		[helpstring("Render the scene to the back buffer.")]
+		HRESULT Render();
+		[helpstring("Return an ordered list of objects found (picked) underneath a specified point on the screen.")]
+		HRESULT HitTest([in] VARIANT varHitParams, [in] VARIANT_BOOL vbReturnAllPicked, [out, retval] VARIANT *pvarHitResult);
+	};
+
+	[
+		object,
+		local,
+		uuid(AA326BA1-0027-11d0-89A9-00A0C9054129),
+		dual,
+		helpstring("IVWRenderRoot Interface"),
+		pointer_default(unique)
+	]
+	interface IVWRenderRoot : IVWRender
+	{
+		[helpstring("Initialize the renderer. Must be invoked before anything else.")]
+		HRESULT Init([in] HWND hWnd, [in] LPDIRECTDRAW pdd, [in] LPDIRECT3DRM pd3drm, [in] LPDIRECT2DRM pd2drm);
+		[propget, helpstring("Set/Get the root scene.")]
+		HRESULT Scene([out, retval] IVWFrame **ppvwfScene);
+		[propput, helpstring("Set/Get the root scene.")]
+		HRESULT Scene([in] IVWFrame *pvwfScene);
+		[helpstring("Set the scene background color")]
+		HRESULT SetBackgroundColor([in] BYTE r, [in] BYTE g, [in] BYTE b);
+		[propget, helpstring("Retrieve the 3D renderer.")]
+		HRESULT VWRender3D([out, retval] IVWRender3D **ppVWRender3D);
+		[propget, helpstring("Retrieve the 2D renderer.")]
+		HRESULT VWRender2D([out, retval] IVWRender2D **ppVWRender2D);
+		[propget, helpstring("Return the camera associated with the root renderer.")]
+		HRESULT Camera([out, retval] IVWFrame **ppvwfCamera);
+		[helpstring("Handle a window size changed event.")]
+		HRESULT HandleSize([in] int cx, [in] int cy);
+		[propget, helpstring("Are we in FastMode?")]
+		HRESULT FastMode([out, retval] VARIANT_BOOL *bFastMode);
+		[propput, helpstring("Reduce resolution to increase rendering performance.")]
+		HRESULT FastMode([in] VARIANT_BOOL bFastMode);
+		[propput, helpstring("Enable FastMode (set via FastMode property).")]
+		HRESULT FastModeEnabled([in] VARIANT_BOOL bEnabled);
+		[propget, helpstring("Enable FastMode (set via FastMode property).")]
+		HRESULT FastModeEnabled([out, retval] VARIANT_BOOL *pbEnabled);
+		[propput, helpstring("Set the color model of the device.")]
+		HRESULT ColorModel([in] int d3drmColorModel);
+		[propput, helpstring("Use HW accelerated device?")]
+		HRESULT UseHWAcceleration([in] VARIANT_BOOL bUseHWAcceleration);
+		[propget, helpstring("Use HW accelerated device?")]
+		HRESULT UseHWAcceleration([out, retval] VARIANT_BOOL *pbUseHWAcceleration);
+		[propput, helpstring("Use a backbuffer for rendering? (scene will be rendered to a renderer created surface before being rendered to the screen).")]
+		HRESULT UseBackBuffer([in] VARIANT_BOOL bUseBackBuffer);
+		[propget, helpstring("Use a backbuffer for rendering? (scene will be rendered to a renderer created surface before being rendered to the screen).")]
+		HRESULT UseBackBuffer([out, retval] VARIANT_BOOL *pbUseBackBuffer);
+		[propput, helpstring("Force a backbuffer for rendering? (if true overrides UseBackBuffer).")]
+		HRESULT ForceBackBuffer([in] VARIANT_BOOL bForceBackBuffer);
+		[propget, helpstring("Force a backbuffer for rendering? (if true overrides UseBackBuffer).")]
+		HRESULT ForceBackBuffer([out, retval] VARIANT_BOOL *pbForceBackBuffer);
+
+		[propget, helpstring("2D overlay enabled?")] 
+		HRESULT OverlayEnabled([out, retval] VARIANT_BOOL* pbEnabled);
+		[propput, helpstring("2D overlay enabled?")] 
+		HRESULT OverlayEnabled([in] VARIANT_BOOL bEnabled);
+
+		[propget, helpstring("Trace FPS stats to the render window.")] 
+		HRESULT FPSecond([out, retval] VARIANT_BOOL* pbEnabled);
+		[propput, helpstring("Trace FPS stats to the render window.")] 
+		HRESULT FPSecond([in] VARIANT_BOOL bEnabled);
+
+		[restricted, hidden, helpstring("Returns the direct draw back buffer")]
+		HRESULT GetBackBuffer([out, retval] LPDIRECTDRAWSURFACE* ppddsBackBuffer);
+
+		[helpstring("BLT from back buffer to screen.")]
+		HRESULT Update();
+
+		[helpstring("Explicitly request a rebuild of the device.")]
+		HRESULT RebuildDevice();
+	};
+
+	[
+		object,
+		local,
+		uuid(4295EBC0-07DE-11d0-89A9-00A0C9054129),
+		dual,
+		helpstring("IVWRender3D Interface"),
+		pointer_default(unique)
+	]
+	interface IVWRender3D : IVWRender
+	{
+		[helpstring("Do the initialization. Must be invoked before anything else.")]
+		HRESULT Init([in] HWND hWnd, [in] LPDIRECTDRAW pdd, [in] LPDIRECT3DRM pd3drm);
+		[propget, helpstring("Get/set the scene.")]
+		HRESULT Scene([out, retval] LPDIRECT3DRMFRAME *ppd3drmf);
+		[propput, helpstring("Get/set the scene.")]
+		HRESULT Scene([in] LPDIRECT3DRMFRAME pd3drmf);
+		[helpstring("Set the scene background color")]
+		HRESULT SetBackgroundColor([in] BYTE r, [in] BYTE g, [in] BYTE b);
+		[helpstring("Handle a window size changed event")]
+		HRESULT HandleSize([in] LPDIRECTDRAW pdd, [in] LPDIRECTDRAWSURFACE pddsBackBuffer, [in] LPDIRECTDRAWCLIPPER pddClipper, [in] int cx, [in] int cy, [in] DWORD dwDeviceType);
+		[propget, helpstring("Retrieve the D3D Retained Mode Object.")]
+		HRESULT Direct3DRM([out, retval] LPDIRECT3DRM *ppd3drm);
+		[propget, helpstring("Retrieve the camera.")]
+		HRESULT Camera([out, retval] LPDIRECT3DRMFRAME *ppd3drm);
+		[helpstring("Reduce resolution to increase rendering performance.")]
+		HRESULT SetFastMode([in] VARIANT_BOOL bFastMode);
+		[helpstring("Clear the back buffer ready for another render.")]
+		HRESULT Clear();
+		[hidden, propget,helpstring("Get a pointer to the D3D Viewport")]
+		HRESULT Viewport([out, retval] LPDIRECT3DRMVIEWPORT *ppd3drmVP);
+		[helpstring("BLT from back buffer to screen.")]
+		HRESULT Update();
+		[restricted, helpstring("Release the 3D device.")]
+		HRESULT ReleaseDevice();
+		[propput, restricted, helpstring("Set the color model of the device.")]
+		HRESULT ColorModel([in] int d3drmColorModel);
+		[propget, helpstring("Get the color model of the device.")]
+		HRESULT ColorModel([out, retval] int *pd3drmColorModel);
+		[restricted, propget, helpstring("Get the width of the device.")]
+		HRESULT DeviceWidth([out, retval] DWORD *pdwDeviceWidth);
+		[restricted, propget, helpstring("Get the height of the device.")]
+		HRESULT DeviceHeight([out, retval] DWORD *pdwDeviceHeight);
+	};
+
+	[
+		object,
+		local,
+		uuid(AC6552C0-07DE-11d0-89A9-00A0C9054129),
+		dual,
+		helpstring("IVWRender3D Interface"),
+		pointer_default(unique)
+	]
+	interface IVWRender2D : IVWRender
+	{
+		[helpstring("Do the initialization. Must be invoked before anything else.")]
+		HRESULT Init([in] HWND hWnd, [in] LPDIRECT2DRM pd2drm);
+		[propget, helpstring("Get/set the scene.")]
+		HRESULT Scene([out, retval] LPDIRECT2DRMFRAME *ppd2drmf);
+		[propput, helpstring("Get/set the scene.")]
+		HRESULT Scene([in] LPDIRECT2DRMFRAME pd2drmf);
+		[helpstring("Set the scene background color")]
+		HRESULT SetBackgroundColor([in] BYTE r, [in] BYTE g, [in] BYTE b);
+		[propget, helpstring("Retrieve the camera.")]
+		HRESULT Camera([out, retval] LPDIRECT2DRMFRAME *ppd2drm);
+		[helpstring("Handle a window size changed event")]
+		HRESULT HandleSize([in] LPDIRECTDRAWSURFACE pddsBackBuffer);
+		[propget, helpstring("Retrieve the D2D Retained Mode Object.")]
+		HRESULT Direct2DRM([out, retval] LPDIRECT2DRM *ppd2drm);
+		[helpstring("Reduce resolution to increase rendering performance.")]
+		HRESULT SetFastMode([in] VARIANT_BOOL bFastMode);
+		[helpstring("Clear the back buffer ready for another render.")]
+		HRESULT Clear();
+		[propput, helpstring("set the backgroundimage for the scene")]
+		HRESULT BackgroundImage([in] LPDIRECT2DRMIMAGE piBackground);
+		[restricted, helpstring("Release the 2D device.")]
+		HRESULT ReleaseDevice();
+	};
+
+#ifdef VWRENDERLIB
+[
+	uuid(60CE4B16-FFF0-11CF-89A9-00A0C9054129),
+	version(1.0),
+	helpstring("VWRender 1.0 Type Library")
+]
+library VWRENDERLib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(7D6A5880-07DE-11d0-89A9-00A0C9054129),
+		helpstring("VWRenderRoot Class")
+	]
+	coclass VWRenderRoot
+	{
+		[default] interface IVWRenderRoot;
+	};
+
+	[
+		uuid(60CE4B26-FFF0-11CF-89A9-00A0C9054129),
+		helpstring("VWRender3D Class")
+	]
+	coclass VWRender3D
+	{
+		[default] interface IVWRender3D;
+	};
+
+	[
+		uuid(60CE4B2B-FFF0-11CF-89A9-00A0C9054129),
+		helpstring("VWRender2D Class")
+	]
+	coclass VWRender2D
+	{
+		[default] interface IVWRender2D;
+	};
+
+};
+#endif

@@ -1,0 +1,391 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- OKBC.Walker | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class OKBC.Walker
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class OKBC.Walker
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----<A HREF="OKBC.AbstractKifWalker.html">OKBC.AbstractKifWalker</A>
+           |
+           +----OKBC.Walker
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>Walker</STRONG>
+     extends OKBC.<A HREF="OKBC.AbstractKifWalker.html">AbstractKifWalker</A>
+{
+          // Fields 16
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_class_list">_class_list</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_define_okbc_frame">_define_okbc_frame</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_direct_superclasses">_direct_superclasses</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_direct_types">_direct_types</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_facet_specs">_facet_specs</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_fspec">_fspec</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_handle">_handle</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_in_package">_in_package</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_let">_let</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_okbc_facet_spec">_okbc_facet_spec</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_okbc_slot_spec">_okbc_slot_spec</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_pretty_name">_pretty_name</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_primitive_p">_primitive_p</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_sentences">_sentences</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_slot_specs">_slot_specs</A>;
+     public static final <A CLASS=nound HREF="OKBC.Symbol.html">Symbol</A> <A HREF="#_type">_type</A>;
+
+          // Constructors 1
+     public <A HREF="#Walker()">Walker</A>();
+
+          // Methods 10
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#walk_expression(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb)">walk_expression</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#walk_expression(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb, OKBC.Node)">walk_expression</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#walk_expression(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb, OKBC.Node, OKBC.Node)">walk_expression</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public static <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#walk_expression(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb, OKBC.Node, OKBC.Node, OKBC.Node)">walk_expression</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+
+     public void <A HREF="#initialize_plist_walker_table()">initialize_plist_walker_table</A>();
+     public void <A HREF="#initialize_walker_table()">initialize_walker_table</A>();
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#walk(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb)">walk</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>);
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#walk(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb, OKBC.Node)">walk</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#walk(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb, OKBC.Node, OKBC.Node)">walk</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+     public <A CLASS=nound HREF="OKBC.Node.html">Node</A> <A HREF="#walk(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb, OKBC.Node, OKBC.Node, OKBC.Node)">walk</A>(<A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A>, <A CLASS=nound HREF="OKBC.Kb.html">Kb</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>, <A CLASS=nound HREF="OKBC.Node.html">Node</A>);
+}
+</PRE>
+<P>
+<P>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Cross Reference</B></FONT></TD> </TR> </TABLE>
+<BR><DL>
+<DT><B>Extended By: </B>
+<DD><A HREF="demos.WalkerTest.html">WalkerTest</A><P>
+</DL><BR>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Fields</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_in_package"><FONT COLOR="#0000FF">&middot;</FONT> _in_package</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _in_package
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_let"><FONT COLOR="#0000FF">&middot;</FONT> _let</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _let
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_define_okbc_frame"><FONT COLOR="#0000FF">&middot;</FONT> _define_okbc_frame</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _define_okbc_frame
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_okbc_slot_spec"><FONT COLOR="#0000FF">&middot;</FONT> _okbc_slot_spec</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _okbc_slot_spec
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_okbc_facet_spec"><FONT COLOR="#0000FF">&middot;</FONT> _okbc_facet_spec</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _okbc_facet_spec
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_slot_specs"><FONT COLOR="#0000FF">&middot;</FONT> _slot_specs</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _slot_specs
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_facet_specs"><FONT COLOR="#0000FF">&middot;</FONT> _facet_specs</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _facet_specs
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_fspec"><FONT COLOR="#0000FF">&middot;</FONT> _fspec</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _fspec
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_sentences"><FONT COLOR="#0000FF">&middot;</FONT> _sentences</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _sentences
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_type"><FONT COLOR="#0000FF">&middot;</FONT> _type</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _type
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_pretty_name"><FONT COLOR="#0000FF">&middot;</FONT> _pretty_name</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _pretty_name
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_handle"><FONT COLOR="#0000FF">&middot;</FONT> _handle</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _handle
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_primitive_p"><FONT COLOR="#0000FF">&middot;</FONT> _primitive_p</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _primitive_p
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_direct_superclasses"><FONT COLOR="#0000FF">&middot;</FONT> _direct_superclasses</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _direct_superclasses
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_direct_types"><FONT COLOR="#0000FF">&middot;</FONT> _direct_types</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _direct_types
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3> <A NAME="_class_list"><FONT COLOR="#0000FF">&middot;</FONT> _class_list</A></H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static final <A HREF="OKBC.Symbol.html">Symbol</A> _class_list
+</PRE>
+<BLOCKQUOTE>
+<P> </BLOCKQUOTE>
+
+<P>
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="Walker"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="Walker()">Walker</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public Walker() </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+Default constructor
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="initialize_walker_table"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="initialize_walker_table()">initialize_walker_table</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void initialize_walker_table() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.AbstractKifWalker.html#initialize_walker_table()">initialize_walker_table</A> in class <A HREF="OKBC.AbstractKifWalker.html">AbstractKifWalker</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="initialize_plist_walker_table"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="initialize_plist_walker_table()">initialize_plist_walker_table</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void initialize_plist_walker_table() </PRE>
+<BLOCKQUOTE>
+<DL>
+<DT><B>Overrides:</B>
+<DD><A HREF="OKBC.AbstractKifWalker.html#initialize_plist_walker_table()">initialize_plist_walker_table</A> in class <A HREF="OKBC.AbstractKifWalker.html">AbstractKifWalker</A>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="walk"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="walk(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb)">walk</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> walk(<A HREF="OKBC.Node.html">Node</A> expression, 
+                    <A HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A> function_to_apply, 
+                    <A HREF="OKBC.Kb.html">Kb</A> kb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="walk"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="walk(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb, OKBC.Node)">walk</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> walk(<A HREF="OKBC.Node.html">Node</A> expression, 
+                    <A HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A> function_to_apply, 
+                    <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                    <A HREF="OKBC.Node.html">Node</A> production_key) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="walk"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="walk(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb, OKBC.Node, OKBC.Node)">walk</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> walk(<A HREF="OKBC.Node.html">Node</A> expression, 
+                    <A HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A> function_to_apply, 
+                    <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                    <A HREF="OKBC.Node.html">Node</A> production_key, 
+                    <A HREF="OKBC.Node.html">Node</A> known_context_type) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="walk"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="walk(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb, OKBC.Node, OKBC.Node, OKBC.Node)">walk</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="OKBC.Node.html">Node</A> walk(<A HREF="OKBC.Node.html">Node</A> expression, 
+                    <A HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A> function_to_apply, 
+                    <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                    <A HREF="OKBC.Node.html">Node</A> production_key, 
+                    <A HREF="OKBC.Node.html">Node</A> known_context_type, 
+                    <A HREF="OKBC.Node.html">Node</A> bound_vars) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="walk_expression"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="walk_expression(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb)">walk_expression</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> walk_expression(<A HREF="OKBC.Node.html">Node</A> expression, 
+                                      <A HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A> function_to_apply, 
+                                      <A HREF="OKBC.Kb.html">Kb</A> kb) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="walk_expression"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="walk_expression(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb, OKBC.Node)">walk_expression</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> walk_expression(<A HREF="OKBC.Node.html">Node</A> expression, 
+                                      <A HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A> function_to_apply, 
+                                      <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                      <A HREF="OKBC.Node.html">Node</A> production_key) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="walk_expression"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="walk_expression(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb, OKBC.Node, OKBC.Node)">walk_expression</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> walk_expression(<A HREF="OKBC.Node.html">Node</A> expression, 
+                                      <A HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A> function_to_apply, 
+                                      <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                      <A HREF="OKBC.Node.html">Node</A> production_key, 
+                                      <A HREF="OKBC.Node.html">Node</A> known_context_type) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="walk_expression"><FONT COLOR="#00DD00">&middot;</FONT></A>
+<A NAME="walk_expression(OKBC.Node, OKBC.AbstractWalkFunction, OKBC.Kb, OKBC.Node, OKBC.Node, OKBC.Node)">walk_expression</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public static <A HREF="OKBC.Node.html">Node</A> walk_expression(<A HREF="OKBC.Node.html">Node</A> expression, 
+                                      <A HREF="OKBC.AbstractWalkFunction.html">AbstractWalkFunction</A> function_to_apply, 
+                                      <A HREF="OKBC.Kb.html">Kb</A> kb, 
+                                      <A HREF="OKBC.Node.html">Node</A> production_key, 
+                                      <A HREF="OKBC.Node.html">Node</A> known_context_type, 
+                                      <A HREF="OKBC.Node.html">Node</A> bound_vars) </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

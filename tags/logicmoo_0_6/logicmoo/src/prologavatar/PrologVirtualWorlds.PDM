@@ -1,0 +1,183 @@
+[Root]
+Most Recent Package=Internet Package 1
+Most Recent Deploy=Web Deployment 1
+
+
+[Package|Internet Package 1|Root]
+SubWizProgID=PDWizard.InetCABPkgSubWiz
+BuildFolder=C:\Msr\output\PrologVW1\Package
+RA Server Support=Yes
+
+[Package|Internet Package 1|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Internet Package 1|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Internet Package 1|Files Found]
+
+[Package|Internet Package 1|Files Released]
+KERNEL.DLL=
+
+[Package|Internet Package 1|Missing Dependency Information]
+C:\Program Files\PowerVB\Tools\TLBEditor.ocx=
+C:\vs7\Retail\Bin\i386\vbcontrols\mswinsck.ocx=
+C:\Msr\output\PrologVW1\vwsystem.tlb=
+C:\WINNT\system32\VBoost6.dll=
+C:\Program Files\PowerVB\Code\TLBTypes.olb=
+C:\Program Files\PowerVB\Code\ROTHookTypes.olb=
+C:\Program Files\PowerVB\Code\OleTypes.olb=
+C:\Program Files\PowerVB\Code\ObjCreate.olb=
+C:\Program Files\PowerVB\Code\Compare.tlb=
+C:\Program Files\PowerVB\Code\ThreadAPI.olb=
+C:\Program Files\PowerVB\Code\VBoostTypes6.olb=
+C:\Program Files\Common Files\Microsoft Shared\MSDesigners98\MDT2SDNB.TLB=
+C:\WINNT\system32\docprop2.dll=
+C:\vs7\Retail\Bin\i386\vbcontrols\msstdfmt.dll=
+C:\Program Files\MSRASI\doc\msbnx\MSBNx.exe=
+C:\Program Files\MSRASI\doc\bin\MSBN3.dll=
+C:\Msr\SWIpl\bin\proquery.dll=
+C:\WINNT\system32\scrobj.dll=
+C:\WINNT\system32\msscript.ocx=
+C:\Program Files\Microsoft Virtual Worlds\vwmm.dll=
+C:\WINNT\system32\TLBINF32.DLL=
+C:\WINNT\system32\riched20.dll=
+
+[Package|Internet Package 1|Out-of-Date Dependency Information]
+C:\WINNT\system32\richtx32.ocx=
+C:\WINNT\system32\mscomctl.ocx=
+C:\WINNT\system32\comdlg32.ocx=
+
+[Package|Internet Package 1|Files Added]
+C:\winnt\System32\AutPrx32.dll=This file is needed for RA server support.
+C:\winnt\System32\AutMgr32.exe=This file is needed for RA server support.
+C:\winnt\System32\RACMgr32.exe=This file is needed for RA server support.
+
+[Package|Internet Package 1|Files Removed]
+c:\program files\common files\microsoft shared\msdesigners98\mdt2sdnb.tlb=
+
+[Package|Internet Package 1|Files In Project]
+C:\Msr\output\PrologVirtualWorlds.exe=Yes
+C:\WINNT\system32\MSVBVM60.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINNT\system32\riched20.dll=Yes
+C:\WINNT\system32\TLBINF32.DLL=Yes
+C:\Program Files\Microsoft Virtual Worlds\vwmm.dll=Yes
+C:\WINNT\system32\msscript.ocx=Yes
+C:\WINNT\system32\scrobj.dll=Yes
+C:\Msr\SWIpl\bin\proquery.dll=Yes
+C:\Program Files\MSRASI\doc\bin\MSBN3.dll=Yes
+C:\Program Files\MSRASI\doc\msbnx\MSBNx.exe=Yes
+C:\vs7\Retail\Bin\i386\vbcontrols\msstdfmt.dll=Yes
+C:\WINNT\system32\docprop2.dll=Yes
+C:\Program Files\Common Files\Microsoft Shared\MSDesigners98\MDT2SDNB.TLB=No
+C:\Program Files\PowerVB\Code\VBoostTypes6.olb=Yes
+C:\Program Files\PowerVB\Code\ThreadAPI.olb=Yes
+C:\Program Files\PowerVB\Code\Compare.tlb=Yes
+C:\Program Files\PowerVB\Code\ObjCreate.olb=Yes
+C:\Program Files\PowerVB\Code\OleTypes.olb=Yes
+C:\Program Files\PowerVB\Code\ROTHookTypes.olb=Yes
+C:\Program Files\PowerVB\Code\TLBTypes.olb=Yes
+C:\WINNT\system32\VBoost6.dll=Yes
+C:\Program Files\Common Files\designer\MSHTMPGR.DLL=Yes
+C:\Msr\output\PrologVW1\vwsystem.tlb=Yes
+C:\WINNT\system32\comdlg32.ocx=Yes
+C:\WINNT\system32\mscomctl.ocx=Yes
+C:\WINNT\system32\richtx32.ocx=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=Yes
+C:\vs7\Retail\Bin\i386\vbcontrols\mswinsck.ocx=Yes
+C:\WINNT\system32\COMCTL32.OCX=Yes
+C:\Program Files\PowerVB\Tools\TLBEditor.ocx=Yes
+C:\WINNT\system32\AUTPRX32.DLL=Yes
+C:\WINNT\system32\AUTMGR32.EXE=Yes
+C:\WINNT\system32\RACMGR32.EXE=Yes
+C:\WINNT\system32\RACREG32.DLL=Yes
+C:\WINNT\system32\ODKOB32.DLL=Yes
+
+[Package|Internet Package 1|Configure Registry Files]
+Applicable=No
+
+[Package|Internet Package 1|Configure Remote Servers]
+Applicable=No
+
+[Package|Internet Package 1|Install Locations]
+
+[Package|Internet Package 1|Configure Shared Files]
+Applicable=
+
+[Package|Internet Package 1|ComponentInfo]
+PrologVirtualWorlds.exe=thiscab
+MSVBVM60.DLL=http://activex.microsoft.com/controls/vb6/VBRun60.cab
+OLEAUT32.DLL=http://activex.microsoft.com/controls/vb6/VBRun60.cab
+OLEPRO32.DLL=http://activex.microsoft.com/controls/vb6/VBRun60.cab
+ASYCFILT.DLL=http://activex.microsoft.com/controls/vb6/VBRun60.cab
+STDOLE2.TLB=http://activex.microsoft.com/controls/vb6/VBRun60.cab
+COMCAT.DLL=http://activex.microsoft.com/controls/vb6/VBRun60.cab
+riched20.dll=thiscab
+TLBINF32.DLL=thiscab
+vwmm.dll=thiscab
+msscript.ocx=thiscab
+scrobj.dll=thiscab
+proquery.dll=thiscab
+MSBN3.dll=thiscab
+MSBNx.exe=thiscab
+msstdfmt.dll=thiscab
+docprop2.dll=thiscab
+VBoostTypes6.olb=thiscab
+ThreadAPI.olb=thiscab
+Compare.tlb=thiscab
+ObjCreate.olb=thiscab
+OleTypes.olb=thiscab
+ROTHookTypes.olb=thiscab
+TLBTypes.olb=thiscab
+VBoost6.dll=thiscab
+MSHTMPGR.DLL=http://activex.microsoft.com/controls/vb6/MSHtmPgR.cab
+vwsystem.tlb=thiscab
+comdlg32.ocx=http://activex.microsoft.com/controls/vb6/ComDlg32.cab
+mscomctl.ocx=http://activex.microsoft.com/controls/vb6/MSComCtl.cab
+richtx32.ocx=http://activex.microsoft.com/controls/vb6/RichTx32.cab
+RICHED32.DLL=thiscab
+mswinsck.ocx=thiscab
+COMCTL32.OCX=http://activex.microsoft.com/controls/vb6/ComCtl32.cab
+TLBEditor.ocx=thiscab
+AUTPRX32.DLL=http://activex.microsoft.com/controls/vb6/MSRACli.cab
+AUTMGR32.EXE=http://activex.microsoft.com/controls/vb6/MSRACli.cab
+RACMGR32.EXE=thiscab
+RACREG32.DLL=thiscab
+ODKOB32.DLL=thiscab
+
+[Package|Internet Package 1|ObjectInfo]
+PrologAvatar=true;true
+AvatarInstance=true;true
+SWIProlog=true;true
+morphism=true;true
+Datum=true;true
+
+[Package|Internet Package 1|Package]
+PackageFolder=C:\Msr\output\PrologVW1\Package
+ProjectFolder=C:\Msr\output\PrologVW1
+ServerSideCab=C:\Msr\output\PrologVW1\Package\PrologVirtualWorlds.CAB
+File1=C:\Msr\output\PrologVW1\Package\PrologVirtualWorlds.CAB
+File2=C:\Msr\output\PrologVW1\Package\PrologVirtualWorlds.HTM
+Handler1=PDWizard.WebPostDplySubWiz
+Handler2=PDWizard.FolderDplySubWiz
+
+[Deploy|Web Deployment 1|Root]
+Package=Internet Package 1
+Handler=PDWizard.WebPostDplySubWiz
+
+[Deploy|Web Deployment 1|Package Files]
+C:\Msr\output\PrologVW1\Package\PrologVirtualWorlds.CAB=Yes
+C:\Msr\output\PrologVW1\Package\PrologVirtualWorlds.HTM=Yes
+
+[Deploy|Web Deployment 1|Other Files and Folders]
+
+[Deploy|Web Deployment 1|WebPost Site]
+URL=ftp://www.aliensystems.com
+Provider={02B5E1D1-8B7C-11D0-AD45-00AA00A219AA}
+Explode=No

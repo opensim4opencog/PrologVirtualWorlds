@@ -1,0 +1,42 @@
+
+:- style_check(-singleton).
+:- style_check(-discontiguous).
+:- style_check(-atom).
+:- style_check(-string).
+%:-set_prolog_flag(double_quotes,string).
+:-index(mooCache(1)).
+:-index(mooCache(1,1)).
+:-index(mooCache(1,1,1)).
+:-index(mooCache(1,1,1,1)).
+:-index(mooCache(1,1,1,1,0)).
+:-index(mooCache(1,0,1,1,1,0)).
+:-index(mooCache(1,1,0,0,1,1,0,0,0)).
+:-dynamic(mooCache/1).
+:-dynamic(mooCache/2).
+:-dynamic(mooCache/3).
+:-dynamic(mooCache/4).
+:-dynamic(mooCache/5).
+:-dynamic(mooCache/6).
+:-dynamic(mooCache/9).
+
+
+:- dynamic mooCache/1.
+
+
+:- dynamic mooCache/2.
+
+
+:- dynamic mooCache/3.
+
+
+:- dynamic mooCache/4.
+
+
+:- dynamic mooCache/5.
+
+
+:- dynamic mooCache/6.
+
+
+:- dynamic mooCache/9.
+

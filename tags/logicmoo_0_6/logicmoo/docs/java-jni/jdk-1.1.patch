@@ -1,0 +1,47 @@
+Patch for JDK 1.1.7A to use with GCC/win32:
+===========================================
+
+GCC doesn't have a __int64 built-in, and this patch basically uses
+"long long" instead.
+
+Here's the trivial patch:
+
+--- jdk-1.1.7A/include/win32/jni_md.h.~1	Mon Oct 26 12:46:28 1998
++++ jdk-1.1.7A/include/win32/jni_md.h	Mon Oct 26 12:46:38 1998
+@@ -26,5 +26,9 @@
+ #define JNICALL __stdcall
+ 
+ typedef long jint;
++#ifdef __GNUC__
++typedef long long jlong;
++#else
+ typedef __int64 jlong;
++#endif
+ typedef signed char jbyte;
+
+To apply the patch:
+  
+  $ cd //c/jdk-1.1.7A
+  $ patch -p1 -s < THIS_PATCH_FILE
+
+Or, to patch by hand:
+  
+  1. Edit the file <jdk_root>/include/win32/jni_md.h, Where <jdk_root> 
+     is the installation root, such c:/jdk1.1.7A.
+  2. Replace the following segment
+
+	typedef long jint;
+	typedef __int64 jlong;
+     
+     with
+
+	typedef long jint;
+	#ifdef __GNUC__
+	typedef long long jlong;
+	#else
+	typedef __int64 jlong;
+	#endif
+	typedef signed char jbyte;
+
+and that's it.
+

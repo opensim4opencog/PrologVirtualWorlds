@@ -1,0 +1,338 @@
+# Microsoft Developer Studio Generated Dependency File, included by mmimage.mak
+
+.\src\blt.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\bmpimage.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\ddhelper.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\defpal.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\gifimage.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\imgcache.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\JPGImage.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	"..\jpeglib\all.h"\
+	"..\jpeglib\jconfig.h"\
+	"..\jpeglib\jerror.h"\
+	"..\jpeglib\jinclude.h"\
+	"..\jpeglib\jmorecfg.h"\
+	"..\jpeglib\jpegint.h"\
+	"..\jpeglib\jpeglib.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\mfib.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\mfimage.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\palmap.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\palmapb.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\palmgr.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\PixInfo.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\ppmimage.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	
+
+.\src\rlesurf.cpp : \
+	"..\D2DUtils\include\D2DUtils.h"\
+	"..\D2DUtils\include\DArray.h"\
+	"..\D2DUtils\include\DSet.h"\
+	"..\D2DUtils\include\ErrMgr.h"\
+	"..\D2DUtils\include\MMUtils.h"\
+	".\include\Blt.h"\
+	".\include\BMPImage.h"\
+	".\include\DDHelper.h"\
+	".\include\GIFImage.h"\
+	".\include\imgcache.h"\
+	".\include\JPGImage.h"\
+	".\include\MFIB.h"\
+	".\include\MFImage.h"\
+	".\include\MMImage.h"\
+	".\include\PalMap.h"\
+	".\include\PalMgr.h"\
+	".\include\PixInfo.h"\
+	".\include\PPMImage.h"\
+	".\include\RLESurf.h"\
+	

@@ -1,0 +1,216 @@
+<!-- Automatically generated with polardoc Version 1.0.7 on Tue Dec 21 20:16:39 PST 1999 -->
+<!-- OKBC.PushableBufferedReader | Do not remove or edit this line! -->
+<STYLE TYPE="text/css"> <!-- A.nound {text-decoration:none; color:black} --> </STYLE>
+<HTML>
+<HEAD>
+<TITLE>
+  Class OKBC.PushableBufferedReader
+</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#0000FF" ALINK="#0000FF">
+<A NAME="_top_"></A>
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<B><FONT FACE="Arial,Helvetica" SIZE=+2>
+     Class OKBC.PushableBufferedReader
+</FONT></B>
+<PRE>
+<A HREF="java.lang.Object.html">java.lang.Object</A>
+   |
+   +----OKBC.PushableBufferedReader
+</PRE>
+<P><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Summary</B></FONT></TD> </TR> </TABLE>
+<A NAME="_Summary_"></A>
+<PRE>
+public class  <STRONG>PushableBufferedReader</STRONG>
+     extends java.lang.<A HREF="java.lang.Object.html">Object</A>
+{
+          // Constructors 2
+     public <A HREF="#PushableBufferedReader(java.io.BufferedReader)">PushableBufferedReader</A>(<A CLASS=nound HREF="java.io.BufferedReader.html">BufferedReader</A>);
+     public <A HREF="#PushableBufferedReader(java.io.Reader)">PushableBufferedReader</A>(<A CLASS=nound HREF="java.io.Reader.html">Reader</A>);
+
+          // Methods 11
+     public void <A HREF="#close()">close</A>() throws <A CLASS=nound HREF="java.io.IOException.html">IOException</A>;
+     public void <A HREF="#mark(int)">mark</A>(int) throws <A CLASS=nound HREF="java.io.IOException.html">IOException</A>;
+     public boolean <A HREF="#markSupported()">markSupported</A>();
+     public void <A HREF="#push(java.lang.String)">push</A>(<A CLASS=nound HREF="java.lang.String.html">String</A>);
+     public int <A HREF="#read()">read</A>() throws <A CLASS=nound HREF="java.io.IOException.html">IOException</A>;
+     public int <A HREF="#read(char[])">read</A>(char[]) throws <A CLASS=nound HREF="java.io.IOException.html">IOException</A>;
+     public int <A HREF="#read(char[], int, int)">read</A>(char[], int, int) throws <A CLASS=nound HREF="java.io.IOException.html">IOException</A>;
+     public <A CLASS=nound HREF="java.lang.String.html">String</A> <A HREF="#readLine()">readLine</A>() throws <A CLASS=nound HREF="java.io.IOException.html">IOException</A>;
+     public boolean <A HREF="#ready()">ready</A>() throws <A CLASS=nound HREF="java.io.IOException.html">IOException</A>;
+     public void <A HREF="#reset()">reset</A>() throws <A CLASS=nound HREF="java.io.IOException.html">IOException</A>;
+     public long <A HREF="#skip(long)">skip</A>(long) throws <A CLASS=nound HREF="java.io.IOException.html">IOException</A>;
+}
+</PRE>
+<P>
+<P>
+<BR><BR>
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Constructors</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="PushableBufferedReader"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="PushableBufferedReader(java.io.BufferedReader)">PushableBufferedReader</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public PushableBufferedReader(<A HREF="java.io.BufferedReader.html">BufferedReader</A> reader) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="PushableBufferedReader"><FONT COLOR="#FFCC00">&middot;</FONT></A>
+<A NAME="PushableBufferedReader(java.io.Reader)">PushableBufferedReader</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public PushableBufferedReader(<A HREF="java.io.Reader.html">Reader</A> reader) </PRE>
+<BLOCKQUOTE>
+</BLOCKQUOTE> <BR>
+
+
+<BR><TABLE BGCOLOR="#00ccff" WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD><FONT FACE="arial,helvetica" SIZE=+1><B>&nbsp;&nbsp;Methods</B></FONT></TD> </TR> </TABLE>
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="readLine"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="readLine()">readLine</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public <A HREF="java.lang.String.html">String</A> readLine()  throws <A HREF="java.io.IOException.html">IOException</A></PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+if there is a line in the push buffer, return it & clear the buffer,
+ otherwise read a line
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="push"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="push(java.lang.String)">push</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void push(<A HREF="java.lang.String.html">String</A> s) </PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+push a previously read line, so that a future readLine will get this
+ pushed line
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="read"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="read()">read</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public int read()  throws <A HREF="java.io.IOException.html">IOException</A></PRE>
+<BLOCKQUOTE>
+<DL>
+<P>
+PASS-THRU METHODS FOR BufferedReader
+<P>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="read"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="read(char[])">read</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public int read(char[] cbuf)  throws <A HREF="java.io.IOException.html">IOException</A></PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="read"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="read(char[], int, int)">read</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public int read(char[] cbuf, 
+                   int off, 
+                   int len)  throws <A HREF="java.io.IOException.html">IOException</A></PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="skip"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="skip(long)">skip</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public long skip(long n)  throws <A HREF="java.io.IOException.html">IOException</A></PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="ready"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="ready()">ready</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean ready()  throws <A HREF="java.io.IOException.html">IOException</A></PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="markSupported"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="markSupported()">markSupported</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public boolean markSupported() </PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="mark"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="mark(int)">mark</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void mark(int readAheadLimit)  throws <A HREF="java.io.IOException.html">IOException</A></PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="reset"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="reset()">reset</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void reset()  throws <A HREF="java.io.IOException.html">IOException</A></PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+<TABLE WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0> <TR> <TD WIDTH=80%>
+<BR><H3><A NAME="close"><FONT COLOR="#FF0000">&middot;</FONT></A>
+<A NAME="close()">close</A> </H3>
+</TD> <TD ALIGN=right WIDTH=20%> <FONT SIZE="-2"><A HREF="#_Summary_">Summary</A> &nbsp;|&nbsp; <A HREF=#_top_>Top</A></FONT> </TD> </TR> </TABLE>
+<PRE>
+   public void close()  throws <A HREF="java.io.IOException.html">IOException</A></PRE>
+<BLOCKQUOTE>
+<DL>
+</DL>
+</BLOCKQUOTE> <BR>
+
+
+<HR SIZE=1 ALIGN=left WIDTH="98%">
+<PRE>
+<A HREF="Packages.html">All Packages</A>  <A HREF="Package-OKBC.html">This Package</A>  <A HREF="Tree.html">Class Hierarchy</A>  <A HREF="Search.html">Class Search</A>  <A HREF="AllNames.html">Index</A>
+</PRE>
+<FONT FACE="Arial,Helvetica" SIZE=-2>
+Freshly brewed Java API Documentation automatically generated with <A HREF="http://www.ualberta.ca/~tgee/polardoc">polardoc</A> Version 1.0.7
+<BR>
+</FONT>
+</BODY>
+</HTML>

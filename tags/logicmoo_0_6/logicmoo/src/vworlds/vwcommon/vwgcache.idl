@@ -1,0 +1,81 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// VWGCache.idl : IDL source for VWGCache.dll
+//
+// This file will be processed by the MIDL tool to
+// produce the type library (VWGCache.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IVWGeometryCache : The geometry cache is used internally to allow frames and their 
+// associated data (i.e. geometry) to be cached so it doesn't have to be re-loaded during
+// a session. The cache also separates geometry (memory light) from textures (memory heavy)
+// when cached to be as efficient as possible.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+	interface IVWGeometryCache;
+
+	import "vwobject.idl";
+	import "vwrender.idl";
+
+cpp_quote("#ifndef __D3DRM_H__")
+	typedef int  D3DRMIMAGE;
+	typedef int* LPDIRECT3DRMTEXTURE;
+	typedef int  IDirect3DRMFrame;
+	typedef int  IDirect3DRMFace;
+cpp_quote("#endif")
+
+cpp_quote("#ifndef __d2d_h__")
+	typedef IDispatch* LPDIRECT2DRMIMAGE;
+cpp_quote("#endif")
+
+	[
+		object,
+		uuid(E2186710-116A-11D0-89A9-00A0C9054129),
+		dual,
+		helpstring("IVWGeometryCache Interface"),
+		pointer_default(unique)
+	]
+	interface IVWGeometryCache : IDispatch
+	{
+		import "oaidl.idl";
+
+		[restricted, helpstring("Initialize the cache.")]
+		HRESULT Init([in] IWorld *pWorld);
+
+		[restricted, helpstring("Load geometry from a specified file, returning the root frame.")]
+		HRESULT LoadGeometry([in] BSTR bstrGeometry, [out, retval] IVWFrame **ppvwf);
+
+		[restricted, helpstring("Release geometry specified by root frame.")]
+		HRESULT ReleaseGeometry([in] IVWFrame *pvwf);
+
+		[helpstring("Set the size of the cache (number of root frames).")]
+		HRESULT SetGeomCacheSize([in] long iCacheSize);
+	};
+
+
+#ifdef VWGCACHELIB
+[
+	uuid(E218670E-116A-11D0-89A9-00A0C9054129),
+	version(1.0),
+	helpstring("VWGCache 1.0 Type Library")
+]
+library VWGCACHELib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(E2186714-116A-11D0-89A9-00A0C9054129),
+		helpstring("VWGeometryCache Class")
+	]
+	coclass VWGeometryCache
+	{
+		[default] interface IVWGeometryCache;
+	};
+
+};
+#endif

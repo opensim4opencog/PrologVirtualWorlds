@@ -1,0 +1,105 @@
+// VWRendVw.odl : type library source for OLE Control project.
+
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (VWRendVw.tlb) that will become a resource in
+// VWRendVw.ocx.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// _DVWRenderView : Interface for the render view control. Allows access to the renderer
+// object itself and various methods/properties to support editing and UI tools (see
+// vwuiobjs.idl for more info).
+//
+// _DVWRenderViewEvents : Interface to be implemented by objects requiring to be notified of 
+// render view events. NOTE: This notification mechanism is connection point based. The object
+// firing the events will implement the IConnectionPointContainer interface. The object
+// requiring notification of these events must find and the IConnectionPointContainer
+// interface on the object firing them. See MS help on IConnectionPointContainer and
+// IConnectionPoint for further information.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(44FAC780-0CA4-11D0-89A9-00A0C9054129), version(1.0),
+  helpstring("VWRenderView OLE Control module"), control ]
+library VWRENDERVIEWLib
+{
+	importlib(STDOLE_TLB);
+	importlib(STDTYPE_TLB);
+#ifdef VWSYSTEM_BUILD
+	importlib("..\..\vwsystem\vwsystem.tlb");
+#else
+	importlib("..\..\vwcommon\VWRender.tlb");
+#endif
+	
+	//  Primary dispatch interface for CVWRenderViewCtrl
+
+	[ uuid(44FAC781-0CA4-11D0-89A9-00A0C9054129),
+	  helpstring("Dispatch interface for VWRenderView Control"), hidden ]
+	dispinterface _DVWRenderView
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CVWRenderViewCtrl)
+			[id(1), helpstring("The client object (see vwclient.idl).")] IDispatch* VWClient;
+			[id(2), helpstring("Object property currently being edited.")] IDispatch* TargetObjectProperty;
+			[id(3), helpstring("The control manager (see vwuiobjs.idl).")] IDispatch* ControlManager;
+			[id(4), helpstring("The renderer (see vwrendvw.idl).")] IDispatch* VWRenderRoot;
+			[id(5), helpstring("Show selection box around selected geometry objects?")] boolean ShowSelection;
+			[id(6), helpstring("What are we editing (Nothing, 3D geometry or boundaries) - see vwrnedit.h.")] long EditMode;
+			[id(7), helpstring("The zoom level (inverse field of view - see DirectX help) for the camera.")] float ZoomLevel;
+			[id(8), helpstring("View mode (perspective/various orthographic - see vwrnedit.h).")] long ViewMode;
+			[id(9), helpstring("Not used.")] long ViewFilter;
+			//}}AFX_ODL_PROP
+
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CVWRenderViewCtrl)
+			[id(10), helpstring("Defined in IVWUIView - see vwuiobjs.idl.")] SCODE LoadUIToolByProgID(BSTR lpctstrProgID, BSTR lpctstrName);
+			[id(11), helpstring("Defined in IVWUIView - see vwuiobjs.idl.")] SCODE AddCurrentUITool(BSTR lpctstrName);
+			[id(12), helpstring("Reset camera back to position it was in before navigating.")] SCODE ResetCameraPosition();
+			[id(13), helpstring("Set a pre-defined navigation path (see vwnvtool.idl).")] void SetNavigationPath(IDispatch *pmapPositions, IDispatch *pmapDirections);
+			[id(14), helpstring("Attach the camera to the geometry of the specified thing.")] void SetCamera(IDispatch *pThing);
+			[id(15), helpstring("Camera will 'look' at specified point.")] SCODE CenterViewOnPosition(short x, short y);
+			[id(16), helpstring("Get the named UI tool (see vwuiobjs.idl).")] IDispatch* GetUITool(BSTR lpctstrName);
+			[id(17), helpstring("Is the named UI tool in the current list (see vwuiobjs.idl)?")] boolean IsUIToolCurrent(BSTR lpctstrName);
+			[id(18), helpstring("Camera will 'look' (and keep looking) at the geometry of the specified thing.")] SCODE CenterViewOnObject(IDispatch *pObject, BOOL bFollowingObject);
+			[id(19), helpstring("Tool events (see vwrnedit.h for types) can be passed to this control and bubbled (fired) up.")] SCODE ToolEvent(int nEvent, IDispatch *pObject, BSTR bstr1, BSTR bstr2, BSTR bstr3, BOOL bBubble);
+			//}}AFX_ODL_METHOD
+	};
+
+	//  Event dispatch interface for CVWRenderViewCtrl
+
+	[ uuid(44FAC782-0CA4-11D0-89A9-00A0C9054129),
+	  helpstring("Event interface for VWRenderView Control") ]
+	dispinterface _DVWRenderViewEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+			// NOTE - ClassWizard will maintain event information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_EVENT(CVWRenderViewCtrl)
+			[id(1), helpstring("An alpha-numeric key (or return or backspace) has been pressed.")] void AlphaKeyPressed(long nChar);
+			[id(2), helpstring("Event for bubbling up of ToolEvents.")] void ToolEvent(int nEvent, IDispatch *pObject, BSTR bstr1, BSTR bstr2, BSTR bstr3);
+			//}}AFX_ODL_EVENT
+	};
+
+	//  Class information for CVWRenderViewCtrl
+
+	[ uuid(44FAC783-0CA4-11D0-89A9-00A0C9054129),
+	  helpstring("VWRenderView Control"), control ]
+	coclass VWRenderView
+	{
+		[default] dispinterface _DVWRenderView;
+		[default, source] dispinterface _DVWRenderViewEvents;
+	};
+
+
+	//{{AFX_APPEND_ODL}}
+};

@@ -1,0 +1,165 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// menuitem.idl : IDL source for menuitem.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (menuitem.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IMenuItem : Used to define all the properties of the individual items of a menu.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+	import "oaidl.idl";
+	import "vwprop.idl";
+
+	[
+		object,
+		uuid(D4916C22-00C2-11D0-8A96-00A0C9082583),
+		dual,
+		local,
+		helpstring("IMenuItem Interface"),
+		pointer_default(unique)
+	]
+	interface IMenuItem : IObjectProperty
+	{
+const DISPID DISPID_MENUITEM_MENUTEXT = 101;
+const DISPID DISPID_MENUITEM_FLAGS = 102;
+const DISPID DISPID_MENUITEM_USERDATA = 103;
+const DISPID DISPID_MENUITEM_STATUSTEXT = 104;
+const DISPID DISPID_MENUITEM_METHOD = 105;
+const DISPID DISPID_MENUITEM_ONUPDATEMETHOD = 106;
+const DISPID DISPID_MENUITEM_ARGUMENTSINT = 107;
+const DISPID DISPID_MENUITEM_OWNER = 108;
+const DISPID DISPID_MENUITEM_SUBMENU = 109;
+const DISPID DISPID_MENUITEM_TARGET = 110;
+const DISPID DISPID_MENUITEM_ADDTARGETPARAMETER = 111;
+const DISPID DISPID_MENUITEM_ISOVERLAYITEM = 112;
+const DISPID DISPID_MENUITEM_ISPROXIMITYSENSITIVE = 113;
+
+		const long MI_DEFAULT   =0x00000000;
+		const long MI_GRAYED    =0x00000001;
+		const long MI_DISABLED  =0x00000002;
+		const long MI_INVISIBLE =0x00000004;
+		const long MI_CHECKED   =0x00000008;
+		const long MI_POPUP		=0x00000010;
+		const long MI_SEPARATOR =0x00000800;
+		const long MI_USEVERBARGS = 0x80000000;
+		
+		[propget, helpstring("Text to appear in the pop-up menu."), id(DISPID_MENUITEM_MENUTEXT)] 
+		HRESULT MenuText([out, retval] BSTR* pbstrMenuText);
+		[propput, helpstring("Text to appear in the pop-up menu."), id(DISPID_MENUITEM_MENUTEXT)] 
+		HRESULT MenuText([in] BSTR bstrMenuText);
+
+		[propget, helpstring("Menu item flags (see MI_XXX above)."), id(DISPID_MENUITEM_FLAGS)] 
+		HRESULT Flags([out, retval] long * nFlags);
+		[propput, helpstring("Menu item flags (see MI_XXX above)."), id(DISPID_MENUITEM_FLAGS)] 
+		HRESULT Flags([in] long nFlags);
+
+		[hidden, propget, helpstring("User data (not currently used)."), id(DISPID_MENUITEM_USERDATA)] 
+		HRESULT UserData([out, retval] VARIANT* pvar);
+		[hidden, propput, helpstring("User data (not currently used)."), id(DISPID_MENUITEM_USERDATA)] 
+		HRESULT UserData([in] VARIANT var);
+
+		[propget, helpstring("List of sub-menu menu items."), id(DISPID_MENUITEM_SUBMENU)] 
+		HRESULT SubMenu([out, retval] IPropertyList** pvar);
+		[propput, helpstring("List of sub-menu menu items."), id(DISPID_MENUITEM_SUBMENU)] 
+		HRESULT SubMenu([in] IPropertyList* var);
+
+		[propget, helpstring("Status text (not currently used)."), id(DISPID_MENUITEM_STATUSTEXT)] 
+		HRESULT StatusText([out, retval] BSTR* pbstrStatusText);
+		[propput, helpstring("Status text (not currently used)."), id(DISPID_MENUITEM_STATUSTEXT)] 
+		HRESULT StatusText([in] BSTR bstrStatusText);
+
+		[propget, helpstring("Method to invoke when selected."), id(DISPID_MENUITEM_METHOD)] 
+		HRESULT Method([out, retval] BSTR* pbstrMethod);
+		[propput, helpstring("Method to invoke when selected."), id(DISPID_MENUITEM_METHOD)] 
+		HRESULT Method([in] BSTR bstrMethod);
+
+		[propget, helpstring("Method to update menu item."), id(DISPID_MENUITEM_ONUPDATEMETHOD)]
+		HRESULT OnUpdateMethod([out, retval] BSTR* pbstrOnUpdateMethod);
+		[propput, helpstring("Method to update menu item."), id(DISPID_MENUITEM_ONUPDATEMETHOD)] 
+		HRESULT OnUpdateMethod([in] BSTR bstrOnUpdateMethod);
+
+		[hidden, propput, helpstring("Arguements for method invoked when selected (in IPropertyList format)."), id(DISPID_MENUITEM_ARGUMENTSINT)] 
+		HRESULT ArgumentsInt([in] IPropertyList* pproplist);
+
+		[restricted, propget, helpstring("Arguements for method invoked when selected (in DISPPARAMS format).")] 
+		HRESULT ArgumentsExt([out, retval] DISPPARAMS** ppdispparams );
+		[restricted, propput, helpstring("Arguements for method invoked when selected (in DISPPARAMS format).")] 
+		HRESULT ArgumentsExt([in] DISPPARAMS* pdispparams);
+
+		[propget, helpstring("Arguements for method invoked when selected (in SafeArray format).")] 
+		HRESULT Arguments([out, retval] VARIANT* pvar);
+		[propput, helpstring("Arguements for method invoked when selected (in SafeArray format).")] 
+		HRESULT Arguments([in] VARIANT var);
+
+		[propget, helpstring("Who to call."), id(DISPID_MENUITEM_OWNER)] 
+		HRESULT Owner([out, retval] IThing ** ppIThing);
+		[propput, helpstring("Who to call."), id(DISPID_MENUITEM_OWNER)] 
+		HRESULT Owner([in] IThing * pIThing);
+
+		[propget, helpstring("Who to apply operation to."), id(DISPID_MENUITEM_TARGET)] 
+		HRESULT Target([out, retval] IThing ** ppIThing);
+		[propput, helpstring("Who to apply operation to."), id(DISPID_MENUITEM_TARGET)] 
+		HRESULT Target([in] IThing * pIThing);
+
+		[propget, helpstring("True if the target should be added as the first parameter."), id(DISPID_MENUITEM_ADDTARGETPARAMETER)] 
+		HRESULT AddTargetParameter([out, retval] VARIANT_BOOL *pboolAddTargetParameter);
+		[propput, helpstring("True if the target should be added as the first parameter."), id(DISPID_MENUITEM_ADDTARGETPARAMETER)] 
+		HRESULT AddTargetParameter([in] VARIANT_BOOL boolAddTargetParameter);
+
+		[hidden, propget, helpstring("True if item should appear in overlay plane (not currently used)."), id(DISPID_MENUITEM_ISOVERLAYITEM)] 
+		HRESULT IsOverlayItem([out, retval] VARIANT_BOOL *pboolIsOverlayItem);
+		[hidden, propput, helpstring("True if item should appear in overlay plane (not currently used)."), id(DISPID_MENUITEM_ISOVERLAYITEM)] 
+		HRESULT IsOverlayItem([in] VARIANT_BOOL boolIsOverlayItem);
+
+		[hidden, propget, helpstring("True if item should only appear when the user is 'close' (not currently used)."), id(DISPID_MENUITEM_ISPROXIMITYSENSITIVE)] 
+		HRESULT IsProximitySensitive([out, retval] VARIANT_BOOL *pboolIsProximitySensitive);
+		[hidden, propput, helpstring("True if item should only appear when the user is 'close' (not currently used)."), id(DISPID_MENUITEM_ISPROXIMITYSENSITIVE)] 
+		HRESULT IsProximitySensitive([in] VARIANT_BOOL boolIsProximitySensitive);
+
+		[helpstring("Execute the operation.")] 
+		HRESULT Execute();
+
+		[restricted, helpstring("Update the menu item.")] 
+		HRESULT OnUpdate();
+
+		[helpstring("Deep copy the menu item (includes sub-menus).")] 
+		HRESULT Duplicate([out, retval] IMenuItem **ppIMenuItem);
+	};
+
+#ifdef MENUITEMLIB
+[
+	uuid(D4916C20-00C2-11D0-8A96-00A0C9082583),
+	version(1.0),
+	helpstring("MenuItem 1.0 Type Library")
+]
+library MENUITEMLib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(D4916C26-00C2-11D0-8A96-00A0C9082583),
+		helpstring("MenuItem Class")
+	]
+	coclass MenuItem
+	{
+		[default] interface IMenuItem;
+	};
+
+	[
+		uuid(8CE4E84B-FCF6-11CF-8A96-00A0C9082583),
+		helpstring("Menu Class")
+	]
+	coclass Menu
+	{
+		[default] interface IMenu;
+	};
+};
+#endif

@@ -1,0 +1,55 @@
+:Base HelpIt.hlp
+:Title Aiuto di Editeur
+1 Cosa è Editeur ?=WhatIsEditeur
+1 Procedure
+2 Appertura e salvataggio di file
+3 Creazione di testo=CreatingText
+3 Appertura di file testo esistenti=OpeningFiles
+3 Ricerca di file=FindingInFiles
+3 Salvataggio di testi=SavingTexts
+3 Chiusura di testi=ClosingTexts
+3 Uscire da Editeur=Quitting
+2 Modifica di testo
+3 Modifica di testo=HIDD_EDITEUR
+3 Spostamenti in un testo=MovingInText
+3 Selezione di testo=SelectingText
+3 Deselezione di testo=UnselectingText
+3 Gestione delle modifiche=HandlingUpdates
+3 Ripetizione dell'ultima modifica=RepeatingLastUpdate
+3 Ole drag and drop=OleDragAndDrop
+3 Tagliare, copiare, aggiungere, incollare, cancellare, selezionare tutto=CutCopyAppendPasteClearSelectAll
+3 Copiare verso, incollare da=CopyToPasteFrom
+3 Indentare, disindentare=IndentUnindent
+3 Maiuscole, minuscole, invertire, capitalizzare=Case
+3 Inserimento della data e dell'ora=DateTime
+2 Ricerca e rimpiazzo
+3 Ricerca di testo=Searching
+3 Rimpiazzo di testo=Replacing
+3 Spostamenti speciali=SpecialMoves
+2 Stampa e invio per posta elettronica
+3 Stampa=Printing
+3 Anteprima di stampa=PrintPreviewing
+3 Imposta pagina=ChangingPageLayout
+3 Imposta stampa=ChangingPrintingOptions
+3 Invio per posta elettronica=Sending
+2 Opzioni e strumenti
+3 Opzioni=Options
+3 Cambiamento della polizza di caratteri=ChangingFont
+3 Definire nuove sintassi=SettingUpNewSyntaxes
+3 Verifica dell'ortografia=SpellChecking
+3 Conversione di larghezza delle tabulazioni=ConvertingTabulationsWidth
+3 Ordinamento=Sorting
+3 Esecuzione di un' programma=Running
+3 Definire degli strumenti esterni=SettingUpTools
+1 Menu
+2 Comandi del menù File=FileMenu
+2 Comandi del menù Edizione=EditMenu
+2 Comandi del menù Ricerca=SearchMenu
+2 Comandi del menù Macro=MacroMenu
+2 Comandi del menù Strumenti=ToolsMenu
+2 Comandi del menù Finestra=WindowMenu
+2 Comandi del menù Guida=HelpMenu
+1 Registrazione
+2 Informazioni legali=LegalInformation
+2 Registrazione=Registering
+2 Buono di ordinazione=OrderForm

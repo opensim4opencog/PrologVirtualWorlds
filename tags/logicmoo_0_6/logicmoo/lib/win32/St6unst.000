@@ -1,0 +1,134 @@
+ %% PLEASE DO NOT MODIFY OR DELETE THIS FILE! %% 
+ %% This file contains information about the installation of an application. %% 
+ %% It will be used to automatically remove all application components from your computer if you choose to do so. %% 
+
+
+NOTE: Beginning of the bootstrapper section
+
+CONFIG: Title: "PrologVirtualWorlds 0.6"
+
+ACTION: RegKey: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion", "SharedDLLs"
+
+ACTION: SystemFile: "C:\WINNT\SYSTEM32\COMCAT.DLL"
+(File currently on disk was already up to date)
+
+ACTION: SystemFile: "C:\WINNT\SYSTEM32\VB6STKIT.DLL"
+(File currently on disk was already up to date)
+
+ACTION: SystemFile: "C:\WINNT\SYSTEM32\STDOLE2.TLB"
+(File currently on disk was already up to date)
+
+ACTION: SystemFile: "C:\WINNT\SYSTEM32\ASYCFILT.DLL"
+(File currently on disk was already up to date)
+
+ACTION: SystemFile: "C:\WINNT\SYSTEM32\OLEPRO32.DLL"
+(File currently on disk was already up to date)
+
+ACTION: SystemFile: "C:\WINNT\SYSTEM32\OLEAUT32.DLL"
+(File currently on disk was already up to date)
+
+ACTION: DllSelfRegister: "C:\WINNT\SYSTEM32\COMCAT.DLL"
+
+ACTION: TLBRegister: "C:\WINNT\SYSTEM32\STDOLE2.TLB"
+
+ACTION: DllSelfRegister: "C:\WINNT\SYSTEM32\OLEPRO32.DLL"
+
+ACTION: DllSelfRegister: "C:\WINNT\SYSTEM32\OLEAUT32.DLL"
+
+NOTE: End of the bootstrapper section
+
+NOTE: Now spawning the main Setup program 'Setup1.exe'....
+
+ACTION: SharedFile: "C:\Program Files\Microsoft Virtual Worlds\PrologVirtualWorlds\System\Editeur.exe"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\ODKOB32.DLL"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\RACREG32.DLL"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\mscomctl.ocx"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\RACMGR32.EXE"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\AUTPRX32.DLL"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\AUTMGR32.EXE"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\Program Files\Microsoft Virtual Worlds\PrologVirtualWorlds\System\Editeur.ocx"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\COMCTL32.OCX"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\MSWINSCK.OCX"
+(File currently on disk was already up to date)
+
+NOTE: The file 'RICHED32.DLL' was not copied because it is intended for use under Windows 95 only. It is not needed under Windows NT 3.51 or 4.0.
+
+ACTION: SharedFile: "C:\WINNT\system32\richtx32.ocx"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\comdlg32.ocx"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\Program Files\Microsoft Virtual Worlds\PrologVirtualWorlds\System\regobj.dll"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\Program Files\Common Files\designer\MSHTMPGR.DLL"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\docprop2.dll"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\scrobj.dll"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\msscript.ocx"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\TLBINF32.DLL"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\WINNT\system32\vwmm.dll"
+(File currently on disk was already up to date)
+
+ACTION: DllSelfRegister: "C:\WINNT\system32\RACREG32.DLL"
+
+ACTION: DllSelfRegister: "C:\WINNT\system32\mscomctl.ocx"
+
+ACTION: DllSelfRegister: "C:\WINNT\system32\AUTPRX32.DLL"
+
+ACTION: ExeSelfRegister: "C:\WINNT\system32\AUTMGR32.EXE"
+
+ACTION: DllSelfRegister: "C:\Program Files\Microsoft Virtual Worlds\PrologVirtualWorlds\System\Editeur.ocx"
+
+ACTION: DllSelfRegister: "C:\WINNT\system32\COMCTL32.OCX"
+
+ACTION: DllSelfRegister: "C:\WINNT\system32\MSWINSCK.OCX"
+
+ACTION: DllSelfRegister: "C:\WINNT\system32\richtx32.ocx"
+
+ACTION: DllSelfRegister: "C:\WINNT\system32\comdlg32.ocx"
+
+ACTION: DllSelfRegister: "C:\Program Files\Common Files\designer\MSHTMPGR.DLL"
+
+ACTION: DllSelfRegister: "C:\WINNT\system32\docprop2.dll"
+
+ACTION: DllSelfRegister: "C:\WINNT\system32\scrobj.dll"
+
+ACTION: DllSelfRegister: "C:\WINNT\system32\msscript.ocx"
+
+ACTION: DllSelfRegister: "C:\WINNT\system32\TLBINF32.DLL"
+
+ACTION: DllSelfRegister: "C:\WINNT\system32\vwmm.dll"
+
+ACTION: RegKey: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion", "App Paths\PrologVirtualWorlds.exe"
+
+ACTION: RegValue: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\PrologVirtualWorlds.exe", ""
+

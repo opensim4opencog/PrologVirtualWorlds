@@ -1,0 +1,65 @@
+// Copyright © 2000 Microsoft Corporation.  All rights reserved.
+// In installing/viewing this source code, you agree to the terms of the
+// Microsoft Research Source License (MSRSL) included in the root of this source tree
+// and available from http://www.vworlds.org/license.asp.
+
+// VWAData.idl : IDL source for VWAData.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (VWAData.tlb) and marshalling code.
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// This file contains the interface definitions for:-
+//
+// IVWAccessoryData : Used by the Accessory Data object property. Accessory data objects
+// are used to remote information regarding accessories when worn by an avatar. This is
+// necessary since other connected avatars may not have access to the actual accessory being
+// worn (bystander logic) but do need to know the graphic to be shown when the accessory is
+// worn and the position it is being worn in.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+	import "oaidl.idl";
+	import "vwprop.idl";
+
+	[
+		object,
+		local,
+		dual,
+		uuid(419F9C00-6B2B-11d1-9888-006097C9A0E1),
+		helpstring("IVWFrame Interface"),
+		pointer_default(unique)
+	]
+	interface IVWAccessoryData : IObjectProperty
+	{
+		[propget, helpstring("The filename of the graphic to be shown when the accessory is worn.")]
+		HRESULT AccessoryGraphic([out, retval] BSTR *pbstrAccessoryGraphic);
+		[propput, helpstring("The filename of the graphic to be shown when the accessory is worn.")]
+		HRESULT AccessoryGraphic([in] BSTR bstrAccessoryGraphic);
+
+		[restricted, helpstring("The position the graphic is being worn in.")]
+		HRESULT GetPos([out] float *pfPosX, [out] float *pfPosY);
+		[restricted, helpstring("The position the graphic is being worn in.")]
+		HRESULT PutPos([in] float fPosX, [in] float fPosY);
+	};
+
+#ifdef VWACCESSORYDATALIB
+[
+	uuid(58A48DC0-6B2B-11d1-9888-006097C9A0E1),
+	version(1.0),
+	helpstring("VWAccessoryData 1.0 Type Library")
+]
+library VWACCESSORYDATALib
+{
+	importlib("stdole32.tlb");
+
+	[
+		uuid(607FA980-6B2B-11d1-9888-006097C9A0E1),
+		helpstring("VWAccessoryData Class")
+	]
+	coclass VWAccessoryData
+	{
+		[default] interface IVWAccessoryData;
+	};
+};
+#endif
