@@ -1,0 +1,202 @@
+
+
+
+;; Create upperlevel types for datum
+(isa JavaObjectInstance Collection)
+(isa JavaValueType Collection)
+(isa JavaPrimitiveValue Collection)
+(isa JavaContainedSet Collection)
+
+;; Hook into Cyc's ontology
+(genls JavaObjectInstance Individual)
+(genls JavaValueType Collection)
+(genls JavaPrimitiveValue MathematicalObject)
+(genls JavaContainedSet SetOrCollection)
+
+(isa JavaMethodName Collection)
+
+
+
+;; Mass the four upper types into JavaValueComparable
+(comment JavaValueComparable "Amassed of four upper types into JavaValueComparable")
+(isa JavaValueComparable Collection)
+
+;;(partitionedInto JavaValueComparable 
+;;       (ThePartition JavaObjectInstance JavaValueType JavaPrimitiveValue JavaContainedSet))
+
+(genls JavaObjectInstance JavaValueComparable)
+(genls JavaValueType JavaValueComparable)
+(genls JavaPrimitiveValue JavaValueComparable)
+(genls JavaContainedSet JavaValueComparable)
+
+
+;; Further split JavaPrimitiveValue Collection
+
+(isa intClass Collection)
+(comment intClass "Collection for java's primitive int type")
+(genls intClass JavaPrimitiveValue)
+
+(isa booleanClass Collection)
+(comment booleanClass "Collection for java's primitive boolean type")
+(genls booleanClass JavaPrimitiveValue)
+
+(isa doubleClass Collection)
+(comment doubleClass "Collection for java's primitive double type")
+(genls doubleClass JavaPrimitiveValue)
+
+(isa floatClass Collection)
+(comment floatClass "Collection for java's primitive float type")
+(genls floatClass JavaPrimitiveValue)
+
+(isa charClass Collection)
+(comment charClass "Collection for java's primitive char type")
+(genls charClass JavaPrimitiveValue)
+
+(isa longClass Collection)
+(comment longClass "Collection for java's primitive long type")
+(genls longClass JavaPrimitiveValue)
+
+;;(partitionedInto JavaPrimitiveValue 
+;;       (ThePartition longClass intClass booleanClass doubleClass floatClass charClass voidClass))
+
+
+;; Further split JavaObjectInstance Collection
+(isa StringClass Collection)
+(isa LongClass Collection)
+(isa IntegerClass Collection)
+(isa BooleanClass Collection)
+(isa ClassClass Collection)
+
+;;(partitionedInto JavaObjectInstance 
+;;       (ThePartition LongClass StringClass BooleanClass DoubleClass FloatClass CharClass ClassClass))
+
+
+(genls StringClass JavaObjectInstance)
+(genls LongClass JavaObjectInstance)
+(genls IntegerClass JavaObjectInstance)
+(genls BooleanClass JavaObjectInstance)
+;; (genls ClassClass JavaObjectInstance)
+
+;; Define JavaValueType from ClassClass and JavaPrimitiveType
+(genls ClassClass JavaValueType)
+
+(isa JavaPrimitiveType Collection)
+(isa JavaNonPrimitiveType Collection)
+(isa JavaReferenceType Collection)
+(isa JavaInstanceType Collection)
+
+(genls JavaPrimitiveType JavaValueType)
+(genls JavaNonPrimitiveType JavaValueType)
+(genls JavaReferenceType JavaNonPrimitiveType)
+(genls JavaInstanceType JavaNonPrimitiveType)
+
+;; semi-hook in types?
+(genls StringClass TextString)
+
+
+;; Define accessors to Objects
+(isa JavaSlot Collection)
+(isa JavaMethod Collection)
+
+;; Building a JavaMethod
+
+
+(isa JavaMethodFn VariableArityFunction)
+(comment JavaMethodFn 
+    "(JavaMethodFn ?StringClass ?Arg1 ?Arg2 ...)  evaluates into an instance of Java's 'Method' Object in Cyc 'JavaMethod'")
+(arityMin JavaMethodFn 1)
+(arg1Isa JavaMethodFn JavaMethodName)
+(resultIsa JavaMethodFn JavaMethod)
+
+
+;; Declared from Java for classes
+
+(isa hasSlot TernaryPredicate)
+(comment hasSlot "(hasSlot ?ClassClass ?JavaSlot ?JavaValueType)  Data stored tuple for knowing thats a ?ClassClass has a particular ?JavaSlot returning ?JavaValueType")
+(arg1Isa hasSlot ClassClass)
+(arg2Isa hasSlot JavaSlot)
+(arg3Isa hasSlot JavaValueType)
+
+(isa hasJavaMethod TernaryPredicate)
+(comment hasJavaMethod  "(hasJavaMethod ?ClassClass ?JavaMethod ?JavaValueType)  Data stored tuple for knowing thats a ?ClassClass has a particular ?JavaMethod returning ?JavaValueType JavaMethods are derived with a (#$JavaMethodFn ?MethodName ?arg1 ?arg2)")
+(arg1Isa hasJavaMethod ClassClass)
+(arg2Isa hasJavaMethod JavaMethod)
+(arg3Isa hasJavaMethod JavaValueType)
+
+;; Data holding
+(isa javaArrayContains TernaryPredicate) 
+(comment javaArrayContains "#$TernaryPredicate for declared JavaContainedSet members")
+(arg1Isa javaArrayContains JavaContainedSet)
+(arg2Isa javaArrayContains PositiveInteger)
+(arg3Isa javaArrayContains JavaValueComparable)
+
+(isa hasSlotValue TernaryPredicate) 
+(comment hasSlotValue "#$TernaryPredicate for declared JavaObjectInstance SlotValue values")
+(arg1Isa hasSlotValue JavaObjectInstance)
+(arg2Isa hasSlotValue JavaSlot)
+(arg3Isa hasSlotValue JavaValueComparable)
+
+;; Comparing Data with JavaEqualEnough
+
+(isa JavaEqualEnough BinaryPredicate)
+(comment JavaEqualEnough "#$BinaryPredicate for comparison strategies against two #$JavaValueComparables (specializing #$equals)")
+(genlPreds JavaEqualEnough equals)
+(arg1Isa JavaEqualEnough JavaValueComparable)
+(arg2Isa JavaEqualEnough JavaValueComparable)
+
+(isa sameMemberships BinaryPredicate)
+(comment sameMemberships "#$BinaryPredicate for comparison strategies against two #$JavaContainedSet (specializing #$setOrCollectionsCoextensional)")
+;;(genlPreds sameMemberships setOrCollectionsCoextensional)
+(arg1Isa sameMemberships JavaContainedSet)
+(arg2Isa sameMemberships JavaContainedSet)
+
+
+(implies
+  (and
+	(isa ?X JavaPrimitiveValue)
+	(isa ?Y JavaPrimitiveValue)
+	(equals ?X ?Y))
+  (JavaEqualEnough ?X ?Y))
+
+;; Compared by Reification
+(implies
+  (and
+	(isa ?X JavaObjectInstance)
+	(isa ?Y JavaObjectInstance)
+	(equals ?X ?Y))
+  (JavaEqualEnough ?X ?Y))
+
+
+;; Compared by subclassing
+(implies
+  (and
+	(isa ?X JavaValueType)
+	(isa ?Y JavaValueType)
+	(or 
+	(genls ?X ?Y)
+	(genls ?Y ?X)))
+  (JavaEqualEnough ?X ?Y))
+
+
+;; Compared by Sets
+(implies
+  (and
+	(isa ?X JavaContainedSet)
+	(isa ?Y JavaContainedSet)
+	(sameMemberships ?X ?Y))
+  (JavaEqualEnough ?X ?Y))
+
+
+
+
+;; Assist in the tractablity of JavaPrimitiveTypes/Values
+(equiv
+	(genls ?Collection JavaPrimitiveValue)
+	(isa ?Collection JavaPrimitiveType))
+
+;; Assist in the Expansion of JavaObjectInstance Types
+(equiv
+	(genls ?Collection JavaObjectInstance)
+	(isa ?Collection ClassClass))
+	
+
