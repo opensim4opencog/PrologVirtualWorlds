@@ -17,11 +17,10 @@ import org.opencyc.xml.*;
 /**
  * Provides the behavior and attributes of OpenCyc AssertionsCollection.<p>
  * <p>
- * Assertions are communicated over the binary API using their Id number (an int).
- * The associated formula, microtheory, truth-value, direction, and remaining attributes are
- * is fetched later.
+ * Assertions are read from a file loadFile(File file) or added in via addFormula()
+ * The assertions may then be added to a OpenCyc server in the given setDefaultKB
  *
- * @version $Id: AssertionsCollection.java,v 1.5 2002-04-08 03:03:23 dmiles Exp $
+ * @version $Id: AssertionsCollection.java,v 1.6 2002-04-08 03:08:18 dmiles Exp $
  * @author Douglas R. Miles
  *
  */
