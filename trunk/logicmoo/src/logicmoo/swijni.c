@@ -4,8 +4,8 @@
  * Now prolog can call java!!!
  *  Project: jpl
  * 
- *  File:    $Id: swijni.c,v 1.1 2002-03-17 05:35:38 dmiles Exp $
- *  Date:    $Date: 2002-03-17 05:35:38 $
+ *  File:    $Id: swijni.c,v 1.2 2002-03-17 09:00:02 dmiles Exp $
+ *  Date:    $Date: 2002-03-17 09:00:02 $
  *  Author:  Fred Dushin <fadushin@syr.edu>
  * 		  
  * 
@@ -156,54 +156,54 @@ destroy_vm()
 foreign_t 
 java_prep_vm()
 	{
-		/* Allows it to be called more then once */
-		if (class_pointer_JNIPrologServer)
-			PL_succeed;
+	/* Allows it to be called more then once */
+	if (class_pointer_JNIPrologServer)
+		PL_succeed;
 
-		/* Allows it to be called more then once */
-		if (!result_of_JNI_CreateJavaVM)
-			PL_succeed;
+	/* Allows it to be called more then once */
+	if (!result_of_JNI_CreateJavaVM)
+		PL_succeed;
 
- {
-    STRING szClasspath = getenv( "CLASSPATH" );
-	STRING cp = malloc( 8192 ); 
+	{
+		STRING szClasspath = getenv( "CLASSPATH" );
+		STRING cp = malloc( 8192 ); 
 
-   // destroy_vm();
-
-
-	sprintf(cp,"-Djava.class.path=%s",szClasspath);
-
-	options[0].optionString = "-Djava.compiler=NONE";	/* disable JIT */
-	options[1].optionString = cp;	/* user classes */
-	options[2].optionString = "-Djava.library.path=.";	/* set native library path */
-	//options[3].optionString = "";						/* print JNI-related messages */
-
-	// options[3].optionString = "-verbose:jni";   	/* print JNI-related messages */
+		// destroy_vm();
 
 
-	// fprintf(stderr, "\nCLASSPATH=%s\n",options[1].optionString);
+		sprintf(cp,"-Djava.class.path=%s",szClasspath);
 
-	vm_args.version = JNI_VERSION_1_4;
-	vm_args.options = options;
-	vm_args.nOptions = 3;
-	vm_args.ignoreUnrecognized = 1;     
+		options[0].optionString = "-Djava.compiler=NONE";	/* disable JIT */
+		options[1].optionString = cp;	/* user classes */
+		options[2].optionString = "-Djava.library.path=.";	/* set native library path */
+		//options[3].optionString = "";						/* print JNI-related messages */
 
-	/*
-		Note that in the Java 2 SDK, there is no longer any need to call 
-	*/
-	result_of_JNI_CreateJavaVM = JNI_CreateJavaVM(&java_vm, 
-												  (void **)&jni_env, 
-												  &vm_args);
+		// options[3].optionString = "-verbose:jni";   	/* print JNI-related messages */
 
-	if (result_of_JNI_CreateJavaVM < 0)
-		{
-		fprintf(stderr, "Can't create Java VM\n%i\n",result_of_JNI_CreateJavaVM);
-		PL_fail;
-		}
-	return prep_vm_phase2();
+
+		// fprintf(stderr, "\nCLASSPATH=%s\n",options[1].optionString);
+
+		vm_args.version = JNI_VERSION_1_4;
+		vm_args.options = options;
+		vm_args.nOptions = 3;
+		vm_args.ignoreUnrecognized = 1;     
+
+		/*
+			Note that in the Java 2 SDK, there is no longer any need to call 
+		*/
+		result_of_JNI_CreateJavaVM = JNI_CreateJavaVM(&java_vm, 
+													  (void **)&jni_env, 
+													  &vm_args);
+
+		if (result_of_JNI_CreateJavaVM < 0)
+			{
+			fprintf(stderr, "Can't create Java VM\n%i\n",result_of_JNI_CreateJavaVM);
+			PL_fail;
+			}
+		return prep_vm_phase2();
 	}
- }
- 
+	}
+
 
 
 foreign_t  
@@ -213,7 +213,7 @@ prep_vm_phase2()
 		PL_succeed;
 
 	class_pointer_JNIPrologServer = JNI_ENV-> 
-			FindClass(jni_env, "logicmoo/JNIPrologServer");
+									FindClass(jni_env, "logicmoo/JNIPrologServer");
 
 	if (!class_pointer_JNIPrologServer)
 		{
@@ -248,7 +248,7 @@ prep_vm_phase2()
 	*/
 
 	class_jstring = sj_FindClass("java/lang/String");
-	
+
 	class_jobject = sj_FindClass("java/lang/Object");
 
 	invoke_object_method = JNI_ENV->GetStaticMethodID(jni_env, 
@@ -263,45 +263,50 @@ prep_vm_phase2()
 	PL_succeed;
 	}
 
-jstring intToHash(term_t temp_term) {
+jstring intToHash(term_t temp_term)
+	{
 	char temp_parse[64];
 	int temp_int;
 	PL_get_integer(temp_term,&temp_int);
 	sprintf(temp_parse,"o%i",temp_int);
 	return chars_to_jstring(temp_parse);
-}
+	}
 
 
-static jobjectArray list2MethodArgs(term_t arg_list) {
+static jobjectArray list2MethodArgs(term_t arg_list)
+	{
 
 	int countup=0;
 	char temp_parse[64];
-	
+
 	term_t temp_term = PL_new_term_ref();	   /* variable for the elements */
 
 	term_t prolog_list = PL_copy_term_ref(arg_list);	/* copy as we need to write */
-	
+
 	jobjectArray method_args=(jobjectArray) JNI_ENV->NewObjectArray(jni_env,
-													   MAX_ARGS,
-													   (jclass) class_jobject,
-													   chars_to_jstring(""));  
-		
-	
+																	MAX_ARGS,
+																	(jclass) class_jobject,
+																	chars_to_jstring(""));  
+
+
 	while ( PL_get_list(prolog_list, temp_term, prolog_list) )
 		{
 		//printf("%s ", arg);
 		countup++;
-		JNI_ENV->SetObjectArrayElement(jni_env,method_args,countup,(jobject) term_to_jobject(temp_term));
+		JNI_ENV->SetObjectArrayElement(jni_env,
+									   method_args,
+									   countup,
+									   (jobject) term_to_jobject(temp_term));
 		//printf("(%d)\n ", countup);
 		}
-	    
-		sprintf(temp_parse,"o%i",countup);
 
-		JNI_ENV->SetObjectArrayElement(jni_env,method_args, (int) 0, chars_to_jstring(temp_parse)); // Sets length
-		
-		return method_args;
+	sprintf(temp_parse,"%i",countup);
 
-}
+	JNI_ENV->SetObjectArrayElement(jni_env,method_args, (int) 0, chars_to_jstring(temp_parse));	// Sets length
+
+	return method_args;
+
+	}
 
 
 static jobject term_to_jobject(term_t temp_term)
@@ -317,24 +322,26 @@ static jobject term_to_jobject(term_t temp_term)
 	switch ( PL_term_type(temp_term) )
 		{
 		case PL_VARIABLE:
-			sprintf(temp_parse,"v%p",temp_term);
+			sprintf(temp_parse,"_%p",temp_term);
 			return chars_to_jstring(temp_parse);
 		case PL_ATOM:
 			PL_get_atom_nchars(temp_term,&len,&temp_string);
-			
+
 			// Special Atoms
-			switch (len) {
+			switch (len)
+				{
 				case 5:
-					if (PL_unify_atom_chars(temp_term,"false")) return chars_to_jstring("bf");
+					if (PL_unify_atom_chars(temp_term,"false"))	return chars_to_jstring("bf");
 				case 0:
 					return chars_to_jstring("s");
 				case 2:
 					if (PL_unify_atom_chars(temp_term,"[]")) return chars_to_jstring("$");
 				case 4:
 					if (PL_unify_atom_chars(temp_term,"true")) return chars_to_jstring("bt");
+					if (PL_unify_atom_chars(temp_term,"$$$$")) return chars_to_jstring("oJNIPrologServer");
 					if (PL_unify_atom_chars(temp_term,"null")) return chars_to_jstring("n");
 				}
-				
+
 			sprintf(temp_parse,"s%s",temp_string); return chars_to_jstring(temp_parse);
 
 		case PL_STRING:
@@ -350,42 +357,57 @@ static jobject term_to_jobject(term_t temp_term)
 			sprintf(temp_parse,"l%f",temp_float);
 			return chars_to_jstring(temp_parse);
 		case PL_TERM:
-			
-			if (PL_get_nil(temp_term)) return chars_to_jstring("$");
-			
-			if (PL_is_list(temp_term))  return (jobject) list2MethodArgs(temp_term);
-				
-			{atom_t name = PL_new_term_ref();
-			int arity;
-			
-			PL_get_name_arity(temp_term, &name, &arity);
 
-			if (arity=0) return term_to_jobject( name);
-			
-			switch (arity)
-				{
-				case 1:
-					if (PL_unify_atom_chars(name,"$java_object")) {
-						term_t arg1 = PL_new_term_ref();
-						PL_get_arg(1, temp_term, arg1);
-						return (jstring) intToHash(arg1);
+			if (PL_get_nil(temp_term)) return chars_to_jstring("$");
+
+			if (PL_is_list(temp_term))	return(jobject) list2MethodArgs(temp_term);
+
+			{atom_t name = PL_new_term_ref();
+				int arity;
+
+				PL_get_name_arity(temp_term, &name, &arity);
+
+				if (arity=0) return term_to_jobject( name);
+
+				PL_get_atom_nchars(name,&len,&temp_string);
+
+				if (temp_string[0]='$')
+					{
+					switch (arity)
+						{
+						case 1:
+							if (PL_unify_atom_chars(name,"$java_object"))
+								{
+								term_t arg1 = PL_new_term_ref();
+								PL_get_arg(1, temp_term, arg1);
+								return(jstring) intToHash(arg1);
+								}
+							if (PL_unify_atom_chars(name,"$java_param"))
+								{
+								term_t arg1 = PL_new_term_ref();
+								PL_get_arg(1, temp_term, arg1);
+								PL_get_atom_nchars(arg1,&len,&temp_string);
+								sprintf(temp_parse,"%s",temp_string);
+								return chars_to_jstring(temp_parse);
+								}
+						case 2:
+							if (PL_unify_atom_chars(name,"$java_instance"))
+								{
+								term_t arg1 = PL_new_term_ref();
+								PL_get_arg(1, temp_term, arg1);
+								return(jstring) intToHash(arg1);
+								}
 						}
-				case 2:
-					if (PL_unify_atom_chars(name,"$java_instance")) {
-						term_t arg1 = PL_new_term_ref();
-						PL_get_arg(1, temp_term, arg1);
-						return (jstring) intToHash(arg1);
-						}
-				}
+					}
 			}
-		
+
 		default:
 			PL_get_chars(temp_term,&temp_string,CVT_ALL);
 			sprintf(temp_parse,"u%s",temp_string);
 			return chars_to_jstring(temp_parse);
 		}
 
-}
+	}
 
 
 
@@ -415,7 +437,6 @@ pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg_list,term
 	foreign_t prolog_result;
 
 	STRING method_result_chars;
-	
 	term_t temp_term = PL_new_term_ref();	   /* variable for the elements */
 
 	result_string_object = JNI_ENV->CallStaticObjectMethod(jni_env,
@@ -436,6 +457,7 @@ pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg_list,term
 		PL_fail;
 		}
 
+
 	//printf("method_result_chars=%s\n ",method_result_chars);
 
 	if (PL_chars_to_term(method_result_chars,temp_term))
@@ -447,7 +469,7 @@ pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg_list,term
 		}
 
 	JNI_ENV->ReleaseStringUTFChars(jni_env, result_string_object, method_result_chars);
-	JNI_ENV->DeleteLocalRef(jni_env,method_args);
+	//  JNI_ENV->DeleteLocalRef(jni_env,method_args);
 
 	return prolog_result;
 

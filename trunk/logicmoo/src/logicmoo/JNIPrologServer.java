@@ -94,8 +94,8 @@ public class JNIPrologServer extends Thread {
 		Array.set(stringClassArrayOfOne,0,stringClass);
 		debug=5;
 		allObjects = new HashMap();
-		allObjects.put("JNIPrologServer",new JNIPrologServer());                
-		allObjects.put("System",System.class);                
+		allObjects.put("oJNIPrologServer",new JNIPrologServer());                
+		allObjects.put("oSystem",System.class);                
 
 	}
 
@@ -146,11 +146,11 @@ public class JNIPrologServer extends Thread {
 	public synchronized static String invokeObject(String objectName,String methodName, Object[] params) {
 		if ( allObjects==null )	createState();
 		if ( debug>1 ) System.err.println("invokeObject("+objectName +","+ methodName +","+ params + ")");
-		Object innerInstance = findInstance(objectName);
+		Object innerInstance = argToObject(objectName);
 		if ( innerInstance==null )		return makeError(new Exception("Object not found in catalog \"" + objectName +"\""));
 		if ( debug>1 ) System.err.println("Found Instance: \"" + innerInstance +"\"" );
 		try {
-			return objectToProlog(invokeObject(innerInstance,methodName,argsToObjectVector(params)));
+			return objectToProlog(invokeObject(innerInstance,(String) argToObject(methodName),argsToObjectVector(params)));
 		} catch ( Exception e ) {
 			return makeError(e);
 		}
@@ -212,25 +212,59 @@ public class JNIPrologServer extends Thread {
 	}
 
 	public synchronized static Object[] argsToObjectVector(Object[] args) {
-		Object[] toReturnObjects=null;
 		int len = Integer.parseInt((String) args[0]);
-		try {
-			toReturnObjects = (Object[])Array.newInstance(findClass("Object"),len);
-		} catch ( Exception e ) {
-			fatalEvent(e);
-		}
+		if ( debug >1 )	System.err.println("argsToObjectVector Len=" + (len));
 
-		for ( int i = 1 ; i < len; i++ ) {
-			try {
-				Object obj = argToObject( (Object) args[i]);
-				if ( debug >1 )	System.err.println("Arg" + i + "=\"" + args[i] + "\" -> " + obj.getClass() + ":" + obj.toString());
-				Array.set(toReturnObjects,i,obj);
-			} catch ( Exception e ) {
-				System.err.println("Arg" + i + "=\"" + args[i] + "\" -> " +e);
-				e.printStackTrace(System.err);
-			}
+		Object toReturnObjects[]=new Object[len];
+		int source = 0;
+		for ( int target = 0 ; target < len ; target++ ) {
+			source ++;
+			toReturnObjects[target ]=argToObject( (Object) args[ source ]);
+			if ( debug >1 )
+				System.err.println("Arg" + target + "=\"" + args[source] + "\" -> " + toReturnObjects[target].toString());
 		}
 		return toReturnObjects;
+	}                     
+
+	public synchronized static Object argToObject(Object arg) {
+		if ( arg instanceof String ) return stringToObj((String)arg);
+		if ( arg.getClass().isArray() )	return argsToObjectVector((Object[])arg);
+		return arg;
+	}
+
+	public synchronized static Object stringToObj(String arg) {
+
+		char fc = arg.charAt(0);
+		switch ( fc ) {
+			case 'o':
+				return findInstance(arg);
+			case 'b':
+				if ( arg.charAt(1)=='t' ) return new Boolean(true);
+				else return new	Boolean(false);
+			case 's':
+				return arg.substring(1);
+			case 'n':
+				return null;
+			case '$':
+				return null;
+			case 'i':
+				try {
+					return new java.lang.Integer(arg.substring(1));
+				} catch ( Exception e ) {
+					warnEvent(e);
+					return new java.lang.Integer(0);
+				}
+			case 'l':
+				try {
+					return new java.lang.Float(arg.substring(2));
+				} catch ( Exception e ) {
+					warnEvent(e);
+					return new java.lang.Float(0);
+				}
+			case 'u':
+				return arg.substring(1);
+		}
+		return arg;
 	}
 
 	public synchronized static String objectToProlog(Object obj ) {
@@ -529,47 +563,6 @@ public class JNIPrologServer extends Thread {
 
 	public synchronized static String parameterToVector(Class paramClass) {
 		return typeToName(paramClass.getName());
-	}
-
-	public synchronized static Object argToObject(Object arg) {
-		if ( arg instanceof String ) return stringToObj((String)arg);
-		if ( arg.getClass().isArray() )	return argsToObjectVector((Object[])arg);
-		return arg;
-	}
-
-	public synchronized static Object stringToObj(String arg) {
-
-		char fc = arg.charAt(0);
-		switch ( fc ) {
-			case 'o':
-				return findInstance(arg);
-			case 'b':
-				if ( arg.charAt(1)=='t' ) return new Boolean(true);
-				else return new	Boolean(false);
-			case 's':
-				return arg.substring(1);
-			case 'n':
-				return null;
-			case '$':
-				return null;
-			case 'i':
-				try {
-					return new java.lang.Integer(arg.substring(1));
-				} catch ( Exception e ) {
-					warnEvent(e);
-					return new java.lang.Integer(0);
-				}
-			case 'l':
-				try {
-					return new java.lang.Float(arg.substring(2));
-				} catch ( Exception e ) {
-					warnEvent(e);
-					return new java.lang.Float(0);
-				}
-			case 'u':
-				return arg.substring(1);
-		}
-		return arg;
 	}
 
 	public synchronized static void warnEvent(Exception e) {
