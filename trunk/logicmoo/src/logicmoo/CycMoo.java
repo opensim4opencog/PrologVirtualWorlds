@@ -10,17 +10,13 @@ import java.util.*;
 import java.awt.*;
 
 // Jamud
-import jamud.*;
-import jamud.command.*;
-import jamud.object.*;
-import jamud.object.event.*;
-import jamud.util.*;
-import com.jamud.commands.olc.*;
-import com.jamud.commands.*;
-import com.jamud.connections.*;
-import com.jamud.communications.*;
-import com.jamud.creation.*;
-//import com.jamud.mud.*;
+import logicmoo.net.*;
+import logicmoo.obj.*;
+import logicmoo.obj.event.JamudEventManager;
+import logicmoo.cmd.*;
+import logicmoo.plugin.JamudPlugin;
+import logicmoo.script.ScriptLanguage;
+import logicmoo.util.*;
 import net.n3.nanoxml.*;
 
 // BeanShell
@@ -44,7 +40,7 @@ import ViolinStrings.*;
 *
 * Collaborates with the <tt>Jamud</tt> class which manages the api connections.
 *
-* @version $Id: CycMoo.java,v 1.6 2002-05-10 19:47:58 dmiles Exp $
+* @version $Id: CycMoo.java,v 1.7 2002-05-14 05:02:38 dmiles Exp $
 * @author Douglas R. Miles
 *
 * <p>Copyright 2001 Cycorp, Inc., license is open source GNU LGPL.
@@ -68,12 +64,13 @@ import ViolinStrings.*;
 public class CycMoo extends CycAssertionsFactory {
 
     private  static  CycMooAgent thisCycMooAgent = null;
-    private  static  Jamud jamudInstance;
-    private  static  MudObjectRoot jamudMudObjectRoot; 
-    private  static  MudObject jamudTop;     
+    private  static  Jamud logicmooInstance;
+    private  static  Area logicmooArea;
+    //    private  static  PlayerManager logicmooPlayerManager;
+    private  static  Room logicmooTop;     
     private  static  Object initialObject; 
-    private  static  bsh.Interpreter jamudBeanShell;     
-    private  static  CycMoo staticAccess=null;
+    private  static  bsh.Interpreter logicmooBeanShell;     
+    public  static  CycMoo staticAccess=null;
     private  static  MooIrcBot efnetIRCBot=null;
     private  static  MooIrcBot opnIRCBot=null;
     private  static  boolean running = false;
@@ -105,7 +102,7 @@ public class CycMoo extends CycAssertionsFactory {
     // CycConstant || Class -> Class || CycConstant 
     public  static  HashMap cycKnowsClass = new HashMap();
     public  static  HashMap cycKnowsObjectAsConstant = new HashMap();
-    //public  static  HashMap cycKnowsArea = new HashMap();
+    //public  static  HashMap cycKnowsMicrotheory = new HashMap();
     //public  static  HashMap cycKnowsExit = new HashMap();
     public  static  HashMap cycKnowsNPC = new HashMap();
     //public  static  HashMap cycKnowsPlayer = new HashMap();
@@ -161,17 +158,13 @@ public class CycMoo extends CycAssertionsFactory {
 	staticAccess.start();
 	return(CycAccess)staticAccess;
     }
-    public  static  MudObjectRoot getMudObjectRoot() {
-	staticAccess.start();
-	return jamudMudObjectRoot;
-    }
     public  static  Jamud getJamud() {
 	staticAccess.start();
-	return jamudInstance;
+	return logicmooInstance;
     }
-    public  static  MudObject getJamudTop() {
+    public  static Room getJamudTop() {
 	staticAccess.start();
-	return jamudTop;
+	return logicmooTop;
     }
     public  static  CycMoo currentInstance() {
 	staticAccess.start();
@@ -179,11 +172,23 @@ public class CycMoo extends CycAssertionsFactory {
     }
     public  static  bsh.Interpreter getBeanShell() {
 	staticAccess.start();
-	return jamudBeanShell;
+	return logicmooBeanShell;
     }
     public  static  CycAssertionsFactory getCycAssertionsFactory() {
 	staticAccess.start();
 	return(CycAssertionsFactory)staticAccess;
+    }
+
+    public static void main(String[] args){
+	try {
+	    CycMoo cm = new CycMoo();
+	    cm.start();    
+	    while ( true ) {
+		Thread.sleep(10000);
+	    }
+	} catch ( Exception e ) {
+	    e.printStackTrace();
+	}
     }
 
     /***********************************************************
@@ -191,12 +196,12 @@ public class CycMoo extends CycAssertionsFactory {
      *
      **********************************************************/
 
-    private    synchronized void start() {
+    private synchronized void start() {
 	if ( running ) return;
 	running = true;
 	System.out.println("Starting LogicMOO (CycMoo)");
 	Log.makeLog();
-	if ( jamudInstance==null ) startJamud(initialObject);
+	if ( logicmooInstance==null ) startJamud(initialObject);
 	if ( cycWebserverThread==null ) {
 	    System.out.println("cycWebserverThread==null");
 	    try {
@@ -221,7 +226,7 @@ public class CycMoo extends CycAssertionsFactory {
 	    jamudMt =  makeCycConstantSafe("#$JamudMt");
 	    javaMt =  makeCycConstantSafe("#$JavaMt");
 	    CycFort reifiedMicrotheory =  makeCycConstantSafe("#$ReifiedMicrotheory");
-	    geographicalRegion =  makeCycConstantSafe("#$GeographicalRegion");
+	    geographicalRegion =  makeCycConstantSafe("#$Room");
 	    cycArrayOfClass =  makeCycConstantSafe("#$SetOfTypeFn");
 
 	    staticAccess.makeCycConstantError =  makeCycConstantSafe("#$MakeCycConstantErrorFn");
@@ -238,8 +243,8 @@ public class CycMoo extends CycAssertionsFactory {
 	    e.printStackTrace();
 	}
 
-	//efnetIRCBot = startCycLBot(efnetIRCBot, "jllykifsh","irc.rt.ru");
-	opnIRCBot = startCycLBot(opnIRCBot, "CycLBot","irc.openprojects.net");
+	efnetIRCBot = startCycLBot(efnetIRCBot, "jllykifsh","irc.rt.ru");
+	//opnIRCBot = startCycLBot(opnIRCBot, "CycLBot","irc.openprojects.net");
 	try {
 	    try {
 		constructMtFromFile("JavaMt.kif","JavaMt");
@@ -261,19 +266,18 @@ public class CycMoo extends CycAssertionsFactory {
 	}
 
 	try {
-	    if ( jamudBeanShell==null ) {
+	    if ( logicmooBeanShell==null ) {
 		// Interpreter(java.io.Reader in, java.io.PrintStream out, java.io.PrintStream err, boolean interactive) 
-		jamudBeanShell = new bsh.Interpreter(new InputStreamReader(System.in),(PrintStream)System.out ,(PrintStream)System.out,false);
-		jamudBeanShell.run();
-		jamudBeanShell.set("jamudInstance",jamudInstance);
-		jamudBeanShell.set("jamudMudObjectRoot",jamudMudObjectRoot);
-		jamudBeanShell.set("jamudTop",jamudTop);
-		jamudBeanShell.set("staticAccess",staticAccess);
-		jamudBeanShell.set("LogicMoo",staticAccess);
-		jamudBeanShell.set("CycMoo",staticAccess);
-		jamudBeanShell.set("jllykifsh",efnetIRCBot);
-		jamudBeanShell.set("CycLBot",opnIRCBot);
-		jamudBeanShell.set("interpretor",jamudBeanShell);
+		logicmooBeanShell = new bsh.Interpreter(new InputStreamReader(System.in),(PrintStream)System.out ,(PrintStream)System.out,false);
+		logicmooBeanShell.run();
+		logicmooBeanShell.set("logicmooInstance",logicmooInstance);
+		logicmooBeanShell.set("logicmooTop",logicmooTop);
+		logicmooBeanShell.set("staticAccess",staticAccess);
+		logicmooBeanShell.set("LogicMoo",staticAccess);
+		logicmooBeanShell.set("CycMoo",staticAccess);
+		logicmooBeanShell.set("jllykifsh",efnetIRCBot);
+		logicmooBeanShell.set("CycLBot",opnIRCBot);
+		logicmooBeanShell.set("interpretor",logicmooBeanShell);
 	    }
 	} catch ( EvalError e ) {
 	    e.printStackTrace();
@@ -289,34 +293,6 @@ public class CycMoo extends CycAssertionsFactory {
     }
 
 
-    public synchronized    void syncBot() {
-	System.out.println("tick syncBot");
-	try {
-	    syncMudAll();
-	} catch ( Exception e ) {
-	    e.printStackTrace();
-	}
-	System.out.println("tock syncBot");
-    }
-
-    /***********************************************************
-     *  Jamud Booting
-     *
-     **********************************************************/
-
-
-    private static void startJamud(Object initial) {
-	String[] args = { "jamud.xml"} ; 
-	try {
-	    Jamud.main( args );
-	    jamudInstance = Jamud.currentInstance();
-	    jamudMudObjectRoot = jamudInstance.mudObjectRoot();
-	    jamudTop = (MudObject) jamudMudObjectRoot.getChildObject(AREA_HOLDER);
-
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.err);
-	}
-    }
 
 
     /***********************************************************
@@ -394,6 +370,9 @@ public class CycMoo extends CycAssertionsFactory {
 	    */
     }
 
+    public static synchronized ArrayList getArrayListQuerySELStatic(String mt, String query) {
+	return staticAccess.getArrayListQuerySEL(mt,query);
+    }
 
     /***********************************************************
      *  Mt Handling Extras
@@ -411,11 +390,11 @@ public class CycMoo extends CycAssertionsFactory {
      **********************************************************/
 
     public synchronized  static  Object eval(String cmd) throws bsh.EvalError  {
-	return  jamudBeanShell.eval(cmd);
+	return  logicmooBeanShell.eval(cmd);
     }
 
     public synchronized  static  void set(String name, Object obj) throws bsh.EvalError  {
-	jamudBeanShell.set(name,obj);
+	logicmooBeanShell.set(name,obj);
     }
 
 
@@ -465,12 +444,12 @@ public class CycMoo extends CycAssertionsFactory {
     }
 
 
-    public synchronized    String mudExec(MudObject actor, String args) {
+    public synchronized    String mudExec(PartiallyTangible actor, String args) {
 	System.out.println("mudExec " + actor.getName()+ " " + args);
 	return "ok.";
 	/*
 	if ( args==null ) return "nothing to do (null)";
-	MudObject newplace = findObject(args);
+	PartiallyTangible newplace = findObject(args);
 	if ( newplace!=null ) {
 	   actor.setParentContainer(newplace.childContainer());
 	   // actor.enact("look");
@@ -482,38 +461,21 @@ public class CycMoo extends CycAssertionsFactory {
 	*/
     }
 
-    public synchronized    String mudExec(MudObject actor, String lctok, String[] params) {
-	if ( lctok.equals("cd") ) return moveTo(actor,params);
-	return lctok + " not recognized";
-	//if (lctok.equals("dumproom")) 
-    }
-
-    public synchronized    String moveTo(MudObject actor, String[] params) {
-	String place = actor.getName()+"-home";
-	if ( params.length==2 ) {
-	    place = params[1];
-	}
-	MudObject newplace = findObject(place);
-	if ( newplace==null ) return "cannot find  " + place;
-	actor.setParentContainer(newplace.childContainer());
-	return "you are now at " + actor.getParentContainer().parentObject().getName();
-
-    }
 
     /*
-    public synchronized  static  class MudObject extends MudObject {
+    public synchronized  static  class PartiallyTangible extends PartiallyTangible {
 
     // Default Constructor
-    public MudObject() {
+    public PartiallyTangible() {
     super();
     }
 
-    public MudObject(Race race, Gender gender, Job job) {
+    public PartiallyTangible(Race race, CycFort gender, CycFort job) {
     super(race,gender,job);
     }
-    public synchronized  static  MudObject asCycMudObject(MudObject object) {
-    if (object instanceof MudObject) return (MudObject)object;
-    MudObject outobj = new MudObject();
+    public synchronized  static  PartiallyTangible asCycReifiable(PartiallyTangible object) {
+    if (object instanceof PartiallyTangible) return (PartiallyTangible)object;
+    PartiallyTangible outobj = new PartiallyTangible();
     object.copycat(outobj);
     return outobj;
     }
@@ -526,31 +488,23 @@ public class CycMoo extends CycAssertionsFactory {
      *
      **********************************************************/
 
-    public class MudObjectNPC extends MudObject {
+    public class ReifiableNPC extends	 /*PartiallyfTangible*/ PartiallyTangible {
+	/*
+public CycFort isa = null;
+public ArrayList alsoisa = new ArrayList();
+public ArrayList goalMicrotheorys = new ArrayList();
+public ArrayList goalObjects = new ArrayList();
+public ArrayList knowsHow = new ArrayList();
 
-	public CycFort isa = null;
-	public ArrayList alsoisa = new ArrayList();
-	public ArrayList goalAreas = new ArrayList();
-	public ArrayList goalObjects = new ArrayList();
-	public ArrayList knowsHow = new ArrayList();
-
-	public ArrayList invokesSelfFeelings = new ArrayList();
-	public ArrayList prefersSelfFeelings = new ArrayList();
-	public ArrayList invokesOthersFeelings = new ArrayList();
-	public ArrayList prefersOthersFeelings = new ArrayList();
-	public ArrayList primitiveCommandStack = new ArrayList();
-	public ArrayList goalScriptStack = new ArrayList();
-
-	public MudObjectNPC() {
+public ArrayList invokesSelfFeelings = new ArrayList();
+public ArrayList prefersSelfFeelings = new ArrayList();
+public ArrayList invokesOthersFeelings = new ArrayList();
+public ArrayList prefersOthersFeelings = new ArrayList();
+public ArrayList primitiveCommandStack = new ArrayList();
+public ArrayList goalScriptStack = new ArrayList();
+		 */
+	public ReifiableNPC() {
 	    super();
-	}
-
-	public Command getNextCommand() {
-	    return null;
-	}           
-
-	public void selfEnact(Command cmd) {
-
 	}
 
     }
@@ -575,147 +529,149 @@ public class CycMoo extends CycAssertionsFactory {
     
     */
 
+    /***********************************************************
+     *  Jamud Booting
+     *
+     **********************************************************/
+
+    private static Area logicmooTopMicrotheory;
+    private static Hashtable logicmooTopRooms;
+    private static Hashtable logicmooTopArtifacts;
+    private static Hashtable logicmooTopBodies;
+
+    private static void startJamud(Object initial) {
+	String[] args = { "ini/jamud.xml"} ; 
+	try {
+	    Jamud.main( args );
+	    logicmooInstance = Jamud.currentInstance();
+	    //logicmooArea =  logicmooInstance.getArea();
+	    //logicmooPlayerManager =  logicmooInstance.getPlayerManager();
+	    //logicmooTop = logicmooArea.getDefaultRoom();
+	    //logicmooTopMicrotheory = logicmooTop.getArea();
+	    //   logicmooTopRooms =  logicmooTopMicrotheory.getRooms();
+
+	} catch ( Exception e ) {
+	    e.printStackTrace(System.err);
+	}
+    }
+
+    public static CycFort nearestFort(String type, Object value ){
+	if ( value==null ) return null;
+	String test = value.toString().toLowerCase();
+	Iterator kws = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$isa ?SEL #$"+type+")").iterator();
+	while ( kws.hasNext() ) {
+	    Object sample = kws.next();
+	    if ( sample instanceof CycFort ) if ( sample.toString().toLowerCase().indexOf(test)==0 ) return(CycFort)sample;
+	}
+	return null;
+    }
+
+
 
     /***********************************************************
      *  Reify Cyc To Jamud
      *
      **********************************************************/
 
-    public synchronized    void queryCycToJamudAll() {
-	reifyAllAreas();
-	// TODO queryCycToJamudAllActors();
-    }
 
-    public synchronized void syncMudAll() {
+    public static HashMap roomVNumToCycFort = new HashMap();
 
-	HashMap allMudArtifacts = new HashMap(); HashMap allMudAreas = new HashMap();
-	getChildrenFrom(jamudMudObjectRoot, allMudAreas, allMudArtifacts);    
+    public synchronized static void syncMudAll() {
 
-	syncAllMudAreas(allMudAreas);
-	syncAllMudEntrances(allMudAreas);
-	syncAllMudArtifacts(allMudArtifacts);  
-
-	syncAllMudLocations(allMudArtifacts);
-
-	syncAllDescriptions(allMudAreas,true);
-	syncAllDescriptions(allMudArtifacts,false);
-	syncAllFlags(allMudAreas,true);
-	syncAllFlags(allMudArtifacts,false);
-	syncAllKeywords(allMudAreas,true);
-	syncAllKeywords(allMudArtifacts,false);
-
-	//syncMudFlag(allMudAreas);
-	//syncMudAttribute();
-	//syncMudKeyword();
-    }
-
-    // --------------------------------------------------------------------------
-    // Test if something is an Area
-    // --------------------------------------------------------------------------
-    public static boolean isArea(MudObject obj) {
-	if ( obj==null ) return false;
-	if ( obj.flags().contains("MudArea") 
-	     || obj.getKeywords().contains("MudArea")
-	     || obj.isFlagged("MudArea")
-	     || obj.getRace().equals("MudArea")
-	     || obj.getJob().equals("MudArea")
-	   ) return true;
-
-	MudObjectContainer objcont = obj.childContainer();
-	if ( objcont==null ) return false;
-	if ( objcont.exits().hasNext() ) return true;
-	return false;
-    }
+	try {
 
 
-    public void getChildrenFrom(MudObjectContainer cont, HashMap isaArea, HashMap isaArtifact) {
-	//System.out.println("getChildrenFrom( " + cont + ",  " + isaArea + ",  " + isaArtifact + ",  "+ isaEntrance +")");
-	if ( cont==null ) return;
-	Iterator childs = cont.childObjects();
-	while ( childs.hasNext() ) {
-	    MudObject child = (MudObject) childs.next();
-	    MudObjectContainer  subcont =  child.childContainer();
-	    Object cycname = getObjNameCyc(child);
-	    String name = cycname.toString();
-	    child.setName(name);
-	    try {
-		child.setTemplateId(name);
-	    } catch ( TemplateConflictException e ) {
+
+	    System.out.println("tick syncMudAll");
+
+
+
+	    //  logicmooTopRooms =  logicmooTopMicrotheory.getRooms();
+	    //   logicmooTopArtifacts =  logicmooTopMicrotheory.getArtifacts();
+	    //  logicmooTopBodies =  logicmooTopMicrotheory.getAgentGenerics();
+
+
+
+	    System.out.println("syncAllRooms: starting");
+	    /*
+	    ArrayList cycMicrotheorysL = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$isa ?SEL #$Room)");
+	    Iterator roomVrefs =  logicmooTopRooms.entrySet().iterator();
+    
+	    while (roomVrefs.hasNext()) {
+	    Object roomVref = roomVrefs.next();
+	    Room room = logicmooTopRooms.get(roomVref);
+	    if (!roomVref.equals(room.getCycFortString())) System.out.println("syncAllRooms: "+roomVref+"!="+room.getCycFortString());
+	    String roomname = room.getName();
+	    String roomfullvnum = room.getFullCycFort();
+	    CycFort cycroomconst=roomVNumToCycFort.get(roomfullvnum);
+	    if (cycroomconst==null) {
+		cycroomconst = makeTypedCycFort("Room",roomname);
+		roomVNumToCycFort.put(cycroomconst,roomfullvnum);
+		roomVNumToCycFort.put(roomfullvnum,cycroomconst);
 	    }
-	    if ( subcont!=null ) {
-		subcont.setName(name);
 	    }
-	    if ( isArea(child) ) {
-		isaArea.put(name,child);
-	    } else {
-		isaArtifact.put(name,child);
+    
+	    Iterator cycMicrotheorys =  cycMicrotheorysL.iterator();
+    
+	    while (cycMicrotheorys.hasNext()) {
+	    CycFort cycMicrotheory = (CycFort) cycMicrotheorys.next();
+	    String vnumforMicrotheory = (String)roomVNumToCycFort.get(cycMicrotheory);
+	    if (vnumforMicrotheory==null) {
+		Room room = new Room(logicmooTopMicrotheory);
+		room.setName(attemptParaphrase(cycMicrotheory));
+		room.setName(attemptParaphrase(cycMicrotheory));
+    
+    
 	    }
-	    getChildrenFrom(subcont,isaArea, isaArtifact);
-	}
-    }
-
-    // --------------------------------------------------------------------------
-    // Synchronize Cyc and Jamud's Known Areas
-    // --------------------------------------------------------------------------
-
-    public synchronized void syncAllMudAreas(HashMap allMudAreas) {
-	System.out.println("syncAllMudAreas");
-	ArrayList mudAreasL = new ArrayList(allMudAreas.keySet());
-	ArrayList cycAreasL = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$isa ?SEL #$MudArea)");
-	Iterator cycAreas =  cycAreasL.iterator();
-	Iterator mudAreas =  mudAreasL.iterator();
-
-	while ( cycAreas.hasNext() ) {
-	    CycFort cycArea = (CycFort)cycAreas.next();
-	    if ( !mudAreasL.contains(cycArea.toString()) )
-		allMudAreas.put(cycArea.toString(),reifyAsNewArea(cycArea));
+    
+	    }
+	      */
+	    /*
+	   syncAllRooms(logicmooTopRooms);
+   
+   
+   
+	   syncAllMudExits(logicmooTopRooms);
+	   syncAllMudArtifacts(logicmooTopArtifacts);  
+   
+	   syncAllMudLocations(logicmooTopRooms);
+   
+	   syncAllDescriptions(allRooms,true);
+	   syncAllDescriptions(allMudArtifacts,false);
+	   syncAllFlags(allRooms,true);
+	   syncAllFlags(allMudArtifacts,false);
+	   syncAllKeywords(allRooms,true);
+	   syncAllKeywords(allMudArtifacts,false);
+   
+	   //syncMudFlag(allRooms);
+	   //syncMudAttribute();
+	   //syncMudKeyword();
+	   */
+	} catch ( Exception e ) {
+	    e.printStackTrace();
 	}
 
-	while ( mudAreas.hasNext() ) {
-	    String mudArea = mudAreas.next().toString();
-	    CycFort cycArea = makeCycConstantSafe(mudArea);
-
-	    if ( !cycAreasL.contains(mudArea) ) {
-		MudObject area = (MudObject)allMudAreas.get(mudArea);
-		if ( area!=null ) {
-		    assertExistingArea(jamudMt,area);
-		    allMudAreas.put(mudArea,area);
-		}
-	    }
-	}
+	System.out.println("tock syncMudAll");
 
     }
 
+
+
     // --------------------------------------------------------------------------
-    // Synchronize Cyc and Jamud's Known Pathways/Entrances
+    // Synchronize Cyc and Jamud's Known Microtheorys
     // --------------------------------------------------------------------------
 
-    public synchronized void syncAllMudEntrances(HashMap allMudAreas) {
-	System.out.println("syncAllMudEntrances");
+    public synchronized void syncAllRooms(Hashtable allRooms) {
+	//  ArrayList cycMicrotheorysL = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$isa ?SEL #$Room)");
+    }
 
-	ArrayList mudAreasL = new ArrayList(allMudAreas.keySet());
-	Iterator mudAreas =  mudAreasL.iterator();
+    // --------------------------------------------------------------------------
+    // Synchronize Cyc and Jamud's Known Pathways/Exits
+    // --------------------------------------------------------------------------
 
-	while ( mudAreas.hasNext() ) {
-	    String mudAreaName = mudAreas.next().toString();
-	    MudObject mudAreaObject = (MudObject) allMudAreas.get(mudAreaName); 
-	    CycFort cycobject = (CycFort)getObjNameCyc(mudAreaObject);
-	    Iterator cycEntrances = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$mudExit " + cycobject.stringApiValue() + " ?SEL)").iterator();
-	    assertRoomExits(cycobject,mudAreaObject.childContainer().exits(),true);
-	    while ( cycEntrances.hasNext() ) {
-		Object cycEntrance = cycEntrances.next();
-		if ( cycEntrance instanceof CycList ) {
-		    Object direction = ((CycList)cycEntrance).second();
-		    Object cycto = ((CycList)cycEntrance).third();
-		    createPathwayIfNew(mudAreaObject,findObject((CycFort)cycto),direction.toString());
-		}
-		if ( cycEntrance instanceof CycNart ) {
-		    Object direction = ((CycNart)cycEntrance).toCycList().second();
-		    Object cycto = ((CycNart)cycEntrance).toCycList().third();
-		    createPathwayIfNew(mudAreaObject,findObject((CycFort)cycto),direction.toString());
-		}
-	    }
-	}
+    public synchronized void syncAllMudExits(HashMap allRooms) {
+	System.out.println("syncAllMudExits");
+	//     Iterator cycExits = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$mudExit " + cycobject.stringApiValue() + " ?SEL)").iterator();
     }
 
     public void assertRoomExits(CycFort cycobject, Iterator exits, boolean clearfirst) {
@@ -732,41 +688,18 @@ public class CycMoo extends CycAssertionsFactory {
 
     public synchronized void syncAllMudArtifacts(HashMap allMudArtifacts) {
 	System.out.println("syncAllMudArtifacts");
-	ArrayList mudArtifactsL = new ArrayList(allMudArtifacts.keySet());
 	ArrayList cycArtifactsL = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$isa ?SEL #$MudArtifact)");
-	Iterator cycArtifacts =  cycArtifactsL.iterator();
-	Iterator mudArtifacts =  mudArtifactsL.iterator();
-
-	while ( cycArtifacts.hasNext() ) {
-	    CycFort cycArtifact = (CycFort)cycArtifacts.next();
-	    if ( !mudArtifactsL.contains(cycArtifact.toString()) ) {
-		System.out.print("telling jamud about " + cycArtifact.cyclify());
-		MudObject newobj =  reifyArtifactObject(cycArtifact);
-		System.out.println(newobj);
-		allMudArtifacts.put(cycArtifact.toString(),newobj);
-	    }
-	}
-
-	while ( mudArtifacts.hasNext() ) {
-	    String mudArtifactName = mudArtifacts.next().toString();
-	    if ( !cycArtifactsL.contains(mudArtifactName) ) {
-		System.out.println("telling cyc about " + mudArtifactName);
-		MudObject mudObject = (MudObject)allMudArtifacts.get(mudArtifactName);
-		CycFort cycobject = (CycFort)makeCycJavaObject(jamudMt,mudObject,false);
-		allMudArtifacts.put(cycobject.toString(),mudObject);
-	    }
-	}
     }
 
 
-    public  CycFort cyclifyFort(Object obj) {
+    public synchronized  static CycFort makeCycFort(Object obj) {
 
 	if ( obj instanceof CycFort ) {
 	    return(((CycFort)obj));
 	}
 
-	if ( obj instanceof Viewable ) {
-	    return cyclifyFort(getObjNameCyc(obj));
+	if ( obj instanceof PartiallyTangible ) {
+	    return makeCycFort(getObjNameCyc(obj));
 	}
 
 	if ( obj instanceof CycList ) {
@@ -779,7 +712,7 @@ public class CycMoo extends CycAssertionsFactory {
 		return makeCycConstantSafe((String)obj);
 	    } else {
 		try {
-		    return cyclifyFort((CycList)(new CycListKifParser(staticAccess)).read(sobj));
+		    return makeCycFort((CycList)(new CycListKifParser(staticAccess)).read(sobj));
 		} catch ( Exception e ) {
 
 		}
@@ -797,8 +730,8 @@ public class CycMoo extends CycAssertionsFactory {
 	    return(((CycFort)obj).cycListApiValue().toString());
 	}
 
-	if ( obj instanceof Viewable ) {
-	    return cyclifyFort(getObjNameCyc(obj)).stringApiValue();
+	if ( obj instanceof PartiallyTangible ) {
+	    return makeCycFort(getObjNameCyc(obj)).stringApiValue();
 	}
 
 	if ( obj instanceof CycList ) {
@@ -826,135 +759,24 @@ public class CycMoo extends CycAssertionsFactory {
 
     public synchronized void syncAllMudLocations(HashMap allMudArtifacts) {
 	System.out.println("syncAllMudLocations");
+	//  Iterator cycLocations = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$mudObjectFoundInMicrotheory " + cycobject.stringApiValue() + " ?SEL)").iterator();
 
-	ArrayList mudArtifactsL = new ArrayList(allMudArtifacts.keySet());
-	Iterator mudArtifacts =  mudArtifactsL.iterator();
-
-	while ( mudArtifacts.hasNext() ) {
-	    String mudArtifactName = mudArtifacts.next().toString();
-	    MudObject mudArtifactObject = (MudObject) allMudArtifacts.get(mudArtifactName); 
-	    CycFort cycobject = (CycFort)getObjNameCyc(mudArtifactObject);
-	    System.out.print("locating " + cycobject.cyclify() + " " );
-	    MudObjectContainer locationContainer = mudArtifactObject.getParentContainer();
-	    System.out.print("with parent " + locationContainer + " " );
-	    MudObject location = null;
-	    CycFort cycmudlocation =null;
-	    if ( locationContainer!=null ) {
-		// Update Cyc
-		location = locationContainer.parentObject();
-		if ( location!=null ) {
-		    cycmudlocation = (CycFort)getObjNameCyc(location);
-		    assertSlotValue(jamudMt,cycobject,"mudObjectFoundInArea",cycmudlocation,true);
-		}
-		System.out.println(""+cycmudlocation + " ");
-	    } else {
-		Iterator cycLocations = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$mudObjectFoundInArea " + cycobject.stringApiValue() + " ?SEL)").iterator();
-		if ( cycLocations.hasNext() ) {
-		    CycFort cycthinks = null;
-		    Object cycLocation = cycLocations.next();
-		    if ( cycLocation instanceof CycConstant ) {
-			cycthinks = ((CycConstant)cycLocation);
-		    }
-		    if ( cycLocation instanceof CycList ) {
-			cycthinks = new CycNart(((CycList)cycLocation));
-		    }
-		    if ( cycLocation instanceof CycNart ) {
-			cycthinks = ((CycNart)cycLocation);
-		    }
-		    MudObject cycthinksParent =  findObject(cycthinks);
-		    System.out.println(" "+cycthinks + " " +cycthinksParent + " ");
-		    if ( cycthinksParent!=null ) {
-			MudObjectContainer cycthinkscont = cycthinksParent.childContainer();
-			if ( cycthinkscont!=null ) {
-			    mudArtifactObject.setParentContainer(cycthinkscont);
-			} else System.out.println(" cyc wants it to be in a non Area ");
-		    } else System.out.println(" cyc points a missing object ");
-		} else System.out.println(" cyc still does not know ");
-	    }
-
-	}    // End while
+	//   ArrayList mudArtifactsL = new ArrayList(allMudArtifacts.keySet());
     }
 
     public synchronized void syncAllDescriptions(HashMap allMudArtifacts,boolean isarea) {
 	System.out.println("syncAllDescriptions");
-	ArrayList mudArtifactsL = new ArrayList(allMudArtifacts.keySet());
-	Iterator mudArtifacts =  mudArtifactsL.iterator();
-
-	while ( mudArtifacts.hasNext() ) {
-	    String mudArtifactName = mudArtifacts.next().toString();
-	    MudObject mudArtifactObject = (MudObject) allMudArtifacts.get(mudArtifactName); 
-	    CycFort cycobject = (CycFort)getObjNameCyc(mudArtifactObject);
-	    MudObjectContainer mudArtifactObjectChild =  mudArtifactObject.childContainer();
-	    String mudArtifactDesc = null;
-
-	    if ( isarea && mudArtifactObjectChild!=null ) {
-		mudArtifactDesc = mudArtifactObjectChild.getDescription();
-	    } else {
-		mudArtifactDesc = mudArtifactObject.getDescription();
-	    }
-
-	    mudArtifactDesc = mudArtifactObject.getDescription();
-
-	    Iterator cycDescs = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$mudDescription " + cycobject.stringApiValue() + " ?SEL)").iterator();
-	    while ( cycDescs.hasNext() ) {
-		String thisCycDec = cycDescs.next().toString();
-		if ( mudArtifactDesc.indexOf(thisCycDec)>-1 ) continue;
-		if ( thisCycDec.indexOf(mudArtifactDesc)>-1 ) mudArtifactDesc = thisCycDec;
-		// mudArtifactDesc = mudArtifactDesc + " " + thisCycDec;
-	    }
-
-	    assertSlotValue(jamudMt,cycobject,"mudDescription",mudArtifactDesc,true);
-
-	    if ( isarea && mudArtifactObjectChild!=null ) {
-		mudArtifactObjectChild.setDescription(mudArtifactDesc);
-	    } else {
-		mudArtifactObject.setDescription(mudArtifactDesc);
-	    }
-	}
+	//       Iterator cycDescs = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$mudDescription " + cycobject.stringApiValue() + " ?SEL)").iterator();
     }
 
     public synchronized void syncAllFlags(HashMap allMudArtifacts, boolean isarea) {
 	System.out.println("syncAllFlags" );
-	ArrayList mudArtifactsL = new ArrayList(allMudArtifacts.keySet());
-	Iterator mudArtifacts =  mudArtifactsL.iterator();
-
-	while ( mudArtifacts.hasNext() ) {
-	    String mudArtifactName = mudArtifacts.next().toString();
-	    MudObject mudArtifactObject = (MudObject) allMudArtifacts.get(mudArtifactName); 
-	    CycFort cycobject = (CycFort)getObjNameCyc(mudArtifactObject);
-	    FlagList mudArtifactFlags = mudArtifactObject.flags(); 
-
-	    Iterator cycFlags = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$mudFlag " + cycobject.stringApiValue() + " ?SEL)").iterator();
-	    while ( cycFlags.hasNext() ) {
-		String thisCycFlag = cycFlags.next().toString();
-		if ( !mudArtifactFlags.contains(thisCycFlag) ) {
-		    mudArtifactFlags.add(thisCycFlag); 
-		}
-		assertSlotValue(jamudMt,cycobject,"mudFlag",mudArtifactFlags.iterator(),true);
-	    }
-	}
+	//      Iterator cycFlags = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$mudFlag " + cycobject.stringApiValue() + " ?SEL)").iterator();
     }
 
     public synchronized void syncAllKeywords(HashMap allMudArtifacts, boolean isarea) {
 	System.out.println("syncAllKeywords" );
-	ArrayList mudArtifactsL = new ArrayList(allMudArtifacts.keySet());
-	Iterator mudArtifacts =  mudArtifactsL.iterator();
-
-	while ( mudArtifacts.hasNext() ) {
-	    String mudArtifactName = mudArtifacts.next().toString();
-	    MudObject mudArtifactObject = (MudObject) allMudArtifacts.get(mudArtifactName); 
-	    CycFort cycobject = (CycFort)getObjNameCyc(mudArtifactObject);
-	    FlagList mudArtifactKeywords = mudArtifactObject.getKeywords(); 
-
-	    Iterator cycKeywords = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$mudKeyword " + cycobject.stringApiValue() + " ?SEL)").iterator();
-	    while ( cycKeywords.hasNext() ) {
-		String thisCycKeyword = cycKeywords.next().toString();
-		if ( !mudArtifactKeywords.contains(thisCycKeyword) ) {
-		    mudArtifactKeywords.add(thisCycKeyword); 
-		}
-		assertSlotValue(jamudMt,cycobject,"mudKeyword",mudArtifactKeywords.iterator(),true);
-	    }
-	}
+	//   Iterator cycKeywords = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$mudKeyword " + cycobject.stringApiValue() + " ?SEL)").iterator();
     }
 
     public synchronized void syncAllMudAttributes(HashMap allMudArtifacts, boolean isarea) {
@@ -965,7 +787,7 @@ public class CycMoo extends CycAssertionsFactory {
 	  
 	  while ( mudArtifacts.hasNext() ) {
 	  String mudArtifactName = mudArtifacts.next().toString();
-	  MudObject mudArtifactObject = (MudObject) allMudArtifacts.get(mudArtifactName); 
+	  PartiallyTangible mudArtifactObject = (PartiallyTangible) allMudArtifacts.get(mudArtifactName); 
 	  CycFort cycobject = (CycFort)getObjNameCyc(mudArtifactObject);
 	  Iterator cycAttributes = staticAccess.getArrayListQuerySEL("EverythingPSC","(#$mudAttribute " + cycobject.stringApiValue() + " ?SEL)").iterator();
 	  assertObjectAttributes(cycobject,mudArtifactObject.attributes(),true);
@@ -987,59 +809,10 @@ public class CycMoo extends CycAssertionsFactory {
     }
 
 
-    public void assertObjectAttributes(CycFort cycobject,Attributes attribs, boolean clearfirst) {
+    public void assertObjectAttributes(CycFort cycobject,Object attribs, boolean clearfirst) {
 
     }
 
-    /*
-    ;;  isa MudThingType
-    ;;  isa MudArea, MudEntrance, MudArtifact, MudBeing 
-    
-    ;; (mudObjectFoundInArea ?MudArtifactOrMudBeing  ?MudArea)
-    ;; (mudPathwayToArea ?Area1  ?Area1 ?MudEntrance)
-    ;; (mudInstance ?MT ?Obj ?MudThingType)
-    ;; (mudDescription ?Obj ?TextString)
-    ;; (mudFlag ?Obj ?Flag)  ;; Attribt
-    ;; (mudAttribute ?Obj ?Attrib ?Value)
-    ;; (mudKeyword ?Obj  ?TextString ) ;; isa's
-    ;; (mudChild ?Obj  ?Obj )
-    */
-
-
-    // --------------------------------------------------------------------------
-    // Reify Cyc #$GeographicalRegion(s) To Jamud
-    // --------------------------------------------------------------------------
-    public synchronized    void reifyAllAreas() {
-	Iterator places =  staticAccess.getArrayListQuerySEL("EverythingPSC","(#$isa ?SEL #$MudArea)").iterator();
-	while ( places.hasNext() ) reifyAsNewArea((CycFort) places.next());
-    }
-
-    // --------------------------------------------------------------------------
-    // Reify Single Area (reifyAreaObjectAndExits and 'objectFoundInLocation's) 
-    // --------------------------------------------------------------------------
-    public synchronized    MudObject reifyAsNewArea(CycFort cycplace) {
-	// Make sure Area Object Exists
-	MudObject area = reifyAreaObjectAndExits(cycplace);
-	// Make sure All objects found in location exisdts in Mud
-	Iterator objects =  staticAccess.getArrayListQuerySEL("EverythingPSC","(#$mudObjectFoundInArea "+ cycplace.stringApiValue() +" ?SEL)").iterator();
-	while ( objects.hasNext() ) reifyObject((CycFort) objects.next());
-	return area;
-    }
-
-    // --------------------------------------------------------------------------
-    // Reify Single Object (All types: Area, Artifact)
-    // --------------------------------------------------------------------------
-    public synchronized    MudObject reifyObject(CycFort cycobject) {
-	if ( cycobject==null ) return null;
-	// (#$isa ?SEL #$GeographicalRegion)
-	try {
-	    if ( isa(cycobject,geographicalRegion) ) return reifyAsNewArea(cycobject);
-	} catch ( Exception io ) {    //CycApiException IOException
-	    io.printStackTrace();
-	}
-
-	return reifyArtifactObject(cycobject);
-    }
 
     public synchronized static void assertIsaSafe(CycFort cycobject, CycFort cycclass, CycFort cycmt) {
 	try {
@@ -1049,20 +822,6 @@ public class CycMoo extends CycAssertionsFactory {
 	}
     }
 
-
-    // --------------------------------------------------------------------------
-    // Reify Single Artifact Object (will create if not found)
-    // --------------------------------------------------------------------------
-    public synchronized    MudObject reifyArtifactObject(CycFort cycobject) {
-	if ( cycobject==null ) return null;
-	MudObject object = findObject(cycobject);
-	if ( object==null ) {
-	    object = makeArtifactObject(cycobject);
-	}
-	assertIsaSafe(cycobject,makeCycConstantSafe("#$MudArtifact"),jamudMt);
-	return object;
-	//Basic
-    }
 
     public synchronized static CycConstant makeCycConstantSafe(String constname) {
 	if ( constname==null ) return null;
@@ -1074,366 +833,16 @@ public class CycMoo extends CycAssertionsFactory {
     }
 
 
-    // --------------------------------------------------------------------------
-    // Reify Unknown Artifact Object
-    // --------------------------------------------------------------------------
-    public synchronized    MudObject makeArtifactObject(CycFort cycobject) {
-	if ( cycobject==null ) return null;
-	String objName= cycobject.toString();
-	MudObject object = new MudObject();
-	assertIsaSafe(cycobject,makeCycConstantSafe("#$MudArtifact"),jamudMt);
-	queryUpdateViewable(object,cycobject);
-	object.setName(objName);
-	object.setShortDescription(objName);
-	return object;
-    }
-
-    // --------------------------------------------------------------------------
-    // Reify Single Area's Object and Exits
-    // --------------------------------------------------------------------------
-    public synchronized    MudObject reifyAreaObjectAndExits(CycFort cycplace) {
-	if ( cycplace==null ) return null;
-	MudObject area = reifyAreaObjectOnly(cycplace);
-	// Get and add internal objects
-	//reifyAreaPortals(cycplace);
-	return area;
-    }
-
-    // --------------------------------------------------------------------------
-    // Reify Single Area's Object Onlky
-    // --------------------------------------------------------------------------
-    public synchronized    MudObject reifyAreaObjectOnly(CycFort cycplace) {
-	MudObject area = findObject(cycplace);
-	if ( area!=null ) return area;
-	String areaName= cycplace.toString();
-	// If area was not made then make it
-	area = createAreaObject(areaName);     
-	// get and set name
-	area.setName(areaName);
-	// Get and add description
-	queryUpdateViewable(area,cycplace);
-	return area;
-    }
-
-    // --------------------------------------------------------------------------
-    // Reify Long and Short Descriptions
-    // --------------------------------------------------------------------------
-    public synchronized    void queryUpdateViewable(Viewable object,CycFort cycobject) {
-	if ( object==null || cycobject==null ) return;
-	FlagList kw = new FlagList();
-
-	String cycname = cycobject.toString();
-	String cycpara = attemptParaphrase(cycobject);
-
-	kw.add(cycname);
-	MudObjectContainer contaner = null;
-	if ( object instanceof MudObject ) contaner = ((MudObject)object).childContainer();
-
-	object.setShortDescription(cycpara);
-
-	StringBuffer desc = new StringBuffer("");
-
-	Iterator answers =  staticAccess.getArrayListQuerySEL("EverythingPSC","(#$comment "+cycobject.stringApiValue()+" ?SEL)").iterator();
-	while ( answers.hasNext() ) desc.append(answers.next().toString());
-
-	String oisa = null;
-
-	Iterator isas =  staticAccess.getArrayListQuerySEL("EverythingPSC","(#$nearestIsa "+cycobject.stringApiValue()+" ?SEL)").iterator();
-
-	while ( isas.hasNext() ) {
-	    oisa = isas.next().toString();
-	    desc.append("\nIs " + oisa );
-	    kw.add(oisa);
-	    while ( isas.hasNext() ) {
-		oisa = isas.next().toString();
-		desc.append(", " + oisa);
-		kw.add(oisa);
-	    }
-	}
-
-	object.setKeywords(new FlagList(kw));
-	String longdesc = Strings.change(desc.toString(),"#$","");
-	object.setDescription(longdesc);
-	if ( contaner!=null ) {
-	    contaner.setName(cycname);
-	    contaner.setShortDescription(cycpara);
-	    contaner.setDescription(longdesc);
-	    contaner.setKeywords(new FlagList(kw));
-	    //  System.out.println(cycobject+"-> " + longdesc);
-	}
-	// Get and append descriptivness
-    }
-
-    // --------------------------------------------------------------------------
-    // Reify Single Area Exits
-    // --------------------------------------------------------------------------
-    public synchronized    void reifyAreaPortals(CycFort cycplace) {
-	/*
-	 if ( cycplace==null ) return;
-	 reifyAreaPortals("EverythingPSC","(#$geographicalSubRegions "+cycplace.stringApiValue()+" ?SEL)",
-	      "local transport into",cycplace);
-	 reifyAreaPortals("EverythingPSC","(#$and (#$isa (#$BorderBetweenFn ?W ?SEL) #$Border) (#$equals ?W "+cycplace.stringApiValue()+"))",
-	      "border transport into",cycplace);
-	 reifyAreaPortals("EverythingPSC","(#$and (#$isa (#$BorderBetweenFn ?SEL ?W ) #$Border) (#$equals ?W "+cycplace.stringApiValue()+"))",
-	      "border transport into",cycplace);
-	 reifyAreaPortals("EverythingPSC","(#$geographicalSubRegions ?SEL "+cycplace.stringApiValue()+")",
-	      "regional transport out to",cycplace);
-	      */
-    }
-
-    public synchronized    void  reifyAreaPortals(String mt,String query,String desc,CycFort cycplace) {
-	ArrayList regionList =  staticAccess.getArrayListQuerySEL(mt,query);
-	System.out.println(""+cycplace+" " + desc + " " + regionList.size());
-	Iterator regions = regionList.iterator();
-	while ( regions.hasNext() ) {
-	    CycFort cycdest = (CycFort) regions.next();
-	    if ( !cycplace.equals(cycdest) ) reifyPathway(cycplace,cycdest,desc);
-	}
-    }
-
-    // --------------------------------------------------------------------------
-    // Reify Single Area Exits
-    // --------------------------------------------------------------------------
-    public synchronized    Entrance reifyPathway(CycFort cycsource,CycFort cyctarget,String desc) {
-	Entrance pathway =  createPathwayIfNew(reifyAreaObjectOnly(cycsource),reifyAreaObjectOnly(cyctarget),desc);
-	// TODO Add more information to pathway before returning it
-	return pathway;
-    }
 
     /***********************************************************
      *  Find In Jamud
      *
      **********************************************************/
 
-    // --------------------------------------------------------------------------
-    // Locate Object
-    // --------------------------------------------------------------------------
-    public synchronized    MudObject findObject(CycFort cycconst) {
-	if ( cycconst==null ) return null;
-	return findObject(cycconst.toString());
-    }
-    // --------------------------------------------------------------------------
-    // Locate Object
-    // --------------------------------------------------------------------------
-    public synchronized    MudObject findObject(String objectName) {
-	if ( objectName==null )	return null;
-	return findObject(jamudMudObjectRoot, objectName);
-    }
-
-
-    // --------------------------------------------------------------------------
-    // Locate Object
-    // --------------------------------------------------------------------------
-    //private static HashMap objectFindHash = new HashMap();
-
-    public synchronized    MudObject findObject(MudObjectContainer  scopearea, String objectName) {
-	if ( objectName==null )	return null;
-	//MudObject object = (MudObject)objectFindHash.get(objectName); 
-	//  if ( object!=null ) return object;
-	MudObject object = findObjectNoCache(scopearea,objectName); 
-	// objectFindHash.put(objectName,object);
-	return object; 
-    }
-
-
-    public  synchronized    MudObject findObjectNoCache(MudObjectContainer  scopearea, String objectName) {
-	// System.out.println("findObject " + objectName + " in " + scopearea.getName() );
-	if ( objectName==null )	return null;
-	if ( scopearea == null || objectName==null ) return null;
-
-	MudObject object = /*MudObject.asCycMudObject*/(scopearea.getChildObject(objectName));
-	if ( object!=null ) return object;
-
-	Iterator i = scopearea.childObjects();
-	while ( i.hasNext() ) {
-	    object = findObjectNoCache(((MudObject) i.next()).childContainer(),objectName);
-	    if ( object!=null )	return object;
-	}
-	return null;
-    }
-
     /***********************************************************
      *  Create In Jamud
      *
      **********************************************************/
-
-    // --------------------------------------------------------------------------
-    // Create Single Area
-    // --------------------------------------------------------------------------
-
-    public synchronized    MudObject  createAreaObject(String areaName) {
-	return createAreaObject(jamudTop, areaName);
-    }
-
-    public synchronized    MudObject createAreaObject(MudObject parent,  String areaName) {
-
-	if ( areaName==null || areaName.length()<1 )
-	    areaName = "new area in " + parent.getName();
-
-	MudObject newAreaObj = /*MudObject.asCycMudObject*/( MudObject.getMudObjectTemplate(areaName));
-	if ( newAreaObj!=null )	return newAreaObj;
-
-
-	// Make  area object 
-	newAreaObj = new MudObject();
-	// Make  child container object 
-	MudObjectContainer newAreaChildContainer = new MudObjectContainer(newAreaObj);
-	// get and set tid
-	/*      try {
-	newAreaObj.isTemplate(true);
-	} catch ( TemplateConflictException e ) {
-	e.printStackTrace();
-	}
-	*/
-	try {
-	    newAreaObj.setTemplateId(areaName);
-	} catch ( TemplateConflictException e ) {
-	    e.printStackTrace();
-	}
-	try {
-	    newAreaObj.isTemplate(true);
-	} catch ( TemplateConflictException e ) {
-	    e.printStackTrace();
-	}
-	newAreaObj.setName(areaName);
-	newAreaObj.setShortDescription("area object for " + areaName);
-	newAreaObj.setDescription("Area object for " + areaName);
-	newAreaObj.setParentContainer(parent.childContainer());
-
-	// Make  area ChildContainer 
-	FlagList fl2 = new FlagList();
-	fl2.add(areaName);
-	newAreaChildContainer.setName(areaName);
-	newAreaChildContainer.setShortDescription("child container for " + areaName);
-	newAreaChildContainer.setDescription("Child container for " + areaName);
-	//ensureUnique(newAreaChildContainer);
-	newAreaChildContainer.setKeywords(fl2);
-	newAreaObj.setKeywords(fl2);
-	return newAreaObj;
-    }
-
-    // --------------------------------------------------------------------------
-    // Create Single One-way Exit
-    // --------------------------------------------------------------------------
-    public synchronized    Entrance createPathwayIfNew(MudObject source,MudObject target,String desc) {
-	if ( source==null || target==null || desc==null ) return null;
-	Entrance pathway = null; 
-	MudObjectContainer targetContainer = target.childContainer();
-	MudObjectContainer sourceContainer = source.childContainer();
-
-	if ( targetContainer==null || sourceContainer==null ) return null;
-
-	// Check Exits
-	Iterator exits = sourceContainer.exits();
-	while ( exits.hasNext() ) {
-	    pathway = (Entrance) exits.next();
-	    if ( pathway==null ) continue;
-	    MudObjectContainer pdest = pathway.getDestination();
-	    if ( pdest==null ) continue;
-	    if ( pdest.equals(targetContainer) ) return pathway;
-	}
-
-	try {
-	    pathway = new Entrance(targetContainer);
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.out);
-	}
-	try {
-	    pathway.setDestinationMessage("came from " + source.getName());
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.out);
-	}
-	try {
-	    pathway.setOriginMessage("you are on your way to " +target.getName());
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.out);
-	}
-	try {
-	    pathway.setKeywords(new FlagList(target.getName()));
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.out);
-	}
-	try {
-	    pathway.setName(target.getName());
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.out);
-	}
-	try {
-	    pathway.setShortDescription(desc + " " + target.getName());
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.out);
-	}
-	try {
-	    pathway.setDescription("from " + source.getShortDescription() + " " + desc + " " + target.getShortDescription());
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.out);
-	}
-	try {
-	    pathway.setType(         Entrance.TYPE_OPEN);
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.out);
-	}
-	try {
-	    pathway.setState(Entrance.STATE_OPEN);
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.out);
-	}
-	try {
-	    sourceContainer.addExit(pathway);
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.out);
-	}
-	return pathway;  
-    }
-
-    /***********************************************************
-     * Attribute Editing
-     *
-     **********************************************************/
-
-    public synchronized    boolean addProperty(MudObjectViewable target, String property)
-    throws JamudException {
-	return addProperty( target,  property,  "" );
-    }
-
-    public synchronized    boolean addProperty(MudObjectViewable target, String property, Object value)
-    throws JamudException {
-	return setProperty(target,  property , value);
-    }
-
-    public synchronized    boolean setProperty(Object target, String property, Object value)
-    throws JamudException {
-
-	if ( attemptJavaSetMethod(target,property,value) )
-	    return true;
-
-	if ( target instanceof MudObject ) {
-	    ((MudObject)target).attributes().setProperty(property,value.toString());
-	    return true;
-	}
-
-	throw new JamudException("The type " + target.getClass().getName() + " did not have the interface to add the property " +value );
-
-    }
-
-    public synchronized    boolean unsetProperty(MudObjectViewable target, String property)
-    throws JamudException {
-	return removeProperty(  target,  property);
-    }
-
-    public synchronized    boolean removeProperty(MudObjectViewable target, String property)
-    throws JamudException {
-	if ( property==null || property.length()<1 )
-	    throw new JamudException("removeProperty: no property name ");
-
-	if ( target instanceof MudObject ) {
-	    ((MudObject)target).attributes().remove(property) ;
-	    return true;
-	}
-	throw new JamudException("The type " + target.getClass().getName() + " did not have the interface to remove the property " +property );
-
-    }
-
 
     /***********************************************************
      * Java Editing
@@ -1480,65 +889,9 @@ public class CycMoo extends CycAssertionsFactory {
     }
 
     /***********************************************************
-     *  Flag Editing
-     *
-     **********************************************************/
-
-    public synchronized    boolean flaglistEdit(MudObjectViewable target, String flagname , boolean value )
-    throws JamudException {
-	if ( flagname==null || flagname.length()<1 )
-	    throw new JamudException("removeProperty: no property name ");
-	FlagList fl = ((MudObject)target).flags();
-	if ( value ) {
-	    if ( !fl.contains(flagname) ) fl.add(flagname);
-	    return true;
-	} else {
-	    if ( fl.contains(flagname) ) fl.remove(flagname);
-	    return true;
-	}
-    }
-
-    public synchronized    boolean destroyObject(MudObjectViewable target)
-    throws JamudException {
-	throw new JamudException("destroyObject: not immplemented ");
-    }
-
-    /***********************************************************
      * Java Typing
      *
      **********************************************************/
-
-
-    public synchronized    Object mktype(String theType,String theData)
-    throws JamudException {
-	try {
-	    if ( theType.equals("Long") )
-		return new java.lang.Long(theData);
-	    if ( theType.equals("Integer") )
-		return new java.lang.Integer(theData);
-	    if ( theType.equals("Short") )
-		return new Short(theData);
-	    if ( theType.equals("Float") )
-		return new java.lang.Float(theData);
-	    if ( theType.equals("Byte") )
-		return new Byte(theData);
-	    if ( theType.equals("Boolean") )
-		return new Boolean(theData);
-	    if ( theType.equals("Char") || theType.equals("Character") )
-		return new Character(theData.charAt(0));
-	    if ( theType.equals("Date") )
-		return new MudDate(Long.parseLong(theData));
-	    if ( theType.equals("Class") )
-		return Class.forName(theData);
-	    if ( theType.equals("String") ) return theData;
-
-	    return makeInstanceFromClass( theType, theData);
-
-	} catch ( Exception e ) {
-	    throw new JamudException("Cannot construct "+ theType +" from \"" + theData + "\" (" + e + ")" );
-	}
-    }
-
 
 
     public synchronized    Object makeInstanceFromClass(String theType,Object value)
@@ -1570,27 +923,14 @@ public class CycMoo extends CycAssertionsFactory {
     }
 
 
-    /***********************************************************
-     *  Messaging
-     *
-     **********************************************************/
-
-    public synchronized    void inform(MudObject actor, String msg) {
-	if ( ((Object)actor) instanceof Player ) {
-	    actor.println(msg);
-	} else {
-	    System.out.println("  BuilderCommand: tells object " + actor.getName() + " \"" + msg + "\"");
-	}
-    }
-
 
 
     /***********************************************************
      *  Jamud To Cyc
      *
      **********************************************************/
-    public Object getObjNameCyc(Object object) {
-	return makeCycJavaObject( jamudMt, object, false);
+    public static Object getObjNameCyc(Object object) {
+	return staticAccess.makeCycJavaObject( jamudMt, object, false);
     }
 
     public Object makeCycJavaObject(CycFort dataMt,Object object) {
@@ -1605,8 +945,6 @@ public class CycMoo extends CycAssertionsFactory {
 	if ( object instanceof String )	return Strings.change((String)object,"\"","\\\"");
 	if ( object instanceof Boolean )  if ( object.equals(Boolean.TRUE) ) return cycTrue;
 	    else return cycFalse;
-	if ( object instanceof MudObjectContainer )
-	    return makeCycJavaObject(dataMt,((MudObjectContainer)object).parentObject() ,assertobj);
 	if ( object instanceof Character ) return  new String("`" + object);
 	if ( object instanceof Integer ) return object;
 	if ( object instanceof Long ) return object;
@@ -1635,44 +973,7 @@ public class CycMoo extends CycAssertionsFactory {
 
 	CycFort cycobject = null;
 
-	if ( object instanceof MudObject ) {
-	    MudObjectContainer  subcont =  ((MudObject)object).childContainer();
-	    String name = ((MudObject)object).getName();
-	    if ( subcont!=null ) {
-		if ( name.length()<2 ) {
-		    name = subcont.getName();
-		}
-	    }
-	    cycobject = makeCycConstantSafe(name);
-	} else if ( object instanceof MudObjectContainer ) {
-	    MudObject  subcont =  ((MudObjectContainer)object).parentObject();
-	    String name = ((MudObjectContainer)object).getName();
-	    if ( subcont!=null ) {
-		if ( name == null ) {
-		    name = subcont.getName();
-		} else {
-		    if ( name.length()<2 ) {
-			name = subcont.getName();
-		    }
-		}
-	    }
-	    cycobject = makeCycConstantSafe(name);
-
-	} else if ( object instanceof Entrance ) {
-	    String pathname =  ((Entrance)object).getName();
-	    MudObjectContainer dest =  ((Entrance)object).getDestination();
-	    Object cycpath = makeCycJavaMember(dataMt,"MudPath",pathname);
-	    Object cycdest = getObjNameCyc(dest);
-
-	    if ( cycpath==null ) cycpath = makeCycConstantSafe("Down");
-	    if ( cycdest==null ) cycdest = makeCycConstantSafe(AREA_HOLDER);
-	    cycobject = new CycNart(makeCycConstantSafe("#$ExitToFn"),new CycList(cycpath,cycdest));
-	
-	} else if ( object instanceof Viewable ) {
-	    cycobject =  makeCycConstantSafe(((Viewable)object).getName());
-	} else {
-	    cycobject =  makeCycConstantSafe("HYP-"+classname.substring(0,classname.length()-8)+object.hashCode());
-	}
+	cycobject =  makeCycConstantSafe("HYP-"+classname.substring(0,classname.length()-8)+object.hashCode());
 
 	String stringKey =  ""+object.hashCode();
 	if ( cycKnowsObjectAsConstant.containsKey(stringKey) ) return cycKnowsObjectAsConstant.get(stringKey);
@@ -1709,15 +1010,6 @@ public class CycMoo extends CycAssertionsFactory {
 
 	if ( object instanceof Iterator ) {
 	    assertIteratorData(dataMt,(Iterator)object, cycobject);
-	    return;
-	}
-
-	if ( object instanceof MudObjectViewable ) {
-	    assertMudObject(dataMt,(MudObject)object, cycobject);
-	    return;
-	}
-	if ( object instanceof MudObjectContainer ) {
-	    assertMudObject(dataMt,((MudObjectContainer)object).parentObject() ,cycobject);
 	    return;
 	}
 
@@ -1772,89 +1064,12 @@ public class CycMoo extends CycAssertionsFactory {
 	}
     }
 
-
-    public void assertJamudAll() {
-
-	staticAccess.assertJamud(     staticAccess.jamudMt,    staticAccess.getJamud());
-    }
-
-    // Assert Entire Mud
-    public void assertJamud(CycFort dataMt, Jamud aJamud) {
-	MudObjectRoot theJamudRoot = aJamud.currentInstance().mudObjectRoot();
-
-	Iterator bellowRoot =  theJamudRoot.childObjects();
-	while ( bellowRoot.hasNext() ) {
-	    MudObject area = (MudObject)bellowRoot.next();
-	    assertExistingArea(dataMt, area);
-	}
-	bellowRoot =  jamudTop.childContainer().childObjects();
-	while ( bellowRoot.hasNext() ) {
-	    MudObject area = (MudObject)bellowRoot.next();
-	    assertExistingArea(dataMt, area);
-	}
-    }
-
-    // Assert Room/Object/Players/NPCs into Cyc
-    public void assertMudObject(CycFort dataMt, MudObject object,CycFort cycobject) {
-	MudObject cobject = /*MudObject.asCycMudObject*/(object);
-	if ( object.isTemplate() ) {
-	    assertExistingArea(dataMt,cobject,cycobject);
-	} else {
-	    assertItem(dataMt,cobject,cycobject);
-	}
-    }
-
-    public MudObject assertExistingArea(CycFort dataMt, MudObject object) {
-	assertExistingArea(dataMt,object,(CycFort)getObjNameCyc(object));
-	return object;
-    }
-
-    public void assertExistingArea(CycFort dataMt, MudObject object,CycFort cycobject) {
-	assertMudObjectViewableParts(dataMt,object,cycobject);
-	assertAddViewableParts(dataMt,object.childContainer(),cycobject);
-	assertInsideParts(dataMt,object,cycobject);
-	assertSlotValue(dataMt,cycobject,"mudExit",object.childContainer().exits(),true);
-    }
-
-    public void assertItem(CycFort dataMt, MudObject object,CycFort cycobject) {
-	assertMudObjectViewableParts(dataMt,object,cycobject);
-	assertAddViewableParts(dataMt,(Viewable) object,cycobject);
-	assertInsideParts(dataMt,object,cycobject);
+    public static void assertSlotValue(CycFort dataMt,CycFort cycobject, Object slot, Object value, boolean singlevalued) {
+	assertSlotValue(dataMt,cycobject,slot,value,null,singlevalued);
     }
 
 
-    public void assertMudObjectViewableParts(CycFort dataMt, MudObject object,CycFort cycobject) {
-	assertSlotValue(dataMt,cycobject,"mudKeyword",((FlagList)object.getKeywords()).iterator(),true);
-	assertSlotValue(dataMt,cycobject,"mudObjectFoundInArea",getObjNameCyc(object.getParentContainer()),true);
-	assertSlotValue(dataMt,cycobject,"mudFlag",object.flags().iterator(),true);
-	//assertSlotValue(dataMt,cycobject,"Gender_getSet",object.getGender().getName(),true);
-	//assertSlotValue(dataMt,cycobject,"Job_getSet",object.getJob().getName(),true);
-	//assertSlotValue(dataMt,cycobject,"Race_getSet",object.getRace().getName(),true);
-    }
-
-    public void assertAddViewableParts(CycFort dataMt, Viewable object,CycFort cycobject) {
-	try {
-
-	    assertIsaSafe(cycobject,      staticAccess.makeCycClassInstance(object.getClass()),dataMt);
-	} catch ( Exception e ) {
-	    e.printStackTrace(System.out);
-	}
-	assertSlotValue(dataMt,cycobject,"mudKeyword",((FlagList)object.getKeywords()).iterator(),false);
-	assertSlotValue(dataMt,cycobject,"mudDescription",object.getDescription(),false);
-	//assertSlotValue(dataMt,cycobject,"ShortDescription_getSet",object.getShortDescription(),false,true);
-    }
-
-
-
-    public void assertInsideParts(CycFort dataMt, MudObject object,CycFort cycobject) {
-	MudObjectContainer container = object.childContainer();
-	if ( container==null ) return;
-	Iterator objs = container.childObjects();
-	while ( objs.hasNext() )
-	    makeCycJavaObject(dataMt,objs.next(),true);
-    }
-
-    public void assertSlotValue(CycFort dataMt,CycFort cycobject, Object slot, Object value, boolean singlevalued) {
+    public static void assertSlotValue(CycFort dataMt,CycFort cycobject, Object slot, Object value, Object type, boolean singlevalued) {
 	CycConstant cycslot = null;
 	if ( cycobject==null ) {
 	    System.out.println("assertSlotValue(CycFort " + dataMt + ",CycConstant " +cycobject+", Object " +slot+", Object " +value+", boolean " +singlevalued +")");
@@ -1865,25 +1080,40 @@ public class CycMoo extends CycAssertionsFactory {
 	    cycslot = (CycConstant)slot;
 	} else {
 	    if ( slot instanceof String ) {
-		cycslot = makeCycJavaMember(dataMt,"JavaSlot",(String)slot);
+		cycslot = staticAccess.makeTypedCycFort(dataMt,"JavaSlot",(String)slot);
 	    }
 	}
 
-	if ( singlevalued ) clearSlot(dataMt,cycobject,cycslot);
+	if ( singlevalued ) staticAccess.clearSlot(dataMt,cycobject,cycslot);
 
 	if ( value == null ) return;
 
 	if ( value instanceof Iterator ) {
 	    while ( ((Iterator)value).hasNext() )
-		assertSlotValue(dataMt,cycobject, cycslot, ((Iterator)value).next(), false);
+		assertSlotValue(dataMt,cycobject, cycslot, ((Iterator)value).next(), type,false);
+	    return;
+	}
+	if ( value instanceof Enumeration ) {
+	    while ( ((Enumeration)value).hasMoreElements() )
+		assertSlotValue(dataMt,cycobject, cycslot, ((Enumeration)value).nextElement(),type, false);
 	    return;
 	}
 
 	if ( value.getClass().isArray() ) {
-	    assertSlotValue(dataMt,cycobject, cycslot, Arrays.asList((Object[])value).iterator(), false);
+	    assertSlotValue(dataMt,cycobject, cycslot, Arrays.asList((Object[])value).iterator(), type, false);
 	    return;
 	}
-	Object cycvalue = makeCycJavaObject(dataMt,value,false);
+	Object cycvalue = staticAccess.makeCycJavaObject(dataMt,value,false);
+	
+	if (type!=null) {
+	    if (cycvalue instanceof CycFort ) {
+		assertIsaSafe((CycFort)cycvalue,(CycFort)makeCycFort(type),dataMt);
+	    }
+	    if (cycvalue instanceof CycList ) {
+		assertIsaSafe(((CycFort)new CycNart((CycList)cycvalue)),(CycFort)makeCycFort(type),dataMt);
+	    }
+	}
+	
 	if ( cycvalue!=null ) {
 	    try {
 		staticAccess.assertGafNoWff(dataMt,cycslot,cycobject,cycvalue);
@@ -1931,7 +1161,7 @@ public class CycMoo extends CycAssertionsFactory {
 	staticAccess.assertWithTranscriptNoWffCheck(assertme,dataMt);
     }
 
-    public void clearSlot(CycFort dataMt,CycFort cycobject, Object cycslot) {
+    public synchronized static void clearSlot(CycFort dataMt,CycFort cycobject, Object cycslot) {
 	// Delete all previous
 	CycList query = new CycList(cycslot);
 	query.add(cycobject);
@@ -2005,7 +1235,7 @@ public class CycMoo extends CycAssertionsFactory {
 		e.printStackTrace();
 	    }
 	    if ( classname.startsWith("java")
-		 || classname.startsWith("jamud")
+		 || classname.startsWith("logicmoo")
 		 || classname.startsWith("org")
 		 //    || classname.startsWith("com")
 	       ) {
@@ -2052,8 +1282,8 @@ public class CycMoo extends CycAssertionsFactory {
 	String classstring = jclass.toString();
 	if ( classstring.startsWith("class java.lang") 
 	     || classstring.startsWith("class java.io")
-	     || classstring.startsWith("class jamud.")
-	     || classstring.startsWith("class com.jamud")
+	     || classstring.startsWith("class logicmoo.")
+	     || classstring.startsWith("class com.logicmoo")
 	     || jclass.isPrimitive() )
 	    return cycjclass;
 
@@ -2064,7 +1294,7 @@ public class CycMoo extends CycAssertionsFactory {
 	    Method method = methods[i];
 	    CycFort cycmethodjclass = makeCycClassInstance(method.getReturnType());
 	    String methodname = method.getName();
-	    CycConstant cycmethod = makeCycJavaMember("JavaMethod",methodname + "_method");
+	    CycConstant cycmethod = makeTypedCycFort("JavaMethod",methodname + "_method");
 	    template.put(cycmethod,method);
 	    Class[] params = method.getParameterTypes();
 	    assertIsaJavaMethodOf(cycjclass,jclass,cycmethod,methodname,params,cycmethodjclass,method,template);
@@ -2074,7 +1304,7 @@ public class CycMoo extends CycAssertionsFactory {
 	for ( int i =0; i<fields.length;i++ ) {
 	    Field field=fields[i];
 	    CycFort cycfieldjclass = makeCycClassInstance(field.getType());
-	    CycConstant cycfield = makeCycJavaMember("JavaSlot",field.getName() + "_field");
+	    CycConstant cycfield = makeTypedCycFort("JavaSlot",field.getName() + "_field");
 	    template.put(cycfield,field);
 	    assertIsaJavaFieldOf(cycjclass,cycfield,cycfieldjclass);
 	}
@@ -2135,9 +1365,9 @@ public class CycMoo extends CycAssertionsFactory {
 	    CycConstant cycdatamethod = null;
 	    try {
 		setmethod = jclass.getMethod("set"+dataname,(Class[])Array.newInstance(method.getReturnType(),1)); 
-		cycdatamethod = makeCycJavaMember("JavaSlot",dataname+ "_getSet");
+		cycdatamethod = makeTypedCycFort("JavaSlot",dataname+ "_getSet");
 	    } catch ( Exception e ) {
-		cycdatamethod = makeCycJavaMember("JavaSlot",dataname+ "_get");
+		cycdatamethod = makeTypedCycFort("JavaSlot",dataname+ "_get");
 		setmethod = null;
 	    }
 	    template.put(cycjclass,new DataMethod(dataname,method,setmethod));
@@ -2147,7 +1377,7 @@ public class CycMoo extends CycAssertionsFactory {
 
 	if ( methodname.startsWith("child") ||  methodname.endsWith("es") ) {
 	    String dataname = methodname;
-	    CycConstant cycdatamethod = makeCycJavaMember("JavaSlot",dataname+ "_getAdd");
+	    CycConstant cycdatamethod = makeTypedCycFort("JavaSlot",dataname+ "_getAdd");
 	    template.put(cycjclass,new DataMethod(dataname,method,null));
 	    assertIsaJavaDataMethodOf(cycjclass,cycdatamethod,cycmethodjclass);
 	    return;
@@ -2157,7 +1387,7 @@ public class CycMoo extends CycAssertionsFactory {
 
 	if ( methodname.equalsIgnoreCase("iterator") ) {
 	    String dataname = methodname;
-	    CycConstant cycdatamethod = makeCycJavaMember("JavaSlot",dataname+ "_getIterator");
+	    CycConstant cycdatamethod = makeTypedCycFort("JavaSlot",dataname+ "_getIterator");
 	    Method setmethod = null;
 	    DataMethod datamethod = new DataMethod(dataname,method,setmethod);
 	    template.put(cycjclass,datamethod);
@@ -2181,7 +1411,7 @@ public class CycMoo extends CycAssertionsFactory {
 	/*
 	 if ( !(methodname.endsWith("s")) ) return;
 	 String dataname = methodname;
-	 CycConstant cycdatamethod = makeCycJavaMember("Slot",dataname+ "_get");
+	 CycConstant cycdatamethod = makeTypedCycFort("Slot",dataname+ "_get");
 	 Method setmethod = null;
 	 DataMethod datamethod = new DataMethod(dataname,method,setmethod);
 	 template.put(cycjclass,datamethod);
@@ -2199,11 +1429,11 @@ public class CycMoo extends CycAssertionsFactory {
 	return cdefs.toString();
     }
 
-    public CycConstant makeCycJavaMember(String ctype,String name) {
-	return makeCycJavaMember(javaMt, ctype, name);
+    public CycConstant makeTypedCycFort(String ctype,String name) {
+	return makeTypedCycFort(javaMt, ctype, name);
     }
 
-    public CycConstant makeCycJavaMember(CycFort dataMt, String type,String name) {
+    public CycConstant makeTypedCycFort(CycFort dataMt, String type,String name) {
 	CycConstant nameC =  makeCycConstantSafe(name);
 	CycConstant typeC =  makeCycConstantSafe(type);
 	try {
@@ -2263,7 +1493,7 @@ public class CycMoo extends CycAssertionsFactory {
 		    Thread.sleep(500);
 		} catch ( java.lang.InterruptedException e ) {
 		}
-		tstaticAccess.syncBot();
+		tstaticAccess.syncMudAll();
 	    }
 	}
     }
