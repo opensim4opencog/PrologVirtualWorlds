@@ -33,6 +33,7 @@ public class CycMoo extends LogicMoo {
     }
 
     public static JamudWorldAccess jamudWorldAccess;
+    public static CycIRCBot cycIRCBot;
     public static org.opencyc.webserver.WebServer cycWebserverThread;
     public static CycMooAccess cycMooAccess;
 
@@ -115,6 +116,12 @@ public class CycMoo extends LogicMoo {
 	}
 	try {
 	    constructMtFromFile("LogicMooMt.kif",cycMooAccess.logicMooMt);
+	} catch ( Exception e ) {
+	    System.err.println(e);
+	}
+	try {
+	    cycIRCBot = new CycIRCBot(cycMooAccess,"CycLBot","http://logicmoo.sourceforge.net","irc.openprojects.net",6667,"#opencyc");
+	    cycIRCBot.start();
 	} catch ( Exception e ) {
 	    System.err.println(e);
 	}
