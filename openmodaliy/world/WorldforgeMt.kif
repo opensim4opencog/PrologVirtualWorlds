@@ -1,0 +1,1033 @@
+(:SET :FORWARD)
+(:SET :MONOTONIC)
+
+(:MT BaseKB)
+
+(isa NpcAgentCollection Collection)
+(isa ArtifactTypeCollection  Collection)
+(isa NpcAgentCollection SecondOrderCollection)
+(isa ArtifactTypeCollection  SecondOrderCollection)
+
+(implies 
+  (isa ?X NpcAgentCollection)
+  (isa ?X FirstOrderCollection))
+
+(implies 
+  (isa ?X ArtifactTypeCollection)
+  (isa ?X FirstOrderCollection))
+
+(genlMt WorldforgeMt FixedStructureMt)
+(genlMt WorldforgeMt HumanActivitiesMt)
+(genlMt WorldforgeMt BuildingMt)
+;;(genlMt WorldforgeMt EverythingPSC)
+
+(implies
+  (and
+	(genlMt ?Mt EverythingPSC)
+	(isa ?Mt2 Microtheory))
+   (genlMt ?Mt ?Mt2))
+
+;;(minimizeExtent thinksProbable)
+(minimizeExtent ist)
+;;(minimizeExtent authorityForMt)
+
+(implies
+    (and
+	(authorityForMt ?Who ?Mt)
+	(ist ?Mt ?What))
+	(beliefs ?Who ?What))
+	
+	   
+(isa in-ContGeneric BinaryPredicate)
+
+												   
+;;(isa WorldforgeMt HypothicalMicrotheory)
+
+;;(implies 
+;;	(isa ?Agent IntelligentAgent)
+;;	(thereExists ?Mt
+;;	  (and
+;;		(isa ?Mt Microtheory)
+;;		(isa ?Mt PlanBackgroundContext)
+;;		(authorityForMt ?Agent ?Mt))))
+
+(:MT WorldforgeMt)
+
+
+(atlasDatatypeToCycL "op" Action)
+(atlasDatatypeToCycL "meta" Intangible)
+(atlasDatatypeToCycL "type" FirstOrderCollection)
+(atlasDatatypeToCycL "object" SpatialThing-Localized)
+(atlasDatatypeToCycL "string" Individual)
+(atlasDatatypeToCycL "map" Thing)
+(atlasDatatypeToCycL "list" Set-Mathematical)
+(atlasDatatypeToCycL "int" Integer)
+(atlasDatatypeToCycL "float" RealNumber)
+
+			  
+
+(implies 
+       (and 
+           (authorityForMt ?WHO ?MT) 
+           (ist ?MT 
+               (implies ?THIS ?THAT))) 
+       (thinksProbable ?WHO 
+           (causes-PropProp ?THIS ?THAT)))
+
+(implies 
+       (and 
+           (authorityForMt ?WHO ?MT) 
+           (genlMt ?MT ?MT2)) 
+   (authorityForMt ?WHO ?MT2))
+
+
+(arity PronounFn 4)
+
+(isa nextNpcCommand BinaryPredicate)
+
+(genls MooDescriptivePredicate MooPredicate )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+;; RegionalAttribute
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+
+
+(isa RegionalAttribute ObjectType) 
+(genls RegionalAttribute AttributeValue) 
+(isa DarkMooAreaAttribute RegionalAttribute)
+(isa DeathMooAreaAttribute RegionalAttribute)
+(isa NoMobMooAreaAttribute RegionalAttribute)
+(isa PeacefullMooAreaAttribute RegionalAttribute)
+(isa SoundProofMooAreaAttribute RegionalAttribute)
+(isa NoTrackMooAreaAttribute RegionalAttribute)
+(isa NoMagicMooAreaAttribute RegionalAttribute)
+(isa PrivateMooAreaAttribute RegionalAttribute)
+(isa GodOnlyMooAreaAttribute RegionalAttribute)
+(isa HouseCrashMooAreaAttribute RegionalAttribute)
+(isa OLCMooAreaAttribute RegionalAttribute)
+(isa BFSMarkMooAreaAttribute RegionalAttribute)
+													
+
+
+(isa SwimmingAreaAttribute RegionalAttribute)
+(isa FlyingAreaAttribute RegionalAttribute)
+
+(isa UnderwaterLocation RegionType)
+(genls UnderwaterLocation OutdoorLocation)
+                                      
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+;; FUNCTION ObjectLocatedInWithWordFn
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+(isa ObjectLocatedInWithWordFn  ReifiableFunction ) 
+(isa ObjectLocatedInWithWordFn IndividualDenotingFunction ) 
+(arity ObjectLocatedInWithWordFn 2)
+(and
+    (resultIsa ObjectLocatedInWithWordFn PartiallyTangible) 
+    (arg1Isa ObjectLocatedInWithWordFn PartiallyTangible)
+    (arg2Isa ObjectLocatedInWithWordFn AbstractInformationalThing)) 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+;; GeographicalDirection
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+(isa Up-Generally GeographicalDirection-General)
+(isa Up-Generally GeographicalDirection)
+(isa Down-Generally GeographicalDirection-General)
+(isa Down-Generally GeographicalDirection)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+;; PortalType
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+(isa PortalType ObjectType)
+(implies 
+    (isa ?T PortalType)
+    (and 
+    (isa ?T FirstOrderCollection)
+    (genls ?T Portal)))
+                                
+(isa OpeningPortal PortalType)
+(isa DoorPortal PortalType)
+(isa SecurityDoorPortal PortalType)
+        
+
+                      
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+;; PortalFromToFn
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+(isa PortalFromToFn TernaryFunction) 
+(isa PortalFromToFn  ReifiableFunction ) 
+(isa PortalFromToFn IndividualDenotingFunction ) 
+(arg1Isa PortalFromToFn GeographicalRegion) 
+(arg2Isa PortalFromToFn GeographicalDirection)
+(arg2Isa PortalFromToFn AbstractInformationalThing) 
+(arg3Isa PortalFromToFn GeographicalRegion) 
+(resultIsa PortalFromToFn Portal) 
+(comment PortalFromToFn "This is a NART (PortalFromToFn ?R1 ?R2 ?D) to produce a instance of a Portal that creates a one-way connects ?R1 to ?R2 via a path ?D")
+
+(implies 											       
+        (and 
+	    (containsPortals ?Loc ?TERM)
+	    (termOfUnit ?TERM (PortalFromToFn ?Loc ?Dir ?Dest)))
+        (hasPortalToRegion ?Loc ?Dest))
+	
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  MOO PREDICATES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(isa MooPredicate PredicateCatagory)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  MOO NL PREDICATES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Moo NL
+
+(isa MooNLPredicate Collection)
+(isa MooNLPredicate PredicateCatagory)
+(genls MooNLPredicate BinaryPredciate)
+(genls MooNLPredicate MooPredicate)
+
+(implies 
+        (isa ?Pred MooNLPredicate)
+        (and 
+                (isa ?Pred BinaryPredicate)
+                (arg1Isa ?Pred PartiallyTangible)
+                (arg2Isa ?Pred AbstractInformationalThing)))			       
+
+(isa mooAbreviation MooNLPredicate)
+(isa mooAdjective MooNLPredicate)
+(isa mooPossessive MooNLPredicate)
+(isa mooPronoun MooNLPredicate)
+(isa mooNomitive MooNLPredicate)
+(isa mooMessage MooNLPredicate)
+(isa mooHelp MooNLPredicate)
+(isa mooAreaView MooNLPredicate)
+(isa mooDescription MooNLPredicate)
+(isa mooKeyword MooNLPredicate)
+(isa mooTraverseMessage MooNLPredicate)
+
+
+(isa isa MooDescriptivePredicate)
+(isa in-ContGeneric MooDescriptivePredicate)
+(isa mooPosition MooDescriptivePredicate)
+(isa mooDescription MooDescriptivePredicate)
+;;(isa hasAttributes MooDescriptivePredicate)
+
+
+(implies
+    (and 
+            (mooAreaView ?Class ?Text)
+            (isa ?Thing ?Class))
+     (mooAreaView ?Thing ?Text))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  MOO STAT PREDICATES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(isa MooSlotBinaryPredicate Collection)
+(isa MooSlotBinaryPredicate PredicateCatagory)
+(genls MooSlotBinaryPredicate BinaryPredciate)
+(genls MooSlotBinaryPredicate MooPredicate)
+
+(implies 
+        (isa ?Pred MooSlotBinaryPredicate)
+        (and 
+                (isa ?Pred BinaryPredicate)
+                (arg1Isa ?Pred PartiallyTangible)
+                (arg2Isa ?Pred AbstractInformationalThing)))
+                
+
+(isa MooSlotTernaryPredicate Collection)
+(isa MooSlotTernaryPredicate PredicateCatagory)
+(genls MooSlotTernaryPredicate TernaryPredicate)
+(genls MooSlotTernaryPredicate MooPredicate)
+
+(implies 
+        (isa ?Pred MooSlotTernaryPredicate)
+        (and 
+                (isa ?Pred TernaryPredicate)
+                (arg1Isa ?Pred PartiallyTangible)
+                (arg2Isa ?Pred AbstractInformationalThing)
+                (arg3Isa ?Pred AbstractInformationalThing)))
+                
+
+
+(isa mooInventory MooSlotBinaryPredicate)
+(isa mooPositionFavored MooSlotBinaryPredicate)
+(isa mooPosition MooSlotBinaryPredicate)
+(isa mooBareHandDamage MooSlotBinaryPredicate)
+(isa mooMaxHitPoints MooSlotBinaryPredicate)
+(isa mooArmorClass MooSlotBinaryPredicate)
+(isa mooToHitArmorClass0 MooSlotBinaryPredicate)
+(isa mooLevelOf MooSlotBinaryPredicate)
+(isa alignmentOfNPC MooSlotBinaryPredicate)
+(isa mooBareHandDamage MooSlotBinaryPredicate)
+(isa mooGold MooSlotBinaryPredicate)
+(isa mooExperience MooSlotBinaryPredicate)
+(isa rentOfObject MooSlotBinaryPredicate)
+(isa costOfObject MooSlotBinaryPredicate)
+(isa armorLevel MooSlotBinaryPredicate)
+(isa damageSizeDice MooSlotBinaryPredicate)
+(isa damageNumberDice MooSlotBinaryPredicate)
+(isa spellCast MooSlotBinaryPredicate)
+(isa spellLevel MooSlotBinaryPredicate)
+(isa containerKey MooSlotBinaryPredicate)
+(isa capacityOfContainer MooSlotBinaryPredicate)
+
+(isa durrationOfLight MooSlotBinaryPredicate)
+(isa massOfObject MooSlotBinaryPredicate)
+(isa chargeCapacity MooSlotBinaryPredicate)
+(isa chargeRemaining MooSlotBinaryPredicate)
+(isa containerKey MooSlotBinaryPredicate)
+
+;; NPC Attributes
+(isa NPCUsesMt HumanBehavioralAttribute)
+
+;;(implies
+;;   (and
+;;	(hasAttributes ?Col NPCUsesMt)
+;;	(hasAttributes ?Inst NPCUsesMt)
+;;	(isa ?Inst ?Col))
+;;   (thereExists ?Mt1 
+;;        (and 
+;;	    (isa ?Mt1 Microtheory)
+;;	    (thereExists ?Mt2
+;;		   (and 
+;;			   (isa ?Mt2 Microtheory)
+;;			   (authorityForMt ?Inst ?Mt2)
+;;			   (genlMt ?Mt2 ?Mt1))))))
+
+
+(isa quantityInContainer MooSlotTernaryPredicate)
+(isa mooWorn MooSlotTernaryPredicate)
+(isa mooExitState MooSlotTernaryPredicate)
+
+
+(implies 
+	(and
+		(mooWorn ?TypeWho ?AT ?TypeWhat)
+		(isa ?Who ?TypeWho))
+	(thereExists 
+	     ?What
+		(and
+		        (isa ?What ?TypeWhat)
+			(wearsClothing ?Who ?What))))
+
+(implies 
+	(and
+		(mooInventory ?TypeWhat ?TypeWho )
+		(isa ?Who ?TypeWho))
+	(thereExists ?What
+		(and
+		        (isa ?What ?TypeWhat)
+			(in-ContGeneric ?Who ?What))))
+
+ 
+         
+(implies 
+	(and
+		(hasAttributes ?Col ?Attr)
+		(isa ?Inst ?Col))
+	(hasAttributes ?Inst ?Attr))
+
+
+(isa KnownCyclist AttributeValue)
+
+;;(implies (performSubL (ExpandSubLFn (?X) (cyc-query '(isa ?X Cyclist) #$InferencePSC))) (hasAttributes ?X KnownCyclist))
+
+
+(isa mooDescriptiveTermSentences BinaryPredicate)
+
+
+(isa OverlyGeneralTermForMoo SetOrCollection)
+(isa MooDescriptivePredicate SetOrCollection)
+(isa mooDescriptiveFormula UnaryPredicate)
+(isa overlyGeneralTermForMooing UnaryPredicate)
+
+(completeExtentKnown overlyGeneralTermForMooing)
+
+
+
+(:UNSET :FORWARD)
+(implies
+	(and
+		(assertedTermSentences ?Term ?Formula)
+		(mooDescriptiveFormula ?Formula))
+	(mooDescriptiveTermSentences ?Term ?Formula))
+	
+(implies
+ (and
+      (isa ?Pred BinaryPredicate)
+      (not (overlyGeneralTermForMooing ?X ))
+      (not (overlyGeneralTermForMooing ?Y ))
+      (isa ?Pred MooDescriptivePredicate))
+(mooDescriptiveFormula (?Pred ?X ?Y)))
+
+(implies
+ (and
+      (isa ?Pred TernaryPredicate)
+      (not (overlyGeneralTermForMooing ?X ))
+      (not (overlyGeneralTermForMooing ?Y ))
+      (not (overlyGeneralTermForMooing ?Z ))
+      (isa ?Pred MooDescriptivePredicate))
+(mooDescriptiveFormula (?Pred ?X ?Y ?Z)))
+
+
+
+(:SET :FORWARD)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;(isa InstanceClonedFn Function-Dentotational)
+;;(isa InstanceClonedFn  ReifiableFunction ) 
+;;(isa InstanceClonedFn IndividualDenotingFunction ) 
+;;(arity InstanceClonedFn 2)
+;;(arg1Isa InstanceClonedFn PartiallyTangible)
+;;(arg2Isa InstanceClonedFn PartiallyTangible)
+;;(resultIsa InstanceClonedFn PartiallyTangible)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+              
+
+(isa PlayerInstance FirstOrderCollection) 
+
+(genls PlayerInstance AgentiveArtifact)
+
+(isa Artifact-Generic-NPC FirstOrderCollection) 
+(genls Artifact-Generic-NPC AgentiveArtifact)
+
+(isa Artifact-Generic-Hero FirstOrderCollection) 
+(genls Artifact-Generic-Hero Artifact-Generic-NPC)
+
+(isa Artifact-Generic-Mob FirstOrderCollection) 
+(genls Artifact-Generic-Mob Artifact-Generic-NPC)
+
+(disjointWith Artifact-Generic-NPC PlayerInstance)
+(disjointWith Artifact-Generic-Hero Artifact-Generic-Mob)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PREDICATE hasAttributesOnClass
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(isa hasAttributesOnClass BinaryPredicate)
+(and
+        (arg1Isa hasAttributesOnClass SecondOrderCollection) 
+        (arg2Isa hasAttributesOnClass AttributeValue)) 
+        
+
+(implies
+    (and 
+            (hasAttributesOnClass ?Class ?Flag)
+            (isa ?Thing ?Class))
+     (hasAttributes ?Thing ?Flag))
+
+;;(implies
+;;    (and 
+;;            (not (hasAttributesOnClass ?Class ?Flag))
+;;            (isa ?Thing ?Class))
+;;    (not (hasAttributes ?Thing ?Flag)))
+             
+
+     
+
+;; PREDICATE mooEvent 
+(isa mooEvent TernaryPredicate)
+(and
+        (arg1Isa mooEvent Thing) 
+        (arg2Isa mooEvent MooEventTrigger) 
+        (arg3Isa mooEvent AbstractInformationalThing) )
+
+;; PREDICATE mooReset 
+(isa mooReset TernaryPredicate)
+(and
+        (arg1Isa mooReset PartiallyTangible) 
+        (arg2Genl mooReset Artifact-Generic) 
+        (arg3Isa mooReset CycLNumber) )
+        
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Define in-ContGeneric
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(isa in-ContGeneric MooPredicate)
+
+(implies 
+        (and 
+                (objectFoundInLocation ?Obj ?Area)
+                (isa ?Obj Artifact-Generic))
+        (in-ContGeneric ?Obj ?Area))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Define mooAttribute
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(isa mooAttribute TernaryPredicate)
+(isa mooAttribute MooPredicate)
+(and
+  (arg1Isa mooAttribute PartiallyTangible)
+  (arg2Isa mooAttribute AbstractInformationalThing)
+  (arg3Isa mooAttribute Thing))
+
+
+
+
+
+;; Jobs
+
+(isa MooJob SecondOrderCollection)
+
+(isa MooWarrior MooJob)
+(nameString MooWarrior "warrior")
+(mooAdjective MooWarrior "warrior-like")
+(mooAbreviation MooWarrior "war")
+
+(isa MooMage MooJob)
+(nameString MooMage "mage")
+(mooAdjective MooMage "mage-like")
+(mooAbreviation MooMage "mag")
+
+(isa MooThief MooJob)
+(nameString MooThief "thief")
+(mooAdjective MooThief "thief-like")
+(mooAbreviation MooThief "thf")
+
+(isa MooHaunter MooJob)
+(nameString MooHaunter "moo haunter")
+(mooAdjective MooHaunter "ghasthy")
+(mooAbreviation MooHaunter "haunt")
+
+;; Races
+
+(nameString HomoGenus "human")
+(mooAdjective HomoGenus "humanoid")
+(mooAbreviation HomoGenus "hum")
+
+(isa MooDrow BiologicalGenus)
+(nameString MooDrow "drow")
+(mooAdjective MooDrow "drowish")
+(mooAbreviation MooDrow "drow")
+
+(isa MooGhost BiologicalGenus)
+(nameString MooGhost "ghost")
+(mooAdjective MooGhost "ghostly")
+(mooAbreviation MooGhost "ghost")
+(mooKeyword MooGhost "jello")
+
+
+(isa MooDwarf BiologicalGenus)
+(nameString MooDwarf "dwarf")
+(mooAdjective MooDwarf "dwarfish")
+(mooAbreviation MooDwarf "dwa")
+
+(isa MooOrc BiologicalGenus)
+(nameString MooOrc "hill orc")
+(mooAdjective MooOrc "orcish")
+(mooAbreviation MooOrc "orc")
+
+(isa MooMinotaur BiologicalGenus)
+(nameString MooMinotaur "minotaur")
+(mooAdjective MooMinotaur "minotaurian")
+(mooAbreviation MooMinotaur "mino")
+
+;; Genders
+
+(isa MooGender SecondOrderCollection)
+(isa MooGender OrganismClassificationType)
+
+(isa MaleAnimal MooGender)
+(nameString MaleAnimal "male")
+(mooAdjective MaleAnimal "male")
+(mooAbreviation MaleAnimal "mal")
+(mooPossessive MaleAnimal "his")
+(mooPronoun MaleAnimal "he")
+(mooNomitive MaleAnimal "him")
+
+(isa FemaleAnimal MooGender)
+(nameString FemaleAnimal "female")
+(mooAdjective FemaleAnimal "female")
+(mooAbreviation FemaleAnimal "fem")
+(mooPronoun FemaleAnimal "she")
+(mooNomitive FemaleAnimal "her")
+(mooPossessive FemaleAnimal "her")
+
+(isa NeuterAnimal MooGender)
+(nameString NeuterAnimal "neuter")
+(mooAdjective NeuterAnimal "neutered")
+(mooAbreviation NeuterAnimal "n")
+(mooPronoun NeuterAnimal "it")
+(mooNomitive NeuterAnimal "it")
+(mooPossessive NeuterAnimal "its")
+
+(isa HermaphroditeAnimal MooGender)
+(nameString HermaphroditeAnimal "hermaphrodite")
+(mooAdjective HermaphroditeAnimal "hermaphroditic")
+(mooAbreviation HermaphroditeAnimal "her")															     
+(mooPronoun HermaphroditeAnimal "zie")
+(mooNomitive HermaphroditeAnimal "zir")
+(mooPossessive HermaphroditeAnimal "zir")
+
+
+
+;;directionBetweenObjects
+
+
+(isa MooTakable AttributeValue)
+(isa MooWearable AttributeValue)
+
+;;(attributeRequiredForAction ActionOnObject MooTakable	)
+;;(isa ActionOnObject)
+        
+
+(isa mooDoorKey BinaryPredicate)
+(and 
+   (arg1Isa mooDoorKey Portal)
+   (arg2Isa mooDoorKey PortalState))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;; Moo Planner
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(isa mooVerb UnaryPredicate)
+(isa mooPred UnaryPredicate)
+(isa mooObject UnaryPredicate)
+
+(arg1Isa mooVerb Event)
+
+(isa singleDoerActionPred BinaryPredicate)
+(isa singleDoerActionPredPos TernaryPredicate)
+				 
+
+(authorityForMt (GenericInstanceFn Dog) AnimalActivitiesMt)
+
+;;(implies (genls ?W SingleDoerAction)  (mooVerb ?W))
+
+;;(implies (genls ?W DefaultDisjointScriptType) (mooVerb ?W))
+
+;;(implies (genls ?W AnimalActivity) (mooVerb ?W))
+					      
+(implies 
+       (isa ?W ActorSlot) 
+       (mooPred ?W))
+
+
+(implies 
+       (isa ?W PartiallyTangible) 
+       (mooObject ?W))
+(implies 
+       (isa ?W Portal) 
+       (mooObject ?W))
+(implies 
+       (isa ?W GeographicalLocation) 
+       (mooObject ?W))     
+(implies 
+       (isa ?W SpatialThing-Localized) 
+       (mooObject ?W))
+
+       
+(implies 
+       (and 
+           (mooVerb ?ESUPER) 
+	   (mooPred ?PSUPER)
+           (genls ?E ?ESUPER) 								
+           (arg1Isa ?PSUPER ?ESUPER)
+           (arg2Isa ?PSUPER ?COL))
+       (relationAllExists ?PSUPER ?E ?COL))  
+
+(implies 
+       (and 
+           (mooVerb ?ESUPER) 
+	   (mooPred ?PSUPER)
+           (genls ?E ?ESUPER) 
+           (arg2Isa ?PSUPER ?ESUPER)
+           (arg1Isa ?PSUPER ?COL))
+       (relationExistsAll ?PSUPER ?COL ?E))
+       
+       
+
+(isa MooAgent FirstOrderCollection)
+
+(genls NpcAgentCollection IntelligentAgent)
+
+
+(isa randomOf BinaryPredicate)
+
+
+(:UNSET :FORWARD)
+
+(implies 
+   (evaluate ?N 
+       (EvaluateSubLFn 
+           (ExpandSubLFn 
+               (?OUTOF) 
+               (!RANDOM ?OUTOF))))
+   (randomOf ?N ?OUTOF))
+
+(:SET :FORWARD)
+           
+(notAssertible randomOf)
+
+
+(isa mooObjectVisibleToWhom BinaryPredicate)
+(arg1Isa mooObjectVisibleToWhom AgentiveArtifact)
+(arg2Isa mooObjectVisibleToWhom PartiallyTangible)
+
+(implies 
+        (and 
+                (in-ContGeneric ?Who ?Loc)
+                (isa ?Who AgentiveArtifact)
+                (in-ContGeneric ?What ?Loc)
+                (different ?Who ?What))
+        (mooObjectVisibleToWhom ?Who ?What))
+
+(implies 
+   (containsPortals ?Loc ?What)
+   (in-ContGeneric ?What ?Loc))		
+
+(isa mooPossiblyAlreadyInRoom TernaryPredicate)
+(arg1Isa mooPossiblyAlreadyInRoom GeographicalRegion)
+(arg2Isa mooPossiblyAlreadyInRoom TextString)
+(arg3Isa mooPossiblyAlreadyInRoom TextString)
+
+
+(implies 
+     (mooPossiblyAlreadyInRoom ?Area ?Text ?Desc)
+     (thereExists ?Obj
+        (and 
+		(mooKeyword ?Obj ?Text)
+		(in-ContGeneric ?Obj ?Area)
+		(mooDescription ?Obj ?Desc))))
+
+
+(:UNSET :FORWARD)
+			   
+;;(implies
+;;	(and
+;;	   (isa ?AnyPred MooPredicate)
+;;	   (?AnyPred (InstanceClonedFn ?D1 ?D2) ?AnyArg)
+;;	   (?Pred ?D1 ?Arg))
+;;	(?Pred (InstanceClonedFn ?D1 ?D2) ?Arg))
+
+(:SET :FORWARD)
+
+(implies 
+	(or 
+	   (nameString ?Obj ?Txt)
+	   (prettyName ?Obj ?Txt))
+	(nameString ?Obj ?Txt))
+
+(implies 
+	(nameString ?Nart ?Text)
+	(ist EnglishParaphraseMt (genFormat ?Nart ?Text !NIL)))
+
+
+;;(implies
+;;   (positiveInterest-Prop ?Who ?What) 
+;;   (nextNpcCommand ?Who ?What))
+
+(implies
+	(isa ?Agent Animal)
+	(desires ?Agent (performedBy Breathing ?Agent)))
+		
+(isa InferencePSC SourceMicrotheory)
+(isa AnimalActivitiesMt SourceMicrotheory)
+
+;;(authorityForMt Cyc InferencePSC)
+	
+	
+(isa avoiding-Prop BinaryPredicate)
+(isa avoiding-Prop PropositionalAttitudeSlot)
+
+
+(implies
+(and
+(isa ?Pred MentalSlot)
+(?Pred ?Who ?This)
+(thinksProbable ?Who (causes-PropProp ?This ?That)))
+(?Pred ?Who ?That))
+
+(implies
+(and  
+(isa ?Pred MentalSlot)
+(?Pred ?Who ?That)
+(thinksProbable ?Who (causes-PropProp ?This ?That)))
+(?Pred ?Who ?This))
+
+(implies
+(isa ?Who Animal)
+(avoiding-Prop ?Who (bodilyDoer ?Who Dying)))
+
+														
+
+
+(implies
+	(and 
+	 (authorityForMt ?Who ?Mt)
+	 (ist ?Mt (implies ?This ?That)))
+	(thinksProbable ?Who (causes-PropProp ?This ?That)))
+
+;;(causes-PropProp ?THIS ?THAT)
+;;(planForTask ?Task ?Plan)
+   
+;;comment :  "queryTemplate relates a class of natural language queries (e.g. sentences) to CycL. For example, 
+;;(commandTemplate #$STemplate ("what color are" (#$NPTemplate :obj)) (#$colorOfType :obj ?X)) would map "what color are frogs?" to (#$colorOfType #$Frog ?X)."  
+
+;;(implies   (commandTemplate #$STemplate '("what color are" (#$NPTemplate :obj)) (#$colorOfType :obj ?X))
+	
+
+(equiv
+	 (avoiding-Prop ?Agent ?What)
+	 (desires ?Agent (not ?What)))
+	 
+
+(:MT EnglishParaphraseMt)
+
+;(genFormat PortalFromToFn "a passage ~a leading to ~a" 
+;       ((2 :EQUALS) 
+;           (3 :EQUALS)))
+	   
+(genFormat PortalFromToFn "A portal ~a" ((2)))
+
+
+(:MT WorldforgeMt)
+
+;; Forward rules
+;;(implies 
+;;   (and 
+;;       (mooObject ?INST)
+;;       (isa ?INST ?All)
+;;       (relationExistsAll ?PRED ?Exists ?All))
+;; (relationExistsInstance ?PRED ?Exists ?INST ))
+
+;;(implies 
+;;   (and 
+;;       (mooObject ?INST)
+;;       (isa ?INST ?All)
+;;       (relationAllExists ?PRED ?All ?Exists))
+;;   (relationInstanceExists ?PRED ?INST ?Exists))
+
+(:MT BaseKB)
+
+(isa BasicAnimalPlanningMt Microtheory)
+(isa BasicAnimalPlanningMt PlanningDomainMicrotheory)
+(genlMt BasicAnimalPlanningMt HumanActivitiesMt)
+(genlMt BasicAnimalPlanningMt AgentGMt)
+(genlMt BasicAnimalPlanningMt AgentGVocabularyMt)
+;;(genlMt BasicAnimalPlanningMt GeneralLexiconMt)
+(genlMt BasicAnimalPlanningMt BiologyMt)
+(genlMt BasicAnimalPlanningMt AnimalMovementMt)
+
+(isa ActionPredicate Collection)							 
+(isa ActionPredicate PredicateCatagory)
+
+(isa SimpleActionPredicate Collection)
+(isa SimpleActionPredicate PredicateCatagory)
+(genls SimpleActionPredicate ActionPredicate)
+
+(isa ComplexActionPredicate Collection)
+(isa ComplexActionPredicate PredicateCatagory)
+(genls ComplexActionPredicate ActionPredicate)
+
+(isa PurposefulActionType Collection)
+(isa PurposefulActionType SetOrCollection)
+
+(isa PredicateForActionFn UnaryFunction)
+(isa PredicateForActionFn ReifiableFunction ) 
+(isa PredicateForActionFn IndividualDenotingFunction ) 
+(isa PredicateForActionFn PredicateDenotingFunction)
+
+;;(preservesGenlsInArg PredicateForActionFn 1)
+
+(resultIsa PredicateForActionFn ActionPredicate)
+(resultIsa PredicateForActionFn Predicate)
+(arg1Genl PredicateForActionFn Action)
+(arg1Isa PredicateForActionFn Collection)
+(arg1Isa PredicateForActionFn PurposefulActionType)
+(arg1Format PredicateForActionFn SetTheFormat)
+
+(isa predicateForAction	BinaryPredicate)			
+(isa predicateForAction	FunctionalPredicate)			
+(isa predicateForAction	IrreflexiveBinaryPredicate) 
+(isa predicateForAction	AntiSymmetricBinaryPredicate)
+(arg1Isa predicateForAction ActionPredicate)
+(arg2Genl predicateForAction Action)
+
+
+;;(functionCorrespondingPredicate-Canonical PredicateForActionFn predicateForAction 1)
+
+(:MT BasicAnimalPlanningMt)
+
+									    
+(isa SimpleActionPredicateForOrganism Collection)
+(isa SimpleActionPredicateForOrganism PredicateCatagory)
+(genls SimpleActionPredicateForOrganism SimpleActionPredicate)
+
+(isa ActionPredicateForOrganism Collection)
+(isa ActionPredicateForOrganism PredicateCatagory)
+
+(genls ActionPredicateForOrganism ActionPredicate)
+
+(isa transport SimpleActionPredicateForOrganism)
+(isa cleans SimpleActionPredicateForOrganism)
+(isa walks SimpleActionPredicateForOrganism)
+(isa climbs SimpleActionPredicateForOrganism)
+(isa dropsObject SimpleActionPredicateForOrganism)
+(isa operatesObject SimpleActionPredicateForOrganism)
+
+(isa makeSandwitch ActionPredicateForOrganism)
+(isa takesObject SimpleActionPredicateForOrganism)
+
+
+(isa ExaminationAction Collection)
+(isa ExaminationAction PredicateCatagory)
+
+(genls PerceivingSlot ExaminationAction)    		
+(genls ExaminationAction ActionPredicateForOrganism)    		
+	   
+
+(predicateForAction sees VisualPerception)
+(predicateForAction smells SmellPerception)
+(predicateForAction hears Hearing)
+(predicateForAction tastes TastePerception)
+ 
+(implies 
+	(isa ?Pred ActionPredicateForOrganism)
+	(arg1Isa ?Pred Organism-Whole))
+	
+	  
+(isa SingleDoerPurposefulActionType Collection)
+
+(implies
+	(and (genls ?Action PurposefulAction)(genls ?Action SingleDoerAction)) (isa ?Action SingleDoerPurposefulActionType))
+
+(implies
+	(genls ?Action PurposefulAction)
+	(isa ?Action PurposefulActionType))	     
+
+(interArg1ResultIsa PredicateForActionFn PurposefulActionType ActionPredicate)
+	
+(genls SingleDoerPurposefulActionType  PurposefulActionType)
+			
+;; (#$effectOfActionIf-Props ACTION CONDITION EFFECTS)
+
+;;(invokeEvent ?EventClass ?Who ArgsNeeded)
+
+(isa invokeEvent ActionPredicate)
+(isa invokeEvent TernaryPredicate)
+(arg1Genl invokeEvent Action)
+(arg2Isa invokeEvent Agent)
+(arg3Isa invokeEvent Thing)
+
+
+(:MT BasicAnimalPlanningMt)
+(interArgIsa1-2 predicateForAction PurposefulActionType ActionPredicate)
+
+
+
+(isa QuaternaryComplexActionPredicate SetOrCollection)
+(isa createSomethingFrom QuaternaryComplexActionPredicate)
+(isa destroySomethingWith QuaternaryComplexActionPredicate)
+(isa giveToSomething QuaternaryComplexActionPredicate)
+
+
+(implies
+  (isa ?Pred ComplexActionPredicate)
+  (and
+	(arg1Isa ?Pred Agent)
+	(arg2Genl ?Pred Action)))
+	
+(implies
+  (isa ?Pred QuaternaryComplexActionPredicate)
+  (and
+	(isa ?Pred ComplexActionPredicate)
+	(isa ?Pred QuaternaryPredicate)
+	(arg3Isa ?Pred Thing)
+	(arg4Isa ?Pred Thing)))		      
+
+										
+
+;;(genls ?EventType CreationEvent)
+(implies	
+	(and 
+		(relationAllExists outputsCreated ?EventType ?OutputType)
+		(relationAllExists inputs ?EventType ?InputType))
+
+	(effectOfActionIf-Props  (createSomethingFrom ?Agent ?EventType ?Input ?Output)
+	   (and 
+		(isa ?Input ?InputType)
+		(controls ?Agent ?Input))
+		
+	(thereExists ?Event
+	   (and 
+		(isa ?Event ?EventType)
+		(bodilyDoer ?Event ?Agent) 
+		(inputs ?Event ?Input)
+		(thereExists ?Output
+		    (and 
+			(outputsCreated ?Event ?Output) 
+			(isa ?Output ?OutputType)
+			(controls ?Agent ?Output)))))))	 
+
+;;(genls ?EventType DestructionEvent)
+(implies	
+	(and 
+		(relationAllExists preActors ?EventType ?HelperType)
+		(relationAllExists damages  ?EventType ?DamagedType))
+
+	(effectOfActionIf-Props  (destroySomethingWith ?Agent ?EventType ?Helper ?Damaged)
+	   (and 
+		(isa ?Helper ?HelperType)
+		(controls ?Agent ?Helper)
+		(near ?Agent ?Helper)
+		(near ?Agent ?Damaged))
+		
+	(thereExists ?Event
+	   (and 
+		(isa ?Event ?EventType)
+		(bodilyDoer ?Event ?Agent) 
+		(inputs ?Event ?Helper)
+		(damages ?Event ?Damaged) 
+		(isa ?Damaged ?DamagedType)
+		(controls ?Agent ?Damaged)))))	     
+
+;;(genls ?EventType TransferEvent)
+(implies	
+	(and 
+		(relationAllExists toPossessor ?EventType ?ObjectType))
+
+	(effectOfActionIf-Props  (giveToSomething ?Agent ?EventType ?Helper ?Object)
+	   (and 
+		(isa ?Helper ?HelperType)
+		(near ?Agent ?Helper)
+		(near ?Agent ?Object))
+		
+	(thereExists ?Event
+	   (and 
+		(isa ?Event ?EventType)
+		(bodilyDoer ?Event ?Agent) 
+		(fromPossessor ?Event ?Agent) 
+		(toPossessor ?Event ?Helper)
+		(transferredThing ?Event ?Object) 
+		(isa ?Object ?ObjectType)
+		(controls ?Agent ?Object)))))
+		
+
+		
+(implies (isa ?Action PurposefulActionType)
+(and (isa (PredicateForActionFn ?Action) ActionPredicate)
+(isa (PredicateForActionFn ?Action) CycLNonAtomicReifiedTerm)))
+		
+(implies 
+(isa ?Action PurposefulActionType)
+(predicateForAction (PredicateForActionFn ?Action) ?Action))
+	
+;;(implies 
+;;	(isa ?Action PurposefulActionType)
+;;	(thereExists ?Pred 
+;;	   (and
+;;		(equals ?Pred (PredicateForActionFn ?Action))
+;;		(isa ?Pred ActionPredicate)
+;;		(isa (PredicateForActionFn ?Action) ActionPredicate)
+;;		(predicateForAction ?Pred ?Action)
+;;		(predicateForAction (PredicateForActionFn ?Action) ?Action))))	
+
