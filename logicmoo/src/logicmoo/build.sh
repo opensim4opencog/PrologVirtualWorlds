@@ -2,11 +2,11 @@
 
 source ../../bin/setpaths
 	
-javac JNIPrologServer.java
+javac JavaRt.java
 
-plld -I$JAVA_HOME/include/linux/ -I$JAVA_HOME/include/ -L$JAVA_HOME/jre/lib/i386/ -o swijnit swijni.c  -ljava 
+plld -I$JAVA_HOME/include/linux/ -I$JAVA_HOME/include/ -L$JAVA_HOME/jre/lib/i386/ -o javart javart.c  -ljava 
 
-plld   swijni.c  -shared -o swijni.so -I$JAVA_HOME/include/linux/ -I$JAVA_HOME/include/ -L$JAVA_HOME/jre/lib/i386/  -ljava 
+plld   javart.c  -shared -o javart.so -I$JAVA_HOME/include/linux/ -I$JAVA_HOME/include/ -L$JAVA_HOME/jre/lib/i386/  -ljava 
 
 
 
