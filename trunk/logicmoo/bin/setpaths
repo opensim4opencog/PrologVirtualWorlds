@@ -1,43 +1,105 @@
 #!/bin/bash
 
+#######################################################
+# LOCAL BASED PATHS  (ones you change)
+#######################################################
 
-#My installation assume Here
+#Installation of LogicMOO
 export LOGICMOOBASE=/opt/sourceforge/logicmoo
 
-# JDK Specifics
+#Installation of CIAO-Prolog
+export CIAOHOME="/home/clip/public_html/Software/Ciao/ciao-1.7p162"
+
+#Installation of Tomcat Webserver
+export TOMCAT_HOME=/opt/tomcat
+
+#Installation of JDK Specifics
 export J2EE=/opt/j2ee
 export JAVA_HOME=/opt/jdk
 
-	       
+#Installation of SWI-Prolog
+export SWI_HOME=/opt/swipl
+			   
+export PLSO=$SWI_HOME/runtime/i686-linux-gnu
 
-#export SWI_HOME=$CONTEXTWEBINF/swi/lib/current
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/jdk/jre/lib/i386/:.
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PLSO
+			   
 
+export CVS_RSH=ssh
+								   
+#######################################################
+# Dirived Paths  (From the above)
+#######################################################
 
 export JARLIB=$LOGICMOOBASE/lib
+export CIAOJAVALIB=$CIAOHOME/library/javall
+export SOAPCONTEXT=$TOMCAT_HOME/webapps/soap
 
-#export CLASSPATH=$J2EE/lib/j2ee.jar:$JAVA_HOME/lib/tools.jar 
-	#JDK/JREE
-export CLASSPATH=$CLASSPATH:$JARLIB/:cos.jar
+export SOAPLIBS=$SOAPCONTEXT/WEB-INF/classes:$SOAPCONTEXT/WEB-INF/lib/pop3.jar
+
+
+
+								     
+								     
+
+#export PLSO=$SWI_HOME/runtime/i686-linux-gnu
+#export PL_HOME=$SWI_HOME
+#export LD_LIBRARY_PATH=$JAVA_HOME/jre/lib/i386/:.:$PLSO:$JARLIB:$LD_LIBRARY_PATH
+
+#######################################################
+#  CLASSPATH  
+#######################################################
+  
+#JDK/JREE
+export CLASSPATH=$J2EE/lib/j2ee.jar:$JAVA_HOME/lib/tools.jar:$TOMCAT_HOME/common/lib/servlet.jar
+# LogicMOO
+export CLASSPATH=$CLASSPATH:$LOGICMOOBASE/src
+
+# Jamud 
+export CLASSPATH=$CLASSPATH:$LOGICMOOBASE/src/partner/jamud/src
+
+# CIAO-Prolog
+export CLASSPATH=$CLASSPATH:$CIAOJAVALIB
+
+#SOAP
+export CLASSPATH=$CLASSPATH:$SOAPLIBS
+	
+#Other Helpers
+export CLASSPATH=$CLASSPATH:$JARLIB/cos.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/bsh-1.2b3.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/ecs-1.4.1.jar
-#export CLASSPATH=$CLASSPATH:$JARLIB/jakarta-oro-2.0.4.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/jdom.jar
-#export CLASSPATH=$CLASSPATH:$JARLIB/jakarta-regexp-1.2.jar
-#export CLASSPATH=$CLASSPATH:$JARLIB/jakarta-regexp-1.2.jar
-#export CLASSPATH=$CLASSPATH:$JARLIB/protege.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/jaxp.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/rdf-api-2001-01-19.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/plc.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/cpj.jar
-#export CLASSPATH=$CLASSPATH:$JARLIB/jamud-core.jar
-#export CLASSPATH=$CLASSPATH:$JARLIB/nanoxml.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/nanoxml.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/log4j.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/tomcat/xerces.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/activation.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/mail.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/jpl.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/crawler.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/junit.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/ViolinStrings.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/FIPA_OSv2_1_0.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/databinding.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/zeus.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/jxta.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/SiRPAC-1.14.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/jakarta-oro-2.0.4.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/commons-collections.jar
+
+
+
+
+
+
+# If Jamud is prebuiilt
+
+#export CLASSPATH=$CLASSPATH:$JARLIB/jamud-core.jar
 #export CLASSPATH=$CLASSPATH:$JARLIB/jamud-plugins.jar
 
-export CLASSPATH=$CLASSPATH:$CONTEXTWEBINF/classes:
 
-#export PLSO=$SWI_HOME/runtime/i686-linux-gnu
-#export PL_HOME=$SWI_HOME
-
-#export LD_LIBRARY_PATH=$JAVA_HOME/jre/lib/i386/:.:$PLSO:$JARLIB:$LD_LIBRARY_PATH
 

@@ -20,6 +20,10 @@ cd $LOGICMOOBASE/src/partner/jamud/src/com/jamud/commands/olc
 
 javac *.java
 
+cd $LOGICMOOBASE/src/partner/jamud/src/com/jamud/commands/logicmoo
+
+javac *.java
+
 cd $LOGICMOOBASE/src/partner/jamud/src/com/jamud/commands/
 
 javac *.java
