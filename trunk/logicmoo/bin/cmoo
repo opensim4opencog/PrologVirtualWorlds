@@ -1,7 +1,0 @@
-#!/bin/bash
-
-cd ../src/logicserver
-
-/home/clip/bin/ciaosh
-
-cd -

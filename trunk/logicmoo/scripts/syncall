@@ -1,8 +1,0 @@
-#!/bin/bash -c echo
-
-export CVS_RSH=ssh 
-
-cvs -z3 -d:ext:dmiles@cvs.logicmoo.sourceforge.net:/cvsroot/logicmoo co logicserver
-
-scp *.html   dmiles@logicmoo.sourceforge.net:/home/groups/l/lo/logicmoo/htdocs 
-
