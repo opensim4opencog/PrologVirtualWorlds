@@ -2,8 +2,8 @@
  * 
  * Now prolog can call java!!!
  * 
- *  File:    $Id: swijni.c,v 1.1 2002-11-16 03:37:16 dmiles Exp $
- *  Date:    $Date: 2002-11-16 03:37:16 $
+ *  File:    $Id: swijni.c,v 1.2 2002-11-16 18:49:51 dmiles Exp $
+ *  Date:    $Date: 2002-11-16 18:49:51 $
  *  Author:  Douglas Miles
  *  
  * This library is free software; you can redistribute it and/or
@@ -57,6 +57,8 @@ static jclass class_jobject;
 static atom_t JAVA_OBJECT;
 static atom_t JAVA_INSTANCE;
 static atom_t JAVA_PARSE;
+
+/*
 static jclass class_jchar;
 static jclass class_jbyte;
 static jclass class_jboolean;
@@ -66,6 +68,7 @@ static jclass class_jint;
 static jclass class_jlong;
 static jclass class_jshort;
 static jclass class_jclass;
+*/
 
 static jmethodID invoke_object_method;
 static long flags;
@@ -149,9 +152,6 @@ foreign_t java_prep_vm() {
 
 		// options[3].optionString = "-verbose:jni";   	/* print JNI-related messages */
 
-
-		//  fprintf(stderr, "%% %s\n",options[1].optionString);
-
 		vm_args.version = JNI_VERSION_1_2;
 
 		vm_args.options = options;
@@ -170,10 +170,24 @@ foreign_t java_prep_vm() {
 			PL_fail;
 		}
 
-		class_pointer_JavaRt = javart_FindClass("logicmoo/JavaRt");
-		class_jobject = javart_FindClass("java/lang/Object");
-		class_jstring = javart_FindClass("java/lang/String");
+		/*
+		Java Type  Native Type  Description  
+		-----------------------------------
+		boolean  jboolean  unsigned 8 bits  
+		byte  jbyte  signed 8 bits  
+		char  jchar  unsigned 16 bits  
+		short  jshort  signed 16 bits  
+		int  jint  signed 32 bits  
+		long  jlong  signed 64 bits  
+		float  jfloat  32 bits  
+		double  jdouble  64 bits  
+		void  void  N/A  
+		
+		*/
+
+		/*	
 		class_jclass = javart_FindClass("java/lang/Class");
+		
 		class_jboolean = javart_FindClass("java/lang/Boolean");
 		class_jbyte = javart_FindClass("java/lang/Byte");
 		class_jchar = javart_FindClass("java/lang/Char");
@@ -181,10 +195,15 @@ foreign_t java_prep_vm() {
 		class_jint = javart_FindClass("java/lang/Integer");
 		class_jlong = javart_FindClass("java/lang/Long");
 		class_jfloat = javart_FindClass("java/lang/Float");
+		*/
+		class_pointer_JavaRt = javart_FindClass("swijni/JavaRt");
 
+		class_jobject = javart_FindClass("java/lang/Object");
+
+		class_jstring = javart_FindClass("java/lang/String");
 
 		if (!class_pointer_JavaRt || !class_jstring) {
-			fprintf(stderr, "Can't find \"logicmoo.JavaRt\" (Set Your Classpath)\n");
+			fprintf(stderr, "Can't find \"swijni.SwiJni\" (Set Your Classpath)\n");
 			PL_fail;
 		}
 
@@ -201,23 +220,7 @@ foreign_t java_prep_vm() {
 
 }
 
-/*
-Java Type  Native Type  Description  
------------------------------------
-boolean  jboolean  unsigned 8 bits  
-byte  jbyte  signed 8 bits  
-char  jchar  unsigned 16 bits  
-short  jshort  signed 16 bits  
-int  jint  signed 32 bits  
-long  jlong  signed 64 bits  
-float  jfloat  32 bits  
-double  jdouble  64 bits  
-void  void  N/A  
-
-*/
-
-
-static jstring intToHash(term_t temp_term) {
+jstring intToObjRef(term_t temp_term) {
 	char temp_parse[64];
 	int temp_int;
 	PL_get_integer(temp_term,&temp_int);
@@ -237,19 +240,12 @@ static jobjectArray list2MethodArgs(term_t arg_list) {
 
 	jobjectArray method_args;
 
-	//	class_jobject = javart_FindClass("java/lang/Object");
-
 	while ( PL_get_list(prolog_list, temp_term, prolog_list) ) countup++;
-
-
-	fprintf(stderr, "listlen = %i \n", countup);
-
+	
 	method_args=(jobjectArray) JNI_ENV->NewObjectArray(jni_env,
 													   countup,
 													   (jclass) class_jobject,
 													   NULL);  
-
-
 	countup=0;
 
 	prolog_list = PL_copy_term_ref(arg_list);	/* copy as we need to write */
@@ -273,7 +269,7 @@ static jobject term_to_jobject(term_t temp_term) {
 	int arity, len, n;
 	STRING temp_string;
 	char temp_parse[4096];
-	double temp_float;        
+	double temp_float;
 	int temp_int;
 
 	switch ( PL_term_type(temp_term) ) {
@@ -288,28 +284,29 @@ static jobject term_to_jobject(term_t temp_term) {
 		// Special Atoms
 		switch (len) {
 		case 5:
-			if (PL_unify_atom_chars(temp_term,"false"))	return chars_to_jstring("f");
+			if (PL_unify_atom_chars(temp_term,"false"))	return chars_to_jstring("bf");
 		case 0:
-			return chars_to_jstring("s$");
+			return chars_to_jstring("s");
 		case 4:
-			if (PL_unify_atom_chars(temp_term,"true"))	return chars_to_jstring("t");
+			if (PL_unify_atom_chars(temp_term,"true")) return chars_to_jstring("bt");
 			if (PL_unify_atom_chars(temp_term,"null")) return chars_to_jstring("n");
-		case 7:
-			if (PL_unify_atom_chars(temp_term,"oJavaRt")) return chars_to_jstring("oJavaRt");
+		case 6:
+			if (PL_unify_atom_chars(temp_term,"javart")) return chars_to_jstring("oJavaRt");
 		}
-		sprintf(temp_parse,"s%s$",temp_string); return chars_to_jstring(temp_parse);
+
+		sprintf(temp_parse,"s%s",temp_string); return chars_to_jstring(temp_parse);
 
 	case PL_STRING:
 		PL_get_chars(temp_term,&temp_string,CVT_ALL);
-		sprintf(temp_parse,"s%s$",temp_string);
+		sprintf(temp_parse,"s%s",temp_string);
 		return chars_to_jstring(temp_parse);
 	case PL_INTEGER: 
 		PL_get_integer(temp_term,&temp_int);
-		sprintf(temp_parse,"@%i",temp_int);
+		sprintf(temp_parse,"i%i",temp_int);
 		return chars_to_jstring(temp_parse);
 	case PL_FLOAT: //todo return a jobject float 
 		PL_get_float(temp_term,&temp_float);
-		sprintf(temp_parse,"#%f",temp_float);
+		sprintf(temp_parse,"l%f",temp_float);
 		return chars_to_jstring(temp_parse);
 	case PL_TERM:
 
@@ -323,7 +320,7 @@ static jobject term_to_jobject(term_t temp_term) {
 			if (name == JAVA_OBJECT || name == JAVA_INSTANCE) {
 				term_t arg1 = PL_new_term_ref();
 				PL_get_arg(1, temp_term, arg1);
-				return(jstring) intToHash(arg1);
+				return(jstring) intToObjRef(arg1);
 			}
 			if (name == JAVA_PARSE) {
 				term_t arg1 = PL_new_term_ref();
@@ -362,13 +359,6 @@ foreign_t pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg
 		method_result_chars = "null";
 	else
 		method_result_chars=jstring_to_chars(result_string_object);
-	9v-0 
-	{
-		fprintf(stderr, "ERROR: Could not get string from result (%d)\n",result_string_object);
-		PL_fail;
-	} 
-
-	printf("method_result_chars=%s\n ",method_result_chars);
 
 	if (PL_chars_to_term(method_result_chars,temp_term)) {
 		prolog_result =(foreign_t)PL_unify(result_term,temp_term); 
@@ -383,6 +373,12 @@ foreign_t pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg
 
 }
 
+int main(int argc, char**argv) {
+ PL_initialise(argc,argv);
+ PL_install_readline();
+ install();
+ PL_toplevel();
+}
 
 install_t install() {
 	PL_register_foreign("java_create_vm", 0, java_prep_vm, 0);
@@ -398,3 +394,4 @@ install_t install() {
 	PL_register_atom(JAVA_PARSE);
 
 }
+
