@@ -149,7 +149,7 @@ public class SystemProceedures {
             Object o = getDrefArg(0).toObject();
             try {
                 Method method = o.getClass().getMethod(getDrefArg(1).toUnquoted(),null);
-                return putArg(2,ForiegnObject.getRef(method.invoke(o,null)) ,p);
+                return putArg(2,ForeignObject.getRef(method.invoke(o,null)) ,p);
             } catch ( Exception e ) {
                 e.printStackTrace();
                 return -1;
@@ -167,9 +167,9 @@ public class SystemProceedures {
             return 1;
         }
          void pri(Object o) {
-            if ( o instanceof ForiegnObject ) {
-                IO.println("% ForiegnObject: ");
-                pri(((ForiegnObject) o).toUnstubbed());
+            if ( o instanceof ForeignObject ) {
+                IO.println("% ForeignObject: ");
+                pri(((ForeignObject) o).toUnstubbed());
             }
             if ( o instanceof Nonvar ) {
                 IO.println("% Nonvar");
@@ -198,7 +198,7 @@ public class SystemProceedures {
         }
 
         public int exec(IKernel p) {
-            return putArg(1,ForiegnObject.getStub(getDirectArg(0).getClass()),p);
+            return putArg(1,ForeignObject.getStub(getDirectArg(0).getClass()),p);
         }
     }
     class jtype extends CompoundProceedure {
@@ -207,7 +207,7 @@ public class SystemProceedures {
         }
 
         public int exec(IKernel p) {
-            return putArg(1,ForiegnObject.getStub(getDrefArg(0).getClass()),p);
+            return putArg(1,ForeignObject.getStub(getDrefArg(0).getClass()),p);
         }
     }
     /**
@@ -361,7 +361,7 @@ public class SystemProceedures {
       -1 for a variable like X
       -2 for an integer like 13
       -3 for real like 3.14
-      -4 for a wrapped ForiegnObject;
+      -4 for a wrapped ForeignObject;
       @see ITerm#getArity
     */
     class get_arity extends CompoundProceedure {

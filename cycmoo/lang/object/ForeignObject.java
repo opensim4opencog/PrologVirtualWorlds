@@ -6,11 +6,11 @@ import java.lang.reflect.*;
 import java.util.*;
 import java.lang.*;
 /**
- * A ForiegnObject is a Jinni FunctionObject with a stubbed slot 
+ * A ForeignObject is a Jinni FunctionObject with a stubbed slot 
  * which containing a wrapped Java object
  */
 
-public class ForiegnObject extends FunctionObject implements InvocationHandler {
+public class ForeignObject extends FunctionObject implements InvocationHandler {
 
     final static public Class  baseinterface = ITerm.class;
     static public ITerm getRef(Object obj) {
@@ -37,7 +37,7 @@ public class ForiegnObject extends FunctionObject implements InvocationHandler {
         try {
             Class proxyClass = Proxy.getProxyClass(baseinterface.getClassLoader(), classes);
             Constructor constructure = proxyClass.getConstructor(new Class[] {InvocationHandler.class});
-            theStub = (ITerm)constructure.newInstance(new Object[] {new ForiegnObject(obj,new ArrayList(Arrays.asList(pclasses)))});
+            theStub = (ITerm)constructure.newInstance(new Object[] {new ForeignObject(obj,new ArrayList(Arrays.asList(pclasses)))});
             KernelAgent.objectPut(theStub.name(),theStub);
             return theStub;
         } catch ( Exception e ) {
@@ -56,7 +56,7 @@ public class ForiegnObject extends FunctionObject implements InvocationHandler {
     // The object is not in critical code
     private boolean available=true;
 
-    private ForiegnObject(Object obj, List classesImplemented) {
+    private ForeignObject(Object obj, List classesImplemented) {
         super();
         this.prevclasses=classesImplemented;
         this.stubbed=obj;
