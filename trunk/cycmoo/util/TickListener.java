@@ -1,4 +1,4 @@
-package logicmoo.util;
+package cycmoo.util;
 
 public abstract interface TickListener {
    public void tick(Ticker source);

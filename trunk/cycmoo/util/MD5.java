@@ -1,10 +1,10 @@
-package logicmoo.util;
+package cycmoo.util;
 
 
 /**
  * Implementation of RSA's MD5 hash generator
  *
- * @version    $Revision: 1.1 $
+ * @version    $Revision: 1.2 $
  * @author    Santeri Paavolainen <sjpaavol@cc.helsinki.fi>
  */
 public class MD5 {

@@ -1,9 +1,10 @@
+//<?
 /***********************************************************************
  * 
  * Now prolog can call java!!!
  * 
- *  File:    $Id: javart.c,v 1.3 2002-11-17 18:32:31 dmiles Exp $
- *  Date:    $Date: 2002-11-17 18:32:31 $
+ *  File:    $Id: javart.c,v 1.4 2002-11-27 21:47:24 dmiles Exp $
+ *  Date:    $Date: 2002-11-27 21:47:24 $
  *  Author:  Douglas Miles
  *  
  * This library is free software; you can redistribute it and/or
@@ -102,11 +103,12 @@ static jmethodID set_object_field_method;
 static jmethodID find_class_method;
 static jmethodID newInt_method;
 static jmethodID newFloat_method;
+static jmethodID newBoolean_method;
 static jmethodID newNull_method;
 static jmethodID findObject_method;
 static jmethodID create_iter_obj;
 static long debug_flags;
-
+static jobject SWIJNI_Null;
 /* Defines */
 
 #define javart_FindClass(classname) \
@@ -129,12 +131,11 @@ static long debug_flags;
 #define CSM1(name,a1) ( (*jni_env)->CallStaticObjectMethod(jni_env,class_pointer_JavaRt,name,a1))
 #define CSM2(name,a1,a2) ( (*jni_env)->CallStaticObjectMethod(jni_env,class_pointer_JavaRt,name,a1,a2))
 #define CSM3(name,a1,a2,a3) ( (*jni_env)->CallStaticObjectMethod(jni_env,class_pointer_JavaRt,name,a1,a2,a3))
-#define CSM4(name,a1,a2,a3,a4) ( (*jni_env)->CallStaticObjectMethod(jni_env,class_pointer_JavaRt,name,a1,a2,a3,a4))
+#define sameAtom(a,b) PL_unify_atom(a,b)
 
-static char * atom_to_chars(term_t temp_term) {
-	char * temp_string;
-	int len;
-	PL_get_atom_nchars(temp_term,&len,&temp_string);
+static char* atom_to_chars(term_t temp_term) {
+	char* temp_string;
+	PL_get_atom_chars(temp_term,&temp_string);
 	return temp_string;
 }
 static term_t get_arg(long countup,term_t temp_term) {
@@ -229,29 +230,27 @@ foreign_t java_sync_vm() {
 	*/
 
 	class_pointer_JavaRt = javart_FindClass("swijni/JavaRt");
-
 	class_jobject = javart_FindClass("java/lang/Object");
-
 	class_jstring = javart_FindClass("java/lang/String");
-
 	if (!class_pointer_JavaRt || !class_jstring) {
 		fprintf(stderr, "Can't find \"swijni.JavaRt\" (Set Your Classpath)\n");
 		PL_fail;
 	}
 
 	invoke_object_method = GSM("invokeObject","(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;");
-	create_object_method = GSM("createObject","(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;");
+	create_object_method = GSM("createObject","(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;");
 	new_object_method = GSM("newObject","(Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;");
 	forget_object_method = GSM("forgetObject","(I)Z");
 	get_object_field_method = GSM("getObjectField","(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/String;");
 	set_object_field_method = GSM("setObjectField","(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/String;");
 	find_class_method =GSM("findClass","(Ljava/lang/String;)Ljava/lang/Class;");
-	newInt_method = GSM("newInt","(I)I");
+	newInt_method = GSM("newInt","(I)Ljava/lang/Integer;");
 	newFloat_method = GSM("newFloat","(F)Ljava/lang/Float;");
+	newBoolean_method = GSM("newBoolean","(Z)Ljava/lang/Boolean;");
 	newNull_method = GSM("newNull","()Ljava/lang/Object;");
 	findObject_method = GSM("findObject","(I)Ljava/lang/Object;");
 	create_iter_obj =GSM("createCollection","(Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object;");
-
+	jobject SWIJNI_Null = CSM0(newNull_method);
 	if (findObject_method==0) {
 		fprintf(stderr, "Cant GetStaticMethodID (findObject_method)\n");
 		PL_fail;
@@ -333,84 +332,91 @@ static jobjectArray list2JavaTyped(jclass array_class, term_t arg_list) {
 
 
 static jobject pl_to_jobject(term_t temp_term) {
-	functor_t functor;
-	int arity, len, n;
-	char * temp_string;
-	double temp_float;
-	long temp_long;
 
 	switch ( PL_term_type(temp_term) ) {
-	case PL_STRING:
-		PL_get_chars(temp_term,&temp_string,CVT_ALL);
-		return chars_to_jstring(temp_string);
-	case PL_INTEGER: 
-		PL_get_long(temp_term,&temp_long);
-		return CSM1(newInt_method,temp_long);
-	case PL_FLOAT: //todo return a jobject float 
-		PL_get_float(temp_term,&temp_float);
-		return CSM1(newFloat_method,temp_float);
-	case PL_VARIABLE:
-		return CSM0(newNull_method);
-	case PL_ATOM:
-		if (PL_get_nil(temp_term)) return CSM0(newNull_method);
-		// Special Atoms
-		if (temp_term==JAVA_TRUE) return(jobject )JNI_TRUE;
-		if (temp_term==JAVA_FALSE) return(jobject )JNI_FALSE;
-		if (temp_term==JAVA_EMPTY_STRING) return chars_to_jstring("");
-		if (temp_term==JAVA_NULL) return CSM0(newNull_method);
-		return atom_to_jstring(temp_term);
-	case PL_TERM:   
-		if (PL_is_list(temp_term))return(jobject) list2Java(temp_term);
-		{
-			atom_t name = PL_new_term_ref();
-			PL_get_name_arity(temp_term, &name, &arity);
-			if (name == JAVA_OBJECT) {
-				term_t arg1 = PL_new_term_ref();
-				PL_get_arg(1, temp_term, arg1);
-				return intToObjRef(arg1);
-			}
-			if (name == JAVA_CLASS) {
-				term_t arg1 = PL_new_term_ref();
-				PL_get_arg(1, temp_term, arg1);
-				return atom_to_jclass(arg1);
-			}
-			if (name == JAVA_ARRAY_TYPED ) {
-				term_t arg1 = PL_new_term_ref();
-				PL_get_arg(1, temp_term, arg1);
-				term_t arg2 = PL_new_term_ref();
-				PL_get_arg(2, temp_term, arg2);
-				return list2JavaTyped(atom_to_jclass(arg1),arg2);
-			}
-			if (name == JAVA_ITERATOR_TYPED ) {
-				term_t arg1 = PL_new_term_ref();
-				PL_get_arg(1, temp_term, arg1);
-				term_t arg2 = PL_new_term_ref();
-				PL_get_arg(2, temp_term, arg2);
-				return CSM2(create_iter_obj,atom_to_jclass(arg1),list2Java(arg2));
-			}
-			// Complex Object
+	case PL_STRING: {
+			char * temp_string;
+			PL_get_chars(temp_term,&temp_string,CVT_ALL);
+			return chars_to_jstring(temp_string);
+		}
+	case PL_INTEGER: {  
+		jvalue jtempv;
+			long temp_long;
+			PL_get_long(temp_term,&temp_long);
+			return CSM1(newInt_method,temp_long);
+		}
+	case PL_FLOAT: { //todo return a jobject float 
+			double temp_float;
+			PL_get_float(temp_term, &temp_float);
+			return CSM1(newFloat_method,temp_float);
+		}
+	case PL_VARIABLE: {
+			return SWIJNI_Null;
+		}
+	case PL_ATOM: {
+			if (PL_get_nil(temp_term)) return SWIJNI_Null;
+			// Special Atoms
+			if (sameAtom(temp_term,JAVA_TRUE)) return CSM1(newBoolean_method,JNI_TRUE);
+			if (sameAtom(temp_term,JAVA_FALSE)) return CSM1(newBoolean_method,JNI_FALSE);
+			if (sameAtom(temp_term,JAVA_EMPTY_STRING)) return chars_to_jstring("");
+			if (sameAtom(temp_term,JAVA_NULL)) return SWIJNI_Null;
+			return atom_to_jstring(temp_term);
+		}
+	case PL_TERM: {
+			functor_t functor;
+			int arity, len, n;
+			if (PL_is_list(temp_term))return(jobject) list2Java(temp_term);
 			{
-				int countup;
-				term_t arg = PL_new_term_ref();  
-				jobjectArray method_args = (jobjectArray) (*jni_env)->NewObjectArray(jni_env,arity,class_jobject,NULL);  
-				for (countup=0; countup<arity; countup++ ) {
-					PL_get_arg(countup,temp_term,arg);
-					(*jni_env)->SetObjectArrayElement(jni_env,method_args,countup,pl_to_jobject(arg));
+				atom_t name = PL_new_term_ref();
+				PL_get_name_arity(temp_term, &name, &arity);
+				if (sameAtom(name,JAVA_OBJECT)) {
+					term_t arg1 = PL_new_term_ref();
+					PL_get_arg(1, temp_term, arg1);
+					return intToObjRef(arg1);
 				}
-				return CSM2(create_object_method,atom_to_jclass(name),method_args);
+				if (sameAtom(name,JAVA_CLASS)) {
+					term_t arg1 = PL_new_term_ref();
+					PL_get_arg(1, temp_term, arg1);
+					return atom_to_jclass(arg1);
+				}
+				if (sameAtom(name,JAVA_ARRAY_TYPED)) {
+					term_t arg1 = PL_new_term_ref();
+					PL_get_arg(1, temp_term, arg1);
+					term_t arg2 = PL_new_term_ref();
+					PL_get_arg(2, temp_term, arg2);
+					return list2JavaTyped(atom_to_jclass(arg1),arg2);
+				}
+				if (sameAtom(name,JAVA_ITERATOR_TYPED)) {
+					term_t arg1 = PL_new_term_ref();
+					PL_get_arg(1, temp_term, arg1);
+					term_t arg2 = PL_new_term_ref();
+					PL_get_arg(2, temp_term, arg2);
+					return CSM2(create_iter_obj,atom_to_jclass(arg1),list2Java(arg2));
+				}
+				// Complex Object
+				{
+					int countup;
+					term_t arg = PL_new_term_ref();  
+					jobjectArray method_args = (jobjectArray) (*jni_env)->NewObjectArray(jni_env,arity,class_jobject,NULL);  
+					for (countup=0; countup<arity; countup++ ) {
+						PL_get_arg(countup,temp_term,arg);
+						(*jni_env)->SetObjectArrayElement(jni_env,method_args,countup,pl_to_jobject(arg));
+					}
+					return CSM2(new_object_method,atom_to_jclass(name),method_args);
+				}
 			}
 		}
 	}
+
 }
 
 
 foreign_t pl_java_create_object(term_t class_term,term_t arg_list,term_t result_term) {
-	return SWIJNI_unify_jstring(
-							   CSM2(
-								   create_object_method,
-								   atom_to_jstring(class_term),
-								   list2Java(arg_list)),
-							   result_term);
+	return SWIJNI_unify_jstring(CSM2(
+									create_object_method,
+									atom_to_jstring(class_term),
+									list2Java(arg_list)),
+								result_term);
 }
 
 foreign_t pl_java_forget_object(term_t object_term) {
@@ -419,31 +425,30 @@ foreign_t pl_java_forget_object(term_t object_term) {
 }
 
 foreign_t pl_set_object_field(term_t object_term, term_t field_term,term_t value_term,term_t result_term) {
-	return SWIJNI_unify_jstring(
-							   CSM3(set_object_field_method,
+	return SWIJNI_unify_jstring(CSM3(
+									set_object_field_method,
 									pl_to_jobject(object_term),
 									atom_to_jstring(field_term),
 									pl_to_jobject(value_term)),
-							   result_term);
+								result_term);
 }
 
 
 foreign_t pl_get_object_field(term_t object_term, term_t field_term,term_t result_term) {
-	return SWIJNI_unify_jstring(
-							   CSM2(
-								   get_object_field_method,
-								   pl_to_jobject(object_term),
-								   atom_to_jstring(field_term)),
-							   result_term);
+	return SWIJNI_unify_jstring(CSM2(
+									get_object_field_method,
+									pl_to_jobject(object_term),
+									atom_to_jstring(field_term)),
+								result_term);
 }
 
 foreign_t pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg_list,term_t result_term) {
-	return SWIJNI_unify_jstring(
-							   CSM3(invoke_object_method,
+	return SWIJNI_unify_jstring(CSM3(
+									invoke_object_method,
 									pl_to_jobject(object_term),
 									atom_to_jstring(method_term),
 									list2Java(arg_list)),
-							   result_term);
+								result_term);
 }
 
 install_t install() {
@@ -500,8 +505,8 @@ int ensure_prolog_running(int argc, char**argv) {
 /***********************************************************************
  *  Project: jpl
  * 
- *  File:    $Id: javart.c,v 1.3 2002-11-17 18:32:31 dmiles Exp $
- *  Date:    $Date: 2002-11-17 18:32:31 $
+ *  File:    $Id: javart.c,v 1.4 2002-11-27 21:47:24 dmiles Exp $
+ *  Date:    $Date: 2002-11-27 21:47:24 $
  *  Author:  Fred Dushin <fadushin@syr.edu>
  * 		  
  * 

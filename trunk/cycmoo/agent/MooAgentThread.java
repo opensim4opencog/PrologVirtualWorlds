@@ -1,9 +1,9 @@
-package logicmoo.agent;
+package cycmoo.agent;
 
-import logicmoo.*;
-import logicmoo.api.*;
-import logicmoo.util.*;
-import logicmoo.obj.*;
+import cycmoo.*;
+import cycmoo.api.*;
+import cycmoo.util.*;
+import cycmoo.obj.*;
 
 
 // Java
@@ -18,7 +18,9 @@ import java.awt.*;
 import org.opencyc.api.*;
 import org.opencyc.javashell.*;
 import org.opencyc.cycobject.*;
+import org.opencyc.cyclobject.*;
 import org.opencyc.kif.*;
+import org.opencyc.javashell.*;
 import org.opencyc.util.*;
 import org.opencyc.webserver.WebServer;
 import org.apache.oro.util.*;
@@ -171,7 +173,7 @@ public abstract class MooAgentThread extends Thread implements IMooClient {
 	}
 	try {
 	    nclassloader = new NClassLoader("/opt/sourceforge/logicmoo/src/",".class","");
-	    meclass = nclassloader.findClass("logicmoo.cmd.ActorCommandParser");
+	    meclass = nclassloader.findClass("cycmoo.cmd.ActorCommandParser");
 	    Constructor cons = meclass.getConstructors()[0];
 	    me = (IActorCommandParser)meclass.newInstance();
 	    me.setData(cyc,name,loc,mt,this);

@@ -1,9 +1,9 @@
-package logicmoo;
+package cycmoo;
 
 
 import java.util.*;
-import logicmoo.obj.*;
-import logicmoo.util.*;
+import cycmoo.obj.*;
+import cycmoo.util.*;
 
 
 /**

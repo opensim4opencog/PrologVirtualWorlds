@@ -1,5 +1,5 @@
-<%@ page language="java" import="logicmoo.*, org.opencyc.constraintsolver.*,org.opencyc.cycobject.*, org.opencyc.kif.*, org.opencyc.jsp.*, org.opencyc.util.*,org.opencyc.api.*,org.opencyc.inferencesupport.*,org.opencyc.webserver.*, java.util.*,com.oreilly.servlet.*,com.oreilly.servlet.multipart.*,java.io.*" %>
-<jsp:useBean id="theLogicMoo" scope="application" class="logicmoo.LogicMoo"/>
+<%@ page language="java" import="cycmoo.*, org.opencyc.constraintsolver.*,org.opencyc.cycobject.*, org.opencyc.kif.*, org.opencyc.jsp.*, org.opencyc.util.*,org.opencyc.api.*,org.opencyc.inferencesupport.*,org.opencyc.webserver.*, java.util.*,com.oreilly.servlet.*,com.oreilly.servlet.multipart.*,java.io.*" %>
+<jsp:useBean id="theLogicMoo" scope="application" class="cycmoo.LogicMoo"/>
 
 <%
 CycAccess cycAccess = theLogicMoo.getCycAccess();
@@ -257,7 +257,7 @@ menu[0][5] = new Item('  Objects', '#', 'workarea', 40, 10, 9);
 menu[0][6] = new Item(' <nobr>NPC Agent', '#', 'workarea', 70, 10, 6);
 menu[0][7] = new Item(' <nobr>Planning', '#', 'workarea', 70, 10, 7);
 menu[0][8] = new Item('  Microtheory', '#', '', 60, 10, 4);
-menu[0][9] = new Item('  Help', 'http://logicmoo.sourceforge.net', '_top', 40, 10, 0);
+menu[0][9] = new Item('  Help', 'http://cycmoo.sourceforge.net', '_top', 40, 10, 0);
 // An example of a link with a target frame/window as well...
 // menu[0][4] = new Item('  Site', 'http://gusnz.cjb.net', '_new', 40, 10, 0);
 

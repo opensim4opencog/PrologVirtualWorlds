@@ -1,5 +1,5 @@
-package logicmoo.api;
-import logicmoo.obj.*;
+package cycmoo.api;
+import cycmoo.obj.*;
 
 
 public interface IMooClient {

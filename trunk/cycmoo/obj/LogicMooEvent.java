@@ -1,9 +1,9 @@
-package logicmoo.obj;
+package cycmoo.obj;
 
-import logicmoo.*;
-import logicmoo.agent.*;
-import logicmoo.api.*;
-import logicmoo.obj.*;
+import cycmoo.*;
+import cycmoo.agent.*;
+import cycmoo.api.*;
+import cycmoo.obj.*;
 
 import java.lang.reflect.*;
 import java.lang.*;
@@ -12,16 +12,20 @@ import java.net.*;
 import java.util.*;
 import java.awt.*;
 
+// OpenCyc
 import org.opencyc.api.*;
+import org.opencyc.javashell.*;
 import org.opencyc.cycobject.*;
 import org.opencyc.cyclobject.*;
+import org.opencyc.kif.*;
+import org.opencyc.javashell.*;
+import org.opencyc.util.*;
+import org.opencyc.webserver.WebServer;
+import org.apache.oro.util.*;
 import org.opencyc.templateparser.*;
 import org.opencyc.inferencesupport.*;
 import org.opencyc.constraintsolver.*;
 import org.opencyc.conversation.*;
-import org.opencyc.kif.*;
-import org.opencyc.util.*;
-import org.opencyc.webserver.WebServer;
 import org.apache.oro.util.*;
 
 
