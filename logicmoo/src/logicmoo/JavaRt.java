@@ -143,6 +143,7 @@ public class JavaRt extends Thread {
 		return innerInstance;
 	}
 
+
 	public synchronized static String invokeObject(String objectName,String methodName, Object[] params) {
 		if ( allObjects==null )	createState();
 		if ( debug>1 ) System.err.println("invokeObject("+objectName +","+ methodName +","+ params + ")");
@@ -150,7 +151,9 @@ public class JavaRt extends Thread {
 		if ( innerInstance==null )		return makeError(new Exception("Object not found in catalog \"" + objectName +"\""));
 		if ( debug>1 ) System.err.println("Found Instance: \"" + innerInstance +"\"" );
 		try {
-			return objectToProlog(invokeObject(innerInstance,(String) argToObject(methodName),argsToObjectVector(params)));
+			String toReturn=  objectToProlog((Object)invokeObject(innerInstance,(String) argToObject(methodName),argsToObjectVector(params)));
+			if ( debug>1 ) System.err.println("returning: \"" + toReturn +"\"" );
+			return toReturn;
 		} catch ( Exception e ) {
 			return makeError(e);
 		}
@@ -160,22 +163,52 @@ public class JavaRt extends Thread {
 	public synchronized static Object invokeObject(Object innerInstance,String methodName, Object[] args) 
 	throws Exception {
 
-		// Get/Set Fields
-		if ( methodName.startsWith("field") ) {
-			Field innerField;
-			if ( methodName.charAt(7)=='s' ) {
-				innerField = getFieldForObject(innerInstance,(String)args[0]);
-				innerField.set(innerInstance,args[1]);
-				return innerField.get(innerInstance);
-			}
-			if ( methodName.charAt(7)=='g' ) {
-				innerField = getFieldForObject(innerInstance,(String)args[0]);
-				return innerField.get(innerInstance);
-			}
-		}
+	    // Get/Set Fields
+	    if ( methodName.startsWith("#") ) {
+		    Field innerField = getFieldForObject(innerInstance,(String)args[0]);
+		    if ( debug>1 ) System.err.println("innerField("+innerField.getName()+ ")");
+		    if ( methodName.charAt(1)=='s' ) innerField.set(innerInstance,args[1]);
+		    if ( debug>1 ) System.err.println(innerField.get(innerInstance));
+		    return innerField.get(innerInstance);
+	    }
 
 		// Invokes Methods
 		return getMethodForObject(innerInstance,methodName,getClasses(args)).invoke(innerInstance,args);
+	}
+
+	      /* Serializes Members into Prolog List */
+	public synchronized static String arrayToPLStructure(Object[] pMembs) {
+		int len = pMembs.length;
+
+		switch ( len ) {
+			case 0:
+				return "[]";
+			case 1:
+				return "[" + objectToProlog(pMembs[0]) + "]";
+		}
+		StringBuffer args = new StringBuffer("[" + objectToProlog(pMembs[0]));
+
+		for ( int nMemb=1 ; nMemb < len; nMemb++ )
+			args.append(",").append(objectToProlog(pMembs[nMemb]));
+
+		return args.append("]").toString();
+	}
+
+
+	public synchronized static String objectToProlog(Object obj ) {
+		if ( obj==null ) return "void";
+		if ( obj instanceof Collection ) return  "collection"; //(" + arrayToPLStructure(((Collection)obj).toArray() ) + ")";
+		// if ( obj instanceof Iterator ) return  "iterator(" + objectToProlog(((Iterator)obj).toArray() ) + ")";
+		Class oClass = obj.getClass();
+		if ( oClass.isPrimitive() )	return obj.toString();
+		if ( oClass.isArray() ) return arrayToPLStructure((Object[])obj);
+	    try {
+			if ( oClass.getDeclaredMethod("toString",null)!=null ) return obj.toString();
+		} catch ( NoSuchMethodException e ) {
+		}
+		
+		addInstance(obj);
+		return nameForInstance(obj);
 	}
 
 	public synchronized static Class[] getClasses(Object[] objs) {
@@ -214,13 +247,14 @@ public class JavaRt extends Thread {
 	public synchronized static Object[] argsToObjectVector(Object[] args) {
 		
 	    int len = args.length;
+	    System.err.println("argsToObjectVector=" + len);
 
 	    Object toReturnObjects[]=new Object[len];
 		int source = 0;
 		for ( int i = 0 ; i < len ; i++ ) {
 			toReturnObjects[i ]=argToObject( (Object) args[ i ]);
 			if ( debug >1 )
-				System.err.println("Arg" + i + "=\"" + args[i] + "\" -> " + toReturnObjects[i].toString());
+			    System.err.println("Arg" + i + "=\"" + args[i] + "\" -> " + toReturnObjects[i].toString());
 		}
 		return toReturnObjects;
 	}                     
@@ -268,16 +302,7 @@ public class JavaRt extends Thread {
 		return arg;
 	}
 
-	public synchronized static String objectToProlog(Object obj ) {
-		if ( obj==null ) return "void";
-		if ( obj.getClass().isPrimitive() )    return obj.toString();
-		try {
-			if ( obj.getClass().getDeclaredMethod("toString",null)!=null ) return obj.toString();
-		} catch ( NoSuchMethodException e ) {
-		}
-		addInstance(obj);
-		return nameForInstance(obj);
-	}
+
 
 	public synchronized static Object mktype(String arg) {
 		int comma = arg.indexOf(',') ;
