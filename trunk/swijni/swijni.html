@@ -8,43 +8,37 @@
 
 </body>
   
-<p><span style='color: teal'><font face="Arial" size="3"><b>SWIJNI and JAVART</b></font></span></p>
-<p><font face="Arial" size="3">Two modules are provided SWIJNI and JAVART currently 
-  they are the same.</font></p>
-<p><font size="3" face="Arial">JAVART - Swi-Prolog implementation of the common 
+<p><span style='color: teal'><font face="Arial" size="3"><b><u>SWIJNI and JAVART</u></b></font></span></p>
+<p><font size="3" face="Arial">JAVART - SWI-Prolog implementation of the common 
   Prolog to Java low level libraries.<br>
   <br>
- SWIJNI - Swi-Prolog natively as possible implementation of Java that should stay in sync with Fred
+ SWIJNI - SWI-Prolog natively as possible implementation of Java that should stay in sync with Fred
 Dushin's Code
   </font></p>
 <p><font face="Arial" size="3"><b><a href="#TOC594">Prolog side 
-  of the Java interface</a>  </b> (see also <a href="#SEC595">Java 
-  callback side</a>)</font></p>
+  of the Java interface</a>  </b> (see also <a href="#SEC595">Java side</a>)</font></p>
   
 <p><font face="Arial" size="3">The prolog side sends commands to the Java reflect 
   interface of objects the result is returned to the user program, or the action 
   fails if there is any problem in the java side. By exporting the below predicates 
-  it should be possible to use any method or callback Java has to offer.</font> 
-</p>
-<p><font face="Arial" size="3">Prolog data representation of java elements is 
-  very simple in this low-level interface. Java primitive types such as integers 
-  and characters are translated into Java strings, and even some Java objects 
-  are translated that way (e. g. Java strings). Java objects are represented in 
-  Prolog as compound terms with a reference to identify the corresponding Java 
-  object. Data conversion is made automatically when the interface is used, so 
+  it should be possible to use any method or callback Java has to offer.&nbsp; Data conversion is made automatically when the interface is used, so 
   the Prolog user programs do not have to deal with the complexity of this tasks.</font> 
 </p>
-  <p><a name=SEC598><font color="#008080" size="3" face="Arial"><b>Module</b></font></a><font color="#008080" size="3" face="Arial"><b>s</b></font></p>
+<p><font face="Arial" size="3"><a href="#TOC599"><b><u>Module</u></b></a></font></p>
   
-<p><font face="Arial" size="3"><a
-name=SEC599><code>:- use_module(library(javart)).</code></a><b><code> </code></b><code><b>or
-</b>:- use_module(library(swijni)).</code></font></p>
+  <p><b><code><font face="Arial" size="3"><a
+name=SEC599>:- use_module(library(javart))</a>.<br>
+  :- use_module(library(swijni)).<br>
+  </font></code></b></p>
   
 <p><font face="Arial" size="3"><a href="#TOC599"><b><u>Predicates</u></b> <br>
   <br>
-</a></font><b> <code><font face="Arial" size="3">java_start/0 or java_start(+classpath)</font></code></b>
+</a></font><b> <code><font face="Arial" size="3">java_start<br>
+java_start(+classpath)</font></code></b>
 </p>
-<p><font size="3" face="Arial">Ensures a Java Virtual Machine is ready for use
+<p><font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Description:</em>  Ensures a Java Virtual Machine is ready for use
 by prolog. If arity 1 version is called is uses a sting the supplied java class path..<br>
 <br>
 </font> <code><b><font face="Arial" size="3">java_stop</font></b></code>
@@ -53,7 +47,7 @@ by prolog. If arity 1 version is called is uses a sting the supplied java class 
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
   </span><em>Description:</em> Stops the interface terminating the threads that
   handle the socket connection, and finishing the Java interface server if it
-  was started using java_start/n.</font></p>
+  was started using java_start/N.</font></p>
   <p> <code><b><font face="Arial" size="3">java_create_object(+java_constructor,-java_object)</font></b></code></p>
   <p> <font face="Arial" size="3">·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -62,37 +56,39 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
   (e.g., 'java.lang.String'), and the parameters passed to the constructor as
   arguments of the structure.</font> </p>
   <p> <font face="Arial" size="3">·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-  </span><em>Call and exit should be compatible with:</em> <code>+java_constructor</code>
-  is a java constructor (structure with functor as constructor full name, and
-  arguments as constructor arguments). (<code>javart:java_constructor/1</code>) <code>-java_object</code>
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span><em>Usage:</em> <code>+java_constructor</code>
+  is a java constructor (structure with functor as class full name, and
+  arguments as constructor arguments). <code>-java_object</code>
   is a java object (a structure with functor '$java_object', and argument an
-  integer given by the java side). (<code>javart:java_object/1</code>)</font></p>
+  integer given by the java side).&nbsp;</font></p>
   <p> <code><b><font face="Arial" size="3">java_delete_object(+java_object)</font></b></code></p>
   <p> <font face="Arial" size="3">·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
   </span><em>Description:</em> Java object deletion. It removes the object given
   as argument from the Java object table.</font> </p>
   <p> <font face="Arial" size="3">·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-  </span><em>Call and exit should be compatible with:</em> <code>+java_object</code>
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span><em>Usage:</em> <code>+java_object</code>
   is a java object (a structure with functor '$java_object', and argument an
-  integer given by the java side). (<code>javart:java_object/1</code>)</font></p>
-  <p> <code><b><font face="Arial" size="3">java_invoke_method(+java_object,+java_method)</font></b></code></p>
-  <p> <font face="Arial" size="3">·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  integer given by the java side).&nbsp;</font></p>
+  <p><code><b><font face="Arial" size="3">java_invoke_method(+java_object,+java_method)<br>
+  java_invoke_method(+java_object,+method_string,[+java_arglist|...],?result)</font></b></code></p>
+  <p> <font size="3" face="Arial">.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </span><em>Description:</em> Invokes a java method on an object. Given a Java
   object reference, invokes the method represented with the second argument.</font> 
   </p>
   <p> <font face="Arial" size="3">·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-  </span><em>Call and exit should be compatible with:</em> <code>+java_object</code>
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span><em>Usage:</em> <code>+java_object</code>
   is a java object (a structure with functor '$java_object', and argument an
-  integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_method</code>
+  integer given by the java side).&nbsp; <code>+java_method</code>
   is a java method (structure with functor as method name, and arguments as
   method ones, plus a result argument. This result argument is unified with the
-  atom 'Yes' if the java method returns void). (<code>javart:java_method/1</code>)</font></p>
-  <p> <code><b><font face="Arial" size="3">java_get_value(+java_object,+java_field)</font></b></code></p>
+  atom 'Yes' if the java method returns void). (<code>java_method/1</code>)</font></p>
+  <p><code><b><font face="Arial" size="3">java_get_value(+java_object,+java_field)<br>
+  java_get_field(+java_object,+field_name,?value)</font></b></code></p>
   <p> <font face="Arial" size="3">·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
   </span><em>Description:</em> Gets the value of a field. Given a Java object as
@@ -101,13 +97,14 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
   fail.</font> 
   </p>
   <p> <font face="Arial" size="3">·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-  </span><em>Call and exit should be compatible with:</em> <code>+java_object</code>
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span><em>Usage:</em> <code>+java_object</code>
   is a java object (a structure with functor '$java_object', and argument an
-  integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_field</code>
+  integer given by the java side).&nbsp; <code>+java_field</code>
   is a java field (structure on which the functor name is the field name, and
-  the single argument is the field value). (<code>javart:java_field/1</code>)</font></p>
-  <p> <code><b><font face="Arial" size="3">java_set_value(+java_object,+java_field)</font></b></code></p>
+  the single argument is the field value).&nbsp;</font></p>
+  <p> <code><b><font face="Arial" size="3">java_set_value(+java_object,+java_field)<br>
+  java_set_field(+java_object,+field_name,+value)</font></b></code></p>
   <p> <font face="Arial" size="3">·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
   </span><em>Description:</em> Sets the value of a Java object field. Given a
@@ -116,12 +113,12 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
   instantiated.</font> 
   </p>
   <p> <font face="Arial" size="3">·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-  </span><em>Call and exit should be compatible with:</em> <code>+java_object</code>
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span><em>Usage:</em> <code>+java_object</code>
   is a java object (a structure with functor '$java_object', and argument an
-  integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_field</code>
+  integer given by the java side).&nbsp; <code>+java_field</code>
   is a java field (structure on which the functor name is the field name, and
-  the single argument is the field value). (<code>javart:java_field/1</code>)</font></p>
+  the single argument is the field value).&nbsp;</font></p>
   <p> <code><b><font face="Arial" size="3">java_add_listener(+java_object,+java_event,+prolog_goal)</font></b></code></p>
   <p> <font face="Arial" size="3">·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -129,19 +126,19 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
   Java object reference, it registers the goal received as third argument to be
   launched when the Java event raises.</font> </p>
   <p> <font face="Arial" size="3">·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-  </span><em>Call and exit should be compatible with:</em> <code>+java_object</code>
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span><em>Usage:</em> <code>+java_object</code>
   is a java object (a structure with functor '$java_object', and argument an
-  integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_event</code>
+  integer given by the java side).&nbsp; <code>+java_event</code>
   is a java event represented as an atom with the full event constructor name
-  (e.g., 'java.awt.event.ActionListener'). (<code>javart:java_event/1</code>) <code>+prolog_goal</code>
+  (e.g., 'java.awt.event.ActionListener').&nbsp; <code>+prolog_goal</code>
   is a prolog predicate. Prolog term that represents the goal that must be
   invoked when the event raises on the object. The predicate arguments can be
   java objects, or even the result of java methods. These java objects will be
   evaluated when the event raises (instead of when the listener is added). The
   arguments that represent java objects must be instantiated to already created
   objects. The variables will be kept uninstantiated when the event raises and
-  the predicate is called. (<code>javart:prolog_goal/1</code>)</font></p>
+  the predicate is called.&nbsp;</font></p>
   <p> <code><b><font face="Arial" size="3">java_remove_listener(+java_object,+java_event,+prolog_goal)</font></b></code></p>
   <p> <font face="Arial" size="3">·<span
 style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
@@ -149,19 +146,19 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
   Given a Java object reference, goal registered for the given event is removed.</font> 
   </p>
   <p> <font face="Arial" size="3">·<span
-style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-  </span><em>Call and exit should be compatible with:</em> <code>+java_object</code>
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span><em>Usage:</em> <code>+java_object</code>
   is a java object (a structure with functor '$java_object', and argument an
-  integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_event</code>
+  integer given by the java side).&nbsp; <code>+java_event</code>
   is a java event represented as an atom with the full event constructor name
-  (e.g., 'java.awt.event.ActionListener'). (<code>javart:java_event/1</code>) <code>+prolog_goal</code>
+  (e.g., 'java.awt.event.ActionListener').&nbsp; <code>+prolog_goal</code>
   is a prolog predicate. Prolog term that represents the goal that must be
   invoked when the event raises on the object. The predicate arguments can be
   java objects, or even the result of java methods. These java objects will be
   evaluated when the event raises (instead of when the listener is added). The
   arguments that represent java objects must be instantiated to already created
   objects. The variables will be kept uninstantiated when the event raises and
-  the predicate is called. (<code>javart:prolog_goal/1</code>)</font></p>
+  the predicate is called.&nbsp;</font></p>
 <p><font face="Arial" size="3"><b><a name=SEC596></a><a href="#TOC596">Java
   event handling from Prolog</a></b></font></p>
   <p><font face="Arial" size="3">Java event handling is based on a delegation
@@ -216,7 +213,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
   classes in the java side which inherit from the term class. Java objects can
   be seen also under the prolog representation as compound terms, where the
   single argument corresponds to the Hash key of the actual java object in the
-  Hash table referred to before. This behaviour makes the handling of mixed java
+  Hash table referred to before. This behavour makes the handling of mixed java
   and prolog elements easy. Prolog goals are represented in the java side as
   objects which contain a prolog compound term with the term representing the
   goal. This case will be seen more in depth next, when the java to prolog is
@@ -235,5 +232,7 @@ style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&
   the prolog to java and java to prolog interfaces simultaneously, in both sides
   of the interface will be filtered those exceptions coming from their own side:
   this avoids an endless loop of exceptions bouncing from one side to another.</font> 
+  </p>
+  <p>&nbsp; 
   </p>
 </html>
