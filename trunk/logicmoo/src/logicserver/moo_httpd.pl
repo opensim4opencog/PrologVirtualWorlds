@@ -2,16 +2,22 @@
 % SOCKET SERVER - Looks at first charicater of request and decides between:
 %  Http, Native or Soap and replies accordingly
 % ===========================================================
+/*
 :-module(moo_httpd,[
    createPrologServer/1,
    xmlPrologServer/1,
    read_line_with_nl/3,
    decodeRequest/2,
-   invokePrologCommandRDF/6]).
+   invokePrologCommandRDF/6,
+   serviceAcceptedClientSocketAtThread/1]).
+*/
 
-:-include(moo_header).
+% :-include(moo_header).
 
-:-use_module(moo_threads).
+
+
+% :-use_module(moo_threads).
+%% :-ensure_loaded(system_dependant).
 
 :-dynamic(isKeepAlive/1).
 
@@ -22,53 +28,51 @@ xmlPrologServer(Port):-
         tcp_socket(ServerSocket),
         catch(ignore(tcp_setopt(ServerSocket, reuseaddr)),_,true),
         at_halt(tcp_close_socket(ServerSocket)),
-        please_tcp_bind(ServerSocket, Port),
+        attemptServerBind(ServerSocket, Port),
         tcp_listen(ServerSocket, 655),
         repeat,
-                tcp_open_socket(ServerSocket, AcceptFd, _),
-                cleanOldProcesses,
-                tcp_accept(AcceptFd, ClientSocket, ip(A4,A3,A2,A1)),
-                getPrettyDateTime(DateTime),
-                sformat(Name,'Dispatcher for ~w.~w.~w.~w  started ~w ',[A4,A3,A2,A1,DateTime]),
-                mooProcessCreate(kill,Name,serviceAcceptedClientSocket(ClientSocket),_,[detatch(true)]),
+	       acceptClientsAtServerSocket(ServerSocket),
         fail.
 
-serviceAcceptedClientSocket(ClientSocket):-
-        tcp_open_socket(ClientSocket, In, Out),
-        catch(serviceIO(In,Out),E,writeSTDERR(serviceIO(In,Out)=E)),
-        ignore((catch(flush_output(Out),_,true),catch(tcp_close_socket(ClientSocket),_,true))),
-        prolog_thread_exit(complete),!.
 
-mutex_call(Goal,Id):-
-                        mutex_create(Id),
-                        mutex_lock(Id),!,
-                        with_mutex(Id,Goal),!,
-                        mutex_unlock_all.
-
-
-
-
-please_tcp_bind(ServerSocket, Port):-
+attemptServerBind(ServerSocket, Port):-
         catch((tcp_bind(ServerSocket, Port),
         flush_output,
         writeSTDERR('cs.\nMoo server started on port ~w. \n\nYes\n?- ',[Port]),flush_output),
         error(E,_),
         (writeSTDERR('\nWaiting for OS to release port ~w. \n(sleeping 4 secs becasue "~w")\n',[Port,E]),
         sleep(4),
-        please_tcp_bind(ServerSocket, Port))),!.
+        attemptServerBind(ServerSocket, Port))),!.
+
+
+acceptClientsAtServerSocket(ServerSocket):-
+		tcp_open_socket(ServerSocket, AcceptFd, _),
+                cleanOldProcesses,!,
+		tcp_accept(AcceptFd, ClientSocket, ip(A4,A3,A2,A1)),!,
+                getPrettyDateTime(DateTime),
+                sformat(Name,'Dispatcher for ~w.~w.~w.~w  started ~w ',[A4,A3,A2,A1,DateTime]),
+                mooProcessCreate(killable,Name,serviceAcceptedClientSocketAtThread(ClientSocket),_,[detatch(true)]),!.
+
+serviceAcceptedClientSocketAtThread(ClientSocket):-
+	tcp_open_socket(ClientSocket, In, Out),!,
+        setMooOption('$socket_in',In),
+        setMooOption('$socket_out',Out),!,
+        serviceIO(In,Out),
+        flush_output,
+	catch(tcp_close_socket(ClientSocket),_,true),
+	prolog_thread_exit(complete).
 
 
 
+getPrettyDateTime(String):-get_time(Time),convert_time(Time, String).
 
 serviceIO(In,Out):-
-        setMooOption('$socket_in',In),
-        setMooOption('$socket_out',Out),
-        writeFmtServer(Out,'<?xml version="1.0" encoding="ISO-8859-1"?>\n',[]),
-        peek_char(In,Char),
-        serviceIOBasedOnChar(Char,In,Out),!.
+        peek_char(In,Char),!,
+	%writeSTDERR(serviceIOBasedOnChar(Char,In,Out)),
+	serviceIOBasedOnChar(Char,In,Out),!.
 
 
-serviceIOBasedOnChar('G',In,Out):-!,
+serviceIOBasedOnChar('G',In,Out):-!,  
          serviceHttpRequest(In,Out).
 
 serviceIOBasedOnChar('P',In,Out):-!,
@@ -89,9 +93,9 @@ serviceHttpRequest(In,Out):-
         writeFmtFlushed(Out,'HTTP/1.1 200 OK\nServer: Moo-HTTPD\nContent-Type: text/html\n\n',[]),
         setMooOption(client,html),
         tell(Out),
-        writeSTDERR('REQUEST: "~q" \n',[Options]),
-        processRequest(Options),
-        catch(flush_output(Out),_,true).
+        writeSTDERR('REQUEST: "~q" \n',[Options]), 
+	processRequest(Options),
+	flush_output.
 
 
 readHTTP(In,Request):-
@@ -163,6 +167,7 @@ decodeRequestAtom(A,A):-!.
 % ===========================================================
 
 serviceNativeRequest(_,In,Out):-
+        writeFmt(Out,'<?xml version="1.0" encoding="ISO-8859-1"?>\n',[]),
         getThread(Session),
         retractall(isKeepAlive(Session)),
         xmlClearTags,
@@ -184,14 +189,14 @@ notKeepAlive(Out,Session):-catch(flush_output(Out),_,true).
 
 
 keep_alive:-getThread(Me),retractall(isKeepAlive(Me)),assert(isKeepAlive(Me)),writeFmtFlushed('<keepalive/>\n',[]).
-goodbye:-getThread(Me),retractall(isKeepAlive(Me)),writeFmtServer('<bye/>/n',[]).
+goodbye:-getThread(Me),retractall(isKeepAlive(Me)),writeFmt('<bye/>/n',[]).
 
 
 invokePrologCommandRDF(Session,In,Out,PrologGoal,ToplevelVars,Returns):-var(PrologGoal),!.
 
 invokePrologCommandRDF(Session,In,Out,PrologGoal,ToplevelVars,Returns):-
         term_to_atom(Session,Atom),concat_atom(['$answers_for_session',Atom],AnswersFlag),
-        writeFmtServer(Out,'<prolog:solutions goal="~q">\n',[PrologGoal]),
+        writeFmt(Out,'<prolog:solutions goal="~q">\n',[PrologGoal]),
         flag(AnswersFlag,_,0),
         set_output(Out),set_input(In),!,
         getCputime(Start),
@@ -200,10 +205,10 @@ invokePrologCommandRDF(Session,In,Out,PrologGoal,ToplevelVars,Returns):-
         getCputime(End),
         flag(AnswersFlag,Returns,Returns),
 %       (Returns > 0 ->
-%               writeFmtServer(Out,'<prolog:yes/>\n',[]) ;
-%               writeFmtServer(Out,'<prolog:no/>\n',[])),!,
+%               writeFmt(Out,'<prolog:yes/>\n',[]) ;
+%               writeFmt(Out,'<prolog:no/>\n',[])),!,
         Elapsed is End -Start,
-        writeFmtServer(Out,'</prolog:solutions answers="~w" cputime="~g">\n',[Returns,Elapsed]),!.
+        writeFmt(Out,'</prolog:solutions answers="~w" cputime="~g">\n',[Returns,Elapsed]),!.
 
 callNondeterministicPrologCommand(Session,AnswersFlag,In,Out,PrologGoal,ToplevelVars):-
         ground(PrologGoal),!,
@@ -230,9 +235,9 @@ callNondeterministicPrologCommand(Session,AnswersFlag,In,Out,PrologGoal,Toplevel
 
 writePrologToplevelVarsXML(Out,PrologGoal,AnswersFlag,ToplevelVars):-
          flag(AnswersFlag,Answers,Answers),
-        writeFmtServer(Out,'<prolog:result solution="~w">\n',[Answers]),
+        writeFmt(Out,'<prolog:result solution="~w">\n',[Answers]),
         writePrologToplevelVarsXML2(Out,ToplevelVars),
-        writeFmtServer(Out,'</prolog:result>\n',[]),!.
+        writeFmt(Out,'</prolog:result>\n',[]),!.
 
 writePrologToplevelVarsXML2(Out,[]):-!.
 writePrologToplevelVarsXML2(Out,[Term|REST]):-!,Term=..[_,N,V],
@@ -240,12 +245,12 @@ writePrologToplevelVarsXML2(Out,[Term|REST]):-!,Term=..[_,N,V],
          writePrologToplevelVarsXML2(Out,REST),!.
 
 
-writeFmtServer(A,B,C):-!.
-writeFmtServer(A,B):-!.
+writeFmt(A,B,C):-!.
+writeFmt(A,B):-!.
 
-writeFmtServer(A,B,C):-
+writeFmt(A,B,C):-
         writeFmtFlushed(A,B,C).
-writeFmtServer(A,B):-
+writeFmt(A,B):-
         writeFmtFlushed(A,B).
 
 

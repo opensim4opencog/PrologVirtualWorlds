@@ -31,7 +31,8 @@
 
 
 
-
+       /*
+       
 :- module(moo_uwdgraphs, [
 	vertices_edges_to_ugraph/3,
 	vertices/2,
@@ -60,8 +61,8 @@
 	independent_set/3,
 	coloring/3,
 	colouring/3
-   ]).
-		  /*
+   ]).              */
+   		  /*
 :- use_module(library(ordsets), [
 	my_ord_add_element/3,
 	my_ord_del_element/3,

@@ -9,6 +9,7 @@
 % Prolog Dependant Code
 % ===================================================================
 
+/*
 :-module(system_dependant,
       [getCputime/1,
       numbervars/1,
@@ -33,12 +34,17 @@
       prolog_current_thread/2,
       prolog_thread_exit/1,
       prolog_thread_self/1,
-      prolog_thread_at_exit/2,
+      prolog_thread_at_exit/1,
+      prolog_thread_signal/2,
       prolog_thread_join/2,
       prolog_notrace/1,
       prolog_statistics/0,
       main/1]).
+      
+*/      
 
+
+mooBaseJavaClass('logicmoo.SwiMoo').
 
 :-use_module(library(system)).
 :-use_module(library(shlib)).
@@ -55,6 +61,10 @@
 :- use_module(library(url)).
 :- use_module(library(quintus)).
 :- use_module(library(qsave)).
+
+:- use_module((javart)).
+
+
 
 
 :- style_check(-singleton).
@@ -87,9 +97,10 @@ prolog_notrace(G):-notrace(G).
 % ========================================================================================
 prolog_thread_create(Goal,Id,Options):-thread_create(Goal,Id,Options).
 prolog_current_thread(Id,Status):-current_thread(Id,Status).
-prolog_thread_at_exit(Goal):-thread_at_exit(Goal).
+prolog_thread_exit(Goal):-thread_exit(Goal).
 prolog_thread_self(Id):-thread_self(Id).
-prolog_thread_at_exit(Id,Goal):-thread_at_exit(Id,Goal).
+prolog_thread_at_exit(Goal):-thread_at_exit(Goal).
+prolog_thread_signal(ID,Goal):-thread_signal(ID,Goal).
 prolog_thread_join(Id,X):-thread_join(Id,X).
 
 % ========================================================================================
@@ -187,18 +198,19 @@ sigma_ua(X):-processRequest(X).
 % Load the Moo header
 % -------------------------------------------------------------------
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 % -------------------------------------------------------------------
 % Load the Moo Engine
 % -------------------------------------------------------------------
-:-ensure_loaded('moo_bootstrap.pl').
+% :-ensure_loaded('moo_bootstrap.pl').
 
 % load files
-processBootstrap:-
+processBootstrap:-!.
+/*
    moduleFile(_,Filename),
    ensure_loaded(Filename),fail.
-
+  */
 processBootstrap:-!.
 
 
@@ -209,25 +221,22 @@ startLogicMoo:-
 	 loadJamudReferences.
 
 
-java_start(_).
-java_create_object(_,_).
-java_invoke_method(_,_).
-java_object(_).
 % -------------------------------------------------------------------
 % Start the system
 % -------------------------------------------------------------------
 
 
 
+
+
 main(Port):-
    ignore(Port=5001),
    processBootstrap,
-   setMooOptionDefaults,
+   setMooOptionDefaults, %trace,
    startLogicMoo,
    setMooOption(client,html),
    createPrologServer(80),
-   createPrologServer(Port),
-   callIfPlatformUnix((prologAtInitalization(['mod/mod_nani.pl']),prologAtInitalization(['mod/mod_eliza.pl']),
-         prologAtInitalization(bot),prologAtInitalization(bot2))).
+   createPrologServer(Port),!.
+%   callIfPlatformUnix((prologAtInitalization(['mod/mod_nani.pl']),prologAtInitalization(['mod/mod_eliza.pl']),
+%         prologAtInitalization(bot),prologAtInitalization(bot2))).
    %throw(wait_now).
-

@@ -22,7 +22,7 @@ make_scripts(CurrentPropValues,_) :-
 
 make_scripts(CurrentPropValues,Scripted) :-
         good_script(CurrentPropValues,true,Scripted,ScriptMore),
-        write_debug(make_scripts,ScriptMore).
+        writeDebug(make_scripts,ScriptMore).
 
 %//------------------------------------------------------------------------------
 

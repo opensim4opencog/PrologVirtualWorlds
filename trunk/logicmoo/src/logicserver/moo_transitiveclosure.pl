@@ -1,12 +1,14 @@
 
+/*
 :-module(moo_transitiveclosure,
    [eraseTransitiveClosureCache/0,
    deduceTransitiveClosure_PartialOrderingRelation/5]).
 
 :-use_module(moo_generation).
 :-use_module(moo_globalisms).
+*/
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 % =====================================================================================================
 %% TC Database

@@ -3,10 +3,10 @@
 % .+user nick #channel Ident 
 % ==========================================
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 :-dynamic(complete_goal/1).
 :-multifile(expireOptimizationsInContext/3).
-:-ensure_loaded(library(occurs)).
+% :-ensure_loaded(library(occurs)).
        
 
 

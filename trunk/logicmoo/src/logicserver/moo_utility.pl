@@ -809,7 +809,7 @@ reconsult(F):-consult(F).
 
 set_global_compiler_options(_Ignore).
 load_dyn(X):-[X].
-assert_n(X):-retractall(X),assert(X).
+assert_new(X):-retractall(X),assert(X).
 
 %%:-load_library(library(quintus)).
 
@@ -1208,7 +1208,7 @@ remove_numbers([],[]):-!.
 remove_numbers([N|L],LL):-number(N),remove_numbers(L,LL),!.
 remove_numbers([N|L],[N|LL]):-remove_numbers(L,LL),!.
 
-%:-include('moo_header.pl').
+%% :-include('moo_header.pl').
 % This file changes Well Founded Semantic Prolog into a more normaized form of WFS-Prolog
 
 /*

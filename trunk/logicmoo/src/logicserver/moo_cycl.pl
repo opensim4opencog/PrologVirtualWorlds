@@ -1,5 +1,5 @@
 
-:-include(moo_header).
+% :-include(moo_header).
 
 
 'intensional-subclass'(_G18216, _G18222)and (isa(_G18228, _G18216)=>isa(_G18228, _G18222)).
@@ -840,7 +840,7 @@ skolemize(_G15339).
 
 'surface-macro'(['interArgReln5-6', _G17767, 'Relation'], ['nth-relation-exists', _G17767, 5, 6, 'Relation']).
 
-end_of_file.
+% end_of_file.
 
 % ;; ====================================================================================   
 %  ;; As Kernel Predicates are Passed As they Are and only explored the surface-domains   
@@ -1109,10 +1109,6 @@ end_of_file.
 'macro-script'('file-resource-create'(_G20745, _G20751), assert('resources-theory', instance('FileName', 'source-file-path')), assert('resources-theory', 'context-exists-in-file'('NewContext-atom', 'FileName'))).
 
 %           
-end_of_file.
-
-%     (end-of-file)  
-'end-of-file'.
 
 %       ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
 %  ;;                                               ;;   
@@ -1437,11 +1433,11 @@ subclass('Argument-List', 'Unmonitored-List').
 %   (relation-located nodisp_debug 0 kernel  (EmptySetFn) nodisp_debug  always )  
 'relation-located'(nodisp_debug, 0, kernel, 'EmptySetFn', nodisp_debug, always).
 
-%   (relation-located system_dependant:prolog_statistics 0 kernel  (EmptySetFn) system_dependant:prolog_statistics  always )  
-'relation-located'(system_dependant:prolog_statistics, 0, kernel, 'EmptySetFn', system_dependant:prolog_statistics, always).
+%   (relation-located prolog_statistics 0 kernel  (EmptySetFn) prolog_statistics  always )  
+'relation-located'(prolog_statistics, 0, kernel, 'EmptySetFn', prolog_statistics, always).
 
-%   (relation-located system_dependant:prolog_statistics 1 kernel  (SetFn ?h639) system_dependant:prolog_statistics  always )  
-'relation-located'(system_dependant:prolog_statistics, 1, kernel, 'SetFn'(_G15847), system_dependant:prolog_statistics, always).
+%   (relation-located prolog_statistics 1 kernel  (SetFn ?h639) prolog_statistics  always )  
+'relation-located'(prolog_statistics, 1, kernel, 'SetFn'(_G15847), prolog_statistics, always).
 
 %   (relation-located inform-single_bindings 2 kernel  (SetFn ?h640  ?h642) inform-single_bindings  always )  
 'relation-located'('inform-single_bindings', 2, kernel, 'SetFn'(_G16850, _G16856), 'inform-single_bindings', always).
@@ -1958,7 +1954,7 @@ subclass('Argument-List', 'Unmonitored-List').
 'relation-located'('read-sock-chars', 4, kernel, 'SetFn'(_G17368, _G17374, _G17380, _G17386), 'read-sock-chars', always).
 
 %   (relation-located  0 kernel  (EmptySetFn)   always )  
-'relation-located'(, 0, kernel, 'EmptySetFn', , always).
+'relation-located'([], 0, kernel, 'EmptySetFn', [], always).
 
 %   (relation-located compile 1 kernel  (SetFn ?h639) compile  always )  
 'relation-located'(compile, 1, kernel, 'SetFn'(_G15703), compile, always).
@@ -3120,7 +3116,7 @@ subclass('Argument-List', 'Unmonitored-List').
 'relation-located'('moo-X-assert-new-1', 5, kernel, 'SetFn'(_G18131, _G18137, _G18143, _G18149, _G18155), 'moo-X-assert-new-1', always).
 
 %       
-end_of_file.
+%end_of_file.
 
 
 

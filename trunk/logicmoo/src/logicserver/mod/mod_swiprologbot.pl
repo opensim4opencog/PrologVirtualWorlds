@@ -94,13 +94,13 @@ does_exist1((Head <- Body)):-
 
 built_in(Goal):-predicate_propetry(Goal,_).
 
-learn_about(List, ToDo) :- !,write_debug(interesting,[studying,List,to,learn,ToDo]).
+learn_about(List, ToDo) :- !,writeDebug(interesting,[studying,List,to,learn,ToDo]).
 
-note_call(Goal):-write_debug(note,call(Goal)).
-note_call(Goal):-write_debug(note,fail(Goal)) & fail.
-note_exit(Goal):-write_debug(note,exit(Goal)).
+note_call(Goal):-writeDebug(note,call(Goal)).
+note_call(Goal):-writeDebug(note,fail(Goal)) & fail.
+note_exit(Goal):-writeDebug(note,exit(Goal)).
 note_redo(_Goal):-true.
-note_redo(Goal):-write_debug(note,redo(Goal)) & fail.
+note_redo(Goal):-writeDebug(note,redo(Goal)) & fail.
  
 	
 succeed((/),true) <- (/).
@@ -185,7 +185,7 @@ main:-
 	egg_connect('vast1.com',65530,swiprolog,binpro,NickHandle),
 	
 	/* log its connection time */
-	write_debug(interesting,[NickHandle,"has made it on-line."]),
+	writeDebug(interesting,[NickHandle,"has made it on-line."]),
 	
 	/* This is a Loop any improper exit codes will bring us back here */
 	repeat, 
@@ -209,7 +209,7 @@ main:-
 	/* we will bring it forground to log it */
                 retract(event(TimeStamp,Where,Goal)),
 		not(Goal=true),
-		write_debug(true,trying(TimeStamp,Where,Goal)),
+		writeDebug(true,trying(TimeStamp,Where,Goal)),
 		(
                 (
                 integer(TimeStamp),
@@ -232,7 +232,7 @@ main:-
 		(
 		not(NewExpires=1),
 		assertz_new(event(Expiration,Where,NewState)),
-		write_debug(true,restacking(Where,NewState))
+		writeDebug(true,restacking(Where,NewState))
 		)
 		;
 		true
@@ -443,18 +443,18 @@ do_execute(Static_Code,Declares,Completed):-
 		(
 		Do_Code
 		,
-		write_debug(true,do_success(Static_Code,Declares,Completed))
+		writeDebug(true,do_success(Static_Code,Declares,Completed))
 		)
 		;
 		(
-		write_debug(true,do_failed(Static_Code,Declares,Completed))
+		writeDebug(true,do_failed(Static_Code,Declares,Completed))
 		,
 		fail
 		)
 		),
 		_ErrorCode,
 			(
-			 write_debug(true,error(_ErrorCode))
+			 writeDebug(true,error(_ErrorCode))
 			  ,
 			  fail
 			     )
@@ -511,7 +511,7 @@ must_be_bound_ops(Op):-member((Op/_),[not/1,call/1,bound/1,nonvar/1,integer/1]),
 
 /*
 to_do_once(Where,Who,P_Answer_Atom)),
-	write_debug(true,stacking(Where,Who,P_Answer_Atom)).
+	writeDebug(true,stacking(Where,Who,P_Answer_Atom)).
 */
 
 
@@ -549,7 +549,7 @@ my_prolog(P_Answer_Atom):-!,
 	/* write to true */
 	trial(P_Answer,Vars),
 
-	write_debug(true,
+	writeDebug(true,
 		[attempting,term(P_Answer_Atom,P_Answer,Vars)]),
 	
 	call_with_depth_limit(once(attempt(P_Answer,Vars)),40,_).
@@ -598,13 +598,13 @@ create_new_clause((Head:-Body)):-!,
 	not(Head=Body),
 	not(clause(Body,Head)),
 	assert((Head:-Body)),
-	write_debug(true,asserted((Head:-Body))).
+	writeDebug(true,asserted((Head:-Body))).
 
 attempt(display(Output),_Vars):-!,term_to_string(Output,Post),post(Post).
 attempt(WriteOutput,_Vars):-
 	WriteOutput=..[Write|Output],
 	member(Write,[write,output,post,writeq,say,print,printf]),!,
-	write_debug(true,output(Output)),
+	writeDebug(true,output(Output)),
 	post(Output).
 
 trial(WriteOutput,_Vars):-
@@ -615,19 +615,19 @@ trial(WriteOutput,_Vars):-
 attempt(getVars(Vars),Vars):-!.
 trial(getVars(Vars),Vars):-!.
 
-attempt(true,_Vars):-!,write_debug(true,true).
-attempt(!,_Vars):-!,write_debug(true,!).
+attempt(true,_Vars):-!,writeDebug(true,true).
+attempt(!,_Vars):-!,writeDebug(true,!).
 
 /*
 attempt(Goal,_Vars):-
 	predicate_property(Goal,_),Goal,
-	write_debug(true,Goal).
+	writeDebug(true,Goal).
 */
 expanded_clause(Head,Body):-get_clauses(Head,Body,_).
 
 attempt(Goal,_Vars):-
 	get_clauses(Goal,Expand,_),!,
-	write_debug(true,expand(Goal,Expand)),
+	writeDebug(true,expand(Goal,Expand)),
 	attempt(Expand,_Vars).
 
 get_clauses(Head,Body,1):-
@@ -658,14 +658,14 @@ attempt(Goal,_Vars):-
 		Error,
 		on_err(Error)
 	),
-	write_debug(true,success(Goal)).
+	writeDebug(true,success(Goal)).
 
 on_err(error(existence_error(procedure, Pred),_)):-!,
 	ask_about(Pred),
-	write_debug(true,learn(Pred)),
+	writeDebug(true,learn(Pred)),
 	fail.
 
-on_err(Error):-!,write_debug(true,Error),fail.
+on_err(Error):-!,writeDebug(true,Error),fail.
 
 ask_about(Question):-post(["i do not understand ",Question]).
 
@@ -702,7 +702,7 @@ ask_about(Question):-post(["i do not understand ",Question]).
 	
 	/* when its done .. it will msg the "solution" for now */
 /*
-	write_debug(true,
+	writeDebug(true,
 	succeed(P_Answer_Plus_Plus,Goal,Proof_Tree,RulesUsed)).
 */
 		/* and now it loops back to the top of main */
@@ -725,14 +725,14 @@ unboundVar(Var):-asserta(varTable(Var,_Unbound)).
 
 unify_Globals1(Var=Val):-
 	(	
-	varTable(Var,Val),write_debug(true,varTable(Var,Val))
+	varTable(Var,Val),writeDebug(true,varTable(Var,Val))
 	);
 	(
 	nonvar(Var),nonvar(Val),asserta(varTable(Var,Val)),
-		write_debug(true,asserta(varTable(Var,Val)))
+		writeDebug(true,asserta(varTable(Var,Val)))
 	);
 	(
-	true %Var=Val,write_debug(true,Var=Val)
+	true %Var=Val,writeDebug(true,Var=Val)
 	).
 
 :-op(700,xfx,':=').
@@ -765,16 +765,16 @@ unify_Globals1(Var=Val):-
 /* strange tcl and network messages can come via eggdrop:egg_term/2
    this is how we handle them.. they are not for us yet */
 
-putlog(Weird_Stuff):-write_debug(minor,Weird_Stuff).
+putlog(Weird_Stuff):-writeDebug(minor,Weird_Stuff).
 
-write_debug(true,Message):-!,
+writeDebug(true,Message):-!,
         any_to_string([true,Message],S),
 	chars_to_atom(S,A),
 	msg("0",A).
 
 	% writeq(A),nl,ttyflush.
 
-write_debug(Level,Message):-!,
+writeDebug(Level,Message):-!,
 	once(debug_to(Level,Place)),!,
 	msg(Place,[Level,Message]),!.
 
@@ -849,7 +849,7 @@ ok_lets_try_it_out(P_Answer,Result):-
 
 ok_lets_try_it_out(P_Answer,Result):-
 	not(is_it_system(P_Answer)),
-	write_debug(learning,["new goal: ",P_Answer]),
+	writeDebug(learning,["new goal: ",P_Answer]),
 	create_new_goal(P_Answer,Result).
 
 is_it_system(P_Answer):-predicate_property(P_Answer,_),!.
@@ -888,10 +888,10 @@ use_the_system_then(write(Mesg),side_effects):-post(Mesg).
 use_the_system_then(display(Term),side_effets):-nonvar(Term),!,
 	term_to_atom(Term,Mesg),
 	post(Mesg).
-use_the_system_then(write_debug(Place,Mesg),side_effects):-!,write_debug(Place,Mesg).
+use_the_system_then(writeDebug(Place,Mesg),side_effects):-!,writeDebug(Place,Mesg).
 use_the_system_then(prolog,true):-!.
 use_the_system_then(Really_System,_):-catch(Really_System,Error,
-			(write_debug(urgent,
+			(writeDebug(urgent,
 			["Really_System: ",Really_System,Error]),
 			fail)).
 
@@ -919,11 +919,11 @@ create_new_goal(Goal,So_I_Can_Proceed_At_This):-
 	
 create_template(Goal,So_I_Can_Proceed_At_This):-  /* aready created, */
 	have_need_for(Goal,So_I_Can_Proceed_At_This),!,
-	write_debug(learning,[need,Goal,to,satisfiy,So_I_Can_Proceed_At_This]).
+	writeDebug(learning,[need,Goal,to,satisfiy,So_I_Can_Proceed_At_This]).
 
 create_template(Goal,So_I_Can_Proceed_At_This):-
 	asserta(have_need_for(Goal,So_I_Can_Proceed_At_This)),
-	write_debug(learning,[need,Goal,to,satisfiy,So_I_Can_Proceed_At_This]).
+	writeDebug(learning,[need,Goal,to,satisfiy,So_I_Can_Proceed_At_This]).
 
 query_all_resource(Goal,So_I_Can_Proceed_At_This):-
 	query_each_resource(Goal,So_I_Can_Proceed_At_This).

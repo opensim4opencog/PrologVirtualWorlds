@@ -1,21 +1,21 @@
 :-dynamic( ax_worldwalker /1).
 
-write_debug(What):-write_debug(unknown,What).
+writeDebug(What):-writeDebug(unknown,What).
  
-write_debug(A,B):-ax_worldwalker(X),once((!,catch2((
+writeDebug(A,B):-ax_worldwalker(X),once((!,catch2((
         sformat(This,'debug ~w:~w',[A,B]),actx_invoke_object(X,[say],[This],[])
         )))).
 
  
-write_debug(A,B):-!,catch(write((A:B)),_,true),nl.
+writeDebug(A,B):-!,catch(write((A:B)),_,true),nl.
 
-%write_debug(A,B):-catch(post((A:B)),_,true).
+%writeDebug(A,B):-catch(post((A:B)),_,true).
 
 /*
-write_debug(make_scripts,Scripted:Proposed_Method) :- !, write_debug1(Scripted), write(Proposed_Method), write('.'), nl.
-write_debug(make_scripts,Scripted) :- !,write(Scripted), write('.'), nl.
-write_debug(Who,What):-ground(What),writeq(Who=What),nl,ttyflush.
-write_debug(_,_).
+writeDebug(make_scripts,Scripted:Proposed_Method) :- !, write_debug1(Scripted), write(Proposed_Method), write('.'), nl.
+writeDebug(make_scripts,Scripted) :- !,write(Scripted), write('.'), nl.
+writeDebug(Who,What):-ground(What),writeq(Who=What),nl,ttyflush.
+writeDebug(_,_).
 */
 
 write_debug1(Scripted:Proposed_Method) :- !, write_debug1(Scripted), write(Proposed_Method), write(';'), nl.
@@ -47,9 +47,9 @@ aformat(Atom,Format,List):-
 
 %//------------------------------------------------------------------------------
 
-assertn(X):-catch((X),_,fail),!.
-assertn(X):-catch(asserta((X)),_,true),!.
-assertn(_X):-!.
+assert_new(X):-catch((X),_,fail),!.
+assert_new(X):-catch(asserta((X)),_,true),!.
+assert_new(_X):-!.
 
 %//------------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ try2(Process):-catch(Process,_,true).
 
 %//------------------------------------------------------------------------------
 
-catch(Process):-catch(Process,_Error,(write_debug(Process,_Error),fail)).
+catch(Process):-catch(Process,_Error,(writeDebug(Process,_Error),fail)).
 
 %//------------------------------------------------------------------------------
 

@@ -9,9 +9,9 @@ return_forms(TNs)
 return_forms_to_html(TNs)
 */
 
-:-module(moo_browser,[invokeBrowserRequest/1]).
+%:-module(moo_browser,[invokeBrowserRequest/1]).
 
-:-include(moo_header).
+% :-include(moo_header).
 
 
 % ==============================================

@@ -18,14 +18,14 @@ p/2   phrase/term expansion
 
 */
 
-write_debug(Who,What):-writeq(Who=What),nl,ttyflush.
+writeDebug(Who,What):-writeq(Who=What),nl,ttyflush.
 
 :-[data].
 
 c(X):-nonvar(X),catch(t(X),_,fail),!.
-c(X):-nonvar(X),catch(X,_,fail),write_debug(c,proved(X)).
-c(X):-nonvar(X),!,write_debug(c,failed(X)),fail.
-c(_):-write_debug(c,unbound),fail.
+c(X):-nonvar(X),catch(X,_,fail),writeDebug(c,proved(X)).
+c(X):-nonvar(X),!,writeDebug(c,failed(X)),fail.
+c(_):-writeDebug(c,unbound),fail.
 
 script --> scriptlet.
 script --> scriptlet, script.
@@ -175,45 +175,45 @@ not(A,B) --> [not(A,B)],
 
 can(A,G) --> [can(A,G)],
         {c(can(A,G))}.
-		t(can(A,G)):-write_debug(t,can(A,G)).
+		t(can(A,G)):-writeDebug(t,can(A,G)).
 
 doing(_Actor,_Action) --> [doing(_Actor,_Action)],
 	{p(actor,_Actor),p(action,_Action),c(doing(_Actor,_Action))}.
-		t(doing(_Actor,_Action)):-write_debug(t,doing(_Actor,_Action)).
+		t(doing(_Actor,_Action)):-writeDebug(t,doing(_Actor,_Action)).
 
 will(_Actor,_Action) --> [will(_Actor,_Action)],
 	{p(actor,_Actor),p(action,_Action),c(will(_Actor,_Action))}.
-		t(will(_Actor,_Action)):-write_debug(t,will(_Actor,_Action)).
+		t(will(_Actor,_Action)):-writeDebug(t,will(_Actor,_Action)).
 
 has_part(_Obj1,_Obj1) --> [has_part(_Obj1,_Obj2)],
 	{p(pobj,_Obj1),p(pobj,_Obj2),neq(_Obj1,_Obj2),c(has_part(_Obj1,_Obj2))}.
-		t(has_part(_Obj1,_Obj2)):-write_debug(t,has_part(_Obj1,_Obj2)).
+		t(has_part(_Obj1,_Obj2)):-writeDebug(t,has_part(_Obj1,_Obj2)).
 
 know(_Actor,_mtransable) --> [know(_Actor,_mtransable)],
 	{p(actor,_Actor),p(mtransable,_mtransable),c(know(_Actor,_mtransable))}.
-		t(know(_Actor,_mtransable)):-write_debug(t,know(_Actor,_mtransable)).
+		t(know(_Actor,_mtransable)):-writeDebug(t,know(_Actor,_mtransable)).
 
 has_attribute(_Actor,_Attribute) --> [has_attribute(_Actor,_Attribute)],
 	{c(has_attribute(_Actor,_Attribute))}.
-		t(has_attribute(_Actor,_Attribute)):-write_debug(t,has_attribute(_Actor,_Attribute)).
+		t(has_attribute(_Actor,_Attribute)):-writeDebug(t,has_attribute(_Actor,_Attribute)).
 
 want_to(_Actor,_Action)--> [want_to(_Actor,_Action)],
         {c(want_to(_Actor,_Action))}.
-                t(want_to(_Actor,_Action)):-write_debug(t,want_to(_Actor,_Action)).
+                t(want_to(_Actor,_Action)):-writeDebug(t,want_to(_Actor,_Action)).
 
 want_be(_Actor,_Attribute)--> [want_be(_Actor,_Attribute)],
         {want_be(_Actor,_Attribute)}.
-                t(want_be(_Actor,_Attribute)):-write_debug(t,want_be(_Actor,_Attribute)).
+                t(want_be(_Actor,_Attribute)):-writeDebug(t,want_be(_Actor,_Attribute)).
 
 want_obj(_Actor,_Obj)--> [want_obj(_Actor,_Obj)],
         {want_obj(_Actor,_Obj)}.
-                t(want_obj(_Actor,_Obj)):-write_debug(t,want_obj(_Actor,_Obj)).
+                t(want_obj(_Actor,_Obj)):-writeDebug(t,want_obj(_Actor,_Obj)).
 
 /*
 			% prototype Phrase %
 Phrase--> [Phrase],
 	{Phrase}.
-		Phrase:-write_debug(try,Phrase).
+		Phrase:-writeDebug(try,Phrase).
 */
 
 

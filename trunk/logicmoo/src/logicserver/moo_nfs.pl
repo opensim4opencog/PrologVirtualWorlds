@@ -1,8 +1,13 @@
+/*
+:- module(moo_nfs,
+      [nnf/2,
+      nfs_cnf/2,
+      dnf/2,
+      pnf/2,
+      cf/2]).
 
-:- module(moo_nfs,[nnf/2,cnf/2,dnf/2,pnf/2,cf/2]).
-
-
-:-include('moo_header.pl').
+  */
+% :-include('moo_header.pl').
 
 /******************************************************************************
 
@@ -89,7 +94,7 @@ nnf(Fml,NNF) :- nnf(Fml,[],NNF,_).
 % Paths:      Number of disjunctive paths in Fml.
 
 nnf(known F,FreeV,BOX,Paths) :- !,
-	nnf(F,FreeV,NNF,Paths), cnf(NNF,CNF), boxRule(known CNF, BOX).
+	nnf(F,FreeV,NNF,Paths), nfs_cnf(NNF,CNF), boxRule(known CNF, BOX).
 
 nnf(consistent F,FreeV,DIA,Paths) :- !,
 	nnf(F,FreeV,NNF,Paths), dnf(NNF,DNF), diaRule(consistent DNF, DIA).
@@ -153,11 +158,11 @@ cirRule(CIR, CIR).
 
 %%%  Conjunctive Normal Form (CNF)  not     not    assumes Fml in NNF
 
-% Usage: cnf( +NNF, ?CNF )
+% Usage: nfs_cnf( +NNF, ?CNF )
 
-cnf(P  and  Q, P1  and  Q1):- !, cnf(P, P1), cnf(Q, Q1).
-cnf(P or Q,     CNF):- !, cnf(P, P1), cnf(Q, Q1), cnf1(P1 or Q1, CNF).
-cnf(CNF,       CNF).
+nfs_cnf(P  and  Q, P1  and  Q1):- !, nfs_cnf(P, P1), nfs_cnf(Q, Q1).
+nfs_cnf(P or Q,     CNF):- !, nfs_cnf(P, P1), nfs_cnf(Q, Q1), cnf1(P1 or Q1, CNF).
+nfs_cnf(CNF,       CNF).
 
 cnf1((P  and  Q) or R, P1  and  Q1):- !, cnf1(P or R, P1), cnf1(Q or R, Q1).
 cnf1(P or (Q  and  R), P1  and  Q1):- !, cnf1(P or Q, P1), cnf1(P or R, Q1).
@@ -218,7 +223,7 @@ pnf(          PNF, _,       PNF ).
 % Cs is a list of the form: [cl(Head,Body), ...]
 % Head  and Body are lists.
 
-cf(PNF, Cla):- removeQ(PNF,[], UnQ), cnf(UnQ,CNF), clausify(CNF,Cla,[]).
+cf(PNF, Cla):- removeQ(PNF,[], UnQ), nfs_cnf(UnQ,CNF), clausify(CNF,Cla,[]).
 
 % removes quantifiers
 removeQ( forall(X,F),Vars, RQ) :- removeQ(F,[X|Vars], RQ).

@@ -3,8 +3,8 @@
 % Maintainer: Douglas Miles
 % Contact: dmiles@users.sourceforge.net ;
 % Version: 'moo_api.pl' 1.0.0
-% Revision:             $Revision: 1.5 $
-% Revised At:   $Date: 2002-03-14 12:46:23 $
+% Revision:             $Revision: 1.6 $
+% Revised At:   $Date: 2002-03-29 22:43:17 $
 
 % ===================================================================
 % PURPOSE
@@ -19,6 +19,7 @@
 % ===================================================================
 % EXPORTS   (Called  only by XSB Java server beans)
 % ===================================================================
+/*
 :-module(moo_api,
             [
 	    processRequest/1
@@ -45,9 +46,9 @@
             ua_read/2 % -- (to be dropped) loads a single theory
 	    */
             ]).
+     */
 
-
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 % ===================================================================
 % Other major predicates:
@@ -82,7 +83,7 @@ initializeMooServerData :-!,
       sendNote(debug,logicEngine,'Contexts are now loaded by contentManager',' '),
       ensureMooContext('MooKernel','GlobalContext'),!.
 
-%:-include('moo_header.pl').
+%% :-include('moo_header.pl').
 
 % ===========================================================
 % CONVERSE WITH JAVA
@@ -142,7 +143,9 @@ invokeRequest(Options):-memberchk(client=moo_xml,Options),!,
 % ===========================================================
 % Surface Returns External TN
 % ===========================================================
-invokeRequest(Options):-memberchk(submit=tn_find,Options),!,
+invokeRequest(Options):-
+   %attach_console,trace,
+      memberchk(submit=tn_find,Options),!,
         ensureMooOption(opt_ctx_assert,'GlobalContext',Ctx),
         ensureMooOption(opt_theory,'PrologMOO',Context),
         ensureMooOption(client,'java',CLIENT),
@@ -485,7 +488,7 @@ invokeRequest(Options):-memberchk(submit=retract,Options),!,
         atom_codes(Retraction,Retraction_Chars),
         ensureMooOption(user='Web',User),
         ensureMooOption(interp='kif',Interp),
-        give_kif_window,
+        writeDebugWindow,
          getCleanCharsWhitespaceProper(Retraction_Chars,Show),!,
          logOnFailure(getSurfaceFromChars(Show,STERM,Vars)),!,
          logOnFailure(getMooTermFromSurface(STERM,NEWFORM)),!,
@@ -540,7 +543,8 @@ invokeRequest(Options):- %memberchk(interp='prolog',Options),!,
         ignore(parse_prolog_cmd(Prolog)).
 
 parse_prolog_cmd(Prolog):-
-        give_kif_window,
+        writeDebugWindow,
+	writeFmtFlushed('<pre>') ,
         catch(atom_to_term(Prolog,CMD,Vars),E,
         (message_to_string(E,S),writeFmt('\nCall "~w" could not be read.  \nError: ~s\n',[Prolog,S]))),!,
         callFromWeb(Prolog,CMD,Vars),!.
@@ -585,7 +589,7 @@ invokeRequest(Options):-
 % ===========================================================
 
 invokeRequest(Options):-
-                memberchk(Context='Load SContext',Options),!,
+                memberchk(context='Load SContext',Options),!,
                 (unsetMooOption(opt_theory=_)),
                 (setMooOption(opt_theory=Context)),
                 ensureMooOption(opt_ctx_assert='GlobalContext',Ctx),
@@ -739,9 +743,9 @@ show_available_theorys_in_combobox(Out):-
 % Useragent Control Panel
 % =================================================
 invokeRequest(Options):-memberchk(client='controlpanel',Options),
-        memberchk(kill=_,Options),!,
-        member(kill=ID,Options),
-        catch(system_dependant:prolog_thread_at_exit(ID,prolog_thread_exit(user_killed(ID))),_,true),
+        memberchk(killable=_,Options),!,
+        member(killable=ID,Options),
+        catch(prolog_thread_signal(ID,prolog_thread_exit(user_killed(ID))),_,true),
         invokeRequest([client='controlpanel']).
 
 
@@ -803,21 +807,27 @@ Password:&nbsp;&nbsp;<input type="text" name="password" size="20">&nbsp;&nbsp;&n
 </body>
 
 </html>
-'),   showMooStatisticsHTML.
+'),   showMooStatisticsHTML,writeDebugWindow.
 
 
-give_kif_window:-!. %Given
 
 % ===========================================================
 % EDITOR WINDOW
 % ===========================================================
 
-give_editor_window:-!,
+writeEditorLogicWindow:-!,
         ensureMooOption(sf='(isa ?X ?Y)',Formula),
         writeFmt('<textarea rows=6 cols=90 name="sf">~w</textarea><br>',[Formula]),
         writeFmt('<br><INPUT type=submit name=submit value="Update Source"></INPUT><hr>',[]),
         writeFmt('<INPUT type=radio name="interp" value="kif" checked>KIF</INPUT>',[]),
         writeFmt('<INPUT type=radio name="interp" value="ace">ACE</INPUT>',[]).
+
+writeDebugWindow:-!,
+        ensureMooOption(sf='(isa ?X ?Y)',Formula),
+	writeFmt('<hr><FORM name="theForm" ID="theForm"  METHOD="GET">
+		<textarea rows="5" cols="70" name="sf">~w</textarea><br>
+		<INPUT type="hidden" name="interp" value="kif" checked>
+		<INPUT type="submit" name="submit" value="command"></INPUT></form>',[Formula]).
 
 
 % ===================================================================================================
@@ -860,7 +870,7 @@ getTheoryStatus(Context):-writeFmt('Unknown\n',[]),!.
 %  INVOKE REQUEST INTERFACE USED BY REQUEST AGENTS
 % ===================================================================
 
-%:-include('moo_header.pl').
+%% :-include('moo_header.pl').
 
 % =======================================================================================
 

@@ -180,9 +180,9 @@ swformat([N,A],N,A):-!.
 
 
 
-%:-ensure_loaded(moo_pttp_original).
-%:-ensure_loaded(moo_fol).
-%:-ensure_loaded(moo_normal).
+%% :-ensure_loaded(moo_pttp_original).
+%% :-ensure_loaded(moo_fol).
+%% :-ensure_loaded(moo_normal).
 
 
 /*
@@ -200,7 +200,7 @@ recompile_all :- make.
 
 :-recompile_all.
 
-%:-ensure_loaded(moo_console).
+%% :-ensure_loaded(moo_console).
 
 getCleanCharsWhitespaceProper([X],[]):-is_whitespace_code(X).
 getCleanCharsWhitespaceProper([F|X],W):-is_whitespace_code(F),getCleanCharsWhitespaceProper(X,W).

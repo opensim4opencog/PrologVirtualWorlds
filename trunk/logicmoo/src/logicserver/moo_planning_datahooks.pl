@@ -27,9 +27,9 @@ triad_rule(
 %% enable_state_with_method(State,Method):- catch(triad_rule(State,Method,_UI)).
 
 
-t1 :- make_scripts( start, state(state_machine(1),enabled), Plan),write_debug(Plan).
+t1 :- make_scripts( start, state(state_machine(1),enabled), Plan),writeDebug(Plan).
 
-t2 :- make_scripts( start, state(state_machine(1),enabled), Plan),write_debug(Plan).
+t2 :- make_scripts( start, state(state_machine(1),enabled), Plan),writeDebug(Plan).
 
 
 

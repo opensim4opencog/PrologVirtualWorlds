@@ -3,7 +3,6 @@
 % the only difference is that the Latex version comments out the following
 % line:  (i.e., the latex vesion starts with "%/*" and the prolog has "/*")
 
-end_of_file.
 
 /*
 \documentclass[11pt,fleqn]{article}
@@ -120,9 +119,9 @@ conjunction is represented as ``{\ttfamily \&}'', disjunction as ``{\ttfamily
 ;}'', negation as failure as ``\verb|~|'', and inequality as
 ``\verb|\=|.
 \begin{verbatim} */
-end_of_file.
+%end_of_file.
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 
 :- op(1060, xfy, [ & ]).
@@ -550,7 +549,7 @@ explain(G) :-
 explain(G,C) :-
    explain(G,C,[]).
 explain(G,C,R) :-
-   system_dependant:prolog_statistics(runtime,_),
+   prolog_statistics(runtime,_),
    ex(G,C,R).
 :- dynamic false/6.
 /* \end{verbatim}
@@ -570,14 +569,14 @@ ex(G,C,R) :-
    append(C,R,CR),
    nl,
    writeln(['Prob( ',G,' | ',CR,' ) = ',Pr]),
-   system_dependant:prolog_statistics(runtime,[_,Time]),
+   prolog_statistics(runtime,[_,Time]),
    writeln(['Runtime: ',Time,' msec.']).
 ex(G,C,R) :-
    \+ done(G,C,R,_,_),
    append(C,R,CR),
    nl,
    writeln(['Prob( ',G,' | ',CR,' ) = ',0.0]),
-   system_dependant:prolog_statistics(runtime,[_,Time]),
+   prolog_statistics(runtime,[_,Time]),
    writeln(['Runtime: ',Time,' msec.']).
 
 ans(G,C,R0,R,P,T) :-

@@ -1,7 +1,7 @@
 
-:-module(moo_database,[]).
+%:-module(moo_database,[]).
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 % =======================================================================================
 % ACTIVATE CONTEXT DAG
@@ -198,7 +198,7 @@ get_arity_fast(Context,R,2).
 % should_be_loaded
 
 
-%:-include('moo_header.pl').
+%% :-include('moo_header.pl').
 
 activate_context(KnowledgeBase:Context):-
                 ensureMooContext(KnowledgeBase,Context).

@@ -24,10 +24,9 @@
 % http://www.dyade.fr/fr/actions/vip/jgl/SPP/dowek.ps 
 % http://logic.stanford.edu/~cs157/lectures/lecture04/sld004.htm
 % ===================================================================
-:-module(moo_sentence,[
-	 getAssertionClauses/5]).
+%:-module(moo_sentence,[getAssertionClauses/5]).
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 /*----------------------------------------------------------------------
 
@@ -1851,7 +1850,7 @@ deduceGoal_sentence_op(equal,true,Depth,Table,equal(U,W),Agent,Context,P):-!,equ
 deduceGoal_sentence_op(equal,false,Depth,Table,equal(U,W),Agent,Context,P):-!,not_equal(U,W,P),!. %defined in moo_equal.P
 
 
-%:-include('moo_header.pl').
+%% :-include('moo_header.pl').
 
 % =========================================================
 % Logicaly Equivalent

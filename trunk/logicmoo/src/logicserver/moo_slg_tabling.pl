@@ -4,9 +4,9 @@
 */
 
 		  
-:-module(moo_slg_tabling,[]).
+%:-module(moo_slg_tabling,[]).
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 :- style_check(-singleton).
 :- style_check(-discontiguous).
@@ -209,10 +209,10 @@ resetTableFlags2:-!.
 
 mslg(Goal):-
 	resetTableFlags,
-	system_dependant:prolog_statistics(cputime,S),
+	prolog_statistics(cputime,S),
 	findall(Goal,
 		slg(Goal),L),
-	system_dependant:prolog_statistics(cputime,E),
+	prolog_statistics(cputime,E),
 	writeq_conj(L),
 	length(L,N),
 	T is  E - S,
@@ -220,10 +220,10 @@ mslg(Goal):-
 
 xmslg(Goal):-
 	resetTableFlags,
-	system_dependant:prolog_statistics(cputime,S),
+	prolog_statistics(cputime,S),
 	findall(Goal,
 		sLGx(Goal),L),
-	system_dependant:prolog_statistics(cputime,E),
+	prolog_statistics(cputime,E),
 	writeq_conj(L),
 	length(L,N),
 	T is  E - S,

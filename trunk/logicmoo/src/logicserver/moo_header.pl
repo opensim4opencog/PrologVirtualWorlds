@@ -13,21 +13,18 @@
 
 %:- op(1200,xfx,<--).
 %:- op(1150,fx,[(tabled),(prolog),(default)]).
-:- op(900,xfx,<-).
-:- op(400,fy,'~').
 
 
 :- op(500,xfx,#).
-%:- op(500,xfy,:).
-:- op(1000,xfy,'=>').
-:- op(500,xfx,#).
-:- op(500,xfx,'#').
+:- op(500,xfy,:).
+%:- op(550,xfx,:).
 %:- op(500,xfx,'@').
 
+:- op(900,xfx,<-).
+:- op(400,fx,'~').
 :- op(400,fy,not).    % negation
 :- op(500,xfy,and).   % conjunction
 :- op(600,xfy,or).   % disjunction
-%:- op(500,xfy,:).
 :- op(0,xfx, 'equal' ).
 :- op(900,xfx,'<=').
 :- op(900,xfx,'if').

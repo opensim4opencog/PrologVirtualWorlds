@@ -1,4 +1,4 @@
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 prototype(TK,G,(TK,GN)):-copy_term(G,GN),numbervars(GN).
 
@@ -284,7 +284,7 @@ fact('instance-of'(A,C),Context,(TN1:TN2), (CN1:CN2)):-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% $Id: moo_tap.pl,v 1.4 2002-03-14 12:46:24 dmiles Exp $
+% $Id: moo_tap.pl,v 1.5 2002-03-29 22:43:19 dmiles Exp $
 % Sicstus Prolog
 % Copyright (C) 1993: Bernhard Beckert and Joachim Posegga
 %                     Universit"at Karlsruhe
@@ -413,7 +413,7 @@ lt_prove(Lit,[(UnivV:Next)|UnExp],Lits,DisV,FreeV,_,VarLim) :-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% $Id: moo_tap.pl,v 1.4 2002-03-14 12:46:24 dmiles Exp $
+% $Id: moo_tap.pl,v 1.5 2002-03-29 22:43:19 dmiles Exp $
 % Sicstus Prolog
 % Copyright (C) 1993: Bernhard Beckert and Joachim Posegga
 %                     Universit"at Karlsruhe
@@ -446,11 +446,11 @@ provefml(Name) :-
         fml(Name,Limit,F),
         write(Name),
         nnf(F,NNF),
-   system_dependant:prolog_statistics(cputime,_),
+   prolog_statistics(cputime,_),
         (lt_prove(NNF,Limit)
-           -> (system_dependant:prolog_statistics(cputime,Time),
+           -> (prolog_statistics(cputime,Time),
                format(' proved in ~w msec, VarLim = ~w ~n',[Time,Limit]))
-           ; (system_dependant:prolog_statistics(cputime,Time),
+           ; (prolog_statistics(cputime,Time),
               format(' no explaination after ~w msec. ~n',[Time]))).
 
 % ------------------------------------------------------------
@@ -464,11 +464,11 @@ incprovefml(Name) :-
         fml(Name,_,F),
         write(Name),
         nnf(F,NNF),
-        system_dependant:prolog_statistics(cputime,_),
+        prolog_statistics(cputime,_),
         (lt_prove(NNF,Limit)
-           -> (system_dependant:prolog_statistics(cputime,Time),
+           -> (prolog_statistics(cputime,Time),
              format('  proved in ~w msec, found VarLim = ~w ~n',[Time,Limit]))
-           ; (system_dependant:prolog_statistics(cputime,Time),
+           ; (prolog_statistics(cputime,Time),
               format(' no explaination after ~w msec. ~n',[Time]))).
 
 % ------------------------------------------------------------
@@ -484,11 +484,11 @@ uv_provefml(Name) :-
         fml(Name,Limit,F),
         write(Name),
         nnf(F,NNF),
-        system_dependant:prolog_statistics(cputime,_),
+        prolog_statistics(cputime,_),
         (prove_uv(NNF,Limit)
-           -> (system_dependant:prolog_statistics(cputime,Time),
+           -> (prolog_statistics(cputime,Time),
                format(' proved in ~w msec, VarLim = ~w ~n',[Time,Limit]))
-           ; (system_dependant:prolog_statistics(cputime,Time),
+           ; (prolog_statistics(cputime,Time),
               format(' no explaination after ~w msec. ~n',[Time]))).
 
 % ------------------------------------------------------------
@@ -502,11 +502,11 @@ uv_incprovefml(Name) :-
         fml(Name,_,F),
         write(Name),
         nnf(F,NNF),
-        system_dependant:prolog_statistics(cputime,_),
+        prolog_statistics(cputime,_),
         (prove_uv(NNF,Limit)
-           -> (system_dependant:prolog_statistics(cputime,Time),
+           -> (prolog_statistics(cputime,Time),
              format('  proved in ~w msec, found VarLim = ~w ~n',[Time,Limit]))
-           ; (system_dependant:prolog_statistics(cputime,Time),
+           ; (prolog_statistics(cputime,Time),
               format(' no explaination after ~w msec. ~n',[Time]))).
 
 

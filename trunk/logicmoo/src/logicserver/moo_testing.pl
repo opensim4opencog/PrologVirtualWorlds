@@ -7,7 +7,7 @@ opt_backchains_max=50 will try 50 prolog backchains aprocimately 12 authorial ba
 opt_deductions_max=100 The system will try to come up with 100 non unique answers before stooping
 */
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 %:-'ROOT_RT'(X),concat_atom([X,'/belief_test/'],O),assert(tq_input_dir(O)).
 
@@ -218,11 +218,11 @@ write_file_list_0(TQDIR,T,TQOutputDir):-
 run_tq_thread(TQDIR):-running_tq(_),!.
 run_tq_thread(TQDIR):-
                         assert(running_tq(TQDIR)),!,
-                        system_dependant:prolog_thread_at_exit(retractall(running_tq(TQDIR))),
+                        prolog_thread_at_exit(retractall(running_tq(TQDIR))),
                         logOnFailure(test_prep_dir(TQDIR,TQOutputDir)),!,
                         concat_atom([TQOutputDir,'index.html'],TestSummary),!,
                         safe_file_open(TestSummary,'w',Dest),!,
-                        system_dependant:prolog_thread_at_exit(close(Dest)),
+                        prolog_thread_at_exit(close(Dest)),
                         writeFmt(Dest,'<HTML><BODY>',[]),
                         run_batch_web(Dest,Context,TQDIR),!,
                         writeFmt(Dest,'</BODY></HTML>',[]),
@@ -1091,7 +1091,7 @@ c_lit(C1,[not(C1)]):-!.
 
 
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 % ===================================================================
 % EXPORTS

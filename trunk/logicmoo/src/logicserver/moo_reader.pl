@@ -6,9 +6,9 @@
 % 
 % Purpose: is to provide forall character processing and transliteration for CycL, KIF, Prolog
 % ===================================================================
-:-module(moo_reader,[readKIF/2,readKIF/1,readKIF_priv/2]).
+%:-module(moo_reader,[readKIF/2,readKIF/1,readKIF_priv/2]).
 
-:-include(moo_header).
+% :-include(moo_header).
 
 % TODO make reader more robust
 
@@ -163,7 +163,7 @@ isCodesWhite([]).
 isCodesWhite([T|W]):-member(T,[32,10,13]),isCodesWhite(W).
 
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 % TODO Need support for
 /*

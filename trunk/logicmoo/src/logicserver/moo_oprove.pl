@@ -2,7 +2,7 @@
 % BELIEF
 % ==========================================
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 :-dynamic(complete_goal/1).
 
@@ -15,7 +15,7 @@
 :- style_check(-atom).
 :- style_check(-string).
 
-:-ensure_loaded(library(occurs)).
+% :-ensure_loaded(library(occurs)).
 
 % ======================================================
 % REQUEST PROC POSITIVE/NEGATIVE
@@ -92,7 +92,7 @@ edify_vars([H|T],[H|NT]):-
 
 agentBelief(FmlInOpen,Literal,VarsRequested,Ctx,Context,User,UA, UVars,[All|Explaination],done(true:UA)):- 
 	writeDebug(green,'Stage 3 - Positive ':FmlInOpen ),
-	deduceGoal(findAllUsingGafsAndOrBackResolution(Literal,VarsRequested,10),VarsRequested,Ctx,Context, [All|Explaination]),
+	deduceGoalOProve(findAllUsingGafsAndOrBackResolution(Literal,VarsRequested,10),VarsRequested,Ctx,Context, [All|Explaination]),
 	length([All|Explaination],UA),!.
 
 agentBelief(FmlInOpen,NLiteral,VarsRequested,Ctx,Context,User,UA, UVars,[All|Explaination],done(false:UA)):- 
@@ -100,7 +100,7 @@ agentBelief(FmlInOpen,NLiteral,VarsRequested,Ctx,Context,User,UA, UVars,[All|Exp
 	(atom_concat('~',FN,F);atom_concat('~',F,FN)),
 	Literal=..[FN|Args],!,
 	writeDebug(red,'Stage 4 -Negative ':FmlInOpen ),
-	deduceGoal(findSingleUsingGafsAndOrBackResolution(Literal,VarsRequested,10),VarsRequested,Ctx,Context, [All|Explaination]),
+	deduceGoalOProve(findSingleUsingGafsAndOrBackResolution(Literal,VarsRequested,10),VarsRequested,Ctx,Context, [All|Explaination]),
 	length([All|Explaination],UA),!.
 */
 
@@ -125,7 +125,7 @@ mooCache('~instance'(v('Abstract', A, ['Class'|B]), v('Abstract', 'Class', ['Cla
      %   recorda(Functor,RealHead,FRef),
 	%stepQualifier(Ref,Functor,RealHead:Head,RFVH:FVH,Body,TN,CID,KRVars,RuleVars,UnivHead,BodyUniv,BodySelfConnected,RealShared,Qualifier),
 	%findall(Body,call_with_depth_limit(block(Ref,callBody(Body,true),Result),47,_),Sols),!,	
-	%findall(RFVH,(deduceGoal(Ref,Body)),Sols)
+	%findall(RFVH,(deduceGoalOProve(Ref,Body)),Sols)
 	%findall(Body,Body,Sols),!,
 	%sort(Sols,SolsS)
 
@@ -136,21 +136,21 @@ mooCache('~instance'(v('Abstract', A, ['Class'|B]), v('Abstract', 'Class', ['Cla
 ensureKey(Literal,Proto,HashKey,Depth,HashKey):-
 	copy_term(Literal,Proto),numbervars(Proto,'$',0,Depth),hash_term(Proto,HashKey),!.
 
-% deduceGoal(Todo,VarsIn,Ctx,Context, AccumulatedOut).
-deduceGoal(Todo,VarsIn,Ctx,Context, AccumulatedOut):-
+% deduceGoalOProve(Todo,VarsIn,Ctx,Context, AccumulatedOut).
+deduceGoalOProve(Todo,VarsIn,Ctx,Context, AccumulatedOut):-
 	writeDebug((Todo-VarsIn-Ctx)),fail.
 	
       
 % Find Single (UsingGafs/UsingBackResolution) Gaf Part
-deduceGoal(findSingleUsingGafsAndOrBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, Result):-
-	deduceGoal(findSingleUsingGafs(Literal,UVars,Depth),VarsRequested,Ctx,Context, Result),!.
+deduceGoalOProve(findSingleUsingGafsAndOrBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, Result):-
+	deduceGoalOProve(findSingleUsingGafs(Literal,UVars,Depth),VarsRequested,Ctx,Context, Result),!.
 
 % Find Single (UsingGafs/UsingBackResolution) BackResolution Part
-deduceGoal(findSingleUsingGafsAndOrBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, Result):-
-	deduceGoal(findSingleUsingBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, Result),!.
+deduceGoalOProve(findSingleUsingGafsAndOrBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, Result):-
+	deduceGoalOProve(findSingleUsingBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, Result),!.
 	
 % Find Single (UsingGafs) mooDatabase Part
-deduceGoal(findSingleUsingGafs(Literal,UVars,Depth),VarsRequested,Ctx,Context, [Accum]):-
+deduceGoalOProve(findSingleUsingGafs(Literal,UVars,Depth),VarsRequested,Ctx,Context, [Accum]):-
 	mooDatabase(Literal, _, Context, PCtx, Explaination),
 	putIntoZ(Literal,Key,HashKey,proved(Literal,Explaination),Accum),!.
 
@@ -161,7 +161,7 @@ mooDatabase(Literal, ReQlist, How, Context, Ctx, Explaination):-
 
 
 % Find Single (UsingBackResolution) mooDatabase Part
-deduceGoal(findSingleUsingBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context,AccumulatedOut):- !,
+deduceGoalOProve(findSingleUsingBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context,AccumulatedOut):- !,
 	shouldCanBackChainOn(Literal,UVars,Depth),
 	not(not(mooDatabase(Literal,Reqs,_,Context,_Ctx,Explaination))),
 	ensureKey(Literal,Key,HashKey,_,Pointer),!,
@@ -170,28 +170,28 @@ deduceGoal(findSingleUsingBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,
 			examineRuleForInfo(Literal,Key,VCount,Pointer,VarsRequested,UVars,Depth,Explaination,ReqList,Info,Sum)
 		),[All|Infomation]),
 	keysort([All|Infomation],RAllInfomation),
-	deduceGoal(nowProveOneWithInfoFromDisj([All|Infomation]),VarsRequested,Ctx,Context,AccumulatedOut).
+	deduceGoalOProve(nowProveOneWithInfoFromDisj([All|Infomation]),VarsRequested,Ctx,Context,AccumulatedOut).
 
 
 
 % Find Single (UsingBackResolution) With Lits
-deduceGoal(nowProveOneWithInfoFromDisj(Infomation),VarsRequested,Ctx,Context,AccumulatedOut):-
+deduceGoalOProve(nowProveOneWithInfoFromDisj(Infomation),VarsRequested,Ctx,Context,AccumulatedOut):-
 	member(First,Infomation),
-	deduceGoal(nowProveWithInfoConj(First),VarsRequested,Ctx,Context,AccumulatedOut),!.
+	deduceGoalOProve(nowProveWithInfoConj(First),VarsRequested,Ctx,Context,AccumulatedOut),!.
 	
 % Find All (UsingGafs/UsingBackResolution) 
-deduceGoal(findAllUsingGafsAndOrBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, Result):-
-	deduceGoal(findAllUsingGafs(Literal,UVars,Depth),VarsRequested,Ctx,Context, GafResults),!,
-	deduceGoal(findAllUsingBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, BKResults),
+deduceGoalOProve(findAllUsingGafsAndOrBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, Result):-
+	deduceGoalOProve(findAllUsingGafs(Literal,UVars,Depth),VarsRequested,Ctx,Context, GafResults),!,
+	deduceGoalOProve(findAllUsingBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, BKResults),
 	append(GafResults,BKResults,Result).
 
 % Find All UsingGafs
-deduceGoal(findAllUsingGafs(Literal,UVars,Depth),VarsRequested,Ctx,Context, All):-
+deduceGoalOProve(findAllUsingGafs(Literal,UVars,Depth),VarsRequested,Ctx,Context, All):-
 	ensureKey(Literal,Key,HashKey,VCount,Pointer),
 	findall(Accum,(mooDatabase(Literal, _, Context, _Ctx, Explaination),putIntoZ(Literal,Key,HashKey,proved(Literal,Explaination)),Accum),All),!.
 
 % Find All UsingBackResolution
-deduceGoal(findAllUsingBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, AccumulatedOut):-
+deduceGoalOProve(findAllUsingBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Context, AccumulatedOut):-
 	%true,
 	ensureKey(Literal,Key,HashKey,VCount,Pointer),!,
 	%VCount < Depth,
@@ -204,7 +204,7 @@ deduceGoal(findAllUsingBackResolution(Literal,UVars,Depth),VarsRequested,Ctx,Con
 		),[All|Infomation]),
 	keysort([All|Infomation],RAllInfomation),
 	reverse(RAllInfomation,AllInfomation),!,
-	deduceGoal(proveAllWithInfoDisj(AllInfomation),VarsRequested,Ctx,Context,AccumulatedOut).
+	deduceGoalOProve(proveAllWithInfoDisj(AllInfomation),VarsRequested,Ctx,Context,AccumulatedOut).
 			
 
 recordaLogged(A,B):-recordaLogged(A,B,C).
@@ -291,18 +291,18 @@ examineRuleForProving(Literal,Key,VCount,Pointer,VarsRequested,UVars,Depth,lit(R
 	(RVCount - req(Req,ReqPointer,UVars))):-!.
 
 % Prove One or More
-deduceGoal(proveAllWithInfoDisj(Infomation),VarsRequested,Ctx,Context,AccumulatedOut):-
+deduceGoalOProve(proveAllWithInfoDisj(Infomation),VarsRequested,Ctx,Context,AccumulatedOut):-
 	findall([Accu|MulatedOut],( 
 			member(Cost-First,Infomation),
-			findall(VarsRequested,deduceGoal(nowProveWithInfoConj(Cost,First),VarsRequested,Ctx,Context,AccumulatedMid),[Accu|MulatedOut])
+			findall(VarsRequested,deduceGoalOProve(nowProveWithInfoConj(Cost,First),VarsRequested,Ctx,Context,AccumulatedMid),[Accu|MulatedOut])
 		),AccumulatedOut).
 	
 
 % Prove Single Item in Conj Then do the rest
-deduceGoal(nowProveWithInfoConj(_,[]),VarsRequested,Ctx,Context,[]):-!.
-deduceGoal(nowProveWithInfoConj(Cost,[First|Rest]),VarsRequested,Ctx,Context,Accumulated):-
-	deduceGoal((First),VarsRequested,Ctx,Context,Results),
-	deduceGoal(nowProveWithInfoConj(Cost,FirsRest),VarsRequested,Ctx,Context,AccumulatedMid),
+deduceGoalOProve(nowProveWithInfoConj(_,[]),VarsRequested,Ctx,Context,[]):-!.
+deduceGoalOProve(nowProveWithInfoConj(Cost,[First|Rest]),VarsRequested,Ctx,Context,Accumulated):-
+	deduceGoalOProve((First),VarsRequested,Ctx,Context,Results),
+	deduceGoalOProve(nowProveWithInfoConj(Cost,FirsRest),VarsRequested,Ctx,Context,AccumulatedMid),
 	append(Results,AccumulatedMid,Accumulated).
 
 % ==================================================	
@@ -310,23 +310,23 @@ deduceGoal(nowProveWithInfoConj(Cost,[First|Rest]),VarsRequested,Ctx,Context,Acc
 % ==================================================	
 
 % Prove For Self Only  Means no goals where blocked on this generalization
-deduceGoal((Priorty-req(Req,ReqPointer,UVars)),VarsRequested,Ctx,Context,[Re|Sults]):-!,
+deduceGoalOProve((Priorty-req(Req,ReqPointer,UVars)),VarsRequested,Ctx,Context,[Re|Sults]):-!,
 	(varintersection(VarsRequested,UVars) ->
-		deduceGoal(findAllUsingGafsAndOrBackResolution(Req,UVars,Depth),VarsRequested,Ctx,Context, [Re|Sults]) 
-		;deduceGoal(findSingleUsingGafsAndOrBackResolution(Req,UVars,Depth),VarsRequested,Ctx,Context, [Re|Sults])).
+		deduceGoalOProve(findAllUsingGafsAndOrBackResolution(Req,UVars,Depth),VarsRequested,Ctx,Context, [Re|Sults]) 
+		;deduceGoalOProve(findSingleUsingGafsAndOrBackResolution(Req,UVars,Depth),VarsRequested,Ctx,Context, [Re|Sults])).
 	
 	
 % Prove For Self First Time (And/Or Others) goals where blocked on this generalization
-deduceGoal((Priorty-delayed(Req,ReqPointer,UVars,OtherLitKeys)),VarsRequested,Ctx,Context,[Re|Sults]):-!,
+deduceGoalOProve((Priorty-delayed(Req,ReqPointer,UVars,OtherLitKeys)),VarsRequested,Ctx,Context,[Re|Sults]):-!,
 	(varintersection(VarsRequested,UVars) ->
-		deduceGoal(findAllUsingGafsAndOrBackResolution(Req,UVars,Depth),VarsRequested,Ctx,Context, [Re|Sults]) 
-		;deduceGoal(findSingleUsingGafsAndOrBackResolution(Req,UVars,Depth),VarsRequested,Ctx,Context, [Re|Sults])).
+		deduceGoalOProve(findAllUsingGafsAndOrBackResolution(Req,UVars,Depth),VarsRequested,Ctx,Context, [Re|Sults]) 
+		;deduceGoalOProve(findSingleUsingGafsAndOrBackResolution(Req,UVars,Depth),VarsRequested,Ctx,Context, [Re|Sults])).
 
 % Prove For Self Second Time (And/Or Others) goals where blocked on this generalization and on this path
-deduceGoal((Priorty-checkTable(Req,ReqPointer,UVars,OtherLitKeys)),VarsRequested,Ctx,Context,[Re|Sults]):-!,
+deduceGoalOProve((Priorty-checkTable(Req,ReqPointer,UVars,OtherLitKeys)),VarsRequested,Ctx,Context,[Re|Sults]):-!,
 	(varintersection(VarsRequested,UVars) ->
-		deduceGoal(findAllUsingGafsAndOrBackResolution(Req,UVars,Depth),VarsRequested,Ctx,Context, [Re|Sults]) 
-		;deduceGoal(findSingleUsingGafsAndOrBackResolution(Req,UVars,Depth),VarsRequested,Ctx,Context, [Re|Sults])).
+		deduceGoalOProve(findAllUsingGafsAndOrBackResolution(Req,UVars,Depth),VarsRequested,Ctx,Context, [Re|Sults]) 
+		;deduceGoalOProve(findSingleUsingGafsAndOrBackResolution(Req,UVars,Depth),VarsRequested,Ctx,Context, [Re|Sults])).
 
 varintersection(_,_).
 	
@@ -412,8 +412,8 @@ agentRequestEach(FmlInOpen,URequest,UVars,Ctx,Context,User,UA, UVars,bullet(FmlI
 	pre_deduce_true(Context,Ctx),
 	getRequestDefaults(URequest,Answers,BackchainsMax,Deductions),
 	free_variables(URequest,FUVars),length(FUVars,H),
-	writeDebug(deduce_Stage_3(deduceGoal(theoryForm(TodoOrs,DoneTrue-DoneFail),H:FUVars,Depth,[],URequest,Ctx,Context,Explaination))),
-	deduceGoal(DB,H:FUVars,VO,Depth /* BackchainsMax */,[],URequest,Ctx,Context,Explaination),
+	writeDebug(deduce_Stage_3(deduceGoalOProve(theoryForm(TodoOrs,DoneTrue-DoneFail),H:FUVars,Depth,[],URequest,Ctx,Context,Explaination))),
+	deduceGoalOProve(DB,H:FUVars,VO,Depth /* BackchainsMax */,[],URequest,Ctx,Context,Explaination),
 	format('~n<hr> ~w: ~q~n<hr>~n',[URequest,Explaination]),
 	flag('Returned Answers',RA,RA+1),
 	is_unique(URequest,UA),
@@ -440,8 +440,8 @@ agentRequestEach(FmlInOpen,URequest,UVars,Ctx,Context,User,UA2,['Result'='false'
 	ignore(BackchainsMax=10),!,
 	free_variables(Args,FUVars),
 	length(FUVars,H),
-	writeDebug(deduce_Stage_3(deduceGoal(DB,H:FUVars,BackchainsMax,[],NegURequest,Ctx,Context,Explaination))),
-	deduceGoal(DB,H:FUVars,VO,BackchainsMax,[],NegURequest,Ctx,Context,Explaination),
+	writeDebug(deduce_Stage_3(deduceGoalOProve(DB,H:FUVars,BackchainsMax,[],NegURequest,Ctx,Context,Explaination))),
+	deduceGoalOProve(DB,H:FUVars,VO,BackchainsMax,[],NegURequest,Ctx,Context,Explaination),
 	flag('Returned Answers',RA,RA+1),!.
 */
 
@@ -473,8 +473,8 @@ request_compile(This,This,Context,VarsIn,VarsOut,true).
 
 
 % Hack in foreign calls
-deduceGoal(DB,VarsIn,VarsOut,Predicate,Logic,Depth,Table,(NewRequest),Agent,Context,Explaination):-
-	deduceGoal(DB,VarsIn,VarsOut,Depth,Table,(NewRequest),Agent,Context,Explaination).
+deduceGoalOProve(DB,VarsIn,VarsOut,Predicate,Logic,Depth,Table,(NewRequest),Agent,Context,Explaination):-
+	deduceGoalOProve(DB,VarsIn,VarsOut,Depth,Table,(NewRequest),Agent,Context,Explaination).
 
 bad_fact(holds(foo,_,_)).
 bad_fact(holds(_,X,_)):-X==instance.
@@ -504,9 +504,9 @@ rd('PartialOrderingRelation').
 */
 
 	
-% Datastructure Of deduceGoal
+% Datastructure Of deduceGoalOProve
 
-%deduceGoal(DB,PG,NG,VG,PGD,NGD,PRD,NRD,VD,PGC,NGC,PRC,NRC,VC,Depth)
+%deduceGoalOProve(DB,PG,NG,VG,PGD,NGD,PRD,NRD,VD,PGC,NGC,PRC,NRC,VC,Depth)
 %PG PosGoals
 %NG NegGoals
 %VG Vars Goals
@@ -522,11 +522,11 @@ rd('PartialOrderingRelation').
 %VC VarsComplete
 %Depth
 
-deduceGoal(DB,~ NG):-!,
-	deduceGoal(DB,[],NG,VG,[],[],[],[],[],[],[],[],[],[],Depth).
+deduceGoalOProve(DB,~ NG):-!,
+	deduceGoalOProve(DB,[],NG,VG,[],[],[],[],[],[],[],[],[],[],Depth).
 
-deduceGoal(DB,PG):-	!,
-	deduceGoal(DB,PG,[],VG,[],[],[],[],[],[],[],[],[],[],Depth).
+deduceGoalOProve(DB,PG):-	!,
+	deduceGoalOProve(DB,PG,[],VG,[],[],[],[],[],[],[],[],[],[],Depth).
 
 
 
@@ -578,16 +578,16 @@ putSupport(DB,M,support(POS)).
 
 putSolution(DB,M,solution(UPOS)).
 
-deduceGoal(DB,[G],Depth):-!,
-	deduceGoal(DB,G,Depth).
+deduceGoalOProve(DB,[G],Depth):-!,
+	deduceGoalOProve(DB,G,Depth).
 
-deduceGoal(DB,[G|Rest],Depth):-!,
-	deduceGoal(DB,G,Depth),
-	deduceGoal(DB,Rest,Depth).
+deduceGoalOProve(DB,[G|Rest],Depth):-!,
+	deduceGoalOProve(DB,G,Depth),
+	deduceGoalOProve(DB,Rest,Depth).
 
-deduceGoal(DB,~ NG,Depth):-deduceGoalNeg(DB,NG,Depth).
+deduceGoalOProve(DB,~ NG,Depth):-deduceGoalNeg(DB,NG,Depth).
 
-deduceGoal(DB,Pos,Depth):-not(Pos = ~ _),deduceGoalPos(DB,Pos,Depth).
+deduceGoalOProve(DB,Pos,Depth):-not(Pos = ~ _),deduceGoalPos(DB,Pos,Depth).
 
 % Negative Stack
 
@@ -606,21 +606,21 @@ deduceGoalNeg(DB,NG,Depth):-
 	isLessGeneral(DB,NG,posGoalsDelayed,M),
 	getDelayer(DB,posGoalsDelayed,M,Undelay),
 	putDelayer(DB,negGoalsDelayed,NG,delayedOn(M)),!,
-	deduceGoal(DB,M,Depth). %New Job
+	deduceGoalOProve(DB,M,Depth). %New Job
 
 % Found less general Refution delayed
 deduceGoalNeg(DB,NG,Depth):-
 	isMoreGeneral(DB,NG,posGoalsDelayed,M),
 	getDelayer(DB,posGoalsDelayed,M,Undelay),
 	putDelayer(DB,negGoalsDelayed,NG,delayedOn(M)),!,
-	deduceGoal(DB,Undelay,Depth). %New Job
+	deduceGoalOProve(DB,Undelay,Depth). %New Job
 
 % Found less general goal delayed
 deduceGoalNeg(DB,NG,Depth):-
 	isMoreGeneral(DB,NG,negGoalsDelayed,M),
 	getDelayer(DB,negGoalsDelayed,M,Undelay),
 	putDelayer(DB,negGoalsDelayed,NG,delayedOn(~M)),!,
-	deduceGoal(DB,Undelay,Depth).
+	deduceGoalOProve(DB,Undelay,Depth).
 
 % Found more general goal delayed (informational) Add support link
 deduceGoalNeg(DB,NG,Depth):-
@@ -636,8 +636,8 @@ deduceGoalNeg(DB,NG,Depth):-
 deduceGoalNeg(DB,NG,Depth):-
 	isLessGeneral(DB,NG,negGoalsComplete,M),
 	putDBZ(DB, NG, negGoalsComplete), %TODO guard
-	((findWaiting(DB, ~NG,NWaiter),deduceGoal(DB,NWaiter,Depth));
-	(findWaiting(DB, ~NG,PWaiter),deduceGoal(DB,PWaiter,Depth)));
+	((findWaiting(DB, ~NG,NWaiter),deduceGoalOProve(DB,NWaiter,Depth));
+	(findWaiting(DB, ~NG,PWaiter),deduceGoalOProve(DB,PWaiter,Depth)));
 	true.
 
 
@@ -658,21 +658,21 @@ deduceGoalPos(DB,POS,Depth):-
 	isLessGeneral(DB,POS,negGoalsDelayed,M),
 	getDelayer(DB,negGoalsDelayed,M,Undelay),
 	putDelayer(DB,posGoalsDelayed,POS,delayedOn(~M)),!,
-	deduceGoal(DB,M,Depth). %New Job
+	deduceGoalOProve(DB,M,Depth). %New Job
 
 % Found less general Refution delayed
 deduceGoalPos(DB,POS,Depth):-
 	isMoreGeneral(DB,POS,negGoalsDelayed,M),
 	getDelayer(DB,negGoalsDelayed,M,Undelay),
 	putDelayer(DB,posGoalsDelayed,POS,delayedOn(~M)),!,
-	deduceGoal(DB,Undelay,Depth). %New Job
+	deduceGoalOProve(DB,Undelay,Depth). %New Job
 
 % Found less general goal delayed
 deduceGoalPos(DB,POS,Depth):-
 	isMoreGeneral(DB,POS,posGoalsDelayed,M),
 	getDelayer(DB,posGoalsDelayed,M,Undelay),
 	putDelayer(DB,posGoalsDelayed,POS,delayedOn(M)),!,
-	deduceGoal(DB,Undelay,Depth).
+	deduceGoalOProve(DB,Undelay,Depth).
 
 % Found more general goal delayed (informational) Add support link
 deduceGoalPos(DB,POS,Depth):-
@@ -688,16 +688,16 @@ deduceGoalPos(DB,POS,Depth):-
 deduceGoalPos(DB,POS,Depth):-
 	isLessGeneral(DB,POS,posGoalsComplete,M),
 	putDBZ(DB, POS, posGoalsComplete), %TODO guard
-	((findWaiting(DB, POS, posGoalsDelayed,NWaiter),deduceGoal(DB,NWaiter,Depth));
-	(findWaiting(DB, POS, negGoalsDelayed,PWaiter),deduceGoal(DB,PWaiter,Depth)));
+	((findWaiting(DB, POS, posGoalsDelayed,NWaiter),deduceGoalOProve(DB,NWaiter,Depth));
+	(findWaiting(DB, POS, negGoalsDelayed,PWaiter),deduceGoalOProve(DB,PWaiter,Depth)));
 	true.
 
 
 % Look for Rules
-deduceGoal(DB,Goal,Depth):- 
+deduceGoalOProve(DB,Goal,Depth):- 
 	 isLessGeneralRule(DB,Goal,Head,Body,UHead,UBody),
 	 taskRule(DB,Head,Body,UHead,UBody,Body,UBody,TODOLIST),
-	 deduceGoal(DB,TODOLIST,Depth).
+	 deduceGoalOProve(DB,TODOLIST,Depth).
 
 taskRule(DB,Head,Body,UHead,UBody,[H],[UH],TODOLIST):-!,
 	taskItem(DB,Head,Body,UHead,UBody,H,UH,TODOLIST),!.	
@@ -868,68 +868,68 @@ divideReq(PH,PGD,NGD,PGC,NGC,PGD,NGD,[PH|PGC],NGC,[]):-
 
 	
 	                    /*
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,or([]),Ctx,Context,ExplainationOut):-!.
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,[],Ctx,Context,ExplainationOut):-!.
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,or([]),Ctx,Context,ExplainationOut):-!.
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,[],Ctx,Context,ExplainationOut):-!.
 
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,[Literal],Ctx,Context,ExplainationOut):-!,
-	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context, ExplainationOut ). % Completeion
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,[Literal],Ctx,Context,ExplainationOut):-!,
+	deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context, ExplainationOut ). % Completeion
 	
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,[Literal|LiteralList],Ctx,Context,ExplainationOut):-
-	deduceGoal(DB,VarsIn,VarsMid,BackchainsMax,ExplainationIn, Literal,Ctx,Context, ExplainationMid ),!, %true,
-	deduceGoal(DB,VarsMid,VarsOut,BackchainsMax,ExplainationMid, LiteralList,Ctx,Context,ExplainationOut).
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,[Literal|LiteralList],Ctx,Context,ExplainationOut):-
+	deduceGoalOProve(DB,VarsIn,VarsMid,BackchainsMax,ExplainationIn, Literal,Ctx,Context, ExplainationMid ),!, %true,
+	deduceGoalOProve(DB,VarsMid,VarsOut,BackchainsMax,ExplainationMid, LiteralList,Ctx,Context,ExplainationOut).
 
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,tabled_or([LiteralList]),Ctx,Context,ExplainationOut):-!,
-	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,LiteralList,Ctx,Context, ExplainationOut). %true,
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,tabled_or([LiteralList]),Ctx,Context,ExplainationOut):-!,
+	deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,LiteralList,Ctx,Context, ExplainationOut). %true,
 	
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,tabled_or([LiteralList|DisjLiteralList]),Ctx,Context,ExplainationOut):-
-	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn, LiteralList,Ctx,Context, ExplainationOut)
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,tabled_or([LiteralList|DisjLiteralList]),Ctx,Context,ExplainationOut):-
+	deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn, LiteralList,Ctx,Context, ExplainationOut)
 	;
-	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn, tabled_or(DisjLiteralList),Ctx,Context,ExplainationOut).
+	deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn, tabled_or(DisjLiteralList),Ctx,Context,ExplainationOut).
 
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,proved_gaf_or([LiteralList]),Ctx,Context,[ExplainationIn|LiteralList]):-!.
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,proved_gaf_or([LiteralList]),Ctx,Context,[ExplainationIn|LiteralList]):-!.
 	
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,proved_gaf_or([LiteralList|_]),Ctx,Context,[ExplainationIn|LiteralList]).
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,proved_gaf_or([LiteralList|_]),Ctx,Context,[ExplainationIn|LiteralList]).
 	
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,proved_gaf_or([_,N|More]),Ctx,Context,ExplainationOut):-!,
-	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,proved_gaf_or([N|More]),Ctx,Context,ExplainationOut).
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,proved_gaf_or([_,N|More]),Ctx,Context,ExplainationOut):-!,
+	deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,proved_gaf_or([N|More]),Ctx,Context,ExplainationOut).
 
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,or([LiteralList]),Ctx,Context,ExplainationOut):-!,
-	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,LiteralList,Ctx,Context, ExplainationOut).  %true,
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,or([LiteralList]),Ctx,Context,ExplainationOut):-!,
+	deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,LiteralList,Ctx,Context, ExplainationOut).  %true,
 	
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,or([LiteralList|DisjLiteralList]),Ctx,Context,ExplainationOut):-
-	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn, LiteralList,Ctx,Context, ExplainationOut)
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,or([LiteralList|DisjLiteralList]),Ctx,Context,ExplainationOut):-
+	deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn, LiteralList,Ctx,Context, ExplainationOut)
 	;
-	deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn, or(DisjLiteralList),Ctx,Context,ExplainationOut).
+	deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn, or(DisjLiteralList),Ctx,Context,ExplainationOut).
 					*/
 % Equals
-%deduceGoal(DB,VarsOut,VarsOut,BackchainsMax,Table,equal(U,W),Ctx,Context,Explaination):-!,
+%deduceGoalOProve(DB,VarsOut,VarsOut,BackchainsMax,Table,equal(U,W),Ctx,Context,Explaination):-!,
 %	prove_ground_goal(equal,Logic,BackchainsMax,Table,equal(U,W),Ctx,Context,Explaination).
   /*
         
-deduceGoal(DB,VarsOut,VarsOut,BackchainsMax,ExplainationIn, Literal,Ctx,Context, _ ):-	
+deduceGoalOProve(DB,VarsOut,VarsOut,BackchainsMax,ExplainationIn, Literal,Ctx,Context, _ ):-	
 	mrecordedLogged(failed,Literal),!,fail.
   */
 /*
-deduceGoal(DB,VarsOut,VarsOut,BackchainsMax,ExplainationIn, Literal,Ctx,Context, _ ):-	
+deduceGoalOProve(DB,VarsOut,VarsOut,BackchainsMax,ExplainationIn, Literal,Ctx,Context, _ ):-	
 	mrecordedLogged(trying,Literal),!,fail.
 */
 	
 	
     /*
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context, ExplainationOut):-
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context, ExplainationOut):-
 	no_rules_about(Literal,Ctx,Context),!,fail.
       */  
 :-dynamic(no_rules_about/3).
 
 /*
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context, ExplainationOut):-fail,!,
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context, ExplainationOut):-fail,!,
 	ado_cache_access_smallest_first(Literal, ReqList, ThisCost,Context,_Ctx,Explaination),
 	not(memberchk(Explaination,ExplainationIn)),
 	BackchainsMax > ThisCost,
 	BackchainsNext is BackchainsMax - ThisCost,
 	vars_legal(VarsIn,Literal,GettingThereFaster,MVarsOut),
 	makeSubexplaination(ExplainationIn,Literal,GettingThereFaster,Explaination,ExplainationMid),
-	deduceGoal(DB,MVarsOut,VarsOut,BackchainsNext,ExplainationMid,ReqList,Ctx,Context,ExplainationOut).
+	deduceGoalOProve(DB,MVarsOut,VarsOut,BackchainsNext,ExplainationMid,ReqList,Ctx,Context,ExplainationOut).
 
 %group_access_legal(N:VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context):-fail.
 
@@ -945,7 +945,7 @@ group_access_legal(N:VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Con
 
 
 /*
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context, ExplainationOut):-
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context, ExplainationOut):-
 	%true,
       %  not(memberchk(Literal,ExplainationIn)),
    %     not(mrecordedLogged(trying_rules,Literal)),
@@ -966,7 +966,7 @@ deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,ExplainationIn,Literal,Ctx,Context, E
 		%writeObject(new_goal(GettingThereBetter),_),
 		BackchainN is BackchainsMax - Cost,
 		makeSubexplaination(ExplainationIn,Literal,GettingThereFaster,ExplainationJunt,ExplainationMid), %true,
-		deduceGoal(DB,MVarsOut,VarsOut,BackchainN,ExplainationMid,GettingThereBetter,_Ctx,Context,ExplainationOut).
+		deduceGoalOProve(DB,MVarsOut,VarsOut,BackchainN,ExplainationMid,GettingThereBetter,_Ctx,Context,ExplainationOut).
 */		
 makeSubexplaination(ExplainationIn,Literal,[[GettingThereFaster]],Explaination,ExplainationMid):-!,
 	append([Explaination|ExplainationIn],[Literal|GettingThereFaster],ExplainationMid).
@@ -1278,15 +1278,15 @@ my_nth0_det(N, [_,_,_,_,_,_   |Tail], Elem) :-
 /*
 
 % specialization of disjoint true //TODO Specialized
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,Table,holds(disjoint,S,C),Ctx,Context, g_h(holds(disjoint,S,C)) * Explaination ):-!,
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,Table,holds(disjoint,S,C),Ctx,Context, g_h(holds(disjoint,S,C)) * Explaination ):-!,
 	deduceSurfaceGuarded(disjoint,Logic,holds(disjoint,S,C),Agent,Context,Explaination).
 
 % specialization of subrelation true //TODO Specialized
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,Table,holds(subrelation,S,C),Ctx,Context, g_h(holds(subrelation,S,C)) * Explaination ):-!,
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,Table,holds(subrelation,S,C),Ctx,Context, g_h(holds(subrelation,S,C)) * Explaination ):-!,
 	deduceSurfaceGuarded(subrelation,Logic,holds(subrelation,S,C),Agent,Context,Explaination).
 
 % specialization of Sentence ops //TODO Specialized
-deduceGoal(DB,VarsIn,VarsOut,Depth,Table,Goal,Agent,Context,P):-functor(Goal,F,_),
+deduceGoalOProve(DB,VarsIn,VarsOut,Depth,Table,Goal,Agent,Context,P):-functor(Goal,F,_),
 	hlPredicateAttribute(F,connective),!,
 	writeDebug(blue,deduceGoal_sentence_op(F,Logic,Depth,Goal,Agent,Context,Table)),
 	deduceGoal_sentence_op(F,Logic,Depth,Table,Goal,Agent,Context,P).
@@ -1294,7 +1294,7 @@ deduceGoal(DB,VarsIn,VarsOut,Depth,Table,Goal,Agent,Context,P):-functor(Goal,F,_
 % ===================================================
 % IrreflexiveRelation True
 % ===================================================
-deduceGoal(DB,VarsIn,VarsOut,true,Depth,Table,holds(Predicate,Arg1,Arg2),Agent,Context,_):-
+deduceGoalOProve(DB,VarsIn,VarsOut,true,Depth,Table,holds(Predicate,Arg1,Arg2),Agent,Context,_):-
 	Predicate\=instance,
 	deduceInstanceTable(Context,Predicate,'IrreflexiveRelation',_),
 	Arg1==Arg2,!,fail.
@@ -1302,14 +1302,14 @@ deduceGoal(DB,VarsIn,VarsOut,true,Depth,Table,holds(Predicate,Arg1,Arg2),Agent,C
 % ===================================================
 % IrreflexiveRelation False
 % ===================================================
-deduceGoal(DB,VarsIn,VarsOut,false,Depth,Table,holds(Predicate,Arg1,Arg2),Agent,Context,P * Explaination * bullet(not(holds(Predicate,Arg1,Arg2)))):-
+deduceGoalOProve(DB,VarsIn,VarsOut,false,Depth,Table,holds(Predicate,Arg1,Arg2),Agent,Context,P * Explaination * bullet(not(holds(Predicate,Arg1,Arg2)))):-
 	Predicate\=instance,
 	deduceInstanceTable(Context,Predicate,'IrreflexiveRelation',_),
 	Arg1==Arg2,!,
 	Explaination=sfindi((instance(Predicate, 'IrreflexiveRelation')=>
 		forall(Arg1, not holds(Predicate, Arg1, Arg2)))).
 
-deduceGoal(DB,VarsIn,VarsOut,true,Depth,Table,holds(Predicate,Arg1,Arg2),Agent,Context,P * Explaination * bullet(not(holds(Predicate,Arg1,Arg2)))):-
+deduceGoalOProve(DB,VarsIn,VarsOut,true,Depth,Table,holds(Predicate,Arg1,Arg2),Agent,Context,P * Explaination * bullet(not(holds(Predicate,Arg1,Arg2)))):-
 	Predicate\=instance,
 	Arg1==Arg2,
 	deduceInstanceTable(Context,Predicate,'SymmetricRelation'),
@@ -1318,24 +1318,24 @@ deduceGoal(DB,VarsIn,VarsOut,true,Depth,Table,holds(Predicate,Arg1,Arg2),Agent,C
 
 
 % Ground goal
-%deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,Table,Fact,Ctx,Context,Explaination):-ground(Fact),
+%deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,Table,Fact,Ctx,Context,Explaination):-ground(Fact),
 %	get_pred(Fact,Predicate,_),!,
 %	prove_ground_goal(Predicate,Logic,BackchainsMax,Table,Fact,Ctx,Context,Explaination).
 
 % Instance goal
-deduceGoal(DB,VarsIn,VarsOut,true,BackchainsMax,Table,holds(instance,E,C),Ctx,Context,Explaination):-
+deduceGoalOProve(DB,VarsIn,VarsOut,true,BackchainsMax,Table,holds(instance,E,C),Ctx,Context,Explaination):-
 	atom(C),!,
 	((deduceInstanceTable(Context,E,C,Explaination))
 	%;prove_finite(instance,Logic,BackchainsMax,Table,holds(instance,E,C),Ctx,Context,Explaination)
 	).
 
 % Instance goal
-deduceGoal(DB,VarsIn,VarsOut,true,BackchainsMax,Table,holds(instance,E,C),Ctx,Context,Explaination):-var(E),var(C),!,
+deduceGoalOProve(DB,VarsIn,VarsOut,true,BackchainsMax,Table,holds(instance,E,C),Ctx,Context,Explaination):-var(E),var(C),!,
 	deduceInstanceTable(Context,C,'Class',_),not(C='Entity'),
 	prove_finite(instance,true,BackchainsMax,Table,holds(instance,E,C),Ctx,Context,Explaination).
 
 % Prove Non Ground Goal
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,Table,Fact,Ctx,Context, Explaination):-
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,Table,Fact,Ctx,Context, Explaination):-
 	get_pred(Fact,Predicate,[A|Rgs]),
 	(
 	non_constrained(Context,Predicate,[A|Rgs]);
@@ -1352,7 +1352,7 @@ enforce_type_for_bound(Context,Predicate,[Vect|S],[A|L]):-
 
 enforce_type_for_bound_arg(Context,Predicate,_,A):-var(A),!.
 enforce_type_for_bound_arg(Context,Predicate,Class,A):-
-	deduceGoal(DB,VarsIn,VarsOut,true,4,g_h([]),holds(instance,Arg,Class),Ctx,Context,Explaination).
+	deduceGoalOProve(DB,VarsIn,VarsOut,true,4,g_h([]),holds(instance,Arg,Class),Ctx,Context,Explaination).
 	
 
 
@@ -1362,7 +1362,7 @@ non_constrained(Context,documentation,[A|Rgs]).
 non_constrained(Context,_,[A|Rgs]).
 
 % Prove Non Ground Goal
-deduceGoal(DB,VarsIn,VarsOut,BackchainsMax,Table,Fact,Ctx,Context, Explaination):-
+deduceGoalOProve(DB,VarsIn,VarsOut,BackchainsMax,Table,Fact,Ctx,Context, Explaination):-
 	get_pred(Fact,Predicate,[A|Rgs]),
 %	atom(Predicate),!,
 	instance_all_predicate(Context,Predicate,[A|Rgs]),
@@ -1382,7 +1382,7 @@ p_deducePossibleInstancesFromClasslist(Context,[Class|Classes],[Arg|ArgS]):-
 	p_deducePossibleInstancesFromClasslist(Context,Classes,ArgS).
 	
 p_deduceInstanceTable(Context,Arg,Class):- % true,
-	deduceGoal(DB,VarsIn,VarsOut,true,4,g_h([]),holds(instance,Arg,Class),Ctx,Context,Explaination),safe_arg(Arg).
+	deduceGoalOProve(DB,VarsIn,VarsOut,true,4,g_h([]),holds(instance,Arg,Class),Ctx,Context,Explaination),safe_arg(Arg).
 	
 % every description is eigther too general or too specific in most scenario cases.. 
 % the real feat is to adapt to the user's mental pixelation
@@ -1494,12 +1494,12 @@ invoke_bakchain(yes,Fact,Conds,Table,TID,BackchainsMax,Ctx,Context,Explaination)
 	not(my_member(tid(TID),Table)),
 	not(my_member(g_h(Fact),Table)),
         Backchains2 is BackchainsMax-3, %Since a Loop should be explored a little
-	deduceGoal(DB,VarsIn,VarsOut,true,Backchains2,(tid(TID)  * g_h(Fact) * Table  ),Conds,Ctx,Context, Explaination ).
+	deduceGoalOProve(DB,VarsIn,VarsOut,true,Backchains2,(tid(TID)  * g_h(Fact) * Table  ),Conds,Ctx,Context, Explaination ).
 
 invoke_bakchain(no,Fact,Conds,Table,TID,BackchainsMax,Ctx,Context,Explaination):-
 	not(my_member(tid(TID),Table)),
 	Backchains2 is BackchainsMax-1,
-	deduceGoal(DB,VarsIn,VarsOut,true,Backchains2,(tid(TID)  * g_h(Fact) * Table  ),Conds,Ctx,Context, Explaination ).
+	deduceGoalOProve(DB,VarsIn,VarsOut,true,Backchains2,(tid(TID)  * g_h(Fact) * Table  ),Conds,Ctx,Context, Explaination ).
 
 make_via(true,TID,VarsIn,VarsOut,Fact,Conds,via(entails(Conds,Fact),Vars) * TID).
 make_via(false,TID,VarsIn,VarsOut,Fact,Conds,via(entails(Conds,not(Fact)),Vars) * TID).
@@ -2057,24 +2057,24 @@ For Axiom Key See http://plato.stanford.edu/entries/logic-modal/
 % ==========================================
 % Hit Variables
 % ==========================================
-/*deduceGoal(Predicate,Logic,Depth,Table,L,Agent,Context,P ):-
-	format('~q.\n',[deduceGoal(Predicate,Logic,L,Agent,Context,Depth,Table)]),fail.
+/*deduceGoalOProve(Predicate,Logic,Depth,Table,L,Agent,Context,P ):-
+	format('~q.\n',[deduceGoalOProve(Predicate,Logic,L,Agent,Context,Depth,Table)]),fail.
   */
 
 
-deduceGoal(Predicate,Logic,Depth,Table,subclass(X,Y),Agent,Context,Explaination):-X=='Entity',!,Y='Entity'.
+deduceGoalOProve(Predicate,Logic,Depth,Table,subclass(X,Y),Agent,Context,Explaination):-X=='Entity',!,Y='Entity'.
 
-deduceGoal(Predicate,Logic,Depth,Table,Var,Agent,Context,Explaination):-getPrologVars(Var,[_,_,_|_],_,_),!,fail.
-deduceGoal(_,true,Depth,Table,equal(U,W),Agent,Context,P):-!,equal(U,W,P),!.  %defined in moo_equal.P
-deduceGoal(_,true,Depth,Table,not equal(U,W),Agent,Context,P):-!,not_equal(U,W,P),!. %defined in moo_equal.P
-deduceGoal(holds,Logic,Depth,Table,holds(holds,_,_),Agent,Context,Explaination):-!,fail.
-deduceGoal(Predicate,Logic,Depth,Table,Var,Agent,Context,Explaination):-
-	once(writeDebug(deduceGoal(Predicate,Logic,Var,Depth,Agent,Context,Table))),fail.
+deduceGoalOProve(Predicate,Logic,Depth,Table,Var,Agent,Context,Explaination):-getPrologVars(Var,[_,_,_|_],_,_),!,fail.
+deduceGoalOProve(_,true,Depth,Table,equal(U,W),Agent,Context,P):-!,equal(U,W,P),!.  %defined in moo_equal.P
+deduceGoalOProve(_,true,Depth,Table,not equal(U,W),Agent,Context,P):-!,not_equal(U,W,P),!. %defined in moo_equal.P
+deduceGoalOProve(holds,Logic,Depth,Table,holds(holds,_,_),Agent,Context,Explaination):-!,fail.
+deduceGoalOProve(Predicate,Logic,Depth,Table,Var,Agent,Context,Explaination):-
+	once(writeDebug(deduceGoalOProve(Predicate,Logic,Var,Depth,Agent,Context,Table))),fail.
 
 
-deduceGoal(holds,Logic,Depth,Table,Var,Agent,Context,Explaination):-
+deduceGoalOProve(holds,Logic,Depth,Table,Var,Agent,Context,Explaination):-
 	predicate_holds(Var,Predicate),	!,
-	deduceGoal(Predicate,Logic,Depth,Table,Var,Agent,Context,Explaination).
+	deduceGoalOProve(Predicate,Logic,Depth,Table,Var,Agent,Context,Explaination).
 	
 predicate_holds(holds(Predicate,_,_),Predicate).
 predicate_holds(holds(Predicate,_,_,_),Predicate).
@@ -2083,39 +2083,39 @@ predicate_holds(holds(Predicate,_),Predicate).
 predicate_holds(G,Predicate):-functor(G,Predicate,_).
 
 
-deduceGoal(Predicate,Logic,Depth,Table,formula,Agent,Context,ExplainationB ):-!,fail.
+deduceGoalOProve(Predicate,Logic,Depth,Table,formula,Agent,Context,ExplainationB ):-!,fail.
 %	writeDebug(red,formula),!,fail.
 
-deduceGoal(Predicate,var,Depth,Table,_,Agent,Context,B ):-!, true,fail.
+deduceGoalOProve(Predicate,var,Depth,Table,_,Agent,Context,B ):-!, true,fail.
 
-deduceGoal(_,Logic,Depth,Table,and(A,B),Agent,Context,ExplainationA * ExplainationB ):-!,
-	deduceGoal(holds,Logic,Depth,Table,A,Agent1,Context,ExplainationA ),
-	deduceGoal(holds,Logic,Depth,Table,B,Agent2,Context,ExplainationB ).
+deduceGoalOProve(_,Logic,Depth,Table,and(A,B),Agent,Context,ExplainationA * ExplainationB ):-!,
+	deduceGoalOProve(holds,Logic,Depth,Table,A,Agent1,Context,ExplainationA ),
+	deduceGoalOProve(holds,Logic,Depth,Table,B,Agent2,Context,ExplainationB ).
 
-deduceGoal(_,Logic,Depth,Table,gafs(Logic,A),Agent,Context,ExplainationA ):-!,
+deduceGoalOProve(_,Logic,Depth,Table,gafs(Logic,A),Agent,Context,ExplainationA ):-!,
 	writeDebug(red,defering_to_gafs(Logic,A)),
-	deduceGoal(holds,Logic,Depth,[defering_to_gafs(Logic,A)|Table],A,Agent1,Context,ExplainationA ).
+	deduceGoalOProve(holds,Logic,Depth,[defering_to_gafs(Logic,A)|Table],A,Agent1,Context,ExplainationA ).
 
-deduceGoal(_,Logic,Depth,Table,delay(Logic,A),Agent,Context,ExplainationA ):-!,
+deduceGoalOProve(_,Logic,Depth,Table,delay(Logic,A),Agent,Context,ExplainationA ):-!,
 	%(mooCache(completed,template(Logic,Template),_)),
 	writeDebug(red,delay_to_gafs(Logic,A)),!,
-	deduceGoal(holds,Logic,Depth,[delay_to_gafs(Logic,A)|Table],A,Agent1,Context,ExplainationA ).
+	deduceGoalOProve(holds,Logic,Depth,[delay_to_gafs(Logic,A)|Table],A,Agent1,Context,ExplainationA ).
  
 % ==========================================
 % Double Negation (Call)
 % ==========================================
-deduceGoal(not,Logic,Depth,Table,not(not(NewRequest)),Agent,Context,ExplainationB ):-
+deduceGoalOProve(not,Logic,Depth,Table,not(not(NewRequest)),Agent,Context,ExplainationB ):-
 	writeDebug(not_not),
 	functor(NewRequest,Predicate,_), !,
-	deduceGoal(Predicate,Logic,Depth,Table,Var,Agent,Context,ExplainationB ).
+	deduceGoalOProve(Predicate,Logic,Depth,Table,Var,Agent,Context,ExplainationB ).
 
 % ============================================================
 % Invert Not
 % ============================================================
-deduceGoal(not,Logic,Depth,Table,not(NewRequest),Agent,Context,Explaination):-
+deduceGoalOProve(not,Logic,Depth,Table,not(NewRequest),Agent,Context,Explaination):-
 	functor(NewRequest,Predicate,_),
 	invert_logic(Logic,NewLogic),!,
-	deduceGoal(Predicate,NewLogic,Depth,Table,NewRequest,Agent,Context,Explaination).
+	deduceGoalOProve(Predicate,NewLogic,Depth,Table,NewRequest,Agent,Context,Explaination).
 	
 
 
@@ -2127,11 +2127,11 @@ invert_logic(false,true).
 % =============================================
 % Choose between deduce_nonground_goal/deduce_ground_goal
 % =============================================
-deduceGoal(Predicate,Logic,Depth,Table,Goal,Agent,Context,P):-  %true,
+deduceGoalOProve(Predicate,Logic,Depth,Table,Goal,Agent,Context,P):-  %true,
 	ground(Goal),!,
 	deduce_ground_goal(Predicate,Logic,Depth,Table,Goal,Agent,Context,P),!.
 
-deduceGoal(Predicate,Logic,Depth,Table,Goal,Agent,Context,P):-
+deduceGoalOProve(Predicate,Logic,Depth,Table,Goal,Agent,Context,P):-
 	term_to_atom(Goal,Template),!,
 	deduce_nonground_goal(Template,Predicate,Logic,Depth,Table,Goal,Agent,Context,P).
 
@@ -2206,7 +2206,7 @@ deduce_ground_goal(Predicate,true,Depth,Table,Goal,Agent,Context,P):-
 % ============================================================
 % Write the Goal to debugger
 % ============================================================
-:-index(deduceGoal(1,1,0,0,1,0,0,0)).
+:-index(deduceGoalOProve(1,1,0,0,1,0,0,0)).
 
 
 prove_goal(Predicate,Logic,Depth,Table,Var,Agent,Context,Explaination):-
@@ -2232,7 +2232,7 @@ prove_goal(Predicate,Logic,Depth,Table,holds(Predicate,[_,H|_]),Agent,Context,Ex
 prove_goal(not,true,Depth,Table,not(NewRequest),Agent,Context,Explaination):-!,
 	invert_logic(Logic,NewLogic),
 	functor(NewRequest,Predicate,_),!,
-	deduceGoal(Predicate,NewLogic,Depth,Table,NewRequest,Agent,Context,Explaination).
+	deduceGoalOProve(Predicate,NewLogic,Depth,Table,NewRequest,Agent,Context,Explaination).
 
 % ==============================================   
 % Time space Limits
@@ -2326,7 +2326,7 @@ prove_goal(holdsDuring,true,Depth,Table,holds(holdsDuring,TimePosition,Situation
         once(request_compile((Situation),NewRequest,Context,UVars,Given)),
 	writeDebug(pink,subgoal(NewRequest,Agent,Context)), 
 	functor(NewRequest,Predicate,_))),
-        deduceGoal(Predicate,true,Depth,Table,NewRequest,Agent,Context,Explaination).
+        deduceGoalOProve(Predicate,true,Depth,Table,NewRequest,Agent,Context,Explaination).
 
 % ==========================================
 % Transition FINITE GOAL
@@ -2401,7 +2401,7 @@ finite_goal(Predicate,false,Depth,Table,Goal,Agent,Context,Explaination):-
 /*
 % Break a holdsDuring on Argument Type Violation
 finite_goal(holdsDuring,Logic,Depth,Table,holdsDuring(TimePosition,Situation),Agent,Context, Explaination):-
-	not(deduceGoal(instance,true,Depth,Table,instance(TimePosition,'TimePosition'),Agent,Context, ITime)),!,fail.
+	not(deduceGoalOProve(instance,true,Depth,Table,instance(TimePosition,'TimePosition'),Agent,Context, ITime)),!,fail.
 
 % Break a holdsDuring on Free Situation
 finite_goal(holdsDuring,Logic,Depth,Table,holdsDuring(TimePosition,false),Agent,Context, Explaination):- !,fail.
@@ -2410,7 +2410,7 @@ finite_goal(holdsDuring,Logic,Depth,Table,holdsDuring(TimePosition,false),Agent,
 */
 /*
 finite_goal(holdsDuring,Logic,Depth,Table,holdsDuring(TimePosition,and(Situation1,Situation2)),Agent,Context, Explaination):- 
-	deduceGoal(and,Logic,Depth,Table,
+	deduceGoalOProve(and,Logic,Depth,Table,
 	and(holdsDuring(TimePosition,Situation1),holdsDuring(TimePosition,Situation)),
 	Agent,Context, Explaination).
 */
@@ -2447,10 +2447,10 @@ deduce_entails(Predicate,Logic,Depth,Table,Pre,Goal,Agent,Context,Explaination )
 	writeDebug(deduce_entails(Predicate,Logic,entails(Pre,Goal),Depth,Table,Agent,Context,Explaination )),fail.
     
 deduce_entails(Predicate,true,Depth,Table,attribute(O,R),not(attribute(O,L)),Agent,Context,Explaination):-
-	deduceGoal(contraryProperty,true,Depth,Table,contraryProperty(L,R),Agent,Context,Explaination ).
+	deduceGoalOProve(contraryProperty,true,Depth,Table,contraryProperty(L,R),Agent,Context,Explaination ).
 
 deduce_entails(Predicate,true,Depth,Table,Pre,Goal,Agent,Context, Explaination ):-
-	Pre==true,!,deduceGoal(Predicate,true,Depth,Table,Goal,Agent,Context, Explaination).
+	Pre==true,!,deduceGoalOProve(Predicate,true,Depth,Table,Goal,Agent,Context, Explaination).
 
 deduce_entails(Predicate,true,Depth,Table,Pre,Goal,Agent,Context, Explaination ):-
 	Pre==false,!,fail.  %Absurdy
@@ -2482,7 +2482,7 @@ finite_goal(Predicate,true,Depth,Table,range( Function, SubClass),Agent,Context,
 	nonvar(Function),
 	deduceTransitiveClosure_PartialOrderingRelation(Context,subrelation,Function,Super,Explaination1),
 	Function \= Super,
-	deduceGoal(Predicate,true,Depth,Table,range( Super, Class),Agent,Context,Explaination2),
+	deduceGoalOProve(Predicate,true,Depth,Table,range( Super, Class),Agent,Context,Explaination2),
 	%write(Class),
 	deduceTransitiveClosure_PartialOrderingRelation(Context,subclass,SubClass,Class,Explaination3).
 	
@@ -2491,7 +2491,7 @@ finite_goal(Predicate,true,Depth,Table,range( Function, SubClass),Agent,Context,
 % =====================================================
 finite_goal(Predicate,true,Depth,Table,range( Function, Class),Agent,Context,Explaination1 * Explaination2):-
 	var(Function),nonvar(Class),
-	deduceGoal(Predicate,true,Depth,Table,range( Super, Class),Agent,Context,Explaination2),
+	deduceGoalOProve(Predicate,true,Depth,Table,range( Super, Class),Agent,Context,Explaination2),
 	deduceTransitiveClosure_PartialOrderingRelation(Context,subrelation,Function,Super,Explaination1).
 
 */
@@ -2569,7 +2569,7 @@ finite_goal(Predicate,true,Depth,Table,Fact,Agent,Context,Explaination * Explain
 	Depth2 is Depth -1,!,  %true,
 	client_rulebase_spec(Predicate,true,Fact, Agent,Context, Conditions, Explaination, F,Type),
 	confirm_rule(Predicate,true,Fact, Agent,Context, Conditions, Explaination, F,Type,Depth,Table,NewTable,NewConds),
-	deduceGoal(holds,true,Depth2,[Fact|NewTable],NewConds,Agent,Context,Explaination2),
+	deduceGoalOProve(holds,true,Depth2,[Fact|NewTable],NewConds,Agent,Context,Explaination2),
 	confirm_ground(Conditions).
 	
 
@@ -2600,7 +2600,7 @@ finite_goal(Predicate,false,Depth,Table,Fact,Agent,Context,Explaination * Explai
 	Depth2 is Depth -1,!,
 	client_rulebase_spec(Predicate,false,Fact, Agent,Context, Conditions, Explaination, F,Type),
 	confirm_rule(Predicate,false,Fact, Agent,Context, Conditions, Explaination, F,Type,Depth,Table,NewTable,NewConds),
-	deduceGoal(holds,true,Depth2,[Fact|NewTable],NewConds,Agent,Context,Explaination2),
+	deduceGoalOProve(holds,true,Depth2,[Fact|NewTable],NewConds,Agent,Context,Explaination2),
 	confirm_ground(Conditions).
 
 /*
@@ -2833,7 +2833,7 @@ prove_holds(false,Depth,Flags,Predicate,Arg1,[Arg2],Table,Agent,Context,P):-
 prove_holds(true,Depth,Flags,Predicate,Arg1,[Arg2],Table,Agent,Context, P * Explaination):-
 	not_in('SymmetricRelation',Table),
 	memberchk('SymmetricRelation',Flags),
-	deduceGoal(Predicate,true,Depth,['SymmetricRelation'|Table],holds(InvPredicate,[Arg2,Arg1]),Agent,Context,Explaination).
+	deduceGoalOProve(Predicate,true,Depth,['SymmetricRelation'|Table],holds(InvPredicate,[Arg2,Arg1]),Agent,Context,Explaination).
 
 	
 % ===================================================
@@ -2869,9 +2869,9 @@ prove_holds(true,Depth,Flags,Predicate,Sub,[Super],Table,Agent,Context, P * Expl
 prove_holds(false,Depth,Flags,Predicate,Sub,[Super],Table,Agent,Context, Explaination):-
 	memberchk('RelationExtendedToQuantities',Flags),
         ((
-	deduceGoal(instance,true,2,[prove_holds,inverse(Predicate)|Table],instance(Sub,'Quantity'),Agent,Context,_)
+	deduceGoalOProve(instance,true,2,[prove_holds,inverse(Predicate)|Table],instance(Sub,'Quantity'),Agent,Context,_)
 	;
-	deduceGoal(instance,true,2,[prove_holds,inverse(Predicate)|Table],instance(Super, 'Quantity'),Agent,Context,_)
+	deduceGoalOProve(instance,true,2,[prove_holds,inverse(Predicate)|Table],instance(Super, 'Quantity'),Agent,Context,_)
 	)),
 	
 	((	belief_math(Depth,['RelationExtendedToQuantities'|Table],holds(Predicate,[Sub|Super]),Agent,Context,Explaination),!,fail)
@@ -2899,11 +2899,11 @@ prove_holds(Logic,Depth,Flags,Predicate,Arg1,[Arg2],Table,Agent,Context,P * Expl
 	%not(memberchk('TransitiveRelation',Flags)),
 	not_in(inverse(Predicate),Table),
 	((
-	deduceGoal(inverse,true,2,[prove_holds,inverse(Predicate)|Table],inverse(InvPredicate,Predicate ),Agent,Context,P)
+	deduceGoalOProve(inverse,true,2,[prove_holds,inverse(Predicate)|Table],inverse(InvPredicate,Predicate ),Agent,Context,P)
 	;
-	deduceGoal(inverse,true,2,[prove_holds,inverse(Predicate)|Table],inverse(Predicate, InvPredicate),Agent,Context,P)
+	deduceGoalOProve(inverse,true,2,[prove_holds,inverse(Predicate)|Table],inverse(Predicate, InvPredicate),Agent,Context,P)
 	)),
-	deduceGoal(InvPredicate,Logic,Depth,[inverse(Predicate),inverse(InvPredicate)|Table],holds(InvPredicate,[Arg2,Arg1]),Agent,Context,Explaination).
+	deduceGoalOProve(InvPredicate,Logic,Depth,[inverse(Predicate),inverse(InvPredicate)|Table],holds(InvPredicate,[Arg2,Arg1]),Agent,Context,Explaination).
 		       */
 
 /*
@@ -2915,7 +2915,7 @@ prove_holds(true,Depth,Flags,Predicate,Arg1,ArgS,Table,Agent,Context,P * Explain
 	deduceSurfaceGuarded(subrelation,true,subrelation(  Child ,Predicate  ),Agent,Context,P),
 	Child \==  Predicate,
 	writeDebug(Child \==  Predicate),
-	deduceGoal(Child,true,Depth,[subrelation(Predicate)|Table],holds(Child,Arg1,Arg2),Agent,Context,Explaination).
+	deduceGoalOProve(Child,true,Depth,[subrelation(Predicate)|Table],holds(Child,Arg1,Arg2),Agent,Context,Explaination).
 
 % ===================================================
 % False subrelation Parent
@@ -2925,7 +2925,7 @@ prove_holds(false,Depth,Flags,Predicate,Arg1,ArgS,Table,Agent,Context,P * Explai
 	deduceSurfaceGuarded(subrelation,true,subrelation(  Predicate, Child  ),Agent,Context,P),
 	Child \==  Predicate,
 	writeDebug(Child \==  Predicate),
-	deduceGoal(Child,false,Depth,[subrelation(Predicate)|Table],holds(Child,Arg1,Arg2),Agent,Context,Explaination).	
+	deduceGoalOProve(Child,false,Depth,[subrelation(Predicate)|Table],holds(Child,Arg1,Arg2),Agent,Context,Explaination).	
 */
 /*
 % ===================================================
@@ -2934,19 +2934,19 @@ prove_holds(false,Depth,Flags,Predicate,Arg1,ArgS,Table,Agent,Context,P * Explai
 prove_holds(Logic,Depth,Flags,Predicate,Arg1,[Arg2|ArgS],Table,Head,Agent,Context,P * Explaination):-
 	fail, 
 	not_in(domain,Table),
-	(deduceGoal(Predicate,true,2,[prove_holds|Table],domain( Predicate, 1 , 'Formula' ),Agent,Context,P),
+	(deduceGoalOProve(Predicate,true,2,[prove_holds|Table],domain( Predicate, 1 , 'Formula' ),Agent,Context,P),
 	getNegationForm(Arg1,NNF),
 	writeDebug(getNegationForm(Arg1,NNF)),
 	Arg1 \= NNF,
 	once((Proto_call=..[Predicate,NNF,Arg2|ArgS])),
-	deduceGoal(Predicate,Logic,Depth,Flags,[domain|Table],Proto_call,Agent,Context,Explaination))
+	deduceGoalOProve(Predicate,Logic,Depth,Flags,[domain|Table],Proto_call,Agent,Context,Explaination))
 	;
-	(deduceGoal(Predicate,true,2,[prove_holds|Table],domain( Predicate, 2 , 'Formula' ),Agent,Context,P),
+	(deduceGoalOProve(Predicate,true,2,[prove_holds|Table],domain( Predicate, 2 , 'Formula' ),Agent,Context,P),
 	getNegationForm(Arg2,NNF),
 	writeDebug(getNegationForm(Arg2,NNF)),
 	Arg2 \= NNF,
 	once((Proto_call=..[Predicate,Arg1,NNF|ArgS])),
-	deduceGoal(Predicate,Logic,Depth,Flags,[domain|Table],Proto_call,Agent,Context,Explaination)).
+	deduceGoalOProve(Predicate,Logic,Depth,Flags,[domain|Table],Proto_call,Agent,Context,Explaination)).
 */
  
 
@@ -2968,8 +2968,8 @@ prove_goal_rtype(holdsDuring,true,Depth,Flags,Table,holdsDuring(TimePosition,Sit
 /*
 prove_goal_rtype(Predicate,false,Depth,Flags,Table,subclass(Sub,SubSuper),Agent,Context,Explaination * Explaination2):-
 	Depth2 is Depth-1,
-	deduceGoal(Predicate,true,Depth2,[subclass(Sub,Super)|Table],disjoint(Sub,Super), Agent,Context,Explaination),
-	deduceGoal(Predicate,true,Depth2,[subclass(SubSub,Super),disjoint(Sub,Super)|Table],subclass(SubSuper,Super),Agent,Context,Explaination2).
+	deduceGoalOProve(Predicate,true,Depth2,[subclass(Sub,Super)|Table],disjoint(Sub,Super), Agent,Context,Explaination),
+	deduceGoalOProve(Predicate,true,Depth2,[subclass(SubSub,Super),disjoint(Sub,Super)|Table],subclass(SubSuper,Super),Agent,Context,Explaination2).
 */  
 % ==========================================================
 % Is Disjoint

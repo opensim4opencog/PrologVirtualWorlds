@@ -3,7 +3,7 @@
 % Maintainers: Douglas Miles
 % Contact: dmiles@users.sourceforge.net ;
 % Version: 'moo_markup.pl' 1.0.0
-% Revised At:  $Date: 2002-03-14 12:46:24 $
+% Revised At:  $Date: 2002-03-29 22:43:18 $
 
 % ===================================================================
 % Major functions:
@@ -11,7 +11,7 @@
 % Interface with Java with XML to display explaination trees and variable bindings
 % ===================================================================
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 :-index(getMarkupFormula(1,1,1,1)).
 :-index(toMarkUp_lang(1,1,1,1)).
 

@@ -3,9 +3,9 @@
 % ===========================================================
 
 			    
-:-module(moo_soap,[]).
+%:-module(moo_soap,[]).
 
-:-include('moo_header.pl').
+% :-include('moo_header.pl').
 
 :-dynamic(xmlCurrentOpenTags/2).
 
