@@ -35,9 +35,11 @@ loadJamudReferences:-
 	 java_invoke_method(JAMUD,getJamudInstance(Instance)),
 	 java_invoke_method(JAMUD,getJamudMudObjectRoot(MudRoot)),!,
 	 assert(jamud_instance(Instance)),
-	 assert(jamud_root(MudRoot)),
-	 showInstanceValue(MudRoot).
+	 assert(jamud_root(MudRoot)).
+	 %showInstanceValue(MudRoot).
 	 
+
+
 showInstanceValue(Object):-
    getJavatypeValueFn(Object,Name,_ActualName,Value),
    format('\n ~q \n',[equal('JavaMemberFn'('JavaObjectFn'(Object),Name),Value)]),
@@ -47,7 +49,8 @@ showInstanceValue(_Object):-
    format('\n~q\n',[Term]),
    fail.
 
-   java_object_known(_).
+java_object_known(_).
+
 
 showInstanceValue(_Object):-!.
 
@@ -71,7 +74,7 @@ getInstanceValue(Object,Name,ActualName,Value):-
 
 
 inferJavatypeMemberFnTuples(equal('JavaMemberFn'('JavaObjectFn'(Object),Name),Result)):-
-      java_object(Object),moo_java:java_object_known(Object),
+      java_object(Object),java_object_known(Object),
       getJavatypeValueFn(Object,Name,_ActualName,Result).
 
 getJavatypeValueFn(Object,ActualName,Value):-
@@ -132,12 +135,6 @@ match_method(_MethodsList,_Method,ActualName,MA,Name,Value,MethodCall):-
       append(Left,[Value],NewRest),!,MethodCall =.. [ActualName|NewRest].
 
 
-
-%:-initialization(startLogicMoo).
-
-
-doTopLoop:-
-    eng_status.
 
 
 
