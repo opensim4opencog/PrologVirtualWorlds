@@ -9,18 +9,6 @@ import java.util.*;
 import java.awt.*;
 import java.net.*;
 
-import jamud.*;
-
-import jamud.command.*;
-import jamud.object.*;
-import jamud.object.event.*;
-import jamud.util.*;
-import com.jamud.commands.*;
-import com.jamud.connections.*;
-import com.jamud.communications.*;
-import com.jamud.creation.*;
-import net.n3.nanoxml.*;
-import org.opencyc.webserver.WebServer;
 import org.opencyc.util.*;
 import org.opencyc.api.*;
 import org.opencyc.chat.*;
@@ -47,11 +35,11 @@ public class CycIRCBot extends Thread  implements ChatSender {
     public boolean running;
 
     // bot details
-    public String ircNick = "Cycbot";
-    public String ircComment = "http://logicmoo.sourceforge.net";
-    public String ircChannel = "#opencyc";
-    public String ircServer = "irc.openprojects.net";
-    public int ircPort = 6667;
+    public static String ircNick = "Cycbot";
+    public static String ircComment = "http://logicmoo.sourceforge.net";
+    public static String ircChannel = "#opencyc";
+    public static String ircServer = "irc.openprojects.net";
+    public static int ircPort = 6667;
 
     public String ircDestination = "#opencyc";
     public String ircDebug = "#cycbot";
@@ -72,27 +60,30 @@ public class CycIRCBot extends Thread  implements ChatSender {
 	ircServer = server;
 	ircPort = port;
 	cycAccess = access;
+
 	ircConnect();
 	if ( channel!=null ) ircJoin(channel);
     }
 
 
     /**
-     * Provides a main function to launch the ConsoleChat application.  The
-     * args are not used.
-     *
-     * @param args not used
+     * Provides a main function to launch the CycIRCBot application.  
+     *     
      */
     public static void main(String[] args) {
-
-    }
-
-    public void ircJoin(String channel) {
-	serverSend("JOIN "+channel);
-    }
-
-    public void ircPart(String channel) {
-	serverSend("PART "+channel);
+	try {
+	    if ( args.length > 0 ) ircNick = args[0];
+	    if ( args.length > 1 ) ircChannel = args[1];
+	    if ( args.length > 2 ) ircServer = args[2];
+	    if ( args.length > 3 ) ircPort = Integer.parseInt((args[3]));
+	    System.out.println("Lauching CycIRCBot: n\nick='"+ircNick+"' \nchannel='"+ircChannel+"' \nserver='"+ircServer+":'"+ircPort+"");
+	    CycIRCBot  ircBot = new CycIRCBot(new CycMooAccess(), ircNick, ircComment, ircServer, ircPort, ircChannel);
+	    ircBot.run();
+	    System.exit(0);
+	} catch ( Exception e ) {
+	    e.printStackTrace(System.err);
+	    System.exit(1);
+	}
     }
 
     /**
@@ -132,17 +123,17 @@ public class CycIRCBot extends Thread  implements ChatSender {
 	ircJoin(ircChannel);
 	ircJoin(ircDebug);
 	ircJoin("#ai");
-	this.running    = true;
-	startChatterBot();
+
+	this.running = true;
 	if ( bshInterpeter==null ) {
 	    // Interpreter(java.io.Reader in, java.io.PrintStream out, java.io.PrintStream err, boolean interactive) 
-
 	    bshInterpeter = new bsh.Interpreter(new InputStreamReader(System.in),(PrintStream)System.out ,(PrintStream)System.out,false);
 	    bshInterpeter.run();
 	}
+	startChatterBot();
 	return;
-
     }
+
     /**
      * Disconnct from an IRC server
      */
@@ -170,15 +161,22 @@ public class CycIRCBot extends Thread  implements ChatSender {
 	    System.err.println("Error ircDisconnecting from IRC server");
 	    e.printStackTrace();
 	}
-
     }
+
+
+    public void ircJoin(String channel) {
+	ircSend("JOIN "+channel);
+    }
+
+    public void ircPart(String channel) {
+	ircSend("PART "+channel);
+    }
+
     /**
      * Sends a raw string to the IRC server
      */
-    public boolean serverSend(String message) {
-
+    public boolean ircSend(String message) {
 	System.out.println("irc: '" + message + "'");
-
 	try {
 	    ircOutputWriter.write(message);
 	    ircOutputWriter.newLine();
@@ -195,8 +193,9 @@ public class CycIRCBot extends Thread  implements ChatSender {
      * @param message String
      */
     public void sendNotice(String destination, String message) {
-	serverSend("notice " + destination + " :" + message);
+	ircSend("notice " + destination + " :" + message);
     }
+
     /**
      * Send a public message to an IRC user
      * @param destination String
@@ -204,7 +203,7 @@ public class CycIRCBot extends Thread  implements ChatSender {
      */
     public boolean sendMessage(String destination, Object post) {
 
-	if ( post==null ) return false;
+	if ( post==null || destination==null ) return false;
 
 	// Wait a 1/2 sec (Keeps from flooding off server)
 	try {
@@ -215,7 +214,8 @@ public class CycIRCBot extends Thread  implements ChatSender {
 	if ( post instanceof Iterator ) {
 	    while ( ((Iterator)post).hasNext() ) {
 		try {
-		    if ( ircInputReader.ready()) if  (ircInputReader.readLine().trim().endsWith(".")) return true;
+		    if ( ircInputReader.ready() )
+			if ( ircInputReader.readLine().trim().endsWith(".") ) return true;
 		} catch ( Exception e ) {
 		}
 		sendMessage(destination,((Iterator)post).next());
@@ -232,10 +232,11 @@ public class CycIRCBot extends Thread  implements ChatSender {
 		while ( (line = mr.readLine()) != null ) sendMessage(destination,line);
 	    } else {
 		if ( message.length() > 120 ) {
-		    serverSend("privmsg " + destination + " :" + message.substring(0,120));
-		    return sendMessage(destination,message.substring(121));
+		    int justify = message.substring(121).indexOf(' ') + 120;
+		    ircSend("privmsg " + destination + " :" + message.substring(0,justify));
+		    return sendMessage(destination,message.substring(justify));
 		} else
-		    return serverSend("privmsg " + destination + " :" + message);
+		    return ircSend("privmsg " + destination + " :" + message);
 	    }
 	    return true;
 	} catch ( Exception e ) {
@@ -274,7 +275,7 @@ public class CycIRCBot extends Thread  implements ChatSender {
 
 	// send a pong back
 	if ( message.substring(0,4).equalsIgnoreCase("ping") ) {
-	    serverSend("pong " + message.substring(5));
+	    ircSend("pong " + message.substring(5));
 	    return;
 	}
 
@@ -295,8 +296,6 @@ public class CycIRCBot extends Thread  implements ChatSender {
 
 	// get the parameters (the rest of the message)
 	params = message.substring(message.indexOf(' ') + 1);
-
-	System.out.println("prefix: '" + prefix + "' command: '" + command + "' params: '" + params + "'");
 
 	if ( params.toLowerCase().startsWith(":closing") ) {
 	    ircConnect();
@@ -361,94 +360,107 @@ public class CycIRCBot extends Thread  implements ChatSender {
     }
 
     public void servicePublicMessage(String from, String hostmask, String returnpath,String params) {
-	if ( params.toLowerCase().startsWith("hello") ) {
-	    sendMessage(returnpath, "hello " + from);
-	    return;
-	}
-	if ( params.toLowerCase().startsWith("time") ) {
-	    sendMessage(returnpath, "the time is " + (new Date()).toString());
-	    return;
-	}
-	if ( params.toLowerCase().startsWith("restart") ) {
-	    restartChatterBot();
-	    //sendMessage(returnpath,"Restarted " + chatterBot);
-	    return;
-	}
 
+	String lcparams = params.toLowerCase().trim();
+
+	int ccol = params.indexOf(':');
+	if ( ccol<0 ) ccol = params.indexOf(' ');
+
+	if ( ccol>1 ) {
+	    String token = lcparams.substring(0,ccol).trim();
+	    params = params.substring(ccol+1).trim();
+	    if ( serviceToken(from, hostmask, returnpath, token,params) ) return;
+	} else {
+	    if ( serviceToken(from, hostmask, returnpath, lcparams, params) ) return;
+	}
+	// ChatterBot Code
 	try {
-	    if ( chatterBot!=null )
-		chatterBot.receiveChatMessage(from,from,params);
+	    if ( chatterBot!=null ) chatterBot.receiveChatMessage(from,from,params);
 	} catch ( Exception e ) {
 	    e.printStackTrace(System.out);
 	    sendDebug(""+e);
 	}
-
-	int ccol = params.indexOf(':');
-
-	if ( ccol>1 ) {
-	    String token = params.substring(0,ccol).trim();
-	    params = params.substring(ccol+1).trim();
-	    servicePublicMessage(from, hostmask, returnpath, token,params);      
-	}
-	return;
     }
 
-    public void servicePublicMessage(String from, String hostmask, String returnpath,String token,String params) {
+    public boolean serviceToken(String from, String hostmask, String returnpath,String token,String params) {
 	System.out.println("token: '" + token + "' params: '" + params + "'");
-	if ( token.equalsIgnoreCase("echo") ) {
+
+	if ( token.equals("hello") ) {
+	    sendMessage(returnpath, "hello " + from);
+	    return true;
+	}
+	if ( token.equals("time") ) {
+	    sendMessage(returnpath, "the time was " + (new Date()).toString());
+	    return true;
+	}
+	if ( token.equals("restart") ) {
+	    restartChatterBot();
+	    //sendMessage(returnpath,"Restarted " + chatterBot);
+	    return true;
+	}
+	if ( token.equals("help") ) {
+	    sendHelp(returnpath,params);
+	    //sendMessage(returnpath,"Restarted " + chatterBot);
+	    return true;
+	}
+	if ( token.equals("echo") ) {
 	    sendMessage(returnpath, params);
-	    return;
+	    return true;
 	}
-	if ( token.equalsIgnoreCase("cyclify") ) {
+	if ( token.equals("cyclify") ) {
 	    sendMessage(returnpath, toCycListString(params));
-	    return;
+	    return true;
 	}
-	if ( token.equalsIgnoreCase("subl") ) {
+	if ( token.equals("subl") ) {
 	    serviceSubL(from,returnpath, params);
-	    return;
+	    return true;
 	}
-	if ( token.equalsIgnoreCase("debug") ) {
+	if ( token.equals("debug") ) {
 	    ircDebug = params;
-	    return;
+	    return true;
 	}
-	if ( token.equalsIgnoreCase("query") ) {
+	if ( token.equals("query") ) {
 	    serviceQuery(from,returnpath, params);
-	    return;
+	    return true;
 	}
-	if ( token.equalsIgnoreCase("prove") ) {
+	if ( token.equals("prove") ) {
 	    serviceProve(from,returnpath, params);
-	    return;
+	    return true;
 	}
-	if ( token.equalsIgnoreCase("ask") ||  token.equalsIgnoreCase("?") ) {
+	if ( token.equals("ask") ||  token.equals("?") ) {
 	    serviceQueryUser(from,returnpath, params);
-	    return;
+	    return true;
 	}
-	if ( token.equalsIgnoreCase("assert") || token.equalsIgnoreCase("+") ) {
+	if ( token.equals("assert") || token.equals("+") ) {
 	    serviceAssert(from,returnpath, params);
-	    return;
+	    return true;
 	}
-	if ( token.equalsIgnoreCase("bsh") ) {
+	if ( token.equals("bsh") ) {
 	    try {
-		bshInterpeter.eval(params);
+		sendMessage(returnpath, bshInterpeter.eval(params));
 	    } catch ( Exception e ) {
 		sendMessage(returnpath,""+e);
 	    }
-	    return;
+	    return true;
 	}
-	if ( token.equalsIgnoreCase("join") ) {
+	if ( token.equals("join") ) {
 	    ircJoin(params);
-	    return;
+	    return true;
 	}
-
-	if ( token.equalsIgnoreCase("part") ) {
+	if ( token.startsWith("part") ) {
 	    ircPart(params);
-	    return;
+	    return true;
 	}
-	if ( token.equalsIgnoreCase("putserv") ) {
-	    serverSend(params);
-	    return;
+	if ( token.startsWith("putserv") ) {
+	    ircSend(params);
+	    return true;
 	}
+	return false;
 
+    }
+
+    public void sendHelp(String returnpath, String params) {
+	sendMessage(returnpath,"usage: help <hello|time|join|part|ask|query|assert|bsh|cyclify>");
     }
 
     public void serviceSubL(String cyclist,String returnpath, String subl) {
@@ -508,18 +520,20 @@ public class CycIRCBot extends Thread  implements ChatSender {
     public void sendAnswers(String returnpath, Object in) {
 	if ( in instanceof CycList ) {
 	    CycList answers = (CycList) in;
-	    int size = answers.size();
-	    if ( size > 5 && size < 51 ) {
+	    if ( answers.toString().length()>120 ) {
+		if ( answers.size()>50 ) {
+		    sendMessage(returnpath,"Your question returned " + answers.size() + " answers .. please refine. (here are the first five)");
+		    CycList al = new CycList();
+		    for (int i=0 ; i<5 ; i++) 
+			al.add(answers.get(i));
+		    sendAnswers(returnpath,al);
+		    return;
+		}
 		sendMessage(returnpath,answers.iterator());
-		return;
-	    }
-	    if ( size>50 ) {
-		sendMessage(returnpath,"Your question returned " + size + " answers .. please refine. ");
 		return;
 	    }
 	}
 	sendMessage(returnpath,in);
-
     }
 
     /**
@@ -551,6 +565,7 @@ public class CycIRCBot extends Thread  implements ChatSender {
     public void listenForConnections(int port) {
 	try {
 	    dccServer = new DccServerThread(this,port);
+	    dccServer.start();
 	} catch ( Exception e ) {
 	}
     }
@@ -637,5 +652,7 @@ public class CycIRCBot extends Thread  implements ChatSender {
 
 
 }
+
+
 
 
