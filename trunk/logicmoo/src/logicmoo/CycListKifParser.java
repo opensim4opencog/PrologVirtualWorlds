@@ -378,6 +378,8 @@ public class CycListKifParser {
 		checkQuotes();
 	}
 
+
+
 	/**
 	 * Scans a word while reading.
 	 *
@@ -416,7 +418,7 @@ public class CycListKifParser {
 			} catch ( CycApiException oops ) {
 				System.out.println(oops);
 				try {
-					w = cycAccess.makeCycConstant("#$" + st.sval + "-SUMO");
+					w = cycAccess.makeCycConstant("#$" + st.sval + "Sumo");
 				} catch ( CycApiException oops2 ) {
 					System.out.println(oops2);
 					w = CycObjectFactory.makeCycSymbol(st.sval);
