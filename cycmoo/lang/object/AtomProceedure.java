@@ -1,4 +1,5 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.object; 
+import cycmoo.lang.*;
 /**
 * Template for builtins of arity 0
 */

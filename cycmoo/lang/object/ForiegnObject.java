@@ -1,4 +1,6 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.object;  //tarau.jinni;
+import cycmoo.lang.*;
+import cycmoo.lang.fluent.*;
 import java.lang.reflect.*;
 import java.util.*;
 import java.lang.*;

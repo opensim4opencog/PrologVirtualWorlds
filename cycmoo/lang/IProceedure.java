@@ -1,4 +1,4 @@
-package jinni.kprolog;  //tarau.jinni;
+package cycmoo.lang;  //tarau.jinni;
 import java.util.*;
 import java.io.Reader;
 /**

@@ -1,5 +1,5 @@
-package jinni.kprolog.parser;  //tarau.jinni;
-import jinni.kprolog.*;
+package cycmoo.lang.parser;  //tarau.jinni;
+import cycmoo.lang.*;
 import java.io.Reader;
 import java.io.IOException;
 import java.io.StreamTokenizer;

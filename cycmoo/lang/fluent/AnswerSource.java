@@ -1,4 +1,4 @@
-package jinni.kprolog;  //tarau.jinni;
+package cycmoo.lang;  //tarau.jinni;
 import java.util.Vector;
 import java.util.Enumeration;
 import java.util.Stack;

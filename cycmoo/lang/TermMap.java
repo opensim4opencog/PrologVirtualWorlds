@@ -1,4 +1,4 @@
-package jinni.kprolog;  //tarau.jinni;
+package cycmoo.lang;  //tarau.jinni;
 import java.util.Vector;
 import java.util.Enumeration;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Hashtable;
 import java.util.NoSuchElementException;
 import java.util.*;
 import java.io.*;
-import jinni.kprolog.parser.PrologParser;  //tarau.jinni;
+import cycmoo.lang.parser.PrologParser;  //tarau.jinni;
 import java.util.*;
 import java.io.Reader;
 
