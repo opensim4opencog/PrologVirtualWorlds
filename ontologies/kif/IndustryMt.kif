@@ -1,0 +1,228 @@
+;; /home/siegel/temp/IndustryMt-non-implications.kif
+
+
+(comment AssemblyStageAttribute "A collection of attributes.  Each instance can be used to denote thatan artifact in the process of construction is at a particular stage of assembly.")
+
+(comment AgriculturalEconomicSector "The collection of all localized groups of enterprises that together (each such group of enterprises together) form major agricultural economic sectors of regions.  The enterprises in each such group define themselves as producers of agricultural commodities or as supporting such producers (see #$AgriculturalCommodity).")
+
+(comment PartlyAssembledAttributeFn "(#$PartlyAssembledAttributeFn ARTIFACTTYPE) returns the attribute of being the focal point of a process of assembly whose intended #$outputsCreated is an instance of ARTIFACTTYPE. (#$hasAttributes THING (#$PartlyAssembledAttributeFn ARTIFACTTYPE)) does not mean that THING is an instance of ARTIFACTTYPE, but it does mean that if OUTPUT is an instance of ARTIFACTTYPE, and ARTIFACTTYPE is a specialization of #$Artifact, and OUTPUT is the #$outputsCreated in MAKING, and MAKING is an instance of #$Assembling, then, for the duration of any such time that it does exist in MAKING, OUTPUT has the attribute (#$PartlyAssembledAttributeFn ARTIFACTTYPE).  We don't foreclose one way or the other upon the question of whether something that has the attribute (#$PartlyAssembledAttributeFn ARTIFACTTYPE) must itself be an instance of ARTIFACTTYPE, since it is anticipated that the commitment will vary with the context and the manufacturing process involved.  If THING has the attribute (#$PartlyAssembledAttributeFn ARTIFACTTYPE) and is not an instance of ARTIFACTTYPE, this implies that there exists a (#$MakingFn ARTIFACTTYPE) and a performer of the making such that the performing #$Agent intends that THING should be #$transformedInto an instance of ARTIFACTTYPE that is the #$outputsCreated of the making.  If THING has the attribute (#$PartlyAssembledAttributeFn ARTIFACTTYPE) and is also an instance of ARTIFACTTYPE, this implies that there exists a (#$MakingFn ARTIFACTTYPE) in which THING is the #$objectActedOn and an assemblingAgent who intends that THING should be the #$outputsCreated of the #$Assembling.")
+
+(comment subIndustries "(#$subIndustries INDUSTRY SUBINDUSTRY) means that 
+the individual (usally geographically defined) SUBINDUSTRY is one
+of the subindustries of the individual INDUSTRY.  (Both must be instances of #$Industry-Localized.)  For instance, the SUBINDUSTRY may produce a specialized form of the products that INDUSTRY produces.
+Thus, the Argentine beef industry is a subindustry of the Argentine livestock
+industry, and the Argentine livestock industry is a subindustry of the
+South American food industry.  Or the SUBINDUSTRY may perform one of the
+#$industryActivityTypes of INDUSTRY, such as the (#$RefiningFn
+#$Petroleum-CrudeOil) phase of the #$OilIndustry.  Note that this predicate relates two individual (geographically defined) industries (instances of #$Industry-Localized), not two kinds of industry.  To relate two kinds of industry, use #$subIndustryTypes.")
+
+(comment ConstructionSiteAttributeFn "(#$ConstructionSiteAttributeFn CONSTRUCTTYPE) returns the attribute of being a #$ConstructionSite for a construct of the type CONSTRUCTTYPE.  This is a 'baptismal' attribute in the sense that a particular region has the attribute (#$ConstructionSiteAttributeFn CONSTRUCTTYPE) from the moment it is designated a construction site for a construct of type CONSTRUCTTYPE, regardless of whether or not overt construction has started at the site.  It is conceivable that for some designated construction sites, construction never in fact takes place: having the attribute implies, at best, that there exists an agent who intends that construction on a construct of the kind cited will take place.")
+
+(comment OilIndustry "The collection of all oil industries.  Each is an instance of #$Industry-Localized (i.e., a #$Group of #$Organizations) whose products are instances of #$PetroleumProduct.")
+
+(comment IndustrialEconomicSector "The collection of all localized groups of enterprises that are producers of industrial commodities, in which each such group together forms the major industrial sector for the region.  'Industrial commodities' includes #$MechanicalDevices and basic industrial materials.   Examples include 'the world industrial sector', the 'industrial sector of China'.  The Chinese water pump industry would not be an exemplar of #$IndustrialEconomicSector but would rather be a sub-industry (see #$subIndustries) of it.  On the other hand, chinese water pump manufacturers would be considered #$groupMembers of 'the industrial sector of China'.")
+
+(comment EnergyEconomicSector "The collection of all localized major groups of enterprises in which the enterprises in each such group define themselves as producers of #$EnergyStuff, and together form a major economic energy sector for the region.  For example, one instance is the group of all electric power companies in #$ElSalvador. Important sub-sectors (see #$subIndustryTypes and #$subIndustries) include: #$OilIndustry, #$CoalIndustry, #$GasIndustry.")
+
+(comment subIndustryTypes "A binary predicate that relates industry types (as opposed to specific instances of #$Industry-Localized).  (#$subIndustryTypes INDUSTRY-TYPE-1 INDUSTRY-TYPE-2) means that INDUSTRY-TYPE-2 is generally a sub-industry of INDUSTRY-TYPE-1 without regard to the specific geographic region.  It is also used to link industry types to their major #$EconomicSectorTypes.  An individual 'industry' is a geographically defined #$Industry-Localized, such as the Belgian ceramics industry, whereas the ceramics industry in general is the collection of all ceramics industries (there is also the worldwide ceramics industry which is an individual #$Industry-Localized rather than a collection).  #$subIndustryTypes depends on the functions of the respective industries without regard to region.  For relating one geographically defined individual #$Industry-Localized to another, use #$subIndustries instead.")
+
+(comment CoalIndustry "The collection of all industries (instances of #$Industry-Localized) (i.e., #$Groups of #$Organizations) whose products are instances of #$Coal.")
+
+(comment OilRefinery "The collection of places where #$Petroleum-CrudeOil is refined. Each instance of #$OilRefinery includes at least one or more distillation or absorption units that seperate the crude oil into various compounds (see #$PetroleumProduct-Refined). But an #$OilRefinery will also be equiped with loading facilities for pumping the oil from trucks or ships, as well as office buildings for personnel. ")
+
+(comment GasIndustry "The collection of all industries (instances of #$Industry-Localized, i.e., #$Groups of #$Organizations) whose products are instances of #$NaturalGas.")
+
+(comment ServiceEconomicSector "The collection of all groups of enterprises in which the enterprises in each such group define themselves primarily as providers of some type of service (see #$ServiceEvent), as opposed to devices or commodities, and each such group together forms the major service sector for that region.  An example would be the service sector of #$France.")
+
+(conceptuallyRelated AssemblyStageAttribute transformedInto)
+
+(conceptuallyRelated PartlyAssembledAttributeFn outputsCreated)
+
+(conceptuallyRelated AssemblyStageAttribute MakingFn)
+
+(conceptuallyRelated ConstructionSiteAttributeFn PartlyAssembledAttributeFn)
+
+(conceptuallyRelated AssemblyStageAttribute outputsCreated)
+
+(conceptuallyRelated PartlyAssembledAttributeFn MakingFn)
+
+(interArgIsa2-1 hasAttributes AssemblyStageAttribute Artifact)
+
+(objectFoundInLocation 
+  (IndustryOfRegionFn ?IND-TYPE ?REGION) ?REGION)
+
+(relationAllExists industryFacilities OilIndustry CondensatePipeline)
+
+(relationAllExists industryFacilities GasIndustry CondensatePipeline)
+
+(relationAllExistsMany industryFacilities OilIndustry OilWell)
+
+(relationAllExistsMany industryFacilities OilIndustry OffshoreOilPlatform)
+
+(relationAllExistsMany industryFacilities GasIndustry Pipe-GenericConduit)
+
+(relationAllExistsMany industryFacilities GasIndustry OffshoreGasPlatform)
+
+(relationAllExistsMany industryFacilities OilIndustry Pipe-GenericConduit)
+
+(relationAllExistsMany industryFacilities OilIndustry TankerShip)
+
+(relationExistsAll industryFacilities GasIndustry GasPipeline)
+
+(relationExistsAll industryFacilities OilIndustry OilPipeline)
+
+(requiredArg1Pred SeparationEvent outputsRemaining)
+
+(resultIsaArg IndustryOfRegionFn 1)
+
+(subIndustries 
+  (IndustryOfRegionFn EnergyEconomicSector ?REG) 
+  (IndustryOfRegionFn OilIndustry ?REG))
+
+(subIndustries 
+  (IndustryOfRegionFn EnergyEconomicSector ?REG) 
+  (IndustryOfRegionFn GasIndustry ?REG))
+
+(subIndustries 
+  (IndustryOfRegionFn EnergyEconomicSector ?REG) 
+  (IndustryOfRegionFn CoalIndustry ?REG))
+
+(subIndustries 
+  (IndustryOfRegionFn IndustrialEconomicSector PlanetEarth) 
+  (IndustryOfRegionFn ComputerHardwareIndustry PlanetEarth))
+
+(subIndustryTypes OffshoreBankingIndustry BankingIndustry)
+
+(subIndustryTypes EnergyEconomicSector CoalIndustry)
+
+(subIndustryTypes EnergyEconomicSector OilIndustry)
+
+(subIndustryTypes EnergyEconomicSector GasIndustry)
+
+(subIndustryTypes ServiceEconomicSector BankingIndustry)
+
+
+;; /home/siegel/temp/IndustryMt-implications.kif
+
+
+(implies 
+  (and 
+    (isa ?FIELD GasField) 
+    (objectFoundInLocation ?FIELD ?REGION)) 
+  (positiveVestedInterest 
+    (IndustryOfRegionFn GasIndustry ?REGION) ?FIELD))
+
+(implies 
+  (industryFacilities 
+    (IndustryOfRegionFn GasIndustry ?REGION) ?FACILITY) 
+  (industryFacilities 
+    (IndustryOfRegionFn EnergyEconomicSector ?REGION) ?FACILITY))
+
+(implies 
+  (isa ?PIPE CondensatePipeline) 
+  (primaryFunction ?PIPE 
+    (TransportFn PetroleumProduct) conveyor-Stationary))
+
+(implies 
+  (and 
+    (isa ?FIELD OilField) 
+    (objectFoundInLocation ?FIELD ?REGION)) 
+  (positiveVestedInterest 
+    (IndustryOfRegionFn OilIndustry ?REGION) ?FIELD))
+
+(implies 
+  (and 
+    (isa ?INDUSTRY Industry-Localized) 
+    (groupMembers ?INDUSTRY ?BUSINESS) 
+    (makesProductType ?BUSINESS ?P-TYPE) 
+    (genls ?P-TYPE ComputerProgram)) 
+  (isa ?INDUSTRY SoftwareIndustry))
+
+(implies 
+  (industryActivityTypes ?INDUSTRY ?ACT-TYPE) 
+  (actsInCapacity ?INDUSTRY performedBy ?ACT-TYPE MainFunction))
+
+(implies 
+  (industryActivityTypes ?INDUSTRY ?ACT-TYPE) 
+  (relationInstanceExistsMany performedBy ?INDUSTRY ?ACT-TYPE))
+
+(implies 
+  (isa ?INDUSTRY CoalIndustry) 
+  (industryProduces ?INDUSTRY Coal))
+
+(implies 
+  (and 
+    (transporter ?TRANSPORT ?SHIP) 
+    (transportees ?TRANSPORT ?OIL) 
+    (isa ?OIL PetroleumProduct)) 
+  (isa ?SHIP TankerShip))
+
+(implies 
+  (and 
+    (conveyor-Stationary ?TRANSPORT ?PIPE) 
+    (transportees ?TRANSPORT ?OIL) 
+    (isa ?OIL PetroleumProduct)) 
+  (isa ?PIPE Pipe-GenericConduit))
+
+(implies 
+  (isa ?X SoftwareIndustry) 
+  (industryProduces ?X ComputerProgram))
+
+(implies 
+  (termOfUnit ?INDUSTRYFN 
+    (IndustryFn ?PRODUCT-TYPE)) 
+  (industryProduces 
+    (IndustryOfRegionFn 
+      (IndustryFn ?PRODUCT-TYPE) ?COUNTRY) ?PRODUCT-TYPE))
+
+(implies 
+  (and 
+    (subIndustries ?INDUSTRY ?SUB) 
+    (industryFacilities ?SUB ?FAC)) 
+  (industryFacilities ?INDUSTRY ?FAC))
+
+(implies 
+  (and 
+    (performedBy ?ACT ?INDUSTRY) 
+    (deviceUsed ?ACT ?DEVICE) 
+    (isa ?ACT ?ACT-TYPE) 
+    (industryActivityTypes ?INDUSTRY ?ACT-TYPE) 
+    (primaryFunction ?DEVICE ?ACT-TYPE ?ROLE)) 
+  (industryFacilities ?INDUSTRY ?DEVICE))
+
+(implies 
+  (and 
+    (performedBy ?ACT ?INDUSTRY) 
+    (eventOccursAt ?ACT ?PLACE) 
+    (isa ?ACT ?ACT-TYPE) 
+    (industryActivityTypes ?INDUSTRY ?ACT-TYPE) 
+    (groupMembers ?INDUSTRY ?ORG) 
+    (owns ?ORG ?PLACE)) 
+  (industryFacilities ?INDUSTRY ?PLACE))
+
+(implies 
+  (industryFacilities 
+    (IndustryOfRegionFn OilIndustry ?REGION) ?FACILITY) 
+  (industryFacilities 
+    (IndustryOfRegionFn EnergyEconomicSector ?REGION) ?FACILITY))
+
+(implies 
+  (isa ?INDUSTRY GasIndustry) 
+  (industryProduces ?INDUSTRY NaturalGas))
+
+(implies 
+  (isa ?INDUSTRY OilIndustry) 
+  (industryProduces ?INDUSTRY PetroleumProduct))
+
+(implies 
+  (industryFacilities 
+    (IndustryOfRegionFn CoalIndustry ?REGION) ?FACILITY) 
+  (industryFacilities 
+    (IndustryOfRegionFn EnergyEconomicSector ?REGION) ?FACILITY))
+
+(implies 
+  (subIndustryTypes ?MAJOR ?MINOR) 
+  (subIndustries 
+    (IndustryOfRegionFn ?MAJOR PlanetEarth) 
+    (IndustryOfRegionFn ?MINOR PlanetEarth)))
+

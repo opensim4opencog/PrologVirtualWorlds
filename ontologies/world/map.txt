@@ -1,0 +1,36 @@
+STARSHIP ENTERPRISE
+
+             Turbolift               |                Ten Forward
+               1010                  |                  1021
+                 |                   |                     |
+      School---1008----Holodeck 2    |     Crusher's-----1019----Security
+       1007      |       1008        |   Quarters 1018     |       1020
+                 |                   |                     |
+        Brig---1005---Transporter    |     Sick Bay-----1016-----Holodeck 4
+        1004     |     Room 1006     |      1015          |        1017
+                 |                   |                    |
+    Geordi's---1002----Data's        |        Cargo-----1013-----Riker's
+ Quarters 1001   |  Quarters 1003    |       Bay 1012     |    Quarters 1014
+                 |                   |                    |
+            Engineering              |                Turbolift
+               1000                  |                  1011
+                                     |
+              DECK 1                 |                DECK 2
+-------------------------------------+-----------------------------------------
+                                     |
+             Turbolift               |      Ready-----Bridge
+               1032                  |     Room 1035    1038         
+                 |                   |                    |
+   Science-----1030-----Cargo        |                 Bridge-----Conference
+   Lab 1029      |     Bay 1031      |                  1036       Room 1037
+                 |                   |                    |
+       Gym-----1027-----Picard's     |                Turbolift   
+      1026       |   Quarters 1028   |                  1034   
+                 |                   |                    |
+    Troi's-----1024-----Worf's       |                Turbolift   
+ Quarters 1023   |   Quarters 1025   |                  1033      
+                 |                   |                
+             Shuttle Bay             |                    
+               1022                  |
+                                     |
+              DECK 3                 |                DECK 4

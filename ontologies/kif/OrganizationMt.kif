@@ -1,0 +1,419 @@
+;; /home/siegel/temp/OrganizationMt-non-implications.kif
+
+
+(comment NaturalGasCompany "An #$NaturalGasCompany is in the business of bringing #$NaturalGas to market.")
+
+(comment OilCompany "An #$OilCompany is in the business of bringing #$PetroleumProduct to market.")
+
+(comment Secretariat "A collection of suborganizations that are primarily responsible for implementing the policies of the various larger organizations of which each instance is a part.  Although a secretariat is generally administrative in nature, it also affects policy insofar as it is charged with implementing that policy.  Not every organization has a secretariat, but for those that do it plays a fairly standard role.")
+
+(comment subOrgs-AdministrativeServiceSupport "(#$subOrgs-AdministrativeServiceSupport SUPER SUB) means that SUB is in an organizational relationship with SUPER in which SUPER is ordinarily responsible for providing most of the administrative services or 'service support' for SUB's activities, and SUB depends on SUPER for this support.  Such support may include engineering, programming, legal, personnel, or religious services, or SUB's primary planning, analysis, or advice.  (Different organizations may supply material goods or money, or may have command over SUB. These are not necessarily indicated by this predicate.)  For example, if a military field reconnaissance unit ordinarily calls upon another unit for most administrative support services --e.g., for maintenance, programming computers, legal issues, personnel management, etc.-- then the engineering unit has the reconnaissance unit as one of its #$subOrgs-AdministrativeServiceSupport dependents.  Similarly, if a company COMP offers its legal department's advice and health coverage to a research team TEAM from a university, then (#$subOrgs-AdministrativeServiceSupport COMP TEAM) is True, even if money for the team's salaries comes from the university.  (See also #$subOrgs-Financial, #$subOrgs-MaterialSupport, and #$subOrgs-Command.)")
+
+(comment subOrgs-MaterialSupport "(#$subOrgs-MaterialSupport SUPER SUB) means that SUB is in an organizational relationship with SUPER in which SUPER is ordinarily responsible for providing most of the materials, supplies, and logistic support or 'infrastructure support' for SUB's activities, and SUB depends on SUPER for this support.  Such support may include equipment, facilities, fuel, and supply and/or resupply of goods and materiel.  (Different organizations may supply services or money, or may have command over SUB.  These are not indicated by this predicate.)  For example, if a military field reconnaissance unit ordinarily calls upon a logistics unit for most of its materiel support--e.g., for mess equipment or for ammunition, then the logistics unit has the reconnaissance unit as one of its #$subOrgs-MaterialSupport dependents.  Similarly, if a company COMP offers its labs, facilities and lab supplies to a research team TEAM from a university, then (#$subOrgs-MaterialSupport COMP TEAM) is True, even if money for the team's salaries comes from the university.  SUB need not be directly supported by SUPER, -- it could also be several steps down in the metrials distribution chain.  (See also #$subOrgs-Financial, #$subOrgs-AdministrativeServiceSupport, and #$subOrgs-Command.)")
+
+(exceptWhen 
+  (and 
+    (different ?GROUP ?OTRGROUP) 
+    (relationAllInstance performedBy ?ATTACKTYPE ?OTRGROUP)) 
+  (implies 
+    (and 
+      (isa ?GROUP TerroristGroup) 
+      (isa ?COUNTRY GeopoliticalEntity) 
+      (genls ?ATTACKTYPE TerroristAttack) 
+      (genls ?TARGETTYPE SpatialThing-Localized) 
+      (residenceOfOrganization ?GROUP ?REGION) 
+      (relationAllInstance inRegion ?TARGETTYPE ?REGION) 
+      (relationAllExists damages ?ATTACKTYPE ?TARGETTYPE) 
+      (givesSupportToAgent ?COUNTRY ?GROUP 
+        (HighAmountFn MilitarySupport))) 
+    (behaviorCapable ?GROUP ?ATTACKTYPE performedBy)))
+
+(genlPreds subOrgs-AdministrativeServiceSupport subOrganizations)
+
+(genlPreds subOrgs-MaterialSupport subOrganizations)
+
+(genlPreds seniorExecutives hasWorkers)
+
+(genlPreds formationAuthorizedBy startsAfterStartingOf)
+
+(isa subOrgs-AdministrativeServiceSupport IrreflexiveBinaryPredicate)
+
+(isa seniorExecutives IrreflexiveBinaryPredicate)
+
+(isa subOrgs-AdministrativeServiceSupport AntiSymmetricBinaryPredicate)
+
+(isa subOrgs-AdministrativeServiceSupport AsymmetricBinaryPredicate)
+
+(isa subOrgs-MaterialSupport IrreflexiveBinaryPredicate)
+
+(isa seniorExecutives AsymmetricBinaryPredicate)
+
+(isa subOrgs-MaterialSupport AntiSymmetricBinaryPredicate)
+
+(isa seniorExecutives AntiSymmetricBinaryPredicate)
+
+(isa subOrgs-MaterialSupport AsymmetricBinaryPredicate)
+
+(isa formationAuthorizedBy AsymmetricBinaryPredicate)
+
+(isa formationAuthorizedBy IrreflexiveBinaryPredicate)
+
+(isa formationAuthorizedBy AntiSymmetricBinaryPredicate)
+
+(negationInverse subOrgs-AdministrativeServiceSupport subOrgs-AdministrativeServiceSupport)
+
+(negationInverse subOrgs-MaterialSupport subOrgs-MaterialSupport)
+
+(negationInverse seniorExecutives seniorExecutives)
+
+(negationInverse formationAuthorizedBy formationAuthorizedBy)
+
+(not 
+  (and 
+    (isa ?AGENCY 
+      (GroupFn NewsOrganization)) 
+    (isa ?ACT PhysicalDistributionEvent) 
+    (capableOfDoing ?AGENCY ?ACT performedBy) 
+    (transferredThing ?ACT ?OBJ) 
+    (isa ?OBJ 
+      (GroupFn MilitaryHardware)) 
+    (cost ?OBJ 
+      (LowAmountFn Money))))
+
+(not 
+  (and 
+    (isa ?X EmploymentTermination) 
+    (objectActedOn ?X ?Y) 
+    (performedBy ?X ?Z) 
+    (holdsIn 
+      (STIF ?X) 
+      (hasWorkers ?Z ?Y))))
+
+(not 
+  (and 
+    (isa ?X EmployeeHiring) 
+    (objectActedOn ?X ?Y) 
+    (performedBy ?X ?Z) 
+    (holdsIn 
+      (STIB ?X) 
+      (employees ?Z ?Y))))
+
+(relationAllExists physicalQuarters Organization HumanShelterConstruction)
+
+(relationAllExists madeBy ManufacturingOrganization Artifact)
+
+(relationAllExists madeBy ManufacturingOrganization PartiallyTangibleProduct)
+
+(relationAllExists hasMembers PublicPrivateConsortium CommercialOrganization)
+
+(relationAllExists hasMembers PublicPrivateConsortium LegalGovernmentOrganization)
+
+(relationExistsAll hasLeaders Organization Leader)
+
+(relationExistsAll hasMembers EducationalOrganization Student)
+
+(relationExistsCountAll subOrganizations Organization Secretariat 1)
+
+(salientAssertions SellingOrganization 
+  (implies 
+    (isa ?U SellingOrganization) 
+    (actsInCapacity ?U sellingAgent SalesActivity MainFunction)))
+    
+
+;; /home/siegel/temp/OrganizationMt-implications.kif
+
+
+(implies 
+  (and 
+    (subOrganizations ?ORG ?SUB) 
+    (connotes ?ORG ?THING Positive)) 
+  (connotes ?SUB ?THING Positive))
+
+(implies 
+  (and 
+    (isa ?X EmploymentTermination) 
+    (objectActedOn ?X ?Y) 
+    (performedBy ?X ?Z)) 
+  (holdsIn 
+    (STIB ?X) 
+    (hasWorkers ?Z ?Y)))
+
+(implies 
+  (subOrgs-Direct ?UPPERORG ?LOWERORG) 
+  (forall 
+    (?MIDDLEORG) 
+    (or 
+      (not 
+        (subOrganizations ?UPPERORG ?MIDDLEORG)) 
+      (not 
+        (subOrganizations ?MIDDLEORG ?UPPERORG)))))
+
+(implies 
+  (isa ?INTER-ORG InternationalOrganization) 
+  (relationInstanceExistsMin operatesInRegion ?INTER-ORG Country 2))
+
+(implies 
+  (hasPositionIn ?OFFICIAL 
+    (GovernmentFn ?GEO) PublicOfficial) 
+  (hasMembers 
+    (GovernmentFn ?GEO) ?OFFICIAL))
+
+(implies 
+  (isa ?X OilCompany) 
+  (sellsProductType ?X PetroleumProduct))
+
+(implies 
+  (suppliers ?X ?Y) 
+  (customers ?Y ?X))
+
+(implies 
+  (and 
+    (isa ?FOUNDING FoundingAnOrganization) 
+    (performedBy ?FOUNDING ?AGT) 
+    (outputsCreated ?FOUNDING ?ORG) 
+    (holdsIn 
+      (STIF ?FOUNDING) 
+      (hasMembers ?ORG ?AGT))) 
+  (memberStatusInOrganization ?AGT ?ORG FoundingMember))
+
+(implies 
+  (and 
+    (isa ?REGION GeographicalRegion) 
+    (isa ?ORG Organization) 
+    (genlPreds ?ACT-PRED deliberateActors) 
+    (performsInsAtLocation ?ORG ?ACT-TYPE ?REGION) 
+    (actsInCapacity ?ORG ?ACT-PRED ?ACT-TYPE MainFunction)) 
+  (operatesInRegion ?ORG ?REGION))
+
+(implies 
+  (and 
+    (arg2Isa ?ROLE ?RANGE) 
+    (actsInCapacity ?AGT ?ROLE ?SCRTYP ?CAPATT)) 
+  (isa ?AGT ?RANGE))
+
+(implies 
+  (and 
+    (siblingOrganizations ?X ?Z) 
+    (parentCompany ?X ?Y)) 
+  (parentCompany ?Z ?Y))
+
+(implies 
+  (and 
+    (isa ?Y ManufacturingOrganization) 
+    (seller ?G030 ?Y) 
+    (objectOfPossessionTransfer ?G030 ?Z)) 
+  (madeBy ?Z ?Y))
+
+(implies 
+  (and 
+    (isa ?REG Country) 
+    (headquarters ?ORG ?PQ) 
+    (objectFoundInLocation ?PQ ?REG)) 
+  (hasHeadquartersInCountry ?ORG ?REG))
+
+(implies 
+  (and 
+    (headquarters ?ORG ?BLDG) 
+    (residenceOfOrganization ?ORG ?REG)) 
+  (objectFoundInLocation ?BLDG ?REG))
+
+(implies 
+  (and 
+    (isa ?COUNTRY IndependentCountry) 
+    (geopoliticalSubdivision ?COUNTRY ?REG) 
+    (residenceOfOrganization ?ORG ?REG)) 
+  (hasHeadquartersInCountry ?ORG ?COUNTRY))
+
+(implies 
+  (boardMembers ?Y ?X) 
+  (hasMembers ?Y ?X))
+
+(implies 
+  (isa ?U RetailOrganization) 
+  (actsInCapacity ?U seller Buying MainFunction))
+
+(implies 
+  (isa ?AGT NewsAgency) 
+  (primaryFunction ?AGT IBTGeneration performedBy))
+
+(implies 
+  (and 
+    (isa ?ORG NationalOrganization) 
+    (residenceOfOrganization ?ORG ?PLACE) 
+    (geographicalSubRegions ?COUNTRY ?PLACE) 
+    (isa ?COUNTRY Country) 
+    (actsInCapacity ?ORG performedBy ?SCRIPT MainFunction)) 
+  (performsInsAtLocation ?ORG ?SCRIPT ?COUNTRY))
+
+(implies 
+  (isa ?U EducationalOrganization) 
+  (actsInCapacity ?U performedBy Teaching MainFunction))
+
+(implies 
+  (isa ?AGT NewsAgency) 
+  (actsInCapacity ?AGT performedBy IBTGeneration MainFunction))
+
+(implies 
+  (and 
+    (residenceOfOrganization ?ORG ?SUBREG) 
+    (geographicalSubRegions ?REG ?SUBREG)) 
+  (residenceOfOrganization ?ORG ?REG))
+
+(implies 
+  (and 
+    (isa ?ORG InternationalOrganization) 
+    (groupMembers ?ORG ?MEMBER) 
+    (isa ?AGREEMENT InternationalAgreement)) 
+  (or 
+    (exists 
+      (?MEMBER) 
+      (not 
+        (implies 
+          (groupMembers ?ORG ?MEMBER) 
+          (obligatedAgent ?AGREEMENT ?MEMBER)))) 
+    (goalCategoryForAgent ?ORG 
+      (not 
+        (agentViolatesObligation ?MEMBER ?AGREEMENT)) InternationalCodeOfConductGoal)))
+
+(implies 
+  (and 
+    (isa ?ORGANIZATION Organization) 
+    (hasOwnershipIn ?AGENT ?ORGANIZATION)) 
+  (affiliatedWith ?AGENT ?ORGANIZATION))
+
+(implies 
+  (and 
+    (isa ?X EmployeeHiring) 
+    (objectActedOn ?X ?Y)) 
+  (isa ?Y Agent))
+
+(implies 
+  (and 
+    (headquarters ?ORG ?BUILDING) 
+    (countryOfAddress ?BUILDING ?COUNTRY)) 
+  (hasHeadquartersInCountry ?ORG ?COUNTRY))
+
+(implies 
+  (and 
+    (isa ?IND Industry-Localized) 
+    (groupMembers ?IND ?ORG) 
+    (headquarters ?ORG ?BLDG)) 
+  (industryFacilities ?IND ?BLDG))
+
+(implies 
+  (hasPositionIn ?X 
+    (GovernmentFn ?C) HeadOfGovernment) 
+  (hasLeaders 
+    (GovernmentFn ?C) ?X))
+
+(implies 
+  (customers ?X ?Y) 
+  (clients ?X ?Y))
+
+(implies 
+  (and 
+    (employees ?Y ?X) 
+    (boss ?X ?Z)) 
+  (employees ?Y ?Z))
+
+(implies 
+  (isa ?U ResearchOrganization) 
+  (actsInCapacity ?U performedBy Research MainFunction))
+
+(implies 
+  (and 
+    (isa ?TRAIN MilitaryTrainingCourse) 
+    (providerOfService ?TRAIN ?ORG) 
+    (isa ?ORG MilitaryOrganization) 
+    (beneficiary ?TRAIN ?MEM)) 
+  (holdsIn ?TRAIN 
+    (hasMembers ?ORG ?MEM)))
+
+(implies 
+  (and 
+    (isa ?C CommercialOrganization) 
+    (employees ?C ?P) 
+    (isa ?P Person)) 
+  (hasMembers ?C ?P))
+
+(implies 
+  (and 
+    (isa ?X EmploymentTermination) 
+    (objectActedOn ?X ?Y)) 
+  (isa ?Y Agent))
+
+(implies 
+  (isa ?GUARD NationalGuardOrganization) 
+  (actsInCapacity ?GUARD performedBy EvacuatingAPlace JobCapacity))
+
+(implies 
+  (isa ?U SellingOrganization) 
+  (actsInCapacity ?U sellingAgent SalesActivity MainFunction))
+
+(implies 
+  (subOrganizations ?WHOLE ?SUB) 
+  (connotes ?SUB ?WHOLE Positive))
+
+(implies 
+  (and 
+    (providerOfService ?SE ?PROV) 
+    (deviceUsed ?SE ?TOOL) 
+    (eventOccursAt ?SE ?LOC) 
+    (physicalQuarters ?PROV ?LOC)) 
+  (owns ?PROV ?TOOL))
+
+(implies 
+  (and 
+    (subOrganizations ?Z ?X) 
+    (hasMembers ?X ?Y)) 
+  (hasMembers ?Z ?Y))
+
+(implies 
+  (and 
+    (isa ?GROUP TerroristGroup) 
+    (residenceOfOrganization ?GROUP ?REGION) 
+    (genls ?ATTACKTYPE TerroristAttack) 
+    (isa ?COUNTRY GeopoliticalEntity) 
+    (givesSupportToAgent ?COUNTRY ?GROUP 
+      (HighAmountFn MilitarySupport)) 
+    (genls ?TARGETTYPE SpatialThing-Localized) 
+    (relationAllExists damages ?ATTACKTYPE ?TARGETTYPE) 
+    (relationAllInstance inRegion ?TARGETTYPE ?REGION)) 
+  (behaviorCapable ?GROUP ?ATTACKTYPE performedBy))
+
+(implies 
+  (and 
+    (isa ?GROUP 
+      (GroupFn IntelligentAgent)) 
+    (isa ?COUNTRY Country) 
+    (hasStatusWithAgent ?GROUP ?COUNTRY DissidentStatus)) 
+  (isa ?GROUP DissidentGroup))
+
+(implies 
+  (isa ?GUARD NationalGuardOrganization) 
+  (actsInCapacity ?GUARD directingAgent EvacuatingAPlace JobCapacity))
+
+(implies 
+  (holdsIn 
+    (StartFn ?ORG) 
+    (hasMembers ?ORG ?MEM)) 
+  (memberStatusInOrganization ?MEM ?ORG FoundingMember))
+
+(implies 
+  (and 
+    (isa ?POS-1 PositionType) 
+    (genls ?POS-1 ?POS-2) 
+    (isa ?POS-2 PositionType) 
+    (hasPositionIn ?P ?ORG ?POS-1)) 
+  (hasPositionIn ?P ?ORG ?POS-2))
+
+(implies 
+  (seniorExecutives ?X ?Y) 
+  (hasWorkers ?X ?Y))
+
+(implies 
+  (memberStatusInOrganization ?MEM ?ORG FoundingMember) 
+  (holdsIn 
+    (StartFn ?ORG) 
+    (hasMembers ?ORG ?MEM)))
+

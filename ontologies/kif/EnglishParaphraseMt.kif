@@ -1,0 +1,1920 @@
+
+(genFormat hardnessOfObject "~a has ~a" NIL)
+
+(genFormat LoopsFn "the set of all loops in ~a" NIL)
+
+(genFormat temporallyDisjoint "~a and ~a don't overlap in time" NIL)
+
+(genFormat preconditionFor-Events "event ~a is a precondition for event ~a" NIL)
+
+(genFormat volumeContained "~a contains ~a" NIL)
+
+(genFormat AttemptingFn "an attempt at ~a" NIL)
+
+(genFormat SubSystemUnderTraversalFn "the smallest subsystem of ~a under ~a" NIL)
+
+(genFormat areaToControl "~a is an area to be controlled" NIL)
+
+(genFormat residesInRegion "~a resides in ~a" NIL)
+
+(genFormat startsRelativeToStartOf "~a starts ~a after ~a starts" NIL)
+
+(genFormat contradictoryMt "at least some assertions of ~a are inconsistent with those of ~a" NIL)
+
+(genFormat presentInRegion "~a has a presence in ~a" NIL)
+
+(genFormat formsBorderBetween "~a forms a border between ~a and ~a" NIL)
+
+(genFormat directedCycleInSystem "~a is a cycle in the semi-directed path system ~a" NIL)
+
+(genFormat coaControlMeasure "~a is a control measure in ~a" NIL)
+
+(genFormat mtRemovalConstraint "deletions from ~a are constrained as follows: '~a'" NIL)
+
+(genFormat deadEndInSystem "~a is a dead-end node in the path system ~a" NIL)
+
+(genFormat EconomicSystemFn "the economy of ~a" NIL)
+
+(genFormat subsumedByIntervalType "~a takes place during ~a" NIL)
+
+(genFormat knowsAbout "~a knows something about ~a" NIL)
+
+(genFormat grossDomesticProduct-Slot "~a's gross domestic product is ~a" NIL)
+
+(genFormat MaleFn "male ~a" NIL)
+
+(genFormat spikeWidth "~a's width is ~a" NIL)
+
+(genFormat LateralRegionFn "lateral region of ~a" NIL)
+
+(genFormat pointInSystem "~a is a point in the path system ~a" NIL)
+
+(genFormat surroundsHorizontally "~a surrounds ~a" NIL)
+
+(genFormat quantitySubsumes "the quantity '~a' subsumes '~a'" NIL)
+
+(genFormat weaponPayload-Max "~a can carry ~a of explosive charge" NIL)
+
+(genFormat actorPartsAffected "~a affects the ~a of the doer of the action" NIL)
+
+(genFormat MonthFn "~a ~a" NIL)
+
+(genFormat MaxRangeFn "the minimum range subsuming ~a and ~a" NIL)
+
+(genFormat waterSolubility "~a has the attribute '~a' in water" NIL)
+
+(genFormat speedOfObject-Translation "the speed of ~a is ~a" NIL)
+
+(genFormat touchesDirectly "~a directly touches ~a" NIL)
+
+(genFormat NucleusFn "~a nucleus" NIL)
+
+(genFormat ObtainingFn "obtaining ~a" NIL)
+
+(genFormat FemaleFn "female ~a" NIL)
+
+(genFormat rateOfFire "~a's rate of fire is ~a" NIL)
+
+(genFormat in-Spiked "~a is spiked into ~a" NIL)
+
+(genFormat STIF "the period shortly after ~a" NIL)
+
+(genFormat purposeOfEvent "the purpose of ~a is: ~a" NIL)
+
+(genFormat assistsInActionByDoing "~a assists in ~a by doing ~a" NIL)
+
+(genFormat traversalFromToInSystem "~a is a traversal from ~a to ~a in ~a" NIL)
+
+(genFormat northOf "~a is north of ~a" NIL)
+
+(genFormat endingPoint "~a ends at ~a" NIL)
+
+(genFormat arg3Genl "the third argument to ~a must have ~a as a generalization (genls) relation" NIL)
+
+(genFormat NationalInfrastructureReqFn "~a's national infrastructure requirements" NIL)
+
+(genFormat productionQuotaDuring "~a's production quota of ~a during ~a is ~a" NIL)
+
+(genFormat areaOfRegion "~a's area is ~a" NIL)
+
+(genFormat realGDPGrowthRateDuring "~a's real GDP growth rate during ~a is ~a" NIL)
+
+(genFormat pipeEndsAtCavity "~a joins ~a at a junction" NIL)
+
+(genFormat ambientVisibility "~a has ~a" NIL)
+
+(genFormat SphereFn "sphere with a diameter of ~a" NIL)
+
+(genFormat pathway-Partial "~a occurs along ~a" NIL)
+
+(genFormat AirForceFn "~a's air force" NIL)
+
+(genFormat in-ImmersedGeneric "~a is immersed in ~a" NIL)
+
+(genFormat sinkNodeInSystem "~a is a sink node in the semi-directed path system ~a" NIL)
+
+(genFormat maritalStatus "~a is ~a" NIL)
+
+(genFormat windowHasCovering "~a is covered by ~a" NIL)
+
+(genFormat relevantInPlace-Somewhere "the assertions in ~a are relevant at least somewhere in the spatial extent of ~a" NIL)
+
+(genFormat weaponRounds "~a can fire ~a bullets consecutively without reloading" NIL)
+
+(genFormat hasHabitat "~a's habitat is ~a" NIL)
+
+(genFormat preconditionFor-PropSit "~a will not obtain unless it is True that ~a" NIL)
+
+(genFormat JoinPathsIntoCycleFn "the cycle obtained by joining ~a" NIL)
+
+(genFormat maxQuantValue "~a's upper limit is ~a" NIL)
+
+(genFormat thingToProtect "~a is to be protected" NIL)
+
+(genFormat believesMt "~a believes every assertion in ~a" NIL)
+
+(genFormat undergroundOf "~a is underground, beneath ~a" NIL)
+
+(genFormat income "~a's income is ~a" NIL)
+
+(genFormat sourceNodeInSystem "~a is a source node in ~a" NIL)
+
+(genFormat circumferenceOfObject "~a's circumference is ~a" NIL)
+
+(genFormat temporallySubsumes "~a temporally subsumes ~a" NIL)
+
+(genFormat operationHasPurpose "~a's operation purpose is that ~a" NIL)
+
+(genFormat mtRelevantPhenomena "~a is phenomenally relevant to ~a" NIL)
+
+(genFormat cotemporal "~a has exactly the same temporal extent as ~a" NIL)
+
+(genFormat isolatedNodeInSystem "~a is an isolated node in the path system ~a" NIL)
+
+(genFormat toState "after ~a, a thing has attribute value ~a" NIL)
+
+(genFormat InteriorRegionFn "interior region of ~a" NIL)
+
+(genFormat carriesInfectionType "~a carries ~a" NIL)
+
+(genFormat MonthsDuration "~a months" NIL)
+
+(genFormat unitAssignedToOperation "~a is assigned to operation ~a" NIL)
+
+(genFormat hasHeadquartersInCountry "the headquarters of ~a are in ~a" NIL)
+
+(genFormat spikePeakValue "~a's peak value is ~a" NIL)
+
+(genFormat PITOfIBTFn "~a's propositional information" NIL)
+
+(genFormat heightOfObject "~a is ~a tall" NIL)
+
+(genFormat latitude "~a's latitude is ~a" NIL)
+
+(genFormat parentCompany "~a's parent company is ~a" NIL)
+
+(genFormat linkBetweenInSystem "~a is a link between nodes ~a and ~a in the path system ~a" NIL)
+
+(genFormat quantityIntersects "the quantity '~a' intersects '~a'" NIL)
+
+(genFormat representsAgentToAgent "~a represents ~a in dealings with ~a" NIL)
+
+(genFormat ConvexHullSpaceFn "the spatial region that is enclosed by the convex hull of ~a" NIL)
+
+(genFormat dealerFor "~a is a dealer for ~a" NIL)
+
+(genFormat basicPrice "~a's basic price is ~a" NIL)
+
+(genFormat RectangularSolidFn "rectangular solid with a length of ~a, a breadth of ~a and a height of ~a" NIL)
+
+(genFormat viscosityOfSubstance "~a has the viscosity ~a" NIL)
+
+(genFormat weatherAttributes "~a is ~a" NIL)
+
+(genFormat EdiblePartFn "edible part of ~a" NIL)
+
+(genFormat densityOfObject "~a has the density ~a" NIL)
+
+(genFormat cohesivenessOfObject "~a has the attribute '~a'" NIL)
+
+(genFormat startingDate "~a's starting date is ~a" NIL)
+
+(genFormat behind-Generally "~a is behind ~a" NIL)
+
+(genFormat STIB "the period shortly before ~a" NIL)
+
+(genFormat operationalControlMilitaryOrg "~a has operational control of ~a" NIL)
+
+(genFormat fertilityRate "the fertility rate of ~a is ~a" NIL)
+
+(genFormat skolemizeForward "terms for fully-bound uses of `~a' should be generated during forward inference" NIL)
+
+(genFormat traversalInSystem "~a is a traversal of some paths in ~a" NIL)
+
+(genFormat currentAccountBalanceDuring "~a's account balance during ~a is ~a" NIL)
+
+(genFormat objectOfPossessionTransfer "in ~a, ~a is transferred from one agent to another" NIL)
+
+(genFormat intends "~a intends that ~a" NIL)
+
+(genFormat importQuotaDuring "~a's import quota of ~a during ~a is ~a" NIL)
+
+(genFormat grossDomesticProduct-Nominal "~a's nominal GDP during ~a is ~a" NIL)
+
+(genFormat memberOfSpecies "~a's species is ~a" NIL)
+
+(genFormat dateOfEvent "~a's date is ~a" NIL)
+
+(genFormat siblingOrganizations "~a and ~a are sibling organizations" NIL)
+
+(genFormat StartFn "the start of ~a" NIL)
+
+(genFormat LandBorderFn "the non-coastal border of ~a" NIL)
+
+(genFormat NavyFn "~a's navy" NIL)
+
+(genFormat stuckTo "~a is stuck to ~a" NIL)
+
+(genFormat relevantInPlace-Everywhere "the assertions in ~a are relevant throughout the spatial extent of ~a" NIL)
+
+(genFormat biases "~a has the (possibly unconsious) unsubstantiated belief that '~a' is True" NIL)
+
+(genFormat eventToOccur "~a is to occur" NIL)
+
+(genFormat prevents-SitProp "~a prevents it from happening that: ~a" NIL)
+
+(genFormat residesInDwelling "~a resides in dwelling ~a" NIL)
+
+(genFormat maxReverseSpeed "the maximum reverse speed of ~a is ~a" NIL)
+
+(genFormat perceives "~a perceives ~a" NIL)
+
+(genFormat terrainTypeOfAvenue "~a's terrain type is ~a" NIL)
+
+(genFormat SqrtFn "square root of ~a" NIL)
+
+(genFormat gunCaliber "~a's caliber is ~a" NIL)
+
+(genFormat mtQueryingConstraint "queries in ~a are constrained as follows: '~a'" NIL)
+
+(genFormat PathFromFn "the starting point of ~a" NIL)
+
+(genFormat connectedInSystem "~a and ~a are connected in the path system ~a" NIL)
+
+(genFormat InverseOfIntervalFn "the mathematical inverse of ~a" NIL)
+
+(genFormat propositionsPerceived "during ~a, an actor perceives '~a' " NIL)
+
+(genFormat consumesPortion "~a consumes a portion of ~a" NIL)
+
+(genFormat purposeInEvent "~a's purpose in ~a is ~a" NIL)
+
+(genFormat spikePeakLocation "~a peaks at ~a" NIL)
+
+(genFormat consistent "it is consistent in context to say that ~a" NIL)
+
+(genFormat linkInSystem "~a is a link in the path system ~a" NIL)
+
+(genFormat conflictLevel "the conflict level of ~a is ~a" NIL)
+
+(genFormat inverseFunc "~a is the inverse function of ~a" NIL)
+
+(genFormat rationalIntermediateGoals "it would be rational for ~a to have as a goal '~a', 
+for the sake of achieving the further goal '~a'" NIL)
+
+(genFormat educationLevel "~a's education is ~a" NIL)
+
+(genFormat SquaredFn "~a squared" NIL)
+
+(genFormat NationalPressFn "the national press of ~a" NIL)
+
+(genFormat dislikesSensorially "~a dislikes ~a" NIL)
+
+(genFormat cityOfAddress "~a has an address in ~a" NIL)
+
+(genFormat onPath "~a is on ~a" NIL)
+
+(genFormat lengthOfObject "~a is ~a long" NIL)
+
+(genFormat orthography "~a's orthography is ~a" NIL)
+
+(genFormat IndustryInfrastructureReqFn "~a infrastructure requirements" NIL)
+
+(genFormat above-Touching "~a is above ~a while they are touching" NIL)
+
+(genFormat hangsAround "~a hangs around ~a" NIL)
+
+(genFormat angleOfLauncher "~a can be fired at a vertical angle of ~a" NIL)
+
+(genFormat notices "through experience, ~a notices that '~a' is True" NIL)
+
+(genFormat subOrgs-OnlyDuringOperation "~a is a suborganization of ~a during some operation" NIL)
+
+(genFormat delayUntilTime "~a is to delay enemy movement until ~a" NIL)
+
+(genFormat countryCodeDigraph "the two letter abbreviation for ~a is ~a" NIL)
+
+(genFormat forceRatioOfUnits "the force ratio of ~a and ~a is ~a" NIL)
+
+(genFormat traversalInSystem-OrderObserved "~a is an order-observing traversal of some paths in ~a" NIL)
+
+(genFormat behind-Directly "~a is directly behind ~a" NIL)
+
+(genFormat stateOfMatter "~a's state of matter is ~a" NIL)
+
+(genFormat requisiteForAnti "~a is necessary to negate some precondition of ~a" NIL)
+
+(genFormat exportQuotaDuring "~a's export quota of ~a during ~a is ~a" NIL)
+
+(genFormat seriesOrderedBy "~a is ordered by ~a" NIL)
+
+(genFormat greaterThanOrEqualTo "~a is greater than or equal to ~a" NIL)
+
+(genFormat dirtinessOfObject "~a's dirtiness is ~a" NIL)
+
+(genFormat ConditionalProbabilitySetFn "the probability that '~a', given that '~a'" NIL)
+
+(genFormat pointsOfContact "~a can be contacted at ~a" NIL)
+
+(genFormat physicalQuarters "~a's physical quarters is ~a" NIL)
+
+(genFormat containerCapacity "~a's capacity is ~a" NIL)
+
+(genFormat DerivedProbability-RangeFn "the range of derived probability that ~a" NIL)
+
+(genFormat RightRegionFn "right region of ~a" NIL)
+
+(genFormat resistanceToCorrosion "~a has ~a" NIL)
+
+(genFormat ConvexHullFn "the convex hull of ~a" NIL)
+
+(genFormat DifferenceFn "~a minus ~a" NIL)
+
+(genFormat DayFn "~a ~a" NIL)
+
+(genFormat numericallyEqual "~a equals ~a" NIL)
+
+(genFormat consumptionRateOfRegion "~a consumes ~a at the rate of ~a" NIL)
+
+(genFormat intermediateGoals "~a has as a goal '~a', 
+for the sake of achieving the further goal '~a'" NIL)
+
+(genFormat obligatedAgent "~a is an obligation of ~a's" NIL)
+
+(genFormat JoinPathsFn "the concatenation of paths in ~a" NIL)
+
+(genFormat mtAnthropacity "the anthropacity of ~a is ~a" NIL)
+
+(genFormat grossDomesticProduct "~a's gross domestic product during ~a is ~a" NIL)
+
+(genFormat opponents "~a and ~a are opponents" NIL)
+
+(genFormat longitude "~a's longitude is ~a" NIL)
+
+(genFormat UniqueNodeIDFn "the unique ID for node ~a" NIL)
+
+(genFormat propPendingFalsification "it is to be prevented that ~a" NIL)
+
+(genFormat friends "~a and ~a are friends" NIL)
+
+(genFormat hasCommConvention "~a knows ~a" NIL)
+
+(genFormat in-ContOpen "~a is in the open container ~a" NIL)
+
+(genFormat containsCavity "~a contains ~a" NIL)
+
+(genFormat enables-SitProp "~a makes it True that ~a" NIL)
+
+(genFormat wornOn "~a is worn on ~a" NIL)
+
+(genFormat hasPortalToRegion "~a and ~a are connected by a portal" NIL)
+
+(genFormat maxSpeed "the maximum speed of ~a is ~a" NIL)
+
+(genFormat PathToFn "the ending point of ~a" NIL)
+
+(genFormat vehicleCargoCapacity-Volume "the volume of ~a's cargo capacity is ~a" NIL)
+
+(genFormat subPathSystems "~a is a subsystem of the path system ~a" NIL)
+
+(genFormat expects "~a expects that ~a" NIL)
+
+(genFormat betweenOnPath "~a is between ~a and ~a along ~a" NIL)
+
+(genFormat positionStatusOfArea "~a's position status is ~a" NIL)
+
+(genFormat oilSolubility "~a has solubility ~a in oil" NIL)
+
+(genFormat spikeNonPeakValue "~a's non-peak value is ~a" NIL)
+
+(genFormat pathBetweenInSystem "~a is a path between ~a and ~a in the path system ~a" NIL)
+
+(genFormat cooperationLevel "the cooperation level of ~a is ~a" NIL)
+
+(genFormat on-Physical "~a is on ~a" NIL)
+
+(genFormat BlockedForFn "~a is blocked" NIL)
+
+(genFormat ResidentsFn "all people who reside in ~a" NIL)
+
+(genFormat middleName "~a's middle name is ~a" NIL)
+
+(genFormat RelinquishingFn "relinquishing ~a" NIL)
+
+(genFormat MtOfIndustryTypeFn "the ~a context" NIL)
+
+(genFormat informStatement "in ~a it is True that ~a" NIL)
+
+(genFormat infoContributed "in ~a ~a proposes ~a" NIL)
+
+(genFormat rotationOfLauncher "~a's range of horizontal rotation is  ~a" NIL)
+
+(genFormat inPlane "~a intersects the surface ~a" NIL)
+
+(genFormat EmbassyBuildingFn "~a's embassy in ~a" NIL)
+
+(genFormat languageOfCommunication "~a's language is ~a" NIL)
+
+(genFormat requisiteFor "~a is necessary for some precondition of ~a" NIL)
+
+(genFormat levelWith "~a is level with ~a" NIL)
+
+(genFormat majorUndertakingsOf "~a is a major undertaking of ~a" NIL)
+
+(genFormat ist-Obligation "it is an obligation in ~a that ~a" NIL)
+
+(genFormat flammabilityOfObject "~a has the attribute '~a'" NIL)
+
+(genFormat eventPosesThreat "~a is an event that threatens ~a" NIL)
+
+(genFormat father "~a's father is ~a" NIL)
+
+(genFormat smells "~a smells ~a" NIL)
+
+(genFormat stateOfAddress "~a is in ~a" NIL)
+
+(genFormat PriorProbability-RangeFn "the range a priori of probability that ~a" NIL)
+
+(genFormat temperatureOfObject "~a`s temperature is ~a" NIL)
+
+(genFormat TerritorialSeaFn "the territorial sea of ~a" NIL)
+
+(genFormat roadSpeed "the top road speed of ~a is ~a" NIL)
+
+(genFormat forall "for every ~a, ~a" NIL)
+
+(genFormat biologicalRelatives "~a and ~a are biological relatives" NIL)
+
+(genFormat hingedTo "~a and ~a are connected by a hinge" NIL)
+
+(genFormat PriorProbabilityFn "the a priori probability that ~a" NIL)
+
+(genFormat QuotientFn "the quotient of ~a divided by ~a" NIL)
+
+(genFormat grossNationalProduct "~a's gross national product during ~a is ~a" NIL)
+
+(genFormat temporalBoundsIdentical "~a starts and ends at the same time as ~a" NIL)
+
+(genFormat viabilityOfAsForeignPolicyTool "The viability of ~a doing ~a as a foreign policy tool is ~a" NIL)
+
+(genFormat covers-Ruglike "~a covers ~a " NIL)
+
+(genFormat compressibilityOfObject "~a has ~a" NIL)
+
+(genFormat suspendingFluid "~a is suspended in ~a" NIL)
+
+(genFormat UniqueLinkIDFn "the unique ID for link ~a" NIL)
+
+(genFormat propPendingVerification "it is to be enabled that ~a" NIL)
+
+(genFormat siblings "~a and ~a are siblings" NIL)
+
+(genFormat likelihood "the likelihood that '~a' is ~a" NIL)
+
+(genFormat TimeIntervalInclusiveFn "the time interval from ~a to ~a" NIL)
+
+(genFormat ReverseListFn "the reverse of ~a" NIL)
+
+(genFormat seriesOrderedByInverse "~a is ordered inversely by ~a" NIL)
+
+(genFormat malleabilityOfObject "~a has the following malleability: '~a'" NIL)
+
+(genFormat covers-Paintlike "~a covers ~a like paint" NIL)
+
+(genFormat MinusFn "-~a" NIL)
+
+(genFormat linkClosedSubSystems "~a is a link-preserving subsystem of the path system ~a" NIL)
+
+(genFormat YearsDuration "~a years" NIL)
+
+(genFormat startsAfterStartingOf "~a starts after ~a" NIL)
+
+(genFormat holdsSometimeDuring "at some time during ~a, ~a" NIL)
+
+(genFormat rampStartLocation "~a's starts at ~a" NIL)
+
+(genFormat socialClass "~a is ~a" NIL)
+
+(genFormat pathInSystem "~a is a path in the path system ~a" NIL)
+
+(genFormat opponentsInConflict "~a and ~a are conflicting opponents in ~a" NIL)
+
+(genFormat allies "~a and ~a are allies" NIL)
+
+(genFormat taskLimitOfAdvance "~a's limit of advance is ~a" NIL)
+
+(genFormat OpenForFn "~a is not blocked" NIL)
+
+(genFormat BiologicalWeaponFn "biological weapon armed with ~a" NIL)
+
+(genFormat BelieverFn "all people who believe in ~a" NIL)
+
+(genFormat angularAcceleration "~a causes an angular acceleration of ~a" NIL)
+
+(genFormat in-Snugly "~a is snugly fitted into ~a" NIL)
+
+(genFormat relatives "~a and ~a are relatives" NIL)
+
+(genFormat outputs "~a's output is ~a" NIL)
+
+(genFormat FindingAPhysicalObjectFn "finding ~a" NIL)
+
+(genFormat beliefs "~a believes that ~a" NIL)
+
+(genFormat LogFn "logarithm of ~a" NIL)
+
+(genFormat IdentityFn "~a" NIL)
+
+(genFormat laterThan "~a is later than ~a" NIL)
+
+(genFormat pointsOfBorder "~a's border points are: ~a" NIL)
+
+(genFormat precursorEventType "every ~a has a preceding event of type ~a" NIL)
+
+(genFormat reloadTime "~a's reload time is ~a" NIL)
+
+(genFormat ExpFn "e^~a" NIL)
+
+(genFormat monetaryValue "~a's monetary value is ~a" NIL)
+
+(genFormat assertedFormula "it has been asserted in the KB that ~a" NIL)
+
+(genFormat directionOfAttack "~a's direction of attack is ~a" NIL)
+
+(genFormat Mega "mega~a" NIL)
+
+(genFormat hasOwnershipIn "~a has ownership in ~a" NIL)
+
+(genFormat after "~a is a time point after ~a" NIL)
+
+(genFormat EmbassyMissionFn "~a's embassy mission in ~a" NIL)
+
+(genFormat inFrontOf-Generally "~a is in front of ~a" NIL)
+
+(genFormat webPageURL "information represented in web page ~a can be accessed through the URL ~a" NIL)
+
+(genFormat globalRequisiteForAnti "~a is necessary to negate all preconditions for ~a" NIL)
+
+(genFormat combatForceValueOfUnit-ForActualStrength "~the combat force value of ~a's actual strength is ~a" NIL)
+
+(genFormat agentPosesThreat "~a threatens ~a" NIL)
+
+(genFormat damages "~a damages ~a" NIL)
+
+(genFormat threatens "In the threat ~a,  
+what is being threatened by the threatener is this: '~a'" NIL)
+
+(genFormat fromLocation "~a originates from ~a" NIL)
+
+(genFormat laborForceDuring "~a's labor force during ~a numbers ~a" NIL)
+
+(genFormat causes-ThingProp "~a causes it to be True that ~a" NIL)
+
+(genFormat dislikesRoleInActivity "~a dislikes being the ~a in ~a" NIL)
+
+(genFormat knowsValue "~a knows ~a's ~a" NIL)
+
+(genFormat reciprocalTransfers "~a was done in exchange for ~a" NIL)
+
+(genFormat touches "~a touches ~a" NIL)
+
+(genFormat holdsInTypeOfTime-Sometime "the assertions in ~a are True at least sometime during the temporal extent of every ~a" NIL)
+
+(genFormat ditchWidth "~a can cross a ditch ~a wide" NIL)
+
+(genFormat parallelVectors "~a and ~a are parallel" NIL)
+
+(genFormat propositionalInfoAbout "~a contains information about ~a" NIL)
+
+(genFormat destructivePotentialOf "~a's destructive potential is ~a" NIL)
+
+(genFormat LocalLinkFlowCapacityFn "the local flow capacity for link ~a independent of ~a" NIL)
+
+(genFormat DateFromIntegerFn "the date represented by ~a" NIL)
+
+(genFormat multiplicationUnits "the unit for ~a times ~a is ~a" NIL)
+
+(genFormat outranksOnScale "~a outranks ~a in ~a" NIL)
+
+(genFormat visuallyDepicts "~a visually depicts ~a" NIL)
+
+(genFormat negationAttribute "one can't be both ~a and ~a" NIL)
+
+(genFormat connectedTo-SemiRigidly "~a and ~a are connected semi-rigidly" NIL)
+
+(genFormat oppositeDirection-Precise "~a is the direction precisely opposite ~a" NIL)
+
+(genFormat dateOfDeath "~a's date of death is ~a" NIL)
+
+(genFormat acknowledgementOf "~a is a response to ~a" NIL)
+
+(genFormat barometricPressure "~a has a barometric pressure of ~a" NIL)
+
+(genFormat RestOfListFn "~a with its first element removed" NIL)
+
+(genFormat pointingToward "~a points toward ~a" NIL)
+
+(genFormat physicalPartTypes "instances of ~a have as a physical part 
+at least one ~a" NIL)
+
+(genFormat mtLinearDistanceValue "reasoning in ~a only applies to objects whose longest axis is ~a" NIL)
+
+(genFormat birthDate "~a came into existence on the calendar date ~a" NIL)
+
+(genFormat pointClosedSubSystems "~a is a point-preserving subsystem of the path system ~a" NIL)
+
+(genFormat fromState "before ~a, a thing has attribute value ~a" NIL)
+
+(genFormat axisOfAdvanceForTask "~a's axis of advance is ~a" NIL)
+
+(genFormat rampInitialValue "~a's initial value is ~a" NIL)
+
+(genFormat cycleInSystem "~a is a cycle in the path system ~a" NIL)
+
+(genFormat partnersInCooperation "~a and ~a are cooperating partners in ~a" NIL)
+
+(genFormat VectorFromToFn "the vector from ~a to ~a" NIL)
+
+(genFormat doesBusinessWith "~a does business with ~a" NIL)
+
+(genFormat RoadSystemFn "the road system of ~a" NIL)
+
+(genFormat changesQuantityInDirection "during ~a, ~a's ~a undergoes ~a change" NIL)
+
+(genFormat AssertionMtFn "the microtheory in which it is True that '~a'" NIL)
+
+(genFormat TreatmentFn "treatment of ~a" NIL)
+
+(genFormat n-WayJunctionInSystem "~a is a ~a-way junction of paths in the ~a system" NIL)
+
+(genFormat Giga "giga~a" NIL)
+
+(genFormat pointsOfCenterLineTraversal "~a's center-line traversal points are: ~a" NIL)
+
+(genFormat conceptuallyRelated "~a is conceptually related to ~a" NIL)
+
+(genFormat wingSpan "~a's wingspan is ~a" NIL)
+
+(genFormat in-ContClosed "~a is closed in the container ~a" NIL)
+
+(genFormat ConveyViaFn "conveyance via ~a" NIL)
+
+(genFormat temporallyIntersects "~a temporally intersects ~a" NIL)
+
+(genFormat minQuantValue "~a's lower limit is ~a" NIL)
+
+(genFormat programUsed "~a uses ~a" NIL)
+
+(genFormat fieldsOfFormalEducation "~a has had formal education in ~a" NIL)
+
+(genFormat likesSensorially "~a likes ~a" NIL)
+
+(genFormat containsInformationAbout "~a has information about ~a" NIL)
+
+(genFormat actionFulfillsObligation "~a fulfills the 
+obligation ~a" NIL)
+
+(genFormat covers-Baglike "~a covers ~a like a bag" NIL)
+
+(genFormat physicalExtent "the physical extent of ~a is ~a" NIL)
+
+(genFormat covers-Hairlike "~a covers ~a like hair" NIL)
+
+(genFormat agreementPeriod "~a lasts for ~a" NIL)
+
+(genFormat acknowledgedAct "~a acknowledges ~a" NIL)
+
+(genFormat decreasesByAmount "after ~a, ~a's ~a decreases by ~a" NIL)
+
+(genFormat globalRequisiteFor "~a is necessary for all preconditions of ~a" NIL)
+
+(genFormat combatForceValueOfUnit "~a's combat force value is ~a" NIL)
+
+(genFormat resistanceOfObject "~a has ~a" NIL)
+
+(genFormat InfectionFn "~a infections" NIL)
+
+(genFormat realGNPGrowthRateDuring "~a's growth rate during ~a is ~a" NIL)
+
+(genFormat fragilityOfObject "~a has ~a" NIL)
+
+(genFormat linkCutSetInSystem "removing all links in ~a from ~a results in a disconnected path system" NIL)
+
+(genFormat StockInFn "stock in ~a" NIL)
+
+(genFormat ist "in ~a ~a" NIL)
+
+(genFormat vehicleCargoCapacity-Mass "~a's mass vehicle cargo capacity is ~a" NIL)
+
+(genFormat in-ImmersedPartly "~a is partly immersed in ~a" NIL)
+
+(genFormat fieldsOfActivity "~a is active in the field of ~a" NIL)
+
+(genFormat lessThan "~a is less than ~a" NIL)
+
+(genFormat DerivedProbabilityFn "the derived probability that ~a" NIL)
+
+(genFormat in-Held "~a is held by ~a" NIL)
+
+(genFormat holdsInTypeOfTime-Always "the assertions in ~a are True throughout the temporal extent of every ~a" NIL)
+
+(genFormat nationalBudgetExpenditures "~a's national budget expenditures are ~a" NIL)
+
+(genFormat desires "~a desires that ~a" NIL)
+
+(genFormat in-Embedded "~a is embedded in ~a" NIL)
+
+(genFormat agentObligationInSituation "~a is obligated to fulfill ~a in ~a" NIL)
+
+(genFormat SituatedLinkFlowCapacityFn "the net flow capacity for link ~a in ~a" NIL)
+
+(genFormat unitHasPurpose "the purpose of the unit ~a is ~a" NIL)
+
+(genFormat trafficableForUnit "~a is trafficable for ~a" NIL)
+
+(genFormat thereExists "there is some ~a such that ~a" NIL)
+
+(genFormat EasternRegionFn "the eastern region of ~a" NIL)
+
+(genFormat BuyingFn "~a buying" NIL)
+
+(genFormat in-ImmersedFully "~a is completely immersed in ~a" NIL)
+
+(genFormat adversarialResponseTo "~a is an adversarial response to ~a" NIL)
+
+(genFormat typicalArmamentOfUnit "" NIL)
+
+(genFormat allOperationalControlMilitaryOrg "~a has operational control over ~a" NIL)
+
+(genFormat mtComprehensionConstraint "~a assumes the following user-comprehension level: '~a'" NIL)
+
+(genFormat hasAgents "~a has agent ~a" NIL)
+
+(genFormat maximalConnectedSubSystems "~a is a maximal connected subsystem of the path system ~a" NIL)
+
+(genFormat acquaintedWith "~a and ~a are acquainted with each other" NIL)
+
+(genFormat infoTransferred-Explicitly "~a is information explicitly transferred in ~a" NIL)
+
+(genFormat grandchildren "~a is ~a's grandchild" NIL)
+
+(genFormat widthOfAOA-Average "the average width of ~a is ~a" NIL)
+
+(genFormat supportingTask "~a is a supporting task for ~a" NIL)
+
+(genFormat rampFinalValue "~a's final value is ~a" NIL)
+
+(genFormat affectedAgent "~a affects ~a" NIL)
+
+(genFormat loopInSystem "~a is a loop in the path system ~a" NIL)
+
+(genFormat travelTime "from ~a to ~a by ~a is ~a" NIL)
+
+(genFormat oppositeDirection-Interval "~a is the opposite direction of ~a" NIL)
+
+(genFormat eventOfPlan "~a is an event in the plan ~a" NIL)
+
+(genFormat RailSystemFn "the rail system of ~a" NIL)
+
+(genFormat frequencyOfSignal "~a's frequency is ~a" NIL)
+
+(genFormat qcAttributeProduct "the product of ~a and ~a is ~a" NIL)
+
+(genFormat BodyPartFn "~a's ~a" NIL)
+
+(genFormat not "it is not True that ~a" NIL)
+
+(genFormat causes-PropProp "~a causes ~a" NIL)
+
+(genFormat hasNumberingSchema "~a's page-numbering schema is ~a" NIL)
+
+(genFormat IntervalMaxFn "at most ~a" NIL)
+
+(genFormat typicalArmamentOfMilitaryPlatformType "~a's armament typically includes (one or more) ~a" NIL)
+
+(genFormat toLocation "~a's destination is ~a " NIL)
+
+(genFormat obscuresFrom "~a obscures ~a from ~a" NIL)
+
+(genFormat performedByPart "~a is performed by some member (or group of members) of ~a" NIL)
+
+(genFormat rightsGranted "~a grants ~a" NIL)
+
+(genFormat sectorOfResponsibility "~a's sector of responsibility is ~a" NIL)
+
+(genFormat shortestRouteByRoadsBetween "~a is the shortest road route between ~a and ~a" NIL)
+
+(genFormat militaryManpower-Active "the active military manpower in ~a is ~a" NIL)
+
+(genFormat areaOfObject "the surface area of ~a is ~a" NIL)
+
+(genFormat agentFulfillsObligation "~a fulfills the 
+obligation ~a" NIL)
+
+(genFormat hasPatients "~a provides medical care to ~a" NIL)
+
+(genFormat eventUndermines "~a undermines ~a" NIL)
+
+(genFormat USDollarFn "~a U.S. dollars" NIL)
+
+(genFormat hasPartAsBorder "the border of ~a includes part of ~a" NIL)
+
+(genFormat ambientRelativeHumidity "~a's ambient relative humidity is ~a" NIL)
+
+(genFormat inRegion "~a is in ~a" NIL)
+
+(genFormat prefers "~a prefers that ~a rather than that ~a" NIL)
+
+(genFormat physicalPartTypes "every ~a has at least one ~a as a part" NIL)
+
+(genFormat nodeCutSetInSystem "removing all nodes in ~a from ~a results in a disconnected path system" NIL)
+
+(genFormat titleOfPerson-String "~a has the title ~a" NIL)
+
+(genFormat unitExpansions "~a is a unit of measure derived from the units on this list: ~a" NIL)
+
+(genFormat holdsInTypeOfPlace-Somewhere "the assertions in ~a are True at least somewhere in every ~a" NIL)
+
+(genFormat LiquidFn "liquid ~a" NIL)
+
+(genFormat FlowRateOnLinkFn "the flow rate across link ~a in ~a" NIL)
+
+(genFormat taskHasPurpose "the purpose of the task ~a is ~a" NIL)
+
+(genFormat WesternRegionFn "the western region of ~a" NIL)
+
+(genFormat tensileStrengthOfSubstance "~a has ~a" NIL)
+
+(genFormat ist-Information "in ~a it is True that ~a" NIL)
+
+(genFormat LastInListFn "the last member of ~a" NIL)
+
+(genFormat operationOfCOA "~a's COA operation is ~a" NIL)
+
+(genFormat mtAreaValue "reasoning in ~a only applies to objects with an area of ~a" NIL)
+
+(genFormat likesAsFriend "~a likes ~a as a friend" NIL)
+
+(genFormat oilRevenue "~a derives revenue from economic transactions involving petroleum products at a rate of ~a" NIL)
+
+(genFormat rearCommandPostOfUnit "~a is the rear command post of ~a" NIL)
+
+(genFormat rampEndLocation "~a ends at ~a" NIL)
+
+(genFormat residenceOfOrganization "~a's headquarters are in ~a" NIL)
+
+(genFormat Dollar-UnitedStates "~a U.S. Dollars" NIL)
+
+(genFormat infoAdded "~a added information ~a" NIL)
+
+(genFormat intendedMaleficiary "~a is intended to harm ~a" NIL)
+
+(genFormat junctionInSystem "~a is a junction in the path system ~a" NIL)
+
+(genFormat surfaceAttributeOfSurf "~a is ~a" NIL)
+
+(genFormat holdsIn "during ~a, ~a" NIL)
+
+(genFormat arg5Genl "the fifth argument to ~a must have ~a as a generalization (genls) relation" NIL)
+
+(genFormat dateOfPublication-PIT "the information in ~a was published on ~a" NIL)
+
+(genFormat lastName "~a's last name is ~a" NIL)
+
+(genFormat oilSupply "~a's oil supply is ~a" NIL)
+
+(genFormat massOfObject "~a has mass ~a" NIL)
+
+(genFormat accountBalance "~a's balance is ~a" NIL)
+
+(genFormat raininessOfRegion "region ~a has a rain level of '~a'" NIL)
+
+(genFormat ibtGenerated "~a generated ~a" NIL)
+
+(genFormat turnRadius "~a's turn radius is ~a" NIL)
+
+(genFormat countryOfAddress "~a is located in ~a" NIL)
+
+(genFormat wavelength "~a's wavelength is ~a" NIL)
+
+(genFormat mother "~a's mother is ~a" NIL)
+
+(genFormat near "~a is near ~a" NIL)
+
+(genFormat missionLevelTaskOfCOA "~a's mission-level task is ~a" NIL)
+
+(genFormat flowCapacity "the maximum flow capacity of ~a is ~a" NIL)
+
+(genFormat actionViolatesObligation "~a violates the 
+obligation ~a" NIL)
+
+(genFormat myEntity "~a is some subabstraction of ~a" NIL)
+
+(genFormat eventDisables "~a disables ~a" NIL)
+
+(genFormat RelationExpressionArityFn "the number of arguments in ~a" NIL)
+
+(genFormat startsRelativeToEndOf "~a starts ~a after ~a ends" NIL)
+
+(genFormat infectionHost "~a's host is ~a" NIL)
+
+(genFormat stateOfDevice "~a's current state is ~a" NIL)
+
+(genFormat currencyOf "~a is the currency for ~a" NIL)
+
+(genFormat sponsorsAgentInAction "~a sponsors ~a in ~a" NIL)
+
+(genFormat LinksFn "the set of all links in ~a" NIL)
+
+(genFormat GovernmentFn "~a's government" NIL)
+
+(genFormat physicalStructuralIntegrity "~a's structural integrity is ~a" NIL)
+
+(genFormat fromLocation "~a is from ~a" NIL)
+
+(genFormat inFrontOf-Directly "~a is directly in front of ~a" NIL)
+
+(genFormat contiguousAfter "~a starts immediately after ~a ends" NIL)
+
+(genFormat SuccessorFn "successor of ~a" NIL)
+
+(genFormat BorderBetweenFn "the border between ~a and ~a" NIL)
+
+(genFormat linkCutMinimalSetInSystem "~a is a minimal link-cut set in ~a" NIL)
+
+(genFormat unemploymentRateDuring "~a's unemployment rate during ~a is ~a" NIL)
+
+(genFormat hairColor "~a's ~a hair is ~a" NIL)
+
+(genFormat AnteriorRegionFn "the anterior region of ~a" NIL)
+
+(genFormat AtomFn "~a atoms" NIL)
+
+(genFormat objectActedOn "~a affects ~a" NIL)
+
+(genFormat containsPortals "~a contains ~a" NIL)
+
+(genFormat endsAfterEndingOf "~a ends after ~a ends" NIL)
+
+(genFormat doorwayHasCovering "~a is the door for ~a" NIL)
+
+(genFormat defenseBudgetExpenditures "~a's defense budget expenditures are ~a" NIL)
+
+(genFormat rotationallyConnectedTo "~a and ~a are rotationally connected" NIL)
+
+(genFormat holdsInTypeOfPlace-Everywhere "the assertions in ~a are True everywhere in each ~a" NIL)
+
+(genFormat MoleculeFn "~a molecules" NIL)
+
+(genFormat SituatedFlowCapacityInToNodeFn "the flow capcity for node ~a in ~a" NIL)
+
+(genFormat subOrgs-Command "~a commands ~a" NIL)
+
+(genFormat infoRemoved "during ~a, ~a was removed" NIL)
+
+(genFormat in-ContGeneric "~a is in ~a" NIL)
+
+(genFormat relevantInTypeOfTime-Sometime "the assertions in ~a are relevant at least sometime during the temporal extent of every ~a" NIL)
+
+(genFormat SouthernRegionFn "the southern region of ~a" NIL)
+
+(genFormat CylinderFn "cylinder with a length of ~a and a diameter of ~a" NIL)
+
+(genFormat temporallyCoterminal "~a and ~a end simultaneously" NIL)
+
+(genFormat SublistFromToFn "the sublist of ~a from ~a to ~a" NIL)
+
+(genFormat SingleSourceFn "the source node of ~a" NIL)
+
+(genFormat employees "~a employs ~a" NIL)
+
+(genFormat complementOfMilitaryUnit "~a's complement is ~a" NIL)
+
+(genFormat mtAdditionConstraint "additions to ~a are constrained as follows: '~a'" NIL)
+
+(genFormat accountStatus "~a has the status: ~a" NIL)
+
+(genFormat tacticalCommandPostOfUnit "~a is the tactical command post of ~a" NIL)
+
+(genFormat negationMt "the domain assumptions of ~a and ~a are mutually inconsistent" NIL)
+
+(genFormat rigidityOfObject "~a has the attribute '~a'" NIL)
+
+(genFormat insIsJobOf "~a is part of ~a's job" NIL)
+
+(genFormat minimize "by default, it is not the case that ~a" NIL)
+
+(genFormat threeWayJunctionInSystem "~a is a three-way junction in the path system ~a" NIL)
+
+(genFormat intendedBeneficiary "~a is intended to benefit ~a" NIL)
+
+(genFormat JuvenileFn "juvenile ~a" NIL)
+
+(genFormat connectedTo-Rigidly "~a and ~a are rigidly connected" NIL)
+
+(genFormat thermalConductivityOfObject "~a ~a" NIL)
+
+(genFormat IndustryFn "the ~a industry" NIL)
+
+(genFormat eventOccursNear "~a occurs near ~a" NIL)
+
+(genFormat uniformValue "~a's uniform value is ~a" NIL)
+
+(genFormat AbsoluteValueFn "absolute value of ~a" NIL)
+
+(genFormat atomicNumber "the atomic number of ~a is ~a" NIL)
+
+(genFormat TimeIntervalBetweenFn "the time interval between ~a and ~a" NIL)
+
+(genFormat spatiallySubsumes "~a spatially subsumes ~a" NIL)
+
+(genFormat owns "~a owns ~a" NIL)
+
+(genFormat oilExport "~a's exports ~a of oil" NIL)
+
+(genFormat dispersionSource "~a's dispersion source is ~a" NIL)
+
+(genFormat onLine "~a is on the the line ~a" NIL)
+
+(genFormat MedialRegionFn "the medial region of ~a" NIL)
+
+(genFormat EmbryoFn "~a embryos" NIL)
+
+(genFormat upAxisPoints "~a's up axis points ~a" NIL)
+
+(genFormat agentViolatesObligation "~a violates the 
+obligation ~a" NIL)
+
+(genFormat temporallyContinuous "~a occupies one continuous chunk of time" NIL)
+
+(genFormat forceCapacity "~a is ~a" NIL)
+
+(genFormat urgeTypeSatisfied "~a can satisfy ~a" NIL)
+
+(genFormat perpendicularObjects "~a and ~a are perpendicular" NIL)
+
+(genFormat eventEnables "~a enables ~a" NIL)
+
+(genFormat formationAuthorizedBy "~a is established in accordance with ~a" NIL)
+
+(genFormat numInhabitants "~a's number of inhabitants is ~a" NIL)
+
+(genFormat skinColor "~a's skin color is ~a" NIL)
+
+(genFormat nodeCutMinimalSetInSystem "~a is a minimal node-cut set in ~a" NIL)
+
+(genFormat LowAmountFn "a low level of ~a" NIL)
+
+(genFormat connectedTo "~a is connected to ~a" NIL)
+
+(genFormat holdsInTime-Sometime "the assertions in ~a are True at least sometime during the temporal extent of ~a" NIL)
+
+(genFormat fordingDepth "~a can cross water ~a deep" NIL)
+
+(genFormat worksWith "~a works with ~a" NIL)
+
+(genFormat SituatedFlowCapacityOutFromNodeFn "the maximum net flow out from ~a in ~a" NIL)
+
+(genFormat MtOfIndustryOfRegionFn "the ~a context" NIL)
+
+(genFormat preconditionFor-SitProp "unless ~a obtains, it will not be True that ~a" NIL)
+
+(genFormat seriesLength "~a has length ~a" NIL)
+
+(genFormat IntervalStartedByFn "the time interval beginning when ~a ends" NIL)
+
+(genFormat loves "~a loves ~a" NIL)
+
+(genFormat relevantInTypeOfTime-Always "the assertions in ~a are relevant throughout the temporal extent of every ~a" NIL)
+
+(genFormat amplitudeOfSignal "~a's amplitude is ~a" NIL)
+
+(genFormat NorthernRegionFn "the northern region of ~a" NIL)
+
+(genFormat SingleSinkFn "the sink node of ~a" NIL)
+
+(genFormat utmZone "~a can be found in the UTM zone ~a" NIL)
+
+(genFormat objectiveOfTask "~a's task objective is ~a" NIL)
+
+(genFormat mtAccessConstraint "access to ~a is constrained as follows: '~a'" NIL)
+
+(genFormat goals "~a has the goal that [~a]" NIL)
+
+(genFormat rotationallyConnectedTo "~a and ~a are rotationally connected by a belt" NIL)
+
+(genFormat ductilityOfObject "~a has ~a" NIL)
+
+(genFormat InteriorFn "interior of ~a" NIL)
+
+(genFormat formsBorderPart "~a forms part of ~a" NIL)
+
+(genFormat operatesInRegion "The scope of ~a's operations includes ~a" NIL)
+
+(genFormat mainCommandPostOfUnit "~a is the main command post of ~a" NIL)
+
+(genFormat rank-Military "~a's rank is ~a" NIL)
+
+(genFormat internationalMonetaryReservesDuring "~a's international monetary reserves during ~a are ~a" NIL)
+
+(genFormat mtVolumeValue "reasoning in ~a only applies to objects with a volume of ~a" NIL)
+
+(genFormat fourWayJunctionInSystem "~a is a four-way junction in the path system ~a" NIL)
+
+(genFormat endsAfterStartingOf "~a ends after the beginning of ~a" NIL)
+
+(genFormat affiliatedWith "~a is affiliated with ~a" NIL)
+
+(genFormat tastes "~a tastes ~a" NIL)
+
+(genFormat connectedByPathType "there is a path of type ~a connecting ~a and ~a" NIL)
+
+(genFormat ambientTemperature "~a's ambient temperature is ~a" NIL)
+
+(genFormat hasAttributes "~a is ~a" NIL)
+
+(genFormat linkFromToInSystem "~a is a link from node ~a to node ~a in the directed path system ~a" NIL)
+
+(genFormat radius "the radius of ~a is ~a" NIL)
+
+(genFormat covers-Skinlike "~a covers the surface of ~a like skin" NIL)
+
+(genFormat terrainAttributes "~a is ~a" NIL)
+
+(genFormat directionBetweenObjects "the direction from ~a to ~a is ~a" NIL)
+
+(genFormat alertnessLevel "~a is ~a" NIL)
+
+(genFormat startsAfterEndingOf "~a starts after the end of ~a" NIL)
+
+(genFormat oilProduction "~a produces ~a of oil" NIL)
+
+(genFormat endingDate "~a ends on ~a" NIL)
+
+(genFormat slopeRange "~a's slope range is ~a" NIL)
+
+(genFormat eventHonors "~a honors ~a" NIL)
+
+(genFormat continuouslyConnectedTo "~a and ~a are seemlessly connected" NIL)
+
+(genFormat government "~a's government is ~a" NIL)
+
+(genFormat populationGrowthRate "the annual population growth rate of ~a is ~a" NIL)
+
+(genFormat agentThreatensInterest "~a threatens ~a's interest ~a" NIL)
+
+(genFormat representsAgentInEvent "~a represents ~a in ~a" NIL)
+
+(genFormat actionExpressesFeeling "~a expresses ~a" NIL)
+
+(genFormat trajectoryPassesThrough "~a passes through ~a" NIL)
+
+(genFormat northwestOf "~a is northwest of ~a" NIL)
+
+(genFormat RentingFn "~a renting" NIL)
+
+(genFormat startingPoint "~a starts at ~a" NIL)
+
+(genFormat CancerFn "~a cancer" NIL)
+
+(genFormat DateInSituationFn "~a ~a of ~a" NIL)
+
+(genFormat pathState "the path-state of ~a is ~a" NIL)
+
+(genFormat widthOfObject "~a is ~a wide" NIL)
+
+(genFormat cityInState "~a is in ~a" NIL)
+
+(genFormat cutLinkInSystem "removing the link ~a from ~a results in a disconnected path system" NIL)
+
+(genFormat volumeOfObject "~a has a volume of ~a" NIL)
+
+(genFormat facesObject "~a's ~a axis faces ~a" NIL)
+
+(genFormat IrregularForcesFn "irregular ~a forces" NIL)
+
+(genFormat governedByAgreement "~a is governed by ~a" NIL)
+
+(genFormat MediumAmountFn "a medium level of ~a" NIL)
+
+(genFormat topicOfInfoTransfer "~a is about ~a" NIL)
+
+(genFormat dailyHighTemperature "~a's daily high temperature is ~a" NIL)
+
+(genFormat ExteriorRegionFn "exterior region of ~a" NIL)
+
+(genFormat holdsInTime-Always "the assertions in ~a are True throughout the temporal extent of ~a" NIL)
+
+(genFormat CentralRegionFn "the central area of ~a" NIL)
+
+(genFormat portalConnectsRegions "~a connects ~a and ~a" NIL)
+
+(genFormat wearsClothing "~a wears ~a" NIL)
+
+(genFormat LocalLinkCutSetFlowCapacityFn "the sum of local flow capacity over ~a in ~a" NIL)
+
+(genFormat transparencyOfObject "~a is ~a" NIL)
+
+(genFormat CenterLineOfPathFn "~a's centerline" NIL)
+
+(genFormat PosteriorRegionFn "the posterior region of ~a" NIL)
+
+(genFormat nativeLanguage "~a's native language is ~a" NIL)
+
+(genFormat rateOfRotationOfObject "the angular velocity of ~a is ~a" NIL)
+
+(genFormat relevantInTypeOfPlace-Somewhere "the assertions in ~a are relevant at least somewhere in every ~a" NIL)
+
+(genFormat weaponEffectiveRange "~a's effective range is ~a" NIL)
+
+(genFormat spouse "~a's spouse is ~a" NIL)
+
+(genFormat temporallyCooriginating "~a and ~a start simultaneously" NIL)
+
+(genFormat emptiesInto "~a empties into ~a" NIL)
+
+(genFormat SubPathBetweenFn "the subpath of ~a between ~a and ~a" NIL)
+
+(genFormat hasStatusWithAgent "~a's status with ~a is ~a" NIL)
+
+(genFormat LengthOfListFn "the length of ~a" NIL)
+
+(genFormat NodesCut-SubSystemFn "the subsystem of ~a with all nodes in ~a cut" NIL)
+
+(genFormat northing "~a's northing is ~a" NIL)
+
+(genFormat areaToProtect "~a is an area to protect" NIL)
+
+(genFormat equals "~a is identical to ~a" NIL)
+
+(genFormat majorReligions "~a's major religions include ~a" NIL)
+
+(genFormat positiveVestedInterest "~a has a positive vested interest in ~a" NIL)
+
+(genFormat eventSupports "~a fulfills a precondition for ~a" NIL)
+
+(genFormat eventOccursAt "the location of ~a is ~a" NIL)
+
+(genFormat hasPhysiologicalAttributes "~a is ~a" NIL)
+
+(genFormat formedByConfluenceOf "~a merges into the ~a" NIL)
+
+(genFormat above-Directly "~a is directly above ~a" NIL)
+
+(genFormat agreementForbids "~a forbids ~a from ~a" NIL)
+
+(genFormat cost "~a costs ~a" NIL)
+
+(genFormat echelonOfUnit "~a's echelon is ~a" NIL)
+
+(genFormat boilingPoint "~a's boiling point is ~a" NIL)
+
+(genFormat stepLocation "~a changes at ~a" NIL)
+
+(genFormat hasSameEntityAs "~a and ~a are both subabstractions of the same entity" NIL)
+
+(genFormat urgeSatisfied "~a satisfies the ~a" NIL)
+
+(genFormat pointOnCycle "~a is a point on the cyclic path ~a" NIL)
+
+(genFormat northeastOf "~a is northeast of ~a" NIL)
+
+(genFormat endsDuring "~a ends during ~a" NIL)
+
+(genFormat temporalBoundsIntersect "~a and ~a temporally intersect" NIL)
+
+(genFormat hasPreparationAttributes "~a is ~a" NIL)
+
+(genFormat oilPriceCharged "~a charges ~a for it's oil" NIL)
+
+(genFormat substring-CaseInsensitive "~a is a case-insensitive substring of ~a" NIL)
+
+(genFormat elementOf "~a is an element of ~a" NIL)
+
+(genFormat dailyLowTemperature "~a's daily low temperature is ~a" NIL)
+
+(genFormat totalDisplacement "during ~a there is ~a displacement" NIL)
+
+(genFormat degreeOfTrafficability "~a's degree of trafficability is ~a" NIL)
+
+(genFormat holidayCelebratedInRegion "~a is typically observed in ~a" NIL)
+
+(genFormat fieldsOfCompetence "~a is competent in ~a" NIL)
+
+(genFormat eastOf "~a is east of ~a" NIL)
+
+(genFormat products "~a produces ~a" NIL)
+
+(genFormat objectTested "~a tests ~a" NIL)
+
+(genFormat boss "~a's boss is ~a" NIL)
+
+(genFormat ChemicalWeaponFn "chemical weapons containing ~a" NIL)
+
+(genFormat RoundDownFn "~a, rounded down" NIL)
+
+(genFormat inputsDestroyed "after ~a, ~a ceases to exist in its pre-event state" NIL)
+
+(genFormat pointOnTraversal "~a is a point on ~a" NIL)
+
+(genFormat populationDuring "~a's population during ~a is ~a" NIL)
+
+(genFormat parallelObjects "~a and ~a are parallel objects" NIL)
+
+(genFormat above-Higher "~a is higher than ~a" NIL)
+
+(genFormat cutNodeInSystem "removing the node ~a from ~a results in a disconnected path system" NIL)
+
+(genFormat implies "if ~a, then ~a" NIL)
+
+(genFormat transformedInto "~a is transformed into ~a" NIL)
+
+(genFormat statementOfPurpose "the stated purpose of ~a is: ~a" NIL)
+
+(genFormat NoAmountFn "a zero level of ~a" NIL)
+
+(genFormat in-Floating "~a is floating in ~a" NIL)
+
+(genFormat holdsInPlace-Somewhere "the assertions in ~a are True at least somewhere in the spatial extent of ~a" NIL)
+
+(genFormat CoastlineFn "the coastline of ~a" NIL)
+
+(genFormat addressText "~a's address is ~a" NIL)
+
+(genFormat SituatedLinkCutSetFlowCapacityFn "the sum of net flow capacity over ~a in ~a" NIL)
+
+(genFormat BorderFn "~a's border" NIL)
+
+(genFormat relevantInTypeOfPlace-Everywhere "the assertions in ~a are relevant everywhere in each ~a" NIL)
+
+(genFormat pipesDirectlyConnected "~a and ~a are directly connected" NIL)
+
+(genFormat NodesFn "the set of all nodes in ~a" NIL)
+
+(genFormat causes-EventEvent "~a is an event causing ~a to happen" NIL)
+
+(genFormat SetOfListMembersFn "the set of all members of ~a" NIL)
+
+(genFormat LinksCut-SubSystemFn "the subsystem of ~a with all links in ~a cut" NIL)
+
+(genFormat easting "~a's easting is ~a" NIL)
+
+(genFormat goalsMt "~a has every assertion in ~a as a goal" NIL)
+
+(genFormat jurisdictionRegion "~a has jurisdiction over ~a" NIL)
+
+(genFormat weaponRange "the maximum range of ~a is ~a" NIL)
+
+(genFormat sees "~a sees ~a" NIL)
+
+(genFormat greaterThan "~a is greater than ~a" NIL)
+
+(genFormat pointQuantValue "~a is equivalent to ~a" NIL)
+
+(genFormat unchangedActors "~a does not change ~a" NIL)
+
+(genFormat IntervalMinFn "at least ~a" NIL)
+
+(genFormat above-Overhead "~a is directly above ~a without touching it" NIL)
+
+(genFormat volatilityOfSubstance "~a has the attribute '~a'" NIL)
+
+(genFormat sovereignAllegianceOfOrg "~a owes allegiance to ~a" NIL)
+
+(genFormat arg4Genl "the fourth argument to ~a must have ~a as a generalization (genls) relation" NIL)
+
+(genFormat hangsFrom "~a hangs from ~a" NIL)
+
+(genFormat overrides "~a overrides ~a" NIL)
+
+(genFormat stepInitialValue "~a's initial value is ~a" NIL)
+
+(genFormat pointOnPath-Generic "~a is a point on the generic path ~a" NIL)
+
+(genFormat likesObject "~a likes ~a" NIL)
+
+(genFormat pointOnPath "~a is a point on the simple path ~a" NIL)
+
+(genFormat taskPriorityExceeds "~a has a higher task priority than ~a" NIL)
+
+(genFormat perpendicularVectors "~a and ~a are perpendicular" NIL)
+
+(genFormat weaponEffectiveRange-Max "~a's maximum effective range is ~a" NIL)
+
+(genFormat knows "~a knows that ~a" NIL)
+
+(genFormat age "~a is ~a old" NIL)
+
+(genFormat YearFn "~a" NIL)
+
+(genFormat subjectToCOC "~a is obliged to follow ~a" NIL)
+
+(genFormat axialTiltRange "~a's axial tilt range is ~a" NIL)
+
+(genFormat adjacentTo "~a is adjacent to ~a" NIL)
+
+(genFormat IndustryOfRegionFn "the ~a of ~a" NIL)
+
+(genFormat suffrageAge "citizens of ~a can legally vote at the age of ~a" NIL)
+
+(genFormat equalStrings-CaseInsensitive "~a and ~a are case-insensitively equal strings" NIL)
+
+(genFormat includedItems "~a includes ~a" NIL)
+
+(genFormat mate "~a and ~a are mates" NIL)
+
+(genFormat ConditionalProbabilityFn "the probability that '~a', given that '~a'" NIL)
+
+(genFormat IntervalEndedByFn "the time interval ending when ~a begins" NIL)
+
+(genFormat RoundUpFn "~a, rounded up" NIL)
+
+(genFormat surroundsCompletely "~a completely surrounds ~a" NIL)
+
+(genFormat structureOfUnitUnspecified "the structure of ~a is unspecified" NIL)
+
+(genFormat elasticityOfObject "~a has the attribute '~a'" NIL)
+
+(genFormat businessPartners "~a and ~a are business partners" NIL)
+
+(genFormat oppositeAttributeValue "~a is the opposite of ~a" NIL)
+
+(genFormat pathBetween "~a is a path between and ~a and ~a" NIL)
+
+(genFormat in-Permeates "~a permeates ~a" NIL)
+
+(genFormat PureFn "pure ~a" NIL)
+
+(genFormat uniquePartTypes "every ~a has exactly one ~a" NIL)
+
+(genFormat cloudinessOfRegion "~a is ~a" NIL)
+
+(genFormat QuartersDuration "~a quarter-years" NIL)
+
+(genFormat holdsInPlace-Everywhere "the assertions in ~a are True throughout the spatial extent of ~a" NIL)
+
+(genFormat facesDirection "the intrinsic forward axis of ~a points ~a" NIL)
+
+(genFormat startsDuring "~a starts during ~a" NIL)
+
+(genFormat Kappa "Kappa for ~a such that ~a" NIL)
+
+(genFormat distanceAboveSeaLevel "~a is ~a above sea level" NIL)
+
+(genFormat outranks-Absolute "~a outranks ~a" NIL)
+
+(genFormat relevantInTime-Sometime "the assertions in ~a are relevant at least sometime during the temporal extent of ~a" NIL)
+
+(genFormat sheetSurfaceConnected "~a covers ~a like a membrane" NIL)
+
+(genFormat direction-Pointing "~a points ~a" NIL)
+
+(genFormat PointsFn "the set of all points in ~a" NIL)
+
+(genFormat negativeVestedInterest "~a has a negative vested interest in ~a" NIL)
+
+(genFormat fastenedTo "~a is fastened to ~a" NIL)
+
+(genFormat causes-SitProp "~a causes it to become True that: ~a" NIL)
+
+(genFormat TraversalFn "the traversal of ~a" NIL)
+
+(genFormat desiresMt "~a wants every assertion in ~a to be True" NIL)
+
+(genFormat cohabitants "~a lives with ~a" NIL)
+
+(genFormat temporallyStartedBy "~a starts before ~a ends" NIL)
+
+(genFormat LeftRegionFn "left region of ~a" NIL)
+
+(genFormat finitaryJunctionInSystem "~a is a finitary junction in ~a" NIL)
+
+(genFormat phaseLineBoundsRegion "~a demarcates ~a" NIL)
+
+(genFormat TimesPerYear "~a times per year" NIL)
+
+(genFormat symbolizes "~a symbolizes ~a" NIL)
+
+(genFormat destination-RoundTrip "~a is the destination in ~a" NIL)
+
+(genFormat maxNrOfPassengers "the maximum number of passengers in ~a is ~a" NIL)
+
+(genFormat above-Generally "~a is above ~a" NIL)
+
+(genFormat suspendedIn "~a is suspended in ~a" NIL)
+
+(genFormat stepFinalValue "~a's final value is ~a" NIL)
+
+(genFormat nodeInSystem "~a is a node in the path system ~a" NIL)
+
+(genFormat resistanceToRadiation "~a has the attribute '~a'" NIL)
+
+(genFormat weaponEffectiveRange-Min "~a's minimum effective range is ~a" NIL)
+
+(genFormat origin-RoundTrip "~a is a round trip from ~a" NIL)
+
+(genFormat MinRangeFn "the minimum range subsumed by ~a and ~a" NIL)
+
+(genFormat governmentType "~a's system of government is ~a" NIL)
+
+(genFormat cohabitingFamilyMembers "~a and ~a are cohabiting family members" NIL)
+
+(genFormat languageSpoken "~a speaks ~a" NIL)
+
+(genFormat cospatial "~a has the same spatial extent as ~a" NIL)
+
+(genFormat simultaneousWith "~a and ~a occur at the same time" NIL)
+
+(genFormat EndFn "the end of ~a" NIL)
+
+(genFormat rents "~a rents ~a" NIL)
+
+(genFormat frontLineOfTroops "the front line troops of ~a are ~a" NIL)
+
+(genFormat RoundClosestFn "~a, rounded to the closest integer" NIL)
+
+(genFormat traversalPassesThrough "~a passes through ~a" NIL)
+
+(genFormat illuminationLevel "~a's illumination is ~a" NIL)
+
+(genFormat shearStrengthOfObject "~a has ~a" NIL)
+
+(genFormat consumptionQuotaDuring "~a's consumption quota of ~a during ~a is ~a" NIL)
+
+(genFormat inflationRateDuring "~a's inflation rate during ~a is ~a" NIL)
+
+(genFormat controls "~a controls ~a" NIL)
+
+(genFormat endToEndConnected "~a is connected to ~a, end-to-end" NIL)
+
+(genFormat dislikesObject "~a dislikes ~a" NIL)
+
+(genFormat totalBudgetExpenditures "~a's total budget expenditures during ~a totals to ~a" NIL)
+
+(genFormat distanceBetween "the shortest distance between ~a and ~a is ~a" NIL)
+
+(genFormat resistanceToBioDeterioration "~a has ~a" NIL)
+
+(genFormat verticalClimb "~a can climb an object ~a high" NIL)
+
+(genFormat spatiallyIntersects "~a and ~a spatially intersect" NIL)
+
+(genFormat possesses "~a possesses ~a" NIL)
+
+(genFormat portalHasCovering "~a has ~a" NIL)
+
+(genFormat ArmyFn "~a's army" NIL)
+
+(genFormat accessibleFromInSystem "~a is accessible from ~a in the semi-directed path system ~a" NIL)
+
+(genFormat relevantInTime-Always "the assertions in ~a are relevant throughout the temporal extent of ~a" NIL)
+
+(genFormat in-Lodged "~a is lodged in ~a" NIL)
+
+(genFormat surrounds-3D "~a surrounds ~a in three dimensions" NIL)
+
+(genMassNoun Water)
+
+(genMassNoun SpokenCommunicating)
+
+(genMassNoun VisibleLight)
+
+(genMassNoun Time-Quantity)
+
+(genMassNoun MolecularStuff)
+
+(genMassNoun VisualPerception)
+
+(genMassNoun EdibleStuff)
+
+(genMassNoun Cancer)
+
+(genMassNoun LevelOfExhaustion)
+
+(genMassNoun Fog)
+
+(genMassNoun Always-TimeInterval)
+
+(genMassNoun LevelOfDiscomfort)
+
+(genMassNoun Mass)
+
+(genMassNoun RelativeHumidity)
+
+(genMassNoun Malleability)
+
+(genMassNoun Food-ReadyToEat)
+
+(genMassNoun ConductorResistance)
+
+(genMassNoun LiquidStateOfMatter)
+
+(genMassNoun Visibility)
+
+(genMassNoun MensClothing)
+
+(genMassNoun EarthStuff)
+
+(genMassNoun News)
+
+(genMassNoun WomensClothing)
+
+(genMassNoun Money)
+
+(genMassNoun Oil)
+
+(genMassNoun EcholocationPerception)
+
+(genMassNoun Volatility)
+
+(genMassNoun ElectromagneticRadiation)
+
+(genMassNoun TouchPerception)
+
+(genMassNoun OuterGarment)
+
+(genMassNoun Anesthesia)
+
+(genMassNoun Water-Saline)
+
+(genMassNoun DomesticatedAnimalFood)
+
+(genMassNoun Food)
+
+(genMassNoun Exercising)
+
+(genMassNoun Raininess)
+
+(genMassNoun SnowProcess)
+
+(genMassNoun CookingFood)
+
+(genMassNoun Transparency)
+
+(genMassNoun Navigating)
+
+(genMassNoun Plastic)
+
+(genMassNoun Hearing)
+
+(genMassNoun NonExclusiveUserRights)
+
+(genMassNoun StoneStuff)
+
+(genMassNoun TensileStrength)
+
+(genMassNoun EnergyStuff)
+
+(genMassNoun StructuralSupportStuff)
+
+(genMassNoun Leather)
+
+(genMassNoun Starvation)
+
+(genMassNoun SmellPerception)
+
+(genMassNoun LightningEvent)
+
+(genMassNoun StockHoldings)
+
+(genMassNoun SuperconductorResistance)
+
+(genMassNoun Perceiving)
+
+(genMassNoun ElectricalResistance)
+
+(genMassNoun NaturalTangibleStuff)
+
+(genMassNoun InsulatorResistance)
+
+(genMassNoun LevelOfHunger)
+
+(genMassNoun InorganicStuff)
+
+(genMassNoun WindProcess)
+
+(genMassNoun Skin)
+
+(genMassNoun RadiationResistance)
+
+(genMassNoun MilitaryHardware)
+
+(genMassNoun Solubility)
+
+(genMassNoun ThermalConductivity)
+
+(genMassNoun TastePerception)
+
+(genMassNoun 
+  (SolidFn Glass))
+
+(genMassNoun SemiconductorStuff)
+
+(genMassNoun LightIntensity)
+
+(genMassNoun Malnutrition)
+
+(genMassNoun Wood)
+
+(genMassNoun SensoryInformation)
+
+(genMassNoun TemporaryWork)
+
+(genMassNoun VegetableMatter)
+
+(genMassNoun ExperiencingHunger)
+
+(genMassNoun Strength)
+
+(genMassNoun OrganicStuff)
+
+(genMassNoun Glass)
+
+(genMassNoun ProtectiveAttire)
+
+(genMassNoun Rigidity)
+
+(genMassNoun SeaWater)
+
+(genMassNoun ListeningDeliberately)
+
+(genMassNoun conceptuallyRelated)
+
+(genMassNoun MineralOre)
+
+(genMassNoun Starving)
+
+(genMassNoun DigestionEvent)
+
+(genMassNoun resistanceOfObject)
+
+(genMassNoun Fungus)
+
+(genMassNoun PieceOfFreeSpace)
+
+(genMassNoun Paper)
+
+(genMassNoun CombustibleFuelSubstance)
+
+(genMassNoun FusionEvent)
+
+(genMassNoun BiologicalDecompositionEvent)
+
+(genMassNoun DecompositionProcess)
+
+(genMassNoun SomethingExisting)
+
+(genMassNoun Manager)
+
+(genMassNoun HourlyWork)
+
+(genMassNoun Oxide)
+
+(genMassNoun HardwareTool)
+
+(genMassNoun Mescaline)
+
+(genMassNoun Steel)
+
+(genMassNoun MuscleTissue)
+
+(genMassNoun Music)
+
+(genMassNoun FurniturePiece)
+
+(genMassNoun FluidTangibleThing)
+
+(genMassNoun ShearStrength)
+
+(genMassNoun LevelOfRelaxationFeeling)
+
+(genMassNoun Punishment)
+
+(genMassNoun Petroleum-CrudeOil)
+
+(genMassNoun Research)
+
+(genMassNoun PrecipitationParticle)
+
+(genMassNoun NaturalGas)
+
+(genMassNoun MonotheisticReligion)
+
+(genMassNoun Concrete)
+
+(genMassNoun knowsAbout)
+
+(genMassNoun ShowingSupportForSomeone)
+
+(genMassNoun Aflatoxin)
+
+(genMassNoun TechnologicalAssistance)
+
+(genMassNoun power-Geopolitical)
+
+(genMassNoun BiologicalToxin)
+
+(genMassNoun Cohesiveness)
+
+(genMassNoun Porosity)
+
+(genMassNoun ArableLand)
+
+(genMassNoun credibility)
+
+(genMassNoun TerrainTrafficabilityLevel)
+
+(genMassNoun power-Military)
+
+(genMassNoun Perceiving-Voluntary)
+
+(genMassNoun MustardGas)
+
+(genMassNoun DissidentStatus)
+
+(genMassNoun degreeOfTrafficability)
+
+(genMassNoun NerveGas)
+
+(genMassNoun BrucellaBacterium)
+
+(genMassNoun TransportingPeople)
+
+(genMassNoun Anthrax-DryForm)
+
+(genMassNoun DiplomaticSupport)
+
+(genMassNoun Napalm)
+
+(genMassNoun ForeignPolicyGoal)
+
+(genMassNoun RotationOfEarth)
+
+(genMassNoun economicStability)
+
+(genMassNoun MilitaryOccupation)
+
+(genMassNoun ReconnaissanceDevice)
+
+(genMassNoun UnderwaterTransportation)
+
+(genMassNoun CooperationEvent)
+
+(genMassNoun AnthraxInfection)
+
+(genMassNoun Perceiving-Involuntary)
+
+(genMassNoun Artillery-Towed)
+
+(genMassNoun Persecution)
+
+(genMassNoun AgentOrange)
+
+(genMassNoun TearGas)
+
+(genMassNoun RicinToxin)
+
+(genMassNoun importanceOfThingInSet)
+
+(genMassNoun UltraSound)
+
+(genMassNoun SteelIndustry)
+
+(genMassNoun PoliticalSupport)
+
+(genMassNoun Artillery-SelfPropelled)
+
+(genMassNoun HydrogenCyanide)
+
+(genMassNoun IrrigatedLand)
+
+(genMassNoun Petroleum-Condensate)
+
+(genMassNoun WatchingSomething)
+
+(genMassNoun NationalizingAnIndustry)
+
+(genMassNoun Coal)
+
+(genMassNoun LiquidFn)
+

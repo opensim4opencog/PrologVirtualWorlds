@@ -1,0 +1,61 @@
+This zone was written by Doctor of EnvyMUD.  I did the minimal changes needed to 
+change it to circleMUD format.
+
+This included the proper headers for the .zon file and the proper file terminators.
+
+The Zone is pretty much drop in, with the following exceptions:
+
+Some of the items don't have the right wear flags (wield, hold, arms etc)
+Since our mud has some non standard ones, I have left them off for you to 
+decide where they will best fit in your mud.
+
+The spec proc list below is from the file, They are not a part of stock Circle, 
+but I include them for completeness.
+
+To use this zone, make sure that SOMEWHERE in the zone, near the begining, the 
+authors name is visible to the players, a sign or edesc in a room works very well.
+
+Include the area and the author (perhaps the EnvyMUD name also) in your help file
+for areas.  And even a small mention in your credits file would be nice.  One of 
+the IMP's suggested if you are feeling generous that you mention that the other 
+areas can be gleaned from the EnvyMUD 2.2 on the ftp.envy.org site
+
+I myself need no mention, as the work I did was very minimal, and quite truthfully, 
+selfish in nature *8).
+
+Many thanks to the EnvyMUD people for allowing this to be shared.
+
+
+Ghost Shaidan, IMP of Questionable Sanity, agis.ag.net (204.164.158.2) 4000
+
+
+Specials list to Follow:
+
+#SPECIALS
+M  9301 spec_thief
+M  9313 spec_breath_fire
+M  9314 spec_breath_fire
+M  9315 spec_cast_cleric
+M  9316 spec_cast_cleric
+M  9317 spec_cast_cleric
+M  9318 spec_cast_cleric
+M  9319 spec_cast_cleric
+M  9320 spec_cast_cleric
+M  9321 spec_cast_cleric
+M  9322 spec_cast_cleric
+M  9323 spec_cast_cleric
+M  9324 spec_cast_cleric
+M  9325 spec_cast_cleric
+M  9326 spec_cast_cleric
+M  9327 spec_cast_cleric
+M  9328 spec_cast_cleric
+M  9329 spec_cast_cleric
+M  9330 spec_cast_mage
+M  9331 spec_cast_mage
+M  9332 spec_breath_acid
+S
+
+
+I do not think that the cleric spec they are talking about is a friendly healing 
+others one, so you will need to work that one out yourself (maybe the mage one will 
+do in a pinch)

@@ -1,0 +1,101 @@
+#10
+The Starship Enterprise~
+* Written in 2001 by Crazyman.
+1099 10 2
+* Mobiles
+M 0 1013 1 1025         Alexander
+M 0 1001 1 1029         Data
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1003 10 12                  Gold Uniform
+G 1 1000 10                             Phaser
+M 0 1003 1 1015         Dr. Crusher
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1004 10 12                  Blue Uniform
+G 1 1009 10                             Medical Tricorder
+G 1 1009 10                             Medical Tricorder
+G 1 1009 10                             Medical Tricorder
+M 0 1000 1 1000         Geordi
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge                      
+E 1 1003 10 12                  Gold Uniform 
+E 1 1008 1 18                   VISOR         
+M 0 1007 1 1021         Guinan
+G 1 1020 100                    Tea
+G 1 1021 100                    Synthehol
+G 1 1022 100                    Ferengi Ale
+G 1 1023 100                    Romulan Whisky
+G 1 1024 100                    Lemonade "Prune Juice"
+G 1 1025 100                  Vulcan Beer
+M 0 1008 1 1006         O'Brien
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1003 10 12                  Gold Uniform
+G 1 1000 10                             Phaser
+M 0 1006 1 1035         Picard
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1002 10 12                  Red Uniform
+G 1 1001 5                      Phaser Rifle
+G 1 1011 5                              Picard's Flute
+M 0 1005 1 1036         Riker
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1002 10 12                  Red Uniform
+G 1 1012 1                      Trombone 
+M 0 1004 1 1007         Troi
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1004 10 12                  Blue Uniform
+M 0 1009 1 1016         Wesley          
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1002 10 12                  Red Uniform
+M 0 1002 1 1025         Worf
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1003 10 12                  Gold Uniform
+G 1 1000 10                             Phaser
+E 1 1007 1 5                    Sash
+M 0 1010 1 1035         Livingston
+M 0 1011 1 1003         Spot            
+M 0 1012 7 1000         Ensign                  
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1003 10 12                  Gold Uniform
+M 0 1012 7 1004         Ensign                  
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1003 10 12                  Gold Uniform
+M 0 1012 7 1011         Ensign
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1002 10 12                  Red Uniform
+M 0 1012 7 1020         Ensign
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1002 10 12                  Red Uniform
+M 0 1012 7 1024         Ensign
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1004 10 12                  Blue Uniform
+M 0 1012 7 1022         Ensign
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1004 10 12                  Blue Uniform
+M 0 1012 7 1036         Ensign           
+E 1 1005 30 8                   Boots
+E 1 1006 25 3                   Comm Badge
+E 1 1004 10 12                  Blue Uniform
+O 0 1010 3 1000                 Dilithium Crystal               
+O 0 1010 3 1000                 Dilithium Crystal       
+O 0 1010 3 1000                 Dilithium Crystal       
+O 0 1009 3 1015                 Tricorder
+O 0 1009 3 1015                 Tricorder
+O 0 1009 3 1015                 Tricorder
+D 0 1022 2 1                    Shuttle Bay Door (Inside)
+D 0 1039 0 1                    Shuttle Bay Door (Outside)
+*
+S
+$

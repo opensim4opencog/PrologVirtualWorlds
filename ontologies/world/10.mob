@@ -1,0 +1,294 @@
+#1000
+Lieutenant Commander Geordi LaForge~
+Geordi LaForge~
+Lieutenant Commander Geordi LaForge is standing here.
+~
+Geordi is the Chief Engineer of the Enterprise. He's
+blind, so he wears a special VISOR that lets him see
+things.
+~
+glmnqr dp 350 E
+46 3 -7 12d12+3200 9d9+42
+75000 425000
+8 8 1
+BareHandAttack: 0
+Str: 16
+Int: 16
+Wis: 16
+Dex: 16
+Con: 16
+Cha: 16
+E
+#1001
+Lieutenant Commander Data Android~
+Data~
+Lieutenant Commander Data is here, trying to be more human.
+~
+Data is the only android on the Enterprise, and the only 
+android in all of Starfleet. He possesses super-human
+strength, and is extremely tough.
+~
+eglmnopqr dp 350 E
+60 1 -9 18d18+4000 10d10+75
+125000 800000
+8 8 1
+BareHandAttack: 6
+Str: 20
+Int: 20
+Wis: 20
+Dex: 20
+Con: 20
+Cha: 20
+E
+#1002
+Lieutenant Worf Klingon~
+Lieutenant Worf~
+Lieutenant Worf is here, looking pretty mean.
+~
+Worf is the first Klingon to have joined Starfleet. He's 
+Chief of Security of the Enterprise, and he's plenty
+strong.
+~
+glmnqr dp 350 E
+54 2 -8 12d12+3400 9d9+60
+10000 550000
+8 8 1
+BareHandAttack: 7
+Str: 19
+Int: 17
+Wis: 17
+Dex: 17
+Con: 17
+Cha: 17
+E
+#1003
+Doctor Beverly Crusher~
+Doctor Crusher~
+Lieutenant Beverly Crusher is here, looking for someone to heal.
+~
+Doctor Crusher is the Enterprise's Chief Medical Officer. Wesley
+is her son. Her husband was killed years ago in an accident
+on another starship which was also commanded by Captain Picard.
+~
+glmnqr dp 350 E
+46 3 -7 12d12+3200 9d9+42
+75000 425000
+8 8 2
+BareHandAttack: 3
+Str: 16
+Int: 16
+Wis: 16
+Dex: 16
+Con: 16
+Cha: 16
+E
+#1004
+Counselor Deanna Troi~
+Counselor Troi~
+Counselor Deanna Troi is here.
+~
+Counselor Troi is the ship's main counselor. She's half
+betazoid, which means that she can read people's minds.
+~
+glmnqr dp 350 E
+46 3 -7 12d12+3200 9d9+42
+75000 425000
+8 8 2
+BareHandAttack: 1
+Str: 16
+Int: 16
+Wis: 16
+Dex: 16
+Con: 16
+Cha: 16
+E
+#1005
+Commander William Riker~
+Commander Riker~
+Commander William Riker is here, staring at you.
+~
+Commander Riker is the Enterprise's first officer. He's
+in charge of keeping the crew in line.
+~
+glmnqr dp 350 E
+50 2 -8 12d12+3200 9d9+52
+75000 500000
+8 8 1
+BareHandAttack: 13
+Str: 18
+Int: 18
+Wis: 18
+Dex: 18
+Con: 18
+Cha: 18
+E
+#1006
+Captain Jean Luc Jean-Luc Picard~
+Captain Picard~
+Captain Jean-Luc Picard is standing here, watching you.
+~
+Captain Picard is a very important man. He's in charge of
+Starfleet's flagship, the Enterprise. He's very smart, and
+very wise. Don't mess with him!
+~
+eglmnopqr dhp 350 E
+80 0 -10 20d20+5000 12d12+75
+750000 1500000
+8 8 1
+BareHandAttack: 9
+Str: 25
+Int: 25
+Wis: 25
+Dex: 25
+Con: 25
+Cha: 25
+E
+#1007
+Guinan~
+Guinan~
+Guinan is here, tending the bar.
+~
+Guinan is a strange being. She's lived for thousands of
+years and experienced many things, but now she's decided
+to work on the Enterprise as a bartender.
+~
+bglmnqr dp 350 E
+50 4 -6 12d12+2600 9d9+36
+50000 400000
+8 8 2
+BareHandAttack: 11
+Str: 16
+Int: 16
+Wis: 16
+Dex: 16
+Con: 16
+Cha: 16
+E
+#1008
+Chief O'Brien Transporter~
+Chief O'Brien~
+Chief O'Brien is here, waiting to teleport you somwhere.
+~
+Chief O'Brien is the transporter chief on the Enterprise. It's
+his job to make sure everyone arrives (and leaves) in one
+piece, instead of trillions of atoms. 
+~
+bglmnqr dp 350 E
+50 4 -6 12d12+2600 9d9+36
+50000 400000
+8 8 1
+BareHandAttack: 11
+Str: 16
+Int: 16
+Wis: 16
+Dex: 16
+Con: 16
+Cha: 16
+E
+#1009
+Wesley Crusher~
+Wesley~
+Wesley Crusher is here, eagerly trying to earn your praise.
+~
+Wesley Crusher is not even an official officer, but he serves
+as an acting Ensign on the bridge. He got this position only
+because Captain Picard feels guilty about killing his father.
+~
+ghlmnqr dp 350 E
+32 6 -2 12d12+1400 9d9+24
+18000 125000
+8 8 1
+BareHandAttack: 4
+Str: 13
+Int: 13
+Wis: 13
+Dex: 13
+Con: 13
+Cha: 13
+E
+#1010
+Livingston fish~
+Livingston~
+Livingston the fish is here, swimming about in his tank.
+~
+Livingston is Captain Picard's pet fish. He's some sort of
+exotic breed, and he's expensive to feed and keep alive.
+~
+bglmn dp 350 E
+24 6 0 12d12+800 9d9+14
+5000 90000
+8 8 1
+BareHandAttack: 4
+Str: 13
+Int: 13
+Wis: 13
+Dex: 13
+Con: 13
+Cha: 13
+E
+#1011
+spot the cat~
+Spot~
+Spot, Data's pet cat, is sitting here looking at you.
+~
+Spot is Data's orange coloured cat. Data is always trying
+to become more human, so he thinks that having a pet might
+help him achieve his goal.
+~
+bglmn dp 350 E
+24 6 0 12d12+800 9d9+14
+5000 90000
+8 8 1
+BareHandAttack: 4
+Str: 13
+Int: 13
+Wis: 13
+Dex: 13
+Con: 13
+Cha: 13
+E
+#1012
+ensign~
+the ensign~
+A nervous looking ensign is standing here, watching you.
+~
+These ensigns make up the backbone of the Enterprise. They
+clean things, do jobs the higher ups won't even consider
+doing, and get yelled at all the time.
+~
+glmnqr dp 350 E
+24 6 2 8d8+1600 8d8+26
+12000 80000
+8 8 1
+BareHandAttack: 10
+Str: 14
+Int: 14
+Wis: 14
+Dex: 14
+Con: 14
+Cha: 14
+E
+#1013
+alexander rozhenko~
+alexander rozhenko~
+Alexander Rozhenko is here, practicing laughing hour.
+~
+Alexander Rozhenko is Worf's son. His mother was half human
+and half Klingon, so Alexander is 3/4 Klingon. He's quite
+small, but since he's a Klingon he's very strong.
+~
+glmnqr dp 0 E
+24 6 2 8d8+1600 8d8+26
+12000 80000
+8 8 1
+BareHandAttack: 10
+Str: 14
+Int: 14
+Wis: 14
+Dex: 14
+Con: 14
+Cha: 14
+E
+
+$
+

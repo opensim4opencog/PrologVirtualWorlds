@@ -1,0 +1,993 @@
+;; /home/siegel/temp/HumanSocialLifeMt-non-implications.kif
+
+
+(arg2Format salutation SetTheFormat)
+
+(arg2Format majorUndertakingsOf SetTheFormat)
+
+(comment relatives "(#$relatives PERSON1 PERSON2) means PERSON2 is some relative of PERSON1, howsoever the relationship is traced, biologically or through custom, rearing or adoption.")
+
+(comment SocialClass-Lifestyle "The collection of attributes that indicate a person's social class, as determined by the person's general lifestyle, quality of life, and relative access to the (material and security oriented) desiderata of life.  It may depend on a cultural non-material system of social rank, based on birth, office, manners, vocal accent or other factors.  Members of this collection include #$LowerMiddleClass, #$UpperClass, etc.")
+
+(comment SuspendedMember "#$SuspendedMember is an attribute representing the status of a member under suspension from an organization.  Suspension implies that during a limited time period the member loses some or all of its member rights and privileges.  Cf. #$ExpelledMember.")
+
+(comment OrganizationalMemberStatus "The collection of statuses that a member may have with respect to an organization; for example, #$CurrentMember, #$ExpelledMember, #$NonMember.")
+
+(comment PermanentMember "The status of a permanent member of an organization.")
+
+(comment NonMember "#$NonMember is an attribute representing the status of an agent who is not currently a member of a certain organization.  Cf. #$CurrentMember, #$SuspendedMember, #$ExpelledMember, #$EmeritusMember.")
+
+(comment EmeritusMember "#$EmeritusMember is an attribute representing the status of an agent that has left the membership of a certain organization without prejudice, e.g., through the expiration of its term.")
+
+(comment socialStatus "(#$socialStatus PRSN STAT GROUP DEGREE) means that the #$Person PRSN has the social status type STAT (such qualities as #$Glamor) at the generic strength level DEGREE (e.g., #$High, #$VeryLow, #$Low, etc.), according to the reference population group GROUP.  For example, in the context of 1980s America, it was True that (#$socialStatus #$Madonna #$Glamor #$HumanTeenager #$VeryHigh).  I.e., Madonna had a `high glamor' status among American teenagers in the 1980's.")
+
+(comment mother "(#$mother CHILD MOM) means MOM is one of the persons who fulfill the role of mother for CHILD.  This may or may not include CHILD's biological mother, and might include CHILD's step mother(s) or foster mother(s).")
+
+(comment AppointedMember "The status of an appointed member of an organization.")
+
+(comment socialClass "(#$socialClass PRSN CLS) means that in the surrounding culture, the #$Person PRSN has the #$SocialClass-Lifestyle CLS.  As the name suggests, this predicate indicates PRSN's approximate social status as determined by his or her style of life -- quality of life, access to material goods and services, and social associations.  It may also depend on a cultural non-material system of social rank, based on birth, office, manners, vocal accent or other factors.  E.g., (#$socialClass #$DonaldTrump #$UpperClass) was True even when he lost his fortune and was (temporarily) bankrupt; and (#$socialClass #$BillGates #$UpperMiddleClass) was True, at least for a while, after he became a billionaire.  This is a good example of a predicate whose precise meaning, and associated heuristic rules, vary quite a bit from context to context, such as from country to country, from century to century, etc.")
+
+(comment agentFulfillsObligation "(#$agentFulfillsObligation AGT OB)
+means that the #$Agent AGT fulfills the #$Obligation OB. Sometimes
+this requires a positive action on the part of the agent, such as
+repaying his debts in order to fulfill his financial obligations,
+while other times it may mean merely that he does not commit an
+action which violates some obligation; e.g., he does not blaspheme.")
+
+(comment CurrentMember "The status of being a current member of an organization, in good standing.  (Contrast with #$SuspendedMember).")
+
+(comment ElectedMember "The status of an elected member of an organization.")
+
+(comment children "(#$children PARENT CHILD) means that CHILD is a child of PARENT in the sense that PARENT cares for CHILD as a parent would, whether or not they are biologically related.")
+
+(comment FoundingMember "The status of a founding member of an organization.")
+
+(comment father "(#$father CHILD FATHER) means FATHER is one of the persons who fulfill the role of father for CHILD.  This may or may not include CHILD's biological father, and might include CHILD's step father(s) or foster father(s).")
+
+(comment friends "(#$friends X Y) means X and Y are friends; typically they have a close relationship of reciprocal care, concern, respect, enjoyment, and mutual regard based on emotional (and/or ideological and intellectual) compatibility, shared interests, etc.
+Note:  In the cases of assertions of two non-human animals being friends, there may be some anthropomorphism going on.")
+
+(comment mate "(#$mate PER1 PER2) means that PER1 and PER2 are long-term companions.  More general in meaning than spouse, this can also be used to refer to one's `significant other(s)', including boyfriend(s), girlfriend(s), one's partner in a gay relationship, etc.  The assumption in the #$HumanSocialLifeMt is that mates are bound together by relatively enduring emotional ties.")
+
+(exceptWhen 
+  (and 
+    (agentViolatesObligation ?VIO ?OB2) 
+    (obligationParts ?WIDECOC ?OB2)) 
+  (implies 
+    (and 
+      (isa ?WIDECOC Obligation) 
+      (agentFulfillsObligation ?VIO ?OB1) 
+      (obligationParts ?WIDECOC ?OB1)) 
+    (agentFulfillsObligation ?VIO ?WIDECOC)))
+
+(isa children AsymmetricBinaryPredicate)
+
+(minimizeExtent rightsGranted)
+
+(minimizeExtent likesAsFriend)
+
+(minimizeExtent acquaintances)
+
+(minimizeExtent languageSpoken)
+
+(negationInverse children children)
+
+(not 
+  (and 
+    (isa ?STEAL Stealing-Generic) 
+    (rightsGranted ?STEAL ?RIGHT) 
+    (isa ?RIGHT UserRightsAttribute)))
+
+(not 
+  (and 
+    (holdsIn ?TIME 
+      (hasMembers ?ORG ?AGT)) 
+    (holdsIn ?TIME 
+      (memberStatusInOrganization ?AGT ?ORG NonMember))))
+
+(not 
+  (and 
+    (perpetrator ?CRIME ?PERP) 
+    (victim ?CRIME ?VICTIM) 
+    (equals ?PERP ?VICTIM)))
+
+(relationAllExists fromLocation ImportExportEvent Country)
+
+(relationAllExists toLocation ImportExportEvent Country)
+
+(relationAllExists prospectiveSeller SalesActivity Agent)
+
+(relationAllExists prospectiveBuyer BuyingActivity Agent)
+
+(relationAllExists outputs MakingAnAgreement Agreement)
+
+(relationAllExists defendants Trial LegalAgent)
+
+(relationAllExists subEvents ExchangeOfUserRights TransferringPossession)
+
+(relationAllExistsMany subEvents Famine Starvation)
+
+(relationAllExistsMin subEvents ExchangeOfUserRights TransferringPossession 2)
+
+(relationAllExistsMin agreeingAgents Agreement Agent 2)
+
+(requiredArg1Pred SalesActivity prospectiveSeller)
+
+(requiredArg1Pred BuyingActivity prospectiveBuyer)
+
+(salientAssertions LawEnforcementOrganization 
+  (implies 
+    (isa ?AGENCY LawEnforcementOrganization) 
+    (actsInCapacity ?AGENCY doneBy CrimeDetection MainFunction)))
+
+(salientAssertions acquaintedWith 
+  (implies 
+    (and 
+      (isa ?PERSON Person) 
+      (acquaintedWith ?OTHER ?PERSON)) 
+    (acquaintances ?PERSON ?OTHER SimpleContactAcquaintance)))
+
+(salientAssertions agentFulfillsObligation 
+  (implies 
+    (and 
+      (isa ?WIDECOC Obligation) 
+      (agentFulfillsObligation ?VIO ?OB1) 
+      (obligationParts ?WIDECOC ?OB1)) 
+    (agentFulfillsObligation ?VIO ?WIDECOC)))
+    
+
+;; /home/siegel/temp/HumanSocialLifeMt-implications.kif
+
+
+(implies 
+  (and 
+    (isa ?SUSPEND SuspendingOfStatus) 
+    (isa ?ORG Organization) 
+    (statusAffected ?SUSPEND ?AGT ?ORG memberStatusInOrganization)) 
+  (holdsIn 
+    (STIF ?SUSPEND) 
+    (memberStatusInOrganization ?AGT ?ORG SuspendedMember)))
+
+(implies 
+  (and 
+    (isa ?MP MalePerson) 
+    (children ?MP ?KID)) 
+  (father ?KID ?MP))
+
+(implies 
+  (and 
+    (isa ?EXPEL ExpellingFromStatus) 
+    (transferredThing ?EXPEL ?EXPELLEE)) 
+  (objectActedOn ?EXPEL ?EXPELLEE))
+
+(implies 
+  (and 
+    (isa ?PER Person) 
+    (hasLeaders ?ORG ?PER)) 
+  (isa ?PER Leader))
+
+(implies 
+  (and 
+    (cohabitingFamilyMembers ?X ?Y) 
+    (cohabitingFamilyMembers ?X ?Z)) 
+  (cohabitingFamilyMembers ?Y ?Z))
+
+(implies 
+  (memberStatusInOrganization ?MEM ?ORG FoundingMember) 
+  (positiveVestedInterest ?MEM ?ORG))
+
+(implies 
+  (holdsIn ?TI 
+    (memberStatusInOrganization ?AGT ?ORG SuspendedMember)) 
+  (holdsIn ?TI 
+    (not 
+      (memberStatusInOrganization ?AGT ?ORG CurrentMember))))
+
+(implies 
+  (and 
+    (isa ?SUSPEND SuspendingOfStatus) 
+    (isa ?ORG Organization) 
+    (statusAffected ?SUSPEND ?AGT ?ORG memberStatusInOrganization)) 
+  (holdsIn 
+    (STIB ?SUSPEND) 
+    (hasMembers ?ORG ?AGT)))
+
+(implies 
+  (spouse ?X ?Y) 
+  (mate ?X ?Y))
+
+(implies 
+  (and 
+    (isa ?AGENT Person) 
+    (temporallyIntersects ?AGENT ?EVENT) 
+    (eventHonors ?EVENT ?AGENT)) 
+  (socialParticipants ?EVENT ?AGENT))
+
+(implies 
+  (holdsIn ?TI 
+    (memberStatusInOrganization ?AGT ?ORG ExpelledMember)) 
+  (holdsIn ?TI 
+    (not 
+      (hasMembers ?ORG ?AGT))))
+
+(implies 
+  (and 
+    (isa ?AGENT SocialBeing) 
+    (objectFoundInLocation ?GPE ?AGENT) 
+    (laws ?GPE ?CODE)) 
+  (subjectToCOC ?AGENT ?CODE))
+
+(implies 
+  (and 
+    (mate ?AGENT1 ?AGENT2) 
+    (residesInRegion ?AGENT1 ?REG)) 
+  (residesInRegion ?AGENT2 ?REG))
+
+(implies 
+  (and 
+    (isa ?U MalePerson) 
+    (spouse ?U ?X)) 
+  (isa ?X FemalePerson))
+
+(implies 
+  (and 
+    (grandchildren ?Y ?X) 
+    (siblings ?X ?Z)) 
+  (grandchildren ?Y ?Z))
+
+(implies 
+  (and 
+    (isa ?COUNTRY Country) 
+    (subOrganizations ?COUNTRY ?SUB) 
+    (holdsIn ?TI 
+      (controls ?SUB ?PER)) 
+    (isa ?PER Person)) 
+  (holdsIn ?TI 
+    (controls ?COUNTRY ?SUB)))
+
+(implies 
+  (residesInDwelling ?Y ?X) 
+  (pointOfContact ?Y HumanResidence ?X))
+
+(implies 
+  (and 
+    (likesAsFriend ?X ?Y) 
+    (likesAsFriend ?Y ?X)) 
+  (friends ?X ?Y))
+
+(implies 
+  (and 
+    (isa ?TAKE Stealing-Generic) 
+    (toPossessor ?TAKE ?TAKER) 
+    (isa ?TAKER SocialBeing)) 
+  (perpetrator ?TAKE ?TAKER))
+
+(implies 
+  (and 
+    (isa ?TAKE Stealing-Generic) 
+    (fromPossessor ?TAKE ?OWNER) 
+    (isa ?OWNER SocialBeing)) 
+  (victim ?TAKE ?OWNER))
+
+(implies 
+  (and 
+    (age ?X ?XA) 
+    (children ?X ?Y) 
+    (age ?Y ?YA) 
+    (termOfUnit ?VAR4 
+      (DifferenceFn ?XA ?YA))) 
+  (lessThan ?VAR4 
+    (YearsDuration 45)))
+
+(implies 
+  (spouse ?X ?Y) 
+  (loves ?X ?Y))
+
+(implies 
+  (holdsIn ?TIME 
+    (memberStatusInOrganization ?AGT ?ORG NonMember)) 
+  (holdsIn ?TIME 
+    (not 
+      (hasMembers ?ORG ?AGT))))
+
+(implies 
+  (and 
+    (isa ?PERSON Person) 
+    (acquaintedWith ?OTHER ?PERSON)) 
+  (acquaintances ?PERSON ?OTHER SimpleContactAcquaintance))
+
+(implies 
+  (spouse ?X ?Y) 
+  (friends ?X ?Y))
+
+(implies 
+  (and 
+    (isa ?IMEX Transaction) 
+    (isa ?IMEX TransportationEvent) 
+    (toLocation ?IMEX ?IMPORTER) 
+    (isa ?IMPORTER Country) 
+    (fromLocation ?IMEX ?EXPORTER) 
+    (different ?IMPORTER ?EXPORTER) 
+    (isa ?EXPORTER Country)) 
+  (isa ?IMEX ImportExportEvent))
+
+(implies 
+  (and 
+    (biologicalRelatives ?X ?Y) 
+    (grandchildren ?Y ?X)) 
+  (ancestors ?X ?Y))
+
+(implies 
+  (and 
+    (spouse ?X ?Z) 
+    (children ?X ?Y)) 
+  (children ?Z ?Y))
+
+(implies 
+  (and 
+    (isa ?U FemalePerson) 
+    (spouse ?U ?X)) 
+  (isa ?X MalePerson))
+
+(implies 
+  (and 
+    (cohabitants ?X ?Y) 
+    (relatives ?X ?Y)) 
+  (cohabitingFamilyMembers ?X ?Y))
+
+(implies 
+  (holdsIn ?TI 
+    (memberStatusInOrganization ?MEM ?ORG AppointedMember)) 
+  (holdsIn ?TI 
+    (hasMembers ?ORG ?MEM)))
+
+(implies 
+  (and 
+    (isa ?TAKE Stealing-Generic) 
+    (performedBy ?TAKE ?AGENT)) 
+  (perpetrator ?TAKE ?AGENT))
+
+(implies 
+  (and 
+    (isa ?CU CohabitationUnit) 
+    (hasMembers ?CU ?X) 
+    (hasMembers ?CU ?Y) 
+    (different ?X ?Y)) 
+  (cohabitants ?X ?Y))
+
+(implies 
+  (and 
+    (isa ?IMPORTER Country) 
+    (isa ?EXPORTER Country) 
+    (toLocation ?IMEX ?IMPORTER) 
+    (fromLocation ?IMEX ?EXPORTER) 
+    (isa ?IMEX ImportExportEvent)) 
+  (different ?IMPORTER ?EXPORTER))
+
+(implies 
+  (and 
+    (isa ?NAT Nationality) 
+    (isa ?PER ?NAT) 
+    (children ?PER ?CHIL)) 
+  (isa ?CHIL ?NAT))
+
+(implies 
+  (and 
+    (isa ?X Person) 
+    (temporallySubsumes ?X ?TIME) 
+    (children ?X ?Y) 
+    (temporallySubsumes ?Y ?TIME)) 
+  (holdsIn ?TIME 
+    (loves ?X ?Y)))
+
+(implies 
+  (and 
+    (feelsTowardsObject ?X ?Y Love Positive) 
+    (feelsTowardsObject ?Y ?X Love Positive)) 
+  (friends ?X ?Y))
+
+(implies 
+  (and 
+    (isa ?ORG Coalition-International) 
+    (internationalOrg-MemberCountry ?ORG ?COUNTRY-1) 
+    (internationalOrg-MemberCountry ?ORG ?COUNTRY-2) 
+    (different ?COUNTRY-1 ?COUNTRY-2) 
+    (performedBy ?COOP ?ORG) 
+    (isa ?COOP MilitaryOperation)) 
+  (partnersInCooperation ?COUNTRY-1 ?COUNTRY-2 ?COOP))
+
+(implies 
+  (and 
+    (isa ?SALES-ACT SalesActivity) 
+    (prospectiveSeller ?SALES-ACT ?PS)) 
+  (performedBy ?SALES-ACT ?PS))
+
+(implies 
+  (and 
+    (isa ?CL ?CLT) 
+    (addressText ?CL ?N) 
+    (pointOfContact ?AGT ?CLT ?CL)) 
+  (pointOfContactInfo ?AGT ?CLT addressText ?N))
+
+(implies 
+  (and 
+    (isa ?Y Person) 
+    (acquaintances ?X ?Y SimpleContactAcquaintance)) 
+  (acquaintances ?Y ?X SimpleContactAcquaintance))
+
+(implies 
+  (holdsIn ?TI 
+    (memberStatusInOrganization ?MEM ?ORG ElectedMember)) 
+  (holdsIn ?TI 
+    (hasMembers ?ORG ?MEM)))
+
+(implies 
+  (and 
+    (isa ?AGT-1 Country) 
+    (different ?AGT-1 ?AGT-2) 
+    (isa ?AGT-2 Country) 
+    (isa ?COOP MilitaryOperation) 
+    (partnersInCooperation ?AGT-1 ?AGT-2 ?COOP)) 
+  (allies ?AGT-1 ?AGT-2))
+
+(implies 
+  (languageSpoken ?X5 ?Y5) 
+  (knowsAbout ?X5 ?Y5))
+
+(implies 
+  (and 
+    (isa ?X Person) 
+    (acquaintedWith ?X ?Y) 
+    (isa ?Y Person)) 
+  (knowsValue ?X ?Y hasGender))
+
+(implies 
+  (spouse ?X ?Y) 
+  (cohabitingFamilyMembers ?X ?Y))
+
+(implies 
+  (and 
+    (isa ?CL ?CLT) 
+    (streetAddressText ?CL ?N) 
+    (pointOfContact ?AGT ?CLT ?CL)) 
+  (pointOfContactInfo ?AGT ?CLT streetAddressText ?N))
+
+(implies 
+  (and 
+    (isa ?LAW CodeOfConduct) 
+    (subjectToCOC ?AGENT ?CODE) 
+    (genlMt ?CODE ?LAW)) 
+  (subjectToCOC ?AGENT ?LAW))
+
+(implies 
+  (isa ?GROUP TerroristGroup) 
+  (behaviorCapable ?GROUP TerroristAct performedBy))
+
+(implies 
+  (cohabitingFamilyMembers ?X ?Y) 
+  (relatives ?X ?Y))
+
+(implies 
+  (holdsIn ?TI 
+    (memberStatusInOrganization ?MEM ?ORG PermanentMember)) 
+  (holdsIn ?TI 
+    (hasMembers ?ORG ?MEM)))
+
+(implies 
+  (and 
+    (isa ?SS SendingSomething) 
+    (fromPossessor ?SS ?SENDER)) 
+  (fromLocation ?SS ?SENDER))
+
+(implies 
+  (and 
+    (isa ?EXCH ExchangeOfUserRights) 
+    (subEvents ?EXCH ?TP) 
+    (isa ?TP TransferringPossession) 
+    (toPossessor ?TP ?AGENT)) 
+  (exchangers ?EXCH ?AGENT))
+
+(implies 
+  (and 
+    (isa ?X Person) 
+    (acquaintedWith ?X ?Y) 
+    (isa ?Y Person)) 
+  (knowsValue ?X ?Y maritalStatus))
+
+(implies 
+  (and 
+    (isa ?ARREST ArrestingSomeone) 
+    (performedBy ?ARREST ?OFF) 
+    (government ?GEO ?GOV) 
+    (isa ?GOV RegionalGovernment) 
+    (employees ?ORG ?OFF) 
+    (subOrganizations ?GOV ?ORG)) 
+  (eventOccursAt ?ARREST ?GEO))
+
+(implies 
+  (and 
+    (isa ?MAKING MakingAnAgreement) 
+    (outputs ?MAKING ?AGREEMENT) 
+    (isa ?AGREEMENT Agreement) 
+    (agreeingAgents ?AGREEMENT ?AGENT)) 
+  (performedBy ?MAKING ?AGENT))
+
+(implies 
+  (and 
+    (reciprocalTransfers ?T1 ?T2) 
+    (toPossessor ?T1 ?AGENT)) 
+  (fromPossessor ?T2 ?AGENT))
+
+(implies 
+  (and 
+    (isa ?BUYING-ACT BuyingActivity) 
+    (prospectiveBuyer ?BUYING-ACT ?PB)) 
+  (performedBy ?BUYING-ACT ?PB))
+
+(implies 
+  (and 
+    (isa ?CL ?CLT) 
+    (countryOfAddress ?CL ?N) 
+    (pointOfContact ?AGT ?CLT ?CL)) 
+  (pointOfContactInfo ?AGT ?CLT countryOfAddress ?N))
+
+(implies 
+  (and 
+    (isa ?G Person) 
+    (grandchildren ?G ?C)) 
+  (holdsIn ?C 
+    (isa ?G HumanAdult)))
+
+(implies 
+  (and 
+    (isa ?MEM-1 Country) 
+    (different ?MEM-1 ?MEM-2) 
+    (isa ?MEM-2 Country) 
+    (hasMembers ?ORG ?MEM-1) 
+    (hasMembers ?ORG ?MEM-2) 
+    (isa ?ORG InternationalAlliance)) 
+  (allies ?MEM-1 ?MEM-2))
+
+(implies 
+  (isa ?ORG USFederalGovernmentOrganization) 
+  (hasHeadquartersInCountry ?ORG UnitedStatesOfAmerica))
+
+(implies 
+  (and 
+    (isa ?AS AbandoningSomething) 
+    (fromPossessor ?AS ?AGENT) 
+    (objectOfPossessionTransfer ?AS ?TP)) 
+  (holdsIn 
+    (STIF ?AS) 
+    (not 
+      (userRightsRelation ?AGENT ?TP PrimaryRoleUseRights))))
+
+(implies 
+  (and 
+    (isa ?U Organization) 
+    (worksWith ?U ?V) 
+    (isa ?V Person)) 
+  (positiveVestedInterest ?V ?U))
+
+(implies 
+  (and 
+    (isa ?X Person) 
+    (acquaintedWith ?X ?Y)) 
+  (knowsValue ?X ?Y memberOfSpecies))
+
+(implies 
+  (and 
+    (children ?P ?C) 
+    (ethnicity ?P ?ETHN)) 
+  (ethnicity ?C ?ETHN))
+
+(implies 
+  (and 
+    (biologicalRelatives ?X ?Y) 
+    (children ?Y ?X)) 
+  (ancestors ?X ?Y))
+
+(implies 
+  (and 
+    (isa ?INFOTRANS InformationTransferEvent) 
+    (infoTransferred ?INFOTRANS ?INFO) 
+    (isa ?INFO Proposition) 
+    (credibility ?INFOTRANS ?AGENT High)) 
+  (increasesCausally ?INFOTRANS 
+    (beliefs ?AGENT ?INFO) likelihood))
+
+(implies 
+  (and 
+    (citizens ?COUNTRY ?P1) 
+    (children ?P1 ?P2)) 
+  (citizens ?COUNTRY ?P2))
+
+(implies 
+  (victim ?CRIME ?VICTIM) 
+  (damages ?CRIME ?VICTIM))
+
+(implies 
+  (and 
+    (isa ?SUPPORT ShowingSupportForSomeone) 
+    (beneficiary ?SUPPORT ?COUNTRY) 
+    (isa ?COUNTRY Country) 
+    (performedBy ?SUPPORT ?ALLY) 
+    (isa ?ALLY Country) 
+    (holdsIn ?SUPPORT 
+      (opponents ?COUNTRY ?OPPONENT))) 
+  (maleficiary ?SUPPORT ?OPPONENT))
+
+(implies 
+  (and 
+    (isa ?SS SendingSomething) 
+    (fromPossessor ?SS ?SENDER) 
+    (objectOfPossessionTransfer ?SS ?TP)) 
+  (holdsIn 
+    (STIF ?SS) 
+    (not 
+      (userRightsRelation ?SENDER ?TP PrimaryRoleUseRights))))
+
+(implies 
+  (and 
+    (isa ?LOC GeographicalRegion) 
+    (eventOccursAt ?ARREST ?LOC) 
+    (isa ?ARREST ArrestingSomeone) 
+    (performedBy ?ARREST ?OFF) 
+    (government ?GEO ?GOV) 
+    (isa ?GOV RegionalGovernment) 
+    (employees ?ORG ?OFF) 
+    (subOrganizations ?GOV ?ORG)) 
+  (geographicalSubRegions ?GEO ?LOC))
+
+(implies 
+  (and 
+    (isa ?AGREEMENT Agreement) 
+    (outputs ?MAKING ?AGREEMENT) 
+    (performedBy ?MAKING ?AGENT) 
+    (isa ?MAKING MakingAnAgreement)) 
+  (agreeingAgents ?AGREEMENT ?AGENT))
+
+(implies 
+  (mate ?X ?Y) 
+  (acquaintedWith ?X ?Y))
+
+(implies 
+  (grandchildren ?X ?Y) 
+  (positiveVestedInterest ?X ?Y))
+
+(implies 
+  (and 
+    (isa ?SENDING SendingSomething) 
+    (performedBy ?SENDING ?SENDER) 
+    (successfulForAgents ?SENDING ?SENDER) 
+    (target ?SENDING ?RECIPIENT)) 
+  (toPossessor ?SENDING ?RECIPIENT))
+
+(implies 
+  (and 
+    (isa ?EXCH ExchangeOfUserRights) 
+    (subEvents ?EXCH ?TP) 
+    (isa ?TP TransferringPossession) 
+    (fromPossessor ?TP ?AGENT)) 
+  (exchangers ?EXCH ?AGENT))
+
+(implies 
+  (and 
+    (isa ?ST Stealing-Generic) 
+    (perpetrator ?ST ?THIEF)) 
+  (toPossessor ?ST ?THIEF))
+
+(implies 
+  (and 
+    (isa ?THEFT Stealing-Generic) 
+    (victim ?THEFT ?PERP)) 
+  (fromPossessor ?THEFT ?PERP))
+
+(implies 
+  (and 
+    (agentViolatesObligation ?VIO ?NARROWOB) 
+    (obligationParts ?WIDEOB ?NARROWOB)) 
+  (agentViolatesObligation ?VIO ?WIDEOB))
+
+(implies 
+  (and 
+    (isa ?X Person) 
+    (acquaintedWith ?X ?Y) 
+    (isa ?Y DomesticPet)) 
+  (knowsValue ?X ?Y hasGender))
+
+(implies 
+  (and 
+    (isa ?INFOTRANS InformationTransferEvent) 
+    (infoTransferred ?INFOTRANS ?INFO) 
+    (isa ?INFO Proposition) 
+    (credibility ?INFOTRANS ?AGENT Low)) 
+  (decreasesCausally ?INFOTRANS 
+    (beliefs ?AGENT ?INFO) likelihood))
+
+(implies 
+  (and 
+    (isa ?O CohabitationUnit) 
+    (hasMembers ?O ?X) 
+    (cohabitants ?X ?Y)) 
+  (hasMembers ?O ?Y))
+
+(implies 
+  (and 
+    (isa ?U FemalePerson) 
+    (mate ?U ?X)) 
+  (isa ?X MalePerson))
+
+(implies 
+  (siblings ?X ?Y) 
+  (positiveVestedInterest ?X ?Y))
+
+(implies 
+  (cohabitants ?X ?Y) 
+  (acquaintedWith ?X ?Y))
+
+(implies 
+  (and 
+    (spouse ?X ?Z) 
+    (residesInDwelling ?X ?Y)) 
+  (residesInDwelling ?Z ?Y))
+
+(implies 
+  (and 
+    (isa ?INFOTRANS InformationTransferEvent) 
+    (infoTransferred ?INFOTRANS ?INFO) 
+    (isa ?INFO Proposition) 
+    (recipientOfInfo ?INFOTRANS ?AGENT) 
+    (causes-SitProp ?INFOTRANS 
+      (beliefs ?AGENT ?INFO))) 
+  (credibility ?INFOTRANS ?AGENT 
+    (IntervalMinFn Medium)))
+
+(implies 
+  (and 
+    (isa ?EXPEL ExpellingFromStatus) 
+    (isa ?ORG Organization) 
+    (statusAffected ?EXPEL ?AGT ?ORG memberStatusInOrganization)) 
+  (holdsIn 
+    (STIB ?EXPEL) 
+    (hasMembers ?ORG ?AGT)))
+
+(implies 
+  (and 
+    (performedBy ?ACT ?AGT) 
+    (actionViolatesObligation ?ACT ?OB)) 
+  (agentViolatesObligation ?AGT ?OB))
+
+(implies 
+  (and 
+    (salutation ?PER ?SAL) 
+    (isa ?SAL MilitaryTitle)) 
+  (isa ?PER MilitaryPerson))
+
+(implies 
+  (and 
+    (isa ?T2 TransferringPossession) 
+    (different ?T1 ?T2) 
+    (toPossessor ?T1 ?AGENT) 
+    (isa ?T1 TransferringPossession) 
+    (subEvents ?EXCH ?T2) 
+    (subEvents ?EXCH ?T1) 
+    (isa ?EXCH ExchangeOfUserRights)) 
+  (fromPossessor ?T2 ?AGENT))
+
+(implies 
+  (and 
+    (children ?X ?Y) 
+    (children ?Y ?Z)) 
+  (grandchildren ?X ?Z))
+
+(implies 
+  (mate ?X ?Y) 
+  (friends ?X ?Y))
+
+(implies 
+  (and 
+    (isa ?SS SendingSomething) 
+    (fromPossessor ?SS ?SENDER)) 
+  (performedBy ?SS ?SENDER))
+
+(implies 
+  (and 
+    (reciprocalTransfers ?T1 ?T2) 
+    (fromPossessor ?T1 ?AGENT)) 
+  (toPossessor ?T2 ?AGENT))
+
+(implies 
+  (and 
+    (isa ?EXPEL ExpellingFromStatus) 
+    (isa ?ORG Organization) 
+    (statusAffected ?EXPEL ?AGT ?ORG memberStatusInOrganization)) 
+  (holdsIn 
+    (STIF ?EXPEL) 
+    (memberStatusInOrganization ?AGT ?ORG ExpelledMember)))
+
+(implies 
+  (holdsIn ?TI 
+    (hasStatusWithAgent ?AGT ?GOV DissidentStatus)) 
+  (holdsIn ?TI 
+    (opponents ?AGT ?GOV)))
+
+(implies 
+  (mate ?X1 ?X2) 
+  (positiveVestedInterest ?X1 ?X2))
+
+(implies 
+  (and 
+    (isa ?U MalePerson) 
+    (mate ?U ?X)) 
+  (isa ?X FemalePerson))
+
+(implies 
+  (holdsIn ?TIME 
+    (memberStatusInOrganization ?AGT ?ORG CurrentMember)) 
+  (holdsIn ?TIME 
+    (hasMembers ?ORG ?AGT)))
+
+(implies 
+  (acquaintances ?X ?Y SimpleContactAcquaintance) 
+  (acquaintedWith ?X ?Y))
+
+(implies 
+  (and 
+    (isa ?FP FemalePerson) 
+    (children ?FP ?KID)) 
+  (mother ?KID ?FP))
+
+(implies 
+  (and 
+    (cohabitants ?X ?Y) 
+    (cohabitants ?X ?Z)) 
+  (cohabitants ?Y ?Z))
+
+(implies 
+  (isa ?AGENCY LawEnforcementOrganization) 
+  (actsInCapacity ?AGENCY doneBy CrimeDetection MainFunction))
+
+(implies 
+  (and 
+    (temporallySubsumes ?Y ?TIME) 
+    (grandchildren ?X ?Y) 
+    (temporallySubsumes ?X ?TIME)) 
+  (holdsIn ?TIME 
+    (loves ?X ?Y)))
+
+(implies 
+  (and 
+    (isa ?T1 TransferringPossession) 
+    (different ?T1 ?T2) 
+    (isa ?T2 TransferringPossession) 
+    (subEvents ?EXCH ?T1) 
+    (subEvents ?EXCH ?T2) 
+    (isa ?EXCH ExchangeOfUserRights)) 
+  (reciprocalTransfers ?T1 ?T2))
+
+(implies 
+  (holdsIn ?TI 
+    (friends ?ONE ?TWO)) 
+  (holdsIn ?TI 
+    (feelsTowardsObject ?ONE ?TWO Friendliness MediumToVeryHigh)))
+
+(implies 
+  (and 
+    (children ?Y ?X) 
+    (siblings ?X ?Z)) 
+  (children ?Y ?Z))
+
+(implies 
+  (maritalStatus ?PER ?STATUS) 
+  (hasAttributes ?PER ?STATUS))
+
+(implies 
+  (holdsIn ?TIME 
+    (hasMembers ?ORG ?AGT)) 
+  (holdsIn ?TIME 
+    (memberStatusInOrganization ?AGT ?ORG CurrentMember)))
+
+(implies 
+  (and 
+    (isa ?CU CohabitationUnit) 
+    (hasMembers ?CU ?G012) 
+    (residesInDwelling ?G012 ?R)) 
+  (physicalQuarters ?CU ?R))
+
+(implies 
+  (and 
+    (children ?X ?Y) 
+    (children ?X ?Z)) 
+  (or 
+    (equals ?Y ?Z) 
+    (siblings ?Y ?Z)))
+
+(implies 
+  (and 
+    (isa ?CLT ContactLocationType) 
+    (isa ?CL ?CLT) 
+    (cityOfAddress ?CL ?N) 
+    (pointOfContact ?AGT ?CLT ?CL)) 
+  (pointOfContactInfo ?AGT ?CLT cityOfAddress ?N))
+
+(implies 
+  (and 
+    (isa ?CLT ContactLocationType) 
+    (isa ?CL ?CLT) 
+    (faxNumberText ?CL ?N) 
+    (pointOfContact ?AGT ?CLT ?CL)) 
+  (pointOfContactInfo ?AGT ?CLT faxNumberText ?N))
+
+(implies 
+  (cohabitingFamilyMembers ?X ?Y) 
+  (cohabitants ?X ?Y))
+
+(implies 
+  (and 
+    (isa ?SENDING SendingSomething) 
+    (performedBy ?SENDING ?SENDER) 
+    (successfulForAgents ?SENDING ?SENDER)) 
+  (isa ?SENDING TransferringPossession))
+
+(implies 
+  (and 
+    (isa ?WIDECOC Obligation) 
+    (obligationParts ?WIDECOC ?OB1) 
+    (agentFulfillsObligation ?VIO ?OB1)) 
+  (agentFulfillsObligation ?VIO ?WIDECOC))
+
+(implies 
+  (holdsIn ?TI 
+    (memberStatusInOrganization ?AGT ?ORG ExpelledMember)) 
+  (holdsIn ?TI 
+    (not 
+      (memberStatusInOrganization ?AGT ?ORG CurrentMember))))
+
+(implies 
+  (and 
+    (isa ?EXCH ExchangeOfUserRights) 
+    (subEvents ?EXCH ?T1) 
+    (isa ?T1 TransferringPossession) 
+    (objectOfPossessionTransfer ?T1 ?OBJ)) 
+  (objectOfPossessionTransfer ?EXCH ?OBJ))
+
+(implies 
+  (and 
+    (isa ?CLT ContactLocationType) 
+    (isa ?CL ?CLT) 
+    (stateOfAddress ?CL ?N) 
+    (pointOfContact ?AGT ?CLT ?CL)) 
+  (pointOfContactInfo ?AGT ?CLT stateOfAddress ?N))
+
+(implies 
+  (and 
+    (isa ?DOC OfficialDocument) 
+    (informationOrigin ?INFOTRANS ?DOC) 
+    (recipientOfInfo ?INFOTRANS ?AGT)) 
+  (credibility ?INFOTRANS ?AGT High))
+
+(implies 
+  (and 
+    (isa ?HM HavingAMeal) 
+    (socialParticipants ?HM ?PER)) 
+  (performedBy ?HM ?PER))
+
+(implies 
+  (and 
+    (isa ?MSA CommercialActivity) 
+    (isa ?MSA MakingSomethingAvailable) 
+    (performedBy ?MSA ?PERF)) 
+  (prospectiveSeller ?MSA ?PERF))
+
+(implies 
+  (and 
+    (isa ?CL ?CLT) 
+    (phoneNumberText ?CL ?N) 
+    (pointOfContact ?AGT ?CLT ?CL)) 
+  (pointOfContactInfo ?AGT ?CLT phoneNumberText ?N))
+
+(implies 
+  (children ?Y ?X) 
+  (relatives ?X ?Y))
+
