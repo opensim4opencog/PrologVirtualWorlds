@@ -23,7 +23,8 @@ public class BuilderCommandUtility {
     public static MudObjectViewable getPeerObject(MudObject s,
 						  String keyword) {
 
-	int len = keyword.length();
+	
+        int len = keyword.length();
 	
 	if ( len==0 )
 	    return null;
