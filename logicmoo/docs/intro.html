@@ -7,11 +7,6 @@
 <LINK REL="stylesheet" TYPE="text/css" HREF="http://msdn.microsoft.com/msdn-online/shared/css/ie4.css" />
 
 <title>SUO-KIF DAML (DARPA)</title>
-<SCRIPT LANGUAGE=vbscript>
-Sub document_oncontextmenu
-	window.event.returnValue=false
-End Sub
-</SCRIPT>
 
 <base target="_self">
 
@@ -19,70 +14,270 @@ End Sub
 
 <body>
 
-<p class="section1"><span style="font-size: 10.0pt; font-family: Verdana"><b>Use
+<p><b>Use
 a KIF/CycL like language&nbsp; to represent shared activities among autonomic
-agent.&nbsp; Java, Prolog libraries integrate with a first
-person MOO system to provide debugging and agent programming facilities.</b></span></p>
-<p class="section1"><span style="font-size: 10.0pt; font-family: Verdana">Java Libraries
-are provided that you need to use KIF (Like <a href="http://suo.ieee.org">Standard
-Upperlevel Ontology</a> - <a href="http://logic.stanford.edu/kif/dpans.html">Knowledge
+agents. &nbsp;Java and Prolog libraries integrate with a first
+person MOO system <a href="http://www.jamud.com">JaMUD</a> to provide debugging and agent programming facilities.</b></p>
+<p>Java Libraries
+are provided that you need to use KIF (<a href="http://logic.stanford.edu/kif/dpans.html">Knowledge
 Interchange Format</a>) and soon enough <a href="http://www.daml.org">DAML</a> (<a href="http://www.darpa.mil">DARPA</a>
 Agent Markup Language) content into an episodic simulation inside a
-virtual world MOO (envisioned as </span><span style="font-size:10.0pt;font-family:Verdana">first person).&nbsp; The programming languages used are Prolog, Java.&nbsp; Combining powerful tools:
-JaMUD and various Edinburgh style of Prologs (mainly so far SWI-Prolog&nbsp; SWI-Prolog is a stable, free,
-professional distribution of the prolog virtual machine and compiler.&nbsp;&nbsp;)<br>
+virtual world MOO.&nbsp;
+The programming languages used are Prolog and Java.&nbsp; Combining powerful tools:
+JaMUD (Christopher
+O'Brien) and various Edinburgh style of Prologs.
+SWI-Prolog is a stable, free,
+professional distribution of the prolog virtual machine and compiler.)<br>
 I am working on and trying other prologs like B-Prolog, BinProlog and
-CIAO-Prolog&nbsp;<br>
+CIAO-Prolog.&nbsp;<br>
 <br>
 The goal is to represent episodic models of memory, diagrams for belief
 engines.&nbsp;<br>
 <br>
 <span style="color:forestgreen">A simple&nbsp;example of agent orientated
-programming inside a Moo:</span></span></p>
+programming inside a Moo:</span></p>
 <ul>
   <li>
-    <p class="section1"><span style="font-size:10.0pt;font-family:Verdana">
+    <p>
 A Rain Agent that enters a room object and emotes that it is raining.&nbsp;
 It then begins adding a 'wetness&nbsp;counter'&nbsp;property to each object in
 the room.&nbsp; The longer&nbsp;it stays in the room the more&nbsp;it
 increments. (This does not have any functional impact on the current workings of
-the objects in the room)</span><o:p>
+the objects in the room)<o:p>
 </o:p>
   </li>
   <li>
-    <p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana">Later
+    <p style="margin:0in;margin-bottom:.0001pt">Later
 you may want to&nbsp;write another&nbsp;agent who enters the room&nbsp;called
 'Sun Agent' who's duty is to look for objects that have the property 'wetness'
-to decrement.</span><o:p>
+to decrement.<o:p>
     &nbsp;</li>
   <li>
-    <p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana">A&nbsp;third
+    <p style="margin:0in;margin-bottom:.0001pt">A&nbsp;third
 agent called 'Common Cold' can go thru and look for both a 'health property' and
 a 'wetness property' and then decide to alter the 'smile method' from emoting
-'beaming smile' to 'tries to smile from behind a stuffed up nose'.</span><o:p>
+'beaming smile' to 'tries to smile from behind a stuffed up nose'.<o:p>
     &nbsp;</li>
 </ul>
-<p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana;color:green">Why
+<p style="margin:0in;margin-bottom:.0001pt"><span style="color: green">Why
 is this important?</span><o:p>
 </o:p>
 </p>
-<p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana">As
+<p style="margin:0in;margin-bottom:.0001pt">As
 since all of these actions are moving thru representation (it can be depicted in
 triples or graphically)&nbsp;an agent may analyze the structure and build a 'story script'. The properties of such a script
 are in an ontological in nature and are best and are understood in a propositional
 language the represents an instantiated
 scene.&nbsp; Since
 information about the methods and properties are public at the time the system
-may at&nbsp;later replay the scenario re placing objects in original scene in a non-deterministic way.&nbsp;</span><o:p></o:p>
+may at&nbsp;later replay the scenario re placing objects in original scene in a non-deterministic way.&nbsp;<o:p></o:p>
 </p>
-<p class="section1" style="margin:0in;margin-bottom:.0001pt"><span style="font-size:10.0pt;font-family:Verdana"> As we discover new
+<p style="margin:0in;margin-bottom:.0001pt"> <br>
+ As we discover new
 facts incrementally we learn the situation was not
-correctly represented.&nbsp; Since the situation is persistable we can re-instantiate
-the&nbsp;episode and put better-educated agents to the task of understanding.&nbsp; I hope will further our technology&nbsp;and
-searchable of
-'scenario' and will allow better&nbsp;rule styles to be designed.</span><o:p>
+correctly represented.&nbsp; Since it is persistable we can re-instantiate
+the&nbsp;episode and put better-educated agents to the task of understanding.&nbsp;
 </o:p>
 </p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><font color="#008080"><b>Persisted
+Data Model</b></font></p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Cyc
+KB?&nbsp; KIF File?&nbsp; Daml Page?&nbsp; Jamud running mud objects?</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">JaMUD
+is saved an loaded from an XML pages.&nbsp; This means at any time we can
+serialize the&nbsp; 'MOOState' context (Microtheory?).</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">This
+is meant to be a solid context comprising of instances and sets.&nbsp; The other
+ontologies about understanding and using these can stored as well as
+hypothetical rooms and objects.&nbsp; They in could be called 'Exemplars' for
+example the Unicorn Pegasus is a mythological creature and could live cut off in
+in the 'Giant Room Of Mythological Creatures' and looks and save like an
+instance of Unicorn.&nbsp; But Pegasus' room may not be part of the relevant KB
+and therefore not effecting to the rest of the system.&nbsp; But how would we persist
+information that does not fit into a 4D space?&nbsp;&nbsp;&nbsp; For example
+these two rules:&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">(=&gt;&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;
+(and&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(instance ?PERSON Human)&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(acquaintedWith ?OTHER ?PERSON))</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;
+(acquaintances ?PERSON ?OTHER SimpleContactAcquaintance))&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">(=&gt;&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;
+(spouse ?X ?Y)&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;
+(friends ?X ?Y))</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Each
+rule is kept in an instance of a ContentBearingObject.&nbsp; Physical Regions of
+the MOO may be effected by any 'Set' of instances from the ContentBearingObject
+Class.&nbsp; ContentBearingObjects can be divided into theoreticals that can be believed
+by agents (or Mobs).&nbsp; The MOO reserves no special godlike entity for
+enforcement of rules unless an agent has been assigned specifically to a room to
+do so.&nbsp; Most cases agents in the room are picking from there own private
+array of ContentBearingObjects which is separate from&nbsp; an entity using the
+room's set.&nbsp;&nbsp;&nbsp;</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><font color="#008080"><b>Here
+are the capabilities expected to be available for the user/knowledge engineer</b></font>:</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><b>MOO<br>
+</b>Telneting into the MOO and using a variety of OLC interfaces such as:</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">(The
+comments ';' are only when debug output is turned on)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&gt;
+new Thing as Tool Hammer.</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;
+Asserted</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;
+(thereExists (?X)<br>
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (and&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(isa ?X Hammer)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(isa ?X Tool)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(located ?X TwistyPassage45SKFn)))</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;
+Warning</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;
+(genls Hammer Tool) is previously entailed</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;&nbsp;
+Your new default object is 'ToolHammer53455345SKFn'</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&gt;
+set ColorProperty&nbsp; Blue</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;
+Asserted&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;
+(hasAttribute ToolHammer53455345SKFn ColorProperty)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;
+(attribute ToolHammer53455345SKFn Blue)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&gt;
+look</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">You
+are in a maze of Twisty passages with exits leading in all directions.<br>
+Someone or something has discarded a Blue Hammer here.</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&gt;
+take hammer</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;
+Retracted</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;&nbsp;
+(located&nbsp; ToolHammer53455345SKFn TwistyPassage45SKFn)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">;
+Asserted<br>
+;&nbsp; (located&nbsp; ToolHammer53455345SKFn Player8)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><b>KIF</b><br>
+I, like others, am comfortable with the good knowledge engineering coming from
+the standard upper level ontology working group.&nbsp; And between the content
+produced there and Cyc should be able to come up with interchangeable mappings
+without conflicts between 'Entity' vs. 'Thing'.&nbsp; This implementation is
+*not* Cyc and therefore tends to try to lean towards the KIF standards.</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><b>CycL</b></p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Asserting
+CycL directly like&nbsp; &quot;(isa Fluffy Mammal)&quot; or an entire CycL
+Microtheory from File which becomes a set of very useful 'ContentBearingObjects'</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><b>DAML</b></p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">The
+inclusion of Daml ontologies (from web sources) to become available to search
+and inference.&nbsp;&nbsp;</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">The
+user&nbsp; may use existing tools for editing content before uploading to
+server.</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Since
+JaMUD is saved an loaded from an XML pages it will be possible to make sure
+these are RDF/DAML compliant.&nbsp;</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Additionally
+RDFQuery should be useful.</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><b>SQL
+Emulation</b></p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Minimalist
+(at first) SQL Interfaces.&nbsp; Mainly a SQL-XMLQuery and a system for
+inserting.&nbsp;&nbsp;</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Since
+it is possible to make the stored content look and feel like SQL Tables.&nbsp;
+Perhaps leveraging inference.&nbsp;<br>
+</p>
+
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><font color="#008080"><b>TO-DO
+List</b></font></p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">MOO
+Based RDF Specification document.<br>
+The port for CIAO-Prolog which better transparently interfaces to JaMUD</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Raw
+Prolog Http content Browser/Editor (mostly completed) (Does not use Java)<br>
+Looking for Help in making a Java Servlet API that Wraps all the useful features
+of content editing and source.</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">User
+can update/expand the current KIF&lt;-&gt;CycL mappings.&nbsp; (Edited in the
+context of a 'system' ontology)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">User
+can update/expand the current DAML&lt;-&gt;KIF mappings.</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">With
+Christopher, the OLC interfaces to JaMUD</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+- Our goal is to increase number of ways to produce stylistic creations from the
+telnet</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Complete
+readability of all Jamud primitive types into prolog paradigms (To better export
+to KIF/CycL)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">A
+small lightweight installation of CIAO-Prolog</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><font color="#008080"><b>Here
+is what has been completed</b></font><br>
+JaMUD is solid and listens on the telnet port and does what it is supposed to
+do.</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">Propositional
+Resolution over KIF/CycL type content<br>
+Specialized </p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt"><font color="#008080"><b>Supported
+configurations</b></font></p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">LINUX
+(currently developed on Redhat 7.x)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">JDK
+1.4 (Out of Beta? Right?)</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">CIAO-Prolog
+1.7.x</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0in; margin-bottom: .0001pt">&nbsp;</p>
 
 </body>
 
