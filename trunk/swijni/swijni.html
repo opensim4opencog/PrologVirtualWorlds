@@ -1,477 +1,239 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<!-- saved from url=(0063) -->
-<HTML><HEAD><TITLE>SWIJNI</TITLE>
-<META content="text/html; charset=iso-8859-1" http-equiv=Content-Type><!-- Created by texi2html 1.56k + clip patches and <A href="http://www.clip.dia.fi.upm.es/Software">lpdoc</A> from ciao.texi on 14 June 2002 --><LINK 
-href="index_files/ciao.css" rel=stylesheet type=text/css>
-<META content="Microsoft FrontPage 4.0" name=GENERATOR></HEAD>
-<BODY link="#008080" vlink="#008080" bgcolor="#FFFFFF" text="#000000" alink="#008080">
-<h2><font size="3" color="#008080" face="Arial">SWIJNI</font></h2>
-<p><font size="3" face="Arial">This low-level prolog to java
-interface is made up of two parts: a Prolog part and a Java part, running in
-separate processes. The Prolog part receives requests from a Prolog program and
-sends them to the Java part through a C interface.</font>
-<ul>
-  <li><a href="#SEC594"><font size="3" face="Arial">Prolog
-    side of the Java interface</font></a>
-  <li><a href="#SEC595"><font size="3" face="Arial">Java
-    side</font></a></li>
-</ul>
-<h3><a href="#TOC594" name="SEC594"><font size="3" face="Arial">Prolog
-side of the Java interface</font></a></h3>
-<p><font size="3" face="Arial">The prolog side receives the
-actions to do in the java side from the user program, and sends them to the java
-side through the socket connection. When the action is done in the java side,
-the result is returned to the user program, or the action fails if there is any
-problem in the java side.</font>
-<p><font size="3" face="Arial">Prolog data representation of java elements is very simple in this low-level
-interface. Java primitive types such as integers and characters are translated
-into Prolog terms, and even some Java objects are translated that way (e. g.
-Java strings). Java objects are represented in Prolog as compound terms with a
-reference to identify the corresponding Java object. Data conversion is made
-automatically when the interface is used, so the Prolog user programs do not
-have to deal with the complexity of this tasks.</font>
-<h2><a href="#TOC598" name="SEC598"><font size="3" face="Arial">Usage
-and interface (<code>javart</code>)</font></a></h2>
-<div class="cartouche">
-  <ul>
-    <li><font face="Arial"><strong><font size="3">Library usage:</font></strong> <font size="3"> <code>:-
-      use_module(library(javart)).</code>
-      </font></font>
-  </ul>
-</div>
-<h2><a href="#TOC599" name="SEC599"><font size="3" face="Arial">Documentation
-on exports (<code>javart</code>)</font></a></h2>
-<p><font face="Arial"><a name="IDX6054"><font size="3"></font></a><font size="3"><a name="IDX6055"></a>
-</font></font>
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_start/0:</b>
-    </font>
-  <dd><a name="IDX6056"></a>
-    <p><font size="3" face="Arial">No further documentation available for this predicate.</font></p>
-  </dd>
-</dl>
-<p><font face="Arial"><a name="IDX6057"><font size="3"></font></a><font size="3"><a name="IDX6058"></a>
-</font></font>
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_start/1:</b>
-    </font>
-  <dd><a name="IDX6059"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_start(+classpath)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> Starts the Java server on the local machine,
-        connects to it, and starts the event handling thread. The Java server is
-        started using the classpath received as argument.</font></font>
-      <li><font face="Arial"><em><font size="3">Call and exit should be compatible with:</font></em> <font size="3"> <code>+classpath</code>
-        is a string (a list of character codes). (<code>basic_props:string/1</code>)</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p>&nbsp;
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_start/2:</b>
-    </font>
-  <dd><a name="IDX6062"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_start(+machine_name,+classpath)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> Starts the Java server in machine_name (using
-        rsh!), connects to it, and starts the event handling thread. The Java
-        server is started using the classpath received as argument.</font></font>
-      <li><font face="Arial"><em><font size="3">Call and exit should be compatible with:</font></em> <font size="3"> <code>+machine_name</code>
-        is currently instantiated to an atom. (<code>term_typing:atom/1</code>) <code>+classpath</code>
-        is a string (a list of character codes). (<code>basic_props:string/1</code>)</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p>&nbsp;
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_stop/0:</b>
-    </font>
-  <dd><a name="IDX6065"></a>
-    <p><strong><font size="3" face="Arial">Usage:</font></strong>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> Stops the interface terminating the threads that
-        handle the socket connection, and finishing the Java interface server if
-        it was started using java_start/n.</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p>&nbsp;
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_connect/2:</b>
-    </font>
-  <dd><a name="IDX6068"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_connect(+machine_name,+port_number)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> Connects to an existing Java interface server
-        running in machine_name and listening at port port_number. To connect to
-        a Java server located in the local machine, use 'localhost' as
-        machine_name.</font></font>
-      <li><font face="Arial"><em><font size="3">Call and exit should be compatible with:</font></em> <font size="3"> <code>+machine_name</code>
-        is the network name of a machine. (<code>javart:machine_name/1</code>) <code>+port_number</code>
-        is an integer. (<code>basic_props:int/1</code>)</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p>&nbsp;
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_disconnect/0:</b>
-    </font>
-  <dd><a name="IDX6071"></a>
-    <p><strong><font size="3" face="Arial">Usage:</font></strong>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> Closes the connection with the java process,
-        terminating the threads that handle the connection to Java. This
-        predicate does not terminate the Java process (this is the disconnection
-        procedure for Java servers not started from Prolog). This predicate
-        should be used when the communication is established with java_connect/2.</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<dl>
-  <dt>&nbsp;
-  <dt><font size="3" face="Arial"><span class="define">Object:</span></font><font size="3" face="Arial"> <b>java_constructor/1:</b>
-    </font>
-  <dd><a name="IDX6077"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_constructor(X)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> <code>X</code> is a java constructor (structure
-        with functor as constructor full name, and arguments as constructor
-        arguments).</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p><font face="Arial"><a name="IDX6078"><font size="3"></font></a><font size="3"><a name="IDX6079"></a>
-</font></font>
-<dl>
-  <dt><font size="3" face="Arial"><span class="define">Object:</span> </font><font size="3" face="Arial"> <b>java_object/1:</b>
-    </font>
-  <dd><a name="IDX6080"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_object(X)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> <code>X</code> is a java object (a structure
-        with functor '$java_object', and argument an integer given by the java
-        side).</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p><font face="Arial"><a name="IDX6081"><font size="3"></font></a><font size="3"><a name="IDX6082"></a>
-</font></font>
-<dl>
-  <dt><font size="3" face="Arial"><span class="define">Object:</span> </font><font size="3" face="Arial"> <b>java_event/1:</b>
-    </font>
-  <dd><a name="IDX6083"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_event(X)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> <code>X</code> is a java event represented as an
-        atom with the full event constructor name (e.g., 'java.awt.event.ActionListener').</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p><font face="Arial"><a name="IDX6084"><font size="3"></font></a><font size="3"><a name="IDX6085"></a>
-</font></font>
-<dl>
-  <dt><font size="3" face="Arial"><span class="define">Object:</span> </font><font size="3" face="Arial"> <b>prolog_goal/1:</b>
-    </font>
-  <dd><a name="IDX6086"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>prolog_goal(X)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> <code>X</code> is a prolog predicate. Prolog
-        term that represents the goal that must be invoked when the event raises
-        on the object. The predicate arguments can be java objects, or even the
-        result of java methods. These java objects will be evaluated when the
-        event raises (instead of when the listener is added). The arguments that
-        represent java objects must be instantiated to already created objects.
-        The variables will be kept uninstantiated when the event raises and the
-        predicate is called.</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p><font face="Arial"><a name="IDX6087"><font size="3"></font></a><font size="3"><a name="IDX6088"></a>
-</font></font>
-<dl>
-  <dt><font size="3" face="Arial"><span class="define">Object:</span> </font><font size="3" face="Arial"> <b>java_field/1:</b>
-    </font>
-  <dd><a name="IDX6089"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_field(X)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> <code>X</code> is a java field (structure on
-        which the functor name is the field name, and the single argument is the
-        field value).</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p><font face="Arial"><a name="IDX6090"><font size="3"></font></a><font size="3"><a name="IDX6091"></a>
-</font></font>
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_use_module/1:</b>
-    </font>
-  <dd><a name="IDX6092"></a>
-    <p><font size="3" face="Arial">No further documentation available for this predicate.</font></p>
-  </dd>
-</dl>
-<p><font face="Arial"><a name="IDX6093"><font size="3"></font></a><font size="3"><a name="IDX6094"></a>
-</font></font>
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_create_object/2:</b>
-    </font>
-  <dd><a name="IDX6095"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_create_object(+java_constructor,-java_object)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> New java object creation. The constructor must
-        be a compound term as defined by its type, with the full class name as
-        functor (e.g., 'java.lang.String'), and the parameters passed to the
-        constructor as arguments of the structure.</font></font>
-      <li><font face="Arial"><em><font size="3">Call and exit should be compatible with:</font></em> <font size="3"> <code>+java_constructor</code>
-        is a java constructor (structure with functor as constructor full name,
-        and arguments as constructor arguments). (<code>javart:java_constructor/1</code>)
-        <code>-java_object</code> is a java object (a structure with functor '$java_object',
-        and argument an integer given by the java side). (<code>javart:java_object/1</code>)</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p>&nbsp;
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_delete_object/1:</b>
-    </font>
-  <dd><a name="IDX6098"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_delete_object(+java_object)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> Java object deletion. It removes the object
-        given as argument from the Java object table.</font></font>
-      <li><font face="Arial"><em><font size="3">Call and exit should be compatible with:</font></em> <font size="3"> <code>+java_object</code>
-        is a java object (a structure with functor '$java_object', and argument
-        an integer given by the java side). (<code>javart:java_object/1</code>)</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p>&nbsp;
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_invoke_method/2:</b>
-    </font>
-  <dd><a name="IDX6101"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_invoke_method(+java_object,+java_method)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> Invokes a java method on an object. Given a Java
-        object reference, invokes the method represented with the second
-        argument.</font></font>
-      <li><font face="Arial"><em><font size="3">Call and exit should be compatible with:</font></em> <font size="3"> <code>+java_object</code>
-        is a java object (a structure with functor '$java_object', and argument
-        an integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_method</code>
-        is a java method (structure with functor as method name, and arguments
-        as method ones, plus a result argument. This result argument is unified
-        with the atom 'Yes' if the java method returns void). (<code>javart:java_method/1</code>)</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p>&nbsp;
-<dl>
-  <dt><font size="3" face="Arial"><span class="define">Object:</span> </font><font size="3" face="Arial"> <b>java_method/1:</b>
-    </font>
-  <dd><a name="IDX6104"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_method(X)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> <code>X</code> is a java method (structure with
-        functor as method name, and arguments as method ones, plus a result
-        argument. This result argument is unified with the atom 'Yes' if the
-        java method returns void).</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p><font face="Arial"><a name="IDX6105"><font size="3"></font></a><font size="3"><a name="IDX6106"></a>
-</font></font>
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_get_value/2:</b>
-    </font>
-  <dd><a name="IDX6107"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_get_value(+java_object,+java_field)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> Gets the value of a field. Given a Java object
-        as first argument, it instantiates the variable given as second
-        argument. This field must be uninstantiated in the java_field functor,
-        or this predicate will fail.</font></font>
-      <li><font face="Arial"><em><font size="3">Call and exit should be compatible with:</font></em> <font size="3"> <code>+java_object</code>
-        is a java object (a structure with functor '$java_object', and argument
-        an integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_field</code>
-        is a java field (structure on which the functor name is the field name,
-        and the single argument is the field value). (<code>javart:java_field/1</code>)</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p><font face="Arial"><a name="IDX6108"><font size="3"></font></a><font size="3"><a name="IDX6109"></a>
-</font></font>
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_set_value/2:</b>
-    </font>
-  <dd><a name="IDX6110"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_set_value(+java_object,+java_field)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> Sets the value of a Java object field. Given a
-        Java object reference, it assigns the value included in the java_field
-        compound term. The field value in the java_field structure must be
-        instantiated.</font></font>
-      <li><font face="Arial"><em><font size="3">Call and exit should be compatible with:</font></em> <font size="3"> <code>+java_object</code>
-        is a java object (a structure with functor '$java_object', and argument
-        an integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_field</code>
-        is a java field (structure on which the functor name is the field name,
-        and the single argument is the field value). (<code>javart:java_field/1</code>)</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p><font face="Arial"><a name="IDX6111"><font size="3"></font></a><font size="3"><a name="IDX6112"></a>
-</font></font>
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_add_listener/3:</b>
-    </font>
-  <dd><a name="IDX6113"></a>
-    <p><font face="Arial"><em><font size="3">Meta-predicate</font></em> <font size="3"> with arguments: <code>java_add_listener(?,?,goal)</code>.</font></font>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_add_listener(+java_object,+java_event,+prolog_goal)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> Adds a listener to an event on an object. Given
-        a Java object reference, it registers the goal received as third
-        argument to be launched when the Java event raises.</font></font>
-      <li><font face="Arial"><em><font size="3">Call and exit should be compatible with:</font></em> <font size="3"> <code>+java_object</code>
-        is a java object (a structure with functor '$java_object', and argument
-        an integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_event</code>
-        is a java event represented as an atom with the full event constructor
-        name (e.g., 'java.awt.event.ActionListener'). (<code>javart:java_event/1</code>)
-        <code>+prolog_goal</code> is a prolog predicate. Prolog term that
-        represents the goal that must be invoked when the event raises on the
-        object. The predicate arguments can be java objects, or even the result
-        of java methods. These java objects will be evaluated when the event
-        raises (instead of when the listener is added). The arguments that
-        represent java objects must be instantiated to already created objects.
-        The variables will be kept uninstantiated when the event raises and the
-        predicate is called. (<code>javart:prolog_goal/1</code>)</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<p><font face="Arial"><a name="IDX6114"><font size="3"></font></a><font size="3"><a name="IDX6115"></a>
-</font></font>
-<dl>
-  <dt><font size="3" face="Arial"> <b>java_remove_listener/3:</b>
-    </font>
-  <dd><a name="IDX6116"></a>
-    <p><font face="Arial"><strong><font size="3">Usage:</font></strong> <font size="3"> <code>java_remove_listener(+java_object,+java_event,+prolog_goal)</code>
-    </font></font>
-    <ul>
-      <li><font face="Arial"><em><font size="3">Description:</font></em> <font size="3"> It removes a listener from an object event
-        queue. Given a Java object reference, goal registered for the given
-        event is removed.</font></font>
-      <li><font face="Arial"><em><font size="3">Call and exit should be compatible with:</font></em> <font size="3"> <code>+java_object</code>
-        is a java object (a structure with functor '$java_object', and argument
-        an integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_event</code>
-        is a java event represented as an atom with the full event constructor
-        name (e.g., 'java.awt.event.ActionListener'). (<code>javart:java_event/1</code>)
-        <code>+prolog_goal</code> is a prolog predicate. Prolog term that
-        represents the goal that must be invoked when the event raises on the
-        object. The predicate arguments can be java objects, or even the result
-        of java methods. These java objects will be evaluated when the event
-        raises (instead of when the listener is added). The arguments that
-        represent java objects must be instantiated to already created objects.
-        The variables will be kept uninstantiated when the event raises and the
-        predicate is called. (<code>javart:prolog_goal/1</code>)</font></font></li>
-    </ul>
-  </dd>
-</dl>
-<h3><a href="#TOC595" name="SEC595"><font size="3" face="Arial">Java
-side</font></a></h3>
-<p><font size="3" face="Arial">The java side of this layer is
-more complex than the prolog side. The tasks this part have to deal to are the
-following:</font>
-<ul>
-  <li><font size="3" face="Arial">Wait for requests from the prolog side.</font>
-  <li><font size="3" face="Arial">Translate the prolog terms received in a 'serialized' form in a more
-    useful java representation.</font>
-  <li><font size="3" face="Arial">Interpret the requests received from the prolog side.</font>
-  <li><font size="3" face="Arial">Handle the set of objects created by or derived from the requests received
-    from de prolog side.</font>
-  <li><font size="3" face="Arial">Handle the events raised in the java side, and launch the listeners added
-    in the prolog side.</font>
-  <li><font size="3" face="Arial">Handle the exceptions raised in the java side, and send to the prolog
-    side.</font></li>
-</ul>
-<p><font size="3" face="Arial">In the implementation of the java side, two items must be carefully designed:
-the handling of java objects, and the representation of prolog data structures.
-The last item is specially important because all the interactions between prolog
-and java are made using prolog structures, an easy way to standardize the
-different data management of both languages. Even the requests themselves are
-encapsulated using prolog structures. The overload of this encapsulation is not
-significant in terms of socket traffic, due to the optimal implementation of the
-prolog serialized term.</font>
-<p><font size="3" face="Arial">The java side must handle the objects created from the prolog side
-dinamically, and these objects must be accessed as fast as possible from the set
-of objects. The java API provides a powerful implementation of Hash tables that
-achieves all the requirements of our implementation.</font>
-<p><font size="3" face="Arial">On the other hand, the java representation of prolog terms is made using the
-inheritance of java classes. In the java side exists a representation of a
-generic prolog term, implemented as an abstract class in java. Variables, atoms,
-compound terms, lists, and numeric terms are classes in the java side which
-inherit from the term class. Java objects can be seen also under the prolog
-representation as compound terms, where the single argument corresponds to the
-Hash key of the actual java object in the Hash table referred to before. This
-behaviour makes the handling of mixed java and prolog elements easy. Prolog
-goals are represented in the java side as objects which contain a prolog
-compound term with the term representing the goal. This case will be seen more
-in depth next, when the java to prolog is explained.</font>
-<h2><a href="#TOC596" name="SEC596"><font size="3" face="Arial">Java
-event handling from Prolog</font></a></h2>
-<p><font size="3" face="Arial">Java event handling is based on a
-delegation model since version 1.1.x. This approach to event handling is very
-powerful and elegant, but a user program cannot handle all the events that can
-arise on a given object: for each kind of event, a listener must be implemented
-and added specifically. However, the Java 2 API includes a special listener (<code>AWTEventListener</code>)
-that can manage the internal java event queue.</font>
-<p><font size="3" face="Arial">The prolog to java interface has been designed to emulate the java event
-handler, and is also based on event objects and listeners. The low level prolog
-to java interface implements its own event manager, to handle those events that
-have prolog listeners associated to the object that raises the event. From the
-prolog side can be added listeners to objects for specific events. The java side
-includes a list of goals to launch from the object and event type.</font>
-<p><font size="3" face="Arial">Due to the events nature, the event handler must work in a separate thread to
-manage the events asynchronously. The java side has its own mechanisms to work
-this way. The prolog side must be implemented specially for event handling using
-threads. The communication between java and prolog is also asynchronous, and an
-additional socket stream is used to avoid interferences with the main socket
-stream. The event stream will work in this implementation only in one way: from
-java to prolog. If an event handler needs to send back requests to java, it will
-use the main socket stream, just like the requests sent directly from a prolog
-program.</font>
-<p><font size="3" face="Arial">The internal process of register a Prolog event handler to a Java event is
-shown in the next figure:</font>
-<p><font size="3" face="Arial"><img alt="Image:autofigip2jbn-events-pl-reg.jpg" src="http://12.211.44.132/swijni/index_files/autofigip2jbn-events-pl-reg.jpg">
-</font>
-<p><font size="3" face="Arial">When an event raises, the low-level Prolog to Java interface has to send to
-the Prolog user program the goal to evaluate. Graphically, the complete process
-takes the tasks involved in the following figure:</font>
-<p><font size="3" face="Arial"><img alt="Image:autofigip2jbn-events-pl-fire.jpg" src="http://12.211.44.132/swijni/index_files/autofigip2jbn-events-pl-fire.jpg">
-</font>
-<h2><a href="#TOC597" name="SEC597"><font size="3" face="Arial">Java
-exception handling from Prolog</font></a></h2>
-<p><font face="Arial"><a name="IDX6023"><font size="3"></font></a><font size="3"><a name="IDX6024"></a>Java exception handling is very
-similar to the peer prolog handling: it includes some specific statements to
-trap exceptions from user code. In the java side, the exceptions can be
-originated from an incorrect request, or can be originated in the code called
-from the request. Both exception types will be sent to prolog using the main
-socket stream, allowing the prolog program manage the exception. However, the
-first kind of exceptions are prefixed, so the user program can distinguish them
-from the second type of exceptions.</font></font>
-<p><font size="3" face="Arial">In order to handle exceptions properly using the prolog to java and java to
-prolog interfaces simultaneously, in both sides of the interface will be
-filtered those exceptions coming from their own side: this avoids an endless
-loop of exceptions bouncing from one side to another.</font>
-</BODY></HTML>
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<title>SWIJNI</title>
+</head>
+<body bgcolor=#FFFFFF link=teal vlink=teal
+
+</body>
+  
+<p><span style='color: teal'><font face="Arial" size="3"><b>SWIJNI and JAVART</b></font></span></p>
+<p><font face="Arial" size="3">Two modules are provided SWIJNI and JAVART currently 
+  they are the same.</font></p>
+<p><font size="3" face="Arial">JAVART - Swi-Prolog implementation of the common 
+  Prolog to Java low level libraries.<br>
+  <br>
+ SWIJNI - Swi-Prolog natively as possible implementation of Java that should stay in sync with Fred
+Dushin's Code
+  </font></p>
+<p><font face="Arial" size="3"><b><a href="#TOC594">Prolog side 
+  of the Java interface</a>  </b> (see also <a href="#SEC595">Java 
+  callback side</a>)</font></p>
+  
+<p><font face="Arial" size="3">The prolog side sends commands to the Java reflect 
+  interface of objects the result is returned to the user program, or the action 
+  fails if there is any problem in the java side. By exporting the below predicates 
+  it should be possible to use any method or callback Java has to offer.</font> 
+</p>
+<p><font face="Arial" size="3">Prolog data representation of java elements is 
+  very simple in this low-level interface. Java primitive types such as integers 
+  and characters are translated into Java strings, and even some Java objects 
+  are translated that way (e. g. Java strings). Java objects are represented in 
+  Prolog as compound terms with a reference to identify the corresponding Java 
+  object. Data conversion is made automatically when the interface is used, so 
+  the Prolog user programs do not have to deal with the complexity of this tasks.</font> 
+</p>
+  <p><a name=SEC598><font color="#008080" size="3" face="Arial"><b>Module</b></font></a><font color="#008080" size="3" face="Arial"><b>s</b></font></p>
+  
+<p><font face="Arial" size="3"><a
+name=SEC599><code>:- use_module(library(javart)).</code></a><b><code> </code></b><code><b>or
+</b>:- use_module(library(swijni)).</code></font></p>
+  
+<p><font face="Arial" size="3"><a href="#TOC599"><b><u>Predicates</u></b> <br>
+  <br>
+</a></font><b> <code><font face="Arial" size="3">java_start/0 or java_start(+classpath)</font></code></b>
+</p>
+<p><font size="3" face="Arial">Ensures a Java Virtual Machine is ready for use
+by prolog. If arity 1 version is called is uses a sting the supplied java class path..<br>
+<br>
+</font> <code><b><font face="Arial" size="3">java_stop</font></b></code>
+</p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Description:</em> Stops the interface terminating the threads that
+  handle the socket connection, and finishing the Java interface server if it
+  was started using java_start/n.</font></p>
+  <p> <code><b><font face="Arial" size="3">java_create_object(+java_constructor,-java_object)</font></b></code></p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Description:</em> New java object creation. The constructor must be
+  a compound term as defined by its type, with the full class name as functor
+  (e.g., 'java.lang.String'), and the parameters passed to the constructor as
+  arguments of the structure.</font> </p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Call and exit should be compatible with:</em> <code>+java_constructor</code>
+  is a java constructor (structure with functor as constructor full name, and
+  arguments as constructor arguments). (<code>javart:java_constructor/1</code>) <code>-java_object</code>
+  is a java object (a structure with functor '$java_object', and argument an
+  integer given by the java side). (<code>javart:java_object/1</code>)</font></p>
+  <p> <code><b><font face="Arial" size="3">java_delete_object(+java_object)</font></b></code></p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Description:</em> Java object deletion. It removes the object given
+  as argument from the Java object table.</font> </p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Call and exit should be compatible with:</em> <code>+java_object</code>
+  is a java object (a structure with functor '$java_object', and argument an
+  integer given by the java side). (<code>javart:java_object/1</code>)</font></p>
+  <p> <code><b><font face="Arial" size="3">java_invoke_method(+java_object,+java_method)</font></b></code></p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Description:</em> Invokes a java method on an object. Given a Java
+  object reference, invokes the method represented with the second argument.</font> 
+  </p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Call and exit should be compatible with:</em> <code>+java_object</code>
+  is a java object (a structure with functor '$java_object', and argument an
+  integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_method</code>
+  is a java method (structure with functor as method name, and arguments as
+  method ones, plus a result argument. This result argument is unified with the
+  atom 'Yes' if the java method returns void). (<code>javart:java_method/1</code>)</font></p>
+  <p> <code><b><font face="Arial" size="3">java_get_value(+java_object,+java_field)</font></b></code></p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Description:</em> Gets the value of a field. Given a Java object as
+  first argument, it instantiates the variable given as second argument. This
+  field must be uninstantiated in the java_field functor, or this predicate will
+  fail.</font> 
+  </p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Call and exit should be compatible with:</em> <code>+java_object</code>
+  is a java object (a structure with functor '$java_object', and argument an
+  integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_field</code>
+  is a java field (structure on which the functor name is the field name, and
+  the single argument is the field value). (<code>javart:java_field/1</code>)</font></p>
+  <p> <code><b><font face="Arial" size="3">java_set_value(+java_object,+java_field)</font></b></code></p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Description:</em> Sets the value of a Java object field. Given a
+  Java object reference, it assigns the value included in the java_field
+  compound term. The field value in the java_field structure must be
+  instantiated.</font> 
+  </p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Call and exit should be compatible with:</em> <code>+java_object</code>
+  is a java object (a structure with functor '$java_object', and argument an
+  integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_field</code>
+  is a java field (structure on which the functor name is the field name, and
+  the single argument is the field value). (<code>javart:java_field/1</code>)</font></p>
+  <p> <code><b><font face="Arial" size="3">java_add_listener(+java_object,+java_event,+prolog_goal)</font></b></code></p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Description:</em> Adds a listener to an event on an object. Given a
+  Java object reference, it registers the goal received as third argument to be
+  launched when the Java event raises.</font> </p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Call and exit should be compatible with:</em> <code>+java_object</code>
+  is a java object (a structure with functor '$java_object', and argument an
+  integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_event</code>
+  is a java event represented as an atom with the full event constructor name
+  (e.g., 'java.awt.event.ActionListener'). (<code>javart:java_event/1</code>) <code>+prolog_goal</code>
+  is a prolog predicate. Prolog term that represents the goal that must be
+  invoked when the event raises on the object. The predicate arguments can be
+  java objects, or even the result of java methods. These java objects will be
+  evaluated when the event raises (instead of when the listener is added). The
+  arguments that represent java objects must be instantiated to already created
+  objects. The variables will be kept uninstantiated when the event raises and
+  the predicate is called. (<code>javart:prolog_goal/1</code>)</font></p>
+  <p> <code><b><font face="Arial" size="3">java_remove_listener(+java_object,+java_event,+prolog_goal)</font></b></code></p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Description:</em> It removes a listener from an object event queue.
+  Given a Java object reference, goal registered for the given event is removed.</font> 
+  </p>
+  <p> <font face="Arial" size="3">·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  </span><em>Call and exit should be compatible with:</em> <code>+java_object</code>
+  is a java object (a structure with functor '$java_object', and argument an
+  integer given by the java side). (<code>javart:java_object/1</code>) <code>+java_event</code>
+  is a java event represented as an atom with the full event constructor name
+  (e.g., 'java.awt.event.ActionListener'). (<code>javart:java_event/1</code>) <code>+prolog_goal</code>
+  is a prolog predicate. Prolog term that represents the goal that must be
+  invoked when the event raises on the object. The predicate arguments can be
+  java objects, or even the result of java methods. These java objects will be
+  evaluated when the event raises (instead of when the listener is added). The
+  arguments that represent java objects must be instantiated to already created
+  objects. The variables will be kept uninstantiated when the event raises and
+  the predicate is called. (<code>javart:prolog_goal/1</code>)</font></p>
+<p><font face="Arial" size="3"><b><a name=SEC596></a><a href="#TOC596">Java
+  event handling from Prolog</a></b></font></p>
+  <p><font face="Arial" size="3">Java event handling is based on a delegation
+  model since version 1.1.x. This approach to event handling is very powerful
+  and elegant, but a user program cannot handle all the events that can arise on
+  a given object: for each kind of event, a listener must be implemented and
+  added specifically. However, the Java 2 API includes a special listener (<code>AWTEventListener</code>)
+  that can manage the internal java event queue.</font> 
+  </p>
+  <p><font face="Arial" size="3">The prolog to java interface has been designed
+  to emulate the java event handler, and is also based on event objects and
+  listeners. The low level prolog to java interface implements its own event
+  manager, to handle those events that have prolog listeners associated to the
+  object that raises the event. From the prolog side can be added listeners to
+  objects for specific events. The java side includes a list of goals to launch
+  from the object and event type.</font> </p>
+  <p><font face="Arial" size="3">Due to the events nature, the event handler
+  must work in a separate thread to manage the events asynchronously. The java
+  side has its own mechanisms to work this way. The prolog side must be
+  implemented specially for event handling using threads. The communication
+  between java and prolog is also asynchronous, and an additional socket stream
+  is used to avoid interferences with the main socket stream. The event stream
+  will work in this implementation only in one way: from java to prolog. If an
+  event handler needs to send back requests to java, it will use the main socket
+  stream, just like the requests sent directly from a prolog program.</font> </p>
+  <p><font face="Arial" size="3">The internal process of register a Prolog event
+  handler to a Java event is shown in the next figure:</font> </p>
+  <p><font face="Arial" size="3">When an event raises, the low-level Prolog to
+  Java interface has to send to the Prolog user program the goal to evaluate.
+  Graphically, the complete process takes the tasks involved in the following
+  figure:</font> </p>
+  <p><font face="Arial" size="3"><a name=SEC595></a><a href="#TOC595"><b>Java side</b></a></font></p>
+  <p><font face="Arial" size="3">In the implementation of the java side, two
+  items must be carefully designed: the handling of java objects, and the
+  representation of prolog data structures. The last item is specially important
+  because all the interactions between prolog and java are made using prolog
+  structures, an easy way to standardize the different data management of both
+  languages. Even the requests themselves are encapsulated using prolog
+  structures. The overload of this encapsulation is not significant in terms of
+  socket traffic, due to the optimal implementation of the prolog serialized
+  term.</font> </p>
+  <p><font face="Arial" size="3">The java side must handle the objects created
+  from the prolog side dynamically, and these objects must be accessed as fast
+  as possible from the set of objects. The java API provides a powerful
+  implementation of Hash tables that achieves all the requirements of our
+  implementation.</font> 
+  </p>
+  <p><font face="Arial" size="3">On the other hand, the java representation of
+  prolog terms is made using the inheritance of java classes. In the java side
+  exists a representation of a generic prolog term, implemented as an abstract
+  class in java. Variables, atoms, compound terms, lists, and numeric terms are
+  classes in the java side which inherit from the term class. Java objects can
+  be seen also under the prolog representation as compound terms, where the
+  single argument corresponds to the Hash key of the actual java object in the
+  Hash table referred to before. This behaviour makes the handling of mixed java
+  and prolog elements easy. Prolog goals are represented in the java side as
+  objects which contain a prolog compound term with the term representing the
+  goal. This case will be seen more in depth next, when the java to prolog is
+  explained.</font> </p>
+  <p><font face="Arial" size="3"><a name=SEC597></a><a href="#TOC597"><b>Java
+  exception handling from Prolog</b></a></font></p>
+  <p><font face="Arial" size="3"><a name=IDX6023></a><a name=IDX6024></a>Java
+  exception handling is very similar to the peer prolog handling: it includes
+  some specific statements to trap exceptions from user code. In the java side,
+  the exceptions can be originated from an incorrect request, or can be
+  originated in the code called from the request. Both exception types will be
+  sent to prolog using the main socket stream, allowing the prolog program
+  manage the exception. However, the first kind of exceptions are prefixed, so
+  the user program can distinguish them from the second type of exceptions.</font> </p>
+  <p><font face="Arial" size="3">In order to handle exceptions properly using
+  the prolog to java and java to prolog interfaces simultaneously, in both sides
+  of the interface will be filtered those exceptions coming from their own side:
+  this avoids an endless loop of exceptions bouncing from one side to another.</font> 
+  </p>
+</html>

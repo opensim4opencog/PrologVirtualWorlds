@@ -3,10 +3,10 @@ workingdir=.
 version=6.0
 packname=(None)
 MACRO=\n
-FILTERNAME=java\nOther Files\n
-FILTERPATTERN=*.java\n*.*\n
-FILTERAPPCOMMAND=\n\n
-FILTERASSOCIATEFILETYPES=0 0 
+FILTERNAME=Other Files\n
+FILTERPATTERN=*.*\n
+FILTERAPPCOMMAND=\n
+FILTERASSOCIATEFILETYPES=0 
 [CONFIGURATIONS]
 activeconfig=,Release
 config=,Release
