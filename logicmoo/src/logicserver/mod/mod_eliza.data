@@ -1,16 +1,7 @@
 
 :- dynamic isa_mem_c/1.
 
-isa_mem_c([martha, is, a, good, thing]).
-isa_mem_c([kracrking, was, talking, about, beer]).
-isa_mem_c([because, beer, is, a, good, thing, martha, said, so]).
-isa_mem_c([i, am, invited, i, bring, the, beer]).
-isa_mem_c([allot, of, oaths, stiull, will, need, upating]).
-isa_mem_c(['06nice', going, '04kingkracr', 6, the, answer, was, '04dolphin', 6, i, got, it, in, 440475, 6, seconds, im, now, ranked, '0415th', 6, of, 426, 6, behind, '04natassja', 6, with, 476, 6]).
-isa_mem_c([10, '10are', these, too, tough, for, i, the, answer, was, '04eighteen', 10, there, comes, the, next, one]).
-isa_mem_c([nephrael, is, still, working, on, thee, converison, to, ciao]).
-isa_mem_c([kingkracr, is, not, that, im]).
-isa_mem_c([beer, is, a, good, thing, martha, said, so]).
+isa_mem_c([martha, said, it, was, a, good, thing]).
 
 :- dynamic isa_mem_c/3.
 
