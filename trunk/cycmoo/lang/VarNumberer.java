@@ -1,4 +1,7 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang; 
+import cycmoo.lang.fluent.*;
+import cycmoo.lang.object.*;
+import cycmoo.lang.builtin.*;  //
 /**
   Used in implementing uniform replacement of
   variables with new constants. useful for printing
@@ -8,10 +11,10 @@ package cycmoo.lang;  //tarau.jinni;
   @see HornClause
 */
 public class VarNumberer extends Nonvar {
-   ITermMap dict;
-   int ctr;
+   public ITermMap dict;
+   public int ctr;
 
-   VarNumberer() {
+   public VarNumberer() {
      dict = KernelAgent.emptyTermMap();
      ctr = 0;
    }

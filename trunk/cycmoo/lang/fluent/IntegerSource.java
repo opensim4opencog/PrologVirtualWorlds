@@ -1,4 +1,6 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.fluent;  
+import cycmoo.lang.*;
+import cycmoo.lang.object.*;
 
 /**
  * creates a source of integers based on x=a*x+b formula

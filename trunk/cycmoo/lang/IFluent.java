@@ -1,4 +1,4 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang;  //
 import java.util.*;
 import java.io.Reader;
 /**

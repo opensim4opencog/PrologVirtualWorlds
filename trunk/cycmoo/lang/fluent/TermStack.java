@@ -1,4 +1,6 @@
-package cycmoo.lang;  
+package cycmoo.lang.fluent;  
+import cycmoo.lang.*;
+import cycmoo.lang.object.*;
 
 import java.util.Stack;
 import java.util.Enumeration;

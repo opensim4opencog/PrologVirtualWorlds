@@ -1,4 +1,7 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.object;  //
+import cycmoo.lang.*;
+import cycmoo.lang.fluent.*;
+
 /**
   Part of the ITerm hierarchy, implementing double float
   point numbers.

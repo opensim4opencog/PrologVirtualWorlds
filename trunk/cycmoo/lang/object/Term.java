@@ -1,4 +1,6 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.object; 
+import cycmoo.lang.*;
+import cycmoo.lang.fluent.*;
 /**
   Top element of the Prolog term hierarchy.
   Describes a simple or compound ter like:
@@ -65,7 +67,7 @@ public abstract class Term extends Object implements ITerm, Cloneable {
         return false;
     }
 /*
-    public static ITerm fromString(String s) {
+    static public ITerm fromString(String s) {
         return HornClause.clauseFromString(s).toTerm();
     }
   */

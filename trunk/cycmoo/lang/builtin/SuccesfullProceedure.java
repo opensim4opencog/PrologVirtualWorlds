@@ -1,10 +1,12 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.builtin;  //
+import cycmoo.lang.*;
+import cycmoo.lang.object.*;
 
 /**
   Always succeeds
 */
 public class SuccesfullProceedure extends AtomProceedure {
-    SuccesfullProceedure() {
+    public SuccesfullProceedure() {
         super("true");
     }
 

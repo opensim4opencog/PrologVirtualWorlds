@@ -1,4 +1,7 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang;  //
+import cycmoo.lang.fluent.*;
+import cycmoo.lang.object.*;
+import cycmoo.lang.builtin.*;  //
 import java.util.*;
 
 /**
@@ -45,7 +48,7 @@ public class TermCopier extends Nonvar {
      Vector.elements can give back the enumeration if needed.
      @see TermCopier
    */
-   static Vector EnumerationToVector(Enumeration e) {
+   static public Vector EnumerationToVector(Enumeration e) {
      Vector V=new Vector();
      while(e.hasMoreElements()) {
        V.addElement(e.nextElement());
@@ -53,7 +56,7 @@ public class TermCopier extends Nonvar {
      return V;
    }
 
-   static Vector ConsToVector(Atom Xs) {
+   static public Vector ConsToVector(Atom Xs) {
      Vector V=new Vector();
      ITerm t=Xs;
       for(;;) {
@@ -85,7 +88,7 @@ public class TermCopier extends Nonvar {
      the Enumeration.
    */
 
-   static ITerm toCompound(Atom c,Enumeration e) {
+   static public ITerm toCompound(Atom c,Enumeration e) {
       Vector V=EnumerationToVector(e);
       int arity=V.size();
       if(arity==0) return c;
@@ -101,7 +104,7 @@ public class TermCopier extends Nonvar {
      Represents a list [f,a1...,an] as f(a1,...,an)
    */
    
-   static Compound VectorToCompound(Vector V) {
+   static public Compound VectorToCompound(Vector V) {
      Atom f=(Atom)V.firstElement();
      int arity=V.size()-1;
      Compound T=Compound.newCompound(f.name(),arity);
@@ -120,7 +123,7 @@ public class TermCopier extends Nonvar {
    */
    final static Atom anAnswer=TermMap.defAtomStatic("answer");
 
-   ITerm getMyVars(ITerm that) {
+   public ITerm getMyVars(ITerm that) {
      /*ITerm*/ that.reaction(this);
      return toCompound(anAnswer,varDict.keys());
    }

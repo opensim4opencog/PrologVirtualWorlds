@@ -1,4 +1,7 @@
-package cycmoo.lang;  
+package cycmoo.lang.fluent;  
+import cycmoo.lang.*; 
+import cycmoo.lang.object.*;
+import cycmoo.lang.builtin.*;  //
 
 import java.util.Vector;
 import java.util.Enumeration;

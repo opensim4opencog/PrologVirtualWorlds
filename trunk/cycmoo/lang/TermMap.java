@@ -1,4 +1,9 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang;  //
+import cycmoo.lang.fluent.*;
+import cycmoo.lang.object.*;
+import cycmoo.lang.builtin.*;  //
+import cycmoo.lang.parser.*;  //
+
 import java.util.Vector;
 import java.util.Enumeration;
 import java.util.Map;
@@ -6,7 +11,6 @@ import java.util.Hashtable;
 import java.util.NoSuchElementException;
 import java.util.*;
 import java.io.*;
-import cycmoo.lang.parser.PrologParser;  //tarau.jinni;
 import java.util.*;
 import java.io.Reader;
 
@@ -347,7 +351,7 @@ public class TermMap extends PersistentFluent implements IProceedureMap, ITermMa
         return fromFile(f,true); 
     }
 
-    public /* this.static */ String lastFile="jinni/kprolog/lib.pro";
+    public /* this.static */ String lastFile="cycmoo/lang/lib.pro";
 
     /**
       reconsults the last reconsulted file

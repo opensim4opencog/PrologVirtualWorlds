@@ -1,4 +1,7 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.fluent;  
+import cycmoo.lang.*;
+import cycmoo.lang.object.*;
+import cycmoo.lang.builtin.*;  //
 
 /**
  * Maps a ITerm to an SourceFluent for iterating over its arguments
