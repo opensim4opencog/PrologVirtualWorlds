@@ -1,4 +1,4 @@
-package cycmoo.lang.builtin;  //tarau.jinni;
+package cycmoo.lang.builtin;  //
 import cycmoo.lang.fluent.*;  
 import cycmoo.lang.*;
 import cycmoo.lang.object.*;

@@ -1,4 +1,7 @@
-package cycmoo.lang;  //tarau.jinni; 
+package cycmoo.lang.fluent;  // 
+import cycmoo.lang.*;
+import cycmoo.lang.object.*;
+import cycmoo.lang.builtin.*;  //
 import java.util.*;
 
 /**
@@ -50,7 +53,7 @@ public class UnfoldingSourceFluent extends SourceFluent {
     /**
      * Extracts an answer at the end of an AND-derivation
      */
-    HornClause getAnswer() {
+    public HornClause getAnswer() {
         if ( null!=goal && goal.getBody() instanceof SuccesfullProceedure ) return goal.ccopy();
         else return null;
     }
@@ -58,14 +61,14 @@ public class UnfoldingSourceFluent extends SourceFluent {
     /**
      * Checks if this clause is the last one, allowing LCO
      */
-    final boolean notLastClause() {
+    final public boolean notLastClause() {
         return(null!=e) && e.hasMoreElements();
     }
 
     /**
      * Reduces builtin functions after the neck of a clause, before a "real" atom is unfolded
      */
-    final void reduceProceedures() {
+    final public void reduceProceedures() {
         for ( ;; ) {
             ITerm first=goal.getFirst();
             if ( null==first ) break; // cannot reduce further
@@ -129,7 +132,7 @@ public class UnfoldingSourceFluent extends SourceFluent {
     /**
      * Tracer on entering g
      */
-    final void trace_goal(HornClause g) {
+    final public void trace_goal(HornClause g) {
         switch ( KernelAgent.tracing ) {
         case 2:
             IO.println(">>>: "+g.getFirst());
@@ -143,7 +146,7 @@ public class UnfoldingSourceFluent extends SourceFluent {
     /**
      * Tracer on exiting g
      */
-    final void trace_failing(HornClause g) {
+    final public void trace_failing(HornClause g) {
         switch ( KernelAgent.tracing ) {
         case 2:
             IO.println("FAILING CALL IN<<<: "+g.getFirst());
@@ -157,7 +160,7 @@ public class UnfoldingSourceFluent extends SourceFluent {
     /**
      * Tracer for undefined predicates
      */
-    final void trace_nomatch(ITerm first) {
+    final public void trace_nomatch(ITerm first) {
         if ( KernelAgent.tracing>0 ) {
             IO.println("*** UNDEFINED CALL: "+first.pprint());
         }

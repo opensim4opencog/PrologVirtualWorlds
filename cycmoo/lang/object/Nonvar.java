@@ -1,18 +1,21 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.object; 
+import cycmoo.lang.*; 
+import cycmoo.lang.fluent.*;
+import cycmoo.lang.builtin.*;  //
 /**
   Part of the Prolog ITerm hierarchy
   @see ITerm
 */
 public abstract class Nonvar extends Term {
 
-    static String getName(Object obj) {
+    static public String getName(Object obj) {
         if ( obj instanceof Class ) return(((Class) obj).getName()+".class");
         if ( obj instanceof Number ) return obj.getClass().getName()+"."+((Number)obj).doubleValue();
         if ( obj instanceof String ) return obj.toString();
         return(obj.getClass().getName()+"."+(++ctr));
     }
 
-    static boolean needsQuoted(String atom) {
+    static public boolean needsQuoted(String atom) {
         int len = atom.length();
         if ( 0==len ) return true;
         if (atom.charAt(--len)=='\'') return false;

@@ -1,4 +1,6 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.object;  
+import cycmoo.lang.*;
+import cycmoo.lang.fluent.*;
 /**
   List Atomructor. Cooperates with terminator Nil.
 

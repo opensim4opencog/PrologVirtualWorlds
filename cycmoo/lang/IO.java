@@ -1,4 +1,7 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang;  //
+import cycmoo.lang.fluent.*;
+import cycmoo.lang.builtin.*;  //
+import cycmoo.lang.object.*;  //
 /*
 * Copyright (C) Paul Tarau 1996-1999*/
 
@@ -9,30 +12,30 @@ import java.util.*;
 
 public class IO {
 
-    public static IOPeer peer=null;
-    public static Applet applet=null;
+    static public IOPeer peer=null;
+    static public Applet applet=null;
 
-    public static boolean showOutput=true;
-    public static boolean showErrors=true;
-    public final static int showTrace=0;
-    public static long maxAnswers=0; // 0 means all, >0 means ask
+    static public boolean showOutput=true;
+    static public boolean showErrors=true;
+    final static public int showTrace=0;
+    static public long maxAnswers=0; // 0 means all, >0 means ask
 
-    public static final Reader input=toReader(System.in);
-    public static Writer output=toWriter(System.out);
+    static public final Reader input=toReader(System.in);
+    static public Writer output=toWriter(System.out);
 
-    static Reader toReader(InputStream f) {
+    static public Reader toReader(InputStream f) {
         return new BufferedReader(new InputStreamReader(f));
     }
 
-    static Reader toFileReader(String fname) {
+    static public Reader toFileReader(String fname) {
         return url_or_file(fname);
     }
 
-    static Writer toWriter(OutputStream f) {
+    static public Writer toWriter(OutputStream f) {
         return new BufferedWriter(new OutputStreamWriter(f));
     }
 
-    static Writer toFileWriter(String s) {
+    static public Writer toFileWriter(String s) {
         Writer f=null;
         //mes("HERE"+s);
         try {
@@ -43,11 +46,11 @@ public class IO {
         return f;
     }
 
-    public static Reader getStdInput() {
+    static public Reader getStdInput() {
         return input;
     }
 
-    public static Writer getStdOutput() {
+    static public Writer getStdOutput() {
         return output;
     }
 
@@ -64,38 +67,38 @@ public class IO {
         return;
     }
 
-    public static final void println(Writer o,String s) {
+    static public final void println(Writer o,String s) {
         print(o,s+"\n");
     }
 
-    public static final void print(String s) {
+    static public final void print(String s) {
         print(getStdOutput(),s);
     }
 
-    public static final void println(String s) {
+    static public final void println(String s) {
         println(getStdOutput(),s);
     }
     
-    public static final void println(Iterator s) {
+    static public final void println(Iterator s) {
         while (s.hasNext()) println(s.next().toString());
     }
-    public static final void println(Enumeration s) {
+    static public final void println(Enumeration s) {
         while (s.hasMoreElements()) println(s.nextElement().toString());
     }
 
     // for now just stubs: usable if IO comes from elswere i.e. sockets
-    static final String read_from(Reader f) {
+    static public final String read_from(Reader f) {
         return readln(f);
     }
 
     // for now just stubs: usable if IO comes from elswere i.e. sockets
-    static final void write_to(Writer f,String s) {
+    static public final void write_to(Writer f,String s) {
         println(f,s);
     }
 
-    static final int MAXBUF=1<<30;
+    static public final int MAXBUF=1<<30;
 
-    static String readLine(Reader f) throws IOException {
+    static public String readLine(Reader f) throws IOException {
         StringBuffer s=new StringBuffer();
         for ( int i=0; i<MAXBUF; i++ ) {
             int c=f.read();
@@ -110,7 +113,7 @@ public class IO {
         return s.toString();
     }
 
-    static final String readln(Reader f) {
+    static public final String readln(Reader f) {
         traceln(2,"READLN TRACE: entering");
         String s=null;
         try {
@@ -125,7 +128,7 @@ public class IO {
         return s;
     }
 
-    public static final String readln() {
+    static public final String readln() {
         String s;
         if ( peer==null ) {
             s=readln(getStdInput());
@@ -135,16 +138,16 @@ public class IO {
         return s;
     }
 
-    public static final String promptln(String prompt) {
+    static public final String promptln(String prompt) {
         print(prompt);
         return readln();
     }
 
-    public static final void mes(String s) {
+    static public final void mes(String s) {
         println(getStdOutput(),s);
     }
 
-    public static final void traceln(int level,String s) {
+    static public final void traceln(int level,String s) {
         if ( !showOutput || showTrace<level ) return;
         if ( peer==null ) {
             println(getStdOutput(),s);
@@ -152,11 +155,11 @@ public class IO {
             peer.traceln(s);
     }
 
-    public static final void traceln(String s) {
+    static public final void traceln(String s) {
         if ( showTrace>=1 ) println(getStdOutput(),s);
     }
 
-    public static void printStackTrace(Throwable e) {
+    static public void printStackTrace(Throwable e) {
         if ( showErrors ) {
             //ByteArrayOutputStream b=new ByteArrayOutputStream();
             //PrintWriter fb=new PrintWriter(b);   
@@ -168,21 +171,21 @@ public class IO {
         }
     }
 
-    public static final void errmes(String s) {
+    static public final void errmes(String s) {
         if ( showErrors ) println(getStdOutput(),s);
     }
 
-    synchronized public static final void errmes(String s,Throwable e) {
+    synchronized static public final void errmes(String s,Throwable e) {
         errmes(s);
         printStackTrace(e);
     }
 
 
-    public static final void assertion(String Mes) {
+    static public final void assertion(String Mes) {
         IO.errmes("assertion failed",(new java.lang.Exception(Mes)));
     }
 
-    public static final int system(String cmd) {
+    static public final int system(String cmd) {
         //IO.mes("executing: <"+cmd+">");
         try {
             Runtime.getRuntime().exec(cmd);
@@ -193,11 +196,11 @@ public class IO {
         return 1;
     }
 
-    public static final Reader url2stream(String f) {
+    static public final Reader url2stream(String f) {
         return url2stream(f,false);
     }
 
-    public static final Reader url2stream(String f,boolean quiet) {
+    static public final Reader url2stream(String f,boolean quiet) {
         Reader stream=null;
         try {
             URL url=new URL(f);
@@ -213,7 +216,7 @@ public class IO {
         return stream;
     }
 
-    public static String getBaseDir() {
+    static public String getBaseDir() {
         if ( null == applet ) return "";
         String appletURL=applet.getCodeBase().toString();
         int slash=appletURL.lastIndexOf('/');
@@ -222,7 +225,7 @@ public class IO {
         return appletURL;
     }
 
-    public static final Reader url_or_file(String s) {
+    static public final Reader url_or_file(String s) {
         Reader stream=null;
         try {
             if ( applet!=null ) {
@@ -241,12 +244,12 @@ public class IO {
         return stream;
     }
 
-    public static final Reader string_to_stream(String s) throws IOException {
+    static public final Reader string_to_stream(String s) throws IOException {
         StringReader stream=new StringReader(s);
         return stream;
     }
 
-    public static final URL find_url(String s) {
+    static public final URL find_url(String s) {
         String valid=null;
         Reader stream;
 

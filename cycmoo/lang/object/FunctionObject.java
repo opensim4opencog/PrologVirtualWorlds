@@ -1,4 +1,8 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.object;  //
+import cycmoo.lang.*;
+import cycmoo.lang.fluent.*;
+import cycmoo.lang.builtin.*;  //
+import java.lang.reflect.*;
 
 import java.util.Hashtable;
 /**

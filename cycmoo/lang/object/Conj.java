@@ -1,4 +1,6 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.object;  
+import cycmoo.lang.*;
+import cycmoo.lang.fluent.*;
 public class Conj extends Cons  implements IProceedure {
     public Conj(ITerm x0, ITerm x1) {
         super(",",x0,x1);

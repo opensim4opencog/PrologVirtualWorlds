@@ -1,4 +1,7 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.object; 
+import cycmoo.lang.*;
+import cycmoo.lang.fluent.*;
+import cycmoo.lang.builtin.*;  //
 public class IntTerm extends NumericTerm {
   public IntTerm(long i) {
     val=i;

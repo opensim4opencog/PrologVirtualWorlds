@@ -1,5 +1,7 @@
-package cycmoo.lang;  //tarau.jinni;
-import cycmoo.lang.builtin.SystemProceedures;  //tarau.jinni;
+package cycmoo.lang;
+import cycmoo.lang.fluent.*;
+import cycmoo.lang.object.*;
+import cycmoo.lang.builtin.*;  //
 import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
@@ -13,20 +15,20 @@ import java.util.Enumeration;
 public class KernelAgent extends Blackboard implements IProceedureMap {
     
     // CLASS FIELDS
-    public static int tracing=1;
-    public static final int version=104;
-    public static KernelAgent firstInstance=null;
-    public static KernelAgent currentInstance() {
+    static public int tracing=1;
+    static public final int version=104;
+    static public KernelAgent firstInstance=null;
+    static public KernelAgent currentInstance() {
         return firstInstance;
     }
-    public static ITermMap newEmptyTermMap() {
+    static public ITermMap newEmptyTermMap() {
         return new TermMap(new Hashtable());
         //return firstInstance;
     }
-    public static ITermMap emptyTermMap() {
+    static public ITermMap emptyTermMap() {
         return new TermMap(new Hashtable());
     }
-    public static void main(String args[]) {
+    static public void main(String args[]) {
         IO.println(
                   "Kernel Prolog "+version/100.0+"\n"+
               //    "Copyright (c) Paul Tarau && BinNet Corp. 1999\n"+
@@ -51,17 +53,17 @@ public class KernelAgent extends Blackboard implements IProceedureMap {
         new SystemProceedures(this);
     }
 
-    //public static Hashtable systemObjectMap = new Hashtable();
+    //static public Hashtable systemObjectMap = new Hashtable();
     
     // Object tracking
-    public static void objectPut(String named, ITerm any){
+    static public void objectPut(String named, ITerm any){
         if (firstInstance==null) return;
         currentInstance().put(named,any);
     }
-    public static ITerm objectGet(String named){
+    static public ITerm objectGet(String named){
        return (ITerm)currentInstance().get(named);
     }
-    public static String objectKey(Object any){
+    static public String objectKey(Object any){
        Enumeration e = currentInstance().keys();
        while (e.hasMoreElements()) {
            Object key=e.nextElement();
@@ -69,7 +71,7 @@ public class KernelAgent extends Blackboard implements IProceedureMap {
        }
        return null;
     }
-    public static void objectRemove(String named){
+    static public void objectRemove(String named){
        currentInstance().remove(named);
     }
 

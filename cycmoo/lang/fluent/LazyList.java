@@ -1,4 +1,6 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.fluent;  
+import cycmoo.lang.*;
+import cycmoo.lang.object.*;
 /**
   Lazy List: produces Cons-like sequences, based on a SourceFluent.  Saving a lazy list to the database does not make too much sense  as it will be discarded when backtracking over its creation point.  Note that a Lazy List has its own trail, and is only discarded  when backtracking over its creation point.
 */

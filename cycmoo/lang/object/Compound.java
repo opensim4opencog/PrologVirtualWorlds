@@ -1,4 +1,4 @@
-package cycmoo.lang.object;  //tarau.jinni;
+package cycmoo.lang.object;  //
 import cycmoo.lang.*;
 import cycmoo.lang.fluent.*;
 /**
@@ -130,7 +130,7 @@ public class Compound extends Atom {
         return funToString();
     }
 
-    public static String watchNull(ITerm x) {
+    static public String watchNull(ITerm x) {
         return((null==x)?"null":x.toString());
     }
 

@@ -1,5 +1,7 @@
-package cycmoo.lang;  //tarau.jinni;
-import cycmoo.lang.parser.PrologParser;  //tarau.jinni;
+package cycmoo.lang.fluent;  
+import cycmoo.lang.*;
+import cycmoo.lang.object.*;
+import cycmoo.lang.parser.PrologParser;  //
 import java.io.Reader;
 import java.io.IOException;
 
@@ -9,7 +11,7 @@ import java.io.IOException;
 */
 public class ClauseReader extends CharReader {
     protected PrologParser parser;
-    public static HornClause goalFromString(ITermMap tm, String line) {
+    static public HornClause goalFromString(ITermMap tm, String line) {
         IO.traceln("read string: <"+line+">");
 
         if ( null==line )
@@ -81,7 +83,7 @@ public class ClauseReader extends CharReader {
         return extract_info(C);
     }
 
-    public static Compound extract_info(HornClause C) {
+    static public Compound extract_info(HornClause C) {
         if ( null==C ) return null;
         ITerm Vs=C.varsOf();
         HornClause SuperC=new HornClause(Vs,C);

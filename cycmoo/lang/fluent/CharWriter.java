@@ -1,4 +1,8 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.fluent;  
+import cycmoo.lang.*;
+import cycmoo.lang.builtin.*;  //
+import cycmoo.lang.object.*;  //
+
 import java.io.Writer;
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -1,6 +1,9 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.object; 
+import cycmoo.lang.*;
+import cycmoo.lang.fluent.*;
+import cycmoo.lang.builtin.*;  //
 import java.util.Enumeration;
-import cycmoo.lang.parser.PrologParser;  //tarau.jinni;
+import cycmoo.lang.parser.PrologParser;  //
 
 
 /**
@@ -69,7 +72,7 @@ public class HornClause extends Compound {
     /**
     * Prints out a clause as Head:-Body
     */
-    private String Clause2String(HornClause c) {
+    public  String Clause2String(HornClause c) {
         ITerm h=c.getHead();
         ITerm t=c.getBody();
         if ( t instanceof Conj ) return h+":-"+((Conj)t).conjToString();
@@ -173,7 +176,7 @@ public class HornClause extends Compound {
       Gets the leftmost (first) goal in the body of a clause,
       i.e. from H:-B1,B2,...,Bn it will extract B1.
     */
-    final ITerm getFirst() {
+    public final ITerm getFirst() {
         ITerm body=getBody();
         if ( body instanceof Conj ) return((Conj)body).getDirectArg(0).dref();
         else if ( body instanceof SuccesfullProceedure ) return null;
@@ -189,7 +192,7 @@ public class HornClause extends Compound {
       @see True
       @see Conj
     */
-    final ITerm getRest() {
+    public final ITerm getRest() {
         ITerm body=getBody();
         if ( body instanceof Conj ) return((Conj)body).getDrefArg(1);
         else return(ITerm)Atom.aTrue;
@@ -205,7 +208,7 @@ public class HornClause extends Compound {
       @see ITerm#unify()
   
     */
-    HornClause unfold(HornClause that,TermStack trail) {
+    public HornClause unfold(HornClause that,TermStack trail) {
         HornClause result=null;
         ITerm first=getFirst();
 
@@ -229,7 +232,7 @@ public class HornClause extends Compound {
       Concatenates 2 Conjunctions
       @see HornClause#unfold
     */
-    static final ITerm appendConj(ITerm x, ITerm y) {
+    static public final ITerm appendConj(ITerm x, ITerm y) {
         y=y.dref();
         if ( x instanceof SuccesfullProceedure ) return y;
         if ( y instanceof SuccesfullProceedure ) return x; // comment out if using getState
@@ -238,11 +241,11 @@ public class HornClause extends Compound {
         return new Conj(x,y);
     }
 
-    synchronized final HornClause unfold_with_goal(HornClause goal,TermStack trail) {
+    public synchronized final HornClause unfold_with_goal(HornClause goal,TermStack trail) {
         return goal.unfold(this,trail);
     }
 
-    synchronized HornClause unfoldedCopy(HornClause that,TermStack trail) {
+    public synchronized HornClause unfoldedCopy(HornClause that,TermStack trail) {
         int oldtop=trail.size();
         HornClause result=unfold(that,trail);
         if ( result==null ) return null;

@@ -1,5 +1,5 @@
-package jinni.kprolog;  //tarau.jinni;
-import jinni.kprolog.parser.PrologParser;  //tarau.jinni;
+package cycmoo.lang;  //
+import cycmoo.lang.parser.PrologParser;  //
 import java.util.*;
 import java.io.Reader;
 /**

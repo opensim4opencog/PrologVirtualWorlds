@@ -1,5 +1,8 @@
-package cycmoo.lang.parser;  //tarau.jinni;
+package cycmoo.lang.parser;  //
 import cycmoo.lang.*;
+import cycmoo.lang.fluent.*;
+import cycmoo.lang.builtin.*;  //
+import cycmoo.lang.object.*;  //
 import java.io.Reader;
 import java.io.IOException;
 import java.io.StreamTokenizer;
@@ -247,12 +250,12 @@ public class PrologParser extends PrologTokenizer implements ITermReader {
     }
 
 
-    public static final String normalizeParseString(String s) {
+    static public final String normalizeParseString(String s) {
         if ( !(s.lastIndexOf(".")>=s.length()-2) ) s=s+".";
         return s;
     }
 
-    public static HornClause clauseFromString(ITermMap tm,String s) {
+    static public HornClause clauseFromString(ITermMap tm,String s) {
         if ( null==s ) return null;
         s=normalizeParseString(s);
         HornClause t=null;

@@ -1,4 +1,6 @@
-package cycmoo.lang;  //tarau.jinni;
+package cycmoo.lang.fluent;  
+import cycmoo.lang.*;
+import cycmoo.lang.object.*;
 import java.util.Enumeration;
 import java.util.Vector;
 
