@@ -4,6 +4,7 @@ import logicmoo.*;
 import logicmoo.api.*;
 import logicmoo.net.*;
 import logicmoo.util.*;
+import logicmoo.obj.*;
 
 
 // Java
@@ -34,14 +35,15 @@ public class MooCommandLine extends MooAgentThread {
     protected boolean loggedin = false;
 
     public MooCommandLine() {
+	super();
     }
 
-    public MooCommandLine(PrintWriter pout, BufferedReader pin) { 
+    public MooCommandLine(PrintWriter pout, BufferedReader pin) {
+	super();
 	try {
 	    out = pout;
 	    in = pin;
-	    cyc = new LogicMooCycAccess();
-	} catch ( Exception e ) {
+	} catch( Exception e ) {
 	    e.printStackTrace();
 	}
     }
@@ -52,109 +54,121 @@ public class MooCommandLine extends MooAgentThread {
     }
 
     public static void runClientAt(PrintWriter pout, BufferedReader pin) {
-	try {
-	    MooCommandLine who = new MooCommandLine(pout,pin);
-	    who.doLogin();
-	    who.run();
-	} catch ( Exception e ){
-	    e.printStackTrace();
-	}
+	MooCommandLine who = new MooCommandLine(pout,pin);
+	who.run();
     }
 
 
-    public void run(){
+    public void run() {
 	isRunning = true;
-	try {
-	    doLogin();
-	} catch ( Exception e ) {
-	    e.printStackTrace();
-	}
-	while ( loggedin && isRunning ) {
-	    try {
-		if ( in.ready() ) {
-		    String line = in.readLine();
-		    if ( line!=null ) {
-			me.enact(line.trim());
-			promptStdIn();
-		    }
-		}
-	    } catch ( Exception e ) {
-		e.printStackTrace();
-	    }
-	}
+	doLogin();
+	while( loggedin && isRunning && !interrupted() )
+	   enact(me.getUserName(),me.getUserName(),promptStdIn());
 	disconnect();
-    }
-
-
-    public Object prompt(Object message) {
-	printSimple(message);
-	try {
-	    return in.readLine();
-	} catch ( Exception e ) {
-	    return e;
-	}
     }
 
     protected void disconnect() {
 	loggedin = false;
+	out.println("goodbye.");
 	try {
 	    out.close();
 	    in.close();
-	} catch ( IOException e ) {
+	} catch( IOException e ) {
 	    e.printStackTrace();
 	}
     }
 
     protected void doLogin() {
 	CycFort userName = null;
-	println("\nWelcome to LogicMoo!");
-	while ( userName ==null ) {
-	    printSimple("username: ");
+	println("<br>Welcome to the LogicMoo.");
+	while( userName == null ) {
 	    try {
-		String usernamestr = in.readLine();
-		userName = cyc.makeCycConstant(usernamestr);
-	    } catch ( Exception e ) {
-		e.printStackTrace();
+		userName = cyc.makeCycConstant(""+prompt("username: "));
+	    } catch( Exception e ) {
+		e.printStackTrace(out);
 	    }
 	}
-
+	println("Passwords are not implemented on this development version.");
 	loggedin = true;
-	println("Password skipped (for a while)\n");
+	reloadInterpretor(userName);
+	println("<br>Authenticated as " + me.getUserName().cyclify());
+    }
+
+
+    protected Object promptStdIn() {
+	writePrmpt();
+	String ret = (String)prompt("");
+	if( ret==null )	return promptStdIn();
+	ret=ret.trim();
+	if( ret.equals("") ) return promptStdIn();
+	this.reloadInterpretor();
+	return ret;
+    }
+
+    protected void writePrmpt() {
+	out.write("["+me.getUserName()+"@"+me.getUserLocation()+" "+me.getInterp()+"]$ ");
+	out.flush();
+    }
+
+    protected void unInteruptStdIn() {
+	writePrmpt();
+	out.write(typeBuffer.toString());
+	out.flush();
+    }
+
+    public Object prompt(Object message) {
+	printSimple(message);
+	out.flush();
 	try {
-	    nclassloader = new NClassLoader("/opt/sourceforge/logicmoo/src/",".class","");
-	    meclass = nclassloader.findClass("logicmoo.cmd.ActorCommandParser");
-	    Constructor cons = meclass.getConstructors()[0];
-	    me = (IActorCommandParser)meclass.newInstance();
-	    me.setData(cyc,userName,null,null,this);
-	    nclassloader = null;
-	    meclass = null;
-	} catch ( Exception e ) {
-	    e.printStackTrace();
+	    return readToLine();
+	} catch( IOException e ) {
+	    loggedin=false;    // Kills IOException loops
+	    isRunning=false;
+	    return e;
 	}
-	me.setData(cyc,userName,null,null,this);
-	println("Authenticated!\n");
-	promptStdIn();
     }
 
-    protected void promptStdIn() {
-	printRaw("["+me.getUserName()+"@"+me.getUserLocation()+" "+me.getInterp()+"]$ ");
+    public boolean isUserTyping() {
+	return typeBuffer.toString().length()>0;
     }
 
+    private StringBuffer typeBuffer = new StringBuffer(""); 
+
+    private char lastVal = 0;
+
+    public String readToLine() throws IOException {
+	char[] abyte = {0};
+	while( true ) {
+	    in.read(abyte);
+	    String last =  typeBuffer.toString();
+	    if( abyte[0]==13 || abyte[0]==10 ) {
+		if( last.length()>0 ) {
+		    typeBuffer = new StringBuffer(""); 
+		    return last;
+		}
+	    } else {
+		typeBuffer.append(abyte);
+	    }
+	}
+    }
 
     public boolean printRaw(String message) {
-	if ( message == null ) return true;
+	if( message == null ) return true;
 	try {
 	    out.print(Strings.change(message,"<br>","\n"));
 	    out.flush();
-	} catch ( Exception e ) {
+	} catch( Exception e ) {
 	}
 	return true;
     }
 
-    public boolean receiveEvent(Object event) {
-	printSimple("<br>");
-	if ( isEventsOn ) printFormat(event);
-	promptStdIn();
+    public boolean receiveEvent(LogicMooEvent event) {
+	if( isEventsOn ) {
+	    printSimple("<br>");
+	    printFormat(event.getFormula());
+	    printSimple("<br>");
+	    unInteruptStdIn();
+	}
 	return true;
     }
 

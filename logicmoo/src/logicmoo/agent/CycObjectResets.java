@@ -56,7 +56,7 @@ public class CycObjectResets  extends Thread {
 
     }
 
-    public synchronized boolean receiveEvent(LogicMooEvent event) {
+    public synchronized boolean receiveEvent(Object from, LogicMooEvent event) {
 	return true;
     }
 

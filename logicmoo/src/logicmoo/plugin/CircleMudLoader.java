@@ -577,7 +577,7 @@ public class CircleMudLoader {
                 // FireWeapon
             case 7:
                 // MissileWeapon
-                assertData("(isa "+vnum+ " Weapon)");
+                assertData("(genls "+vnum+ " Weapon)");
 
                 if ( flag0==6 ) {
                     assertData("(genls "+vnum+ " MudFireWeapon)");
@@ -644,7 +644,7 @@ public class CircleMudLoader {
                 parseContainerState(vnum, Integer.parseInt( values[1] ));
                 if ( Integer.parseInt(values[3])>0 ) assertData("(hasAttributes "+vnum+ " ContainerPosionedAttribute)");
                 String contents =  parseFluid(Integer.parseInt(values[2])); 
-                assertData("(isa " + contents + " LiquidTangibleThing)");
+                assertData("(genls " + contents + " LiquidTangibleThing)");
                 assertData("(quantityInContainer "+vnum+ " " +contents + " " + values[1] + ")");
                 break;
             case 18:
@@ -1146,7 +1146,7 @@ public class CircleMudLoader {
                 break;
             case 2048:
             case 'l':
-                assertData("(hasAttributes "+vnum+ " NPCUsesMt)");
+                assertData("(implies (isa ?X "+vnum+ ")(isa ?X IntelligentAgent))");
                 break;
             case 4096:
             case 'm':
@@ -1207,6 +1207,8 @@ public class CircleMudLoader {
                 break;
             case 64:
             case 'g':
+//                assertData("(behaviorCapable "+vnum+ " NPC_WATERWALK)");
+//                assertData("(typeBehaviorCapable "+vnum+ " ?Role ?Event))");
                 assertData("(hasAttributes "+vnum+ " NPC_WATERWALK)");
                 break;
             case 128:
@@ -1215,7 +1217,7 @@ public class CircleMudLoader {
                 break;
             case 256:
             case 'i':
-                assertData("(hasAttributes "+vnum+ " NPC_GROUP)");
+                assertData("(genls "+vnum+ " (GroupFn Agent-Generic))");
                 break;
             case 512:
             case 'j':

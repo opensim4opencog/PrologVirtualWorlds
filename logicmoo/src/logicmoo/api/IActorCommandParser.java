@@ -15,7 +15,7 @@ import org.opencyc.cycobject.*;
 
 public interface IActorCommandParser  {
     public void setData(LogicMooCycAccess cm, CycFort user,CycFort loc,CycFort mt, IMooClient mc);
-    public boolean enact(Object event);
+    public boolean enact(Object channel,Object user,Object event);
     public bsh.Interpreter getBeanShell();
     public void moveTo(CycFort cycobj,CycFort  cycwhere);
     public CycFort getUserName();
