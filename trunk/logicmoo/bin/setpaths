@@ -18,7 +18,7 @@ export J2EE=/opt/j2ee
 export JAVA_HOME=/opt/jdk
 
 #Installation of SWI-Prolog
-export SWI_HOME=/opt/swipl
+export SWI_HOME=/usr/lib/pl-5.0.6
 			   
 export PLSO=$SWI_HOME/runtime/i686-linux-gnu
 
@@ -56,14 +56,16 @@ export CLASSPATH=$J2EE/lib/j2ee.jar:$JAVA_HOME/lib/tools.jar:$TOMCAT_HOME/common
 # LogicMOO
 export CLASSPATH=$CLASSPATH:$LOGICMOOBASE/src
 
+							  
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$LOGICMOOBASE/lib/
 # Jamud 
-export CLASSPATH=$CLASSPATH:$LOGICMOOBASE/src/partner/jamud/src
+#export CLASSPATH=$CLASSPATH:$LOGICMOOBASE/src/partner/jamud/src
 
 # CIAO-Prolog
 export CLASSPATH=$CLASSPATH:$CIAOJAVALIB
 
 #SOAP
-export CLASSPATH=$CLASSPATH:$SOAPLIBS
+export CLASSPATH=$CLASSPATH:$SOAPLIBS:.
 	
 #Other Helpers
 export CLASSPATH=$CLASSPATH:$JARLIB/cos.jar
@@ -73,6 +75,7 @@ export CLASSPATH=$CLASSPATH:$JARLIB/jdom.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/jaxp.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/rdf-api-2001-01-19.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/plc.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/jwam.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/cpj.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/nanoxml.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/log4j.jar
@@ -92,6 +95,8 @@ export CLASSPATH=$CLASSPATH:$JARLIB/jakarta-oro-2.0.4.jar
 export CLASSPATH=$CLASSPATH:$JARLIB/commons-collections.jar
 
 
+		      
+ 	      
 
 
 

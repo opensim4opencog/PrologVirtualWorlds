@@ -1,286 +1,352 @@
-;;(create-constant "TTPred-attr-English")
-;; (fif (cyc-assert '(isa JamudMt ReifiedMicrotheory) BaseKB) nill (print "fail 48753"));
 
-
-(:MT BaseKB)
 (:SET :FORWARD)
 (:SET :MONOTONIC)
+
+(:MT BaseKB)
 
 (isa ReifiedMicrotheory MicrotheoryType)
 (genls ReifiedMicrotheory DataMicrotheory)
 
-(isa JamudMt ReifiedMicrotheory)
+(isa JamudMt TheoryMicrotheory)
+(isa JamudMt GeneralMicrotheory)
+
+(isa NpcAgentCollection Collection)
+(isa ArtifactTypeCollection  Collection)
+(isa NpcAgentCollection SecondOrderCollection)
+(isa ArtifactTypeCollection  SecondOrderCollection)
+
+(implies 
+  (isa ?X NpcAgentCollection)
+  (isa ?X FirstOderCollection))
+
+(implies 
+  (isa ?X ArtifactTypeCollection)
+  (isa ?X FirstOderCollection))
+
+(genlMt JamudMt FixedStructureMt)
+(genlMt JamudMt HumanActivitiesMt)
+(genlMt  JamudMt BuildingMt)
+;;(isa JamudMt HypothicalMicrotheory)
+
+(:MT JamudMt)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+;; RegionalAttribute
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+(isa RegionalAttribute ObjectType) 
+(genls RegionalAttribute AttributeValue) 
+(isa DarkMudAreaAttribute RegionalAttribute)
+(isa DeathMudAreaAttribute RegionalAttribute)
+(isa NoMobMudAreaAttribute RegionalAttribute)
+(isa PeacefullMudAreaAttribute RegionalAttribute)
+(isa SoundProofMudAreaAttribute RegionalAttribute)
+(isa NoTrackMudAreaAttribute RegionalAttribute)
+(isa NoMagicMudAreaAttribute RegionalAttribute)
+(isa PrivateMudAreaAttribute RegionalAttribute)
+(isa GodOnlyMudAreaAttribute RegionalAttribute)
+(isa HouseCrashMudAreaAttribute RegionalAttribute)
+(isa OLCMudAreaAttribute RegionalAttribute)
+(isa BFSMarkMudAreaAttribute RegionalAttribute)
 
 
 
-;; Perhaps together, we can work out an ontology of a sample Mud.  Here is a start..  
-;; 
-;;Need critiques additions, renamings and modifications to these very incomplete ontologies
-;; 
-;;If it developes into a D&D pragma we can also try to see how the upper branches could get more generic for example:
-;; 
-;;'MagicalItemMudObj-' should be changed to 'SpecialOperatedItem' that partions into 'SuperNaturalItem' and 'HighTechItem'
-;;
-;;Good ontologies (in my experience), are made from nitpicking and thinking up what-if exceptions and adjusting accordingly.
-;;
-;;Sometimes a discovery is made when you think up a 'MagicRoom' where would that go in MudArtifact-ObjectiveMt and MudArtifact-SubjectiveMt.. 
-;;Is there a combination? or a missing alignment?
-;;
-;;
-;;
-;;
-;;
-;;
-;;* Has Prototype Specs
-;;** Is Reified from MudArtifact example: (AirInstanceFn ?Area) implies AirInstance*
-;;
-;;Having two ontogies is generally usefull.
-;;
-;;One for the Objective view above and another for a Subjective view bellow:
-;;
-;;;;  MudArtifact-SubjectiveMt
-;;MudArtifact-
-;;        |__ ToolMudObj 
-;;             |__ KeyTypeMudObj 
-;;             |__ LightGivingMudObj 
-;;        |__ MagicalItemMudObj-
-;;             |__ CreationMagicMudObj-
-;;             |__ DestructionMagicMudObj-
-;;        |__ ConsumableMudObj 
-;;             |__ DrinkableMudObj 
-;;             |__ ChewableMudObj 
-;;        |__ WearableMudObj-
-;;             |__ WearableOnHeadMudObj-
-;;             |__ WearableOnFeetMudObj-
-;;        |__ MovableMudObj-
-;;        |__ AnnamateMudObj-
-;;        |__ InannamateMudObj-
-;;        |__ SolidMudObj 
-;;        |__ LiquidMudObj 
-;;
-;;
-;;
+(isa SwimmingAreaAttribute RegionalAttribute)
+(isa FlyingAreaAttribute RegionalAttribute)
+
+(isa UnderwaterLocation RegionType)
+(genls UnderwaterLocation OutdoorLocation)
+                                      
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+;; FUNCTION ObjectLocatedInWithWordFn
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+(isa ObjectLocatedInWithWordFn  ReifiableFunction ) 
+(isa ObjectLocatedInWithWordFn IndividualDenotingFunction ) 
+(arity ObjectLocatedInWithWordFn 2)
+(and
+    (resultIsa ObjectLocatedInWithWordFn PartiallyTangible) 
+    (arg1Isa ObjectLocatedInWithWordFn PartiallyTangible)
+    (arg2Isa ObjectLocatedInWithWordFn AbstractInformationalThing)) 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+;; GeographicalDirection
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+(isa Up-Generally GeographicalDirection-General)
+(isa Up-Generally GeographicalDirection)
+(isa Down-Generally GeographicalDirection-General)
+(isa Down-Generally GeographicalDirection)
 
 
-;; spatiallyIncludes
-;; (genlPreds surroundsCompletely spatiallyIncludes)
-;; (genlPreds spatiallySubsumes spatiallyIncludes)
-;; (genlPreds cospatial spatiallyIncludes)
-;; (genlPreds spatiallyContains spatiallyIncludes)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+;; PortalType
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+(isa PortalType ObjectType)
+(implies 
+    (isa ?T PortalType)
+    (and 
+    (isa ?T FirstOrderCollection)
+    (genls ?T Portal)))
+                                
+(isa OpeningPortal PortalType)
+(isa DoorPortal PortalType)
+(isa SecurityDoorPortal PortalType)
+        
 
+                      
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
+;; PortalFromToFn
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;  
+(isa PortalFromToFn TernaryFunction) 
+(isa PortalFromToFn  ReifiableFunction ) 
+(isa PortalFromToFn IndividualDenotingFunction ) 
+(arg1Isa PortalFromToFn GeographicalRegion) 
+(arg2Isa PortalFromToFn GeographicalDirection)
+(arg2Isa PortalFromToFn AbstractInformationalThing) 
+(arg3Isa PortalFromToFn GeographicalRegion) 
+(resultIsa PortalFromToFn Portal) 
+(comment PortalFromToFn "This is a NART (PortalFromToFn ?R1 ?R2 ?D) to produce a instance of a Portal that creates a one-way connects ?R1 to ?R2 via a path ?D")
 
-;;Mt : SpatialGVocabularyMt
-;;(arg2Isa spatiallyIncludes SpatialThing)
-;;(arg2Isa spatiallyContains SpatialThing)
-;;(arg2Isa surrounds-3D SpatialThing)
-;;(arg2Isa cospatial SpatialThing)
-;;(arg2Isa spatiallySubsumes SpatialThing)
-;;(arg2Isa spatiallyDisjoint SpatialThing)
-;;(arg2Isa touchesDirectly SpatialThing)
-;;(arg2Isa spatiallyIntersects SpatialThing)
-;;(arg2Isa surroundsCompletely SpatialThing)
-;;(arg2Isa touches SpatialThing)
-
-
-;;;;  MudArtifact-ObjectiveMt
-
-(isa MudArea FirstOrderCollection)
-(genls MudArea Place)
-;;        |__ MudArea
-;;                |__ MudAreaRegional
-;;                |__ MudAreaCity
-;;                |__ MudAreaBuilding
-;;                |__ MudAreaBuildingInclosure
-;;                     |__ GenericRoomInstance* (default AreaMudObj)
-;;                |__ MudAreaWaterway
-;;                |__ MudAreaNaturalInclosure
-;;                     |__ CaveInstance*
-;;                |__ MudAreaOutdoor
-;;                     |__ ForestInstance*
-;;                |__ MudAreaPathway
-(isa MudAreaRegional FirstOrderCollection)
-(isa MudAreaCity FirstOrderCollection)
-(isa MudAreaBuilding FirstOrderCollection)
-(isa MudAreaBuildingInclosure FirstOrderCollection)
-(isa MudAreaWaterway FirstOrderCollection)
-(isa MudAreaNaturalInclosure FirstOrderCollection)
-(isa MudAreaOutdoor FirstOrderCollection)
-(isa MudAreaPathway FirstOrderCollection)
-(genls MudAreaRegional MudArea)
-(genls MudAreaCity MudArea)
-(genls MudAreaBuilding MudArea)
-(genls MudAreaBuildingInclosure MudArea)
-(genls MudAreaWaterway MudArea)
-(genls MudAreaNaturalInclosure MudArea)
-(genls MudAreaOutdoor MudArea)
-(genls MudAreaPathway MudArea)
-
-
-;;        |__ ComponentMudObj (Meaning it is a part to something and not creatable)
-;;                |__ AreaPartMudObj-
-;;                     |__ GroundFloorInstance** 
-;;                     |__ AirInstance** 
-;;                |__ BodyPartMudObj-
-;;                     |__ HeadInstance** 
-;;                     |__ NeckInstance**
-
-
-
-(isa MudArtifact FirstOrderCollection)
-(genls MudArtifact SomethingExisting)
-(disjointWith MudArtifact MudArea)
-;;        |__ MudArtifact-
-;;                |__ BiologicalLivingObject
-;;                        |__ MudArtifact-Player
-;;                                |__ PlayerInstance*
-;;                        |__ MudArtifact-NPC
-;;                              |__ MudArtifact-Hero* (only one instance )
-;;                              |__ MudArtifact-Mob (can have more then one in the Mud)
-;;                                      |__ CruelOrcsMobInstance* (specialization of parent)
-;;                                      |__ BlueDragonInstance* (specialization of parent)
-(isa MudArtifact-Player FirstOrderCollection) 
-(genls MudArtifact-Player BiologicalLivingObject)
-(isa BiologicalLivingObject FirstOrderCollection) 
-(genls BiologicalLivingObject MudArtifact)
-(isa PlayerInstance FirstOrderCollection) 
-(genls PlayerInstance MudArtifact-Player)
-(isa MudArtifact-NPC FirstOrderCollection) 
-(genls MudArtifact-NPC BiologicalLivingObject)
-(isa MudArtifact-Hero FirstOrderCollection) 
-(genls MudArtifact-Hero MudArtifact-NPC)
-(isa MudArtifact-Mob FirstOrderCollection) 
-(genls MudArtifact-Mob MudArtifact-NPC)
-(disjointWith MudArtifact-NPC MudArtifact-Player)
-(disjointWith MudArtifact-Hero MudArtifact-Mob)
-
-
-(isa MudArtifact-NonSentient FirstOrderCollection)
-(genls MudArtifact-NonSentient MudArtifact)
-(disjointWith MudArtifact-NonSentient BiologicalLivingObject)
-;;                |__ MudArtifact-NonSentient* (blank can be furthur specialized)
-;;                     |__ MudArtifact-Furniture
-;;                             |__ FountainInstance*  
-;;                             |__ EntranceInstance*      
-;;                     |__ MudArtifact-Battlement
-;;                             |__ SwordInstance*
-;;                             |__ SheildInstance*
-;;                     |__ MudArtifact-Dead
-;;                             |__ GhostedPlayerInstance*
-;;                             |__ DeadHeroInstance*
-;;                     |__ MudArtifact-Packaging
-;;                             |__ UrnInstance*
-;;                             |__ FlaskInstance*
-;;                             |__ SatchelInstance*
-(isa MudArtifact-Furniture FirstOrderCollection)
-(genls MudArtifact-Furniture MudArtifact-NonSentient)
-(isa MudArtifact-Battlement FirstOrderCollection)
-(genls MudArtifact-Battlement MudArtifact-NonSentient)
-(isa MudArtifact-Dead FirstOrderCollection)
-(genls MudArtifact-Dead MudArtifact-NonSentient)
-(isa MudArtifact-Packaging FirstOrderCollection)
-(genls MudArtifact-Packaging MudArtifact-NonSentient)
-(isa MudArtifact-Consumable FirstOrderCollection)
-(genls MudArtifact-Consumable MudArtifact-NonSentient)
-
-
-
-;;(implies 
-;;	(#$isa 
-;;	  (#$BorderBetweenFn ?X ?Y) #$Border)
-;;	 (bordersOn ?X ?Y))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;  MUD Types
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(isa MudEntrance FirstOrderCollection)
-(isa MudArea FirstOrderCollection)
-(isa MudArtifact FirstOrderCollection)
-(isa MudPath Collection)
-
-(isa MudPredicate Collections)
-
-(isa MudAttributeFlag Collection)
-(genls MudAttributeFlag AttributeValue)
-
-(genls MudEntrance EntranceInstance)
-
-(genls MudArea MudTemporal)
-(genls MudArtifact MudTemporal)
-(genls MudEntrance MudTemporal)
-
-(genls MudArtifact MudObjectInstance)
-
-
- 
+(implies 
+        (and 
+	    (containsPortals ?Loc ?TERM)
+	    (termOfUnit ?TERM (PortalFromToFn ?Loc ?Dir ?Dest)))
+        (hasPortalToRegion ?Loc ?Dest))
+	
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;  MUD PREDICATES
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Define mudInstance
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(isa mudInstance TernaryPredicate)
-(and
-  (arg1Isa mudInstance DataMicrotheory)
-  (arg2Isa mudInstance SomethingExisting)
-  (arg3Genl mudInstance SomethingExisting))
-
+(isa MudPredicate PredicateType)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Define mudObjectFoundInArea
+;;  MUD NL PREDICATES
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(isa mudObjectFoundInArea FunctionalSlot)
-(isa mudObjectFoundInArea MudPredicate)
-(and
-  (arg1Isa mudObjectFoundInArea MudArtifact)
-  (arg2Isa mudObjectFoundInArea MudArea))
+
+;; Mud NL
+
+(isa MudNLPredicate Collection)
+(isa MudNLPredicate PredicateType)
+(genls MudNLPredicate BinaryPredciate)
+(genls MudNLPredicate MudPredicate)
 
 (implies 
-	(objectFoundInLocation ?Obj ?Area)
-	(mudObjectFoundInArea ?Obj ?Area))
+        (isa ?Pred MudNLPredicate)
+        (and 
+                (isa ?Pred BinaryPredicate)
+                (arg1Isa ?Pred PartiallyTangible)
+                (arg2Isa ?Pred AbstractInformationalThing)))
 
-(:MT JamudMt)
+(isa mudAbreviation MudNLPredicate)
+(isa mudAdjective MudNLPredicate)
+(isa mudPossessive MudNLPredicate)
+(isa mudPronoun MudNLPredicate)
+(isa mudNomitive MudNLPredicate)
+(isa mudMessage MudNLPredicate)
+(isa mudHelp MudNLPredicate)
+(isa mudAreaView MudNLPredicate)
+(isa mudDescription MudNLPredicate)
+(isa mudKeyword MudNLPredicate)
+(isa mudTraverseMessage MudNLPredicate)
+
+
+(implies
+    (and 
+            (mudAreaView ?Class ?Text)
+            (isa ?Thing ?Class))
+     (mudAreaView ?Thing ?Text))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  MUD STAT PREDICATES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(isa MudSlotBinaryPredicate Collection)
+(isa MudSlotBinaryPredicate PredicateType)
+(genls MudSlotBinaryPredicate BinaryPredciate)
+(genls MudSlotBinaryPredicate MudPredicate)
 
 (implies 
-	(objectFoundInLocation ?Obj ?Area)
-	(isa ?Obj MudArtifact))
+        (isa ?Pred MudSlotBinaryPredicate)
+        (and 
+                (isa ?Pred BinaryPredicate)
+                (arg1Isa ?Pred PartiallyTangible)
+                (arg2Isa ?Pred AbstractInformationalThing)))
+                
 
-(:MT BaseKB)
-	
+(isa MudSlotTernaryPredicate Collection)
+(isa MudSlotTernaryPredicate PredicateType)
+(genls MudSlotTernaryPredicate TernaryPredicate)
+(genls MudSlotTernaryPredicate MudPredicate)
+
+(implies 
+        (isa ?Pred MudSlotTernaryPredicate)
+        (and 
+                (isa ?Pred TernaryPredicate)
+                (arg1Isa ?Pred PartiallyTangible)
+                (arg2Isa ?Pred AbstractInformationalThing)
+                (arg3Isa ?Pred AbstractInformationalThing)))
+                
+
+
+(isa mudInventory MudSlotBinaryPredicate)
+(isa mudPositionFavored MudSlotBinaryPredicate)
+(isa mudPosition MudSlotBinaryPredicate)
+(isa mudBareHandDamage MudSlotBinaryPredicate)
+(isa mudMaxHitPoints MudSlotBinaryPredicate)
+(isa mudArmorClass MudSlotBinaryPredicate)
+(isa mudToHitArmorClass0 MudSlotBinaryPredicate)
+(isa mudLevelOf MudSlotBinaryPredicate)
+(isa alignmentOfNPC MudSlotBinaryPredicate)
+(isa mudBareHandDamage MudSlotBinaryPredicate)
+(isa mudGold MudSlotBinaryPredicate)
+(isa mudExperience MudSlotBinaryPredicate)
+(isa rentOfObject MudSlotBinaryPredicate)
+(isa costOfObject MudSlotBinaryPredicate)
+(isa armorLevel MudSlotBinaryPredicate)
+(isa damageSizeDice MudSlotBinaryPredicate)
+(isa damageNumberDice MudSlotBinaryPredicate)
+(isa spellCast MudSlotBinaryPredicate)
+(isa spellLevel MudSlotBinaryPredicate)
+(isa containerKey MudSlotBinaryPredicate)
+(isa capacityOfContainer MudSlotBinaryPredicate)
+
+(isa durrationOfLight MudSlotBinaryPredicate)
+(isa massOfObject MudSlotBinaryPredicate)
+(isa chargeCapacity MudSlotBinaryPredicate)
+(isa chargeRemaining MudSlotBinaryPredicate)
+(isa containerKey MudSlotBinaryPredicate)
+
+;; NPC Attributes
+(isa NPCUsesMt HumanBehavioralAttribute)
+
+(implies
+   (and
+	(hasAttributes ?Col NPCUsesMt)
+	(hasAttributes ?Inst NPCUsesMt)
+	(isa ?Inst ?Col))
+   (thereExists ?Mt1 
+        (and 
+	    (isa ?Mt1 Microtheory)
+	    (thereExists ?Mt2
+		   (and 
+			   (isa ?Mt2 Microtheory)
+			   (authorityForMt ?Inst ?Mt2)
+			   (genlMt ?Mt2 ?Mt1))))))
+
+
+(isa quantityInContainer MudSlotTernaryPredicate)
+(isa mudWorn MudSlotTernaryPredicate)
+(isa mudExitState MudSlotTernaryPredicate)
+
+
+(implies 
+	(and
+		(mudWorn ?TypeWho ?AT ?TypeWhat)
+		(isa ?Who ?TypeWho))
+	(thereExists 
+	     ?What
+		(and
+		        (isa ?What ?TypeWhat)
+			(wearsClothing ?Who ?What))))
+
+(implies 
+	(and
+		(mudInventory ?TypeWhat ?TypeWho )
+		(isa ?Who ?TypeWho))
+	(thereExists 
+	     ?What
+		(and
+		        (isa ?What ?TypeWhat)
+			(in-ContGeneric ?Who ?What))))
+
+ 
+         
+(implies 
+	(and
+		(hasAttributes ?Col ?Attr)
+		(isa ?Inst ?Col))
+	(hasAttributes ?Inst ?Attr))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Define mudDescription
+(isa InstanceClonedFn Function-Dentotational)
+(isa InstanceClonedFn  ReifiableFunction ) 
+(isa InstanceClonedFn IndividualDenotingFunction ) 
+(arity InstanceClonedFn 2)
+(arg1Isa InstanceClonedFn PartiallyTangible)
+(arg2Isa InstanceClonedFn PartiallyTangible)
+(resultIsa InstanceClonedFn PartiallyTangible)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(genlPreds mudDescription comment)
-(isa mudDescription BinaryPredicate)
-(isa mudDescription MudPredicate)
+              
+
+(isa PlayerInstance FirstOrderCollection) 
+
+(genls PlayerInstance AgentiveArtifact)
+
+(isa Artifact-Generic-NPC FirstOrderCollection) 
+(genls Artifact-Generic-NPC AgentiveArtifact)
+
+(isa Artifact-Generic-Hero FirstOrderCollection) 
+(genls Artifact-Generic-Hero Artifact-Generic-NPC)
+
+(isa Artifact-Generic-Mob FirstOrderCollection) 
+(genls Artifact-Generic-Mob Artifact-Generic-NPC)
+
+(disjointWith Artifact-Generic-NPC PlayerInstance)
+(disjointWith Artifact-Generic-Hero Artifact-Generic-Mob)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PREDICATE hasAttributesOnClass
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(isa hasAttributesOnClass BinaryPredicate)
 (and
-  (arg1Isa mudDescription MudTemporal)
-  (arg2Isa mudDescription TextString))
-  
+        (arg1Isa hasAttributesOnClass SecondOrderCollection) 
+        (arg2Isa hasAttributesOnClass AttributeValue)) 
+        
 
+(implies
+    (and 
+            (hasAttributesOnClass ?Class ?Flag)
+            (isa ?Thing ?Class))
+     (hasAttributes ?Thing ?Flag))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Define mudKeyword
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(isa mudKeyword BinaryPredicate)
-(isa mudKeyword MudPredicate)
+;;(implies
+;;    (and 
+;;            (not (hasAttributesOnClass ?Class ?Flag))
+;;            (isa ?Thing ?Class))
+;;    (not (hasAttributes ?Thing ?Flag)))
+             
+
+     
+
+;; PREDICATE mudEvent 
+(isa mudEvent TernaryPredicate)
 (and
-  (arg1Isa mudKeyword MudTemporal)
-  (arg2Isa mudKeyword TextString))
+        (arg1Isa mudEvent Thing) 
+        (arg2Isa mudEvent MudEventTrigger) 
+        (arg3Isa mudEvent AbstractInformationalThing) )
+
+;; PREDICATE mudReset 
+(isa mudReset TernaryPredicate)
+(and
+        (arg1Isa mudReset PartiallyTangible) 
+        (arg2Genl mudReset Artifact-Generic) 
+        (arg3Isa mudReset CycLNumber) )
+        
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Define mudFlag
+;; Define in-ContGeneric
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(isa mudFlag BinaryPredicate)
-(isa mudFlag MudPredicate)
-(and
-  (arg1Isa mudFlag MudTemporal)
-  (arg2Isa mudFlag MudAttributeFlag))
+(isa in-ContGeneric MudPredicate)
+
+(implies 
+        (and 
+                (objectFoundInLocation ?Obj ?Area)
+                (isa ?Obj Artifact-Generic))
+        (in-ContGeneric ?Obj ?Area))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Define mudAttribute
@@ -288,146 +354,204 @@
 (isa mudAttribute TernaryPredicate)
 (isa mudAttribute MudPredicate)
 (and
-  (arg1Isa mudAttribute MudTemporal)
-  (arg2Isa mudAttribute TextString)
+  (arg1Isa mudAttribute PartiallyTangible)
+  (arg2Isa mudAttribute AbstractInformationalThing)
   (arg3Isa mudAttribute Thing))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Define mudExit
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(isa mudExit BinaryPredicate)
-(isa mudExit MudPredicate)
-(and
-  (arg1Isa mudExit MudArea)
-  (arg2Isa mudExit MudEntrance))
-  
-(implies
-   (mudExit ?Place ?W)
-   (isa ?Place MudArea))
-
-       
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Define ExitToFn
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(isa ExitToFn BinaryFunction)
-(and
-  (resultIsa ExitToFn MudEntrance)
-  (arg1Isa ExitToFn MudPath)
-  (arg2Isa ExitToFn MudArea))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Define mudPathwayToArea
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(isa mudPathwayToArea TernaryPredicate)
-(genlPreds mudPathwayToArea  directionBetweenObjects)
-(and
-  (arg1Isa mudPathwayToArea MudArea)
-  (arg2Isa mudPathwayToArea MudArea)
-  (arg3Isa mudPathwayToArea MudPath))
-
-(:MT JamudMt)
-
-(implies
-	(mudPathwayToArea ?A1 ?A2 ?D)
-	(and 
-	   (isa ?A1 MudArea)
-	   (isa ?A2 MudArea)))
-
-(:MT BaseKB)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Relate  mudPathwayToArea and mudExits
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(equiv 
-  (mudPathwayToArea ?Area1 ?Area2 ?Path)
-  (mudExit ?Area1 (ExitToFn ?Path ?Area2)))
-  
-
-	  
-(:MT JamudMt)
-
-
-;; mudSlot ?
 
 
 
 
+;; Jobs
 
-;; Forward rules
-(implies 
-   (and 
-       (mudInstance ?MT ?INST ?INDEP-COL)
-       (relationExistsAll ?PRED ?INDEP-COL ?DEP-COL))
-   (ist ?MT
-	(relationExistsInstance ?PRED ?DEP-COL ?INST )))
+(isa MudJob SecondOrderCollection)
 
-(implies 
-   (and 
-       (mudInstance ?MT ?INST ?INDEP-COL)
-       (relationAllExists ?PRED ?INDEP-COL ?DEP-COL))
-   (ist ?MT
-	(relationInstanceExists ?PRED ?INST ?DEP-COL)))
+(isa MudWarrior MudJob)
+(nameString MudWarrior "warrior")
+(mudAdjective MudWarrior "warrior-like")
+(mudAbreviation MudWarrior "war")
 
-(implies 
-   (and 
-       (mudInstance ?MT ?INST ?COLL)
-       (relationExistsInstance ?PRED ?COLL ?INST ))
-  (ist ?MT 
-    (thereExists ?OBJ 
-       (and 
-          (isa ?OBJ ?COLL) 
-          (?PRED  ?INST ?OBJ)))))
+(isa MudMage MudJob)
+(nameString MudMage "mage")
+(mudAdjective MudMage "mage-like")
+(mudAbreviation MudMage "mag")
 
-(implies 
-   (and 
-       (mudInstance ?MT ?INST ?COLL)
-       (relationInstanceExists ?PRED ?INST ?COLL))
-  (ist ?MT 
-    (thereExists ?OBJ 
-       (and 
-          (isa ?OBJ ?COLL) 
-          (?PRED  ?OBJ ?INST)))))
-	 
+(isa MudThief MudJob)
+(nameString MudThief "thief")
+(mudAdjective MudThief "thief-like")
+(mudAbreviation MudThief "thf")
+
+(isa MudHaunter MudJob)
+(nameString MudHaunter "mud haunter")
+(mudAdjective MudHaunter "ghasthy")
+(mudAbreviation MudHaunter "haunt")
+
+;; Races
+
+(nameString HomoGenus "human")
+(mudAdjective HomoGenus "humanoid")
+(mudAbreviation HomoGenus "hum")
+
+(isa MudDrow BiologicalGenus)
+(nameString MudDrow "drow")
+(mudAdjective MudDrow "drowish")
+(mudAbreviation MudDrow "drow")
+
+(isa MudGhost BiologicalGenus)
+(nameString MudGhost "ghost")
+(mudAdjective MudGhost "ghostly")
+(mudAbreviation MudGhost "ghost")
+(mudKeyword MudGhost "jello")
 
 
-(implies 
-	(or 
-	 (isa ?OBJ GeographicalRegion)
-	 (isa ?Obj LandTopographicalFeature)
-	 (isa ?Obj Building)
-	 (isa ?Obj Place))
-	(isa ?OBJ MudArea))
+(isa MudDwarf BiologicalGenus)
+(nameString MudDwarf "dwarf")
+(mudAdjective MudDwarf "dwarfish")
+(mudAbreviation MudDwarf "dwa")
+
+(isa MudOrc BiologicalGenus)
+(nameString MudOrc "hill orc")
+(mudAdjective MudOrc "orcish")
+(mudAbreviation MudOrc "orc")
+
+(isa MudMinotaur BiologicalGenus)
+(nameString MudMinotaur "minotaur")
+(mudAdjective MudMinotaur "minotaurian")
+(mudAbreviation MudMinotaur "mino")
+
+;; Genders
+
+(isa MudGender SecondOrderCollection)
+(isa MudGender OrganismClassificationType)
+
+(isa MaleAnimal MudGender)
+(nameString MaleAnimal "male")
+(mudAdjective MaleAnimal "male")
+(mudAbreviation MaleAnimal "mal")
+(mudPossessive MaleAnimal "his")
+(mudPronoun MaleAnimal "he")
+(mudNomitive MaleAnimal "him")
+
+(isa FemaleAnimal MudGender)
+(nameString FemaleAnimal "female")
+(mudAdjective FemaleAnimal "female")
+(mudAbreviation FemaleAnimal "fem")
+(mudPronoun FemaleAnimal "she")
+(mudNomitive FemaleAnimal "her")
+(mudPossessive FemaleAnimal "her")
+
+(isa NeuterAnimal MudGender)
+(nameString NeuterAnimal "neuter")
+(mudAdjective NeuterAnimal "neutered")
+(mudAbreviation NeuterAnimal "n")
+(mudPronoun NeuterAnimal "it")
+(mudNomitive NeuterAnimal "it")
+(mudPossessive NeuterAnimal "its")
+
+(isa HermaphroditeAnimal MudGender)
+(nameString HermaphroditeAnimal "hermaphrodite")
+(mudAdjective HermaphroditeAnimal "hermaphroditic")
+(mudAbreviation HermaphroditeAnimal "her")
+(mudPronoun HermaphroditeAnimal "zie")
+(mudNomitive HermaphroditeAnimal "zir")
+(mudPossessive HermaphroditeAnimal "zir")
+
 
 
 ;;directionBetweenObjects
 
-;;;; Lifter
-;;(implies 
-  ;;     (and 
-    ;;    	(genls ?COL SomethingExisting) 
-      ;;  	(isa ?TERM ?COL))
-        ;;   (mudInstance JamudMt ?TERM ?COL))
+
+(isa MudTakable AttributeValue)
+(isa MudWearable AttributeValue)
+
+;;(attributeRequiredForAction ActionOnObject MudTakable
+;;(isa ActionOnObject)
+        
+
+(isa mudDoorKey BinaryPredicate)
+(and 
+   (arg1Isa mudDoorKey Portal)
+   (arg2Isa mudDoorKey PortalState))
+
+
+(isa mudVerb UnaryPredicate)
+(arg1Isa mudVerb Thing)
+
+(implies 
+ (or 
+    (genls ?W AnimalActivity)
+    (isa ?W DefaultDisjointScriptType))
+(mudVerb ?W ))
+
+          
+
+(isa MudAgent FirstOrderCollection)
+
+
+(isa mudObjectVisibleToWhom BinaryPredicate)
+(arg1Isa mudObjectVisibleToWhom AgentiveArtifact)
+(arg2Isa mudObjectVisibleToWhom PartiallyTangible)
+
+(implies 
+        (and 
+                (in-ContGeneric ?Who ?Loc)
+                (isa ?Who AgentiveArtifact)
+                (in-ContGeneric ?What ?Loc)
+                (different ?Who ?What))
+        (mudObjectVisibleToWhom ?Who ?What))
+
+(implies 
+   (containsPortals ?Loc ?What)
+   (in-ContGeneric ?What ?Loc))
+
+(isa mudPossiblyAlreadyInRoom TernaryPredicate)
+(arg1Isa mudPossiblyAlreadyInRoom GeographicalRegion)
+(arg2Isa mudPossiblyAlreadyInRoom TextString)
+(arg3Isa mudPossiblyAlreadyInRoom TextString)
+
+
+(implies 
+     (mudPossiblyAlreadyInRoom ?Area ?Text ?Desc)
+     (thereExists ?Obj
+        (and 
+		(mudKeyword ?Obj ?Text)
+		(in-ContGeneric ?Obj ?Area)
+		(mudDescription ?Obj ?Desc))))
 
 
 
+			   
+(implies
+	(and
+	   (isa ?AnyPred MudPredicate)
+	   (?AnyPred (InstanceClonedFn ?D1 ?D2) ?AnyArg)
+	   (?Pred ?D1 ?Arg))
+	(?Pred (InstanceClonedFn ?D1 ?D2) ?Arg))
+
+
+(implies 
+	(or 
+	   (nameString ?Obj ?Txt)
+	   (prettyName ?Obj ?Txt))
+	(nameString ?Obj ?Txt))
+
+(implies 
+	(nameString ?Nart ?Text)
+	(ist EnglishParaphraseMt (genFormat ?Nart ?Text !NIL)))
 
 
 
+(:MT EnglishParaphraseMt)
 
-(isa dmiles-torch LightingDevice) 
-(isa dmiles-sword  Weapon)
-
-(isa magicWand1  LightingDevice)
-(isa magicWand1  Weapon)
-
-(isa dmiles-home  ModernShelterConstruction)
-(objectFoundInLocation dmiles-torch dmiles-home)
-(in-ContGeneric dmiles-sword dmiles-home)
-(in-ContGeneric magicWand1 midg_001)
-
-		       
+;(genFormat PortalFromToFn "a passage ~a leading to ~a" 
+;       ((2 :EQUALS) 
+;           (3 :EQUALS)))
+	   
+(genFormat PortalFromToFn "[~a]" ((2)))
 
 
+	   
+   
+ 
+
+     
