@@ -1,4 +1,6 @@
-package jinni.kprolog;  //tarau.jinni;
+package cycmoo.lang.object;  //tarau.jinni;
+import cycmoo.lang.*;
+import cycmoo.lang.fluent.*;
 /**
   Implements compound terms
   @see ITerm

@@ -1,5 +1,5 @@
-package jinni.kprolog;  //tarau.jinni;
-import jinni.kprolog.builtin.SystemProceedures;  //tarau.jinni;
+package cycmoo.lang;  //tarau.jinni;
+import cycmoo.lang.builtin.SystemProceedures;  //tarau.jinni;
 import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
