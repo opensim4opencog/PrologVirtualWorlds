@@ -75,7 +75,10 @@ class BuilderCommand implements Command {
 
                 MudObjectViewable objTarget = null;
 
-                if ( cmdName.equals("create")||cmdName.startsWith("+") )
+		if (  cmdName == null )
+			  return "for help use: @ [create|set|unset|remove|flaglist|destroy] ";
+                
+		if ( cmdName.equals("create")||cmdName.startsWith("+") )
                         return createObject(actor,objName,InterpreterManager.commandSplit(params)[1]);
 
                 try {
@@ -138,6 +141,15 @@ class BuilderCommand implements Command {
         }
 
         protected static String createObject(MudObject actor,String type, String params) {
+                
+                if (type==null) {
+                         return "usage: @ create <room|objectname> ";
+                }
+                
+                if (type==null) {
+                         return "usage: @ create <room|objectname> ";
+                }
+
                 if ( type.equals("room") )
                         return createRoomObject( actor, params);
 
@@ -183,11 +195,16 @@ class BuilderCommand implements Command {
 
 
         protected static String createRoomObject(MudObject actor, String params) {
+                
                 // TODO: This will change with Sieges new object design
                 MudObjectContainer actorsRoom = actor.getParentContainer();
                 MudObject actorsBuilding = actorsRoom.parentObject();
                 String roomName = InterpreterManager.commandSplit(params)[0];
-                MudObjectContainer newRoom = null;
+                
+                if (roomName==null) 
+                        return "usage: @ create room <name> <direction>";
+		
+		MudObjectContainer newRoom = null;
                 try {
                         newRoom = (MudObjectContainer)BuilderCommandUtility.createRoomObject(actorsBuilding,roomName);
                 } catch ( Exception e ) {
@@ -237,6 +254,10 @@ class BuilderCommand implements Command {
         }
 
         protected static String setProperty(MudObject actor, Object target, String params) {
+
+                if (target == null || params == null ) {
+			return "@ set [object] <propertyname> <value>";
+                }
 
                 String property = InterpreterManager.commandSplit(params)[0];
                 String value = InterpreterManager.commandSplit(params)[1];
