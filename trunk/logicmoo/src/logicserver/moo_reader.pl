@@ -6,7 +6,9 @@
 % 
 % Purpose: is to provide forall character processing and transliteration for CycL, KIF, Prolog
 % ===================================================================
-%module(moo_reader,[readKIF/2,readKIF/1,readKIF_priv/1,readKIF_priv/2]).
+:-module(moo_reader,[readKIF/2,readKIF/1,readKIF_priv/2]).
+
+:-include(moo_header).
 
 % TODO make reader more robust
 
@@ -168,8 +170,8 @@ isCodesWhite([T|W]):-member(T,[32,10,13]),isCodesWhite(W).
 Predicate AFTER
 
 % 3037 (pnx_nf (FORWARD (arg1Isa hasMembers Organization)) GlobalContext T-3015) 
-surface(DynStat,'clause-form'(arg1Isa(hasMembers,'Organization')),'BaseIKB','GlobalContext','T-3015',_h75135). 
-clf(arg1Isa(hasMembers,'Organization'),true,'BaseIKB','GlobalContext','T-3015',3110).
+surface(DynStat,'clause-form'(arg1Isa(hasMembers,'Organization')),'BaseIContext','GlobalContext','T-3015',_h75135). 
+clf(arg1Isa(hasMembers,'Organization'),true,'BaseIContext','GlobalContext','T-3015',3110).
 
 )
 % ===================================================================
@@ -1171,7 +1173,7 @@ moo_B_seeing_console:-moo_B_seeing(FileName,LocalFile,_IOPort),!,LocalFile=useri
 moo_BInserting_console:-moo_BInserting(FileName,LocalFile,_IOPort),!,LocalFile=userin.
 
 
-moo_file_open(_LocalFile,Mode,_IOPort):-file_open(_LocalFile,Mode,_IOPort),once((valid_handle(_IOPort);((ua_out(cb_error,['File Not Found',_LocalFile],_X)),!,abort))).
+moo_file_open(_LocalFile,Mode,_IOPort):-file_open(_LocalFile,Mode,_IOPort),once((valid_handle(_IOPort);((writeIfOption(cb_error,['File Not Found',_LocalFile],_X)),!,abort))).
 
 % file_get0(IOPort,Char)  See Platform Specifics
 

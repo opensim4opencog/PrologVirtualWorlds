@@ -3,7 +3,7 @@
 % Maintainers: Douglas Miles
 % Contact: dmiles@users.sourceforge.net ;
 % Version: 'moo_markup.pl' 1.0.0
-% Revised At:  $Date: 2002-03-08 14:39:51 $
+% Revised At:  $Date: 2002-03-12 21:34:08 $
 
 % ===================================================================
 % Major functions:
@@ -51,7 +51,7 @@ toMarkUp(chat,Var,VS,Chars):-!,catch(toMarkUp(kif,Var,VS,Chars),_,true),!.
 toMarkUp(java,Var,VS,Chars):-!,catch(toMarkUp(html,Var,VS,Chars),_,true),!.
 
 toMarkUp(L,T,V,Chars):-!,
-        ignore(catch(/*notrace*/((
+        ignore(catch(/*system_dependant:prolog_notrace*/((
         copy_term((T,V),(CT,CV)),
         numbervars((CT,CV),'$VAR',0,_),%trace,
         toMarkUp_lang(L,CT,CV,Chars))),_,true)),!.
@@ -285,7 +285,7 @@ getMarkupFormula(kif,incode(X,M),Vars,HAtom):-!,
 % ==================================================
 
 getMarkupFormula(L,cfind(entails(Pre,Post)),Vars,Out):-
-        mooCache(PredR,Post,Pre,T,true,KB,Ctx,Explaination),
+        mooCache(PredR,Post,Pre,T,true,Context,Explaination),
         getMarkupFormula(L,Explaination,Vars,Out),!.
 
 % ==================================================
@@ -308,18 +308,18 @@ getMarkupFormula(L,crossref(X),Vars,Atom):-!,
 % ==================================================
 
 getMarkupFormula(L,sfind(X),Vars,Out):- nonvar(X),
-        mooCache(PredR, surface, X,V,KB, Ctx, TN, Auth, State),!,
+        mooCache(PredR, surface, X,V,Context, Ctx, TN, Auth, State),!,
         var_merge(Vars,V,TVars),!,
-        getMarkupFormula(L,surf(KB,TN),TVars,Out).
+        getMarkupFormula(L,surf(Context,TN),TVars,Out).
 
 % ==================================================
 % Find a surface form, Display its explaination, show instanced version
 % ==================================================
 
 getMarkupFormula(L,sfindi(X),Vars,Out):- nonvar(X),
-        mooCache(PredR, surface, X,V,KB, Ctx, TN, Auth, State),!,
+        mooCache(PredR, surface, X,V,Context, Ctx, TN, Auth, State),!,
         var_merge(Vars,V,TVars),!,
-        getMarkupFormula(L,surf(KB,TN) * bullet_a(X),TVars,Out).
+        getMarkupFormula(L,surf(Context,TN) * bullet_a(X),TVars,Out).
 
 getMarkupFormula(L,sfindi(X),Vars,Out):- nonvar(X),
         getMarkupFormula(L,bullet_a(X),Vars,Out).
@@ -367,13 +367,13 @@ getMarkupFormula(L,nv(Subj),Vars,Chars):-!,toMarkUp_list(L,Subj,Vars,Chars).
 % Maintainerial writing
 % ==========================
 
-getMarkupFormula(L,surf(KB,TN),Vars,Atom):-
-        mooCache(PredR,surface, OForm, OVars,KB,Ctx,TN,_, _),!,
+getMarkupFormula(L,surf(Context,TN),Vars,Atom):-
+        mooCache(PredR,surface, OForm, OVars,Context,TN,_, _),!,
         getMarkupFormula(L,OForm,OVars,Orig),
         flag(explaination_linenumber,LN,LN+1),
-        getMarkupFormula(L,bullet(KB,Ctx,TN,LN,Orig),Vars,Atom).
-getMarkupFormula(L,surf(KB,TN),Vars,Atom):-!,
-        getMarkupFormula(L,bullet('assertion lookup failure'(KB,TN)),Vars,Atom).
+        getMarkupFormula(L,bullet(Context,TN,LN,Orig),Vars,Atom).
+getMarkupFormula(L,surf(Context,TN),Vars,Atom):-!,
+        getMarkupFormula(L,bullet('assertion lookup failure'(Context,TN)),Vars,Atom).
 
 % ==========================
 % Bullet writing
@@ -391,13 +391,13 @@ getMarkupFormula(L,bullet(X),Vars,Atom):-!,
         getMarkupFormula(L,X,Vars,Orig),
         getMarkupFormula(L,bullet('Kernel','GlobalContext',9100000,LN,Orig),Vars,Atom).
 
-getMarkupFormula(html,bullet(KB,Ctx,TN,LN,Orig),Vars,Atom):-!,%trace,
+getMarkupFormula(html,bullet(Context,TN,LN,Orig),Vars,Atom):-!,%trace,
         flag(indent,_,0),
         (catch((TN < 100000),_,fail) ->
-                sformat(Atom,'~w <A href="skb.jsp?req=SA&skb=~w&id=~w" title="~w ~w ~w" ><img border=0 src="bullet.gif"/></A> ~w',[LN,KB,TN,TN,KB,Ctx,Orig]);
-                sformat(Atom,'~w <img border=0 src="bullet.gif" title="Not added to browser ~w (~w)"> ~w',[LN,KB,Ctx,Orig])),!.
+                sformat(Atom,'~w <A href="stheory.jsp?req=SA&stheory=~w&id=~w" title="~w ~w ~w" ><img border=0 src="bullet.gif"/></A> ~w',[LN,Context,TN,TN,Context,Orig]);
+                sformat(Atom,'~w <img border=0 src="bullet.gif" title="Not added to browser ~w (~w)"> ~w',[LN,Context,Orig])),!.
 
-getMarkupFormula(kif,bullet(KB,Ctx,TN,LN,Orig),Vars,Atom):-!,
+getMarkupFormula(kif,bullet(Context,TN,LN,Orig),Vars,Atom):-!,
         flag(indent,_,0),
 %       getMarkupFormula(kif,asserted(Ctx,Orig),Vars,F),
         getMarkupFormula(kif,Orig,Vars,F),
@@ -604,10 +604,10 @@ toMarkUp_lang(LANG,kif(COMP),Vars,Atom):-!,toMarkUp_lang(kif,COMP,Vars,Atom).
 toMarkUp_lang(LANG,html(COMP),Vars,Atom):-!,toMarkUp_lang(html,COMP,Vars,Atom).
 
 toMarkUp_lang(html,select(Name,OptionList),Vars,Out):-toMarkUp_lang(html,options(OptionList),Vars,Options),sformat(Out,'<select sort name="~w" id="~w" size="1">~w</select>',[Name,Name,Options]).
-toMarkUp_lang(html,checkbox(Name,on),Vars,Out):-
-                sformat(Out,'<input type=checkbox name="~w" id="~w" checked>',[Name,Name]),!.
-toMarkUp_lang(html,checkbox(Name,_),Vars,Out):-
-                sformat(Out,'<input type=checkbox name="~w" id="~w">',[Name,Name]),!.
+toMarkUp_lang(html,chectheoryox(Name,on),Vars,Out):-
+                sformat(Out,'<input type=chectheoryox name="~w" id="~w" checked>',[Name,Name]),!.
+toMarkUp_lang(html,chectheoryox(Name,_),Vars,Out):-
+                sformat(Out,'<input type=chectheoryox name="~w" id="~w">',[Name,Name]),!.
 toMarkUp_lang(html,options([]),Vars,'').
 
 toMarkUp_lang(L,getPrologVars(Form),Vars,Chars):-markUpVARLIST(L,Form,Vars,SChars),sformat(Chars,'~w',[SChars]),!.
@@ -636,7 +636,7 @@ toMarkUp_lang(html,option(Option),Vars,Out):-sformat(Out,'<option value="~w">~w<
 toMarkUp_lang(_,Atom,_VS,Chars):-number(Atom),!,sformat(Chars,'~w',[Atom]).
 
 toMarkUp_lang(L,Value,Vars,Chars):-
-        mooCache(PredR, skolem, Value = x(Name,Expression),SKVARS,KB, Ctx, TN, Auth, State),!,
+        mooCache(PredR, skolem, Value = x(Name,Expression),SKVARS,Context, Ctx, TN, Auth, State),!,
             toMarkUp_lang(kif,Name,Vars,NameQ),  prependQuestionMark(NameQ,NameQM),
             subst(x(Sk,Expression),Sk,NameQM,x(NSk,NExpression)),!,
             toMarkUp_lang(L,exists([NSk],NExpression),SKVARS,Chars).
@@ -657,40 +657,40 @@ toMarkUp_lang(_,'neg',Vars,'neg ').
 % Not compound - TEXT
 toMarkUp_lang(html,Atom,Vars,Chars):-
         atom_codes(Atom,[115,107|_]),!,
-                atom_lookup_kb_ctx(html,Atom,KB,Ctx,Result,ID,Color,Page),!,
+                atom_lookup_theory_ctx(html,Atom,Context,Result,ID,Color,Page),!,
                 (Result=ml(This) -> toMarkUp_lang(html,This,Vars,SResult) ; SResult=Result),
-                (KB=none ->
+                (Context=none ->
                         sformat(Chars,'<font color=~w>~w</font>',[Color,SResult]);
-                        sformat(Chars,'<A HREF="~w.jsp?logicforms=logicforms&submit=All%20Forms&data=~w&kb=~w">~w</A>',[Page,ID,KB,SResult])
+                        sformat(Chars,'<A HREF="~w.jsp?logicforms=logicforms&submit=All%20Forms&data=~w&theory=~w">~w</A>',[Page,ID,Context,SResult])
                 ).
 
 toMarkUp_lang(html,Atom,Vars,Chars):-
-                atom_lookup_kb_ctx(html,Atom,KB,Ctx,Result,ID,Color,Page),!,
+                atom_lookup_theory_ctx(html,Atom,Context,Result,ID,Color,Page),!,
                 (Result=ml(This) -> toMarkUp_lang(html,This,Vars,SResult) ; SResult=Result),
-                (KB=none ->
+                (Context=none ->
                         sformat(Chars,'<font color=~w>~w</font>',[Color,SResult]);
-                        sformat(Chars,'<A HREF="~w.jsp?req=SC&term=~w&skb=~w">~w</A>',[Page,ID,KB,SResult])
+                        sformat(Chars,'<A HREF="~w.jsp?req=SC&term=~w&stheory=~w">~w</A>',[Page,ID,Context,SResult])
                 ).
 
 toMarkUp_lang(kif,Atom,Vars,Chars):-
-                atom_lookup_kb_ctx(kif,Atom,KB,Ctx,Result,ID,Color,Page),!,
+                atom_lookup_theory_ctx(kif,Atom,Context,Result,ID,Color,Page),!,
                 (Result=ml(This) -> toMarkUp_lang(html,This,Vars,SResult) ; SResult=Result),
                         sformat(Chars,'~w',[SResult]).
 
 % Lookup Proc
-atom_lookup_kb_ctx(kif,Atom,none,none,Atom,Atom,black,skb):-!.
+atom_lookup_theory_ctx(kif,Atom,none,none,Atom,Atom,black,stheory):-!.
 
-atom_lookup_kb_ctx(_,Atom,KB,'GlobalContext',Atom,Atom,purple,skolems):-
-        hlPredicateAttribute(Atom,'SkolemFunction'),!,isMooOption(opt_kb=KB),!.
+atom_lookup_theory_ctx(_,Atom,Context,'GlobalContext',Atom,Atom,purple,skolems):-
+        hlPredicateAttribute(Atom,'SkolemFunction'),!,isMooOption(opt_theory=Context),!.
 
-atom_lookup_kb_ctx(Lang,Atom,KB,Ctx,Atom,B,C,skb):-
-        atom_lookup_kb_ctx(Lang,Atom,KB,Ctx,Atom,B,C).
+atom_lookup_theory_ctx(Lang,Atom,Context,Atom,B,C,stheory):-
+        atom_lookup_theory_ctx(Lang,Atom,Context,Atom,B,C).
 
-atom_lookup_kb_ctx(kif,Atom,none,none,Atom,Atom,black):-!.
-atom_lookup_kb_ctx(L,Atom,none,none,Atom,Atom,black):-once(atom_codes(Atom,Codes)),
+atom_lookup_theory_ctx(kif,Atom,none,none,Atom,Atom,black):-!.
+atom_lookup_theory_ctx(L,Atom,none,none,Atom,Atom,black):-once(atom_codes(Atom,Codes)),
         once((memberchk(34,Codes);memberchk(63,Codes);memberchk(32,Codes);memberchk(37,Codes))),!. % String
-atom_lookup_kb_ctx(_,Atom,KB,'GlobalContext',Atom,Atom,blue):-!,isMooOption(opt_kb=KB),!. % Leftover must be PrologMOO (TODO)
-atom_lookup_kb_ctx(_,Atom,'PrologMOO','GlobalContext',Atom,Atom,blue):-!.
+atom_lookup_theory_ctx(_,Atom,Context,'GlobalContext',Atom,Atom,blue):-!,isMooOption(opt_theory=Context),!. % Leftover must be PrologMOO (TODO)
+atom_lookup_theory_ctx(_,Atom,'PrologMOO','GlobalContext',Atom,Atom,blue):-!.
 
 codes_to_links(Codes,PrettyAtom):-
         getUnquotedCodes(Codes,UCodes),

@@ -1,4 +1,6 @@
 
+:-module(moo_algebra,[]).
+
 end_of_file.
 
 :-include('moo_header.pl').
@@ -137,7 +139,7 @@ fun('Fn'('PercentFn',[Value]),'Fn'('AssignmentFn',['DivisionFn',Value,100])).
 
 fun(Have,Todo):-on_the_surface(equal(Have,Todo)).
 
-on_the_surface(equal(Have,Todo)) :- mooCache(PredR,ASID,surface,(equal(X , Y)),Vars,KB,Ctx,TN,On),unnumbervars((X,Y),(Have,Todo)),!.
+on_the_surface(equal(Have,Todo)) :- mooCache(PredR,ASID,surface,(equal(X , Y)),Vars,Context,TN,On),unnumbervars((X,Y),(Have,Todo)),!.
 
 
 
@@ -401,7 +403,7 @@ u(A,B,_):-!,A==B.
 
 u(A,B,_):-!,unify_with_occurs_check(A,B),!.
 %u(A,B,_):-catch(unify_with_occurs_check(A,B),E,fail),!.
-%u(A,B,_):-mooCache(PredR,surface,'equal'(A,B):L,KB,Ctx,TN,Maintainer,On).
+%u(A,B,_):-mooCache(PredR,surface,'equal'(A,B):L,Context,TN,Maintainer,On).
 
 predicates_declared_inline_HL('resolve_skolem',2).
 

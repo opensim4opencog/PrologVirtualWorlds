@@ -1,3 +1,7 @@
+
+:- module(moo_nfs,[nnf/2,cnf/2,dnf/2,pnf/2,cf/2,nfs_help/0,e/0]).
+
+
 :-include('moo_header.pl').
 
 /******************************************************************************
@@ -60,7 +64,7 @@ FORMULA SYNTAX
    until(A,B) = until(A,B)
 ******************************************************************************/
 
-%:- module(nfs,[nnf/2,cnf/2,dnf/2,pnf/2,cf/2,nfs_help/0,e/0]).
+%
 
 :- op(400,fy,known),  % Necessity, Always
    op(400,fy,consistent),  % Possibly, Eventually

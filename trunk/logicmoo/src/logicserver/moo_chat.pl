@@ -46,12 +46,12 @@ agentConsult_args(Context_atom,ConsultationPred,_Num,[Head|Tail]):-!,   %trace,
 
 agentConsult_one_arg(Context_atom,ConsultationPred,_Num,Head):- (var(Head);member(Head,['-','?','+','#'])), !,
                   write_direct_l(['<arg argn="',_Num,'"']),
-                  %ignore((kb(Context_atom,['surface-domain',ConsultationPred,_Num,ArgDomain]),write_direct_l([' domain="',ArgDomain,'"']))),
+                  %ignore((theory(Context_atom,['surface-domain',ConsultationPred,_Num,ArgDomain]),write_direct_l([' domain="',ArgDomain,'"']))),
                   write_direct_l([' state="need"/>',nl]).
          
 agentConsult_one_arg(Context_atom,ConsultationPred,_Num,Head):-!,
                   write_direct_l(['<arg argn="',_Num,'"']),
-                  %ignore((kb(Context_atom,['surface-domain',ConsultationPred,_Num,ArgDomain]),write_direct_l([' domain="',ArgDomain,'"']))),
+                  %ignore((theory(Context_atom,['surface-domain',ConsultationPred,_Num,ArgDomain]),write_direct_l([' domain="',ArgDomain,'"']))),
                   write_direct_l([' state="bound">',Head,'</arg>',nl]).
 
 agentConsult_get_results(Context_atom,(PSurface,CSurface,WFS,CFORM,NextTerm)):-  
@@ -63,7 +63,7 @@ agentConsult_get_results(Context_atom,(PSurface,CSurface,WFS,CFORM,NextTerm)):-
                               ((
                                ignore((           
                                           once(tell_retract_parse_chars(Assert_chars,Pterm,Vars)),
-                                          source_compile(Pterm,Ctx,TN,KB,CM,Vars,PSurface,CSurface,WFS,CFORM),
+                                          source_compile(Pterm,Ctx,TN,Context,CM,Vars,PSurface,CSurface,WFS,CFORM),
                                           do_to_conjuncts(CSurface,assert_prolog_tm),!,
                                           do_to_conjuncts(CFORM,assert_prolog_tm),!
                                        )), 
@@ -81,7 +81,7 @@ consultation(PredicateI,PProtoArgs,PArgs,_Cxt):-
        pterm_to_sterm(PProtoArgs,ProtoArgs),
        pterm_to_sterm(PArgs,Args),
                consultation_match_list(Args,ProtoArgs,ConsultTemplate),
-            %   ua_out(rt,[want,[PredicateI|Args],asking,[PredicateI|ConsultTemplate]]),
+            %   writeIfOption(rt,[want,[PredicateI|Args],asking,[PredicateI|ConsultTemplate]]),
                once((
                      ((moo_K_scenario(_Cxt,[PredicateI|ConsultTemplate]),!))
                      ;

@@ -1,3 +1,9 @@
+
+:-module(moo_english,[]).
+
+:-include('moo_header.pl').
+
+
 ace_to_surface(CHARS,Formula):-
          sentenceToList(CHARS,S),
          sentence(G,S,[]),!,tologic(G,F), 
@@ -33,7 +39,7 @@ quick_search(Goal):-
 
 :-dynamic(complete_goal/1).
 
-:-multifile(expireOptimizationsInKB/3).
+:-multifile(expireOptimizationsInContext/3).
 
 :- style_check(-singleton).
 :- style_check(-discontiguous).

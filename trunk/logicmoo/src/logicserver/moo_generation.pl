@@ -1,5 +1,5 @@
 % ===================================================================
-% ua_out(class(input),message(input),respoinse(output))
+% writeIfOption(class(input),message(input),respoinse(output))
 % generic call interface that was hooked into the belief engine with "ua_set_agent_callback(console_post)"
 %This is not a predicate the useragent calls, but one that is called by the belief module to communicate  a question to the useragent or inform it of something.  
 % The useragent decides if it can answer the a question and if not itself may ask a human user that is using it.
@@ -23,7 +23,27 @@
 % 
 % ===================================================================
 
+								   
+:-module(moo_generation,
+	 [ 
+	 writeDebug/1,
+	 writeDebug/2,
+	 writeDebugFast/1,
+	 logOnFailureIgnore/1,
+	 setMooOptionExplicitWriteSettings/0,
+	 setMooOptionImplicitWriteSettings/0,
+	 sendNote/1,
+	 sendNote/4,
+	 writeFailureLog/2,
+	 debugOnFailure/2,
+	 writeObject/2,
+	 writeObject/3,
+	 writeObject_conj/2]).
+
+
 :-include('moo_header.pl').
+
+:-use_module(moo_globalisms).
 
 % Assertion Time Errors
 
@@ -36,35 +56,28 @@
 % Out of memory error 
 % Broken socket: The connection between the web-based GUI and the belief engine is broken 
 % Redundant assertion: ; RAP note: this should be followed by a explaination of the type violation as per the XML element definition for "explaination" 
-% Undefined constant: Do you wish to add the constants to the KB? ; RAP note: this should be followed by a list of constants and a prompt to the user 
+% Undefined constant: Do you wish to add the constants to the Context? ; RAP note: this should be followed by a list of constants and a prompt to the user 
 
 
 % ==========================================================
 %  Sending Notes
 % ==========================================================
-%writeDebug(T):-!.  writeDebug(C,T):-!.
+writeDebug(T):-!.  writeDebug(C,T):-!.
  
-%writeDebug(T):-notrace(isMooOption(opt_debug=off)),!.
-%writeDebug(C,T):-notrace(isMooOption(opt_debug=off)),!.
-
-ttc(X):-thread_signal(X,trace).
-ttc2:-thread_signal(2,trace).
-ttc4:-thread_signal(4,trace).
+%writeDebug(T):-system_dependant:prolog_notrace(isMooOption(opt_debug=off)),!.
+%writeDebug(C,T):-system_dependant:prolog_notrace(isMooOption(opt_debug=off)),!.
 
 logOnFailureIgnore(X):-ignore(logOnFailure(X)),!.
 
-
-writeModePush(Push):-!.
-
-writeModePop(Pop):-!.
+writeModePush(_Push):-!.
+writeModePop(_Pop):-!.
 
 writeDebug(T):-!,
-	notrace((
+	system_dependant:prolog_notrace((
 	if_prolog(swi,
 		(prolog_current_frame(Frame),
 		prolog_frame_attribute(Frame,level,Depth),!,
 		Depth2 = (Depth-25))),
-	if_prolog(bp,Depth=2),
 	writeFmt(';;',[T]),!,
 	indent_e(Depth2),!,
 	writeFmt('~q\n',[T]))),!.
@@ -74,7 +87,7 @@ indent_e(X):-XX is X -1,!,write(' '), indent_e(XX).
 
 
 writeDebug(C,T):-!,
-	notrace((
+	system_dependant:prolog_notrace((
 	writeFmt('<font size=+1 color=~w>',[C]),
 	writeDebug(T),
         writeFmt('</font>',[]))),!.
@@ -104,7 +117,7 @@ write_response_end:-!.
 
 sendNote(X):-var(X),!.
 sendNote(X):-mods(X),!.
-%sendNote(X):-!,assert(mods(X)).
+sendNote(X):-!,assert(mods(X)).
 sendNote(X).			 
 
 sendNote(To,From,Subj,Message):-sendNote(To,From,Subj,Message,_).
@@ -184,7 +197,7 @@ sendNote_1(To,From,Subj,Message,Vars):-  % In KIF
 sendNote(To,From,Subj,Message,Vars):-!.
 
 
-writeDebugS(X):-writeq(X),nl.
+writeDebugFast(X):-writeq(X),nl.
 
 logOnFailure(assert(X,Y)):- catch(assert(X,Y),_,Y=0),!.
 logOnFailure(assert(X)):- catch(assert(X),_,true),!.
@@ -267,9 +280,44 @@ writeObject_conj(Output,Vars):-
 :-dynamic(resolve_skolem/2).
 
 
-ua_out(C,P):-once_ignore(writeUAEvent(C,P,_)).
+writeIfOption(C,P):-once_ignore(writeUAEvent(C,P,_)).
 
-ua_out(C,M,Vars):-once_ignore(writeUAEvent(C,M,Vars)).
+writeIfOption(C,M,Vars):-once_ignore(writeUAEvent(C,M,Vars)).
+
+setMooOptionExplicitWriteSettings:-
+             setMooOption(disp_explicit='off'),
+             setMooOption(disp_modification='off'),
+             setMooOption(disp_debug='off'),
+             setMooOption(disp_note_user='off'),
+             setMooOption(disp_notes_nonuser='off'),
+             setMooOption(disp_qresults='off'),
+             setMooOption(disp_explaination_true='off'),
+             setMooOption(disp_explaination_other='off'),
+             setMooOption(disp_bindings='off'),
+             setMooOption(disp_answers_num_yes='off'),
+             setMooOption(disp_answers_num_no='off'),
+             setMooOption(disp_answers_num_definate='off'),
+             setMooOption(disp_answers_num_tries='off'),
+             setMooOption(disp_cputime='off'),
+             setMooOption(disp_compiled='off'),
+             setMooOption(disp_ground_forms='off').
+
+setMooOptionImplicitWriteSettings:-
+             setMooOption(disp_explicit='off'),
+             setMooOption(disp_modification='on'),
+             setMooOption(disp_debug='on'),
+             setMooOption(disp_note_user='on'),
+             setMooOption(disp_notes_nonuser='on'),
+             setMooOption(disp_explaination_true='on'),
+             setMooOption(disp_explaination_other='off'),
+             setMooOption(disp_bindings='on'),
+             setMooOption(disp_answers_num_yes='on'),
+             setMooOption(disp_answers_num_no='on'),
+             setMooOption(disp_answers_num_definate='on'),
+             setMooOption(disp_answers_num_tries='on'),
+             setMooOption(disp_cputime='on'),
+             setMooOption(disp_compiled='on'),
+             setMooOption(disp_ground_forms='on').
 
 
 
@@ -314,110 +362,6 @@ cb_consult=[true|false] Default is false
 
 
 */
-
-
-setMooOptionExpliciteWriteSettings:-
-             setMooOption(disp_explicit='off'),
-             setMooOption(disp_modification='off'),
-             setMooOption(disp_debug='off'),
-             setMooOption(disp_note_user='off'),
-             setMooOption(disp_notes_nonuser='off'),
-             setMooOption(disp_qresults='off'),
-             setMooOption(disp_explaination_true='off'),
-             setMooOption(disp_explaination_other='off'),
-             setMooOption(disp_bindings='off'),
-             setMooOption(disp_answers_num_yes='off'),
-             setMooOption(disp_answers_num_no='off'),
-             setMooOption(disp_answers_num_definate='off'),
-             setMooOption(disp_answers_num_tries='off'),
-             setMooOption(disp_cputime='off'),
-             setMooOption(disp_compiled='off'),
-             setMooOption(disp_ground_forms='off').
-
-setMooOptionImplicitWriteSettings:-
-             setMooOption(disp_explicit='off'),
-             setMooOption(disp_modification='on'),
-             setMooOption(disp_debug='on'),
-             setMooOption(disp_note_user='on'),
-             setMooOption(disp_notes_nonuser='on'),
-             setMooOption(disp_explaination_true='on'),
-             setMooOption(disp_explaination_other='off'),
-             setMooOption(disp_bindings='on'),
-             setMooOption(disp_answers_num_yes='on'),
-             setMooOption(disp_answers_num_no='on'),
-             setMooOption(disp_answers_num_definate='on'),
-             setMooOption(disp_answers_num_tries='on'),
-             setMooOption(disp_cputime='on'),
-             setMooOption(disp_compiled='on'),
-             setMooOption(disp_ground_forms='on').
-
-
-setMooOption([]):-!.
-setMooOption([H|T]):-!,
-      setMooOption(H),!,
-      setMooOption(T),!.
-setMooOption(Var=_):-var(Var),!.
-setMooOption(_=Var):-var(Var),!.
-setMooOption((N=V)):-nonvar(N),!,setMooOption_thread(N,V),!.
-setMooOption(N):-atomic(N),!,setMooOption_thread(N,true).
-	
-setMooOption(Name,Value):-setMooOption_thread(Name,Value).
-setMooOption_thread(Name,Value):-
-	notrace((thread_self(Process),
-	retractall('$MooOption'(Process,Name,_)),
-	asserta('$MooOption'(Process,Name,Value)),!)).
-
-
-unsetMooOption(Name=Value):-nonvar(Name),
-	unsetMooOption_thread(Name,Value).
-unsetMooOption(Name):-nonvar(Name),
-	unsetMooOption_thread(Name,_).
-unsetMooOption(Name):-notrace(retractall('$MooOption'(Process,Name,Value))).
-
-
-unsetMooOption_thread(Name):-
-	unsetMooOption_thread(Name,Value).
-
-unsetMooOption_thread(Name,Value):-
-	thread_self(Process),
-	retractall('$MooOption'(Process,Name,Value)).
-	
-getMooOption_nearest_thread(Name,Value):-
-	getMooOption_thread(Name,Value),!.
-getMooOption_nearest_thread(Name,Value):-
-	'$MooOption'(_,Name,Value),!.
-getMooOption_nearest_thread(Name,Value):-!.
-
-
-
-isMooOption(Name=Value):-!,isMooOption(Name,Value).
-isMooOption(Name):-!,isMooOption(Name,true).
-
-isMooOption(Name,Value):-getMooOption_thread(Name,Value).
-
-getMooOption_thread(Name,Value):-
-	notrace((thread_self(Process),
-	'$MooOption'(Process,Name,Value))),!.
-
-
-getMooOption(Name=_Default,Value):-nonvar(Name),!,ensureMooOption(Name,Default,Value).
-getMooOption(Name=Value):-nonvar(Name),!,ensureMooOption(Name,_,Value).
-getMooOption(Name,Value):-nonvar(Name),!,ensureMooOption(Name,_,Value).
-
-
-ensureMooOption(Name=Default,Value):-
-	ensureMooOption(Name,Default,Value),!.
-	
-ensureMooOption(Name,Default,Value):-
-	getMooOption_thread(Name,Value),!.
-ensureMooOption(Name,Default,Default):-
-	setMooOption_thread(Name,Default),!.
-ensureMooOption(Name,Default,Value):-nonvar(Name),!,   
-	setMooOption_thread(Name,Value),!.
-ensureMooOption(Name,Default,Default).
-
-
-
 
 write_val(Any,Vars):- isMooOption(client=html)
       -> write_val_xml(Any,Vars) ;

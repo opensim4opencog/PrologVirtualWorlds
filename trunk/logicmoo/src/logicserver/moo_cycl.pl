@@ -1,3 +1,7 @@
+
+:-include(moo_header).
+
+
 'intensional-subclass'(_G18216, _G18222)and (isa(_G18228, _G18216)=>isa(_G18228, _G18222)).
 
 'intensional-subclass'(_G18435, _G18441)and (instance(_G18447, _G18435)=>instance(_G18447, _G18441)).
@@ -1009,9 +1013,9 @@ end_of_file.
 %    ;(instance moo-kernel resource-atom)   
 %  ;(instance moo-kernel kif-file-resource)   
 %  ;(instance moo-kernel prolog-file-resource)   
-%  ;(instance kernel-kb context-atom)   
-%  ;(instance context-links-kb context-atom)   
-%  ;(instance complier-kb context-atom)   
+%  ;(instance kernel-theory context-atom)   
+%  ;(instance context-links-theory context-atom)   
+%  ;(instance complier-theory context-atom)   
 %  ;(instance default-context context-atom)   
 %       ;; If Context was an object:   
 %  ;;   
@@ -1095,14 +1099,14 @@ end_of_file.
 %     (  =>          (macro-script  (?Atom ?1 ?2 ?3 ?4) ?Proposition)          (instance ?Atom macro-atom)  )  
 'macro-script'(holds(_G17491, _G17467, _G17473, _G17479, _G17485), _G17497)=>instance(_G17491, 'macro-atom').
 
-%                                                                                                                                         (macro-script   (context-create ?Context-atom)          (and-then                  (assert  resources-kb (instance ?Context-atom  context-atom ) )                   (retractall  resources-kb  (context-state ?Context-atom  ?? ) )                   (assert  resources-kb  (context-state ?Context-atom  context-state-unloaded))           )  )  
-'macro-script'('context-create'(_G24939), 'and-then'(assert('resources-kb', instance(_G24939, 'context-atom')), retractall('resources-kb', 'context-state'(_G24939, _G24951)), assert('resources-kb', 'context-state'(_G24939, 'context-state-unloaded')))).
+%                                                                                                                                         (macro-script   (context-create ?Context-atom)          (and-then                  (assert  resources-theory (instance ?Context-atom  context-atom ) )                   (retractall  resources-theory  (context-state ?Context-atom  ?? ) )                   (assert  resources-theory  (context-state ?Context-atom  context-state-unloaded))           )  )  
+'macro-script'('context-create'(_G24939), 'and-then'(assert('resources-theory', instance(_G24939, 'context-atom')), retractall('resources-theory', 'context-state'(_G24939, _G24951)), assert('resources-theory', 'context-state'(_G24939, 'context-state-unloaded')))).
 
 %           (macro-script           (use-kr ?Context-atom ?Resource-Path)            (and-then                  (context-create ?Context-atom)                  (file-resource-create ?Resource-Path)          )  )  
 'macro-script'('use-kr'(_G18925, _G18931), 'and-then'('context-create'(_G18925), 'file-resource-create'(_G18931))).
 
-%                           (macro-script           (file-resource-create ?Resource-name ?Resource-path)                  (assert  resources-kb  (instance FileName  source-file-path))                   (assert  resources-kb  (context-exists-in-file NewContext-atom  FileName))   )  
-'macro-script'('file-resource-create'(_G20745, _G20751), assert('resources-kb', instance('FileName', 'source-file-path')), assert('resources-kb', 'context-exists-in-file'('NewContext-atom', 'FileName'))).
+%                           (macro-script           (file-resource-create ?Resource-name ?Resource-path)                  (assert  resources-theory  (instance FileName  source-file-path))                   (assert  resources-theory  (context-exists-in-file NewContext-atom  FileName))   )  
+'macro-script'('file-resource-create'(_G20745, _G20751), assert('resources-theory', instance('FileName', 'source-file-path')), assert('resources-theory', 'context-exists-in-file'('NewContext-atom', 'FileName'))).
 
 %           
 end_of_file.
@@ -1115,14 +1119,14 @@ end_of_file.
 %  ;;                Bootstrap/INI file                        ;;   
 %  ;;                                               ;;   
 %  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   
-%    ;(use-kr kernel-kb 'builtin\kernel-kb.kif')          ; That is here   
-%  ;(use-kr compiler-kb 'builtin\compiler-kb.kif')   
-%  ;(use-kr belief-kb 'builtin\belief-kb.kif')   
+%    ;(use-kr kernel-theory 'builtin\kernel-theory.kif')          ; That is here   
+%  ;(use-kr compiler-theory 'builtin\compiler-theory.kif')   
+%  ;(use-kr belief-theory 'builtin\belief-theory.kif')   
 %  ;(use-kr context-links 'builtin\context-links.kif')   
-%  ;;;(use-kr merged-ontology-kb 'builtin\merged-ontology-kb.kif')   
-%  ;(use-kr universal-kb 'builtin\universal-kb.kif')   
-%  ;(use-kr sample-kb 'builtin\sample-kb.kif')   
-%  ;(use-kr resources-kb 'resources\resources-kb.kif')   
+%  ;;;(use-kr merged-ontology-theory 'builtin\merged-ontology-theory.kif')   
+%  ;(use-kr universal-theory 'builtin\universal-theory.kif')   
+%  ;(use-kr sample-theory 'builtin\sample-theory.kif')   
+%  ;(use-kr resources-theory 'resources\resources-theory.kif')   
 %  ;(use-resource moo-user-assisted-belief)   
 %                 ;; Context/Rule Management   
 %    ;; Imagine a context as an object:   
@@ -1185,7 +1189,7 @@ subclass('Argument-List', 'Unmonitored-List').
 %  ;;   (domain ?KRName-Prfedicate 2 ?Known-Class)   
 %  ;;            ...etc...   
 %  ;;   (relation-located ?KRName-Predicate ?VALENCE ?Name-of-resource ( ?Arg1Argument-Mode ?Arg2Argument-Mode ) ?'Predicate-Name-in-Resource' ?Resource-Availabily)   
-%    ;;  Now into the $/resources/resources-kb.kif file add the lines:  (Or make sure MOO agent adds this assertion)   
+%    ;;  Now into the $/resources/resources-theory.kif file add the lines:  (Or make sure MOO agent adds this assertion)   
 %  ;;   (instance ?Name-of-resource Resource-Modules)   
 %  ;;   (instance  ?KRName-Predicate Relation-atom)   
 %  ;;   (resource-module ?Name-of-resource filesystem ?RelativePath) or (resource-module ?Name-of-resource moo-system ?RequestName)   
@@ -1196,7 +1200,7 @@ subclass('Argument-List', 'Unmonitored-List').
 %  ;;  or possibly ( resource-state ?Name-of-resource cb_error )   
 %  ;;   
 %  ;;  Try out a call to the predicate    
-%  ;;  the resources-kb should now have  ( resource-state ?Name-of-resource loaded )   
+%  ;;  the resources-theory should now have  ( resource-state ?Name-of-resource loaded )   
 %  ;;   
 %  ;;   From that point on it will stay loaded until you call  ( unuse-resource ?Name-of-resource )   
 %  ;;   Now you will see no assertion of  (resource-state ... ...)   
@@ -1433,11 +1437,11 @@ subclass('Argument-List', 'Unmonitored-List').
 %   (relation-located nodisp_debug 0 kernel  (EmptySetFn) nodisp_debug  always )  
 'relation-located'(nodisp_debug, 0, kernel, 'EmptySetFn', nodisp_debug, always).
 
-%   (relation-located statistics 0 kernel  (EmptySetFn) statistics  always )  
-'relation-located'(statistics, 0, kernel, 'EmptySetFn', statistics, always).
+%   (relation-located system_dependant:prolog_statistics 0 kernel  (EmptySetFn) system_dependant:prolog_statistics  always )  
+'relation-located'(system_dependant:prolog_statistics, 0, kernel, 'EmptySetFn', system_dependant:prolog_statistics, always).
 
-%   (relation-located statistics 1 kernel  (SetFn ?h639) statistics  always )  
-'relation-located'(statistics, 1, kernel, 'SetFn'(_G15847), statistics, always).
+%   (relation-located system_dependant:prolog_statistics 1 kernel  (SetFn ?h639) system_dependant:prolog_statistics  always )  
+'relation-located'(system_dependant:prolog_statistics, 1, kernel, 'SetFn'(_G15847), system_dependant:prolog_statistics, always).
 
 %   (relation-located inform-single_bindings 2 kernel  (SetFn ?h640  ?h642) inform-single_bindings  always )  
 'relation-located'('inform-single_bindings', 2, kernel, 'SetFn'(_G16850, _G16856), 'inform-single_bindings', always).
@@ -1576,8 +1580,8 @@ subclass('Argument-List', 'Unmonitored-List').
 %   (relation-located html-head 1 kernel  (SetFn ?h639) html-head  always )  
 'relation-located'('html-head', 1, kernel, 'SetFn'(_G15799), 'html-head', always).
 
-%   (relation-located moo-H-restart-belief-kb 0 kernel  (EmptySetFn) moo-H-restart-belief-kb  always )  
-'relation-located'('moo-H-restart-belief-kb', 0, kernel, 'EmptySetFn', 'moo-H-restart-belief-kb', always).
+%   (relation-located moo-H-restart-belief-theory 0 kernel  (EmptySetFn) moo-H-restart-belief-theory  always )  
+'relation-located'('moo-H-restart-belief-theory', 0, kernel, 'EmptySetFn', 'moo-H-restart-belief-theory', always).
 
 %   (relation-located optional-bound 2 kernel  (SetFn ?h640  ?h642) optional-bound  always )  
 'relation-located'('optional-bound', 2, kernel, 'SetFn'(_G16466, _G16472), 'optional-bound', always).
@@ -1953,8 +1957,8 @@ subclass('Argument-List', 'Unmonitored-List').
 %   (relation-located read-sock-chars 4 kernel  (SetFn ?h642  ?h644  ?h646  ?h648) read-sock-chars  always )  
 'relation-located'('read-sock-chars', 4, kernel, 'SetFn'(_G17368, _G17374, _G17380, _G17386), 'read-sock-chars', always).
 
-%   (relation-located notrace 0 kernel  (EmptySetFn) notrace  always )  
-'relation-located'(notrace, 0, kernel, 'EmptySetFn', notrace, always).
+%   (relation-located system_dependant:prolog_notrace 0 kernel  (EmptySetFn) system_dependant:prolog_notrace  always )  
+'relation-located'(system_dependant:prolog_notrace, 0, kernel, 'EmptySetFn', system_dependant:prolog_notrace, always).
 
 %   (relation-located compile 1 kernel  (SetFn ?h639) compile  always )  
 'relation-located'(compile, 1, kernel, 'SetFn'(_G15703), compile, always).
@@ -2115,8 +2119,8 @@ subclass('Argument-List', 'Unmonitored-List').
 %   (relation-located bootstrap-sitepackage 2 kernel  (SetFn ?h640  ?h642) bootstrap-sitepackage  always )  
 'relation-located'('bootstrap-sitepackage', 2, kernel, 'SetFn'(_G16802, _G16808), 'bootstrap-sitepackage', always).
 
-%   (relation-located moo_X_kb-pred 1 kernel  (SetFn ?h639) moo_X_kb-pred  always )  
-'relation-located'('moo_X_kb-pred', 1, kernel, 'SetFn'(_G16087), 'moo_X_kb-pred', always).
+%   (relation-located moo_X_theory-pred 1 kernel  (SetFn ?h639) moo_X_theory-pred  always )  
+'relation-located'('moo_X_theory-pred', 1, kernel, 'SetFn'(_G16087), 'moo_X_theory-pred', always).
 
 %   (relation-located moo-C-request-based-on-language-2 4 kernel  (SetFn ?h642  ?h644  ?h646  ?h648) moo-C-request-based-on-language-2  always )  
 'relation-located'('moo-C-request-based-on-language-2', 4, kernel, 'SetFn'(_G18328, _G18334, _G18340, _G18346), 'moo-C-request-based-on-language-2', always).
@@ -2392,8 +2396,8 @@ subclass('Argument-List', 'Unmonitored-List').
 %   (relation-located current-atom 1 kernel  (SetFn ?h639) current-atom  always )  
 'relation-located'('current-atom', 1, kernel, 'SetFn'(_G15943), 'current-atom', always).
 
-%   (relation-located moo-moo_X_kb-predicates 1 kernel  (SetFn ?h639) moo-moo_X_kb-predicates  always )  
-'relation-located'('moo-moo_X_kb-predicates', 1, kernel, 'SetFn'(_G16663), 'moo-moo_X_kb-predicates', always).
+%   (relation-located moo-moo_X_theory-predicates 1 kernel  (SetFn ?h639) moo-moo_X_theory-predicates  always )  
+'relation-located'('moo-moo_X_theory-predicates', 1, kernel, 'SetFn'(_G16663), 'moo-moo_X_theory-predicates', always).
 
 %   (relation-located tmpfile-open 1 kernel  (SetFn ?h639) tmpfile-open  always )  
 'relation-located'('tmpfile-open', 1, kernel, 'SetFn'(_G15943), 'tmpfile-open', always).
@@ -2689,8 +2693,8 @@ subclass('Argument-List', 'Unmonitored-List').
 %   (relation-located proper-hilog 1 kernel  (SetFn ?h639) proper-hilog  always )  
 'relation-located'('proper-hilog', 1, kernel, 'SetFn'(_G15943), 'proper-hilog', always).
 
-%   (relation-located moo_X_kb-eval 2 kernel  (SetFn ?h640  ?h642) moo_X_kb-eval  always )  
-'relation-located'('moo_X_kb-eval', 2, kernel, 'SetFn'(_G16514, _G16520), 'moo_X_kb-eval', always).
+%   (relation-located moo_X_theory-eval 2 kernel  (SetFn ?h640  ?h642) moo_X_theory-eval  always )  
+'relation-located'('moo_X_theory-eval', 2, kernel, 'SetFn'(_G16514, _G16520), 'moo_X_theory-eval', always).
 
 %   (relation-located write-http-header 0 kernel  (EmptySetFn) write-http-header  always )  
 'relation-located'('write-http-header', 0, kernel, 'EmptySetFn', 'write-http-header', always).
@@ -2959,8 +2963,8 @@ subclass('Argument-List', 'Unmonitored-List').
 %   (relation-located disp_debug 0 kernel  (EmptySetFn) disp_debug  always )  
 'relation-located'(disp_debug, 0, kernel, 'EmptySetFn', disp_debug, always).
 
-%   (relation-located moo_X_kb 2 kernel  (SetFn ?h640  ?h642) moo_X_kb  always )  
-'relation-located'(moo_X_kb, 2, kernel, 'SetFn'(_G16274, _G16280), moo_X_kb, always).
+%   (relation-located moo_X_theory 2 kernel  (SetFn ?h640  ?h642) moo_X_theory  always )  
+'relation-located'(moo_X_theory, 2, kernel, 'SetFn'(_G16274, _G16280), moo_X_theory, always).
 
 %   (relation-located not-backwards-chain 4 kernel  (SetFn ?h642  ?h644  ?h646  ?h648) not-backwards-chain  always )  
 'relation-located'('not-backwards-chain', 4, kernel, 'SetFn'(_G17560, _G17566, _G17572, _G17578), 'not-backwards-chain', always).
@@ -3094,8 +3098,8 @@ subclass('Argument-List', 'Unmonitored-List').
 %   (relation-located moo-H-update 3 kernel  (SetFn ?h641  ?h643  ?h645) moo-H-update  always )  
 'relation-located'('moo-H-update', 3, kernel, 'SetFn'(_G16893, _G16899, _G16905), 'moo-H-update', always).
 
-%   (relation-located ua-restart-belief-kb 3 kernel  (SetFn ?h641  ?h643  ?h645) ua-restart-belief-kb  always )  
-'relation-located'('ua-restart-belief-kb', 3, kernel, 'SetFn'(_G17325, _G17331, _G17337), 'ua-restart-belief-kb', always).
+%   (relation-located ua-restart-belief-theory 3 kernel  (SetFn ?h641  ?h643  ?h645) ua-restart-belief-theory  always )  
+'relation-located'('ua-restart-belief-theory', 3, kernel, 'SetFn'(_G17325, _G17331, _G17337), 'ua-restart-belief-theory', always).
 
 %   (relation-located moo-H-context-ensure-loaded 1 kernel  (SetFn ?h639) moo-H-context-ensure-loaded  always )  
 'relation-located'('moo-H-context-ensure-loaded', 1, kernel, 'SetFn'(_G16759), 'moo-H-context-ensure-loaded', always).

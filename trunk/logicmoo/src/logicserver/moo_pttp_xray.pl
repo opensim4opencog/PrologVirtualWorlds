@@ -156,14 +156,14 @@ mkm:-
 	show_relations,
 	told.
 
-get_relations(KB,Ctx):-
+get_relations(Context,Ctx):-
 	retractall(fact_relation(_)),
 	retractall(rule_relation(_,_)),
 	fail.
 	
 /*
-get_relations(KB,Ctx):-
-	mooCache(R, _, Axiom, Vars, KB, Ctx, Tracking, User, Status),
+get_relations(Context,Ctx):-
+	mooCache(R, _, Axiom, Vars, Context, Ctx, Tracking, User, Status),
 	get_relation(R),
 	Axiom = subrelation(W,_),
 	get_relation(W),
@@ -173,13 +173,13 @@ get_relations(KB,Ctx):-
 	
 
 
-get_relations(KB,Ctx):-
-	mooCache(R,Cons, Ante, _, Logic, KB, Ctx, Explaination),
+get_relations(Context,Ctx):-
+	mooCache(R,Cons, Ante, _, Logic, Context, Ctx, Explaination),
 	get_relation(R),
 	get_r_relation(R,Logic),
 	fail.
 
-get_relations(KB,Ctx):-listing(rule_relation),listing(fact_relation).
+get_relations(Context,Ctx):-listing(rule_relation),listing(fact_relation).
 
 :-dynamic(rule_relation/2).
 :-dynamic(fact_relation/1).
@@ -207,12 +207,12 @@ mk_length(R,A,P):-
 	P=..[R|L].
 
 getArity(R,A):-
-	mooCache(valence, surface, valence(R,A), Vars, KBName, Context, Tracking, User, Status).
+	mooCache(valence, surface, valence(R,A), Vars, ContextName, Context, Tracking, User, Status).
 getArity(R,A):-
-	mooCache(R, surface, P, Vars, KBName, Context, Tracking, User, Status),
+	mooCache(R, surface, P, Vars, ContextName, Context, Tracking, User, Status),
 	functor(P,R,A).
 getArity(R,A):-
-	mooCache(R, GAF, Vars, KBName, Context, Tracking, User),
+	mooCache(R, GAF, Vars, ContextName, Context, Tracking, User),
 	functor(GAF,holds,HF),
 	A is HF-1,!.
 	
@@ -243,8 +243,8 @@ mapping_nt(~q,undefined).
 %%%
 
 xray(Name) :-
-	read_kb(Name,KB),
-	dpttp(Name,KB).
+	read_theory(Name,Context),
+	dpttp(Name,Context).
 	
 
 dpttp(Name,X) :-
@@ -359,7 +359,7 @@ dpttp1(X) :-
 dpttp2(Name,Y:Z) :-
         nl,
         write('XRay writing compiled clauses ... '),
-        write_ckb(Name,Y),
+        write_ctheory(Name,Y),
 	write_cmm(Name,Z),
 	write('done.'),
 	!.
@@ -371,7 +371,7 @@ dpttp2(Y:Z) :-
 dpttp3(Name) :-
 	nl,
         write('XRay compiling clauses ... '),
-        compile_ckb(Name),
+        compile_ctheory(Name),
 	write('done.'),
         nl,
         write('XRay compiling request ... '),
@@ -934,12 +934,12 @@ time(X) :-
 time(X,Type) :-
         flag(ncalls,_,0),
 
-        statistics(runtime,[T1,_]),     % Quintus Prolog on Sun
+        system_dependant:prolog_statistics(runtime,[T1,_]),     % Quintus Prolog on Sun
 %        T1 is get-internal-run-time,  % Common KIF time function
 
         call(X),
 
-        statistics(runtime,[T2,_]),     % Quintus Prolog on Sun
+        system_dependant:prolog_statistics(runtime,[T2,_]),     % Quintus Prolog on Sun
         Secs is (T2 - T1) / 1000.0,     % Quintus measures runtime in milliseconds
 %        T2 is get-internal-run-time,  % Common KIF time function
 %        Secs is (T2 - T1) / 977.0,      % internal-time-units-per-second on Darwin
@@ -1070,15 +1070,15 @@ head(P,N,Head) :-
 %%                                                                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% reads the knowledge base from the file 'Name.kb'
+% reads the knowledge base from the file 'Name.theory'
 
-read_kb(Name,Wff) :-
-	concat_atom(Name,'.kb',KBFile),
-	read_clauses(KBFile,Wff).	
+read_theory(Name,Wff) :-
+	concat_atom(Name,'.theory',ContextFile),
+	read_clauses(ContextFile,Wff).	
 
-read_ckb(Name,Wff) :-
-	concat_atom(Name,'.ckb',CKBFile),
-	read_clauses(CKBFile,Wff).	
+read_ctheory(Name,Wff) :-
+	concat_atom(Name,'.ctheory',CContextFile),
+	read_clauses(CContextFile,Wff).	
 
 read_que(Name,Wff) :-
 	concat_atom(Name,'.que',QFile),
@@ -1111,20 +1111,20 @@ read_matrix_loop(Stream,Matrix) :-
 		   Matrix = [Elem|L]).
 
 % writes a compiled knowledge base consisting of contrapositives only
-% to the file 'Name.ckb'
+% to the file 'Name.ctheory'
 
-write_ckb(File,KB) :-
-	concat_atom(File,'.ckb',KBFile),
-	open(KBFile,write,KBStream),
+write_ctheory(File,Context) :-
+	concat_atom(File,'.ctheory',ContextFile),
+	open(ContextFile,write,ContextStream),
 	concat_atom(File,'.que',QFile),
 	open(QFile,write,QStream),
-        write_contrapositives(streams(KBStream,QStream),KB),
-        close(KBStream),
+        write_contrapositives(streams(ContextStream,QStream),Context),
+        close(ContextStream),
         close(QStream),
-	get_file_info(KBFile,size,KBFileSize),
+	get_file_info(ContextFile,size,ContextFileSize),
 	get_file_info(QFile,size,QFileSize),
 	nl,nl,
-	write(KBFile),write(' written '),write(KBFileSize),format(' bytes'),
+	write(ContextFile),write(' written '),write(ContextFileSize),format(' bytes'),
 	write(QFile), write(' written '),write(QFileSize), format(' bytes'),
 	!.
 
@@ -1157,11 +1157,11 @@ write_contrapositives(Streams,(A,B)) :-
 	!,
         write_contrapositives(Streams,A),
         write_contrapositives(Streams,B).
-write_contrapositives(streams(KBStream,QStream),(A:-B)) :-
+write_contrapositives(streams(ContextStream,QStream),(A:-B)) :-
 	functor(A,request,_) ->
 		write_clauses(QStream,(A:-B));
 	%true ->
-		write_clauses(KBStream,(A:-B)).	
+		write_clauses(ContextStream,(A:-B)).	
 
 
 write_clauses(Stream,(A,B)) :-
@@ -1196,9 +1196,9 @@ write_matrix(L) :-
 	close(Stream).
 
 
-compile_ckb(File) :-	
-	concat_atom(File,'.ckb',KBFile),
-	compile(KBFile).
+compile_ctheory(File) :-	
+	concat_atom(File,'.ctheory',ContextFile),
+	compile(ContextFile).
 
 compile_request(File) :-	
 	concat_atom(File,'.que',QFile),
@@ -1231,9 +1231,9 @@ ask(Name,Request) :-
         !.
 
 tell(Name,Wff) :-	
-	read_kb(Name,KB),
-	conjoin(Wff,KB,NewKB),
-	dpttp(Name,NewKB).
+	read_theory(Name,Context),
+	conjoin(Wff,Context,NewContext),
+	dpttp(Name,NewContext).
 
 write_proved(Explaination,ExplainationEnd) :-
         write('proved'),
@@ -1840,8 +1840,8 @@ write_lem(File,LemmaProcs) :-
         close(LemmaStream),
 	!.
 compile_lem(File) :-	
-	concat_atom(File,'.lem',KBFile),
-	compile(KBFile).
+	concat_atom(File,'.lem',ContextFile),
+	compile(ContextFile).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                                                           %%

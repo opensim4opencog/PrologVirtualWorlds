@@ -19,7 +19,7 @@ invokeTestSystem(Options):-
         retractall(last_tq(_)),assert(last_tq('TES')),
         memberchk(cmd='runtest',Options),!,make,
         setMooOption(opt_ctx_assert='GlobalContext'),
-        setMooOption(opt_kb='PrologMOO'),
+        setMooOption(opt_theory='PrologMOO'),
         getMooOption(asid=_,AID),
         getMooOption(user='Web',User),
         getMooOption(interp='kif',Interp),
@@ -28,11 +28,11 @@ invokeTestSystem(Options):-
 
 
 % ===========================================================
-% Run TQ Entire Directory "Sub" using "KB" and "Ctx" then Send the Output to Stream "Dest"
+% Run TQ Entire Directory "Sub" using "Context" and "Ctx" then Send the Output to Stream "Dest"
 % ===========================================================
 invokeTestSystem(Options):-memberchk(submit='Run TQs',Options),!,make,
         setMooOption(opt_ctx_assert='GlobalContext'),
-        setMooOption(opt_kb='PrologMOO'),
+        setMooOption(opt_theory='PrologMOO'),
         getMooOption(asid=_,AID),
         getMooOption(user='Web',User),
         getMooOption(interp='kif',Interp),
@@ -46,7 +46,7 @@ invokeTestSystem(Options):-memberchk(submit='Run TQs',Options),!,make,
 
 invokeTestSystem(Options):-memberchk(cmd='tqpage',Options),!,make,
         setMooOption(opt_ctx_assert='GlobalContext'),
-        setMooOption(opt_kb='PrologMOO'),
+        setMooOption(opt_theory='PrologMOO'),
         getMooOption(asid=_,AID),
         getMooOption(user='Web',User),
         getMooOption(interp='kif',Interp),
@@ -65,7 +65,7 @@ invokeTestSystem(Options):-memberchk(cmd='tqpage',Options),!,make,
 
 invokeTestSystem(Options):-
         setMooOption(opt_ctx_assert='GlobalContext'),
-        setMooOption(opt_kb='PrologMOO'),
+        setMooOption(opt_theory='PrologMOO'),
         getMooOption(asid=_,AID),
         getMooOption(user='Web',User),
         getMooOption(interp='kif',Interp),
@@ -218,17 +218,17 @@ write_file_list_0(TQDIR,T,TQOutputDir):-
 run_tq_thread(TQDIR):-running_tq(_),!.
 run_tq_thread(TQDIR):-
                         assert(running_tq(TQDIR)),!,
-                        thread_at_exit(retractall(running_tq(TQDIR))),
+                        system_dependant:prolog_thread_at_exit(retractall(running_tq(TQDIR))),
                         logOnFailure(test_prep_dir(TQDIR,TQOutputDir)),!,
                         concat_atom([TQOutputDir,'index.html'],TestSummary),!,
                         safe_file_open(TestSummary,'w',Dest),!,
-                        thread_at_exit(close(Dest)),
+                        system_dependant:prolog_thread_at_exit(close(Dest)),
                         writeFmt(Dest,'<HTML><BODY>',[]),
-                        run_batch_web(Dest,KB,Ctx,TQDIR),!,
+                        run_batch_web(Dest,Context,TQDIR),!,
                         writeFmt(Dest,'</BODY></HTML>',[]),
                         retractall(running_tq(TQDIR)),
                         ignore(catch(close(Dest),_,true)),
-                        ignore(thread_exit(completed_tq(KB,Ctx,TQDIR))
+                        ignore(prolog_thread_exit(completed_tq(Context,TQDIR))
                         ).
 
 
@@ -293,7 +293,7 @@ test_prep_dir(Sub,ODIRSub):-
          prolog_to_os_filename(ODIRSub,TQOS),
          writeFmt(user_error,'~q.\n',[prolog_to_os_filename(ODIRSub,TQOS)]),!.
 
-run_batch_web(Dest,KB,Ctx,Sub):-
+run_batch_web(Dest,Context,Sub):-
          logOnFailure((
          flag('Tests Failed',_,0),
          flag('Tests Passed',_,0),
@@ -456,9 +456,9 @@ testTQFileWriteHTML0(FileName,User,TimeRequired,Result,Title,Mods):- make,
                 setMooOption(client,html),
                  once(source_from_stream(INPUT,Chars,Formula,Vars)),nonvar(Formula),
                   logOnFailure(isMooOption(opt_ctx_assert=Ctx)),
-                  logOnFailure(isMooOption(opt_kb=KB)),
+                  logOnFailure(isMooOption(opt_theory=Context)),
                   %logOnFailure(once(toMarkUp(html,formula(Formula),Vars,Out))),writeFmt('<hr>~w<br>',[Out]),
-                   logOnFailure(once(invokeOperation(verbose,Formula,Ctx,Tracking,KB,User,Vars))),
+                   logOnFailure(once(invokeOperation(verbose,Formula,Ctx,Tracking,Context,User,Vars))),
          at_end_of_stream(INPUT),!,
          file_close(INPUT),
          evaluate_result(Result),!,
@@ -520,7 +520,7 @@ retain_answer_list(_).
 
 parse_moo_lf(Options):-memberchk(submit='Negated',Options),!,make,
         getMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        getMooOption(opt_kb='PrologMOO',KB),
+        getMooOption(opt_theory='PrologMOO',Context),
         getMooOption(sf=surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
         getMooOption(user='Web',User),
@@ -537,7 +537,7 @@ parse_moo_lf(Options):-memberchk(submit='Negated',Options),!,make,
 
 parse_moo_lf(Options):-memberchk(submit='Conjunctive',Options),!,make,
         getMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        getMooOption(opt_kb='PrologMOO',KB),
+        getMooOption(opt_theory='PrologMOO',Context),
         getMooOption(sf=surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
         getMooOption(user='Web',User),
@@ -553,7 +553,7 @@ parse_moo_lf(Options):-memberchk(submit='Conjunctive',Options),!,make,
 
 parse_moo_lf(Options):-memberchk(submit='Disjunctive',Options),!,make,
         getMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        getMooOption(opt_kb='PrologMOO',KB),
+        getMooOption(opt_theory='PrologMOO',Context),
         getMooOption(sf=surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
         getMooOption(user='Web',User),
@@ -572,7 +572,7 @@ parse_moo_lf(Options):-
         (memberchk(submit='Entailment',Options);memberchk(submit='Given',Options)),
         !,make,
         getMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        getMooOption(opt_kb='PrologMOO',KB),
+        getMooOption(opt_theory='PrologMOO',Context),
         getMooOption(sf=surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
         getMooOption(user='Web',User),
@@ -581,7 +581,7 @@ parse_moo_lf(Options):-
         logOnFailure(getCleanCharsWhitespaceProper(Assertion_Chars,Show)),!,
         logOnFailure(getSurfaceFromChars(Show,STERM,Vars)),!,
         logOnFailure(getMooTermFromSurface(STERM,NEWFORM)),!,
-        getAssertionClauses(PreQ,KB,Ctx,NEWFORM,Output,Vars,T),
+        getAssertionClauses(PreQ,Context,NEWFORM,Output,Vars,T),
         writeObject_conj(Output,Vars),
         writeObject('$spacer',Vars),
         writeObject('Paths '(T),Vars),!.
@@ -589,7 +589,7 @@ parse_moo_lf(Options):-
 parse_moo_lf(Options):-
         memberchk(submit='True',Options),!,make,
         getMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        getMooOption(opt_kb='PrologMOO',KB),
+        getMooOption(opt_theory='PrologMOO',Context),
         getMooOption(sf=surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
         getMooOption(user='Web',User),
@@ -598,14 +598,14 @@ parse_moo_lf(Options):-
         logOnFailure(getCleanCharsWhitespaceProper(Assertion_Chars,Show)),!,
         logOnFailure(getSurfaceFromChars(Show,STERM,Vars)),!,
         logOnFailure(getMooTermFromSurface(STERM,NEWFORM)),!,
-        getAssertionClauses(PreQ,KB,Ctx,NEWFORM,Output,Vars,_),
+        getAssertionClauses(PreQ,Context,NEWFORM,Output,Vars,_),
         writeObject('$spacer',Vars),
         writeObject(Output,Vars).
 
 parse_moo_lf(Options):-
         memberchk(submit='False',Options),!,make,
         getMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        getMooOption(opt_kb='PrologMOO',KB),
+        getMooOption(opt_theory='PrologMOO',Context),
         getMooOption(sf=surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
         getMooOption(user='Web',User),
@@ -614,7 +614,7 @@ parse_moo_lf(Options):-
         logOnFailure(getCleanCharsWhitespaceProper(Assertion_Chars,Show)),!,
         logOnFailure(getSurfaceFromChars(Show,STERM,Vars)),!,
         logOnFailure(getMooTermFromSurface(STERM,NEWFORM)),!,
-        getAssertionClauses(PreQ,KB,Ctx,not(NEWFORM),Output,Vars,_),
+        getAssertionClauses(PreQ,Context,not(NEWFORM),Output,Vars,_),
         writeObject('$spacer',Vars),
         writeObject(Output,Vars).
 
@@ -622,7 +622,7 @@ parse_moo_lf(Options):-
 parse_moo_lf(Options):-
         memberchk(submit='Possible',Options),!,make,
         getMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        getMooOption(opt_kb='PrologMOO',KB),
+        getMooOption(opt_theory='PrologMOO',Context),
         getMooOption(sf=surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
         getMooOption(user='Web',User),
@@ -631,14 +631,14 @@ parse_moo_lf(Options):-
         logOnFailure(getCleanCharsWhitespaceProper(Assertion_Chars,Show)),!,
         logOnFailure(getSurfaceFromChars(Show,STERM,Vars)),!,
         logOnFailure(getMooTermFromSurface(STERM,NEWFORM)),!,
-        getAssertionClauses(PreQ,KB,Ctx,possible(NEWFORM),Output,Vars,_),
+        getAssertionClauses(PreQ,Context,possible(NEWFORM),Output,Vars,_),
         writeObject('$spacer',Vars),
         writeObject_conj(Output,Vars).
 
 parse_moo_lf(Options):-
         memberchk(submit='Impossible',Options),!,make,
         getMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        getMooOption(opt_kb='PrologMOO',KB),
+        getMooOption(opt_theory='PrologMOO',Context),
         getMooOption(sf=surf,Assertion),
         atom_codes(Assertion,Assertion_Chars),
         getMooOption(user='Web',User),
@@ -647,25 +647,25 @@ parse_moo_lf(Options):-
         logOnFailure(getCleanCharsWhitespaceProper(Assertion_Chars,Show)),!,
         logOnFailure(getSurfaceFromChars(Show,STERM,Vars)),!,
         logOnFailure(getMooTermFromSurface(STERM,NEWFORM)),!,
-        getAssertionClauses(PreQ,KB,Ctx,not(possible(NEWFORM)),Output,Vars,_),
+        getAssertionClauses(PreQ,Context,not(possible(NEWFORM)),Output,Vars,_),
         writeObject('$spacer',Vars),
         writeObject_conj(Output,Vars).
 
 parse_moo_lf(Options):-
         memberchk(submit='All Forms',Options),
         getMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        getMooOption(opt_kb='PrologMOO',_KB),
+        getMooOption(opt_theory='PrologMOO',_Context),
         getMooOption(data=instance,TN),!,
-        writeKnownFormsTN(Ctx,KB:TN).
+        writeKnownFormsTN(Ctx,Context:TN).
 
 parse_moo_lf(Options):-
         memberchk(submit='mooCache',Options),
         getMooOption(opt_ctx_assert='GlobalContext',Ctx),
-        getMooOption(opt_kb='PrologMOO',_KB),
+        getMooOption(opt_theory='PrologMOO',_Context),
         getMooOption(data=instance,TN),!,
         listing_template(mooCache(_,_,_,_,_,_,TN,_,_)),
-        listing_template(mooCache(PredR,Fact,Type,_,KB,Agent,(surf(KB,TN) ))),
-        listing_template(mooCache(PredR,Fact,Pre,Type,_,KB,Agent,(surf(KB,TN) * via(_,Vars)))),
+        listing_template(mooCache(PredR,Fact,Type,_,Context,(surf(Context,TN) ))),
+        listing_template(mooCache(PredR,Fact,Pre,Type,_,Context,(surf(Context,TN) * via(_,Vars)))),
         !.
 
 
@@ -680,15 +680,15 @@ show_relations:-
         retractall(shown_rel(_,_)),fail.
 
 show_relations:-
-        mooCache(R, surface, Axiom, Vars, KBName, Context, Tracking, User, Status),
+        mooCache(R, surface, Axiom, Vars, ContextName, Context, Tracking, User, Status),
         show_relations(R),fail.
 
 show_relations:-
-        mooCache(R, Axiom, Vars, KBName, Context, Tracking, User, Status),
+        mooCache(R, Axiom, Vars, ContextName, Context, Tracking, User, Status),
         show_relations(R),fail.
 
 show_relations:-
-        mooCache(R, Axiom, Vars, KBName, Context, Tracking, User),
+        mooCache(R, Axiom, Vars, ContextName, Context, Tracking, User),
         show_relations(R),fail.
 
 show_relations:-!.
@@ -700,12 +700,12 @@ mk_length(R,A,P):-
         P=..[R|L].
 
 getArity(R,A):-
-        mooCache(valence, surface, valence(R,A), Vars, KBName, Context, Tracking, User, Status).
+        mooCache(valence, surface, valence(R,A), Vars, ContextName, Context, Tracking, User, Status).
 getArity(R,A):-
-        mooCache(R, surface, P, Vars, KBName, Context, Tracking, User, Status),
+        mooCache(R, surface, P, Vars, ContextName, Context, Tracking, User, Status),
         functor(P,R,A).
 getArity(R,A):-
-        mooCache(R, GAF, Vars, KBName, Context, Tracking, User),
+        mooCache(R, GAF, Vars, ContextName, Context, Tracking, User),
         functor(GAF,holds,HF),
         A is HF-1,!.
 
@@ -920,7 +920,7 @@ tsurf9a:-tsurf(=>(instance(A, 'Physical'), exists(B, exists(C, and(located(A, C)
 
 
 tsurf(Clause,KRVars):-
-        getAssertionClauses('KB','Ctx',Clause,Out,KRVars,FlagsL),!,
+        getAssertionClauses('Context','Ctx',Clause,Out,KRVars,FlagsL),!,
         subst(FlagsL,'.',*,Flags),!,
         writeq_conj(Out),nl,nl.
         %writeTranslation(Clause).
@@ -946,7 +946,7 @@ writeq_conj(Out):-writeq(Out),nl.
 
 
 sb(TN):-
-        mooCache(_,_,Surf, Vars, KB,Ctx, TN, _,_),
+        mooCache(_,_,Surf, Vars, Context, TN, _,_),
         tsurf(Surf,Vars),!.
 
 
@@ -1061,7 +1061,7 @@ t9 :- writeTranslation(
 */
 
 /*
-% error:  'Predicate Failed' getNegationForm(PIN,PNNF,forall(X10, forall(Y10, forall(Z10, forall(A11, forall(B11, not exists(X10, exists(Y10, instance(Y10, 'CutSetFn'(Z10))and instance(X10, 'MinimalCutSetFn'(Z10))and pathLength(Y10, A11)and pathLength(X10, B11)and lessThan(A11, B11)))))))), toplevel, 0, 'GRAPH THEORY', ['PATH1'=Y10, 'PATH2'=X10, 'GRAPH'=Z10, 'NUMBER1'=A11, 'NUMBER2'=B11|C11], _G12470, forall(X10, forall(Y10, forall(Z10, forall(A11, forall(B11, not exists(X10, exists(Y10, instance(Y10, Z11803)and instance(X10, A11804)and pathLength(Y10, A11)and pathLength(X10, B11)and lessThan(A11, B11)))))))), [Z11803, A11804], _G12473, _G12474)
+% error:  'Predicate Failed' getNegationForm(PIN,PNNF,forall(X10, forall(Y10, forall(Z10, forall(A11, forall(B11, not exists(X10, exists(Y10, instance(Y10, 'CutSetFn'(Z10))and instance(X10, 'MinimalCutSetFn'(Z10))and pathLength(Y10, A11)and pathLength(X10, B11)and lessThan(A11, B11)))))))), toplevel, 0, 'GRAPH Context', ['PATH1'=Y10, 'PATH2'=X10, 'GRAPH'=Z10, 'NUMBER1'=A11, 'NUMBER2'=B11|C11], _G12470, forall(X10, forall(Y10, forall(Z10, forall(A11, forall(B11, not exists(X10, exists(Y10, instance(Y10, Z11803)and instance(X10, A11804)and pathLength(Y10, A11)and pathLength(X10, B11)and lessThan(A11, B11)))))))), [Z11803, A11804], _G12473, _G12474)
 
 */
 
@@ -1128,14 +1128,14 @@ test_u_load:-interfaceLoad('testfile.pl').
 
 
 /* Assertion
-interfaceAssert(+KIFCharsIn,+Ctx,+KB,+User).
+interfaceAssert(+KIFCharsIn,+Ctx,+Context,+User).
 KIFCharsIn = "(instance virginia Computer)"
 Ctx = 'Computers and Things'
-KB = 'PrologMOO' currently must be set to 'PrologMOO'
+Context = 'PrologMOO' currently must be set to 'PrologMOO'
 User = 'dmiles@users.sourceforge.net'
 
 */
-        % interfaceAssert(+KIFCharsIn,+Ctx,+KB,+User).
+        % interfaceAssert(+KIFCharsIn,+Ctx,+Context,+User).
 test_u_assert:-interfaceAssert("(instance hardwareType Relation)",'test','PrologMOO','tester') .
 test_u_assert1:-interfaceAssert("(instance hardwareType Object)",'test','PrologMOO','tester') .
 
@@ -1143,12 +1143,12 @@ test_u_assert1:-interfaceAssert("(instance hardwareType Object)",'test','PrologM
 /*
 Now the predicates that you most want
 Invokes a request
-interfaceRequest(+KIFCharsIn,+Ctx,+KB,+User,-UResultsSoFar,-Result,-Explaination,-Status).
+interfaceRequest(+KIFCharsIn,+Ctx,+Context,+User,-UResultsSoFar,-Result,-Explaination,-Status).
 
 Input variables:
 KIFCharsIn = "(instance ?What Computer)"
 Ctx = 'Computers and Things'  % Any legal Atom that helps you book keep
-KB = 'PrologMOO' currently must be set to 'PrologMOO'
+Context = 'PrologMOO' currently must be set to 'PrologMOO'
 User = 'dmiles@users.sourceforge.net'  There are times when error messages about redundant assertions happen.. and for bookkeeping all assertions have an author atom.. perhaps you can even use the source file name it came from.
 
 output variables:
@@ -1159,7 +1159,7 @@ Status = is either 'true' or '!' ... true = more results.. '!' means no more res
 (Status is optional.. if you completely remove this argument and it will fail at the next call after the first solution returning !)
 */
 
-                % interfaceRequest(+KIFCharsIn,+Ctx,+KB,+User,-UResultsSoFar,-Result,-Explaination,-Status).
+                % interfaceRequest(+KIFCharsIn,+Ctx,+Context,+User,-UResultsSoFar,-Result,-Explaination,-Status).
 test_u_request:-interfaceRequest("(hardwareType ?W ?U)",'test','PrologMOO','tester',U,R,P),
          writeObject(getPrologVars(R),R),writeObject(explaination(P),R),fail.
 

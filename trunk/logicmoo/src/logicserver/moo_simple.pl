@@ -4,7 +4,7 @@
 /* 
 Purpose of this file:
 
-Before a KB is canonicalized we must be able to make simple belief on
+Before a Context is canonicalized we must be able to make simple belief on
 
 (instance AnyTerm ?What)
 (domain AnyTerm ?N ?What)
@@ -36,85 +36,85 @@ Also we should be able to in some situations:
 
 
 
-deduceSurfaceGuarded(Fact,KB,Ctx,Explaination):-	  
+deduceSurfaceGuarded(Fact,Context,Explaination):-	  
 	ground(Fact),!,
-	deduceSurface_full(Fact,KB,Ctx,Explaination).
+	deduceSurface_full(Fact,Context,Explaination).
 	
-deduceSurfaceGuarded(Fact,KB,Ctx,Explaination):-	  
+deduceSurfaceGuarded(Fact,Context,Explaination):-	  
 	not(ground(Fact)),!,
-	deduceSurface(Fact,KB,Ctx,Explaination).
+	deduceSurface(Fact,Context,Explaination).
 	
-getFactForTransitiveClosure(KB,Ctx,Call,Explaination):-
-	deduceSurface_easy(Call,KB,Ctx,Explaination).
+getFactForTransitiveClosure(Context,Call,Explaination):-
+	deduceSurface_easy(Call,Context,Explaination).
 
-%:-index(deduceSurface_gaf(Fact,KB,Ctx,Explaination)).
+%:-index(deduceSurface_gaf(Fact,Context,Explaination)).
 	
 % ========================================================
 % deduceSurface => deduceSurface_full
 % ========================================================
 
 % Non defined presently	except this redirection
-deduceSurface_full(Fact,KB,Ctx,Explaination):-
-	deduceSurface(Fact,KB,Ctx,Explaination).
+deduceSurface_full(Fact,Context,Explaination):-
+	deduceSurface(Fact,Context,Explaination).
 
 /*
-deduceSurface_full(instance,false,KB,Ctx,holds(instance,E,C),P1 * P2 * crossref(instance,disjoint)):-
-	     deduceSurface(instance(E,M),KB,Ctx,P1),
-	     deduceSurface_full(disjoint(M,C),KB,Ctx,P2).
+deduceSurface_full(instance,false,Context,holds(instance,E,C),P1 * P2 * crossref(instance,disjoint)):-
+	     deduceSurface(instance(E,M),Context,P1),
+	     deduceSurface_full(disjoint(M,C),Context,P2).
 
-deduceSurface_full_reflexive(disjoint(M,C),KB,Ctx,P2):-
-		deduceSurface_full(disjoint(C,M),KB,Ctx,P2).
+deduceSurface_full_reflexive(disjoint(M,C),Context,P2):-
+		deduceSurface_full(disjoint(C,M),Context,P2).
 
-deduceSurface_full_reflexive(disjoint(M,C),KB,Ctx,P2):-
-		deduceSurface_full(disjoint(M,C),KB,Ctx,P2).
+deduceSurface_full_reflexive(disjoint(M,C),Context,P2):-
+		deduceSurface_full(disjoint(M,C),Context,P2).
 
-deduceSurface_full(PredR,false,KB,Ctx,holds(instance,E,C),P1 * P2):-
+deduceSurface_full(PredR,false,Context,holds(instance,E,C),P1 * P2):-
 	     deduceSurface(instance(E,M),P1),
-	     deduceSurface_full(subclass,false,KB,Ctx,holds(subclass,M,C),P2),M\=C.
+	     deduceSurface_full(subclass,false,Context,holds(subclass,M,C),P2),M\=C.
 */	     
 
 % ========================================================
 % Easy Forwardchains
 % ========================================================
 
-deduceSurface_easy(Fact,KB,Ctx,Explaination):-
-	deduceSurface_gaf(Fact,KB,Ctx,Explaination).
+deduceSurface_easy(Fact,Context,Explaination):-
+	deduceSurface_gaf(Fact,Context,Explaination).
 	
 
 
 /*
-deduceSurface_easy(instance(X,Class),KB,Ctx,Explainations):-
-	atom(Class),deduceSurface_dc_instance1(X,Class,KB,Ctx,Explainations).
+deduceSurface_easy(instance(X,Class),Context,Explainations):-
+	atom(Class),deduceSurface_dc_instance1(X,Class,Context,Explainations).
 */
-deduceSurface_gaf_sym(Fact,KB,Ctx,P1):-deduceSurface_gaf(Fact,KB,Ctx,I).
-deduceSurface_gaf_sym(Fact,KB,Ctx,P1):-compound(Fact),
+deduceSurface_gaf_sym(Fact,Context,P1):-deduceSurface_gaf(Fact,Context,I).
+deduceSurface_gaf_sym(Fact,Context,P1):-compound(Fact),
 	Fact=..[F,A,B],
 	Term=..[F,B,A],
-	deduceSurface_gaf(Term,KB,Ctx,I).
+	deduceSurface_gaf(Term,Context,I).
 
-deduceSurface_gaf(Fact,KB,Ctx,surf(KB,_Ctx,TN,0)):-
-	mooCache(Fact,_,Flags,[],KB,_Ctx,TN,Maintainer,TMResult).
+deduceSurface_gaf(Fact,Context,surf(Context,_Ctx,TN,0)):-
+	mooCache(Fact,_,Flags,[],Context,_Ctx,TN,Maintainer,TMResult).
 	
 
 % ========================================================
 % subclass/partition True
 % ========================================================
 
-deduceSurface_easy(subclass(A,B),KB,Ctx,Explaination * incode(holds(subclass,A,B),crossref(Composition,subclass))):-
+deduceSurface_easy(subclass(A,B),Context,Explaination * incode(holds(subclass,A,B),crossref(Composition,subclass))):-
 	member(Composition,[disjointDecomposition,exhaustiveDecomposition,partition]),
-	deduceSurface_gaf(G,KB,Ctx,Explaination),
+	deduceSurface_gaf(G,Context,Explaination),
 	G=..[Composition,B|Children],
 %	not(B='Entity'),
 	member(A,Children),
 %	not(A='Entity'),
 	A\=B.
 % ====================================================
-% make_disjoint_classes(KB,Ctx)
+% make_disjoint_classes(Context,Ctx)
 % ===================================================
 
-deduceSurface_easy(disjoint(A,B),KB,Ctx,  Explaination * incode(holds(disjoint,A,B),Composition) ):-%trace,
+deduceSurface_easy(disjoint(A,B),Context,  Explaination * incode(holds(disjoint,A,B),Composition) ):-%trace,
 	member(Composition,[disjointDecomposition,exhaustiveDecomposition,partition]),
-	deduceSurface_gaf(G,KB,Ctx,Explaination),
+	deduceSurface_gaf(G,Context,Explaination),
 	G=..[Composition,C|Children],
 	%`not(C='Entity'),
 	member(A,Children),
@@ -126,41 +126,41 @@ deduceSurface_easy(disjoint(A,B),KB,Ctx,  Explaination * incode(holds(disjoint,A
 % Normal Forwardchains
 % ================================================
 
-deduceSurface(valence(Predicate,N),KB,Ctx,Explaination):-!,
-	deduceValence(KB,Ctx,Predicate,N,Explaination),!.
+deduceSurface(valence(Predicate,N),Context,Explaination):-!,
+	deduceValence(Context,Predicate,N,Explaination),!.
 
-deduceSurface(Fact,KB,Ctx,Explaination):-
-	deduceSurface_easy(Fact,KB,Ctx,Explaination).
+deduceSurface(Fact,Context,Explaination):-
+	deduceSurface_easy(Fact,Context,Explaination).
 
-deduceSurface(instance(X,Class),KB,Ctx,incode(instance(X,Class),'Found in Class Constants')):-
+deduceSurface(instance(X,Class),Context,incode(instance(X,Class),'Found in Class Constants')):-
 	Class='Class',!,
-	getClassesListFromKB(Rs,KB,Ctx),
+	getClassesListFromContext(Rs,Context,Ctx),
 	member(X,Rs).		
 
-deduceSurface(instance(X,Class),KB,Ctx,incode(instance(X,Class),'Found in Predicate Constants')):-
+deduceSurface(instance(X,Class),Context,incode(instance(X,Class),'Found in Predicate Constants')):-
 	Class='Predicate',!,
-	getPredicatesListFromKB(Rs,KB,Ctx),
+	getPredicatesListFromContext(Rs,Context,Ctx),
 	member(X,Rs).	
 	
-deduceSurface(instance(X,Class),KB,Ctx,incode(instance(X,Class),'Found in Attribute Constants')):-
+deduceSurface(instance(X,Class),Context,incode(instance(X,Class),'Found in Attribute Constants')):-
 	Class='Attribute',!,
-	getAttributeNamelistFromKB(Rs,KB,Ctx),
+	getAttributeNamelistFromContext(Rs,Context,Ctx),
 	member(X,Rs).	
 
-deduceSurface(instance(X,Class),KB,Ctx,incode(instance(X,Class),'Found in Relation Constants')):-
+deduceSurface(instance(X,Class),Context,incode(instance(X,Class),'Found in Relation Constants')):-
 	Class='Relation',!,
-	getRelationsListFromKB(Rs,KB,Ctx),
+	getRelationsListFromContext(Rs,Context,Ctx),
 	member(X,Rs).		
 
-deduceSurface(instance(X,Class),KB,Ctx,incode(instance(X,Class),'Found in Function Constants')):-
+deduceSurface(instance(X,Class),Context,incode(instance(X,Class),'Found in Function Constants')):-
 	Class='Function',!,
-	getFunctionListFromKB(Rs,KB,Ctx),
+	getFunctionListFromContext(Rs,Context,Ctx),
 	member(X,Rs).		
 
-deduceSurface(instance(E,C),KB,Ctx,P1 * P2 *  Explaination):-
-	deduceSurface_easy(instance(E,M),KB,Ctx,P1),
+deduceSurface(instance(E,C),Context,P1 * P2 *  Explaination):-
+	deduceSurface_easy(instance(E,M),Context,P1),
 	not((M=='Entity')),
-	deduceSurface_full(subclass(M,C),KB,Ctx,P2),
+	deduceSurface_full(subclass(M,C),Context,P2),
 	(M\==C),
 	Explaination=sfindi((holds(subclass,M, C)=>forall(E,( holds(instance,E, M)=>holds(instance,E, C))))).
 	     	
@@ -168,84 +168,84 @@ deduceSurface(instance(E,C),KB,Ctx,P1 * P2 *  Explaination):-
 % subrelations
 % ========================================================
 
-deduceSurface(subrelation(S,C),KB,Ctx,Explaination):-!,
-	deduceTransitiveClosure_PartialOrderingRelation(KB,Ctx,subrelation,S,C,Explaination),not((S=C)).
+deduceSurface(subrelation(S,C),Context,Explaination):-!,
+	deduceTransitiveClosure_PartialOrderingRelation(Context,subrelation,S,C,Explaination),not((S=C)).
 						 
 % ========================================================
 % instance true
 % ========================================================
 
-deduceSurface(subclass(S,C),KB,Ctx,Explaination):-!,
-	deduceTransitiveClosure_PartialOrderingRelation(KB,Ctx,subclass,S,C,Explaination),not((S=C)).
+deduceSurface(subclass(S,C),Context,Explaination):-!,
+	deduceTransitiveClosure_PartialOrderingRelation(Context,subclass,S,C,Explaination),not((S=C)).
 
-deduceSurface(instance(R,C),KB,Ctx, (P1*P2*P3)):-
-	deduceSurface_easy(subrelation(R,P),KB,Ctx,P1),R\=P,
-	deduceSurface_easy(instance(C,'InheritableRelation'),KB,Ctx, P2), 
-	deduceSurface(instance(P,C),KB,Ctx, P3).
+deduceSurface(instance(R,C),Context, (P1*P2*P3)):-
+	deduceSurface_easy(subrelation(R,P),Context,P1),R\=P,
+	deduceSurface_easy(instance(C,'InheritableRelation'),Context, P2), 
+	deduceSurface(instance(P,C),Context, P3).
 
 
-:-retractall(mooCache(KB,_Ctx,completed_table(_))).
+:-retractall(mooCache(Context,_Ctx,completed_table(_))).
 
 
 deduceSurface(disjoint(A,B), P1 * P2 * P3 ):-
 	(nonvar(A);nonvar(B)),
 	deduceSurface(holds(disjoint,SuperOfB,SuperOfA),P1),
-	deduceTransitiveClosure_PartialOrderingRelation(KB,Ctx,subclass,A,SuperOfA,P2),
-	deduceTransitiveClosure_PartialOrderingRelation(KB,Ctx,subclass,B,SuperOfB,P3),
+	deduceTransitiveClosure_PartialOrderingRelation(Context,subclass,A,SuperOfA,P2),
+	deduceTransitiveClosure_PartialOrderingRelation(Context,subclass,B,SuperOfB,P3),
 	((A\=SuperOfA);(B\=SuperOfB)).
 	%TODO((A=AA,B=BB);(B=AA,A=BB)).
 
 
-deduceSurface(domain(disjointDecomposition,N,'Class'),KB,Ctx, incode(domain(disjointDecomposition,N,'Class'))):-integer(N),!.
-deduceSurface(domain(exhaustiveDecomposition,N,'Class'),KB,Ctx, incode(domain(exhaustiveDecomposition,N,'Class'))):-integer(N),!.
-deduceSurface(domain('AssignmentFn',1,'Function'),KB,Ctx, incode(domain('AssignmentFn',1,'Function'))):-!.
-deduceSurface(domain('AssignmentFn',N,'Entity'),KB,Ctx, incode(domain(AssignmentFn,N,'Entity'))):-integer(N),N>1,!.
-deduceSurface(domain('holds',1,'Relation'),KB,Ctx, incode(domain('holds',N,'Relation'))):-!.
-deduceSurface(domain('holds',N,'Entity'),KB,Ctx, incode(domain('holds',N,'Entity'))):-integer(N),N>1,!.
+deduceSurface(domain(disjointDecomposition,N,'Class'),Context, incode(domain(disjointDecomposition,N,'Class'))):-integer(N),!.
+deduceSurface(domain(exhaustiveDecomposition,N,'Class'),Context, incode(domain(exhaustiveDecomposition,N,'Class'))):-integer(N),!.
+deduceSurface(domain('AssignmentFn',1,'Function'),Context, incode(domain('AssignmentFn',1,'Function'))):-!.
+deduceSurface(domain('AssignmentFn',N,'Entity'),Context, incode(domain(AssignmentFn,N,'Entity'))):-integer(N),N>1,!.
+deduceSurface(domain('holds',1,'Relation'),Context, incode(domain('holds',N,'Relation'))):-!.
+deduceSurface(domain('holds',N,'Entity'),Context, incode(domain('holds',N,'Entity'))):-integer(N),N>1,!.
 
 
-deduceSurface(domain(R,N,S),KB,Ctx,(P1 * P2 * Explaination)):-
-	deduceSurface_full(subrelation(R,P),KB,Ctx,P1),
+deduceSurface(domain(R,N,S),Context,(P1 * P2 * Explaination)):-
+	deduceSurface_full(subrelation(R,P),Context,P1),
 	R\=P,
-	deduceSurface_full(domain(P,N,S),KB,Ctx, P2),
+	deduceSurface_full(domain(P,N,S),Context, P2),
 	Explaination=(holds(subrelation,R, P)and domain(P, N, S)and domain(R, N, S)=>holds(subclass,S, S)).
 
-deduceSurface(domain(R,N,S),KB,Ctx, P1 * Explaination):-
+deduceSurface(domain(R,N,S),Context, P1 * Explaination):-
 	nonvar(N),
-	deduceSurface(valence(R,N),KB,Ctx,P1),
-	deduceSurface(range(R,S),KB,Ctx, Explaination),!.
+	deduceSurface(valence(R,N),Context,P1),
+	deduceSurface(range(R,S),Context, Explaination),!.
 
-deduceSurface(domain(R,N,S),KB,Ctx,P1 * Explaination):-
+deduceSurface(domain(R,N,S),Context,P1 * Explaination):-
 	nonvar(N),
-	deduceSurface_full(subrelation(R,PredR),KB,Ctx,P1),R\=P,
-	deduceSurface(valence(P,N),KB,Ctx,_),
-	deduceSurface(range(P,S),KB,Ctx, Explaination),!.
+	deduceSurface_full(subrelation(R,PredR),Context,P1),R\=P,
+	deduceSurface(valence(P,N),Context,_),
+	deduceSurface(range(P,S),Context, Explaination),!.
 	
 
-deduceSurface(domainSubclass(R,N,S),KB,Ctx,(P1 * P2 * Explaination)):-
-	deduceSurface_full(subrelation(R,P),KB,Ctx,P1),
+deduceSurface(domainSubclass(R,N,S),Context,(P1 * P2 * Explaination)):-
+	deduceSurface_full(subrelation(R,P),Context,P1),
 	R\=P,
-	deduceSurface_full(domainSubclass(P,N,S),KB,Ctx, P2),
+	deduceSurface_full(domainSubclass(P,N,S),Context, P2),
 	Explaination=(holds(subrelation,R, P)and domainSubclass(P, N, S)and domainSubclass(R, N, S)=>holds(subclass,S, S)).
 
-deduceSurface(domainSubclass(R,N,S),KB,Ctx, P1 * Explaination):-
+deduceSurface(domainSubclass(R,N,S),Context, P1 * Explaination):-
 	nonvar(N),
-	deduceSurface(valence(R,N),KB,Ctx,P1),
-	deduceSurface(rangeSubclass(R,S),KB,Ctx, Explaination),!.
+	deduceSurface(valence(R,N),Context,P1),
+	deduceSurface(rangeSubclass(R,S),Context, Explaination),!.
 
-deduceSurface(domainSubclass(R,N,S),KB,Ctx,P1 * Explaination):-
+deduceSurface(domainSubclass(R,N,S),Context,P1 * Explaination):-
 	nonvar(N),
-	deduceSurface_full(subrelation(R,PredR),KB,Ctx,P1),R\=P,
-	deduceSurface(valence(P,N),KB,Ctx,_),
-	deduceSurface(rangeSubclass(P,S),KB,Ctx, Explaination),!.
+	deduceSurface_full(subrelation(R,PredR),Context,P1),R\=P,
+	deduceSurface(valence(P,N),Context,_),
+	deduceSurface(rangeSubclass(P,S),Context, Explaination),!.
 
-deduceSurface(domain(R,N,'Class'),KB,Ctx, Explaination):-
+deduceSurface(domain(R,N,'Class'),Context, Explaination):-
 	nonvar(N),nonvar(R),
-	deduceSurface(domainSubclass(R,N,S),KB,Ctx, Explaination),!.
+	deduceSurface(domainSubclass(R,N,S),Context, Explaination),!.
 
-deduceSurface(range(R,'Class'),KB,Ctx, Explaination):-
+deduceSurface(range(R,'Class'),Context, Explaination):-
 	nonvar(N),nonvar(R),
-	deduceSurface(rangeSubclass(R,N,S),KB,Ctx, Explaination),!.
+	deduceSurface(rangeSubclass(R,N,S),Context, Explaination),!.
 
 
 % ==========================================================
@@ -253,85 +253,85 @@ deduceSurface(range(R,'Class'),KB,Ctx, Explaination):-
 % ==========================================================
 %domain(A, 2, B)=>forall(C, forall(D, holds(A, D, C)=>holds(instance,C, B)))
 
-expireOptimizationsInKB(KB,Ctx,Assertion):-
+expireOptimizationsInContext(Context,Assertion):-
 	%writeDebug(yellow,'erasing instancell'),
-	retractall((mooCache(KB,_Ctx,deduceInstanceTable(Class,Set)))).
+	retractall((mooCache(Context,_Ctx,deduceInstanceTable(Class,Set)))).
 
 	
-instance_all(KB,Ctx,Predicate,Args):-
-	deduceSurfaceDomainVector(N,Predicate,VectS,KB,Ctx,Explainations),
-	deducePossibleInstancesFromClasslist(KB,Ctx,VectS,Args).
+instance_all(Context,Predicate,Args):-
+	deduceSurfaceDomainVector(N,Predicate,VectS,Context,Explainations),
+	deducePossibleInstancesFromClasslist(Context,VectS,Args).
 
-deducePossibleInstancesFromClasslist(KB,Ctx,[],[]).
-deducePossibleInstancesFromClasslist(KB,Ctx,[Class|Classes],[Arg|ArgS]):-
-	deduceInstanceTable(KB,Ctx,Arg,Class,_),
-	deducePossibleInstancesFromClasslist(KB,Ctx,Classes,ArgS).
+deducePossibleInstancesFromClasslist(Context,[],[]).
+deducePossibleInstancesFromClasslist(Context,[Class|Classes],[Arg|ArgS]):-
+	deduceInstanceTable(Context,Arg,Class,_),
+	deducePossibleInstancesFromClasslist(Context,Classes,ArgS).
 	
 
 
-deduceInstanceTable(KB,Ctx,Arg,'Entity',_):-
-	writeDebug(red,deduceInstanceTable(KB,Ctx,Arg,'Entity')),!,fail.
+deduceInstanceTable(Context,Arg,'Entity',_):-
+	writeDebug(red,deduceInstanceTable(Context,Arg,'Entity')),!,fail.
 
-deduceInstanceTable(KB,Ctx,Arg,'Class',incode(instance(Arg,'Class'),'Found in Class Constants')):-
-	getClassesListFromKB(Rs,KB,Ctx),!,
+deduceInstanceTable(Context,Arg,'Class',incode(instance(Arg,'Class'),'Found in Class Constants')):-
+	getClassesListFromContext(Rs,Context,Ctx),!,
 	member(Arg,Rs).
 
-deduceInstanceTable(KB,Ctx,Arg,'Relation',incode(instance(Arg,'Relation'),'Found in Relation Constants')):-
-	getRelationsListFromKB(Rs,KB,Ctx),!,
+deduceInstanceTable(Context,Arg,'Relation',incode(instance(Arg,'Relation'),'Found in Relation Constants')):-
+	getRelationsListFromContext(Rs,Context,Ctx),!,
 	member(Arg,Rs).
 
-deduceInstanceTable(KB,Ctx,Arg,'Predicate',incode(instance(Arg,'Predicate'),'Found in Predicate Constants')):-
-	getPredicatesListFromKB(Rs,KB,Ctx),!,
+deduceInstanceTable(Context,Arg,'Predicate',incode(instance(Arg,'Predicate'),'Found in Predicate Constants')):-
+	getPredicatesListFromContext(Rs,Context,Ctx),!,
 	member(Arg,Rs).
 
-deduceInstanceTable(KB,Ctx,Arg,'Function',incode(instance(Arg,'Function'),'Found in Function Constants')):-
-	getFunctionListFromKB(Rs,KB,Ctx),!,
-	member(Arg,Rs).
-	
-deduceInstanceTable(KB,Ctx,Arg,'Attribute',incode(instance(Arg,'Attribute'),'Found in Attribute Constants')):-
-	getAttributeNamelistFromKB(Rs,KB,Ctx),!,
+deduceInstanceTable(Context,Arg,'Function',incode(instance(Arg,'Function'),'Found in Function Constants')):-
+	getFunctionListFromContext(Rs,Context,Ctx),!,
 	member(Arg,Rs).
 	
+deduceInstanceTable(Context,Arg,'Attribute',incode(instance(Arg,'Attribute'),'Found in Attribute Constants')):-
+	getAttributeNamelistFromContext(Rs,Context,Ctx),!,
+	member(Arg,Rs).
+	
 
-deduceInstanceTable(KB,Ctx,Arg,Class,incode(instance(Arg,Class),'Found in Defined Constants')):-
-	mooCache(KB,_Ctx,deduceInstanceTable(Class,Set)),
+deduceInstanceTable(Context,Arg,Class,incode(instance(Arg,Class),'Found in Defined Constants')):-
+	mooCache(Context,_Ctx,deduceInstanceTable(Class,Set)),
 	%writeDebug(silver,extent(holds(instance,Class,Set))),
 	!,
 	member(Arg,Set).
 	
-deduceInstanceTable(KB,Ctx,Arg,Class,incode(instance(Arg,Class),'Found in Defined Cached Constants')):-
+deduceInstanceTable(Context,Arg,Class,incode(instance(Arg,Class),'Found in Defined Cached Constants')):-
 	atom(Class),
 	findall(A,
-			deduceSurface(instance(Arg,Class),KB,Ctx,Explaination),
+			deduceSurface(instance(Arg,Class),Context,Explaination),
 		List),sort(List,Set),!,
-	asserta(mooCache(KB,_Ctx,deduceInstanceTable(Class,Set))),
-	writeDebug(green,made_extent(KB,Ctx,deduceInstanceTable(Class,Set))),!,
+	asserta(mooCache(Context,_Ctx,deduceInstanceTable(Class,Set))),
+	writeDebug(green,made_extent(Context,deduceInstanceTable(Class,Set))),!,
 	member(Arg,Set).
      
 
 
-expireOptimizationsInKB(KB,Ctx,Assertion):-
+expireOptimizationsInContext(Context,Assertion):-
 		writeDebug(yellow,'erasing deduceInstanceTable'),
-		retractall((mooCache(KB,_Ctx,deduceInstanceTable(Class,Set)))).
+		retractall((mooCache(Context,_Ctx,deduceInstanceTable(Class,Set)))).
 	
 
 
-getRelationsListFromKB:-retractall(mooCache(KB,_Ctx,relation_list(Rs))),!,getRelationsListFromKB(Rs,KB,Ctx),write(Rs).
+getRelationsListFromContext:-retractall(mooCache(Context,_Ctx,relation_list(Rs))),!,getRelationsListFromContext(Rs,Context,Ctx),write(Rs).
 
 
-getRelationsListFromKB(Rs,KB,Ctx):-
-	mooCache(KB,_Ctx,relation_list(Rs)),!.
-getRelationsListFromKB(Rs,KB,Ctx):-
+getRelationsListFromContext(Rs,Context,Ctx):-
+	mooCache(Context,_Ctx,relation_list(Rs)),!.
+getRelationsListFromContext(Rs,Context,Ctx):-
 	findall(X,
 		(
 			(
 				(
 					(
-						deduceTransitiveClosure_PartialOrderingRelation(KB,Ctx,subclass,M,'Relation',SCExplaination),
-						deduceSurface_gaf(instance(X,M),KB,Ctx,Explaination)
+						deduceTransitiveClosure_PartialOrderingRelation(Context,subclass,M,'Relation',SCExplaination),
+						deduceSurface_gaf(instance(X,M),Context,Explaination)
 					);
 					(
-					deduceSurface_gaf(GAF,KB,Ctx,_Explaination),
+					deduceSurface_gaf(GAF,Context,_Explaination),
 					((
 					  GAF=subrelation(X,_);GAF=subrelation(_,X);
 					  GAF=inverse(X,_);GAF=inverse(_,X);
@@ -343,21 +343,21 @@ getRelationsListFromKB(Rs,KB,Ctx):-
 			atom(X)
 		)),Relations),
 	sort(Relations,Rs),
-	asserta(mooCache(KB,_Ctx,relation_list(Rs))),!.
+	asserta(mooCache(Context,_Ctx,relation_list(Rs))),!.
 
-getAttributeNamelistFromKB(Rs,KB,Ctx):-
-	mooCache(KB,_Ctx,attribute_list(Rs)),!.
-getAttributeNamelistFromKB(Rs,KB,Ctx):-
+getAttributeNamelistFromContext(Rs,Context,Ctx):-
+	mooCache(Context,_Ctx,attribute_list(Rs)),!.
+getAttributeNamelistFromContext(Rs,Context,Ctx):-
 	findall(X,
 		(
 			(
 				(
 					(
-						deduceTransitiveClosure_PartialOrderingRelation(KB,Ctx,subclass,M,'Attribute',SCExplaination),
-						deduceSurface_gaf(instance(X,M),KB,Ctx,Explaination)
+						deduceTransitiveClosure_PartialOrderingRelation(Context,subclass,M,'Attribute',SCExplaination),
+						deduceSurface_gaf(instance(X,M),Context,Explaination)
 					);
 					(
-					deduceSurface_gaf(GAF,KB,Ctx,_Explaination),
+					deduceSurface_gaf(GAF,Context,_Explaination),
 					((GAF=subAttribute(X,_);
 						GAF=subAttribute(_,X);
 							GAF=successorAttribute(X,_);
@@ -370,125 +370,125 @@ getAttributeNamelistFromKB(Rs,KB,Ctx):-
 			atom(X)
 		)),Attributes),
 	sort(Attributes,Rs),
-	asserta(mooCache(KB,_Ctx,attribute_list(Rs))),!.
+	asserta(mooCache(Context,_Ctx,attribute_list(Rs))),!.
 
 
-getPredicatesListFromKB(Rs,KB,Ctx):-
-	mooCache(KB,_Ctx,predicatesListFromKB(Rs)),!.
-getPredicatesListFromKB(Rs,KB,Ctx):-
-	getRelationsListFromKB(RR,KB,Ctx),!,
+getPredicatesListFromContext(Rs,Context,Ctx):-
+	mooCache(Context,_Ctx,predicatesListFromContext(Rs)),!.
+getPredicatesListFromContext(Rs,Context,Ctx):-
+	getRelationsListFromContext(RR,Context,Ctx),!,
 	findall(X,
 		((
 		member(X,RR),
 		not(atom_concat(_,'Fn',X))
 		)),Relations),
 	sort(Relations,Rs),
-	asserta(mooCache(KB,_Ctx,predicatesListFromKB(Rs))),!.
+	asserta(mooCache(Context,_Ctx,predicatesListFromContext(Rs))),!.
 
-getFunctionListFromKB(Rs,KB,Ctx):-
-	mooCache(KB,_Ctx,functionListFromKB(Rs)),!.
-getFunctionListFromKB(Rs,KB,Ctx):-
-	getRelationsListFromKB(RR,KB,Ctx),!,
+getFunctionListFromContext(Rs,Context,Ctx):-
+	mooCache(Context,_Ctx,functionListFromContext(Rs)),!.
+getFunctionListFromContext(Rs,Context,Ctx):-
+	getRelationsListFromContext(RR,Context,Ctx),!,
 	findall(X,
 		((
 		member(X,RR),
 		atom_concat(_,'Fn',X)
 		)),Relations),
 	sort(Relations,Rs),
-	asserta(mooCache(KB,_Ctx,functionListFromKB(Rs))),!.
+	asserta(mooCache(Context,_Ctx,functionListFromContext(Rs))),!.
 
-getClassesListFromKB(Rs,KB,Ctx):-
-	mooCache(KB,_Ctx,classListFromKB(Rs)),!.
-getClassesListFromKB(Rs,KB,Ctx):-
+getClassesListFromContext(Rs,Context,Ctx):-
+	mooCache(Context,_Ctx,classListFromContext(Rs)),!.
+getClassesListFromContext(Rs,Context,Ctx):-
 	findall(X,
 		((
-					deduceSurface_gaf(GAF,KB,Ctx,_Explaination),
+					deduceSurface_gaf(GAF,Context,_Explaination),
 					((GAF=subclass(_,X);GAF=subclass(X,_);GAF=disjoint(_,X);GAF=disjoint(X,_);GAF=instance(_,X);GAF=range(_,X);
 						deduceSubclassBySurfacePartition(GAF,Classes)
 					)),nonvar(X))),Classes),
 	sort(Classes,Rs),
-	asserta(mooCache(KB,_Ctx,classListFromKB(Rs))),!.
+	asserta(mooCache(Context,_Ctx,classListFromContext(Rs))),!.
 			
 deduceSubclassBySurfacePartition(GAF,A):-
 	GAF=..[Composition|Children],
 	member(Composition,[disjointDecomposition,exhaustiveDecomposition,partition]),
 	member(A,Children).
 /*
-deduceSurface_dc_instance(X,Class,KB,Ctx,Explainations  * SCExplaination):-%var(X),var(Class),!,
+deduceSurface_dc_instance(X,Class,Context,Explainations  * SCExplaination):-%var(X),var(Class),!,
 	atom(Class),
-	deduceSurface_dc_instance1(X,M,KB,Ctx,Explainations),
-        deduceTransitiveClosure_PartialOrderingRelation(KB,Ctx,subclass,M,Class,SCExplaination).
+	deduceSurface_dc_instance1(X,M,Context,Explainations),
+        deduceTransitiveClosure_PartialOrderingRelation(Context,subclass,M,Class,SCExplaination).
 */
        /*
-deduceSurface_dc_instance1(X,Class,KB,Ctx,argOf(Predicate,N,X)):-%var(X),var(Class),!,
-	deduceSurfaceDomainVector(_Arity,Predicate,VectS,KB,Ctx,Explainations),
+deduceSurface_dc_instance1(X,Class,Context,argOf(Predicate,N,X)):-%var(X),var(Class),!,
+	deduceSurfaceDomainVector(_Arity,Predicate,VectS,Context,Explainations),
 	not(atom_concat(_,'Fn',Predicate)),
 	nth1(N,VectS,Class),
-	deduceSurfaceEntityInRelationArg(N,Predicate,X,KB,Ctx,ExplainationO).
+	deduceSurfaceEntityInRelationArg(N,Predicate,X,Context,ExplainationO).
 	 */
 
 % ==================================================
-% deduceSurfaceEntityInRelationArg(N,Predicate,VectS,KB,Ctx,ExplainationO)
+% deduceSurfaceEntityInRelationArg(N,Predicate,VectS,Context,ExplainationO)
 %
-% (un)precacheSurfaceEntityInRelationArg(KB,Ctx)
+% (un)precacheSurfaceEntityInRelationArg(Context,Ctx)
 % ==================================================
 
-deduceSurfaceEntityInRelationArg(N,Predicate,X,KB,Ctx,ExplainationO):-
-	precacheSurfaceEntityInRelationArg(KB,Ctx),!,
-	mooCache(KB,_Ctx,arg_vector(Predicate,N,X,ExplainationO)).
+deduceSurfaceEntityInRelationArg(N,Predicate,X,Context,ExplainationO):-
+	precacheSurfaceEntityInRelationArg(Context,Ctx),!,
+	mooCache(Context,_Ctx,arg_vector(Predicate,N,X,ExplainationO)).
 	
-precacheSurfaceEntityInRelationArg(KB,Ctx):-mooCache(KB,_Ctx,done(precacheSurfaceEntityInRelationArg)),!.
+precacheSurfaceEntityInRelationArg(Context,Ctx):-mooCache(Context,_Ctx,done(precacheSurfaceEntityInRelationArg)),!.
 
 /*
-precacheSurfaceEntityInRelationArg(KB,Ctx):-
-	mooCache(Fact, surface, KB,Ctx,  Explaination),
-	precacheSurfaceEntityInRelationArg_util(Fact,Classification,KB,Ctx,Explaination),fail.
+precacheSurfaceEntityInRelationArg(Context,Ctx):-
+	mooCache(Fact, surface, Context,  Explaination),
+	precacheSurfaceEntityInRelationArg_util(Fact,Classification,Context,Explaination),fail.
 
-precacheSurfaceEntityInRelationArg(KB,Ctx):-
-	mooCache(Predicate,HLFact,HLConds,_,  KB,Ctx,  Explaination),
-	precacheSurfaceEntityInRelationArg_util(entails(HLFact,HLConds),Classification,KB,Ctx,Explaination),fail.
+precacheSurfaceEntityInRelationArg(Context,Ctx):-
+	mooCache(Predicate,HLFact,HLConds,_,  Context,  Explaination),
+	precacheSurfaceEntityInRelationArg_util(entails(HLFact,HLConds),Classification,Context,Explaination),fail.
 */
 	
-precacheSurfaceEntityInRelationArg(KB,Ctx):-assert(mooCache(KB,_Ctx,done(precacheSurfaceEntityInRelationArg))),!.
+precacheSurfaceEntityInRelationArg(Context,Ctx):-assert(mooCache(Context,_Ctx,done(precacheSurfaceEntityInRelationArg))),!.
 		
-expireSurfaceEntityInRelationArg(KB,Ctx):-
-	 retractall(mooCache(KB,_Ctx,arg_vector(Predicate,N,VectS,_))),
-	  retractall(mooCache(KB,_Ctx,done(precacheSurfaceEntityInRelationArg))).
+expireSurfaceEntityInRelationArg(Context,Ctx):-
+	 retractall(mooCache(Context,_Ctx,arg_vector(Predicate,N,VectS,_))),
+	  retractall(mooCache(Context,_Ctx,done(precacheSurfaceEntityInRelationArg))).
 
 % ==================================================
 % Memorize Constants
-%		precacheSurfaceEntityInRelationArg_util(entails(HLFact,HLConds),Classification,KB,Ctx,Explaination),
-%		precacheSurfaceEntityInRelationArg_util(HLFact,Classification,KB,Ctx,Explaination),
+%		precacheSurfaceEntityInRelationArg_util(entails(HLFact,HLConds),Classification,Context,Explaination),
+%		precacheSurfaceEntityInRelationArg_util(HLFact,Classification,Context,Explaination),
 % ==================================================
 
-precacheSurfaceEntityInRelationArg_util(A,Classification,KB,Ctx,Explaination):-(isSlot(A);string(A);atom(A);number(A)),!.
+precacheSurfaceEntityInRelationArg_util(A,Classification,Context,Explaination):-(isSlot(A);string(A);atom(A);number(A)),!.
 
-precacheSurfaceEntityInRelationArg_util([H|T],Classification,KB,Ctx,Explaination):-!,
-	precacheSurfaceEntityInRelationArg_util(H,Classification,KB,Ctx,Explaination),!,
-	precacheSurfaceEntityInRelationArg_util(T,Classification,KB,Ctx,Explaination).
-precacheSurfaceEntityInRelationArg_util(Formula,Classification,KB,Ctx,Explaination):-
+precacheSurfaceEntityInRelationArg_util([H|T],Classification,Context,Explaination):-!,
+	precacheSurfaceEntityInRelationArg_util(H,Classification,Context,Explaination),!,
+	precacheSurfaceEntityInRelationArg_util(T,Classification,Context,Explaination).
+precacheSurfaceEntityInRelationArg_util(Formula,Classification,Context,Explaination):-
 		Formula=..[holds,P|Args],!,
-		precacheSurfaceEntityInRelationArg_util_holdsN(P,1,Args,Classification,KB,Ctx,Explaination).
-precacheSurfaceEntityInRelationArg_util(skolem(_,_),Classification,KB,Ctx,Explaination):-!.
-precacheSurfaceEntityInRelationArg_util(Formula,Classification,KB,Ctx,Explaination):-
+		precacheSurfaceEntityInRelationArg_util_holdsN(P,1,Args,Classification,Context,Explaination).
+precacheSurfaceEntityInRelationArg_util(skolem(_,_),Classification,Context,Explaination):-!.
+precacheSurfaceEntityInRelationArg_util(Formula,Classification,Context,Explaination):-
 		Formula=..[_|Args],!,
-		precacheSurfaceEntityInRelationArg_util(Args,Classification,KB,Ctx,Explaination).
+		precacheSurfaceEntityInRelationArg_util(Args,Classification,Context,Explaination).
 	
 precacheSurfaceEntityInRelationArg_nosaveRelation(precacheSurfaceEntityInRelationArg_nosaveRelation). %dummy 
 
-precacheSurfaceEntityInRelationArg_util_holdsN(P,N,_,Classification,KB,Ctx,Explaination):-precacheSurfaceEntityInRelationArg_nosaveRelation(P),!.
-precacheSurfaceEntityInRelationArg_util_holdsN(P,N,[],Classification,KB,Ctx,Explaination).
-precacheSurfaceEntityInRelationArg_util_holdsN(P,N,[A|RGS],Classification,KB,Ctx,Explaination):-
-	precacheSurfaceEntityInRelationArg_argN(PredR,P,N,A,Classification,KB,Ctx,Explaination),
+precacheSurfaceEntityInRelationArg_util_holdsN(P,N,_,Classification,Context,Explaination):-precacheSurfaceEntityInRelationArg_nosaveRelation(P),!.
+precacheSurfaceEntityInRelationArg_util_holdsN(P,N,[],Classification,Context,Explaination).
+precacheSurfaceEntityInRelationArg_util_holdsN(P,N,[A|RGS],Classification,Context,Explaination):-
+	precacheSurfaceEntityInRelationArg_argN(PredR,P,N,A,Classification,Context,Explaination),
 	NN is N+1,
-	precacheSurfaceEntityInRelationArg_util_holdsN(P,NN,RGS,Classification,KB,Ctx,Explaination).
+	precacheSurfaceEntityInRelationArg_util_holdsN(P,NN,RGS,Classification,Context,Explaination).
 	
 
-precacheSurfaceEntityInRelationArg_argN(PredR,P,N,A,Classification,KB,Ctx,Explaination):-non_memerable(A),!.
-precacheSurfaceEntityInRelationArg_argN(PredR,Predicate,N,VectS,Classification,KB,Ctx,Explaination):-
-	mooCache(KB,_Ctx,arg_vector(Predicate,N,VectS,_)),!.
-precacheSurfaceEntityInRelationArg_argN(PredR,Predicate,N,VectS,Classification,KB,Ctx,Explaination):-
-	asserta(mooCache(KB,_Ctx,arg_vector(Predicate,N,VectS,Explaination))),!.
+precacheSurfaceEntityInRelationArg_argN(PredR,P,N,A,Classification,Context,Explaination):-non_memerable(A),!.
+precacheSurfaceEntityInRelationArg_argN(PredR,Predicate,N,VectS,Classification,Context,Explaination):-
+	mooCache(Context,_Ctx,arg_vector(Predicate,N,VectS,_)),!.
+precacheSurfaceEntityInRelationArg_argN(PredR,Predicate,N,VectS,Classification,Context,Explaination):-
+	asserta(mooCache(Context,_Ctx,arg_vector(Predicate,N,VectS,Explaination))),!.
 
 non_memerable(A):-isSlot(A).
 %non_memerable(A):-number(A).
@@ -513,73 +513,73 @@ reif(_):-!.
 
 
 
-expireOptimizationsInKB(KB,Ctx,Assertion):-
-		writeDebug(silver,'destroy_valence_vectors/expireDomainsListForRelation(KB,Ctx)/expireSurfaceEntityInRelationArg(KB,Ctx)'),
-		retractall(mooCache(KB,_Ctx,functionListFromKB(Rs))),
-		retractall(mooCache(KB,_Ctx,relation_list(Rs))),
-		retractall(mooCache(KB,_Ctx,predicatesListFromKB(Rs))),
-		retractall(mooCache(KB,_Ctx,classListFromKB(Rs))),
-		retractall(mooCache(KB,_Ctx,attribute_list(Rs))),
-		expireSurfaceEntityInRelationArg(KB,Ctx),
-		expireDomainsListForRelation(KB,Ctx),
-		precacheSurfaceEntityInRelationArg(KB,Ctx).
+expireOptimizationsInContext(Context,Assertion):-
+		writeDebug(silver,'destroy_valence_vectors/expireDomainsListForRelation(Context,Ctx)/expireSurfaceEntityInRelationArg(Context,Ctx)'),
+		retractall(mooCache(Context,_Ctx,functionListFromContext(Rs))),
+		retractall(mooCache(Context,_Ctx,relation_list(Rs))),
+		retractall(mooCache(Context,_Ctx,predicatesListFromContext(Rs))),
+		retractall(mooCache(Context,_Ctx,classListFromContext(Rs))),
+		retractall(mooCache(Context,_Ctx,attribute_list(Rs))),
+		expireSurfaceEntityInRelationArg(Context,Ctx),
+		expireDomainsListForRelation(Context,Ctx),
+		precacheSurfaceEntityInRelationArg(Context,Ctx).
 		
 
 
 
 % Get Domain (Will return all predicates and arity with explaination of how it was derived)
 
-deduceSurfaceDomainVector(N,Predicate,VectS,KB,Ctx,ExplainationO):-
-	buildDomainsListForRelation(KB,Ctx),!,
-	mooCache(KB,_Ctx,domain_vector(Predicate,N,VectS,ExplainationO)).
+deduceSurfaceDomainVector(N,Predicate,VectS,Context,ExplainationO):-
+	buildDomainsListForRelation(Context,Ctx),!,
+	mooCache(Context,_Ctx,domain_vector(Predicate,N,VectS,ExplainationO)).
 	
-buildDomainsListForRelation(KB,Ctx):-mooCache(KB,_Ctx,done(buildDomainsListForRelation)),!.
-buildDomainsListForRelation(KB,Ctx):- 
-	once(getRelationsListFromKB(Rs,KB,Ctx)),
+buildDomainsListForRelation(Context,Ctx):-mooCache(Context,_Ctx,done(buildDomainsListForRelation)),!.
+buildDomainsListForRelation(Context,Ctx):- 
+	once(getRelationsListFromContext(Rs,Context,Ctx)),
 	member(Predicate,Rs),  %trace, 	
-	once(deduceValence(KB,Ctx,Predicate,N,_Explaination)),
-	once(deduceHoldsNDomVect(N,Predicate,VectS,KB,Ctx)),
+	once(deduceValence(Context,Predicate,N,_Explaination)),
+	once(deduceHoldsNDomVect(N,Predicate,VectS,Context,Ctx)),
 	%writeDebug(green,domain_vector(Predicate,N,VectS)),
-	asserta_if_new(mooCache(KB,_Ctx,domain_vector(Predicate,N,VectS,cached))),fail.
-buildDomainsListForRelation(KB,Ctx):-assert(mooCache(KB,_Ctx,done(buildDomainsListForRelation))),!.
+	asserta_if_new(mooCache(Context,_Ctx,domain_vector(Predicate,N,VectS,cached))),fail.
+buildDomainsListForRelation(Context,Ctx):-assert(mooCache(Context,_Ctx,done(buildDomainsListForRelation))),!.
 		
-expireDomainsListForRelation(KB,Ctx):-
-	 retractall(mooCache(KB,_Ctx,domain_vector(Predicate,N,VectS,cached))),
-	  retractall(mooCache(KB,_Ctx,done(buildDomainsListForRelation))).
+expireDomainsListForRelation(Context,Ctx):-
+	 retractall(mooCache(Context,_Ctx,domain_vector(Predicate,N,VectS,cached))),
+	  retractall(mooCache(Context,_Ctx,done(buildDomainsListForRelation))).
 
 
 % assert cache/2 
-deduceSurface_domain(Predicate,N,Class,KB,Ctx):-
+deduceSurface_domain(Predicate,N,Class,Context,Ctx):-
 	atom(Predicate),
-	deduceSurface(domain(Predicate,N,Class),KB,Ctx,Explaination2).
+	deduceSurface(domain(Predicate,N,Class),Context,Explaination2).
 
 :-index(deduceHoldsNDomVect(1,0,1,0,0)).
 
 
-deduceHoldsNDomVect(2,Predicate,[Class1,Class2],KB,Ctx):-!,
-	deduceSurface_domain(Predicate,1,Class1,KB,Ctx),!,
-	deduceSurface_domain(Predicate,2,Class2,KB,Ctx),!.
+deduceHoldsNDomVect(2,Predicate,[Class1,Class2],Context,Ctx):-!,
+	deduceSurface_domain(Predicate,1,Class1,Context,Ctx),!,
+	deduceSurface_domain(Predicate,2,Class2,Context,Ctx),!.
 
-deduceHoldsNDomVect(3,Predicate,[Class1,Class2,Class3],KB,Ctx):-!,
-	deduceSurface_domain(Predicate,1,Class1,KB,Ctx),!,
-	deduceSurface_domain(Predicate,2,Class2,KB,Ctx),!,
-	deduceSurface_domain(Predicate,3,Class3,KB,Ctx),!.
+deduceHoldsNDomVect(3,Predicate,[Class1,Class2,Class3],Context,Ctx):-!,
+	deduceSurface_domain(Predicate,1,Class1,Context,Ctx),!,
+	deduceSurface_domain(Predicate,2,Class2,Context,Ctx),!,
+	deduceSurface_domain(Predicate,3,Class3,Context,Ctx),!.
 
-deduceHoldsNDomVect(1,Predicate,[Class1],KB,Ctx):-!,
-	deduceSurface_domain(Predicate,1,Class1,KB,Ctx),!.
+deduceHoldsNDomVect(1,Predicate,[Class1],Context,Ctx):-!,
+	deduceSurface_domain(Predicate,1,Class1,Context,Ctx),!.
 
-deduceHoldsNDomVect(4,Predicate,[Class1,Class2,Class3,Class4],KB,Ctx):-!,
-	deduceSurface_domain(Predicate,1,Class1,KB,Ctx),!,
-	deduceSurface_domain(Predicate,2,Class2,KB,Ctx),!,
-	deduceSurface_domain(Predicate,3,Class3,KB,Ctx),!,
-	deduceSurface_domain(Predicate,4,Class4,KB,Ctx),!.
+deduceHoldsNDomVect(4,Predicate,[Class1,Class2,Class3,Class4],Context,Ctx):-!,
+	deduceSurface_domain(Predicate,1,Class1,Context,Ctx),!,
+	deduceSurface_domain(Predicate,2,Class2,Context,Ctx),!,
+	deduceSurface_domain(Predicate,3,Class3,Context,Ctx),!,
+	deduceSurface_domain(Predicate,4,Class4,Context,Ctx),!.
 
-deduceHoldsNDomVect(5,Predicate,[Class1,Class2,Class3,Class4,Class5],KB,Ctx):-!,
-	deduceSurface_domain(Predicate,1,Class1,KB,Ctx),!,
-	deduceSurface_domain(Predicate,2,Class2,KB,Ctx),!,
-	deduceSurface_domain(Predicate,3,Class3,KB,Ctx),!,
-	deduceSurface_domain(Predicate,4,Class4,KB,Ctx),!,
-	deduceSurface_domain(Predicate,5,Class5,KB,Ctx),!.
+deduceHoldsNDomVect(5,Predicate,[Class1,Class2,Class3,Class4,Class5],Context,Ctx):-!,
+	deduceSurface_domain(Predicate,1,Class1,Context,Ctx),!,
+	deduceSurface_domain(Predicate,2,Class2,Context,Ctx),!,
+	deduceSurface_domain(Predicate,3,Class3,Context,Ctx),!,
+	deduceSurface_domain(Predicate,4,Class4,Context,Ctx),!,
+	deduceSurface_domain(Predicate,5,Class5,Context,Ctx),!.
 
  
 
@@ -601,10 +601,10 @@ isPropositional(A):-A=..[P|_],is_instance_of(P,C),is_subclass_of(C,'Predicate').
 % True/False Instance (Specialization)  based on Asserted Rule
 % ==========================================================
 
-prove_goal_instance(Logic,Depth,Table,Entity,EClass,Agent,KB,P ):-!,
+prove_goal_instance(Logic,Depth,Table,Entity,EClass,Agent,Context,P ):-!,
 	Depth2 is Depth -1,!,
 	writeDebug('?'(Logic,Entity,EClass)),   
-	(((proveInstance(Logic,Depth2,Table,Entity,EClass,Agent,KB,P),
+	(((proveInstance(Logic,Depth2,Table,Entity,EClass,Agent,Context,P),
 	nonvar(Entity),nonvar(EClass), 
 	writeDebug('+i'(Logic,Entity,EClass))));(!,writeDebug('-i'(Logic,Entity,EClass)),!,fail)).
 
@@ -614,66 +614,66 @@ prove_goal_instance(Logic,Depth,Table,Entity,EClass,Agent,KB,P ):-!,
 % ==========================================================
 
 
-%proveInstance(true,Depth,Table,X,Class,Agent,KB,incode(instance(X,Classes),'Cached')):-
+%proveInstance(true,Depth,Table,X,Class,Agent,Context,incode(instance(X,Classes),'Cached')):-
 %	atom(X),r_flags(X,Classes),!,member(Class,Classes).
 
-%proveInstance(Logic,Depth,Table,X,Class,Agent,KB,Explaination):-
-%	deduceSurfaceGuarded(instance,Logic,instance(X,Class),Agent,KB,Explaination).
+%proveInstance(Logic,Depth,Table,X,Class,Agent,Context,Explaination):-
+%	deduceSurfaceGuarded(instance,Logic,instance(X,Class),Agent,Context,Explaination).
 
-proveInstance(Logic,Depth,Table,X,Class,Agent,KB,Explaination):-var(X),!,fail.
+proveInstance(Logic,Depth,Table,X,Class,Agent,Context,Explaination):-var(X),!,fail.
 
-proveInstance(Logic,Depth,Table,X,Class,Agent,KB,Explaination):-
+proveInstance(Logic,Depth,Table,X,Class,Agent,Context,Explaination):-
 	memberchk(defering_to_gafs(Logic,_),Table),!,fail.
 	
-proveInstance(Logic,Depth,Table,X,Class,Agent,KB, Explaination2 * Explaination):- %trace,
+proveInstance(Logic,Depth,Table,X,Class,Agent,Context, Explaination2 * Explaination):- %trace,
 	compound(X),X=..[P|List],!,
-	proveInstance_compound(Logic,Depth,Table,P,List,X,Class,Agent,KB,Explaination).
+	proveInstance_compound(Logic,Depth,Table,P,List,X,Class,Agent,Context,Explaination).
 	
-proveInstance(false,Depth,Table,'Formula',Type,Agent,KB,incode(not 'Formula')).
+proveInstance(false,Depth,Table,'Formula',Type,Agent,Context,incode(not 'Formula')).
 
-proveInstance(Logic,Depth,Table,Number,Type,Agent,KB,Explaination):-
+proveInstance(Logic,Depth,Table,Number,Type,Agent,Context,Explaination):-
 	number(Number),!,
-	proveInstance_number(Logic,Depth,Table,Number,Type,Agent,KB,Explaination).
+	proveInstance_number(Logic,Depth,Table,Number,Type,Agent,Context,Explaination).
 
 /*
-proveInstance(Logic,Depth,Table,Arg1,Arg2,Agent,KB,Explaination * Explaination2):-  !,
+proveInstance(Logic,Depth,Table,Arg1,Arg2,Agent,Context,Explaination * Explaination2):-  !,
 	not(member('some_instance'(Arg1),Table)),
-	client_rulebase_spec(instance,Logic,instance(Arg1,Arg2), Agent,KB, Conditions, Explaination, F,Type),
+	client_rulebase_spec(instance,Logic,instance(Arg1,Arg2), Agent,Context, Conditions, Explaination, F,Type),
 	atom(Arg2),
-	confirm_rule(instance,Logic,instance(Arg1,Arg2), Agent,KB, Conditions, Explaination, F,Type,Depth,Table,NewTable,NewConds),
-	deduceGoal(holds,true,Depth,['Atom_instance'(Arg1),instance(Arg1,Arg2)|NewTable],NewConds,Agent,KB,Explaination2),
+	confirm_rule(instance,Logic,instance(Arg1,Arg2), Agent,Context, Conditions, Explaination, F,Type,Depth,Table,NewTable,NewConds),
+	deduceGoal(holds,true,Depth,['Atom_instance'(Arg1),instance(Arg1,Arg2)|NewTable],NewConds,Agent,Context,Explaination2),
 	confirm_ground(Conditions).
 */	
 
-proveInstance_number(true,Depth,Table,Number,'RealNumber',Agent,KB,incode(instance(Number,'RealNumber'))).
-proveInstance_number(Logic,Depth,Table,Number,Integer,Agent,KB,Explaination):-
+proveInstance_number(true,Depth,Table,Number,'RealNumber',Agent,Context,incode(instance(Number,'RealNumber'))).
+proveInstance_number(Logic,Depth,Table,Number,Integer,Agent,Context,Explaination):-
 	integer(Number),!,
-	proveInstance_integer(Logic,Depth,Table,Number,Integer,Agent,KB,Explaination).
+	proveInstance_integer(Logic,Depth,Table,Number,Integer,Agent,Context,Explaination).
 
-proveInstance_number(false,Depth,Table,Number,'Integer',Agent,KB,incode(not(instance(Number,'Integer')))).
+proveInstance_number(false,Depth,Table,Number,'Integer',Agent,Context,incode(not(instance(Number,'Integer')))).
 	
-proveInstance_integer(true,Depth,Table,Number,'Integer',Agent,KB,incode(instance(Number,'Integer'))).
-proveInstance_integer(true,Depth,Table,Number,'PositiveInteger',Agent,KB,incode(instance(Number,'PositiveInteger'))):-Number>0.
-proveInstance_integer(true,Depth,Table,Number,'NegativeInteger',Agent,KB,incode(instance(Number,'NegativeInteger'))):-Number<0.
-proveInstance_integer(false,Depth,Table,Number,'PositiveInteger',Agent,KB,incode(instance(Number,'PositiveInteger'))):-Number<0.
-proveInstance_integer(false,Depth,Table,Number,'NegativeInteger',Agent,KB,incode(instance(Number,'NegativeInteger'))):-Number>0.
+proveInstance_integer(true,Depth,Table,Number,'Integer',Agent,Context,incode(instance(Number,'Integer'))).
+proveInstance_integer(true,Depth,Table,Number,'PositiveInteger',Agent,Context,incode(instance(Number,'PositiveInteger'))):-Number>0.
+proveInstance_integer(true,Depth,Table,Number,'NegativeInteger',Agent,Context,incode(instance(Number,'NegativeInteger'))):-Number<0.
+proveInstance_integer(false,Depth,Table,Number,'PositiveInteger',Agent,Context,incode(instance(Number,'PositiveInteger'))):-Number<0.
+proveInstance_integer(false,Depth,Table,Number,'NegativeInteger',Agent,Context,incode(instance(Number,'NegativeInteger'))):-Number>0.
 
-proveInstance_compound(Logic,Depth,Table,'zzskFn',List,X,C,Agent,KB,Explaination):-!,
-	proveInstance_skolem(Logic,Depth,Table,'zzskFn',List,X,C,Agent,KB,Explaination).
+proveInstance_compound(Logic,Depth,Table,'zzskFn',List,X,C,Agent,Context,Explaination):-!,
+	proveInstance_skolem(Logic,Depth,Table,'zzskFn',List,X,C,Agent,Context,Explaination).
 
 
 % Formula was a skolem
-proveInstance_skolem(true,Depth,Table,'zzskFn',List,X,C,Agent,KB,Explaination * Explaination2):- C=='Entiry',!,
+proveInstance_skolem(true,Depth,Table,'zzskFn',List,X,C,Agent,Context,Explaination * Explaination2):- C=='Entiry',!,
 	ground(X).
 /*
 
-proveInstance_skolem(Logic,Depth,Table,'zzskFn',List,X,C,Agent,KB,Explaination * Explaination2):-
+proveInstance_skolem(Logic,Depth,Table,'zzskFn',List,X,C,Agent,Context,Explaination * Explaination2):-
 	not_in(instance(X,C),Table),
-	client_rulebase(instance,true_'$existential's, instance(X,C),Agent,KB,ConditionsE,Explaination,Type),
+	client_rulebase(instance,true_'$existential's, instance(X,C),Agent,Context,ConditionsE,Explaination,Type),
 	ground(ConditionsE),
 	not(proveInstance_skolem_dis(ConditionsE)),
 	writeDebug(green,'<='('E_instance'(X,C),ConditionsE)),
-	deduce_backchain(true,Depth,[instance(X,C)|Table],ConditionsE,Agent,KB,Explaination2),!.
+	deduce_backchain(true,Depth,[instance(X,C)|Table],ConditionsE,Agent,Context,Explaination2),!.
 */		
 
 proveInstance_skolem_dis(not(A)):-!,
@@ -686,33 +686,33 @@ proveInstance_skolem_dis(ON,N):-atom_concat(_,'On',ON).
 
  
 % Formula is a Function with Range
-proveInstance_compound(true,Depth,Table,P,List,X,Class,Agent,KB,Explaination * Explaination2 * incode(instance(X,Class),'Structural Instances')):-
-	deduceSurface(instance,true,KB,Agent,instance(P,'Function'),Explaination),
-	deduceSurfaceGuarded(P,true,range( P ,Class),Agent,KB,Explaination2).
+proveInstance_compound(true,Depth,Table,P,List,X,Class,Agent,Context,Explaination * Explaination2 * incode(instance(X,Class),'Structural Instances')):-
+	deduceSurface(instance,true,Context,instance(P,'Function'),Explaination),
+	deduceSurfaceGuarded(P,true,range( P ,Class),Agent,Context,Explaination2).
 
 % Formula is a Function of not Range
-proveInstance_compound(false,Depth,Table,P,List,X,Class,Agent,KB,Explaination * incode(not(range(P,Class))) * incode(instance(X,Class),'Structural Instances')):-
-	deduceSurface(instance,true,KB,Agent,instance(P,'Function'),Explaination),
-	not(deduceSurfaceGuarded(Predicate,true,Table,range(P,Class),Agent,KB,Explaination2)).
+proveInstance_compound(false,Depth,Table,P,List,X,Class,Agent,Context,Explaination * incode(not(range(P,Class))) * incode(instance(X,Class),'Structural Instances')):-
+	deduceSurface(instance,true,Context,instance(P,'Function'),Explaination),
+	not(deduceSurfaceGuarded(Predicate,true,Table,range(P,Class),Agent,Context,Explaination2)).
 
 % Formual is a Proposition if it is headed be a Relation
-proveInstance_compound(true,Depth,Table,P,List,X,'Proposition',Agent,KB,Explaination * incode(instance(X,'Proposition'),'Structural Instances') ):-
-	deduceSurface(instance,true,KB,Agent,instance(P,'Relation'),Explaination).
+proveInstance_compound(true,Depth,Table,P,List,X,'Proposition',Agent,Context,Explaination * incode(instance(X,'Proposition'),'Structural Instances') ):-
+	deduceSurface(instance,true,Context,instance(P,'Relation'),Explaination).
 
 % Formula is a Not Proposition if it is headed be a Relation
-proveInstance_compound(false,Depth,Table,P,List,X,'Proposition',Agent,KB,(incode(not(instance(X,'Proposition'),'Structural Instances')* Explaination))):-
-	deduceSurface(instance,true,KB,Agent,instance(P,'Relation'),Explaination).
+proveInstance_compound(false,Depth,Table,P,List,X,'Proposition',Agent,Context,(incode(not(instance(X,'Proposition'),'Structural Instances')* Explaination))):-
+	deduceSurface(instance,true,Context,instance(P,'Relation'),Explaination).
 
 % Formula is Formula
-proveInstance_compound(true,Depth,Table,P,List,X,'Formula',Agent,KB,incode(instance(X,'Formula'),'Structural Instances')).
+proveInstance_compound(true,Depth,Table,P,List,X,'Formula',Agent,Context,incode(instance(X,'Formula'),'Structural Instances')).
 
 % Bachain on Formula
 /*
-proveInstance_compound(true,Depth,Table,P,List,X,C,Agent,KB,Explaination):-
+proveInstance_compound(true,Depth,Table,P,List,X,C,Agent,Context,Explaination):-
 		ground((X,C)),
-		client_rulebase(instance,true, instance(X,C),Agent,KB,ConditionsE,_), requistionable(ConditionsE,Type),
+		client_rulebase(instance,true, instance(X,C),Agent,Context,ConditionsE,_), requistionable(ConditionsE,Type),
 		Depth2 is Depth-1,
-		deduce_backchain(true,Depth2,[instance(X,C)|Table],ConditionsE,Agent,KB,Explaination). %TODO only one Antecedant Possble
+		deduce_backchain(true,Depth2,[instance(X,C)|Table],ConditionsE,Agent,Context,Explaination). %TODO only one Antecedant Possble
 */
 
 
@@ -725,24 +725,24 @@ proveInstance_compound(true,Depth,Table,P,List,X,C,Agent,KB,Explaination):-
 :-dynamic(forwardchain_PrologMOO_valence2/6).
 :-dynamic(backchain_PrologMOO_valence2/6).
 
-deduceValence(KB,Ctx,not,1,inlinecode(valence(not,1))):-!.
+deduceValence(Context,not,1,inlinecode(valence(not,1))):-!.
 
-deduceValence(KB,Ctx,X,2,inlinecode(valence(X,2))):-
-	deduceSurfaceGuarded(instance(X,'SententialOperator'),KB,Ctx,Explaination),!.
+deduceValence(Context,X,2,inlinecode(valence(X,2))):-
+	deduceSurfaceGuarded(instance(X,'SententialOperator'),Context,Explaination),!.
 
-deduceValence(KB,Ctx,R,N,Explaination):-
-	deduceValence_util(KB,Ctx,R,N,Explaination),!.
+deduceValence(Context,R,N,Explaination):-
+	deduceValence_util(Context,R,N,Explaination),!.
 
 % Valence #2
-deduceValence(KB,Ctx,X,N,Explaination * Explaination3 * inlinecode(valence,N)):-
-	deduceTransitiveClosure_PartialOrderingRelation(KB,Ctx,subrelation,X,Super,Explaination3),
+deduceValence(Context,X,N,Explaination * Explaination3 * inlinecode(valence,N)):-
+	deduceTransitiveClosure_PartialOrderingRelation(Context,subrelation,X,Super,Explaination3),
 	X\=Super,
-	deduceValence_util(KB,Ctx,Super,N,Explaination),!.
+	deduceValence_util(Context,Super,N,Explaination),!.
 
-deduceValence(KB,Ctx,X,N,Explaination * Explaination3 * inlinecode(valence,N)):-
-	deduceSurface_gaf_sym(disjointRelation(X,Super),KB,Ctx,Explaination3),
+deduceValence(Context,X,N,Explaination * Explaination3 * inlinecode(valence,N)):-
+	deduceSurface_gaf_sym(disjointRelation(X,Super),Context,Explaination3),
 	X\=Super,
-	deduceValence_util(KB,Ctx,Super,N,Explaination),!.
+	deduceValence_util(Context,Super,N,Explaination),!.
 	
 
 
@@ -752,42 +752,42 @@ deduceValence(KB,Ctx,X,N,Explaination * Explaination3 * inlinecode(valence,N)):-
 % Entry Points for singleValued   valence/2
 % ==================================================================================
 % Valence #1
-deduceNegValence(KB,Ctx,X,YY,Explaination * inlinecode(valence,1)):-
+deduceNegValence(Context,X,YY,Explaination * inlinecode(valence,1)):-
 	isValenceInt(YY),
-	deduceValence_util(KB,Ctx,X,Y,Explaination),!,Y=YY.
+	deduceValence_util(Context,X,Y,Explaination),!,Y=YY.
 	
 % Valence #10
-deduceNegValence(KB,Ctx,X,YY,Explaination * inlinecode(valence,10)):-
-	deduceValence_util(KB,Ctx,X,Y,Explaination),isValenceInt(YY),Y\=YY,!.
+deduceNegValence(Context,X,YY,Explaination * inlinecode(valence,10)):-
+	deduceValence_util(Context,X,Y,Explaination),isValenceInt(YY),Y\=YY,!.
 
 	
 % Valence Asserted
-deduceValence_util(KB,Ctx,X,Y,Explaination):-
-	mooCache(valence(X,Y), _,_,_,KB,Ctx,_,_,Explaination),!.
+deduceValence_util(Context,X,Y,Explaination):-
+	mooCache(valence(X,Y), _,_,_,Context,_,_,Explaination),!.
 					    
 % Valence #6
-deduceValence_util(KB,Ctx,X,2,Explaination * inlinecode(valence,6)):-
-	deduceSurfaceGuarded(instance(X,'BinaryPredicate'),KB,Ctx,Explaination),!.
+deduceValence_util(Context,X,2,Explaination * inlinecode(valence,6)):-
+	deduceSurfaceGuarded(instance(X,'BinaryPredicate'),Context,Explaination),!.
 
 % Valence #7
-deduceValence_util(KB,Ctx,X,3,Explaination * inlinecode(valence,7)):-
-	deduceSurfaceGuarded(instance(X,'TernaryPredicate'),KB,Ctx,Explaination),!.
+deduceValence_util(Context,X,3,Explaination * inlinecode(valence,7)):-
+	deduceSurfaceGuarded(instance(X,'TernaryPredicate'),Context,Explaination),!.
 
 % Valence #8
-deduceValence_util(KB,Ctx,X,4,Explaination * inlinecode(valence,8)):-
-	deduceSurfaceGuarded(instance(X,'QuaternaryPredicate'),KB,Ctx,Explaination),!.
+deduceValence_util(Context,X,4,Explaination * inlinecode(valence,8)):-
+	deduceSurfaceGuarded(instance(X,'QuaternaryPredicate'),Context,Explaination),!.
 	
 % Valence #3
-deduceValence_util(KB,Ctx,X,2,Explaination * inlinecode(valence,3)):-
-	deduceSurfaceGuarded(instance(X,'UnaryFunction'),KB,Ctx,Explaination),!.
+deduceValence_util(Context,X,2,Explaination * inlinecode(valence,3)):-
+	deduceSurfaceGuarded(instance(X,'UnaryFunction'),Context,Explaination),!.
 
 % Valence #4
-deduceValence_util(KB,Ctx,X,3,Explaination * inlinecode(valence,4)):-
-	deduceSurfaceGuarded(instance(X,'BinaryFunction'),KB,Ctx,Explaination),!.
+deduceValence_util(Context,X,3,Explaination * inlinecode(valence,4)):-
+	deduceSurfaceGuarded(instance(X,'BinaryFunction'),Context,Explaination),!.
 
 % Valence #5
-deduceValence_util(KB,Ctx,X,4,Explaination * inlinecode(valence,5)):-
-	deduceSurfaceGuarded(instance(X,'TernaryFunction'),KB,Ctx,Explaination),!.
+deduceValence_util(Context,X,4,Explaination * inlinecode(valence,5)):-
+	deduceSurfaceGuarded(instance(X,'TernaryFunction'),Context,Explaination),!.
 
 
 	
@@ -857,7 +857,7 @@ Flags: r1([2nd(holds)])
 explaination_line(incode('PrologMOO_valence2', 2, ['REL'=A|B]), via(entails(holds(instance, A, 'QuintaryPredicate'), holds(valence, A, 5)), ['REL'=A|B])*surf('PrologMOO', 1622)).
 
 /*
-deduceValence_util(KB,Ctx, A, 5, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 2, ['REL'=A|B])) :- 
+deduceValence_util(Context, A, 5, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 2, ['REL'=A|B])) :- 
 	forwardchain_instance(true, holds(instance, A, 'QuintaryPredicate'), 'BASE ONTOLOGY', C)
 */
 
@@ -883,7 +883,7 @@ Flags: r1([2nd(holds)])
 explaination_line(incode('PrologMOO_valence2', 3, ['REL'=A|B]), via(entails(holds(instance, A, 'QuaternaryPredicate'), holds(valence, A, 4)), ['REL'=A|B])*surf('PrologMOO', 1614)).
 
 /*
-deduceValence_util(KB,Ctx, A, 4, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 3, ['REL'=A|B])) :- 
+deduceValence_util(Context, A, 4, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 3, ['REL'=A|B])) :- 
 	forwardchain_instance(true, holds(instance, A, 'QuaternaryPredicate'), 'BASE ONTOLOGY', C)
 */
 
@@ -909,7 +909,7 @@ Flags: r1([2nd(holds)])
 explaination_line(incode('PrologMOO_valence2', 4, ['REL'=A|B]), via(entails(holds(instance, A, 'TernaryPredicate'), holds(valence, A, 3)), ['REL'=A|B])*surf('PrologMOO', 1606)).
 
 /*
-deduceValence_util(KB,Ctx, A, 3, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 4, ['REL'=A|B])) :- 
+deduceValence_util(Context, A, 3, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 4, ['REL'=A|B])) :- 
 	forwardchain_instance(true, holds(instance, A, 'TernaryPredicate'), 'BASE ONTOLOGY', C)
 */
 
@@ -935,7 +935,7 @@ Flags: r1([2nd(holds)])
 explaination_line(incode('PrologMOO_valence2', 5, ['REL'=A|B]), via(entails(holds(instance, A, 'BinaryPredicate'), holds(valence, A, 2)), ['REL'=A|B])*surf('PrologMOO', 1598)).
 
 /*
-deduceValence_util(KB,Ctx, A, 2, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 5, ['REL'=A|B])) :- 
+deduceValence_util(Context, A, 2, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 5, ['REL'=A|B])) :- 
 	forwardchain_instance(true, holds(instance, A, 'BinaryPredicate'), 'BASE ONTOLOGY', C)
 */
 
@@ -961,7 +961,7 @@ Flags: r1([2nd(holds)])
 explaination_line(incode('PrologMOO_valence2', 6, ['FUNCTION'=A|B]), via(entails(holds(instance, A, 'TernaryFunction'), holds(valence, A, 3)), ['FUNCTION'=A|B])*surf('PrologMOO', 1580)).
 
 /*
-deduceValence_util(KB,Ctx, A, 3, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 6, ['FUNCTION'=A|B])) :- 
+deduceValence_util(Context, A, 3, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 6, ['FUNCTION'=A|B])) :- 
 	forwardchain_instance(true, holds(instance, A, 'TernaryFunction'), 'BASE ONTOLOGY', C)
 */
 
@@ -987,7 +987,7 @@ Flags: r1([2nd(holds)])
 explaination_line(incode('PrologMOO_valence2', 7, ['FUNCTION'=A|B]), via(entails(holds(instance, A, 'BinaryFunction'), holds(valence, A, 2)), ['FUNCTION'=A|B])*surf('PrologMOO', 1558)).
 
 /*
-deduceValence_util(KB,Ctx, A, 2, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 7, ['FUNCTION'=A|B])) :- 
+deduceValence_util(Context, A, 2, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 7, ['FUNCTION'=A|B])) :- 
 	forwardchain_instance(true, holds(instance, A, 'BinaryFunction'), 'BASE ONTOLOGY', C)
 */
 
@@ -1013,7 +1013,7 @@ Flags: r1([2nd(holds)])
 explaination_line(incode('PrologMOO_valence2', 8, ['FUNCTION'=A|B]), via(entails(holds(instance, A, 'UnaryFunction'), holds(valence, A, 1)), ['FUNCTION'=A|B])*surf('PrologMOO', 1536)).
 
 /*
-deduceValence_util(KB,Ctx, A, 1, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 8, ['FUNCTION'=A|B])) :- 
+deduceValence_util(Context, A, 1, 'BASE ONTOLOGY', D, D*C*incode('PrologMOO_valence2', 8, ['FUNCTION'=A|B])) :- 
 	forwardchain_instance(true, holds(instance, A, 'UnaryFunction'), 'BASE ONTOLOGY', C)
 */
 
@@ -1043,7 +1043,7 @@ Flags: r1([zzskFn(Valence8SkFn), 2nd(holds)])
 explaination_line(incode('PrologMOO_valence2', 9, ['PRED1'=A, 'PRED2'=B, 'NUMBER'=C|D]), via(entails(holds(subrelation, A, B), holds(valence, B, zzskFn('Valence8SkFn', [B, A]))), ['PRED1'=A, 'PRED2'=B, 'NUMBER'=C|D])*surf('PrologMOO', 183)).
 
 /*
-deduceValence_util(KB,Ctx, B, zzskFn('Valence8SkFn', [B, A]), 'STRUCTURAL ONTOLOGY', E, F*E*incode('PrologMOO_valence2', 9, ['PRED1'=A, 'PRED2'=B, 'NUMBER'=C|D])) :- 
+deduceValence_util(Context, B, zzskFn('Valence8SkFn', [B, A]), 'STRUCTURAL ONTOLOGY', E, F*E*incode('PrologMOO_valence2', 9, ['PRED1'=A, 'PRED2'=B, 'NUMBER'=C|D])) :- 
 	forwardchain(true, holds(subrelation, A, B), 'STRUCTURAL ONTOLOGY', E)
 */
 
@@ -1073,7 +1073,7 @@ Flags: r1([zzskFn(Valence8SkFn), 2nd(holds)])
 explaination_line(incode('PrologMOO_valence2', 10, ['PRED1'=A, 'PRED2'=B, 'NUMBER'=C|D]), via(entails(holds(subrelation, A, B), holds(valence, A, zzskFn('Valence8SkFn', [B, A]))), ['PRED1'=A, 'PRED2'=B, 'NUMBER'=C|D])*surf('PrologMOO', 183)).
 
 /*
-deduceValence_util(KB,Ctx, A, zzskFn('Valence8SkFn', [B, A]), 'STRUCTURAL ONTOLOGY', E, F*E*incode('PrologMOO_valence2', 10, ['PRED1'=A, 'PRED2'=B, 'NUMBER'=C|D])) :- 
+deduceValence_util(Context, A, zzskFn('Valence8SkFn', [B, A]), 'STRUCTURAL ONTOLOGY', E, F*E*incode('PrologMOO_valence2', 10, ['PRED1'=A, 'PRED2'=B, 'NUMBER'=C|D])) :- 
 	forwardchain(true, holds(subrelation, A, B), 'STRUCTURAL ONTOLOGY', E)
 */
 

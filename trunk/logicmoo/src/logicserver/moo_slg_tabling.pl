@@ -3,6 +3,9 @@
    This version handles request answering with integrity constraints.
 */
 
+		  
+:-module(moo_slg_tabling,[]).
+
 :-include('moo_header.pl').
 
 :- style_check(-singleton).
@@ -106,7 +109,7 @@ ensure_slghead(Head,SLGHead):-
 	writeDebug(faking_slg : Head),!.
 */
 
-stableGround(G):-%notrace
+stableGround(G):-%system_dependant:prolog_notrace
 		(stableGroundTrace(G)).
 stableGroundTrace(G):- (ground(G),!) ; (var(G),!,fail).
 stableGroundTrace(v(_,G,_)):-!,nonvar(G).
@@ -133,9 +136,9 @@ isAlwaysProlog(Nlit):-nonvar(Nlit),
 	(predicate_property(Nlit,PP),(PP=built_in;PP=imported_from(_)))),!.
 
 
-surf(KB,TN,CID,[]):-!.
-surf(KB,TN,CID,Vars):-
-	writeq(surf(KB,TN,CID,Vars)),nl.
+surf(Context,TN,CID,[]):-!.
+surf(Context,TN,CID,Vars):-
+	writeq(surf(Context,TN,CID,Vars)),nl.
 	
 
 /* isPrologCurrently(Call) :  Call is a Prolog subgoal */
@@ -193,7 +196,7 @@ prologSLGCall( Call,Body):-
 
 
 
-resetTableFlags:-notrace(resetTableFlags2).
+resetTableFlags:-system_dependant:prolog_notrace(resetTableFlags2).
 		
 resetTableFlags2:-
 	current_flag(X),
@@ -206,10 +209,10 @@ resetTableFlags2:-!.
 
 mslg(Goal):-
 	resetTableFlags,
-	statistics(cputime,S),
+	system_dependant:prolog_statistics(cputime,S),
 	findall(Goal,
 		slg(Goal),L),
-	statistics(cputime,E),
+	system_dependant:prolog_statistics(cputime,E),
 	writeq_conj(L),
 	length(L,N),
 	T is  E - S,
@@ -217,10 +220,10 @@ mslg(Goal):-
 
 xmslg(Goal):-
 	resetTableFlags,
-	statistics(cputime,S),
+	system_dependant:prolog_statistics(cputime,S),
 	findall(Goal,
 		sLGx(Goal),L),
-	statistics(cputime,E),
+	system_dependant:prolog_statistics(cputime,E),
 	writeq_conj(L),
 	length(L,N),
 	T is  E - S,
@@ -232,9 +235,9 @@ call_one([B|L]):-call_one(L).
 
 
 prologCall(true(_),Call,F,Args,[]):-
-	mooCache(Call, true, KB, Ctx,Explaination),stableGroundTraceA(Args),writeq('+').
+	mooCache(Call, true, Context, Ctx,Explaination),stableGroundTraceA(Args),writeq('+').
 prologCall(false(_),Call,F,Args,[]):-
-	mooCache(Call, false, KB, Ctx,Explaination),stableGroundTraceA(Args),writeq('-').
+	mooCache(Call, false, Context, Ctx,Explaination),stableGroundTraceA(Args),writeq('-').
 
 prologCall(true(_),instance(v(H,X,List),v('Asbtract',Class,['Class'|_])),F,Args,[]):-!,
 	nonvar(X),nonvar(List),
@@ -252,7 +255,7 @@ prologCall(_,Call,F,Args,Body):-
 prologCall(true(_),Call,F,Args,Body):-
 	once((format('needs: '),writeArgLit(Call))),
 	copy_term(Call,Copy),
-	mooCache(Copy, Body,/*true(_)*/ _, KB, Ctx,surf(KB,TN,CLID,Vars)),
+	mooCache(Copy, Body,/*true(_)*/ _, Context, Ctx,surf(Context,TN,CLID,Vars)),
 		not(recorded(TN,Call)),
 		(recorda(TN,Call)),
 		Call=Copy,
@@ -262,7 +265,7 @@ prologCall(true(_),Call,F,Args,Body):-
 		%term_to_atom(Vars,Atom),
 				/*
 prologCall(false(_),Call,F,Args,Body):-
-		mooCache(Call, Body,false(_),KB, Ctx,surf(KB,TN,CLID,Vars)),
+		mooCache(Call, Body,false(_),Context, Ctx,surf(Context,TN,CLID,Vars)),
 		call_one(Args),
 		stableGroundTraceA(Args) -> true ;
 		((
@@ -271,12 +274,12 @@ prologCall(false(_),Call,F,Args,Body):-
 		X<3,
 		stableGroundTraceA(Body) 
 		)),
-		format('~q.~n',[true:X:surf(KB,TN,CLID,Vars)]).
+		format('~q.~n',[true:X:surf(Context,TN,CLID,Vars)]).
 				  */
 	
 
 /*
-prologCall(false(_),Call,F,Args,Body):-mooCache(Call, Body,false(_),KB, Ctx,Explaination),
+prologCall(false(_),Call,F,Args,Body):-mooCache(Call, Body,false(_),Context, Ctx,Explaination),
 		stableGroundTraceA(Args),
 		stableGroundTraceA(Body),
 		format('~q.~n',[false:Explaination]).

@@ -88,11 +88,11 @@ test_extend_functions(Term):-
 	format('<pre><B><font color=green>~w</font></B>\n',['Functions']),
 	write_conj_test_function(KRVars,Best),
 	format('<B><font size color=red>Compiled</font></B>\n'),
-	getAssertionClauses(KB,Ctx,Term,Clauses,KRVars,How),!,
+	getAssertionClauses(Context,Term,Clauses,KRVars,How),!,
 	write_conj_test_function(KRVars,Clauses),
 	format('\n\n</pre>').
 				
-write_conj_test_function(KRVars,A):-notrace(write_conj_test_function1(KRVars,A)).
+write_conj_test_function(KRVars,A):-system_dependant:prolog_notrace(write_conj_test_function1(KRVars,A)).
 
 write_conj_test_function1(KRVars,A):-isSlot(A),format('~q\n',A),!.
 write_conj_test_function1(KRVars,and(A,B)):-
@@ -199,7 +199,7 @@ get_do_job(Original,Original):-!.
 
 % Skip getPrologVars and some terms
 get_job_sent(Original,Term,In,Tasks):-
-	notrace((isSlot(Term);
+	system_dependant:prolog_notrace((isSlot(Term);
 	atom(Term);
 	list(Term);
 	number(Term))),!,fail.
@@ -339,9 +339,9 @@ get_job_sent(Original,Holds,In,Tasks):-
 	Holds=..[_|Args],!,
 	get_job_sent(Original,Args,In,Tasks).
 
-has_sub_job(Original,Args):- notrace(not(not(get_job_sent(Original,Args,_)))),!.
-no_sub_job(Original,Arg):-notrace((Arg=..[_|Args],!,no_sub_job(Original,Args))).
-no_sub_job(Original,Args):-notrace((not(get_job_sent(Original,Args,_)))),!.
+has_sub_job(Original,Args):- system_dependant:prolog_notrace(not(not(get_job_sent(Original,Args,_)))),!.
+no_sub_job(Original,Arg):-system_dependant:prolog_notrace((Arg=..[_|Args],!,no_sub_job(Original,Args))).
+no_sub_job(Original,Args):-system_dependant:prolog_notrace((not(get_job_sent(Original,Args,_)))),!.
 
 
 % ===========================================================
