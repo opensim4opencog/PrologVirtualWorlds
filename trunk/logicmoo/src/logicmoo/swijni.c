@@ -4,8 +4,8 @@
  * Now prolog can call java!!!
  *  Project: jpl
  * 
- *  File:    $Id: swijni.c,v 1.2 2002-03-17 09:00:02 dmiles Exp $
- *  Date:    $Date: 2002-03-17 09:00:02 $
+ *  File:    $Id: swijni.c,v 1.3 2002-03-17 09:03:11 dmiles Exp $
+ *  Date:    $Date: 2002-03-17 09:03:11 $
  *  Author:  Fred Dushin <fadushin@syr.edu>
  * 		  
  * 
@@ -399,6 +399,9 @@ static jobject term_to_jobject(term_t temp_term)
 								}
 						}
 					}
+				PL_get_chars(temp_term,&temp_string,CVT_ALL);
+				sprintf(temp_parse,"u%s",temp_string);
+				return chars_to_jstring(temp_parse);
 			}
 
 		default:
