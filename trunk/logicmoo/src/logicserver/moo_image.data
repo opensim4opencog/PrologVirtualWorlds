@@ -40,7 +40,6 @@
 
 :- dynamic mooCache/9.
 
-%end_of_file.
 
 
 mooCache(domain('WealthFn', 1, 'Agent'), domain('WealthFn', 1, 'Agent'), [], [], 'PrologMOO', 'UNITS OF MEASURE', 4024, 'Anonymous', A).
