@@ -2,8 +2,8 @@
  * 
  * Now prolog can call java!!!
  * 
- *  File:    $Id: javart.c,v 1.1 2002-11-16 03:37:16 dmiles Exp $
- *  Date:    $Date: 2002-11-16 03:37:16 $
+ *  File:    $Id: javart.c,v 1.2 2002-11-16 18:49:51 dmiles Exp $
+ *  Date:    $Date: 2002-11-16 18:49:51 $
  *  Author:  Douglas Miles
  *  
  * This library is free software; you can redistribute it and/or
@@ -124,20 +124,17 @@ static void init_prolog(int argc, STRING *argv);
 static jobject term_to_jobject(term_t temp_term);
 
 
-foreign_t destroy_vm() 
-	{
+foreign_t destroy_vm() {
 	result_of_JNI_CreateJavaVM=-1;		/* Means not created */
 	class_pointer_JavaRt = 0;	/* Uninitialized */
-	if (java_vm)
-		{
+	if (java_vm) {
 		JAVA_VM->DestroyJavaVM(java_vm);
 		jni_env = 0;
-		}
-	PL_succeed;
 	}
+	PL_succeed;
+}
 
-foreign_t java_prep_vm()
-	{
+foreign_t java_prep_vm() {
 	/* Allows it to be called more then once */
 	if (class_pointer_JavaRt) PL_succeed;
 
@@ -155,9 +152,6 @@ foreign_t java_prep_vm()
 
 		// options[3].optionString = "-verbose:jni";   	/* print JNI-related messages */
 
-
-		//  fprintf(stderr, "%% %s\n",options[1].optionString);
-
 		vm_args.version = JNI_VERSION_1_2;
 
 		vm_args.options = options;
@@ -171,78 +165,71 @@ foreign_t java_prep_vm()
 													  (void **)&jni_env, 
 													  &vm_args);
 
-		if (result_of_JNI_CreateJavaVM < 0)
-			{
+		if (result_of_JNI_CreateJavaVM < 0) {
 			fprintf(stderr, "Can't create Java VM\n%i\n",result_of_JNI_CreateJavaVM);
 			PL_fail;
-			}
+		}
 
-		class_pointer_JavaRt = javart_FindClass("logicmoo/JavaRt");
+		/*
+		Java Type  Native Type  Description  
+		-----------------------------------
+		boolean  jboolean  unsigned 8 bits  
+		byte  jbyte  signed 8 bits  
+		char  jchar  unsigned 16 bits  
+		short  jshort  signed 16 bits  
+		int  jint  signed 32 bits  
+		long  jlong  signed 64 bits  
+		float  jfloat  32 bits  
+		double  jdouble  64 bits  
+		void  void  N/A  
+		
+		*/
+
+		/*	
+		class_jclass = javart_FindClass("java/lang/Class");
+		
+		class_jboolean = javart_FindClass("java/lang/Boolean");
+		class_jbyte = javart_FindClass("java/lang/Byte");
+		class_jchar = javart_FindClass("java/lang/Char");
+		class_jshort = javart_FindClass("java/lang/Short");
+		class_jint = javart_FindClass("java/lang/Integer");
+		class_jlong = javart_FindClass("java/lang/Long");
+		class_jfloat = javart_FindClass("java/lang/Float");
+		*/
+		class_pointer_JavaRt = javart_FindClass("swijni/JavaRt");
 
 		class_jobject = javart_FindClass("java/lang/Object");
 
 		class_jstring = javart_FindClass("java/lang/String");
 
-		if (!class_pointer_JavaRt || !class_jstring)
-			{
-			fprintf(stderr, "Can't find \"logicmoo.JavaRt\" (Set Your Classpath)\n");
+		if (!class_pointer_JavaRt || !class_jstring) {
+			fprintf(stderr, "Can't find \"swijni.JavaRt\" (Set Your Classpath)\n");
 			PL_fail;
-			}
+		}
 
 		invoke_object_method = JNI_ENV->GetStaticMethodID(jni_env, 
 														  class_pointer_JavaRt, 
 														  "invokeObject",
 														  "(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;");
-		if (!invoke_object_method)
-			{
+		if (!invoke_object_method) {
 			fprintf(stderr, "Cant GetStaticMethodID (invokeObject)\n");
 			PL_fail;
-			}
+		}
 		PL_succeed;
 	}
 
-	}
+}
 
-/*
-Java Type  Native Type  Description  
------------------------------------
-boolean  jboolean  unsigned 8 bits  
-byte  jbyte  signed 8 bits  
-char  jchar  unsigned 16 bits  
-short  jshort  signed 16 bits  
-int  jint  signed 32 bits  
-long  jlong  signed 64 bits  
-float  jfloat  32 bits  
-double  jdouble  64 bits  
-void  void  N/A  
-
-*/
-
-/*	
-class_jclass = javart_FindClass("java/lang/Class");
-
-class_jboolean = javart_FindClass("java/lang/Boolean");
-class_jbyte = javart_FindClass("java/lang/Byte");
-class_jchar = javart_FindClass("java/lang/Char");
-class_jshort = javart_FindClass("java/lang/Short");
-class_jint = javart_FindClass("java/lang/Integer");
-class_jlong = javart_FindClass("java/lang/Long");
-class_jfloat = javart_FindClass("java/lang/Float");
-*/
-
-
-jstring intToHash(term_t temp_term)
-	{
+jstring intToObjRef(term_t temp_term) {
 	char temp_parse[64];
 	int temp_int;
 	PL_get_integer(temp_term,&temp_int);
 	sprintf(temp_parse,"o%i",temp_int);
 	return chars_to_jstring(temp_parse);
-	}
+}
 
 
-static jobjectArray list2MethodArgs(term_t arg_list)
-	{
+static jobjectArray list2MethodArgs(term_t arg_list) {
 
 	int countup=0;
 	char temp_parse[64];
@@ -253,39 +240,30 @@ static jobjectArray list2MethodArgs(term_t arg_list)
 
 	jobjectArray method_args;
 
-//	class_jobject = javart_FindClass("java/lang/Object");
-
 	while ( PL_get_list(prolog_list, temp_term, prolog_list) ) countup++;
-
-
-	fprintf(stderr, "listlen = %i \n", countup);
-
+	
 	method_args=(jobjectArray) JNI_ENV->NewObjectArray(jni_env,
 													   countup,
 													   (jclass) class_jobject,
 													   NULL);  
-
-
 	countup=0;
 
 	prolog_list = PL_copy_term_ref(arg_list);	/* copy as we need to write */
 
-	while ( PL_get_list(prolog_list, temp_term, prolog_list) )
-		{
+	while ( PL_get_list(prolog_list, temp_term, prolog_list) ) {
 		JNI_ENV->SetObjectArrayElement(jni_env,
 									   method_args,
 									   countup,
 									   (jobject) term_to_jobject(temp_term));
 		countup++;
-		}
+	}
 
 	return method_args;
 
-	}
+}
 
 
-static jobject term_to_jobject(term_t temp_term)
-	{
+static jobject term_to_jobject(term_t temp_term) {
 
 	functor_t functor;
 	int arity, len, n;
@@ -294,79 +272,75 @@ static jobject term_to_jobject(term_t temp_term)
 	double temp_float;
 	int temp_int;
 
-	switch ( PL_term_type(temp_term) )
+	switch ( PL_term_type(temp_term) ) {
+	case PL_VARIABLE:
+		sprintf(temp_parse,"_%p",temp_term);
+		return chars_to_jstring(temp_parse);
+	case PL_ATOM:
+		if (PL_get_nil(temp_term)) return(jobject) list2MethodArgs(temp_term);
+
+		PL_get_atom_nchars(temp_term,&len,&temp_string);
+
+		// Special Atoms
+		switch (len) {
+		case 5:
+			if (PL_unify_atom_chars(temp_term,"false"))	return chars_to_jstring("bf");
+		case 0:
+			return chars_to_jstring("s");
+		case 4:
+			if (PL_unify_atom_chars(temp_term,"true")) return chars_to_jstring("bt");
+			if (PL_unify_atom_chars(temp_term,"null")) return chars_to_jstring("n");
+		case 6:
+			if (PL_unify_atom_chars(temp_term,"javart")) return chars_to_jstring("oJavaRt");
+		}
+
+		sprintf(temp_parse,"s%s",temp_string); return chars_to_jstring(temp_parse);
+
+	case PL_STRING:
+		PL_get_chars(temp_term,&temp_string,CVT_ALL);
+		sprintf(temp_parse,"s%s",temp_string);
+		return chars_to_jstring(temp_parse);
+	case PL_INTEGER: 
+		PL_get_integer(temp_term,&temp_int);
+		sprintf(temp_parse,"i%i",temp_int);
+		return chars_to_jstring(temp_parse);
+	case PL_FLOAT: //todo return a jobject float 
+		PL_get_float(temp_term,&temp_float);
+		sprintf(temp_parse,"l%f",temp_float);
+		return chars_to_jstring(temp_parse);
+	case PL_TERM:
+
+		if (PL_is_list(temp_term))	return(jobject) list2MethodArgs(temp_term);
+
 		{
-		case PL_VARIABLE:
-			sprintf(temp_parse,"_%p",temp_term);
-			return chars_to_jstring(temp_parse);
-		case PL_ATOM:
-			if (PL_get_nil(temp_term)) return (jobject) list2MethodArgs(temp_term);
-			
-			PL_get_atom_nchars(temp_term,&len,&temp_string);
-						
-			// Special Atoms
-			switch (len)
-				{
-				case 5:
-					if (PL_unify_atom_chars(temp_term,"false"))	return chars_to_jstring("bf");
-				case 0:
-					return chars_to_jstring("s");
-				case 4:
-					if (PL_unify_atom_chars(temp_term,"true")) return chars_to_jstring("bt");
-					if (PL_unify_atom_chars(temp_term,"$$$$")) return chars_to_jstring("oJavaRt");
-					if (PL_unify_atom_chars(temp_term,"null")) return chars_to_jstring("n");
-				}
+			atom_t name = PL_new_term_ref();
 
-			sprintf(temp_parse,"s%s",temp_string); return chars_to_jstring(temp_parse);
+			PL_get_name_arity(temp_term, &name, &arity);
 
-		case PL_STRING:
-			PL_get_chars(temp_term,&temp_string,CVT_ALL);
-			sprintf(temp_parse,"s%s",temp_string);
-			return chars_to_jstring(temp_parse);
-		case PL_INTEGER: 
-			PL_get_integer(temp_term,&temp_int);
-			sprintf(temp_parse,"i%i",temp_int);
-			return chars_to_jstring(temp_parse);
-		case PL_FLOAT: //todo return a jobject float 
-			PL_get_float(temp_term,&temp_float);
-			sprintf(temp_parse,"l%f",temp_float);
-			return chars_to_jstring(temp_parse);
-		case PL_TERM:
-
-			if (PL_is_list(temp_term))	return(jobject) list2MethodArgs(temp_term);
-
-			{
-				atom_t name = PL_new_term_ref();
-
-				PL_get_name_arity(temp_term, &name, &arity);
-
-				if (name == JAVA_OBJECT || name == JAVA_INSTANCE)
-					{
-					term_t arg1 = PL_new_term_ref();
-					PL_get_arg(1, temp_term, arg1);
-					return(jstring) intToHash(arg1);
-					}
-				if (name == JAVA_PARSE)
-					{
-					term_t arg1 = PL_new_term_ref();
-					PL_get_arg(1, temp_term, arg1);
-					PL_get_atom_nchars(arg1,&len,&temp_string);
-					sprintf(temp_parse,"%s",temp_string);
-					return chars_to_jstring(temp_parse);
-					}
-				PL_get_chars(temp_term,&temp_string,CVT_ALL);
-				sprintf(temp_parse,"t%s",temp_string);
+			if (name == JAVA_OBJECT || name == JAVA_INSTANCE) {
+				term_t arg1 = PL_new_term_ref();
+				PL_get_arg(1, temp_term, arg1);
+				return(jstring) intToObjRef(arg1);
+			}
+			if (name == JAVA_PARSE) {
+				term_t arg1 = PL_new_term_ref();
+				PL_get_arg(1, temp_term, arg1);
+				PL_get_atom_nchars(arg1,&len,&temp_string);
+				sprintf(temp_parse,"%s",temp_string);
 				return chars_to_jstring(temp_parse);
 			}
+			PL_get_chars(temp_term,&temp_string,CVT_ALL);
+			sprintf(temp_parse,"t%s",temp_string);
+			return chars_to_jstring(temp_parse);
 		}
+	}
 	PL_get_chars(temp_term,&temp_string,CVT_ALL);
 	sprintf(temp_parse,"u%s",temp_string);
 	return chars_to_jstring(temp_parse);
 
-	}
+}
 
-foreign_t pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg_list,term_t result_term) 
-	{
+foreign_t pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg_list,term_t result_term) {
 	jstring result_string_object;
 	jobjectArray method_args;
 	foreign_t prolog_result;
@@ -380,37 +354,33 @@ foreign_t pl_java_invoke_object(term_t object_term,term_t method_term,term_t arg
 														   term_to_jobject(object_term),
 														   term_to_jobject(method_term),
 														   list2MethodArgs(arg_list));
-	
+
 	if (!result_string_object)
-			method_result_chars = "null";
-			else 
-			method_result_chars=jstring_to_chars(result_string_object);
-			 9v-0 
-				{
-				fprintf(stderr, "ERROR: Could not get string from result (%d)\n",result_string_object);
-				PL_fail;
-				} 
+		method_result_chars = "null";
+	else
+		method_result_chars=jstring_to_chars(result_string_object);
 
-	printf("method_result_chars=%s\n ",method_result_chars);
-
-	if (PL_chars_to_term(method_result_chars,temp_term))
-		{
+	if (PL_chars_to_term(method_result_chars,temp_term)) {
 		prolog_result =(foreign_t)PL_unify(result_term,temp_term); 
-		} else
-		{
-			prolog_result =(foreign_t)PL_unify_string_chars(result_term,method_result_chars); 
-		}
+	} else {
+		prolog_result =(foreign_t)PL_unify_string_chars(result_term,method_result_chars); 
+	}
 
 	//  JNI_ENV->DeleteLocalRef(jni_env,method_args);
 	//	JNI_ENV->ReleaseStringUTFChars(jni_env, result_string_object, method_result_chars);
 
 	return prolog_result;
 
-	}
+}
 
+int main(int argc, char**argv) {
+ PL_initialise(argc,argv);
+ PL_install_readline();
+ install();
+ PL_toplevel();
+}
 
-install_t install()
-	{
+install_t install() {
 	PL_register_foreign("java_create_vm", 0, java_prep_vm, 0);
 	PL_register_foreign("java_destroy_vm", 0, destroy_vm, 0);
 	PL_register_foreign("java_invoke_object_protected", 4, pl_java_invoke_object, 0);
@@ -423,59 +393,5 @@ install_t install()
 	PL_register_atom(JAVA_INSTANCE);
 	PL_register_atom(JAVA_PARSE);
 
-	}
-
-/*
-
-			
-static int call_chars(const char *goal)
-	{
-	fid_t fid = PL_open_foreign_frame();
-	term_t g = PL_new_term_ref();
-	int rval=0;
-
-	if ( PL_chars_to_term(goal, g) )
-		rval = PL_call(g, NULL);
-	else
-		rval = FALSE;
-
-	PL_discard_foreign_frame(fid);
-	return rval;
-	}
-			
-static void 
-init_prolog(argc, argv) 
-int argc;
-STRING *argv;
-{
-	STRING av[10];
-	int ac = 0;
-
-	av[ac++] = argv[0];
-	
-	  //  av[ac++] = "-x";
-	//	av[ac++] = "mystate";
-	
-	av[ac]   = NULL;
-
-	if (!PL_initialise(ac, av))
-		PL_halt(1);
-
-	install();
-	PL_install_readline(); 
 }
-
-
-// Main is used when invoking from commandline
-int 
-main(argc, argv) 
-int argc;
-STRING *argv;
-{
-	init_prolog(argc,argv);
-	PL_toplevel();
-	return 0;
-}
-											  */
-
 

@@ -1,7 +1,5 @@
 
-% This is only used by SWI as a drop-in for CIAO-Prolog bidirrectional interface for Java
-
-:-module(javart,[
+:-module(swijni,[
 	 java_start/0,
 	 java_start/1,
 	 java_start_local/0,
@@ -79,11 +77,11 @@ java_create_object(Class,Object):-
 	notrace(java_invoke_object_at_thread('$$$$',createObject,[Class],Object)).
 
 java_destroy_object(Object):-
-	notrace(java_invoke_object_at_thread('$$$$',forgetObject,[Object],_True)).
+	notrace(java_invoke_object_at_thread('java_object'(0),forgetObject,[Object],_True)).
 
-java_object('$$$$').
+java_object(0).
 java_object(X):-var(X),!,
-	 java_invoke_object_at_thread('$$$$','#g',[allObjects],All),!,
+	 java_invoke_object_at_thread('java_object'(0),'#g',[allObjects],All),!,
 	 All=..[_,List],
 	 member(X,List).
 
@@ -130,4 +128,4 @@ java_call_to_thread(Client,JavaThread,Goal):-
 
 
 
-   
+  
