@@ -1,6 +1,0 @@
-:-dynamic(test/1).
- :-multifile(test/1).
-
-test(1).
-test(orignal).
-test(3).
