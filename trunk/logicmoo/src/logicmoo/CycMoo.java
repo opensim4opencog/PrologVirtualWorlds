@@ -21,6 +21,7 @@ import org.opencyc.webserver.WebServer;
 import org.opencyc.util.*;
 import org.opencyc.api.*;
 import org.opencyc.cycobject.*;
+import ViolinStrings.*;
 
 import javax.servlet.jsp.*;
 
@@ -108,7 +109,7 @@ public class CycMoo extends LogicMoo {
 	    System.err.println(e);
 	}
 	try {
-	    constructMtFromFile("JamudWorldAccessMt.kif",cycMooAccess.jamudMt);
+	    constructMtFromFile("JamudMt.kif",cycMooAccess.jamudMt);
 	} catch ( Exception e ) {
 	    System.err.println(e);
 	}
@@ -191,12 +192,6 @@ public class CycMoo extends LogicMoo {
 	}
     }
 
-    public static String getHttpValue(PageContext  pageContext, String variable, String def) {
-	String pp = pageContext.getRequest().getParameter(variable);	      
-	if ( pp!=null )	pageContext.getSession().setAttribute(variable,pp);
-	pp = (String)pageContext.getSession().getAttribute(variable);
-	if ( pp!=null ) return pp; else return def;
-    }
 
 }
 
