@@ -14,5 +14,11 @@ public class w
     PrintWriter p = new PrintWriter(f);
     // still, can do only limited things to f... but p has println()
     // and will forward that to f in terms of f.write()
+
+    // write to the PrintWriter (which forwards to the FileWriter)
+    p.println("dmiles, myarray and zealot were here!");
+
+    // close the stream
+    p.close();
   } // end of main (String[] args)
 }
