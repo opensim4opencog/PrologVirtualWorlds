@@ -4,8 +4,8 @@
  * Now prolog can call java!!!
  *  Project: jpl
  * 
- *  File:    $Id: swijni.c,v 1.5 2002-03-17 10:12:27 dmiles Exp $
- *  Date:    $Date: 2002-03-17 10:12:27 $
+ *  File:    $Id: swijni.c,v 1.6 2002-03-17 10:52:43 dmiles Exp $
+ *  Date:    $Date: 2002-03-17 10:52:43 $
  *  Author:  Fred Dushin <fadushin@syr.edu>
  * 		  
  * 
@@ -363,9 +363,9 @@ static jobject term_to_jobject(term_t temp_term)
 			if (PL_is_list(temp_term))	return(jobject) list2MethodArgs(temp_term);
 
 			{
-				atom_t name = PL_new_term_ref();
+				STRING temp_string_n;
 				int arity;
-				STRING temp_term_n;
+				atom_t name = PL_new_term_ref();
 
 				PL_get_name_arity(temp_term, &name, &arity);
 
