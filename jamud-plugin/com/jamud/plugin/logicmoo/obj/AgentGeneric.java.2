@@ -1,0 +1,364 @@
+package  logicmoo.obj;
+
+
+import java.util.*;
+import logicmoo.*; 
+import logicmoo.cmd.*;
+import logicmoo.obj.event.*;
+import logicmoo.script.*;
+import logicmoo.util.*;
+import net.n3.nanoxml.*; import org.opencyc.cycobject.*; import logicmoo.*;
+
+
+public class AgentGeneric extends Reifiable implements Flagged, GuidTracable, JamudEventTrigger {
+
+    public static final String MARKUP = "AGENT";
+
+    private static final String
+    PROPERTY_STATLIST = "STATLIST",
+    PROPERTY_SKILLS = "SKILLS",
+    PROPERTY_JOB = "JOB",
+    PROPERTY_ORGANIZATION = "ORGANIZATION",
+    PROPERTY_GENDER = "GENDER",
+    PROPERTY_SCRIPT = "SCRIPT",
+    PROPERTY_WORN = "WORN",
+    PROPERTY_WEAR_LOCATION = "WEAR";
+
+    public static final String
+    STAT_INT = "INT",
+    STAT_WIS = "WIS",
+    STAT_DEX = "DEX",
+    STAT_STR = "STR",
+    STAT_CON = "CON",
+    STAT_LEVEL = "LEVEL",
+    STAT_HP_MAX = "HPMAX",
+    STAT_MANA_MAX = "MAMAX",
+    STAT_MOVE_MAX = "MVMAX",
+    STAT_HP = "HP",
+    STAT_MANA ="MA",
+    STAT_MOVE = "MV",
+    STAT_ARMOR_BASH = "A_BASH",
+    STAT_ARMOR_PIERCE = "A_PIERCE",
+    STAT_ARMOR_SLASH = "A_SLASH",
+    STAT_ARMOR_MAGIC = "A_MAGIC",
+    STAT_SAVES = "SAVES",
+    STAT_EXP = "EXP",
+    STAT_EXP_TNL = "EXPTNL",
+    STAT_ALIGNMENT = "ALIGN",
+    STAT_WIMPY = "WIMPY",
+    STAT_GOLD = "GOLD",
+    STAT_POSITION = "POSITION",
+    STAT_VISIBLE = "VISIBLE";
+
+    public static final String
+    FLAG_ETHOS_CHAOTIC = "CHAOTIC",
+    FLAG_ETHOS_LAWFUL = "LAWFUL",
+    FLAG_ETHOS_NEUTRAL = "NEUTRAL";
+
+    public static final int
+    POSITION_STANDING = 0,
+    POSITION_SITTING = 1,
+    POSITION_SLEEPING = 2;
+
+    public static final int
+    VIS_HIDDEN = 1,
+    VIS_INVIS = 2,
+    VIS_WIZINVIS = 4;
+
+    private GeographicalRegion room;
+    public GeographicalRegion getGeographicalRegion() { 
+	if ( this.room==null ) {
+	    this.room = Jamud.currentInstance().getMicrotheoryManager().getGeographicalRegion(null,getSlotValueFort(cycFort,"mudObjectLocated"));
+	}
+	return this.room;}
+    public void setGeographicalRegion(GeographicalRegion room) { 
+	CycFort cycroom = room.getCycFort();
+	CycMoo.assertSlotValue(CycMoo.jamudMt,cycFort,"mudObjectLocatedInArea",cycroom,true);
+	this.room = room;
+    }
+
+    private Engineer cyclist;
+    public Engineer getEngineer() { return cyclist;}
+    public void setEngineer(Engineer cyclist) { this.cyclist = cyclist;}
+
+    private Vector scripts = new Vector();
+    public Vector getScripts() { return scripts;}
+
+    private Group artifacts = new Group();
+    public Group getArtifacts() { return artifacts;}
+
+    private Hashtable worn = new Hashtable();
+    public Hashtable getWorn() { return worn;}
+    public Artifact getWornOn(CycFort location) { return(Artifact) worn.get(location);}
+    public Artifact getWornOn(String location) { return(Artifact) worn.get(Reifiable.makeCycFort(location));}
+
+    public void setWornOn(String location, Artifact i) {
+	setWornOn(Reifiable.makeCycFort(location),i);
+    }
+    
+    public void setWornOn(CycFort location, Artifact i) {
+	if ( i == null ) {
+	    worn.remove(location);
+	} else {
+	    CycFort item = i.getCycFort();
+	    worn.put(location, i);
+	}
+    }
+
+    public AgentGeneric() {
+	//empty
+    }
+
+
+    public void quit() {
+	getGeographicalRegion().exit(this, this.getName() + " slowly fades from view.");
+    }
+
+    public Artifact getArtifact(String name) {
+	return artifacts.getArtifact(name);
+    }
+    public Artifact getArtifact(CycFort name) {
+	return artifacts.getArtifact(name);
+    }
+
+
+    public Artifact fetchArtifact(CycFort name) {
+	return artifacts.fetchArtifact(name);
+    }
+    public Artifact fetchArtifact(String name) {
+	return artifacts.fetchArtifact(name);
+    }
+
+
+    public void print(CycFort text) {
+	if ( cyclist != null )
+	    cyclist.print(text.toString());
+	else
+	    triggerOnText(text.toString());
+    }
+
+    public void print(String text) {
+	if ( cyclist != null )
+	    cyclist.print(text);
+	else
+	    triggerOnText(text);
+    }
+
+
+    public void print(byte[] text) {
+	if ( cyclist != null )
+	    cyclist.print(text);
+	else
+	    triggerOnText(new String(text));
+    }
+
+
+    public void println(CycFort text) {
+	if ( cyclist != null )
+	    cyclist.println(text.toString());
+	else
+	    triggerOnText(text.toString() + "\n");
+    }
+
+    public void println(String text) {
+	if ( cyclist != null )
+	    cyclist.println(text);
+	else
+	    triggerOnText(text + "\n");
+    }
+
+
+    public void triggerOnText(String text) {
+	Object[] o = { text};
+	Jamud.getEventManager().triggerListeners(new AgentGenericEvent(this, AgentGenericEvent.EVENT_TEXT, o));
+    }
+
+
+    public void triggerOnArrive(GeographicalRegion where) {
+	Object[] o = { where};
+	Jamud.getEventManager().triggerListeners(new AgentGenericEvent(this, AgentGenericEvent.EVENT_ARRIVE, o));
+    }
+
+
+    public void triggerOnDepart(GeographicalRegion where) {
+	Object[] o = { where};
+	Jamud.getEventManager().triggerListeners(new AgentGenericEvent(this, AgentGenericEvent.EVENT_DEPART, o));
+    }
+
+
+    public void triggerOnEnter(AgentGeneric who) {
+	Object[] o = { who};
+	Jamud.getEventManager().triggerListeners(new AgentGenericEvent(this, AgentGenericEvent.EVENT_ENTER, o));
+    }
+
+
+    public void triggerOnExit(AgentGeneric who) {
+	Object[] o = { who};
+	Jamud.getEventManager().triggerListeners(new AgentGenericEvent(this, AgentGenericEvent.EVENT_EXIT, o));
+    }
+
+
+    public void triggerOnTick() {
+	Jamud.getEventManager().triggerListeners(new AgentGenericEvent(this, JamudEvent.EVENT_TICK, new Object[0]));
+    }
+
+
+    public boolean enact(String command) {
+	return enact(command, false);
+    }
+
+    public boolean enact(String command, boolean fromFight) {
+	if ( command == null ) command = "";
+
+	String[] sp = Util.split(command, " ");
+	return AgentGenericInterpreter.execute(this, sp[0], sp[1], fromFight);
+    }
+
+
+    public boolean enact(String command, String args) {
+	return enact(command, args, false);
+    }
+
+
+    public boolean enact(String command, String args, boolean fromFight) {
+	if ( command == null ) command = "";
+	if ( args == null ) args = "";
+	return AgentGenericInterpreter.execute(this, command, args, fromFight);
+    }
+
+    public void tick() {
+
+	//trigger our event
+	triggerOnTick();
+
+	//trigger our artifacts' events
+	for ( Enumeration enum = artifacts.elements(); enum.hasMoreElements(); )
+	    ((Artifact)enum.nextElement()).tick();
+
+    }
+
+
+    public AgentGeneric getSemiClone() {
+
+	AgentGeneric n = new AgentGeneric();
+
+	//Reifiable
+	n.setName(getName());
+	n.setComment(getComment());
+	n.setPrettyName(getPrettyName());
+	n.setKeywords(new FlagList(getKeywords()));
+
+	//Flagged
+	n.flags = (new FlagList(flags));
+
+	//GuidTracable
+	n.cycFort = cycFort;
+
+	n.microtheory = microtheory;
+
+	//Scripts
+	for ( Enumeration enum = scripts.elements(); enum.hasMoreElements(); )
+	    n.scripts.add( ((EventScript)enum.nextElement()).getSemiClone(n) );
+
+	return n;
+    }
+
+
+    public static AgentGeneric loadAgentGeneric(XMLElement xml) throws Exception {
+	if ( ! xml.getName().equals(MARKUP) )
+	    throw new Exception("non-" + MARKUP + " element in AgentGeneric.loadAgentGeneric");
+
+	AgentGeneric b = new AgentGeneric();
+
+	b.cycFort = CycMoo.makeCycFort(xml.getAttribute(GuidTracable.PROPERTY_VNUM));
+	b.setName(xml.getAttribute(SomethingExisting.PROPERTY_NAME));
+
+	for ( Enumeration enum = xml.enumerateChildren(); enum.hasMoreElements(); ) {
+	    XMLElement nxt = (XMLElement) enum.nextElement();
+	    String nom = nxt.getName();
+
+	    if ( nom.equals(Reifiable.PROPERTY_KEYWORDS) )
+		b.setKeywords(new FlagList(nxt.getContent()));
+
+	    else if ( nom.equals(Reifiable.PROPERTY_COMMENT) ) {
+		b.setPrettyName(nxt.getAttribute(Reifiable.PROPERTY_PRETTYNAME));
+		b.setComment(Util.format(nxt.getContent(), 70, true));
+	    }
+
+	    else if ( nom.equals(PROPERTY_SCRIPT) ) {
+		EventScript es = EventScript.loadEventScript(b, nxt);
+		if ( es != null )
+		    b.scripts.add(es);
+	    }
+
+	    else if ( nom.equals(Group.MARKUP) )
+		b.artifacts = Group.loadOrganization(nxt);
+
+	    else if ( nom.equals(PROPERTY_WORN) ) {
+		for ( Enumeration renum = nxt.enumerateChildren(); renum.hasMoreElements(); ) {
+		    XMLElement x = (XMLElement) renum.nextElement();
+
+		    if ( ! x.getName().equals(PROPERTY_WEAR_LOCATION) )
+			throw new Exception("non-" + PROPERTY_WEAR_LOCATION + " element loading worn inventory");
+
+		    String n = x.getAttribute(PROPERTY_NAME, null);
+		    if ( n != null )
+			for ( Enumeration xnum = x.enumerateChildren(); xnum.hasMoreElements(); )
+			    b.worn.put(n, Artifact.loadArtifact((XMLElement) xnum.nextElement()));
+		}
+	    }
+
+	}
+
+	return b;
+    }
+
+
+    public XMLElement toXMLElement() {
+
+	//body
+	XMLElement xml = new XMLElement();
+	xml.setName(MARKUP);
+	xml.setAttribute(GuidTracable.PROPERTY_VNUM, cycFort.toString());
+	xml.setAttribute(SomethingExisting.PROPERTY_NAME, getName());
+
+	XMLElement nxt;
+
+	//body.keywords
+	nxt = new XMLElement();
+	nxt.setName(Reifiable.PROPERTY_KEYWORDS);
+	nxt.setContent(getKeywords().toString());
+	xml.addChild(nxt);
+
+	//body.desc
+	nxt = new XMLElement();
+	nxt.setName(Reifiable.PROPERTY_COMMENT);
+	nxt.setAttribute(Reifiable.PROPERTY_PRETTYNAME, getPrettyName());
+	nxt.setContent(getComment());
+	xml.addChild(nxt);
+
+	//body.worn
+	nxt = new XMLElement();
+	nxt.setName(PROPERTY_WORN);
+	for ( Enumeration enum = worn.keys(); enum.hasMoreElements(); ) {
+	    String k = (String) enum.nextElement();
+	    Artifact i = (Artifact) worn.get(k);
+	    if ( i != null ) {
+		XMLElement x = new XMLElement();
+		x.setName(PROPERTY_WEAR_LOCATION);
+		x.setAttribute(PROPERTY_NAME, k);
+		x.addChild(i.toXMLElement());
+		nxt.addChild(x);
+	    }
+	}
+	xml.addChild(nxt);
+
+	nxt = null;
+
+	//body.artifacts
+	xml.addChild(artifacts.toXMLElement());
+
+	return xml;
+    }
+
+}
