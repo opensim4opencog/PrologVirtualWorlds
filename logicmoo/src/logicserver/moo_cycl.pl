@@ -866,8 +866,8 @@ end_of_file.
 %   ( as-kernel succeed 0 )  
 'as-kernel'(succeed, 0).
 
-%   ( as-kernel trace 0 )  
-'as-kernel'(trace, 0).
+%   ( as-kernel true 0 )  
+'as-kernel'(true, 0).
 
 %   ( as-kernel atom 1 )  
 'as-kernel'(atom, 1).
@@ -1957,8 +1957,8 @@ subclass('Argument-List', 'Unmonitored-List').
 %   (relation-located read-sock-chars 4 kernel  (SetFn ?h642  ?h644  ?h646  ?h648) read-sock-chars  always )  
 'relation-located'('read-sock-chars', 4, kernel, 'SetFn'(_G17368, _G17374, _G17380, _G17386), 'read-sock-chars', always).
 
-%   (relation-located system_dependant:prolog_notrace 0 kernel  (EmptySetFn) system_dependant:prolog_notrace  always )  
-'relation-located'(system_dependant:prolog_notrace, 0, kernel, 'EmptySetFn', system_dependant:prolog_notrace, always).
+%   (relation-located  0 kernel  (EmptySetFn)   always )  
+'relation-located'(, 0, kernel, 'EmptySetFn', , always).
 
 %   (relation-located compile 1 kernel  (SetFn ?h639) compile  always )  
 'relation-located'(compile, 1, kernel, 'SetFn'(_G15703), compile, always).

@@ -31,7 +31,7 @@
       prologAtInitalization/1,
       prolog_thread_create/3,
       prolog_current_thread/2,
-      prolog_thread_at_exit/1,
+      prolog_thread_exit/1,
       prolog_thread_self/1,
       prolog_thread_at_exit/2,
       prolog_thread_join/2,
@@ -116,7 +116,7 @@ writeOverwritten:-isConsoleOverwritten,!.
 writeOverwritten:-assert(isConsoleOverwritten).
 
 writeSTDERR(F):-writeSTDERR('~q',[F]).
-writeSTDERR(F,A):-system_dependant:prolog_notrace((
+writeSTDERR(F,A):-((
         format(user_error,F,A),
         nl(user_error),
         flush_output(user_error))).

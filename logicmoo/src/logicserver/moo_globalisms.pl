@@ -110,7 +110,7 @@ setMooOption(N):-atomic(N),!,setMooOption_thread(N,true).
 	
 setMooOption(Name,Value):-setMooOption_thread(Name,Value).
 setMooOption_thread(Name,Value):-
-	system_dependant:prolog_notrace((getThread(Process),
+	((getThread(Process),
 	retractall('$MooOption'(Process,Name,_)),
 	asserta('$MooOption'(Process,Name,Value)),!)).
 
@@ -119,7 +119,7 @@ unsetMooOption(Name=Value):-nonvar(Name),
 	unsetMooOption_thread(Name,Value).
 unsetMooOption(Name):-nonvar(Name),
 	unsetMooOption_thread(Name,_).
-unsetMooOption(Name):-system_dependant:prolog_notrace(retractall('$MooOption'(_Process,Name,_Value))).
+unsetMooOption(Name):-(retractall('$MooOption'(_Process,Name,_Value))).
 
 
 unsetMooOption_thread(Name):-
@@ -143,7 +143,7 @@ isMooOption(Name):-!,isMooOption(Name,true).
 isMooOption(Name,Value):-getMooOption_thread(Name,Value).
 
 getMooOption_thread(Name,Value):-
-	system_dependant:prolog_notrace((getThread(Process),
+	((getThread(Process),
 	'$MooOption'(Process,Name,Value))),!.
 
 

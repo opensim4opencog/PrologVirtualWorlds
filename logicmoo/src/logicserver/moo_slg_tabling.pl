@@ -109,7 +109,7 @@ ensure_slghead(Head,SLGHead):-
 	writeDebug(faking_slg : Head),!.
 */
 
-stableGround(G):-%system_dependant:prolog_notrace
+stableGround(G):-%
 		(stableGroundTrace(G)).
 stableGroundTrace(G):- (ground(G),!) ; (var(G),!,fail).
 stableGroundTrace(v(_,G,_)):-!,nonvar(G).
@@ -165,7 +165,7 @@ prologCall(Call):-
 %xprologCall(Call):-dynamic(Call),catch(Call,E,xhandle(E,Call)).
 xprologCall(Call):-prologCall(Call).
 
-xhandle(E,Call):-format('xhandle: ~n~q.~nxhandle:',[E:Call]),trace,fail.
+xhandle(E,Call):-format('xhandle: ~n~q.~nxhandle:',[E:Call]),true,fail.
 
 xprologSLGCall(Call,Body):-
 	prologSLGCall(Call,Body).
@@ -196,7 +196,7 @@ prologSLGCall( Call,Body):-
 
 
 
-resetTableFlags:-system_dependant:prolog_notrace(resetTableFlags2).
+resetTableFlags:-(resetTableFlags2).
 		
 resetTableFlags2:-
 	current_flag(X),
@@ -241,7 +241,7 @@ prologCall(false(_),Call,F,Args,[]):-
 
 prologCall(true(_),instance(v(H,X,List),v('Asbtract',Class,['Class'|_])),F,Args,[]):-!,
 	nonvar(X),nonvar(List),
-		trace,close_list(List),!,
+		true,close_list(List),!,
 		member(Class,List).
 
 %prologCall(_,Call,F,Args,Body):-member(F,[domain]),!.
@@ -323,9 +323,9 @@ remove_v_argW(HO,HO).
 	
 
 /* SLG tracing : 
-   xtrace :  turns SLG trace on, which prints out tables at various 
+   xtrace :  turns SLG true on, which prints out tables at various 
            points
-   xnotrace :  turns off SLG trace
+   xnotrace :  turns off SLG true
 */
 xtrace :-( wfs_trace -> true ; assertLogged(wfs_trace)).
 xnotrace :- retractallLogged(wfs_trace).
@@ -871,7 +871,7 @@ wfs_all(Call,Anss,Tab0,Tab,N0,N,Delay) :-
 
 % :- assertLogged('slg$tabled'(_,_)).
 
-oldt(Call,Ggoal,Tab0,Tab,S0,S,Dfn0,Dfn,Dep0,Dep,TP0,TP) :-%trace,
+oldt(Call,Ggoal,Tab0,Tab,S0,S,Dfn0,Dfn,Dep0,Dep,TP0,TP) :-%true,
     ( number(Call) ->
       TP0 = (_  :  Tcl),
       find(Tcl,Call,Clause),
@@ -883,7 +883,7 @@ oldt(Call,Ggoal,Tab0,Tab,S0,S,Dfn0,Dfn,Dep0,Dep,TP0,TP) :-%trace,
     comp_tab_ent(Ggoal,Tab1,Tab,S1,S,Dfn1,Dfn,Dep1,Dep,TP1,TP).
 
 map_oldt([],_Ggoal,Tab,Tab,S,S,Dfn,Dfn,Dep,Dep,TP,TP).
-map_oldt([Clause|Frames],Ggoal,Tab0,Tab,S0,S,Dfn0,Dfn,Dep0,Dep,TP0,TP) :-%trace,
+map_oldt([Clause|Frames],Ggoal,Tab0,Tab,S0,S,Dfn0,Dfn,Dep0,Dep,TP0,TP) :-%true,
   edge_oldt(Clause,Ggoal,Tab0,Tab1,S0,S1,Dfn0,Dfn1,Dep0,Dep1,TP0,TP1),
   map_oldt(Frames,Ggoal,Tab1,Tab,S1,S,Dfn1,Dfn,Dep1,Dep,TP1,TP).
 
@@ -2498,9 +2498,9 @@ sLGx_builtx_xin(xxnotrace).
 /* ----------------- enxd of sLGx_loaxd routxines --------------------------- */
 
 /* SLG tracxing:
-   xxtrace: turns SLG trace on, which prxints out tables at xvarious 
+   xxtrace: turns SLG true on, which prxints out tables at xvarious 
            poxints
-   xxnotrace: turns off SLG trace
+   xxnotrace: turns off SLG true
 */
 xxtrace :- 
     ( wfsx_trace -> 
@@ -4448,7 +4448,7 @@ load_stream(InStream, [], end_of_file).
 load_stream(InStream, Program, ':-'(_)):-
 	load_stream(InStream, Program).
 	
-load_stream(InStream, Program, Line):-%trace,
+load_stream(InStream, Program, Line):-%true,
 		parse(Line, Head, Body),
 		cons_rule(Head, Body, Rule),
 		Program = [Rule|Rest_Program],

@@ -3,7 +3,7 @@
 % Maintainers: Douglas Miles
 % Contact: dmiles@users.sourceforge.net ;
 % Version: 'moo_markup.pl' 1.0.0
-% Revised At:  $Date: 2002-03-12 21:34:08 $
+% Revised At:  $Date: 2002-03-14 12:46:24 $
 
 % ===================================================================
 % Major functions:
@@ -51,9 +51,9 @@ toMarkUp(chat,Var,VS,Chars):-!,catch(toMarkUp(kif,Var,VS,Chars),_,true),!.
 toMarkUp(java,Var,VS,Chars):-!,catch(toMarkUp(html,Var,VS,Chars),_,true),!.
 
 toMarkUp(L,T,V,Chars):-!,
-        ignore(catch(/*system_dependant:prolog_notrace*/((
+        ignore(catch(/**/((
         copy_term((T,V),(CT,CV)),
-        numbervars((CT,CV),'$VAR',0,_),%trace,
+        numbervars((CT,CV),'$VAR',0,_),%true,
         toMarkUp_lang(L,CT,CV,Chars))),_,true)),!.
 
 % VARIABLES
@@ -391,7 +391,7 @@ getMarkupFormula(L,bullet(X),Vars,Atom):-!,
         getMarkupFormula(L,X,Vars,Orig),
         getMarkupFormula(L,bullet('Kernel','GlobalContext',9100000,LN,Orig),Vars,Atom).
 
-getMarkupFormula(html,bullet(Context,TN,LN,Orig),Vars,Atom):-!,%trace,
+getMarkupFormula(html,bullet(Context,TN,LN,Orig),Vars,Atom):-!,%true,
         flag(indent,_,0),
         (catch((TN < 100000),_,fail) ->
                 sformat(Atom,'~w <A href="stheory.jsp?req=SA&stheory=~w&id=~w" title="~w ~w ~w" ><img border=0 src="bullet.gif"/></A> ~w',[LN,Context,TN,TN,Context,Orig]);

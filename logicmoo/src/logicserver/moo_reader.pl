@@ -32,7 +32,7 @@ readKIF_priv(Stream,[])  :-at_end_of_stream(Stream).
 readKIF_priv(Stream,CHARS)  :-  
 		kifReadStatePopParens,!,
 		unset_g(reading_in_comment),
-		unset_g(reading_in_string),!, %trace,
+		unset_g(reading_in_string),!, %true,
 		call_with_depth_limit(readKIFChars_p0_priv(Stream,CHARS),40000,_),!.
 
 readKIFChars_p0_priv(Stream,[]):-at_end_of_stream(Stream),!.

@@ -31,7 +31,7 @@
       prologAtInitalization/1,
       prolog_thread_create/3,
       prolog_current_thread/2,
-      prolog_thread_at_exit/1,
+      prolog_thread_exit/1,
       prolog_thread_self/1,
       prolog_thread_at_exit/2,
       prolog_thread_join/2,
@@ -87,7 +87,7 @@ prolog_notrace(G):-notrace(G).
 % ========================================================================================
 prolog_thread_create(Goal,Id,Options):-thread_create(Goal,Id,Options).
 prolog_current_thread(Id,Status):-current_thread(Id,Status).
-prolog_thread_at_exit(Goal):-thread_at_exit(Goal).
+prolog_thread_exit(Goal):-thread_exit(Goal).
 prolog_thread_self(Id):-thread_self(Id).
 prolog_thread_at_exit(Id,Goal):-thread_at_exit(Id,Goal).
 prolog_thread_join(Id,X):-thread_join(Id,X).
@@ -116,7 +116,7 @@ writeOverwritten:-isConsoleOverwritten,!.
 writeOverwritten:-assert(isConsoleOverwritten).
 
 writeSTDERR(F):-writeSTDERR('~q',[F]).
-writeSTDERR(F,A):-system_dependant:prolog_notrace((
+writeSTDERR(F,A):-((
         format(user_error,F,A),
         nl(user_error),
         flush_output(user_error))).
@@ -186,9 +186,6 @@ sigma_ua(X):-processRequest(X).
 % -------------------------------------------------------------------
 % Load the Moo header
 % -------------------------------------------------------------------
-:- current_prolog_flag(arch,'i386-win32') ->
-      user:include('moo_swiprolog_win32.pl') ; 
-      user:include('moo_swiprolog_unix.pl').
 
 :-include('moo_header.pl').
 

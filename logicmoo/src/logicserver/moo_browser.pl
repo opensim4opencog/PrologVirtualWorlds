@@ -214,7 +214,7 @@ on_to_check(_,_,' ').
 % Disables
 invokeBrowserRequest(Options):-     
 		memberchk(submit='Change',Options),
-		memberchk(ue='Disable',Options),  %trace,
+		memberchk(ue='Disable',Options),  %true,
 		findall(N,(member(N=on,Options),number(N)),List),
 		do_each_disable(List).
 
@@ -230,7 +230,7 @@ invokeBrowserRequest(Options):-
 % Enables
 invokeBrowserRequest(Options):-   
 		memberchk(submit='Change',Options),
-		memberchk(ue='Enable',Options),   %trace,
+		memberchk(ue='Enable',Options),   %true,
 		findall(N,(member(N=on,Options),number(N)),List),
 		do_each_enable(List).
 

@@ -89,12 +89,14 @@
 % getRequestClauses/3
 % ======================================================================
 
+/*
 ttsurf:-tsurf((=>(instance(A, 'Transaction'), 
 	exists(B, exists(C, exists(D, exists(E, exists(F, exists(G, 
 		and(instance(E, 'Giving'), and(instance(D, 'Giving'), and(subProcess(E, A), and(subProcess(D, A), and(agent(E, G), and(agent(D, F), and(patient(E, C), 
 			and(patient(D, B), and(destination(E, F), and(destination(D, G), 
 				and(not(equal(G, F)), not(equal(C, B))))))))))))))))))))),
 		  ['TRANS'=A, 'AGENT1'=G, 'AGENT2'=F, 'GIVE1'=E, 'GIVE2'=D, 'OBJ1'=C, 'OBJ2'=B]).
+*/
 
 % ======================================================================
 % IMPORTS
@@ -106,11 +108,6 @@ ttsurf:-tsurf((=>(instance(A, 'Transaction'),
 % getAssertionClauses(-Context,-Ctx,-Prop,+NConjAssertsClauses,+KRVars,-AllFlagsO)
 % ======================================================================
 
-/*
-getAssertionClauses(Context,Surface,surface,[/*Vars*/],[/*Flags*/]):-
-	once(getConstants(atomic,Surface,Cs,_,_)),
-	intersection(Cs,[<=>,exists,and,or,'',equal,entails,forall,=>,not,possible,known],[]),!.
-*/
 getAssertionClauses(Context,Prop,NConjAssertsClauses,KRVars,AllFlags):- 
 	logOnFailure(canonicalizeProposition(Context,Prop,CNF,DNF,ConjAssertsClauses,KRVars,AllFlags)),
 	debugOnFailure(putFeaturesInFormula(assertion,KRVars,ConjAssertsClauses,AllFlags,NConjAssertsClauses)),!.
@@ -120,9 +117,12 @@ getAssertionClauses(Context,Prop,NConjAssertsClauses,KRVars,AllFlags):-
 % getRequestClauses(-Context,-Ctx,-Prop,+NConjAssertsClauses,+KRVars,-AllFlagsO)
 % ======================================================================
 
-getRequestClauses(Context,Surface,surface,[/*Vars*/],[/*Flags*/]):-
+/*
+getRequestClauses(Context,Surface,surface,[],[] ):-
 	once(getConstants(atomic,Surface,Cs,_,_)),
-	intersection(Cs,[<=>,exists,and,or,equal,entails,forall,=>,<=,not,possible,known],[]),!.
+	intersection(Cs,[(<=>),(exists),(and),(or),(equal),(entails),(forall),(=>),(not),(possible),(known)],([])),
+	!.
+*/
 
 getRequestClauses(Context,Prop,NConjAssertsClauses,KRVars,AllFlags):- 
 	canonicalizeProposition(Context,Prop,CNF,DNF,ConjAssertsClauses,KRVars,AllFlags),
@@ -135,7 +135,7 @@ getRequestClauses(Context,Prop,NConjAssertsClauses,KRVars,AllFlags):-
 canonicalizeProposition(Context,Prop,CNF,DNF,ConjAssertsClauses,KRVars,AllFlags):- 
 	close_list(KRVars),!,                  
 	%writeObject(Prop,KRVars),
-	numbervars(Prop:KRVars:Context:Ctx),
+	numbervars((Prop,KRVars,Context,Ctx)),
 	logOnFailure(getModeledPredicates(Prop,FmlInOpen)),!,
 	%writeObject('<hr>getModeledPredicates: \n',KRVars),
 	%writeObject(FmlInOpen,KRVars),
@@ -330,7 +330,7 @@ putDomainsTogether(V,Flags,[domainV(V,FUnivListO)|Flags]):-
 	findall(Univ,(member(dom(VV,Univ),Flags),V==VV),UnivList),
 	flatten(UnivList,FUnivListU),
 	sort(FUnivListU,FUnivList),
-	subtract(FUnivList,[instance:1,request:_,equal:_],FUnivListO),!.
+	subtract(FUnivList,[':'(instance,1),':'(request,_),':'(equal,_)],FUnivListO),!.
 
 %%% Negation Normal Form
 % -----------------------------------------------------------------
@@ -341,15 +341,16 @@ putDomainsTogether(V,Flags,[domainV(V,FUnivListO)|Flags]):-
 % Paths:      Number of disjunctive paths in Fml.
 
 % Variable as Formula collect its caller
-getNegationForm(Caller,ArgN,Context,KRVars,[dom(Var,[Caller:ArgN]) ],Var,UFreeV,Var,1):- isSlot(Var),!.
+getNegationForm(Caller,ArgN,Context,KRVars,[dom(Var,[':'(Caller,ArgN)]) ],Var,UFreeV,Var,1):- isSlot(Var),!.
 
 % Special case for Instance
-getNegationForm(Caller,ArgN,Context,KRVars,[dom(A,['$instanceof':Class])],instance(A,Class),UFreeV,instance(A,Class),1):-
+getNegationForm(Caller,ArgN,Context,KRVars,[dom(A,[':'('$instanceof',Class)])],
+   instance(A,Class),UFreeV,instance(A,Class),1):-
 	isSlot(A),atom(Class),!.
 
 /*
 % Special case for Instance
-getNegationForm(Caller,ArgN,Context,KRVars,[dom(A,['$instanceof':Class])/*post(A,instance(A,Class))*/|PreQ],or(not(instance(A,Class)),Fml),UFreeV,Out,N):-
+getNegationForm(Caller,ArgN,Context,KRVars,[dom(A,['$instanceof':Class])|PreQ],or(not(instance(A,Class)),Fml),UFreeV,Out,N):-
 	not(Fml = exists(_,_)),
 	isSlot(A),atom(Class),!,
 	getNegationForm(Caller,ArgN,Context,KRVars,PreQ,Fml,UFreeV,Out,N),!.
@@ -357,7 +358,7 @@ getNegationForm(Caller,ArgN,Context,KRVars,[dom(A,['$instanceof':Class])/*post(A
 
 
 % Atom as Formula (do nothing)     				    
-getNegationForm(Caller,ArgN,Context,KRVars,[],Term,UFreeV,Term,1):-not(compound(Term)),!.
+getNegationForm(Caller,ArgN,Context,KRVars,[],Term,UFreeV,Term,1):- \+ (compound(Term)),!.
 
 % Special case for string
 getNegationForm(Caller,ArgN,Context,KRVars,[],string(A),UFreeV,string(A),1):-!.
@@ -723,7 +724,7 @@ optimizeGraph(Graph,Optimal):-
 	
 mergeAnteceedants(Optimal,[],Optimal).
 mergeAnteceedants([],Optimal,[]).
-mergeAnteceedants(Pre,[[Cons]-Ante|More],Optimal):- %trace,
+mergeAnteceedants(Pre,[[Cons]-Ante|More],Optimal):- %true,
 	once((member(ConsqS-Before,Pre),
 	copy_term_member(Cons,ConsqS,Original))),
 	not(Before=Ante),
@@ -783,7 +784,7 @@ replace_in_clause(T1,[],[T1],[],[]):-!.
 replace_in_clause(T1,[T2|Clause],PutFront,NewClause,Generalized):-
 	not(functor(T1,common,_)),
 	not(functor(T2,common,_)),
-	once(system_dependant:prolog_notrace(compareVariant(T1,T2,GT,Cost1,Cost2))),
+	once((compareVariant(T1,T2,GT,Cost1,Cost2))),
 		compare(Dif,Cost1,Cost2),
 		apply_mgu(Dif,Cost1,Cost2,T1,T2,GT,PutFront,Clause,NewClause,Generalized),!.
 
@@ -1585,7 +1586,7 @@ sent_and(Clause1, Clause2, [Clause1,Clause2]).
 % ============================================
 
 % Free Formulas are never 
-isTheorem(T,V):-system_dependant:prolog_notrace(isTheoremTrue(T,V)).
+isTheorem(T,V):-(isTheoremTrue(T,V)).
 isTheoremTrue(V,FreeV):-isSlot(V),!,fail.
 isTheoremTrue(V,FreeV):-isReducedToTrue(V),!.
 
@@ -1709,7 +1710,7 @@ km_check(or(_,true),FreeV):-!.
 km_check(or(true,_),FreeV):-!.
 
 % 'Kalish & Montague, Theorem 17'
-km_check(=>(P,=>(not(PP),_)),FreeV):-trace,deduceLogicallyEquiv(P,PP),!.
+km_check(=>(P,=>(not(PP),_)),FreeV):-true,deduceLogicallyEquiv(P,PP),!.
 
 % ==========================================
 % Not possible

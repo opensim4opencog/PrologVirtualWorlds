@@ -24,25 +24,25 @@
 isNonVar(Denotation):-not(isSlot(Denotation)).
 
 % Is var means to Moo this is a Slot
-isSlot(Denotation):-system_dependant:prolog_notrace((isVarProlog(Denotation);isVarObject(Denotation))),!.
+isSlot(Denotation):-((isVarProlog(Denotation);isVarObject(Denotation))),!.
 
 isSlot(Denotation,Denotation):- isVarProlog(Denotation),!.
 isSlot(Denotation,PrologVar):- isVarObject(Denotation,PrologVar),!.
 
 isHiddenSlot(Term):-fail.
 
-isVarProlog(A):-system_dependant:prolog_notrace((var(A);A='$VAR'(_))).
+isVarProlog(A):-((var(A);A='$VAR'(_))).
 
-isVarObject(Denotation):-system_dependant:prolog_notrace((
+isVarObject(Denotation):-((
 		  isObject(Denotation,BaseType),
 		  arg(1,Denotation,Value),!,isSlot(Value))).
 
-isVarObject(Denotation,Value):-system_dependant:prolog_notrace((
+isVarObject(Denotation,Value):-((
 		  isObject(Denotation,BaseType),
 		  arg(1,Denotation,Value),!,isSlot(Value))).
 	
 isObject(Denotation,BaseType):-
-	system_dependant:prolog_notrace(((atom(BaseType) ->
+	(((atom(BaseType) ->
 		  (atom_concat('$',BaseType,F),functor(Denotation,F,2));
 		  (functor(Denotation,F,2),atom_concat('$',BaseType,F))
 		 ),!)).
@@ -123,7 +123,7 @@ isEntityFunction(Term,FnT,ArgsT):-Term=..[FnT|ArgsT],hlPredicateAttribute(FnT,'F
 % ===================================================================
 
 getPrologVars(Term, Vars, Singletons, Multiples) :-
-    system_dependant:prolog_notrace((getPrologVars(Term, VarList, []),
+    ((getPrologVars(Term, VarList, []),
     close_list(VarList),
     keysort(VarList, KeyList),
     split_key_list(KeyList, Vars, Singletons, Multiples))).
@@ -151,7 +151,7 @@ getPrologVars(I, N, Term, V0, V) :-
 % ===================================================================
 
 getAllPrologVars(Term, Vars, Singletons, Multiples) :-
-    system_dependant:prolog_notrace((getAllPrologVars(Term, VarList, []),
+    ((getAllPrologVars(Term, VarList, []),
     close_list(VarList),
     keysort(VarList, KeyList),
     split_key_list(KeyList, Vars, Singletons, Multiples))).
@@ -174,7 +174,7 @@ getAllPrologVars(I, N, Term, V0, V) :-
 % ===================================================================
 
 getSlots(Term, Vars, Singletons, Multiples) :-
-    system_dependant:prolog_notrace((getSlots(Term, VarList, []),
+    ((getSlots(Term, VarList, []),
     close_list(VarList),
     keysort(VarList, KeyList),
     split_key_list(KeyList, Vars, Singletons, Multiples))).
@@ -205,7 +205,7 @@ getSlots(I, N, Term, V0, V) :-
 % ===================================================================
 
 getConstants(Types,Term, Vars, Singletons, Multiples) :-
-    system_dependant:prolog_notrace((getConstants(Types,Term, VarList, []),
+    ((getConstants(Types,Term, VarList, []),
     close_list(VarList),
     keysort(VarList, KeyList),
     split_key_list(KeyList, Vars, Singletons, Multiples))).
@@ -677,7 +677,7 @@ consult_as_dynamic(FilenameLocal):-
 
 % Usage: subst(+Fml,+X,+Sk,?FmlSk)
 
-subst(A,B,C,D):-system_dependant:prolog_notrace(nd_subst(A,B,C,D)),!.
+subst(A,B,C,D):-(nd_subst(A,B,C,D)),!.
 
 nd_subst(  Var, VarS,SUB,SUB ) :- Var==VarS,!.
 nd_subst(        P, X,Sk,        P1 ) :- functor(P,_,N),nd_subst1( X, Sk, P, N, P1 ).
@@ -756,7 +756,7 @@ crossref_vars(Fml,Frozen,FmlVars = FrozenVars):-
 % Usage: repl(+Fml,+X,+Sk,?FmlSk)
 
 replc(Fml,X,Sk,FmlSk):-
-	system_dependant:prolog_notrace(repl(Fml,X,Sk,FmlSk)),!.
+	(repl(Fml,X,Sk,FmlSk)),!.
 /*
 	copy_term(Fml,FmlX),
 	numbervars(FmlX),
@@ -1130,7 +1130,7 @@ mreplc([H|Body],F,R,[NH|NBody]):-!,
 	mreplc(H,F,R,NH),!,
 	mreplc(Body,F,R,NBody),!.
 mreplc(A,F,R,Rs):-!,
-	A=..[H|Body],%  trace,
+	A=..[H|Body],%  true,
 	mreplc(H,F,R,NH),
 	mreplc(Body,F,R,NBody),
 	Rs=..[NH|NBody].
@@ -1183,7 +1183,7 @@ conjunctsToList((Ante),[(Ante)]).
 
 
 prologEach([],Item,_):-!.
-prologEach([Item|Rest],Test,Goal):-system_dependant:prolog_notrace((
+prologEach([Item|Rest],Test,Goal):-((
 	not(not((Item=Test,Goal))),!,
 	prologEach(Rest,Test,Goal),!)).
 

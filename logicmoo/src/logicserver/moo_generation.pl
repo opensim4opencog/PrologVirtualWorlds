@@ -64,8 +64,8 @@
 % ==========================================================
 writeDebug(T):-!.  writeDebug(C,T):-!.
  
-%writeDebug(T):-system_dependant:prolog_notrace(isMooOption(opt_debug=off)),!.
-%writeDebug(C,T):-system_dependant:prolog_notrace(isMooOption(opt_debug=off)),!.
+%writeDebug(T):-(isMooOption(opt_debug=off)),!.
+%writeDebug(C,T):-(isMooOption(opt_debug=off)),!.
 
 logOnFailureIgnore(X):-ignore(logOnFailure(X)),!.
 
@@ -73,7 +73,7 @@ writeModePush(_Push):-!.
 writeModePop(_Pop):-!.
 
 writeDebug(T):-!,
-	system_dependant:prolog_notrace((
+	((
 	if_prolog(swi,
 		(prolog_current_frame(Frame),
 		prolog_frame_attribute(Frame,level,Depth),!,
@@ -87,7 +87,7 @@ indent_e(X):-XX is X -1,!,write(' '), indent_e(XX).
 
 
 writeDebug(C,T):-!,
-	system_dependant:prolog_notrace((
+	((
 	writeFmt('<font size=+1 color=~w>',[C]),
 	writeDebug(T),
         writeFmt('</font>',[]))),!.
@@ -202,22 +202,22 @@ writeDebugFast(X):-writeq(X),nl.
 logOnFailure(assert(X,Y)):- catch(assert(X,Y),_,Y=0),!.
 logOnFailure(assert(X)):- catch(assert(X),_,true),!.
 logOnFailure(assert(X)):- catch(assert(X),_,true),!.
-%logOnFailure(X):-catch(X,E,trace),!.
-logOnFailure(X):-catch(X,E,(writeFailureLog(E,X),!,catch((trace,X),_,fail))),!.
+%logOnFailure(X):-catch(X,E,true),!.
+logOnFailure(X):-catch(X,E,(writeFailureLog(E,X),!,catch((true,X),_,fail))),!.
 logOnFailure(X):- writeFailureLog('Predicate Failed',X),!.
 
 
 writeFailureLog(E,X):-
 		writeFmt(user_error,'\n% error:  ~q ~q\n',[E,X]),flush_output(user_error),!,
-		%,trace.
+		%,true.
 		writeFmt('\n;; error:  ~q ~q\n',[E,X]),!,flush_output. %,say([E,X]).
 		
 debugOnFailure(assert(X,Y)):- catch(assert(X,Y),_,Y=0),!.
 debugOnFailure(assert(X)):- catch(assert(X),_,true),!.
 debugOnFailure(assert(X)):- catch(assert(X),_,true),!.
-%logOnFailure(X):-catch(X,E,trace),!.
+%logOnFailure(X):-catch(X,E,true),!.
 debugOnFailure(X):-catch(X,E,(writeFailureLog(E,X),fail)),!.
-debugOnFailure(X):-trace,X.
+debugOnFailure(X):-true,X.
 
 debugOnFailure(arg_domains,CALL):-!,logOnFailure(CALL),!.
 debugOnFailure(Module,CALL):-debugOnFailure(CALL),!.

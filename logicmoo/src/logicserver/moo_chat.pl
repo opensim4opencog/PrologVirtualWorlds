@@ -39,7 +39,7 @@ agentConsult_want(Context_atom,[ConsultationPred|RequestArgs]):-
                      write_direct_l(['</Want>',nl]).
                              
 agentConsult_args(_Context_atom,_Consultation,_Num,[]):-!.                                          
-agentConsult_args(Context_atom,ConsultationPred,_Num,[Head|Tail]):-!,   %trace,
+agentConsult_args(Context_atom,ConsultationPred,_Num,[Head|Tail]):-!,   %true,
                      once(agentConsult_one_arg(ConsultationPred,Context_atom,_Num,Head)),
                      Next_Num is _Num +1,
                      agentConsult_args(Context_atom,ConsultationPred,Next_Num,Tail).

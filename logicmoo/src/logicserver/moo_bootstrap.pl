@@ -1,43 +1,47 @@
 
 % utility modules
-moduleFile(prolog([system]),'moo_utility.pl').
-moduleFile(prolog([system]),'moo_fileutils.pl').
-moduleFile(prolog([system]),'moo_uwdgraphs.pl').
-moduleFile(prolog([system]),'moo_slg_tabling.pl').
-moduleFile(prolog([system]),'moo_reader.pl').
-moduleFile(prolog([system]),'moo_database.pl').
-moduleFile(prolog([system]),'moo_threads.pl').
-moduleFile(prolog([system]),'moo_globalisms.pl').
-moduleFile(prolog([system]),'moo_java.pl').
+
+:-ensure_loaded('moo_utility.pl').
+:-ensure_loaded('moo_fileutils.pl').
+:-ensure_loaded('moo_uwdgraphs.pl').
+:-ensure_loaded('moo_slg_tabling.pl').
+:-ensure_loaded('moo_reader.pl').
+:-ensure_loaded('moo_database.pl').
+:-ensure_loaded('moo_threads.pl').
+:-ensure_loaded('moo_globalisms.pl').
+:-ensure_loaded('moo_java.pl').
+
 
 % server modules
-moduleFile(prolog([system]),'moo_httpd.pl').
-moduleFile(prolog([system]),'moo_soap.pl').
-moduleFile(prolog([system]),'moo_browser.pl').
-moduleFile(prolog([system]),'moo_markup.pl').
-moduleFile(prolog([system]),'moo_generation.pl').
-moduleFile(prolog([system]),'moo_cmdline.pl').
-moduleFile(prolog([system]),'moo_api.pl').
+:-ensure_loaded('moo_httpd.pl').
+:-ensure_loaded('moo_soap.pl').
+:-ensure_loaded('moo_browser.pl').
+:-ensure_loaded('moo_markup.pl').
+:-ensure_loaded('moo_generation.pl').
+:-ensure_loaded('moo_cmdline.pl').
+:-ensure_loaded('moo_api.pl').
 
 % inference type modules
-moduleFile(prolog([system,inference]),'moo_transitiveclosure.pl').
-moduleFile(prolog([system,inference]),'moo_oprove.pl').
-moduleFile(prolog([system,inference]),'moo_icl.pl').
-moduleFile(prolog([system,inference]),'moo_tap.pl').
-moduleFile(prolog([system,inference]),'moo_simple.pl').
-moduleFile(prolog([system,inference]),'moo_pttp_xray.pl').
-moduleFile(prolog([system,inference]),'moo_belief.pl').
+:-ensure_loaded('moo_transitiveclosure.pl').
+:-ensure_loaded('moo_oprove.pl').
+:-ensure_loaded('moo_icl.pl').
+:-ensure_loaded('moo_tap.pl').
+:-ensure_loaded('moo_simple.pl').
+:-ensure_loaded('moo_pttp_xray.pl').
+:-ensure_loaded('moo_belief.pl').
 
 % other
-moduleFile(prolog([system]),'moo_sentence.pl').
-moduleFile(prolog([system]),'moo_cycl.pl').
-moduleFile(prolog([system]),'moo_nfs.pl').
-moduleFile(prolog([system]),'moo_english.pl').
-moduleFile(prolog([system]),'moo_chat.pl').
-moduleFile(prolog([system]),'moo_compiler.pl').
-moduleFile(prolog([system]),'moo_functionals.pl').
-moduleFile(prolog([system]),'moo_insert.pl').
-moduleFile(prolog([system]),'moo_testing.pl').
+:-ensure_loaded('moo_sentence.pl').
+:-ensure_loaded('moo_cycl.pl').
+:-ensure_loaded('moo_nfs.pl').
+:-ensure_loaded('moo_english.pl').
+:-ensure_loaded('moo_chat.pl').
+:-ensure_loaded('moo_compiler.pl').
+:-ensure_loaded('moo_functionals.pl').
+:-ensure_loaded('moo_insert.pl').
+:-ensure_loaded('moo_testing.pl').
+
+:-ensure_loaded('moo_image.data').
 
 moduleFile(image('PrologMOO'),'moo_image.data').
 

@@ -40,6 +40,9 @@
 
 :- dynamic mooCache/9.
 
+end_of_file.
+
+
 mooCache(domain('WealthFn', 1, 'Agent'), domain('WealthFn', 1, 'Agent'), [], [], 'PrologMOO', 'UNITS OF MEASURE', 4024, 'Anonymous', A).
 mooCache(documentation('WealthFn', string('"A UnaryFunction that maps an Agent to a CurrencyMeasure specifying the value of the property owned by the Agent.  Note that this Function is generally used in conjunction with the Function PropertyFn, e.g. (WealthFn (PropertyFn BillGates)) would return the monetary value of the sum of Bill Gates\' holdings."')), documentation('WealthFn', string('"A UnaryFunction that maps an Agent to a CurrencyMeasure specifying the value of the property owned by the Agent.  Note that this Function is generally used in conjunction with the Function PropertyFn, e.g. (WealthFn (PropertyFn BillGates)) would return the monetary value of the sum of Bill Gates\' holdings."')), [], [], 'PrologMOO', 'UNITS OF MEASURE', 4028, 'Anonymous', A).
 mooCache('include-context'('STRUCTURAL', 'ONTOLOGY'), 'include-context'('STRUCTURAL', 'ONTOLOGY'), [], [], 'PrologMOO', 'TEMPORAL CONCEPTS', 4042, 'Web', A).

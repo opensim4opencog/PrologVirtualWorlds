@@ -201,13 +201,13 @@ tam(Surface,entails(OAnte,OConsq),Flags,Vars,Context,TN,Maintainer,Result):-!,
 	flag(clause_id,CLID,CLID+1),
 	logOnFailure(once(putAttributeStructures(Surface,Rule,Context,Flags,entails(OAnte,OConsq),entails(Ante,Consq)))),!,
 		convertListNotNeg([Consq],[NConsq]),
-		conjunctsToList(Ante,List),%trace,
+		conjunctsToList(Ante,List),%true,
 		reorderAnteceedants([NConsq|List],List,All),!,
 		convertListNotNeg(All,AnteListS),!,
 		unnumbervars(
 				(NConsq,AnteListS,Vars,Context,surf(Context,TN,CLID,Vars)),
 				(UNConsq,UAnteListS,UVars,UContext,UCtx,UExplaination)),
-		numbervars((UNConsq,UAnteListS,UVars,UContext,UCtx,UExplaination),'$VAR',0,_),% trace,
+		numbervars((UNConsq,UAnteListS,UVars,UContext,UCtx,UExplaination),'$VAR',0,_),% true,
 	length(AnteListS,Cost),
 		format('~q.~n',['2'(UNConsq,UAnteListS,Cost,UVars,UContext,UCtx,UExplaination)]),!.
 		
@@ -275,44 +275,44 @@ assertzClean(X):-unnumbervars(X,Y),!, assert(Y).
 
 assertAll([]):-!.
 assertAll(end_of_file).
-assertAll([H|T]):-!,system_dependant:prolog_notrace((assertAll(H),assertAll(T))),!.
+assertAll([H|T]):-!,((assertAll(H),assertAll(T))),!.
 assertAll((H,T)):-!,notace((assertAll(H),assertAll(T))),!.	
 assertAll(':-'(T)):-!,call(T).
 assertAll(InContext):-isClaused(InContext),!.
 assertAll(T):-catch(asserta(T),E,format('~n% prolog warning ~w ~n',[E])),!. 
 
 isClaused(InContext):-
-	system_dependant:prolog_notrace(not(not((numbervars(InContext,'$VAR',0,_),!,isClausedG(InContext))))),!.
+	(not(not((numbervars(InContext,'$VAR',0,_),!,isClausedG(InContext))))),!.
 	
-isClausedG(mooCache(C,A,ExplainationID:KRVars:KR,Context,TN)):-
-	clause(mooCache(C,A,_:_:_,Context,_,_),true,OldID),
+isClausedG(mooCache(C,A,_,Context,TN)):-
+	clause(mooCache(C,_,_,_),true,OldID),
 	clause(mooCache(OC,OA,_,_,_,_),true,OldID),
 	numbervars(OC:OA,'$VAR',0,_),
 	C:A==OC:OA,!,ifInteractive(write(',')),!.
 
-isClausedG(mooCache(C,ExplainationID:KRVars:KR,Context,TN)):-
-	clause(mooCache(C,_:_:_,Context,_,_),true,OldID),
-	clause(mooCache(OC,_,_,_,_),true,OldID),
+isClausedG(mooCache(C,_,Context,TN)):-
+	clause(mooCache(C,_,Context,_),true,OldID),
+	clause(mooCache(OC,_,_,_),true,OldID),
 	numbervars(OC,'$VAR',0,_),
 	C==OC,!,ifInteractive(write(',')),!.
 
-isClausedG(mooCache(_:_,C,Context,_,_)):-
-	clause(mooCache(_:_,C,Context,_,_),true,OldID),
-	clause(mooCache(_:_,OC,Context,_,_),true,OldID),
+isClausedG(mooCache(_,C,Context,_,_)):-
+	clause(mooCache(_,C,Context,_,_),true,OldID),
+	clause(mooCache(_,OC,Context,_,_),true,OldID),
 	numbervars(OC,'$VAR',0,_),
 	C==OC,!,ifInteractive(write(',')),!.
 
-isClausedG(InContext:-B):-isClausedG(InContext,B),!.
+isClausedG((InContext:-B)):-isClausedG(InContext,B),!.
 isClausedG(InContext):-isClausedG(InContext,true),!.
 
 isClausedG(C,A):-
 	clause(C,A,OldID),
 	clause(OC,OA,OldID),
-	numbervars(OC:OA,'$VAR',0,_),
+	numbervars(OC+OA,'$VAR',0,_),
 	C:A==OC:OA,!.
 	
 		
-countAssertions(C:-A,N):-countAssertions(C,A,N).
+countAssertions((C:-A),N):-countAssertions(C,A,N).
 countAssertions(C,N):-countAssertions(C,true,N).	
 
 countAssertions(C,A,N):-
@@ -672,7 +672,7 @@ is_semantic_duplication(Consq,ProtoConsq,AnteProto,AnteListS,Vars,Context,Explai
 bp_retract(Retraction_Chars,Context,TN,L,User):-
       (((idGen(TN),TrackingAtom=(TN)) ; TrackingAtom=TN)),!,
       setMooOption(OptionList),
-      write_response_begin,!, %%trace,
+      write_response_begin,!, %%true,
       tell_retract_parse_chars(Retraction_Chars,Formula,Vars),
       %%ignore(once(retract(Retraction_Chars,_Ctx,TrackingAtom,Context,User))),
       retract_odbc(Formula,Ctx,TrackingAtom,Context,Vars,User),

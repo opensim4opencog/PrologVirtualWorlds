@@ -96,14 +96,14 @@ serviceHttpRequest(In,Out):-
 
 readHTTP(In,Request):-
         read_line_with_nl(In, Codes, []),
-        append("GET /",Stuff,Codes), %trace,
+        append("GET /",Stuff,Codes), %true,
         append(RequestCodes,[72,84,84,80|_],Stuff),
         atom_codes(RequestEncoded,RequestCodes),
         decodeRequest(RequestEncoded,Request).
 
 readHTTP(In,Request):-
         read_line_with_nl(In, Codes, []),
-        append("POST /",Stuff,Codes), %trace,
+        append("POST /",Stuff,Codes), %true,
         append(RequestCodes,[72,84,84,80|_],Stuff),
         atom_codes(RequestEncoded,RequestCodes),
         decodeRequest(RequestEncoded,Request).
