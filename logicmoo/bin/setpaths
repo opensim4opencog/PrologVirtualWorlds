@@ -1,0 +1,43 @@
+#!/bin/bash
+
+
+#My installation assume Here
+export LOGICMOOBASE=/opt/sourceforge/logicmoo
+
+# JDK Specifics
+export J2EE=/opt/j2ee
+export JAVA_HOME=/opt/jdk
+
+	       
+
+#export SWI_HOME=$CONTEXTWEBINF/swi/lib/current
+
+
+export JARLIB=$LOGICMOOBASE/lib
+
+#export CLASSPATH=$J2EE/lib/j2ee.jar:$JAVA_HOME/lib/tools.jar 
+	#JDK/JREE
+export CLASSPATH=$CLASSPATH:$JARLIB/:cos.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/ecs-1.4.1.jar
+#export CLASSPATH=$CLASSPATH:$JARLIB/jakarta-oro-2.0.4.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/jdom.jar
+#export CLASSPATH=$CLASSPATH:$JARLIB/jakarta-regexp-1.2.jar
+#export CLASSPATH=$CLASSPATH:$JARLIB/jakarta-regexp-1.2.jar
+#export CLASSPATH=$CLASSPATH:$JARLIB/protege.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/jaxp.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/rdf-api-2001-01-19.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/plc.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/cpj.jar
+#export CLASSPATH=$CLASSPATH:$JARLIB/jamud-core.jar
+#export CLASSPATH=$CLASSPATH:$JARLIB/nanoxml.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/jpl.jar
+export CLASSPATH=$CLASSPATH:$JARLIB/crawler.jar
+#export CLASSPATH=$CLASSPATH:$JARLIB/jamud-plugins.jar
+
+export CLASSPATH=$CLASSPATH:$CONTEXTWEBINF/classes:
+
+#export PLSO=$SWI_HOME/runtime/i686-linux-gnu
+#export PL_HOME=$SWI_HOME
+
+#export LD_LIBRARY_PATH=$JAVA_HOME/jre/lib/i386/:.:$PLSO:$JARLIB:$LD_LIBRARY_PATH
+
