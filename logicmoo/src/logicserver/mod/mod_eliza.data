@@ -1,6 +1,31 @@
 
 :- dynamic isa_mem_c/1.
 
+isa_mem_c([hey, if, squishybo, paid, i, will, i, have, sex, with, squishybo]).
+isa_mem_c([i, gona, play, '2v23v34v4', or, are, spacsea, gona, go, without, i]).
+isa_mem_c([spacsea, is, keeping, your, win, over, i, as, long, as, possible]).
+isa_mem_c([escoe, will, make, it, quick, and, painless]).
+isa_mem_c([jeffer, is, going, to, sleep]).
+isa_mem_c([i, am, a, dorf]).
+isa_mem_c([escoe, is, gonna, go, see, if, beardo, is, online, i, plays, wc3]).
+isa_mem_c([then, youd, be, like, spacsea, karl, malowned, i]).
+isa_mem_c([humans, are, orc, food]).
+isa_mem_c([what, lv, was, my, pally]).
+isa_mem_c([your, teamate, was, gay]).
+isa_mem_c([while, the, guy, is, saying, raa]).
+isa_mem_c([guess, what, the, first, thing, i, said, after, spacsea, said, i, was, kablowned]).
+isa_mem_c([spacsea, guess, the, rape, was, good]).
+isa_mem_c([peanutman, is, smokeing]).
+isa_mem_c([what, the, fuck, was, my, problem]).
+isa_mem_c([your, pillow, is, calling, muglack, latah]).
+isa_mem_c([oh, and, servers, are, patching]).
+isa_mem_c([i, am, on, nt, muglack, know, im, here]).
+isa_mem_c([who, there, is, down, with, opp]).
+isa_mem_c([la, wouldnt, be, something, without, mexicans, brown, pride, something, soemthing, the, sex, again, something, something]).
+isa_mem_c([to, live, in, die, in, la, its, the, place, to, be, got, to, be, their, to, know, it]).
+isa_mem_c([escoe, is, going, to, cali, yea]).
+isa_mem_c([ok, bags, are, packed, youre, tekking, the, next, train, to, cali]).
+isa_mem_c([ok, anyway, the, emulator, is, retarded]).
 isa_mem_c([martha, said, it, was, a, good, thing]).
 
 :- dynamic isa_mem_c/3.

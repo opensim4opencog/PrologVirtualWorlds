@@ -15,7 +15,7 @@ opt_deductions_max=100 The system will try to come up with 100 non unique answer
 % =========================================================
 % Run A Single TQ
 % =========================================================
-parse_moo_ua_tq(Options):-
+invokeTestSystem(Options):-
 	retractall(last_tq(_)),assert(last_tq('TES')),	
 	memberchk(cmd='runtest',Options),!,make,
 	setMooOption(opt_ctx_assert='GlobalContext'),
@@ -30,7 +30,7 @@ parse_moo_ua_tq(Options):-
 % ===========================================================
 % Run TQ Entire Directory "Sub" using "KB" and "Ctx" then Send the Output to Stream "Dest"
 % ===========================================================
-parse_moo_ua_tq(Options):-memberchk(submit='Run TQs',Options),!,make,
+invokeTestSystem(Options):-memberchk(submit='Run TQs',Options),!,make,
 	setMooOption(opt_ctx_assert='GlobalContext'),
 	setMooOption(opt_kb='PrologMOO'),
 	getMooOption(asid=_,AID),
@@ -38,13 +38,13 @@ parse_moo_ua_tq(Options):-memberchk(submit='Run TQs',Options),!,make,
 	getMooOption(interp='kif',Interp),
 	getMooOption(tqDir='soundness',TQDIR),
 	mooProcessCreate(ProcessName,run_tq_thread(TQDIR),Id,[]),!,
-	parse_moo_ua_tq([client='tqsystem']).
+	invokeTestSystem([client='tqsystem']).
 
 % ===========================================================
 % Show a TEST DIRECTORY
 % ===========================================================
 
-parse_moo_ua_tq(Options):-memberchk(cmd='tqpage',Options),!,make,
+invokeTestSystem(Options):-memberchk(cmd='tqpage',Options),!,make,
 	setMooOption(opt_ctx_assert='GlobalContext'),
 	setMooOption(opt_kb='PrologMOO'),
 	getMooOption(asid=_,AID),
@@ -63,7 +63,7 @@ parse_moo_ua_tq(Options):-memberchk(cmd='tqpage',Options),!,make,
 % Show main TQ Front page (fallback)
 % ====================================================
 
-parse_moo_ua_tq(Options):-
+invokeTestSystem(Options):-
 	setMooOption(opt_ctx_assert='GlobalContext'),
 	setMooOption(opt_kb='PrologMOO'),
 	getMooOption(asid=_,AID),
