@@ -1,2 +1,6 @@
+i#!/bin/bash
+
+cd ../src/logicserver
+
 /home/clip/bin/prolog moo_ciao
 
