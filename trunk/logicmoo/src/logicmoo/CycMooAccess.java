@@ -24,8 +24,8 @@ import org.opencyc.api.*;
 import org.opencyc.cycobject.*;
 import org.apache.oro.util.*;
 
-import javax.servlet.jsp.*;
 
+import javax.servlet.jsp.*;
 
 
 /**
@@ -33,7 +33,7 @@ import javax.servlet.jsp.*;
 *
 * Collaborates with the <tt>CycConnection</tt> class which manages the api connections.
 *
-* @version $Id: CycMooAccess.java,v 1.1 2002-04-12 15:29:24 dmiles Exp $
+* @version $Id: CycMooAccess.java,v 1.2 2002-04-13 09:06:07 dmiles Exp $
 * @author Douglas R. Miles, Stephen L. Reed
 *
 * <p>Copyright 2001 Cycorp, Inc., license is open source GNU LGPL.
@@ -150,20 +150,20 @@ public class CycMooAccess extends CycAccess {
     * @param arg3 the third argument of the predicate
      */
     public void assertGaf (CycFort mt,
-                           CycConstant predicate,
-                           CycFort arg1,
-                           CycFort arg2,
+			   CycConstant predicate,
+			   CycFort arg1,
+			   CycFort arg2,
 			   CycFort arg3)
-        throws IOException, UnknownHostException, CycApiException {
-        // (predicate <CycFort> <CycFort>)
-        String command = withBookkeepingInfo() +
-            "(cyc-assert '(" +
-            predicate.stringApiValue() + " " +
-            arg1.stringApiValue() + " " +
-            arg2.stringApiValue() + " " +
-            arg3.stringApiValue() + " )" +
-            mt.stringApiValue() + " ))";
-        converseVoid(command);
+    throws IOException, UnknownHostException, CycApiException {
+	// (predicate <CycFort> <CycFort>)
+	String command = withBookkeepingInfo() +
+			 "(cyc-assert '(" +
+			 predicate.stringApiValue() + " " +
+			 arg1.stringApiValue() + " " +
+			 arg2.stringApiValue() + " " +
+			 arg3.stringApiValue() + " )" +
+			 mt.stringApiValue() + " ))";
+	converseVoid(command);
     }
 
     /**
@@ -177,20 +177,20 @@ public class CycMooAccess extends CycAccess {
     * @param arg3 the third argument of the predicate
      */
     public void assertGaf (CycFort mt,
-                           CycConstant predicate,
-                           CycFort arg1,
-                           Integer arg2,
+			   CycConstant predicate,
+			   CycFort arg1,
+			   Integer arg2,
 			   CycFort arg3)
-        throws IOException, UnknownHostException, CycApiException {
-        // (predicate <CycFort> <CycFort>)
-        String command = withBookkeepingInfo() +
-            "(cyc-assert '(" +
-            predicate.stringApiValue() + " " +
-            arg1.stringApiValue() + " " +
-            arg2.toString() + " " +
-            arg3.stringApiValue() + " )" +
-            mt.stringApiValue() + " ))";
-        converseVoid(command);
+    throws IOException, UnknownHostException, CycApiException {
+	// (predicate <CycFort> <CycFort>)
+	String command = withBookkeepingInfo() +
+			 "(cyc-assert '(" +
+			 predicate.stringApiValue() + " " +
+			 arg1.stringApiValue() + " " +
+			 arg2.toString() + " " +
+			 arg3.stringApiValue() + " )" +
+			 mt.stringApiValue() + " ))";
+	converseVoid(command);
     }
 
     /**
@@ -204,18 +204,18 @@ public class CycMooAccess extends CycAccess {
     * @param arg3 the third argument of the predicate
      */
     public void assertGaf (CycFort mt,
-                           CycConstant predicate,
-                           CycFort arg1,
-                           Integer arg2)
-            throws IOException, UnknownHostException, CycApiException {
-        // (predicate <CycFort> <CycFort>)
-        String command = withBookkeepingInfo() +
-            "(cyc-assert '(" +
-            predicate.stringApiValue() + " " +
-            arg1.stringApiValue() + " " +
-            arg2.toString() + " )" +
-            mt.stringApiValue() + " ))";
-        converseVoid(command);
+			   CycConstant predicate,
+			   CycFort arg1,
+			   Integer arg2)
+    throws IOException, UnknownHostException, CycApiException {
+	// (predicate <CycFort> <CycFort>)
+	String command = withBookkeepingInfo() +
+			 "(cyc-assert '(" +
+			 predicate.stringApiValue() + " " +
+			 arg1.stringApiValue() + " " +
+			 arg2.toString() + " )" +
+			 mt.stringApiValue() + " ))";
+	converseVoid(command);
     }
 
 
@@ -224,9 +224,9 @@ public class CycMooAccess extends CycAccess {
      * Returns a with-bookkeeping-info macro expresssion.
      */
     private String withBookkeepingInfo () {
-        return "(with-bookkeeping-info (new-bookkeeping-info " +
-            cycadministrator.stringApiValue() + " (the-date) " +
-            opencycproject.stringApiValue() + " (the-second)) ";
+	return "(with-bookkeeping-info (new-bookkeeping-info " +
+	cycadministrator.stringApiValue() + " (the-date) " +
+	opencycproject.stringApiValue() + " (the-second)) ";
     }
 
     /**
@@ -239,7 +239,7 @@ public class CycMooAccess extends CycAccess {
     public void assertGenlMt(CycFort mt1, CycFort mt2) throws IOException, CycApiException {
 	assertGaf(baseKB,genlMt,mt1,mt2);
     }
-    
+
     /**
      * Asserts a genlMt formula in BaseKB.  The operation
      * will be added to the KB transcript for replication and archive.
@@ -252,7 +252,7 @@ public class CycMooAccess extends CycAccess {
 	assertGaf(baseKB,genlMt,mt1,makeCycConstant(mt2));
     }
 
-    
+
     /**
     * Override of <tt>CycAccess</tt>
     * Constructs a new <tt>CycConstant</tt> object using the constant name.
@@ -302,7 +302,7 @@ public class CycMooAccess extends CycAccess {
      *
      * @return new <tt>CycList</tt> that represents the new Gaf
      */
-    
+
     public static CycList makeGaf(CycConstant cycPredicate, CycConstant arg1, CycConstant arg2) {
 	CycList cycList = new CycList(cycPredicate);
 	cycList.add(arg1);
@@ -318,7 +318,7 @@ public class CycMooAccess extends CycAccess {
      *
      * @return new <tt>CycList</tt> that represents the new Gaf
      */
-    
+
     public CycList makeIsa(CycConstant term, String type) {
 	return makeGaf(isa,term,makeCycConstant(type));
     }
@@ -331,7 +331,7 @@ public class CycMooAccess extends CycAccess {
      *
      * @return new <tt>CycList</tt> that represents the new Gaf
      */
-    
+
     public CycList makeIsa(CycConstant term, CycConstant type) {
 	return makeGaf(isa,term,type);
     }
@@ -345,8 +345,8 @@ public class CycMooAccess extends CycAccess {
      * @param <tt>CycList</tt> sentence the given sentence for assertion
      * @param <tt>CycFort</tt> mt the microtheory in which the assertion is placed
      */
-    
-   public void assertWithTranscriptNoWffCheck(CycList sentence, CycFort mt)
+
+    public void assertWithTranscriptNoWffCheck(CycList sentence, CycFort mt)
     throws IOException, UnknownHostException, CycApiException {
 	if ( sentence==null )
 	    throw new CycApiException("assertWithTranscriptNoWFFCheck: sentence==null");
@@ -365,38 +365,7 @@ public class CycMooAccess extends CycAccess {
 	converseVoid(command);
     }
 
-
-    public void writeOptionsHtml(PageContext pageContext,String collectionname, String sel) {
-	writeOptionsHtml( pageContext, getArrayList(pageContext,collectionname),  sel);
-    }
-
-    public void writeOptionsHtml(PageContext pageContext,String collectionname1, String collectionname2, String sel) {
-	writeOptionsHtml( pageContext, intersectsArrayList(getArrayList(pageContext,collectionname1),getArrayList(pageContext,collectionname2)),  sel);
-    }
-
-    public void writeOptionsHtml(PageContext pageContext,String collectionname1, String collectionname2, String collectionname3, String sel) {
-	writeOptionsHtml( pageContext, intersectsArrayList(getArrayList(pageContext,collectionname1), intersectsArrayList(getArrayList(pageContext,collectionname2),getArrayList(pageContext,collectionname3))),  sel);
-    }
-
-    public ArrayList getArrayList(PageContext pageContext,String collectionname) {
-	try {
-	    String mt = (String)pageContext.getSession().getAttribute("microtheory");
-	    if ( !(mt instanceof String) ) {
-		return(ArrayList)getAllInstances(makeCycConstant(collectionname));
-	    } else {
-	      //  System.out.println("getArrayList: using " + mt);
-		CycList query = new CycList(isa);
-		CycVariable variable = new CycVariable("?INST");
-		query.add(variable);
-		query.add(makeCycConstant(collectionname));
-		return(ArrayList) askWithVariable(query,variable,makeCycConstant(mt));
-	    }
-	} catch ( Exception e ) {
-	    return new ArrayList();
-	}
-    }
-
-    public ArrayList intersectsArrayList(ArrayList l1, ArrayList l2) {
+    public static ArrayList intersectsArrayList(ArrayList l1, ArrayList l2) {
 	ArrayList list = new ArrayList();
 	Iterator list1 = l1.iterator();
 	while ( list1.hasNext() ) {
@@ -406,34 +375,21 @@ public class CycMooAccess extends CycAccess {
 	return list;
     }
 
-    public void writeOptionsHtml(PageContext pageContext,ArrayList list, String sel) {
-	PrintWriter  pw=null;
+    public ArrayList getArrayList(PageContext pageContext,String collectionname) {
 	try {
-	    pw = pageContext.getResponse().getWriter();
-	    pw.flush();
-	} catch ( IOException ioe ) {
-	}
-	writeOptionsHtml(pw, list,  sel);
-    }
-
-    public void writeOptionsHtml(Writer pw,ArrayList list, String sel) {
-	CycFort s = null;
-	try {
-	    pw.flush();
-	    Collections.sort(list);
-	    Iterator result = list.iterator();
-	    while ( result.hasNext() ) {
-		s = ((CycFort) result.next());
-		if ( s instanceof CycConstant ) {
-		    if ( s.toString().startsWith(sel) )
-			pw.write("<option SELECTED>" + s + "</option>");
-		    else
-			pw.write("<option>" + s + "</option>");
-		}
+	    String mt = (String)pageContext.getSession().getAttribute("microtheory");
+	    if ( !(mt instanceof String) ) {
+		return(ArrayList)getAllInstances(makeCycConstant(collectionname));
+	    } else {
+		//  System.out.println("getArrayList: using " + mt);
+		CycList query = new CycList(isa);
+		CycVariable variable = new CycVariable("?INST");
+		query.add(variable);
+		query.add(makeCycConstant(collectionname));
+		return(ArrayList) askWithVariable(query,variable,makeCycConstant(mt));
 	    }
-
-	    pw.flush();
 	} catch ( Exception e ) {
+	    return new ArrayList();
 	}
     }
 
@@ -477,6 +433,7 @@ public class CycMooAccess extends CycAccess {
 	try {
 	    pw = pageContext.getResponse().getWriter();
 	    pw.flush();
+	    pw.println("createPredicate for " + username);
 	    setCyclist(username);
 	    CycConstant microtheorynameC = makeCycConstantOrNull(microtheoryname);
 	    CycConstant usernameC = makeCycConstantOrNull(username);
@@ -497,8 +454,8 @@ public class CycMooAccess extends CycAccess {
 		if ( commentname.length()>3 ) {
 		    assertComment(predicatenameC,commentname,microtheoryC);
 		}
-		for (int i=1 ; i >= arityN ;i++) {
-		    if (isagenl[i].startsWith("G")) {
+		for ( int i=1 ; i <= arityN ;i++ ) {
+		    if ( isagenl[i].startsWith("G") ) {
 			assertGaf(microtheoryC,argGenl,predicatenameC, new Integer( i),makeCycConstant(arg[i]));
 		    } else {
 			assertGaf(microtheoryC,argIsa,predicatenameC, new Integer( i),makeCycConstant(arg[i]));
@@ -542,5 +499,72 @@ public class CycMooAccess extends CycAccess {
     public static CycConstant opencycproject = null;
 
 
+    public void writeOptionsHtml(PageContext pageContext,String collectionname, String sel) {
+	writeOptionsHtml( pageContext, getArrayList(pageContext,collectionname),  sel);
+    }
+
+    public void writeOptionsHtml(PageContext pageContext,String collectionname1, String collectionname2, String sel) {
+	writeOptionsHtml( pageContext, intersectsArrayList(getArrayList(pageContext,collectionname1),getArrayList(pageContext,collectionname2)),  sel);
+    }
+
+    public void writeOptionsHtml(PageContext pageContext,String collectionname1, String collectionname2, String collectionname3, String sel) {
+	writeOptionsHtml( pageContext, intersectsArrayList(getArrayList(pageContext,collectionname1), intersectsArrayList(getArrayList(pageContext,collectionname2),getArrayList(pageContext,collectionname3))),  sel);
+    }                   
+
+
+    public void writeOptionsHtml(PageContext pageContext,ArrayList list, String sel) {
+	PrintWriter  pw=null;
+	try {
+	    pw = pageContext.getResponse().getWriter();
+	    pw.flush();
+	} catch ( IOException ioe ) {
+	}
+	writeOptionsHtml(pw, list,  sel);
+    }
+
+    public void writeOptionsHtml(Writer pw,ArrayList list, String sel) {
+	CycFort s = null;
+	try {
+	    pw.flush();
+	    Collections.sort(list);
+	    Iterator result = list.iterator();
+	    while ( result.hasNext() ) {
+		s = ((CycFort) result.next());
+		if ( s instanceof CycConstant ) {
+		    if ( s.toString().startsWith(sel) )
+			pw.write("<option SELECTED>" + s + "</option>");
+		    else
+			pw.write("<option>" + s + "</option>");
+		}
+	    }
+
+	    pw.flush();
+	} catch ( Exception e ) {
+	}
+    }
+
+
+    public ArrayList getArrayList(PageContext pageContext,String collectionname) {
+	try {
+	    String mt = (String)pageContext.getSession().getAttribute("microtheory");
+	    if ( !(mt instanceof String) ) {
+		return(ArrayList)getAllInstances(makeCycConstant(collectionname));
+	    } else {
+		//  System.out.println("getArrayList: using " + mt);
+		CycList query = new CycList(isa);
+		CycVariable variable = new CycVariable("?INST");
+		query.add(variable);
+		query.add(makeCycConstant(collectionname));
+		return(ArrayList) askWithVariable(query,variable,makeCycConstant(mt));
+	    }
+	} catch ( Exception e ) {
+	    return new ArrayList();
+	}
+    }
+
+
+
 
 }
+
+
