@@ -4,8 +4,8 @@
  * Now prolog can call java!!!
  *  Project: jpl
  * 
- *  File:    $Id: swijni.c,v 1.3 2002-03-17 09:03:11 dmiles Exp $
- *  Date:    $Date: 2002-03-17 09:03:11 $
+ *  File:    $Id: swijni.c,v 1.4 2002-03-17 09:09:38 dmiles Exp $
+ *  Date:    $Date: 2002-03-17 09:09:38 $
  *  Author:  Fred Dushin <fadushin@syr.edu>
  * 		  
  * 
@@ -367,11 +367,11 @@ static jobject term_to_jobject(term_t temp_term)
 
 				PL_get_name_arity(temp_term, &name, &arity);
 
-				if (arity=0) return term_to_jobject( name);
+				if (arity == 0) return term_to_jobject( name);
 
 				PL_get_atom_nchars(name,&len,&temp_string);
 
-				if (temp_string[0]='$')
+				if (temp_string[0] == '$')
 					{
 					switch (arity)
 						{
@@ -400,7 +400,7 @@ static jobject term_to_jobject(term_t temp_term)
 						}
 					}
 				PL_get_chars(temp_term,&temp_string,CVT_ALL);
-				sprintf(temp_parse,"u%s",temp_string);
+				sprintf(temp_parse,"t%s",temp_string);
 				return chars_to_jstring(temp_parse);
 			}
 
