@@ -20,7 +20,7 @@ public class CiaoMoo extends LogicMoo {
 	
 	*/
 
-	public void CiaoMoo() {
+	public CiaoMoo() throws Exception {
 	}
 
 
