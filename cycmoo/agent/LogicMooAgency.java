@@ -1,10 +1,10 @@
 //<pre>
-package logicmoo.agent;
+package cycmoo.agent;
 
-import logicmoo.api.*;
-import logicmoo.agent.*;
-import logicmoo.util.*;
-import logicmoo.obj.*;
+import cycmoo.api.*;
+import cycmoo.agent.*;
+import cycmoo.util.*;
+import cycmoo.obj.*;
 
 
 // Java

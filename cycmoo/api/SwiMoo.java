@@ -1,4 +1,4 @@
-package logicmoo;
+package cycmoo;
 
 import java.lang.*;
 import java.lang.reflect.*;
@@ -13,7 +13,7 @@ public class SwiMoo extends LogicMoo {
 	Constructor called by prolog code:
 	
 	createJamud:-
-			 java_create_object('logicmoo.SwiMoo',JAMUD),
+			 java_create_object('cycmoo.SwiMoo',JAMUD),
 			 format('\njamud.Jamud=~q\n',[JAMUD]),!,
 			 assert(jamud_object(JAMUD)),!.
 	

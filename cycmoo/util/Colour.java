@@ -1,4 +1,4 @@
-package logicmoo.util;
+package cycmoo.util;
 
 
 import java.util.Hashtable;

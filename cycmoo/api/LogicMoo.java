@@ -1,12 +1,12 @@
-package logicmoo;
+package cycmoo;
 
-import logicmoo.api.*;
-import logicmoo.agent.*;
-import logicmoo.cmd.*;
-import logicmoo.obj.*;
-import logicmoo.plugin.*;
-import logicmoo.net.*;
-import logicmoo.util.*;
+import cycmoo.api.*;
+import cycmoo.agent.*;
+import cycmoo.cmd.*;
+import cycmoo.obj.*;
+import cycmoo.plugin.*;
+import cycmoo.net.*;
+import cycmoo.util.*;
 
 
 
@@ -41,7 +41,7 @@ import ViolinStrings.*;
 *
 * Collaborates with the <tt>Jamud</tt> class which manages the api connections.
 *
-* @version $Id: LogicMoo.java,v 1.1 2002-11-16 03:33:12 dmiles Exp $
+* @version $Id: LogicMoo.java,v 1.2 2002-11-27 21:47:23 dmiles Exp $
 * @author Douglas R. Miles
 *
 * <p>Copyright 2001 Cycorp, Inc., license is open source GNU LGPL.
@@ -76,7 +76,7 @@ public class LogicMoo extends Thread {
     private  static boolean running = false;
 
     private static org.opencyc.webserver.WebServer cycWebserverThread=null;
-    private static logicmoo.net.LogicMooTelnetServer cycMooserverThread = null;
+    private static cycmoo.net.LogicMooTelnetServer cycMooserverThread = null;
 
     public static void main(String[] args) {
 	try {
@@ -99,11 +99,11 @@ public class LogicMoo extends Thread {
      */
     public LogicMoo() throws IOException, CycApiException {
 	try {
-	if( cyc==null )	cyc =  new LogicMooCycAccess();
-	primaryStart();
-	System.out.println("loaded LogicMoo");
-	moo = this;
-	} catch (Exception e) {
+	    if( cyc==null ) cyc =  new LogicMooCycAccess();
+	    primaryStart();
+	    System.out.println("loaded LogicMoo");
+	    moo = this;
+	} catch( Exception e ) {
 	    e.printStackTrace();
 	}
     }
@@ -177,13 +177,13 @@ public class LogicMoo extends Thread {
 	Log.current.println("Starting LogicMOO (LogicMoo)");
 	startWebserverThread();
 	try {
-	  startIrcBot();
-	  cyc.constructMtFromFile("JamudMt.kif","BaseKB");
+	    startIrcBot();
+	    cyc.constructMtFromFile("JamudMt.kif","BaseKB");
 	} catch( Exception e ) {
 	    e.printStackTrace();
 	}
 	startMooServerThread();
-        startNPCs();
+	startNPCs();
 
 	//startNLParser();
 	//startSecondaryThread
@@ -205,7 +205,7 @@ File[] files = dir.listFiles();
 for ( int i = 0 ; i<files.length; i++ ) {
 String classname = files[i].getName();
 if ( classname.endsWith(".class") ) {
-classname = "logicmoo.plugins."+classname.substring(0,classname.indexOf('.'));
+classname = "cycmoo.plugins."+classname.substring(0,classname.indexOf('.'));
 if ( !plugins.contains(classname) ) {
 Log.current.println("Starting " + classname);
 
@@ -229,8 +229,8 @@ e.printStackTrace();
 
 	if( opnIRCBot==null ) {
 	    try {
-	     //   opnIRCBot = new MooIrcBot(cyc,"CycLBot","http://www.opencyc.org","irc.worldforge.org",6667,"#flood");
-	    //   opnIRCBot.start();
+		//   opnIRCBot = new MooIrcBot(cyc,"CycLBot","http://www.opencyc.org","irc.worldforge.org",6667,"#flood");
+		//   opnIRCBot.start();
 		wfIRCBot = new MooIrcBot(cyc,"CycLBot","http://www.opencyc.org","irc.openprojects.net",6667,"#opencyc");
 		wfIRCBot.start();
 	    } catch( Exception e ) {
@@ -374,14 +374,14 @@ e.printStackTrace();
 	    PrintWriter pw = new PrintWriter(pSock.getOutputStream());
 	    pw.println("+"+raw + "\n");
 	    pw.flush();
-	    
+
 	    BufferedReader st = new BufferedReader(new InputStreamReader( pSock.getInputStream()));
-	    
+
 	    // Thread.sleep(time);
 	    //Thread.sleep(4000);
 	    String line = "";
 	    try {
-		while ((line = st.readLine())!=null) {
+		while( (line = st.readLine())!=null ) {
 		    System.out.println(line);
 		    sb.append(line + "\n");
 		}
@@ -472,15 +472,14 @@ e.printStackTrace();
 	if( term instanceof String ) return "'$jString'(" + toPrologCycString(term.toString()) +")";
 	if( term instanceof Integer ) return(term.toString());
 	if( term instanceof Float ) return(term.toString());
-	if( term instanceof CycVariable) return "'$jCycVariable'('"+term.toString()+"')";
+	if( term instanceof CycVariable ) return "'$jCycVariable'('"+term.toString()+"')";
 	if( term instanceof CycAssertion ) return "'$jCycAssertion'("+toPrologCycTerm(((CycAssertion)term).getFormula()) +")";
 	return "'$jObject'(" +toPrologCycAString(term.toString())+")";
     }
 
 
     public static String toPrologCycList(CycList cyclist) {
-	if( cyclist==null ) return "[]";
-	if( cyclist.isEmpty() )	return "[]";
+	if( cyclist==null || cyclist.isEmpty()  ) return "[]";
 	StringBuffer sb = new StringBuffer("[");
 	if( !cyclist.isProperList() ) {
 	    for( int i =0; i < cyclist.size(); i++ ) {

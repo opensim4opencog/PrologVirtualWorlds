@@ -1,4 +1,4 @@
-package logicmoo.api;
+package cycmoo.api;
 
 import java.lang.*;
 import java.lang.reflect.*;

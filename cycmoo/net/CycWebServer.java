@@ -1,7 +1,7 @@
-package logicmoo.net;
+package cycmoo.net;
 
-import logicmoo.*;
-import logicmoo.obj.*;
+import cycmoo.*;
+import cycmoo.obj.*;
 
 
 // Java
@@ -11,7 +11,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.awt.*;
-import logicmoo.*;
+import cycmoo.*;
 
 
 public class CycWebServer  extends Thread {

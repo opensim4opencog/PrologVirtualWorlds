@@ -1,12 +1,12 @@
-package logicmoo.api;
+package cycmoo.api;
 
-import logicmoo.*;
-import logicmoo.agent.*;
-import logicmoo.cmd.*;
-import logicmoo.obj.*;
-import logicmoo.plugin.*;
-import logicmoo.net.*;
-import logicmoo.util.*;
+import cycmoo.*;
+import cycmoo.agent.*;
+import cycmoo.cmd.*;
+import cycmoo.obj.*;
+import cycmoo.plugin.*;
+import cycmoo.net.*;
+import cycmoo.util.*;
 
 
 
@@ -25,11 +25,18 @@ import bsh.util.*;
 
 // OpenCyc
 import org.opencyc.api.*;
-import org.opencyc.constraintsolver.*;
-import org.opencyc.inferencesupport.*;
+import org.opencyc.javashell.*;
 import org.opencyc.cycobject.*;
+import org.opencyc.cyclobject.*;
 import org.opencyc.kif.*;
+import org.opencyc.javashell.*;
 import org.opencyc.util.*;
+import org.opencyc.webserver.WebServer;
+import org.apache.oro.util.*;
+import org.opencyc.templateparser.*;
+import org.opencyc.inferencesupport.*;
+import org.opencyc.constraintsolver.*;
+import org.opencyc.conversation.*;
 import org.apache.oro.util.*;
 
 // Util
@@ -40,7 +47,7 @@ import ViolinStrings.*;
 *
 * Collaborates with the <tt>Jamud</tt> class which manages the api connections.
 *
-* @version $Id: LogicMooCycAccess.java,v 1.1 2002-11-16 03:33:12 dmiles Exp $
+* @version $Id: LogicMooCycAccess.java,v 1.2 2002-11-27 21:47:23 dmiles Exp $
 * @author Douglas R. Miles
 *
 * <p>Copyright 2001 Cycorp, Inc., license is open source GNU LGPL.
@@ -156,7 +163,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 	return(CycAssertionsFactory)this;
     }
     public  LogicMoo getLogicMoo() {
-	moo = logicmoo.LogicMoo.getInstance();
+	moo = cycmoo.LogicMoo.getInstance();
 	return moo;
     }
 
@@ -1005,7 +1012,7 @@ public class LogicMooCycAccess extends CycAssertionsFactory {
 	String classstring = jclass.toString();
 	if ( classstring.startsWith("class java.lang") 
 	     || classstring.startsWith("class java.io")
-	     || classstring.startsWith("class logicmoo.")
+	     || classstring.startsWith("class cycmoo.")
 	     || classstring.startsWith("class com.logicmoo")
 	     || jclass.isPrimitive() )
 	    return cycjclass;

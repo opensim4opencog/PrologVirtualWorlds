@@ -1,4 +1,4 @@
-package logicmoo.net;
+package cycmoo.net;
 
 import java.lang.*;
 import java.lang.reflect.*;

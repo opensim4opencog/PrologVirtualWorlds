@@ -1,8 +1,8 @@
-package logicmoo.net;
+package cycmoo.net;
 
-import logicmoo.*;
-import logicmoo.agent.*;
-import logicmoo.obj.*;
+import cycmoo.*;
+import cycmoo.agent.*;
+import cycmoo.obj.*;
 
 
 

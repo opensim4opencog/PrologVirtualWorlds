@@ -1,5 +1,5 @@
-<%@ page language="java" import=" jamud.*,jamud.object.*, logicmoo.*, org.opencyc.constraintsolver.*,org.opencyc.cycobject.*, org.opencyc.creation.*, org.opencyc.kif.*, org.opencyc.jsp.*, org.opencyc.util.*,org.opencyc.api.*,org.opencyc.inferencesupport.*,org.opencyc.webserver.*, java.util.*,com.oreilly.servlet.*,com.oreilly.servlet.multipart.*,java.io.*" %>
-<jsp:useBean id="theLogicMoo" scope="application" class="logicmoo.LogicMoo"/>
+<%@ page language="java" import=" jamud.*,jamud.object.*, cycmoo.*, org.opencyc.constraintsolver.*,org.opencyc.cycobject.*, org.opencyc.creation.*, org.opencyc.kif.*, org.opencyc.jsp.*, org.opencyc.util.*,org.opencyc.api.*,org.opencyc.inferencesupport.*,org.opencyc.webserver.*, java.util.*,com.oreilly.servlet.*,com.oreilly.servlet.multipart.*,java.io.*" %>
+<jsp:useBean id="theLogicMoo" scope="application" class="cycmoo.LogicMoo"/>
 
 <pre>           
 <%

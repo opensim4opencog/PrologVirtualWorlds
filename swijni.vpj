@@ -20,7 +20,9 @@ swijni\javart.c
 swijni\JavaRt.java
 swijni\javart.pl
 swijni\Makefile
+swijni\PrologJTerm.java
 swijni\swijni.c
+swijni\swijni.h
 swijni\SwiJni.java
 swijni\swijni.pl
 [ASSOCIATION]

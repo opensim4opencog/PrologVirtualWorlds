@@ -1,4 +1,4 @@
-package logicmoo;
+package cycmoo;
 
 import java.lang.*;
 import java.lang.reflect.*;
@@ -14,7 +14,7 @@ public class CiaoMoo extends LogicMoo {
 	Constructor called by prolog code:
 	
 	createJamud:-
-			 java_create_object('logicmoo.CiaoMoo',JAMUD),
+			 java_create_object('cycmoo.CiaoMoo',JAMUD),
 			 format('\njamud.Jamud=~q\n',[JAMUD]),!,
 			 assert(jamud_object(JAMUD)),!.
 	
@@ -102,12 +102,6 @@ public class CiaoMoo extends LogicMoo {
 	public synchronized static PLTerm parameterToPLTerm(Class paramClass) {
 		return new PLAtom(paramClass.getName());
 	}
-
-
-
-
-
-
 
 }
 
