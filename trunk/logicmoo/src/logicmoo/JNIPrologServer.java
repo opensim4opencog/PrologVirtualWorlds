@@ -1,7 +1,8 @@
 package logicmoo;
+
 import java.util.Hashtable;
 import java.lang.String;
-import jpl.*;
+//import jpl.*;
 import java.lang.reflect.*;
 import java.io.*;
 import java.util.*;
@@ -51,8 +52,8 @@ public class JNIPrologServer extends Thread {
 
         runStatic();
 
-        if ( bootFile!=null )
-            if ( bootFile.equals("test.pl") ) testJava();
+   //     if ( bootFile!=null )
+   //         if ( bootFile.equals("test.pl") ) testJava();
     }
 
     /* Starts an instance of a PrologServer running as thread*/
@@ -64,14 +65,14 @@ public class JNIPrologServer extends Thread {
     public static void runStatic() {
         if ( !m_isInitialized ) {
             initAll();
-            setCwd(cwd);
-            consult(bootFile);
+          //  setCwd(cwd);
+         //   consult(bootFile);
         }
     }
 
     /* Ensures Prolog VM is running and Scripting Engine is running*/
     public synchronized static void initAll() {
-        JPL.init();
+       // JPL.init();
         JNIPrologServer.createState();
         m_isInitialized = true;
     }
@@ -91,9 +92,9 @@ public class JNIPrologServer extends Thread {
         }
 
         Array.set(stringClassArrayOfOne,0,stringClass);
-        debug=1;
+        debug=5;
         allObjects = new HashMap();
-        allObjects.put("object('JNIPrologServer')",new JNIPrologServer());                
+        allObjects.put("'$java_object'('JNIPrologServer')",new JNIPrologServer());                
     }
 
     /* Scripting Engine is running = true*/
@@ -101,19 +102,20 @@ public class JNIPrologServer extends Thread {
         return m_isInitialized;
     }
 
-    /* Loads a Prolog sourceFile to running server*/
+/*
+    ///+ Loads a Prolog sourceFile to running server+/
     public synchronized static boolean consult( String sourceFile) {
         if ( sourceFile==null ) return false;
         return invokePrologN1("consult",sourceFile);
     }
 
-    /* This is invoked only on a running PrologServer to change it's local directory */
+    ///+ This is invoked only on a running PrologServer to change it's local directory +/
     public synchronized static boolean setCwd( String pathame) {
         cwd = pathame;
         return invokePrologN1("cd",cwd);
     }
 
-    /* This is an easy to use method(param) inovation to the Prolog kernel */
+    ///+ This is an easy to use method(param) inovation to the Prolog kernel +/
     public static boolean invokePrologN1(String method, String param) {
         jpl.Term consult_arg[] = { new jpl.Atom(param)};
         jpl.Query consult_query = new jpl.Query(method, consult_arg );
@@ -121,7 +123,7 @@ public class JNIPrologServer extends Thread {
     }
 
 
-    /* Runs diagnostics on Prolog kernel (test.pl must be in path) */
+    ///+ Runs diagnostics on Prolog kernel (test.pl must be in path) +/
     public synchronized static boolean testJava() {
 
         java.util.Hashtable solution=null;
@@ -173,7 +175,7 @@ public class JNIPrologServer extends Thread {
         return true;
     }
 
-
+*/
     /* Prolog Will call these */
 
     public synchronized static String createObject(String className) {
@@ -197,15 +199,11 @@ public class JNIPrologServer extends Thread {
         String intKey = "" + innerInstance.hashCode();
         if ( allObjects.get(intKey) !=null ) return;
         allObjects.put(intKey,innerInstance);
-        allObjects.put(nameForInstance(innerInstance),innerInstance);
-        allObjects.put(innerInstance.toString(),innerInstance);
     }
 
     public synchronized static void delInstance(Object innerInstance) {
         String intKey = "" + innerInstance.hashCode();
         if ( allObjects.get(intKey) ==null ) return;
-        allObjects.remove(innerInstance.toString());
-        allObjects.remove(nameForInstance(innerInstance));
         allObjects.remove(intKey);
     }
 
@@ -217,6 +215,7 @@ public class JNIPrologServer extends Thread {
         return innerInstance;
     }
 
+ /*
     public synchronized static String invokeObject(String objectName,String methodName,int params, String[] args) {
         if ( allObjects==null ) createState();
         if ( debug>1 ) System.err.println("invokeObject("+objectName +","+ methodName +","+ params + ")");
@@ -229,26 +228,32 @@ public class JNIPrologServer extends Thread {
             return makeError(e);
         }
     }
+ */
 
-    public synchronized static Object invokeObject(Object innerInstance,String methodName, Object[] args) 
+    
+    public synchronized static String invokeObject(String objectName,String methodName, Object[] args) 
     throws Exception {
+        if ( allObjects==null ) createState();
+        if ( debug>1 ) System.err.println("invokeObject("+objectName +","+ methodName +","+ args + ")");
+        Object innerInstance = findInstance(objectName);
+        if ( innerInstance==null )      return makeError(new Exception("Object not found in catalog \"" + objectName +"\""));
 
         // Get/Set Fields
-        if ( methodName.startsWith("$T") ) {
+        if ( methodName.startsWith("sfield") ) {
             Field innerField;
-            if ( methodName.charAt(2)=='s' ) {
-                innerField = getFieldForObject(innerInstance,methodName.substring(6));
+            if ( methodName.charAt(7)=='s' ) {
+                innerField = getFieldForObject(innerInstance,methodName.substring(8));
                 innerField.set(innerInstance,args[0]);
-                return innerField.get(innerInstance);
+                return objectToProlog(innerField.get(innerInstance));
             }
-            if ( methodName.charAt(2)=='g' ) {
-                innerField = getFieldForObject(innerInstance,methodName.substring(6));
-                return innerField.get(innerInstance);
+            if ( methodName.charAt(7)=='g' ) {
+                innerField = getFieldForObject(innerInstance,methodName.substring(8));
+                return objectToProlog(innerField.get(innerInstance));
             }
         }
 
         // Invokes Methods
-        return getMethodForObject(innerInstance,methodName,getClasses(args)).invoke(innerInstance,args);
+        return objectToProlog(getMethodForObject(innerInstance,methodName,getClasses(args)).invoke(innerInstance,args));
     }
 
     public synchronized static Class[] getClasses(Object[] objs) {
@@ -438,7 +443,7 @@ public class JNIPrologServer extends Thread {
 
     public synchronized static String getInstanceDef(Object obj) {
         try {
-            return "object("  + classToVector(obj.getClass())  + ":"  + obj.hashCode()+ ")";
+            return "'$java_object'("  + classToVector(obj.getClass())  + ":"  + obj.hashCode()+ ")";
         } catch ( Exception e ) {
             return makeError(e );
         }
@@ -476,7 +481,7 @@ public class JNIPrologServer extends Thread {
             int comma=instanceName.indexOf(',');
             switch ( instanceName.charAt(1) ) {
                 case 'T':
-                    return findInstance("object('"+instanceName.substring(comma+1)+"')");
+                    return findInstance("'$java_object'('"+instanceName.substring(comma+1)+"')");
                 case 'i':
                     return allObjects.get(instanceName.substring(2));
                 case 'l':
@@ -497,7 +502,7 @@ public class JNIPrologServer extends Thread {
 
     /* Return public synchronized instance name (HashCode)*/
     public synchronized static String nameForInstance(Object innerInstance) {
-        return "object(" + toScriptingName(innerInstance.getClass().getName()) +":" + innerInstance.hashCode() + ")";
+        return "'$java_object'(" + toScriptingName(innerInstance.getClass().getName()) +":" + innerInstance.hashCode() + ")";
     }
 
 
@@ -623,7 +628,7 @@ public class JNIPrologServer extends Thread {
     }
 
     public synchronized static Object argToObject(String arg) {
-        if ( arg.startsWith("object(") ) return findInstance(arg);
+        if ( arg.startsWith("'$java_object'(") ) return findInstance(arg);
         if ( arg.startsWith("type(") ) return mktype(arg);
         if ( arg.length()==0 ) return "";
         if ( arg.charAt(0)!='$' ) return arg;
