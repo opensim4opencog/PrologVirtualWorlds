@@ -1,11 +1,11 @@
-Attribute VB_Name = "Module"
+Attribute VB_Name = "Module1"
 Option Explicit
-Public a As frmBrowser
-Sub main()
 
-Set a = New frmBrowser
-a.Show
+Public fMainForm As frmMain
 
-App.TaskVisible = True
 
+Sub Main()
+    Set fMainForm = New frmMain
+    fMainForm.Show
 End Sub
+

@@ -1,35 +1,22 @@
 VERSION 5.00
 Begin VB.Form frmAbout 
    BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "About VirtualWorldClient"
+   Caption         =   "About QueryForum"
    ClientHeight    =   3630
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   5865
    ClipControls    =   0   'False
+   Icon            =   "frmAbout.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
+   Picture         =   "frmAbout.frx":0442
    ScaleHeight     =   3630
    ScaleWidth      =   5865
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
-   Tag             =   "About VirtualWorldClient"
-   Begin VB.PictureBox picIcon 
-      AutoSize        =   -1  'True
-      BackColor       =   &H00C0C0C0&
-      ClipControls    =   0   'False
-      Height          =   540
-      Left            =   240
-      Picture         =   "frmAbout.frx":0000
-      ScaleHeight     =   480
-      ScaleMode       =   0  'User
-      ScaleWidth      =   480
-      TabIndex        =   2
-      TabStop         =   0   'False
-      Top             =   240
-      Width           =   540
-   End
+   Tag             =   "1079"
    Begin VB.CommandButton cmdOK 
       Cancel          =   -1  'True
       Caption         =   "OK"
@@ -37,7 +24,7 @@ Begin VB.Form frmAbout
       Height          =   345
       Left            =   4245
       TabIndex        =   0
-      Tag             =   "OK"
+      Tag             =   "1081"
       Top             =   2625
       Width           =   1467
    End
@@ -46,27 +33,26 @@ Begin VB.Form frmAbout
       Height          =   345
       Left            =   4260
       TabIndex        =   1
-      Tag             =   "&System Info..."
+      Tag             =   "1080"
       Top             =   3075
       Width           =   1452
    End
    Begin VB.Label lblDescription 
-      Caption         =   "App Description"
       ForeColor       =   &H00000000&
       Height          =   1170
       Left            =   1050
-      TabIndex        =   6
-      Tag             =   "App Description"
+      TabIndex        =   5
+      Tag             =   "1085"
       Top             =   1125
       Width           =   4092
    End
    Begin VB.Label lblTitle 
-      Caption         =   "Application Title"
+      Caption         =   "Query Forum"
       ForeColor       =   &H00000000&
       Height          =   480
       Left            =   1050
-      TabIndex        =   5
-      Tag             =   "Application Title"
+      TabIndex        =   4
+      Tag             =   "1084"
       Top             =   240
       Width           =   4092
    End
@@ -89,21 +75,20 @@ Begin VB.Form frmAbout
       Y2              =   2445
    End
    Begin VB.Label lblVersion 
-      Caption         =   "Version"
+      Caption         =   "Version 0.6"
       Height          =   225
       Left            =   1050
-      TabIndex        =   4
-      Tag             =   "Version"
+      TabIndex        =   3
+      Tag             =   "1083"
       Top             =   780
       Width           =   4092
    End
    Begin VB.Label lblDisclaimer 
-      Caption         =   "Warning: ..."
       ForeColor       =   &H00000000&
       Height          =   825
       Left            =   255
-      TabIndex        =   3
-      Tag             =   "Warning: ..."
+      TabIndex        =   2
+      Tag             =   "1082"
       Top             =   2625
       Width           =   3870
    End
@@ -113,8 +98,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Option Explicit
-
 ' Reg Key Security Options...
 Const KEY_ALL_ACCESS = &H2003F
                                           
@@ -137,6 +120,7 @@ Private Declare Function RegQueryValueEx Lib "advapi32" Alias "RegQueryValueExA"
 Private Declare Function RegCloseKey Lib "advapi32" (ByVal hKey As Long) As Long
 
 Private Sub Form_Load()
+    LoadResStrings Me
     lblVersion.Caption = "Version " & App.Major & "." & App.Minor & "." & App.Revision
     lblTitle.Caption = App.Title
 End Sub
