@@ -128,3 +128,4 @@ moduleFile(prolog([system]),'moo_testing.pl').
 
 moduleFile(image('PrologMOO'),'moo_image.data').
 
+
