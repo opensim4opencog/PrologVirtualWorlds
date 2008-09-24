@@ -14,7 +14,7 @@ public class PRED_atom_concat_3 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = 6215763422195688291L;
-  static /*SymbolTerm*/Object AC_2 = makeSymbol("ac", 2);
+  static /*SymbolTerm*/Object AC_2 = makeAtom("ac", 2);
   public Object arg1;
   public Object arg2;
   public Object arg3;
@@ -62,7 +62,7 @@ public class PRED_atom_concat_3 extends PredicateBase {
       final int endIndex = str3.length();
       Object t =  Prolog.Nil;
       for (int i = 0; i <= endIndex; i++) {
-        final Object[] args = { makeSymbol(str3.substring(0, i)), makeSymbol(str3.substring(i, endIndex)) };
+        final Object[] args = { makeAtom(str3.substring(0, i)), makeAtom(str3.substring(i, endIndex)) };
         t = makeList(makeStructure(PRED_atom_concat_3.AC_2, args), t);
       }
       final Object[] args12 = { a1, a2 };
@@ -76,7 +76,7 @@ public class PRED_atom_concat_3 extends PredicateBase {
     if (!isAtomTerm(a1)) throw new IllegalTypeException(this, 1, "integer", a1);
     if (!isAtomTerm(a2)) throw new IllegalTypeException(this, 2, "integer", a2);
     final String str3 = nameUQ(a1).concat(nameUQ(a2));
-    if (!unify(a3, makeSymbol(str3))) return this.fail(engine);
+    if (!unify(a3, makeAtom(str3))) return this.fail(engine);
     return this.cont;
   }
 

@@ -36,7 +36,7 @@ public class RepresentationException extends BuiltinException {
    * <code>representation_error(goal,argNo,flag)</code>.
    */
   public Object getMessageTerm() {
-    Object[] args = { StaticProlog.makeJavaObject(goal), StaticProlog.makeInteger(argNo), StaticProlog.makeSymbol(flag) };
+    Object[] args = { StaticProlog.makeJavaObject(goal), StaticProlog.makeInteger(argNo), StaticProlog.makeAtom(flag) };
     return StaticProlog.makeStructure(REPRESENTATION_ERROR, args);
   }
 

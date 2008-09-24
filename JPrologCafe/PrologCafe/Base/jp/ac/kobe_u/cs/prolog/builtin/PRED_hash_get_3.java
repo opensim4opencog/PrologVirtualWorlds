@@ -14,7 +14,7 @@ public class PRED_hash_get_3 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = -5075901836471330055L;
-  public static /*SymbolTerm*/Object SYM_NIL = makeSymbol("[]");
+  public static /*SymbolTerm*/Object SYM_NIL = makeAtom("[]");
   public Object arg1;
   public Object arg2;
   public Object arg3;

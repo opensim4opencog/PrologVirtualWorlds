@@ -45,7 +45,7 @@ public class IllegalTypeException extends BuiltinException {
    * <code>type_error(goal,argNo,type,culprit)</code>.
    */
   public Object getMessageTerm() {
-    Object[] args = { StaticProlog.makeJavaObject(goal), StaticProlog.makeInteger(argNo), StaticProlog.makeSymbol(type), culprit };
+    Object[] args = { StaticProlog.makeJavaObject(goal), StaticProlog.makeInteger(argNo), StaticProlog.makeAtom(type), culprit };
     return StaticProlog.makeStructure(TYPE_ERROR, args);
   }
 

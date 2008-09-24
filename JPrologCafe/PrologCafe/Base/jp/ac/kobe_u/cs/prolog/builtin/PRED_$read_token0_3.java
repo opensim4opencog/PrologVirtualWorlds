@@ -92,7 +92,7 @@ class PRED_$read_token0_3 extends PredicateBase {
           break;
         }
         default:
-          token = makeSymbol(s.toString());
+          token = makeAtom(s.toString());
       }
     } catch (final Exception e) {
       throw new TermException(makeJavaObject(e));

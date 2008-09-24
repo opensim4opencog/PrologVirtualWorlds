@@ -14,7 +14,7 @@ public class PRED_atom_chars_2 extends PredicateBase
    * 
    */
   private static final long serialVersionUID = -4773050909782667286L;
-    static /*SymbolTerm*/Object Nil = makeSymbol("[]");
+    static /*SymbolTerm*/Object Nil = makeAtom("[]");
     Object arg1;
     Object arg2;
 
@@ -53,7 +53,7 @@ final Object[] engine_aregs = engine.getAreg();
     a2 = deref(a2);
     if (isVariable(a1)){
  if (isNil(a2)){
-     if (!unify(a1, makeSymbol("")))
+     if (!unify(a1, makeAtom("")))
   return this.fail(engine);
      return this.cont;
  }
@@ -74,7 +74,7 @@ final Object[] engine_aregs = engine.getAreg();
   throw new IllegalTypeException(this, 2, "character", a2);
      sb.append(nameUQ(car));
  }
- if (!unify(a1, makeSymbol(sb.toString())))
+ if (!unify(a1, makeAtom(sb.toString())))
      return this.fail(engine);
  return this.cont;
     }
@@ -84,7 +84,7 @@ final Object[] engine_aregs = engine.getAreg();
  final String s = nameUQ(a1);
  Object x = PRED_atom_chars_2.Nil;
  for (int i = s.length(); i > 0; i--)
-     x = makeList(makeSymbol(s.substring(i - 1, i)), x);
+     x = makeList(makeAtom(s.substring(i - 1, i)), x);
  if (!unify(a2, x))
      return this.fail(engine);
  return this.cont;

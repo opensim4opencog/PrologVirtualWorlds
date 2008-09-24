@@ -59,7 +59,7 @@ public class PRED_char_code_2 extends PredicateBase {
       if (!isInteger(a2)) throw new IllegalTypeException(this, 2, "integer", a2);
       final int i = (int) intValue(a2);//(IntegerTerm) car).longValue();;
       if (!Character.isDefined(i)) throw new RepresentationException(this, 2, "character_code");
-      if (!unify(a1, makeSymbol(String.valueOf((char) i)))) return this.fail(engine);
+      if (!unify(a1, makeAtom(String.valueOf((char) i)))) return this.fail(engine);
     } else if (isAtomTerm(a1)) {
       final String s = nameUQ(a1);
       if (s.length() != 1) throw new IllegalTypeException(this, 1, "character", a1);

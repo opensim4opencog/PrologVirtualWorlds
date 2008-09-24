@@ -12,11 +12,11 @@ class PRED_$set_prolog_impl_flag_2 extends PredicateBase
    * 
    */
   private static final long serialVersionUID = 1044821584364287346L;
-    static /*SymbolTerm*/Object CHAR_CONVERSION = makeSymbol("char_conversion");
-    static /*SymbolTerm*/Object DEBUG = makeSymbol("debug");
-    static /*SymbolTerm*/Object UNKNOWN = makeSymbol("unknown");
-    static /*SymbolTerm*/Object DOUBLE_QUOTES = makeSymbol("double_quotes");
-    static /*SymbolTerm*/Object PRINT_STACK_TRACE = makeSymbol("print_stack_trace");
+    static /*SymbolTerm*/Object CHAR_CONVERSION = makeAtom("char_conversion");
+    static /*SymbolTerm*/Object DEBUG = makeAtom("debug");
+    static /*SymbolTerm*/Object UNKNOWN = makeAtom("unknown");
+    static /*SymbolTerm*/Object DOUBLE_QUOTES = makeAtom("double_quotes");
+    static /*SymbolTerm*/Object PRINT_STACK_TRACE = makeAtom("print_stack_trace");
     public Object arg1;
     public Object arg2;
 

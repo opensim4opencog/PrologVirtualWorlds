@@ -14,7 +14,7 @@ class PRED_$get_instances_2 extends PredicateBase
   private static final long serialVersionUID = -573729492312632850L;
     public Object arg1;
     public Object arg2;
-    public static /*SymbolTerm*/Object COMMA = makeSymbol(",", 2);
+    public static /*SymbolTerm*/Object COMMA = makeAtom(",", 2);
 
     @Override
     public  int arity() {

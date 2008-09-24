@@ -45,7 +45,7 @@ public class PRED_java_object_2 extends JavaPredicate {
     Object term = this.arg1;
     final Object term_1_ = this.arg2;
     term = deref(term);
-    final JavaObjectTerm jo;
+    final Object jo;
     if (!isJavaObject(term)) {
       jo = makeJavaObject(term);
     } else {

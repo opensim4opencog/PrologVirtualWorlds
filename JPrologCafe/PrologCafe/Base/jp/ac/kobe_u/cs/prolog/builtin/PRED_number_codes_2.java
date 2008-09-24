@@ -13,7 +13,7 @@ public class PRED_number_codes_2 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = 2162887753469119625L;
-  static /*SymbolTerm*/Object Nil = makeSymbol("[]");
+  static /*SymbolTerm*/Object Nil = makeAtom("[]");
   Object arg1, arg2;
 
   public PRED_number_codes_2(Object a1, Object a2, Predicate cont) {

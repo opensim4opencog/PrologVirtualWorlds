@@ -59,7 +59,7 @@ default: return newIndexOutOfBoundsException("getarg", i0,null);  }   }
         if (! isJavaObject(a1)) {
             return fail(engine);
         }
-        if (! unify(a2,makeAtom(getName(getClass(object(a1)))))) {
+        if (! unify(a2,makeAtom(getClass(toJava(a1)).getName()))) {
             return fail(engine);
         }
         //END inline expansion

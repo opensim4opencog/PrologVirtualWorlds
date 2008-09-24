@@ -12,10 +12,10 @@ public class PRED_close_2 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = 3076288140617792857L;
-  public static /*SymbolTerm*/Object SYM_ALIAS_1 = makeSymbol("alias", 1);
-  public static /*SymbolTerm*/Object SYM_FORCE_1 = makeSymbol("force", 1);
-  public static /*SymbolTerm*/Object SYM_TRUE = makeSymbol("true");
-  public static /*SymbolTerm*/Object SYM_FALSE = makeSymbol("false");
+  public static /*SymbolTerm*/Object SYM_ALIAS_1 = makeAtom("alias", 1);
+  public static /*SymbolTerm*/Object SYM_FORCE_1 = makeAtom("force", 1);
+  public static /*SymbolTerm*/Object SYM_TRUE = makeAtom("true");
+  public static /*SymbolTerm*/Object SYM_FALSE = makeAtom("false");
   public Object arg1;
   public Object arg2;
 

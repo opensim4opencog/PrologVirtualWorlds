@@ -36,7 +36,7 @@ public class EvaluationException extends BuiltinException {
 	Object[] args = {
 	    StaticProlog.makeJavaObject(goal), 
 	    StaticProlog.makeInteger(argNo), 
-	    StaticProlog.makeSymbol(errorType)};
+	    StaticProlog.makeAtom(errorType)};
 	return StaticProlog.makeStructure(EVALUATION_ERROR, args);
     }
 

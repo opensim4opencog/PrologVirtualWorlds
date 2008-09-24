@@ -45,9 +45,9 @@ public class SyntaxException extends BuiltinException {
 	Object[] args = {
 	    StaticProlog.makeJavaObject(goal), 
 	    StaticProlog.makeInteger(argNo), 
-	    StaticProlog.makeSymbol(type),
+	    StaticProlog.makeAtom(type),
 	    culprit,
-	    StaticProlog.makeSymbol(message) };
+	    StaticProlog.makeAtom(message) };
 	return StaticProlog.makeStructure(SYNTAX_ERROR, args);
     }
 

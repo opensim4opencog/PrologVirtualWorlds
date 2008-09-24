@@ -50,7 +50,7 @@ public class IllegalDomainException extends BuiltinException {
 	Object[] args = {
 	    StaticProlog.makeJavaObject(goal), 
 	    StaticProlog.makeInteger(argNo), 
-	    StaticProlog.makeSymbol(domain),
+	    StaticProlog.makeAtom(domain),
 	    culprit};
 	return StaticProlog.makeStructure(DOMAIN_ERROR, args);
     }

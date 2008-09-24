@@ -552,7 +552,7 @@ public class Prolog implements Serializable {
   }
 
   static public/*SymbolTerm*/Object makeSymbol(String n) {
-    return SymbolTermBase.makeSymbol(n);
+    return SymbolTermBase.makeAtom(n);
   }
 
   /**

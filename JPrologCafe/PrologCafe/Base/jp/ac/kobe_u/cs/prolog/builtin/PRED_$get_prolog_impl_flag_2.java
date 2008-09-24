@@ -13,18 +13,18 @@ class PRED_$get_prolog_impl_flag_2 extends PredicateBase {
    * 
    */
   private static final long serialVersionUID = 6253715433630034714L;
-  static /*SymbolTerm*/Object TRUE = makeSymbol("true");
-  static /*SymbolTerm*/Object FALSE = makeSymbol("false");
-  static /*SymbolTerm*/Object BOUNDED = makeSymbol("bounded");
-  static /*SymbolTerm*/Object MAX_INTEGER = makeSymbol("max_integer");
-  static /*SymbolTerm*/Object MIN_INTEGER = makeSymbol("min_integer");
-  static /*SymbolTerm*/Object INTEGER_ROUNDING_FUNCTION = makeSymbol("integer_rounding_function");
-  static /*SymbolTerm*/Object CHAR_CONVERSION = makeSymbol("char_conversion");
-  static /*SymbolTerm*/Object DEBUG = makeSymbol("debug");
-  static /*SymbolTerm*/Object MAX_ARITY = makeSymbol("max_arity");
-  static /*SymbolTerm*/Object UNKNOWN = makeSymbol("unknown");
-  static /*SymbolTerm*/Object DOUBLE_QUOTES = makeSymbol("double_quotes");
-  static /*SymbolTerm*/Object PRINT_STACK_TRACE = makeSymbol("print_stack_trace");
+  static /*SymbolTerm*/Object TRUE = makeAtom("true");
+  static /*SymbolTerm*/Object FALSE = makeAtom("false");
+  static /*SymbolTerm*/Object BOUNDED = makeAtom("bounded");
+  static /*SymbolTerm*/Object MAX_INTEGER = makeAtom("max_integer");
+  static /*SymbolTerm*/Object MIN_INTEGER = makeAtom("min_integer");
+  static /*SymbolTerm*/Object INTEGER_ROUNDING_FUNCTION = makeAtom("integer_rounding_function");
+  static /*SymbolTerm*/Object CHAR_CONVERSION = makeAtom("char_conversion");
+  static /*SymbolTerm*/Object DEBUG = makeAtom("debug");
+  static /*SymbolTerm*/Object MAX_ARITY = makeAtom("max_arity");
+  static /*SymbolTerm*/Object UNKNOWN = makeAtom("unknown");
+  static /*SymbolTerm*/Object DOUBLE_QUOTES = makeAtom("double_quotes");
+  static /*SymbolTerm*/Object PRINT_STACK_TRACE = makeAtom("print_stack_trace");
   public Object arg1;
   public Object arg2;
 
@@ -74,19 +74,19 @@ class PRED_$get_prolog_impl_flag_2 extends PredicateBase {
     } else if (prologEquals(a1, PRED_$get_prolog_impl_flag_2.MIN_INTEGER)) {
       if (!unify(a2, makeInteger(engine.getMinInteger()))) return this.fail(engine);
     } else if (prologEquals(a1, PRED_$get_prolog_impl_flag_2.INTEGER_ROUNDING_FUNCTION)) {
-      if (!unify(a2, makeSymbol(engine.getIntegerRoundingFunction()))) return this.fail(engine);
+      if (!unify(a2, makeAtom(engine.getIntegerRoundingFunction()))) return this.fail(engine);
     } else if (prologEquals(a1, PRED_$get_prolog_impl_flag_2.CHAR_CONVERSION)) {
-      if (!unify(a2, makeSymbol(engine.getCharConversion()))) return this.fail(engine);
+      if (!unify(a2, makeAtom(engine.getCharConversion()))) return this.fail(engine);
     } else if (prologEquals(a1, PRED_$get_prolog_impl_flag_2.DEBUG)) {
-      if (!unify(a2, makeSymbol(engine.getDebug()))) return this.fail(engine);
+      if (!unify(a2, makeAtom(engine.getDebug()))) return this.fail(engine);
     } else if (prologEquals(a1, PRED_$get_prolog_impl_flag_2.MAX_ARITY)) {
       if (!unify(a2, makeInteger(engine.getMaxArity()))) return this.fail(engine);
     } else if (prologEquals(a1, PRED_$get_prolog_impl_flag_2.UNKNOWN)) {
-      if (!unify(a2, makeSymbol(engine.getUnknown()))) return this.fail(engine);
+      if (!unify(a2, makeAtom(engine.getUnknown()))) return this.fail(engine);
     } else if (prologEquals(a1, PRED_$get_prolog_impl_flag_2.DOUBLE_QUOTES)) {
-      if (!unify(a2, makeSymbol(engine.getDoubleQuotes()))) return this.fail(engine);
+      if (!unify(a2, makeAtom(engine.getDoubleQuotes()))) return this.fail(engine);
     } else if (prologEquals(a1, PRED_$get_prolog_impl_flag_2.PRINT_STACK_TRACE)) {
-      if (!unify(a2, makeSymbol(engine.getPrintStackTrace()))) return this.fail(engine);
+      if (!unify(a2, makeAtom(engine.getPrintStackTrace()))) return this.fail(engine);
     } else
       return this.fail(engine);
     return this.cont;

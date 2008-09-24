@@ -38,7 +38,7 @@ public interface VariableTerm extends Term, Undoable {
    * @see #bind(Object)
    * @see Trail
    */
-  public boolean unify(Object t);
+  //public boolean unify(Object t);
 
   /** 
    * Binds this variable to a given term. 
@@ -46,7 +46,7 @@ public interface VariableTerm extends Term, Undoable {
    * @param t a term to be bound.
    * @see Trail
    */
-  public boolean bind(Object t);
+ //ublic boolean bind(Object t);
 
   //  /** 
   //   * Checks whether this object is convertible with the given Java class type 

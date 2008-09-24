@@ -777,7 +777,7 @@ class PRED_$match_type_2_18 extends PRED_$match_type_2 {
         if (! isJavaObject(a2)) {
             return fail(engine);
         }
-        if (! unify(s23,makeAtom(getName(getClass(object(a2)))))) {
+        if (! unify(s23,makeAtom(getClass(toJava(a2)).getName()))) {
             return fail(engine);
         }
         //END inline expansion
