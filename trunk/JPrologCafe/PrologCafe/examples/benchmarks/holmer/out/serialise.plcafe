@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/serialise.in ...}
+
+# Name: serialise
+# Iterations: 1000
+# TestTime: 343 msec.
+# OverHead: 86 msec.
+# TestTime-OverHead: 257 msec.
+# (TestTime-OverHead)/Iterations: 0.257 msec.
+###CSV###,serialise,1000,343,86,257,0.257
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/serialise.in consulted, 5 msec}
+bye

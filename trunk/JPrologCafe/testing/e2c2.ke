@@ -1,0 +1,424 @@
+(implies 
+       (and 
+           (hypotheticDenotation ?HYPOTHETIC ?PROPERNOUN ?THENAME) 
+           (wordSemTrans ?THENAME ?PROPERNOUN RegularNounFrame ?TEMPLATE ?PROPERNOUNSEMTRANS) 
+           (evaluate ?FACTS 
+               (SubstituteFormulaFn ?HYPOTHETIC :NOUN ?TEMPLATE))) 
+       (holdsIn ?HYPOTHETIC ?FACTS))         )
+
+
+
+       
+(wordSemTrans Put-TheWord Verb 
+       (PPCompFrameFn DitransitivePPFrameType In-TheWord) 
+       (and 
+           (isa :ACTION PuttingSomethingSomewhere) 
+           (toLocation :ACTION :OBLIQUE-OBJECT) 
+           (providerOfMotiveForce :ACTION :SUBJECT) 
+           (primaryObjectMoving :ACTION :OBJECT)) verbSemTrans)   
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                                                                          
+F: (implies 
+       (and 
+           (ist ?MT 
+               (hypotheticDenotation ?EVENT ?POS ?VERB)) 
+           ;;(wordSemTrans ?VERB ??NUM (PPCompFrameFn DitransitivePPFrameType ?PREP) ?TEMPLATE ?POS ?PRED ?OBJECT ) 
+           (wordSemTrans ?VERB ?POS (PPCompFrameFn ?PPFrameType ?PREP) ?TEMPLATE ?PRED) 
+           (hypotheticSubjectVerbObjectPrepOblique ?SUBJECT ?EVENT ?OBJECT ?PREP ?TARGET) 
+           (substituteFrameKeywords ?TEMPLATE ?SUBJECT ?EVENT ?OBJECT ?TARGET ?FACTS))
+       (ist ?MT ?FACTS)).
+
+     
+
+(implies 
+       (and 
+           (ist ?MT 
+               (hypotheticDenotation ?EVENT ?POS ?VERB)) 
+           (wordSemTrans ?VERB ?POS (ParticleCompFrameFn ?PPFrameType ?PREP) ?TEMPLATE ?PRED) 
+           (hypotheticSubjectVerbObjectPrepOblique ?SUBJECT ?EVENT ?OBJECT ?PREP ?TARGET) 
+           (substituteFrameKeywords ?TEMPLATE ?SUBJECT ?EVENT ?OBJECT ?TARGET ?FACTS))
+       (ist ?MT ?FACTS))
+
+
+
+
+(implies 
+       (and 
+           (ist ?MT 
+               (hypotheticDenotation ?EVENT ?POS ?VERB)) 
+           (wordSemTrans ?VERB ?POS (PPCompFrameFn TransitivePPFrameType ?PREP) ?TEMPLATE ?PRED) 
+           (hypotheticSubjectVerbObjectPrepOblique ?SUBJECT ?EVENT ?OBJECT ?PREP ?TARGET) 
+           (substituteFrameKeywords ?TEMPLATE ?SUBJECT ?EVENT ?OBJECT ?TARGET ?FACTS))
+       (ist ?MT ?FACTS))
+
+                                    
+(implies 
+       (and 
+           (hypotheticDenotation ?EVENT ?POS ?VERB) 
+           (wordSemTrans ?VERB ?POS 
+               (PPCompFrameFn DitransitivePPFrameType ?PREP) ?TEMPLATE ?PRED) 
+           (ist ?MT 
+               (hypotheticSubjectVerbObjectPrepOblique ?SUBJECT ?EVENT ?OBJECT ?PREP ?TARGET)) 
+           (substituteFrameKeywords ?TEMPLATE ?SUBJECT ?EVENT ?OBJECT ?TARGET ?FACTS)) 
+       (ist ?MT ?FACTS))
+       
+                                           
+
+    
+       
+(implies 
+       (and 
+           (ist ?MT 
+           (hypotheticDenotation ?EVENT ?Verb ?THEVERB) )
+           (hypotheticSubjectVerbObject ?SUBJECT ?EVENT ?OBJECT) 
+           (wordSemTrans ?THEVERB ?Verb TransitiveNPFrame ?TEMPLATE ?PRED) 
+       (evaluate ?FACTS 
+           (SubstituteFormulaFn ?OBJECT :OBJECT 
+               (SubstituteFormulaFn ?SUBJECT :SUBJECT 
+                   (SubstituteFormulaFn ?EVENT :ACTION ?TEMPLATE)))))
+       (ist ?MT ?FACTS))
+       
+       
+(implies 
+       (and 
+           (ist ?MT 
+           (hypotheticDenotation ?EVENT ?Verb ?THEVERB) )
+           (hypotheticSubjectVerbPrepObject ?SUBJECT ?EVENT ?PREP ?OBJECT) 
+           (wordSemTrans ?THEVERB ?Verb (PPCompFrameFn ?FRAME ?PREP)  ?TEMPLATE ?PRED) 
+       (evaluate ?FACTS 
+           (SubstituteFormulaFn ?OBJECT :OBJECT 
+               (SubstituteFormulaFn ?SUBJECT :SUBJECT 
+                   (SubstituteFormulaFn ?EVENT :ACTION ?TEMPLATE)))))
+       (ist ?MT ?FACTS))
+       
+(implies 
+   (and 
+       (ist ?MT 
+           (hypotheticDenotation ?HYPOTHETIC ?PROPERNOUN ?THENAME)) 
+       (wordSemTrans ?THENAME ?PROPERNOUN RegularNounFrame ?TEMPLATE ?PROPERNOUNSEMTRANS) 
+       (evaluate ?FACTS 
+           (SubstituteFormulaFn ?HYPOTHETIC :NOUN ?TEMPLATE))) 
+   (ist ?MT ?FACTS))
+   
+(implies 
+       (and 
+           (ist ?MT 
+               (hypotheticDenotation ?HYPOTHETIC ?ADJECTIVE ?THENAME)) 
+           (wordSemTrans ?THENAME ?ADJECTIVE RegularAdjFrame ?TEMPLATE ?PROPERNOUNSEMTRANS) 
+           (evaluate ?FACTS 
+               (SubstituteFormulaFn ?HYPOTHETIC :NOUN (SubstituteFormulaFn (IsaFn ?HYPOTHETIC) :REPLACE ?TEMPLATE)))) 
+       (ist ?MT ?FACTS))
+                                         
+                                         
+(implies 
+           (hypotheticSubjectVerbPrepObject ?SUBJECT ?EVENT By-TheWord ?OBJECT) 
+           (hypotheticSubjectVerbObject ?OBJECT ?EVENT ?SUBJECT) )
+       
+(implies 
+           (hypotheticSubjectVerbObjectPrepOblique ?SUBJECT ?EVENT ?OBJECT ?PREP ?TARGET) 
+           (hypotheticSubjectVerbObject ?SUBJECT ?EVENT ?OBJECT) )
+
+(implies 
+           (hypotheticSubjectVerbPrepObjectOblique ?SUBJECT ?EVENT  ?PREP ?OBJECT ?TARGET) 
+           (hypotheticSubjectVerbObjectPrepOblique ?SUBJECT ?EVENT ?OBJECT ?PREP ?TARGET) )
+(equiv 
+           (hypotheticSubjectVerbPrepObject ?SUBJECT ?EVENT  ?PREP ?OBJECT ) 
+           (hypotheticSubjectVerbObjectPrep ?SUBJECT ?EVENT ?OBJECT ?PREP) )
+
+
+(implies 
+           (hypotheticSubjectVerbObject ?SUBJECT ?EVENT ?OBJECT) 
+           (hypotheticSubjectVerb ?SUBJECT ?EVENT) )
+           
+(implies (and
+           (ist ?MT (hypotheticSubjectVerb ?SUBJECT ?EVENT)  )
+           (ist ?MT (hypotheticDenotation ?EVENT Verb ?VERB)  )
+           (wordSemTrans ?VERB Verb IntransitiveVerbFrame ?TEMPLATE ?PRED)
+       (evaluate ?FACTS 
+           (SubstituteFormulaFn ?EVENT :ACTION 
+               (SubstituteFormulaFn ?SUBJECT :SUBJECT ?TEMPLATE))))       
+   (ist ?MT ?FACTS))
+                               
+   
+(wordSemTrans Arabian-TheWord Adjective RegularAdjFrame 
+       (conceptuallyRelated :NOUN ArabianPeninsula) adjSemTrans)
+       
+(hypotheticDenotation Hypothetic-John NounPhrase "John")       
+       
+          (and 
+   
+   
+(implies 
+       (and 
+           (ist ?MT (and (hypotheticDenotation ?EVENT Verb Be-TheWord) 
+           (hypotheticSubjectVerbPrepObject ?SUBJECT ?EVENT ?PREP-THEWORD ?OBJECT) ))
+           (prepSemTrans ?PREP-THEWORD ?N6 Post-NounPhraseModifyingFrame ?TEMPLATE)
+       (evaluate ?FACTS 
+           (SubstituteFormulaFn ?OBJECT :OBJECT 
+               (SubstituteFormulaFn ?SUBJECT :NOUN ?TEMPLATE))))       
+   (ist ?MT ?FACTS))
+                        
+       
+(implies 
+       (and 
+          (ist ?MT (hypotheticDenotation ?HYPOTHETIC ?PROPERNOUN ?THENAME)  )
+           (wordSemTrans ?THENAME ?PROPERNOUN ?RegularNounFrame ?TEMPLATE ?PROPERNOUNSEMTRANS) 
+           (evaluate ?FACTS 
+               (SubstituteFormulaFn ?HYPOTHETIC :NOUN ?TEMPLATE))) 
+   (ist ?MT ?FACTS))
+                                               
+
+       
+       
+(hypotheticDenotation Hypothetic-An-Apple NounPhrase "an apple")
+
+
+       
+       
+       ;;(posSubsumes)   
+
+              
+       
+;; (ParseMtForSourceFn E2C-Parses-CCW) 
+       
+F: (or (not (hypotheticDenotation ?HYPOTHETIC ?PROPERNOUN ?THENAME))
+       (not 
+           (wordSemTrans ?THENAME ?PROPERNOUN RegularNounFrame ?TEMPLATE ?PROPERNOUNSEMTRANS))
+       (SubstituteFormulaFn ?HYPOTHETIC :NOUN ?TEMPLATE)).
+   
+                                                          %(ParseMtForSourceFn (StringInDocumentFn E2C-Parses-CCW "A picture of a dog is in the yard")) 
+   %E2C-Parses-CCW
+   %A picture of a dog is in the yard
+
+;;%The major feature of $topic is that it encourages us to understand form in terms of area, rather than representational versimilitude thus composition in terms of odour, rather than space.  
+;;%Farewell in a pave the raw infrequent Zen. Intuitive projectile culture pen.
+;;%Extravagant dissension thy budget rape, Das erosive and ripped senile policy tape.
+;;%Abandon naivete above rude, Elliptic steroid notable artful shrewd
+;;%Appall abandon feudal practical team, Machismo furioso ripoff waste dream
+;;%
+
+;; What is integral to one of the central preoccupations of $user is the perception of the arena of contrasting the senses of smell and taste where the extraordinarily refined proportions of feces and urine subsist in a world of his own phantastical doing. 
+#|
+?- e2c("The cat in the hat sees a bat").
+
+(thereExists ?cat65 
+       (and (isa ?cat65 (OneOfFn Cat DomesticCat ) ) 
+         (and (and (isa ?sees3 Event ) (thereExists ?bat26 
+         (and (isa ?bat26 (OneOfFn BaseballBat BaseballSwing Bat-Mammal ) ) 
+         (or (awareOf ?cat65 ?bat26 ) (and (isa ?sees3 VisualPerception ) 
+         (performedBy ?sees3 ?cat65 ) (perceivedThings ?sees3 ?bat26 ) ) ) ) ) ) 
+         (thereExists ?hat27 (and (isa ?hat27 Hat ) (in-UnderspecifiedContainer ?cat65 ?hat27 ) ) ) ) ) )
+
+|#
+
+               
+
+(genFormat nearestTransitiveNeighbor "~a nearest generalization by transitivity of ~a is ~a" 
+       (TheList 
+           (TheList 2 :EQUALS :POSSESSIVE) 
+           (TheList 1 :EQUALS) 
+           (TheList 3 :EQUALS)))
+
+(#$implies 
+  (#$and
+  (#$genls ?C #$Thing) 
+    (#$evaluate ?R (#$EvaluateSubLFn 
+        (#$ExpandSubLFn 
+          (?C) 
+          (LENGTH 
+            (REMOVE-DUPLICATES 
+              (ALL-SPECS ?C)))))))
+
+  (#$ist #$BaseKB     (#$numspecs ?C ?R)))
+  
+
+(and
+(isa hypotheticSubjectVerbObjectPrepOblique QuintaryPredicate)
+(isa hypotheticSubjectVerbPrepObjectOblique QuintaryPredicate)
+(isa hypotheticSubjectVerbObjectPrep QuaternaryPredicate)
+(isa hypotheticSubjectVerbPrepObject QuaternaryPredicate)
+(isa hypotheticSubjectVerbObject TernaryPredicate)
+(isa hypotheticSubjectVerbPrep TernaryPredicate)
+(isa hypotheticSubjectVerb BinaryPredicate))
+
+       
+;;%hypotheticSubjectVerb
+(find-or-create-constant "hypotheticSubjectVerbObjectPrepOblique")
+(find-or-create-constant "hypotheticSubjectVerbPrepObjectOblique")
+(find-or-create-constant "hypotheticSubjectVerbObjectPrep")
+(find-or-create-constant "hypotheticSubjectVerbPrepObject")
+(find-or-create-constant "hypotheticSubjectVerbObject")
+(find-or-create-constant "hypotheticSubjectVerbPrep")
+(find-or-create-constant "hypotheticSubjectVerb")
+
+default mt: BaseKB.
+constant: E2C-Parser.
+isa: SoftwareAgent.
+
+;;E2C-Parses-CCW
+
+F:
+(implies  (ist  (TextStringPropositionalExtractionMtFn #$E2C-Parser #$EnglishLanguage "Bill Clinton lives in New York State") ?FACT)   
+    (isa ?FACT CycLPropositionalSentence)).
+    
+ 
+ ;;(#$DocumentSentenceFn DOCUMENT SENTENCE-LOCATOR)." 
+         
+         
+(hypotheticSubjectVerbObjectPrepOblique Hypothetic-He Hypothetic-Gave-To Hypothetic-A-Gift To-TheWord Hypothetic-Her-Mother)
+
+F: (implies 
+       (and 
+           (hypotheticDenotation ?EVENT Verb ?VERB) 
+          (ist ?MT (hypotheticSubjectVerbObjectPrepOblique ?SUBJECT ?EVENT ?OBJECT ?PREP ?TARGET))
+           (wordSemTrans ?VERB Verb     (PPCompFrameFn DitransitivePPFrameType ?PREP)  ?TEMPLATE ?PRED) 
+           (evaluate ?SUBSTITUTEFORMULAFN 
+               (SubstituteFormulaFn ?OBJECT :OBJECT 
+                   (SubstituteFormulaFn ?SUBJECT :SUBJECT 
+                       (SubstituteFormulaFn ?EVENT :ACTION 
+                           (SubstituteFormulaFn ?TARGET :OBLIQUE-OBJECT ?TEMPLATE)))))) 
+       (ist ?MT ?SUBSTITUTEFORMULAFN)).
+       
+       
+(implies 
+(and
+(hypotheticSubjectVerbObjectPrepOblique ?SUBJECT ?EVENT ?OBJECT ?PREP ?TARGET)
+(hypotheticDenotation ?EVENT Verb ?VERB)
+
+           (evaluate ?SUBSTITUTEFORMULAFN 
+               (SubstituteFormulaFn ?OBJECT :OBJECT 
+                   (SubstituteFormulaFn ?SUBJECT :SUBJECT 
+                        (SubstituteFormulaFn ?EVENT :ACTION 
+                            (SubstituteFormulaFn ?TARGET :OBLIQUE-OBJECT ?TEMPLATE))))))
+
+       (holdsIn ?EVENT ?SUBSTITUTEFORMULAFN))
+         
+(implies 
+       (and 
+           (hypotheticDenotation ?HYPOTHETIC-IS-IN Verb Be-TheWord) 
+           (hypotheticSubjectVerbPrepObject ?HYPOTHETIC-A-PICTURE-OF-A-DOG ?HYPOTHETIC-IS-IN ?IN-THEWORD ?HYPOTHETIC-THE-YARD) 
+           (prepSemTrans ?IN-THEWORD ?N6 Post-NounPhraseModifyingFrame ?TEMPLATE) 
+           (evaluate ?SUBSTITUTEFORMULAFN 
+               (SubstituteFormulaFn ?HYPOTHETIC-THE-YARD :OBJECT 
+                   (SubstituteFormulaFn ?HYPOTHETIC-A-PICTURE-OF-A-DOG :NOUN ?TEMPLATE)))) 
+              (ist ?MT ?SUBSTITUTEFORMULAFN))
+
+(implies 
+(and
+(hypotheticSubjectVerbObject ?SUBJECT ?EVENT ?OBJECT)
+(hypotheticDenotation ?EVENT Verb ?TheVerb)
+(verbSemTrans ?TheVerb ?N0 TransitiveNPFrame  ?TEMPLATE) 
+           (evaluate ?SUBSTITUTEFORMULAFN 
+               (SubstituteFormulaFn ?OBJECT :OBJECT 
+                   (SubstituteFormulaFn ?SUBJECT :SUBJECT 
+                        (SubstituteFormulaFn ?EVENT :ACTION ?TEMPLATE)))))
+                        
+(holdsIn ?EVENT ?SUBSTITUTEFORMULAFN)    )
+       
+                        
+
+         
+         ;;:NOUN :OBJECT
+         
+           (in-UnderspecifiedContainer :ACTION :OBJECT))
+         
+         (thereExists ?EVENT
+          (and 
+           (isa ?EVENT ?Situation-Localized) 
+           (isa ?EVENT ?Situation-Localized) 
+         
+         
+         ;  ,cycAssert(wordSemTrans(WORD,33,'Post-NounPhraseModifyingFrame',CYCL,'Preposition','prepReln-Object',and(isa(':NOUN',NOUN),isa(':OBLIQUE-OBJECT',OBJECT))),'#$EnglishMt'),fail.
+
+           (implies (and (compoundSemTrans ?WORD  (TheList ?S1)  ?POS TransitiveInfinitivePhraseFrame   ?CYCL)
+           (wordStrings ?WORDW ?S1) )
+           (wordSemTrans ?WORD 30 (PPCompFrameFn TransitiveParticleNPFrameType ?WORDW) ?CYCL ?POS compoundSemTrans True))                                               
+            
+
+           %wordSemTrans(Word,SenseNum,Frame,CycL,Pos
+           %(resultIsa FrameRestrictionFn SubcategorizationFrame)
+           %  ?SubcategorizationFrame 
+
+
+                                                                    
+                                 
+Individual : E2C-Parses-CCW
+
+Bookkeeping Assertions : 
+
+(myCreator E2C-Parses-CCW CycAdministrator) in BookkeepingMt
+(myCreationTime E2C-Parses-CCW 20051021) in BookkeepingMt
+(myCreationSecond E2C-Parses-CCW 83333) in BookkeepingMt
+
+GAF Arg : 1
+
+
+--------------------------------------------------------------------------------
+NART Arg : 1
+(ParseMtForSourceFn E2C-Parses-CCW)
+(ContextOfPCWFn E2C-Parses-CCW)
+ 
+(ParseMtForSourceFn E2C-Parses-CCW)
+(ContextOfPCWFn E2C-Parses-CCW)
+ 
+
+--------------------------------------------------------------------------------
+Miscellaneous References :
+(implies 
+       (doom:descriptionStrings ?OBJ ?DESC) 
+       (termOfUnit 
+           (DescriptiveReportFn E2C-Parses-CCW ?OBJ) 
+           (DescriptiveReportFn E2C-Parses-CCW ?OBJ)))
+(implies 
+       (doom:descriptionStrings ?OBJ ?DESC) 
+       (termOfUnit 
+           (StringInDocumentFn 
+                   (DescriptiveReportFn E2C-Parses-CCW ?OBJ) ?DESC) 
+           (StringInDocumentFn 
+                   (DescriptiveReportFn E2C-Parses-CCW ?OBJ) ?DESC)))
+                                  
+(equiv 
+       (doom:descriptionStrings ?OBJ ?DESC) 
+       (genlMt 
+           (ContextOfPCWFn 
+               (DescriptiveReportFn E2C-Parses-CCW ?OBJ)) 
+           (ParseMtForSourceFn 
+               (StringInDocumentFn 
+                   (DescriptiveReportFn E2C-Parses-CCW ?OBJ) ?DESC))))            
+            
+(implies 
+       (termOfUnit 
+           (ParseMtForSourceFn 
+               (StringInDocumentFn E2C-Parses-CCW ?SENT)) 
+           (ParseMtForSourceFn 
+               (StringInDocumentFn E2C-Parses-CCW ?SENT))) 
+       (genlMt 
+           (ContextOfPCWFn E2C-Parses-CCW) 
+           (ParseMtForSourceFn 
+               (StringInDocumentFn E2C-Parses-CCW ?SENT))))
+(implies 
+       (termOfUnit 
+           (ParseMtForSourceFn 
+               (StringInDocumentFn E2C-Parses-CCW ?SENT)) 
+           (ParseMtForSourceFn 
+               (StringInDocumentFn E2C-Parses-CCW ?SENT))) 
+       (genlMt 
+           (ParseMtForSourceFn 
+               (StringInDocumentFn E2C-Parses-CCW ?SENT)) 
+           (ParseMtForSourceFn E2C-Parses-CCW))) 
+       
+
+           
+Last Agenda operation:
+(FI-ASSERT 
+'(ist 
+       (InstanceNamedFn "arabian camel" Microtheory) 
+       (isa (InstanceNamedFn "arabian camel" Microtheory) HypotheticalContext)) 
+       
+       'doom:SituationMt ':DEFAULT)
+
+
+

@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/xprolog/path.in ...}
+
+# Name: path
+# Iterations: 10
+# TestTime: 21730 msec.
+# OverHead: 2 msec.
+# TestTime-OverHead: 21728 msec.
+# (TestTime-OverHead)/Iterations: 2172.8 msec.
+###CSV###,path,10,21730,2,21728,2172.8
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/xprolog/path.in consulted, 5 msec}
+bye

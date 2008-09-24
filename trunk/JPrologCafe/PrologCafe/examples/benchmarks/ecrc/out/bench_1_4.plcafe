@@ -1,0 +1,15 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/ecrc/bench_1_4.in ...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+# Name:             index(10000)
+# T first loop:     435 msec.
+# T compens loop:   13 msec.
+# T net:            422 msec.
+# KLips:            0.49763033175355453
+###CSV###,index(10000),435,13,422,0.49763033175355453
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/ecrc/bench_1_4.in consulted, 25 msec}
+bye

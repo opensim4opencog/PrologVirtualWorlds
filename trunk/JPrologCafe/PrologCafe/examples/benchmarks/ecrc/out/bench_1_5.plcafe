@@ -1,0 +1,38 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/ecrc/bench_1_5.in ...}
+# Name:             construct_list(100000)
+# T overall loop:   6192 msec.
+# T compens loop:   52 msec.
+# T benchmark:      6140 msec.
+# KLips:            1.6286644951140066
+###CSV###,construct_list(100000),6192,52,6140,1.6286644951140066
+
+# Name:             match_list(100000)
+# T overall loop:   5424 msec.
+# T compens loop:   46 msec.
+# T benchmark:      5378 msec.
+# KLips:            1.859427296392711
+###CSV###,match_list(100000),5424,46,5378,1.859427296392711
+
+# Name:             construct_structure(100000)
+# T overall loop:   9543 msec.
+# T compens loop:   46 msec.
+# T benchmark:      9497 msec.
+# KLips:            1.0529640939243974
+###CSV###,construct_structure(100000),9543,46,9497,1.0529640939243974
+
+# Name:             match_structure(100000)
+# T overall loop:   3900 msec.
+# T compens loop:   46 msec.
+# T benchmark:      3854 msec.
+# KLips:            2.594706798131811
+###CSV###,match_structure(100000),3900,46,3854,2.594706798131811
+
+# Name:             match_nested_structure(100000)
+# T overall loop:   686 msec.
+# T compens loop:   45 msec.
+# T benchmark:      641 msec.
+# KLips:            0.15600624024961
+###CSV###,match_nested_structure(100000),686,45,641,0.15600624024961
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/ecrc/bench_1_5.in consulted, 8 msec}
+bye

@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/nreverse.in ...}
+
+# Name: nreverse
+# Iterations: 1000
+# TestTime: 290 msec.
+# OverHead: 83 msec.
+# TestTime-OverHead: 207 msec.
+# (TestTime-OverHead)/Iterations: 0.207 msec.
+###CSV###,nreverse,1000,290,83,207,0.207
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/nreverse.in consulted, 5 msec}
+bye

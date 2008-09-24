@@ -1,0 +1,18 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/tak.in ...}
+{expanding trail...}
+{expanding choice point stack...}
+{expanding trail...}
+{expanding choice point stack...}
+{expanding trail...}
+{expanding choice point stack...}
+
+# Name: tak
+# Iterations: 1000
+# TestTime: 131209 msec.
+# OverHead: 89 msec.
+# TestTime-OverHead: 131120 msec.
+# (TestTime-OverHead)/Iterations: 131.12 msec.
+###CSV###,tak,1000,131209,89,131120,131.12
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/tak.in consulted, 6 msec}
+bye

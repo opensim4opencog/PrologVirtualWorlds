@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/browse.in ...}
+
+# Name: browse
+# Iterations: 1000
+# TestTime: 322946 msec.
+# OverHead: 94 msec.
+# TestTime-OverHead: 322852 msec.
+# (TestTime-OverHead)/Iterations: 322.852 msec.
+###CSV###,browse,1000,322946,94,322852,322.852
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/browse.in consulted, 5 msec}
+bye

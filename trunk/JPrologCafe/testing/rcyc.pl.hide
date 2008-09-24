@@ -1,0 +1,274 @@
+
+:- style_check(-discontiguous).
+:- style_check(-singleton).
+:- style_check(-atom).
+:- style_check(+string).
+
+:- use_module(library(occurs)).
+:-use_module(library(make)).
+:-use_module(library(lists)).
+%:- ([owl_parser]).
+
+:-redefine_system_predicate(list_undefined).
+:-redefine_system_predicate(make:list_undefined).
+
+:-redefine_system_predicate(between/3).
+
+list_undefined.
+make:list_undefined.
+
+%:-[cyc_nl].
+
+
+
+%:- [tasks_sd2].
+%:- [sdom2].
+%:- [tasks_sd3].
+%:- [sdom3].
+%:- [tasks_sd4].
+%:- [sdom4].
+
+
+%kb(Out):-assertion([[ist,Mt,Form],S,D]),once((s2p([ist,Mt,Form],ist(MM,P),Opt),sort(Opt,DSO),P=..PP,append(PP,[MM,prop(DSO,D,S)],PPP),Out=..PPP)).
+
+
+tellall(Sig):-flag(Sig,_,0),Sig,format('~q.~n',[Sig]),flag(Sig,X,X+1),fail.
+tellall(Sig):-!,flag(Sig,X,X),format(user_error,'% ~q total ~d.~n',[Sig,X]).
+
+%:-['plassertions'].
+%:-['plconstants'].
+%:-['plnarts'].
+
+:-index(asserted(1, 1, 1, 1)).
+:-dynamic(asserted/4).
+%:-['asserted'].
+
+
+loadRCyc(File):-
+      see(File),
+      repeat,
+      read(Term),
+      once(loadRCycTerm(Term)),
+      Term = end_of_file,seen.
+
+loadRCycTerm(termOfUnit(_,_,_,_)).
+loadRCycTerm('.'(X,Y,Z,T)):-!,loadRCycTerm('istFn'(Z,X,Y,T,_)).
+loadRCycTerm(X):-X=..[F|ARGS],
+         append(Left,[_,_],ARGS),
+         NX=..[F|Left],
+         catch(loadRCycTerm2(NX),E,(format(user_error,'~q.~n',[E]))),!.
+
+loadRCycTerm2(NX):-once(catch(once(clause(NX,_,_)),_,fail)->true;assert(NX)).
+
+lrc:-loadRCyc('plassertions.pl').
+
+%:-use_module(library(check)).
+:-abolish(check:list_undefined/0).
+:-abolish(list_undefined/0).
+list_undefined.
+
+
+assertable(Pred,Arg1,Arg2,[],MT):-
+         asserted(arity,Pred,2,[]),
+         asserted(arg1Isa,Pred,Arg1C,[]),asserted(arg2Isa,Pred,Arg2C,[]),
+         asserted(isa,Arg2,Arg2C,[]),asserted(isa,Arg1,Arg1C,[]).
+
+predAccess(Pred,assertedMt):-var(Pred),!,fail.
+predAccess(comment,assertedMt).
+predAccess(termOfUnit,assertedMt).
+predAccess(cyclistNotes,assertedMt).
+predAccess(Pred,assertedMt):-asserted(argIsa, Pred, _, ['ProperNameString']).
+
+assertedLocal(PredO,Arg1O,Arg2O,ArgSO):-
+   assertedMt(PredO,Arg1O,Arg2O,ArgSO,MT),
+   not(Arg2O=[_,_,_,_|_]),
+   not(predAccess(PredO,assertedMt)).
+
+
+
+
+
+:-dynamic(inferAsserted/4).
+%inferAsserted(nearestIsa,X,Y,[]):-asserted(isa,X,Y,[]).
+%inferAsserted(nearestGenls,X,Y,[]):-asserted(genls,X,Y,[]).
+%inferAsserted(nearestGenlMt,X,Y,[]):-asserted(genlMt,X,Y,[]).
+
+rewriteAssertions:-
+%      abolish(asserted/4),dynamic(asserted/4),
+      tell('asserted.pl'),
+      format('
+:- style_check(-singleton).
+:- style_check(-discontiguous).
+:- style_check(-atom).
+:- style_check(+string).
+:-index(asserted(1,1,1,1)).
+:-dynamic(asserted/4).
+asserted(A,B,C,D):-inferAsserted(A,B,C,D).
+             ~n',[]),!,
+      ignore((assertedMt(PredO,Arg1O,Arg2O,ArgSO,MT),
+      writeAssertions(assertedMt(PredO,Arg1O,Arg2O,ArgSO,MT)),
+      fail)),
+      told,
+     !. % ['asserted.pl'].
+
+writeAssertions(assertedMt(PredO,Arg1O,Arg2O,ArgSO,MT)):-fail.
+writeAssertions(assertedMt(PredO,Arg1O,Arg2O,ArgSO,MT)):-!,
+      format('~q.~n',[asserted(PredO,Arg1O,Arg2O,ArgSO)]).
+
+
+rewriteAssertions2:-
+         abolish(asserted/4),
+         dynamic(asserted/4),
+      tell('asserted.pl'),
+      format('
+:- style_check(-singleton).
+:- style_check(-discontiguous).
+:- style_check(-atom).
+:- style_check(+string).
+:-index(asserted(1,1,1,1)).
+:-dynamic(asserted/4).
+asserted(A,B,C,D):-inferAsserted(A,B,C,D).
+             ~n',[]),!,
+      ignore((assertedLocal(PredO,Arg1O,Arg2O,ArgSO),format('~q.~n',[asserted(PredO,Arg1O,Arg2O,ArgSO)]),fail)),
+      told,
+      !. %['asserted.pl'].
+
+
+assertedMt(PredO,Arg1O,Arg2O,ArgSO,MTO):-assertedMt(PredO,Arg1O,Arg2O,ArgSO,MTO,_Vars).
+assertedMt(PredO,Arg1O,Arg2O,ArgSO,MTO,Vars):-
+   assertion(_ID,Pred,Rest,MT,EL,_TRUE,_FORWARD,_MONOTONIC,_DEDUCED,_DEPENDANTS,_ARGUMENT,_WHEN20050225,_WHO),
+   not(member(Pred,[termOfUnit,comment,cyclistNotes])),
+   xform([Pred|Rest],MT,EL,PredO,Arg1O,Arg2O,ArgSO,MTO,Vars).
+
+xform(HL,MT,EL,PredO,Arg1O,Arg2O,ArgSO,MTO,Vars):-   
+   cyc:s2p(EL,ELO,EV),
+   cyc:s2p(HL,HLO,HV),
+   cyc:s2p(MT,MTO,MV),
+   append(EV,HV,EH),
+   append(EH,MV,VarsI),!,
+   safe_sort(VarsI,Vars),!,   
+   recode(ELO,HLO,NLO),
+   decodeEL(NLO,PredO,Arg1O,Arg2O,ArgSO,MTO).
+
+%   ((functor(HLO,F,_),functor(ELO,F,_)) -> decodeEL(HLO,PredO,Arg1O,Arg2O,ArgSO,MTO);(decodeEL(el(ELO),PredO,Arg1O,Arg2O,ArgSO,MTO);decodeEL(HLO,PredO,Arg1O,Arg2O,ArgSO,MTO))).
+%   ((ELO=HLO) -> decodeEL(HLO,PredO,Arg1O,Arg2O,ArgSO,MTO);(decodeEL(el(ELO),PredO,Arg1O,Arg2O,ArgSO,MTO);decodeEL(HLO,PredO,Arg1O,Arg2O,ArgSO,MTO))).
+
+
+%recode(HL,HL,HL):-!. %var(HL);number(HL);atom(HL),!.
+recode(EL,HL,EL):-unify_with_occurs_check(EL,HL),!.
+recode(EL,HL,EL):-var(HL),!.
+recode(EL,HL,HL):-var(EL),!.
+recode([E|EL],[H|HL],[N|NL]):-!,recode(E,H,N),recode(EL,HL,NL).
+recode(_,nart(NART),nart(NART)):-!.
+recode(nart(NART),_,nart(NART)):-!.
+recode(EL,assertionID(_),EL):-!.
+recode(assertionID(_),EL,EL):-!.
+recode(EL,HL,NL):-EL=..[P|ELL],HL=..[P|HLL],!,recode(ELL,HLL,NLL),NL=..[P|NLL].
+recode(EL,HL,EL).
+%srecode(EL,HL,HL).
+   
+
+safe_sort(Vars,Vars):-var(Vars),!.
+safe_sort(VarsI,Vars):-sort(VarsI,Vars).
+
+decodeEL(ELO,PredO,Arg1O,Arg2O,ArgSO,MTO):-
+   once(((ELO=..[PredO,Arg1O],Arg2O=[],ArgSO=[]);
+   ELO=..[PredO,Arg1O,Arg2O|ArgSO])).
+ 
+cycQuery2(X):-call_with_depth_limit(cycQFull(X),3,L),not(depth_limit_exceeded=L).
+
+%cycQuery2(X):-trand((L=H;genlPreds(L,H,_,_)),arity(L,A,_,_),functor(X,H,A)),X=..[L|XS],append([L|XS],[MT,_],XX),P=..XX,catch(P,_,fail).
+
+cycQ(X):-var(X),!,asserted(F,Arg1,Arg2,Rest),X=..[F,Arg1,Arg2|Rest].
+cycQ(X):-ground(X),!,cycQueryBoth(X),!.
+cycQ(X):-free_variables(X,[V]),!,cycQuery(X).
+cycQ(X):-cycQueryBoth(X).
+
+cycQueryBoth(X):-cycQuery(X).
+cycQueryBoth(X):-cycQFull(X).
+
+
+%constantFind(Name,R):-evalSubL('constant-apropos'(string(Name)),R:_).
+
+cycQueryV(Vars,CycL):-free_variables(Vars,Free),cyc:cycQueryReal(CycL,'EverythingPSC',Free,Backchains,Number,Time,Depth).
+
+cycQFull([P,Arg1,Arg2]):-nonvar(P),nonvar(Arg1),cycQueryV(Arg2,and(relationAllInstance(P,Type,Arg2),isa(Arg1,Type))).
+cycQFull([P,Obj,Arg2]):-cycQ(isa(Obj,Type)),cycQPred(relationAllInstance,[P,Type,Arg2]).
+cycQFull([P|Rest]):-!,cycQPred(P,Rest).
+cycQFull(C):-compound(C),C=..[P|Rest],cycQPred(P,Rest).
+%cycQFull(isa(X,Z)):-nonvar(Z),!,((Y=Z);transitive(genls,Y,Z)),ground(Y),not(Z=Y),binPred(isa,X,Y).
+cycQFull(and(X,Y)):-cycQ(X),cycQ(Y).
+cycQFull(and(X,Y,Z)):-cycQ(X),cycQ(Y),cycQ(Z).
+cycQFull(X):- X=..[H|XS], transitive(genlPreds,L,H),debugFmt(genlPreds(L,H)),cycQPred(L,XS).
+cycQFull(C):-binPred(implies,A,C),not(contains_term(C,A)),debugFmt(implies(A,C)),cycQFull(A).
+
+binPred(Pred,L,H):-cycQPred(Pred,[L,H]).
+
+cycQPred(P,[Arg1]):-asserted(P,Arg1,[],[]).
+cycQPred(P,[Arg1,Arg2|Rest]):-!,asserted(P,Arg1,Arg2,Rest).
+
+transitive(Pred,L,H):- (binPred(Pred,L,M),(H=M;(binPred(Pred,M,M2),(H=M2;(binPred(Pred,M2,M3),
+   (H=M3;(binPred(Pred,M3,M4),(H=M4;(binPred(Pred,M4,M5),(H=M5;(binPred(Pred,M5,M6),(H=M6;(binPred(Pred,M6,H)))))))))))))).
+
+worthTry(P).
+
+my_exec(I,J):- catch('$toplevel':'$execute'(I, J),E,(format(user_error,'% ~q.~n',[E]),fail)).
+
+avar(AVAR).
+unify_avar(AVAR,F):-compound(F),arg(N,F,C),compound(C),C=avar(AVAR),!.
+unify_avar(AVAR,avar(AVAR)):-!.
+unify_avar(AVAR,F).
+      
+      bindIgnore([]):-!.
+bindIgnore([X|L]):-ignore(X),bindIgnore(L).
+
+
+
+
+trand(X,Y):-free_variables(X,XX),free_variables(Y,YY),trand2(X,XX,Y,YY).
+trand(X,Y,Z):-trand(trand(X,Y),Z).
+trand2(X,[],Y,_):-!,X,Y.
+trand2(X,_,Y,[]):-!,Y,X.
+trand2(X,XX,Y,YY):-length(XX,NX),length(YY,NY),!, ((NY>NX) -> (Y,X) ; (X,Y)).
+
+
+
+badQuery(genls(X,X)).
+
+repl_prolog:-put_attr(AVAR,self,AVAR),repl_prolog(AVAR).
+
+repl_prolog(AVAR):-
+        flag('$tracing', A, off),
+        flag('$break_level', B, B),
+        ignore((
+        repeat,
+        (   '$toplevel':'$module'(C, C),
+            (   stream_property(user_input, tty(true))
+            ->  '$toplevel':'$system_prompt'(C, B, D),
+                '$toplevel':prompt(E, '|    ')
+            ;   D='',
+                '$toplevel':prompt(E, '')
+            ),
+            trim_stacks,
+            '$toplevel':read_query(D, F, G),
+            unify_avar(AVAR,F),
+            '$toplevel':prompt(H, E),
+            '$toplevel':call_expand_query(F, I, G, J)
+        -> my_exec(I,J)
+        ),fail)),repl_prolog(AVAR).      
+      
+
+%:- [tasks_sd2].
+%:- [sdom2].
+%:- [tasks_sd3].
+%:- [sdom3].
+%:- [tasks_sd4].
+%:- [sdom4].
+
+
+qsize(X):-free_variables(X,F),qsizeV(F,X).
+
+qsizeV(F,X):-findall(F,X,L),length(L,N),sort(L,LS),length(LS,NS),format('% Size ~q = ~q:~q~n',[X,N,NS]),member(F,LS).
+
+
+

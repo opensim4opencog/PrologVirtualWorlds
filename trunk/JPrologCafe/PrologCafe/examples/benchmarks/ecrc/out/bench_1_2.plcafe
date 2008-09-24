@@ -1,0 +1,57 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/ecrc/bench_1_2.in ...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+{expanding choice point stack...}
+# Name:             choice_point(10000)
+# T overall loop:   602 msec.
+# T compens loop:   14 msec.
+# T net:            588 msec.
+# KLips:            0.34013605442176875
+###CSV###,choice_point(10000),602,14,588,0.34013605442176875
+
+# Name:             choice_point(10000)
+# T overall loop:   206 msec.
+# T compens loop:   4 msec.
+# T net:            202 msec.
+# KLips:            0.9900990099009902
+###CSV###,choice_point(10000),206,4,202,0.9900990099009902
+
+# Name:             choice_point0ar(10000)
+# T overall loop:   235 msec.
+# T compens loop:   5 msec.
+# T net:            230 msec.
+# KLips:            0.8695652173913043
+###CSV###,choice_point0ar(10000),235,5,230,0.8695652173913043
+
+# Name:             baktrak1(1000000)
+# T overall loop:   4970 msec.
+# T compens loop:   461 msec.
+# T net:            4509 msec.
+# KLips:            4.435573297848746
+###CSV###,baktrak1(1000000),4970,461,4509,4.435573297848746
+
+# Name:             baktrak2(1000000)
+# T overall loop:   3402 msec.
+# T compens loop:   462 msec.
+# T net:            2940 msec.
+# KLips:            6.802721088435375
+###CSV###,baktrak2(1000000),3402,462,2940,6.802721088435375
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/ecrc/bench_1_2.in consulted, 4 msec}
+bye

@@ -1,0 +1,106 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/ecrc/bench_2.in ...}
+# Name:             fibonacci(10000)
+# Net Time is:      29207 msec.
+# KLips are:        1.688636285821892
+###CSV###,fibonacci(10000),29217,10,29207,1.688636285821892
+
+# Name:             map(100000)
+# Net Time is:      3762 msec.
+# KLips are:        1.8075491759702287
+###CSV###,map(100000),3810,48,3762,1.8075491759702287
+
+# Name:             mham(100)
+# Net Time is:      22049 msec.
+# KLips are:        2.2396661980135155
+###CSV###,mham(100),22049,0,22049,2.2396661980135155
+
+# Name:             mutest(10000)
+# Net Time is:      6249 msec.
+# KLips are:        2.185949751960314
+###CSV###,mutest(10000),6254,5,6249,2.185949751960314
+
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+{expanding trail...}
+# Name:             qs(10000)
+# Net Time is:      5118 msec.
+# KLips are:        1.1742868307932786
+###CSV###,qs(10000),5123,5,5118,1.1742868307932786
+
+# Name:             qu(10000)
+# Net Time is:      2241 msec.
+# KLips are:        3.0522088353413657
+###CSV###,qu(10000),2246,5,2241,3.0522088353413657
+
+# Name:             query(10000)
+# Net Time is:      9439 msec.
+# KLips are:        2.43034219726666
+###CSV###,query(10000),9443,4,9439,2.43034219726666
+
+# Name:             differen(100000)
+# Net Time is:      4578 msec.
+# KLips are:        1.5508955875928352
+###CSV###,differen(100000),4624,46,4578,1.5508955875928352
+
+{expanding trail...}
+{expanding trail...}
+# Name:             diff(10000)
+# Net Time is:      3217 msec.
+# KLips are:        1.889959589679826
+###CSV###,diff(10000),3222,5,3217,1.889959589679826
+
+# Name:             nrev(5000)
+# Net Time is:      7279 msec.
+# KLips are:        1.7182993543069103
+###CSV###,nrev(5000),7279,0,7279,1.7182993543069103
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/ecrc/bench_2.in consulted, 3 msec}
+bye

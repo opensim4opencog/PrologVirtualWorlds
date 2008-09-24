@@ -1,0 +1,30 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/brahme/plbench.in ...}
+
+# Name: g1f(5000)
+# Iterations: 100
+# TestTime: 2221 msec.
+# OverHead: 14 msec.
+# TestTime-OverHead: 2207 msec.
+# (TestTime-OverHead)/Iterations: 22.07 msec.
+###CSV###,g1f(5000),100,2221,14,2207,22.07
+
+
+# Name: g2f(5000)
+# Iterations: 100
+# TestTime: 727 msec.
+# OverHead: 7 msec.
+# TestTime-OverHead: 720 msec.
+# (TestTime-OverHead)/Iterations: 7.2 msec.
+###CSV###,g2f(5000),100,727,7,720,7.2
+
+
+# Name: g2a(5000)
+# Iterations: 10
+# TestTime: 45382 msec.
+# OverHead: 2 msec.
+# TestTime-OverHead: 45380 msec.
+# (TestTime-OverHead)/Iterations: 4538.0 msec.
+###CSV###,g2a(5000),10,45382,2,45380,4538.0
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/brahme/plbench.in consulted, 3 msec}
+bye

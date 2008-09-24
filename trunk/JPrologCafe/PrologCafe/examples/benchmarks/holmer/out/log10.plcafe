@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/log10.in ...}
+
+# Name: log10
+# Iterations: 1000
+# TestTime: 171 msec.
+# OverHead: 84 msec.
+# TestTime-OverHead: 87 msec.
+# (TestTime-OverHead)/Iterations: 0.087 msec.
+###CSV###,log10,1000,171,84,87,0.087
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/log10.in consulted, 5 msec}
+bye

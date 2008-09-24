@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/portland/genlist.in ...}
+
+# Name: make_list(300)
+# Iterations: 1000
+# TestTime: 19612 msec.
+# OverHead: 83 msec.
+# TestTime-OverHead: 19529 msec.
+# (TestTime-OverHead)/Iterations: 19.529 msec.
+###CSV###,make_list(300),1000,19612,83,19529,19.529
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/portland/genlist.in consulted, 20 msec}
+bye

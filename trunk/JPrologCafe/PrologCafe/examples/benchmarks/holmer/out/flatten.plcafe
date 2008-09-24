@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/flatten.in ...}
+
+# Name: flatten
+# Iterations: 1000
+# TestTime: 704 msec.
+# OverHead: 79 msec.
+# TestTime-OverHead: 625 msec.
+# (TestTime-OverHead)/Iterations: 0.625 msec.
+###CSV###,flatten,1000,704,79,625,0.625
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/flatten.in consulted, 6 msec}
+bye

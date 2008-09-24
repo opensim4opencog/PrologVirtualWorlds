@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/fast_mu.in ...}
+
+# Name: fast_mu
+# Iterations: 1000
+# TestTime: 617 msec.
+# OverHead: 82 msec.
+# TestTime-OverHead: 535 msec.
+# (TestTime-OverHead)/Iterations: 0.535 msec.
+###CSV###,fast_mu,1000,617,82,535,0.535
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/fast_mu.in consulted, 6 msec}
+bye

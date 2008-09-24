@@ -1,0 +1,3816 @@
+begin_predicate(system_predicate/1).
+        package_name('jp.ac.kobe_u.cs.prolog.builtin').
+        import_package('jp.ac.kobe_u.cs.prolog.lang').
+        info([system_predicate/1, 'system.pl']).
+main(system_predicate/1, (public)) :
+        put_con(system_predicate/1, s(1)).
+        put_con(true, s(2)).
+        put_con(therwise, s(3)).
+        put_con(fail, s(4)).
+        put_con(false, s(5)).
+        put_con(!, s(6)).
+        put_con('$get_level'/1, s(7)).
+        put_con('$neck_cut', s(8)).
+        put_con('$cut'/1, s(9)).
+        put_con(^ / 2, s(10)).
+        put_con((',')/2, s(11)).
+        put_con((;)/2, s(12)).
+        put_con((->)/2, s(13)).
+        put_con(call/1, s(14)).
+        put_con(catch/3, s(15)).
+        put_con(throw/1, s(16)).
+        put_con(on_exception/3, s(17)).
+        put_con(raise_exception/1, s(18)).
+        put_con((=)/2, s(19)).
+        put_con('$unify'/2, s(20)).
+        put_con((\=)/2, s(21)).
+        put_con('$not_unifiable'/2, s(22)).
+        put_con(var/1, s(23)).
+        put_con(atom/1, s(24)).
+        put_con(integer/1, s(25)).
+        put_con(float/1, s(26)).
+        put_con(atomic/1, s(27)).
+        put_con(compound/1, s(28)).
+        put_con(nonvar/1, s(29)).
+        put_con(number/1, s(30)).
+        put_con(java/1, s(31)).
+        put_con(java/2, s(32)).
+        put_con(closure/1, s(33)).
+        put_con(ground/1, s(34)).
+        put_con(callable/1, s(35)).
+        put_con((==)/2, s(36)).
+        put_con('$equality_of_term'/2, s(37)).
+        put_con((\==)/2, s(38)).
+        put_con('$inequality_of_term'/2, s(39)).
+        put_con((@<)/2, s(40)).
+        put_con('$before'/2, s(41)).
+        put_con((@>)/2, s(42)).
+        put_con('$after'/2, s(43)).
+        put_con((@=<)/2, s(44)).
+        put_con('$not_after'/2, s(45)).
+        put_con((@>=)/2, s(46)).
+        put_con('$not_before'/2, s(47)).
+        put_con(?= / 2, s(48)).
+        put_con('$identical_or_cannot_unify'/2, s(49)).
+        put_con(compare/3, s(50)).
+        put_con(sort/2, s(51)).
+        put_con(keysort/2, s(52)).
+        put_con(merge/3, s(53)).
+        put_con(arg/3, s(54)).
+        put_con(functor/3, s(55)).
+        put_con((=..)/2, s(56)).
+        put_con('$univ'/2, s(57)).
+        put_con(copy_term/2, s(58)).
+        put_con((is)/2, s(59)).
+        put_con('$abs'/2, s(60)).
+        put_con('$asin'/2, s(61)).
+        put_con('$acos'/2, s(62)).
+        put_con('$atan'/2, s(63)).
+        put_con('$bitwise_conj'/3, s(64)).
+        put_con('$bitwise_disj'/3, s(65)).
+        put_con('$bitwise_exclusive_or'/3, s(66)).
+        put_con('$bitwise_neg'/2, s(67)).
+        put_con('$ceil'/2, s(68)).
+        put_con('$cos'/2, s(69)).
+        put_con('$degrees'/2, s(70)).
+        put_con('$exp'/2, s(71)).
+        put_con('$float'/2, s(72)).
+        put_con('$float_integer_part'/2, s(73)).
+        put_con('$float_fractional_part'/2, s(74)).
+        put_con('$float_quotient'/3, s(75)).
+        put_con('$floor'/2, s(76)).
+        put_con('$int_quotient'/3, s(77)).
+        put_con('$log'/2, s(78)).
+        put_con('$max'/3, s(79)).
+        put_con('$min'/3, s(80)).
+        put_con('$minus'/3, s(81)).
+        put_con('$mod'/3, s(82)).
+        put_con('$multi'/3, s(83)).
+        put_con('$plus'/3, s(84)).
+        put_con('$pow'/3, s(85)).
+        put_con('$radians'/2, s(86)).
+        put_con('$rint'/2, s(87)).
+        put_con('$round'/2, s(88)).
+        put_con('$shift_left'/3, s(89)).
+        put_con('$shift_right'/3, s(90)).
+        put_con('$sign'/2, s(91)).
+        put_con('$sin'/2, s(92)).
+        put_con('$sqrt'/2, s(93)).
+        put_con('$tan'/2, s(94)).
+        put_con('$truncate'/2, s(95)).
+        put_con((=:=)/2, s(96)).
+        put_con('$arith_equal'/2, s(97)).
+        put_con((=\=)/2, s(98)).
+        put_con('$arith_not_equal'/2, s(99)).
+        put_con((<)/2, s(100)).
+        put_con('$less_than'/2, s(101)).
+        put_con((=<)/2, s(102)).
+        put_con('$less_or_equal'/2, s(103)).
+        put_con((>)/2, s(104)).
+        put_con('$greater_than'/2, s(105)).
+        put_con((>=)/2, s(106)).
+        put_con('$greater_or_equal'/2, s(107)).
+        put_con(clause/2, s(108)).
+        put_con((initialization)/2, s(109)).
+        put_con('$new_indexing_hash'/3, s(110)).
+        put_con(assert/1, s(111)).
+        put_con(assertz/1, s(112)).
+        put_con(asserta/1, s(113)).
+        put_con(retract/1, s(114)).
+        put_con(abolish/1, s(115)).
+        put_con(retractall/1, s(116)).
+        put_con(findall/3, s(117)).
+        put_con(bagof/3, s(118)).
+        put_con(setof/3, s(119)).
+        put_con(current_input/1, s(120)).
+        put_con(current_output/1, s(121)).
+        put_con(set_input/1, s(122)).
+        put_con(set_output/1, s(123)).
+        put_con(open/3, s(124)).
+        put_con(open/4, s(125)).
+        put_con(close/1, s(126)).
+        put_con(close/2, s(127)).
+        put_con(flush_output/1, s(128)).
+        put_con(flush_output, s(129)).
+        put_con(stream_property/2, s(130)).
+        put_con(get_char/1, s(131)).
+        put_con(get_char/2, s(132)).
+        put_con(get_code/1, s(133)).
+        put_con(get_code/2, s(134)).
+        put_con(peek_char/1, s(135)).
+        put_con(peek_char/2, s(136)).
+        put_con(peek_code/1, s(137)).
+        put_con(peek_code/2, s(138)).
+        put_con(put_char/1, s(139)).
+        put_con(put_char/2, s(140)).
+        put_con(put_code/1, s(141)).
+        put_con(put_code/2, s(142)).
+        put_con(nl, s(143)).
+        put_con(nl/1, s(144)).
+        put_con(get0/1, s(145)).
+        put_con(get0/2, s(146)).
+        put_con(get/1, s(147)).
+        put_con(get/2, s(148)).
+        put_con(put/1, s(149)).
+        put_con(put/2, s(150)).
+        put_con(tab/1, s(151)).
+        put_con(tab/2, s(152)).
+        put_con(skip/1, s(153)).
+        put_con(skip/2, s(154)).
+        put_con(get_byte/1, s(155)).
+        put_con(get_byte/2, s(156)).
+        put_con(peek_byte/1, s(157)).
+        put_con(peek_byte/2, s(158)).
+        put_con(put_byte/1, s(159)).
+        put_con(put_byte/2, s(160)).
+        put_con(read/1, s(161)).
+        put_con(read/2, s(162)).
+        put_con(read_with_variables/2, s(163)).
+        put_con(read_with_variables/3, s(164)).
+        put_con(read_line/1, s(165)).
+        put_con(read_line/2, s(166)).
+        put_con(write/1, s(167)).
+        put_con(write/2, s(168)).
+        put_con(writeq/1, s(169)).
+        put_con(writeq/2, s(170)).
+        put_con(write_canonical/1, s(171)).
+        put_con(write_canonical/2, s(172)).
+        put_con(write_term/2, s(173)).
+        put_con(write_term/3, s(174)).
+        put_con(op/3, s(175)).
+        put_con(current_op/3, s(176)).
+        put_con((\+)/1, s(177)).
+        put_con(once/1, s(178)).
+        put_con(repeat, s(179)).
+        put_con(atom_length/2, s(180)).
+        put_con(atom_concat/3, s(181)).
+        put_con(sub_atom/5, s(182)).
+        put_con(atom_chars/2, s(183)).
+        put_con(atom_codes/2, s(184)).
+        put_con(char_code/2, s(185)).
+        put_con(number_chars/2, s(186)).
+        put_con(number_codes/2, s(187)).
+        put_con(name/2, s(188)).
+        put_con(set_prolog_flag/2, s(189)).
+        put_con(current_prolog_flag/2, s(190)).
+        put_con(halt, s(191)).
+        put_con(halt/1, s(192)).
+        put_con(abort, s(193)).
+        put_con('C'/3, s(194)).
+        put_con(expand_term/2, s(195)).
+        put_con(new_hash/1, s(196)).
+        put_con(new_hash/2, s(197)).
+        put_con(hash_clear/1, s(198)).
+        put_con(hash_contains_key/2, s(199)).
+        put_con(hash_get/3, s(200)).
+        put_con(hash_is_empty/1, s(201)).
+        put_con(hash_keys/2, s(202)).
+        put_con(hash_map/2, s(203)).
+        put_con(hash_put/3, s(204)).
+        put_con(hash_remove/2, s(205)).
+        put_con(hash_size/2, s(206)).
+        put_con('$get_hash_manager'/1, s(207)).
+        put_con(java_constructor0/2, s(208)).
+        put_con(java_constructor/2, s(209)).
+        put_con(java_declared_constructor0/2, s(210)).
+        put_con(java_declared_constructor/2, s(211)).
+        put_con(java_method0/3, s(212)).
+        put_con(java_method/3, s(213)).
+        put_con(java_declared_method0/3, s(214)).
+        put_con(java_declared_method/3, s(215)).
+        put_con(java_get_field0/3, s(216)).
+        put_con(java_get_field/3, s(217)).
+        put_con(java_get_declared_field0/3, s(218)).
+        put_con(java_get_declared_field/3, s(219)).
+        put_con(java_set_field0/3, s(220)).
+        put_con(java_set_field/3, s(221)).
+        put_con(java_set_declared_field0/3, s(222)).
+        put_con(java_set_declared_field/3, s(223)).
+        put_con(synchronized/2, s(224)).
+        put_con(java_conversion/2, s(225)).
+        put_con(cafeteria, s(226)).
+        put_con(consult/1, s(227)).
+        put_con(trace, s(228)).
+        put_con(notrace, s(229)).
+        put_con(debug, s(230)).
+        put_con(nodebug, s(231)).
+        put_con(leash/1, s(232)).
+        put_con(spy/1, s(233)).
+        put_con(nospy/1, s(234)).
+        put_con(nospyall, s(235)).
+        put_con(listing, s(236)).
+        put_con(listing/1, s(237)).
+        put_con(length/2, s(238)).
+        put_con(numbervars/3, s(239)).
+        put_con(statistics/2, s(240)).
+        label(fail/0).
+        label(system_predicate/1+var).
+        label(system_predicate/1+var+1).
+        label(system_predicate/1+var+2).
+        label(system_predicate/1+var+3).
+        label(system_predicate/1+var+4).
+        label(system_predicate/1+var+5).
+        label(system_predicate/1+var+6).
+        label(system_predicate/1+var+7).
+        label(system_predicate/1+var+8).
+        label(system_predicate/1+var+9).
+        label(system_predicate/1+var+10).
+        label(system_predicate/1+var+11).
+        label(system_predicate/1+var+12).
+        label(system_predicate/1+var+13).
+        label(system_predicate/1+var+14).
+        label(system_predicate/1+var+15).
+        label(system_predicate/1+var+16).
+        label(system_predicate/1+var+17).
+        label(system_predicate/1+var+18).
+        label(system_predicate/1+var+19).
+        label(system_predicate/1+var+20).
+        label(system_predicate/1+var+21).
+        label(system_predicate/1+var+22).
+        label(system_predicate/1+var+23).
+        label(system_predicate/1+var+24).
+        label(system_predicate/1+var+25).
+        label(system_predicate/1+var+26).
+        label(system_predicate/1+var+27).
+        label(system_predicate/1+var+28).
+        label(system_predicate/1+var+29).
+        label(system_predicate/1+var+30).
+        label(system_predicate/1+var+31).
+        label(system_predicate/1+var+32).
+        label(system_predicate/1+var+33).
+        label(system_predicate/1+var+34).
+        label(system_predicate/1+var+35).
+        label(system_predicate/1+var+36).
+        label(system_predicate/1+var+37).
+        label(system_predicate/1+var+38).
+        label(system_predicate/1+var+39).
+        label(system_predicate/1+var+40).
+        label(system_predicate/1+var+41).
+        label(system_predicate/1+var+42).
+        label(system_predicate/1+var+43).
+        label(system_predicate/1+var+44).
+        label(system_predicate/1+var+45).
+        label(system_predicate/1+var+46).
+        label(system_predicate/1+var+47).
+        label(system_predicate/1+var+48).
+        label(system_predicate/1+var+49).
+        label(system_predicate/1+var+50).
+        label(system_predicate/1+var+51).
+        label(system_predicate/1+var+52).
+        label(system_predicate/1+var+53).
+        label(system_predicate/1+var+54).
+        label(system_predicate/1+var+55).
+        label(system_predicate/1+var+56).
+        label(system_predicate/1+var+57).
+        label(system_predicate/1+var+58).
+        label(system_predicate/1+var+59).
+        label(system_predicate/1+var+60).
+        label(system_predicate/1+var+61).
+        label(system_predicate/1+var+62).
+        label(system_predicate/1+var+63).
+        label(system_predicate/1+var+64).
+        label(system_predicate/1+var+65).
+        label(system_predicate/1+var+66).
+        label(system_predicate/1+var+67).
+        label(system_predicate/1+var+68).
+        label(system_predicate/1+var+69).
+        label(system_predicate/1+var+70).
+        label(system_predicate/1+var+71).
+        label(system_predicate/1+var+72).
+        label(system_predicate/1+var+73).
+        label(system_predicate/1+var+74).
+        label(system_predicate/1+var+75).
+        label(system_predicate/1+var+76).
+        label(system_predicate/1+var+77).
+        label(system_predicate/1+var+78).
+        label(system_predicate/1+var+79).
+        label(system_predicate/1+var+80).
+        label(system_predicate/1+var+81).
+        label(system_predicate/1+var+82).
+        label(system_predicate/1+var+83).
+        label(system_predicate/1+var+84).
+        label(system_predicate/1+var+85).
+        label(system_predicate/1+var+86).
+        label(system_predicate/1+var+87).
+        label(system_predicate/1+var+88).
+        label(system_predicate/1+var+89).
+        label(system_predicate/1+var+90).
+        label(system_predicate/1+var+91).
+        label(system_predicate/1+var+92).
+        label(system_predicate/1+var+93).
+        label(system_predicate/1+var+94).
+        label(system_predicate/1+var+95).
+        label(system_predicate/1+var+96).
+        label(system_predicate/1+var+97).
+        label(system_predicate/1+var+98).
+        label(system_predicate/1+var+99).
+        label(system_predicate/1+var+100).
+        label(system_predicate/1+var+101).
+        label(system_predicate/1+var+102).
+        label(system_predicate/1+var+103).
+        label(system_predicate/1+var+104).
+        label(system_predicate/1+var+105).
+        label(system_predicate/1+var+106).
+        label(system_predicate/1+var+107).
+        label(system_predicate/1+var+108).
+        label(system_predicate/1+var+109).
+        label(system_predicate/1+var+110).
+        label(system_predicate/1+var+111).
+        label(system_predicate/1+var+112).
+        label(system_predicate/1+var+113).
+        label(system_predicate/1+var+114).
+        label(system_predicate/1+var+115).
+        label(system_predicate/1+var+116).
+        label(system_predicate/1+var+117).
+        label(system_predicate/1+var+118).
+        label(system_predicate/1+var+119).
+        label(system_predicate/1+var+120).
+        label(system_predicate/1+var+121).
+        label(system_predicate/1+var+122).
+        label(system_predicate/1+var+123).
+        label(system_predicate/1+var+124).
+        label(system_predicate/1+var+125).
+        label(system_predicate/1+var+126).
+        label(system_predicate/1+var+127).
+        label(system_predicate/1+var+128).
+        label(system_predicate/1+var+129).
+        label(system_predicate/1+var+130).
+        label(system_predicate/1+var+131).
+        label(system_predicate/1+var+132).
+        label(system_predicate/1+var+133).
+        label(system_predicate/1+var+134).
+        label(system_predicate/1+var+135).
+        label(system_predicate/1+var+136).
+        label(system_predicate/1+var+137).
+        label(system_predicate/1+var+138).
+        label(system_predicate/1+var+139).
+        label(system_predicate/1+var+140).
+        label(system_predicate/1+var+141).
+        label(system_predicate/1+var+142).
+        label(system_predicate/1+var+143).
+        label(system_predicate/1+var+144).
+        label(system_predicate/1+var+145).
+        label(system_predicate/1+var+146).
+        label(system_predicate/1+var+147).
+        label(system_predicate/1+var+148).
+        label(system_predicate/1+var+149).
+        label(system_predicate/1+var+150).
+        label(system_predicate/1+var+151).
+        label(system_predicate/1+var+152).
+        label(system_predicate/1+var+153).
+        label(system_predicate/1+var+154).
+        label(system_predicate/1+var+155).
+        label(system_predicate/1+var+156).
+        label(system_predicate/1+var+157).
+        label(system_predicate/1+var+158).
+        label(system_predicate/1+var+159).
+        label(system_predicate/1+var+160).
+        label(system_predicate/1+var+161).
+        label(system_predicate/1+var+162).
+        label(system_predicate/1+var+163).
+        label(system_predicate/1+var+164).
+        label(system_predicate/1+var+165).
+        label(system_predicate/1+var+166).
+        label(system_predicate/1+var+167).
+        label(system_predicate/1+var+168).
+        label(system_predicate/1+var+169).
+        label(system_predicate/1+var+170).
+        label(system_predicate/1+var+171).
+        label(system_predicate/1+var+172).
+        label(system_predicate/1+var+173).
+        label(system_predicate/1+var+174).
+        label(system_predicate/1+var+175).
+        label(system_predicate/1+var+176).
+        label(system_predicate/1+var+177).
+        label(system_predicate/1+var+178).
+        label(system_predicate/1+var+179).
+        label(system_predicate/1+var+180).
+        label(system_predicate/1+var+181).
+        label(system_predicate/1+var+182).
+        label(system_predicate/1+var+183).
+        label(system_predicate/1+var+184).
+        label(system_predicate/1+var+185).
+        label(system_predicate/1+var+186).
+        label(system_predicate/1+var+187).
+        label(system_predicate/1+var+188).
+        label(system_predicate/1+var+189).
+        label(system_predicate/1+var+190).
+        label(system_predicate/1+var+191).
+        label(system_predicate/1+var+192).
+        label(system_predicate/1+var+193).
+        label(system_predicate/1+var+194).
+        label(system_predicate/1+var+195).
+        label(system_predicate/1+var+196).
+        label(system_predicate/1+var+197).
+        label(system_predicate/1+var+198).
+        label(system_predicate/1+var+199).
+        label(system_predicate/1+var+200).
+        label(system_predicate/1+var+201).
+        label(system_predicate/1+var+202).
+        label(system_predicate/1+var+203).
+        label(system_predicate/1+var+204).
+        label(system_predicate/1+var+205).
+        label(system_predicate/1+var+206).
+        label(system_predicate/1+var+207).
+        label(system_predicate/1+var+208).
+        label(system_predicate/1+var+209).
+        label(system_predicate/1+var+210).
+        label(system_predicate/1+var+211).
+        label(system_predicate/1+var+212).
+        label(system_predicate/1+var+213).
+        label(system_predicate/1+var+214).
+        label(system_predicate/1+var+215).
+        label(system_predicate/1+var+216).
+        label(system_predicate/1+var+217).
+        label(system_predicate/1+var+218).
+        label(system_predicate/1+var+219).
+        label(system_predicate/1+var+220).
+        label(system_predicate/1+var+221).
+        label(system_predicate/1+var+222).
+        label(system_predicate/1+var+223).
+        label(system_predicate/1+var+224).
+        label(system_predicate/1+var+225).
+        label(system_predicate/1+var+226).
+        label(system_predicate/1+var+227).
+        label(system_predicate/1+var+228).
+        label(system_predicate/1+var+229).
+        label(system_predicate/1+var+230).
+        label(system_predicate/1+var+231).
+        label(system_predicate/1+var+232).
+        label(system_predicate/1+var+233).
+        label(system_predicate/1+var+234).
+        label(system_predicate/1+var+235).
+        label(system_predicate/1+var+236).
+        label(system_predicate/1+var+237).
+        label(system_predicate/1+var+238).
+        label(system_predicate/1+var+239).
+        label(system_predicate/1+con).
+        label(system_predicate/1+str).
+        label(system_predicate/1+1).
+        label(system_predicate/1+2).
+        label(system_predicate/1+3).
+        label(system_predicate/1+4).
+        label(system_predicate/1+5).
+        label(system_predicate/1+6).
+        label(system_predicate/1+7).
+        label(system_predicate/1+8).
+        label(system_predicate/1+9).
+        label(system_predicate/1+10).
+        label(system_predicate/1+11).
+        label(system_predicate/1+12).
+        label(system_predicate/1+13).
+        label(system_predicate/1+14).
+        label(system_predicate/1+15).
+        label(system_predicate/1+16).
+        label(system_predicate/1+17).
+        label(system_predicate/1+18).
+        label(system_predicate/1+19).
+        label(system_predicate/1+20).
+        label(system_predicate/1+21).
+        label(system_predicate/1+22).
+        label(system_predicate/1+23).
+        label(system_predicate/1+24).
+        label(system_predicate/1+25).
+        label(system_predicate/1+26).
+        label(system_predicate/1+27).
+        label(system_predicate/1+28).
+        label(system_predicate/1+29).
+        label(system_predicate/1+30).
+        label(system_predicate/1+31).
+        label(system_predicate/1+32).
+        label(system_predicate/1+33).
+        label(system_predicate/1+34).
+        label(system_predicate/1+35).
+        label(system_predicate/1+36).
+        label(system_predicate/1+37).
+        label(system_predicate/1+38).
+        label(system_predicate/1+39).
+        label(system_predicate/1+40).
+        label(system_predicate/1+41).
+        label(system_predicate/1+42).
+        label(system_predicate/1+43).
+        label(system_predicate/1+44).
+        label(system_predicate/1+45).
+        label(system_predicate/1+46).
+        label(system_predicate/1+47).
+        label(system_predicate/1+48).
+        label(system_predicate/1+49).
+        label(system_predicate/1+50).
+        label(system_predicate/1+51).
+        label(system_predicate/1+52).
+        label(system_predicate/1+53).
+        label(system_predicate/1+54).
+        label(system_predicate/1+55).
+        label(system_predicate/1+56).
+        label(system_predicate/1+57).
+        label(system_predicate/1+58).
+        label(system_predicate/1+59).
+        label(system_predicate/1+60).
+        label(system_predicate/1+61).
+        label(system_predicate/1+62).
+        label(system_predicate/1+63).
+        label(system_predicate/1+64).
+        label(system_predicate/1+65).
+        label(system_predicate/1+66).
+        label(system_predicate/1+67).
+        label(system_predicate/1+68).
+        label(system_predicate/1+69).
+        label(system_predicate/1+70).
+        label(system_predicate/1+71).
+        label(system_predicate/1+72).
+        label(system_predicate/1+73).
+        label(system_predicate/1+74).
+        label(system_predicate/1+75).
+        label(system_predicate/1+76).
+        label(system_predicate/1+77).
+        label(system_predicate/1+78).
+        label(system_predicate/1+79).
+        label(system_predicate/1+80).
+        label(system_predicate/1+81).
+        label(system_predicate/1+82).
+        label(system_predicate/1+83).
+        label(system_predicate/1+84).
+        label(system_predicate/1+85).
+        label(system_predicate/1+86).
+        label(system_predicate/1+87).
+        label(system_predicate/1+88).
+        label(system_predicate/1+89).
+        label(system_predicate/1+90).
+        label(system_predicate/1+91).
+        label(system_predicate/1+92).
+        label(system_predicate/1+93).
+        label(system_predicate/1+94).
+        label(system_predicate/1+95).
+        label(system_predicate/1+96).
+        label(system_predicate/1+97).
+        label(system_predicate/1+98).
+        label(system_predicate/1+99).
+        label(system_predicate/1+100).
+        label(system_predicate/1+101).
+        label(system_predicate/1+102).
+        label(system_predicate/1+103).
+        label(system_predicate/1+104).
+        label(system_predicate/1+105).
+        label(system_predicate/1+106).
+        label(system_predicate/1+107).
+        label(system_predicate/1+108).
+        label(system_predicate/1+109).
+        label(system_predicate/1+110).
+        label(system_predicate/1+111).
+        label(system_predicate/1+112).
+        label(system_predicate/1+113).
+        label(system_predicate/1+114).
+        label(system_predicate/1+115).
+        label(system_predicate/1+116).
+        label(system_predicate/1+117).
+        label(system_predicate/1+118).
+        label(system_predicate/1+119).
+        label(system_predicate/1+120).
+        label(system_predicate/1+121).
+        label(system_predicate/1+122).
+        label(system_predicate/1+123).
+        label(system_predicate/1+124).
+        label(system_predicate/1+125).
+        label(system_predicate/1+126).
+        label(system_predicate/1+127).
+        label(system_predicate/1+128).
+        label(system_predicate/1+129).
+        label(system_predicate/1+130).
+        label(system_predicate/1+131).
+        label(system_predicate/1+132).
+        label(system_predicate/1+133).
+        label(system_predicate/1+134).
+        label(system_predicate/1+135).
+        label(system_predicate/1+136).
+        label(system_predicate/1+137).
+        label(system_predicate/1+138).
+        label(system_predicate/1+139).
+        label(system_predicate/1+140).
+        label(system_predicate/1+141).
+        label(system_predicate/1+142).
+        label(system_predicate/1+143).
+        label(system_predicate/1+144).
+        label(system_predicate/1+145).
+        label(system_predicate/1+146).
+        label(system_predicate/1+147).
+        label(system_predicate/1+148).
+        label(system_predicate/1+149).
+        label(system_predicate/1+150).
+        label(system_predicate/1+151).
+        label(system_predicate/1+152).
+        label(system_predicate/1+153).
+        label(system_predicate/1+154).
+        label(system_predicate/1+155).
+        label(system_predicate/1+156).
+        label(system_predicate/1+157).
+        label(system_predicate/1+158).
+        label(system_predicate/1+159).
+        label(system_predicate/1+160).
+        label(system_predicate/1+161).
+        label(system_predicate/1+162).
+        label(system_predicate/1+163).
+        label(system_predicate/1+164).
+        label(system_predicate/1+165).
+        label(system_predicate/1+166).
+        label(system_predicate/1+167).
+        label(system_predicate/1+168).
+        label(system_predicate/1+169).
+        label(system_predicate/1+170).
+        label(system_predicate/1+171).
+        label(system_predicate/1+172).
+        label(system_predicate/1+173).
+        label(system_predicate/1+174).
+        label(system_predicate/1+175).
+        label(system_predicate/1+176).
+        label(system_predicate/1+177).
+        label(system_predicate/1+178).
+        label(system_predicate/1+179).
+        label(system_predicate/1+180).
+        label(system_predicate/1+181).
+        label(system_predicate/1+182).
+        label(system_predicate/1+183).
+        label(system_predicate/1+184).
+        label(system_predicate/1+185).
+        label(system_predicate/1+186).
+        label(system_predicate/1+187).
+        label(system_predicate/1+188).
+        label(system_predicate/1+189).
+        label(system_predicate/1+190).
+        label(system_predicate/1+191).
+        label(system_predicate/1+192).
+        label(system_predicate/1+193).
+        label(system_predicate/1+194).
+        label(system_predicate/1+195).
+        label(system_predicate/1+196).
+        label(system_predicate/1+197).
+        label(system_predicate/1+198).
+        label(system_predicate/1+199).
+        label(system_predicate/1+200).
+        label(system_predicate/1+201).
+        label(system_predicate/1+202).
+        label(system_predicate/1+203).
+        label(system_predicate/1+204).
+        label(system_predicate/1+205).
+        label(system_predicate/1+206).
+        label(system_predicate/1+207).
+        label(system_predicate/1+208).
+        label(system_predicate/1+209).
+        label(system_predicate/1+210).
+        label(system_predicate/1+211).
+        label(system_predicate/1+212).
+        label(system_predicate/1+213).
+        label(system_predicate/1+214).
+        label(system_predicate/1+215).
+        label(system_predicate/1+216).
+        label(system_predicate/1+217).
+        label(system_predicate/1+218).
+        label(system_predicate/1+219).
+        label(system_predicate/1+220).
+        label(system_predicate/1+221).
+        label(system_predicate/1+222).
+        label(system_predicate/1+223).
+        label(system_predicate/1+224).
+        label(system_predicate/1+225).
+        label(system_predicate/1+226).
+        label(system_predicate/1+227).
+        label(system_predicate/1+228).
+        label(system_predicate/1+229).
+        label(system_predicate/1+230).
+        label(system_predicate/1+231).
+        label(system_predicate/1+232).
+        label(system_predicate/1+233).
+        label(system_predicate/1+234).
+        label(system_predicate/1+235).
+        label(system_predicate/1+236).
+        label(system_predicate/1+237).
+        label(system_predicate/1+238).
+        label(system_predicate/1+239).
+        label(system_predicate/1+240).
+        new_hash(con, 18).
+        new_hash(str, 222).
+        static([put_hash(s(2), system_predicate/1+2, con), put_hash(s(3), system_predicate/1+3, con), put_hash(s(4), system_predicate/1+4, con), put_hash(s(5), system_predicate/1+5, con), put_hash(s(6), system_predicate/1+6, con), put_hash(s(8), system_predicate/1+8, con), put_hash(s(129), system_predicate/1+129, con), put_hash(s(143), system_predicate/1+143, con), put_hash(s(179), system_predicate/1+179, con), put_hash(s(191), system_predicate/1+191, con), put_hash(s(193), system_predicate/1+193, con), put_hash(s(226), system_predicate/1+226, con), put_hash(s(228), system_predicate/1+228, con), put_hash(s(229), system_predicate/1+229, con), put_hash(s(230), system_predicate/1+230, con), put_hash(s(231), system_predicate/1+231, con), put_hash(s(235), system_predicate/1+235, con), put_hash(s(236), system_predicate/1+236, con), put_hash(s(1), system_predicate/1+1, str), put_hash(s(7), system_predicate/1+7, str), put_hash(s(9), system_predicate/1+9, str), put_hash(s(10), system_predicate/1+10, str), put_hash(s(11), system_predicate/1+11, str), put_hash(s(12), system_predicate/1+12, str), put_hash(s(13), system_predicate/1+13, str), put_hash(s(14), system_predicate/1+14, str), put_hash(s(15), system_predicate/1+15, str), put_hash(s(16), system_predicate/1+16, str), put_hash(s(17), system_predicate/1+17, str), put_hash(s(18), system_predicate/1+18, str), put_hash(s(19), system_predicate/1+19, str), put_hash(s(20), system_predicate/1+20, str), put_hash(s(21), system_predicate/1+21, str), put_hash(s(22), system_predicate/1+22, str), put_hash(s(23), system_predicate/1+23, str), put_hash(s(24), system_predicate/1+24, str), put_hash(s(25), system_predicate/1+25, str), put_hash(s(26), system_predicate/1+26, str), put_hash(s(27), system_predicate/1+27, str), put_hash(s(28), system_predicate/1+28, str), put_hash(s(29), system_predicate/1+29, str), put_hash(s(30), system_predicate/1+30, str), put_hash(s(31), system_predicate/1+31, str), put_hash(s(32), system_predicate/1+32, str), put_hash(s(33), system_predicate/1+33, str), put_hash(s(34), system_predicate/1+34, str), put_hash(s(35), system_predicate/1+35, str), put_hash(s(36), system_predicate/1+36, str), put_hash(s(37), system_predicate/1+37, str), put_hash(s(38), system_predicate/1+38, str), put_hash(s(39), system_predicate/1+39, str), put_hash(s(40), system_predicate/1+40, str), put_hash(s(41), system_predicate/1+41, str), put_hash(s(42), system_predicate/1+42, str), put_hash(s(43), system_predicate/1+43, str), put_hash(s(44), system_predicate/1+44, str), put_hash(s(45), system_predicate/1+45, str), put_hash(s(46), system_predicate/1+46, str), put_hash(s(47), system_predicate/1+47, str), put_hash(s(48), system_predicate/1+48, str), put_hash(s(49), system_predicate/1+49, str), put_hash(s(50), system_predicate/1+50, str), put_hash(s(51), system_predicate/1+51, str), put_hash(s(52), system_predicate/1+52, str), put_hash(s(53), system_predicate/1+53, str), put_hash(s(54), system_predicate/1+54, str), put_hash(s(55), system_predicate/1+55, str), put_hash(s(56), system_predicate/1+56, str), put_hash(s(57), system_predicate/1+57, str), put_hash(s(58), system_predicate/1+58, str), put_hash(s(59), system_predicate/1+59, str), put_hash(s(60), system_predicate/1+60, str), put_hash(s(61), system_predicate/1+61, str), put_hash(s(62), system_predicate/1+62, str), put_hash(s(63), system_predicate/1+63, str), put_hash(s(64), system_predicate/1+64, str), put_hash(s(65), system_predicate/1+65, str), put_hash(s(66), system_predicate/1+66, str), put_hash(s(67), system_predicate/1+67, str), put_hash(s(68), system_predicate/1+68, str), put_hash(s(69), system_predicate/1+69, str), put_hash(s(70), system_predicate/1+70, str), put_hash(s(71), system_predicate/1+71, str), put_hash(s(72), system_predicate/1+72, str), put_hash(s(73), system_predicate/1+73, str), put_hash(s(74), system_predicate/1+74, str), put_hash(s(75), system_predicate/1+75, str), put_hash(s(76), system_predicate/1+76, str), put_hash(s(77), system_predicate/1+77, str), put_hash(s(78), system_predicate/1+78, str), put_hash(s(79), system_predicate/1+79, str), put_hash(s(80), system_predicate/1+80, str), put_hash(s(81), system_predicate/1+81, str), put_hash(s(82), system_predicate/1+82, str), put_hash(s(83), system_predicate/1+83, str), put_hash(s(84), system_predicate/1+84, str), put_hash(s(85), system_predicate/1+85, str), put_hash(s(86), system_predicate/1+86, str), put_hash(s(87), system_predicate/1+87, str), put_hash(s(88), system_predicate/1+88, str), put_hash(s(89), system_predicate/1+89, str), put_hash(s(90), system_predicate/1+90, str), put_hash(s(91), system_predicate/1+91, str), put_hash(s(92), system_predicate/1+92, str), put_hash(s(93), system_predicate/1+93, str), put_hash(s(94), system_predicate/1+94, str), put_hash(s(95), system_predicate/1+95, str), put_hash(s(96), system_predicate/1+96, str), put_hash(s(97), system_predicate/1+97, str), put_hash(s(98), system_predicate/1+98, str), put_hash(s(99), system_predicate/1+99, str), put_hash(s(100), system_predicate/1+100, str), put_hash(s(101), system_predicate/1+101, str), put_hash(s(102), system_predicate/1+102, str), put_hash(s(103), system_predicate/1+103, str), put_hash(s(104), system_predicate/1+104, str), put_hash(s(105), system_predicate/1+105, str), put_hash(s(106), system_predicate/1+106, str), put_hash(s(107), system_predicate/1+107, str), put_hash(s(108), system_predicate/1+108, str), put_hash(s(109), system_predicate/1+109, str), put_hash(s(110), system_predicate/1+110, str), put_hash(s(111), system_predicate/1+111, str), put_hash(s(112), system_predicate/1+112, str), put_hash(s(113), system_predicate/1+113, str), put_hash(s(114), system_predicate/1+114, str), put_hash(s(115), system_predicate/1+115, str), put_hash(s(116), system_predicate/1+116, str), put_hash(s(117), system_predicate/1+117, str), put_hash(s(118), system_predicate/1+118, str), put_hash(s(119), system_predicate/1+119, str), put_hash(s(120), system_predicate/1+120, str), put_hash(s(121), system_predicate/1+121, str), put_hash(s(122), system_predicate/1+122, str), put_hash(s(123), system_predicate/1+123, str), put_hash(s(124), system_predicate/1+124, str), put_hash(s(125), system_predicate/1+125, str), put_hash(s(126), system_predicate/1+126, str), put_hash(s(127), system_predicate/1+127, str), put_hash(s(128), system_predicate/1+128, str), put_hash(s(130), system_predicate/1+130, str), put_hash(s(131), system_predicate/1+131, str), put_hash(s(132), system_predicate/1+132, str), put_hash(s(133), system_predicate/1+133, str), put_hash(s(134), system_predicate/1+134, str), put_hash(s(135), system_predicate/1+135, str), put_hash(s(136), system_predicate/1+136, str), put_hash(s(137), system_predicate/1+137, str), put_hash(s(138), system_predicate/1+138, str), put_hash(s(139), system_predicate/1+139, str), put_hash(s(140), system_predicate/1+140, str), put_hash(s(141), system_predicate/1+141, str), put_hash(s(142), system_predicate/1+142, str), put_hash(s(144), system_predicate/1+144, str), put_hash(s(145), system_predicate/1+145, str), put_hash(s(146), system_predicate/1+146, str), put_hash(s(147), system_predicate/1+147, str), put_hash(s(148), system_predicate/1+148, str), put_hash(s(149), system_predicate/1+149, str), put_hash(s(150), system_predicate/1+150, str), put_hash(s(151), system_predicate/1+151, str), put_hash(s(152), system_predicate/1+152, str), put_hash(s(153), system_predicate/1+153, str), put_hash(s(154), system_predicate/1+154, str), put_hash(s(155), system_predicate/1+155, str), put_hash(s(156), system_predicate/1+156, str), put_hash(s(157), system_predicate/1+157, str), put_hash(s(158), system_predicate/1+158, str), put_hash(s(159), system_predicate/1+159, str), put_hash(s(160), system_predicate/1+160, str), put_hash(s(161), system_predicate/1+161, str), put_hash(s(162), system_predicate/1+162, str), put_hash(s(163), system_predicate/1+163, str), put_hash(s(164), system_predicate/1+164, str), put_hash(s(165), system_predicate/1+165, str), put_hash(s(166), system_predicate/1+166, str), put_hash(s(167), system_predicate/1+167, str), put_hash(s(168), system_predicate/1+168, str), put_hash(s(169), system_predicate/1+169, str), put_hash(s(170), system_predicate/1+170, str), put_hash(s(171), system_predicate/1+171, str), put_hash(s(172), system_predicate/1+172, str), put_hash(s(173), system_predicate/1+173, str), put_hash(s(174), system_predicate/1+174, str), put_hash(s(175), system_predicate/1+175, str), put_hash(s(176), system_predicate/1+176, str), put_hash(s(177), system_predicate/1+177, str), put_hash(s(178), system_predicate/1+178, str), put_hash(s(180), system_predicate/1+180, str), put_hash(s(181), system_predicate/1+181, str), put_hash(s(182), system_predicate/1+182, str), put_hash(s(183), system_predicate/1+183, str), put_hash(s(184), system_predicate/1+184, str), put_hash(s(185), system_predicate/1+185, str), put_hash(s(186), system_predicate/1+186, str), put_hash(s(187), system_predicate/1+187, str), put_hash(s(188), system_predicate/1+188, str), put_hash(s(189), system_predicate/1+189, str), put_hash(s(190), system_predicate/1+190, str), put_hash(s(192), system_predicate/1+192, str), put_hash(s(194), system_predicate/1+194, str), put_hash(s(195), system_predicate/1+195, str), put_hash(s(196), system_predicate/1+196, str), put_hash(s(197), system_predicate/1+197, str), put_hash(s(198), system_predicate/1+198, str), put_hash(s(199), system_predicate/1+199, str), put_hash(s(200), system_predicate/1+200, str), put_hash(s(201), system_predicate/1+201, str), put_hash(s(202), system_predicate/1+202, str), put_hash(s(203), system_predicate/1+203, str), put_hash(s(204), system_predicate/1+204, str), put_hash(s(205), system_predicate/1+205, str), put_hash(s(206), system_predicate/1+206, str), put_hash(s(207), system_predicate/1+207, str), put_hash(s(208), system_predicate/1+208, str), put_hash(s(209), system_predicate/1+209, str), put_hash(s(210), system_predicate/1+210, str), put_hash(s(211), system_predicate/1+211, str), put_hash(s(212), system_predicate/1+212, str), put_hash(s(213), system_predicate/1+213, str), put_hash(s(214), system_predicate/1+214, str), put_hash(s(215), system_predicate/1+215, str), put_hash(s(216), system_predicate/1+216, str), put_hash(s(217), system_predicate/1+217, str), put_hash(s(218), system_predicate/1+218, str), put_hash(s(219), system_predicate/1+219, str), put_hash(s(220), system_predicate/1+220, str), put_hash(s(221), system_predicate/1+221, str), put_hash(s(222), system_predicate/1+222, str), put_hash(s(223), system_predicate/1+223, str), put_hash(s(224), system_predicate/1+224, str), put_hash(s(225), system_predicate/1+225, str), put_hash(s(227), system_predicate/1+227, str), put_hash(s(232), system_predicate/1+232, str), put_hash(s(233), system_predicate/1+233, str), put_hash(s(234), system_predicate/1+234, str), put_hash(s(237), system_predicate/1+237, str), put_hash(s(238), system_predicate/1+238, str), put_hash(s(239), system_predicate/1+239, str), put_hash(s(240), system_predicate/1+240, str)]).
+system_predicate/1 :
+        set(arg(1), ea(1)).
+        set(cont, econt).
+        setB0.
+        switch_on_term(system_predicate/1+var, fail/0, fail/0, system_predicate/1+con, system_predicate/1+str, fail/0).
+system_predicate/1+var :
+        try(system_predicate/1+1, system_predicate/1+var+1).
+system_predicate/1+var+1 :
+        retry(system_predicate/1+2, system_predicate/1+var+2).
+system_predicate/1+var+2 :
+        retry(system_predicate/1+3, system_predicate/1+var+3).
+system_predicate/1+var+3 :
+        retry(system_predicate/1+4, system_predicate/1+var+4).
+system_predicate/1+var+4 :
+        retry(system_predicate/1+5, system_predicate/1+var+5).
+system_predicate/1+var+5 :
+        retry(system_predicate/1+6, system_predicate/1+var+6).
+system_predicate/1+var+6 :
+        retry(system_predicate/1+7, system_predicate/1+var+7).
+system_predicate/1+var+7 :
+        retry(system_predicate/1+8, system_predicate/1+var+8).
+system_predicate/1+var+8 :
+        retry(system_predicate/1+9, system_predicate/1+var+9).
+system_predicate/1+var+9 :
+        retry(system_predicate/1+10, system_predicate/1+var+10).
+system_predicate/1+var+10 :
+        retry(system_predicate/1+11, system_predicate/1+var+11).
+system_predicate/1+var+11 :
+        retry(system_predicate/1+12, system_predicate/1+var+12).
+system_predicate/1+var+12 :
+        retry(system_predicate/1+13, system_predicate/1+var+13).
+system_predicate/1+var+13 :
+        retry(system_predicate/1+14, system_predicate/1+var+14).
+system_predicate/1+var+14 :
+        retry(system_predicate/1+15, system_predicate/1+var+15).
+system_predicate/1+var+15 :
+        retry(system_predicate/1+16, system_predicate/1+var+16).
+system_predicate/1+var+16 :
+        retry(system_predicate/1+17, system_predicate/1+var+17).
+system_predicate/1+var+17 :
+        retry(system_predicate/1+18, system_predicate/1+var+18).
+system_predicate/1+var+18 :
+        retry(system_predicate/1+19, system_predicate/1+var+19).
+system_predicate/1+var+19 :
+        retry(system_predicate/1+20, system_predicate/1+var+20).
+system_predicate/1+var+20 :
+        retry(system_predicate/1+21, system_predicate/1+var+21).
+system_predicate/1+var+21 :
+        retry(system_predicate/1+22, system_predicate/1+var+22).
+system_predicate/1+var+22 :
+        retry(system_predicate/1+23, system_predicate/1+var+23).
+system_predicate/1+var+23 :
+        retry(system_predicate/1+24, system_predicate/1+var+24).
+system_predicate/1+var+24 :
+        retry(system_predicate/1+25, system_predicate/1+var+25).
+system_predicate/1+var+25 :
+        retry(system_predicate/1+26, system_predicate/1+var+26).
+system_predicate/1+var+26 :
+        retry(system_predicate/1+27, system_predicate/1+var+27).
+system_predicate/1+var+27 :
+        retry(system_predicate/1+28, system_predicate/1+var+28).
+system_predicate/1+var+28 :
+        retry(system_predicate/1+29, system_predicate/1+var+29).
+system_predicate/1+var+29 :
+        retry(system_predicate/1+30, system_predicate/1+var+30).
+system_predicate/1+var+30 :
+        retry(system_predicate/1+31, system_predicate/1+var+31).
+system_predicate/1+var+31 :
+        retry(system_predicate/1+32, system_predicate/1+var+32).
+system_predicate/1+var+32 :
+        retry(system_predicate/1+33, system_predicate/1+var+33).
+system_predicate/1+var+33 :
+        retry(system_predicate/1+34, system_predicate/1+var+34).
+system_predicate/1+var+34 :
+        retry(system_predicate/1+35, system_predicate/1+var+35).
+system_predicate/1+var+35 :
+        retry(system_predicate/1+36, system_predicate/1+var+36).
+system_predicate/1+var+36 :
+        retry(system_predicate/1+37, system_predicate/1+var+37).
+system_predicate/1+var+37 :
+        retry(system_predicate/1+38, system_predicate/1+var+38).
+system_predicate/1+var+38 :
+        retry(system_predicate/1+39, system_predicate/1+var+39).
+system_predicate/1+var+39 :
+        retry(system_predicate/1+40, system_predicate/1+var+40).
+system_predicate/1+var+40 :
+        retry(system_predicate/1+41, system_predicate/1+var+41).
+system_predicate/1+var+41 :
+        retry(system_predicate/1+42, system_predicate/1+var+42).
+system_predicate/1+var+42 :
+        retry(system_predicate/1+43, system_predicate/1+var+43).
+system_predicate/1+var+43 :
+        retry(system_predicate/1+44, system_predicate/1+var+44).
+system_predicate/1+var+44 :
+        retry(system_predicate/1+45, system_predicate/1+var+45).
+system_predicate/1+var+45 :
+        retry(system_predicate/1+46, system_predicate/1+var+46).
+system_predicate/1+var+46 :
+        retry(system_predicate/1+47, system_predicate/1+var+47).
+system_predicate/1+var+47 :
+        retry(system_predicate/1+48, system_predicate/1+var+48).
+system_predicate/1+var+48 :
+        retry(system_predicate/1+49, system_predicate/1+var+49).
+system_predicate/1+var+49 :
+        retry(system_predicate/1+50, system_predicate/1+var+50).
+system_predicate/1+var+50 :
+        retry(system_predicate/1+51, system_predicate/1+var+51).
+system_predicate/1+var+51 :
+        retry(system_predicate/1+52, system_predicate/1+var+52).
+system_predicate/1+var+52 :
+        retry(system_predicate/1+53, system_predicate/1+var+53).
+system_predicate/1+var+53 :
+        retry(system_predicate/1+54, system_predicate/1+var+54).
+system_predicate/1+var+54 :
+        retry(system_predicate/1+55, system_predicate/1+var+55).
+system_predicate/1+var+55 :
+        retry(system_predicate/1+56, system_predicate/1+var+56).
+system_predicate/1+var+56 :
+        retry(system_predicate/1+57, system_predicate/1+var+57).
+system_predicate/1+var+57 :
+        retry(system_predicate/1+58, system_predicate/1+var+58).
+system_predicate/1+var+58 :
+        retry(system_predicate/1+59, system_predicate/1+var+59).
+system_predicate/1+var+59 :
+        retry(system_predicate/1+60, system_predicate/1+var+60).
+system_predicate/1+var+60 :
+        retry(system_predicate/1+61, system_predicate/1+var+61).
+system_predicate/1+var+61 :
+        retry(system_predicate/1+62, system_predicate/1+var+62).
+system_predicate/1+var+62 :
+        retry(system_predicate/1+63, system_predicate/1+var+63).
+system_predicate/1+var+63 :
+        retry(system_predicate/1+64, system_predicate/1+var+64).
+system_predicate/1+var+64 :
+        retry(system_predicate/1+65, system_predicate/1+var+65).
+system_predicate/1+var+65 :
+        retry(system_predicate/1+66, system_predicate/1+var+66).
+system_predicate/1+var+66 :
+        retry(system_predicate/1+67, system_predicate/1+var+67).
+system_predicate/1+var+67 :
+        retry(system_predicate/1+68, system_predicate/1+var+68).
+system_predicate/1+var+68 :
+        retry(system_predicate/1+69, system_predicate/1+var+69).
+system_predicate/1+var+69 :
+        retry(system_predicate/1+70, system_predicate/1+var+70).
+system_predicate/1+var+70 :
+        retry(system_predicate/1+71, system_predicate/1+var+71).
+system_predicate/1+var+71 :
+        retry(system_predicate/1+72, system_predicate/1+var+72).
+system_predicate/1+var+72 :
+        retry(system_predicate/1+73, system_predicate/1+var+73).
+system_predicate/1+var+73 :
+        retry(system_predicate/1+74, system_predicate/1+var+74).
+system_predicate/1+var+74 :
+        retry(system_predicate/1+75, system_predicate/1+var+75).
+system_predicate/1+var+75 :
+        retry(system_predicate/1+76, system_predicate/1+var+76).
+system_predicate/1+var+76 :
+        retry(system_predicate/1+77, system_predicate/1+var+77).
+system_predicate/1+var+77 :
+        retry(system_predicate/1+78, system_predicate/1+var+78).
+system_predicate/1+var+78 :
+        retry(system_predicate/1+79, system_predicate/1+var+79).
+system_predicate/1+var+79 :
+        retry(system_predicate/1+80, system_predicate/1+var+80).
+system_predicate/1+var+80 :
+        retry(system_predicate/1+81, system_predicate/1+var+81).
+system_predicate/1+var+81 :
+        retry(system_predicate/1+82, system_predicate/1+var+82).
+system_predicate/1+var+82 :
+        retry(system_predicate/1+83, system_predicate/1+var+83).
+system_predicate/1+var+83 :
+        retry(system_predicate/1+84, system_predicate/1+var+84).
+system_predicate/1+var+84 :
+        retry(system_predicate/1+85, system_predicate/1+var+85).
+system_predicate/1+var+85 :
+        retry(system_predicate/1+86, system_predicate/1+var+86).
+system_predicate/1+var+86 :
+        retry(system_predicate/1+87, system_predicate/1+var+87).
+system_predicate/1+var+87 :
+        retry(system_predicate/1+88, system_predicate/1+var+88).
+system_predicate/1+var+88 :
+        retry(system_predicate/1+89, system_predicate/1+var+89).
+system_predicate/1+var+89 :
+        retry(system_predicate/1+90, system_predicate/1+var+90).
+system_predicate/1+var+90 :
+        retry(system_predicate/1+91, system_predicate/1+var+91).
+system_predicate/1+var+91 :
+        retry(system_predicate/1+92, system_predicate/1+var+92).
+system_predicate/1+var+92 :
+        retry(system_predicate/1+93, system_predicate/1+var+93).
+system_predicate/1+var+93 :
+        retry(system_predicate/1+94, system_predicate/1+var+94).
+system_predicate/1+var+94 :
+        retry(system_predicate/1+95, system_predicate/1+var+95).
+system_predicate/1+var+95 :
+        retry(system_predicate/1+96, system_predicate/1+var+96).
+system_predicate/1+var+96 :
+        retry(system_predicate/1+97, system_predicate/1+var+97).
+system_predicate/1+var+97 :
+        retry(system_predicate/1+98, system_predicate/1+var+98).
+system_predicate/1+var+98 :
+        retry(system_predicate/1+99, system_predicate/1+var+99).
+system_predicate/1+var+99 :
+        retry(system_predicate/1+100, system_predicate/1+var+100).
+system_predicate/1+var+100 :
+        retry(system_predicate/1+101, system_predicate/1+var+101).
+system_predicate/1+var+101 :
+        retry(system_predicate/1+102, system_predicate/1+var+102).
+system_predicate/1+var+102 :
+        retry(system_predicate/1+103, system_predicate/1+var+103).
+system_predicate/1+var+103 :
+        retry(system_predicate/1+104, system_predicate/1+var+104).
+system_predicate/1+var+104 :
+        retry(system_predicate/1+105, system_predicate/1+var+105).
+system_predicate/1+var+105 :
+        retry(system_predicate/1+106, system_predicate/1+var+106).
+system_predicate/1+var+106 :
+        retry(system_predicate/1+107, system_predicate/1+var+107).
+system_predicate/1+var+107 :
+        retry(system_predicate/1+108, system_predicate/1+var+108).
+system_predicate/1+var+108 :
+        retry(system_predicate/1+109, system_predicate/1+var+109).
+system_predicate/1+var+109 :
+        retry(system_predicate/1+110, system_predicate/1+var+110).
+system_predicate/1+var+110 :
+        retry(system_predicate/1+111, system_predicate/1+var+111).
+system_predicate/1+var+111 :
+        retry(system_predicate/1+112, system_predicate/1+var+112).
+system_predicate/1+var+112 :
+        retry(system_predicate/1+113, system_predicate/1+var+113).
+system_predicate/1+var+113 :
+        retry(system_predicate/1+114, system_predicate/1+var+114).
+system_predicate/1+var+114 :
+        retry(system_predicate/1+115, system_predicate/1+var+115).
+system_predicate/1+var+115 :
+        retry(system_predicate/1+116, system_predicate/1+var+116).
+system_predicate/1+var+116 :
+        retry(system_predicate/1+117, system_predicate/1+var+117).
+system_predicate/1+var+117 :
+        retry(system_predicate/1+118, system_predicate/1+var+118).
+system_predicate/1+var+118 :
+        retry(system_predicate/1+119, system_predicate/1+var+119).
+system_predicate/1+var+119 :
+        retry(system_predicate/1+120, system_predicate/1+var+120).
+system_predicate/1+var+120 :
+        retry(system_predicate/1+121, system_predicate/1+var+121).
+system_predicate/1+var+121 :
+        retry(system_predicate/1+122, system_predicate/1+var+122).
+system_predicate/1+var+122 :
+        retry(system_predicate/1+123, system_predicate/1+var+123).
+system_predicate/1+var+123 :
+        retry(system_predicate/1+124, system_predicate/1+var+124).
+system_predicate/1+var+124 :
+        retry(system_predicate/1+125, system_predicate/1+var+125).
+system_predicate/1+var+125 :
+        retry(system_predicate/1+126, system_predicate/1+var+126).
+system_predicate/1+var+126 :
+        retry(system_predicate/1+127, system_predicate/1+var+127).
+system_predicate/1+var+127 :
+        retry(system_predicate/1+128, system_predicate/1+var+128).
+system_predicate/1+var+128 :
+        retry(system_predicate/1+129, system_predicate/1+var+129).
+system_predicate/1+var+129 :
+        retry(system_predicate/1+130, system_predicate/1+var+130).
+system_predicate/1+var+130 :
+        retry(system_predicate/1+131, system_predicate/1+var+131).
+system_predicate/1+var+131 :
+        retry(system_predicate/1+132, system_predicate/1+var+132).
+system_predicate/1+var+132 :
+        retry(system_predicate/1+133, system_predicate/1+var+133).
+system_predicate/1+var+133 :
+        retry(system_predicate/1+134, system_predicate/1+var+134).
+system_predicate/1+var+134 :
+        retry(system_predicate/1+135, system_predicate/1+var+135).
+system_predicate/1+var+135 :
+        retry(system_predicate/1+136, system_predicate/1+var+136).
+system_predicate/1+var+136 :
+        retry(system_predicate/1+137, system_predicate/1+var+137).
+system_predicate/1+var+137 :
+        retry(system_predicate/1+138, system_predicate/1+var+138).
+system_predicate/1+var+138 :
+        retry(system_predicate/1+139, system_predicate/1+var+139).
+system_predicate/1+var+139 :
+        retry(system_predicate/1+140, system_predicate/1+var+140).
+system_predicate/1+var+140 :
+        retry(system_predicate/1+141, system_predicate/1+var+141).
+system_predicate/1+var+141 :
+        retry(system_predicate/1+142, system_predicate/1+var+142).
+system_predicate/1+var+142 :
+        retry(system_predicate/1+143, system_predicate/1+var+143).
+system_predicate/1+var+143 :
+        retry(system_predicate/1+144, system_predicate/1+var+144).
+system_predicate/1+var+144 :
+        retry(system_predicate/1+145, system_predicate/1+var+145).
+system_predicate/1+var+145 :
+        retry(system_predicate/1+146, system_predicate/1+var+146).
+system_predicate/1+var+146 :
+        retry(system_predicate/1+147, system_predicate/1+var+147).
+system_predicate/1+var+147 :
+        retry(system_predicate/1+148, system_predicate/1+var+148).
+system_predicate/1+var+148 :
+        retry(system_predicate/1+149, system_predicate/1+var+149).
+system_predicate/1+var+149 :
+        retry(system_predicate/1+150, system_predicate/1+var+150).
+system_predicate/1+var+150 :
+        retry(system_predicate/1+151, system_predicate/1+var+151).
+system_predicate/1+var+151 :
+        retry(system_predicate/1+152, system_predicate/1+var+152).
+system_predicate/1+var+152 :
+        retry(system_predicate/1+153, system_predicate/1+var+153).
+system_predicate/1+var+153 :
+        retry(system_predicate/1+154, system_predicate/1+var+154).
+system_predicate/1+var+154 :
+        retry(system_predicate/1+155, system_predicate/1+var+155).
+system_predicate/1+var+155 :
+        retry(system_predicate/1+156, system_predicate/1+var+156).
+system_predicate/1+var+156 :
+        retry(system_predicate/1+157, system_predicate/1+var+157).
+system_predicate/1+var+157 :
+        retry(system_predicate/1+158, system_predicate/1+var+158).
+system_predicate/1+var+158 :
+        retry(system_predicate/1+159, system_predicate/1+var+159).
+system_predicate/1+var+159 :
+        retry(system_predicate/1+160, system_predicate/1+var+160).
+system_predicate/1+var+160 :
+        retry(system_predicate/1+161, system_predicate/1+var+161).
+system_predicate/1+var+161 :
+        retry(system_predicate/1+162, system_predicate/1+var+162).
+system_predicate/1+var+162 :
+        retry(system_predicate/1+163, system_predicate/1+var+163).
+system_predicate/1+var+163 :
+        retry(system_predicate/1+164, system_predicate/1+var+164).
+system_predicate/1+var+164 :
+        retry(system_predicate/1+165, system_predicate/1+var+165).
+system_predicate/1+var+165 :
+        retry(system_predicate/1+166, system_predicate/1+var+166).
+system_predicate/1+var+166 :
+        retry(system_predicate/1+167, system_predicate/1+var+167).
+system_predicate/1+var+167 :
+        retry(system_predicate/1+168, system_predicate/1+var+168).
+system_predicate/1+var+168 :
+        retry(system_predicate/1+169, system_predicate/1+var+169).
+system_predicate/1+var+169 :
+        retry(system_predicate/1+170, system_predicate/1+var+170).
+system_predicate/1+var+170 :
+        retry(system_predicate/1+171, system_predicate/1+var+171).
+system_predicate/1+var+171 :
+        retry(system_predicate/1+172, system_predicate/1+var+172).
+system_predicate/1+var+172 :
+        retry(system_predicate/1+173, system_predicate/1+var+173).
+system_predicate/1+var+173 :
+        retry(system_predicate/1+174, system_predicate/1+var+174).
+system_predicate/1+var+174 :
+        retry(system_predicate/1+175, system_predicate/1+var+175).
+system_predicate/1+var+175 :
+        retry(system_predicate/1+176, system_predicate/1+var+176).
+system_predicate/1+var+176 :
+        retry(system_predicate/1+177, system_predicate/1+var+177).
+system_predicate/1+var+177 :
+        retry(system_predicate/1+178, system_predicate/1+var+178).
+system_predicate/1+var+178 :
+        retry(system_predicate/1+179, system_predicate/1+var+179).
+system_predicate/1+var+179 :
+        retry(system_predicate/1+180, system_predicate/1+var+180).
+system_predicate/1+var+180 :
+        retry(system_predicate/1+181, system_predicate/1+var+181).
+system_predicate/1+var+181 :
+        retry(system_predicate/1+182, system_predicate/1+var+182).
+system_predicate/1+var+182 :
+        retry(system_predicate/1+183, system_predicate/1+var+183).
+system_predicate/1+var+183 :
+        retry(system_predicate/1+184, system_predicate/1+var+184).
+system_predicate/1+var+184 :
+        retry(system_predicate/1+185, system_predicate/1+var+185).
+system_predicate/1+var+185 :
+        retry(system_predicate/1+186, system_predicate/1+var+186).
+system_predicate/1+var+186 :
+        retry(system_predicate/1+187, system_predicate/1+var+187).
+system_predicate/1+var+187 :
+        retry(system_predicate/1+188, system_predicate/1+var+188).
+system_predicate/1+var+188 :
+        retry(system_predicate/1+189, system_predicate/1+var+189).
+system_predicate/1+var+189 :
+        retry(system_predicate/1+190, system_predicate/1+var+190).
+system_predicate/1+var+190 :
+        retry(system_predicate/1+191, system_predicate/1+var+191).
+system_predicate/1+var+191 :
+        retry(system_predicate/1+192, system_predicate/1+var+192).
+system_predicate/1+var+192 :
+        retry(system_predicate/1+193, system_predicate/1+var+193).
+system_predicate/1+var+193 :
+        retry(system_predicate/1+194, system_predicate/1+var+194).
+system_predicate/1+var+194 :
+        retry(system_predicate/1+195, system_predicate/1+var+195).
+system_predicate/1+var+195 :
+        retry(system_predicate/1+196, system_predicate/1+var+196).
+system_predicate/1+var+196 :
+        retry(system_predicate/1+197, system_predicate/1+var+197).
+system_predicate/1+var+197 :
+        retry(system_predicate/1+198, system_predicate/1+var+198).
+system_predicate/1+var+198 :
+        retry(system_predicate/1+199, system_predicate/1+var+199).
+system_predicate/1+var+199 :
+        retry(system_predicate/1+200, system_predicate/1+var+200).
+system_predicate/1+var+200 :
+        retry(system_predicate/1+201, system_predicate/1+var+201).
+system_predicate/1+var+201 :
+        retry(system_predicate/1+202, system_predicate/1+var+202).
+system_predicate/1+var+202 :
+        retry(system_predicate/1+203, system_predicate/1+var+203).
+system_predicate/1+var+203 :
+        retry(system_predicate/1+204, system_predicate/1+var+204).
+system_predicate/1+var+204 :
+        retry(system_predicate/1+205, system_predicate/1+var+205).
+system_predicate/1+var+205 :
+        retry(system_predicate/1+206, system_predicate/1+var+206).
+system_predicate/1+var+206 :
+        retry(system_predicate/1+207, system_predicate/1+var+207).
+system_predicate/1+var+207 :
+        retry(system_predicate/1+208, system_predicate/1+var+208).
+system_predicate/1+var+208 :
+        retry(system_predicate/1+209, system_predicate/1+var+209).
+system_predicate/1+var+209 :
+        retry(system_predicate/1+210, system_predicate/1+var+210).
+system_predicate/1+var+210 :
+        retry(system_predicate/1+211, system_predicate/1+var+211).
+system_predicate/1+var+211 :
+        retry(system_predicate/1+212, system_predicate/1+var+212).
+system_predicate/1+var+212 :
+        retry(system_predicate/1+213, system_predicate/1+var+213).
+system_predicate/1+var+213 :
+        retry(system_predicate/1+214, system_predicate/1+var+214).
+system_predicate/1+var+214 :
+        retry(system_predicate/1+215, system_predicate/1+var+215).
+system_predicate/1+var+215 :
+        retry(system_predicate/1+216, system_predicate/1+var+216).
+system_predicate/1+var+216 :
+        retry(system_predicate/1+217, system_predicate/1+var+217).
+system_predicate/1+var+217 :
+        retry(system_predicate/1+218, system_predicate/1+var+218).
+system_predicate/1+var+218 :
+        retry(system_predicate/1+219, system_predicate/1+var+219).
+system_predicate/1+var+219 :
+        retry(system_predicate/1+220, system_predicate/1+var+220).
+system_predicate/1+var+220 :
+        retry(system_predicate/1+221, system_predicate/1+var+221).
+system_predicate/1+var+221 :
+        retry(system_predicate/1+222, system_predicate/1+var+222).
+system_predicate/1+var+222 :
+        retry(system_predicate/1+223, system_predicate/1+var+223).
+system_predicate/1+var+223 :
+        retry(system_predicate/1+224, system_predicate/1+var+224).
+system_predicate/1+var+224 :
+        retry(system_predicate/1+225, system_predicate/1+var+225).
+system_predicate/1+var+225 :
+        retry(system_predicate/1+226, system_predicate/1+var+226).
+system_predicate/1+var+226 :
+        retry(system_predicate/1+227, system_predicate/1+var+227).
+system_predicate/1+var+227 :
+        retry(system_predicate/1+228, system_predicate/1+var+228).
+system_predicate/1+var+228 :
+        retry(system_predicate/1+229, system_predicate/1+var+229).
+system_predicate/1+var+229 :
+        retry(system_predicate/1+230, system_predicate/1+var+230).
+system_predicate/1+var+230 :
+        retry(system_predicate/1+231, system_predicate/1+var+231).
+system_predicate/1+var+231 :
+        retry(system_predicate/1+232, system_predicate/1+var+232).
+system_predicate/1+var+232 :
+        retry(system_predicate/1+233, system_predicate/1+var+233).
+system_predicate/1+var+233 :
+        retry(system_predicate/1+234, system_predicate/1+var+234).
+system_predicate/1+var+234 :
+        retry(system_predicate/1+235, system_predicate/1+var+235).
+system_predicate/1+var+235 :
+        retry(system_predicate/1+236, system_predicate/1+var+236).
+system_predicate/1+var+236 :
+        retry(system_predicate/1+237, system_predicate/1+var+237).
+system_predicate/1+var+237 :
+        retry(system_predicate/1+238, system_predicate/1+var+238).
+system_predicate/1+var+238 :
+        retry(system_predicate/1+239, system_predicate/1+var+239).
+system_predicate/1+var+239 :
+        trust(system_predicate/1+240).
+system_predicate/1+con :
+        switch_on_hash(con, 18, fail/0, [true:system_predicate/1+2, therwise:system_predicate/1+3, fail:system_predicate/1+4, false:system_predicate/1+5, !:system_predicate/1+6, '$neck_cut':system_predicate/1+8, flush_output:system_predicate/1+129, nl:system_predicate/1+143, repeat:system_predicate/1+179, halt:system_predicate/1+191, abort:system_predicate/1+193, cafeteria:system_predicate/1+226, trace:system_predicate/1+228, notrace:system_predicate/1+229, debug:system_predicate/1+230, nodebug:system_predicate/1+231, nospyall:system_predicate/1+235, listing:system_predicate/1+236]).
+system_predicate/1+str :
+        switch_on_hash(str, 222, fail/0, [system_predicate/1:system_predicate/1+1, '$get_level'/1:system_predicate/1+7, '$cut'/1:system_predicate/1+9, ^ / 2:system_predicate/1+10, (',')/2:system_predicate/1+11, (;)/2:system_predicate/1+12, (->)/2:system_predicate/1+13, call/1:system_predicate/1+14, catch/3:system_predicate/1+15, throw/1:system_predicate/1+16, on_exception/3:system_predicate/1+17, raise_exception/1:system_predicate/1+18, (=)/2:system_predicate/1+19, '$unify'/2:system_predicate/1+20, (\=)/2:system_predicate/1+21, '$not_unifiable'/2:system_predicate/1+22, var/1:system_predicate/1+23, atom/1:system_predicate/1+24, integer/1:system_predicate/1+25, float/1:system_predicate/1+26, atomic/1:system_predicate/1+27, compound/1:system_predicate/1+28, nonvar/1:system_predicate/1+29, number/1:system_predicate/1+30, java/1:system_predicate/1+31, java/2:system_predicate/1+32, closure/1:system_predicate/1+33, ground/1:system_predicate/1+34, callable/1:system_predicate/1+35, (==)/2:system_predicate/1+36, '$equality_of_term'/2:system_predicate/1+37, (\==)/2:system_predicate/1+38, '$inequality_of_term'/2:system_predicate/1+39, (@<)/2:system_predicate/1+40, '$before'/2:system_predicate/1+41, (@>)/2:system_predicate/1+42, '$after'/2:system_predicate/1+43, (@=<)/2:system_predicate/1+44, '$not_after'/2:system_predicate/1+45, (@>=)/2:system_predicate/1+46, '$not_before'/2:system_predicate/1+47, ?= / 2:system_predicate/1+48, '$identical_or_cannot_unify'/2:system_predicate/1+49, compare/3:system_predicate/1+50, sort/2:system_predicate/1+51, keysort/2:system_predicate/1+52, merge/3:system_predicate/1+53, arg/3:system_predicate/1+54, functor/3:system_predicate/1+55, (=..)/2:system_predicate/1+56, '$univ'/2:system_predicate/1+57, copy_term/2:system_predicate/1+58, (is)/2:system_predicate/1+59, '$abs'/2:system_predicate/1+60, '$asin'/2:system_predicate/1+61, '$acos'/2:system_predicate/1+62, '$atan'/2:system_predicate/1+63, '$bitwise_conj'/3:system_predicate/1+64, '$bitwise_disj'/3:system_predicate/1+65, '$bitwise_exclusive_or'/3:system_predicate/1+66, '$bitwise_neg'/2:system_predicate/1+67, '$ceil'/2:system_predicate/1+68, '$cos'/2:system_predicate/1+69, '$degrees'/2:system_predicate/1+70, '$exp'/2:system_predicate/1+71, '$float'/2:system_predicate/1+72, '$float_integer_part'/2:system_predicate/1+73, '$float_fractional_part'/2:system_predicate/1+74, '$float_quotient'/3:system_predicate/1+75, '$floor'/2:system_predicate/1+76, '$int_quotient'/3:system_predicate/1+77, '$log'/2:system_predicate/1+78, '$max'/3:system_predicate/1+79, '$min'/3:system_predicate/1+80, '$minus'/3:system_predicate/1+81, '$mod'/3:system_predicate/1+82, '$multi'/3:system_predicate/1+83, '$plus'/3:system_predicate/1+84, '$pow'/3:system_predicate/1+85, '$radians'/2:system_predicate/1+86, '$rint'/2:system_predicate/1+87, '$round'/2:system_predicate/1+88, '$shift_left'/3:system_predicate/1+89, '$shift_right'/3:system_predicate/1+90, '$sign'/2:system_predicate/1+91, '$sin'/2:system_predicate/1+92, '$sqrt'/2:system_predicate/1+93, '$tan'/2:system_predicate/1+94, '$truncate'/2:system_predicate/1+95, (=:=)/2:system_predicate/1+96, '$arith_equal'/2:system_predicate/1+97, (=\=)/2:system_predicate/1+98, '$arith_not_equal'/2:system_predicate/1+99, (<)/2:system_predicate/1+100, '$less_than'/2:system_predicate/1+101, (=<)/2:system_predicate/1+102, '$less_or_equal'/2:system_predicate/1+103, (>)/2:system_predicate/1+104, '$greater_than'/2:system_predicate/1+105, (>=)/2:system_predicate/1+106, '$greater_or_equal'/2:system_predicate/1+107, clause/2:system_predicate/1+108, (initialization)/2:system_predicate/1+109, '$new_indexing_hash'/3:system_predicate/1+110, assert/1:system_predicate/1+111, assertz/1:system_predicate/1+112, asserta/1:system_predicate/1+113, retract/1:system_predicate/1+114, abolish/1:system_predicate/1+115, retractall/1:system_predicate/1+116, findall/3:system_predicate/1+117, bagof/3:system_predicate/1+118, setof/3:system_predicate/1+119, current_input/1:system_predicate/1+120, current_output/1:system_predicate/1+121, set_input/1:system_predicate/1+122, set_output/1:system_predicate/1+123, open/3:system_predicate/1+124, open/4:system_predicate/1+125, close/1:system_predicate/1+126, close/2:system_predicate/1+127, flush_output/1:system_predicate/1+128, stream_property/2:system_predicate/1+130, get_char/1:system_predicate/1+131, get_char/2:system_predicate/1+132, get_code/1:system_predicate/1+133, get_code/2:system_predicate/1+134, peek_char/1:system_predicate/1+135, peek_char/2:system_predicate/1+136, peek_code/1:system_predicate/1+137, peek_code/2:system_predicate/1+138, put_char/1:system_predicate/1+139, put_char/2:system_predicate/1+140, put_code/1:system_predicate/1+141, put_code/2:system_predicate/1+142, nl/1:system_predicate/1+144, get0/1:system_predicate/1+145, get0/2:system_predicate/1+146, get/1:system_predicate/1+147, get/2:system_predicate/1+148, put/1:system_predicate/1+149, put/2:system_predicate/1+150, tab/1:system_predicate/1+151, tab/2:system_predicate/1+152, skip/1:system_predicate/1+153, skip/2:system_predicate/1+154, get_byte/1:system_predicate/1+155, get_byte/2:system_predicate/1+156, peek_byte/1:system_predicate/1+157, peek_byte/2:system_predicate/1+158, put_byte/1:system_predicate/1+159, put_byte/2:system_predicate/1+160, read/1:system_predicate/1+161, read/2:system_predicate/1+162, read_with_variables/2:system_predicate/1+163, read_with_variables/3:system_predicate/1+164, read_line/1:system_predicate/1+165, read_line/2:system_predicate/1+166, write/1:system_predicate/1+167, write/2:system_predicate/1+168, writeq/1:system_predicate/1+169, writeq/2:system_predicate/1+170, write_canonical/1:system_predicate/1+171, write_canonical/2:system_predicate/1+172, write_term/2:system_predicate/1+173, write_term/3:system_predicate/1+174, op/3:system_predicate/1+175, current_op/3:system_predicate/1+176, (\+)/1:system_predicate/1+177, once/1:system_predicate/1+178, atom_length/2:system_predicate/1+180, atom_concat/3:system_predicate/1+181, sub_atom/5:system_predicate/1+182, atom_chars/2:system_predicate/1+183, atom_codes/2:system_predicate/1+184, char_code/2:system_predicate/1+185, number_chars/2:system_predicate/1+186, number_codes/2:system_predicate/1+187, name/2:system_predicate/1+188, set_prolog_flag/2:system_predicate/1+189, current_prolog_flag/2:system_predicate/1+190, halt/1:system_predicate/1+192, 'C'/3:system_predicate/1+194, expand_term/2:system_predicate/1+195, new_hash/1:system_predicate/1+196, new_hash/2:system_predicate/1+197, hash_clear/1:system_predicate/1+198, hash_contains_key/2:system_predicate/1+199, hash_get/3:system_predicate/1+200, hash_is_empty/1:system_predicate/1+201, hash_keys/2:system_predicate/1+202, hash_map/2:system_predicate/1+203, hash_put/3:system_predicate/1+204, hash_remove/2:system_predicate/1+205, hash_size/2:system_predicate/1+206, '$get_hash_manager'/1:system_predicate/1+207, java_constructor0/2:system_predicate/1+208, java_constructor/2:system_predicate/1+209, java_declared_constructor0/2:system_predicate/1+210, java_declared_constructor/2:system_predicate/1+211, java_method0/3:system_predicate/1+212, java_method/3:system_predicate/1+213, java_declared_method0/3:system_predicate/1+214, java_declared_method/3:system_predicate/1+215, java_get_field0/3:system_predicate/1+216, java_get_field/3:system_predicate/1+217, java_get_declared_field0/3:system_predicate/1+218, java_get_declared_field/3:system_predicate/1+219, java_set_field0/3:system_predicate/1+220, java_set_field/3:system_predicate/1+221, java_set_declared_field0/3:system_predicate/1+222, java_set_declared_field/3:system_predicate/1+223, synchronized/2:system_predicate/1+224, java_conversion/2:system_predicate/1+225, consult/1:system_predicate/1+227, leash/1:system_predicate/1+232, spy/1:system_predicate/1+233, nospy/1:system_predicate/1+234, listing/1:system_predicate/1+237, length/2:system_predicate/1+238, numbervars/3:system_predicate/1+239, statistics/2:system_predicate/1+240]).
+system_predicate/1+1 :
+        comment((system_predicate(system_predicate(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(system_predicate(A)):-[])).
+        get_str(system_predicate/1, s(1), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+2 :
+        comment((system_predicate(true):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(true):-[])).
+        get_con(true, s(2), a(1)).
+        execute(cont).
+system_predicate/1+3 :
+        comment((system_predicate(therwise):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(therwise):-[])).
+        get_con(therwise, s(3), a(1)).
+        execute(cont).
+system_predicate/1+4 :
+        comment((system_predicate(fail):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(fail):-[])).
+        get_con(fail, s(4), a(1)).
+        execute(cont).
+system_predicate/1+5 :
+        comment((system_predicate(false):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(false):-[])).
+        get_con(false, s(5), a(1)).
+        execute(cont).
+system_predicate/1+6 :
+        comment((system_predicate(!):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(!):-[])).
+        get_con(!, s(6), a(1)).
+        execute(cont).
+system_predicate/1+7 :
+        comment((system_predicate('$get_level'(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$get_level'(A)):-[])).
+        get_str('$get_level'/1, s(7), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+8 :
+        comment((system_predicate('$neck_cut'):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$neck_cut'):-[])).
+        get_con('$neck_cut', s(8), a(1)).
+        execute(cont).
+system_predicate/1+9 :
+        comment((system_predicate('$cut'(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$cut'(A)):-[])).
+        get_str('$cut'/1, s(9), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+10 :
+        comment((system_predicate(A^B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A^B):-[])).
+        get_str(^ / 2, s(10), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+11 :
+        comment((system_predicate((A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate((A, B)):-[])).
+        get_str((',')/2, s(11), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+12 :
+        comment((system_predicate((A;B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate((A;B)):-[])).
+        get_str((;)/2, s(12), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+13 :
+        comment((system_predicate((A->B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate((A->B)):-[])).
+        get_str((->)/2, s(13), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+14 :
+        comment((system_predicate(call(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(call(A)):-[])).
+        get_str(call/1, s(14), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+15 :
+        comment((system_predicate(catch(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(catch(A, B, C)):-[])).
+        get_str(catch/3, s(15), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+16 :
+        comment((system_predicate(throw(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(throw(A)):-[])).
+        get_str(throw/1, s(16), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+17 :
+        comment((system_predicate(on_exception(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(on_exception(A, B, C)):-[])).
+        get_str(on_exception/3, s(17), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+18 :
+        comment((system_predicate(raise_exception(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(raise_exception(A)):-[])).
+        get_str(raise_exception/1, s(18), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+19 :
+        comment((system_predicate(A=B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A=B):-[])).
+        get_str((=)/2, s(19), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+20 :
+        comment((system_predicate('$unify'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$unify'(A, B)):-[])).
+        get_str('$unify'/2, s(20), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+21 :
+        comment((system_predicate(A\=B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A\=B):-[])).
+        get_str((\=)/2, s(21), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+22 :
+        comment((system_predicate('$not_unifiable'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$not_unifiable'(A, B)):-[])).
+        get_str('$not_unifiable'/2, s(22), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+23 :
+        comment((system_predicate(var(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(var(A)):-[])).
+        get_str(var/1, s(23), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+24 :
+        comment((system_predicate(atom(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(atom(A)):-[])).
+        get_str(atom/1, s(24), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+25 :
+        comment((system_predicate(integer(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(integer(A)):-[])).
+        get_str(integer/1, s(25), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+26 :
+        comment((system_predicate(float(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(float(A)):-[])).
+        get_str(float/1, s(26), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+27 :
+        comment((system_predicate(atomic(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(atomic(A)):-[])).
+        get_str(atomic/1, s(27), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+28 :
+        comment((system_predicate(compound(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(compound(A)):-[])).
+        get_str(compound/1, s(28), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+29 :
+        comment((system_predicate(nonvar(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(nonvar(A)):-[])).
+        get_str(nonvar/1, s(29), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+30 :
+        comment((system_predicate(number(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(number(A)):-[])).
+        get_str(number/1, s(30), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+31 :
+        comment((system_predicate(java(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java(A)):-[])).
+        get_str(java/1, s(31), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+32 :
+        comment((system_predicate(java(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java(A, B)):-[])).
+        get_str(java/2, s(32), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+33 :
+        comment((system_predicate(closure(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(closure(A)):-[])).
+        get_str(closure/1, s(33), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+34 :
+        comment((system_predicate(ground(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(ground(A)):-[])).
+        get_str(ground/1, s(34), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+35 :
+        comment((system_predicate(callable(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(callable(A)):-[])).
+        get_str(callable/1, s(35), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+36 :
+        comment((system_predicate(A==B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A==B):-[])).
+        get_str((==)/2, s(36), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+37 :
+        comment((system_predicate('$equality_of_term'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$equality_of_term'(A, B)):-[])).
+        get_str('$equality_of_term'/2, s(37), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+38 :
+        comment((system_predicate(A\==B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A\==B):-[])).
+        get_str((\==)/2, s(38), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+39 :
+        comment((system_predicate('$inequality_of_term'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$inequality_of_term'(A, B)):-[])).
+        get_str('$inequality_of_term'/2, s(39), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+40 :
+        comment((system_predicate(A@<B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A@<B):-[])).
+        get_str((@<)/2, s(40), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+41 :
+        comment((system_predicate('$before'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$before'(A, B)):-[])).
+        get_str('$before'/2, s(41), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+42 :
+        comment((system_predicate(A@>B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A@>B):-[])).
+        get_str((@>)/2, s(42), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+43 :
+        comment((system_predicate('$after'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$after'(A, B)):-[])).
+        get_str('$after'/2, s(43), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+44 :
+        comment((system_predicate(A@=<B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A@=<B):-[])).
+        get_str((@=<)/2, s(44), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+45 :
+        comment((system_predicate('$not_after'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$not_after'(A, B)):-[])).
+        get_str('$not_after'/2, s(45), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+46 :
+        comment((system_predicate(A@>=B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A@>=B):-[])).
+        get_str((@>=)/2, s(46), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+47 :
+        comment((system_predicate('$not_before'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$not_before'(A, B)):-[])).
+        get_str('$not_before'/2, s(47), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+48 :
+        comment((system_predicate(?=(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(?=(A, B)):-[])).
+        get_str(?= / 2, s(48), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+49 :
+        comment((system_predicate('$identical_or_cannot_unify'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$identical_or_cannot_unify'(A, B)):-[])).
+        get_str('$identical_or_cannot_unify'/2, s(49), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+50 :
+        comment((system_predicate(compare(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(compare(A, B, C)):-[])).
+        get_str(compare/3, s(50), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+51 :
+        comment((system_predicate(sort(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(sort(A, B)):-[])).
+        get_str(sort/2, s(51), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+52 :
+        comment((system_predicate(keysort(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(keysort(A, B)):-[])).
+        get_str(keysort/2, s(52), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+53 :
+        comment((system_predicate(merge(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(merge(A, B, C)):-[])).
+        get_str(merge/3, s(53), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+54 :
+        comment((system_predicate(arg(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(arg(A, B, C)):-[])).
+        get_str(arg/3, s(54), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+55 :
+        comment((system_predicate(functor(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(functor(A, B, C)):-[])).
+        get_str(functor/3, s(55), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+56 :
+        comment((system_predicate(A=..B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A=..B):-[])).
+        get_str((=..)/2, s(56), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+57 :
+        comment((system_predicate('$univ'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$univ'(A, B)):-[])).
+        get_str('$univ'/2, s(57), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+58 :
+        comment((system_predicate(copy_term(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(copy_term(A, B)):-[])).
+        get_str(copy_term/2, s(58), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+59 :
+        comment((system_predicate(A is B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A is B):-[])).
+        get_str((is)/2, s(59), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+60 :
+        comment((system_predicate('$abs'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$abs'(A, B)):-[])).
+        get_str('$abs'/2, s(60), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+61 :
+        comment((system_predicate('$asin'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$asin'(A, B)):-[])).
+        get_str('$asin'/2, s(61), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+62 :
+        comment((system_predicate('$acos'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$acos'(A, B)):-[])).
+        get_str('$acos'/2, s(62), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+63 :
+        comment((system_predicate('$atan'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$atan'(A, B)):-[])).
+        get_str('$atan'/2, s(63), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+64 :
+        comment((system_predicate('$bitwise_conj'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$bitwise_conj'(A, B, C)):-[])).
+        get_str('$bitwise_conj'/3, s(64), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+65 :
+        comment((system_predicate('$bitwise_disj'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$bitwise_disj'(A, B, C)):-[])).
+        get_str('$bitwise_disj'/3, s(65), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+66 :
+        comment((system_predicate('$bitwise_exclusive_or'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$bitwise_exclusive_or'(A, B, C)):-[])).
+        get_str('$bitwise_exclusive_or'/3, s(66), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+67 :
+        comment((system_predicate('$bitwise_neg'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$bitwise_neg'(A, B)):-[])).
+        get_str('$bitwise_neg'/2, s(67), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+68 :
+        comment((system_predicate('$ceil'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$ceil'(A, B)):-[])).
+        get_str('$ceil'/2, s(68), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+69 :
+        comment((system_predicate('$cos'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$cos'(A, B)):-[])).
+        get_str('$cos'/2, s(69), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+70 :
+        comment((system_predicate('$degrees'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$degrees'(A, B)):-[])).
+        get_str('$degrees'/2, s(70), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+71 :
+        comment((system_predicate('$exp'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$exp'(A, B)):-[])).
+        get_str('$exp'/2, s(71), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+72 :
+        comment((system_predicate('$float'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$float'(A, B)):-[])).
+        get_str('$float'/2, s(72), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+73 :
+        comment((system_predicate('$float_integer_part'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$float_integer_part'(A, B)):-[])).
+        get_str('$float_integer_part'/2, s(73), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+74 :
+        comment((system_predicate('$float_fractional_part'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$float_fractional_part'(A, B)):-[])).
+        get_str('$float_fractional_part'/2, s(74), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+75 :
+        comment((system_predicate('$float_quotient'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$float_quotient'(A, B, C)):-[])).
+        get_str('$float_quotient'/3, s(75), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+76 :
+        comment((system_predicate('$floor'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$floor'(A, B)):-[])).
+        get_str('$floor'/2, s(76), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+77 :
+        comment((system_predicate('$int_quotient'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$int_quotient'(A, B, C)):-[])).
+        get_str('$int_quotient'/3, s(77), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+78 :
+        comment((system_predicate('$log'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$log'(A, B)):-[])).
+        get_str('$log'/2, s(78), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+79 :
+        comment((system_predicate('$max'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$max'(A, B, C)):-[])).
+        get_str('$max'/3, s(79), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+80 :
+        comment((system_predicate('$min'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$min'(A, B, C)):-[])).
+        get_str('$min'/3, s(80), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+81 :
+        comment((system_predicate('$minus'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$minus'(A, B, C)):-[])).
+        get_str('$minus'/3, s(81), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+82 :
+        comment((system_predicate('$mod'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$mod'(A, B, C)):-[])).
+        get_str('$mod'/3, s(82), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+83 :
+        comment((system_predicate('$multi'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$multi'(A, B, C)):-[])).
+        get_str('$multi'/3, s(83), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+84 :
+        comment((system_predicate('$plus'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$plus'(A, B, C)):-[])).
+        get_str('$plus'/3, s(84), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+85 :
+        comment((system_predicate('$pow'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$pow'(A, B, C)):-[])).
+        get_str('$pow'/3, s(85), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+86 :
+        comment((system_predicate('$radians'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$radians'(A, B)):-[])).
+        get_str('$radians'/2, s(86), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+87 :
+        comment((system_predicate('$rint'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$rint'(A, B)):-[])).
+        get_str('$rint'/2, s(87), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+88 :
+        comment((system_predicate('$round'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$round'(A, B)):-[])).
+        get_str('$round'/2, s(88), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+89 :
+        comment((system_predicate('$shift_left'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$shift_left'(A, B, C)):-[])).
+        get_str('$shift_left'/3, s(89), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+90 :
+        comment((system_predicate('$shift_right'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$shift_right'(A, B, C)):-[])).
+        get_str('$shift_right'/3, s(90), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+91 :
+        comment((system_predicate('$sign'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$sign'(A, B)):-[])).
+        get_str('$sign'/2, s(91), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+92 :
+        comment((system_predicate('$sin'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$sin'(A, B)):-[])).
+        get_str('$sin'/2, s(92), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+93 :
+        comment((system_predicate('$sqrt'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$sqrt'(A, B)):-[])).
+        get_str('$sqrt'/2, s(93), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+94 :
+        comment((system_predicate('$tan'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$tan'(A, B)):-[])).
+        get_str('$tan'/2, s(94), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+95 :
+        comment((system_predicate('$truncate'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$truncate'(A, B)):-[])).
+        get_str('$truncate'/2, s(95), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+96 :
+        comment((system_predicate(A=:=B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A=:=B):-[])).
+        get_str((=:=)/2, s(96), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+97 :
+        comment((system_predicate('$arith_equal'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$arith_equal'(A, B)):-[])).
+        get_str('$arith_equal'/2, s(97), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+98 :
+        comment((system_predicate(A=\=B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A=\=B):-[])).
+        get_str((=\=)/2, s(98), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+99 :
+        comment((system_predicate('$arith_not_equal'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$arith_not_equal'(A, B)):-[])).
+        get_str('$arith_not_equal'/2, s(99), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+100 :
+        comment((system_predicate(A<B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A<B):-[])).
+        get_str((<)/2, s(100), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+101 :
+        comment((system_predicate('$less_than'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$less_than'(A, B)):-[])).
+        get_str('$less_than'/2, s(101), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+102 :
+        comment((system_predicate(A=<B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A=<B):-[])).
+        get_str((=<)/2, s(102), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+103 :
+        comment((system_predicate('$less_or_equal'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$less_or_equal'(A, B)):-[])).
+        get_str('$less_or_equal'/2, s(103), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+104 :
+        comment((system_predicate(A>B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A>B):-[])).
+        get_str((>)/2, s(104), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+105 :
+        comment((system_predicate('$greater_than'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$greater_than'(A, B)):-[])).
+        get_str('$greater_than'/2, s(105), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+106 :
+        comment((system_predicate(A>=B):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(A>=B):-[])).
+        get_str((>=)/2, s(106), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+107 :
+        comment((system_predicate('$greater_or_equal'(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$greater_or_equal'(A, B)):-[])).
+        get_str('$greater_or_equal'/2, s(107), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+108 :
+        comment((system_predicate(clause(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(clause(A, B)):-[])).
+        get_str(clause/2, s(108), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+109 :
+        comment((system_predicate(initialization(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(initialization(A, B)):-[])).
+        get_str((initialization)/2, s(109), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+110 :
+        comment((system_predicate('$new_indexing_hash'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$new_indexing_hash'(A, B, C)):-[])).
+        get_str('$new_indexing_hash'/3, s(110), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+111 :
+        comment((system_predicate(assert(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(assert(A)):-[])).
+        get_str(assert/1, s(111), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+112 :
+        comment((system_predicate(assertz(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(assertz(A)):-[])).
+        get_str(assertz/1, s(112), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+113 :
+        comment((system_predicate(asserta(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(asserta(A)):-[])).
+        get_str(asserta/1, s(113), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+114 :
+        comment((system_predicate(retract(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(retract(A)):-[])).
+        get_str(retract/1, s(114), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+115 :
+        comment((system_predicate(abolish(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(abolish(A)):-[])).
+        get_str(abolish/1, s(115), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+116 :
+        comment((system_predicate(retractall(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(retractall(A)):-[])).
+        get_str(retractall/1, s(116), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+117 :
+        comment((system_predicate(findall(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(findall(A, B, C)):-[])).
+        get_str(findall/3, s(117), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+118 :
+        comment((system_predicate(bagof(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(bagof(A, B, C)):-[])).
+        get_str(bagof/3, s(118), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+119 :
+        comment((system_predicate(setof(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(setof(A, B, C)):-[])).
+        get_str(setof/3, s(119), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+120 :
+        comment((system_predicate(current_input(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(current_input(A)):-[])).
+        get_str(current_input/1, s(120), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+121 :
+        comment((system_predicate(current_output(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(current_output(A)):-[])).
+        get_str(current_output/1, s(121), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+122 :
+        comment((system_predicate(set_input(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(set_input(A)):-[])).
+        get_str(set_input/1, s(122), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+123 :
+        comment((system_predicate(set_output(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(set_output(A)):-[])).
+        get_str(set_output/1, s(123), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+124 :
+        comment((system_predicate(open(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(open(A, B, C)):-[])).
+        get_str(open/3, s(124), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+125 :
+        comment((system_predicate(open(A, B, C, D)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(open(A, B, C, D)):-[])).
+        get_str(open/4, s(125), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+126 :
+        comment((system_predicate(close(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(close(A)):-[])).
+        get_str(close/1, s(126), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+127 :
+        comment((system_predicate(close(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(close(A, B)):-[])).
+        get_str(close/2, s(127), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+128 :
+        comment((system_predicate(flush_output(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(flush_output(A)):-[])).
+        get_str(flush_output/1, s(128), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+129 :
+        comment((system_predicate(flush_output):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(flush_output):-[])).
+        get_con(flush_output, s(129), a(1)).
+        execute(cont).
+system_predicate/1+130 :
+        comment((system_predicate(stream_property(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(stream_property(A, B)):-[])).
+        get_str(stream_property/2, s(130), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+131 :
+        comment((system_predicate(get_char(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(get_char(A)):-[])).
+        get_str(get_char/1, s(131), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+132 :
+        comment((system_predicate(get_char(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(get_char(A, B)):-[])).
+        get_str(get_char/2, s(132), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+133 :
+        comment((system_predicate(get_code(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(get_code(A)):-[])).
+        get_str(get_code/1, s(133), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+134 :
+        comment((system_predicate(get_code(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(get_code(A, B)):-[])).
+        get_str(get_code/2, s(134), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+135 :
+        comment((system_predicate(peek_char(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(peek_char(A)):-[])).
+        get_str(peek_char/1, s(135), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+136 :
+        comment((system_predicate(peek_char(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(peek_char(A, B)):-[])).
+        get_str(peek_char/2, s(136), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+137 :
+        comment((system_predicate(peek_code(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(peek_code(A)):-[])).
+        get_str(peek_code/1, s(137), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+138 :
+        comment((system_predicate(peek_code(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(peek_code(A, B)):-[])).
+        get_str(peek_code/2, s(138), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+139 :
+        comment((system_predicate(put_char(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(put_char(A)):-[])).
+        get_str(put_char/1, s(139), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+140 :
+        comment((system_predicate(put_char(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(put_char(A, B)):-[])).
+        get_str(put_char/2, s(140), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+141 :
+        comment((system_predicate(put_code(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(put_code(A)):-[])).
+        get_str(put_code/1, s(141), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+142 :
+        comment((system_predicate(put_code(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(put_code(A, B)):-[])).
+        get_str(put_code/2, s(142), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+143 :
+        comment((system_predicate(nl):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(nl):-[])).
+        get_con(nl, s(143), a(1)).
+        execute(cont).
+system_predicate/1+144 :
+        comment((system_predicate(nl(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(nl(A)):-[])).
+        get_str(nl/1, s(144), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+145 :
+        comment((system_predicate(get0(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(get0(A)):-[])).
+        get_str(get0/1, s(145), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+146 :
+        comment((system_predicate(get0(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(get0(A, B)):-[])).
+        get_str(get0/2, s(146), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+147 :
+        comment((system_predicate(get(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(get(A)):-[])).
+        get_str(get/1, s(147), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+148 :
+        comment((system_predicate(get(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(get(A, B)):-[])).
+        get_str(get/2, s(148), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+149 :
+        comment((system_predicate(put(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(put(A)):-[])).
+        get_str(put/1, s(149), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+150 :
+        comment((system_predicate(put(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(put(A, B)):-[])).
+        get_str(put/2, s(150), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+151 :
+        comment((system_predicate(tab(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(tab(A)):-[])).
+        get_str(tab/1, s(151), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+152 :
+        comment((system_predicate(tab(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(tab(A, B)):-[])).
+        get_str(tab/2, s(152), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+153 :
+        comment((system_predicate(skip(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(skip(A)):-[])).
+        get_str(skip/1, s(153), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+154 :
+        comment((system_predicate(skip(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(skip(A, B)):-[])).
+        get_str(skip/2, s(154), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+155 :
+        comment((system_predicate(get_byte(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(get_byte(A)):-[])).
+        get_str(get_byte/1, s(155), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+156 :
+        comment((system_predicate(get_byte(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(get_byte(A, B)):-[])).
+        get_str(get_byte/2, s(156), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+157 :
+        comment((system_predicate(peek_byte(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(peek_byte(A)):-[])).
+        get_str(peek_byte/1, s(157), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+158 :
+        comment((system_predicate(peek_byte(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(peek_byte(A, B)):-[])).
+        get_str(peek_byte/2, s(158), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+159 :
+        comment((system_predicate(put_byte(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(put_byte(A)):-[])).
+        get_str(put_byte/1, s(159), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+160 :
+        comment((system_predicate(put_byte(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(put_byte(A, B)):-[])).
+        get_str(put_byte/2, s(160), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+161 :
+        comment((system_predicate(read(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(read(A)):-[])).
+        get_str(read/1, s(161), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+162 :
+        comment((system_predicate(read(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(read(A, B)):-[])).
+        get_str(read/2, s(162), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+163 :
+        comment((system_predicate(read_with_variables(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(read_with_variables(A, B)):-[])).
+        get_str(read_with_variables/2, s(163), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+164 :
+        comment((system_predicate(read_with_variables(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(read_with_variables(A, B, C)):-[])).
+        get_str(read_with_variables/3, s(164), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+165 :
+        comment((system_predicate(read_line(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(read_line(A)):-[])).
+        get_str(read_line/1, s(165), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+166 :
+        comment((system_predicate(read_line(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(read_line(A, B)):-[])).
+        get_str(read_line/2, s(166), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+167 :
+        comment((system_predicate(write(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(write(A)):-[])).
+        get_str(write/1, s(167), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+168 :
+        comment((system_predicate(write(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(write(A, B)):-[])).
+        get_str(write/2, s(168), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+169 :
+        comment((system_predicate(writeq(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(writeq(A)):-[])).
+        get_str(writeq/1, s(169), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+170 :
+        comment((system_predicate(writeq(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(writeq(A, B)):-[])).
+        get_str(writeq/2, s(170), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+171 :
+        comment((system_predicate(write_canonical(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(write_canonical(A)):-[])).
+        get_str(write_canonical/1, s(171), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+172 :
+        comment((system_predicate(write_canonical(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(write_canonical(A, B)):-[])).
+        get_str(write_canonical/2, s(172), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+173 :
+        comment((system_predicate(write_term(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(write_term(A, B)):-[])).
+        get_str(write_term/2, s(173), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+174 :
+        comment((system_predicate(write_term(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(write_term(A, B, C)):-[])).
+        get_str(write_term/3, s(174), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+175 :
+        comment((system_predicate(op(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(op(A, B, C)):-[])).
+        get_str(op/3, s(175), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+176 :
+        comment((system_predicate(current_op(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(current_op(A, B, C)):-[])).
+        get_str(current_op/3, s(176), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+177 :
+        comment((system_predicate(\+A):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(\+A):-[])).
+        get_str((\+)/1, s(177), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+178 :
+        comment((system_predicate(once(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(once(A)):-[])).
+        get_str(once/1, s(178), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+179 :
+        comment((system_predicate(repeat):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(repeat):-[])).
+        get_con(repeat, s(179), a(1)).
+        execute(cont).
+system_predicate/1+180 :
+        comment((system_predicate(atom_length(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(atom_length(A, B)):-[])).
+        get_str(atom_length/2, s(180), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+181 :
+        comment((system_predicate(atom_concat(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(atom_concat(A, B, C)):-[])).
+        get_str(atom_concat/3, s(181), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+182 :
+        comment((system_predicate(sub_atom(A, B, C, D, E)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(sub_atom(A, B, C, D, E)):-[])).
+        get_str(sub_atom/5, s(182), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+183 :
+        comment((system_predicate(atom_chars(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(atom_chars(A, B)):-[])).
+        get_str(atom_chars/2, s(183), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+184 :
+        comment((system_predicate(atom_codes(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(atom_codes(A, B)):-[])).
+        get_str(atom_codes/2, s(184), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+185 :
+        comment((system_predicate(char_code(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(char_code(A, B)):-[])).
+        get_str(char_code/2, s(185), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+186 :
+        comment((system_predicate(number_chars(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(number_chars(A, B)):-[])).
+        get_str(number_chars/2, s(186), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+187 :
+        comment((system_predicate(number_codes(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(number_codes(A, B)):-[])).
+        get_str(number_codes/2, s(187), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+188 :
+        comment((system_predicate(name(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(name(A, B)):-[])).
+        get_str(name/2, s(188), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+189 :
+        comment((system_predicate(set_prolog_flag(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(set_prolog_flag(A, B)):-[])).
+        get_str(set_prolog_flag/2, s(189), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+190 :
+        comment((system_predicate(current_prolog_flag(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(current_prolog_flag(A, B)):-[])).
+        get_str(current_prolog_flag/2, s(190), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+191 :
+        comment((system_predicate(halt):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(halt):-[])).
+        get_con(halt, s(191), a(1)).
+        execute(cont).
+system_predicate/1+192 :
+        comment((system_predicate(halt(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(halt(A)):-[])).
+        get_str(halt/1, s(192), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+193 :
+        comment((system_predicate(abort):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(abort):-[])).
+        get_con(abort, s(193), a(1)).
+        execute(cont).
+system_predicate/1+194 :
+        comment((system_predicate('C'(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('C'(A, B, C)):-[])).
+        get_str('C'/3, s(194), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+195 :
+        comment((system_predicate(expand_term(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(expand_term(A, B)):-[])).
+        get_str(expand_term/2, s(195), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+196 :
+        comment((system_predicate(new_hash(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(new_hash(A)):-[])).
+        get_str(new_hash/1, s(196), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+197 :
+        comment((system_predicate(new_hash(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(new_hash(A, B)):-[])).
+        get_str(new_hash/2, s(197), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+198 :
+        comment((system_predicate(hash_clear(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(hash_clear(A)):-[])).
+        get_str(hash_clear/1, s(198), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+199 :
+        comment((system_predicate(hash_contains_key(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(hash_contains_key(A, B)):-[])).
+        get_str(hash_contains_key/2, s(199), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+200 :
+        comment((system_predicate(hash_get(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(hash_get(A, B, C)):-[])).
+        get_str(hash_get/3, s(200), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+201 :
+        comment((system_predicate(hash_is_empty(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(hash_is_empty(A)):-[])).
+        get_str(hash_is_empty/1, s(201), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+202 :
+        comment((system_predicate(hash_keys(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(hash_keys(A, B)):-[])).
+        get_str(hash_keys/2, s(202), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+203 :
+        comment((system_predicate(hash_map(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(hash_map(A, B)):-[])).
+        get_str(hash_map/2, s(203), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+204 :
+        comment((system_predicate(hash_put(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(hash_put(A, B, C)):-[])).
+        get_str(hash_put/3, s(204), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+205 :
+        comment((system_predicate(hash_remove(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(hash_remove(A, B)):-[])).
+        get_str(hash_remove/2, s(205), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+206 :
+        comment((system_predicate(hash_size(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(hash_size(A, B)):-[])).
+        get_str(hash_size/2, s(206), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+207 :
+        comment((system_predicate('$get_hash_manager'(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate('$get_hash_manager'(A)):-[])).
+        get_str('$get_hash_manager'/1, s(207), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+208 :
+        comment((system_predicate(java_constructor0(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_constructor0(A, B)):-[])).
+        get_str(java_constructor0/2, s(208), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+209 :
+        comment((system_predicate(java_constructor(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_constructor(A, B)):-[])).
+        get_str(java_constructor/2, s(209), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+210 :
+        comment((system_predicate(java_declared_constructor0(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_declared_constructor0(A, B)):-[])).
+        get_str(java_declared_constructor0/2, s(210), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+211 :
+        comment((system_predicate(java_declared_constructor(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_declared_constructor(A, B)):-[])).
+        get_str(java_declared_constructor/2, s(211), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+212 :
+        comment((system_predicate(java_method0(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_method0(A, B, C)):-[])).
+        get_str(java_method0/3, s(212), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+213 :
+        comment((system_predicate(java_method(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_method(A, B, C)):-[])).
+        get_str(java_method/3, s(213), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+214 :
+        comment((system_predicate(java_declared_method0(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_declared_method0(A, B, C)):-[])).
+        get_str(java_declared_method0/3, s(214), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+215 :
+        comment((system_predicate(java_declared_method(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_declared_method(A, B, C)):-[])).
+        get_str(java_declared_method/3, s(215), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+216 :
+        comment((system_predicate(java_get_field0(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_get_field0(A, B, C)):-[])).
+        get_str(java_get_field0/3, s(216), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+217 :
+        comment((system_predicate(java_get_field(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_get_field(A, B, C)):-[])).
+        get_str(java_get_field/3, s(217), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+218 :
+        comment((system_predicate(java_get_declared_field0(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_get_declared_field0(A, B, C)):-[])).
+        get_str(java_get_declared_field0/3, s(218), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+219 :
+        comment((system_predicate(java_get_declared_field(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_get_declared_field(A, B, C)):-[])).
+        get_str(java_get_declared_field/3, s(219), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+220 :
+        comment((system_predicate(java_set_field0(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_set_field0(A, B, C)):-[])).
+        get_str(java_set_field0/3, s(220), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+221 :
+        comment((system_predicate(java_set_field(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_set_field(A, B, C)):-[])).
+        get_str(java_set_field/3, s(221), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+222 :
+        comment((system_predicate(java_set_declared_field0(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_set_declared_field0(A, B, C)):-[])).
+        get_str(java_set_declared_field0/3, s(222), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+223 :
+        comment((system_predicate(java_set_declared_field(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_set_declared_field(A, B, C)):-[])).
+        get_str(java_set_declared_field/3, s(223), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+224 :
+        comment((system_predicate(synchronized(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(synchronized(A, B)):-[])).
+        get_str(synchronized/2, s(224), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+225 :
+        comment((system_predicate(java_conversion(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(java_conversion(A, B)):-[])).
+        get_str(java_conversion/2, s(225), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+226 :
+        comment((system_predicate(cafeteria):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(cafeteria):-[])).
+        get_con(cafeteria, s(226), a(1)).
+        execute(cont).
+system_predicate/1+227 :
+        comment((system_predicate(consult(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(consult(A)):-[])).
+        get_str(consult/1, s(227), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+228 :
+        comment((system_predicate(trace):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(trace):-[])).
+        get_con(trace, s(228), a(1)).
+        execute(cont).
+system_predicate/1+229 :
+        comment((system_predicate(notrace):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(notrace):-[])).
+        get_con(notrace, s(229), a(1)).
+        execute(cont).
+system_predicate/1+230 :
+        comment((system_predicate(debug):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(debug):-[])).
+        get_con(debug, s(230), a(1)).
+        execute(cont).
+system_predicate/1+231 :
+        comment((system_predicate(nodebug):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(nodebug):-[])).
+        get_con(nodebug, s(231), a(1)).
+        execute(cont).
+system_predicate/1+232 :
+        comment((system_predicate(leash(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(leash(A)):-[])).
+        get_str(leash/1, s(232), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+233 :
+        comment((system_predicate(spy(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(spy(A)):-[])).
+        get_str(spy/1, s(233), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+234 :
+        comment((system_predicate(nospy(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(nospy(A)):-[])).
+        get_str(nospy/1, s(234), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+235 :
+        comment((system_predicate(nospyall):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(nospyall):-[])).
+        get_con(nospyall, s(235), a(1)).
+        execute(cont).
+system_predicate/1+236 :
+        comment((system_predicate(listing):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(listing):-[])).
+        get_con(listing, s(236), a(1)).
+        execute(cont).
+system_predicate/1+237 :
+        comment((system_predicate(listing(A)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(listing(A)):-[])).
+        get_str(listing/1, s(237), a(1)).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+238 :
+        comment((system_predicate(length(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(length(A, B)):-[])).
+        get_str(length/2, s(238), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+239 :
+        comment((system_predicate(numbervars(A, B, C)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(numbervars(A, B, C)):-[])).
+        get_str(numbervars/3, s(239), a(1)).
+        unify_void(1).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+system_predicate/1+240 :
+        comment((system_predicate(statistics(A, B)):-true)).
+        decl_term_vars([a(1)]).
+        decl_pred_vars([cont]).
+        set(ea(1), a(1)).
+        set(econt, cont).
+        comment((system_predicate(statistics(A, B)):-[])).
+        get_str(statistics/2, s(240), a(1)).
+        unify_void(1).
+        unify_void(1).
+        execute(cont).
+end_predicate(system_predicate/1).
+
+

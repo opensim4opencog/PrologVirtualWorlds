@@ -1,0 +1,7 @@
+
+
+prolog_system(swi).
+
+:-ensure_loaded('logicmoo.pl').
+
+

@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/portland/primes.in ...}
+
+# Name: primes(1000)
+# Iterations: 1000
+# TestTime: 37588 msec.
+# OverHead: 101 msec.
+# TestTime-OverHead: 37487 msec.
+# (TestTime-OverHead)/Iterations: 37.487 msec.
+###CSV###,primes(1000),1000,37588,101,37487,37.487
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/portland/primes.in consulted, 20 msec}
+bye

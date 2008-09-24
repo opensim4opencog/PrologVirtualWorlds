@@ -1,0 +1,310 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/pereira/pereira.in ...}
+
+# Name: tail_call_atom_atom
+# Iterations: 200000
+# TestTime: 7795 msec.
+# OverHead: 4551 msec.
+# TestTime-OverHead: 3244 msec.
+# (TestTime-OverHead)/Iterations: 0.01622 msec.
+###CSV###,tail_call_atom_atom,200000,7795,4551,3244,0.01622
+
+
+# Name: binary_call_atom_atom
+# Iterations: 200000
+# TestTime: 8368 msec.
+# OverHead: 4577 msec.
+# TestTime-OverHead: 3791 msec.
+# (TestTime-OverHead)/Iterations: 0.018955 msec.
+###CSV###,binary_call_atom_atom,200000,8368,4577,3791,0.018955
+
+
+# Name: cons_list
+# Iterations: 200000
+# TestTime: 9705 msec.
+# OverHead: 4555 msec.
+# TestTime-OverHead: 5150 msec.
+# (TestTime-OverHead)/Iterations: 0.02575 msec.
+###CSV###,cons_list,200000,9705,4555,5150,0.02575
+
+
+# Name: walk_list
+# Iterations: 200000
+# TestTime: 9802 msec.
+# OverHead: 4574 msec.
+# TestTime-OverHead: 5228 msec.
+# (TestTime-OverHead)/Iterations: 0.02614 msec.
+###CSV###,walk_list,200000,9802,4574,5228,0.02614
+
+
+# Name: walk_list_rec
+# Iterations: 200000
+# TestTime: 7419 msec.
+# OverHead: 4565 msec.
+# TestTime-OverHead: 2854 msec.
+# (TestTime-OverHead)/Iterations: 0.01427 msec.
+###CSV###,walk_list_rec,200000,7419,4565,2854,0.01427
+
+
+# Name: walk_list(1)
+# Iterations: 200000
+# TestTime: 7558 msec.
+# OverHead: 4554 msec.
+# TestTime-OverHead: 3004 msec.
+# (TestTime-OverHead)/Iterations: 0.01502 msec.
+###CSV###,walk_list(1),200000,7558,4554,3004,0.01502
+
+
+# Name: walk_list(2)
+# Iterations: 200000
+# TestTime: 9213 msec.
+# OverHead: 4542 msec.
+# TestTime-OverHead: 4671 msec.
+# (TestTime-OverHead)/Iterations: 0.023355 msec.
+###CSV###,walk_list(2),200000,9213,4542,4671,0.023355
+
+
+# Name: walk_list(4)
+# Iterations: 200000
+# TestTime: 12790 msec.
+# OverHead: 4543 msec.
+# TestTime-OverHead: 8247 msec.
+# (TestTime-OverHead)/Iterations: 0.041235 msec.
+###CSV###,walk_list(4),200000,12790,4543,8247,0.041235
+
+
+# Name: walk_list(8)
+# Iterations: 200000
+# TestTime: 19702 msec.
+# OverHead: 4556 msec.
+# TestTime-OverHead: 15146 msec.
+# (TestTime-OverHead)/Iterations: 0.07573 msec.
+###CSV###,walk_list(8),200000,19702,4556,15146,0.07573
+
+
+# Name: walk_list(16)
+# Iterations: 200000
+# TestTime: 32178 msec.
+# OverHead: 4686 msec.
+# TestTime-OverHead: 27492 msec.
+# (TestTime-OverHead)/Iterations: 0.13746 msec.
+###CSV###,walk_list(16),200000,32178,4686,27492,0.13746
+
+
+# Name: cons_term
+# Iterations: 200000
+# TestTime: 12727 msec.
+# OverHead: 4891 msec.
+# TestTime-OverHead: 7836 msec.
+# (TestTime-OverHead)/Iterations: 0.03918 msec.
+###CSV###,cons_term,200000,12727,4891,7836,0.03918
+
+
+# Name: walk_term
+# Iterations: 200000
+# TestTime: 8777 msec.
+# OverHead: 4757 msec.
+# TestTime-OverHead: 4020 msec.
+# (TestTime-OverHead)/Iterations: 0.0201 msec.
+###CSV###,walk_term,200000,8777,4757,4020,0.0201
+
+
+# Name: walk_term_rec
+# Iterations: 200000
+# TestTime: 6488 msec.
+# OverHead: 4573 msec.
+# TestTime-OverHead: 1915 msec.
+# (TestTime-OverHead)/Iterations: 0.009575 msec.
+###CSV###,walk_term_rec,200000,6488,4573,1915,0.009575
+
+
+# Name: shallow_backtracking
+# Iterations: 200000
+# TestTime: 9212 msec.
+# OverHead: 4247 msec.
+# TestTime-OverHead: 4965 msec.
+# (TestTime-OverHead)/Iterations: 0.024825 msec.
+###CSV###,shallow_backtracking,200000,9212,4247,4965,0.024825
+
+
+# Name: deep_backtracking
+# Iterations: 200000
+# TestTime: 11015 msec.
+# OverHead: 4106 msec.
+# TestTime-OverHead: 6909 msec.
+# (TestTime-OverHead)/Iterations: 0.034545 msec.
+###CSV###,deep_backtracking,200000,11015,4106,6909,0.034545
+
+
+# Name: choice_point
+# Iterations: 200000
+# TestTime: 15044 msec.
+# OverHead: 4119 msec.
+# TestTime-OverHead: 10925 msec.
+# (TestTime-OverHead)/Iterations: 0.054625 msec.
+###CSV###,choice_point,200000,15044,4119,10925,0.054625
+
+
+# Name: trail_variables
+# Iterations: 200000
+# TestTime: 17374 msec.
+# OverHead: 4303 msec.
+# TestTime-OverHead: 13071 msec.
+# (TestTime-OverHead)/Iterations: 0.065355 msec.
+###CSV###,trail_variables,200000,17374,4303,13071,0.065355
+
+
+# Name: medium_unify
+# Iterations: 200000
+# TestTime: 6630 msec.
+# OverHead: 4620 msec.
+# TestTime-OverHead: 2010 msec.
+# (TestTime-OverHead)/Iterations: 0.01005 msec.
+###CSV###,medium_unify,200000,6630,4620,2010,0.01005
+
+
+# Name: deep_unify
+# Iterations: 200000
+# TestTime: 123405 msec.
+# OverHead: 4667 msec.
+# TestTime-OverHead: 118738 msec.
+# (TestTime-OverHead)/Iterations: 0.59369 msec.
+###CSV###,deep_unify,200000,123405,4667,118738,0.59369
+
+
+# Name: integer_add
+# Iterations: 200000
+# TestTime: 10755 msec.
+# OverHead: 4623 msec.
+# TestTime-OverHead: 6132 msec.
+# (TestTime-OverHead)/Iterations: 0.03066 msec.
+###CSV###,integer_add,200000,10755,4623,6132,0.03066
+
+
+# Name: floating_add
+# Iterations: 200000
+# TestTime: 11187 msec.
+# OverHead: 4968 msec.
+# TestTime-OverHead: 6219 msec.
+# (TestTime-OverHead)/Iterations: 0.031095 msec.
+###CSV###,floating_add,200000,11187,4968,6219,0.031095
+
+
+# Name: arg(1)
+# Iterations: 200000
+# TestTime: 11853 msec.
+# OverHead: 4638 msec.
+# TestTime-OverHead: 7215 msec.
+# (TestTime-OverHead)/Iterations: 0.036075 msec.
+###CSV###,arg(1),200000,11853,4638,7215,0.036075
+
+
+# Name: arg(2)
+# Iterations: 200000
+# TestTime: 11740 msec.
+# OverHead: 4964 msec.
+# TestTime-OverHead: 6776 msec.
+# (TestTime-OverHead)/Iterations: 0.03388 msec.
+###CSV###,arg(2),200000,11740,4964,6776,0.03388
+
+
+# Name: arg(4)
+# Iterations: 200000
+# TestTime: 12117 msec.
+# OverHead: 4635 msec.
+# TestTime-OverHead: 7482 msec.
+# (TestTime-OverHead)/Iterations: 0.03741 msec.
+###CSV###,arg(4),200000,12117,4635,7482,0.03741
+
+
+# Name: arg(8)
+# Iterations: 200000
+# TestTime: 11765 msec.
+# OverHead: 4995 msec.
+# TestTime-OverHead: 6770 msec.
+# (TestTime-OverHead)/Iterations: 0.03385 msec.
+###CSV###,arg(8),200000,11765,4995,6770,0.03385
+
+
+# Name: arg(16)
+# Iterations: 200000
+# TestTime: 12145 msec.
+# OverHead: 4736 msec.
+# TestTime-OverHead: 7409 msec.
+# (TestTime-OverHead)/Iterations: 0.037045 msec.
+###CSV###,arg(16),200000,12145,4736,7409,0.037045
+
+
+# Name: index
+# Iterations: 200000
+# TestTime: 10353 msec.
+# OverHead: 4658 msec.
+# TestTime-OverHead: 5695 msec.
+# (TestTime-OverHead)/Iterations: 0.028475 msec.
+###CSV###,index,200000,10353,4658,5695,0.028475
+
+{expanding internal database...}
+
+# Name: assert_unit
+# Iterations: 100
+# TestTime: 3200 msec.
+# OverHead: 3 msec.
+# TestTime-OverHead: 3197 msec.
+# (TestTime-OverHead)/Iterations: 31.97 msec.
+###CSV###,assert_unit,100,3200,3,3197,31.97
+
+
+# Name: access_unit
+# Iterations: 5000
+# TestTime: 14281 msec.
+# OverHead: 117 msec.
+# TestTime-OverHead: 14164 msec.
+# (TestTime-OverHead)/Iterations: 2.8328 msec.
+###CSV###,access_unit,5000,14281,117,14164,2.8328
+
+
+# Name: slow_access_unit
+# Iterations: 1000
+# TestTime: 17331 msec.
+# OverHead: 23 msec.
+# TestTime-OverHead: 17308 msec.
+# (TestTime-OverHead)/Iterations: 17.308 msec.
+###CSV###,slow_access_unit,1000,17331,23,17308,17.308
+
+
+# Name: setof
+# Iterations: 10000
+# TestTime: 3282 msec.
+# OverHead: 233 msec.
+# TestTime-OverHead: 3049 msec.
+# (TestTime-OverHead)/Iterations: 0.3049 msec.
+###CSV###,setof,10000,3282,233,3049,0.3049
+
+
+# Name: pair_setof
+# Iterations: 10000
+# TestTime: 3095 msec.
+# OverHead: 231 msec.
+# TestTime-OverHead: 2864 msec.
+# (TestTime-OverHead)/Iterations: 0.2864 msec.
+###CSV###,pair_setof,10000,3095,231,2864,0.2864
+
+
+# Name: double_setof
+# Iterations: 10000
+# TestTime: 144089 msec.
+# OverHead: 232 msec.
+# TestTime-OverHead: 143857 msec.
+# (TestTime-OverHead)/Iterations: 14.3857 msec.
+###CSV###,double_setof,10000,144089,232,143857,14.3857
+
+
+# Name: bagof
+# Iterations: 10000
+# TestTime: 2402 msec.
+# OverHead: 232 msec.
+# TestTime-OverHead: 2170 msec.
+# (TestTime-OverHead)/Iterations: 0.217 msec.
+###CSV###,bagof,10000,2402,232,2170,0.217
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/pereira/pereira.in consulted, 2 msec}
+bye
