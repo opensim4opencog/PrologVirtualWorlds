@@ -14,10 +14,10 @@ class PRED_$statistics_2 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = 9091734488065009859L;
-  public static /*SymbolTerm*/Object Nil = makeSymbol("[]");
-  public static /*SymbolTerm*/Object SYM_RUNTIME = makeSymbol("runtime");
-  public static /*SymbolTerm*/Object SYM_TRAIL = makeSymbol("trail");
-  public static /*SymbolTerm*/Object SYM_CHOICE = makeSymbol("choice");
+  public static /*SymbolTerm*/Object Nil = makeAtom("[]");
+  public static /*SymbolTerm*/Object SYM_RUNTIME = makeAtom("runtime");
+  public static /*SymbolTerm*/Object SYM_TRAIL = makeAtom("trail");
+  public static /*SymbolTerm*/Object SYM_CHOICE = makeAtom("choice");
   Object arg1;
   Object arg2;
 

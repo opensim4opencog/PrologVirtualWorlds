@@ -12,8 +12,8 @@ public class PRED_$univ_2 extends PredicateBase
    * 
    */
   private static final long serialVersionUID = 941823099363621809L;
-    static /*SymbolTerm*/Object SYM_DOT = makeSymbol(".");
-    static /*SymbolTerm*/Object SYM_NIL = makeSymbol("[]");
+    static /*SymbolTerm*/Object SYM_DOT = makeAtom(".");
+    static /*SymbolTerm*/Object SYM_NIL = makeAtom("[]");
     public Object arg1;
     public Object arg2;
 
@@ -59,7 +59,7 @@ final Object[] engine_aregs = engine.getAreg();
  if (!unify(a2, t))
      return this.fail(engine);
     } else if (isCompound(a1)){
- final /*SymbolTerm*/Object sym = makeSymbol(nameUQ(a1));
+ final /*SymbolTerm*/Object sym = makeAtom(nameUQ(a1));
  final Object[] args = args(a1);
  Object t = PRED_$univ_2.SYM_NIL;
  for (int i = args.length; i > 0; i--)
@@ -95,7 +95,7 @@ final Object[] engine_aregs = engine.getAreg();
   throw new IllegalTypeException(this, 2, "list", a2);
  }
  final int n = jp.ac.kobe_u.cs.prolog.lang.ListTermBase.listLength((Object) a2) - 1;
- final /*SymbolTerm*/Object sym = makeSymbol(nameUQ(head), n);
+ final /*SymbolTerm*/Object sym = makeAtom(nameUQ(head), n);
  final Object[] args = new Object[n];
  for (int i = 0; i<n; i++){
      args[i] = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.first((Object) tail));

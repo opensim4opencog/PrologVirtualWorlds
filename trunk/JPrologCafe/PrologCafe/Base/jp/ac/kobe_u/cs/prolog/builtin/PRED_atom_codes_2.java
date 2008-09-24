@@ -15,7 +15,7 @@ public class PRED_atom_codes_2 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = -913101710459999986L;
-  static /*SymbolTerm*/Object Nil = makeSymbol("[]");
+  static /*SymbolTerm*/Object Nil = makeAtom("[]");
   Object arg1;
   Object arg2;
 
@@ -68,7 +68,7 @@ public class PRED_atom_codes_2 extends PredicateBase {
         if (!Character.isDefined((char) i)) throw new RepresentationException(this, 2, "character_code");
         sb.append((char) i);
       }
-      if (!unify(a1, makeSymbol(sb.toString()))) return this.fail(engine);
+      if (!unify(a1, makeAtom(sb.toString()))) return this.fail(engine);
       return this.cont;
     }
     if (!isAtomTerm(a1)) throw new IllegalTypeException(this, 1, "atom", a1);

@@ -100,15 +100,15 @@ public class Compiler {
         return false;
       }
       // Create arguments
-      Object prolog = SymbolTermBase.makeSymbol(_prolog);
-      Object wam = SymbolTermBase.makeSymbol(_wam);
+      Object prolog = SymbolTermBase.makeAtom(_prolog);
+      Object wam = SymbolTermBase.makeAtom(_wam);
       Object op = Prolog.Nil;
-      if (eliminateDisjunctions) op = Prolog.makeList(SymbolTermBase.makeSymbol("ed"), op);
-      if (arithmeticCompilation) op = Prolog.makeList(SymbolTermBase.makeSymbol("ac"), op);
-      if (inlineExpansion) op = Prolog.makeList(SymbolTermBase.makeSymbol("ie"), op);
-      if (optimiseRecursiveCall) op = Prolog.makeList(SymbolTermBase.makeSymbol("rc"), op);
-      if (switchOnHash) op = Prolog.makeList(SymbolTermBase.makeSymbol("idx"), op);
-      if (generateClosure) op = Prolog.makeList(SymbolTermBase.makeSymbol("clo"), op);
+      if (eliminateDisjunctions) op = Prolog.makeList(SymbolTermBase.makeAtom("ed"), op);
+      if (arithmeticCompilation) op = Prolog.makeList(SymbolTermBase.makeAtom("ac"), op);
+      if (inlineExpansion) op = Prolog.makeList(SymbolTermBase.makeAtom("ie"), op);
+      if (optimiseRecursiveCall) op = Prolog.makeList(SymbolTermBase.makeAtom("rc"), op);
+      if (switchOnHash) op = Prolog.makeList(SymbolTermBase.makeAtom("idx"), op);
+      if (generateClosure) op = Prolog.makeList(SymbolTermBase.makeAtom("clo"), op);
       Object[] args = { Prolog.makeList(prolog, Prolog.makeList(wam, Prolog.makeList(op, Prolog.Nil))) };
       // Create predicate
       Class clazz = (new PrologClassLoader()).loadPredicateClass("jp.ac.kobe_u.cs.prolog.compiler.pl2am", "pl2am", 1, true);
@@ -143,8 +143,8 @@ public class Compiler {
         return false;
       }
       // Create arguments
-      Object wam = SymbolTermBase.makeSymbol(_wam);
-      Object dir = SymbolTermBase.makeSymbol(_dir);
+      Object wam = SymbolTermBase.makeAtom(_wam);
+      Object dir = SymbolTermBase.makeAtom(_dir);
       Object[] args = { Prolog.makeList(wam, Prolog.makeList(dir, Prolog.Nil)) };
       // Create predicate
       //	    Class clazz = PredicateEncoder.getClass("jp.ac.kobe_u.cs.prolog.compiler.am2j", "am2j", 1);

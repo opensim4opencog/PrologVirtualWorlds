@@ -15,7 +15,7 @@ public class PRED_sort_2 extends PredicateBase
    * 
    */
   private static final long serialVersionUID = -1598610344045447227L;
-    static /*SymbolTerm*/Object Nil = makeSymbol("[]");
+    static /*SymbolTerm*/Object Nil = makeAtom("[]");
     Object arg1;
     Object arg2;
 

@@ -46,7 +46,7 @@ public class PRED_java_conversion_2 extends PredicateBase {
     if (o == null) throw new EvaluationException(this, 2, "undefined");
     if ((o instanceof Byte) || (o instanceof Short) || (o instanceof Integer) || (o instanceof Long)) return makeInteger(((Number) o).intValue());
     if ((o instanceof Float) || (o instanceof Double)) return makeDouble(((Number) o).doubleValue());
-    if (o instanceof String) return makeSymbol((String) o);
+    if (o instanceof String) return makeAtom((String) o);
     if (o instanceof Vector) {
       final Vector v = (Vector) o;
       Object t = Prolog.Nil;

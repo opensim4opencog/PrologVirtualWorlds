@@ -17,8 +17,8 @@ public class PRED_keysort_2 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = 1937513875144863756L;
-  static /*SymbolTerm*/Object SYM_HYPHEN_2 = makeSymbol("-", 2);
-  static /*SymbolTerm*/Object Nil = makeSymbol("[]");
+  static /*SymbolTerm*/Object SYM_HYPHEN_2 = makeAtom("-", 2);
+  static /*SymbolTerm*/Object Nil = makeAtom("[]");
   Object arg1;
   Object arg2;
 

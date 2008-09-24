@@ -11,7 +11,7 @@ public class PRED_peek_char_2 extends PredicateBase
    * 
    */
   private static final long serialVersionUID = 3643102696425524225L;
-    public static /*SymbolTerm*/Object SYM_EOF = makeSymbol("end_of_file");
+    public static /*SymbolTerm*/Object SYM_EOF = makeAtom("end_of_file");
     public Object arg1;
     public Object arg2;
 
@@ -84,7 +84,7 @@ final Object[] engine_aregs = engine.getAreg();
  if (!Character.isDefined(c))
      throw new RepresentationException(this, 0, "character");
  ((PushbackReader) stream).unread(c);
- if (!unify(a2, makeSymbol(String.valueOf((char) c))))
+ if (!unify(a2, makeAtom(String.valueOf((char) c))))
      return this.fail(engine);
  return this.cont;
     } catch (final IOException e){

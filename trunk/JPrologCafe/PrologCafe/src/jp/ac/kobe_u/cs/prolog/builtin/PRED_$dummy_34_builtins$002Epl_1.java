@@ -75,7 +75,7 @@ class PRED_$dummy_34_builtins$002Epl_1_1 extends PRED_$dummy_34_builtins$002Epl_
         if (! isJavaObject(a1)) {
             return fail(engine);
         }
-        if (! unify(s1,makeAtom(getName(getClass(object(a1)))))) {
+        if (! unify(s1,makeAtom(getClass(toJava(a1)).getName()))) {
             return fail(engine);
         }
         //END inline expansion
@@ -96,7 +96,7 @@ class PRED_$dummy_34_builtins$002Epl_1_2 extends PRED_$dummy_34_builtins$002Epl_
         if (! isJavaObject(a1)) {
             return fail(engine);
         }
-        if (! unify(s2,makeAtom(getName(getClass(object(a1)))))) {
+        if (! unify(s2,makeAtom(getClass(toJava(a1)).getName()))) {
             return fail(engine);
         }
         //END inline expansion

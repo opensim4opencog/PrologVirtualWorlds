@@ -93,7 +93,7 @@ public class VariableTermBase extends MachineTerm implements VariableTerm, Undoa
       return unify(getVal(), t);
     }
     t = deref(t);
-    bind(t);
+    bind(this, t);
     return true;
   }
 
@@ -130,31 +130,25 @@ public class VariableTermBase extends MachineTerm implements VariableTerm, Undoa
     return value;
   }
 
-  /** 
-   * Binds this variable to a given term. 
-   * And pushs this variable to trail stack if necessary. 
-   * @param that a term to be bound.
-   * @see Trail
-   */
-  public boolean bind(Object that) {
-    if (this == that) {
-      return true;
-    }
-    Prolog machine = this.machine;
-    Trail trail = machine.trail;
-    if (isVariable(that) && ((VariableTerm) that).timeStamp() >= this.timeStamp) {
-      ((VariableTerm) that).setVal(this);
-      if (((VariableTerm) that).timeStamp() < trail.engine.stack_getTimeStamp()) {
-        trail.push((VariableTerm) that);
-      }
-    } else {
-      this.setVal(that);
-      if (this.timeStamp() < trail.engine.stack_getTimeStamp()) {
-        trail.push(this);
-      }
-    }
-    return true;
-  }
+  //  public boolean bind(Object that) {
+  //    if (this == that) {
+  //      return true;
+  //    }
+  //    Prolog machine = this.machine;
+  //    Trail trail = machine.trail;
+  //    if (isVariable(that) && ((VariableTerm) that).timeStamp() >= this.timeStamp) {
+  //      ((VariableTerm) that).setVal(this);
+  //      if (((VariableTerm) that).timeStamp() < trail.engine.stack_getTimeStamp()) {
+  //        trail.push((VariableTerm) that);
+  //      }
+  //    } else {
+  //      this.setVal(that);
+  //      if (this.timeStamp() < trail.engine.stack_getTimeStamp()) {
+  //        trail.push(this);
+  //      }
+  //    }
+  //    return true;
+  //  }
 
   /** 
    * Checks whether this object is convertible with the given Java class type 
@@ -180,7 +174,7 @@ public class VariableTermBase extends MachineTerm implements VariableTerm, Undoa
     if (engine != machine) {
       Thread.dumpStack();
     }
-    if (isBound()) return copy(getVal(),engine);
+    if (isBound()) return copy(getVal(), engine);
     co = (VariableTermBase) engine.copyHash.get(this);
     if (co == null) {
       //	    co = Prolog.makeVariable(engine);
@@ -221,7 +215,7 @@ public class VariableTermBase extends MachineTerm implements VariableTerm, Undoa
    * @see #value
    */
   public String toQuotedString() {
-    if (isBound()) return toQuotedString( getVal());//.toQuotedString();
+    if (isBound()) return toQuotedString(getVal());//.toQuotedString();
     return nameUQ();
   }
 
@@ -280,21 +274,13 @@ public class VariableTermBase extends MachineTerm implements VariableTerm, Undoa
    * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
    */
   public int compareTo(Object anotherTerm) { // anotherTerm must be dereferenced.
-    if (isBound()) return compareTo(getVal(),anotherTerm);
+    if (isBound()) return compareTerm(getVal(), anotherTerm);
     if (!isVariable(anotherTerm)) return BEFORE;
     if (this == anotherTerm) return EQUAL;
-    int x = this.hashCode(4) - hashCode( anotherTerm,4);
+    int x = this.hashCode(4) - hashCode(anotherTerm, 4);
     if (x != 0) return x;
     throw new InternalException("VariableTerm is not unique");
   }
 
-  /**
-   * @param a3
-   * @param streamObject
-   */
-  public static void bind(VariableTerm a3, Object streamObject) {
-    // TODO Auto-generated method stub
-    a3.bind(streamObject);
 
-  }
 }

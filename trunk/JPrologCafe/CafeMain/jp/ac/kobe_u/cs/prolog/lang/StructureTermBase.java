@@ -193,9 +193,9 @@ public class StructureTermBase extends TermBase implements StructureTerm {
       return BEFORE;
     }
     if (arity != arity2) return (arity - arity2);
-    if (!prologEquals(functor, functor2)) return compareTo(functor, functor2);
+    if (!prologEquals(functor, functor2)) return compareTerm(functor, functor2);
     for (int i = 0; i < arity; i++) {
-      rc = compareTo(args[i], deref(args2[i]));
+      rc = compareTerm(args[i], deref(args2[i]));
       if (rc != EQUAL) return rc;
     }
     return EQUAL;

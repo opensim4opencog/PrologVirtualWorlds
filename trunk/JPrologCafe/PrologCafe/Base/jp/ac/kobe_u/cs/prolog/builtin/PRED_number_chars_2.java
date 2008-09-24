@@ -13,7 +13,7 @@ public class PRED_number_chars_2 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = 5932745211000415718L;
-  static /*SymbolTerm*/Object Nil = makeSymbol("[]");
+  static /*SymbolTerm*/Object Nil = makeAtom("[]");
   Object arg1, arg2;
 
   public PRED_number_chars_2(Object a1, Object a2, Predicate cont) {
@@ -85,7 +85,7 @@ public class PRED_number_chars_2 extends PredicateBase {
       final String s = a1.toString();
       Object y = PRED_number_chars_2.Nil;
       for (int i = s.length(); i > 0; i--) {
-        y = makeList(makeSymbol(s.substring(i - 1, i)), y);
+        y = makeList(makeAtom(s.substring(i - 1, i)), y);
       }
       if (!unify(a2, y)) return this.fail(engine);
       return this.cont;

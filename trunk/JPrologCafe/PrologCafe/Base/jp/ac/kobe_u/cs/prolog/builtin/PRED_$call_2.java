@@ -27,7 +27,7 @@ class PRED_$call_2 extends PredicateBase {
   Object arg1;
   Object arg2;
   Predicate cont;
-  public static /*SymbolTerm*/Object SYM_SLASH_2 = makeSymbol("/", 2);
+  public static /*SymbolTerm*/Object SYM_SLASH_2 = makeAtom("/", 2);
 
   @Override
   public int arity() {
@@ -87,7 +87,7 @@ class PRED_$call_2 extends PredicateBase {
           clazz = engine.pcl.loadPredicateClass("jp.ac.kobe_u.cs.prolog.builtin", functor, arity, true);
         } catch (final ClassNotFoundException ee) {
           if (engine.getUnknown().equals("fail")) return this.fail(engine);
-          final Object[] fa = { makeSymbol(functor), makeInteger(arity) };
+          final Object[] fa = { makeAtom(functor), makeInteger(arity) };
           throw new ExistenceException(this, 0, "procedure", makeStructure(PRED_$call_2.SYM_SLASH_2, fa), "");
         }
       }

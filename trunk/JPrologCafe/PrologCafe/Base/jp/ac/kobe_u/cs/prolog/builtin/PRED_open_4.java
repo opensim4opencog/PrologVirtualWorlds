@@ -17,17 +17,17 @@ public class PRED_open_4 extends PredicateBase
    * 
    */
   private static final long serialVersionUID = -2504908944907240194L;
-    public static /*SymbolTerm*/Object SYM_NIL = makeSymbol("[]");
-    public static /*SymbolTerm*/Object SYM_TEXT = makeSymbol("text");
-    public static /*SymbolTerm*/Object SYM_READ = makeSymbol("read");
-    public static /*SymbolTerm*/Object SYM_WRITE = makeSymbol("write");
-    public static /*SymbolTerm*/Object SYM_APPEND = makeSymbol("append");
-    public static /*SymbolTerm*/Object SYM_INPUT = makeSymbol("input");
-    public static /*SymbolTerm*/Object SYM_OUTPUT = makeSymbol("output");
-    public static /*SymbolTerm*/Object SYM_ALIAS_1 = makeSymbol("alias", 1);
-    public static /*SymbolTerm*/Object SYM_MODE_1 = makeSymbol("mode", 1);
-    public static /*SymbolTerm*/Object SYM_TYPE_1 = makeSymbol("type", 1);
-    public static /*SymbolTerm*/Object SYM_FILE_NAME_1 = makeSymbol("file_name", 1);
+    public static /*SymbolTerm*/Object SYM_NIL = makeAtom("[]");
+    public static /*SymbolTerm*/Object SYM_TEXT = makeAtom("text");
+    public static /*SymbolTerm*/Object SYM_READ = makeAtom("read");
+    public static /*SymbolTerm*/Object SYM_WRITE = makeAtom("write");
+    public static /*SymbolTerm*/Object SYM_APPEND = makeAtom("append");
+    public static /*SymbolTerm*/Object SYM_INPUT = makeAtom("input");
+    public static /*SymbolTerm*/Object SYM_OUTPUT = makeAtom("output");
+    public static /*SymbolTerm*/Object SYM_ALIAS_1 = makeAtom("alias", 1);
+    public static /*SymbolTerm*/Object SYM_MODE_1 = makeAtom("mode", 1);
+    public static /*SymbolTerm*/Object SYM_TYPE_1 = makeAtom("type", 1);
+    public static /*SymbolTerm*/Object SYM_FILE_NAME_1 = makeAtom("file_name", 1);
     public Object arg1;
     public Object arg2;
     public Object arg3;
@@ -84,7 +84,7 @@ final Object[] engine_aregs = engine.getAreg();
  throw new PInstantiationException(this, 2);
     if (!isAtomTerm(a2))
  throw new IllegalTypeException(this, 2, "atom", a2);
-    jp.ac.kobe_u.cs.prolog.lang.JavaObjectTerm streamObject;
+    Object streamObject;
     try {
  if (prologEquals(a2, PRED_open_4.SYM_READ)){
      if (!file.exists())
@@ -133,7 +133,7 @@ final Object[] engine_aregs = engine.getAreg();
     }
     final Object[] args1 = { PRED_open_4.SYM_TEXT};
     final Object[] args2 = { a2};
-    final Object[] args3 = { makeSymbol(file.getAbsolutePath())};
+    final Object[] args3 = { makeAtom(file.getAbsolutePath())};
     opts = makeList(makeStructure(PRED_open_4.SYM_TYPE_1, args1), opts);
     opts = makeList(makeStructure(PRED_open_4.SYM_MODE_1, args2), opts);
     opts = makeList(makeStructure(PRED_open_4.SYM_FILE_NAME_1, args3), opts);

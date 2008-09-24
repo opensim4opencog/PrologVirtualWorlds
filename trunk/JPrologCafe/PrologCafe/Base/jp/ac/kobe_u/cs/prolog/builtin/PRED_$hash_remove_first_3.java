@@ -14,7 +14,7 @@ class PRED_$hash_remove_first_3 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = -8286572780865685524L;
-  public static /*SymbolTerm*/Object SYM_NIL = makeSymbol("[]");
+  public static /*SymbolTerm*/Object SYM_NIL = makeAtom("[]");
   public Object arg1;
   public Object arg2;
   public Object arg3;

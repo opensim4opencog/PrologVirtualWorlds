@@ -45,7 +45,7 @@ public class ExistenceException extends BuiltinException {
    * <code>existence_error(goal,argNo,objType,culprit,message)</code>.
    */
   public Object getMessageTerm() {
-    Object[] args = { StaticProlog.makeJavaObject(goal), StaticProlog.makeInteger(argNo), StaticProlog.makeSymbol(objType), culprit, StaticProlog.makeSymbol(message) };
+    Object[] args = { StaticProlog.makeJavaObject(goal), StaticProlog.makeInteger(argNo), StaticProlog.makeAtom(objType), culprit, StaticProlog.makeAtom(message) };
     return StaticProlog.makeStructure(EXISTENCE_ERROR, args);
   }
 

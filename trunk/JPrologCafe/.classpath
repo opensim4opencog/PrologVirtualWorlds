@@ -53,22 +53,5 @@
 	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/soap.jar"/>
 	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/qizx/qizxopen.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/antlr-2.7.5.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/arq-extra.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/arq.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/concurrent.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/icu4j_3_4.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/iri.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/jena.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/jenatest.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/json.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/junit.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/log4j-1.2.12.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/lucene-core-2.3.1.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/stax-api-1.0.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/wstx-asl-3.0.0.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="jena/jena2/lib/xml-apis.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

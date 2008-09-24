@@ -13,7 +13,7 @@ public class PRED_functor_3 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = 565517774219593438L;
-  static/*SymbolTerm*/Object SYM_DOT = makeSymbol(".");
+  static/*SymbolTerm*/Object SYM_DOT = makeAtom(".");
   Object arg1;
   Object arg2;
   Object arg3;
@@ -78,7 +78,7 @@ public class PRED_functor_3 extends PredicateBase {
       final Object[] args = new Object[n];
       for (int i = 0; i < n; i++)
         args[i] = engine.makeVariable(this);
-      final/*SymbolTerm*/Object sym = makeSymbol(nameUQ(a2), n);
+      final/*SymbolTerm*/Object sym = makeAtom(nameUQ(a2), n);
       if (!unify(a1, makeStructure(sym, args))) return this.fail(engine);
       return this.cont;
     }
@@ -91,7 +91,7 @@ public class PRED_functor_3 extends PredicateBase {
       functor = PRED_functor_3.SYM_DOT;
       arity = makeInteger(2);
     } else if (isCompound(a1)) {
-      functor = makeSymbol(nameUQ(a1));
+      functor = makeAtom(nameUQ(a1));
       arity = makeInteger(arity(a1));
     } else
       return this.fail(engine);

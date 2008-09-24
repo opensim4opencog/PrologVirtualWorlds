@@ -237,7 +237,7 @@ public class ListTermBase extends TermBase implements ListTerm {
       int arity = arity(anotherTerm);
       if (2 != arity) return (2 - arity);
       /*SymbolTerm*/Object functor = functor(anotherTerm);
-      if (!prologEquals(SYM_DOT, functor)) return compareTo(SYM_DOT,functor);
+      if (!prologEquals(SYM_DOT, functor)) return compareTerm(SYM_DOT,functor);
     }
     Object[] args = new Object[2];
     if (isListTerm(anotherTerm)) {
@@ -251,7 +251,7 @@ public class ListTermBase extends TermBase implements ListTerm {
     Object tmp = car;
     int rc;
     for (int i = 0; i < 2; i++) {
-      rc = compareTo(tmp, deref(args[i]));
+      rc = compareTerm(tmp, deref(args[i]));
       if (rc != EQUAL) return rc;
       tmp = cdr;
     }

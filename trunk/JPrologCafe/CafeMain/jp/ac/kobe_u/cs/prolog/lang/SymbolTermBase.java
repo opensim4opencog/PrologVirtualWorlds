@@ -39,13 +39,13 @@ public class SymbolTermBase extends TermBase implements SymbolTerm {
   final private int arity;
 
   /** Returns a Prolog atom for the given name. */
-  public static Object makeSymbol(String _name) {
+  public static Object makeSymbol(Object _name) {
     // if (true) return _name;
     return makeSymbol(_name, 0);
   }
 
   /** Returns a Prolog functor for the given name and arity. */
-  public static Object makeSymbol(String _name, int _arity) {
+  public static Object makeSymbol(Object _name, int _arity) {
     String key = _name + "/" + _arity;
     Object sym;
     synchronized (SYMBOL_TABLE) {
