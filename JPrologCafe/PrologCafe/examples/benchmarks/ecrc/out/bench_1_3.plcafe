@@ -1,0 +1,17 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/ecrc/bench_1_3.in ...}
+# Name:             envir(1000000)
+# T overall loop:   10346 msec.
+# T compens loop:   468 msec.
+# T net:            9878 msec.
+# KLips:            16.096375784571777
+###CSV###,envir(1000000),10346,468,9878,16.096375784571777
+
+# Name:             envir0ar(1000000)
+# T overall loop:   10255 msec.
+# T compens loop:   460 msec.
+# T net:            9795 msec.
+# KLips:            16.232771822358348
+###CSV###,envir0ar(1000000),10255,460,9795,16.232771822358348
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/ecrc/bench_1_3.in consulted, 5 msec}
+bye

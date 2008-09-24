@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/portland/snairev.in ...}
+
+# Name: snairev(2000)
+# Iterations: 10
+# TestTime: 36774 msec.
+# OverHead: 2 msec.
+# TestTime-OverHead: 36772 msec.
+# (TestTime-OverHead)/Iterations: 3677.2 msec.
+###CSV###,snairev(2000),10,36774,2,36772,3677.2
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/portland/snairev.in consulted, 21 msec}
+bye

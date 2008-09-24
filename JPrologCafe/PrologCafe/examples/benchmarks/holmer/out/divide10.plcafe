@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/divide10.in ...}
+
+# Name: divide10
+# Iterations: 1000
+# TestTime: 194 msec.
+# OverHead: 81 msec.
+# TestTime-OverHead: 113 msec.
+# (TestTime-OverHead)/Iterations: 0.113 msec.
+###CSV###,divide10,1000,194,81,113,0.113
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/divide10.in consulted, 6 msec}
+bye

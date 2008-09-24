@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/zebra.in ...}
+
+# Name: zebra
+# Iterations: 1000
+# TestTime: 13610 msec.
+# OverHead: 98 msec.
+# TestTime-OverHead: 13512 msec.
+# (TestTime-OverHead)/Iterations: 13.512 msec.
+###CSV###,zebra,1000,13610,98,13512,13.512
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/zebra.in consulted, 5 msec}
+bye

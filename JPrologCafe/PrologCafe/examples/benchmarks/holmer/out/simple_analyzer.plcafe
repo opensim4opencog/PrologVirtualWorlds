@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/simple_analyzer.in ...}
+
+# Name: simple_analyzer
+# Iterations: 1000
+# TestTime: 10217 msec.
+# OverHead: 85 msec.
+# TestTime-OverHead: 10132 msec.
+# (TestTime-OverHead)/Iterations: 10.132 msec.
+###CSV###,simple_analyzer,1000,10217,85,10132,10.132
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/simple_analyzer.in consulted, 6 msec}
+bye

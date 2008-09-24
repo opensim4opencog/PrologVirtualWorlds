@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/queens_8.in ...}
+
+# Name: queens_8
+# Iterations: 1000
+# TestTime: 1263 msec.
+# OverHead: 81 msec.
+# TestTime-OverHead: 1182 msec.
+# (TestTime-OverHead)/Iterations: 1.182 msec.
+###CSV###,queens_8,1000,1263,81,1182,1.182
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/queens_8.in consulted, 6 msec}
+bye

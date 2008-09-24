@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/portland/hanoi.in ...}
+
+# Name: hanoi(20)
+# Iterations: 10
+# TestTime: 9080 msec.
+# OverHead: 3 msec.
+# TestTime-OverHead: 9077 msec.
+# (TestTime-OverHead)/Iterations: 907.7 msec.
+###CSV###,hanoi(20),10,9080,3,9077,907.7
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/portland/hanoi.in consulted, 21 msec}
+bye

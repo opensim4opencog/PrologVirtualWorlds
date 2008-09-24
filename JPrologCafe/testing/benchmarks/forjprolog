@@ -1,0 +1,14 @@
+measure(Goal,Dummy,Utime,Gtime,System) :-
+	measure(Goal,Dummy,Utime,Gtime,_,_,System).
+
+measure(Goal,Dummy,Utime,Gtime,NGs,GcBytes,'JProlog') :-
+    statistics(runtime,[T1,_]), !,
+    call(Goal), !,
+    statistics(runtime,[T2,_]), !,
+	call(Dummy), !,
+	statistics(runtime,[T3,_]), !,
+    Utime is T2 - T1 - (T3 - T2).
+
+init_glob(V) :- b_setval(a,V).
+get_glob(V) :- b_getval(a,V).
+set_glob(V) :- b_setval(a,V).

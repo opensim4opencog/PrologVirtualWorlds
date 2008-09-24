@@ -1,0 +1,401 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0073)http://66.14.82.104:6701/english.moo?english=I drank the arabian coffee . -->
+<HTML><HEAD><TITLE>MOO Engine - English Parser</TITLE>
+<META http-equiv=Content-Language content=en-us>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<META 
+content="PROLOG Artificial Intelligence Ontology AI MOO DARPA Douglas Miles" 
+name=Keywords>
+<META content="PROLOG Artificial Intelligence Ontology AI DARPA MOO" 
+name=Description>
+<META content="MSHTML 6.00.2900.2668" name=GENERATOR></HEAD>
+<BODY><A href="http://66.14.82.104:6701/browse.moo">Browse</A> <A 
+href="http://66.14.82.104:6701/english.moo">English</A> <A 
+href="http://66.14.82.104:6701/cycl.moo">CycL</A> <A 
+href="http://66.14.82.104:6701/subl.moo">SubLisp</A> <A 
+href="http://66.14.82.104:6701/daml.moo">Daml</A> <A 
+href="http://66.14.82.104:6701/wn.moo">WordNet</A> <A 
+href="http://66.14.82.104:6701/cycml.moo">CycML</A> <A 
+href="http://66.14.82.104:6701/prolog.moo">Prolog</A> <A 
+href="http://66.14.82.104:6701/settings.moo">Settings</A> <A 
+href="http://66.14.82.104:6701/system.moo">System</A> <A 
+href="http://66.14.82.104:6701/help.moo">Help</A> <BR><FONT 
+size=+1>Create/Edit</FONT> <A 
+href="http://66.14.82.104:6701/predicate.moo">Predicate</A> <A 
+href="http://66.14.82.104:6701/function.moo">Function</A> <A 
+href="http://66.14.82.104:6701/collection.moo">Collection</A> <A 
+href="http://66.14.82.104:6701/microtheory.moo">Microtheory</A> <FONT 
+size=+1>Tests</FONT> <A 
+href="http://66.14.82.104:6701/inference_tests.moo">Inference</A><BR><BR><FONT 
+color=green size=+1><B>English Parser</B></FONT><BR>
+<FORM method=get>
+<P><TEXTAREA name=english cols=80>I drank the arabian coffee .</TEXTAREA><BR><INPUT type=submit value="Parse Normally" name=submit>&nbsp;<INPUT type=submit value="Parse with idiomatics" name=submit> 
+<INPUT type=checkbox value=CHECKED name=findall>&nbsp;Show 
+All<BR></P></FORM>Please wait..<BR><TEXTAREA name=debug rows=5 wrap=off cols=80>?- e2c("I drank the arabian coffee .").
+
+substPos([nn, nnp, surroundtag, dt, nn], [[txt, arabian], 4:4, 1.0-nn, 0.85-nn, 0.2-'ProperCountNoun', 0.2-'ProperNoun', 0.2-'Adjective', 0.195-jj, 0.02-ns, 0.01-vbz], nn, nnp, [[txt, arabian], 4:4, 1.0-nnp, 0.85-nnp, 0.2-'ProperCountNoun', 0.2-'ProperNoun', 0.2-'Adjective', 0.195-jj, 0.02-ns, 0.01-vbz])
+substPos([nnp, jj, surroundtag, dt, nn], [[txt, arabian], 4:4, 1.0-nnp, 0.85-nnp, 0.2-'ProperCountNoun', 0.2-'ProperNoun', 0.2-'Adjective', 0.195-jj, 0.02-ns, 0.01-vbz], nnp, jj, [[txt, arabian], 4:4, 1.0-jj, 0.85-jj, 0.2-'ProperCountNoun', 0.2-jj, 0.2-'Adjective', 0.195-jj, 0.02-ns, 0.01-vbz])
+[[txt, 'I'], 1:1, 1.0-nnp, 0.2-'IndefinitePronoun', 0.2-'Pronoun-SubjectOrObject', 0.2-'Pronoun', 0.2-'PossessivePronoun', 0.2-'SubjectPronoun', 0.2-'ObjectPronoun', 0.2-'ReflexivePronoun', 0.2-'WHPronoun', 0.2-'PossessivePronoun-Post', 0.2-'ReciprocalPronoun', 0.2-'Number-SP', 0.2-'ExpletivePronoun', 0.000443-nn, 0.000295-nnp, 0.000148-fw, 0.000148-nns]
+[[txt, drank], 2:2, 1.0-vbd, 1.0-vbd, 0.2-'Verb']
+[[txt, the], 3:3, 1.0-dt, 0.459398-at, 0.415235-dt, 0.25-vbd, 0.25-pdt, 0.25-'nn|dt', 0.25-in, 0.2-'Determiner-Definite', 0.2-'Determiner-ClassA', 0.2-'Determiner-ClassB', 0.2-'Determiner-ClassC', 0.2-'Postdeterminer', 0.2-'Determiner-Central', 0.2-'Determiner', 0.2-'WHDeterminer', 0.001645-'at-tl', 0.001269-'at-hl', 0.000192-'at-nc', 5.9e-005-jj, 4.4e-005-nnp, 2.2e-005-nil, 7e-006-'at-tl-hl', 7e-006-cd, 7e-006-nn, 7e-006-vbp]
+[[txt, arabian], 4:4, 1.0-jj, 0.85-jj, 0.2-'ProperCountNoun', 0.2-jj, 0.2-'Adjective', 0.195-jj, 0.02-ns, 0.01-vbz]
+[[txt, coffee], 5:5, 1.0-nn, 0.929134-nn, 0.2-'MassNoun-Generic', 0.2-'MassNoun']
+[[txt, '.'], 6:6, 1.0-'.', 1.0-'.', 0.8-'.', 0.2-'Punctuation-SP']
+
+
+seg(thing, 'PRONOUN', ['I'], [[[txt, 'I'], 1:1, 1.0-nnp, 0.2-'IndefinitePronoun', 0.2-'Pronoun-SubjectOrObject', 0.2-'Pronoun', 0.2-'PossessivePronoun', 0.2-'SubjectPronoun', 0.2-'ObjectPronoun', 0.2-'ReflexivePronoun', 0.2-'WHPronoun', 0.2-'PossessivePronoun-Post', 0.2-'ReciprocalPronoun', 0.2-'Number-SP', 0.2-'ExpletivePronoun', 0.000443-nn, 0.000295-nnp, 0.000148-fw, 0.000148-nns]])
+seg(situation, 'Verb', [drank], [[[txt, drank], 2:2, 1.0-vbd, 1.0-vbd, 0.2-'Verb']])
+seg(thing, 'DET', [the, arabian, coffee], [[[txt, the], 3:3, 1.0-dt, 0.459398-at, 0.415235-dt, 0.25-vbd, 0.25-pdt, 0.25-'nn|dt', 0.25-in, 0.2-'Determiner-Definite', 0.2-'Determiner-ClassA', 0.2-'Determiner-ClassB', 0.2-'Determiner-ClassC', 0.2-'Postdeterminer', 0.2-'Determiner-Central', 0.2-'Determiner', 0.2-'WHDeterminer', 0.001645-'at-tl', 0.001269-'at-hl', 0.000192-'at-nc', 5.9e-005-jj, 4.4e-005-nnp, 2.2e-005-nil, 7e-006-'at-tl-hl', 7e-006-cd, 7e-006-nn, 7e-006-vbp], [[txt, arabian], 4:4, 1.0-jj, 0.85-jj, 0.2-'ProperCountNoun', 0.2-jj, 0.2-'Adjective', 0.195-jj, 0.02-ns, 0.01-vbz], [[txt, coffee], 5:5, 1.0-nn, 0.929134-nn, 0.2-'MassNoun-Generic', 0.2-'MassNoun']])
+seg(sym, 'SYM', ['.'], [[[txt, '.'], 6:6, 1.0-'.', 1.0-'.', 0.8-'.', 0.2-'Punctuation-SP']])
+
+
+seg(thing, 'PRONOUN', ['I'], [[[txt, 'I'], 1:1, 1.0-nnp, 0.2-'IndefinitePronoun', 0.2-'Pronoun-SubjectOrObject', 0.2-'Pronoun', 0.2-'PossessivePronoun', 0.2-'SubjectPronoun', 0.2-'ObjectPronoun', 0.2-'ReflexivePronoun', 0.2-'WHPronoun', 0.2-'PossessivePronoun-Post', 0.2-'ReciprocalPronoun', 0.2-'Number-SP', 0.2-'ExpletivePronoun', 0.000443-nn, 0.000295-nnp, 0.000148-fw, 0.000148-nns]])
+seg(situation, 'Verb', [drank], [[[txt, drank], 2:2, 1.0-vbd, 1.0-vbd, 0.2-'Verb']])
+seg(thing, 'DET', [the, arabian, coffee], [[[txt, the], 3:3, 1.0-dt, 0.459398-at, 0.415235-dt, 0.25-vbd, 0.25-pdt, 0.25-'nn|dt', 0.25-in, 0.2-'Determiner-Definite', 0.2-'Determiner-ClassA', 0.2-'Determiner-ClassB', 0.2-'Determiner-ClassC', 0.2-'Postdeterminer', 0.2-'Determiner-Central', 0.2-'Determiner', 0.2-'WHDeterminer', 0.001645-'at-tl', 0.001269-'at-hl', 0.000192-'at-nc', 5.9e-005-jj, 4.4e-005-nnp, 2.2e-005-nil, 7e-006-'at-tl-hl', 7e-006-cd, 7e-006-nn, 7e-006-vbp], [[txt, arabian], 4:4, 1.0-jj, 0.85-jj, 0.2-'ProperCountNoun', 0.2-jj, 0.2-'Adjective', 0.195-jj, 0.02-ns, 0.01-vbz], [[txt, coffee], 5:5, 1.0-nn, 0.929134-nn, 0.2-'MassNoun-Generic', 0.2-'MassNoun']])
+
+
+theObject(_G25115, 'Hypothetic-I', ['I'])
+seg(situation, 'Verb', [drank], [[[txt, drank], 2:2, 1.0-vbd, 1.0-vbd, 0.2-'Verb']])
+seg(thing, 'DET', [the, arabian, coffee], [[[txt, the], 3:3, 1.0-dt, 0.459398-at, 0.415235-dt, 0.25-vbd, 0.25-pdt, 0.25-'nn|dt', 0.25-in, 0.2-'Determiner-Definite', 0.2-'Determiner-ClassA', 0.2-'Determiner-ClassB', 0.2-'Determiner-ClassC', 0.2-'Postdeterminer', 0.2-'Determiner-Central', 0.2-'Determiner', 0.2-'WHDeterminer', 0.001645-'at-tl', 0.001269-'at-hl', 0.000192-'at-nc', 5.9e-005-jj, 4.4e-005-nnp, 2.2e-005-nil, 7e-006-'at-tl-hl', 7e-006-cd, 7e-006-nn, 7e-006-vbp], [[txt, arabian], 4:4, 1.0-jj, 0.85-jj, 0.2-'ProperCountNoun', 0.2-jj, 0.2-'Adjective', 0.195-jj, 0.02-ns, 0.01-vbz], [[txt, coffee], 5:5, 1.0-nn, 0.929134-nn, 0.2-'MassNoun-Generic', 0.2-'MassNoun']])
+
+
+theObject(_G25115, 'Hypothetic-I', ['I'])
+seg(situation, 'Verb', [drank], [[[txt, drank], 2:2, 1.0-vbd, 1.0-vbd, 0.2-'Verb']])
+theObject(_G25405, 'Hypothetic-The-Arabian-Coffee', [the, arabian, coffee])
+
+
+theObject('Action', 'Hypothetic-Drank', [drank])
+theObject(_G25115, 'Hypothetic-I', ['I'])
+
+
+theObject(_G25115, 'Hypothetic-I', ['I'])
+
+
+
+
+</TEXTAREA><BR>
+<FORM action=assert.moo method=get>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TH>Assertion</TR>
+  <TR>
+    <TD noWrap><TEXTAREA name=cycl rows=20 wrap=off cols=80>(and 
+  (situationConstituents Hypothetic-GenitiveFrame Hypothetic-I) 
+  (subEvents Hypothetic-GenitiveFrame Hypothetic-Drank) 
+  (actors Hypothetic-Drank Hypothetic-The-Arabian-Coffee) 
+  (preActors Hypothetic-Drank Hypothetic-I) 
+  (isa Hypothetic-Drank DrinkingEvent) 
+  (performedBy Hypothetic-Drank Hypothetic-I) 
+  (primaryObjectMoving Hypothetic-Drank Hypothetic-I) 
+  (objectMoving Hypothetic-Drank Hypothetic-I) 
+  (consumedObject Hypothetic-Drank Hypothetic-The-Arabian-Coffee) 
+  (isa Hypothetic-Drank Event) 
+  (isa Hypothetic-Drank Situation) 
+  (termStrings Hypothetic-Drank "drank") 
+  (occursDuring Hypothetic-Drank 
+    (IntervalBeforeFn Now AnIndefiniteAmountOfTime)) 
+  (isa Hypothetic-The-Arabian-Coffee Individual) 
+  (isa Hypothetic-The-Arabian-Coffee SomethingExisting) 
+  (termStrings Hypothetic-The-Arabian-Coffee "the arabian coffee") 
+  (isa Hypothetic-The-Arabian-Coffee Coffee-Ground) 
+  (isa Hypothetic-The-Arabian-Coffee Coffee-Beverage) 
+  (equals Hypothetic-The-Arabian-Coffee ArabianPeninsula) 
+  (isa Hypothetic-The-Arabian-Coffee ArabianHorse) 
+  (conceptuallyRelated Hypothetic-The-Arabian-Coffee ArabianPeninsula) 
+  (isa Hypothetic-I Individual) 
+  (properNameStrings Hypothetic-I "I") 
+  (equals Hypothetic-I 
+    (PronounFn FirstPerson-NLAttr Singular-NLAttr Ungendered-NLAttr SubjectPronoun)) 
+  (isa Hypothetic-I SomethingExisting) 
+  (termStrings Hypothetic-I "I") 
+  (equals Hypothetic-I Hypothetic-I) 
+  (isa Hypothetic-GenitiveFrame Event))
+</TEXTAREA> </TD></TR></TBODY></TABLE><BR><INPUT type=submit value="Assert Now" name=assert><BR></FORM>
+<FORM action=english.moo method=post><INPUT type=hidden 
+value="I drank the arabian coffee ." name=english>
+<TABLE border=1>
+  <CAPTION>['Hypothetic-I', 'Hypothetic-The-Arabian-Coffee', 
+  'Hypothetic-Drank']</CAPTION>
+  <TBODY>
+  <TR>
+    <TH>Variable Quantification<BR>Or Constant Name
+    <TH>Refactoring To Customize The Assertion (Persistent)</TR> 
+  <TR>
+    <TD noWrap>
+      <P>&nbsp;<INPUT type=radio CHECKED value=skolemize 
+      name="skolem('Hypothetic-I')">Hypothetic-I</INPUT><BR>&nbsp;<INPUT 
+      type=radio value=find-or-create-constant 
+      name="skolem('Hypothetic-I')"><INPUT value=Hypothetic-I2 
+      name="constant('Hypothetic-I')"></INPUT> </P>
+    <TD noWrap><PRE></PRE></TD>
+  <TR>
+    <TD noWrap>
+      <P>&nbsp;<INPUT type=radio CHECKED value=skolemize 
+      name="skolem('Hypothetic-The-Arabian-Coffee')">Hypothetic-The-Arabian-Coffee</INPUT><BR>&nbsp;<INPUT 
+      type=radio value=find-or-create-constant 
+      name="skolem('Hypothetic-The-Arabian-Coffee')"><INPUT 
+      value=Hypothetic-The-Arabian-Coffee2 
+      name="constant('Hypothetic-The-Arabian-Coffee')"></INPUT> </P>
+    <TD noWrap><PRE></PRE></TD>
+  <TR>
+    <TD noWrap>
+      <P>&nbsp;<INPUT type=radio CHECKED value=skolemize 
+      name="skolem('Hypothetic-Drank')">Hypothetic-Drank</INPUT><BR>&nbsp;<INPUT 
+      type=radio value=find-or-create-constant 
+      name="skolem('Hypothetic-Drank')"><INPUT value=Hypothetic-Drank2 
+      name="constant('Hypothetic-Drank')"></INPUT> </P>
+    <TD noWrap><PRE></PRE></TD>
+  <TR>
+    <TD noWrap>
+    <TD noWrap><PRE><INPUT title="'Hypothetic-I'." type=checkbox CHECKED name="accepted('Hypothetic-I')"><INPUT type=hidden value=Hypothetic-I name="offered('Hypothetic-I')">&nbsp;(situationConstituents Hypothetic-GenitiveFrame Hypothetic-I)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="'Hypothetic-Drank'." type=checkbox CHECKED name="accepted('Hypothetic-Drank')"><INPUT type=hidden value=Hypothetic-Drank name="offered('Hypothetic-Drank')">&nbsp;(subEvents Hypothetic-GenitiveFrame Hypothetic-Drank)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="textCached([drank], [denotation, 'DrinkingEvent', 'QAClarifyingCollectionType', 'IterativeSituationType', 'ProcessType', 'StuffType', 'ClarifyingCollectionType', 'Collection', 'TemporalStuffType', 'DurativeEventType'])." type=checkbox CHECKED name="accepted(textCached([drank], [denotation, 'DrinkingEvent', 'QAClarifyingCollectionType', 'IterativeSituationType', 'ProcessType', 'StuffType', 'ClarifyingCollectionType', 'Collection', 'TemporalStuffType', 'DurativeEventType']))"><INPUT type=hidden value="textCached([drank], [denotation, DrinkingEvent, QAClarifyingCollectionType, IterativeSituationType, ProcessType, StuffType, ClarifyingCollectionType, Collection, TemporalStuffType, DurativeEventType])" name="offered(textCached([drank], [denotation, 'DrinkingEvent', 'QAClarifyingCollectionType', 'IterativeSituationType', 'ProcessType', 'StuffType', 'ClarifyingCollectionType', 'Collection', 'TemporalStuffType', 'DurativeEventType']))">&nbsp;(actors Hypothetic-Drank Hypothetic-The-Arabian-Coffee)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="textCached([drank], [denotation, 'DrinkingEvent', 'QAClarifyingCollectionType', 'IterativeSituationType', 'ProcessType', 'StuffType', 'ClarifyingCollectionType', 'Collection', 'TemporalStuffType', 'DurativeEventType'])." type=checkbox CHECKED name="accepted(textCached([drank], [denotation, 'DrinkingEvent', 'QAClarifyingCollectionType', 'IterativeSituationType', 'ProcessType', 'StuffType', 'ClarifyingCollectionType', 'Collection', 'TemporalStuffType', 'DurativeEventType']))"><INPUT type=hidden value="textCached([drank], [denotation, DrinkingEvent, QAClarifyingCollectionType, IterativeSituationType, ProcessType, StuffType, ClarifyingCollectionType, Collection, TemporalStuffType, DurativeEventType])" name="offered(textCached([drank], [denotation, 'DrinkingEvent', 'QAClarifyingCollectionType', 'IterativeSituationType', 'ProcessType', 'StuffType', 'ClarifyingCollectionType', 'Collection', 'TemporalStuffType', 'DurativeEventType']))">&nbsp;(preActors Hypothetic-Drank Hypothetic-I)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="textCached([drank], [denotation, 'DrinkingEvent', 'QAClarifyingCollectionType', 'IterativeSituationType', 'ProcessType', 'StuffType', 'ClarifyingCollectionType', 'Collection', 'TemporalStuffType', 'DurativeEventType'])." type=checkbox CHECKED name="accepted(textCached([drank], [denotation, 'DrinkingEvent', 'QAClarifyingCollectionType', 'IterativeSituationType', 'ProcessType', 'StuffType', 'ClarifyingCollectionType', 'Collection', 'TemporalStuffType', 'DurativeEventType']))"><INPUT type=hidden value="textCached([drank], [denotation, DrinkingEvent, QAClarifyingCollectionType, IterativeSituationType, ProcessType, StuffType, ClarifyingCollectionType, Collection, TemporalStuffType, DurativeEventType])" name="offered(textCached([drank], [denotation, 'DrinkingEvent', 'QAClarifyingCollectionType', 'IterativeSituationType', 'ProcessType', 'StuffType', 'ClarifyingCollectionType', 'Collection', 'TemporalStuffType', 'DurativeEventType']))">&nbsp;(isa Hypothetic-Drank DrinkingEvent)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="textCached('Drink-TheWord', [frame, 'Drink-TheWord', 'Verb', 'IntransitiveVerbFrame', and(isa('Hypothetic-Drank', 'DrinkingEvent'), performedBy('Hypothetic-Drank', 'Hypothetic-I')), verbSemTrans])." type=checkbox name="accepted(textCached('Drink-TheWord', [frame, 'Drink-TheWord', 'Verb', 'IntransitiveVerbFrame', and(isa('Hypothetic-Drank', 'DrinkingEvent'), performedBy('Hypothetic-Drank', 'Hypothetic-I')), verbSemTrans]))"><INPUT type=hidden value="textCached(Drink-TheWord, [frame, Drink-TheWord, Verb, IntransitiveVerbFrame, and(isa(Hypothetic-Drank, DrinkingEvent), performedBy(Hypothetic-Drank, Hypothetic-I)), verbSemTrans])" name="offered(textCached('Drink-TheWord', [frame, 'Drink-TheWord', 'Verb', 'IntransitiveVerbFrame', and(isa('Hypothetic-Drank', 'DrinkingEvent'), performedBy('Hypothetic-Drank', 'Hypothetic-I')), verbSemTrans]))">&nbsp;(performedBy Hypothetic-Drank Hypothetic-I)<BR>&nbsp;<FONT color=green size=-1>"Formula 
+  (#$performedBy #$Hypothetic-Drank #$Hypothetic-I) 
+was not well formed because: 
+Term #$Hypothetic-I violates arg-isa #$Agent-Generic
+applicable to argument 2 of relation #$performedBy
+in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;.
+Term #$Hypothetic-I violates arg-isa #$Agent-Generic
+applicable to argument 2 of relation #$performedBy
+(via #$deliberateActors)
+in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;.
+Term #$Hypothetic-I violates arg-isa #$Agent-Generic
+applicable to argument 2 of relation #$performedBy
+(via #$awareOf)
+in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;.
+"</FONT>
+<INPUT title="textCached('Drink-TheWord', [frame, 'Drink-TheWord', 'Verb', 'IntransitiveVerbFrame', and(isa('Hypothetic-Drank', 'DrinkingEvent'), primaryObjectMoving('Hypothetic-Drank', 'Hypothetic-I')), verbSemTrans])." type=checkbox name="accepted(textCached('Drink-TheWord', [frame, 'Drink-TheWord', 'Verb', 'IntransitiveVerbFrame', and(isa('Hypothetic-Drank', 'DrinkingEvent'), primaryObjectMoving('Hypothetic-Drank', 'Hypothetic-I')), verbSemTrans]))"><INPUT type=hidden value="textCached(Drink-TheWord, [frame, Drink-TheWord, Verb, IntransitiveVerbFrame, and(isa(Hypothetic-Drank, DrinkingEvent), primaryObjectMoving(Hypothetic-Drank, Hypothetic-I)), verbSemTrans])" name="offered(textCached('Drink-TheWord', [frame, 'Drink-TheWord', 'Verb', 'IntransitiveVerbFrame', and(isa('Hypothetic-Drank', 'DrinkingEvent'), primaryObjectMoving('Hypothetic-Drank', 'Hypothetic-I')), verbSemTrans]))">&nbsp;(primaryObjectMoving Hypothetic-Drank Hypothetic-I)<BR>&nbsp;<FONT color=green size=-1>"Formula 
+  (#$primaryObjectMoving #$Hypothetic-Drank #$Hypothetic-I) 
+was not well formed because: 
+Term #$Hypothetic-I violates inter-arg-isa #$FluidTangibleThing
+applicable to argument 2 of relation #$primaryObjectMoving
+when argument 1, #$Hypothetic-Drank, isa #$FluidFlowEvent
+in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;.
+Term #$Hypothetic-I violates inter-arg-isa #$FluidTangibleThing
+applicable to argument 2 of relation #$primaryObjectMoving
+(via #$objectMoving)
+when argument 1, #$Hypothetic-Drank, isa #$FluidFlowEvent
+in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;.
+Term #$Hypothetic-I violates inter-arg-isa #$FluidTangibleThing
+applicable to argument 2 of relation #$primaryObjectMoving
+when argument 1, #$Hypothetic-Drank, isa #$FluidFlow-Translation
+in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;.
+Term #$Hypothetic-I violates arg-isa #$SpatialThing
+applicable to argument 2 of relation #$primaryObjectMoving
+(via #$objectMoving)
+in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;.
+Term #$Hypothetic-I violates arg-isa #$PartiallyTangible
+applicable to argument 2 of relation #$primaryObjectMoving
+in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;.
+"</FONT>
+<INPUT title="textCached('Drink-TheWord', [frame, 'Drink-TheWord', 'Verb', 'IntransitiveVerbFrame', and(isa('Hypothetic-Drank', 'DrinkingEvent'), objectMoving('Hypothetic-Drank', 'Hypothetic-I')), verbSemTrans])." type=checkbox name="accepted(textCached('Drink-TheWord', [frame, 'Drink-TheWord', 'Verb', 'IntransitiveVerbFrame', and(isa('Hypothetic-Drank', 'DrinkingEvent'), objectMoving('Hypothetic-Drank', 'Hypothetic-I')), verbSemTrans]))"><INPUT type=hidden value="textCached(Drink-TheWord, [frame, Drink-TheWord, Verb, IntransitiveVerbFrame, and(isa(Hypothetic-Drank, DrinkingEvent), objectMoving(Hypothetic-Drank, Hypothetic-I)), verbSemTrans])" name="offered(textCached('Drink-TheWord', [frame, 'Drink-TheWord', 'Verb', 'IntransitiveVerbFrame', and(isa('Hypothetic-Drank', 'DrinkingEvent'), objectMoving('Hypothetic-Drank', 'Hypothetic-I')), verbSemTrans]))">&nbsp;(objectMoving Hypothetic-Drank Hypothetic-I)<BR>&nbsp;<FONT color=green size=-1>"Formula 
+  (#$objectMoving #$Hypothetic-Drank #$Hypothetic-I) 
+was not well formed because: 
+Term #$Hypothetic-I violates inter-arg-isa #$FluidTangibleThing
+applicable to argument 2 of relation #$objectMoving
+when argument 1, #$Hypothetic-Drank, isa #$FluidFlowEvent
+in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;.
+Term #$Hypothetic-I violates arg-isa #$SpatialThing
+applicable to argument 2 of relation #$objectMoving
+in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;.
+"</FONT>
+<INPUT title="textCached('Drink-TheWord', [frame, 'Drink-TheWord', 'Verb', 'TransitiveNPFrame', and(isa('Hypothetic-Drank', 'DrinkingEvent'), performedBy('Hypothetic-Drank', 'Hypothetic-I'), consumedObject('Hypothetic-Drank', 'Hypothetic-The-Arabian-Coffee')), verbSemTrans])." type=checkbox CHECKED name="accepted(textCached('Drink-TheWord', [frame, 'Drink-TheWord', 'Verb', 'TransitiveNPFrame', and(isa('Hypothetic-Drank', 'DrinkingEvent'), performedBy('Hypothetic-Drank', 'Hypothetic-I'), consumedObject('Hypothetic-Drank', 'Hypothetic-The-Arabian-Coffee')), verbSemTrans]))"><INPUT type=hidden value="textCached(Drink-TheWord, [frame, Drink-TheWord, Verb, TransitiveNPFrame, and(isa(Hypothetic-Drank, DrinkingEvent), performedBy(Hypothetic-Drank, Hypothetic-I), consumedObject(Hypothetic-Drank, Hypothetic-The-Arabian-Coffee)), verbSemTrans])" name="offered(textCached('Drink-TheWord', [frame, 'Drink-TheWord', 'Verb', 'TransitiveNPFrame', and(isa('Hypothetic-Drank', 'DrinkingEvent'), performedBy('Hypothetic-Drank', 'Hypothetic-I'), consumedObject('Hypothetic-Drank', 'Hypothetic-The-Arabian-Coffee')), verbSemTrans]))">&nbsp;(consumedObject Hypothetic-Drank Hypothetic-The-Arabian-Coffee)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="'Hypothetic-Drank'." type=checkbox CHECKED name="accepted('Hypothetic-Drank')"><INPUT type=hidden value=Hypothetic-Drank name="offered('Hypothetic-Drank')">&nbsp;(isa Hypothetic-Drank Event)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="'Hypothetic-Drank'." type=checkbox CHECKED name="accepted('Hypothetic-Drank')"><INPUT type=hidden value=Hypothetic-Drank name="offered('Hypothetic-Drank')">&nbsp;(isa Hypothetic-Drank Situation)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="'Hypothetic-Drank'." type=checkbox CHECKED name="accepted('Hypothetic-Drank')"><INPUT type=hidden value=Hypothetic-Drank name="offered('Hypothetic-Drank')">&nbsp;(termStrings Hypothetic-Drank "drank")<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="'Hypothetic-Drank'." type=checkbox CHECKED name="accepted('Hypothetic-Drank')"><INPUT type=hidden value=Hypothetic-Drank name="offered('Hypothetic-Drank')">&nbsp;(occursDuring Hypothetic-Drank 
+      (IntervalBeforeFn Now AnIndefiniteAmountOfTime))<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="'Hypothetic-The-Arabian-Coffee'." type=checkbox CHECKED name="accepted('Hypothetic-The-Arabian-Coffee')"><INPUT type=hidden value=Hypothetic-The-Arabian-Coffee name="offered('Hypothetic-The-Arabian-Coffee')">&nbsp;(isa Hypothetic-The-Arabian-Coffee Individual)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="'Hypothetic-The-Arabian-Coffee'." type=checkbox CHECKED name="accepted('Hypothetic-The-Arabian-Coffee')"><INPUT type=hidden value=Hypothetic-The-Arabian-Coffee name="offered('Hypothetic-The-Arabian-Coffee')">&nbsp;(isa Hypothetic-The-Arabian-Coffee SomethingExisting)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="'Hypothetic-The-Arabian-Coffee'." type=checkbox CHECKED name="accepted('Hypothetic-The-Arabian-Coffee')"><INPUT type=hidden value=Hypothetic-The-Arabian-Coffee name="offered('Hypothetic-The-Arabian-Coffee')">&nbsp;(termStrings Hypothetic-The-Arabian-Coffee "the arabian coffee")<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="textCached([coffee], [denotation, 'Coffee-Ground', 'TangibleStuffCompositionType', 'ArtifactTypeByGenericCategory', 'StuffType', 'ClarifyingCollectionType', 'Collection', 'TemporalStuffType'])." type=checkbox CHECKED name="accepted(textCached([coffee], [denotation, 'Coffee-Ground', 'TangibleStuffCompositionType', 'ArtifactTypeByGenericCategory', 'StuffType', 'ClarifyingCollectionType', 'Collection', 'TemporalStuffType']))"><INPUT type=hidden value="textCached([coffee], [denotation, Coffee-Ground, TangibleStuffCompositionType, ArtifactTypeByGenericCategory, StuffType, ClarifyingCollectionType, Collection, TemporalStuffType])" name="offered(textCached([coffee], [denotation, 'Coffee-Ground', 'TangibleStuffCompositionType', 'ArtifactTypeByGenericCategory', 'StuffType', 'ClarifyingCollectionType', 'Collection', 'TemporalStuffType']))">&nbsp;(isa Hypothetic-The-Arabian-Coffee Coffee-Ground)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="textCached([coffee], [denotation, 'Coffee-Beverage', 'DefaultDisjointEdibleStuffType', 'TangibleStuffCompositionType', 'StuffType', 'Collection', 'TemporalStuffType'])." type=checkbox CHECKED name="accepted(textCached([coffee], [denotation, 'Coffee-Beverage', 'DefaultDisjointEdibleStuffType', 'TangibleStuffCompositionType', 'StuffType', 'Collection', 'TemporalStuffType']))"><INPUT type=hidden value="textCached([coffee], [denotation, Coffee-Beverage, DefaultDisjointEdibleStuffType, TangibleStuffCompositionType, StuffType, Collection, TemporalStuffType])" name="offered(textCached([coffee], [denotation, 'Coffee-Beverage', 'DefaultDisjointEdibleStuffType', 'TangibleStuffCompositionType', 'StuffType', 'Collection', 'TemporalStuffType']))">&nbsp;(isa Hypothetic-The-Arabian-Coffee Coffee-Beverage)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="textCached([arabian], [denotation, 'ArabianPeninsula', 'Peninsula', 'SpatialThing-Localized', 'Individual'])." type=checkbox CHECKED name="accepted(textCached([arabian], [denotation, 'ArabianPeninsula', 'Peninsula', 'SpatialThing-Localized', 'Individual']))"><INPUT type=hidden value="textCached([arabian], [denotation, ArabianPeninsula, Peninsula, SpatialThing-Localized, Individual])" name="offered(textCached([arabian], [denotation, 'ArabianPeninsula', 'Peninsula', 'SpatialThing-Localized', 'Individual']))">&nbsp;(equals Hypothetic-The-Arabian-Coffee ArabianPeninsula)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="textCached([arabian], [denotation, 'ArabianHorse', 'BiologicalSubspecies', 'StuffType', 'Collection', 'TemporalStuffType'])." type=checkbox name="accepted(textCached([arabian], [denotation, 'ArabianHorse', 'BiologicalSubspecies', 'StuffType', 'Collection', 'TemporalStuffType']))"><INPUT type=hidden value="textCached([arabian], [denotation, ArabianHorse, BiologicalSubspecies, StuffType, Collection, TemporalStuffType])" name="offered(textCached([arabian], [denotation, 'ArabianHorse', 'BiologicalSubspecies', 'StuffType', 'Collection', 'TemporalStuffType']))">&nbsp;(isa Hypothetic-The-Arabian-Coffee ArabianHorse)<BR>&nbsp;<FONT color=green size=-1>"Formula 
+  (#$isa #$Hypothetic-The-Arabian-Coffee #$ArabianHorse) 
+was not well formed because: 
+#$Hypothetic-The-Arabian-Coffee is known not to be an instance of #$ArabianHorse in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;.  
+sbhl conflict: (#$isa #$Hypothetic-The-Arabian-Coffee #$ArabianHorse) TRUE #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;
+      because: (#$isa #$Hypothetic-The-Arabian-Coffee #$Coffee-Beverage) True-JustificationTruth               
+(#$genls #$Coffee-Beverage #$Drink) TRUE               
+(#$genls #$Drink #$LiquidTangibleThing) TRUE               
+(#$genls #$LiquidTangibleThing #$FluidTangibleThing) TRUE               
+(#$disjointWith #$FluidTangibleThing #$Agent-PartiallyTangible) TRUE               
+(#$genls #&lt;(#$CollectionUnionFn (#$TheSet #$Person #$Animal))&gt; #$Agent-PartiallyTangible) TRUE               
+(#$genls #$Animal #&lt;(#$CollectionUnionFn (#$TheSet #$Person #$Animal))&gt;) TRUE               
+(#$genls #$NonHumanAnimal #$Animal) TRUE               
+(#$genls #$EquineAnimal #$NonHumanAnimal) TRUE               
+(#$genls #$Horse #$EquineAnimal) TRUE               
+(#$genls #$Horse-Domesticated #$Horse) TRUE               
+(#$genls #$ArabianHorse #$Horse-Domesticated) TRUE
+
+"</FONT>
+<INPUT title="textCached('Arabian-TheWord', [frame, 'Arabian-TheWord', 'Adjective', 'RegularAdjFrame', conceptuallyRelated('Hypothetic-The-Arabian-Coffee', 'ArabianPeninsula'), adjSemTrans])." type=checkbox name="accepted(textCached('Arabian-TheWord', [frame, 'Arabian-TheWord', 'Adjective', 'RegularAdjFrame', conceptuallyRelated('Hypothetic-The-Arabian-Coffee', 'ArabianPeninsula'), adjSemTrans]))"><INPUT type=hidden value="textCached(Arabian-TheWord, [frame, Arabian-TheWord, Adjective, RegularAdjFrame, conceptuallyRelated(Hypothetic-The-Arabian-Coffee, ArabianPeninsula), adjSemTrans])" name="offered(textCached('Arabian-TheWord', [frame, 'Arabian-TheWord', 'Adjective', 'RegularAdjFrame', conceptuallyRelated('Hypothetic-The-Arabian-Coffee', 'ArabianPeninsula'), adjSemTrans]))">&nbsp;(conceptuallyRelated Hypothetic-The-Arabian-Coffee ArabianPeninsula)<BR>&nbsp;<FONT color=green size=-1>"Formula 
+  (#$conceptuallyRelated #$Hypothetic-The-Arabian-Coffee #$ArabianPeninsula) 
+was not well formed because: 
+(#$isa #$conceptuallyRelated #$IrreflexiveBinaryPredicate) in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;
+"</FONT>
+<INPUT title="'Hypothetic-I'." type=checkbox CHECKED name="accepted('Hypothetic-I')"><INPUT type=hidden value=Hypothetic-I name="offered('Hypothetic-I')">&nbsp;(isa Hypothetic-I Individual)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title=captialized1. type=checkbox name=accepted(captialized1)><INPUT type=hidden value=captialized1 name=offered(captialized1)>&nbsp;(properNameStrings Hypothetic-I "I")<BR>&nbsp;<FONT color=green size=-1>"Formula 
+  (#$properNameStrings #$Hypothetic-I \"I\") 
+was not well formed because: 
+Asserting a literal with predicate #$properNameStrings is prohibited in mt #&lt;(#$ParseMtForSourceFn (#$StringInDocumentFn #$NLTESTMT \"I drank the arabian coffee .\"))&gt;.
+"</FONT>
+<INPUT title="textCached(['I'], [denotation, nart(['PronounFn', 'FirstPerson-NLAttr', 'Singular-NLAttr', 'Ungendered-NLAttr', 'SubjectPronoun']), 'IndexicalConcept', 'Person', 'SpatialThing-Localized', 'Individual', 'Agent-Generic'])." type=checkbox CHECKED name="accepted(textCached(['I'], [denotation, nart(['PronounFn', 'FirstPerson-NLAttr', 'Singular-NLAttr', 'Ungendered-NLAttr', 'SubjectPronoun']), 'IndexicalConcept', 'Person', 'SpatialThing-Localized', 'Individual', 'Agent-Generic']))"><INPUT type=hidden value="textCached([I], [denotation, nart([PronounFn, FirstPerson-NLAttr, Singular-NLAttr, Ungendered-NLAttr, SubjectPronoun]), IndexicalConcept, Person, SpatialThing-Localized, Individual, Agent-Generic])" name="offered(textCached(['I'], [denotation, nart(['PronounFn', 'FirstPerson-NLAttr', 'Singular-NLAttr', 'Ungendered-NLAttr', 'SubjectPronoun']), 'IndexicalConcept', 'Person', 'SpatialThing-Localized', 'Individual', 'Agent-Generic']))">&nbsp;(equals Hypothetic-I 
+      (PronounFn FirstPerson-NLAttr Singular-NLAttr Ungendered-NLAttr SubjectPronoun))<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="'Hypothetic-I'." type=checkbox CHECKED name="accepted('Hypothetic-I')"><INPUT type=hidden value=Hypothetic-I name="offered('Hypothetic-I')">&nbsp;(isa Hypothetic-I SomethingExisting)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="'Hypothetic-I'." type=checkbox CHECKED name="accepted('Hypothetic-I')"><INPUT type=hidden value=Hypothetic-I name="offered('Hypothetic-I')">&nbsp;(termStrings Hypothetic-I "I")<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="textCached(['I'], [denotation, 'Hypothetic-I', 'SomethingExisting', 'Individual'])." type=checkbox CHECKED name="accepted(textCached(['I'], [denotation, 'Hypothetic-I', 'SomethingExisting', 'Individual']))"><INPUT type=hidden value="textCached([I], [denotation, Hypothetic-I, SomethingExisting, Individual])" name="offered(textCached(['I'], [denotation, 'Hypothetic-I', 'SomethingExisting', 'Individual']))">&nbsp;(equals Hypothetic-I Hypothetic-I)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+<INPUT title="'Hypothetic-GenitiveFrame'." type=checkbox CHECKED name="accepted('Hypothetic-GenitiveFrame')"><INPUT type=hidden value=Hypothetic-GenitiveFrame name="offered('Hypothetic-GenitiveFrame')">&nbsp;(isa Hypothetic-GenitiveFrame Event)<BR>&nbsp;<FONT color=green size=-1>T</FONT>
+</PRE></TD></TR></TBODY></TABLE><BR><INPUT value=NLTESTMT name=profile>&nbsp;<INPUT type=submit value="Save Profile" name=review></FORM>
+<P><STRONG>Recent Parses</STRONG>
+<P><A 
+href="http://66.14.82.104:6701/english.moo?english=I drank the arabian coffee .">I 
+drank the arabian coffee .</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=[ ]">[ ]</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=her ear is peirced">her ear 
+is peirced</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=her ear it pierced">her ear 
+it pierced</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=I see a dog">I see a 
+dog</A><BR><A href="http://66.14.82.104:6701/english.moo?english=a fox see">a 
+fox see</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=I have a happy book">I have a 
+happy book</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=I would like to see a funny book">I 
+would like to see a funny book</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=her sat">her sat</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=i hit john">i hit 
+john</A><BR><A href="http://66.14.82.104:6701/english.moo?english=I saw it">I 
+saw it</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=I need to buy a present , but I want a gift inexpensive">I 
+need to buy a present , but I want a gift inexpensive</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=a dog eats">a dog 
+eats</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=the singer loudly sang a new song">the 
+singer loudly sang a new song</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=other costumes were really bad">other 
+costumes were really bad</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=You ' re in Doctor Crusher ' s quarters">You 
+' re in Doctor Crusher ' s quarters</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=He gave a gift to her">He 
+gave a gift to her</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=I was bargaining with you">I 
+was bargaining with you</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=Do it the way you ' ve always done it">Do 
+it the way you ' ve always done it</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=All your base are belong to us">All 
+your base are belong to us</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=You see the holodeck ' s panel">You 
+see the holodeck ' s panel</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=all you can see is it">all 
+you can see is it</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=A large grey door leads into the Shuttle Bay">A 
+large grey door leads into the Shuttle Bay</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=I really like the fashion you do your hair">I 
+really like the fashion you do your hair</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=You ' re now on Holodeck 2">You 
+' re now on Holodeck 2</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=A">A</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=The bird flew the airplane .">The 
+bird flew the airplane .</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=A picture of it">A picture of 
+it</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=I read about it">I read about 
+it</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=colorado beetle">colorado 
+beetle</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=You ' re in Worf ' s quarters">You 
+' re in Worf ' s quarters</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=The price of the stock rose three tenths of one point">The 
+price of the stock rose three tenths of one point</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=the thing">the 
+thing</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=she pierced him in the ear">she 
+pierced him in the ear</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=This is my friend Bob">This 
+is my friend Bob</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=He knows about Eifnofkin">He 
+knows about Eifnofkin</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=he attended school">he 
+attended school</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=i see her ear">i see her 
+ear</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=the dream dreamt">the dream 
+dreamt</A><BR><A href="http://66.14.82.104:6701/english.moo?english=a fox">a 
+fox</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=president clinton">president 
+clinton</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=she took on clothing">she 
+took on clothing</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=a girly man">a girly 
+man</A><BR><A href="http://66.14.82.104:6701/english.moo?english=a fox sees">a 
+fox sees</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=I used some wood">I used some 
+wood</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=the sitter sat">the sitter 
+sat</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=The buy-out caused a free-for-all in the mid-afternoon">The 
+buy-out caused a free-for-all in the mid-afternoon</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=Dogs eat you">Dogs eat 
+you</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=his and her boat sank">his 
+and her boat sank</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=my">my</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=few attended">few 
+attended</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=Dogs eat bones">Dogs eat 
+bones</A><BR><A href="http://66.14.82.104:6701/english.moo?english=i to dress">i 
+to dress</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=the singer sang the song">the 
+singer sang the song</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=the bird">the bird</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=I slept with you">I slept 
+with you</A><BR><A href="http://66.14.82.104:6701/english.moo?english=A bunch">A 
+bunch</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=the mother ' s milk">the 
+mother ' s milk</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=Many who initially supported Thomas later changed their minds">Many 
+who initially supported Thomas later changed their minds</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=she is pierced in the ear">she 
+is pierced in the ear</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=My uncle ' s mother ' s cousin is visiting us">My 
+uncle ' s mother ' s cousin is visiting us</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=i am a john">i am a 
+john</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=the man who paints loves her">the 
+man who paints loves her</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=The big mind on everybody ' s question is who killed OJ">The 
+big mind on everybody ' s question is who killed OJ</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=i hit the john">i hit the 
+john</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=The new David Letterman is a happy , relaxed David Letterman">The 
+new David Letterman is a happy , relaxed David Letterman</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=Livingston the fish is here , swimming about in his tank">Livingston 
+the fish is here , swimming about in his tank</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=I can see you">I can see 
+you</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=I really like it">I really 
+like it</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=arabian camel">arabian 
+camel</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=A bunch of goats">A bunch of 
+goats</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=all small computer screens">all 
+small computer screens</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=The nearest drug store is about 3 / 4 of a mile away">The 
+nearest drug store is about 3 / 4 of a mile away</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=her bule car sits">her bule 
+car sits</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=the big book">the big 
+book</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=my girl a the his her who">my 
+girl a the his her who</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=all that is">all that 
+is</A><BR><A 
+href="http://66.14.82.104:6701/english.moo?english=she beat off">she beat 
+off</A><BR></P></BODY></HTML>

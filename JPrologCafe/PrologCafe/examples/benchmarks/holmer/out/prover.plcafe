@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/prover.in ...}
+
+# Name: prover
+# Iterations: 1000
+# TestTime: 659 msec.
+# OverHead: 82 msec.
+# TestTime-OverHead: 577 msec.
+# (TestTime-OverHead)/Iterations: 0.577 msec.
+###CSV###,prover,1000,659,82,577,0.577
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/prover.in consulted, 6 msec}
+bye

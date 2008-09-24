@@ -1,0 +1,447 @@
+:- use_module(library(lists)) .
+
+:- use_module(library(format)) .
+
+main :-
+       [results],
+       setof(A,B ^ C ^ D ^ E ^ bench(A,B,C,D,E),F),
+       bench_results(F),
+       averages .
+
+averages :-
+       findall(A,system(A),B),
+       write('average '),
+       averages(B) .
+
+averages([]) :-
+       writeln(\\) .
+
+averages([A|B]) :-
+       avg_percentages(A,C),
+       format('&\t - &\t ~1f\\%',[C]),
+       averages(B) .
+
+bench_results([]) .
+
+bench_results([A|B]) :-
+       bench_result(A),
+       bench_results(B) .
+
+bench_result(A) :-
+       write(A),
+       write('\t\t'),
+       findall(B - C,(system(B) , best_result(A,B,C)),D),
+       print_times(D,A),
+       nl .
+
+print_times([A - B|C],D) :-
+       print_times(B,[A - B|C],D) .
+
+print_times( _ ,[], _ ) :-
+       !,
+       write(\\) .
+
+print_times(A,[B - C|D],E) :-
+       F is C / A * 1.00000000000000000e+02,
+       percentage(B,E,F),
+       format('& ~D & ~1f\\%\t',[C,F]),
+       print_times(A,D,E) .
+
+system(sicstus) .
+
+system(yap) .
+
+system(hProlog) .
+
+system(xsb) .
+
+system(swiprolog) .
+
+best_result(A,B,C) :-
+       findall(D,bench(A, _ ,D, _ ,B),E),
+       min_list(E,C) .
+
+:- use_module(library(chr)) .
+
+'attach_percentage/3'([], _ ) .
+
+'attach_percentage/3'([A|B],C) :-
+       ( get_attr(A,user,D) ->
+            D = v(E,F,G,H,I),
+            ( E /\ 1 =:= 1 ->
+                 put_attr(A,user,v(E,[C|F],G,H,I))
+            ;
+                 J is E \/ 1,
+                 put_attr(A,user,v(J,[C],G,H,I))
+            )
+       ;
+            put_attr(A,user,v(1,[C],[],[],[]))
+       ),
+       'attach_percentage/3'(B,C) .
+
+'attach_avg_percentages/2'([], _ ) .
+
+'attach_avg_percentages/2'([A|B],C) :-
+       ( get_attr(A,user,D) ->
+            D = v(E,F,G,H,I),
+            ( E /\ 2 =:= 2 ->
+                 put_attr(A,user,v(E,F,[C|G],H,I))
+            ;
+                 J is E \/ 2,
+                 put_attr(A,user,v(J,F,[C],H,I))
+            )
+       ;
+            put_attr(A,user,v(2,[],[C],[],[]))
+       ),
+       'attach_avg_percentages/2'(B,C) .
+
+'attach_summer/3'([], _ ) .
+
+'attach_summer/3'([A|B],C) :-
+       ( get_attr(A,user,D) ->
+            D = v(E,F,G,H,I),
+            ( E /\ 4 =:= 4 ->
+                 put_attr(A,user,v(E,F,G,[C|H],I))
+            ;
+                 J is E \/ 4,
+                 put_attr(A,user,v(J,F,G,[C],I))
+            )
+       ;
+            put_attr(A,user,v(4,[],[],[C],[]))
+       ),
+       'attach_summer/3'(B,C) .
+
+'attach_sum/3'([], _ ) .
+
+'attach_sum/3'([A|B],C) :-
+       ( get_attr(A,user,D) ->
+            D = v(E,F,G,H,I),
+            ( E /\ 8 =:= 8 ->
+                 put_attr(A,user,v(E,F,G,H,[C|I]))
+            ;
+                 J is E \/ 8,
+                 put_attr(A,user,v(J,F,G,H,[C]))
+            )
+       ;
+            put_attr(A,user,v(8,[],[],[],[C]))
+       ),
+       'attach_sum/3'(B,C) .
+
+'detach_percentage/3'([], _ ) .
+
+'detach_percentage/3'([A|B],C) :-
+       ( get_attr(A,user,D) ->
+            D = v(E,F,G,H,I),
+            ( E /\ 1 =:= 1 ->
+                 chr:sbag_del_element(F,C,J),
+                 ( J == [] ->
+                      K is E /\ -2,
+                      ( K == 0 ->
+                           del_attr(A,user)
+                      ;
+                           put_attr(A,user,v(K,[],G,H,I))
+                      )
+                 ;
+                      put_attr(A,user,v(E,J,G,H,I))
+                 )
+            ;
+                 true
+            )
+       ;
+            true
+       ),
+       'detach_percentage/3'(B,C) .
+
+'detach_avg_percentages/2'([], _ ) .
+
+'detach_avg_percentages/2'([A|B],C) :-
+       ( get_attr(A,user,D) ->
+            D = v(E,F,G,H,I),
+            ( E /\ 2 =:= 2 ->
+                 chr:sbag_del_element(G,C,J),
+                 ( J == [] ->
+                      K is E /\ -3,
+                      ( K == 0 ->
+                           del_attr(A,user)
+                      ;
+                           put_attr(A,user,v(K,F,[],H,I))
+                      )
+                 ;
+                      put_attr(A,user,v(E,F,J,H,I))
+                 )
+            ;
+                 true
+            )
+       ;
+            true
+       ),
+       'detach_avg_percentages/2'(B,C) .
+
+'detach_summer/3'([], _ ) .
+
+'detach_summer/3'([A|B],C) :-
+       ( get_attr(A,user,D) ->
+            D = v(E,F,G,H,I),
+            ( E /\ 4 =:= 4 ->
+                 chr:sbag_del_element(H,C,J),
+                 ( J == [] ->
+                      K is E /\ -5,
+                      ( K == 0 ->
+                           del_attr(A,user)
+                      ;
+                           put_attr(A,user,v(K,F,G,[],I))
+                      )
+                 ;
+                      put_attr(A,user,v(E,F,G,J,I))
+                 )
+            ;
+                 true
+            )
+       ;
+            true
+       ),
+       'detach_summer/3'(B,C) .
+
+'detach_sum/3'([], _ ) .
+
+'detach_sum/3'([A|B],C) :-
+       ( get_attr(A,user,D) ->
+            D = v(E,F,G,H,I),
+            ( E /\ 8 =:= 8 ->
+                 chr:sbag_del_element(I,C,J),
+                 ( J == [] ->
+                      K is E /\ -9,
+                      ( K == 0 ->
+                           del_attr(A,user)
+                      ;
+                           put_attr(A,user,v(K,F,G,H,[]))
+                      )
+                 ;
+                      put_attr(A,user,v(E,F,G,H,J))
+                 )
+            ;
+                 true
+            )
+       ;
+            true
+       ),
+       'detach_sum/3'(B,C) .
+
+attach_increment([], _ ) .
+
+attach_increment([A|B],v(C,D,E,F,G)) :-
+       chr:not_locked(A),
+       ( get_attr(A,user,H) ->
+            H = v(I,J,K,L,M),
+            sort(J,N),
+            chr:merge_attributes(D,N,O),
+            sort(K,P),
+            chr:merge_attributes(E,P,Q),
+            sort(L,R),
+            chr:merge_attributes(F,R,S),
+            sort(M,T),
+            chr:merge_attributes(G,T,U),
+            V is C \/ I,
+            put_attr(A,user,v(V,O,Q,S,U))
+       ;
+            put_attr(A,user,v(C,D,E,F,G))
+       ),
+       attach_increment(B,v(C,D,E,F,G)) .
+
+attr_unify_hook(v(A,B,C,D,E),F) :-
+       sort(B,G),
+       sort(C,H),
+       sort(D,I),
+       sort(E,J),
+       ( var(F) ->
+            ( get_attr(F,user,K) ->
+                 K = v(L,M,N,O,P),
+                 sort(M,Q),
+                 chr:merge_attributes(G,Q,R),
+                 sort(N,S),
+                 chr:merge_attributes(H,S,T),
+                 sort(O,U),
+                 chr:merge_attributes(I,U,V),
+                 sort(P,W),
+                 chr:merge_attributes(J,W,X),
+                 Y is A \/ L,
+                 put_attr(F,user,v(Y,R,T,V,X)),
+                 chr:run_suspensions_loop([R,T,V,X])
+            ;
+                 put_attr(F,user,v(A,G,H,I,J)),
+                 chr:run_suspensions_loop([G,H,I,J])
+            )
+       ;
+            ( compound(F) ->
+                 term_variables(F,Z),
+                 attach_increment(Z,v(A,G,H,I,J))
+            ;
+                 true
+            ),
+            chr:run_suspensions_loop([G,H,I,J])
+       ) .
+
+percentage(A,B,C) :-
+       'percentage/3__0'(A,B,C, _ ) .
+
+'percentage/3__0'(A, _ ,B,C) :-
+       chr:via_1(A,D),
+       get_attr(D,user,E),
+       E = v(F, _ , _ ,G, _ ),
+       F /\ 4 =:= 4,
+       chr:sbag_member(H,G),
+       H = suspension( _ ,I, _ , _ , _ , _ ,J,K,L),
+       I = mutable(active),
+       J == A,
+       !,
+       chr:remove_constraint_internal(H,M),
+       'detach_summer/3'(M,H),
+       ( var(C) ->
+            true
+       ;
+            chr:remove_constraint_internal(C,N),
+            'detach_percentage/3'(N,C)
+       ),
+       O is K + B,
+       P is L + 1,
+       summer(A,O,P) .
+
+'percentage/3__0'(A,B,C,D) :-
+       ( var(D) ->
+            chr:insert_constraint_internal(E,D,user : 'percentage/3__0'(A,B,C,D),percentage,[A,B,C])
+       ;
+            chr:activate_constraint(E,D, _ )
+       ),
+       'attach_percentage/3'(E,D) .
+
+avg_percentages(A,B) :-
+       'avg_percentages/2__0'(A,B, _ ) .
+
+'avg_percentages/2__0'(A,B,C) :-
+       ( var(C) ->
+            chr:allocate_constraint(user : 'avg_percentages/2__0'(A,B,C),C,avg_percentages,[A,B])
+       ;
+            true
+       ),
+       chr:novel_production(C,1),
+       !,
+       chr:extend_history(C,1),
+       chr:activate_constraint(D,C,E),
+       'attach_avg_percentages/2'(D,C),
+       summer(A,0,0),
+       (
+         C = suspension( _ ,F, _ ,G, _ , _ , _ , _ ),
+         F = mutable(active),
+         G = mutable(E) ->
+            chr:update_mutable(inactive,F),
+            'avg_percentages/2__1'(A,B,C)
+       ;
+            true
+       ) .
+
+'avg_percentages/2__0'(A,B,C) :-
+       ( var(C) ->
+            chr:allocate_constraint(user : 'avg_percentages/2__0'(A,B,C),C,avg_percentages,[A,B])
+       ;
+            true
+       ),
+       'avg_percentages/2__1'(A,B,C) .
+
+'avg_percentages/2__1'(A,B,C) :-
+       chr:via_1(A,D),
+       get_attr(D,user,E),
+       E = v(F, _ , _ , _ ,G),
+       F /\ 8 =:= 8,
+       chr:sbag_member(H,G),
+       H = suspension( _ ,I, _ , _ , _ , _ ,J,K,L),
+       I = mutable(active),
+       J == A,
+       !,
+       chr:remove_constraint_internal(H,M),
+       'detach_sum/3'(M,H),
+       ( var(C) ->
+            true
+       ;
+            chr:remove_constraint_internal(C,N),
+            'detach_avg_percentages/2'(N,C)
+       ),
+       B is K / L .
+
+'avg_percentages/2__1'( _ , _ ,A) :-
+       chr:activate_constraint(B,A, _ ),
+       'attach_avg_percentages/2'(B,A) .
+
+summer(A,B,C) :-
+       'summer/3__0'(A,B,C, _ ) .
+
+'summer/3__0'(A,B,C,D) :-
+       chr:via_1(A,E),
+       get_attr(E,user,F),
+       F = v(G,H, _ , _ , _ ),
+       G /\ 1 =:= 1,
+       chr:sbag_member(I,H),
+       I = suspension( _ ,J, _ , _ , _ , _ ,K, _ ,L),
+       J = mutable(active),
+       K == A,
+       !,
+       chr:remove_constraint_internal(I,M),
+       'detach_percentage/3'(M,I),
+       ( var(D) ->
+            true
+       ;
+            chr:remove_constraint_internal(D,N),
+            'detach_summer/3'(N,D)
+       ),
+       O is B + L,
+       P is C + 1,
+       summer(A,O,P) .
+
+'summer/3__0'(A,B,C,D) :-
+       !,
+       ( var(D) ->
+            true
+       ;
+            chr:remove_constraint_internal(D,E),
+            'detach_summer/3'(E,D)
+       ),
+       sum(A,B,C) .
+
+'summer/3__0'(A,B,C,D) :-
+       ( var(D) ->
+            chr:insert_constraint_internal(E,D,user : 'summer/3__0'(A,B,C,D),summer,[A,B,C])
+       ;
+            chr:activate_constraint(E,D, _ )
+       ),
+       'attach_summer/3'(E,D) .
+
+sum(A,B,C) :-
+       'sum/3__0'(A,B,C, _ ) .
+
+'sum/3__0'(A,B,C,D) :-
+       chr:via_1(A,E),
+       get_attr(E,user,F),
+       F = v(G, _ ,H, _ , _ ),
+       G /\ 2 =:= 2,
+       chr:sbag_member(I,H),
+       I = suspension( _ ,J, _ , _ , _ , _ ,K,L),
+       J = mutable(active),
+       K == A,
+       !,
+       chr:remove_constraint_internal(I,M),
+       'detach_avg_percentages/2'(M,I),
+       ( var(D) ->
+            true
+       ;
+            chr:remove_constraint_internal(D,N),
+            'detach_sum/3'(N,D)
+       ),
+       L is B / C .
+
+'sum/3__0'(A,B,C,D) :-
+       ( var(D) ->
+            chr:insert_constraint_internal(E,D,user : 'sum/3__0'(A,B,C,D),sum,[A,B,C])
+       ;
+            chr:activate_constraint(E,D, _ )
+       ),
+       'attach_sum/3'(E,D) .
+

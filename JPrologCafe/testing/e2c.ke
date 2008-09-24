@@ -1,0 +1,434 @@
+default mt: UniversalVocabularyMt.
+constant: wordSemTrans.
+isa: NLSemanticPredicate.
+arity: 7.
+F: (#$argIsa #$wordSemTrans 1 #$LexicalWord).
+F: (#$argIsa #$wordSemTrans 2 #$Thing).
+F: (#$argIsa #$wordSemTrans 3 #$Thing).
+F: (#$argIsa #$wordSemTrans 4 #$Thing).
+F: (#$argIsa #$wordSemTrans 5 #$LinguisticObjectType).
+F: (#$argIsa #$wordSemTrans 6 #$Predicate).
+F: (#$argIsa #$wordSemTrans 7 #$Thing).
+
+
+default mt: BaseKB.
+F: (comment wordSemTrans "(#$wordSemTrans #$LexicalWord #$Integer #$SubcategorizationFrame #$NLTemplateExpression #$LinguisticObjectType #$Predicate #$NLTemplateExpression)").
+
+F:  (and
+(implies (clauseSemTrans ?WORD ?NUM ?FRAME  ?CYCL) (wordSemTrans  ?WORD ?NUM ?FRAME ?CYCL Conjunction clauseSemTrans True))
+(implies (nounSemTrans ?WORD ?NUM ?FRAME  ?CYCL) (wordSemTrans  ?WORD ?NUM ?FRAME ?CYCL Noun nounSemTrans True))).
+
+
+F: 
+(implies 
+(and (compoundSemTrans ?WORD  (TheList ?S1)  ?POS IntransitiveVerbFrame ?CYCL) (partOfSpeech ?WORDW ?POSW ?S1) )
+(wordSemTrans ?WORD 30 (PPCompFrameFn TransitiveParticleNPFrameType ?WORDW) ?CYCL ?POS compoundSemTrans True))     .                                          
+
+
+
+F: 
+(implies (and (compoundSemTrans ?WORD  (TheList ?S1)  ?POS TransitiveInfinitivePhraseFrame   ?CYCL)
+(wordStrings ?WORDW ?S1) )
+(wordSemTrans ?WORD 30 (PPCompFrameFn TransitiveParticleNPFrameType ?WORDW) ?CYCL ?POS compoundSemTrans True))         .                                      
+
+F: 
+(implies 
+(prepSemTrans-New ?WORD ?POS ?FRAME ?CYCL) 
+(wordSemTrans ?WORD 30 ?FRAME ?CYCL ?POS prepSemTrans-New True)).
+
+F: 
+(implies 
+  (and 
+      (nounPrep ?WORD ?PREP ?CYCL) 
+      (termOfUnit ?PPCOMPFRAMEFN 
+	  (PPCompFrameFn TransitivePPFrameType ?PREP))) 
+  (wordSemTrans ?WORD 30 ?PPCOMPFRAMEFN ?CYCL Noun nounPrep True)).
+
+F: 
+           (implies 
+                  (prepReln-Action ?ACTION ?OBJECT ?WORD ?CYCL) 
+                  (wordSemTrans ?WORD 30 VerbPhraseModifyingFrame ?CYCL Preposition prepReln-Action 
+                      (and 
+                          (isa :ACTION ?ACTION) 
+                          (isa :OBLIQUE-OBJECT ?OBJECT)))).
+
+F: 
+           (implies 
+                  (prepReln-Object ?NOUN ?OBJECT ?WORD ?CYCL) 
+                  (wordSemTrans ?WORD 30 Post-NounPhraseModifyingFrame ?CYCL Preposition prepReln-Object 
+                      (and 
+                          (isa :NOUN ?NOUN) 
+                          (isa :OBLIQUE-OBJECT ?OBJECT)))).
+F: 
+           (implies 
+                  (and 
+                      (semTransPredForPOS ?POS ?Pred) 
+                      (?Pred ?WORD ?NUM ?FRAME ?CYCL)) 
+                        (wordSemTrans ?WORD ?NUM ?FRAME ?CYCL ?POS ?Pred True)).
+
+F: 
+           (implies 
+                        (adjSemTrans-Restricted ?WORD ?NUM ?FRAME ?COL ?CYCL)
+                        (wordSemTrans ?WORD ?NUM ?FRAME ?CYCL Adjective adjSemTrans-Restricted (isa :NOUN ?COL))).
+
+F: 
+           (implies 
+                        (nonCompositionalVerbSemTrans ?WORD ?COL ?CYCL)
+                        (wordSemTrans ?WORD 666 VerbPhraseModifyingFrame ?CYCL Verb nonCompositionalVerbSemTrans (isa :OBJECT ?COL))).
+
+F: 
+           (implies 
+                        (lightVerb-TransitiveSemTrans ?WORD ?COL ?CYCL)
+                        (wordSemTrans ?WORD 667 VerbPhraseModifyingFrame ?CYCL Verb lightVerb-TransitiveSemTrans (isa :OBJECT ?COL))).
+
+F: 
+           (implies 
+                        (verbSemTransPartial  ?WORD ?NUM ?FRAME ?CYCL)
+                        (wordSemTrans ?WORD ?NUM ?FRAME ?CYCL Verb verbSemTransPartial True)).
+
+F: 
+           (implies 
+                  (and 
+                      (isa ?OBJ ?COL) 
+                      (adjSemTransTemplate ?COL ?FRAME ?CYCL) 
+                      (denotation ?WORD Adjective ?NUM ?OBJ) 
+                      (evaluate ?TRANS 
+                          (SubstituteFormulaFn ?OBJ :DENOT ?CYCL))) 
+                  (wordSemTrans  ?WORD ?NUM ?FRAME ?TRANS Adjective adjSemTrans True )).
+
+F: 
+           (implies 
+                        (and 
+                            (genls ?SPEC ?COL) 
+                            (verbSemTransTemplate ?COL ?FRAME ?CYCL) 
+                            (denotation ?WORD Verb ?NUM ?SPEC) 
+                            (evaluate ?TRANS 
+                                (SubstituteFormulaFn ?SPEC :DENOT ?CYCL))) 
+                  (wordSemTrans  ?WORD ?NUM ?FRAME ?TRANS Verb verbSemTrans True )).
+
+
+F: 
+(implies 
+       (and 
+           (different ?WORD1 ?WORD2) 
+           (semTransPredForPOS ?POS ?PRED) 
+           (denotesOpposite ?WORD1 ?POS ?NUM1 ?CONCEPT) 
+           (denotation ?WORD2 ?POS ?NUM2 ?CONCEPT) 
+           (?PRED ?WORD2 ?NUM2 ?FRAME ?FORMULA)) 
+       (?PRED ?WORD1 ?NUM1 ?FRAME 
+           (not ?FORMULA))).
+           
+ 
+                      		         
+
+F: 
+(implies 
+(and (denotation ?WORD ?POS ?NUM ?COL)(isa ?COL Collection)(genls ?POS Noun))
+(wordSemTrans ?WORD ?NUM RegularNounFrame (isa :NOUN ?COL) ?POS denotation True)).
+
+default Mt: BaseKB.        
+F: 
+(implies (and (compoundSemTrans ?WORD  (TheList ?S1)  ?POS TransitiveNPFrame  ?CYCL)
+(partOfSpeech ?WORDW ?POSW ?S1) )
+(wordSemTrans ?WORD 30 (PPCompFrameFn TransitiveParticleNPFrameType ?WORDW) ?CYCL ?POS compoundSemTrans True))      .
+  
+                
+default Mt: BaseKB.        
+F: 
+(implies 
+       (and 
+           (isa ?BELIEFS BinaryPredicate) 
+           (denotation ?BELIEVE-THEWORD ?Verb ?NUM ?BELIEFS)) 
+       (wordSemTrans ?BELIEVE-THEWORD ?NUM TransitiveNPFrame 
+           (thereExists :ACTION 
+                   (holdsIn :ACTION 
+                       (?BELIEFS :SUBJECT :OBJECT))) ?Verb denotation True))    .  
+
+
+default Mt: BaseKB.        
+F: 
+(implies 
+       (and 
+           (isa ?BELIEFS BinaryPredicate) 
+           (denotationRelatedTo ?BELIEVE-THEWORD ?Verb ?NUM ?BELIEFS)) 
+       (wordSemTrans ?BELIEVE-THEWORD ?NUM TransitiveNPFrame 
+           (thereExists :ACTION 
+                   (holdsIn :ACTION 
+                       (?BELIEFS :SUBJECT :OBJECT))) ?Verb denotationRelatedTo True))    .  
+
+   
+default Mt: BaseKB.        
+F: 
+(implies 
+       (and 
+           (isa ?BELIEFS BinaryPredicate) 
+           (denotesOpposite ?DISBELIEVE-THEWORD ?Verb ?NUM ?BELIEFS)) 
+       (wordSemTrans ?DISBELIEVE-THEWORD ?NUM TransitiveNPFrame 
+           (thereExists :ACTION 
+               (not 
+                   (holdsIn :ACTION 
+                       (?BELIEFS :SUBJECT :OBJECT)))) ?Verb denotesOpposite True))    .  
+
+
+
+
+
+F: 
+(implies 
+	(and 
+	   (derivedUsingSuffix 
+	       (WordWithSuffixFn ?GIRL-THEWORD Ly_AdjectiveProducing-TheSuffix) Ly_AdjectiveProducing-TheSuffix) 
+	   (denotation ?GIRL-THEWORD CountNoun ?NUM ?FEMALECHILD)) 
+	(wordSemTrans 
+	   (WordWithSuffixFn ?GIRL-THEWORD Ly_AdjectiveProducing-TheSuffix) ?NUM RegularAdjFrame 
+	   (conceptuallyRelated :NOUN ?FEMALECHILD) Adjective derivedUsingSuffix True)).
+
+
+
+
+default Mt: BaseKB.        
+F: 
+(implies 
+(and (denotation ?WORD ?POS ?NUM ?COL)(genls ?COL Event)(genls ?POS Verb))
+(wordSemTrans ?WORD ?NUM RegularNounFrame (and (situationConstituents :ACTION :SUBJECT)(genls :ACTION ?COL)) ?POS denotation True)).
+
+
+
+             ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ 
+F: 
+(implies 
+       (and 
+           (relationInstanceAll performsInstancesAsPartOfJob ?REFINISHING ?REFINISHER) 
+           (subcatFrame ?RENOVATE-THEWORD Verb ?NUM ?TRANSITIVENPFRAME) 
+           (denotation ?RENOVATE-THEWORD AgentiveNoun ?NUM2 ?REFINISHER)) 
+       (wordSemTrans ?RENOVATE-THEWORD ?NUM ?TRANSITIVENPFRAME 
+           (thereExists :ACTION 
+               (and 
+                   (bodilyDoer :SUBJECT :ACTION) 
+                   (isa :ACTION ?REFINISHING) 
+                   (possible 
+                       (isa :SUBJECT ?REFINISHER)))) Verb performsInstancesAsPartOfJob True)).
+
+
+
+
+default Mt: BaseKB.        
+constant: IsaFn.
+isa: TermMacroFunction ReifiableFunction CollectionDenotingFunction UnaryFunction.
+arity: 1.
+resultIsa: Collection.
+arg1Isa: Thing. 
+F:  (functionCorrespondingPredicate-Generic IsaFn isa 2).
+F: (implies 
+  (isa ?INST ?COL)
+  (equals (IsaFn ?INST) ?COL)).
+
+F: (isa ?INST (IsaFn ?INST)).
+
+
+
+default Mt: BaseKB.        
+F: 
+(implies 
+       (and 
+           (subcatFrame ?RUSH-THEWORD Verb ?NUM1 TransitiveNPFrame) 
+           (denotation ?RUSH-THEWORD Verb ??NUM0 ?CHARGING-RUSHING)) 
+       (verbSemTransPartial  ?RUSH-THEWORD ?NUM1 TransitiveNPFrame 
+           (thereExists :ACTION 
+               (and 
+                   (situationConstituents :ACTION :OBJECT) 
+                   (doneBy :ACTION :SUBJECT) 
+                   (isa :ACTION ?CHARGING-RUSHING))))).
+
+
+default Mt: BaseKB.        
+constant: substituteFrameKeywords.
+
+F: (isa substituteFrameKeywords Predicate).
+F: (arity substituteFrameKeywords 6).
+
+F: (comment substituteFrameKeywords "(substituteFrameKeywords -TEMPLATE +SUBJECT +EVENT +OBJECT +TARGET +FACTS)").
+
+F: (implies
+            (evaluate ?FACTS 
+               (SubstituteFormulaFn ?OBJECT :OBJECT 
+                   (SubstituteFormulaFn ?SUBJECT :SUBJECT 
+                       (SubstituteFormulaFn ?EVENT :ACTION 
+                           (SubstituteFormulaFn ?TARGET :OBLIQUE-OBJECT 
+                             (SubstituteFormulaFn ?SUBJECT :NOUN 
+                                (SubstituteFormulaFn (IsaFn ?SUBJECT) :REPLACE ?TEMPLATE)))))))
+ (substituteFrameKeywords ?TEMPLATE ?SUBJECT ?EVENT ?OBJECT ?TARGET ?FACTS)).
+
+
+F: (implies
+  (and
+    (formulaSubstitutionFor ?OBJECT :OBJECT ?TEMPLATE1 ?TEMPLATE)
+    (formulaSubstitutionFor ?SUBJECT :SUBJECT ?TEMPLATE2 ?TEMPLATE1)
+    (formulaSubstitutionFor ?EVENT :ACTION ?TEMPLATE3 ?TEMPLATE2)
+    (formulaSubstitutionFor ?SUBJECT :NOUN ?TEMPLATE4 ?TEMPLATE3)
+    (formulaSubstitutionFor ?TARGET :OBLIQUE-OBJECT ?TEMPLATE5 ?TEMPLATE4)
+    (formulaSubstitutionFor (IsaFn ?SUBJECT) :REPLACE ?TEMPLATE6 ?TEMPLATE5)
+    (formulaSubstitutionFor ?OBJECT :POSSESSOR ?FACTS ?TEMPLATE6))
+ (substituteFrameKeywords ?TEMPLATE ?SUBJECT ?EVENT ?OBJECT ?TARGET ?FACTS)) .
+
+
+
+default mt: UniversalVocabularyMt.
+constant: hypotheticDenotation.
+isa: TernaryPredicate.
+F: (isa hypotheticDenotation TernaryPredicate).
+F: (arg1Isa hypotheticDenotation  IndeterminateTerm).
+F: (arg2Isa hypotheticDenotation TermPhrasesConstraint).
+F: (arg3Isa hypotheticDenotation LexicalWord).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;http://www.cnn.com/2005/POLITICS/11/04/carter.lookback/index.html
+                                                                                                               
+
+                                                       
+constant: E2C-Parses-CCW.
+default mt: UniversalVocabularyMt.
+isa :  PublishedMaterial TextualPCW .
+
+default mt: BaseKB.
+contextOfPCW :  (ContextOfPCWFn E2C-Parses-CCW) .
+
+;;default mt: TKB-FETSourceDocumentsMt.
+;;contextOfPCW :  (ContextOfPCWFn E2C-Parses-CCW)  .
+
+
+    
+;F: (hypotheticDenotation The-Slow-Car Slow-TheWord Adjective)
+;F: (hypotheticDenotation The-Slow-Car Car-TheWord Noun)
+
+;hypotheticPartOfSpeech         /LexicalWord 
+;CycLReifiableDenotationalTerm NLWordForm SpeechPart
+
+           
+default mt: (ParseMtForSourceFn E2C-Parses-CCW).
+
+F: (and  
+      (implies 
+             (and 
+                 (hypotheticDenotation ?HYPOTHETIC ?POS ?THEWORD) 
+                 (denotation ?THEWORD ?POS ?N0 ?WHAT)) 
+             (isa ?HYPOTHETIC ?WHAT))
+      (implies 
+             (and 
+                 (hypotheticDenotation ?HYPOTHETIC Pronoun ?THEWORD) 
+                 (denotation ?THEWORD SubjectPronoun ?N0 ?WHAT)) 
+             (equals ?HYPOTHETIC ?WHAT))
+      (implies 
+             (and 
+                 (hypotheticDenotation ?HYPOTHETIC ?Pronoun ?THEWORD) 
+                 (denotation ?THEWORD ObjectPronoun ?N0 ?WHAT)) 
+             (equals ?HYPOTHETIC ?WHAT)) ).
+
+
+       
+
+default mt: UniversalVocabularyMt.
+
+F: (denotation He-TheWord SubjectPronoun 0 
+       (PronounFn ThirdPerson-NLAttr Singular-NLAttr Masculine-NLAttr SubjectPronoun)).
+
+
+
+constant:  hypotheticSubjectVerbObjectPrepOblique .
+constant:  hypotheticSubjectVerbPrepObjectOblique.
+constant:  hypotheticSubjectVerbObjectPrep .
+constant:  hypotheticSubjectVerbPrepObject .
+constant:  hypotheticSubjectVerbObject .
+constant:  hypotheticSubjectVerbPrep .
+constant:  hypotheticSubjectVerb .
+
+
+F: (and
+(isa hypotheticSubjectVerbObjectPrepOblique QuintaryPredicate)
+(isa hypotheticSubjectVerbPrepObjectOblique QuintaryPredicate)
+(isa hypotheticSubjectVerbObjectPrep QuaternaryPredicate)
+(isa hypotheticSubjectVerbPrepObject QuaternaryPredicate)
+(isa hypotheticSubjectVerbObject TernaryPredicate)
+(isa hypotheticSubjectVerbPrep TernaryPredicate)
+(isa hypotheticSubjectVerb BinaryPredicate)).
+
+                                                                                
+default mt: UniversalVocabularyMt.
+F: (implies 
+       (and 
+           (ist ?MT 
+               (hypotheticDenotation ?EVENT ?POS ?VERB)) 
+           (wordSemTrans ?VERB ??NUM (PPCompFrameFn DitransitivePPFrameType ?PREP) ?TEMPLATE ?POS ??PRED ?OBJECT ) 
+           (hypotheticSubjectVerbObjectPrepOblique ?SUBJECT ?EVENT ?OBJECT ?PREP ?TARGET) 
+           (evaluate ?FACTS 
+               (SubstituteFormulaFn ?OBJECT :OBJECT 
+                   (SubstituteFormulaFn ?SUBJECT :SUBJECT 
+                       (SubstituteFormulaFn ?EVENT :ACTION 
+                           (SubstituteFormulaFn ?TARGET :OBLIQUE-OBJECT ?TEMPLATE))))) 
+           )
+       (ist ?MT ?FACTS)).
+
+
+
+default mt: UniversalVocabularyMt.
+F: (implies 
+       (and 
+           (posOfPhraseType ?PHRASETYPE ?POSMASTER) 
+           (genls ?POS ?POSMASTER) 
+           (speechPartPreds ?POS ?PRED) 
+           (hypotheticDenotation ?HYPOTHETIC ?PHRASETYPE ?STRING) 
+           (wordForms ?WORD ?PRED ?STRING)) 
+       (hypotheticDenotation ?HYPOTHETIC ?POS ?WORD)).
+
+         
+constant: lexicallySubsumed.
+isa: BinaryPredicate.
+                       
+F: (and 
+(isa lexicallySubsumed BinaryPredicate)
+(arg1Isa lexicallySubsumed LinguisticObjectType)
+(arg2Isa lexicallySubsumed LinguisticObjectType)
+(genlPreds genls lexicallySubsumed)
+(genlPreds posOfPhraseType lexicallySubsumed)
+(genlPreds equals lexicallySubsumed)
+(genlPreds nlPhraseTypeForTemplateCategory lexicallySubsumed)
+(lexicallySubsumed  ProperNoun Noun)).
+
+
+F: (implies 
+       (and 
+           (hypotheticDenotation ?HYPOTHETIC ?POSSOME ?STRING) 
+           (wordForms ?WORD ?PRED ?STRING)
+           (speechPartPreds ?POS ?PRED) 
+           (lexicallySubsumed ?POS ?POSSOME))
+       (hypotheticDenotation ?HYPOTHETIC ?POS ?WORD)).
+
+
+
+
+
+
+
+
+
+
+
+
+

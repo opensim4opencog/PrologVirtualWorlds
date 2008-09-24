@@ -1,0 +1,42 @@
+go :-
+	go(5000).
+
+nrev([],[]).
+nrev([X|Rest],Ans):-
+	nrev(Rest,L), append(L,[X],Ans).
+
+go(Count):-
+	measure(dobench(Count), dodummy(Count), Utime,Gtime,System),
+	nl, write(bench(nrev,Count,Utime,Gtime,System)), write('.'),nl.
+
+dobench(Count):-
+	data(List),
+	repeat(Count),
+	nrev(List,_),
+	fail.
+dobench(_).
+
+dodummy(Count):-
+	data(List),
+	repeat(Count),
+	dummy(List,_),
+	fail.
+dodummy(_).
+
+dummy(_,_).
+
+data(X):-
+	data(X,30).
+
+data([],0).
+
+data([a|Y],N):-
+	N > 0, 
+	N1 is N-1, 
+	data(Y,N1).
+
+repeat(_).
+repeat(N):-
+	N > 1, 
+	N1 is N-1, 
+	repeat(N1).

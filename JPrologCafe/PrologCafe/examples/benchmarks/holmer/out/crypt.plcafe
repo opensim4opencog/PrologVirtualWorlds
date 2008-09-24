@@ -1,0 +1,12 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/crypt.in ...}
+
+# Name: crypt
+# Iterations: 1000
+# TestTime: 1036 msec.
+# OverHead: 82 msec.
+# TestTime-OverHead: 954 msec.
+# (TestTime-OverHead)/Iterations: 0.954 msec.
+###CSV###,crypt,1000,1036,82,954,0.954
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/holmer/crypt.in consulted, 6 msec}
+bye

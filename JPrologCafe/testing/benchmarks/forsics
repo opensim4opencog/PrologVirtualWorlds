@@ -1,0 +1,46 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SICStus Prolog specific predicates to go along with my odd benchmarks
+%% 
+%% measure/5 is supposed to measure the user time (not including gctime)
+%% and the garbage collection time of Goal minus Dummy
+%% the Dummy can at the call of measure/4 just be true if there is no dummy loop
+%% to subtract
+%% 
+%% By Bart Demoen & Phuong-Lan Nguyen - 8 February 2001
+%% Comments to bmd@cs.kuleuven.ac.be - thanks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+measure(Goal,Dummy,Utime,Gtime,sicstus) :-
+	measure(Goal,Dummy,Utime,Gtime,_,_,sicstus).
+
+measure(Goal,Dummy,Utime,Gtime,NGs,GcBytes,sicstus) :-
+        statistics(runtime,[T1,_]),
+        statistics(garbage_collection,[NG1,B1,G1]),
+        call(Goal),
+        statistics(runtime,[T2,_]),
+        statistics(garbage_collection,[NG2,B2,G2]),
+	call(Dummy),
+	statistics(runtime,[T3,_]),
+        statistics(garbage_collection,[NG3,B3,G3]),
+        Utime is T2 - T1 - (T3 - T2),
+        Gtime is G2-G1-(G3-G2),
+	GcBytes is (B2-B1) - (B3-B2),
+	NGs is (NG2-NG1) - (NG3-NG2).
+
+
+%% init_glob(V) :- recorded(a,_,Ref), erase(Ref), fail ; recorda(a,V,_).
+%% get_glob(V) :- recorded(a,V,_).
+%% set_glob(V) :- recorded(a,_,Ref), erase(Ref), !, recorda(a,V,_).
+
+%% :- dynamic(a/1).
+%% 
+%% init_glob(V) :- retract(a(_)), fail ; asserta(a(V)).
+%% get_glob(V) :- a(V).
+%% set_glob(V) :- retract(a(_)), !, asserta(a(V)).
+
+
+
+init_glob(V) :- bb_put(a,V).
+get_glob(V) :- bb_get(a,V).
+set_glob(V) :- bb_put(a,V).
+

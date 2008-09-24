@@ -1,0 +1,10 @@
+| ?- {consulting /Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/ecrc/bench_1_7.in ...}
+# Name:             cuttest(100000)
+# T overall loop:   5020 msec.
+# T compens loop:   50 msec.
+# T net:            4970 msec.
+# KLips:            6.036217303822937
+###CSV###,cuttest(100000),5020,50,4970,6.036217303822937
+
+{/Users/banbara/prog/plcafe/PrologCafe1.1.10/examples/benchmarks/ecrc/bench_1_7.in consulted, 22 msec}
+bye
