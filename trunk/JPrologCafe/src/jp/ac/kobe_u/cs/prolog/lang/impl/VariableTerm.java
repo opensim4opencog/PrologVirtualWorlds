@@ -15,9 +15,9 @@ import jp.ac.kobe_u.cs.prolog.lang.Undoable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-interface VariableTerm extends Term, Undoable {
+interface VariableTerm extends Term {
 
-  /** 
+  /**
    * Returns the value of <code>timeStamp</code>.
    * @see #timeStamp
    */
@@ -31,9 +31,9 @@ interface VariableTerm extends Term, Undoable {
   Undoable getUndoable();
 
   /* Object */
-  /** 
+  /**
    * Checks whether the argument term is unified with this one.
-   * If this is an unbound variable, the <code>unify</code> method binds this to 
+   * If this is an unbound variable, the <code>unify</code> method binds this to
    * the dereferenced value of argument term: <code>bind(t.deref(), trail)</code>,
    * and returns <code>true</code>.
    * Otherwise, it returns a <code>boolean</code> whose value is <code>val.unify(t, trail)</code>.
@@ -44,25 +44,25 @@ interface VariableTerm extends Term, Undoable {
    * @see Trail
    */
   //public boolean unify(Object t);
-  /** 
-   * Binds this variable to a given term. 
-   * And pushs this variable to trail stack if necessary. 
+  /**
+   * Binds this variable to a given term.
+   * And pushs this variable to trail stack if necessary.
    * @param t a term to be bound.
    * @see Trail
    */
   //ublic boolean bind(Object t);
-  //  /** 
-  //   * Checks whether this object is convertible with the given Java class type 
+  //  /**
+  //   * Checks whether this object is convertible with the given Java class type
   //   * if this variable is unbound.
   //   * Otherwise, returns the value of <code>val.convertible(type)</code>.
   //   * @param type the Java class type to compare with.
-  //   * @return <code>true</code> if this (or dereferenced term) is 
+  //   * @return <code>true</code> if this (or dereferenced term) is
   //   * convertible with <code>type</code>. Otherwise <code>false</code>.
   //   * @see #val
   //   */
   //  public boolean convertible(Class type);
   //
-  //  /** 
+  //  /**
   //   * Returns a copy of this object if unbound variable.
   //   * Otherwise, returns the value of <code>val.copy(engine)</code>.
   //   * @see #val
@@ -74,7 +74,7 @@ interface VariableTerm extends Term, Undoable {
   //  // if bound return val.isGround()
   //  public boolean isGround();
   //
-  //  /** 
+  //  /**
   //   * Returns <code>this</code> if this variable is unbound.
   //   * Otherwise, returns a Java object that corresponds to the dereferenced term:
   //   * <code>val.toJava()</code>.
@@ -117,12 +117,12 @@ interface VariableTerm extends Term, Undoable {
   //  public void unTrailSelf();
   //
   //  /* Comparable */
-  //  /** 
+  //  /**
   //   * Compares two terms in <em>Prolog standard order of terms</em>.<br>
   //   * It is noted that <code>t1.compareTo(t2) == 0</code> has the same
   //   * <code>boolean</code> value as <code>t1.equals(t2)</code>.
   //   * @param anotherTerm the term to compare with. It must be dereferenced.
-  //   * @return the value <code>0</code> if two terms are identical; 
+  //   * @return the value <code>0</code> if two terms are identical;
   //   * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
   //   * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
   //   */

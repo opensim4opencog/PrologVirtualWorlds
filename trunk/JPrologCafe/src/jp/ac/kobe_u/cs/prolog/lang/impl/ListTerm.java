@@ -5,14 +5,14 @@ import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 /**
  * List.<br>
  * The class <code>ListTerm</code> represents a list structure.<br>
- * 
+ *
  * <pre>
  *  % [1,2]
  *  Object Nil = Prolog.makeSymbol("[]");
  *  Object  n1 = IntegerTerm(1);
  *  Object  n2 = IntegerTerm(2);
  *  Object   t = Prolog.makeList(n1, Prolog.makeList(n2, Nil));
- *  
+ *
  *  Object car = ((ListTerm)t).car();
  *  Object cdr = ((ListTerm)t).cdr();
  * </pre>
@@ -42,15 +42,15 @@ interface ListTerm extends Term {
   // //   private Object           car;
   //
   //    /**
-  //     * Holds the list consisting of all the rest of the elements of 
+  //     * Holds the list consisting of all the rest of the elements of
   //     * this <code>ListTerm</code> but the first one.
   //     */
   // //   private Object           cdr;
   //
   ////    /**
   ////     * Constructs a new Prolog list structure
-  ////     * such that <code>_car</code> is the first element of this list, and 
-  ////     * <code>_cdr</code> is the list consisting of all the rest of the 
+  ////     * such that <code>_car</code> is the first element of this list, and
+  ////     * <code>_cdr</code> is the list consisting of all the rest of the
   ////     * elements of this list but the first one.
   ////     */
   ////    public ListTerm(Object _car, Object _cdr) {
@@ -81,7 +81,7 @@ interface ListTerm extends Term {
   //  //    /* Object */
   //  //    public boolean unify(Object t);
   //  //
-  //  //    /** 
+  //  //    /**
   //  //     * @return the <code>boolean</code> whose value is
   //  //     * <code>convertible(Vector.class, type)</code>.
   //  //     * @see Object#convertible(Class, Class)
@@ -95,7 +95,7 @@ interface ListTerm extends Term {
   /** Returns the length of this <code>ListTerm</code>. */
   public int listLength();
   //
-  //    /** 
+  //    /**
   //     * Returns a <code>java.util.Vector</code> corresponds to this <code>ListTerm</code>
   //     * according to <em>Prolog Cafe interoperability with Java</em>.
   //     * @return a <code>java.util.Vector</code> object equivalent to
@@ -107,7 +107,7 @@ interface ListTerm extends Term {
   //    /**
   //     * Checks <em>term equality</em> of two terms.
   //     * The result is <code>true</code> if and only if the argument is an instance of
-  //     * <code>ListTerm</code>, and 
+  //     * <code>ListTerm</code>, and
   //     * all corresponding pairs of elements in the two lists are <em>term-equal</em>.
   //     * @param obj the object to compare with. This must be dereferenced.
   //     * @return <code>true</code> if the given object represents a Prolog list
@@ -122,12 +122,12 @@ interface ListTerm extends Term {
   //    public String toString() ;
   //
   //    /* Comparable */
-  //    /** 
+  //    /**
   //     * Compares two terms in <em>Prolog standard order of terms</em>.<br>
   //     * It is noted that <code>t1.compareTo(t2) == 0</code> has the same
   //     * <code>boolean</code> value as <code>t1.equals(t2)</code>.
   //     * @param anotherTerm the term to compared with. It must be dereferenced.
-  //     * @return the value <code>0</code> if two terms are identical; 
+  //     * @return the value <code>0</code> if two terms are identical;
   //     * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
   //     * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
   //     */
