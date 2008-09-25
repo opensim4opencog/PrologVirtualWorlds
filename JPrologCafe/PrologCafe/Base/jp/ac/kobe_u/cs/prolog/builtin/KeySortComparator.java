@@ -18,9 +18,9 @@ class KeySortComparator extends StaticProlog implements Comparator<Object> {
     return compareTerm(arg1, arg2);
   }
 
-  /* synthetic */public/*volatile*/int compareVolitile(Object object, Object object_0_) {
-    /* flow_0_0_INVOKE_VIRTUAL
-    */
-    return this.compare((Object) object, (Object) object_0_);
-  }
+  //  /* synthetic */public/*volatile*/int compareVolitile(Object object, Object object_0_) {
+  //    /* flow_0_0_INVOKE_VIRTUAL
+  //    */
+  //    return this.compare((Object) object, (Object) object_0_);
+  //  }
 }

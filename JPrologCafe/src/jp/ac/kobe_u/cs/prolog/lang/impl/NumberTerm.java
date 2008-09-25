@@ -24,7 +24,7 @@ abstract class NumberTerm extends Number implements Term {
   @Override
   public int hashCode() {
     // TODO Auto-generated method stub
-    return val.hashCode();
+    return this.val.hashCode();
   }
 
   /* (non-Javadoc)
@@ -35,10 +35,10 @@ abstract class NumberTerm extends Number implements Term {
     // TODO Auto-generated method stub
     if (obj instanceof Number) {
       if (!(obj instanceof NumberTerm)) {
-        return val.equals(obj);
+        return this.val.equals(obj);
       }
     }
-    return equalJProlog(obj);
+    return this.equalJProlog(obj);
   }
 
   /* (non-Javadoc)
@@ -263,7 +263,7 @@ abstract class NumberTerm extends Number implements Term {
   @Override
   final public String toString() {
     // TODO Auto-generated method stub
-    return "" + toJava();
+    return "" + this.toJava();
   }
 
   /**
@@ -294,19 +294,23 @@ abstract class NumberTerm extends Number implements Term {
   //    return ;//Integer.valueOf(this.val);
   //  }
 
+  @Override
   final public double doubleValue() {
-    return val.doubleValue();
+    return this.val.doubleValue();
   }
 
+  @Override
   final public float floatValue() {
     return (float) (this.doubleValue());
   }
 
   /* NumberTerm */
+  @Override
   final public int intValue() {
     return this.val.intValue();
   }
 
+  @Override
   final public long longValue() {
     return this.val.longValue();
   }

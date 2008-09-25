@@ -2,6 +2,7 @@ package jp.ac.kobe_u.cs.prolog.lang.impl;
 
 import jp.ac.kobe_u.cs.prolog.lang.InternalException;
 import jp.ac.kobe_u.cs.prolog.lang.Prolog;
+import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 import jp.ac.kobe_u.cs.prolog.lang.Trail;
 import jp.ac.kobe_u.cs.prolog.lang.Undoable;
 
@@ -17,7 +18,11 @@ import jp.ac.kobe_u.cs.prolog.lang.Undoable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
+class VariableTermBase extends MachineTerm implements VariableTerm {
+  /**
+   * 
+   */
+  private static final long serialVersionUID = -4728841990842289056L;
   /** Holds a term to which this variable is bound. Initial value is <code>this</code> (self-reference). */
   // private Object value;
   /** A CPF time stamp when this object is newly constructed. */
@@ -53,20 +58,21 @@ class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
    * @see Prolog#getCPFTimeStamp
    */
   public VariableTermBase(Prolog engine) {
-    timeStamp = engine.getCPFTimeStamp();
-    machine = engine;
-    setVal(this);
+    this.timeStamp = engine.getCPFTimeStamp();
+    this.machine = engine;
+    this.setVal(this);
   }
 
-  /** 
+  /**
    * Returns the value of <code>timeStamp</code>.
    * @see #timeStamp
    */
   public long timeStamp() {
-    return timeStamp;
+    return this.timeStamp;
   }
 
   /** Returns a string representation of this object.*/
+  @Override
   public String nameUQ() {
     return "_" + Integer.toHexString(System.identityHashCode(this)).toUpperCase();
   }
@@ -75,15 +81,16 @@ class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
    * @see java.lang.Object#hashCode()
    */
   //  @Override
+  @Override
   public int hashCode(int d) {
     // TODO Auto-generated method stub
     return System.identityHashCode(this);
   }
 
   /* Object */
-  /** 
+  /**
    * Checks whether the argument term is unified with this one.
-   * If this is an unbound variable, the <code>unify</code> method binds this to 
+   * If this is an unbound variable, the <code>unify</code> method binds this to
    * the dereferenced value of argument term: <code>bind(t.deref(), trail)</code>,
    * and returns <code>true</code>.
    * Otherwise, it returns a <code>boolean</code> whose value is <code>val.unify(t, trail)</code>.
@@ -93,12 +100,13 @@ class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
    * @see #bind(Object)
    * @see Trail
    */
+  @Override
   public boolean unify(Object t) {
-    if (isBound()) {
-      return unify(getVal(), t);
+    if (this.isBound()) {
+      return StaticProlog.unify(this.getVal(), t);
     }
-    t = deref(t);
-    bind(this, t);
+    t = StaticProlog.deref(t);
+    StaticProlog.bind(this, t);
     return true;
   }
 
@@ -132,7 +140,7 @@ class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
   }
 
   public Object getVal() {
-    return value;
+    return this.value;
   }
 
   //  public boolean bind(Object that) {
@@ -155,58 +163,63 @@ class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
   //    return true;
   //  }
 
-  /** 
-   * Checks whether this object is convertible with the given Java class type 
+  /**
+   * Checks whether this object is convertible with the given Java class type
    * if this variable is unbound.
    * Otherwise, returns the value of <code>val.convertible(type)</code>.
    * @param type the Java class type to compare with.
-   * @return <code>true</code> if this (or dereferenced term) is 
+   * @return <code>true</code> if this (or dereferenced term) is
    * convertible with <code>type</code>. Otherwise <code>false</code>.
    * @see #value
    */
+  @Override
   public boolean convertible(Class type) {
-    if (isBound()) return convertible(getVal(), type);
-    return convertible(this.getClass(), type);
+    if (this.isBound()) return StaticProlog.convertible(this.getVal(), type);
+    return StaticProlog.convertible(this.getClass(), type);
   }
 
-  /** 
+  /**
    * Returns a copy of this object if unbound variable.
    * Otherwise, returns the value of <code>val.copy(engine)</code>.
    * @see #value
    */
+  @Override
   public Object copy() {
     VariableTermBase co;
-    if (isBound()) return copy(getVal());
-    co = (VariableTermBase) machine.copyHash.get(this);
+    if (this.isBound()) return StaticProlog.copy(this.getVal());
+    co = (VariableTermBase) this.machine.copyHash.get(this);
     if (co == null) {
       //	    co = Prolog.makeVariable(engine);
-      co = new VariableTermBase(machine);
+      co = new VariableTermBase(this.machine);
       co.timeStamp = Long.MIN_VALUE;
       //machine
-      machine.copyHash.put(this, co);
+      this.machine.copyHash.put(this, co);
     }
     return co;
   }
 
+  @Override
   public Object deref() {
-    if (getVal() == this) return this;
-    return deref(getVal());//.deref();
+    if (this.getVal() == this) return this;
+    return StaticProlog.deref(this.getVal());//.deref();
   }
 
+  @Override
   public boolean isGround() {
-    if (isBound()) return isGround(getVal());
+    if (this.isBound()) return StaticProlog.isGround(this.getVal());
     return false;
   }
 
-  /** 
+  /**
    * Returns <code>this</code> if this variable is unbound.
    * Otherwise, returns a Java object that corresponds to the dereferenced term:
    * <code>val.toJava()</code>.
    * @return a Java object defined in <em>Prolog Cafe interoperability with Java</em>.
    * @see #value
    */
+  @Override
   public Object toJava() {
-    if (isBound()) return toJava(getVal());//.toJava();
+    if (this.isBound()) return StaticProlog.toJava(this.getVal());//.toJava();
     return this;
   }
 
@@ -216,9 +229,10 @@ class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
    * <code>val.toQuotedString()</code>
    * @see #value
    */
+  @Override
   public String toQuotedString() {
-    if (isBound()) return toQuotedString(getVal());//.toQuotedString();
-    return nameUQ();
+    if (this.isBound()) return StaticProlog.toQuotedString(this.getVal());//.toQuotedString();
+    return this.nameUQ();
   }
 
   /* Object */
@@ -233,8 +247,9 @@ class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
    * @see #value
    * @see #compareTo
   */
+  @Override
   public boolean equalJProlog(Object obj) {
-    if (isBound()) return prologEquals(getVal(), obj);
+    if (this.isBound()) return StaticProlog.prologEquals(this.getVal(), obj);
     if (!(obj instanceof VariableTerm)) // ???
       return false; //???
     return this == obj;
@@ -246,9 +261,10 @@ class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
    * <code>val.toString()</code>
    * @see #value
    */
+  @Override
   public String toStringImpl(int d) {
-    if (isBound()) return toString(getVal());
-    return nameUQ();
+    if (this.isBound()) return StaticProlog.toString(this.getVal());
+    return this.nameUQ();
   }
 
   /**
@@ -257,29 +273,29 @@ class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
   @Override
   public boolean isBound() {
     // TODO Auto-generated method stub
-    return getVal() != this;
+    return this.getVal() != this;
   }
 
   /* Undoable */
   public void unTrailSelf() {
-    setVal(this);
+    this.setVal(this);
   }
 
   /* Comparable */
-  /** 
+  /**
    * Compares two terms in <em>Prolog standard order of terms</em>.<br>
    * It is noted that <code>t1.compareTo(t2) == 0</code> has the same
    * <code>boolean</code> value as <code>t1.equals(t2)</code>.
    * @param anotherTerm the term to compare with. It must be dereferenced.
-   * @return the value <code>0</code> if two terms are identical; 
+   * @return the value <code>0</code> if two terms are identical;
    * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
    * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
    */
   public int compareTo(Object anotherTerm) { // anotherTerm must be dereferenced.
-    if (isBound()) return compareTerm(getVal(), anotherTerm);
-    if (!isVariable(anotherTerm)) return BEFORE;
-    if (this == anotherTerm) return EQUAL;
-    int x = this.hashCode(4) - hashCode(anotherTerm, 4);
+    if (this.isBound()) return StaticProlog.compareTerm(this.getVal(), anotherTerm);
+    if (!StaticProlog.isVariable(anotherTerm)) return Term.BEFORE;
+    if (this == anotherTerm) return Term.EQUAL;
+    final int x = this.hashCode(4) - StaticProlog.hashCode(anotherTerm, 4);
     if (x != 0) return x;
     throw new InternalException("VariableTerm is not unique");
   }
@@ -290,16 +306,26 @@ class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
   @Override
   public Prolog getMachine() {
     // TODO Auto-generated method stub
-    return machine;
+    return this.machine;
   }
 
-  /* (non-Javadoc)
-   * @see jp.ac.kobe_u.cs.prolog.lang.VariableTerm#getUndoable()
-   */
+  //  /* (non-Javadoc)
+  //   * @see jp.ac.kobe_u.cs.prolog.lang.VariableTerm#getUndoable()
+  //   */
   @Override
   public Undoable getUndoable() {
+    final Object undoValue = getVal();
     // TODO Auto-generated method stub
-    return this;
+    return new Undoable() {
+      /* (non-Javadoc)
+       * @see jp.ac.kobe_u.cs.prolog.lang.Undoable#unTrailSelf()
+       */
+      @Override
+      public void unTrailSelf() {
+        // TODO Auto-generated method stub
+        setVal(undoValue);
+      }
+    };
   }
 
 }

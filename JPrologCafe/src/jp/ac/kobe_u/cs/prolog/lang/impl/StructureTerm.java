@@ -12,7 +12,7 @@ package jp.ac.kobe_u.cs.prolog.lang.impl;
  *  Object[] a3 = {a1, a2};
  *  Object a4 = Prolog.makeSymbol("father", 2);
  *  Object  t = Prolog.makeStructure(a4, a3);
- *  
+ *
  *  Object functor = ((StructureTerm)t).functor();
  *  Object[]  args = ((StructureTerm)t).args();
  *  int    arity = ((StructureTerm)t).arity();
@@ -34,7 +34,7 @@ interface StructureTerm extends Term {
   //
   //    /**
   //     * Constructs a new Prolog compound term
-  //     * such that <code>_functor</code> is the functor symbol, and 
+  //     * such that <code>_functor</code> is the functor symbol, and
   //     * <code>_args</code> is the argument terms respectively.
   //     */
   //    public StructureTerm(/*SymbolTerm*/Object _functor, Object[] _args){
@@ -74,7 +74,7 @@ interface StructureTerm extends Term {
   //  public String nameUQ();//{ return functor.name(); }
   //
   //  /* Object */
-  //  public boolean unify(Object t);// 
+  //  public boolean unify(Object t);//
   //
   //  public Object copy(Prolog engine);
   //
@@ -101,12 +101,12 @@ interface StructureTerm extends Term {
   //  public String toString();
   //
   //  /* Comparable */
-  //  /** 
+  //  /**
   //   * Compares two terms in <em>Prolog standard order of terms</em>.<br>
   //   * It is noted that <code>t1.compareTo(t2) == 0</code> has the same
   //   * <code>boolean</code> value as <code>t1.equals(t2)</code>.
   //   * @param anotherTerm the term to compared with. It must be dereferenced.
-  //   * @return the value <code>0</code> if two terms are identical; 
+  //   * @return the value <code>0</code> if two terms are identical;
   //   * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
   //   * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
   //   */

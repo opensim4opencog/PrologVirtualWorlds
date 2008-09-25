@@ -10,7 +10,7 @@ import jp.ac.kobe_u.cs.prolog.lang.Trail;
  * The superclass of classes for term structures.
  * The subclasses of <code>Object</code> must override
  * the <code>unify</code> method.
- * 
+ *
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
@@ -19,6 +19,11 @@ abstract class TermBase extends StaticProlog
 
 implements Serializable, Comparable<Object>, Term {
 
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = -8720103333850253464L;
 
   /**
    * @param string
@@ -34,7 +39,7 @@ implements Serializable, Comparable<Object>, Term {
   @Override
   public String toString() {
     // TODO Auto-generated method stub
-    return toStringImpl(40);
+    return this.toStringImpl(40);
   }
 
   /* (non-Javadoc)
@@ -43,11 +48,12 @@ implements Serializable, Comparable<Object>, Term {
   @Override
   final public int hashCode() {
     // TODO Auto-generated method stub
-    return hashCode(40);
+    return this.hashCode(40);
   }
 
+  @Override
   final public boolean equals(Object other) {
-    return equalJProlog(((Object) other));
+    return this.equalJProlog((other));
   }
 
   abstract public int hashCode(int depth);
@@ -58,15 +64,15 @@ implements Serializable, Comparable<Object>, Term {
   //@Override
   public String nameUQ() {
     // TODO Auto-generated method stub
-    typeError("NAMED");
-    return toString();
+    this.typeError("NAMED");
+    return this.toString();
   }
 
   //abstract boolean prologEquals(Object o) ;
 
   public abstract boolean equalJProlog(Object s1);
 
-  /** 
+  /**
    * Checks whether the argument term is unified with this one.
    * @param t the term to be unified with.
    * @param trail Trail Stack.
@@ -108,7 +114,7 @@ implements Serializable, Comparable<Object>, Term {
   //    // TODO Auto-generated method stub
   //    return 0;
   //  }
-  /** 
+  /**
    * Checks whether the argument term is unified with this one.
    * @param t the term to be unified with.
    * @return <code>true</code> if succeeds, otherwise <code>false</code>.
@@ -119,12 +125,12 @@ implements Serializable, Comparable<Object>, Term {
   //    return equals(s1);
   //  }
   final public boolean unify(Object t, Trail trail) {
-    return unify(t);
+    return this.unify(t);
   }
 
-  /** 
+  /**
    * Check whether this term is a logical variable.
-   * @return <code>true</code> if <code>this instanceof VariableTerm</code>, 
+   * @return <code>true</code> if <code>this instanceof VariableTerm</code>,
    * otherwise <code>false</code>.
    * @see VariableTerm
    */
@@ -132,9 +138,9 @@ implements Serializable, Comparable<Object>, Term {
     return this instanceof VariableTerm;
   }
 
-  /** 
+  /**
    * Check whether this term is an integer.
-   * @return <code>true</code> if <code>this instanceof IntegerTerm</code>, 
+   * @return <code>true</code> if <code>this instanceof IntegerTerm</code>,
    * otherwise <code>false</code>.
    * @see IntegerTerm
    */
@@ -142,7 +148,7 @@ implements Serializable, Comparable<Object>, Term {
     return false;// this instanceof IntegerTerm;
   }
 
-  /** 
+  /**
    * Check whether this term is a float.
    * @return <code>true</code> if <code>this instanceof DoubleTerm</code>,
    * otherwise <code>false</code>.
@@ -152,9 +158,9 @@ implements Serializable, Comparable<Object>, Term {
     return false;// this instanceof NumberTerm;
   }
 
-  /** 
+  /**
    * Check whether this term is a number.
-   * @return <code>true</code> if <code>this instanceof IntegerTerm || this instanceof DoubleTerm</code>, 
+   * @return <code>true</code> if <code>this instanceof IntegerTerm || this instanceof DoubleTerm</code>,
    * otherwise <code>false</code>.
    * @see IntegerTerm
    * @see NumberTerm
@@ -163,7 +169,7 @@ implements Serializable, Comparable<Object>, Term {
     return false;//((this instanceof IntegerTerm) || (this instanceof NumberTerm));
   }
 
-  /** 
+  /**
    * Check whether this term is an atom.
    * @return <code>true</code> if <code>this instanceof SymbolTerm</code>,
    * otherwise <code>false</code>.
@@ -176,10 +182,10 @@ implements Serializable, Comparable<Object>, Term {
   /** Check whether this term is an empty list. */
   public boolean isNil() {
     if (true) return false;
-    return prologEquals(Prolog.Nil, this);
+    return StaticProlog.prologEquals(Prolog.Nil, this);
   }
 
-  /** 
+  /**
    * Check whether this term is a list structure.
    * @return <code>true</code> if <code>this instanceof ListTerm</code>,
    * otherwise <code>false</code>.
@@ -189,7 +195,7 @@ implements Serializable, Comparable<Object>, Term {
     return this instanceof ListTerm;
   }
 
-  /** 
+  /**
    * Check whether this term is a compound term.
    * @return <code>true</code> if <code>this instanceof StructureTerm</code>,
    * otherwise <code>false</code>.
@@ -199,7 +205,7 @@ implements Serializable, Comparable<Object>, Term {
     return this instanceof StructureTerm;
   }
 
-  /** 
+  /**
    * Check whether this term is a java term.
    * @return <code>true</code> if <code>this instanceof JavaObjectTerm</code>,
    * otherwise <code>false</code>.
@@ -209,7 +215,7 @@ implements Serializable, Comparable<Object>, Term {
     return this instanceof JavaObjectTerm;
   }
 
-  /** 
+  /**
    * Check whether this term is a closure term.
    * @return <code>true</code> if <code>this instanceof ClosureTerm</code>,
    * otherwise <code>false</code>.
@@ -219,15 +225,15 @@ implements Serializable, Comparable<Object>, Term {
     return this instanceof ClosureTerm;
   }
 
-  /** 
+  /**
    * Check whether this object is convertible with the given Java class type.
    * @param type the Java class type to compare with.
-   * @return <code>true</code> if this is convertible with 
+   * @return <code>true</code> if this is convertible with
    * <code>type</code>. Otherwise <code>false</code>.
    * @see #convertible(Class, Class)
    */
   public boolean convertible(Class type) {
-    return convertible(getClass(), type);
+    return StaticProlog.convertible(this.getClass(), type);
   }
 
   /** Returns a copy of this object. */
@@ -240,7 +246,7 @@ implements Serializable, Comparable<Object>, Term {
     return this;
   }
 
-  /** 
+  /**
    * Check whether this term is a ground term.
    * @return <code>true</code> if ground, otherwise <code>false</code>.
    */
@@ -248,8 +254,8 @@ implements Serializable, Comparable<Object>, Term {
     return true;
   }
 
-  /** 
-   * Returns a Java object that corresponds to this term 
+  /**
+   * Returns a Java object that corresponds to this term
    * if defined in <em>Prolog Cafe interoperability with Java</em>.
    * Otherwise, returns <code>this</code>.
    * @return a Java object if defined in <em>Prolog Cafe interoperability with Java</em>,

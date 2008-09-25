@@ -3,7 +3,7 @@ package jp.ac.kobe_u.cs.prolog.lang.impl;
 /**
  * Java-term.<br>
  * The <code>JavaObjectTerm</code> class wraps a java object.<br>
- * 
+ *
  * <pre>
  *  import java.util.Hashtable;
  *  Object t = Prolog.makeJavaObject(new Hashtable());
@@ -27,7 +27,7 @@ interface JavaObjectTerm extends Term {
   //  /* Object */
   //  public boolean unify(Object t);
   //
-  //  /** 
+  //  /**
   //   * Check whether the wrapped object is convertible with the given Java class type.
   //   * @return the <code>boolean</code> whose value is
   //   * <code>convertible(clazz, type)</code>.
@@ -36,7 +36,7 @@ interface JavaObjectTerm extends Term {
   //   */
   //  public boolean convertible(Class type); //{ return convertible(clazz, type); }
   //
-  //  /** 
+  //  /**
   //   * Returns the object wrapped by this <code>JavaObjectTerm</code>.
   //   * @return the value of <code>obj</code>.
   //   * @see #obj
@@ -46,7 +46,7 @@ interface JavaObjectTerm extends Term {
   //  /**
   //   * Checks <em>term equality</em> of two terms.
   //   * The result is <code>true</code> if and only if the argument is an instance of
-  //   * <code>JavaObjectTerm</code>, and 
+  //   * <code>JavaObjectTerm</code>, and
   //   * the pairs of wrapped objects in the two java-term are <em>equal</em>
   //   * by <code>obj.equals(((JavaObjectTerm)o).obj)</code>.
   //   * @param o the object to compare with. This must be dereferenced.
@@ -62,12 +62,12 @@ interface JavaObjectTerm extends Term {
   //  public String toString(); //
   //
   //  /* Comparable */
-  //  /** 
+  //  /**
   //   * Compares two terms in <em>Prolog standard order of terms</em>.<br>
   //   * It is noted that <code>t1.compareTo(t2) == 0</code> has the same
   //   * <code>boolean</code> value as <code>t1.equals(t2)</code>.
   //   * @param anotherTerm the term to compared with. It must be dereferenced.
-  //   * @return the value <code>0</code> if two terms are identical; 
+  //   * @return the value <code>0</code> if two terms are identical;
   //   * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
   //   * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
   //   */
