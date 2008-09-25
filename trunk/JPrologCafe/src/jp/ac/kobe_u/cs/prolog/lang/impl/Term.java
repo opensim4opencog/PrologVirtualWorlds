@@ -136,8 +136,9 @@ interface Term extends Serializable, Comparable<Object> {
    */
   public Object toJava();//{ 	return this;    }
 
-  /** Returns a quoted string representation of this term. */
-  public String toQuotedString();// { return this.toString(); }
+  /** Returns a quoted string representation of this term. 
+   * @param depth TODO*/
+  public String toQuotedString(int depth);// { return this.toString(); }
 
   /**
    * @param s1

@@ -1,0 +1,6 @@
+.svn/
+*.svn-base
+*.svn*
+*.svn-work
+**/.svn/
+

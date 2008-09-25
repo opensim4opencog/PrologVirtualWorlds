@@ -15,7 +15,7 @@ import jp.ac.kobe_u.cs.prolog.lang.Trail;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-abstract class TermBase extends StaticProlog
+public abstract class TermBase extends StaticProlog
 
 implements Serializable, Comparable<Object>, Term {
 
@@ -79,8 +79,6 @@ implements Serializable, Comparable<Object>, Term {
    * @return <code>true</code> if succeeds, otherwise <code>false</code>.
    */
   abstract public boolean unify(Object t);
-
-  abstract public boolean isConst();
 
   /* (non-Javadoc)
    * @see be.kuleuven.jProlog.APrologObject#toStringImpl(int)
@@ -266,7 +264,7 @@ implements Serializable, Comparable<Object>, Term {
   }
 
   /** Returns a quoted string representation of this term. */
-  public String toQuotedString() {
+  public String toQuotedString(int depth) {
     return this.toString();
   }
 

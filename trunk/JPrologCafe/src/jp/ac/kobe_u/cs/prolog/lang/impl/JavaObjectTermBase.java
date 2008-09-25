@@ -39,15 +39,6 @@ abstract class JavaObjectTermBase extends TermBase implements JavaObjectTerm {
     this.clazz = _obj.getClass();
   }
 
-  /* (non-Javadoc)
-   * @see be.kuleuven.jProlog.PrologObject#isConst()
-   */
-  @Override
-  public boolean isConst() {
-    // TODO Auto-generated method stub
-    return true;
-  }
-
   /** Returns the object wrapped by this <code>JavaObjectTerm</code>. */
   @Override
   public Object toJava() {
@@ -60,7 +51,7 @@ abstract class JavaObjectTermBase extends TermBase implements JavaObjectTerm {
   }
 
   @Override
-  public String toQuotedString() {
+  public String toQuotedString(int depth) {
     return this.toString();
   }
 

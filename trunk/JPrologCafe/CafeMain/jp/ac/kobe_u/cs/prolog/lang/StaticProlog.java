@@ -3,6 +3,7 @@
  */
 package jp.ac.kobe_u.cs.prolog.lang;
 
+
 //import jp.ac.kobe_u.cs.prolog.lang.impl.StaticPrologNumbers;
 
 /**
@@ -263,9 +264,9 @@ abstract public class StaticProlog extends StaticPrologNumbers {
     return methods.makeStructure(s, args);
   }
 
-//  public static final Object makeTerm(final Object o) {
-//    return methods.makeTerm(o);
-//  }
+  //  public static final Object makeTerm(final Object o) {
+  //    return methods.makeTerm(o);
+  //  }
 
   final public static String nameUQ(Object thiz) {
     return methods.nameUQ(thiz);
@@ -348,6 +349,45 @@ abstract public class StaticProlog extends StaticPrologNumbers {
   public static Predicate getCode(Object a1) {
     // TODO Auto-generated method stub
     return methods.getCode(a1);
+  }
+
+  /**
+   * @param a
+   * @return
+   */
+  public static Object makeVariableLoc(VariableTermLocation a) {
+    // TODO Auto-generated method stub
+    return methods.makeVariableLoc(a);
+  }
+
+  /**
+   * @param obj
+   * @param i
+   * @return
+   */
+  public static Object arg0(Object obj, int i) {
+    // TODO Auto-generated method stub
+    return methods.arg0(obj, i);
+  }
+
+  /**
+   * @param arg1
+   * @param d0
+   * @return
+   */
+  public static String toString(Object arg1, int d0) {
+    // TODO Auto-generated method stub
+    return methods.toString(arg1, d0);
+  }
+
+  /**
+   * @param arg1
+   * @param d0
+   * @return
+   */
+  public static String toQuotedString(Object arg1, int d0) {
+    // TODO Auto-generated method stub
+    return methods.toQuotedString(arg1, d0);
   }
 
 }
