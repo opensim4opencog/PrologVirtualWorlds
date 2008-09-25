@@ -8,7 +8,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  */
 public class SystemException extends PrologException {
     /** A functor symbol of <code>system_error/1</code>. */
-    public static /*SymbolTerm*/Object SYSTEM_ERROR = Prolog.makeSymbol("system_error", 1);
+    public static /*SymbolTerm*/Object SYSTEM_ERROR = StaticProlog.makeAtom("system_error", 1);
 
     /** Holds a message. */
     public String message;
@@ -22,8 +22,8 @@ public class SystemException extends PrologException {
      * <code>system_error(message)</code>.
      */
     public Object getMessageTerm() {
-	Object[] args = {Prolog.makeSymbol(message)};
-	return Prolog.makeStructure(SYSTEM_ERROR, args);
+	Object[] args = {StaticProlog.makeAtom(message)};
+	return StaticProlog.makeStructure(SYSTEM_ERROR, args);
     }
 
     /** Returns a string representation of this <code>SystemException</code>. */

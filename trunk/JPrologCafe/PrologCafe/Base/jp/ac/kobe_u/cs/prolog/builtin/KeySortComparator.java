@@ -4,8 +4,6 @@ package jp.ac.kobe_u.cs.prolog.builtin;
 import java.util.Comparator;
 
 import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
-import jp.ac.kobe_u.cs.prolog.lang.StructureTerm;
-import jp.ac.kobe_u.cs.prolog.lang.*;
 
 /* used 2 more classes */
 /* import jp.ac.kobe_u.cs.prolog.builtin.KeySortComparator; */

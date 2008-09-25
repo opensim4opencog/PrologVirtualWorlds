@@ -69,15 +69,15 @@ public class PRED_java_conversion_2 extends PredicateBase {
     a2 = deref(a2);
     if (isVariable(a1)) {
       if (isJavaObject(a2))
-        jp.ac.kobe_u.cs.prolog.lang.VariableTermBase.bind((VariableTerm) a1, this.inverseConversion(toJava(a2)));
+        bind(a1, this.inverseConversion(toJava(a2)));
       else
-        jp.ac.kobe_u.cs.prolog.lang.VariableTermBase.bind((VariableTerm) a1, a2);
+        bind(a1, a2);
     } else {
       if (!isVariable(a2)) throw new IllegalTypeException(this, 2, "variable", a2);
       if (isJavaObject(a1) || isCompound(a1) || isClosure(a1))
-        jp.ac.kobe_u.cs.prolog.lang.VariableTermBase.bind((VariableTerm) a2, a1);
+        bind(a2, a1);
       else
-        jp.ac.kobe_u.cs.prolog.lang.VariableTermBase.bind((VariableTerm) a2, makeJavaObject(toJava(a1)));
+        bind(a2, makeJavaObject(toJava(a1)));
     }
     return this.cont;
   }

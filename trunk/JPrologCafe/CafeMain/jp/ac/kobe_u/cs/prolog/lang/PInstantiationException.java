@@ -15,7 +15,7 @@ public class PInstantiationException extends BuiltinException {
      */
 
     /** A functor symbol of <code>instantiation/2</code>. */
-    public static /*SymbolTerm*/Object INSTANTIATION_ERROR = Prolog.makeSymbol("instantiation_error", 2);
+    public static /*SymbolTerm*/Object INSTANTIATION_ERROR = StaticProlog.makeAtom("instantiation_error", 2);
 
     /** Constructs a new <code>PInstantiationException</code>. */
     public PInstantiationException(){}

@@ -1,5 +1,6 @@
 package jp.ac.kobe_u.cs.prolog.lang;
 
+
 /**
  * The abstract class <code>JavaPredicate</code> contains methods
  * for interoperating with Java</em>.<br>

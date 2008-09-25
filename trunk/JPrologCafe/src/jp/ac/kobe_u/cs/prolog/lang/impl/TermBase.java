@@ -1,6 +1,10 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
 
 import java.io.Serializable;
+
+import jp.ac.kobe_u.cs.prolog.lang.Prolog;
+import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
+import jp.ac.kobe_u.cs.prolog.lang.Trail;
 
 /**
  * The superclass of classes for term structures.
@@ -11,7 +15,7 @@ import java.io.Serializable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public abstract class TermBase extends StaticProlog
+abstract class TermBase extends StaticProlog
 
 implements Serializable, Comparable<Object>, Term {
 
@@ -230,7 +234,7 @@ implements Serializable, Comparable<Object>, Term {
   }
 
   /** Returns a copy of this object. */
-  public Object copy(Prolog engine) {
+  public Object copy() {
     return this;
   }
 

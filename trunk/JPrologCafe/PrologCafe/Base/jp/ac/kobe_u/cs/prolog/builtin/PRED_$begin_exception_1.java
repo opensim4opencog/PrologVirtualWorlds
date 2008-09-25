@@ -60,7 +60,7 @@ class PRED_$begin_exception_1 extends BlockPredicate {
           if (code == null) break main_loop;
           if (this.outOfLoop) break main_loop;
          /// System.out.println(";;TRACE "+code);
-          code = code.exec(engine);
+          code = code.execCode(engine);
         }
         switch (engine.exceptionRaised) {
           case 1: // halt/0

@@ -1,4 +1,7 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
+
+import jp.ac.kobe_u.cs.prolog.lang.Predicate;
+
 /**
  * Closure.<br>
  * The class <code>ClosureTerm</code> represents a closure structure.<br>
@@ -7,7 +10,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public interface ClosureTerm extends Term {
+interface ClosureTerm extends Term {
     /** Holds a <code>Predicate</code> object that represents a Prolog goal. */
     ;// final private Predicate code;
 

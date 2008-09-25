@@ -1,4 +1,7 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
+
+import jp.ac.kobe_u.cs.prolog.lang.*;
+
 
 /**
  * Java-term.<br>
@@ -14,7 +17,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class JavaObjectTermBase extends TermBase implements JavaObjectTerm {
+class JavaObjectTermBase extends TermBase implements JavaObjectTerm {
   /** Holds a java object that this <code>JavaObjectTerm</code> wraps. */
   private Object value = null;
   /** Holds a <code>java.lang.Class</code> of object wrapped by this <code>JavaObjectTerm</code>. */

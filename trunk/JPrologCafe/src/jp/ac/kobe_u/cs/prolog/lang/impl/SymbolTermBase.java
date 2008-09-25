@@ -1,6 +1,10 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
 
 import java.security.InvalidAlgorithmParameterException;
+
+import jp.ac.kobe_u.cs.prolog.lang.InternalException;
+import jp.ac.kobe_u.cs.prolog.lang.Prolog;
+import jp.ac.kobe_u.cs.prolog.lang.Token;
 
 /**
  * Atom.<br>
@@ -15,7 +19,7 @@ import java.security.InvalidAlgorithmParameterException;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class SymbolTermBase extends TermBase implements SymbolTerm {
+class SymbolTermBase extends TermBase implements SymbolTerm {
   /* (non-Javadoc)
   * @see jp.ac.kobe_u.cs.prolog.lang.CafeTerm#equalJProlog(java.lang.Object)
   */
@@ -30,6 +34,7 @@ public class SymbolTermBase extends TermBase implements SymbolTerm {
     if (!t) return false;
     return true;//throw new Error();
   }
+
   /** Symbol table. */
   //final private static Hashtable<String,SymbolTerm> SYMBOL_TABLE = new Hashtable<String,SymbolTerm>();
   /** Holds a string representation of this <code>SymbolTerm</code>. */

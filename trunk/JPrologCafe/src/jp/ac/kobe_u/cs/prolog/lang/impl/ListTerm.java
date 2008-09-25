@@ -1,4 +1,6 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
+
+import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 
 /**
  * List.<br>
@@ -30,10 +32,10 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public interface ListTerm extends Term {
+interface ListTerm extends Term {
   //
   //    /** A functor <code>'.' /2</code>. */
-  public static /*SymbolTerm*/Object SYM_DOT = Prolog.makeSymbol(".", 2);
+  public static/*SymbolTerm*/Object SYM_DOT = StaticProlog.makeAtom(".", 2);
 
   //
   //    /** Holds the first element of this <code>ListTerm</code>. */

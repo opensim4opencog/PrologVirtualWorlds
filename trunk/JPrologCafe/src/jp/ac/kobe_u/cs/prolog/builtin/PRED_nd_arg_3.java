@@ -8,8 +8,6 @@ import jp.ac.kobe_u.cs.prolog.lang.NonDetPredicate;
 import jp.ac.kobe_u.cs.prolog.lang.PInstantiationException;
 import jp.ac.kobe_u.cs.prolog.lang.Predicate;
 import jp.ac.kobe_u.cs.prolog.lang.Prolog;
-import jp.ac.kobe_u.cs.prolog.lang.StructureTerm;
-import jp.ac.kobe_u.cs.prolog.lang.*;
 
 /**
  <code>arg/3</code> defined in callbox.pl<br>

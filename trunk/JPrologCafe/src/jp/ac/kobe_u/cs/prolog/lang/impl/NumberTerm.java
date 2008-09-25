@@ -1,4 +1,8 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
+
+import jp.ac.kobe_u.cs.prolog.lang.EvaluationException;
+import jp.ac.kobe_u.cs.prolog.lang.IllegalTypeException;
+import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 
 /**
  * Floating point number.
@@ -14,7 +18,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
 */
-class NumberTerm extends TermBase {
+public class NumberTerm extends TermBase {
   /** Holds a <code>double</code> value that this <code>DoubleTerm</code> represents. */
   private final Number val;
   
@@ -23,8 +27,11 @@ class NumberTerm extends TermBase {
    */
   @Override
   public boolean isDouble() {
-    // TODO Auto-generated method stub
     return val.intValue()!=val.hashCode();
+  }
+  @Override
+  public boolean isInteger() {
+    return val.intValue()==val.hashCode();
   }
 
   /* (non-Javadoc)
@@ -35,6 +42,10 @@ class NumberTerm extends TermBase {
     // TODO Auto-generated method stub
     return true;
   }
+  
+  public float floatValue() {
+    return (float) (this.doubleValue());
+  }
 
   /**
    * Constructs a new Prolog floating point number 
@@ -44,13 +55,6 @@ class NumberTerm extends TermBase {
     val = i;
   }
 
-  /**
-   * Returns the value of <code>val</code>.
-   * @see #val
-   */
-  public double value() {
-    return doubleValue();
-  }
 
   /* Object */
   public boolean unify(Object t) {
@@ -140,6 +144,7 @@ class NumberTerm extends TermBase {
   }
 
   public NumberTerm abs() {
+    if (this.isInteger()) return StaticProlog.makeInteger(Math.abs(this.longValue()));
     return makeDouble(Math.abs(this.doubleValue()));
   }
 
@@ -243,6 +248,7 @@ class NumberTerm extends TermBase {
   }
 
   public Number negate() {
+    if (this.isInteger()) return -this.longValue();
     return -this.doubleValue();
   }
 

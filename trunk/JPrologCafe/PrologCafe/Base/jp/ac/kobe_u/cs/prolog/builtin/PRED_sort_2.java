@@ -60,14 +60,14 @@ final Object[] engine_aregs = engine.getAreg();
     }
     if (!isListTerm(a1))
  throw new IllegalTypeException(this, 1, "list", a1);
-    final int len = jp.ac.kobe_u.cs.prolog.lang.ListTermBase.listLength((Object) a1);
+    final int len = listLength((Object) a1);
     final Object[] list = new Object[len];
     Object tmp = a1;
     for (int i = 0; i<len; i++){
  if (!isListTerm(tmp))
      throw new IllegalTypeException(this, 1, "list", a1);
- list[i] = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.first((Object) tmp));
- tmp = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.rest((Object) tmp));
+ list[i] = deref(first((Object) tmp));
+ tmp = deref(rest((Object) tmp));
     }
     if (!prologEquals(tmp, PRED_sort_2.Nil))
  throw new PInstantiationException(this, 1);

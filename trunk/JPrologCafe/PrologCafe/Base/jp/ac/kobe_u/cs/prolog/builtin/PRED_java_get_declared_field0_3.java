@@ -75,7 +75,7 @@ final Object[] engine_aregs = engine.getAreg();
      clazz = Class.forName(nameUQ(a1));
  else if (isJavaObject(a1)){
      instance = toJava(a1);
-     clazz = jp.ac.kobe_u.cs.prolog.lang.JavaObjectTermBase.getClazz( a1);
+     clazz = getClazz( a1);
  } else
      throw new IllegalTypeException(this, 1, "atom_or_java", a1);
  a2 = deref(a2);

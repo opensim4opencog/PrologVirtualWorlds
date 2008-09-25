@@ -14,7 +14,7 @@ class PRED_$hash_remove_first_3 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = -8286572780865685524L;
-  public static /*SymbolTerm*/Object SYM_NIL = makeAtom("[]");
+  public static/*SymbolTerm*/Object SYM_NIL = makeAtom("[]");
   public Object arg1;
   public Object arg2;
   public Object arg3;
@@ -77,17 +77,17 @@ class PRED_$hash_remove_first_3 extends PredicateBase {
     Object z;
     for (/**/; !isNil(x); x = z) {
       if (!isListTerm(x)) throw new InternalException(this + ": the valus of " + a2 + " is not list structure");
-      final Object y = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.first(x));
-      z = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.rest(x));
+      final Object y = deref(first(x));
+      z = deref(rest(x));
       if (prologEquals(y, a3)) {
         if (isNil(z)) {
           if (isListTerm(x0))
-            jp.ac.kobe_u.cs.prolog.lang.ListTermBase.setCdr(x0, Nil);
+            setCdr(x0, Nil);
           else
             elem = Nil;
         } else {
-          jp.ac.kobe_u.cs.prolog.lang.ListTermBase.setCar(x, deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.first((Object) z)));
-          jp.ac.kobe_u.cs.prolog.lang.ListTermBase.setCdr(x, deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.rest((Object) z)));
+          setCar(x, deref(first((Object) z)));
+          setCdr(x, deref(rest((Object) z)));
         }
         break;
       }

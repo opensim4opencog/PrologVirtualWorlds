@@ -191,7 +191,7 @@ public class HashtableOfTerm<V> extends AbstractMap<Object, V> implements Map<Ob
     final Entry tab[] = this.table;
     for (int i = tab.length; i-- > 0;) {
       for (Entry<Object, V> e = tab[i]; e != null; e = e.next) {
-        if (e.value.equals(value)) {
+        if (StaticProlog.prologEquals(e.value,value)) {
           return true;
         }
       }

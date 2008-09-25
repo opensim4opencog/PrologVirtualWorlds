@@ -1,7 +1,12 @@
 package jp.ac.kobe_u.cs.prolog.compiler;
 
-import jp.ac.kobe_u.cs.prolog.lang.*;
 import java.io.File;
+
+import jp.ac.kobe_u.cs.prolog.lang.Predicate;
+import jp.ac.kobe_u.cs.prolog.lang.Prolog;
+import jp.ac.kobe_u.cs.prolog.lang.PrologClassLoader;
+import jp.ac.kobe_u.cs.prolog.lang.PrologControl;
+import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 
 /**
  * The <code>Compiler</code> class provides methods for 
@@ -100,16 +105,16 @@ public class Compiler {
         return false;
       }
       // Create arguments
-      Object prolog = SymbolTermBase.makeAtom(_prolog);
-      Object wam = SymbolTermBase.makeAtom(_wam);
+      Object prolog = StaticProlog.makeAtom(_prolog);
+      Object wam = StaticProlog.makeAtom(_wam);
       Object op = Prolog.Nil;
-      if (eliminateDisjunctions) op = Prolog.makeList(SymbolTermBase.makeAtom("ed"), op);
-      if (arithmeticCompilation) op = Prolog.makeList(SymbolTermBase.makeAtom("ac"), op);
-      if (inlineExpansion) op = Prolog.makeList(SymbolTermBase.makeAtom("ie"), op);
-      if (optimiseRecursiveCall) op = Prolog.makeList(SymbolTermBase.makeAtom("rc"), op);
-      if (switchOnHash) op = Prolog.makeList(SymbolTermBase.makeAtom("idx"), op);
-      if (generateClosure) op = Prolog.makeList(SymbolTermBase.makeAtom("clo"), op);
-      Object[] args = { Prolog.makeList(prolog, Prolog.makeList(wam, Prolog.makeList(op, Prolog.Nil))) };
+      if (eliminateDisjunctions) op = StaticProlog.makeList(StaticProlog.makeAtom("ed"), op);
+      if (arithmeticCompilation) op = StaticProlog.makeList(StaticProlog.makeAtom("ac"), op);
+      if (inlineExpansion) op = StaticProlog.makeList(StaticProlog.makeAtom("ie"), op);
+      if (optimiseRecursiveCall) op = StaticProlog.makeList(StaticProlog.makeAtom("rc"), op);
+      if (switchOnHash) op = StaticProlog.makeList(StaticProlog.makeAtom("idx"), op);
+      if (generateClosure) op = StaticProlog.makeList(StaticProlog.makeAtom("clo"), op);
+      Object[] args = { StaticProlog.makeList(prolog, StaticProlog.makeList(wam, StaticProlog.makeList(op, Prolog.Nil))) };
       // Create predicate
       Class clazz = (new PrologClassLoader()).loadPredicateClass("jp.ac.kobe_u.cs.prolog.compiler.pl2am", "pl2am", 1, true);
       Predicate code = (Predicate) (clazz.newInstance());
@@ -143,9 +148,9 @@ public class Compiler {
         return false;
       }
       // Create arguments
-      Object wam = SymbolTermBase.makeAtom(_wam);
-      Object dir = SymbolTermBase.makeAtom(_dir);
-      Object[] args = { Prolog.makeList(wam, Prolog.makeList(dir, Prolog.Nil)) };
+      Object wam = StaticProlog.makeAtom(_wam);
+      Object dir = StaticProlog.makeAtom(_dir);
+      Object[] args = { StaticProlog.makeList(wam, StaticProlog.makeList(dir, Prolog.Nil)) };
       // Create predicate
       //	    Class clazz = PredicateEncoder.getClass("jp.ac.kobe_u.cs.prolog.compiler.am2j", "am2j", 1);
       Class clazz = (new PrologClassLoader()).loadPredicateClass("jp.ac.kobe_u.cs.prolog.compiler.am2j", "am2j", 1, true);

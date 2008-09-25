@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
 
 /**
  * Java-term.<br>
@@ -14,7 +14,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public interface JavaObjectTerm extends Term {
+interface JavaObjectTerm extends Term {
   //
   //  /** Returns the object wrapped by this <code>JavaObjectTerm</code>. */
   //  public Object toJava(); //{ return obj; }

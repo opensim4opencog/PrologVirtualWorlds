@@ -62,12 +62,12 @@ final Object[] engine_aregs = engine.getAreg();
  if (!isListTerm(a2))
      throw new IllegalTypeException(this, 2, "list", a2);
  final StringBuffer sb = new StringBuffer();
- for (Object x = a2; !isNil(x); x = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.rest( x))){
+ for (Object x = a2; !isNil(x); x = deref(rest( x))){
      if (isVariable(x))
   throw new PInstantiationException(this, 2);
      if (!isListTerm(x))
   throw new IllegalTypeException(this, 2, "list", a2);
-     final Object car = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.first( x));
+     final Object car = deref(first( x));
      if (isVariable(car))
   throw new PInstantiationException(this, 2);
      if (!isAtomTerm(car) || (nameUQ(car).length()!=1))

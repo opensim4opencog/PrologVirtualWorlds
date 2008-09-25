@@ -1,4 +1,9 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
+
+import jp.ac.kobe_u.cs.prolog.lang.InternalException;
+import jp.ac.kobe_u.cs.prolog.lang.Prolog;
+import jp.ac.kobe_u.cs.prolog.lang.Trail;
+import jp.ac.kobe_u.cs.prolog.lang.Undoable;
 
 /**
  * Variable.<br>
@@ -12,7 +17,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
+class VariableTermBase extends MachineTerm implements VariableTerm, Undoable {
   /** Holds a term to which this variable is bound. Initial value is <code>this</code> (self-reference). */
   // private Object value;
   /** A CPF time stamp when this object is newly constructed. */
@@ -169,19 +174,16 @@ public class VariableTermBase extends MachineTerm implements VariableTerm, Undoa
    * Otherwise, returns the value of <code>val.copy(engine)</code>.
    * @see #value
    */
-  public Object copy(Prolog engine) {
+  public Object copy() {
     VariableTermBase co;
-    if (engine != machine) {
-      Thread.dumpStack();
-    }
-    if (isBound()) return copy(getVal(), engine);
-    co = (VariableTermBase) engine.copyHash.get(this);
+    if (isBound()) return copy(getVal());
+    co = (VariableTermBase) machine.copyHash.get(this);
     if (co == null) {
       //	    co = Prolog.makeVariable(engine);
       co = new VariableTermBase(machine);
       co.timeStamp = Long.MIN_VALUE;
       //machine
-      engine.copyHash.put(this, co);
+      machine.copyHash.put(this, co);
     }
     return co;
   }
@@ -282,5 +284,22 @@ public class VariableTermBase extends MachineTerm implements VariableTerm, Undoa
     throw new InternalException("VariableTerm is not unique");
   }
 
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.VariableTerm#getMachine()
+   */
+  @Override
+  public Prolog getMachine() {
+    // TODO Auto-generated method stub
+    return machine;
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.VariableTerm#getUndoable()
+   */
+  @Override
+  public Undoable getUndoable() {
+    // TODO Auto-generated method stub
+    return this;
+  }
 
 }

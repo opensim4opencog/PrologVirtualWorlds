@@ -3,15 +3,9 @@
  */
 package jp.ac.kobe_u.cs.prolog.lang;
 
-import jade.util.leap.HashMap;
-
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
-
-import java_cup.terminal;
-
+import jp.ac.kobe_u.cs.prolog.lang.impl.NumberTerm;
+import jp.ac.kobe_u.cs.prolog.lang.impl.StaticPrologMethodImpl;
+import jp.ac.kobe_u.cs.prolog.lang.impl.StaticPrologNumbers;
 import sun.awt.util.IdentityLinkedList;
 
 /**
@@ -41,11 +35,11 @@ abstract public class StaticProlog extends StaticPrologNumbers {
     /** 
      * Check whether there is a widening conversion from <code>from</code> to <code>to</code>.
      */
-    boolean convertible(Class from, Class<?> to);
+    boolean convertible(Class from, Class to);
 
     boolean convertible(Object thiz, Class to);
 
-    Object copy(Object thiz, Prolog engine);
+    Object copy(Object thiz);
 
     /** Returns the deref value of this term. */
     Object deref(Object thiz);
@@ -175,7 +169,7 @@ abstract public class StaticProlog extends StaticPrologNumbers {
      * @param pred_$op_specifier_2
      * @return
      */
-    ClosureTerm makeClosure(Predicate pred);
+    Object makeClosure(Predicate pred);
 
     /**
      * @param random
@@ -194,9 +188,9 @@ abstract public class StaticProlog extends StaticPrologNumbers {
 
     Object makeList(Object car, Object cdr);
 
-    StructureTerm makeStructure(Object s, Object[] args);
+    Object makeStructure(Object s, Object[] args);
 
-    Term makeTerm(final Object o);
+    Object makeTerm(final Object o);
 
     String nameUQ(Object thiz);
 
@@ -236,6 +230,18 @@ abstract public class StaticProlog extends StaticPrologNumbers {
     String toString(Object thiz);
 
     boolean unify(Object thiz, Object o);
+
+    /**
+     * @param prolog
+     * @return
+     */
+    Object makeVariable(Prolog prolog);
+
+    /**
+     * @param a1
+     * @return
+     */
+    Predicate getCode(Object a1);
   }
 
   final static PrologMethods methods = new StaticPrologMethodImpl();
@@ -271,8 +277,8 @@ abstract public class StaticProlog extends StaticPrologNumbers {
     return methods.convertible(thiz, to);
   }
 
-  public static Object copy(Object thiz, Prolog engine) {
-    return methods.copy(thiz, engine);
+  public static Object copy(Object thiz) {
+    return methods.copy(thiz);
   }
 
   /** Returns the deref value of this term. */
@@ -454,7 +460,7 @@ abstract public class StaticProlog extends StaticPrologNumbers {
    * @param pred_$op_specifier_2
    * @return
    */
-  final public static ClosureTerm makeClosure(Predicate pred) {
+  final public static Object makeClosure(Predicate pred) {
     return methods.makeClosure(pred);
   }
 
@@ -486,11 +492,11 @@ abstract public class StaticProlog extends StaticPrologNumbers {
     return methods.makeList(car, cdr);
   }
 
-  final public static StructureTerm makeStructure(Object s, Object[] args) {
+  final public static Object makeStructure(Object s, Object[] args) {
     return methods.makeStructure(s, args);
   }
 
-  public static final Term makeTerm(final Object o) {
+  public static final Object makeTerm(final Object o) {
     return methods.makeTerm(o);
   }
 
@@ -559,5 +565,23 @@ abstract public class StaticProlog extends StaticPrologNumbers {
   final public static boolean unify(Object thiz, Object o) {
     return methods.unify(thiz, o);
   }//throws Throwable;
+
+  /**
+   * @param prolog
+   * @return
+   */
+  public static Object makeVariable(Prolog prolog) {
+    // TODO Auto-generated method stub
+    return methods.makeVariable(prolog);
+  }
+
+  /**
+   * @param a1
+   * @return
+   */
+  public static Predicate getCode(Object a1) {
+    // TODO Auto-generated method stub
+    return methods.getCode(a1);
+  }
 
 }

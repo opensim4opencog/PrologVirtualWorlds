@@ -5,6 +5,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
 
 import java.util.Collection;
 
+
 /**
  * @author root
  *
@@ -21,12 +22,21 @@ abstract public class PredicateBase extends StaticProlog implements Predicate {
   /* (non-Javadoc)
    * @see jp.ac.kobe_u.cs.prolog.lang.Predicate#exec(jp.ac.kobe_u.cs.prolog.lang.Prolog)
    */
-  @Override
+  //@Override
   abstract public Predicate exec(Prolog engine) throws PrologException;
 
   public void enter(Prolog engine) {
-
   }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.Predicate#execCode(jp.ac.kobe_u.cs.prolog.lang.Prolog)
+   */
+  @Override
+  public Predicate execCode(Prolog engine) throws PrologException {
+    // TODO Auto-generated method stub
+    return exec(engine);
+  }
+  
 
   /* (non-Javadoc)
    * @see jp.ac.kobe_u.cs.prolog.lang.Predicate#setArgument(jp.ac.kobe_u.cs.prolog.lang.Object[], jp.ac.kobe_u.cs.prolog.lang.Predicate)

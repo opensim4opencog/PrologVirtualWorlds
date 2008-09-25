@@ -1,6 +1,7 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
 
 import java.util.Hashtable;
+
 
 /**
  * Atom.<br>
@@ -15,7 +16,7 @@ import java.util.Hashtable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public interface SymbolTerm extends Term {
+interface SymbolTerm extends Term {
 
   /** Symbol table. */
   final static Hashtable<String, Object> SYMBOL_TABLE = new Hashtable<String, Object>();

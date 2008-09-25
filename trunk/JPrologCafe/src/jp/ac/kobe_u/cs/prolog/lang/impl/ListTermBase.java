@@ -1,6 +1,8 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
 
 import java.util.Vector;
+
+import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 
 /**
  * List.<br>
@@ -32,8 +34,8 @@ import java.util.Vector;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class ListTermBase extends TermBase implements ListTerm {
-  
+class ListTermBase extends TermBase implements ListTerm {
+
   /* (non-Javadoc)
    * @see jp.ac.kobe_u.cs.prolog.lang.TermBase#isNil()
    */
@@ -53,7 +55,7 @@ public class ListTermBase extends TermBase implements ListTerm {
   }
 
   /** A functor <code>'.' /2</code>. */
-  public static /*SymbolTerm*/Object SYM_DOT = Prolog.makeSymbol(".", 2);
+  public static/*SymbolTerm*/Object SYM_DOT = StaticProlog.makeAtom(".", 2);
 
   /** Holds the first element of this <code>ListTerm</code>. */
   private Object car;
@@ -130,8 +132,8 @@ public class ListTermBase extends TermBase implements ListTerm {
     return convertible(Vector.class, type);
   }
 
-  public Object copy(Prolog engine) {
-    return Prolog.makeList(copy(car, engine), copy(cdr, engine));
+  public Object copy() {
+    return makeList(copy(car), copy(cdr));
   }
 
   public boolean isGround() {
@@ -237,7 +239,7 @@ public class ListTermBase extends TermBase implements ListTerm {
       int arity = arity(anotherTerm);
       if (2 != arity) return (2 - arity);
       /*SymbolTerm*/Object functor = functor(anotherTerm);
-      if (!prologEquals(SYM_DOT, functor)) return compareTerm(SYM_DOT,functor);
+      if (!prologEquals(SYM_DOT, functor)) return compareTerm(SYM_DOT, functor);
     }
     Object[] args = new Object[2];
     if (isListTerm(anotherTerm)) {

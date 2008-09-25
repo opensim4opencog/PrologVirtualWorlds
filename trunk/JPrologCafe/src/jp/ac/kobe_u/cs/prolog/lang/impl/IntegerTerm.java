@@ -1,9 +1,13 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
+
+import jp.ac.kobe_u.cs.prolog.lang.EvaluationException;
+import jp.ac.kobe_u.cs.prolog.lang.IllegalTypeException;
+import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 
 /**
  * Integer.<br>
- * The class <code>IntegerTerm</code> wraps a value of primitive type 
- * <code>int</code>. 
+ * The class <code>IntegerTerm</code> wraps a value of primitive type
+ * <code>int</code>.
  * <pre>
  *   Object t = makeInteger(100);
  *   int i = ((IntegerTerm)t).intValue();
@@ -14,6 +18,11 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @version 1.0
  */
 class IntegerTerm extends NumberTerm implements Term {
+  /**
+   * 
+   */
+  private static final long serialVersionUID = -6791859586170148195L;
+
   /** Holds an <code>int</code> value that this <code>IntegerTerm</code> represents. */
   /// final private long val;
   /** Constructs a new Prolog integer that represents the specified <code>int</code> value. */
@@ -34,7 +43,7 @@ class IntegerTerm extends NumberTerm implements Term {
   }
 
   //  /**
-  //   * Constructs a new Prolog integer that represents integer value 
+  //   * Constructs a new Prolog integer that represents integer value
   //   * of specified <code>String</code> parameter.
   //   * @exception NumberFormatException
   //   * if the <code>String</code> does not contain a parsable integer.
@@ -57,26 +66,28 @@ class IntegerTerm extends NumberTerm implements Term {
   //  }
 
   /* Object */
+  @Override
   public boolean unify(Object t) {
-    if (isVariable(t)) return unify(t, this);
-    if (!isInteger(t))
+    if (StaticProlog.isVariable(t)) return StaticProlog.unify(t, this);
+    if (!StaticProlog.isInteger(t))
       return false;
     else
-      return this.doubleValue() == intValue(t);
+      return this.doubleValue() == StaticProlog.intValue(t);
   }
 
-  /** 
+  /**
    * @return the <code>boolean</code> whose value is
    * <code>convertible(Integer.class, type)</code>.
    * @see Object#convertible(Class, Class)
    */
+  @Override
   public boolean convertible(Class type) {
-    return convertible(Integer.class, type);
+    return StaticProlog.convertible(Integer.class, type);
   }
 
   //    protected Object copy(Prolog engine) { return makeInteger(val); }
 
-  //  /** 
+  //  /**
   //   * Returns a <code>java.lang.Integer</code> corresponds to this <code>IntegerTerm</code>
   //   * according to <em>Prolog Cafe interoperability with Java</em>.
   //   * @return a <code>java.lang.Integer</code> object equivalent to
@@ -88,8 +99,9 @@ class IntegerTerm extends NumberTerm implements Term {
 
   /* Object */
   /** Returns a string representation of this <code>IntegerTerm</code>. */
+  @Override
   public String toStringImpl(int d) {
-    return "" + toJava();
+    return "" + this.toJava();
   }
 
   /**
@@ -97,36 +109,39 @@ class IntegerTerm extends NumberTerm implements Term {
    * The result is <code>true</code> if and only if the argument is an instance of
    * <code>IntegerTerm</code> and has the same <code>int</code> value as this object.
    * @param obj the object to compare with. This must be dereferenced.
-   * @return <code>true</code> if the given object represents a Prolog integer 
+   * @return <code>true</code> if the given object represents a Prolog integer
    * equivalent to this <code>IntegerTerm</code>, false otherwise.
    * @see #compareTo
   */
+  @Override
   public boolean equalJProlog(Object obj) {
     if (!(obj instanceof IntegerTerm)) return false;
     return this.doubleValue() == ((IntegerTerm) obj).longValue();
   }
 
+  @Override
   public int hashCode(int d) {
     return (int) this.doubleValue();
   }
 
   /* Comparable */
-  /** 
+  /**
    * Compares two terms in <em>Prolog standard order of terms</em>.<br>
    * It is noted that <code>t1.compareTo(t2) == 0</code> has the same
    * <code>boolean</code> value as <code>t1.equals(t2)</code>.
    * @param anotherTerm the term to compared with. It must be dereferenced.
-   * @return the value <code>0</code> if two terms are identical; 
+   * @return the value <code>0</code> if two terms are identical;
    * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
    * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
    */
+  @Override
   public int compareTo(Object anotherTerm) { // anotherTerm must be dereferenced.
-    if (isVariable(anotherTerm) || isDouble(anotherTerm)) return AFTER;
-    if (!isInteger(anotherTerm)) return BEFORE;
-    long v = ((IntegerTerm) anotherTerm).longValue();
-    if (this.doubleValue() == v) return EQUAL;
-    if (this.doubleValue() > v) return AFTER;
-    return BEFORE;
+    if (StaticProlog.isVariable(anotherTerm) || StaticProlog.isDouble(anotherTerm)) return Term.AFTER;
+    if (!StaticProlog.isInteger(anotherTerm)) return Term.BEFORE;
+    final long v = ((IntegerTerm) anotherTerm).longValue();
+    if (this.doubleValue() == v) return Term.EQUAL;
+    if (this.doubleValue() > v) return Term.AFTER;
+    return Term.BEFORE;
   }
 
   //  /* NumberTerm */
@@ -138,34 +153,33 @@ class IntegerTerm extends NumberTerm implements Term {
   //    return (long) (this.doubleValue());
   //  }
 
-  public float floatValue() {
-    return (float) (this.doubleValue());
-  }
-
+  @Override
   public int arithCompareTo(NumberTerm t) {
     //    if (isDouble(t)) return -(t.arithCompareTo(this));
-    double v = t.doubleValue();
-    if (this.doubleValue() == v) return EQUAL;
-    if (this.doubleValue() > v) return AFTER;
-    return BEFORE;
+    final double v = t.doubleValue();
+    if (this.doubleValue() == v) return Term.EQUAL;
+    if (this.doubleValue() > v) return Term.AFTER;
+    return Term.BEFORE;
   }
 
-  boolean isInt() {
-    return true;
-  }
+  //  boolean isInt() {
+  //    return true;
+  //  }
 
+  @Override
   public NumberTerm abs() {
-    if (isInt()) return makeInteger((long) Math.abs(this.doubleValue()));
     return super.abs();
   }
 
+  @Override
   public NumberTerm acos() {
-    return makeDouble(Math.acos(this.doubleValue()));
+    return StaticProlog.makeDouble(Math.acos(this.doubleValue()));
   }
 
+  @Override
   public NumberTerm add(NumberTerm t) {
-    if (isDouble(t)) return super.add(t);
-    return makeInteger(this.mustInt() + t.longValue());
+    if (StaticProlog.isDouble(t)) return super.add(t);
+    return StaticProlog.makeInteger(this.mustInt() + t.longValue());
   }
 
   /**
@@ -173,45 +187,52 @@ class IntegerTerm extends NumberTerm implements Term {
    */
   private long mustInt() {
     // TODO Auto-generated method stub
-    return (long) doubleValue();
+    return (long) this.doubleValue();
   }
 
-  /** 
+  /**
    * @exception IllegalTypeException if the given argument
    * <code>NumberTerm</code> is a floating point number.
    */
+  @Override
   public NumberTerm and(NumberTerm t) {
-    if (isDouble(t)) throw new IllegalTypeException("integer", t);
-    return makeInteger(this.mustInt() & t.longValue());
+    if (StaticProlog.isDouble(t)) throw new IllegalTypeException("integer", t);
+    return StaticProlog.makeInteger(this.mustInt() & t.longValue());
   }
 
+  @Override
   public NumberTerm asin() {
-    return makeDouble(Math.asin(this.doubleValue()));
+    return StaticProlog.makeDouble(Math.asin(this.doubleValue()));
   }
 
+  @Override
   public NumberTerm atan() {
-    return makeDouble(Math.atan(this.doubleValue()));
+    return StaticProlog.makeDouble(Math.atan(this.doubleValue()));
   }
 
+  @Override
   public NumberTerm ceil() {
     return this;
   }
 
+  @Override
   public NumberTerm cos() {
-    return makeDouble(Math.cos(this.doubleValue()));
+    return StaticProlog.makeDouble(Math.cos(this.doubleValue()));
   }
 
-  /** 
+  /**
    * @exception EvaluationException if the given argument
    * <code>NumberTerm</code> represents <coe>0</code>.
    */
+  @Override
   public NumberTerm divide(NumberTerm t) {
     if (t.doubleValue() == 0) throw new EvaluationException("zero_divisor");
-    return makeDouble(this.doubleValue() / t.doubleValue());
+    return StaticProlog.makeDouble(this.doubleValue() / t.doubleValue());
   }
 
+  @Override
   public NumberTerm exp() {
-    return makeDouble(Math.exp(this.doubleValue()));
+    return StaticProlog.makeDouble(Math.exp(this.doubleValue()));
   }
 
   //  public NumberTerm floatIntPart() {
@@ -222,28 +243,31 @@ class IntegerTerm extends NumberTerm implements Term {
   //    throw new IllegalTypeException("float", this);
   //  }
 
+  @Override
   public NumberTerm floor() {
     return this;
   }
 
-  /** 
+  /**
    * @exception IllegalTypeException if the given argument
    * <code>NumberTerm</code> is a floating point number.
    * @exception EvaluationException if the given argument
    * <code>NumberTerm</code> represents <coe>0</code>.
    */
+  @Override
   public NumberTerm intDivide(NumberTerm t) {
-    if (isDouble(t)) throw new IllegalTypeException("integer", t);
+    if (StaticProlog.isDouble(t)) throw new IllegalTypeException("integer", t);
     if (t.longValue() == 0) throw new EvaluationException("zero_divisor");
-    return makeInteger((this.mustInt() / t.longValue()));
+    return StaticProlog.makeInteger((this.mustInt() / t.longValue()));
   }
 
-  /** 
+  /**
    * @exception EvaluationException if this object represents <coe>0</code>.
    */
+  @Override
   public NumberTerm log() {
     if (this.doubleValue() == 0) throw new EvaluationException("undefined");
-    return makeDouble(Math.log(this.doubleValue()));
+    return StaticProlog.makeDouble(Math.log(this.doubleValue()));
   }
 
   //
@@ -257,119 +281,133 @@ class IntegerTerm extends NumberTerm implements Term {
   //    return makeInteger(Math.min(this.val, t.longValue()));
   //  }
 
-  /** 
+  /**
    * @exception IllegalTypeException if the given argument
    * <code>NumberTerm</code> is a floating point number.
    * @exception EvaluationException if the given argument
    * <code>NumberTerm</code> represents <coe>0</code>.
    */
+  @Override
   public NumberTerm mod(NumberTerm t) {
     //if (isDouble(t)) throw new IllegalTypeException("integer", t);
     if (t.longValue() == 0) throw new EvaluationException("zero_divisor");
-    return makeInteger(this.mustInt() % t.longValue());
+    return StaticProlog.makeInteger(this.mustInt() % t.longValue());
   }
 
+  @Override
   public NumberTerm multiply(NumberTerm t) {
-    if (isDouble(t)) return t.multiply(this);
-    return makeInteger(this.mustInt() * t.longValue());
+    if (StaticProlog.isDouble(t)) return t.multiply(this);
+    return StaticProlog.makeInteger(this.mustInt() * t.longValue());
   }
 
-  public Number negate() {
-    if (isInt()) return -longValue();
-    return -this.doubleValue();
-  }
-
+  @Override
   public NumberTerm not() {
-    return makeInteger(~this.mustInt());
+    return StaticProlog.makeInteger(~this.mustInt());
   }
 
-  /** 
+  /**
    * @exception IllegalTypeException if the given argument
    * <code>NumberTerm</code> is a floating point number.
    */
+  @Override
   public NumberTerm or(NumberTerm t) {
-    if (isDouble(t)) throw new IllegalTypeException("integer", t);
-    return makeInteger(this.mustInt() | t.longValue());
+    if (StaticProlog.isDouble(t)) throw new IllegalTypeException("integer", t);
+    return StaticProlog.makeInteger(this.mustInt() | t.longValue());
   }
 
+  @Override
   public NumberTerm pow(NumberTerm t) {
-    return makeDouble(Math.pow(this.doubleValue(), t.doubleValue()));
+    return StaticProlog.makeDouble(Math.pow(this.doubleValue(), t.doubleValue()));
   }
 
+  @Override
   public NumberTerm rint() {
-    return makeDouble(this.doubleValue());
+    return StaticProlog.makeDouble(this.doubleValue());
   }
 
+  @Override
   public NumberTerm round() {
     return this;
   }
 
-  /** 
+  /**
    * @exception IllegalTypeException if the given argument
    * <code>NumberTerm</code> is a floating point number.
    */
+  @Override
   public NumberTerm shiftLeft(NumberTerm t) {
-    if (isDouble(t)) throw new IllegalTypeException("integer", t);
-    return makeInteger(this.mustInt() << t.longValue());
+    if (StaticProlog.isDouble(t)) throw new IllegalTypeException("integer", t);
+    return StaticProlog.makeInteger(this.mustInt() << t.longValue());
   }
 
-  /** 
+  /**
    * @exception IllegalTypeException if the given argument
    * <code>NumberTerm</code> is a floating point number.
    */
+  @Override
   public NumberTerm shiftRight(NumberTerm t) {
-    if (isDouble(t)) throw new IllegalTypeException("integer", t);
-    return makeInteger(this.mustInt() >> t.longValue());
+    if (StaticProlog.isDouble(t)) throw new IllegalTypeException("integer", t);
+    return StaticProlog.makeInteger(this.mustInt() >> t.longValue());
   }
 
+  @Override
   public NumberTerm signum() {
-    return makeInteger((int) Math.signum((double) this.doubleValue()));
+    return StaticProlog.makeInteger((int) Math.signum(this.doubleValue()));
   }
 
+  @Override
   public NumberTerm sin() {
-    return makeDouble(Math.sin(this.doubleValue()));
+    return StaticProlog.makeDouble(Math.sin(this.doubleValue()));
   }
 
-  /** 
+  /**
    * @exception EvaluationException if this object represents
    * an integer less than <coe>0</code>.
    */
+  @Override
   public NumberTerm sqrt() {
     if (this.doubleValue() < 0) throw new EvaluationException("undefined");
-    return makeDouble(Math.sqrt(this.doubleValue()));
+    return StaticProlog.makeDouble(Math.sqrt(this.doubleValue()));
   }
 
+  @Override
   public NumberTerm subtract(NumberTerm t) {
-    if (isDouble(t)) return makeDouble(this.doubleValue() - t.doubleValue());
-    return makeInteger((long) (this.doubleValue() - t.doubleValue()));
+    if (StaticProlog.isDouble(t)) return StaticProlog.makeDouble(this.doubleValue() - t.doubleValue());
+    return StaticProlog.makeInteger((long) (this.doubleValue() - t.doubleValue()));
   }
 
+  @Override
   public NumberTerm tan() {
-    return makeDouble(Math.tan(this.doubleValue()));
+    return StaticProlog.makeDouble(Math.tan(this.doubleValue()));
   }
 
+  @Override
   public NumberTerm toDegrees() {
-    return makeDouble(Math.toDegrees(this.doubleValue()));
+    return StaticProlog.makeDouble(Math.toDegrees(this.doubleValue()));
   }
 
+  @Override
   public NumberTerm toFloat() {
-    return makeDouble((double) this.doubleValue());
+    return StaticProlog.makeDouble(this.doubleValue());
   }
 
+  @Override
   public NumberTerm toRadians() {
-    return makeDouble(Math.toRadians(this.doubleValue()));
+    return StaticProlog.makeDouble(Math.toRadians(this.doubleValue()));
   }
 
+  @Override
   public NumberTerm truncate() {
     return this;
   }
 
-  /** 
+  /**
    * @exception IllegalTypeException if the given argument
    * <code>NumberTerm</code> is a floating point number.
    */
+  @Override
   public NumberTerm xor(NumberTerm t) {
-    if (isDouble(t)) throw new IllegalTypeException("integer", t);
-    return makeInteger(this.mustInt() ^ t.longValue());
+    if (StaticProlog.isDouble(t)) throw new IllegalTypeException("integer", t);
+    return StaticProlog.makeInteger(this.mustInt() ^ t.longValue());
   }
 }

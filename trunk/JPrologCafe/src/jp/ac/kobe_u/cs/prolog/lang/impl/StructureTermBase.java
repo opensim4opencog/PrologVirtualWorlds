@@ -1,4 +1,8 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
+
+import jp.ac.kobe_u.cs.prolog.lang.InternalException;
+import jp.ac.kobe_u.cs.prolog.lang.Prolog;
+import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 
 /**
  * Compound term. <br>
@@ -21,7 +25,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class StructureTermBase extends TermBase implements StructureTerm {
+class StructureTermBase extends TermBase implements StructureTerm {
   /** Holds the functor symbol of this <code>StructureTerm</code>. */
   final private/*SymbolTerm*/Object functor;
 
@@ -97,11 +101,11 @@ public class StructureTermBase extends TermBase implements StructureTerm {
     return true;
   }
 
-  public Object copy(Prolog engine) {
+  public Object copy() {
     Object[] a = new Object[arity];
     for (int i = 0; i < arity; i++)
-      a[i] = StaticProlog.copy(args[i], engine);
-    return Prolog.makeStructure(functor, a);
+      a[i] = StaticProlog.copy(args[i]);
+    return StaticProlog.makeStructure(functor, a);
   }
 
   public boolean isGround() {

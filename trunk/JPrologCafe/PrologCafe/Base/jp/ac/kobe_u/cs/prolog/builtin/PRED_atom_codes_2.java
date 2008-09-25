@@ -58,10 +58,10 @@ public class PRED_atom_codes_2 extends PredicateBase {
     a2 = deref(a2);
     if (isVariable(a1)) {
       final StringBuffer sb = new StringBuffer();
-      for (Object x = a2; !isNil(x); x = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.rest(x))) {
+      for (Object x = a2; !isNil(x); x = deref(rest(x))) {
         if (isVariable(x)) throw new PInstantiationException(this, 2);
         if (!isListTerm(x)) throw new IllegalTypeException(this, 2, "list", a2);
-        final Object car = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.first(x));
+        final Object car = deref(first(x));
         if (isVariable(car)) throw new PInstantiationException(this, 2);
         if (!isInteger(car)) throw new RepresentationException(this, 2, "character_code");
         final int i =  (int) intValue(car);//(IntegerTerm) car).longValue();;
