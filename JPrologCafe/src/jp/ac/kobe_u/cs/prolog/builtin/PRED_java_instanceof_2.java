@@ -93,7 +93,7 @@ public class PRED_java_instanceof_2 extends NonDetPredicate {
     boolean hasNext = this.iter.hasNext();
     while (hasNext) {
       final Object next = this.iter.next();
-      final Object a3 = StaticProlog.makeTerm(next);
+      final Object a3 = (next);
       if (unify(a2, a3)) return true;
       if (orName != null) {
         if (next.toString().endsWith(orName)) {

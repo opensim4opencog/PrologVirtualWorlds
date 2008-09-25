@@ -1,12 +1,10 @@
 package jp.ac.kobe_u.cs.prolog.lang.impl;
 
-import jp.ac.kobe_u.cs.prolog.lang.EvaluationException;
-import jp.ac.kobe_u.cs.prolog.lang.IllegalTypeException;
 import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 
 /**
  * Floating point number.
- * The class <code>DoubleTerm</code> wraps a value of 
+ * The class <code>DoubleTerm</code> wraps a value of
  * primitive type <code>double</code>.
  *
  * <pre>
@@ -18,337 +16,304 @@ import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
 */
-public class NumberTerm extends TermBase {
-  /** Holds a <code>double</code> value that this <code>DoubleTerm</code> represents. */
-  private final Number val;
-  
+abstract class NumberTerm extends Number implements Term {
+
   /* (non-Javadoc)
-   * @see jp.ac.kobe_u.cs.prolog.lang.TermBase#isDouble()
+   * @see java.lang.Object#hashCode()
    */
   @Override
-  public boolean isDouble() {
-    return val.intValue()!=val.hashCode();
-  }
-  @Override
-  public boolean isInteger() {
-    return val.intValue()==val.hashCode();
+  public int hashCode() {
+    // TODO Auto-generated method stub
+    return val.hashCode();
   }
 
   /* (non-Javadoc)
-   * @see be.kuleuven.jPrologObject#isConst()
+   * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
-  public boolean isConst() {
+  public boolean equals(Object obj) {
+    // TODO Auto-generated method stub
+    if (obj instanceof Number) {
+      if (!(obj instanceof NumberTerm)) {
+        return val.equals(obj);
+      }
+    }
+    return equalJProlog(obj);
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.Term#copy()
+   */
+  @Override
+  public Object copy() {
+    // TODO Auto-generated method stub
+    return this;
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.Term#deref()
+   */
+  @Override
+  public Object deref() {
+    // TODO Auto-generated method stub
+    return this;
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.Term#isAtomTerm()
+   */
+  @Override
+  public boolean isAtomTerm() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.Term#isClosure()
+   */
+  @Override
+  public boolean isClosure() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.Term#isCompound()
+   */
+  @Override
+  public boolean isCompound() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.Term#isGround()
+   */
+  @Override
+  public boolean isGround() {
     // TODO Auto-generated method stub
     return true;
   }
-  
-  public float floatValue() {
-    return (float) (this.doubleValue());
-  }
 
-  /**
-   * Constructs a new Prolog floating point number 
-   * that represents the specified <code>double</code> value.
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.Term#isJavaObject()
    */
-  public NumberTerm(Number i) {
-    val = i;
+  @Override
+  public boolean isJavaObject() {
+    // TODO Auto-generated method stub
+    return false;
   }
 
-
-  /* Object */
-  public boolean unify(Object t) {
-    if (isVariable(t)) return unify(t, this);
-    if (!isDouble(t)) return false;
-    return this.doubleValue() == doubleValue(t);
-  }
-
-  /** 
-   * @return the <code>boolean</code> whose value is
-   * <code>convertible(Double.class, type)</code>.
-   * @see Object#convertible(Class, Class)
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.Term#isListTerm()
    */
-  public boolean convertible(Class type) {
-    return convertible(Double.class, type);
+  @Override
+  public boolean isListTerm() {
+    // TODO Auto-generated method stub
+    return false;
   }
 
-  //    protected Object copy(Prolog engine) { return makeDouble(val); }
-
-  /** 
-   * Returns a <code>java.lang.Double</code> corresponds to this <code>DoubleTerm</code>
-   * according to <em>Prolog Cafe interoperability with Java</em>.
-   * @return a <code>java.lang.Double</code> object equivalent to
-   * this <code>DoubleTerm</code>.
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.Term#isNil()
    */
-  public Object toJava() {
-    return val;
+  @Override
+  public boolean isNil() {
+    // TODO Auto-generated method stub
+    return false;
   }
 
-  /* Object */
-  /** Returns a string representation of this <code>DoubleTerm</code>. */
-  public String toStringImpl(int d) {
-    return Double.toString(this.doubleValue());
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.Term#isNumber()
+   */
+  @Override
+  public boolean isNumber() {
+    // TODO Auto-generated method stub
+    return true;
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.Term#isVariable()
+   */
+  @Override
+  public boolean isVariable() {
+    // TODO Auto-generated method stub
+    return false;
   }
 
   /**
    * Checks <em>term equality</em> of two terms.
    * The result is <code>true</code> if and only if the argument is an instance of
-   * <code>DoubleTerm</code> and has the same <code>double</code> value as this object.
+   * <code>IntegerTerm</code> and has the same <code>int</code> value as ((Number)this) object.
    * @param obj the object to compare with. This must be dereferenced.
-   * @return <code>true</code> if the given object represents a Prolog floating
-   * point number equivalent to this <code>DoubleTerm</code>, false otherwise.
+   * @return <code>true</code> if the given object represents a Prolog integer
+   * equivalent to ((Number)this) <code>IntegerTerm</code>, false otherwise.
    * @see #compareTo
   */
-  public boolean equalJProlog(Object obj) {
-
-    if (!(obj instanceof NumberTerm)) return false;
-    return Double.doubleToLongBits(this.doubleValue()) == Double.doubleToLongBits(((NumberTerm) obj).doubleValue());
-  }
-
-  public int hashCode(int d) {
-    long bits = Double.doubleToLongBits(this.doubleValue());
-    return (int) (bits ^ (bits >>> 32));
+  @Override
+  final public boolean equalJProlog(Object obj) {
+    if (StaticProlog.isDouble(this)) {
+      if (!StaticProlog.isDouble(obj)) return false;
+    } else {
+      if (!StaticProlog.isInteger(obj)) return false;
+    }
+    return this.doubleValue() == ((NumberTerm) obj).doubleValue();
   }
 
   /* Comparable */
-  /** 
+  /**
    * Compares two terms in <em>Prolog standard order of terms</em>.<br>
    * It is noted that <code>t1.compareTo(t2) == 0</code> has the same
    * <code>boolean</code> value as <code>t1.equals(t2)</code>.
    * @param anotherTerm the term to compared with. It must be dereferenced.
-   * @return the value <code>0</code> if two terms are identical; 
-   * a value less than <code>0</code> if this term is <em>before</em> the <code>anotherTerm</code>;
-   * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
+   * @return the value <code>0</code> if two terms are identical;
+   * a value less than <code>0</code> if ((Number)this) term is <em>before</em> the <code>anotherTerm</code>;
+   * and a value greater than <code>0</code> if ((Number)this) term is <em>after</em> the <code>anotherTerm</code>.
    */
-  public int compareTo(Object anotherTerm) { // anotherTerm must be dereferenced
-    if (isVariable(anotherTerm)) return AFTER;
-    if (!isDouble(anotherTerm)) return BEFORE;
-    return Double.compare(this.doubleValue(), doubleValue(anotherTerm));
+  @Override
+  final public int compareTo(Object anotherTerm) { // anotherTerm must be dereferenced.
+    if (StaticProlog.isVariable(anotherTerm) || (StaticProlog.isDouble(this) || StaticProlog.isDouble(anotherTerm))) return Term.AFTER;
+    if (StaticProlog.isInteger(this) && !StaticProlog.isInteger(anotherTerm)) return Term.BEFORE;
+    if (StaticProlog.isDouble(this) && !StaticProlog.isDouble(anotherTerm)) return Term.BEFORE;
+    final double v = ((NumberTerm) anotherTerm).doubleValue();
+    if (this.doubleValue() == v) return Term.EQUAL;
+    if (this.doubleValue() > v) return Term.AFTER;
+    return Term.BEFORE;
   }
 
-  /* NumberTerm */
-  public int intValue() {
-    return val.intValue();
+  /* Object */
+  @Override
+  final public boolean unify(Object t) {
+    if (StaticProlog.isVariable(t)) return StaticProlog.unify(t, this);
+    if (StaticProlog.isDouble(this)) {
+      if (!StaticProlog.isDouble(t)) return false;
+    } else {
+      if (!StaticProlog.isInteger(t)) return false;
+    }
+    return this.doubleValue() == StaticProlog.intValue(t);
   }
 
-  public long longValue() {
-    return val.longValue();
+  //
+  //  /* (non-Javadoc)
+  //   * @see be.kuleuven.jPrologObject#isConst()
+  //   */
+  //  @Override
+  //  final public boolean isConst() {
+  //    // TODO Auto-generated method stub
+  //    return true;
+  //  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.TermBase#isDouble()
+   */
+  @Override
+  final public boolean isDouble() {
+    return this.val.intValue() != this.val.hashCode();
   }
 
-  public double doubleValue() {
+  @Override
+  final public boolean isInteger() {
+    return this.val.intValue() == this.val.hashCode();
+  }
+
+  /**
+   * Returns a <code>java.lang.Double</code> corresponds to ((Number)this) <code>DoubleTerm</code>
+   * according to <em>Prolog Cafe interoperability with Java</em>.
+   * @return a <code>java.lang.Double</code> object equivalent to
+   * ((Number)this) <code>DoubleTerm</code>.
+   */
+  @Override
+  final public Object toJava() {
+    return this.val;
+  }
+
+  /* Object */
+  /** Returns a string representation of ((Number)this) <code>IntegerTerm</code>. */
+  @Override
+  final public String toStringImpl(int d) {
+    return "" + this.toJava();
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.TermBase#toQuotedString()
+   */
+  @Override
+  final public String toQuotedString() {
+    // TODO Auto-generated method stub
+    return "" + this.toJava();
+  }
+
+  /**
+   * @return the <code>boolean</code> whose value is
+   * <code>convertible(Integer.class, type)</code>.
+   * @see Object#convertible(Class, Class)
+   */
+  @Override
+  final public boolean convertible(Class type) {
+    return StaticProlog.convertible(this.val.getClass(), type);
+  }
+
+  @Override
+  final public int hashCode(int d) {
+    return this.toJava().hashCode();
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.TermBase#toQuotedString()
+   */
+  @Override
+  final public String toString() {
+    // TODO Auto-generated method stub
+    return "" + toJava();
+  }
+
+  /**
+   *
+   */
+  private static final long serialVersionUID = 3922819481957309645L;
+
+  /** Holds a <code>double</code> value that ((Number)this) <code>DoubleTerm</code> represents. */
+  private final Number val;
+
+  /**
+   * Constructs a new Prolog floating point number
+   * that represents the specified <code>double</code> value.
+   */
+  public NumberTerm(Number i) {
+    this.val = i;
+  }
+
+  //    protected Object copy(Prolog engine) { return makeInteger(val); }
+
+  //  /**
+  //   * Returns a <code>java.lang.Integer</code> corresponds to ((Number)this) <code>IntegerTerm</code>
+  //   * according to <em>Prolog Cafe interoperability with Java</em>.
+  //   * @return a <code>java.lang.Integer</code> object equivalent to
+  //   * ((Number)this) <code>IntegerTerm</code>.
+  //   */
+  //  final public  Object toJava() {
+  //    return ;//Integer.valueOf(this.val);
+  //  }
+
+  final public double doubleValue() {
     return val.doubleValue();
   }
 
-  public int arithCompareTo(NumberTerm t) {
-    return Double.compare(this.doubleValue(), t.doubleValue());
+  final public float floatValue() {
+    return (float) (this.doubleValue());
   }
 
-  public NumberTerm abs() {
-    if (this.isInteger()) return StaticProlog.makeInteger(Math.abs(this.longValue()));
-    return makeDouble(Math.abs(this.doubleValue()));
+  /* NumberTerm */
+  final public int intValue() {
+    return this.val.intValue();
   }
 
-  public NumberTerm acos() {
-    return makeDouble(Math.acos(this.doubleValue()));
+  final public long longValue() {
+    return this.val.longValue();
   }
+  //
+  //  final public NumberTerm negate() {
+  //    if (StaticProlog.isInteger(this)) return StaticProlog.makeInteger(-this.longValue());
+  //    return StaticProlog.makeDouble(-this.doubleValue());
+  //  }
 
-  public NumberTerm add(NumberTerm t) {
-    return makeDouble(this.doubleValue() + t.doubleValue());
-  }
-
-  /** 
-   * Throws a <code>type_error</code>.
-   * @exception IllegalTypeException
-   */
-  public NumberTerm and(NumberTerm t) {
-    throw new IllegalTypeException("integer", this);
-  }
-
-  //    public NumberTerm and(NumberTerm t) { return makeInteger(this.intValue() & t.intValue()); }
-
-  public NumberTerm asin() {
-    return makeDouble(Math.asin(this.doubleValue()));
-  }
-
-  public NumberTerm atan() {
-    return makeDouble(Math.atan(this.doubleValue()));
-  }
-
-  public NumberTerm ceil() {
-    return makeInteger((int) Math.ceil(this.doubleValue()));
-  }
-
-  public NumberTerm cos() {
-    return makeDouble(Math.cos(this.doubleValue()));
-  }
-
-  /** 
-   * @exception EvaluationException if the given argument
-   * <code>NumberTerm</code> represents <coe>0</code>.
-   */
-  public NumberTerm divide(NumberTerm t) {
-    if (t.doubleValue() == 0) throw new EvaluationException("zero_divisor");
-    return makeDouble(this.doubleValue() / t.doubleValue());
-  }
-
-  public NumberTerm exp() {
-    return makeDouble(Math.exp(this.doubleValue()));
-  }
-
-  public NumberTerm floatIntPart() {
-    return makeDouble(Math.signum(this.doubleValue()) * Math.floor(Math.abs(this.doubleValue())));
-  }
-
-  public NumberTerm floatFractPart() {
-    return makeDouble(this.doubleValue() - Math.signum(this.doubleValue()) * Math.floor(Math.abs(this.doubleValue())));
-  }
-
-  public NumberTerm floor() {
-    return makeInteger((int) Math.floor(this.doubleValue()));
-  }
-
-  /** 
-   * Throws a <code>type_error</code>.
-   * @exception IllegalTypeException
-   */
-  public NumberTerm intDivide(NumberTerm t) {
-    throw new IllegalTypeException("integer", this);
-  }
-
-  //    public NumberTerm intDivide(NumberTerm t) {	return makeInteger((int)(this.intValue() / t.intValue())); }
-
-  /** 
-   * @exception EvaluationException if this object represents <coe>0</code>.
-   */
-  public NumberTerm log() {
-    if (this.doubleValue() == 0) throw new EvaluationException("undefined");
-    return makeDouble(Math.log(this.doubleValue()));
-  }
-
-  public NumberTerm max(NumberTerm t) {
-    return makeDouble(Math.max(this.doubleValue(), t.doubleValue()));
-  }
-
-  public NumberTerm min(NumberTerm t) {
-    return makeDouble(Math.min(this.doubleValue(), t.doubleValue()));
-  }
-
-  /** 
-   * Throws a <code>type_error</code>.
-   * @exception IllegalTypeException
-   */
-  public NumberTerm mod(NumberTerm t) {
-    throw new IllegalTypeException("integer", this);
-  }
-
-  //    public NumberTerm mod(NumberTerm t) { return makeInteger(this.intValue() % t.intValue()); }
-
-  public NumberTerm multiply(NumberTerm t) {
-    return makeDouble(this.doubleValue() * t.doubleValue());
-  }
-
-  public Number negate() {
-    if (this.isInteger()) return -this.longValue();
-    return -this.doubleValue();
-  }
-
-  /** 
-   * Throws a <code>type_error</code>.
-   * @exception IllegalTypeException
-   */
-  public NumberTerm not() {
-    throw new IllegalTypeException("integer", this);
-  }
-
-  //    public NumberTerm not() { return makeInteger(~ this.intValue()); }
-
-  /** 
-   * Throws a <code>type_error</code>.
-   * @exception IllegalTypeException
-   */
-  public NumberTerm or(NumberTerm t) {
-    throw new IllegalTypeException("integer", this);
-  }
-
-  //    public NumberTerm or(NumberTerm t) { return makeInteger(this.intValue() | t.intValue()); }
-
-  public NumberTerm pow(NumberTerm t) {
-    return makeDouble(Math.pow(this.doubleValue(), t.doubleValue()));
-  }
-
-  public NumberTerm rint() {
-    return makeDouble(Math.rint(this.doubleValue()));
-  }
-
-  public NumberTerm round() {
-    return makeInteger((int) Math.round(this.doubleValue()));
-  }
-
-  /** 
-   * Throws a <code>type_error</code>.
-   * @exception IllegalTypeException
-   */
-  public NumberTerm shiftLeft(NumberTerm t) {
-    throw new IllegalTypeException("integer", this);
-  }
-
-  /** 
-   * Throws a <code>type_error</code>.
-   * @exception IllegalTypeException
-   */
-  public NumberTerm shiftRight(NumberTerm t) {
-    throw new IllegalTypeException("integer", this);
-  }
-
-  public NumberTerm signum() {
-    return makeDouble(Math.signum(this.doubleValue()));
-  }
-
-  public NumberTerm sin() {
-    return makeDouble(Math.sin(this.doubleValue()));
-  }
-
-  /** 
-   * @exception EvaluationException if this object represents
-   * a floating point number less than <coe>0</code>.
-   */
-  public NumberTerm sqrt() {
-    if (this.doubleValue() < 0) throw new EvaluationException("undefined");
-    return makeDouble(Math.sqrt(this.doubleValue()));
-  }
-
-  public NumberTerm subtract(NumberTerm t) {
-    return makeDouble(this.doubleValue() - t.doubleValue());
-  }
-
-  public NumberTerm tan() {
-    return makeDouble(Math.tan(this.doubleValue()));
-  }
-
-  public NumberTerm toDegrees() {
-    return makeDouble(Math.toDegrees(this.doubleValue()));
-  }
-
-  public NumberTerm toFloat() {
-    return this;
-  }
-
-  public NumberTerm toRadians() {
-    return makeDouble(Math.toRadians(this.doubleValue()));
-  }
-
-  public NumberTerm truncate() {
-    if (this.doubleValue() >= 0)
-      return makeInteger((int) Math.floor(this.doubleValue()));
-    else
-      return makeInteger((int) (-1 * Math.floor(Math.abs(this.doubleValue()))));
-  }
-
-  /** 
-   * Throws a <code>type_error</code>.
-   * @exception IllegalTypeException
-   */
-  public NumberTerm xor(NumberTerm t) {
-    throw new IllegalTypeException("integer", this);
-  }
 }
