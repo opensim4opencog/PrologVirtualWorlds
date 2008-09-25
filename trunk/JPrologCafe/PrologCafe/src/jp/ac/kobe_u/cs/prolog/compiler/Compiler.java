@@ -7,6 +7,7 @@ import jp.ac.kobe_u.cs.prolog.lang.Prolog;
 import jp.ac.kobe_u.cs.prolog.lang.PrologClassLoader;
 import jp.ac.kobe_u.cs.prolog.lang.PrologControl;
 import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
+import jp.ac.kobe_u.cs.prolog.lang.impl.StaticPrologMethodImpl;
 
 /**
  * The <code>Compiler</code> class provides methods for 
@@ -86,6 +87,10 @@ public class Compiler {
   protected boolean switchOnHash = true;
   /** Non-standard option. Compiler option for closure generation. Its initial value is <code>false</code> */
   protected boolean generateClosure = false;
+
+  static {
+    StaticProlog.methods = new StaticPrologMethodImpl();
+  }
 
   /** 
    * Translates a Prolog program into a WAM-based intermediate code. 

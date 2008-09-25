@@ -68,7 +68,7 @@ public class PRED_java_iterate_2 extends NonDetPredicate {
 
     while (hasNext) {
       final Object next = this.iter.next();
-      final Object a3 = makeTerm(next);
+      final Object a3 = next;
       if (unify(a2, a3)) return true;
       hasNext = this.iter.hasNext();
     }

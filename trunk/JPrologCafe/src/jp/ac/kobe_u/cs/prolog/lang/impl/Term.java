@@ -28,7 +28,7 @@ interface Term extends Serializable, Comparable<Object> {
    * @param t the term to be unified with.
    * @return <code>true</code> if succeeds, otherwise <code>false</code>.
    */
-  abstract public boolean unifyImpl(Object t);
+  abstract public boolean unify(Object t);
 
   /** 
    * Check whether this term is a logical variable.

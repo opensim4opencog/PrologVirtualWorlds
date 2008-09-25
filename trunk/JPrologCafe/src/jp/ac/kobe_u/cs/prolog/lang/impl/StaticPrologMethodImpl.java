@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package jp.ac.kobe_u.cs.prolog.lang.impl;
 
@@ -12,16 +12,17 @@ import java.util.Vector;
 import jp.ac.kobe_u.cs.prolog.lang.HashtableOfTerm;
 import jp.ac.kobe_u.cs.prolog.lang.Predicate;
 import jp.ac.kobe_u.cs.prolog.lang.Prolog;
+import jp.ac.kobe_u.cs.prolog.lang.PrologMethods;
 import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 import jp.ac.kobe_u.cs.prolog.lang.Token;
 import jp.ac.kobe_u.cs.prolog.lang.Trail;
 import jp.ac.kobe_u.cs.prolog.lang.Undoable;
-import jp.ac.kobe_u.cs.prolog.lang.StaticProlog.PrologMethods;
 
 /**
  * @author root
  *
  */
+
 public class StaticPrologMethodImpl implements PrologMethods {
   /**
    * @param ceil
@@ -40,21 +41,21 @@ public class StaticPrologMethodImpl implements PrologMethods {
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#arity(java.lang.Object)
    */
   final public int arity(Object tin) {
-    Term t = makeTerm(tin);
-    return isCompound(t) ? ((StructureTerm) t).arity() : ((SymbolTerm) t).arity();
+    final Term t = makeTerm(tin);
+    return StaticProlog.isCompound(t) ? ((StructureTerm) t).arity() : ((SymbolTerm) t).arity();
   }
 
   /* (non-Javadoc)
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#bind(java.lang.Object, java.lang.Object)
    */
   final public boolean bind(Object thiz, Object that) {
-    VariableTerm r = ((VariableTerm) thiz);
+    final VariableTerm r = ((VariableTerm) thiz);
     if (r == that) {
       return true;
     }
-    Prolog machine = r.getMachine();
-    Trail trail = machine.trail;
-    if (isVariable(that) && ((VariableTerm) that).timeStamp() >= r.timeStamp()) {
+    final Prolog machine = r.getMachine();
+    final Trail trail = machine.trail;
+    if (StaticProlog.isVariable(that) && (((VariableTerm) that).timeStamp() >= r.timeStamp())) {
       ((VariableTerm) that).setVal(r);
       if (((VariableTerm) that).timeStamp() < trail.engine.stack_getTimeStamp()) {
         trail.push((Undoable) that);
@@ -80,7 +81,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#consArgs(java.lang.Object)
    */
   final public Object[] consArgs(Object obj) {
-    ListTerm ll = (ListTerm) obj;
+    final ListTerm ll = (ListTerm) obj;
     return new Object[] { ll.first(), ll.rest() };
   }
 
@@ -129,7 +130,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
     if (thiz instanceof Term) return ((Term) thiz).copy();
     //  if (thiz instanceof Cloneable) return (Object)((Cloneable) thiz).clone();
     if (thiz instanceof String) return thiz;
-    if (isJavaObject(thiz)) return thiz;
+    if (StaticProlog.isJavaObject(thiz)) return thiz;
     return makeTerm(thiz).copy();
   }
 
@@ -145,7 +146,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#doubleValue(java.lang.Object)
    */
   public double doubleValue(Object t) {
-    return ((Number) toJava(t)).doubleValue();
+    return ((Number) StaticProlog.toJava(t)).doubleValue();
   }
 
   /* (non-Javadoc)
@@ -169,7 +170,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
    */
   final public boolean functorOf(Object s2, Object a3) {
     // TODO Auto-generated method stub
-    return prologEquals(s2, functor(a3));
+    return StaticProlog.prologEquals(s2, StaticProlog.functor(a3));
   }
 
   /* (non-Javadoc)
@@ -185,7 +186,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
    */
   final public Class getClazz(Object thiz) {
     // TODO Auto-generated method stub
-    return toJava(thiz).getClass();
+    return StaticProlog.toJava(thiz).getClass();
   }
 
   /* (non-Javadoc)
@@ -202,7 +203,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
    */
   final public int hashCode(Object thiz) {
     // TODO Auto-generated method stub
-    return hashCode(thiz, 40);
+    return StaticProlog.hashCode(thiz, 40);
   }
 
   //
@@ -223,14 +224,14 @@ public class StaticPrologMethodImpl implements PrologMethods {
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#instanceOfTerm(java.lang.Object)
    */
   final public boolean instanceOfTerm(Object obj) {
-    return obj instanceof VariableTerm || obj instanceof IntegerTerm || obj instanceof NumberTerm || obj instanceof SymbolTerm || obj instanceof ListTerm || obj instanceof StructureTerm || obj instanceof JavaObjectTerm || obj instanceof ClosureTerm;
+    return (obj instanceof VariableTerm) || (obj instanceof NumberTerm) || (obj instanceof SymbolTerm) || (obj instanceof ListTerm) || (obj instanceof StructureTerm) || (obj instanceof JavaObjectTerm) || (obj instanceof ClosureTerm);
   }
 
   /* (non-Javadoc)
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#intValue(java.lang.Object)
    */
   final public long intValue(Object obj) {
-    return ((Number) toJava(obj)).longValue();
+    return ((Number) StaticProlog.toJava(obj)).longValue();
   }
 
   /* (non-Javadoc)
@@ -238,10 +239,11 @@ public class StaticPrologMethodImpl implements PrologMethods {
    */
   final public boolean isAtomTerm(Object thiz) {
     if (thiz instanceof CharSequence) return true;
-    Term t = makeTerm(thiz);
+    if (thiz instanceof Number) return false;
+    final Term t = makeTerm(thiz);
     if (t.isAtomTerm()) return true;
     if (t instanceof SymbolTerm) {
-      if (isVariable(t)) return false;
+      if (StaticProlog.isVariable(t)) return false;
       return false;
     }
     if (true) return false;
@@ -253,6 +255,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
    */
   final public boolean isClosure(Object thiz) {
     if (thiz instanceof String) return false;
+    if (thiz instanceof Number) return false;
     return makeTerm(thiz).isClosure();
   }// { return this instanceof ClosureTerm; }
 
@@ -261,6 +264,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
    */
   final public boolean isCompound(Object thiz) {
     if (thiz instanceof String) return false;
+    if (thiz instanceof Number) return false;
     return makeTerm(thiz).isCompound();
   }//{ return this instanceof StructureTerm; }
 
@@ -269,7 +273,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
    */
   final public boolean isCutter(Object a3) {
     // TODO Auto-generated method stub
-    return isInteger(a3);
+    return StaticProlog.isInteger(a3);
   }
 
   /* (non-Javadoc)
@@ -277,8 +281,10 @@ public class StaticPrologMethodImpl implements PrologMethods {
    */
   final public boolean isDouble(Object thiz) {
     if (thiz instanceof Number) {
-      Number n = (Number) thiz;
-      if (n.hashCode() != n.intValue()) return true;
+      final Number n = (Number) thiz;
+
+      final int hc = thiz.hashCode();
+      if (hc != n.intValue()) return true;
       return false;
     }
     if (thiz instanceof String) return false;
@@ -289,7 +295,9 @@ public class StaticPrologMethodImpl implements PrologMethods {
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#isGround(java.lang.Object)
    */
   final public boolean isGround(Object thiz) {
-    if (isJavaObject(thiz)) return true;
+    if (thiz instanceof Number) return true;
+    if (thiz instanceof String) return true;
+    if (StaticProlog.isJavaObject(thiz)) return true;
     return makeTerm(thiz).isGround();
 
   }//{ return true; }
@@ -298,16 +306,17 @@ public class StaticPrologMethodImpl implements PrologMethods {
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#isInteger(java.lang.Object)
    */
   final public boolean isInteger(Object thiz) {
-    thiz = toJava(thiz);
+    thiz = StaticProlog.toJava(thiz);
     if (thiz instanceof Number) {
-      Number n = (Number) thiz;
+      final Number n = (Number) thiz;
       if (n.hashCode() == n.intValue()) return true;
       return false;
     }
     if (thiz instanceof String) return false;
-    Term term = makeTerm(thiz);
+    final Term term = makeTerm(thiz);
     if (term.isNumber()) {
-      if (((NumberTerm) term).floatFractPart().doubleValue() == 0) {
+      final NumberTerm r = ((NumberTerm) term);
+      if (StaticProlog.makeDouble(r.doubleValue() - Math.signum(r.doubleValue()) * Math.floor(Math.abs(r.doubleValue()))).doubleValue() == 0) {
         return true;
       }
     }
@@ -373,9 +382,9 @@ public class StaticPrologMethodImpl implements PrologMethods {
   final public int listLength(Object thiz) {
     // TODO Auto-generated method stub
     int count = 0;
-    while (ListTermBase.isListTerm(thiz)) {
+    while (StaticProlog.isListTerm(thiz)) {
       count++;
-      thiz = ListTermBase.deref(ListTermBase.rest(thiz));
+      thiz = StaticProlog.deref(StaticProlog.rest(thiz));
     }
     return count;
   }
@@ -405,13 +414,14 @@ public class StaticPrologMethodImpl implements PrologMethods {
   /* (non-Javadoc)
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#makeDouble(java.lang.Number)
    */
-  final public NumberTerm makeDouble(Number c) {
-    NumberTerm it = (NumberTerm) javaLang2TermMap.get(c);
-    if (it == null) {
-      it = new NumberTerm(c);
-      javaLang2TermMap.put(c, it);
-    }
-    return it;
+  final public Number makeDouble(Number c) {
+    //    NumberTerm it = null;// (NumberTerm) javaLang2TermMap.get(c);
+    //    if (it == null) {
+    //      it = new NumberTerm(c);
+    //      //  javaLang2TermMap.put(c, it);
+    //    }
+    //    return it;
+    return c;
   }
 
   /* (non-Javadoc)
@@ -425,13 +435,23 @@ public class StaticPrologMethodImpl implements PrologMethods {
   /* (non-Javadoc)
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#makeInteger(java.lang.Number)
    */
-  final public NumberTerm makeInteger(Number c) {
-    IntegerTerm it = (IntegerTerm) javaLang2TermMap.get(c);
+  final public Number makeInteger(Number c) {
+    //    if (isDouble(c)) {
+    //      throw new Error("non integer: " + c);
+    //    }
+    NumberTerm it = (NumberTerm) javaLang2TermMap.get(c);
     if (it == null) {
-      it = new IntegerTerm(c);
+      it = new NumberTerm(c) {
+
+        /**
+         * 
+         */
+        private static final long serialVersionUID = -7130847454857024319L;
+      };
       javaLang2TermMap.put(c, it);
     }
     return it;
+    //return c;
   }
 
   /* (non-Javadoc)
@@ -453,31 +473,31 @@ public class StaticPrologMethodImpl implements PrologMethods {
    */
   final public Object makeStructure(Object s, Object[] args) {
     if (s instanceof Class) {
-      Class c = ((Class) s);
+      final Class c = ((Class) s);
       try {
-        if (args == null || args.length == 0) return c.newInstance();
+        if ((args == null) || (args.length == 0)) return c.newInstance();
         return c.getConstructor(toClasses(args)).newInstance(args);
-      } catch (InstantiationException e) {
+      } catch (final InstantiationException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
-      } catch (IllegalAccessException e) {
+      } catch (final IllegalAccessException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
-      } catch (IllegalArgumentException e) {
+      } catch (final IllegalArgumentException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
-      } catch (SecurityException e) {
+      } catch (final SecurityException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
-      } catch (InvocationTargetException e) {
+      } catch (final InvocationTargetException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
-      } catch (NoSuchMethodException e) {
+      } catch (final NoSuchMethodException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
     }
-    return new StructureTermBase((/*SymbolTerm*/Object) s, args);
+    return new StructureTermBase(s, args);
   }
 
   /**
@@ -485,10 +505,10 @@ public class StaticPrologMethodImpl implements PrologMethods {
    * @return
    */
   private Class[] toClasses(Object[] args) {
-    if (args == null || args.length == 0) return new Class[0];
-    Class[] argsc = new Class[args.length]; // TODO Auto-generated method stub
+    if ((args == null) || (args.length == 0)) return new Class[0];
+    final Class[] argsc = new Class[args.length]; // TODO Auto-generated method stub
     for (int i = 0; i < args.length; i++) {
-      argsc[i] = getClass(args);//.getClass();
+      argsc[i] = StaticProlog.getClass(args);//.getClass();
     }
     return argsc;
   }
@@ -497,7 +517,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#makeSymbol(java.lang.String)
    */
   public Object makeSymbol(String n) {
-    return SymbolTermBase.makeAtom(n);
+    return StaticProlog.makeAtom(n);
   }
 
   /* (non-Javadoc)
@@ -514,18 +534,19 @@ public class StaticPrologMethodImpl implements PrologMethods {
     //      return (SymbolTerm) makeAtom(o.toString());
     //    }
     if (o instanceof Number) {
-      Number n = (Number) o;
-      if (n.intValue() == n.hashCode()) {
-        return makeInteger(n);
-      }
-      return makeDouble(n);
+      return (Term) o;
+      //      Number n = (Number) o;
+      //      if (n.intValue() == n.hashCode()) {
+      //        return makeInteger(n);
+      //      }
+      //      return makeDouble(n);
     }
 
     if (false) if (o instanceof Vector) {
       final Vector v = (Vector) o;
       Object t = Prolog.Nil;
       for (int i = v.size(); i > 0; i--) {
-        t = makeList(makeTerm(v.elementAt(i - 1)), t);
+        t = StaticProlog.makeList(makeTerm(v.elementAt(i - 1)), t);
       }
       return (Term) t;
     }
@@ -533,11 +554,11 @@ public class StaticPrologMethodImpl implements PrologMethods {
       final List v = (List) o;
       Object t = Prolog.Nil;
       for (int i = v.size(); i > 0; i--) {
-        t = makeList(makeTerm(v.get(i - 1)), t);
+        t = StaticProlog.makeList(makeTerm(v.get(i - 1)), t);
       }
       return (Term) t;
     }
-    return makeJavaObject(o);
+    return (Term) StaticProlog.makeJavaObject(o);
   }
 
   /* (non-Javadoc)
@@ -550,7 +571,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
       return ((StructureTermBase) thiz).nameUQ();
     }
     if (thiz instanceof ListTerm) {
-      ListTermBase r = ((ListTermBase) thiz);
+      final ListTermBase r = ((ListTermBase) thiz);
       // TODO Auto-generated method stub
       return r.nameUQ();
     }
@@ -571,15 +592,15 @@ public class StaticPrologMethodImpl implements PrologMethods {
     if (thiz == obj) return true;
     if (thiz instanceof Term) return ((Term) thiz).equalJProlog(obj);
     if (obj instanceof Term) return ((Term) obj).equalJProlog(thiz);
+    if (thiz instanceof String) return thiz.equals(obj);
+    if (thiz.getClass() != obj.getClass()) {
+      if (thiz.equals(obj)) {
+        throw new Error(thiz + "==" + obj);
+      }
+      return false;
+    }
     return thiz.equals(obj);
   }// throws Throwable;
-
-  /* (non-Javadoc)
-   * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#prologHashCode(java.lang.Object, java.util.Collection)
-   */
-  final public int prologHashCode(Object thiz, Collection newParam) {
-    return makeTerm(thiz).hashCode(40);
-  }
 
   /* (non-Javadoc)
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#rest(java.lang.Object)
@@ -633,10 +654,12 @@ public class StaticPrologMethodImpl implements PrologMethods {
    */
   final public boolean unify(Object thiz, Object o) {
     if (thiz == o) return true;
-    if (thiz instanceof Term) return ((Term) thiz).unifyImpl(o);
-    if (o instanceof Term) return ((Term) o).unifyImpl(thiz);
-    if (isNonTerm(thiz)) return prologEquals(thiz, o);
-    return makeTerm(thiz).unifyImpl(o);
+    if (thiz instanceof Term) return ((Term) thiz).unify(o);
+    if (o instanceof Term) return ((Term) o).unify(thiz);
+    if (isNonTerm(thiz)) {
+      return StaticProlog.prologEquals(thiz, o);
+    }
+    return makeTerm(thiz).unify(o);
   }//throws Throwable;
 
   /* (non-Javadoc)

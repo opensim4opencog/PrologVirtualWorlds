@@ -2,6 +2,13 @@ package jp.ac.kobe_u.cs.prolog.lang;
 
 import java.util.StringTokenizer;
 
+import jp.ac.kobe_u.cs.prolog.lang.Predicate;
+import jp.ac.kobe_u.cs.prolog.lang.Prolog;
+import jp.ac.kobe_u.cs.prolog.lang.PrologClassLoader;
+import jp.ac.kobe_u.cs.prolog.lang.PrologControl;
+import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
+import jp.ac.kobe_u.cs.prolog.lang.impl.StaticPrologMethodImpl;
+
 /**
  * Prolog Cafe launcher.
  * The <code>PrologMain</code> class launchs the Prolog Cafe system.<br>
@@ -27,11 +34,12 @@ import java.util.StringTokenizer;
  */
 public class PrologMain {
   /** Version information */
-  public static String VERSION = "Prolog Cafe 1.1.11 (dragonfly) based on java.lang.Object";
+  public static String VERSION = "Prolog Cafe 1.1.11 (dragonfly) based on java.lang.Object 2";
   /** Copyright information */
   public static String COPYRIGHT = "Copyright(C) 1997-2008 M.Banbara and N.Tamura";
 
   public static void main(String argv[]) {
+    StaticProlog.methods = new StaticPrologMethodImpl();
     if (argv.length == 0) {
       argv = new String[] { "cafeteria" };
     }

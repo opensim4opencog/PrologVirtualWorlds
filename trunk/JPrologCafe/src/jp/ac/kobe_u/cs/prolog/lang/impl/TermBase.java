@@ -19,9 +19,6 @@ abstract class TermBase extends StaticProlog
 
 implements Serializable, Comparable<Object>, Term {
 
-  final public boolean unifyImpl(Object t) {
-    return unify(t);
-  }
 
   /**
    * @param string
@@ -142,7 +139,7 @@ implements Serializable, Comparable<Object>, Term {
    * @see IntegerTerm
    */
   public boolean isInteger() {
-    return this instanceof IntegerTerm;
+    return false;// this instanceof IntegerTerm;
   }
 
   /** 
@@ -152,7 +149,7 @@ implements Serializable, Comparable<Object>, Term {
    * @see NumberTerm
    */
   public boolean isDouble() {
-    return this instanceof NumberTerm;
+    return false;// this instanceof NumberTerm;
   }
 
   /** 
@@ -163,7 +160,7 @@ implements Serializable, Comparable<Object>, Term {
    * @see NumberTerm
    */
   public boolean isNumber() {
-    return ((this instanceof IntegerTerm) || (this instanceof NumberTerm));
+    return false;//((this instanceof IntegerTerm) || (this instanceof NumberTerm));
   }
 
   /** 
