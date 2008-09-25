@@ -25,6 +25,15 @@ import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
  * @version 1.0
  */
 class StructureTermBase extends TermBase implements StructureTerm {
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.StructureTerm#arg0(int)
+   */
+  @Override
+  public Object arg0(int i) {
+    // TODO Auto-generated method stub
+    return args[i];
+  }
   /**
    * 
    */
@@ -38,15 +47,6 @@ class StructureTermBase extends TermBase implements StructureTerm {
 
   /** Holds the arity of this <code>StructureTerm</code>. */
   final private int arity;
-
-  /* (non-Javadoc)
-   * @see be.kuleuven.jProlog.PrologObject#isConst()
-   */
-  @Override
-  public boolean isConst() {
-    // TODO Auto-generated method stub
-    return false;
-  }
 
   /**
    * Constructs a new Prolog compound term
@@ -124,7 +124,7 @@ class StructureTermBase extends TermBase implements StructureTerm {
   }
 
   @Override
-  public String toQuotedString() {
+  public String toQuotedString(int depth) {
     String delim = "";
     String s = StaticProlog.toQuotedString(this.functor) + "(";
     for (int i = 0; i < this.arity; i++) {

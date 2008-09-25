@@ -39,15 +39,6 @@ class ClosureTermBase extends TermBase implements ClosureTerm {
     return this.code;
   }
 
-  /* (non-Javadoc)
-   * @see jp.ac.kobe_u.cs.prolog.lang.TermBase#isConst()
-   */
-  @Override
-  public boolean isConst() {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
   /* Object */
   @Override
   public boolean unify(Object t) {
@@ -58,7 +49,7 @@ class ClosureTermBase extends TermBase implements ClosureTerm {
   }
 
   @Override
-  public String toQuotedString() {
+  public String toQuotedString(int depth) {
     return this.toString();
   }
 

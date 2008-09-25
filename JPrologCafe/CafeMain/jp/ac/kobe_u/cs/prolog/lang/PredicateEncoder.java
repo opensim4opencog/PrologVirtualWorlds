@@ -102,4 +102,19 @@ public class PredicateEncoder {
     System.out.println(PredicateEncoder.encode(p, f, n));
     System.out.println(PredicateEncoder.defined(p, f, n));
   }
+
+  /**
+   * @param thiz
+   * @return
+   */
+  public static String decodeName(Class thiz) {
+    // TODO Auto-generated method stub
+    String c = ((Class) thiz).getName();
+    if (c.startsWith("PRED_")) {
+      c = c.substring(5);
+    }
+    int us = c.lastIndexOf('_');
+    c = c.substring(0, us);
+    return c;
+  }
 }

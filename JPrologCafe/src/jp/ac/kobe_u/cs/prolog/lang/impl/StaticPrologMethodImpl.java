@@ -3,6 +3,7 @@
  */
 package jp.ac.kobe_u.cs.prolog.lang.impl;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,12 +13,14 @@ import java.util.Vector;
 import jp.ac.kobe_u.cs.prolog.lang.HashtableOfTerm;
 import jp.ac.kobe_u.cs.prolog.lang.InternalException;
 import jp.ac.kobe_u.cs.prolog.lang.Predicate;
+import jp.ac.kobe_u.cs.prolog.lang.PredicateEncoder;
 import jp.ac.kobe_u.cs.prolog.lang.Prolog;
 import jp.ac.kobe_u.cs.prolog.lang.PrologMethods;
 import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 import jp.ac.kobe_u.cs.prolog.lang.Token;
 import jp.ac.kobe_u.cs.prolog.lang.Trail;
 import jp.ac.kobe_u.cs.prolog.lang.Undoable;
+import jp.ac.kobe_u.cs.prolog.lang.VariableTermLocation;
 
 /**
  * @author root
@@ -548,11 +551,14 @@ public class StaticPrologMethodImpl implements PrologMethods {
   /* (non-Javadoc)
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#makeStructure(java.lang.Object, java.lang.Object[])
    */
-  final public Object makeStructure(Object s, Object[] args) {
+  final public Object makeStructure(Object s, final Object[] args) {
     if (s instanceof Class) {
       final Class c = ((Class) s);
       try {
         if ((args == null) || (args.length == 0)) return c.newInstance();
+        if (true) {
+          return c.getConstructors()[0].newInstance(args);
+        }
         return c.getConstructor(this.toClasses(args)).newInstance(args);
       } catch (final InstantiationException e) {
         // TODO Auto-generated catch block
@@ -574,7 +580,8 @@ public class StaticPrologMethodImpl implements PrologMethods {
         e.printStackTrace();
       }
     }
-    return new StructureTermBase(s, args);
+    return new StructureTermBase(s, args) {
+    };
   }
 
   /**
@@ -585,7 +592,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
     if ((args == null) || (args.length == 0)) return new Class[0];
     final Class[] argsc = new Class[args.length]; // TODO Auto-generated method stub
     for (int i = 0; i < args.length; i++) {
-      argsc[i] = StaticProlog.getClass(args);//.getClass();
+      argsc[i] = StaticProlog.getClass(args[i]);//.getClass();
     }
     return argsc;
   }
@@ -645,6 +652,9 @@ public class StaticPrologMethodImpl implements PrologMethods {
   final public String nameUQ(Object thiz) {
     // TODO Auto-generated method stub
     //functor(thiz)
+    if (thiz instanceof Class) {
+      return PredicateEncoder.decodeName((Class) thiz);
+    }
     if (thiz instanceof StructureTerm) {
       return ((StructureTermBase) thiz).nameUQ();
     }
@@ -714,7 +724,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
    */
   final public String toQuotedString(Object thiz) {
     // TODO Auto-generated method stub
-    if (thiz instanceof Term) return this.makeTerm(thiz).toQuotedString();
+    if (thiz instanceof Term) return this.makeTerm(thiz).toQuotedString(400);
     if (thiz instanceof String) return Token.toQuotedString(thiz.toString());
     return Token.toQuotedString("" + thiz);
   }
@@ -746,7 +756,29 @@ public class StaticPrologMethodImpl implements PrologMethods {
   @Override
   public VariableTerm makeVariable(Prolog prolog) {
     // TODO Auto-generated method stub
-    return new VariableTermBase(prolog);
+    return new VariableTermBase(prolog, new VariableTermLocation() {
+      Object value = unboundInit;
+
+      /* (non-Javadoc)
+       * @see jp.ac.kobe_u.cs.prolog.lang.impl.VariableTermLocation#isBound()
+       */
+      @Override
+      public boolean isBound() {
+        // TODO Auto-generated method stub
+        return value != unboundInit;
+      }
+
+      @Override
+      public Object getVal() {
+        // TODO Auto-generated method stub
+        return value;
+      }
+
+      @Override
+      public void setVal(Object o) {
+        value = o;
+      }
+    });
   }
 
   /* (non-Javadoc)
@@ -756,6 +788,43 @@ public class StaticPrologMethodImpl implements PrologMethods {
   public Predicate getCode(Object a1) {
     // TODO Auto-generated method stub
     return ((ClosureTerm) a1).getCode();
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.PrologMethods#makeVariableLoc(jp.ac.kobe_u.cs.prolog.lang.impl.VariableTermLocation)
+   */
+  @Override
+  public Object makeVariableLoc(VariableTermLocation a) {
+    return new VariableTermBase(VariableTermBase.machine, a);
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.PrologMethods#toQuotedString(java.lang.Object, int)
+   */
+  @Override
+  public String toQuotedString(Object arg1, int d0) {
+    // TODO Auto-generated method stub
+    if (arg1 instanceof Term) return ((Term) arg1).toQuotedString(d0);
+    return toQuotedString(arg1);
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.PrologMethods#toString(java.lang.Object, int)
+   */
+  @Override
+  public String toString(Object arg1, int d0) {
+    // TODO Auto-generated method stub
+    if (arg1 instanceof Term) return ((Term) arg1).toStringImpl(d0);
+    return toString(arg1);
+  }
+
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.PrologMethods#arg0(java.lang.Object, int)
+   */
+  @Override
+  public Object arg0(Object obj, int i) {
+    // TODO Auto-generated method stub
+    return ((StructureTerm) obj).arg0(i);
   }
 
 }

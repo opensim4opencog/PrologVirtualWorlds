@@ -237,7 +237,7 @@ abstract class NumberTerm extends Number implements Term {
    * @see jp.ac.kobe_u.cs.prolog.lang.impl.TermBase#toQuotedString()
    */
   @Override
-  final public String toQuotedString() {
+  final public String toQuotedString(int depth) {
     // TODO Auto-generated method stub
     return "" + this.toJava();
   }

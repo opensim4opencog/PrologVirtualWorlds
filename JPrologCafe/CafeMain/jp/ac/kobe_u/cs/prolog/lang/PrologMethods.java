@@ -3,6 +3,7 @@
  */
 package jp.ac.kobe_u.cs.prolog.lang;
 
+
 public interface PrologMethods {
 
   Object[] args(Object obj);
@@ -231,4 +232,31 @@ public interface PrologMethods {
    * @return
    */
   Predicate getCode(Object a1);
+
+  /**
+   * @param a
+   * @return
+   */
+  Object makeVariableLoc(VariableTermLocation a);
+
+  /**
+   * @param arg1
+   * @param d0
+   * @return
+   */
+  String toString(Object arg1, int d0);
+
+  /**
+   * @param arg1
+   * @param d0
+   * @return
+   */
+  String toQuotedString(Object arg1, int d0);
+
+  /**
+   * @param obj
+   * @param i
+   * @return
+   */
+  Object arg0(Object obj, int i);
 }

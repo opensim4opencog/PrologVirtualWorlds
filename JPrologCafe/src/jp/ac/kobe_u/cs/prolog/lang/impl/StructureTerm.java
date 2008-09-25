@@ -1,6 +1,5 @@
 package jp.ac.kobe_u.cs.prolog.lang.impl;
 
-
 /**
  * Compound term. <br>
  * The <code>StructureTerm</code> class represents a compound term but list.<br>
@@ -22,7 +21,7 @@ package jp.ac.kobe_u.cs.prolog.lang.impl;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-interface StructureTerm extends Term {
+public interface StructureTerm extends Term {
   //    /** Holds the functor symbol of this <code>StructureTerm</code>. */
   //    final private  /*SymbolTerm*/Object functor;
   //
@@ -65,6 +64,7 @@ interface StructureTerm extends Term {
    */
 
   public Object[] args();//{ return args; }
+
   //
   //  /** Returns the string representation of functor symbol of this <code>StructureTerm</code>.
   //   * @return a <code>String</code> whose value is <code>functor.name()</code>.
@@ -111,5 +111,11 @@ interface StructureTerm extends Term {
   //   * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
   //   */
   //  public int compareTo(Object anotherTerm);
+
+  /**
+   * @param i
+   * @return
+   */
+  public Object arg0(int i);
 
 }

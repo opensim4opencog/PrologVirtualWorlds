@@ -50,15 +50,6 @@ class ListTermBase extends TermBase implements ListTerm {
     return false;
   }
 
-  /* (non-Javadoc)
-   * @see be.kuleuven.jProlog.PrologObject#isConst()
-   */
-  @Override
-  public boolean isConst() {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
   /** A functor <code>'.' /2</code>. */
   public static/*SymbolTerm*/Object SYM_DOT = StaticProlog.makeAtom(".", 2);
 
@@ -180,7 +171,7 @@ class ListTermBase extends TermBase implements ListTerm {
   }
 
   @Override
-  public String toQuotedString() {
+  public String toQuotedString(int depth) {
     Object x = this;
     String s = "[";
     for (;;) {

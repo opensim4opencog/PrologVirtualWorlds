@@ -5,6 +5,7 @@ import jp.ac.kobe_u.cs.prolog.lang.Prolog;
 import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 import jp.ac.kobe_u.cs.prolog.lang.Trail;
 import jp.ac.kobe_u.cs.prolog.lang.Undoable;
+import jp.ac.kobe_u.cs.prolog.lang.VariableTermLocation;
 
 /**
  * Variable.<br>
@@ -18,7 +19,7 @@ import jp.ac.kobe_u.cs.prolog.lang.Undoable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-class VariableTermBase extends MachineTerm implements VariableTerm {
+class VariableTermBase extends MachineTerm implements VariableTerm, VariableTermLocation {
   /**
    * 
    */
@@ -28,18 +29,7 @@ class VariableTermBase extends MachineTerm implements VariableTerm {
   /** A CPF time stamp when this object is newly constructed. */
   private long timeStamp;
 
-  public interface VariableTermLocation {
-
-  }
-
-  /* (non-Javadoc)
-   * @see be.kuleuven.jProlog.PrologObject#isConst()
-   */
-  @Override
-  public boolean isConst() {
-    // TODO Auto-generated method stub
-    return false;
-  }
+  final VariableTermLocation value;
 
   // final Prolog machine;
 
@@ -57,7 +47,8 @@ class VariableTermBase extends MachineTerm implements VariableTerm {
    * @param engine Current Prolog engine.
    * @see Prolog#getCPFTimeStamp
    */
-  public VariableTermBase(Prolog engine) {
+  public VariableTermBase(Prolog engine, VariableTermLocation loc) {
+    value = loc;
     this.timeStamp = engine.getCPFTimeStamp();
     this.machine = engine;
     this.setVal(this);
@@ -110,8 +101,6 @@ class VariableTermBase extends MachineTerm implements VariableTerm {
     return true;
   }
 
-  public Object value;
-
   //  /* (non-Javadoc)
   //   * @see jp.ac.kobe_u.cs.prolog.lang.CafeTerm#prologEquals(java.lang.Object)
   //   */
@@ -135,12 +124,12 @@ class VariableTermBase extends MachineTerm implements VariableTerm {
   //   */
   //  @Override
   //  abstract public int compareTo(Object o) ;
-  public void setVal(Object value) {
-    this.value = value;
+  public void setVal(Object v) {
+    value.setVal(v);
   }
 
   public Object getVal() {
-    return this.value;
+    return value.getVal();
   }
 
   //  public boolean bind(Object that) {
@@ -190,7 +179,7 @@ class VariableTermBase extends MachineTerm implements VariableTerm {
     co = (VariableTermBase) this.machine.copyHash.get(this);
     if (co == null) {
       //	    co = Prolog.makeVariable(engine);
-      co = new VariableTermBase(this.machine);
+      co = (VariableTermBase) StaticProlog.makeVariable(machine);
       co.timeStamp = Long.MIN_VALUE;
       //machine
       this.machine.copyHash.put(this, co);
@@ -200,7 +189,7 @@ class VariableTermBase extends MachineTerm implements VariableTerm {
 
   @Override
   public Object deref() {
-    if (this.getVal() == this) return this;
+    if (!isBound()) return this;
     return StaticProlog.deref(this.getVal());//.deref();
   }
 
@@ -230,7 +219,7 @@ class VariableTermBase extends MachineTerm implements VariableTerm {
    * @see #value
    */
   @Override
-  public String toQuotedString() {
+  public String toQuotedString(int depth) {
     if (this.isBound()) return StaticProlog.toQuotedString(this.getVal());//.toQuotedString();
     return this.nameUQ();
   }
@@ -273,7 +262,8 @@ class VariableTermBase extends MachineTerm implements VariableTerm {
   @Override
   public boolean isBound() {
     // TODO Auto-generated method stub
-    return this.getVal() != this;
+    Object v = this.getVal();
+    return v != null && v != this;
   }
 
   /* Undoable */

@@ -23,7 +23,7 @@ interface ClosureTerm extends Term {
     /* Object */
     public boolean unify(Object t) ;//
 
-    public String toQuotedString();// { return toString(); }
+    public String toQuotedString(int depth);// { return toString(); }
 
     /* Object */
     /**
