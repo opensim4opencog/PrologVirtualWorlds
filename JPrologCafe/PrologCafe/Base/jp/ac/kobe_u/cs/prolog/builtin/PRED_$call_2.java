@@ -74,7 +74,7 @@ class PRED_$call_2 extends PredicateBase {
         args = null;
         arity = 0;
       } else if (isCompound(a2)) {
-        functor = nameUQ(jp.ac.kobe_u.cs.prolog.lang.StructureTermBase.functor((Object) a2));
+        functor = nameUQ(functor((Object) a2));
         args = args(a2);
         arity = arity(a2);
       } else

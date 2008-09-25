@@ -77,9 +77,9 @@ class PRED_$hash_addz_3 extends PredicateBase {
       Object x = elem;
       for (;;) {
         if (!isListTerm(x)) throw new InternalException(this + ": the valus of " + a2 + " is not list structure");
-        final Object y = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.rest( x));
+        final Object y = deref(rest( x));
         if (isNil(y)) {
-          jp.ac.kobe_u.cs.prolog.lang.ListTermBase.setCdr( x, makeList(a3, PRED_$hash_addz_3.SYM_NIL));
+          setCdr( x, makeList(a3, PRED_$hash_addz_3.SYM_NIL));
           break;
         }
         x = y;

@@ -1,7 +1,10 @@
 /* PRED_$call_closure_1 - at Sun Sep 21 05:38:59 PDT 2008 */
 package jp.ac.kobe_u.cs.prolog.builtin;
 
-import jp.ac.kobe_u.cs.prolog.lang.*;
+import jp.ac.kobe_u.cs.prolog.lang.Predicate;
+import jp.ac.kobe_u.cs.prolog.lang.PredicateBase;
+import jp.ac.kobe_u.cs.prolog.lang.Prolog;
+import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 
 /* used 3 more classes */
 /* import java.lang.StringBuilder; */
@@ -50,10 +53,11 @@ class PRED_$call_closure_1 extends PredicateBase {
     engine.setB0();
     final Object a1 = deref(this.arg1);
     if (!isClosure(a1)) return this.fail(engine);
-    final Predicate code = jp.ac.kobe_u.cs.prolog.lang.ClosureTermBase.getCode((ClosureTerm) a1);
+    final Predicate code =StaticProlog.getCode( a1);
     ((PredicateBase)code).cont = this.cont;
     return code;
   }
+
 
   @Override
   public void setArgument(Object[] args, Predicate cont) {

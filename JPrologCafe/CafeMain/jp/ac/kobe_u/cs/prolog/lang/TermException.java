@@ -19,6 +19,8 @@ public class TermException extends PrologException {
     /** Constructs a new <code>TermException</code> with a given message term. */
     public TermException(Object _message){
 	message = _message;
+	_message = StaticProlog.toJava(_message);
+	if (_message instanceof Throwable) ((Throwable) _message).printStackTrace();
     }
 
     public Object getMessageTerm() {

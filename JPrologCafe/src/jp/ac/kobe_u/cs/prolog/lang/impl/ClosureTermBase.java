@@ -1,5 +1,6 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
 
+import jp.ac.kobe_u.cs.prolog.lang.Predicate;
 
 /**
  * Closure.<br>
@@ -9,7 +10,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class ClosureTermBase extends TermBase implements ClosureTerm {
+class ClosureTermBase extends TermBase implements ClosureTerm {
   /** Holds a <code>Predicate</code> object that represents a Prolog goal. */
   final private Predicate code;
 
@@ -17,7 +18,7 @@ public class ClosureTermBase extends TermBase implements ClosureTerm {
   public ClosureTermBase(Predicate _code) {
     code = _code;
   }
-  
+
   /* (non-Javadoc)
    * @see jp.ac.kobe_u.cs.prolog.lang.Object#nameUQ()
    */
@@ -33,7 +34,6 @@ public class ClosureTermBase extends TermBase implements ClosureTerm {
     return code;
   }
 
-  
   /* (non-Javadoc)
    * @see jp.ac.kobe_u.cs.prolog.lang.TermBase#isConst()
    */
@@ -42,11 +42,11 @@ public class ClosureTermBase extends TermBase implements ClosureTerm {
     // TODO Auto-generated method stub
     return false;
   }
-  
+
   /* Object */
   public boolean unify(Object t) {
     //	t = t.deref();
-    if (isVariable(t)) return unify(t,this);
+    if (isVariable(t)) return unify(t, this);
     if (!isClosure(t)) return false;
     return code.equals(((ClosureTerm) t).getCode());
   }

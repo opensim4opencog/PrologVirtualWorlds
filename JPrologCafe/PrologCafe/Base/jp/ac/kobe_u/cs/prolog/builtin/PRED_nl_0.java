@@ -1,7 +1,5 @@
 /* PRED_nl_0 - at Sun Sep 21 05:38:58 PDT 2008 */
 package jp.ac.kobe_u.cs.prolog.builtin;
-import jp.ac.kobe_u.cs.prolog.lang.Predicate;
-import jp.ac.kobe_u.cs.prolog.lang.Prolog;
 import jp.ac.kobe_u.cs.prolog.lang.*;
 /* used 2 more classes */
 /* import java.lang.String; */

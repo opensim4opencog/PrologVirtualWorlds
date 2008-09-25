@@ -11,7 +11,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  */
 public class IllegalDomainException extends BuiltinException {
     /** A functor symbol of <code>domain_error/4</code>. */
-    public static /*SymbolTerm*/Object DOMAIN_ERROR = Prolog.makeSymbol("domain_error", 4);
+    public static /*SymbolTerm*/Object DOMAIN_ERROR = StaticProlog.makeAtom("domain_error", 4);
 
     /*
       domain ::= character_code_list | close_option | flag_value | io_mode | 

@@ -1,7 +1,9 @@
 /**
  * 
  */
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
+
+import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
 
 /**
  * @author root

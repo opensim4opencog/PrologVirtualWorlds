@@ -10,7 +10,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  */
 public class PermissionException extends BuiltinException {
     /** A functor symbol of <code>permission_error/5</code>. */
-    public static /*SymbolTerm*/Object PERMISSION_ERROR = Prolog.makeSymbol("permission_error", 5);
+    public static /*SymbolTerm*/Object PERMISSION_ERROR = StaticProlog.makeAtom("permission_error", 5);
 
     /* operation ::= access | create | input | modify | open | output | reposition | new */
     /** Holds a string representation of operation. */
@@ -49,12 +49,12 @@ public class PermissionException extends BuiltinException {
      */
     public Object getMessageTerm() {
 	Object[] args = {
-	    Prolog.makeJavaObject(goal), 
-	    Prolog.makeSymbol(operation),
-	    Prolog.makeSymbol(permissionType),
+	    StaticProlog.makeJavaObject(goal), 
+	    StaticProlog.makeAtom(operation),
+	    StaticProlog.makeAtom(permissionType),
 	    culprit,
-	    Prolog.makeSymbol(message)};
-	return Prolog.makeStructure(PERMISSION_ERROR, args);
+	    StaticProlog.makeAtom(message)};
+	return StaticProlog.makeStructure(PERMISSION_ERROR, args);
     }
 
     /** Returns a string representation of this <code>PermissionException</code>. */

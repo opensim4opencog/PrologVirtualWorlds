@@ -3,11 +3,9 @@ package jp.ac.kobe_u.cs.prolog.builtin;
 
 import java.util.Collection;
 
-import jp.ac.kobe_u.cs.prolog.lang.JavaObjectTerm;
 import jp.ac.kobe_u.cs.prolog.lang.JavaPredicate;
 import jp.ac.kobe_u.cs.prolog.lang.Predicate;
 import jp.ac.kobe_u.cs.prolog.lang.Prolog;
-import jp.ac.kobe_u.cs.prolog.lang.*;
 
 public class PRED_java_object_2 extends JavaPredicate {
   /**

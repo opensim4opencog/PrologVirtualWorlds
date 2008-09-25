@@ -60,16 +60,16 @@ final Object[] engine_aregs = engine.getAreg();
     }
     if (!isListTerm(a2))
  throw new IllegalTypeException(this, 2, "list", a2);
-    for (Object tmp = a2; !isNil(tmp); tmp = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.rest((Object) tmp))){
+    for (Object tmp = a2; !isNil(tmp); tmp = deref(rest((Object) tmp))){
  if (isVariable(tmp))
      throw new PInstantiationException(this, 2);
  if (!isListTerm(tmp))
      throw new IllegalTypeException(this, 2, "list", a2);
- final Object car = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.first((Object) tmp));
+ final Object car = deref(first((Object) tmp));
  if (isVariable(car))
      throw new PInstantiationException(this, 2);
  if (isCompound(car)){
-     final /*SymbolTerm*/Object functor = jp.ac.kobe_u.cs.prolog.lang.StructureTermBase.functor((Object) car);
+     final /*SymbolTerm*/Object functor = functor((Object) car);
      final Object[] args = args(car);
      if (prologEquals(functor, PRED_new_hash_2.SYM_ALIAS_1)){
   final Object alias = deref(args[0]);

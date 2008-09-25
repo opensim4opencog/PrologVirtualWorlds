@@ -21,7 +21,7 @@ public interface Predicate  extends Serializable {
      * @exception PrologException if a Prolog exception is raised.
      * @see Prolog
      */
-    public abstract Predicate exec(Prolog engine) throws PrologException;
+    public abstract Predicate execCode(Prolog engine) throws PrologException;
 
     /** Returns the arity of this predicate. */
     public abstract int arity();

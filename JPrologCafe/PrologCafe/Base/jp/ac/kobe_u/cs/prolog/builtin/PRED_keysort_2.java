@@ -64,16 +64,16 @@ public class PRED_keysort_2 extends PredicateBase {
       return this.cont;
     }
     if (!isListTerm(a1)) throw new IllegalTypeException(this, 1, "list", a1);
-    final int len = jp.ac.kobe_u.cs.prolog.lang.ListTermBase.listLength((Object) a1);
+    final int len = listLength((Object) a1);
     final Object[] list = new Object[len];
     Object tmp = a1;
     for (int i = 0; i < len; i++) {
       if (!isListTerm(tmp)) throw new IllegalTypeException(this, 1, "list", a1);
-      list[i] = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.first((Object) tmp));
+      list[i] = deref(first((Object) tmp));
       if (isVariable(list[i])) throw new PInstantiationException(this, 1);
       if (!isCompound(list[i])) throw new IllegalTypeException(this, 1, "key_value_pair", a1);
-      if (!prologEquals(jp.ac.kobe_u.cs.prolog.lang.StructureTermBase.functor((Object) list[i]), PRED_keysort_2.SYM_HYPHEN_2)) throw new IllegalTypeException(this, 1, "key_value_pair", a1);
-      tmp = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.rest((Object) tmp));
+      if (!prologEquals(functor((Object) list[i]), PRED_keysort_2.SYM_HYPHEN_2)) throw new IllegalTypeException(this, 1, "key_value_pair", a1);
+      tmp = deref(rest((Object) tmp));
     }
     if (!prologEquals(tmp, PRED_keysort_2.Nil)) throw new PInstantiationException(this, 1);
     try {

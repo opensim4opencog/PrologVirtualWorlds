@@ -1,4 +1,5 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
+
 
 /**
  * Compound term. <br>
@@ -21,7 +22,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public interface StructureTerm extends Term {
+interface StructureTerm extends Term {
   //    /** Holds the functor symbol of this <code>StructureTerm</code>. */
   //    final private  /*SymbolTerm*/Object functor;
   //
@@ -48,7 +49,7 @@ public interface StructureTerm extends Term {
    * @return the value of <code>functor</code>.
    * @see #functor
    */
-  public /*SymbolTerm*/Object functor();//{ return functor; }
+  public/*SymbolTerm*/Object functor();//{ return functor; }
 
   //
   //  /** Returns the arity of this <code>StructureTerm</code>.

@@ -1,5 +1,13 @@
 package jp.ac.kobe_u.cs.prolog.lang;
 
+import static jp.ac.kobe_u.cs.prolog.lang.StaticProlog.deref;
+import static jp.ac.kobe_u.cs.prolog.lang.StaticProlog.intValue;
+import static jp.ac.kobe_u.cs.prolog.lang.StaticProlog.isAtomTerm;
+import static jp.ac.kobe_u.cs.prolog.lang.StaticProlog.isCompound;
+import static jp.ac.kobe_u.cs.prolog.lang.StaticProlog.isDouble;
+import static jp.ac.kobe_u.cs.prolog.lang.StaticProlog.isInteger;
+import static jp.ac.kobe_u.cs.prolog.lang.StaticProlog.isListTerm;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -7,10 +15,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.PushbackReader;
 import java.io.Serializable;
-import java.util.Dictionary;
-import java.util.Hashtable;
 import java.util.Map;
-import static jp.ac.kobe_u.cs.prolog.lang.StaticProlog.*;
 
 /**
  * Prolog engine.
@@ -82,7 +87,7 @@ public class Prolog implements Serializable {
   protected long previousRuntime;
 
   /** Hashtable for creating a copy of term. */
-  protected Map copyHash;
+  public Map copyHash;
 
   /** The size of the pushback buffer used for creating input streams. */
   public static int PUSHBACK_SIZE = 2;
@@ -104,20 +109,20 @@ public class Prolog implements Serializable {
   protected HashtableOfTerm hashManager;
 
   /** Holds an atom <code>[]<code> (empty list). */
-  public static/*SymbolTerm*/Object Nil = makeSymbol("[]");
+  public static/*SymbolTerm*/Object Nil = StaticProlog.makeAtom("[]");
 
   /* Some symbols for stream options */
-  static/*SymbolTerm*/Object SYM_MODE_1 = makeSymbol("mode", 1);
-  static/*SymbolTerm*/Object SYM_ALIAS_1 = makeSymbol("alias", 1);
-  static/*SymbolTerm*/Object SYM_TYPE_1 = makeSymbol("type", 1);
-  static/*SymbolTerm*/Object SYM_READ = makeSymbol("read");
-  static/*SymbolTerm*/Object SYM_APPEND = makeSymbol("append");
-  static/*SymbolTerm*/Object SYM_INPUT = makeSymbol("input");
-  static/*SymbolTerm*/Object SYM_OUTPUT = makeSymbol("output");
-  static/*SymbolTerm*/Object SYM_TEXT = makeSymbol("text");
-  static/*SymbolTerm*/Object SYM_USERINPUT = makeSymbol("user_input");
-  static/*SymbolTerm*/Object SYM_USEROUTPUT = makeSymbol("user_output");
-  static/*SymbolTerm*/Object SYM_USERERROR = makeSymbol("user_error");
+  static/*SymbolTerm*/Object SYM_MODE_1 = StaticProlog.makeAtom("mode", 1);
+  static/*SymbolTerm*/Object SYM_ALIAS_1 = StaticProlog.makeAtom("alias", 1);
+  static/*SymbolTerm*/Object SYM_TYPE_1 = StaticProlog.makeAtom("type", 1);
+  static/*SymbolTerm*/Object SYM_READ = StaticProlog.makeAtom("read");
+  static/*SymbolTerm*/Object SYM_APPEND = StaticProlog.makeAtom("append");
+  static/*SymbolTerm*/Object SYM_INPUT = StaticProlog.makeAtom("input");
+  static/*SymbolTerm*/Object SYM_OUTPUT = StaticProlog.makeAtom("output");
+  static/*SymbolTerm*/Object SYM_TEXT = StaticProlog.makeAtom("text");
+  static/*SymbolTerm*/Object SYM_USERINPUT = StaticProlog.makeAtom("user_input");
+  static/*SymbolTerm*/Object SYM_USEROUTPUT = StaticProlog.makeAtom("user_output");
+  static/*SymbolTerm*/Object SYM_USERERROR = StaticProlog.makeAtom("user_error");
 
   /** Constructs new Prolog engine. */
   public Prolog(PrologControl c) {
@@ -149,9 +154,9 @@ public class Prolog implements Serializable {
     userOutput = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
     userError = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.err)), true);
 
-    copyHash = new HashtableOfTerm<VariableTerm>();
-    hashManager = new HashtableOfTerm();
-    streamManager = new HashtableOfTerm();//Prolog.makeHashtableOf();
+    copyHash = StaticProlog.makeHashtableOf();//new HashtableOfTerm<Object>();
+    hashManager = StaticProlog.makeHashtableOf();// new HashtableOfTerm();
+    streamManager = StaticProlog.makeHashtableOf();// new HashtableOfTerm();//Prolog.makeHashtableOf();
 
     streamManager.put(SYM_USERINPUT, StaticProlog.makeJavaObject(userInput));
     streamManager.put(StaticProlog.makeJavaObject(userInput), makeStreamProperty(SYM_READ, SYM_INPUT, SYM_USERINPUT, SYM_TEXT));
@@ -185,7 +190,7 @@ public class Prolog implements Serializable {
     printStackTrace = "off";
 
     pendingGoals = Nil;
-    exception = makeSymbol("$no_ball");
+    exception = StaticProlog.makeAtom("$no_ball");
     startRuntime = System.currentTimeMillis();
     previousRuntime = 0;
 
@@ -207,7 +212,7 @@ public class Prolog implements Serializable {
 
   /** Discards all choice points after the value of <code>i</code>. */
   public void cut(Object i) {
-    orStack.cut(((NumberTerm) i).intValue());
+    orStack.cut((int) intValue(i));
   }
 
   /** Discards all choice points after the value of <code>B0</code>. */
@@ -221,7 +226,7 @@ public class Prolog implements Serializable {
    */
   public Object copy(Object t) {
     copyHash.clear();
-    return StaticProlog.copy(t, this);
+    return StaticProlog.copy(t);
   }
 
   /** 
@@ -509,50 +514,9 @@ public class Prolog implements Serializable {
    * @param prolog
    * @return
    */
-  public VariableTerm makeVariable(Predicate pred) {
+  public Object makeVariable(Predicate pred) {
     // TODO Auto-generated method stub
-    return new VariableTermBase(this);
-  }
-
-  /**
-   * @param s2
-   * @param terms
-   * @return
-   */
-  public static StructureTerm makeStructure(/*SymbolTerm*/Object s2, Object[] terms) {
-    // TODO Auto-generated method stub
-    return new StructureTermBase(s2, terms);
-  }
-
-  //  /**
-  //   * @param makeInteger
-  //   * @param token
-  //   * @return
-  //   */
-  public static ListTerm makeList(Object a, Object d) {
-    // TODO Auto-generated method stub
-    return new ListTermBase(a, d);
-  }
-
-  //
-  //  static public IntegerTerm makeInteger(int i) {
-  //    return new IntegerTerm(i);
-  //  }
-  //
-  //  static public NumberTerm makeDouble(double i) {
-  //    return new NumberTerm(i);
-  //  }
-  //
-  static public JavaObjectTerm makeJavaObject(Object i) {
-    return new JavaObjectTermBase(i);
-  }
-
-  static public/*SymbolTerm*/Object makeSymbol(String n, int a) {
-    return SymbolTermBase.makeSymbol(n, a);
-  }
-
-  static public/*SymbolTerm*/Object makeSymbol(String n) {
-    return SymbolTermBase.makeAtom(n);
+    return StaticProlog.makeVariable(this);
   }
 
   /**

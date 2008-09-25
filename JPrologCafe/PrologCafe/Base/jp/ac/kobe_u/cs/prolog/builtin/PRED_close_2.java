@@ -57,13 +57,13 @@ public class PRED_close_2 extends PredicateBase {
     boolean forceFlag = false;
     Object stream = null;
     a2 = deref(a2);
-    for (Object tmp = a2; !isNil(tmp); tmp = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.rest((Object) tmp))) {
+    for (Object tmp = a2; !isNil(tmp); tmp = deref(rest((Object) tmp))) {
       if (isVariable(tmp)) throw new PInstantiationException(this, 2);
       if (!isListTerm(tmp)) throw new IllegalTypeException(this, 2, "list", a2);
-      final Object car = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.first((Object) tmp));
+      final Object car = deref(first((Object) tmp));
       if (isVariable(car)) throw new PInstantiationException(this, 2);
       if (isCompound(car)) {
-        final /*SymbolTerm*/Object functor = jp.ac.kobe_u.cs.prolog.lang.StructureTermBase.functor((Object) car);
+        final /*SymbolTerm*/Object functor = functor((Object) car);
         final Object[] args = args(car);
         if (prologEquals(functor, PRED_close_2.SYM_FORCE_1)) {
           final Object bool = deref(args[0]);
@@ -117,10 +117,10 @@ public class PRED_close_2 extends PredicateBase {
       streamManager.remove(engine.getStreamManager().get(a1));
       streamManager.remove(a1);
     } else if (isJavaObject(a1)) {
-      for (Object tmp2 =(Object)  streamManager.get(a1); !isNil(tmp2); tmp2 = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.rest((Object) tmp2))) {
-        final Object car = deref(jp.ac.kobe_u.cs.prolog.lang.ListTermBase.first((Object) tmp2));
+      for (Object tmp2 =(Object)  streamManager.get(a1); !isNil(tmp2); tmp2 = deref(rest((Object) tmp2))) {
+        final Object car = deref(first((Object) tmp2));
         if (isCompound(car)) {
-          final /*SymbolTerm*/Object functor = jp.ac.kobe_u.cs.prolog.lang.StructureTermBase.functor((Object) car);
+          final /*SymbolTerm*/Object functor = functor((Object) car);
           final Object[] args = args(car);
           if (prologEquals(functor, PRED_close_2.SYM_ALIAS_1)) {
             final Object alias = deref(args[0]);

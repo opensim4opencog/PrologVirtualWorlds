@@ -1,5 +1,7 @@
 package jp.ac.kobe_u.cs.prolog.lang;
 
+import jp.ac.kobe_u.cs.prolog.lang.impl.NumberTerm;
+
 /**
  * The <code>Arithmetic</code> class contains a method
  * for evaluating arithmetic expressions.<br>

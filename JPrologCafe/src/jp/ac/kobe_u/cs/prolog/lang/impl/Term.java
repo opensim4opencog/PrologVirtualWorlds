@@ -1,4 +1,4 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
 
 import java.io.Serializable;
 
@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public interface Term extends Serializable, Comparable<Object> {
+interface Term extends Serializable, Comparable<Object> {
 
   /** Holds an integer value <code>0</code>. */
   public static int EQUAL = 0;
@@ -37,6 +37,7 @@ public interface Term extends Serializable, Comparable<Object> {
    * @see VariableTerm
    */
   public boolean isVariable();//{ return this instanceof VariableTerm; }
+
   /** 
    * Check whether this term is an integer.
    * @return <code>true</code> if <code>this instanceof IntegerTerm</code>, 
@@ -69,6 +70,7 @@ public interface Term extends Serializable, Comparable<Object> {
    * @see SymbolTerm
    */
   public boolean isAtomTerm();//{ return this instanceof /*SymbolTerm*/Object; }
+
   /** Check whether this term is an empty list. */
   public boolean isNil();//{ return Prolog.Nil.equals(this); }
 
@@ -86,21 +88,24 @@ public interface Term extends Serializable, Comparable<Object> {
    * otherwise <code>false</code>.
    * @see StructureTerm
    */
-    public boolean isCompound();//{ return this instanceof StructureTerm; }
+  public boolean isCompound();//{ return this instanceof StructureTerm; }
+
   /** 
    * Check whether this term is a java term.
    * @return <code>true</code> if <code>this instanceof JavaObjectTerm</code>,
    * otherwise <code>false</code>.
    * @see JavaObjectTerm
    */
-   public boolean isJavaObject();// { return this instanceof JavaObjectTerm; }
+  public boolean isJavaObject();// { return this instanceof JavaObjectTerm; }
+
   /** 
    * Check whether this term is a closure term.
    * @return <code>true</code> if <code>this instanceof ClosureTerm</code>,
    * otherwise <code>false</code>.
    * @see ClosureTerm
    */
-   public boolean isClosure();// { return this instanceof ClosureTerm; }
+  public boolean isClosure();// { return this instanceof ClosureTerm; }
+
   /** 
    * Check whether this object is convertible with the given Java class type.
    * @param type the Java class type to compare with.
@@ -111,14 +116,17 @@ public interface Term extends Serializable, Comparable<Object> {
   public boolean convertible(Class type);// { return convertible(getClass(), type); }
 
   /** Returns a copy of this object. */
-  Object copy(Prolog engine);// { return this; }
+  Object copy();// { return this; }
+
   /** Returns the deref value of this term. */
-   public Object deref();//{ return this; }
+  public Object deref();//{ return this; }
+
   /** 
    * Check whether this term is a ground term.
    * @return <code>true</code> if ground, otherwise <code>false</code>.
    */
   public boolean isGround();//{ return true; }
+
   /** 
    * Returns a Java object that corresponds to this term 
    * if defined in <em>Prolog Cafe interoperability with Java</em>.
@@ -126,7 +134,8 @@ public interface Term extends Serializable, Comparable<Object> {
    * @return a Java object if defined in <em>Prolog Cafe interoperability with Java</em>,
    * otherwise <code>this</code>.
    */
-   public Object toJava();//{ 	return this;    } 
+  public Object toJava();//{ 	return this;    } 
+
   /** Returns a quoted string representation of this term. */
   public String toQuotedString();// { return this.toString(); }
 

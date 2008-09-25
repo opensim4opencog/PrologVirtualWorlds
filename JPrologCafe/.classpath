@@ -1,57 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="CafeMain"/>
+	<classpathentry kind="src" path="PrologCafe/src"/>
 	<classpathentry kind="src" path="PrologCafe/Base"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="PrologCafe/src"/>
-	<classpathentry kind="lib" path="JProlog/libs/junit-4.1.jar"/>
-	<classpathentry kind="lib" path="JProlog/libs/log4j-1.2.13.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/commons-collections-2.1.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/commons-httpclient-2.0-rc2.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/hsqldb-1.7.2RC1.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/jdom.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/mysql-connector.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/endorsed/crimson.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/endorsed/jaxp1.1.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/endorsed/servlet-1.2.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/endorsed/sqlx.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/junit-3.8.1.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/log4j-1.2.8.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/lib/log4j.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/jade/jade.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/axis/axis-ant.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/axis/axis.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/axis/commons-discovery.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/axis/commons-logging.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/axis/jaxrpc.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/axis/saaj.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/axis/wsdl4j.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/jade/Base64.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/jade/http.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/jade/jadeTools.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/commons-collections-2.1.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/commons-httpclient-2.0-rc2.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/commons-lang-2.0.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/junitperf.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/mmmysql.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/xalan.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/xml-apis.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/activation.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/jakarta-regexp-1.2.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/JCup.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/jms.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/jndi.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/joram.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/jta.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/log4j.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/mail.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/mom.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/ow_monolog.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/joram/soap.jar"/>
-	<classpathentry kind="lib" path="prova-1.8.0/prova/lib/qizx/qizxopen.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.maven.ide.eclipse.MAVEN2_CLASSPATH_CONTAINER"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

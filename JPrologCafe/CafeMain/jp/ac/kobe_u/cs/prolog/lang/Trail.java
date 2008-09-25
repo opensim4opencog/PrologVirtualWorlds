@@ -21,7 +21,7 @@ public class Trail implements Serializable {
     protected int top;
 
     /** Holds the Prolog engine that this <code>Trail</code> belongs to. */
-    protected Prolog engine;
+    public Prolog engine;
 	
     /** Constructs a new trail stack. */
     public Trail(Prolog _engine) {

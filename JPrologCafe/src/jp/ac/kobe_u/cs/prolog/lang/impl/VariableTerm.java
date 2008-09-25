@@ -1,4 +1,7 @@
-package jp.ac.kobe_u.cs.prolog.lang;
+package jp.ac.kobe_u.cs.prolog.lang.impl;
+
+import jp.ac.kobe_u.cs.prolog.lang.Prolog;
+import jp.ac.kobe_u.cs.prolog.lang.Undoable;
 
 /**
  * Variable.<br>
@@ -12,7 +15,7 @@ package jp.ac.kobe_u.cs.prolog.lang;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public interface VariableTerm extends Term, Undoable {
+interface VariableTerm extends Term, Undoable {
 
   /** 
    * Returns the value of <code>timeStamp</code>.
@@ -24,6 +27,8 @@ public interface VariableTerm extends Term, Undoable {
   public String nameUQ();
 
   boolean isBound();
+
+  Undoable getUndoable();
 
   /* Object */
   /** 
@@ -39,15 +44,13 @@ public interface VariableTerm extends Term, Undoable {
    * @see Trail
    */
   //public boolean unify(Object t);
-
   /** 
    * Binds this variable to a given term. 
    * And pushs this variable to trail stack if necessary. 
    * @param t a term to be bound.
    * @see Trail
    */
- //ublic boolean bind(Object t);
-
+  //ublic boolean bind(Object t);
   //  /** 
   //   * Checks whether this object is convertible with the given Java class type 
   //   * if this variable is unbound.
@@ -124,9 +127,13 @@ public interface VariableTerm extends Term, Undoable {
   //   * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
   //   */
   //  public int compareTo(Object anotherTerm);
-
   /**
    * @param variableTermBase
    */
   public void setVal(Object variableTermBase);
+
+  /**
+   * @return
+   */
+  public Prolog getMachine();
 }

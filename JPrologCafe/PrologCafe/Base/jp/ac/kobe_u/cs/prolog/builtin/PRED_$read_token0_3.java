@@ -2,6 +2,8 @@
 package jp.ac.kobe_u.cs.prolog.builtin;
 
 import java.io.PushbackReader;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import jp.ac.kobe_u.cs.prolog.lang.*;
 
@@ -79,16 +81,16 @@ class PRED_$read_token0_3 extends PredicateBase {
       type = Token.read_token(s, (PushbackReader) stream);
       switch (type) {
         case 73:
-          token = makeInteger(Integer.parseInt(s.toString()));
+          token = makeInteger(parseInteger(s.toString()));
           break;
         case 68:
-          token = makeDouble(Double.parseDouble(s.toString()));
+          token = makeDouble(parseDouble(s.toString()));
           break;
         case 83: {
           final char[] chars = s.toString().toCharArray();
           token = Prolog.Nil;
           for (int i = chars.length; i > 0; i--)
-            token = makeList(makeInteger((byte)chars[i - 1]), token);
+            token = makeList(makeInteger((byte) chars[i - 1]), token);
           break;
         }
         default:
@@ -100,6 +102,38 @@ class PRED_$read_token0_3 extends PredicateBase {
     if (!unify(a2, makeInteger(type))) return this.fail(engine);
     if (!unify(a3, token)) return this.fail(engine);
     return this.cont;
+  }
+
+  /**
+   * @param string
+   * @return
+   */
+  private Number parseInteger(String string) {
+    try {
+      return Integer.parseInt(string);
+    } catch (NumberFormatException nfe) {
+      try {
+        return Long.parseLong(string);
+      } catch (NumberFormatException nfe2) {
+        return new BigInteger(string);
+      }
+    }
+  }
+
+  /**
+   * @param string
+   * @return
+   */
+  private Number parseDouble(String string) {
+    try {
+      return Double.parseDouble(string);
+    } catch (NumberFormatException nfe) {
+      try {
+        return Float.parseFloat(string);
+      } catch (NumberFormatException nfe2) {
+        return new BigDecimal(string);
+      }
+    }
   }
 
   @Override
