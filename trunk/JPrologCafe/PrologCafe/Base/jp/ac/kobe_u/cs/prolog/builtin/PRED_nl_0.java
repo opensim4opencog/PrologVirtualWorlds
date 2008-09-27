@@ -26,12 +26,12 @@ this.cont = cont;
     /* flow_0_0_EmptyBlock_1054706169
  */
 /* empty */}
-    @Override
-    public  String toString() {
-        /* flow_0_0_ConstantOperator
- */
-return "nl";
-}
+//    @Override
+//    public  String toString() {
+//        /* flow_0_0_ConstantOperator
+// */
+//return "nl";
+//}
     @Override
     public  Predicate exec(Prolog engine) {
         /* flow_0_0_LocalStoreOperator

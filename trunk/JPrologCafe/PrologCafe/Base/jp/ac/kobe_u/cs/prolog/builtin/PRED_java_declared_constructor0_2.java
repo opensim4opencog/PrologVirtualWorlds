@@ -48,13 +48,13 @@ public class PRED_java_declared_constructor0_2 extends JavaPredicate {
     this.cont = cont;
   }
 
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    return "java_declared_constructor0(" + this.arg1 + "," + this.arg2 + ")";
-  }
-
+  //
+  //  @Override
+  //  public String toString() {
+  //    /* flow_0_0_StringAddOperator
+  //    */
+  //    return "java_declared_constructor0(" + this.arg1 + "," + this.arg2 + ")";
+  //  }
 
   @Override
   public Predicate exec(Prolog engine) {

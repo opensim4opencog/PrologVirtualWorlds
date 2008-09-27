@@ -109,7 +109,11 @@ public class PredicateEncoder {
    */
   public static String decodeName(Class thiz) {
     // TODO Auto-generated method stub
-    String c = ((Class) thiz).getName();
+
+    String c = thiz.getSimpleName();
+    if (c == null) {
+      c = thiz.getName();
+    }
     if (c.startsWith("PRED_")) {
       c = c.substring(5);
     }

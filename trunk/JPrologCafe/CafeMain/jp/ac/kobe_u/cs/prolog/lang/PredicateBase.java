@@ -5,7 +5,6 @@ package jp.ac.kobe_u.cs.prolog.lang;
 
 import java.util.Collection;
 
-
 /**
  * @author root
  *
@@ -34,9 +33,19 @@ abstract public class PredicateBase extends StaticProlog implements Predicate {
   @Override
   public Predicate execCode(Prolog engine) throws PrologException {
     // TODO Auto-generated method stub
-    return exec(engine);
+    if (false) {
+      String s = "TRACE: " + this;
+      System.out.flush();
+      if (s.contains("PRED_nl_")) {
+        //  System.err.print(false);
+      }
+      System.out.println(s);
+      System.out.flush();
+    }
+    Predicate p = exec(engine);
+    System.out.flush();
+    return p;
   }
-  
 
   /* (non-Javadoc)
    * @see jp.ac.kobe_u.cs.prolog.lang.Predicate#setArgument(jp.ac.kobe_u.cs.prolog.lang.Object[], jp.ac.kobe_u.cs.prolog.lang.Predicate)
@@ -55,8 +64,43 @@ abstract public class PredicateBase extends StaticProlog implements Predicate {
     throw new IndexOutOfBoundsException(string + " " + i0 + " with " + val);
   }
 
-  public String toPrologString(java.util.Collection newParam) {
-    return super.toString();
+  public String toPrologString(Collection newParam) {
+    String s;
+    final Class c = this.getClass();
+    s = c.getSimpleName();
+    boolean added = newParam.add(this);
+    s += "(";
+    final int a = this.arity();
+    for (int i = 1; i <= a; i++) {
+      java.lang.reflect.Field f;
+      Object v;
+      try {
+        f = c.getDeclaredField("arg" + i);
+        f.setAccessible(true);
+        try {
+          v = f.get(this);
+          s += argString(v, newParam);
+        } catch (final IllegalArgumentException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } catch (final IllegalAccessException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+      } catch (final SecurityException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      } catch (final NoSuchFieldException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+
+    }
+    s += ")";
+    if (added) {
+      newParam.remove(this);
+    }
+    return s;
   }
 
   /**
@@ -65,7 +109,7 @@ abstract public class PredicateBase extends StaticProlog implements Predicate {
    * @param val
    */
   @Override
-  public String toString() {
+  final public String toString() {
     return toPrologString(newIdentityLinkedList());
   }
 
@@ -79,14 +123,18 @@ abstract public class PredicateBase extends StaticProlog implements Predicate {
 
     if (arg32 == null) return "__/*NULL*/";
     if (!newParam.add(this)) {
-      return ".." + getClass() + "..";
+      return ".." + arg32.getClass().getSimpleName() + "..";
     }
     try {
-      //            if (isVariable(arg32)) {
-      //                Object arg2 = deref(arg32);
-      //                //   if (arg2 != arg32) return arg32.toPrologString(newParam) + "/*=" + arg2.toPrologString(newParam) + "*/";
-      //            }
-      return "" + arg32.toString();//(40);
+      if (isVariable(arg32)) {
+        Object arg2 = deref(arg32);
+        //   if (arg2 != arg32) return arg32.toPrologString(newParam) + "/*=" + arg2.toPrologString(newParam) + "*/";
+      }
+      try {
+        return "" + StaticProlog.toString(arg32, 23);//(40);
+      } catch (Throwable t) {
+        return "..<" + arg32.getClass().getSimpleName() + ">..";
+      }
     } finally {
       newParam.remove(this);
     }

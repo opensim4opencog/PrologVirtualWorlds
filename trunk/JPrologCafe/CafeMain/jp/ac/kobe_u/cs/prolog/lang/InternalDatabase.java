@@ -24,10 +24,12 @@ public class InternalDatabase implements Serializable {
   /** the top index of this <code>InternalDatabase</code>. */
   protected int top;
 
+  /** Hashtable for managing internal databases. */
+  static final protected HashtableOfTerm hashManager = StaticProlog.makeHashtableOf();// new HashtableOfTerm();
+
   /** Constructs a new internal dababase. */
   public InternalDatabase() {
-    buffer = new Object[maxContents];
-    top = -1;
+    this(100000);
   }
 
   /** Constructs a new internal dababase with the given size. */
@@ -35,6 +37,7 @@ public class InternalDatabase implements Serializable {
     maxContents = n;
     buffer = new Object[maxContents];
     top = -1;
+   
   }
 
   /** Discards all entries. */

@@ -35,13 +35,13 @@ public class PRED_$term_hash_2 extends PredicateBase {
     this.arg2 = a2;
     this.cont = cont;
   }
-
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    return "$term_hash(" + this.arg1 + ", " + this.arg2 + ")";
-  }
+//
+//  @Override
+//  public String toString() {
+//    /* flow_0_0_StringAddOperator
+//    */
+//    return "$term_hash(" + this.arg1 + ", " + this.arg2 + ")";
+//  }
 
   @Override
   public Predicate exec(Prolog engine) {

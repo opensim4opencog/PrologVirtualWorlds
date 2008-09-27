@@ -2,6 +2,7 @@ package jp.ac.kobe_u.cs.prolog.lang.impl;
 
 import jp.ac.kobe_u.cs.prolog.lang.Prolog;
 import jp.ac.kobe_u.cs.prolog.lang.Undoable;
+import jp.ac.kobe_u.cs.prolog.lang.VariableTermLocation;
 
 /**
  * Variable.<br>
@@ -15,7 +16,7 @@ import jp.ac.kobe_u.cs.prolog.lang.Undoable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-interface VariableTerm extends Term {
+interface VariableTerm extends Term, VariableTermLocation {
 
   /**
    * Returns the value of <code>timeStamp</code>.
@@ -25,8 +26,6 @@ interface VariableTerm extends Term {
 
   /** Returns a string representation of this object.*/
   public String nameUQ();
-
-  boolean isBound();
 
   Undoable getUndoable();
 
@@ -127,11 +126,10 @@ interface VariableTerm extends Term {
   //   * and a value greater than <code>0</code> if this term is <em>after</em> the <code>anotherTerm</code>.
   //   */
   //  public int compareTo(Object anotherTerm);
-  /**
-   * @param variableTermBase
-   */
-  public void setVal(Object variableTermBase);
-
+  //  /**
+  //   * @param variableTermBase
+  //   */
+  //  public void setVal(Object variableTermBase);
   /**
    * @return
    */

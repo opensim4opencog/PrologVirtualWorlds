@@ -47,13 +47,13 @@ class PRED_$get_prolog_impl_flag_2 extends PredicateBase {
     this.arg2 = a2;
     this.cont = cont;
   }
-
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    return "$get_prolog_impl_flag(" + this.arg1 + "," + this.arg2 + ")";
-  }
+//
+//  @Override
+//  public String toString() {
+//    /* flow_0_0_StringAddOperator
+//    */
+//    return "$get_prolog_impl_flag(" + this.arg1 + "," + this.arg2 + ")";
+//  }
 
   @Override
   public Predicate exec(Prolog engine) {

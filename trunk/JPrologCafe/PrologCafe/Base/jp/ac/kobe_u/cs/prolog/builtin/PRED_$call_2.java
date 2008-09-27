@@ -49,12 +49,12 @@ class PRED_$call_2 extends PredicateBase {
     */
     /* empty */}
 
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    return "$call(" + this.arg1 + "," + this.arg2 + ")";
-  }
+//  @Override
+//  public String toString() {
+//    /* flow_0_0_StringAddOperator
+//    */
+//    return "$call(" + this.arg1 + "," + this.arg2 + ")";
+//  }
 
   @Override
   public Predicate exec(Prolog engine) {
@@ -74,7 +74,8 @@ class PRED_$call_2 extends PredicateBase {
         args = null;
         arity = 0;
       } else if (isCompound(a2)) {
-        functor = nameUQ(functor((Object) a2));
+        Object fc = functor((Object) a2);
+        functor = nameUQ(fc);
         args = args(a2);
         arity = arity(a2);
       } else

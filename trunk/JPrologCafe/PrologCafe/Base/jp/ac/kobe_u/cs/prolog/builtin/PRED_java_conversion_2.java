@@ -33,12 +33,12 @@ public class PRED_java_conversion_2 extends PredicateBase {
     this.cont = cont;
   }
 
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    return "java_conversion(" + this.arg1 + "," + this.arg2 + ")";
-  }
+  //  @Override
+  //  public String toString() {
+  //    /* flow_0_0_StringAddOperator
+  //    */
+  //    return "java_conversion(" + this.arg1 + "," + this.arg2 + ")";
+  //  }
 
   protected Object inverseConversion(Object o) {
     /* flow_0_0_IfThenElseBlock_1394841115

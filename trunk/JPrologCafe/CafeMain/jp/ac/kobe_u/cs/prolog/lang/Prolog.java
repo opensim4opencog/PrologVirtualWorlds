@@ -15,6 +15,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.PushbackReader;
 import java.io.Serializable;
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Map;
 
 /**
@@ -23,9 +24,56 @@ import java.util.Map;
  * @author Mutsunori Banbara (banbara@kobe-u.ac.jp)
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
-*/
-public class Prolog implements Serializable {
+ * 
+[06:34] <dmiles_afk> i have his downloaded and will test in a few
+[06:48] <dmiles_afk> hrrm he has three differnce versoons ;P
+[06:49] <dmiles_afk> http://www.rl.pri.ee/rl-prolog/rl-prolog.zip,  http://www.rl.pri.ee/prolog/comp/src.tar.gz,   and a version thats based on w-prolog
+[06:52] <dmiles_afk> i am trying to merge the choicepoints and undo-trail into the same stack,  Rla did that, do you use two differnt things subconscious?
+[06:53] <subconscious> I have one stack
+[06:53] <dmiles_afk> do you save the cuts and the varaible undos both onto that stack?
+[06:53] <subconscious> yes
+[06:54] <dmiles_afk> do you unwind to the last cut on the !/0 ?
+[06:54] <subconscious> I'm not sure what that means
+[06:55] <dmiles_afk> on a cut pred, do you iterate backwards until you 'find' a cut-object?
+[06:55] <subconscious> no
+[06:56] <dmiles_afk> erm neck-object
+[06:56] <subconscious> I have the cut index to calculate how may choice points to cut, then I merge down the variables stored in each one while popping them off
+[06:57] <dmiles_afk> ah so you use a number as well (cut index) .. ok i think RLa does it that way to
+[06:58] <dmiles_afk> i started with PrologCafe and trying to simplify it down
+[06:59] <dmiles_afk> probably the one that has the best support for everything: indexed dynamic database preds, mature reader with op/3, Cuts, DCGs etc, java preds
+[06:59] <dmiles_afk> took it backwards towards it's origins of jProlog,  removed the need to pass around the trail for Unify/Bind/Copy_term
+[07:01] <dmiles_afk> since each unifiable at creation get a reference to their creating engine.. then later reusing that reference,  also stroing it in the java.lang.Thread.setUncounghtExceptionHandler
+[07:02] * rabbit- (n=johannes@220.253-203-50.VIC.netspace.net.au) Quit (Read error: 104 (Connection reset by peer))
+[07:02] <dmiles_afk> however still gotta move towards your guys' single trail model
 
+*/
+public class Prolog implements Serializable, java.lang.Thread.UncaughtExceptionHandler {
+
+  static Prolog lastProlog;
+
+  /* (non-Javadoc)
+   * @see java.lang.Thread.UncaughtExceptionHandler#uncaughtException(java.lang.Thread, java.lang.Throwable)
+   */
+  @Override
+  public void uncaughtException(Thread t, Throwable e) {
+    // TODO Auto-generated method stub
+    e.printStackTrace();
+    if (prevUncaughtExceptionHandler != null) {
+      prevUncaughtExceptionHandler.uncaughtException(t, e);
+    } else {
+      UncaughtExceptionHandler use = Thread.getDefaultUncaughtExceptionHandler();
+      if (use != null) use.uncaughtException(t, e);
+
+    }
+  }
+
+  public static Prolog currentProlog() {
+    UncaughtExceptionHandler uc = Thread.currentThread().getUncaughtExceptionHandler();
+    if (uc instanceof Prolog) return (Prolog) uc;
+    return lastProlog;
+  }
+
+  final java.lang.Thread.UncaughtExceptionHandler prevUncaughtExceptionHandler;
   /** Prolog thread */
   final public PrologControl control;
   /** Argument registers */
@@ -39,9 +87,12 @@ public class Prolog implements Serializable {
   /** Cut pointer */
   public int B0;
   /** Class loader */
-  public PrologClassLoader pcl;
+  final public PrologClassLoader pcl;
   /** Internal Database */
-  public InternalDatabase internalDB;
+  final static public InternalDatabase internalDB;
+  static {
+    internalDB = new InternalDatabase();
+  }
 
   /** Current time stamp of choice point frame */
   protected long CPFTimeStamp;
@@ -105,9 +156,6 @@ public class Prolog implements Serializable {
   /** Hashtable for managing input and output streams. */
   protected HashtableOfTerm streamManager;
 
-  /** Hashtable for managing internal databases. */
-  protected HashtableOfTerm hashManager;
-
   /** Holds an atom <code>[]<code> (empty list). */
   public static/*SymbolTerm*/Object Nil = StaticProlog.makeAtom("[]");
 
@@ -126,13 +174,21 @@ public class Prolog implements Serializable {
 
   /** Constructs new Prolog engine. */
   public Prolog(PrologControl c) {
+    final Thread t;
+    if (c != null && c.thread != null) {
+      t = c.thread;
+    } else {
+      t = Thread.currentThread();
+    }
+    prevUncaughtExceptionHandler = t.getUncaughtExceptionHandler();
+    t.setUncaughtExceptionHandler(this);
     control = c;
     aregs = new Object[maxArity];
     setCont(null);
     orStack = new CPFStack(this);
     trail = new Trail(this);
     pcl = new PrologClassLoader();
-    internalDB = new InternalDatabase();
+    //    internalDB = new InternalDatabase();
     initOnce();
   }
 
@@ -149,13 +205,14 @@ public class Prolog implements Serializable {
    *   <li><code>streamManager</code>
    * </ul>
    */
-  protected void initOnce() {
+  private void initOnce() {
+    lastProlog = this;
+    copyHash = StaticProlog.makeHashtableOf();//new HashtableOfTerm<Object>();
+
     userInput = new PushbackReader(new BufferedReader(new InputStreamReader(System.in)), PUSHBACK_SIZE);
     userOutput = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)), true);
     userError = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.err)), true);
 
-    copyHash = StaticProlog.makeHashtableOf();//new HashtableOfTerm<Object>();
-    hashManager = StaticProlog.makeHashtableOf();// new HashtableOfTerm();
     streamManager = StaticProlog.makeHashtableOf();// new HashtableOfTerm();//Prolog.makeHashtableOf();
 
     streamManager.put(SYM_USERINPUT, StaticProlog.makeJavaObject(userInput));
@@ -498,7 +555,7 @@ public class Prolog implements Serializable {
 
   /** Returns the hash manager. */
   public HashtableOfTerm getHashManager() {
-    return hashManager;
+    return internalDB.hashManager;
   }
 
   //    /**

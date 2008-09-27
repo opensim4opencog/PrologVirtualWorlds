@@ -36,11 +36,11 @@ public class PRED_number_chars_2 extends PredicateBase {
   public int arity() {
     return 2;
   }
-
-  @Override
-  public String toString() {
-    return "number_chars(" + this.arg1 + "," + this.arg2 + ")";
-  }
+//
+//  @Override
+//  public String toString() {
+//    return "number_chars(" + this.arg1 + "," + this.arg2 + ")";
+//  }
 
   @Override
   public Predicate exec(Prolog engine) {

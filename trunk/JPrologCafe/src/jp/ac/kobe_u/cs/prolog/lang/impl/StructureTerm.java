@@ -118,4 +118,9 @@ public interface StructureTerm extends Term {
    */
   public Object arg0(int i);
 
+  /**
+   * @return
+   */
+  public String nameUQ();
+
 }

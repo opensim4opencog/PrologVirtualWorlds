@@ -36,11 +36,11 @@ public class PRED_number_codes_2 extends PredicateBase {
   public int arity() {
     return 2;
   }
-
-  @Override
-  public String toString() {
-    return "number_codes(" + this.arg1 + "," + this.arg2 + ")";
-  }
+//
+//  @Override
+//  public String toString() {
+//    return "number_codes(" + this.arg1 + "," + this.arg2 + ")";
+//  }
 
   @Override
   public Predicate exec(Prolog engine) {

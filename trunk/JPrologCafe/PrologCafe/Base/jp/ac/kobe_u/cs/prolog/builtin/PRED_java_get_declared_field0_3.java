@@ -36,12 +36,12 @@ return 3;
     /* flow_0_0_EmptyBlock_403316091
  */
 /* empty */}
-    @Override
-    public  String toString() {
-        /* flow_0_0_StringAddOperator
- */
-return "java_get_declared_field0(" + this.arg1 + "," + this.arg2 + "," + this.arg3 + ")";
-}
+//    @Override
+//    public  String toString() {
+//        /* flow_0_0_StringAddOperator
+// */
+//return "java_get_declared_field0(" + this.arg1 + "," + this.arg2 + "," + this.arg3 + ")";
+//}
     public  PRED_java_get_declared_field0_3(Object a1, Object a2, Object a3, Predicate cont) {
         /* flow_0_0_PutFieldOperator
  */

@@ -16,7 +16,7 @@ import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-abstract class JavaObjectTermBase extends TermBase implements JavaObjectTerm {
+final class JavaObjectTermBase extends TermBase implements JavaObjectTerm {
   /**
    * 
    */

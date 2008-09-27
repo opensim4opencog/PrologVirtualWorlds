@@ -43,7 +43,7 @@ abstract public class NonDetPredicate extends PredicateBase implements Predicate
      * @see jp.ac.kobe_u.cs.prolog.lang.Predicate#toPredString()
      */
     @Override
-    public String toPrologString(Collection newParam) throws NullPointerException {
+    public String toPrologString(Collection newParam) {
       // TODO Auto-generated method stub
       return NonDetPredicate.this.toPrologString(newParam);
     }

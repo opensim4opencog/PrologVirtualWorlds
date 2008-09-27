@@ -36,10 +36,10 @@ class PRED_$begin_sync_2 extends BlockPredicate {
     return 2;
   }
 
-  @Override
-  public String toString() {
-    return "$begin_sync(" + this.arg1 + "," + this.arg2 + ")";
-  }
+//  @Override
+//  public String toString() {
+//    return "$begin_sync(" + this.arg1 + "," + this.arg2 + ")";
+//  }
 
   @Override
   public Predicate exec(Prolog engine) {
