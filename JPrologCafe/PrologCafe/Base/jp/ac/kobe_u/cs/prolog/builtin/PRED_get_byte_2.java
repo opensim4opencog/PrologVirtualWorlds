@@ -11,7 +11,7 @@ public class PRED_get_byte_2 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = -8062704932302940211L;
-  public static /*IntegerTerm*/Object INT_EOF = makeInteger(-1);
+  public static/*IntegerTerm*/Object INT_EOF = makeInteger(-1);
   public Object arg1;
   public Object arg2;
 
@@ -35,12 +35,13 @@ public class PRED_get_byte_2 extends PredicateBase {
     this.cont = cont;
   }
 
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    return "get_byte(" + this.arg1 + "," + this.arg2 + ")";
-  }
+  //
+  //  @Override
+  //  public String toString() {
+  //    /* flow_0_0_StringAddOperator
+  //    */
+  //    return "get_byte(" + this.arg1 + "," + this.arg2 + ")";
+  //  }
 
   @Override
   public Predicate exec(Prolog engine) {

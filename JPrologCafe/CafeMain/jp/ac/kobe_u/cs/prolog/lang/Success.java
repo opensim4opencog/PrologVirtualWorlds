@@ -1,5 +1,7 @@
 package jp.ac.kobe_u.cs.prolog.lang;
 
+import java.util.Collection;
+
 
 /**
  * Initial continuation goal.<br>
@@ -36,7 +38,7 @@ public class Success extends PredicateBase {
   }
 
   /** Returns a string representation of this <code>Success</code>. */
-  public String toString() {
+  public String toPrologString(Collection c) {
     return "Success";
   }
 

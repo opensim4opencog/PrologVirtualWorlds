@@ -36,12 +36,12 @@ public class PRED_atom_length_2 extends PredicateBase {
     this.cont = cont;
   }
 
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    return "atom_length(" + this.arg1 + "," + this.arg2 + ")";
-  }
+//  @Override
+//  public String toString() {
+//    /* flow_0_0_StringAddOperator
+//    */
+//    return "atom_length(" + this.arg1 + "," + this.arg2 + ")";
+//  }
 
   @Override
   public Predicate exec(Prolog engine) {

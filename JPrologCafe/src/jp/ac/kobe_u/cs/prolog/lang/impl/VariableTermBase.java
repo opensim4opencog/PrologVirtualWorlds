@@ -125,7 +125,14 @@ class VariableTermBase extends MachineTerm implements VariableTerm, VariableTerm
   //  @Override
   //  abstract public int compareTo(Object o) ;
   public void setVal(Object v) {
-    value.setVal(v);
+    if (v == this) {
+      value.setVal(v);
+      if (value.isBound()) {
+        //    System.out.println("odd...");
+      }
+    } else {
+      value.setVal(v);
+    }
   }
 
   public Object getVal() {

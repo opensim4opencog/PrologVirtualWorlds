@@ -35,12 +35,13 @@ this.arg1 = a1;
     this.arg2 = a2;
     this.cont = cont;
 }
-    @Override
-    public  String toString() {
-        /* flow_0_0_StringAddOperator
- */
-return "$fast_writeq(" + this.arg1 + ", " + this.arg2 + ")";
-}
+
+  //    @Override
+  //    public  String toString() {
+  //        /* flow_0_0_StringAddOperator
+  // */
+  //return "$fast_writeq(" + this.arg1 + ", " + this.arg2 + ")";
+  //}
     @Override
     public  Predicate exec(Prolog engine) {
         /* flow_0_0_LocalStoreOperator

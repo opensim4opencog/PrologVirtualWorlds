@@ -1,7 +1,14 @@
 package jp.ac.kobe_u.cs.prolog.lang.impl;
 
+import java.lang.reflect.Field;
+
+import com.sun.org.apache.bcel.internal.generic.VariableLengthInstruction;
+
 import jp.ac.kobe_u.cs.prolog.lang.InternalException;
+import jp.ac.kobe_u.cs.prolog.lang.JavaException;
+import jp.ac.kobe_u.cs.prolog.lang.Prolog;
 import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
+import jp.ac.kobe_u.cs.prolog.lang.VariableTermLocation;
 
 /**
  * Compound term. <br>
@@ -24,55 +31,38 @@ import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class StructureTermBase extends TermBase implements StructureTerm {
-
-  /* (non-Javadoc)
-   * @see jp.ac.kobe_u.cs.prolog.lang.impl.StructureTerm#arg0(int)
-   */
-  @Override
-  public Object arg0(int i) {
-    // TODO Auto-generated method stub
-    return args[i];
-  }
+final class StructureTermObject extends TermBase implements StructureTerm, JavaObjectTerm {
   /**
    * 
    */
   private static final long serialVersionUID = 6905572459626027669L;
 
   /** Holds the functor symbol of this <code>StructureTerm</code>. */
-  //final
-  private/*SymbolTerm*/Object functor;
+  final private/*SymbolTerm*/Class functor;
 
   /** Holds the argument terms of this <code>StructureTerm</code>. */
-  //final
-  private Object[] args;
+  private Field[] fields;
 
   /** Holds the arity of this <code>StructureTerm</code>. */
-  //final
-  private int arity;
+  final private int arity;
+
+  final private Object obj;
 
   /**
    * Constructs a new Prolog compound term
    * such that <code>_functor</code> is the functor symbol, and
    * <code>_args</code> is the argument terms respectively.
    */
-  public StructureTermBase(Object _functor, Object[] _args) {
-    this.functor = _functor;
-    this.arity = _args.length;//(functor);
-    this.args = _args;
-    if (this.arity != this.args.length) throw new InternalException("Invalid argument length in StructureTerm");
-  }
-
-  /**
-   * Constructs a new Prolog compound term
-   * such that <code>_functor</code> is the functor symbol, and
-   * <code>_args</code> is the argument terms respectively.
-   */
-  public StructureTermBase() {
-    //    this.functor = _functor;
-    //    this.arity = _args.length;//(functor);
-    //    this.args = _args;
-    //    if (this.arity != this.args.length) throw new InternalException("Invalid argument length in StructureTerm");
+  public StructureTermObject(Object idea) {
+    //this.obj = idea;
+    obj = idea;
+    this.functor = idea.getClass();
+    this.fields = functor.getFields();
+    if (fields.length == 0) {
+      this.fields = functor.getDeclaredFields();
+    }
+    this.arity = fields.length;//(functor);
+    if (this.arity != this.fields.length) throw new InternalException("Invalid argument length in StructureTerm");
   }
 
   /** Returns the functor symbol of this <code>StructureTerm</code>.
@@ -96,7 +86,20 @@ public class StructureTermBase extends TermBase implements StructureTerm {
    * @see #args
    */
   public Object[] args() {
-    return this.args;
+    Object[] args = new Object[arity];
+    for (int i = 0; i < arity; i++) {
+      try {
+        args[i] = fields[i].get(obj);
+        if (args[i] == null) {
+          //   args[i] =  new VariableTermBase(Prolog.machine);
+        }
+      } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        throw new JavaException(e);
+      }
+    }
+    return args;
   }
 
   /** Returns the string representation of functor symbol of this <code>StructureTerm</code>.
@@ -109,6 +112,15 @@ public class StructureTermBase extends TermBase implements StructureTerm {
     return StaticProlog.nameUQ(this.functor);
   }
 
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.impl.TermBase#toJava()
+   */
+  @Override
+  public Object toJava() {
+    // TODO Auto-generated method stub
+    return obj;
+  }
+
   /* Object */
   @Override
   public boolean unify(Object t) {
@@ -117,37 +129,76 @@ public class StructureTermBase extends TermBase implements StructureTerm {
     if (!StaticProlog.prologEquals(this.functor, StaticProlog.functor(t))) return false;
     final Object[] targs = StaticProlog.args(t);
     for (int i = 0; i < this.arity; i++) {
-      if (!StaticProlog.unify(this.args[i], targs[i])) return false;
+      if (!StaticProlog.unify(this.arg0(i), targs[i])) return false;
     }
     return true;
   }
 
   @Override
   public Object copy() {
+    if (true) return this;
     final Object[] a = new Object[this.arity];
     for (int i = 0; i < this.arity; i++)
-      a[i] = StaticProlog.copy(this.args[i]);
+      a[i] = StaticProlog.copy(this.arg0(i));
     return StaticProlog.makeStructure(this.functor, a);
   }
 
   @Override
   public boolean isGround() {
     for (int i = 0; i < this.arity; i++) {
-      if (!StaticProlog.isGround(this.args[i])) return false;
+      if (!StaticProlog.isGround(this.arg0(i))) return false;
     }
     return true;
   }
 
   @Override
-  public String toQuotedString(int depth) {
+  public String toQuotedString(int d) {
     String delim = "";
-    String s = StaticProlog.toQuotedString(this.functor) + "(";
+    String s = StaticProlog.toQuotedString(this.functor, d) + "(";
     for (int i = 0; i < this.arity; i++) {
-      s += delim + StaticProlog.toQuotedString(this.args[i]);
+      s += delim + StaticProlog.toQuotedString(this.arg0(i), d);
       delim = ",";
     }
     s += ")";
     return s;
+  }
+
+  /**
+   * @param i
+   * @return
+   */
+  public Object arg0(int i) {
+    Field f = fields[i];
+    try {
+      Object res = f.get(obj);
+      if (res == null) {
+        return termFieldLocationVar(fields[i], obj);
+      }
+      return res;
+    } catch (IllegalArgumentException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+      try {
+        return f.get(null);
+      } catch (Exception e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+        throw new JavaException(e1);
+      }
+    } catch (IllegalAccessException e) {
+      f.setAccessible(true);
+      return arg0(i);
+    }
+  }
+
+  /**
+   * @param field
+   * @param obj2
+   * @return
+   */
+  private Object termFieldLocationVar(Field field, Object obj2) {
+    // TODO Auto-generated method stub
+    return StaticProlog.makeVariableLoc(new VariableFieldLocation(field, obj2));
   }
 
   /* Object */
@@ -167,7 +218,7 @@ public class StructureTermBase extends TermBase implements StructureTerm {
     if (!StaticProlog.prologEquals(this.functor, StaticProlog.functor(obj))) return false;
     final Object[] targs = StaticProlog.args(obj);
     for (int i = 0; i < this.arity; i++) {
-      if (!StaticProlog.prologEquals(this.args[i], (StaticProlog.deref(targs[i])))) return false;
+      if (!StaticProlog.prologEquals(this.arg0(i), (StaticProlog.deref(targs[i])))) return false;
     }
     return true;
   }
@@ -177,7 +228,7 @@ public class StructureTermBase extends TermBase implements StructureTerm {
     int h = 1;
     h = 31 * h + StaticProlog.hashCode(this.functor, d);
     for (int i = 0; i < this.arity; i++)
-      h = 31 * h + StaticProlog.hashCode(StaticProlog.deref(this.args[i]), d);
+      h = 31 * h + StaticProlog.hashCode(StaticProlog.deref(this.arg0(i)), d);
     return h;
   }
 
@@ -187,7 +238,7 @@ public class StructureTermBase extends TermBase implements StructureTerm {
     String delim = "";
     String s = StaticProlog.toString(this.functor()) + "(";
     for (int i = 0; i < this.arity; i++) {
-      s += delim + StaticProlog.toString(this.args[i]);
+      s += delim + StaticProlog.toString(this.arg0(i));
       delim = ",";
     }
     s += ")";
@@ -226,7 +277,7 @@ public class StructureTermBase extends TermBase implements StructureTerm {
     if (this.arity != arity2) return (this.arity - arity2);
     if (!StaticProlog.prologEquals(this.functor, functor2)) return StaticProlog.compareTerm(this.functor, functor2);
     for (int i = 0; i < this.arity; i++) {
-      rc = StaticProlog.compareTerm(this.args[i], StaticProlog.deref(args2[i]));
+      rc = StaticProlog.compareTerm(this.arg0(i), StaticProlog.deref(args2[i]));
       if (rc != Term.EQUAL) return rc;
     }
     return Term.EQUAL;

@@ -3,7 +3,6 @@
  */
 package jp.ac.kobe_u.cs.prolog.lang;
 
-
 //import jp.ac.kobe_u.cs.prolog.lang.impl.StaticPrologNumbers;
 
 /**
@@ -12,7 +11,11 @@ package jp.ac.kobe_u.cs.prolog.lang;
  */
 abstract public class StaticProlog extends StaticPrologNumbers {
 
-  public static PrologMethods methods;
+  public static PrologMethods //change to interface for builds 
+  //StaticPrologMethodImpl 
+  //
+  //
+  methods;
 
   final public static Object[] args(Object obj) {
     return methods.args(obj);

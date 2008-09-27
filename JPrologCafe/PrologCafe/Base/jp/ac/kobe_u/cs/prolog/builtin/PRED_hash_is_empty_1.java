@@ -31,12 +31,12 @@ return 1;
 this.arg1 = a1;
     this.cont = cont;
 }
-    @Override
-    public  String toString() {
-        /* flow_0_0_StringAddOperator
- */
-return "hash_is_empty(" + this.arg1 + ")";
-}
+//    @Override
+//    public  String toString() {
+//        /* flow_0_0_StringAddOperator
+// */
+//return "hash_is_empty(" + this.arg1 + ")";
+//}
     @Override
     public  Predicate exec(Prolog engine) {
         /* flow_0_0_LocalStoreOperator

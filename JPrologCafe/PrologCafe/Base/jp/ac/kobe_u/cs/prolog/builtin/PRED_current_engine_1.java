@@ -34,12 +34,12 @@ public class PRED_current_engine_1 extends PredicateBase {
     this.cont = cont;
   }
 
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    return "current_engine(" + this.arg1 + ")";
-  }
+//  @Override
+//  public String toString() {
+//    /* flow_0_0_StringAddOperator
+//    */
+//    return "current_engine(" + this.arg1 + ")";
+//  }
 
   @Override
   public Predicate exec(Prolog engine) {

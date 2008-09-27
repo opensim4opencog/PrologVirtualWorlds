@@ -41,12 +41,12 @@ public class PRED_java_method0_3 extends JavaPredicate {
     */
     /* empty */}
 
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    return "java_method0(" + this.arg1 + "," + this.arg2 + "," + this.arg3 + ")";
-  }
+//  @Override
+//  public String toString() {
+//    /* flow_0_0_StringAddOperator
+//    */
+//    return "java_method0(" + this.arg1 + "," + this.arg2 + "," + this.arg3 + ")";
+//  }
 
   public PRED_java_method0_3(Object a1, Object a2, Object a3, Predicate cont) {
     /* flow_0_0_PutFieldOperator

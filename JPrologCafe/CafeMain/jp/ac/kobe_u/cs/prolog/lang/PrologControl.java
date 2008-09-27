@@ -166,6 +166,7 @@ public class PrologControl implements Runnable, Serializable {
     code = p;
     code.setArgument(args, new Success(this));
     thread = new Thread(this);
+    thread.setUncaughtExceptionHandler(engine);
     thread.start(); // execute run() in new thread.
     try {
       wait(); // wait caller's thread.

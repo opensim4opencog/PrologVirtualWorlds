@@ -29,12 +29,12 @@ public class PRED_current_input_1 extends PredicateBase {
     this.cont = cont;
   }
 
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    return "current_input(" + this.arg1 + ")";
-  }
+  //  @Override
+  //  public String toString() {
+  //    /* flow_0_0_StringAddOperator
+  //    */
+  //    return "current_input(" + this.arg1 + ")";
+  //  }
 
   @Override
   public Predicate exec(Prolog engine) {

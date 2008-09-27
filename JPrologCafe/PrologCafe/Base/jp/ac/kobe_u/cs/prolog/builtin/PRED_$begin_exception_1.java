@@ -34,10 +34,10 @@ class PRED_$begin_exception_1 extends BlockPredicate {
     return 1;
   }
 
-  @Override
-  public String toString() {
-    return "$begin_exception(" + this.arg1 + ")";
-  }
+//  @Override
+//  public String toString() {
+//    return "$begin_exception(" + this.arg1 + ")";
+//  }
 
   @Override
   public Predicate exec(Prolog engine) {

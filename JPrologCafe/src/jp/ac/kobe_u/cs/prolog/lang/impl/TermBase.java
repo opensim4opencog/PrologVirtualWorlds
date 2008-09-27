@@ -39,7 +39,7 @@ implements Serializable, Comparable<Object>, Term {
   @Override
   public String toString() {
     // TODO Auto-generated method stub
-    return this.toStringImpl(40);
+    return this.toStringImpl(4000);
   }
 
   /* (non-Javadoc)

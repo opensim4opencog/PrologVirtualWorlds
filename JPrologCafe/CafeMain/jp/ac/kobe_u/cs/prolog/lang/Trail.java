@@ -1,5 +1,8 @@
 package jp.ac.kobe_u.cs.prolog.lang;
+
 import java.io.Serializable;
+import java.util.Stack;
+
 /**
  * Trail stack.<br>
  * The class <code>Trail</code> represents a trail stack.<br>
@@ -10,102 +13,124 @@ import java.io.Serializable;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
  */
-public class Trail implements Serializable {
-    /** Maximum size of enties. Initial size is <code>20000</code>. */
-    protected int maxContents = 20000;
+public class Trail extends Stack<Undoable> implements Serializable {
+  /**
+   *
+   */
+  private static final long serialVersionUID = 2109560047917187716L;
 
-    /** An array of <code>Undoable</code> entries. */
-    protected Undoable[] buffer;
+  /** Maximum size of enties. Initial size is <code>20000</code>. */
+  protected int maxContents = 20000;
 
-    /** the top index of this <code>Trail</code>. */
-    protected int top;
+  /** An array of <code>Undoable</code> entries. */
+  //  protected Undoable[]      elementData;
+  /** the top index of this <code>Trail</code>. */
+  // protected int             top;
+  /** Holds the Prolog engine that this <code>Trail</code> belongs to. */
+  final public Prolog engine;
 
-    /** Holds the Prolog engine that this <code>Trail</code> belongs to. */
-    public Prolog engine;
-	
-    /** Constructs a new trail stack. */
-    public Trail(Prolog _engine) {
-	engine = _engine;
-	buffer = new Undoable[maxContents];
-	top = -1;
+  /** Constructs a new trail stack. */
+  public Trail(Prolog _engine) {
+    super();
+    this.engine = _engine;
+    this.elementData = new Undoable[this.maxContents];
+    //        this.top = -1;
+  }
+
+  /* (non-Javadoc)
+   * @see java.util.Stack#push(java.lang.Object)
+   */
+  @Override
+  public Undoable push(Undoable item) {
+    // TODO Auto-generated method stub
+    return super.push(item);
+  }
+
+  /** Constructs a new trail stack with the given size. */
+  public Trail(Prolog _engine, int n) {
+    this.engine = _engine;
+    this.maxContents = n;
+    this.elementData = new Undoable[this.maxContents];
+    //   this.top = -1;
+  }
+
+  /** Discards all entries. */
+  protected void deleteAll() {
+    while (!this.empty()) {
+      pop();
+      //   this.elementData[this.top--] = null;
     }
+  }
 
-    /** Constructs a new trail stack with the given size. */
-    public Trail(Prolog _engine, int n) {
-	engine = _engine;
-	maxContents = n;
-	buffer = new Undoable[maxContents];
-	top = -1;
+  /** Tests if this stack has no entry. */
+  //    @Override
+  //    public boolean empty() {
+  //        return this.top == -1;
+  //    }
+  /** Discards all entries. */
+  public void init() {
+    this.deleteAll();
+  }
+
+  /** Returns the value of <code>maxContents</code>.
+   * @see #maxContents
+   */
+  public int max() {
+    return this.maxContents;
+  }
+
+  //    /** Pops an entry from this <code>Trail</code>. */
+  //    @Override
+  //    public Undoable pop() {
+  //        final Undoable t = this.elementData[this.top];
+  //        this.elementData[this.top--] = null;
+  //        return t;
+  //    }
+
+  //    /** Pushs an entry to this <code>Trail</code>. */
+  //    @Override
+  //    public Undoable push(Undoable t) {
+  //        try {
+  //            this.elementData[++this.top] = t;
+  //        } catch (final ArrayIndexOutOfBoundsException e) {
+  //            System.out.println("{expanding trail...}");
+  //            final int len = this.elementData.length;
+  //            final Undoable[] new_buffer = new Undoable[len + 20000];
+  //            for (int i = 0; i < len; i++) {
+  //                new_buffer[i] = this.elementData[i];
+  //            }
+  //            this.elementData = new_buffer;
+  //            this.elementData[this.top] = t;
+  //            this.maxContents = len + 20000;
+  //        }
+  //        return t;
+  //    }
+
+  /** Shows the contents of this <code>Trail</code>. */
+  public void show() {
+    if (this.empty()) {
+      System.out.println("{trail stack is empty!}");
+      return;
     }
-
-    /** Discards all entries. */
-    public void init() { deleteAll(); }
-
-    /** Pushs an entry to this <code>Trail</code>. */
-    public void push(Undoable t) {
-	try {
-	    buffer[++top] = t;
-	} catch (ArrayIndexOutOfBoundsException e) {
-	    System.out.println("{expanding trail...}");
-	    int len = buffer.length;
-	    Undoable[] new_buffer = new Undoable[len+20000];
-	    for(int i=0; i<len; i++){
-		new_buffer[i] = buffer[i];
-	    }
-	    buffer = new_buffer;
-	    buffer[top] = t;
-	    maxContents = len+20000;
-	}
+    for (int i = 0; i <= this.top(); i++) {
+      System.out.print("trail[" + i + "]: ");
+      System.out.println(this.elementData[i]);
     }
+  }
 
-    /** Pops an entry from this <code>Trail</code>. */
-    public Undoable pop() {
-	Undoable t = buffer[top];
-	buffer[top--] = null;
-	return t;
+  /** Returns the value of <code>top</code>.
+   * @see #top
+   */
+  public int top() {
+    return this.size() - 1;
+  }
+
+  /** Unwinds all entries after the value of <code>i</code>. */
+  public void unwind(int i) {
+    Undoable t;
+    while (this.top() > i) {
+      t = pop();
+      t.unTrailSelf();
     }
-
-    /** Discards all entries. */
-    protected void deleteAll() {
-	while (! empty()) {
-	    buffer[top--] = null;
-	}	
-    }
-
-    /** Tests if this stack has no entry. */
-    public boolean empty() {
-	return top == -1;
-    }
-
-    /** Returns the value of <code>maxContents</code>. 
-     * @see #maxContents
-     */
-    public int max() { return maxContents; }
-
-    /** Returns the value of <code>top</code>. 
-     * @see #top
-     */
-    public int top() { return top; }
-
-    /** Unwinds all entries after the value of <code>i</code>. */
-    public void unwind(int i) {
-	Undoable t;
-	while (top > i) {
-	    t = pop();
-	    t.unTrailSelf();
-	}
-    }
-
-    /** Shows the contents of this <code>Trail</code>. */
-    public void show() {
-	if (empty()) {
-	    System.out.println("{trail stack is empty!}");
-	    return;
-	}
-	for (int i=0; i<=top; i++) {
-	    System.out.print("trail[" + i + "]: ");
-	    System.out.println(buffer[i]);
-	}
-    }
+  }
 }
-

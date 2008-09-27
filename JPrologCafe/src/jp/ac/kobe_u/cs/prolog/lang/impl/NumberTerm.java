@@ -16,7 +16,7 @@ import jp.ac.kobe_u.cs.prolog.lang.StaticProlog;
  * @author Naoyuki Tamura (tamura@kobe-u.ac.jp)
  * @version 1.0
 */
-abstract class NumberTerm extends Number implements Term {
+final class NumberTerm extends Number implements Term {
 
   /* (non-Javadoc)
    * @see java.lang.Object#hashCode()

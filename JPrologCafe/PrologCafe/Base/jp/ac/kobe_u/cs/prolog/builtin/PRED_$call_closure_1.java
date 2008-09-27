@@ -38,12 +38,12 @@ class PRED_$call_closure_1 extends PredicateBase {
     this.cont = cont;
   }
 
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    return "$call_closure(" + this.arg1 + ")";
-  }
+//  @Override
+//  public String toString() {
+//    /* flow_0_0_StringAddOperator
+//    */
+//    return "$call_closure(" + this.arg1 + ")";
+//  }
 
   @Override
   public Predicate exec(Prolog engine) {

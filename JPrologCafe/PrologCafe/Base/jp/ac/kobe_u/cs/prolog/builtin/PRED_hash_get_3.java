@@ -14,7 +14,7 @@ public class PRED_hash_get_3 extends PredicateBase {
   * 
   */
   private static final long serialVersionUID = -5075901836471330055L;
-  public static /*SymbolTerm*/Object SYM_NIL = makeAtom("[]");
+  public static/*SymbolTerm*/Object SYM_NIL = makeAtom("[]");
   public Object arg1;
   public Object arg2;
   public Object arg3;
@@ -31,12 +31,12 @@ public class PRED_hash_get_3 extends PredicateBase {
     */
     /* empty */}
 
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    return "hash_get(" + this.arg1 + "," + this.arg2 + "," + this.arg3 + ")";
-  }
+  //  @Override
+  //  public String toString() {
+  //    /* flow_0_0_StringAddOperator
+  //    */
+  //    return "hash_get(" + this.arg1 + "," + this.arg2 + "," + this.arg3 + ")";
+  //  }
 
   public PRED_hash_get_3(Object a1, Object a2, Object a3, Predicate cont) {
     /* flow_0_0_PutFieldOperator

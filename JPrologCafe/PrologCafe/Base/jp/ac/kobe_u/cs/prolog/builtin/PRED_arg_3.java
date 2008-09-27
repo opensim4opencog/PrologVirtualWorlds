@@ -32,13 +32,13 @@ public class PRED_arg_3 extends PredicateBase {
     */
     /* empty */}
 
-  @Override
-  public String toString() {
-    /* flow_0_0_StringAddOperator
-    */
-    Collection param = newIdentityLinkedList();
-    return "arg(" + argString(arg1, param) + "," + argString(arg2, param) + "," + argString(arg3, param) + ")";
-  }
+//  @Override
+//  public String toString() {
+//    /* flow_0_0_StringAddOperator
+//    */
+//    Collection param = newIdentityLinkedList();
+//    return "arg(" + argString(arg1, param) + "," + argString(arg2, param) + "," + argString(arg3, param) + ")";
+//  }
 
   public PRED_arg_3(Object a1, Object a2, Object a3, Predicate cont) {
     /* flow_0_0_PutFieldOperator
