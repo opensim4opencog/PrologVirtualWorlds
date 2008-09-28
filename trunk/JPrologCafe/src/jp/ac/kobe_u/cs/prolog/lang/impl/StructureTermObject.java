@@ -42,6 +42,7 @@ final class StructureTermObject extends TermBase implements StructureTerm, JavaO
 
   /** Holds the argument terms of this <code>StructureTerm</code>. */
   private Field[] fields;
+  private Object[] args;
 
   /** Holds the arity of this <code>StructureTerm</code>. */
   final private int arity;
@@ -62,7 +63,11 @@ final class StructureTermObject extends TermBase implements StructureTerm, JavaO
       this.fields = functor.getDeclaredFields();
     }
     this.arity = fields.length;//(functor);
+    args = new Object[arity];
     if (this.arity != this.fields.length) throw new InternalException("Invalid argument length in StructureTerm");
+    for (int i = 0; i < arity; i++) {
+      args[i] = arg0(i);
+    }
   }
 
   /** Returns the functor symbol of this <code>StructureTerm</code>.
@@ -86,15 +91,12 @@ final class StructureTermObject extends TermBase implements StructureTerm, JavaO
    * @see #args
    */
   public Object[] args() {
+    if (true) return args;
     Object[] args = new Object[arity];
     for (int i = 0; i < arity; i++) {
       try {
-        args[i] = fields[i].get(obj);
-        if (args[i] == null) {
-          //   args[i] =  new VariableTermBase(Prolog.machine);
-        }
+        args[i] = arg0(i);
       } catch (Exception e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
         throw new JavaException(e);
       }
@@ -117,7 +119,6 @@ final class StructureTermObject extends TermBase implements StructureTerm, JavaO
    */
   @Override
   public Object toJava() {
-    // TODO Auto-generated method stub
     return obj;
   }
 
@@ -168,6 +169,7 @@ final class StructureTermObject extends TermBase implements StructureTerm, JavaO
    * @return
    */
   public Object arg0(int i) {
+    if (args[i] != null) return args[i];
     Field f = fields[i];
     try {
       Object res = f.get(obj);
@@ -176,15 +178,7 @@ final class StructureTermObject extends TermBase implements StructureTerm, JavaO
       }
       return res;
     } catch (IllegalArgumentException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-      try {
-        return f.get(null);
-      } catch (Exception e1) {
-        // TODO Auto-generated catch block
-        e1.printStackTrace();
-        throw new JavaException(e1);
-      }
+      return termFieldLocationVar(fields[i], obj);
     } catch (IllegalAccessException e) {
       f.setAccessible(true);
       return arg0(i);
@@ -197,7 +191,6 @@ final class StructureTermObject extends TermBase implements StructureTerm, JavaO
    * @return
    */
   private Object termFieldLocationVar(Field field, Object obj2) {
-    // TODO Auto-generated method stub
     return StaticProlog.makeVariableLoc(new VariableFieldLocation(field, obj2));
   }
 

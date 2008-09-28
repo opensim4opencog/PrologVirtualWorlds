@@ -58,7 +58,6 @@ public class StructureTermObject_4 extends TermBase implements StructureTerm {
   public Object arg2;
   public Object arg3;
   public Object arg4;
-  public Object arg5;
 
   // final private Object obj;
 
@@ -128,7 +127,7 @@ public class StructureTermObject_4 extends TermBase implements StructureTerm {
     }
     if (StaticProlog.isVariable(t)) return StaticProlog.unify(t, this);
     if (!StaticProlog.isCompound(t)) return false;
-    if (!StaticProlog.unify(this.getClass(), StaticProlog.functor(t))) return false;
+    if (!StaticProlog.unify(this.functor(), StaticProlog.functor(t))) return false;
     if (!StaticProlog.unify(arg1, StaticProlog.arg0(t, 0))) return false;
     if (!StaticProlog.unify(arg2, StaticProlog.arg0(t, 1))) return false;
     if (!StaticProlog.unify(arg3, StaticProlog.arg0(t, 2))) return false;
@@ -257,32 +256,6 @@ public class StructureTermObject_4 extends TermBase implements StructureTerm {
     throw new NoSuchFieldError(toString() + " doesnt have a arg" + i);
   }
 
-  
-
-  /**
-   * @param i
-   * @return
-   */
-  public Object arg5(int i) {
-    switch (i) {
-      case 0: {
-        return arg1 != null ? arg1 : makeVariableLoc(varg0(i));
-      }
-      case 1: {
-        return arg2 != null ? arg2 : makeVariableLoc(varg0(i));
-      }
-      case 2: {
-        return arg3 != null ? arg3 : makeVariableLoc(varg0(i));
-      }
-      case 3: {
-        return arg4 != null ? arg4 : makeVariableLoc(varg0(i));
-      }
-      case 4: {
-        return arg5 != null ? arg5 : makeVariableLoc(varg0(i));
-      }
-    }
-    throw new NoSuchFieldError(toString() + " doesnt have a arg" + i);
-  }
 
   public VariableTermLocation varg0(final int i) {
     switch (i) {
@@ -452,38 +425,6 @@ public class StructureTermObject_4 extends TermBase implements StructureTerm {
    *         <code>0</code> if this term is <em>after</em> the
    *         <code>anotherTerm</code>.
    */
-  public int compareTo(Object anotherTerm) { // anotherTerm must be
-    // dereferenced.
-    /* SymbolTerm */Object functor2;
-    int arity2, rc;
-
-    if (StaticProlog.isVariable(anotherTerm) || StaticProlog.isNumber(anotherTerm) || StaticProlog.isAtomTerm(anotherTerm)) return Term.AFTER;
-    if (StaticProlog.isListTerm(anotherTerm)) {
-      if (4 != 2) return (4 - 2);
-      rc = StaticProlog.compareTerm(this.getClass(), ListTerm.SYM_DOT);
-      if (rc != 0) return rc;
-      rc = StaticProlog.compareTerm(arg1, StaticProlog.first(anotherTerm));
-      if (rc != 0) return rc;
-      rc = StaticProlog.compareTerm(arg2, StaticProlog.rest(anotherTerm));
-      return rc;
-    } else if (StaticProlog.isCompound(anotherTerm)) {
-      arity2 = StaticProlog.arity(anotherTerm);
-      if (4 != arity2) return (4 - arity2);
-      functor2 = StaticProlog.functor(anotherTerm);
-      rc = StaticProlog.compareTerm(this.getClass(), functor2);
-      if (rc != 0) return rc;
-      rc = StaticProlog.compareTerm(arg1, StaticProlog.deref(arg0(anotherTerm, 0)));
-      if (rc != 0) return rc;
-      rc = StaticProlog.compareTerm(arg2, StaticProlog.deref(arg0(anotherTerm, 1)));
-      if (rc != 0) return rc;
-      rc = StaticProlog.compareTerm(arg3, StaticProlog.deref(arg0(anotherTerm, 2)));
-      if (rc != 0) return rc;
-      rc = StaticProlog.compareTerm(arg4, StaticProlog.deref(arg0(anotherTerm, 3)));
-      return rc;
-    } else {
-      return Term.BEFORE;
-    }
-  }
 
   public int compareTo1(Object anotherTerm) { // anotherTerm must be
     // dereferenced.
@@ -533,7 +474,7 @@ public class StructureTermObject_4 extends TermBase implements StructureTerm {
     }
   }
 
-  public int compareTo4(Object anotherTerm) { // anotherTerm must be
+  public int compareTo(Object anotherTerm) { // anotherTerm must be
     // dereferenced.
     /* SymbolTerm */Object functor2;
     if (StaticProlog.isVariable(anotherTerm) || StaticProlog.isNumber(anotherTerm) || StaticProlog.isAtomTerm(anotherTerm)) return Term.AFTER;

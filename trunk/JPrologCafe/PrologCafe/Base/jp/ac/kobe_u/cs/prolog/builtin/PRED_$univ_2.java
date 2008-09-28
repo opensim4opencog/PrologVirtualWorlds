@@ -55,9 +55,7 @@ public class PRED_$univ_2 extends PredicateBase {
     Object a1 = this.arg1;
     Object a2 = this.arg2;
     a1 = deref(a1);
-    if (isAtomTerm(a1) || isNumber(a1) || isJavaObject(a1) || isClosure(a1)) {
-      if (!unify(a2, makeList(a1, PRED_$univ_2.SYM_NIL))) return this.fail(engine);
-    } else if (isListTerm(a1)) {
+    if (isListTerm(a1)) {
       Object t = makeList(rest((Object) a1), PRED_$univ_2.SYM_NIL);
       t = makeList(first((Object) a1), t);
       t = makeList(PRED_$univ_2.SYM_DOT, t);
@@ -97,6 +95,8 @@ public class PRED_$univ_2 extends PredicateBase {
         tail = deref(rest((Object) tail));
       }
       if (!unify(a1, makeStructure(sym, args))) return this.fail(engine);
+    } else if (isAtomTerm(a1) || isNumber(a1) || isJavaObject(a1) || isClosure(a1)) {
+      if (!unify(a2, makeList(a1, PRED_$univ_2.SYM_NIL))) return this.fail(engine);
     } else
       return this.fail(engine);
     return this.cont;
