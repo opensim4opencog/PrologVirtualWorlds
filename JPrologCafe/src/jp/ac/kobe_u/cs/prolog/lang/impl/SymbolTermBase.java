@@ -15,6 +15,11 @@ import static org.objectweb.asm.Opcodes.ATHROW;
 import static org.objectweb.asm.Opcodes.BIPUSH;
 import static org.objectweb.asm.Opcodes.CHECKCAST;
 import static org.objectweb.asm.Opcodes.DUP;
+import static org.objectweb.asm.Opcodes.F_APPEND;
+import static org.objectweb.asm.Opcodes.F_CHOP;
+import static org.objectweb.asm.Opcodes.F_FULL;
+import static org.objectweb.asm.Opcodes.F_SAME;
+import static org.objectweb.asm.Opcodes.F_SAME1;
 import static org.objectweb.asm.Opcodes.GETFIELD;
 import static org.objectweb.asm.Opcodes.GETSTATIC;
 import static org.objectweb.asm.Opcodes.GOTO;
@@ -34,6 +39,7 @@ import static org.objectweb.asm.Opcodes.IF_ICMPEQ;
 import static org.objectweb.asm.Opcodes.ILOAD;
 import static org.objectweb.asm.Opcodes.IMUL;
 import static org.objectweb.asm.Opcodes.INSTANCEOF;
+import static org.objectweb.asm.Opcodes.INTEGER;
 import static org.objectweb.asm.Opcodes.INVOKESPECIAL;
 import static org.objectweb.asm.Opcodes.INVOKESTATIC;
 import static org.objectweb.asm.Opcodes.INVOKEVIRTUAL;
@@ -45,6 +51,7 @@ import static org.objectweb.asm.Opcodes.NEW;
 import static org.objectweb.asm.Opcodes.PUTFIELD;
 import static org.objectweb.asm.Opcodes.RETURN;
 import static org.objectweb.asm.Opcodes.SIPUSH;
+import static org.objectweb.asm.Opcodes.TOP;
 import static org.objectweb.asm.Opcodes.V1_6;
 
 import java.util.HashMap;
@@ -59,7 +66,6 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
 
 /**
  * Atom.<br>
@@ -315,10 +321,10 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
     FieldVisitor fv;
     MethodVisitor mv;
     AnnotationVisitor av0;
-    final String I_LANG = "jp/ac/kobe_u/cs/prolog/lang";
+    final String I_LANG = "jp/ac/kobe_u" + "/cs/prolog/lang";
     final String PREDNAME_4 = I_LANG + "/impl/PRED_" + name + "_" + arity4;
     final String LNAME_4 = "L" + PREDNAME_4 + ";";
-    final String LOBJ = "Ljava/lang/Object;";
+    final String LOBJ = "Ljava/" + "lang/Object;";
 
     cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, PREDNAME_4, null, I_LANG + "/impl/StructureTermBase", new String[] { I_LANG + "/impl/StructureTerm" });
 
@@ -561,7 +567,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitInsn(IRETURN);
       mv.visitLabel(l1);
       mv.visitLineNumber(127, l1);
-      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
       mv.visitVarInsn(ALOAD, 1);
       mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isVariable", "(" + LOBJ + ")Z");
       Label l3 = new Label();
@@ -572,7 +578,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitInsn(IRETURN);
       mv.visitLabel(l3);
       mv.visitLineNumber(128, l3);
-      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
       mv.visitVarInsn(ALOAD, 1);
       mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isCompound", "(" + LOBJ + ")Z");
 
@@ -583,7 +589,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
 
       mv.visitLabel(l4);
       mv.visitLineNumber(129, l4);
-      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
       mv.visitVarInsn(ALOAD, 0);
       mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
       mv.visitVarInsn(ALOAD, 1);
@@ -596,7 +602,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      mv.visitInsn(IRETURN);
       //      mv.visitLabel(l5);
       //      mv.visitLineNumber(130, l5);
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
       //      mv.visitVarInsn(ALOAD, 1);
@@ -610,7 +616,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      mv.visitInsn(IRETURN);
       //      mv.visitLabel(l6);
       //      mv.visitLineNumber(131, l6);
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
       //      mv.visitVarInsn(ALOAD, 1);
@@ -626,7 +632,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l7);
         mv.visitLineNumber(132, l7);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + (i + 1), LOBJ);
         mv.visitVarInsn(ALOAD, 1);
@@ -641,7 +647,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //    mv.visitInsn(IRETURN);
       //    mv.visitLabel(l7);
       //    mv.visitLineNumber(132, l7);
-      //    mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //    mv.visitFrame(F_SAME, 0, null, 0, null);
       //    mv.visitVarInsn(ALOAD, 0);
       //    mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", LOBJ);
       //    mv.visitVarInsn(ALOAD, 1);
@@ -655,7 +661,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      mv.visitInsn(IRETURN);
       //      mv.visitLabel(l8);
       //      mv.visitLineNumber(133, l8);
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", LOBJ);
       //      mv.visitVarInsn(ALOAD, 1);
@@ -669,7 +675,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitInsn(IRETURN);
       mv.visitLabel(l9);
       mv.visitLineNumber(134, l9);
-      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
       mv.visitInsn(ICONST_1);
       mv.visitInsn(IRETURN);
 
@@ -702,7 +708,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l1);
         mv.visitLineNumber(140, l1);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + i, LOBJ);
         mv.visitVarInsn(ALOAD, 1);
@@ -717,7 +723,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      mv.visitInsn(IRETURN);
       //      mv.visitLabel(l1);
       //      mv.visitLineNumber(140, l1);
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
       //      mv.visitVarInsn(ALOAD, 1);
@@ -731,7 +737,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      mv.visitInsn(IRETURN);
       //      mv.visitLabel(l2);
       //      mv.visitLineNumber(141, l2);
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", LOBJ);
       //      mv.visitVarInsn(ALOAD, 1);
@@ -745,7 +751,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      mv.visitInsn(IRETURN);
       //      mv.visitLabel(l3);
       //      mv.visitLineNumber(142, l3);
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", LOBJ);
       //      mv.visitVarInsn(ALOAD, 1);
@@ -759,7 +765,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitInsn(IRETURN);
       mv.visitLabel(l4);
       mv.visitLineNumber(143, l4);
-      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
       mv.visitInsn(ICONST_1);
       mv.visitInsn(IRETURN);
       Label l5 = new Label();
@@ -828,7 +834,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitLabel(l1);
       mv.visitLineNumber(154, l1);
 
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
       //      mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isGround", "(" + LOBJ + ")Z");
@@ -839,7 +845,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      mv.visitLabel(l2);
       //      mv.visitLineNumber(155, l2);
       //      
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", LOBJ);
       //      mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isGround", "(" + LOBJ + ")Z");
@@ -850,7 +856,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      mv.visitLabel(l3);
       //      mv.visitLineNumber(156, l3);
       //      
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);      
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);      
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", LOBJ);
       //      mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isGround", "(" + LOBJ + ")Z");
@@ -863,7 +869,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
 
       for (int i = 2; i <= arity4; i++) {
         {
-          mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+          mv.visitFrame(F_SAME, 0, null, 0, null);
           mv.visitVarInsn(ALOAD, 0);
           mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + i, LOBJ);
           mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isGround", "(" + LOBJ + ")Z");
@@ -876,7 +882,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         }
       }
 
-      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
       mv.visitInsn(ICONST_1);
       mv.visitInsn(IRETURN);
       Label l5 = new Label();
@@ -1005,7 +1011,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitJumpInsn(GOTO, l10);
       mv.visitLabel(l4);
       mv.visitLineNumber(172, l4);
-      mv.visitFrame(Opcodes.F_APPEND, 3, new Object[] { Opcodes.INTEGER, "java/lang/String", "java/lang/String" }, 0, null);
+      mv.visitFrame(F_APPEND, 3, new Object[] { INTEGER, "java/lang/String", "java/lang/String" }, 0, null);
       mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
       mv.visitInsn(DUP);
       mv.visitVarInsn(ALOAD, 4);
@@ -1017,7 +1023,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitVarInsn(ASTORE, 4);
       mv.visitLabel(l10);
       mv.visitLineNumber(174, l10);
-      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
       mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
       mv.visitInsn(DUP);
       mv.visitVarInsn(ALOAD, 4);
@@ -1045,7 +1051,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
 
     switch (arity4) {
       case 0: {
-        mv = cw.visitMethod(ACC_PUBLIC, "arg0", "(I)Ljava/lang/Object;", null, null);
+        mv = cw.visitMethod(ACC_PUBLIC, "arg0", "(I)" + LOBJ, null, null);
         mv.visitCode();
         Label l0 = new Label();
         mv.visitLabel(l0);
@@ -1056,7 +1062,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(DUP);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "toString", "()Ljava/lang/String;");
-        mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(Ljava/lang/Object;)Ljava/lang/String;");
+        mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(" + LOBJ + ")Ljava/lang/String;");
         mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "(Ljava/lang/String;)V");
         mv.visitLdcInsn(" doesnt have a arg");
         mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
@@ -1067,14 +1073,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(ATHROW);
         Label l1 = new Label();
         mv.visitLabel(l1);
-        mv.visitLocalVariable("this", "Ljp/ac/kobe_u/cs/prolog/lang/impl/StructureTermObject_4;", null, l0, l1, 0);
+        mv.visitLocalVariable("this", LNAME_4, null, l0, l1, 0);
         mv.visitLocalVariable("i", "I", null, l0, l1, 1);
         mv.visitMaxs(5, 2);
         mv.visitEnd();
         break;
       }
       case 1: {
-        mv = cw.visitMethod(ACC_PUBLIC, "arg0", "(I)Ljava/lang/Object;", null, null);
+        mv = cw.visitMethod(ACC_PUBLIC, "arg0", "(I)" + LOBJ, null, null);
         mv.visitCode();
         Label l0 = new Label();
         mv.visitLabel(l0);
@@ -1087,37 +1093,37 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         // ONE
         mv.visitLabel(l1);
         mv.visitLineNumber(196, l1);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         Label l3 = new Label();
         mv.visitJumpInsn(IFNULL, l3);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         Label l4 = new Label();
         mv.visitJumpInsn(GOTO, l4);
         mv.visitLabel(l3);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l4);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
 
         mv.visitLabel(l2);
         mv.visitLineNumber(199, l2);
 
         // LAST
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitTypeInsn(NEW, "java/lang/NoSuchFieldError");
         mv.visitInsn(DUP);
         mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
         mv.visitInsn(DUP);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "toString", "()Ljava/lang/String;");
-        mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(Ljava/lang/Object;)Ljava/lang/String;");
+        mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(" + LOBJ + ")Ljava/lang/String;");
         mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "(Ljava/lang/String;)V");
         mv.visitLdcInsn(" doesnt have a arg");
         mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
@@ -1128,7 +1134,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(ATHROW);
         Label l5 = new Label();
         mv.visitLabel(l5);
-        mv.visitLocalVariable("this", "Ljp/ac/kobe_u/cs/prolog/lang/impl/StructureTermObject_4;", null, l0, l5, 0);
+        mv.visitLocalVariable("this", LNAME_4, null, l0, l5, 0);
         mv.visitLocalVariable("i", "I", null, l0, l5, 1);
         mv.visitMaxs(5, 2);
         mv.visitEnd();
@@ -1137,7 +1143,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       }
 
       case 2: {
-        mv = cw.visitMethod(ACC_PUBLIC, "arg0", "(I)Ljava/lang/Object;", null, null);
+        mv = cw.visitMethod(ACC_PUBLIC, "arg0", "(I)" + LOBJ, null, null);
         mv.visitCode();
         Label l0 = new Label();
         mv.visitLabel(l0);
@@ -1151,58 +1157,58 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         // ONE
         mv.visitLabel(l1);
         mv.visitLineNumber(209, l1);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         Label l4 = new Label();
         mv.visitJumpInsn(IFNULL, l4);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         Label l5 = new Label();
         mv.visitJumpInsn(GOTO, l5);
         mv.visitLabel(l4);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l5);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l2);
         mv.visitLineNumber(212, l2);
 
         // TWO
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
         Label l6 = new Label();
         mv.visitJumpInsn(IFNULL, l6);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
         Label l7 = new Label();
         mv.visitJumpInsn(GOTO, l7);
         mv.visitLabel(l6);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l7);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l3);
         mv.visitLineNumber(215, l3);
 
         // LAST
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitTypeInsn(NEW, "java/lang/NoSuchFieldError");
         mv.visitInsn(DUP);
         mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
         mv.visitInsn(DUP);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "toString", "()Ljava/lang/String;");
-        mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(Ljava/lang/Object;)Ljava/lang/String;");
+        mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(" + LOBJ + ")Ljava/lang/String;");
         mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "(Ljava/lang/String;)V");
         mv.visitLdcInsn(" doesnt have a arg");
         mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
@@ -1213,7 +1219,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(ATHROW);
         Label l8 = new Label();
         mv.visitLabel(l8);
-        mv.visitLocalVariable("this", "Ljp/ac/kobe_u/cs/prolog/lang/impl/StructureTermObject_4;", null, l0, l8, 0);
+        mv.visitLocalVariable("this", LNAME_4, null, l0, l8, 0);
         mv.visitLocalVariable("i", "I", null, l0, l8, 1);
         mv.visitMaxs(5, 2);
         mv.visitEnd();
@@ -1221,7 +1227,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
 
       }
       case 3: {
-        mv = cw.visitMethod(ACC_PUBLIC, "arg0", "(I)Ljava/lang/Object;", null, null);
+        mv = cw.visitMethod(ACC_PUBLIC, "arg0", "(I)" + LOBJ, null, null);
         mv.visitCode();
         Label l0 = new Label();
         mv.visitLabel(l0);
@@ -1234,74 +1240,74 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitTableSwitchInsn(0, 2, l4, new Label[] { l1, l2, l3 });
         mv.visitLabel(l1);
         mv.visitLineNumber(225, l1);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         Label l5 = new Label();
         mv.visitJumpInsn(IFNULL, l5);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         Label l6 = new Label();
         mv.visitJumpInsn(GOTO, l6);
         mv.visitLabel(l5);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l6);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l2);
         mv.visitLineNumber(228, l2);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
         Label l7 = new Label();
         mv.visitJumpInsn(IFNULL, l7);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
         Label l8 = new Label();
         mv.visitJumpInsn(GOTO, l8);
         mv.visitLabel(l7);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l8);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l3);
         mv.visitLineNumber(231, l3);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", LOBJ);
         Label l9 = new Label();
         mv.visitJumpInsn(IFNULL, l9);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", LOBJ);
         Label l10 = new Label();
         mv.visitJumpInsn(GOTO, l10);
         mv.visitLabel(l9);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l10);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l4);
         mv.visitLineNumber(234, l4);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitTypeInsn(NEW, "java/lang/NoSuchFieldError");
         mv.visitInsn(DUP);
         mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
         mv.visitInsn(DUP);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "toString", "()Ljava/lang/String;");
-        mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(Ljava/lang/Object;)Ljava/lang/String;");
+        mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(" + LOBJ + ")Ljava/lang/String;");
         mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "(Ljava/lang/String;)V");
         mv.visitLdcInsn(" doesnt have a arg");
         mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
@@ -1312,7 +1318,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(ATHROW);
         Label l11 = new Label();
         mv.visitLabel(l11);
-        mv.visitLocalVariable("this", "Ljp/ac/kobe_u/cs/prolog/lang/impl/StructureTermObject_4;", null, l0, l11, 0);
+        mv.visitLocalVariable("this", LNAME_4, null, l0, l11, 0);
         mv.visitLocalVariable("i", "I", null, l0, l11, 1);
         mv.visitMaxs(5, 2);
         mv.visitEnd();
@@ -1321,7 +1327,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       }
 
       case 4: {
-        mv = cw.visitMethod(ACC_PUBLIC, "arg0", "(I)Ljava/lang/Object;", null, null);
+        mv = cw.visitMethod(ACC_PUBLIC, "arg0", "(I)" + LOBJ, null, null);
         mv.visitCode();
         Label l0 = new Label();
         mv.visitLabel(l0);
@@ -1335,94 +1341,94 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitTableSwitchInsn(0, 3, l5, new Label[] { l1, l2, l3, l4 });
         mv.visitLabel(l1);
         mv.visitLineNumber(244, l1);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         Label l6 = new Label();
         mv.visitJumpInsn(IFNULL, l6);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         Label l7 = new Label();
         mv.visitJumpInsn(GOTO, l7);
         mv.visitLabel(l6);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l7);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l2);
         mv.visitLineNumber(247, l2);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
         Label l8 = new Label();
         mv.visitJumpInsn(IFNULL, l8);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
         Label l9 = new Label();
         mv.visitJumpInsn(GOTO, l9);
         mv.visitLabel(l8);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l9);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l3);
         mv.visitLineNumber(250, l3);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", LOBJ);
         Label l10 = new Label();
         mv.visitJumpInsn(IFNULL, l10);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", LOBJ);
         Label l11 = new Label();
         mv.visitJumpInsn(GOTO, l11);
         mv.visitLabel(l10);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l11);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l4);
         mv.visitLineNumber(253, l4);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", LOBJ);
         Label l12 = new Label();
         mv.visitJumpInsn(IFNULL, l12);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", LOBJ);
         Label l13 = new Label();
         mv.visitJumpInsn(GOTO, l13);
         mv.visitLabel(l12);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l13);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l5);
         mv.visitLineNumber(256, l5);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitTypeInsn(NEW, "java/lang/NoSuchFieldError");
         mv.visitInsn(DUP);
         mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
         mv.visitInsn(DUP);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "toString", "()Ljava/lang/String;");
-        mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(Ljava/lang/Object;)Ljava/lang/String;");
+        mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(" + LOBJ + ")Ljava/lang/String;");
         mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "(Ljava/lang/String;)V");
         mv.visitLdcInsn(" doesnt have a arg");
         mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
@@ -1433,7 +1439,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(ATHROW);
         Label l14 = new Label();
         mv.visitLabel(l14);
-        mv.visitLocalVariable("this", "Ljp/ac/kobe_u/cs/prolog/lang/impl/StructureTermObject_4;", null, l0, l14, 0);
+        mv.visitLocalVariable("this", LNAME_4, null, l0, l14, 0);
         mv.visitLocalVariable("i", "I", null, l0, l14, 1);
         mv.visitMaxs(5, 2);
         mv.visitEnd();
@@ -1441,7 +1447,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
 
       }
       case 5: {
-        mv = cw.visitMethod(ACC_PUBLIC, "arg0", "(I)Ljava/lang/Object;", null, null);
+        mv = cw.visitMethod(ACC_PUBLIC, "arg0", "(I)" + LOBJ, null, null);
         mv.visitCode();
         Label l0 = new Label();
         mv.visitLabel(l0);
@@ -1456,114 +1462,114 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitTableSwitchInsn(0, 4, l6, new Label[] { l1, l2, l3, l4, l5 });
         mv.visitLabel(l1);
         mv.visitLineNumber(266, l1);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         Label l7 = new Label();
         mv.visitJumpInsn(IFNULL, l7);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         Label l8 = new Label();
         mv.visitJumpInsn(GOTO, l8);
         mv.visitLabel(l7);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l8);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l2);
         mv.visitLineNumber(269, l2);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
         Label l9 = new Label();
         mv.visitJumpInsn(IFNULL, l9);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
         Label l10 = new Label();
         mv.visitJumpInsn(GOTO, l10);
         mv.visitLabel(l9);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l10);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l3);
         mv.visitLineNumber(272, l3);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", LOBJ);
         Label l11 = new Label();
         mv.visitJumpInsn(IFNULL, l11);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", LOBJ);
         Label l12 = new Label();
         mv.visitJumpInsn(GOTO, l12);
         mv.visitLabel(l11);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l12);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l4);
         mv.visitLineNumber(275, l4);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", LOBJ);
         Label l13 = new Label();
         mv.visitJumpInsn(IFNULL, l13);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", LOBJ);
         Label l14 = new Label();
         mv.visitJumpInsn(GOTO, l14);
         mv.visitLabel(l13);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l14);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l5);
         mv.visitLineNumber(278, l5);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg5", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg5", LOBJ);
         Label l15 = new Label();
         mv.visitJumpInsn(IFNULL, l15);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg5", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg5", LOBJ);
         Label l16 = new Label();
         mv.visitJumpInsn(GOTO, l16);
         mv.visitLabel(l15);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitVarInsn(ILOAD, 1);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;");
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(Ljp/ac/kobe_u/cs/prolog/lang/VariableTermLocation;)" + LOBJ);
         mv.visitLabel(l16);
-        mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         mv.visitInsn(ARETURN);
         mv.visitLabel(l6);
         mv.visitLineNumber(281, l6);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitTypeInsn(NEW, "java/lang/NoSuchFieldError");
         mv.visitInsn(DUP);
         mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
         mv.visitInsn(DUP);
         mv.visitVarInsn(ALOAD, 0);
         mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "toString", "()Ljava/lang/String;");
-        mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(Ljava/lang/Object;)Ljava/lang/String;");
+        mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(" + LOBJ + ")Ljava/lang/String;");
         mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "(Ljava/lang/String;)V");
         mv.visitLdcInsn(" doesnt have a arg");
         mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
@@ -1574,7 +1580,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(ATHROW);
         Label l17 = new Label();
         mv.visitLabel(l17);
-        mv.visitLocalVariable("this", "Ljp/ac/kobe_u/cs/prolog/lang/impl/StructureTermObject_4;", null, l0, l17, 0);
+        mv.visitLocalVariable("this", LNAME_4, null, l0, l17, 0);
         mv.visitLocalVariable("i", "I", null, l0, l17, 1);
         mv.visitMaxs(5, 2);
         mv.visitEnd();
@@ -1604,7 +1610,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
           {
             mv.visitLabel(labels[0]);
             mv.visitLineNumber(185, labels[0]);
-            mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+            mv.visitFrame(F_SAME, 0, null, 0, null);
             mv.visitVarInsn(ALOAD, 0);
             mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + argNum, LOBJ);
             Label l6 = new Label();
@@ -1614,19 +1620,19 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
             Label l7 = new Label();
             mv.visitJumpInsn(GOTO, l7);
             mv.visitLabel(l6);
-            mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+            mv.visitFrame(F_SAME, 0, null, 0, null);
             mv.visitVarInsn(ALOAD, 0);
             mv.visitVarInsn(ILOAD, 1);
             mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)L" + I_LANG + "/VariableTermLocation;");
             mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(L" + I_LANG + "/VariableTermLocation;)" + LOBJ);
             mv.visitLabel(l7);
-            mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+            mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
             mv.visitInsn(ARETURN);
           }
         }
         //      mv.visitLabel(l2);
         //      mv.visitLineNumber(188, l2);
-        //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        //      mv.visitFrame(F_SAME, 0, null, 0, null);
         //      mv.visitVarInsn(ALOAD, 0);
         //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
         //      Label l8 = new Label();
@@ -1636,18 +1642,18 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         //      Label l9 = new Label();
         //      mv.visitJumpInsn(GOTO, l9);
         //      mv.visitLabel(l8);
-        //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        //      mv.visitFrame(F_SAME, 0, null, 0, null);
         //      mv.visitVarInsn(ALOAD, 0);
         //      mv.visitVarInsn(ILOAD, 1);
         //      mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)L" + I_LANG + "/VariableTermLocation;");
         //      mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(L" + I_LANG + "/VariableTermLocation;)" + LOBJ);
         //      mv.visitLabel(l9);
-        //      mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        //      mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         //      mv.visitInsn(ARETURN);
         //      
         //      mv.visitLabel(l3);
         //      mv.visitLineNumber(191, l3);
-        //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        //      mv.visitFrame(F_SAME, 0, null, 0, null);
         //      mv.visitVarInsn(ALOAD, 0);
         //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", LOBJ);
         //      Label l10 = new Label();
@@ -1657,18 +1663,18 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         //      Label l11 = new Label();
         //      mv.visitJumpInsn(GOTO, l11);
         //      mv.visitLabel(l10);
-        //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        //      mv.visitFrame(F_SAME, 0, null, 0, null);
         //      mv.visitVarInsn(ALOAD, 0);
         //      mv.visitVarInsn(ILOAD, 1);
         //      mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)L" + I_LANG + "/VariableTermLocation;");
         //      mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(L" + I_LANG + "/VariableTermLocation;)" + LOBJ);
         //      mv.visitLabel(l11);
-        //      mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        //      mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         //      mv.visitInsn(ARETURN);
         //      
         //      mv.visitLabel(l4);
         //      mv.visitLineNumber(194, l4);
-        //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        //      mv.visitFrame(F_SAME, 0, null, 0, null);
         //      mv.visitVarInsn(ALOAD, 0);
         //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", LOBJ);
         //      Label l12 = new Label();
@@ -1678,18 +1684,18 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         //      Label l13 = new Label();
         //      mv.visitJumpInsn(GOTO, l13);
         //      mv.visitLabel(l12);
-        //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        //      mv.visitFrame(F_SAME, 0, null, 0, null);
         //      mv.visitVarInsn(ALOAD, 0);
         //      mv.visitVarInsn(ILOAD, 1);
         //      mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "varg0", "(I)L" + I_LANG + "/VariableTermLocation;");
         //      mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "makeVariableLoc", "(L" + I_LANG + "/VariableTermLocation;)" + LOBJ);
         //      mv.visitLabel(l13);
-        //      mv.visitFrame(Opcodes.F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
+        //      mv.visitFrame(F_SAME1, 0, null, 1, new Object[] { "java/lang/Object" });
         //      mv.visitInsn(ARETURN);
 
         mv.visitLabel(l5);
         mv.visitLineNumber(197, l5);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitTypeInsn(NEW, "java/lang/NoSuchFieldError");
         mv.visitInsn(DUP);
         mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
@@ -1736,7 +1742,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
 
       //      mv.visitLabel(labels[0]);
       //      mv.visitLineNumber(203, labels[0]);
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitTypeInsn(NEW, PREDNAME_4 + "$1");
       //      mv.visitInsn(DUP);
       //      mv.visitVarInsn(ALOAD, 0);
@@ -1745,7 +1751,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      
       //      mv.visitLabel(labels[1]);
       //      mv.visitLineNumber(223, labels[1]);
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitTypeInsn(NEW, PREDNAME_4 + "$2");
       //      mv.visitInsn(DUP);
       //      mv.visitVarInsn(ALOAD, 0);
@@ -1755,7 +1761,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         {
           mv.visitLabel(labels[i]);
           mv.visitLineNumber(267, labels[i]);
-          mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+          mv.visitFrame(F_SAME, 0, null, 0, null);
           final String D4 = "$" + (i + 1);
           mv.visitTypeInsn(NEW, PREDNAME_4 + D4);
           mv.visitInsn(DUP);
@@ -1767,7 +1773,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      
       //      mv.visitLabel(labels[2]);
       //      mv.visitLineNumber(245, labels[2]);
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitTypeInsn(NEW, PREDNAME_4 + "$3");
       //      mv.visitInsn(DUP);
       //      mv.visitVarInsn(ALOAD, 0);
@@ -1776,7 +1782,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      
       //    mv.visitLabel(labels[3]);
       //    mv.visitLineNumber(267, labels[3]);
-      //    mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //    mv.visitFrame(F_SAME, 0, null, 0, null);
       //    mv.visitTypeInsn(NEW, PREDNAME_4 + "$4");
       //    mv.visitInsn(DUP);
       //    mv.visitVarInsn(ALOAD, 0);
@@ -1785,7 +1791,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
 
       mv.visitLabel(l5);
       mv.visitLineNumber(289, l5);
-      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
       mv.visitTypeInsn(NEW, "java/lang/NoSuchFieldError");
       mv.visitInsn(DUP);
       mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
@@ -1822,7 +1828,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitInsn(IRETURN);
       mv.visitLabel(l1);
       mv.visitLineNumber(310, l1);
-      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
       mv.visitVarInsn(ALOAD, 0);
       mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
       mv.visitVarInsn(ALOAD, 1);
@@ -1835,7 +1841,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitLabel(l2);
       mv.visitLineNumber(311, l2);
 
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
       //      mv.visitVarInsn(ALOAD, 1);
@@ -1850,7 +1856,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      mv.visitLineNumber(312, l3);
       //      
       //      
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
       //      mv.visitVarInsn(ALOAD, 1);
@@ -1866,7 +1872,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       for (int i = 1; i <= arity4; i++) {
         {
 
-          mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+          mv.visitFrame(F_SAME, 0, null, 0, null);
           mv.visitVarInsn(ALOAD, 0);
           mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + i, LOBJ);
           mv.visitVarInsn(ALOAD, 1);
@@ -1882,7 +1888,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         }
       }
 
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg3", LOBJ);
       //      mv.visitVarInsn(ALOAD, 1);
@@ -1896,7 +1902,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      mv.visitLabel(l5);
       //      mv.visitLineNumber(314, l5);
       //      
-      //      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      //      mv.visitFrame(F_SAME, 0, null, 0, null);
       //      mv.visitVarInsn(ALOAD, 0);
       //      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg4", LOBJ);
       //      mv.visitVarInsn(ALOAD, 1);
@@ -1910,7 +1916,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       //      mv.visitLabel(l6);
       //      mv.visitLineNumber(315, l6);
       //      
-      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
       mv.visitInsn(ICONST_1);
       mv.visitInsn(IRETURN);
       Label l7 = new Label();
@@ -2149,7 +2155,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitJumpInsn(GOTO, l10);
       mv.visitLabel(l4);
       mv.visitLineNumber(342, l4);
-      mv.visitFrame(Opcodes.F_APPEND, 3, new Object[] { Opcodes.INTEGER, "java/lang/String", "java/lang/String" }, 0, null);
+      mv.visitFrame(F_APPEND, 3, new Object[] { INTEGER, "java/lang/String", "java/lang/String" }, 0, null);
       mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
       mv.visitInsn(DUP);
       mv.visitVarInsn(ALOAD, 4);
@@ -2161,7 +2167,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitVarInsn(ASTORE, 4);
       mv.visitLabel(l10);
       mv.visitLineNumber(344, l10);
-      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
       mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
       mv.visitInsn(DUP);
       mv.visitVarInsn(ALOAD, 4);
@@ -2189,31 +2195,31 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
     }
     switch (arity4) {
       case 1: {
-        mv = cw.visitMethod(ACC_PUBLIC, "compareTo", "(Ljava/lang/Object;)I", null, null);
+        mv = cw.visitMethod(ACC_PUBLIC, "compareTo", "(" + LOBJ + ")I", null, null);
         mv.visitCode();
         Label l0 = new Label();
         mv.visitLabel(l0);
         mv.visitLineNumber(490, l0);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isVariable", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isVariable", "(" + LOBJ + ")Z");
         Label l1 = new Label();
         mv.visitJumpInsn(IFNE, l1);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isNumber", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isNumber", "(" + LOBJ + ")Z");
         mv.visitJumpInsn(IFNE, l1);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isAtomTerm", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isAtomTerm", "(" + LOBJ + ")Z");
         Label l2 = new Label();
         mv.visitJumpInsn(IFEQ, l2);
         mv.visitLabel(l1);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitInsn(ICONST_1);
         mv.visitInsn(IRETURN);
         mv.visitLabel(l2);
         mv.visitLineNumber(491, l2);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isListTerm", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isListTerm", "(" + LOBJ + ")Z");
         Label l3 = new Label();
         mv.visitJumpInsn(IFEQ, l3);
         Label l4 = new Label();
@@ -2223,16 +2229,16 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l3);
         mv.visitLineNumber(493, l3);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isCompound", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isCompound", "(" + LOBJ + ")Z");
         Label l5 = new Label();
         mv.visitJumpInsn(IFEQ, l5);
         Label l6 = new Label();
         mv.visitLabel(l6);
         mv.visitLineNumber(494, l6);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "arity", "(Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "arity", "(" + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 3);
         Label l7 = new Label();
         mv.visitLabel(l7);
@@ -2247,17 +2253,17 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l8);
         mv.visitLineNumber(496, l8);
-        mv.visitFrame(Opcodes.F_FULL, 4, new Object[] { PREDNAME_4, "java/lang/Object", Opcodes.TOP, Opcodes.INTEGER }, 0, new Object[] {});
+        mv.visitFrame(F_FULL, 4, new Object[] { PREDNAME_4, "java/lang/Object", TOP, INTEGER }, 0, new Object[] {});
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "functor", "(Ljava/lang/Object;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "functor", "(" + LOBJ + ")" + LOBJ);
         mv.visitVarInsn(ASTORE, 2);
         Label l9 = new Label();
         mv.visitLabel(l9);
         mv.visitLineNumber(497, l9);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "functor", "()Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "functor", "()" + LOBJ);
         mv.visitVarInsn(ALOAD, 2);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 4);
         Label l10 = new Label();
         mv.visitLabel(l10);
@@ -2269,14 +2275,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l11);
         mv.visitLineNumber(499, l11);
-        mv.visitFrame(Opcodes.F_FULL, 5, new Object[] { PREDNAME_4, "java/lang/Object", "java/lang/Object", Opcodes.INTEGER, Opcodes.INTEGER }, 0, new Object[] {});
+        mv.visitFrame(F_FULL, 5, new Object[] { PREDNAME_4, "java/lang/Object", "java/lang/Object", INTEGER, INTEGER }, 0, new Object[] {});
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         mv.visitVarInsn(ALOAD, 1);
         mv.visitInsn(ICONST_0);
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(Ljava/lang/Object;I)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "deref", "(Ljava/lang/Object;)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(" + LOBJ + "I)" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "deref", "(" + LOBJ + ")" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 4);
         Label l12 = new Label();
         mv.visitLabel(l12);
@@ -2285,14 +2291,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l5);
         mv.visitLineNumber(502, l5);
-        mv.visitFrame(Opcodes.F_CHOP, 3, null, 0, null);
+        mv.visitFrame(F_CHOP, 3, null, 0, null);
         mv.visitInsn(ICONST_M1);
         mv.visitInsn(IRETURN);
         Label l13 = new Label();
         mv.visitLabel(l13);
-        mv.visitLocalVariable("this", "Ljp/ac/kobe_u/cs/prolog/lang/impl/StructureTermObject_4;", null, l0, l13, 0);
-        mv.visitLocalVariable("anotherTerm", "Ljava/lang/Object;", null, l0, l13, 1);
-        mv.visitLocalVariable("functor2", "Ljava/lang/Object;", null, l9, l5, 2);
+        mv.visitLocalVariable("this", LNAME_4, null, l0, l13, 0);
+        mv.visitLocalVariable("anotherTerm", LOBJ, null, l0, l13, 1);
+        mv.visitLocalVariable("functor2", LOBJ, null, l9, l5, 2);
         mv.visitLocalVariable("arity2", "I", null, l7, l5, 3);
         mv.visitLocalVariable("rc", "I", null, l10, l5, 4);
         mv.visitMaxs(3, 5);
@@ -2300,40 +2306,40 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         break;
       }
       case 2: {
-        mv = cw.visitMethod(ACC_PUBLIC, "compareTo", "(Ljava/lang/Object;)I", null, null);
+        mv = cw.visitMethod(ACC_PUBLIC, "compareTo", "(" + LOBJ + ")I", null, null);
         mv.visitCode();
         Label l0 = new Label();
         mv.visitLabel(l0);
         mv.visitLineNumber(511, l0);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isVariable", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isVariable", "(" + LOBJ + ")Z");
         Label l1 = new Label();
         mv.visitJumpInsn(IFNE, l1);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isNumber", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isNumber", "(" + LOBJ + ")Z");
         mv.visitJumpInsn(IFNE, l1);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isAtomTerm", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isAtomTerm", "(" + LOBJ + ")Z");
         Label l2 = new Label();
         mv.visitJumpInsn(IFEQ, l2);
         mv.visitLabel(l1);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitInsn(ICONST_1);
         mv.visitInsn(IRETURN);
         mv.visitLabel(l2);
         mv.visitLineNumber(512, l2);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isListTerm", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isListTerm", "(" + LOBJ + ")Z");
         Label l3 = new Label();
         mv.visitJumpInsn(IFEQ, l3);
         Label l4 = new Label();
         mv.visitLabel(l4);
         mv.visitLineNumber(513, l4);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "functor", "()Ljava/lang/Object;");
-        mv.visitFieldInsn(GETSTATIC, "jp/ac/kobe_u/cs/prolog/lang/impl/ListTerm", "SYM_DOT", "Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKEVIRTUAL, PREDNAME_4, "functor", "()" + LOBJ);
+        mv.visitFieldInsn(GETSTATIC, I_LANG + "/impl/ListTerm", "SYM_DOT", LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 4);
         Label l5 = new Label();
         mv.visitLabel(l5);
@@ -2345,12 +2351,12 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l6);
         mv.visitLineNumber(515, l6);
-        mv.visitFrame(Opcodes.F_FULL, 5, new Object[] { PREDNAME_4, "java/lang/Object", Opcodes.TOP, Opcodes.TOP, Opcodes.INTEGER }, 0, new Object[] {});
+        mv.visitFrame(F_FULL, 5, new Object[] { PREDNAME_4, "java/lang/Object", TOP, TOP, INTEGER }, 0, new Object[] {});
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "first", "(Ljava/lang/Object;)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "first", "(" + LOBJ + ")" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 4);
         Label l7 = new Label();
         mv.visitLabel(l7);
@@ -2362,12 +2368,12 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l8);
         mv.visitLineNumber(517, l8);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "rest", "(Ljava/lang/Object;)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "rest", "(" + LOBJ + ")" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 4);
         Label l9 = new Label();
         mv.visitLabel(l9);
@@ -2376,16 +2382,16 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l3);
         mv.visitLineNumber(519, l3);
-        mv.visitFrame(Opcodes.F_FULL, 2, new Object[] { PREDNAME_4, "java/lang/Object" }, 0, new Object[] {});
+        mv.visitFrame(F_FULL, 2, new Object[] { PREDNAME_4, "java/lang/Object" }, 0, new Object[] {});
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isCompound", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isCompound", "(" + LOBJ + ")Z");
         Label l10 = new Label();
         mv.visitJumpInsn(IFEQ, l10);
         Label l11 = new Label();
         mv.visitLabel(l11);
         mv.visitLineNumber(520, l11);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "arity", "(Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "arity", "(" + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 3);
         Label l12 = new Label();
         mv.visitLabel(l12);
@@ -2400,9 +2406,9 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l13);
         mv.visitLineNumber(522, l13);
-        mv.visitFrame(Opcodes.F_FULL, 4, new Object[] { PREDNAME_4, "java/lang/Object", Opcodes.TOP, Opcodes.INTEGER }, 0, new Object[] {});
+        mv.visitFrame(F_FULL, 4, new Object[] { PREDNAME_4, "java/lang/Object", TOP, INTEGER }, 0, new Object[] {});
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "functor", "(Ljava/lang/Object;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "functor", "(" + LOBJ + ")" + LOBJ);
         mv.visitVarInsn(ASTORE, 2);
         Label l14 = new Label();
         mv.visitLabel(l14);
@@ -2410,7 +2416,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitVarInsn(ALOAD, 0);
         mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
         mv.visitVarInsn(ALOAD, 2);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 4);
         Label l15 = new Label();
         mv.visitLabel(l15);
@@ -2422,14 +2428,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l16);
         mv.visitLineNumber(525, l16);
-        mv.visitFrame(Opcodes.F_FULL, 5, new Object[] { PREDNAME_4, "java/lang/Object", "java/lang/Object", Opcodes.INTEGER, Opcodes.INTEGER }, 0, new Object[] {});
+        mv.visitFrame(F_FULL, 5, new Object[] { PREDNAME_4, "java/lang/Object", "java/lang/Object", INTEGER, INTEGER }, 0, new Object[] {});
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         mv.visitVarInsn(ALOAD, 1);
         mv.visitInsn(ICONST_0);
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(Ljava/lang/Object;I)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "deref", "(Ljava/lang/Object;)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(" + LOBJ + "I)" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "deref", "(" + LOBJ + ")" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 4);
         Label l17 = new Label();
         mv.visitLabel(l17);
@@ -2441,14 +2447,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l18);
         mv.visitLineNumber(527, l18);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
         mv.visitVarInsn(ALOAD, 1);
         mv.visitInsn(ICONST_1);
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(Ljava/lang/Object;I)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "deref", "(Ljava/lang/Object;)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(" + LOBJ + "I)" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "deref", "(" + LOBJ + ")" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 4);
         Label l19 = new Label();
         mv.visitLabel(l19);
@@ -2457,14 +2463,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l10);
         mv.visitLineNumber(530, l10);
-        mv.visitFrame(Opcodes.F_CHOP, 3, null, 0, null);
+        mv.visitFrame(F_CHOP, 3, null, 0, null);
         mv.visitInsn(ICONST_M1);
         mv.visitInsn(IRETURN);
         Label l20 = new Label();
         mv.visitLabel(l20);
-        mv.visitLocalVariable("this", "Ljp/ac/kobe_u/cs/prolog/lang/impl/StructureTermObject_4;", null, l0, l20, 0);
-        mv.visitLocalVariable("anotherTerm", "Ljava/lang/Object;", null, l0, l20, 1);
-        mv.visitLocalVariable("functor2", "Ljava/lang/Object;", null, l14, l10, 2);
+        mv.visitLocalVariable("this", LNAME_4, null, l0, l20, 0);
+        mv.visitLocalVariable("anotherTerm", LOBJ, null, l0, l20, 1);
+        mv.visitLocalVariable("functor2", LOBJ, null, l14, l10, 2);
         mv.visitLocalVariable("arity2", "I", null, l12, l10, 3);
         mv.visitLocalVariable("rc", "I", null, l5, l3, 4);
         mv.visitLocalVariable("rc", "I", null, l15, l10, 4);
@@ -2473,31 +2479,31 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         break;
       }
       default: { //is 4
-        mv = cw.visitMethod(ACC_PUBLIC, "compareTo", "(Ljava/lang/Object;)I", null, null);
+        mv = cw.visitMethod(ACC_PUBLIC, "compareTo", "(" + LOBJ + ")I", null, null);
         mv.visitCode();
         Label l0 = new Label();
         mv.visitLabel(l0);
         mv.visitLineNumber(537, l0);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isVariable", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isVariable", "(" + LOBJ + ")Z");
         Label l1 = new Label();
         mv.visitJumpInsn(IFNE, l1);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isNumber", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isNumber", "(" + LOBJ + ")Z");
         mv.visitJumpInsn(IFNE, l1);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isAtomTerm", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isAtomTerm", "(" + LOBJ + ")Z");
         Label l2 = new Label();
         mv.visitJumpInsn(IFEQ, l2);
         mv.visitLabel(l1);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitInsn(ICONST_1);
         mv.visitInsn(IRETURN);
         mv.visitLabel(l2);
         mv.visitLineNumber(538, l2);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isListTerm", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isListTerm", "(" + LOBJ + ")Z");
         Label l3 = new Label();
         mv.visitJumpInsn(IFEQ, l3);
         Label l4 = new Label();
@@ -2507,16 +2513,16 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l3);
         mv.visitLineNumber(540, l3);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "isCompound", "(Ljava/lang/Object;)Z");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "isCompound", "(" + LOBJ + ")Z");
         Label l5 = new Label();
         mv.visitJumpInsn(IFEQ, l5);
         Label l6 = new Label();
         mv.visitLabel(l6);
         mv.visitLineNumber(542, l6);
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "arity", "(Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "arity", "(" + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 3);
         Label l7 = new Label();
         mv.visitLabel(l7);
@@ -2531,9 +2537,9 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l8);
         mv.visitLineNumber(544, l8);
-        mv.visitFrame(Opcodes.F_FULL, 4, new Object[] { PREDNAME_4, "java/lang/Object", Opcodes.TOP, Opcodes.INTEGER }, 0, new Object[] {});
+        mv.visitFrame(F_FULL, 4, new Object[] { PREDNAME_4, "java/lang/Object", TOP, INTEGER }, 0, new Object[] {});
         mv.visitVarInsn(ALOAD, 1);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "functor", "(Ljava/lang/Object;)Ljava/lang/Object;");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "functor", "(" + LOBJ + ")" + LOBJ);
         mv.visitVarInsn(ASTORE, 2);
         Label l9 = new Label();
         mv.visitLabel(l9);
@@ -2541,7 +2547,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitVarInsn(ALOAD, 0);
         mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Object", "getClass", "()Ljava/lang/Class;");
         mv.visitVarInsn(ALOAD, 2);
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 4);
         Label l10 = new Label();
         mv.visitLabel(l10);
@@ -2553,14 +2559,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l11);
         mv.visitLineNumber(547, l11);
-        mv.visitFrame(Opcodes.F_FULL, 5, new Object[] { PREDNAME_4, "java/lang/Object", "java/lang/Object", Opcodes.INTEGER, Opcodes.INTEGER }, 0, new Object[] {});
+        mv.visitFrame(F_FULL, 5, new Object[] { PREDNAME_4, "java/lang/Object", "java/lang/Object", INTEGER, INTEGER }, 0, new Object[] {});
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg1", LOBJ);
         mv.visitVarInsn(ALOAD, 1);
         mv.visitInsn(ICONST_0);
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(Ljava/lang/Object;I)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "deref", "(Ljava/lang/Object;)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(" + LOBJ + "I)" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "deref", "(" + LOBJ + ")" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 4);
         Label l12 = new Label();
         mv.visitLabel(l12);
@@ -2572,14 +2578,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l13);
         mv.visitLineNumber(549, l13);
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg2", LOBJ);
         mv.visitVarInsn(ALOAD, 1);
         mv.visitInsn(ICONST_1);
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(Ljava/lang/Object;I)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "deref", "(Ljava/lang/Object;)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(" + LOBJ + "I)" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "deref", "(" + LOBJ + ")" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 4);
         Label l14 = new Label();
         mv.visitLabel(l14);
@@ -2592,14 +2598,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitLabel(l15);
         mv.visitLineNumber(551, l15);
         for (int i = 3; i < arity4; i++) { // arg3 thru arg(Arity-1)
-          mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+          mv.visitFrame(F_SAME, 0, null, 0, null);
           mv.visitVarInsn(ALOAD, 0);
-          mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + i, "Ljava/lang/Object;");
+          mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + i, LOBJ);
           mv.visitVarInsn(ALOAD, 1);
           pushIntConst(mv, i - 1); // mv.visitInsn(ICONST_2);
-          mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(Ljava/lang/Object;I)Ljava/lang/Object;");
-          mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "deref", "(Ljava/lang/Object;)Ljava/lang/Object;");
-          mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+          mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(" + LOBJ + "I)" + LOBJ);
+          mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "deref", "(" + LOBJ + ")" + LOBJ);
+          mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
           mv.visitVarInsn(ISTORE, 4);
           Label l16 = new Label();
           mv.visitLabel(l16);
@@ -2613,14 +2619,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
           mv.visitLineNumber(553, l17);
         }
         // arg Arity
-        mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+        mv.visitFrame(F_SAME, 0, null, 0, null);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + arity4, "Ljava/lang/Object;");
+        mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + arity4, LOBJ);
         mv.visitVarInsn(ALOAD, 1);
         pushIntConst(mv, arity4 - 1); // // mv.visitInsn(ICONST_3);
-        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(Ljava/lang/Object;I)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "deref", "(Ljava/lang/Object;)Ljava/lang/Object;");
-        mv.visitMethodInsn(INVOKESTATIC, "jp/ac/kobe_u/cs/prolog/lang/StaticProlog", "compareTerm", "(Ljava/lang/Object;Ljava/lang/Object;)I");
+        mv.visitMethodInsn(INVOKESTATIC, PREDNAME_4, "arg0", "(" + LOBJ + "I)" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "deref", "(" + LOBJ + ")" + LOBJ);
+        mv.visitMethodInsn(INVOKESTATIC, I_LANG + "/StaticProlog", "compareTerm", "(" + LOBJ + LOBJ + ")I");
         mv.visitVarInsn(ISTORE, 4);
         Label l18 = new Label();
         mv.visitLabel(l18);
@@ -2629,14 +2635,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
         mv.visitInsn(IRETURN);
         mv.visitLabel(l5);
         mv.visitLineNumber(556, l5);
-        mv.visitFrame(Opcodes.F_CHOP, 3, null, 0, null);
+        mv.visitFrame(F_CHOP, 3, null, 0, null);
         mv.visitInsn(ICONST_M1);
         mv.visitInsn(IRETURN);
         Label l19 = new Label();
         mv.visitLabel(l19);
-        mv.visitLocalVariable("this", "Ljp/ac/kobe_u/cs/prolog/lang/impl/StructureTermObject_4;", null, l0, l19, 0);
-        mv.visitLocalVariable("anotherTerm", "Ljava/lang/Object;", null, l0, l19, 1);
-        mv.visitLocalVariable("functor2", "Ljava/lang/Object;", null, l9, l5, 2);
+        mv.visitLocalVariable("this", LNAME_4, null, l0, l19, 0);
+        mv.visitLocalVariable("anotherTerm", LOBJ, null, l0, l19, 1);
+        mv.visitLocalVariable("functor2", LOBJ, null, l9, l5, 2);
         mv.visitLocalVariable("arity2", "I", null, l7, l5, 3);
         mv.visitLocalVariable("rc", "I", null, l10, l5, 4);
         mv.visitMaxs(3, 5);
@@ -2655,14 +2661,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
     FieldVisitor fv;
     MethodVisitor mv;
     AnnotationVisitor av0;
-    final String I_LANG = "jp/ac/kobe_u/cs/prolog/lang";
+    final String I_LANG = "jp/ac" + "/kobe_u/cs/prolog/lang";
     final String PREDNAME_4 = I_LANG + "/impl/PRED_" + name + "_" + arity4;
     final String LNAME_4 = "L" + PREDNAME_4 + ";";
-    final String LOBJ = "Ljava/lang/Object;";
+    final String LOBJ = "Ljava/" + "lang/Object;";
 
     final String INNERNAME_4 = PREDNAME_4 + "$" + argNum;
     final String INNERNAME_L = "L" + INNERNAME_4 + ";";
-    cw.visit(V1_6, ACC_FINAL + ACC_SUPER, INNERNAME_4, null, "java/lang/Object", new String[] { "jp/ac/kobe_u/cs/prolog/lang/VariableTermLocation" });
+    cw.visit(V1_6, ACC_FINAL + ACC_SUPER, INNERNAME_4, null, "java/lang/Object", new String[] { I_LANG + "/VariableTermLocation" });
 
     cw.visitSource("StructureTermObject_4.java", null);
 
@@ -2696,14 +2702,14 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitEnd();
     }
     {
-      mv = cw.visitMethod(ACC_PUBLIC, "getVal", "()Ljava/lang/Object;", null, null);
+      mv = cw.visitMethod(ACC_PUBLIC, "getVal", "()" + LOBJ, null, null);
       mv.visitCode();
       Label l0 = new Label();
       mv.visitLabel(l0);
       mv.visitLineNumber(207, l0);
       mv.visitVarInsn(ALOAD, 0);
       mv.visitFieldInsn(GETFIELD, INNERNAME_4, "this$0", LNAME_4);
-      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + argNum, "Ljava/lang/Object;");
+      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + argNum, LOBJ);
       mv.visitInsn(ARETURN);
       Label l1 = new Label();
       mv.visitLabel(l1);
@@ -2719,13 +2725,13 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitLineNumber(212, l0);
       mv.visitVarInsn(ALOAD, 0);
       mv.visitFieldInsn(GETFIELD, INNERNAME_4, "this$0", LNAME_4);
-      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + argNum, "Ljava/lang/Object;");
+      mv.visitFieldInsn(GETFIELD, PREDNAME_4, "arg" + argNum, LOBJ);
       Label l1 = new Label();
       mv.visitJumpInsn(IFNULL, l1);
       mv.visitInsn(ICONST_1);
       mv.visitInsn(IRETURN);
       mv.visitLabel(l1);
-      mv.visitFrame(Opcodes.F_SAME, 0, null, 0, null);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
       mv.visitInsn(ICONST_0);
       mv.visitInsn(IRETURN);
       Label l2 = new Label();
@@ -2735,7 +2741,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitEnd();
     }
     {
-      mv = cw.visitMethod(ACC_PUBLIC, "setVal", "(Ljava/lang/Object;)V", null, null);
+      mv = cw.visitMethod(ACC_PUBLIC, "setVal", "(" + LOBJ + ")V", null, null);
       mv.visitCode();
       Label l0 = new Label();
       mv.visitLabel(l0);
@@ -2767,7 +2773,7 @@ final class SymbolTermBase extends TermBase implements SymbolTerm {
       mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "(Ljava/lang/String;)V");
       mv.visitVarInsn(ALOAD, 0);
       mv.visitFieldInsn(GETFIELD, INNERNAME_4, "this$0", LNAME_4);
-      mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/Object;)Ljava/lang/StringBuilder;");
+      mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(" + LOBJ + ")Ljava/lang/StringBuilder;");
       mv.visitLdcInsn("%");
       mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;");
       mv.visitVarInsn(ALOAD, 0);

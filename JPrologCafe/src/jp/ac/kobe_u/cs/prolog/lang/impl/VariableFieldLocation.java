@@ -58,7 +58,8 @@ public class VariableFieldLocation implements VariableTermLocation {
       return;
     }
     try {
-      Object v = StaticProlog.toJava(o);
+      Object v = StaticProlog.deref(StaticProlog.toJava(o));
+      if (StaticProlog.isVariable(v)) return;
       field.set(obj, v);
     } catch (IllegalArgumentException e) {
       e.printStackTrace();

@@ -5,6 +5,7 @@ package jp.ac.kobe_u.cs.prolog.lang.impl;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -569,6 +570,11 @@ public class StaticPrologMethodImpl implements PrologMethods {
    * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#makeStructure(java.lang.Object, java.lang.Object[])
    */
   final public Object makeStructure(Object s, final Object[] args) {
+    if (args.length == 2) {
+      if (nameUQ(s).equals(".")) {
+        return makeList(args[0], args[1]);
+      }
+    }
     if (s instanceof Class) {
       final Class c = ((Class) s);
       try {
@@ -597,8 +603,7 @@ public class StaticPrologMethodImpl implements PrologMethods {
         e.printStackTrace();
       }
     }
-    return new StructureTermBase(s, args) {
-    };
+    return new StructureTermBase(s, args);
   }
 
   /* (non-Javadoc)
@@ -702,11 +707,53 @@ public class StaticPrologMethodImpl implements PrologMethods {
     if (thiz instanceof Term) return ((Term) thiz).equalJProlog(obj);
     if (obj instanceof Term) return ((Term) obj).equalJProlog(thiz);
     if (thiz instanceof String) return thiz.equals(obj);
-    if (thiz.getClass() != obj.getClass()) {
+    Class cthiz = thiz.getClass();
+    if (cthiz != obj.getClass()) {
       if (thiz.equals(obj)) {
         throw new Error(thiz + "==" + obj);
       }
       return false;
+    }
+    if (cthiz.isArray()) {
+      Object[] athz = (Object[]) thiz;
+      Object[] aobj = (Object[]) obj;
+      if (athz.length != aobj.length) {
+        return false;
+      }
+      for (int i = 0; i < aobj.length; i++) {
+        if (!prologEquals(athz[i], aobj[i])) return false;
+      }
+      return true;
+    }
+    return thiz.equals(obj);
+  }// throws Throwable;
+
+  // @Override
+  /* (non-Javadoc)
+   * @see jp.ac.kobe_u.cs.prolog.lang.IPrologMethods#prologEquals(java.lang.Object, java.lang.Object)
+   */
+  final public boolean unifyObject(Object thiz, Object obj) {
+    if (thiz == obj) return true;
+    if (thiz instanceof Term) return ((Term) thiz).unify(obj);
+    if (obj instanceof Term) return ((Term) obj).unify(thiz);
+    if (thiz instanceof String) return thiz.equals(obj);
+    Class cthiz = thiz.getClass();
+    if (cthiz != obj.getClass()) {
+      if (thiz.equals(obj)) {
+        throw new Error(thiz + "==" + obj);
+      }
+      return false;
+    }
+    if (cthiz.isArray()) {
+      Object[] athz = (Object[]) thiz;
+      Object[] aobj = (Object[]) obj;
+      if (athz.length != aobj.length) {
+        return false;
+      }
+      for (int i = 0; i < aobj.length; i++) {
+        if (!unifyObject(athz[i], aobj[i])) return false;
+      }
+      return true;
     }
     return thiz.equals(obj);
   }// throws Throwable;

@@ -118,7 +118,8 @@ public class PredicateEncoder {
       c = c.substring(5);
     }
     int us = c.lastIndexOf('_');
-    c = c.substring(0, us);
+    if (us>0) c = c.substring(0, us);
+    else  c= thiz.getName();
     return c;
   }
 }
